@@ -13,7 +13,7 @@
 title: foDev Jeong's site
 
 # Your name to show in the footer
-author: Some Person
+author: akillness
 
 ###############################################
 # --- List of links in the navigation bar --- #
@@ -61,11 +61,11 @@ social-network-links:
   # youtube: "@daattali"
 #  medium: yourname
 #  reddit: yourname
- linkedin: akillness
+  linkedin: akillness
 #  xing: yourname
 #  stackoverflow: "3943160/daattali"
 #  snapchat: deanat78
- instagram: akillness
+  instagram: akillness
 #  spotify: yourname
 #  telephone: +14159998888
 #  steam: deanat78
