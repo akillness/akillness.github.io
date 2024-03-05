@@ -10,7 +10,7 @@
 ############################
 
 # Name of website
-title: foDev Jeong's site
+title: Foward to Development
 
 # Your name to show in the footer
 author: akillness
@@ -21,13 +21,10 @@ author: akillness
 
 navbar-links:
   About Me: "aboutme"
-  Blue Print: "blueprint"
+    - resume: "resume"
+    - Blue Print: "blueprint"
   Interesting: "interesting"
-  #Resources:
-    #- Beautiful Jekyll: "https://beautifuljekyll.com"
-    #- Learn markdown: "https://www.markdowntutorial.com/"
-  #Author's home: "https://deanattali.com"
-
+  
 ################
 # --- Logo --- #
 ################
