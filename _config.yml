@@ -21,7 +21,7 @@ author: akillness
 
 navbar-links:
   About Me: "aboutme"
-    - resume: "/pdf/resume.pdf"
+    # - resume: "/pdf/resume.pdf"
     - Blue Print: "blueprint"
   Interesting: "interesting"
   
