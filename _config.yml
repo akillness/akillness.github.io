@@ -20,9 +20,10 @@ author: akillness
 ###############################################
 
 navbar-links:
-  About Me: "aboutme"
-    # - resume: "/pdf/resume.pdf"
-    - Blue Print: "blueprint"
+  About Me:
+    - It's me: "aboutme"
+    - Resume: "/pdf/resume.pdf"
+    - My BluePrint: "blueprint"
   Interesting: "interesting"
   
 ################
