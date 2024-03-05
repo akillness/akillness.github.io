@@ -22,7 +22,7 @@ author: Created by FoDev Jeong
 navbar-links:
   About Me:
     - It's me: "aboutme"
-    - Resume: "/pdf/resume.pdf"
+    - Resume: "/assets/pdf/resume.pdf"
     - My BluePrint: "blueprint"
   Interesting: "interesting"
   
