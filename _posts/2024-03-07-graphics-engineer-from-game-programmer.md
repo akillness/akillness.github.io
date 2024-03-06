@@ -5,7 +5,7 @@ subtitle: 인터뷰를 통한 커리큘럼짜보기 by 홍정모
 cover-img: /assets/img/path.jpg
 thumbnail-img: /assets/img/thumb.png
 share-img: /assets/img/path.jpg
-tags: [game, graphics, 홍정모, curriculum]
+tags: [game, graphics, curriculum]
 author: foDev_jeong
 ---
    
