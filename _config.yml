@@ -22,9 +22,10 @@ author: Created by FoDev-Jeong
 navbar-links:
   About Me:
     - It's me: "aboutme"
-    - Resume: "/assets/pdf/resume.pdf"
     - My BluePrint: "blueprint"
-  Interesting: "interesting"
+    - Resume: "/assets/pdf/resume.pdf"
+    
+  # Interesting: "interesting"
   
 ################
 # --- Logo --- #
@@ -52,7 +53,7 @@ round-avatar: true
 social-network-links:
   email: "akillness38@gmail.com"
   # rss: true  # remove this line if you don't want to show an RSS link at the bottom
-  facebook: akillness
+  # facebook: akillness
   github: akillness
   # twitter: daattali
   # patreon: DeanAttali
@@ -63,7 +64,7 @@ social-network-links:
 #  xing: yourname
 #  stackoverflow: "3943160/daattali"
 #  snapchat: deanat78
-  instagram: akillness
+  # instagram: akillness
 #  spotify: yourname
 #  telephone: +14159998888
 #  steam: deanat78
