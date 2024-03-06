@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 게임 클라이언트에서 그래픽스 엔지니어까지
-subtitle: 인터뷰를 통한 커리큘럼짜보기 by 홍정모
+title: graphics
+subtitle: engineer
 cover-img: /assets/img/path.jpg
 thumbnail-img: /assets/img/thumb.png
 share-img: /assets/img/path.jpg
