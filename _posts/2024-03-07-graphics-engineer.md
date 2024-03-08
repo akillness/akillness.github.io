@@ -15,7 +15,7 @@ author: foDev_jeong
 
 리드 그래픽스 엔지니어로 성장하는 방법에 대해 인터뷰한 내용을 토대로 커리큘럼을 작성해보려고한다.
 
-
+<iframe width="480" height="360" src="http://youtu.be/qWsL6g66OOI" frameborder="0" allowfullscreen></iframe>
 
 > 그래픽스 엔지니어의 필요성?   
 
