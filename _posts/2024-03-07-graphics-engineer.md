@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 그패릭스 엔지니어로 성장하기
+title: 그래픽스 엔지니어로 성장하기
 subtitle: 프로그래머 홍정모 인터뷰 내용
 cover-img: /assets/img/path.jpg
 thumbnail-img: /assets/img/thumb.png
