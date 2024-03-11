@@ -15,7 +15,7 @@ author: foDev_jeong
 
 프로그래밍에 대한 커리큘럼을 정리해보자
 
-[![Curriculum](https://img.youtube.com/vi/EdGOWiTn5RI/0.jpg)](https://youtu.be/EdGOWiTn5RI)
+[![Curriculum](https://img.youtube.com/vi/EdGOWiTn5RI/0.jpg)](https://youtu.be/EdGOWiTn5RI?si=5eQec_ik0rmdtSeU)
 
 > Programming 적응 순서   
 
