@@ -15,10 +15,12 @@ author: foDev_jeong
 
 Web GL에 대한 개념과  내용을 정리해보자
 
-[![WebGL](https://img.youtube.com/vi/EdGOWiTn5RI/0.jpg)](https://youtu.be/EdGOWiTn5RI)
+[![Programming Curriculum](https://img.youtube.com/vi/EdGOWiTn5RI/0.jpg)](https://youtu.be/EdGOWiTn5RI)
 
-> Web GL이 갖는의미?   
+> Programming 적응 순서   
 
-DirectX 나 Vulkan 수준의 Graphics pipeline 이나 sdk 수준을 상위 언어 수준으로 다룰 수 있도록 하는 레이블
+C/C++ 또는 Python을 통해 언어의 문법을 익히고, Graphics pipeline을 이해하고 구현함으로써 실질적인 개발을 이룰수 있도록 하는 것이 목표의 큰그림이다. 
+
+자료구조, 알고리듬 등의 개념은 프로그래밍을 하면서 도움이 되는 개념이기 때문에, 적절하게 배우는 시점을 제안하는 내용으로 구성이 되어 있다.
 
 
