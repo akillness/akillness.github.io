@@ -15,7 +15,7 @@ author: foDev_jeong
 
 Web GL에 대한 개념과  내용을 정리해보자
 
-[![Programming](https://img.youtube.com/vi/EdGOWiTn5RI/0.jpg)](https://youtu.be/EdGOWiTn5RI)
+[![Curriculum](https://img.youtube.com/vi/EdGOWiTn5RI/0.jpg)](https://youtu.be/EdGOWiTn5RI)
 
 > Programming 적응 순서   
 
