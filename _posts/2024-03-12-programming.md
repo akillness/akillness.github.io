@@ -13,7 +13,7 @@ author: foDev_jeong
 ## **전직 교수 겸 현직  인스타그램 프로그래머 홍정모님 유툽채널 HONGlab**
 
 
-Web GL에 대한 개념과  내용을 정리해보자
+프로그래밍에 대한 커리큘럼을 정리해보자
 
 [![Curriculum](https://img.youtube.com/vi/EdGOWiTn5RI/0.jpg)](https://youtu.be/EdGOWiTn5RI)
 
