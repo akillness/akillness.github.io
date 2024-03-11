@@ -15,7 +15,7 @@ author: foDev_jeong
 
 Web GL에 대한 개념과  내용을 정리해보자
 
-[![Graphics Engineer](https://img.youtube.com/vi/EdGOWiTn5RI/0.jpg)](https://youtu.be/EdGOWiTn5RI)
+[![WebGL](https://img.youtube.com/vi/EdGOWiTn5RI/0.jpg)](https://youtu.be/EdGOWiTn5RI)
 
 > Web GL이 갖는의미?   
 
