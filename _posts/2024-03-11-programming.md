@@ -2,10 +2,10 @@
 layout: post
 title: Programming 진행 순서 정리
 subtitle: Honglab 프로그래밍
-cover-img: /assets/img/path.jpg
-thumbnail-img: /assets/img/thumb.png
-share-img: /assets/img/path.jpg
-tags: [programming, curriculum]
+cover-img: /assets/img/cover/programming.jpeg
+thumbnail-img: /assets/img/thumbnail/programming.jpeg
+share-img: /assets/img/cover/programming.jpeg
+tags: [programming, curriculum, mindset]
 author: foDev_jeong
 ---
    
