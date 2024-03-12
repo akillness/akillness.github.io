@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Programming 진행 순서 정리
-subtitle: Honglab 프로그래밍
+title: Programming 을 대하는 우리의 자세
+subtitle: Honglab 으라차차! 프로그래밍
 cover-img: /assets/img/cover/programming.jpeg
 thumbnail-img: /assets/img/thumbnail/programming.jpeg
 share-img: /assets/img/cover/programming.jpeg
