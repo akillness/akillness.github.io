@@ -2,9 +2,9 @@
 layout: post
 title: 그래픽스 엔지니어로 성장하기
 subtitle: 프로그래머 홍정모 인터뷰 내용
-cover-img: /assets/img/path.jpg
-thumbnail-img: /assets/img/thumb.png
-share-img: /assets/img/path.jpg
+cover-img: /assets/img/cover/graphics.jpeg
+thumbnail-img: /assets/img/thumbnail/graphics.jpeg
+share-img: /assets/img/cover/graphics.jpeg
 tags: [game, graphics, curriculum]
 author: foDev_jeong
 ---
