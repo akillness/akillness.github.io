@@ -24,6 +24,7 @@ navbar-links:
     - It's me: "aboutme"
     - My BluePrint: "blueprint"
     - Resume: "/assets/pdf/resume.pdf"
+  Flutter CC: "flutter_bp"
     
   # Interesting: "interesting"
   
