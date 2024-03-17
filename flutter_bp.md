@@ -47,7 +47,7 @@ var foo = function(x) {
 foo(3)
 ```
 
-## Flutter를 이용한 app 기획-1
+## Flutter를 이용한 app 기획 1
 You can add notification, warning and error boxes like this:
 {: .box-note}
 **Note:** This is a notification box.
@@ -56,7 +56,7 @@ You can add notification, warning and error boxes like this:
 
 ## app 기능구현(1)
 
-## Flutter를 이용한 app 기획-2
+## Flutter를 이용한 app 기획 2
 You can add notification, warning and error boxes like this:
 {: .box-warning}
 **Warning:** This is a warning box.
