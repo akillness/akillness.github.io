@@ -74,9 +74,12 @@ You can add notification, warning and error boxes like this:
 
 
 ### Reference 
-
+- https://brunch.co.kr/@tilltue/56
+- https://d2.naver.com/helloworld/3384599
+- https://flgichacha.tistory.com/2
+- https://flutter.ducafecat.com/ko/pubs/html_editor-package-info
+- https://yozm.wishket.com/magazine/detail/1566/
 
 
 <!-- ## Local URLs in project sites {#local-urls} -->
-
-![Crepe](/assets/img/crepe.jpg)
+<!-- ![Crepe](/assets/img/crepe.jpg) -->
