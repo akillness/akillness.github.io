@@ -279,4 +279,4 @@ Visual Studio Code 홈페이지 다운로드 : [https://code.visualstudio.com/](
 ### Reference 
 - [https://brunch.co.kr/@tilltue/56](https://brunch.co.kr/@tilltue/56)
 - [https://d2.naver.com/helloworld/3384599](https://d2.naver.com/helloworld/3384599)
-
+- [플러터 설계 컨셉](https://velog.io/@stone1098/%ED%94%8C%EB%9F%AC%ED%84%B0%EC%9D%98-%EA%B8%B0%EB%B3%B8-%EA%B0%9C%EB%85%90)
