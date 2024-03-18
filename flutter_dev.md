@@ -241,9 +241,6 @@ Visual Studio Code 홈페이지 다운로드 : [https://code.visualstudio.com/](
 
 * * *
 ## Flutter를 이용한 app 기획 1
-You can add notification, warning and error boxes like this:
-{: .box-note}
-**Note:** This is a notification box.
 
 * * *
 ## app 세부구성(1)
@@ -253,9 +250,6 @@ You can add notification, warning and error boxes like this:
 
 * * *
 ## Flutter를 이용한 app 기획 2
-You can add notification, warning and error boxes like this:
-{: .box-warning}
-**Warning:** This is a warning box.
 
 * * *
 ## app 세부구성(2)
@@ -268,16 +262,9 @@ You can add notification, warning and error boxes like this:
 
 * * *
 ## DB 만들기
-You can add notification, warning and error boxes like this:
-{: .box-error}
-**Error:** This is an error box.
-
 
 * * *
 ## 마켓플레이스에 올려보기
-
-{: .box-note}
-**Note:** This is a notification box.
 
 
 ### Reference 
