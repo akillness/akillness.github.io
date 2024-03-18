@@ -243,6 +243,24 @@ Doctor summary (to see all details, run flutter doctor -v):
 [✓] VS Code (version 1.87.2)
 ~~~
 
+*MacOS 상에서 🔼 위의 경우, 아래와 같이 <span style="color:green"> **해결** </span>
+- " 응용프로그램 > 안드로이드 스튜디오 > 콘텐츠 " 폴더에 들어가셔서 jre 폴더를 새로 만듭니다.
+- jbr 폴더 안에 있는 'Contents' 폴더를 --->> 새로만든 jre 폴더에 복사합니다.
+
+~~~ sh
+>flutter doctor
+Doctor summary (to see all details, run flutter doctor -v):
+[✓] Flutter (Channel master, 3.1.0-0.0.pre.1430, on macOS 14.2.1 23C71 darwin-x64,
+    locale ko-KR)
+[✓] Android toolchain - develop for Android devices (Android SDK version 34.0.0)
+[✓] Xcode - develop for iOS and macOS (Xcode 15.3)
+[✓] Chrome - develop for the web
+[✓] Android Studio (version 2023.2)
+[✓] VS Code (version 1.87.2)
+[✓] Connected device (2 available)
+[✓] HTTP Host Availability
+~~~
+
 
 ### VSCode Flutter 프로젝트 생성하기
 
@@ -306,3 +324,4 @@ Doctor summary (to see all details, run flutter doctor -v):
 - [https://d2.naver.com/helloworld/3384599](https://d2.naver.com/helloworld/3384599)
 - [플러터 설계 컨셉](https://velog.io/@stone1098/%ED%94%8C%EB%9F%AC%ED%84%B0%EC%9D%98-%EA%B8%B0%EB%B3%B8-%EA%B0%9C%EB%85%90)
 - [MacOS Flutter 설치하기](https://msyu1207.tistory.com/entry/Mac%EC%97%90%EC%84%9C-Flutter-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0feat-android-studio-xcode)
+- [MD 이모티콘](https://kr.piliapp.com/twitter-symbols/)
