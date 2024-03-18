@@ -221,6 +221,29 @@ Visual Studio Code 홈페이지 다운로드 : [https://code.visualstudio.com/](
   + 'flutter doctor --android-licenses' 입력 후 엔터치면 동의 문구가 나오는데 y를 모두 입력한다
   + 위의 과정을 거치면 느낌표 였었던 부분이 체크표시로 바뀐 것을 확인 할 수 있다 
 
+~~~ sh
+>flutter doctor
+Doctor summary (to see all details, run flutter doctor -v):
+[✓] Flutter (Channel master, 3.1.0-0.0.pre.1430, on macOS 14.2.1 23C71 darwin-x64, locale ko-KR)
+[✓] Android toolchain - develop for Android devices (Android SDK version 33.0.0)
+[✗] Xcode - develop for iOS and macOS
+    ✗ Xcode installation is incomplete; a full installation is necessary for iOS development.
+      Download at: https://developer.apple.com/xcode/download/
+      Or install Xcode via the App Store.
+      Once installed, run:
+        sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+        sudo xcodebuild -runFirstLaunch
+    ✗ CocoaPods not installed.
+        CocoaPods is used to retrieve the iOS and macOS platform side's plugin code that responds to your plugin usage on the Dart side.
+        Without CocoaPods, plugins will not work on iOS or macOS.
+        For more info, see https://flutter.dev/platform-plugins
+      To install see https://guides.cocoapods.org/using/getting-started.html#installation for instructions.
+[✓] Chrome - develop for the web
+[!] Android Studio (not installed)
+[✓] VS Code (version 1.87.2)
+~~~
+
+
 ### VSCode Flutter 프로젝트 생성하기
 
 + Ctrl + Shift + P 키를 눌러 커맨드차아에 Flutter를 입력 후, New Project  부분을 클릭한다.
@@ -228,6 +251,8 @@ Visual Studio Code 홈페이지 다운로드 : [https://code.visualstudio.com/](
 + Flutter 프로젝트를 저장할 폴더를 생성한다.
 + 저장할 폴더 위치를 지정하면 Project Name 타입, 프로젝트 이름을 설정할 수 있다.
 + 프로젝트명 입력을 하면, 기본코드와 함께 Flutter 프로젝트가 생성된다.
+
+
 
 ### VSCode Flutter 프로젝트 실행하기
 + 샘플 코드에서 'F5' 단축키를 누르거나 왼쪽 ▶버튼을 클릭해 프로젝트를 실행한다.
