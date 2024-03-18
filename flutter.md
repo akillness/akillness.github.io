@@ -236,7 +236,14 @@ Visual Studio Code 홈페이지 다운로드 : [https://code.visualstudio.com/](
 
 
 ### VSCode Flutter 애뮬레이터로 실행하기
-링크 : [https://parkjh7764.tistory.com/172](https://parkjh7764.tistory.com/172)
+
++ VSCode에서 Ctrl + Shift + P 단축키를 누른 후 'Emulator'를 입력 후 클릭한다.
+  + **실제로는 '안드로이드 스튜디오(Android Studio) 애뮬레이터 가상 디바이스 설치' 가 필요하고, 안드로이드 스튜디오에 있는 애뮬레이터로 디버깅 하는 형태이다.** ( <span style="color:red" >***안드로이드 스튜디오가 필요** </span>)
+    
++ 안드로이드 스튜디오에서 설치한 AVD가 연동이 되어 실행할 애뮬레이터를 선택할 수 있다.  
+  + 안드로이드 스튜디오 Virtual Device 화면 확인+
++ AVD를 선택하면 VSCode 에서 애뮬레이터로 실행할 수 있게 된다.
++ **F5 단축키를 눌러 프로젝트를 실행시킨다.**
 
 
 * * *
