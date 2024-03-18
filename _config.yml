@@ -13,7 +13,7 @@
 title: Foward to Development
 
 # Your name to show in the footer
-author: Created by FoDev-Jeong
+author: Created by FoDev Jeong
 
 ###############################################
 # --- List of links in the navigation bar --- #
@@ -21,10 +21,11 @@ author: Created by FoDev-Jeong
 
 navbar-links:
   About Me:
-    - It's me: "aboutme"
-    - My BluePrint: "blueprint"
+    - Hello world: "helloworld"
+    # - My BluePrint: "blueprint"
     - Resume: "/assets/pdf/resume.pdf"
-  Flutter Dev: "flutter_dev"
+  Projects: 
+    - Flutter: "flutter"
     
   # Interesting: "interesting"
   
