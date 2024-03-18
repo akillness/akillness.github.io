@@ -288,6 +288,7 @@ Doctor summary (to see all details, run flutter doctor -v):
 + AVD를 선택하면 VSCode 에서 애뮬레이터로 실행할 수 있게 된다.
 + **F5 단축키를 눌러 프로젝트를 실행시킨다.**
 
+추가)참고 : [https://hileejaeho.cafe24.com/docs/flutter/vscode%EC%97%90%EC%84%9C-emulator%EB%A1%9C-%EC%8B%A4%ED%96%89%ED%95%98%EA%B8%B0/](https://hileejaeho.cafe24.com/docs/flutter/vscode%EC%97%90%EC%84%9C-emulator%EB%A1%9C-%EC%8B%A4%ED%96%89%ED%95%98%EA%B8%B0/)
 
 * * *
 ## Flutter를 이용한 app 기획 1
