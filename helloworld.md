@@ -26,7 +26,10 @@ DirectX, Unity3D 기반 게임 제작 경험을 바탕으로 게임회사에 취
   - Category is Vision, Graphics, Game
 - AI based Service
 
-#### Previous Work+
+#### Current Work
+- Flutter를 이용한 App / Web 개발 ( Dart programming )
+
+#### Previous Work
 - Faceform, 4D Scan/HMC data post-processing to low-poly 
 - 3-Match puzzle game level generator ( Model by Cellular Automata )
 - 3-Match puzzle game playing agent to estimate level ( Model by Monte Carlo Tree Search  )
