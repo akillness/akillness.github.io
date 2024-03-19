@@ -15,8 +15,7 @@ DirectX, Unity3D 기반 게임 제작 경험을 바탕으로 게임회사에 취
 
 게으른 베짱이 심보가 두둑하지만, 앞으로 열심히 성장하겠습니다. :D
 
-
-* * * 
+* * *
 #### Interesting Things+
 - Graphics Programming 
   - proto typing 
@@ -26,8 +25,11 @@ DirectX, Unity3D 기반 게임 제작 경험을 바탕으로 게임회사에 취
   - Category is Vision, Graphics, Game
 - AI based Service
 
+* * * 
+
 #### Current Work
 - Flutter를 이용한 App / Web 개발 ( Dart programming )
+- Lip Sync Model based on Wav2Mesh to improve performance
 
 #### Previous Work
 - Faceform, 4D Scan/HMC data post-processing to low-poly 
