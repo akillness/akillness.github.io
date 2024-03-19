@@ -244,7 +244,7 @@ Doctor summary (to see all details, run flutter doctor -v):
 ~~~
 
 *MacOS 상에서 🔼 위의 경우, 아래와 같이 <span style="color:green"> **해결** </span>
-- " 응용프로그램 > 안드로이드 스튜디오 > 콘텐츠 " 폴더에 들어가셔서 jre 폴더를 새로 만듭니다.
+- "응용프로그램 > 안드로이드 스튜디오 > 콘텐츠" 폴더에 들어가셔서 jre 폴더를 새로 만듭니다.
 - jbr 폴더 안에 있는 'Contents' 폴더를 --->> 새로만든 jre 폴더에 복사합니다.
 
 ~~~ sh
