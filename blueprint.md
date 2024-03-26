@@ -4,84 +4,57 @@ title: Blue Print
 subtitle: To be continue..
 ---
 
+Python 공부하기
 
-{: .box-success}
-This is a demo post to show you how to write blog posts with markdown.  I strongly encourage you to [take 5 minutes to learn how to write in markdown](https://markdowntutorial.com/) - it'll teach you how to transform regular text into bold/italics/tables/etc.<br/>I also encourage you to look at the [code that created this post](https://raw.githubusercontent.com/daattali/beautiful-jekyll/master/_posts/2020-02-28-sample-markdown.md) to learn some more advanced tips about using markdown in Beautiful Jekyll.
 
-**Here is some bold text**
+metaclass : class를 정의해주는 class 개념 
 
-## Here is a secondary heading
+ㄴ 기본 제공해주는 기능은 type()
 
-[This is a link to a different site](https://deanattali.com/) and [this is a link to a section inside this page](#local-urls).
+import abc : 추상 베이스 클래스 [abc 추상 베이스 클레스](https://docs.python.org/ko/3/library/abc.html)
 
-Here's a table:
+ㄴ class abc.ABCMeta : 추상 베이스 클래스 (ABC)를 정의하기 위한 메타 클래스.
 
-| Number | Next number | Previous number |
-| :------ |:--- | :--- |
-| Five | Six | Four |
-| Ten | Eleven | Nine |
-| Seven | Eight | Six |
-| Two | Three | One |
 
-How about a yummy crepe?
+*arg, **kwargs 의 의미
 
-![Crepe](https://beautifuljekyll.com/assets/img/crepe.jpg)
+ㄴ *args : 파라미터를 몇개를 받을지 모르는 경우 사용한다. args 는 <span style="red">튜플 형태>/span>로 전달된다.
 
-It can also be centered!
+~~~python
+def print_param(*args):
+    print args
+    for p in args:
+        print p
 
-![Crepe](https://beautifuljekyll.com/assets/img/crepe.jpg){: .mx-auto.d-block :}
-
-Here's a code chunk:
+print_param('a', 'b', 'c', 'd')
+#('a', 'b', 'c', 'd')
+#a
+#b
+#c
+#d
 
 ~~~
-var foo = function(x) {
-  return(x + 5);
-}
-foo(3)
+
+ㄴ **kwargs :  파라미터 명을 같이 보낼 수 있다. kwargs는 <span style="red">딕셔너리 형태</span>로 전달된다.
+
+
+~~~python
+def print_param2(**kwargs):
+    print kwargs
+    print kwargs.keys()
+    print kwargs.values()
+
+    for name, value in kwargs.items():
+        print "%s : %s" % (name, value)
+
+print_param2(first = 'a', second = 'b', third = 'c', fourth = 'd')
+
+#{'second': 'b', 'fourth': 'd', 'third': 'c', 'first': 'a'}
+#['second', 'fourth', 'third', 'first']
+#['b', 'd', 'c', 'a']
+#second : b
+#fourth : d
+#third : c
+#first : a
 ~~~
 
-And here is the same code with syntax highlighting:
-
-```javascript
-var foo = function(x) {
-  return(x + 5);
-}
-foo(3)
-```
-
-And here is the same code yet again but with line numbers:
-
-{% highlight javascript linenos %}
-var foo = function(x) {
-  return(x + 5);
-}
-foo(3)
-{% endhighlight %}
-
-## Boxes
-You can add notification, warning and error boxes like this:
-
-### Notification
-
-{: .box-note}
-**Note:** This is a notification box.
-
-### Warning
-
-{: .box-warning}
-**Warning:** This is a warning box.
-
-### Error
-
-{: .box-error}
-**Error:** This is an error box.
-
-## Local URLs in project sites {#local-urls}
-
-When hosting a *project site* on GitHub Pages (for example, `https://USERNAME.github.io/MyProject`), URLs that begin with `/` and refer to local files may not work correctly due to how the root URL (`/`) is interpreted by GitHub Pages. You can read more about it [in the FAQ](https://beautifuljekyll.com/faq/#links-in-project-page). To demonstrate the issue, the following local image will be broken **if your site is a project site:**
-
-![Crepe](/assets/img/crepe.jpg)
-
-If the above image is broken, then you'll need to follow the instructions [in the FAQ](https://beautifuljekyll.com/faq/#links-in-project-page). Here is proof that it can be fixed:
-
-![Crepe]({{ '/assets/img/crepe.jpg' | relative_url }})
