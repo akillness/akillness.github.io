@@ -1,12 +1,18 @@
 ---
 layout: post
-title: 그래픽스 엔지니어가 말하는 ID
-subtitle: 리드 그래픽스 엔지니어 인터뷰어의 솔직 인터뷰
-cover-img: /assets/img/cover/graphics.jpeg
-thumbnail-img: /assets/img/thumbnail/graphics.jpeg
-share-img: /assets/img/cover/graphics.jpeg
+title: 리드 그래픽스 엔지니어 인터뷰어의 솔직 인터뷰
+categories: [Blogging, Curriculum]
 tags: [game, graphics, curriculum]
+description: graphics programming, honglab, interview
 author: foDev_jeong
+date: 2024-03-07 11:33:00 +0800
+pin: true
+math: true
+mermaid: true
+image:
+  path: /assets/img/cover/graphics.jpeg
+  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
+  alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
    
 홍정모 (전)교수님의 유투브는 현직자들 인터뷰 내용도 유투브를 통해 다루고 있는데, 각 현직자들이 근무하는 회사의 분위기가 인터뷰어에게서 나타나기도하고, 원하는 회사 포지션의 인터뷰어가 있다면 채용관련 꿀팁? 같은 내용도 반드시 포함되어 있을 것 같다.
@@ -21,7 +27,7 @@ author: foDev_jeong
 **Note:** 항시 마인드 셋을 갖고, 새롭게 도전전하는 일에 대해 "왜?" 해야하는지 스스로의 동기가 필요합니다 :D
 
 
-[![Graphics Engineer](https://img.youtube.com/vi/qWsL6g66OOI/0.jpg)](https://youtu.be/qWsL6g66OOI)
+{% include embed/youtube.html id='qWsL6g66OOI' %}
 
 리드 그래픽스 엔지니어로 활동하시는 김문수님과의 인터뷰를 통해, 알짜배기 그래픽스 엔지니어로 성장할 수 있는 내용을 확인해볼까요?
 
