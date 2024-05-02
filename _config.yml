@@ -16,7 +16,7 @@ timezone: Asia/Seoul
 
 title: Fodev Jeong # the main title
 
-tagline: 나의' 개발일지 # it will display as the sub-title
+tagline: Fodev's 개발일지 # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   Game, Programming, AI

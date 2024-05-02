@@ -1,11 +1,11 @@
 ---
 title: 리드 그래픽스 엔지니어 인터뷰어의 솔직 인터뷰
 description: graphics programming, honglab, interview
-categories: [Blogging, Curriculum]
-tags: [game, graphics, curriculum]
 author: foDev_jeong
 date: 2024-03-07 11:33:00 +0800
-pin: true
+categories: [Blogging, Curriculum]
+tags: [game, graphics, curriculum]
+# pin: true
 math: true
 mermaid: true
 image:
@@ -13,6 +13,8 @@ image:
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
+
+
    
 홍정모 (전)교수님의 유투브는 현직자들 인터뷰 내용도 유투브를 통해 다루고 있는데, 각 현직자들이 근무하는 회사의 분위기가 인터뷰어에게서 나타나기도하고, 원하는 회사 포지션의 인터뷰어가 있다면 채용관련 꿀팁? 같은 내용도 반드시 포함되어 있을 것 같다.
 
