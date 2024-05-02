@@ -1,16 +1,15 @@
 ---
-layout: post
 title: 리드 그래픽스 엔지니어 인터뷰어의 솔직 인터뷰
+description: graphics programming, honglab, interview
 categories: [Blogging, Curriculum]
 tags: [game, graphics, curriculum]
-description: graphics programming, honglab, interview
 author: foDev_jeong
 date: 2024-03-07 11:33:00 +0800
 pin: true
 math: true
 mermaid: true
 image:
-  path: /assets/img/cover/graphics.jpeg
+  path: /assets/img/cover.png
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
