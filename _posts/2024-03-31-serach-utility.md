@@ -1,12 +1,18 @@
 ---
-layout: post
 title: Kakao API 관련해서 찾아본 내용
 subtitle: 몇 가지 알게 된 Utility 기록
-cover-img: /assets/img/cover.png
-thumbnail-img: /assets/img/thumbnail.png
-share-img: /assets/img/cover/share.jpeg
+categories: [Blogging, API, Kakao]
 tags: [Utility, Kakao API]
 author: foDev_jeong
+date: 2024-03-31 18:30:00 +0800
+render_with_liquid: true
+# pin: true
+# math: true
+# mermaid: true
+# image:
+#   path: /assets/img/cover/programming.jpeg
+#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
+#   alt: [2024 programming curriculum by honglab]
 ---
 
 카카오API를 이용해서 챗봇만들기 한번 해볼까? 해서 찾아봤는데, 간단한 챗봇기능은 OpenChat에서 방장에게 기본 제공되는 기능이 있다. (인사, 스케쥴러) 이런 기능 말고 대화 봇이나 Chat GPT 같이 메신저 등 요구하는 봇을 만들려면 카카오 개발자 사이트를 통해서 개발이 가능하다. 하지만 여기까지만 알아볼 예정 ^^
@@ -23,6 +29,20 @@ Kakao API 를 이용해 오픈챗 같은? 기능을 만들어 볼 수 있을까 
 
 위의 정보는 찾아보면서 업데이트 해야겠다
 
+
+#### Liquid Codes
+
+If you want to display the **Liquid** snippet, surround the liquid code with `{% raw %}` and `{% endraw %}`:
+
+````markdown
+{% raw %}
+```liquid
+{% if product.title contains 'Pack' %}
+  This product's title contains the word Pack.
+{% endif %}
+```
+{% endraw %}
+````
 
 {: .box-note}
 (기록)무료 도메인을 제공하는 사이트 [neocities](https://neocities.org/)

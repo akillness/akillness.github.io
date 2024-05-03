@@ -1,12 +1,17 @@
 ---
-layout: post
 title: Programming 어쩌면 쉬울지도?
-subtitle: Honglab 을 통해 접해보자 프로그래밍
-cover-img: /assets/img/cover/programming.jpeg
-thumbnail-img: /assets/img/thumbnail/programming.jpeg
-share-img: /assets/img/cover/programming.jpeg
+description: programming, honglab, curriculum
+categories: [Blogging, Curriculum]
 tags: [programming, curriculum, mindset]
 author: foDev_jeong
+date: 2024-03-11 20:33:00 +0800
+# pin: true
+# math: true
+# mermaid: true
+image:
+  path: /assets/img/cover/programming.jpeg
+  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
+  alt: [3D graphics viewport]
 ---
 
 프로그래밍의 공부순서라는걸 다시금 접근하기 쉽게 풀어서 안내해주신다. 소개하는 영상의 내용을 앞서 설명하자면, 기본적인 프로그래밍 언어 1개를 배우면서 향후, 목적성을 가지고 다양한 기능을 개발하기 위해서 필요한 자료구조, 알고리즘을 배워야한다. 
@@ -23,7 +28,7 @@ author: foDev_jeong
 
 프로그래밍을 공부하기 앞서, 가볍게 홍정모님의 이야기를 한번 들어보세요!
 
-[![Curriculum](https://img.youtube.com/vi/EdGOWiTn5RI/0.jpg)](https://youtu.be/EdGOWiTn5RI?si=5eQec_ik0rmdtSeU)
+{% include embed/youtube.html id='EdGOWiTn5RI' %}
 
 > 요약
 
