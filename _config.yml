@@ -97,11 +97,11 @@ comments:
     issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: 'akillness/akillness.github.io' # <gh-username>/<repo>
-    repo_id: 'R_kgDOL2P5og'
-    category: 'Comments'
-    category_id: 'DIC_kwDOL2P5os4CfGHn'
-    mapping: 'pathname' # optional, default to 'pathname'
+    repo: "akillness/akillness.github.io" # <gh-username>/<repo>
+    repo_id: "R_kgDOL2P5og"
+    category: "Comments"
+    category_id: "DIC_kwDOL2P5os4CfGHn"
+    mapping: "pathname" # optional, default to 'pathname'
     strict: # optional, default to '0'
     input_position: # optional, default to 'bottom'
     lang: # optional, default to the value of `site.lang`
