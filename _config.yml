@@ -14,7 +14,7 @@ timezone: Asia/Seoul
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Fodev Jeong # the main title
+title: Fodev_Jeong # the main title
 
 tagline: Fodev's 개발일지 # it will display as the sub-title
 
@@ -66,7 +66,7 @@ goatcounter:
 #     light  - Use the light color scheme
 #     dark   - Use the dark color scheme
 #
-theme_mode: light # [light | dark]
+theme_mode: [light | dark] # [light | dark]
 
 # The CDN endpoint for images.
 # Notice that once it is assigned, the CDN url
@@ -97,7 +97,7 @@ comments:
     issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: 'akillness/akillness.github.io' # <gh-username>/<repo>
+    repo: 'gh-akillness/akillness.github.io' # <gh-username>/<repo>
     repo_id: 'R_kgDOL2P5og'
     category: 'Comments'
     category_id: 'DIC_kwDOL2P5os4CfGHn'
