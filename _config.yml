@@ -97,15 +97,15 @@ comments:
     issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: "akillness/akillness.github.io" # <gh-username>/<repo>
-    repo_id: "R_kgDOL2P5og"
-    category: "Comments"
-    category_id: "DIC_kwDOL2P5os4CfGHn"
-    mapping: "pathname" # optional, default to 'pathname'
-    strict: "0" # optional, default to '0'
-    input_position: "bottom" # optional, default to 'bottom'
-    lang: "ko" # optional, default to the value of `site.lang`
-    reactions_enabled: "1" # optional, default to the value of `1`
+    repo: 'akillness/akillness.github.io' # <gh-username>/<repo>
+    repo_id: 'R_kgDOL2P5og'
+    category: 'Comments'
+    category_id: 'DIC_kwDOL2P5os4CfGHn'
+    mapping: 'pathname' # optional, default to 'pathname'
+    strict: '0' # optional, default to '0'
+    input_position: 'bottom' # optional, default to 'bottom'
+    lang: 'ko' # optional, default to the value of `site.lang`
+    reactions_enabled: '1' # optional, default to the value of `1`
 
 # Self-hosted static assets, optional › https://github.com/cotes2020/chirpy-static-assets
 assets:
