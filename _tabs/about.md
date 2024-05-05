@@ -42,3 +42,21 @@ DirectX, Unity3D 기반 게임 제작 경험을 바탕으로 게임회사에 취
 - Emotional User Behavior Analysis Tool ( Model by Multi-Layer Perceptron )
 
 * * * 
+
+
+### study
+
+- Dart_pad: "https://dartpad.dev/"
+- LLM: "https://bbycroft.net/llm"
+- GameSketch: "https://gitmind.com/app/docs/msddgwqm"
+- Cosera: "https://www.coursera.org/"
+- DeeplearningAI: "https://www.deeplearning.ai/"
+  
+
+### generative AI
+
+- Gemini: "https://gemini.google.com/"
+- Claude3: "https://claude.ai/chats"
+- ChatGPT: "https://chat.openai.com/"
+- SD_Web: "https://stablediffusionweb.com/"
+- MJ_Web: "https://www.imagine.art/"- 
