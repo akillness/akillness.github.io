@@ -65,45 +65,19 @@ DirectX, Unity3D 기반 게임 제작 경험을 바탕으로 게임회사에 취
 #업무정리, #일정, #단위설정, #테스트코드 , #블로그
 
 | Title                      | Subject          | Category | Detail | Link | 
-| :--------------------------- | :--------------- | :------: | :------: | :------:|
-| Alfreds Futterkiste          | Maria Anders     | Germany | | |
-| Island Trading               | Helen Bennett    |      UK | | |
-| Magazzini Alimentari Riuniti | Giovanni Rovelli |   Italy | | |
+| :--------------------------- | :--------------- | :------ | :------ | :------|
+| Prepared Categories | Concept Summary | Blog | | <https://akillness.gihub.io> |
+| | Project History & Resume | Github | | <https://github.com/akillness> |
+| | To Do List | Planning | | <https://app.todoist.com/app/today> |
+| | Schedule Planning | Scheduler | | <https://bear.app/> |
+| | Idea Sketch | Brain Storming | | <https://gitmind.com> |
+| Coding Test | Baekjoon | Problem Solving | | <https://www.acmicpc.net/step> |
+| | Algorithm & Data Structure | Concept Study | | `To be blogging..` |
+| ML/DL & AI Tech Trend | Research & Implementation | | | `To be blogging..` |
+| | Pytorch | Practice | memory, pylightning | `To be blogging..` |
+| English Speacking | Practice | Study | Goal : free talking | |
 
 
-### 기본준비
-- 블로깅 : <https://akillness.gihub.io>
-- 코드 및 이력관리 : <https://github.com/akillness>
-- 게임환경 구축 ( Mac M2 pro, personal )
-  - Unreal, Xcode 설정
-- 일정관리 : [Todoist](https://app.todoist.com/app/today)
-- 메모 또는 스케치 : <https://bear.app/>
-- 아이디어 스케치 : <https://gitmind.com>
---- 
-### 취업준비 
-- 코딩테스트용 프로그래밍 공부
-  - 백준, 프로그래밍 : <https://www.acmicpc.net/step>
-  - 자료구조, 알고리즘 공부
-    - 조사 정리 및 개념 이해 
-      - [\[Data structure\] 개발자라면 꼭 알아야 할 7가지 자료구조](https://velog.io/@jha0402/Data-structure-%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%9D%BC%EB%A9%B4-%EA%BC%AD-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-7%EA%B0%80%EC%A7%80-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0)
-      - [\[알고리즘 + 자료구조 = 프로그램\] 자료구조의 개념과 종류](https://m.hanbit.co.kr/channel/category/category_view.html?cms_code=CMS2832062046)
-- AI 기술 분석 ( 논문, 기술 요약 및 정리 )
-  - 트랜드
-  - 핵심
-- PyTorch 코드 구현
-  - 기본
-    - 개념 및 수식
-  - 구성
-    - tensor board
-    - tensor serving
-    - device gpu
-    - memory ( ram, vram )
-    - pylightning 
-- 외국어
-  - 자격증 
-    - 토익, 토플 (택 1 )
-  - 회화
-    - free talking 가능  목표
 --- 
 ### 대학원준비
 - 일정준비
