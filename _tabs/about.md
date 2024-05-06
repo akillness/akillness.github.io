@@ -43,42 +43,46 @@ DirectX, Unity3D 기반 게임 제작 경험을 바탕으로 게임회사에 취
 
 * * * 
 
+#### Generative AI & Study Table
 
-### study
 
-- Dart_pad: "https://dartpad.dev/"
-- LLM: "https://bbycroft.net/llm"
-- GameSketch: "https://gitmind.com/app/docs/msddgwqm"
-- Cosera: "https://www.coursera.org/"
-- DeeplearningAI: "https://www.deeplearning.ai/"
+| Title                      | Subject          | Detail   |  Link   |
+| :--------------------------| :--------------- | :------  | :------ |
+| Study | Cosera | Deep Learning For Certifiaction | <https://www.coursera.org/> |
+| | DeeplearningAI | Deep Learning For Certifiaction | <https://www.deeplearning.ai/> |
+| | LLM | Visualization Concept by simulation | <https://bbycroft.net/llm> |
+| Sketch | GameSketch | | <https://gitmind.com/app/docs/msddgwqm> |
+| Dart Pad | | | <https://dartpad.dev/> |
+| Generative AI (Text) | Gemini | | <https://gemini.google.com/> |
+| | Claude3 | | <https://claude.ai/chats> |
+| | ChatGPT | | <https://chat.openai.com/> |
+| Generative AI (Image) | Stable Diffusion (Web) | | <https://stablediffusionweb.com/> |
+| | Midjourney | | <https://www.imagine.art/> |
   
-
-### generative AI
-
-- Gemini: "https://gemini.google.com/"
-- Claude3: "https://claude.ai/chats"
-- ChatGPT: "https://chat.openai.com/"
-- SD_Web: "https://stablediffusionweb.com/"
-- MJ_Web: "https://www.imagine.art/"- 
-
-
 
 
 # 일정 및 계획 수립
 #업무정리, #일정, #단위설정, #테스트코드 , #블로그
 
+| Title                      | Subject          | Category | Detail | Link | 
+| :--------------------------- | :--------------- | :------: | :------: | :------:|
+| Alfreds Futterkiste          | Maria Anders     | Germany | | |
+| Island Trading               | Helen Bennett    |      UK | | |
+| Magazzini Alimentari Riuniti | Giovanni Rovelli |   Italy | | |
+
+
 ### 기본준비
-- 블로깅 : akillness.gihub.io
-- 코드 및 이력관리 : https://github.com/akillness
+- 블로깅 : <https://akillness.gihub.io>
+- 코드 및 이력관리 : <https://github.com/akillness>
 - 게임환경 구축 ( Mac M2 pro, personal )
   - Unreal, Xcode 설정
 - 일정관리 : [Todoist](https://app.todoist.com/app/today)
-- 메모 또는 스케치 : https://bear.app/
-- 아이디어 스케치 : https://gitmind.com
+- 메모 또는 스케치 : <https://bear.app/>
+- 아이디어 스케치 : <https://gitmind.com>
 --- 
 ### 취업준비 
 - 코딩테스트용 프로그래밍 공부
-  - 백준, 프로그래밍 : https://www.acmicpc.net/step
+  - 백준, 프로그래밍 : <https://www.acmicpc.net/step>
   - 자료구조, 알고리즘 공부
     - 조사 정리 및 개념 이해 
       - [\[Data structure\] 개발자라면 꼭 알아야 할 7가지 자료구조](https://velog.io/@jha0402/Data-structure-%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%9D%BC%EB%A9%B4-%EA%BC%AD-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-7%EA%B0%80%EC%A7%80-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0)
@@ -131,3 +135,28 @@ DirectX, Unity3D 기반 게임 제작 경험을 바탕으로 게임회사에 취
   - 월간목표수립
   - 분기별목표수립
   - 연간목표수립
+
+
+
+
+
+## Block Quote
+
+> This line shows the _block quote_.
+
+## Prompts
+
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
+> An example showing the `tip` type prompt.
+{: .prompt-tip }
+
+> An example showing the `info` type prompt.
+{: .prompt-info }
+
+> An example showing the `warning` type prompt.
+{: .prompt-warning }
+
+> An example showing the `danger` type prompt.
+{: .prompt-danger }
+<!-- markdownlint-restore -->
