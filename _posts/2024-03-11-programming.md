@@ -11,7 +11,7 @@ date: 2024-03-11 20:33:00 +0800
 image:
   path: /assets/img/cover/programming.jpeg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: [3D graphics viewport]
+  alt: [2024 programming curriculum by honglab]
 ---
 
 프로그래밍의 공부순서라는걸 다시금 접근하기 쉽게 풀어서 안내해주신다. 소개하는 영상의 내용을 앞서 설명하자면, 기본적인 프로그래밍 언어 1개를 배우면서 향후, 목적성을 가지고 다양한 기능을 개발하기 위해서 필요한 자료구조, 알고리즘을 배워야한다. 
@@ -23,8 +23,8 @@ image:
 
 ## **전직 교수 겸 현직  인스타그램 프로그래머 홍정모님 유툽채널 HONGlab**
 
-{: .box-note}
-**Note:** 항시 마인드 셋을 갖고, 새롭게 도전전하는 일에 대해 "왜?" 해야하는지 스스로의 동기가 필요합니다 :D
+> **Note:** 항시 마인드 셋을 갖고, 새롭게 도전전하는 일에 대해 "왜?" 해야하는지 스스로의 동기가 필요합니다 :D
+{: .prompt-info }
 
 프로그래밍을 공부하기 앞서, 가볍게 홍정모님의 이야기를 한번 들어보세요!
 
