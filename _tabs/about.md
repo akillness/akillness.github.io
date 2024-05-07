@@ -4,8 +4,8 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-{: .box-success}
-**Warning:** **나 혼자는 레벨업 ~ !!**
+> 나 혼자는 레벨업 ~ !!
+{: .prompt-danger }
 
 ### History
 
