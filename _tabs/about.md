@@ -4,7 +4,7 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-> 나 혼자는 레벨업 ~ !!
+> 나 혼자는 레벨업 ~ !! ( [Resume](/assets/pdf/resume.pdf))
 {: .prompt-danger }
 
 ### History

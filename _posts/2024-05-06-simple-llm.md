@@ -6,6 +6,7 @@ tags: [study, Simple LLM, Pytorch]
 author: foDev_jeong
 date: 2024-05-06 18:25:00 +0800
 mermaid: true
+# render_with_liquid: false
 ---
 
 LLM(Large Language Model) 공부하기 계획부터 실제 코드까지 작성하는 포스트를 작성한다. 당근에서 LLM 사용하기 
@@ -40,6 +41,15 @@ LLM(Large Language Model) 공부하기 계획부터 실제 코드까지 작성�
   - LLMs Making Decision : Agent
 - Step.7
   - Fine-Tuning LLM
+
+
+<!-- ```liquid
+{% if product.title contains 'Pack' %}
+  This product's title contains the word Pack.
+{% endif %}
+  No title
+``` -->
+
 
 
 * * *
@@ -88,3 +98,55 @@ It adjust bit precision for model weights based on importance, improving efficie
 또한 부록으로, HuggingFace의 Accelerate를 사용하여 A100-80GB에서 큰 모델(e.g., Llama2-70B)을 추론하는 방법을 설명한 내용도 노션에 별도로 작성했으니 많은 참고 부탁드립니다!
 
 <https://lnkd.in/dWVSqc-5>
+
+
+# LLM Lingo: Must-Know Terms
+
+## Foundation Model
+
+LLM designed to generate and understand human-like text across a wide range of use-cases
+
+## Transformer
+
+A popular LLM design known for its attention mechanism and parallel processing abilities
+
+## Prompting
+
+Providing carefully crafted inputs to an LLM to generate desired outputs
+
+## Context-Length
+
+Maximum number of input words/tokens an LLM can consider when generating an output.
+
+## Few-Shot Learning
+
+Providing very few examples to an LLM to assist it in performing a specific task.
+
+## Zero-Shot Learning
+
+Providing only task instructions to the LLM relying solely on its preexisting knowledge
+
+## RAG
+
+Retrieval-Augmented Generation. Appending retrieved information to improve LLM response
+
+## Knowledge Base(KB)
+
+Collection of documents from which relevant information is retrieved in RAG
+
+## Vector Database
+
+Stores vector representations of the KB, aiding the retrieval of relevant information in RAG,
+
+## Fine-Tuning
+
+Adapting an LLM to a specific task or domain by further training it on task-specific data.
+
+## Instruction Tuning
+
+Adjusting an LLM's behavior during fine-tuning by providing specific guidelines/directives
+
+## Hallucination
+
+Tendency of LLMs to sometimes generate incorrect or non-factual information.
+
