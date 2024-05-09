@@ -32,7 +32,8 @@ LLM(Large Language Model) 공부하기 계획부터 실제 코드까지 작성�
 - Step.2
   - Chaining Prompt ( Prompt Chains + LLM )
 - Step.3
-  - Adding External Knowledge Base : RAG
+  - Adding External Knowledge Base : RAG ( Retrieval Augmented Generation)
+    - `답변에 필요한 정보를 먼저 찾아서 LLM에게 질문과 함께 넘겨주는 방식`
 - Step.4
   - Adding Memory to LLMs
 - Step.5
