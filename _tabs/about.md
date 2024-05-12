@@ -4,7 +4,7 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-> 나 혼자는 레벨업 ~ !! ( [Resume](/assets/pdf/resume.pdf))
+> 나 혼자는 레벨업 ~ !! ( [Resume](/assets/pdf/resume.pdf), [HuggingFace](https://github.com/huggingface) )
 {: .prompt-danger }
 
 ### History
@@ -31,10 +31,10 @@ DirectX, Unity3D 기반 게임 제작 경험을 바탕으로 게임회사에 취
 * * * 
 
 #### Current Work
-- Flutter를 이용한 App / Web 개발 ( Dart programming )
-- Lip Sync Model based on Wav2Mesh to improve performance ( Model by based LLM )
+- Ready to Prepare Interesting things
 
 #### Previous Work
+- Lip Sync Model based on Wav2Mesh to improve performance ( Model by based LLM )
 - Faceform, 4D Scan/HMC data post-processing to low-poly 
 - 3-Match puzzle game level generator ( Model by Cellular Automata )
 - 3-Match puzzle game playing agent to estimate level ( Model by Monte Carlo Tree Search  )
