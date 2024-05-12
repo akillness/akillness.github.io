@@ -14,7 +14,7 @@ date: 2024-05-12 23:57:00 +0800
 ---
 
 ## Streamlit 으로 제작된 Simple LLM ( model : gpt-3.5-turbo )
-- github : https://github.com/streamlit/llm-examples
+- github : <https://github.com/streamlit/llm-examples>
   - ㄴ 요 위에꺼 이해 끝나면 이것도 해보자 
     - github : [pathwaycom/llm-app: LLM App templates for RAG, knowledge mining, and stream analytics. Ready to run with Docker,⚡in sync with your data sources.](https://github.com/pathwaycom/llm-app)
 - Openapi api-key에 대해서, gpt-3.5 는 웹으로는 무료인데 api를 사용하려면 신용카드 등록 또는 새로운 계정을 만들어서 무료 이용까지 사용하는 식으로 사용하는 것이 방법이다. ( 애초에 Openaip api-key 정책이 그렇게 되어있다!! )
