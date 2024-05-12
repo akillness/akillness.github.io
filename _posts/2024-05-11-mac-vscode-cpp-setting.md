@@ -16,4 +16,5 @@ date: 2024-05-11 16:30:00 +0800
 
 # [MacOS / AppleSilicon] VSCODE C++ 설정 환경 설정 개발환경 세팅 AppleSilicon
 
-<https://polarcompass.tistory.com/12>
+> **Reference** <https://polarcompass.tistory.com/12>
+{: .prompt-info }
