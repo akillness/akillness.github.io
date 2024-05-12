@@ -4,7 +4,7 @@ description: Transformer, Guid, Huggingface
 categories: [News, Transformer]
 tags: [Study, Transformer, Huggingface]
 author: Pavel Iakubovskii
-date: 2024-05-10 13:23:00 +0800
+date: 2024-05-09 15:53:00 +0800
 # mermaid: true
 # render_with_liquid: false
 # image:
