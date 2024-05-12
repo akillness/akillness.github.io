@@ -16,6 +16,9 @@ date: 2024-05-11 14:30:00 +0800
 
 # HongLab 알고리듬 압축코스 - 강의소개
 
+> **Codes :**  <https://github.com/akillness/Algorithm_Honglab>
+{: .prompt-info }
+
 알고리듬 배우는 이유?
 1. 취업
    - ‘코딩인터뷰 -> 코딩테스트’ 로 변형된 개념, 때문에 사람이 문제를 어떤 방식으로 접근하고 풀어나가는지에 대한 가능성을 보는 ‘인터뷰’
