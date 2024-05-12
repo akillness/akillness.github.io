@@ -156,16 +156,13 @@ C++ (GDB/LLDB) 선택
 ~~~
  
 
-※ 주의점
+> ※ 주의점
 tasks.json 의 label 부분과
-
 "label": "clang++ build active file",
-
 launch.json의 preLaunchTask 부분 이름이 같아야 한다.
-
 "preLaunchTask": "clang++ build active file"
-
 한글로 되어있을 경우엔 되도록 영어로 바꿔 주도록 한다.
+{: .prompt-warning }
 
 9. C/C++ configuration 세팅
 

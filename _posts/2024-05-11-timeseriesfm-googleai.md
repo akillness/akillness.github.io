@@ -14,7 +14,7 @@ date: 2024-05-10 15:41:00 +0800
 ---
 
 
-# What's New?
+# What's New? ( from [Google AI](https://twitter.com/GoogleAI))
 
 We’re excited to release the weights of our Time Series Foundation Model (TimesFM) on Hugging Face! 
 
