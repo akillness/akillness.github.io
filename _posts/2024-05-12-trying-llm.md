@@ -1,5 +1,5 @@
 ---
-title: 개념정리 ( Simple LLM, Streamlit, code spaces )
+title: Streamlit 로 구성된 Simple LLM 구현 테스트
 description: LLM, Streamlit, Codespaces
 categories: [LLM, Streamlit]
 tags: [Streamlit, LLM, Pytorch]
@@ -31,3 +31,8 @@ date: 2024-05-12 23:57:00 +0800
 
 ## Code spaces는 무엇인고
 - 개념보자 : [GitHub Codespaces 개요](https://docs.github.com/ko/codespaces/overview)
+
+
+> ## 전체적으로 구성된 프로젝트 구조 파악 해보기
+- Verba :: <https://github.com/weaviate/Verba?tab=readme-ov-file>
+{: .prompt-warning }
