@@ -1,8 +1,8 @@
 ---
 title: Consistency Large Language Models
 description: LLM, Consistency LLM
-categories: [LLM, ChosistencyLLM]
-tags: [LLM, Consistency, Efficient Parallel Decoder]
+categories: [LLM, Chosistency LLM]
+tags: [LLM, Consistency LLM, Efficient Parallel Decoder]
 # author: Maryam Miradi, PhD
 date: 2024-05-12 13:27:00 +0800
 # mermaid: true

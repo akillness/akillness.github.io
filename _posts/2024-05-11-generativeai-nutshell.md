@@ -1,8 +1,8 @@
 ---
 title: Generative AI in a Nutshell
 description: Generative AI, Nutshell 
-categories: [Script, GenerativeAI]
-tags: [Study, GenerativeAI, Nutshell]
+categories: [Script, Generative AI]
+tags: [Study, Generative AI, Nutshell]
 # author: JAE-HONG EOM
 date: 2024-05-11 23:43:00 +0800
 # mermaid: true

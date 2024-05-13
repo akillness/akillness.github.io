@@ -1,7 +1,7 @@
 ---
 title: Data Pipelines Overview
-description: Script, Datapipeline
-categories: [Script, Datapipeline]
+description: Script, Data Pipeline
+categories: [Script, Data Pipeline]
 tags: [Datapipeline, Cookbook]
 # author: foDev_jeong
 date: 2024-04-17 15:10:00 +0800
@@ -14,7 +14,7 @@ date: 2024-04-17 15:10:00 +0800
 #   alt: [ Data pipeline Overview ]
 ---
 
-![Data pipeline Overview ](/assets/img/news/data-pipeline-overview.gif){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
+![Data Pipeline Overview ](/assets/img/news/data-pipeline-overview.gif){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
 ### Data Pipelines Overview
 

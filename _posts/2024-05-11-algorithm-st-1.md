@@ -1,7 +1,7 @@
 ---
 title: 알고리듬 압축코스 - 강의소개
 description: Algorithm, Honglab
-categories: [Algorithm, Goal]
+categories: [Algorithm, Introduce]
 tags: [Study, Algorithm, Python, C++]
 # author: foDev_jeong
 date: 2024-05-11 14:30:00 +0800
