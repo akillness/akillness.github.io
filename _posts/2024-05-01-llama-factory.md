@@ -7,12 +7,11 @@ tags: [LLM, LLama, Opensource]
 date: 2024-05-01 19:57:00 +0800
 # mermaid: true
 # render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
+image:
+  path: /assets/img/news/Llama-factory.jpeg
+  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
+  alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
 
 ### 🎊 If you're new to fine-tuning LLMs and prefer a GUI based or low-code approach, LlaMA-Factory is one of the best open-source tools out there!
 
@@ -47,6 +46,7 @@ The GitHub repo already has about 17k stars! Go check it out here: <https://lnkd
 
 
 * * *
+
 
 ### 🎊 LLM을 미세 조정하는 것이 처음이고 GUI 기반 또는 로우 코드 접근 방식을 선호하는 경우 LlaMA-Factory는 최고의 오픈 소스 도구 중 하나입니다!
 
