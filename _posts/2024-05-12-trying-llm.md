@@ -13,6 +13,10 @@ date: 2024-05-12 23:57:00 +0800
 #   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
 
+> ## 전체적으로 구성된 프로젝트 구조 파악 해보기
+- Verba :: <https://github.com/weaviate/Verba?tab=readme-ov-file>
+{: .prompt-warning }
+
 ## Streamlit 으로 제작된 Simple LLM ( model : gpt-3.5-turbo )
 - github : <https://github.com/streamlit/llm-examples>
   - ㄴ 요 위에꺼 이해 끝나면 이것도 해보자 
@@ -33,6 +37,3 @@ date: 2024-05-12 23:57:00 +0800
 - 개념보자 : [GitHub Codespaces 개요](https://docs.github.com/ko/codespaces/overview)
 
 
-> ## 전체적으로 구성된 프로젝트 구조 파악 해보기
-- Verba :: <https://github.com/weaviate/Verba?tab=readme-ov-file>
-{: .prompt-warning }
