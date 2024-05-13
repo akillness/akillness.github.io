@@ -10,7 +10,7 @@ date: 2024-04-24 19:57:00 +0800
 image:
   path: /assets/img/news/llm-agents.jpeg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
+  alt: [Beginner-friendly 101 guide on LLM agents]
 ---
 
 ### 🎊 This weekend, check out my beginner-friendly 101 guide on LLM agents! Use this comprehensive guide to understand the concepts and then build your own LLM agent!
