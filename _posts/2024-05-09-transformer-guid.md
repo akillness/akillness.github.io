@@ -1,7 +1,7 @@
 ---
 title: Updated the guide for huggingface object detection transformers
 description: Transformer, Guid, Huggingface
-categories: [News, Transformer]
+categories: [Script, Transformer]
 tags: [Study, Transformer, Huggingface]
 # author: Pavel Iakubovskii
 date: 2024-05-09 15:53:00 +0800

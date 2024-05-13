@@ -1,7 +1,7 @@
 ---
 title: Lilys AI 유투브 요약 및 블로그 작성 기능
 description: Lilys AI, Blog, Youtube
-categories: [LLM, LilysAI]
+categories: [Script, LilysAI]
 tags: [LilysAI, LLM, Summary]
 # author: foDev_jeong
 date: 2024-05-12 18:57:00 +0800
