@@ -22,12 +22,12 @@ image:
 💡 I've developed a beginner-friendly guide to introduce you to the foundations of LLM agents which also includes free resources to create your very own agent!
 
 > Here are the topics
-⛳ Introduction to LLM Agents
-⛳LLM Agent Framework (Memory, Planning, Tools)
-⛳Multi-agent systems (MAS)
-⛳Real World LLM Agents
-⛳Evaluating LLM Agents
-⛳Build Your Own Agent
+- ⛳ Introduction to LLM Agents
+- ⛳ LLM Agent Framework (Memory, Planning, Tools)
+- ⛳ Multi-agent systems (MAS)
+- ⛳ Real World LLM Agents
+- ⛳ Evaluating LLM Agents
+- ⛳ Build Your Own Agent
 {: .prompt-info }
 
 The guide is available on my GitHub repo: <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/resources/agents_101_guide.md>
@@ -47,12 +47,12 @@ Please note that while this guide is tailored for beginners, it assumes some pri
 💡 LLM 에이전트의 기초를 소개하기 위해 초보자 친화적인 가이드를 개발했으며, 여기에는 자신만의 에이전트를 만들 수 있는 무료 리소스도 포함되어 있습니다!
 
 > 주제는 다음과 같습니다
-⛳ LLM 에이전트 소개
-⛳LLM 에이전트 프레임워크 (메모리, 플래닝, 툴)
-⛳다중 에이전트 시스템(MAS)
-⛳실제 LLM 에이전트
-⛳LLM 에이전트 평가하기
-⛳나만의 에이전트 구축
+- ⛳ LLM 에이전트 소개
+- ⛳ LLM 에이전트 프레임워크 (메모리, 플래닝, 툴)
+- ⛳ 다중 에이전트 시스템(MAS)
+- ⛳ 실제 LLM 에이전트
+- ⛳ LLM 에이전트 평가하기
+- ⛳ 나만의 에이전트 구축
 {: .prompt-info }
 
 이 가이드는 내 GitHub 리포지토리에서 사용할 수 있습니다 <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/resources/agents_101_guide.md>
