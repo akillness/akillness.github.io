@@ -30,7 +30,7 @@ image:
 ⛳Build Your Own Agent
 {: .prompt-info }
 
-The guide is available on my GitHub repo: <https://lnkd.in/e8Sp_y6W>
+The guide is available on my GitHub repo: <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/resources/agents_101_guide.md>
 
 Please note that while this guide is tailored for beginners, it assumes some prior understanding of LLMs and their practical applications.
 
@@ -55,7 +55,7 @@ Please note that while this guide is tailored for beginners, it assumes some pri
 ⛳나만의 에이전트 구축
 {: .prompt-info }
 
-이 가이드는 내 GitHub 리포지토리에서 사용할 수 있습니다 <https://lnkd.in/e8Sp_y6W.>
+이 가이드는 내 GitHub 리포지토리에서 사용할 수 있습니다 <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/resources/agents_101_guide.md>
 
 이 가이드는 초보자를 위해 작성되었지만, LLM과 실제 적용에 대한 사전 이해를 전제로 합니다.
 
