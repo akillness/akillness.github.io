@@ -14,9 +14,9 @@ timezone: Asia/Seoul
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Fodev_Jeong # the main title
+title: Fodev Jeong # the main title
 
-tagline: Fodev's 개발일지 # it will display as the sub-title
+tagline: Fodev's Note to Development # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   Game, Programming, AI
@@ -39,10 +39,10 @@ social:
   links:
     # The first element serves as the copyright owner's link
     # - https://twitter.com/akillness0308 # change to your twitter homepage
-    - https://github.com/akillness # change to your github homepage
+    # - https://github.com/akillness # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/akillness
-    # - https://www.linkedin.com/in/akillness38
+    - https://www.linkedin.com/in/akillness38
 
 google_site_verification: # fill in to your verification string
 
