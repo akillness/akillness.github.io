@@ -3,7 +3,7 @@ title: LLM에 대해 개념부터 파헤쳐보기
 description: pytorch, LLM, simple, prompt
 categories: [LLM, Tutorial]
 tags: [Tutorial, LLM, Pytorch]
-author: foDev_jeong
+# author: foDev_jeong
 date: 2024-05-06 18:25:00 +0800
 pin: true
 mermaid: true

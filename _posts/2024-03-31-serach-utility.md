@@ -3,7 +3,7 @@ title: Kakao API 관련해서 찾아본 내용
 subtitle: 몇 가지 알게 된 Utility 기록
 categories: [Blogging, API, Kakao]
 tags: [Utility, Kakao API]
-author: foDev_jeong
+# author: foDev_jeong
 date: 2024-03-31 18:30:00 +0800
 render_with_liquid: true
 # pin: true

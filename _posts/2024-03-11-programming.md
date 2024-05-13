@@ -3,7 +3,7 @@ title: Programming 어쩌면 쉬울지도?
 description: programming, honglab, curriculum
 categories: [Blogging, Curriculum]
 tags: [programming, curriculum, mindset]
-author: foDev_jeong
+# author: foDev_jeong
 date: 2024-03-11 20:33:00 +0800
 # pin: true
 # math: true

@@ -3,7 +3,7 @@ title: 개념정리 ( Simple LLM, Streamlit, code spaces )
 description: LLM, Streamlit, Codespaces
 categories: [LLM, Streamlit]
 tags: [Streamlit, LLM, Pytorch]
-author: foDev_jeong
+# author: foDev_jeong
 date: 2024-05-12 23:57:00 +0800
 # mermaid: true
 # render_with_liquid: false

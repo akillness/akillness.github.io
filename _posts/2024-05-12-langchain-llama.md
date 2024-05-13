@@ -3,7 +3,7 @@ title: LangChain and LlamaIndex to LLM Frameworks
 description: LLM, LangChain, LlamaIndex
 categories: [News, LangChain&LlamaIndex]
 tags: [LangChain, LLM, LlamaIndex]
-author: Pavan Belagatti
+# author: Pavan Belagatti
 date: 2024-05-12 13:27:00 +0800
 # mermaid: true
 # render_with_liquid: false

@@ -3,7 +3,7 @@ title: Generative AI in a Nutshell
 description: Generative AI, Nutshell 
 categories: [News, GenerativeAI]
 tags: [Study, GenerativeAI, Nutshell]
-author: JAE-HONG EOM
+# author: JAE-HONG EOM
 date: 2024-05-11 23:43:00 +0800
 # mermaid: true
 # render_with_liquid: false

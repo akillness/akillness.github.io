@@ -34,16 +34,16 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: Fodev_Jeong
+  name: Fodev Jeong
   email: akillness38@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
     # - https://twitter.com/akillness0308 # change to your twitter homepage
-    # - https://github.com/akillness # change to your github homepage
+    - https://github.com/akillness # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/akillness
-    - https://www.linkedin.com/in/akillness38
-
+    # - https://www.linkedin.com/in/akillness38
+∂∂∂
 google_site_verification: # fill in to your verification string
 
 # ↑ --------------------------
