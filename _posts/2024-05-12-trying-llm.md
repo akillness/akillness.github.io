@@ -6,7 +6,7 @@ tags: [Streamlit, LLM, Pytorch]
 # author: foDev_jeong
 date: 2024-05-12 23:57:00 +0800
 pin: true
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 image:
   path: /assets/img/llm/LLM_models.png
