@@ -5,13 +5,50 @@ categories: [LLM, Streamlit]
 tags: [Streamlit, LLM, Pytorch]
 # author: foDev_jeong
 date: 2024-05-12 23:57:00 +0800
+pin: true
 # mermaid: true
 # render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
+image:
+  path: /assets/img/llm/LLM_models.png
+  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
+  alt: [LLM Model history since 2019 years]
 ---
+
+
+## Step-by-Step Guide to Building LLM Apps Basic to Advanced Components Created
+
+```mermaid
+ gantt
+  title Gant Chart to represent LLM Study
+  Simple LLM App ( Prompt + LLM ) :active, a, 2024-05-08, 2w
+  Chaining Prompt ( Prompt Chains + LLM ) :crit, b, after a, 2w
+  Adding External Knowledge Base-RAG :c, after b, 2w
+  Adding Memory to LLMs :crit, d, after c, 2w
+  Using External Tool with LLM : e, after d, 2w
+  LLMs Making Decision-Agent :crit, f, after e, 2w
+  Fine-Tuning LLM : g, after f, 2w
+```
+
+
+- Step.1
+  - Simple LLM App ( Prompt + LLM )
+- Step.2
+  - Chaining Prompt ( Prompt Chains + LLM )
+- Step.3
+  - Adding External Knowledge Base : RAG ( Retrieval Augmented Generation)
+    - `답변에 필요한 정보를 먼저 찾아서 LLM에게 질문과 함께 넘겨주는 방식`
+    - 이를 통해 특정 문서나 서비스의 데이터베이스에 있는 정보에 기반해서 답변을 생성할 수 있다.
+![RAG](/assets/img/llm/RAG.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
+- Step.4
+  - Adding Memory to LLMs
+- Step.5
+  - Using External Tool with LLM
+- Step.6
+  - LLMs Making Decision : Agent
+- Step.7
+  - Fine-Tuning LLM
+
+* * *
 
 > ## 전체적으로 구성된 프로젝트 구조 파악 해보기
 - Verba :: <https://github.com/weaviate/Verba?tab=readme-ov-file>

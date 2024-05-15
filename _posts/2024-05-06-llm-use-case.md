@@ -1,53 +1,18 @@
 ---
-title: LLM에 대해 개념부터 파헤쳐보기
+title: LLM 사용하는 당근마켓 케이스 확인하기
 description: pytorch, LLM, simple, prompt
 categories: [LLM, Rewrite]
 tags: [Rewrite, LLM, Pytorch]
 # author: foDev_jeong
 date: 2024-05-06 18:25:00 +0800
-pin: true
+# pin: true
 mermaid: true
 # render_with_liquid: false
-image:
-  path: /assets/img/llm/LLM_models.png
-  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: [LLM Model history since 2019 years]
+# image:
+#   path: /assets/img/llm/LLM_models.png
+#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
+#   alt: [LLM Model history since 2019 years]
 ---
-
-## Step-by-Step Guide to Building LLM Apps Basic to Advanced Components Created
-
-```mermaid
- gantt
-  title Gant Chart to represent LLM Study
-  Simple LLM App ( Prompt + LLM ) :active, a, 2024-05-08, 2w
-  Chaining Prompt ( Prompt Chains + LLM ) :crit, b, after a, 2w
-  Adding External Knowledge Base-RAG :c, after b, 2w
-  Adding Memory to LLMs :crit, d, after c, 2w
-  Using External Tool with LLM : e, after d, 2w
-  LLMs Making Decision-Agent :crit, f, after e, 2w
-  Fine-Tuning LLM : g, after f, 2w
-```
-
-
-- Step.1
-  - Simple LLM App ( Prompt + LLM )
-- Step.2
-  - Chaining Prompt ( Prompt Chains + LLM )
-- Step.3
-  - Adding External Knowledge Base : RAG ( Retrieval Augmented Generation)
-    - `답변에 필요한 정보를 먼저 찾아서 LLM에게 질문과 함께 넘겨주는 방식`
-    - 이를 통해 특정 문서나 서비스의 데이터베이스에 있는 정보에 기반해서 답변을 생성할 수 있다.
-![RAG](/assets/img/llm/RAG.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
-- Step.4
-  - Adding Memory to LLMs
-- Step.5
-  - Using External Tool with LLM
-- Step.6
-  - LLMs Making Decision : Agent
-- Step.7
-  - Fine-Tuning LLM
-
-* * *
 
 LLM(Large Language Model) 공부하기 계획부터 실제 코드까지 작성하는 포스트를 작성한다. 
 [당근에서 LLM 사용하기](https://medium.com/daangn/%EB%8B%B9%EA%B7%BC%EC%97%90%EC%84%9C-llm-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0-76131ecebce1) 내용을 통해 LLM의 잘하는 일을 알아보고, LLM을 활용한 사례를 분석해보자.
