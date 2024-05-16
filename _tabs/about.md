@@ -137,6 +137,6 @@ DirectX, Unity3D 기반 게임 제작 경험을 바탕으로 게임회사에 취
 > An example showing the `warning` type prompt.
 {: .prompt-warning }
 
-> An example showing the `danger` type prompt.
+> `알고리듬 강의` : <https://honglab.co.kr/courses/take/algorithms>
 {: .prompt-danger }
 <!-- markdownlint-restore -->
