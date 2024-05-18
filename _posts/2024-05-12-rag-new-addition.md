@@ -46,7 +46,7 @@ date: 2024-05-12 21:29:00 +0800
 
 Depending on the use-case, you can explore relevant papers to address various challenges and improve RAG. Happy Learning!
 
-Link to the list: <https://lnkd.in/ekN-2P9d>
+Link to the list: <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/research_updates/rag_research_table.md>
 
 🚨 I post #genai content daily, follow along for the latest updates
 #rag 
@@ -88,7 +88,7 @@ Link to the list: <https://lnkd.in/ekN-2P9d>
 
 사용 사례에 따라 관련 문서를 탐색하여 다양한 문제를 해결하고 RAG를 개선할 수 있습니다. 행복한 학습!
 
-목록에 대한 링크: <https://lnkd.in/ekN-2P9d>
+목록에 대한 링크: <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/research_updates/rag_research_table.md>
 
 🚨 매일 해시태그#genai 콘텐츠를 게시하고 최신 업데이트를 팔로우합니다.
 해시태그#rag 
