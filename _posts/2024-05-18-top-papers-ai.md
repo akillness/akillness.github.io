@@ -16,7 +16,7 @@ date: 2024-05-18 18:20:00 +0800
 
 ## 📝 Top Papers in Computer Vision, NLP, Speech, Multimodal AI, Core ML, RecSys, and Graph ML • 
 
-> Distilled AI : <http://papers.aman.ai>
+> Distilled AI : <https://aman.ai/papers/>
 > aman AI : <https://aman.ai/>
 
 👉🏼 I’ve put together a summary of key papers in 해시태그#AI and segregated them into (i) need-to-know and (ii) good-to-know.
@@ -77,7 +77,7 @@ date: 2024-05-18 18:20:00 +0800
 
 ## 📝 컴퓨터 비전, NLP, 음성, 멀티모달 AI, Core ML, RecSys 및 Graph ML 분야의 주요 논문 • 
 
-> Distilled AI : <http://papers.aman.ai>
+> Distilled AI : <https://aman.ai/papers/>
 > aman AI : <https://aman.ai/>
 > 
 👉🏼 해시태그#AI 의 주요 논문을 요약하여 (i) 알아야 할 사항과 (ii) 알아두면 좋은 내용으로 구분했습니다.
