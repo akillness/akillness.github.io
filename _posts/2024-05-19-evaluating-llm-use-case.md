@@ -1,7 +1,7 @@
 ---
 title: LLM 성능 평가 ( 한국어 ) Use Case 분석해보기
 description: LLM, Evaluation
-categories: [Script, Evaluation]
+categories: [Blogging, Evaluation]
 tags: [LLM, Evaluation]
 # author: foDev_jeong
 date: 2024-05-19 01:20:00 +0800
