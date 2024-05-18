@@ -40,7 +40,7 @@ Some other cool features include:
 + 🚀 Faster Inference
   + Facilitates faster inference through OpenAI-style API, Gradio UI, and CLI with vLLM worker. This enables seamless deployment and usage of fine-tuned models in real-world applications with efficient inference capabilities.
 
-The GitHub repo already has about 17k stars! Go check it out here: <https://lnkd.in/eWW6PgGY>
+The GitHub repo already has about 17k stars! Go check it out here: <https://github.com/hiyouga/LLaMA-Factory?tab=readme-ov-file>
 
 🚨 I share #genai content daily, follow along for the latest updates! #llms #finetuning ( from [Aishwarya Naresh Reganti](https://www.linkedin.com/in/areganti/recent-activity/all/))
 
@@ -75,4 +75,4 @@ The GitHub repo already has about 17k stars! Go check it out here: <https://lnkd
 + 🚀 더 빠른 추론
   + vLLM 작업자를 사용하여 OpenAI 스타일 API, Gradio UI 및 CLI를 통해 더 빠른 추론을 용이하게 합니다. 이를 통해 효율적인 추론 기능을 통해 실제 애플리케이션에서 미세 조정된 모델을 원활하게 배포하고 사용할 수 있습니다.
 
-GitHub 저장소에는 이미 약 17개의 별이 있습니다! 여기에서 확인하십시오 : <https://lnkd.in/eWW6PgGY>
+GitHub 저장소에는 이미 약 17개의 별이 있습니다! 여기에서 확인하십시오 : <https://github.com/hiyouga/LLaMA-Factory?tab=readme-ov-file>
