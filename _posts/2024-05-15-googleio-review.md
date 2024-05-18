@@ -32,7 +32,7 @@ date: 2024-05-15 12:00:00 +0800
   
 {% include embed/youtube.html id='s4InWsd-J6g' %}
 
-> #### 기사 : <https://www.themiilk.com/articles/adf756817?u=15ed0645&t=a9b8598f7&from=>
+> #### 기사 : <https://blog.google/intl/ko-kr/products/google-io-2024-keynote-sundar-pichai/>
 
 #### 요약 
 
