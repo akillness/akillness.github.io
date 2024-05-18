@@ -24,6 +24,10 @@ image:
 {: .prompt-info }
 
 
+
+* * * 
+
+
 ### RLHF Workflow
 
 From Reward Modeling to Online RLHF
@@ -35,6 +39,7 @@ We present the workflow of Online Iterative Reinforcement Learning from Human Fe
 - paper : <https://arxiv.org/abs/2405.07863>
 - blog : <https://huggingface.co/blog/rlhf>
 {: .prompt-tip }
+
 
 * * * 
 
