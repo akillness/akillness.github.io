@@ -32,7 +32,9 @@ The comparison's outcome is the following ⇒ 𝗙𝘂𝗹𝗹𝘆 𝗮𝘂𝘁�
 
 ➡️ 𝗧𝗵𝗲𝘀𝗲 𝗳𝗶𝗻𝗱𝗶𝗻𝗴𝘀 𝗹𝗲𝗱 𝘁𝗼 𝘀𝗲𝘃𝗲𝗿𝗮𝗹 𝗮𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗮𝗹 𝗶𝗺𝗽𝗿𝗼𝘃𝗲𝗺𝗲𝗻𝘁 𝗶𝗻 𝗜𝗱𝗲𝗳𝗶𝗰𝘀-𝟮:
 ➤ Replaced cross-attention architecture with fully autoregressive architecture
+
 ➤ Enable treating images with varying aspect ratio
+
 ➤ Allow to split an image in 4, to be encoded on 320 vision tokens instead of 64, if you want to increase perf at the cost of more compute
 
 ✨ As a result, Idefics-2 reaches state-of-the-art performance for this model size! Now just a few more steps to catch up to GPT-4o!
@@ -67,8 +69,11 @@ Andrew Reed 아레나의 ELO 순위에서 OS LLM이 클로즈드 소스 LLM을 �
 
 ➡️ 이러한 발견은 Idefics-2의 몇 가지 아키텍처 개선으로 이어졌습니다.
 ➤ cross-attention 아키텍처를 완전 자동 회귀 아키텍처로 대체했습니다.
+
 ➤ 다양한 종횡비로 이미지 처리 가능
+
 ➤ 더 많은 컴퓨팅 비용으로 성능을 높이려면 이미지를 4개로 분할하여 64개 대신 320개의 비전 토큰으로 인코딩할 수 있습니다.
+
 
 ✨ 결과적으로 Idefics-2는 이 모델 크기에 대해 최첨단 성능에 도달했습니다! 이제 GPT-4o를 따라잡기 위한 몇 단계만 더 거치면 됩니다!
 
