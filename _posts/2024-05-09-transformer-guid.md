@@ -32,3 +32,15 @@ date: 2024-05-09 15:53:00 +0800
 
 
 from [Pavel Iakubovskii](https://twitter.com/qubvel1)
+
+
+* * *
+
+## ⚡ 앞으로 해야 할 일 !!!
+
+### Transformer를 이해하자 👀
+ - 샘플모델 구성
+ - 개념 다잡기
+ - 테스트 및 개선 방법 고민, 연구
+ - torch 모든 기능 구성 및 커스텀 활용
+ - applied 서비스 탐색
