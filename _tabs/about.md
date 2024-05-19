@@ -134,7 +134,7 @@ DirectX, Unity3D 기반 게임 제작 경험을 바탕으로 게임회사에 취
 > An example showing the `info` type prompt.
 {: .prompt-info }
 
-> An example showing the `warning` type prompt.
+> `ML for Games Course` : <https://huggingface.co/learn/ml-games-course/unit0/introduction>
 {: .prompt-warning }
 
 > `알고리듬 강의` : <https://honglab.co.kr/courses/take/algorithms>
