@@ -42,7 +42,9 @@ The comparison's outcome is the following ⇒ 𝗙𝘂𝗹𝗹𝘆 𝗮𝘂𝘁�
 Congrats for this great release Léo Tronchon Hugo Laurençon Victor Sanh! 👏
 
 👉 𝗥𝗲𝗮𝗱 𝘁𝗵𝗲 𝗜𝗱𝗲𝗳𝗶𝗰𝘀-𝟮 𝗽𝗮𝗽𝗲𝗿: <https://huggingface.co/papers/2405.02246>
+
 🚀 𝗔𝗻𝗱𝗿𝗲𝘄’𝘀 𝘀𝗽𝗮𝗰𝗲 𝘁𝗵𝗮𝘁 𝘀𝗵𝗼𝘄𝘀 𝗢𝗦 𝗺𝗼𝗱𝗲𝗹𝘀 𝗰𝗮𝘁𝗰𝗵𝗶𝗻𝗴 𝘂𝗽 (𝗳𝗼𝗿 𝘁𝗲𝘅𝘁 𝗺𝗼𝗱𝗲𝗹𝘀): <https://huggingface.co/spaces/andrewrreed/closed-vs-open-arena-elo>
+
 ⚔️ 𝗖𝗼𝗺𝗽𝗮𝗿𝗲 𝘃𝗶𝘀𝗶𝗼𝗻 𝗺𝗼𝗱𝗲𝗹𝘀 𝗶𝗻 𝘁𝗵𝗲 𝗩𝗶𝘀𝗶𝗼𝗻 𝗮𝗿𝗲𝗻𝗮: <https://huggingface.co/spaces/WildVision/vision-arena>
 
 
@@ -80,5 +82,7 @@ Andrew Reed 아레나의 ELO 순위에서 OS LLM이 클로즈드 소스 LLM을 �
 이 멋진 릴리스 Léo Tronchon Hugo Laurençon Victor Sanh 축하합니다! 👏
 
 👉 Idefics-2 논문 읽기: <https://huggingface.co/papers/2405.02246>
+
 🚀 OS 모델이 따라잡는 것을 보여주는 Andrew의 공간 (텍스트 모델의 경우) : <https://huggingface.co/spaces/andrewrreed/closed-vs-open-arena-elo>
+
 ⚔️ 비전 분야의 비전 모델 비교: <https://huggingface.co/spaces/WildVision/vision-arena>
