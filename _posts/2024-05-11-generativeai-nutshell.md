@@ -13,6 +13,10 @@ date: 2024-05-11 23:43:00 +0800
 #   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
 
+> [`Generative AI Preparation`](https://github.com/Msrevalli/Generative-AI-Preparation) (Generative AI 개념북) Thanks to [Aishwarya Naresh Reganti](https://www.linkedin.com/in/areganti/)
+{: .prompt-warning }
+
+
 
 # What's New? (from [JAE-HONG EOM](https://www.linkedin.com/in/jae-hong-e-93368248/))
 
@@ -22,11 +26,10 @@ date: 2024-05-11 23:43:00 +0800
 
 자, 오늘은 Henrik Kniberg의 Generative AI In a Nutshell 다이어그램 및 비디오를 통해 생성형 AI 기본 지식을 정리해 봅시다. 😉
 
-(Source) <https://lnkd.in/ggmR5G2e>
+(Source) <https://www.crisp.se/kurser/ai-for-leaders-2024-04-23>
 
-
-(Video) <https://lnkd.in/gUnRRY8a>
-
+(Video) 
+{% include embed/youtube.html id='2IK3DFHRFfw' %}
 
 * * * 
 * * *
