@@ -13,6 +13,10 @@ image:
   alt: [Beginner-friendly 101 guide on LLM agents]
 ---
 
+> 에이전트는 툴, 실행 코드, 임베딩, 벡터 저장소의 조합을 통해 대화형 LLM의 개념을 확장한다. 즉, 에이전트는 RAG에 부가적인 단계를 더한 것
+{: .prompt-info}
+
+
 ### 🎊 This weekend, check out my beginner-friendly 101 guide on LLM agents! Use this comprehensive guide to understand the concepts and then build your own LLM agent!
 
 🥁 LLM agents are gaining quite some momentum in the generative AI space since they can process feedback, maintain memory, strategize for future actions, and collaborate with various tools to make informed decisions.
