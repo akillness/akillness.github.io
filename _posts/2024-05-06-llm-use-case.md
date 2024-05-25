@@ -1,8 +1,8 @@
 ---
 title: LLM 사용하는 당근마켓 케이스 확인하기
 description: pytorch, LLM, simple, prompt
-categories: [LLM, Rewrite]
-tags: [Rewrite, LLM, Pytorch]
+categories: [LLM, UseCase]
+tags: [UseCase, LLM, Pytorch]
 # author: foDev_jeong
 date: 2024-05-06 18:25:00 +0800
 # pin: true

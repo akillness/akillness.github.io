@@ -1,7 +1,7 @@
 ---
 title: Streamlit 로 구성된 Simple LLM 구현 테스트
 description: LLM, Streamlit, Codespaces
-categories: [LLM, Streamlit]
+categories: [LLM, UseCase]
 tags: [Streamlit, LLM, Pytorch]
 # author: foDev_jeong
 date: 2024-05-12 23:57:00 +0800
