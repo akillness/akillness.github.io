@@ -33,8 +33,8 @@ image:
 
 - Step.1
   - Simple LLM App ( Prompt + LLM )
-    - Github : <https://github.com/lxe/simple-llm-finetuner>
-      - 
+    - My Github : <https://github.com/akillness/LLM_Course>
+    - Others : <https://github.com/mlabonne/llm-course>
 - Step.2
   - Chaining Prompt ( Prompt Chains + LLM )
 - Step.3
@@ -59,10 +59,10 @@ image:
 - Verba :: <https://github.com/weaviate/Verba?tab=readme-ov-file>
 {: .prompt-warning }
 
-## [흐름 정리](https://www.itworld.co.kr/news/337110#csidxd1ed0d605ed5c97bde855d08d70d63d )
+## [Workflow for Concept](https://www.itworld.co.kr/news/337110#csidxd1ed0d605ed5c97bde855d08d70d63d )
 
 <details markdown="1">
-<summary> How to concern for LLM </summary>
+<summary> How to consist of LLM </summary>
 
 ## 모델 선택
 - LLM은 거의 매일 개선되므로 금방 뒤쳐지거나 구식이 될 수 있는 모델에 묶이지 않는 것이 좋다. 이 문제에 대처하려면 서로 다른 벤더에서 두 개 이상의 모델을 선택해야 한다
@@ -159,7 +159,51 @@ image:
 
 </details>
 
-## Streamlit 으로 제작된 Simple LLM ( model : gpt-3.5-turbo ) 테스트
+
+<details markdown="1">
+<summary> How to consist of LLM for application </summary>
+
+대형 언어 모델(LLM)의 등장으로 인해 추론 쿼리를 연결하여 더 긴 애플리케이션을 만드는 필요성이 생겼습니다.
+
+이를 통해 일련의 이벤트로 더 복잡한 사용자 쿼리를 해결하거나, 사용자가 더 긴 대화를 원하는 경우 여러 대화 턴을 관리할 수 있습니다.
+따라서 프롬프트 체이닝을 수용하기 위한 다양한 플로우 엔지니어링 애플리케이션이 개발되었습니다.
+
+
+![LLM Agents to Chains](/assets/img/llm/LLM-agents-to-chains.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
+
+## 체인
+
+프롬프트 체이닝은 프롬프트 기반 AI 시스템에서 사용되는 기술로, 하나의 프롬프트가 특정 결과나 작업을 달성하기 위해 연속적으로 다른 프롬프트를 생성하거나 영향을 미치는 방법입니다. 기본적으로 여러 프롬프트를 연결하여 AI 모델이 원하는 응답이나 행동을 유도하도록 안내하는 방법입니다.
+
+체인의 일부 노드는 특정 시점에서 사용자 입력을 요청할 수 있어 대화형 UI로 작동할 수 있습니다.
+
+예를 들어, 언어 생성의 맥락에서 초기 프롬프트를 사용하여 주제나 시나리오를 소개할 수 있습니다. 그런 다음 모델에서 생성된 응답을 다음 프롬프트로 다시 입력하여 대화를 더 발전시키거나 출력을 세밀하게 조정할 수 있습니다.
+
+이 과정은 의사 결정 지점이 있는 하드코딩된 일련의 이벤트로 구성된다는 점을 명확히 해야 합니다. 이 접근 방식은 상태 기계와 비슷합니다.
+
+## 에이전트
+
+어떻게 보면 현재 간과되고 있는 것 같지만, 자율 AI 에이전트는 기술의 중요한 발전을 나타냅니다.
+
+에이전트는 인공 지능을 갖추고 있으며 다음과 같은 능력을 가지고 있습니다:
+- 독립적으로 작동
+- 결정 내리기
+- 지속적인 인간의 개입 없이 행동하기
+미래에는 자율 AI 에이전트가 의료, 금융, 제조, 운송 등 다양한 산업을 혁신할 것입니다. 그러나 의사 결정의 책임성, 투명성, 윤리 및 책임과 관련된 고려 사항이 있습니다.
+
+이러한 도전에도 불구하고, 자율 AI 에이전트가 제공하는 미래는 엄청난 가능성을 가지고 있습니다. 기술이 계속 발전함에 따라 이러한 에이전트는 우리의 일상 생활에 점점 더 통합될 것입니다.
+</details>
+
+
+
+## Trial & Error
+
+<details markdown="1">
+<summary> Streamlit & Code spaces </summary>
+
+* * * 
+
+## Trial : Streamlit 으로 제작된 Simple LLM ( model : gpt-3.5-turbo )
 
 > 테스트완료
 {: .prompt-info }
@@ -175,19 +219,13 @@ image:
 ![ Simple llm test ](/assets/img/llm/Simple_llm_test.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
 
-## Trial & Error
-
-<details markdown="1">
-<summary> Streamlit & Code spaces </summary>
-
-* * * 
+## Error
 
 VSCode를 이용해서, 디버깅시스템으로 진행해보니 아래와깉은 오류가 나온다? 엥? 뭐지 찾아보자. 찾아보니까 이것은 Streamlit 자체를 사용하는 방법이 잘못됐다.
 
-
 오류해결 내용 : **[\[OpenAI\] Chatgpt 에러 해결 - openai.RateLimitError: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details.](https://arc-viewpoint.tistory.com/entry/OpenAI-Chatgpt-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0-openaiRateLimitError-Error-code-429-error-message-You-exceeded-your-current-quota-please-check-your-plan-and-billing-details)**
 
-## Streamlit 이 무엇인고?
+### Streamlit 이 무엇인고?
 
 * * * 
 
@@ -212,7 +250,7 @@ VSCode를 이용해서, 디버깅시스템으로 진행해보니 아래와깉은
 - 도큐먼트 : [Working with Streamlit's execution model](https://docs.streamlit.io/develop/concepts/architecture)
 
 
-## Code spaces 란?
+### Code spaces 란?
 
 * * * 
 

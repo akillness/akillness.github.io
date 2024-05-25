@@ -4,7 +4,7 @@ description: LLM, Course
 categories: [Script, GPT4o]
 tags: [GPT4o, LLM, Architecture]
 # author: foDev_jeong
-date: 2024-05-25 23:05:00 +0800
+date: 2024-05-25 11:05:00 +0800
 # mermaid: true
 # render_with_liquid: false
 # image:

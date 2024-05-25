@@ -4,7 +4,7 @@ description: LLM, Course
 categories: [LLM, Cookbook]
 tags: [Cookbook, LLM]
 # author: foDev_jeong
-date: 2024-05-25 10:00:00 +0800
+date: 2024-05-25 00:20:00 +0800
 # mermaid: true
 # render_with_liquid: false
 # image:
