@@ -47,7 +47,10 @@ Integral to cryptography, particularly RSA, integer factorization breaks down nu
 
 CC: Rocky Bhatia
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
+* * * 
 
 
 ### 🌟 정렬 알고리즘
@@ -81,3 +84,5 @@ GPS 시스템 및 네트워크 라우팅의 경로 계획에 필수적인 Dijkst
 암호화, 특히 RSA에 필수적인 정수 인수분해는 숫자를 소인수로 나눕니다. RSA의 보안은 대규모 컴포지트를 팩터링하는 어려움에 따라 달라지며, 공개 키에서 개인 키를 쉽게 추출할 수 없으므로 디지털 통신이 보호됩니다.
 
 CC: 록키 바티아
+
+</details>

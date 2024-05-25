@@ -41,7 +41,10 @@ Please note that while this guide is tailored for beginners, it assumes some pri
 🚨 I post #genai content daily, follow along for the latest updates! #genai #llms #agents
 
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
+* * * 
 
 ### Lilys ai 번역 : https://lilys.ai/digest/674766 
 > 원문 : <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/resources/agents_101_guide.md>
@@ -110,3 +113,5 @@ Please note that while this guide is tailored for beginners, it assumes some pri
    - 과제 특정 메트릭 외에도, 에이전트를 *평가*하는 몇 가지 차원에는 *유틸리티, 사회성, 가치, 지속적인 진화 능력, 적대적 강건성,* 그리고 *신뢰성*이 포함된다.
 
 #### 10.️ 에이전트를 직접 만들어 보세요 (자료)
+
+</details>

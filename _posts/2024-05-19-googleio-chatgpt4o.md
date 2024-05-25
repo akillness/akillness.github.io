@@ -44,6 +44,8 @@ Exciting times ahead!
 
 
 
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
 * * * 
 
@@ -54,3 +56,5 @@ Exciting times ahead!
 Google은 100가지를 발표했지만 더 빠른 읽기를 위해 더 작은/비생성형 AI 업데이트 중 일부를 건너뛰었습니다. 
 
 가슴 설레는 시간들이 기다리고 있습니다!
+
+</details>

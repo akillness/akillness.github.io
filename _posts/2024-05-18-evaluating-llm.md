@@ -49,7 +49,10 @@ Evaluating LLMs is both crucial and challenging, especially with existing benchm
 2. Leaderboard: <https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro#4-leaderboard>
 
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
+* * * 
 
 
 ## 모든 AI/ML 엔지니어가 알아야 할 해시태그#LLM 평가 프레임워크 및 도구.
@@ -83,3 +86,5 @@ LLM을 평가하는 것은 중요하면서도 어려운 일이며, 특히 MMLU�
 
 1. 데이터 세트: <https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro>
 2. 리더보드: <https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro#4-leaderboard>
+
+</details>

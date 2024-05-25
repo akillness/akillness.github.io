@@ -31,8 +31,10 @@ date: 2024-05-11 23:43:00 +0800
 (Video) 
 {% include embed/youtube.html id='2IK3DFHRFfw' %}
 
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
 * * * 
-* * *
 
 > Lilys AI 요약노트 : <https://lilys.ai/digest/617175?videoId=2IK3DFHRFfw&result=summaryNote&source=video>
 
@@ -206,3 +208,5 @@ Prompt Engineering을 통해 더욱 숙련될수록 AI로부터 더 빠르고 �
 생성형 인공지능 기술을 이해하고 이를 내게 유리한 방향으로 활용합시다.
 
 이를 통해 기회가 되어, 업무 효율성을 높일 수 있어요.
+
+</details>

@@ -34,7 +34,10 @@ date: 2024-05-09 15:53:00 +0800
 from [Pavel Iakubovskii](https://twitter.com/qubvel1)
 
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
+* * * 
 
 ## ⚡ 앞으로 해야 할 일 !!!
 
@@ -44,3 +47,5 @@ from [Pavel Iakubovskii](https://twitter.com/qubvel1)
  - 테스트 및 개선 방법 고민, 연구
  - torch 모든 기능 구성 및 커스텀 활용
  - applied 서비스 탐색
+
+</details>

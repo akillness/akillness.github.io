@@ -54,7 +54,10 @@ Link to the list: <https://github.com/aishwaryanr/awesome-generative-ai-guide/bl
 
 ![ RAG Papers newest additions ](/assets/img/llm/Impactful_RAG_Papers.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
+* * * 
 
 🎊 내 RAG 논문 목록은 이제 4월의 논문을 포함하여 최신 추가 사항으로 업데이트되었습니다. 여기에는 빠른 요약과 주제 태그와 함께 60개 이상의 논문이 포함되어 있습니다.
 
@@ -90,6 +93,4 @@ Link to the list: <https://github.com/aishwaryanr/awesome-generative-ai-guide/bl
 
 목록에 대한 링크: <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/research_updates/rag_research_table.md>
 
-🚨 매일 해시태그#genai 콘텐츠를 게시하고 최신 업데이트를 팔로우합니다.
-해시태그#rag 
-해시태그#llms
+</details>

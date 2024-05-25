@@ -33,6 +33,8 @@ image:
 
 - Step.1
   - Simple LLM App ( Prompt + LLM )
+    - Github : <https://github.com/lxe/simple-llm-finetuner>
+      - 
 - Step.2
   - Chaining Prompt ( Prompt Chains + LLM )
 - Step.3

@@ -39,9 +39,10 @@ Elasticsearch can be used as a tool for SIEM, helping organizations to analyze s
  
 ![ Top 6 ElasticSearch Use Cases ](/assets/img/blog/ElasticSearch_use_cases.gif){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-
+* * * 
 
 ## Elasticsearch는 강력하고 다재다능한 검색 기능으로 널리 사용됩니다. 
 
@@ -64,3 +65,5 @@ Elasticsearch는 지리 공간 인덱싱 및 검색 기능을 통해 지리 데�
  
 🔹 SIEM(보안 정보 및 이벤트 관리) 
 Elasticsearch는 SIEM을 위한 도구로 사용할 수 있으며, 조직이 보안 이벤트를 실시간으로 분석할 수 있도록 지원합니다. 
+
+</details>

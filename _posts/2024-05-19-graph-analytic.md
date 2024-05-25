@@ -139,8 +139,10 @@ Some examples include:
 
 ![ Graph Analytics ](/assets/img/blog/Graph_Analytics.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
+* * * 
 
 ## 그래프 분석의 힘: 알고리즘, 유형, 기법 및 25개의 상위 Python 라이브러리 📚
 
@@ -264,3 +266,5 @@ GNN의 예는 다음과 같습니다.
 - 📚 넷웍킷
 - 📚 그라켈 
 - 📚 PyGraphistry(파이그래피스트리) 
+
+</details>

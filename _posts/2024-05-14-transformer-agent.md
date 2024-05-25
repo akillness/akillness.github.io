@@ -32,7 +32,10 @@ If you've never played with Agents, the following guide gets you up to speed as 
 Thanks a lot Lysandre Debut, Joffrey THOMAS, Pedro Cuenca and Arthur Zucker!
 
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
+* * * 
 
 에이전트 프레임워크🙌의 새 버전
 
@@ -51,3 +54,5 @@ Hugging Face Transformers 'main' 브랜치에서 액세스할 수 있습니다(v
 👉 <https://huggingface.co/docs/transformers/main/en/agents>
 
 Lysandre Debut, Joffrey THOMAS, Pedro Cuenca, Arthur Zucker 감사합니다!
+
+</details>

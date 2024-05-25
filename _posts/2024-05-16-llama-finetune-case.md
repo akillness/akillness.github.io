@@ -41,8 +41,10 @@ We present the workflow of Online Iterative Reinforcement Learning from Human Fe
 {: .prompt-tip }
 
 
-* * * 
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
+* * * 
 
 ### Llama 3 8B는 이제까지 나온 것 중 최고입니다!
 
@@ -66,3 +68,5 @@ RLHF 워크플로우
 - paper : <https://arxiv.org/abs/2405.07863>
 - blog : <https://huggingface.co/blog/rlhf>
 {: .prompt-tip }
+
+</details>

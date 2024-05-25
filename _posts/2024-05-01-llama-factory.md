@@ -13,6 +13,9 @@ image:
   alt: [LlaMA-Factory is one of the best open-source tools out there]
 ---
 
+> [LLM Finetuning](https://github.com/lxe/simple-llm-finetuner?tab=readme-ov-file)
+{: .prompt-tip}
+
 ### 🎊 If you're new to fine-tuning LLMs and prefer a GUI based or low-code approach, LlaMA-Factory is one of the best open-source tools out there!
 
 I've been trying out different open-source fine-tuning tools, and I really enjoyed using LlaMA Factory. It has a user-friendly GUI option (suitable for single GPU use-cases) which makes fine-tuning super easy with just a few clicks.
@@ -44,9 +47,10 @@ The GitHub repo already has about 17k stars! Go check it out here: <https://gith
 
 🚨 I share #genai content daily, follow along for the latest updates! #llms #finetuning ( from [Aishwarya Naresh Reganti](https://www.linkedin.com/in/areganti/recent-activity/all/))
 
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-* * *
-
+* * * 
 
 ### 🎊 LLM을 미세 조정하는 것이 처음이고 GUI 기반 또는 로우 코드 접근 방식을 선호하는 경우 LlaMA-Factory는 최고의 오픈 소스 도구 중 하나입니다!
 
@@ -76,3 +80,5 @@ The GitHub repo already has about 17k stars! Go check it out here: <https://gith
   + vLLM 작업자를 사용하여 OpenAI 스타일 API, Gradio UI 및 CLI를 통해 더 빠른 추론을 용이하게 합니다. 이를 통해 효율적인 추론 기능을 통해 실제 애플리케이션에서 미세 조정된 모델을 원활하게 배포하고 사용할 수 있습니다.
 
 GitHub 저장소에는 이미 약 17개의 별이 있습니다! 여기에서 확인하십시오 : <https://github.com/hiyouga/LLaMA-Factory?tab=readme-ov-file>
+
+</details>

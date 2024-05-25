@@ -50,8 +50,10 @@ The multimodal achievement and latency are impressive. 🔥 But I'm not worried 
 
 ![ GPT4o Released ](/assets/img/llm/GPT4o.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
-* * * 
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
+* * * 
 
 ## 🤯 OpenAI 의 새로운 멀티모달 LLM은 텍스트, 오디오, 비전을 실시간으로 이해하고 생성할 수 있습니다. 
 
@@ -72,6 +74,7 @@ The multimodal achievement and latency are impressive. 🔥 But I'm not worried 
 - 카메라의 이미지를 동시에 공유하고 ChatGPT와 소통할 수 있는 대화형 모드도 있습니다! 💬
 ⠀
 
+
 > 요약
 - 📥 입력: 텍스트, 텍스트 + 이미지, 텍스트 + 오디오, 텍스트 + 비디오, 오디오(예제 기반)
 - 📤출력: 이미지, 이미지 + 텍스트, 텍스트, 오디오(예제 기반)
@@ -86,3 +89,5 @@ The multimodal achievement and latency are impressive. 🔥 But I'm not worried 
 Blog: <https://openai.com/index/hello-gpt-4o/>
 
 The multimodal achievement and latency are impressive. 🔥 But I'm not worried about open-source AI. Open Source is stronger than ever and equally good for enterprises and companies use cases where you don't need a 200ms latency with voice input. ✅
+
+</details>

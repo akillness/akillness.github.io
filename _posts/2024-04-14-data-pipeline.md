@@ -42,6 +42,10 @@ Over to you: What's your story with data-driven pipelines? How have they influen
 –
 Subscribe to our weekly newsletter to get a Free System Design PDF (158 pages): <https://bit.ly/3KCnWXq>
 
+
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
 * * * 
 
 데이터 파이프라인 개요
@@ -67,5 +71,4 @@ Subscribe to our weekly newsletter to get a Free System Design PDF (158 pages): 
 
 데이터 기반 파이프라인에 대한 이야기는 무엇인가요? 데이터 관리 게임에 어떤 영향을 미쳤습니까?
 
-–
-주간 뉴스레터를 구독하여 무료 시스템 설계 PDF(158페이지)를 받으십시오. https://bit.ly/3KCnWXq
+</details>

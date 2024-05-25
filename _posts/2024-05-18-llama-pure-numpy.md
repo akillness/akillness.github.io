@@ -30,7 +30,10 @@ date: 2024-05-18 15:20:00 +0800
 <object data="/assets/img/llm/Llama3_implemeted_in_pure_Numpy.pdf" width="100%" height="450" type='application/pdf'></object>
 
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
+* * * 
 
 🦙 순수 NumPy👩 🔬로 구현된 라마 3
 
@@ -44,5 +47,5 @@ date: 2024-05-18 15:20:00 +0800
 
 📊 GQA를 코드에 통합하는 동안 작성자는 GQA를 모델 동작에 적용하지 않으므로 해석 가능성을 높이기 위해 NumPy를 원활하게 구현할 수 있습니다. 이 혁신적인 접근 방식에 대한 더 많은 통찰력을 계속 지켜봐 주십시오! 
 
-
+</details>
 

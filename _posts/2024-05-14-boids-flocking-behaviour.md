@@ -31,7 +31,10 @@ For the technical analysis and code see Christopher Wolfram's article at the lin
 
 ![ BOiDS Thumbnail ](/assets/img/algorithm/BOiDS-Thumbnail.gif){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
+* * * 
 
 3마리의 새 떼가 하늘에서 서로를 피합니다. 역학은 무엇입니까?
 복잡하지만 ... 또한 간단합니다. 설명해 드리겠습니다.
@@ -43,3 +46,5 @@ BOiDS는 새, 물고기 및 기타 사회적 개체의 무리 짓기 동작을 �
 다양한 대안 또는 일반화가 가능합니다. 우리는 우리가 살고 있는 세 가지 차원을 넘어서는 추상적인 공간적 차원의 임의의 수로 갈 수 있다. 다중 "종"은 분리와 핵분열-융합 행동을 도입하기 때문에 흥미롭습니다. 우리는 다른 새들을 근시 또는 원시로 만들 수 있으며, 근시는 핵심을 유지하고 원시는 주변부에 머무르는 경향이 있음을 알 수 있습니다.
 
 기술적 분석 및 코드는 위 링크에 있는 Christopher Wolfram의 기사를 참조하십시오. 감사!
+
+</details>

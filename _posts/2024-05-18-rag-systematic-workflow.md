@@ -43,7 +43,10 @@ But to make RAG work perfectly, here are some key points to consider:
 ![ A systematic workflow ](/assets/img/llm/Systematic_RAG_workflow.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
+* * * 
 
 ## RAG는 이해해야 할 세 가지 모듈로 구성되어 있습니다!
 
@@ -69,3 +72,5 @@ But to make RAG work perfectly, here are some key points to consider:
 6. 윤리적 고려 사항: 외부 지식 출처가 편향되지 않고 공격적이거나 오해의 소지가 있는 정보를 포함하지 않도록 합니다.
 
 7. 오래되었거나 잘못된 정보 처리: 검색된 정보가 오래되었거나 잘못된 상황을 처리하기 위한 전략을 마련하는 것이 중요합니다.
+
+</details>

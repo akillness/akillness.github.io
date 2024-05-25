@@ -55,7 +55,10 @@ While most of us have commonly used text embedding, Embeddings can also be utili
 
 ![ VectorEmbeddings](/assets/img/blog/Vectorembedding_backbone.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
+* * * 
 
 ## VectorEmbeddings AI/ML 애플리케이션의 중추입니다. 
 
@@ -94,3 +97,5 @@ LLM은 임베딩(embedding)이라는 특수한 형식으로 공급되는 데이�
 - ⦿ 개발자를 위한 벡터 임베딩 설명: <https://levelup.gitconnected.com/vector-embeddings-explained-for-developers-6bd9800d3635>
 
 - ⦿ 벡터 임베딩 생성 및 저장에 대한 완벽한 가이드: <https://levelup.gitconnected.com/a-complete-guide-to-creating-and-storing-vector-embeddings-aaede9822bcd>
+
+</details>

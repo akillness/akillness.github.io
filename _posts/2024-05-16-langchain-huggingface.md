@@ -37,6 +37,9 @@ We are looking forward to see what you'll build with it !
 
 ![ 𝗛𝘂𝗴𝗴𝗶𝗻𝗴 𝗙𝗮𝗰𝗲 𝘅 𝗟𝗮𝗻𝗴𝗖𝗵𝗮𝗶𝗻 ](/assets/img/llm/Huggingface_Langchain.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
 * * * 
 
 ## LangChain의 새로운 파트너🤝
@@ -58,3 +61,5 @@ We are looking forward to see what you'll build with it !
 우리는 당신이 그것으로 무엇을 만들 것인지 기대하고 있습니다!
 
 특별히 감사하는 분들: Erick Friis, 패키지에 대한 도움을 주신 Kirill Kondratenko, 커뮤니티 패키지에서 첫 번째 PR을 해주신 Andrew Reed, Aymeric Roucher
+
+</details>

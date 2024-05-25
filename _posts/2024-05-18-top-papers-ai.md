@@ -73,7 +73,10 @@ date: 2024-05-18 18:20:00 +0800
 
 ![ Top Papers ](/assets/img/news/AI_Papers_link.gif){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
+* * * 
 
 ## 📝 컴퓨터 비전, NLP, 음성, 멀티모달 AI, Core ML, RecSys 및 Graph ML 분야의 주요 논문 • 
 
@@ -130,3 +133,5 @@ date: 2024-05-18 18:20:00 +0800
 - 인수분해 기반 알고리즘 LLE(LLE, LAP, HOPE)
 - 랜덤 워크 기반 알고리즘(Node2vec)
 - 딥러닝 기반 알고리즘 (SDNE, GraphSAGE, EGNN, GCN, GAT)
+
+</details>

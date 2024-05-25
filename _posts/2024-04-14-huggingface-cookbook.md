@@ -39,7 +39,10 @@ Currently contains 16 notebooks in English and Chinese:
  15. Advanced RAG on HuggingFace documentation using LangChain
  16. Detecting Issues in a Text Dataset with Cleanlab
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
+* * * 
 
 ### 거의 알려지지 않은 보석 : 오픈 소스 요리 책
 
@@ -65,3 +68,5 @@ Currently contains 16 notebooks in English and Chinese:
 14. 합성 데이터 및 LLM-As-A-Judge를 사용한 RAG 평가
 15. LangChain을 사용한 HuggingFace 문서의 고급 RAG
 16. Cleanlab을 사용하여 텍스트 데이터 세트에서 문제 감지
+
+</details>

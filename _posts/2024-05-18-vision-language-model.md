@@ -50,7 +50,10 @@ Congrats for this great release Léo Tronchon Hugo Laurençon Victor Sanh! 👏
 
 ![ 𝐕𝐢𝐬𝐢𝐨𝐧 𝐥𝐚𝐧𝐠𝐮𝐚𝐠𝐞 𝐦𝐨𝐝𝐞𝐥𝐬 ](/assets/img/news/VisionLanguage_model.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
-* * *
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+
+* * * 
 
 
 ## 오픈 소스 모델의 거대한 도약
@@ -86,3 +89,5 @@ Andrew Reed 아레나의 ELO 순위에서 OS LLM이 클로즈드 소스 LLM을 �
 🚀 OS 모델이 따라잡는 것을 보여주는 Andrew의 공간 (텍스트 모델의 경우) : <https://huggingface.co/spaces/andrewrreed/closed-vs-open-arena-elo>
 
 ⚔️ 비전 분야의 비전 모델 비교: <https://huggingface.co/spaces/WildVision/vision-arena>
+
+</details>
