@@ -1,5 +1,5 @@
 ---
-title: Release Chameleon Opensource
+title: Release Chameleon Model
 description: LLM, Chameleon
 categories: [Script, Chameleon]
 tags: [Chameleon, LLM]
