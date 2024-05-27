@@ -1,6 +1,6 @@
 ---
 title: Kakao API 관련해서 찾아본 내용
-subtitle: 몇 가지 알게 된 Utility 기록
+description: Kakao, Utility
 categories: [Blogging, API, Kakao]
 tags: [Utility, Kakao API]
 # author: foDev_jeong
