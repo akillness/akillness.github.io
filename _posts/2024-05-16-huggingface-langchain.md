@@ -1,7 +1,7 @@
 ---
 title: Hugging Face x Langchain
 description: HuggingFace, Langchaing
-categories: [Script, LangChain]
+categories: [LLM, Cookbook]
 tags: [HuggingFace, Langchain]
 # author: foDev_jeong
 date: 2024-05-16 16:20:00 +0800
