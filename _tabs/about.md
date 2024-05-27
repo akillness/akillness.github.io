@@ -48,6 +48,11 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
 
 ### Study ( Self-Development )
 
+> #### HongLab Cource for Algorithm
+- `Instruction with Vide` : <https://honglab.co.kr/courses/take/algorithms>
+- `Github` : <https://github.com/HongLabInc/HongLabAlgorithmsPart1>
+{: .prompt-danger }
+
 > #### Hugging Face Course For Game Development by using Generative AI
 - `ML for Games Course ` : <https://huggingface.co/learn/ml-games-course/unit0/introduction>
 - `Create with Code in Unity` : <https://learn.unity.com/course/create-with-code>
@@ -55,10 +60,14 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
 
 {% include embed/youtube.html id='XtQMytORBmM' %}
 
-> #### HongLab Cource for Algorithm
-- `Instruction with Vide` : <https://honglab.co.kr/courses/take/algorithms>
-- `Github` : <https://github.com/HongLabInc/HongLabAlgorithmsPart1>
-{: .prompt-danger }
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > More Learning </summary>
+
+- Learning [Natural Language Processing with Transformers](https://huggingface.co/learn/nlp-course/chapter1/1)
+- Learning [Audio Processing with Transformers (Speech-To-Text, Text-To-Speech…)](https://huggingface.co/learn/audio-course/chapter0/introduction)
+- Learn to [build Generative AI Applications with Gradio](https://www.deeplearning.ai/short-courses/building-generative-ai-applications-with-gradio/)
+  
+</details>
 
 
 * * * 
@@ -139,15 +148,3 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
 | | ChatGPT | | <https://chat.openai.com/> |
 | Generative AI (Image) | Stable Diffusion (Web) | | <https://stablediffusionweb.com/> |
 | | Midjourney | | <https://www.imagine.art/> |
-  
-
-
-
-
-<!-- ## Prompts
-
-> An example showing the `tip` type prompt.
-{: .prompt-tip }
-
-> An example showing the `info` type prompt.
-{: .prompt-info } -->
