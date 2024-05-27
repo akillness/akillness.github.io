@@ -53,6 +53,8 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
 - `Create with Code in Unity` : <https://learn.unity.com/course/create-with-code>
 {: .prompt-warning }
 
+{% include embed/youtube.html id='XtQMytORBmM' %}
+
 > #### HongLab Cource for Algorithm
 - `Instruction with Vide` : <https://honglab.co.kr/courses/take/algorithms>
 - `Github` : <https://github.com/HongLabInc/HongLabAlgorithmsPart1>
