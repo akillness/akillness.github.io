@@ -6,7 +6,7 @@ mermaid: true
 ---
 
 
-## Let me introduce myself !
+## Let me introduce myself.
 
 ~~~
 Hello, my master's degree studies are on user behavior analysis in gaming-specific cameras, emotions and keyboards.
@@ -42,21 +42,37 @@ If you have the same idea, always please contact me :D
 
 ### Current Work 👉 [Resume](/assets/pdf/resume.pdf)
 - Ready to Prepare Interesting things
+- Self-Development
+
+* * *
+
+### Study ( Self-Development )
+
+> #### Hugging Face Course For Game Development by using Generative AI
+- `ML for Games Course ` : <https://huggingface.co/learn/ml-games-course/unit0/introduction>
+- `Create with Code in Unity` : <https://learn.unity.com/course/create-with-code>
+{: .prompt-warning }
+
+> #### HongLab Cource for Algorithm
+- `Instruction with Vide` : <https://honglab.co.kr/courses/take/algorithms>
+- `Github` : <https://github.com/HongLabInc/HongLabAlgorithmsPart1>
+{: .prompt-danger }
+
 
 * * * 
 
-> #### Look at Interesting Things+
-- Graphics Programming 
-  - proto typing 
+#### Interesting Things+
+
+~~~
 - Game Programming
   - Unreal Engine Game proto typing
 - Coding Contest Winner
 - Kaggle Ranker
   - Category is Vision, Graphics, Game
 - AI based Service
-  - Development Game
-  - Development Others
-{: .prompt-info }
+  - Game Development
+  - Application Development
+~~~ 
 
 * * *
 
@@ -104,16 +120,6 @@ If you have the same idea, always please contact me :D
 | | Pytorch | Practice | memory, pylightning | <https://github.com/akillness/SPTTC> |
 | English Speacking | Practice | Study | Goal : free talking | |
 
-* * *
-
-### Study
-
-> `ML for Games Course` : <https://huggingface.co/learn/ml-games-course/unit0/introduction>
-{: .prompt-warning }
-
-> `알고리듬 강의` : <https://honglab.co.kr/courses/take/algorithms>
-- Github : <https://github.com/HongLabInc/HongLabAlgorithmsPart1>
-{: .prompt-danger }
 
 * * *
 
