@@ -14,18 +14,18 @@ Hello, my master's degree studies are on user behavior analysis in gaming-specif
 
 I have experience creating an MCTS-based play agent for a match-3 puzzle game to predict level balancing.
 (Previously, I trained reinforcement learning-based play agents in a Dungeon Delivery game environment.)
-Next, we had the experience of creating a leveled map generator for a match-3 puzzle game with Playing Agent.
+Next, we had the experience of creating a leveled map generator for a match-3 puzzle game with Playing Agent. ( Called "MAFIA" )
 
-Recently, I have been trying to create face model from 4D scans to deep learning models. 
+Recently, I have been joining to create face model from 4D scans to deep learning models. (From Called "AVATAR" )
 
-Because we want to reduce the cost of creating facial animations for too many characters. ( Called "AVATAR" )
+Because we want to reduce the cost of creating high-quality facial animations like a digital double.
 
-I want to learn more powerful technologies such as machine learning/deep learning/generative AI for games.
+Now, I want to learn more powerful technologies such as machine learning, deep learning, generative AI for games.
 As soon as possible, i want to create a game with infinite content using generative AI.
 
 I am growing as a programming engineer in the game industry.
 
-If you have the same idea, always please contact me :D
+If you have the same idea, always please contact me :D  👉 <https://www.linkedin.com/in/akillness38/>
 ~~~
 
 * * *
