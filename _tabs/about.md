@@ -58,6 +58,20 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
 - `Create with Code in Unity` : <https://learn.unity.com/course/create-with-code>
 {: .prompt-warning }
 
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Application Conditions </summary>
+
+Here are the criteria for validating the game demo:
+
+- Have a team from 1 to 5 teammates.
+- Have a working demo that can run either on **_WEBGL or Windows_**.
+- The demo and application must be in **_English_**.
+- The game must use at least one **_open-source_** tool as part of the game or workflow.
+
+</details>
+
+* * * 
+
 {% include embed/youtube.html id='XtQMytORBmM' %}
 
 <details markdown="1">
@@ -70,7 +84,6 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
 </details>
 
 
-* * * 
 
 #### Interesting Things+
 
