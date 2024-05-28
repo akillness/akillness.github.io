@@ -1,5 +1,5 @@
 ---
-title: Streamlit 로 구성된 Simple LLM 구현 테스트
+title: LLM Course - Let's start to make Simple LLM!
 description: LLM, Streamlit, Codespaces
 categories: [LLM, UseCase]
 tags: [Streamlit, LLM, Pytorch]
@@ -14,6 +14,9 @@ image:
   alt: [LLM Model history since 2019 years]
 ---
 
+
+> 👉 Github : <https://github.com/akillness/LLM_Course>
+{: .prompt-info }
 
 ## Step-by-Step Guide to Building LLM Apps Basic to Advanced Components Created
 
