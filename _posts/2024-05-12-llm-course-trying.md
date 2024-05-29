@@ -58,7 +58,7 @@ image:
 
 * * *
 
-> **전체적으로 구성된 프로젝트 구조 파악 해보기**
+> **Understand the overall structure of the project**
 - Verba :: <https://github.com/weaviate/Verba?tab=readme-ov-file>
 {: .prompt-warning }
 
