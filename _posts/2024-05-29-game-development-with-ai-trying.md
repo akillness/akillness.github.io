@@ -87,12 +87,7 @@ You’re now ready to start your exciting journey of using machine learning in g
 
 ## Go to the Goal 
 
-- UNIT 1. CREATE A SMART ROBOT NPC USING HUGGING FACE 🤗 AND UNITY SENTIS
-- DEFINING MY DEMO PART 1. FINDING THE IDEA AND WRITING THE GDD
-- BONUS 1. CLASSICAL AI IN VIDEO GAMES
-- UNIT 2. AI TOOLS FOR GAME DEVELOPERS 🎨
-- WHEN THE NEXT UNITS WILL BE PUBLISHED?
-  - 👉 [AI in Game (creator : Thomas Simonini)](https://www.youtube.com/c/ThomasSimonini)
+- To be continue.. 
 
 
 <!-- <details markdown="1">
