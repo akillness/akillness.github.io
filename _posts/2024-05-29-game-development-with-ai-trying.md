@@ -22,6 +22,8 @@ image:
 | | Twitter | <https://twitter.com/ThomasSimonini> |
 | | LinkedIn | <https://www.linkedin.com/in/simoninithomas/?locale=en_US> |
 
+> ** Large Language Models and Games: A Survey and Roadmap : <https://arxiv.org/pdf/2402.18659> 
+
 > And more ( Check, Contributors and reviewers ): <https://huggingface.co/learn/ml-games-course/unit0/who-are-we>
 {: .prompt-info }
 
