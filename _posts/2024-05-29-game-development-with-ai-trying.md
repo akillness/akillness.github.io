@@ -17,7 +17,7 @@ image:
 | Subject | Type | Link|
 | :--- | :--- | :--- |
 | ML For Games Course | Course | <https://huggingface.co/learn/ml-games-course/unit0/introduction> |
-| AI Playbook for Game Developers  | Tutorial | <https://thomassimonini.substack.com/> |
+<!-- | AI Playbook for Game Developers  | Tutorial | <https://thomassimonini.substack.com/> | -->
 | AI in Game (creator : Thomas Simonini)| Video  | <https://www.youtube.com/c/ThomasSimonini> |
 | | Twitter | <https://twitter.com/ThomasSimonini> |
 | | LinkedIn | <https://www.linkedin.com/in/simoninithomas/?locale=en_US> |
