@@ -47,18 +47,18 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
 * * *
 
 ### Ready to Interview
-- Interview Master : <https://www.interviewmaster.io/subscribe?ref=usm1cn5fqw>
+- Interview Master ( As preparing to solve problems with code ) : <https://www.interviewmaster.io/>
+  - Reward Progress : <https://www.interviewmaster.io/subscribe?ref=usm1cn5fqw>
 
-### Study ( Self-Development )
+### Self-Development 
 
 > #### HongLab Cource for Algorithm
-- `Instruction with Vide` : <https://honglab.co.kr/courses/take/algorithms>
-- `Github` : <https://github.com/HongLabInc/HongLabAlgorithmsPart1>
+- `Github` : <https://github.com/akillness/Algorithm_Honglab>
 {: .prompt-danger }
 
 > #### Hugging Face Course For Game Development by using Generative AI
-- `ML for Games Course ` : <https://huggingface.co/learn/ml-games-course/unit0/introduction>
-- `Create with Code in Unity` : <https://learn.unity.com/course/create-with-code>
+- `ML for Games Course ` : <https://akillness.github.io/posts/game-development-with-ai-trying/>
+- `Create with Code in Unity` : <https://akillness.github.io/posts/learn-to-develop-game/>
 {: .prompt-warning }
 
 
