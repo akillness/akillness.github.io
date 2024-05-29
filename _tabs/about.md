@@ -48,6 +48,7 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
 
 ### Ready to Interview
 - Interview Master ( As preparing to solve problems with code ) : <https://www.interviewmaster.io/>
+  - Summary : This course is called Data Structures and Algorithms (DSA)
   - Reward Progress : <https://www.interviewmaster.io/subscribe?ref=usm1cn5fqw>
 
 ### Self-Development 
