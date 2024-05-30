@@ -15,7 +15,8 @@ image:
 ---
 
 
-> 👉 Github : <https://github.com/akillness/LLM_Course>
+> - 👉 Github : <https://github.com/akillness/LLM_Course>
+- 👉 Survey : <https://akillness.github.io/posts/llm-2024-survey/>
 {: .prompt-info }
 
 ## Step-by-Step Guide to Building LLM Apps Basic to Advanced Components Created
