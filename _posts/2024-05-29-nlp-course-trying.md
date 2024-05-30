@@ -4,7 +4,7 @@ description: LLM, NLP, Transformer
 categories: [LLM, NLP]
 tags: [LLM, NLP, Transformer]
 # author: foDev_jeong
-date: 2024-05-28 00:13:00 +0800
+date: 2024-05-29 00:13:00 +0800
 pin: true
 # mermaid: true
 # render_with_liquid: false

@@ -4,7 +4,7 @@ description: LLM, Game, Unity
 categories: [LLM, Game]
 tags: [LLM, Game, Unity]
 # author: foDev_jeong
-date: 2024-05-28 20:13:00 +0800
+date: 2024-05-29 20:13:00 +0800
 pin: true
 mermaid: true
 # render_with_liquid: false
