@@ -19,13 +19,13 @@ image:
 ```mermaid
  gantt
   title Create with Code in Unity3D
-  Getting Start :active, a, 2024-05-30, 1w
-  Unit 1 - Player Control :crit, b, after a, 1w
+  Getting Started :active, a, 2024-05-30, 1w
+  Unit 1 - Player Control :b, after a, 1w
   Unit 2 - Basic Game Play :c, after b, 1w
-  Unit 3 - Sound and Effect :crit, d, after c, 1w
+  Unit 3 - Sound and Effect : d, after c, 1w
   Unit 4 - Game Play Mechanics : e, after d, 1w
-  Unit 5 - User Interface :crit, f, after e, 1w
-  Next Steps : g, after f, 1w
+  Unit 5 - User Interface : f, after e, 1w
+  Next Steps : crit, g, after f, 1w
 ```
 
 * * *

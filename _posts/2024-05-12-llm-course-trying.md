@@ -26,13 +26,13 @@ image:
 ```mermaid
  gantt
   title Gant Chart to represent LLM Study
-  Simple LLM App ( Prompt + LLM ) :active, a, 2024-05-08, 2w
-  Chaining Prompt ( Prompt Chains + LLM ) :crit, b, after a, 2w
+  Simple LLM App ( Prompt + LLM ) :crit, a, 2024-05-08, 2w
+  Chaining Prompt ( Prompt Chains + LLM ) :active, b, after a, 2w
   Adding External Knowledge Base-RAG :c, after b, 2w
-  Adding Memory to LLMs :crit, d, after c, 2w
+  Adding Memory to LLMs : d, after c, 2w
   Using External Tool with LLM : e, after d, 2w
-  LLMs Making Decision-Agent :crit, f, after e, 2w
-  Fine-Tuning LLM : g, after f, 2w
+  LLMs Making Decision-Agent : f, after e, 2w
+  Fine-Tuning LLM : crit,g, after f, 2w
 ```
 
 - Step.1
