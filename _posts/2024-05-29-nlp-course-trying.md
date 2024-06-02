@@ -58,6 +58,7 @@ The text needs to be processed in a way that enables the model to learn from it.
 
 
 ... (to be continue)
+
 <!-- <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
