@@ -138,7 +138,7 @@ kramdown:
     css_class: highlight
     # default_lang: console
     span:
-      line_numbers: false
+      line_numbers: true
     block:
       line_numbers: true
       start_line: 1
