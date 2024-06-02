@@ -42,7 +42,8 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
 
 ### Current Work 👉 [Resume](/assets/pdf/resume.pdf)
 - Ready to Prepare Interesting things
-- Self-Development
+- Self-Development 👉 **_Ready to Interview_**, **_Self-Development (below)_**
+  - Reading Paper : <https://ieeexplore.ieee.org/document/9980408>
 
 * * *
 
