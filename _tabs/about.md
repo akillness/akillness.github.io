@@ -6,6 +6,8 @@ mermaid: true
 ---
 
 
+{% include google-analytics.html %}
+
 ## Let me introduce myself.
 
 ~~~
@@ -140,3 +142,5 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
 | | ChatGPT | | <https://chat.openai.com/> |
 | Generative AI (Image) | Stable Diffusion (Web) | | <https://stablediffusionweb.com/> |
 | | Midjourney | | <https://www.imagine.art/> |
+
+
