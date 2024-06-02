@@ -36,6 +36,7 @@ Please let me know in the comments what you would like to see in the course and 
 For an interactive version of this course, I created two LLM assistants that will answer questions and test your knowledge in a personalized way:
 - 🤗 [HuggingChat Assistant](https://huggingface.co/chat/): Free version using Mixtral-8x7B.
 - 🤖 [ChatGPT Assistant](https://chatgpt.com/g/g-yviLuLqvI-llm-course?oai-dm=1): Requires a premium account.
+- ⭐[LangChain Tutorial with AWS](https://www.singlestore.com/blog/how-to-create-open-source-ai-apps-with-langchain/?utm_medium=referral&utm_source=pavan&utm_term=lnkdn&utm_content=openlang)
 
 ![ LLM Course ](/assets/img/llm/LLM_course.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
@@ -66,5 +67,6 @@ For an interactive version of this course, I created two LLM assistants that wil
 
 - 🤗 [HuggingChat Assistant](https://huggingface.co/chat/): Mixtral-8x7B를 사용하는 무료 버전.
 - 🤖 [ChatGPT Assistant](https://chatgpt.com/g/g-yviLuLqvI-llm-course?oai-dm=1): 프리미엄 계정이 필요합니다.
+- ⭐[LangChain Tutorial with AWS](https://www.singlestore.com/blog/how-to-create-open-source-ai-apps-with-langchain/?utm_medium=referral&utm_source=pavan&utm_term=lnkdn&utm_content=openlang)
 
 </details>
