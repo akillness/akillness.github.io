@@ -50,7 +50,7 @@ google_site_verification: "google06c53db253d71ce5.html" # fill in to your verifi
 # The end of `jekyll-seo-tag` settings
 
 google_analytics:
-  id: # fill in your Google Analytics ID
+  id: "G-DY896ZK9GS" # fill in your Google Analytics ID
 
 goatcounter:
   id: # fill in your Goatcounter ID
