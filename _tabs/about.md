@@ -47,7 +47,8 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
 - Self-Development 👉 **_Ready to Interview_**, **_Self-Development (below)_**
   - Reading Paper : <https://ieeexplore.ieee.org/document/9980408>
     - PDF : [Generating_Role-Playing_Game_Quests_With_GPT_Language_Models.pdf](</assets/pdf/Generating_Role-Playing_Game_Quests_With_GPT_Language_Models.pdf>)
-    - lilys AI : <https://lilys.ai/digest/732152?s=1>
+      - Summary by lilys AI : <https://lilys.ai/digest/732152?s=1>
+    - Quest GPT-2 Github : <https://github.com/svartinen/gpt2-quest-descriptions>
 
 * * *
 
