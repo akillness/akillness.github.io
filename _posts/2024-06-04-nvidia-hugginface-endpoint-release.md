@@ -1,10 +1,10 @@
 ---
 title: The release of NVIDIA NIM on Hugging Face Inference Endpoints
-description: NVIDIA, End[oint]
+description: NVIDIA, EndPoint
 categories: [LLM, Cookbook]
 tags: [AI, NVIDIA, Endpoint]
 # author: foDev_jeong
-date: 2024-06-04 15:00:00 +0800
+date: 2024-06-04 02:00:00 +0800
 # pin: true
 # mermaid: true
 # render_with_liquid: false
