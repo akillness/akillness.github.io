@@ -36,8 +36,8 @@ image:
 
 | Subject | Type | Link|
 | :--- | :--- | :--- |
-<!-- | **Create with Code in Unity** | Tutorial | <https://learn.unity.com/course/create-with-code> | -->
-| **Game Maker's Toolkit** | Video | <https://www.youtube.com/@GMTK> |
+| `Create with Code in Unity` | Tutorial | <https://learn.unity.com/course/create-with-code> |
+| Game Maker's Toolkit | Video | <https://www.youtube.com/@GMTK> |
 
 
 ## Introduction
