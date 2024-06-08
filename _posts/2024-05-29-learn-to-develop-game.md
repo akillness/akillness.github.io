@@ -18,7 +18,7 @@ image:
 
 ```mermaid
  gantt
-  title Create with Code in Unity3D
+  title Create with Code of Unity3D
   Getting Started :active, a, 2024-05-30, 1w
   Unit 1 - Player Control :b, after a, 1w
   Unit 2 - Basic Game Play :c, after b, 1w
