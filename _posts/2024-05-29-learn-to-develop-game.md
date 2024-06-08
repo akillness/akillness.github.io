@@ -32,7 +32,6 @@ image:
 | :--- | :--- | :--- |
 | Working on my Unity project | Github | <https://github.com/akillness/PlayerControl> |
 
-* * *
 
 ## Course
 
