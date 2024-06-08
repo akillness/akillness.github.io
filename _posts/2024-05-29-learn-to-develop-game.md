@@ -42,6 +42,7 @@ image:
 | :--- | :--- | :--- |
 | `Create with Code in Unity` | Tutorial | <https://learn.unity.com/course/create-with-code> |
 | Game Maker's Toolkit | Video | <https://www.youtube.com/@GMTK> |
+| AI and Game | News | <https://www.aiandgames.com/?utm_source=homepage_recommendations&utm_campaign=872843> |
 
 
 
