@@ -28,16 +28,22 @@ image:
   Next Steps : crit, g, after f, 1w
 ```
 
+| Subject | Type | Link|
+| :--- | :--- | :--- |
+| Working on my Unity project | Github | <https://github.com/akillness/PlayerControl> |
+
 * * *
 
 ## Course
 
 {% include embed/youtube.html id='XtQMytORBmM' %}
 
+
 | Subject | Type | Link|
 | :--- | :--- | :--- |
 | `Create with Code in Unity` | Tutorial | <https://learn.unity.com/course/create-with-code> |
 | Game Maker's Toolkit | Video | <https://www.youtube.com/@GMTK> |
+
 
 
 ## Introduction
