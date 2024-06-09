@@ -17,7 +17,7 @@ image:
 
 > - 👉 Github : <https://github.com/akillness/LLM_Course>
 - 👉 Survey : <https://akillness.github.io/posts/llm-2024-survey/>
-- 👉 History : <https://modulabs.co.kr/blog/llama-3-intro/>
+<!-- - 👉 History : <https://modulabs.co.kr/blog/llama-3-intro/> -->
 {: .prompt-info }
 
 ## Step-by-Step Guide to Building LLM Apps Basic to Advanced Components Created
