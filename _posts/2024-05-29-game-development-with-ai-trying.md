@@ -87,11 +87,11 @@ Congratulations on finishing this introduction unit!
 You’re now ready to start your exciting journey of using machine learning in games 🥳
 
 
-## Go to the Goal 
+## Explore Game with AI
 
-- To be continue.. 
+- Dark Souls
 
-
+{% include embed/youtube.html id='PrHKzKQdZxY' %}
 <!-- <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 

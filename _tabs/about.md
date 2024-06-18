@@ -39,6 +39,7 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
 - 3-Match puzzle game playing agent to estimate level ( Model by Monte Carlo Tree Search  )
 - Dunjeon Delivery Reinforcement learning based agent ( Model by Double- DQN )
 - Emotional User Behavior Analysis Tool ( Model by Multi-Layer Perceptron )
+  - paper : [Facial Expression Scale Recognition System for Game Play Analysis](https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE06645430)
 
 * * *
 
