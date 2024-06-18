@@ -87,11 +87,22 @@ Congratulations on finishing this introduction unit!
 You’re now ready to start your exciting journey of using machine learning in games 🥳
 
 
-## Explore Game with AI
+## The AI of Dark Souls
 
-- Dark Souls
+Article : <https://www.aiandgames.com/p/the-ai-of-dark-souls?utm_source=post-email-title&publication_id=1069672&post_id=144527115&utm_campaign=email-post-title&isFreemail=true&r=28moe0&triedRedirect=true&utm_medium=email>
+
+- Exploring the AI of Dark Souls : AI and Games #75
 
 {% include embed/youtube.html id='PrHKzKQdZxY' %}
+
+- Prepare to Die by Simple AI - Dark Souls and Difficulty : Design Dive
+
+{% include embed/youtube.html id='s2S8o3fmJyc' %}
+
+- The Secret Reward Systems of Dark Souls II : Design Dive
+
+{% include embed/youtube.html id='4ke8D_FgAj0' %}
+
 <!-- <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
