@@ -15,7 +15,9 @@ pin: true
 ---
 
 | Subject | Type | Link|
-| :--- | :--- | :---
+| :--- | :--- | :--- |
+| Transformer Course  | Course | <https://huggingface.co/docs/transformers/main/en/index> |
+| Model Hub | Models | <https://huggingface.co/models> |
 | NLP Course  | Course | <https://huggingface.co/learn/nlp-course/chapter1/1> |
 | The Hugging Face Course | Github | <https://github.com/huggingface/course#-jupyter-notebooks> |
 
