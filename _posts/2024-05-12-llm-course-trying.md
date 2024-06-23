@@ -5,7 +5,7 @@ categories: [LLM, UseCase]
 tags: [Streamlit, LLM, Pytorch]
 # author: foDev_jeong
 date: 2024-05-12 23:57:00 +0800
-pin: true
+# pin: true
 mermaid: true
 # render_with_liquid: false
 image:
