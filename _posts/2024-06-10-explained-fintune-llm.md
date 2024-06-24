@@ -1,8 +1,8 @@
 ---
 title: 5 techniques to fine-tune LLMs, explained visually!
-description: LLM, Finetuning, Visualization
-categories: [LLM, Finetuning]
-tags: [LLM, Finetuning]
+description: LLM, PEFT, Visualization
+categories: [LLM, PEFT]
+tags: [LLM, PEFT]
 # author: foDev_jeong
 date: 2024-06-10 10:10:00 +0800
 # pin: true
@@ -13,6 +13,9 @@ date: 2024-06-10 10:10:00 +0800
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
+
+> Check more PEFT (Parameters Efficient Fine-Tuning) methods : <https://huggingface.co/docs/peft/index>
+{: .prompt-info }
 
 ## Fine-tuning large language models traditionally involved adjusting billions of parameters, demanding significant computational power and resources. 
 
