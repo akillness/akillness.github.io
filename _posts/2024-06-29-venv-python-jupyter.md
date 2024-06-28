@@ -1,5 +1,5 @@
 ---
-title: Setting Jupyter Kernel with venv of python
+title: Setting Jupyter Kernel according to venv of python
 description: Python, venv, jupyter
 categories: [Setting, Jupyter]
 tags: [Venv, Jupyter]
