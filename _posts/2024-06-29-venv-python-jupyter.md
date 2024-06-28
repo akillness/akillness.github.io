@@ -20,6 +20,12 @@ date: 2024-06-29 00:10:00 +0800
 
 - activate.bat 또는 source activate 실행
 
+## Setting Jupyter Notebook
+
+~~~sh
+pip install jupyter jupyter notebook
+~~~
+
 ## Install ipkernel to add Jyputer Kernel 
 
 ~~~sh
