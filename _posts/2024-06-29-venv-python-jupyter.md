@@ -26,7 +26,7 @@ date: 2024-06-29 00:10:00 +0800
 pip install ipykernel
 ~~~
 
-## Add Jupyter Kernen
+## Add Jupyter Kernel
 
 ~~~sh
 python -m ipykernel install --user --name "virtual env name" --display-name "shown name of diplay"
