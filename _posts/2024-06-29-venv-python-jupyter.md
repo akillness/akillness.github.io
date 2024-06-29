@@ -47,5 +47,9 @@ jupyter kernelspec uninstall .venv
 ![ Tools for building LLM Application ](/assets/img/llm/LLM_tools_for_building.jpeg){: .light .shadow .rounded-10 w='1212' h='668' } -->
 
 
->Reference : <https://hellodata.tistory.com/38>
+> Reference
+- ipkernel : <https://hellodata.tistory.com/38>
+- Google Colab : <https://creatorjo.tistory.com/entry/%EA%B5%AC%EA%B8%80-%EC%BD%94%EB%9E%A9colab-%EA%B8%B0%EC%B4%88-%EC%82%AC%EC%9A%A9%EB%B2%95>
 {: .prompt-info}
+
+
