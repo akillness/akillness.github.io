@@ -4,7 +4,7 @@ description: Software,CI/CD
 categories: [Setting, CI/CD]
 tags: [CI, CD]
 # author: foDev_jeong
-date: 2024-07-05 19:10:00 +0800
+date: 2024-06-30 19:10:00 +0800
 # pin: true
 # math: true
 # mermaid: true

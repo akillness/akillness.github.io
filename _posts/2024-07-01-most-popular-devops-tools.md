@@ -4,7 +4,7 @@ description: DevOps, Tools
 categories: [Setting, DevOps]
 tags: [DevOps,Tools]
 # author: foDev_jeong
-date: 2024-07-05 20:10:00 +0800
+date: 2024-07-01 20:10:00 +0800
 # pin: true
 # math: true
 # mermaid: true

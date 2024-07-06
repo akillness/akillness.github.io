@@ -4,7 +4,7 @@ description: LLM, AI, Storyteller
 categories: [LLM, Course]
 tags: [Storyteller, Course]
 # author: foDev_jeong
-date: 2024-06-30 12:10:00 +0800
+date: 2024-06-30 19:10:00 +0800
 # pin: true
 # math: true
 # mermaid: true

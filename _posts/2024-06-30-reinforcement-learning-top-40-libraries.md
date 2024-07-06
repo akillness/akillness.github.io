@@ -4,7 +4,7 @@ description: ReinforecementLearning, Library
 categories: [Study, ReinforcementLearning]
 tags: [Course, ReinforementLearning]
 # author: foDev_jeong
-date: 2024-07-05 20:10:00 +0800
+date: 2024-06-30 20:10:00 +0800
 # pin: true
 # math: true
 # mermaid: true
