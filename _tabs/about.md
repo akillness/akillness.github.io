@@ -83,7 +83,7 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
   - Application Development
 ~~~ 
 
-> Wow !! **Hot Issue : ReLU Games, Deeplearning Game "Smoking Gun" Open by using** Azure OpenAI GPT.
+> Wow !! **Hot Issue : ReLU Games, Deeplearning Game "Uncover the Smoking Gun" Open by using** Azure OpenAI GPT.
 {: .prompt-danger}
 
 {% include embed/youtube.html id='zrc1BUULVfo' %}
