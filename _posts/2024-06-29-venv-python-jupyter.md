@@ -14,7 +14,7 @@ date: 2024-06-29 00:10:00 +0800
 #   alt: [2024 programming curriculum by honglab]
 ---
 
-
+In this post, when i use jupyter notebook explain how to add venv of python.
 
 ## Setting venv of python 
 

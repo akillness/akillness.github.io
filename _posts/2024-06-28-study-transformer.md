@@ -14,33 +14,36 @@ date: 2024-06-28 00:10:00 +0800
 #   alt: [2024 programming curriculum by honglab]
 ---
 
-> Update comming soon.. 
-{: .prompt-danger}
-
 # Step to explain Transformer 
 > Dataset : <https://github.com/NoCodeProgram/deepLearning/tree/main/rnn>
 
+## RNN Studying Repository
+> Repository : <https://github.com/akillness/SPTTC/tree/main/practice/myRNN>
+{: .prompt-info}
 
-## Transformer Intro
+**Contents of table**
+- RNN Intro
+- RNN Implementation
+- RNN Classification
+- RNN Generation
+- Word Embedding
 
-## Self-Attention
 
-## Multi-Head Attention 
+## Transformer Studying Repository
+> Repository : <https://github.com/akillness/SPTTC/tree/main/practice/myTransformer>
+{: .prompt-info}
 
-## Layer Norm & Encoder
-
-## Embedding Layer
+**Contents of table**
+- Self-Attention
+- Multi-Head Attention
+- Layer Norm & Encoder
+- Embedding Layer
 
 > Test Tokenizer according to Model : <https://tiktokenizer.vercel.app/?model=gpt2>
 {: .prompt-tip}
 
-- WordToVec of RNN 
-
-## Positional Encoding Layer
-
-## Transformer Encoder
-
-## Transformer Decoder
+- Positional Encoding Layer
+- Transformer Encoder
 
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Explaining about Transformer by talker programming without code </summary>
