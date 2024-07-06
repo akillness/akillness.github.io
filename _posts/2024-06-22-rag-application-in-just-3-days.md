@@ -4,7 +4,7 @@ description: RAG, Applicaition
 categories: [LLM, RAG]
 tags: [RAG, Application]
 # author: foDev_jeong
-date: 2024-07-05 19:10:00 +0800
+date: 2024-06-22 20:10:00 +0800
 # pin: true
 # math: true
 # mermaid: true

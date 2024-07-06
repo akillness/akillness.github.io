@@ -24,7 +24,7 @@ This means massive cost savings (think 85%+) without sacrificing the quality you
 
 Dive into the paper, try their demo, and see how open source is leading the way to a more efficient AI future. 
 
-- Demo: <https://816388d8af31950a69.gradio.live/>
+- Demo: <https://lnkd.in/gnjfB9vf>
 - Code: <https://github.com/lm-sys/RouteLLM>
 - Paper: <https://arxiv.org/abs/2406.18665>
 - 🤗Hugging Face: <https://huggingface.co/routellm>

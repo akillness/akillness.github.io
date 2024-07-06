@@ -4,7 +4,7 @@ description: Rag, Practices
 categories: [LLM, RAG]
 tags: [RAG, Practices]
 # author: foDev_jeong
-date: 2024-07-05 22:10:00 +0800
+date: 2024-07-04 22:10:00 +0800
 # pin: true
 # math: true
 # mermaid: true

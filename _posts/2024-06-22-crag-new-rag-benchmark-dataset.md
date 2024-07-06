@@ -4,7 +4,7 @@ description: CRAG, LLM
 categories: [LLM, CRAG]
 tags: [RAG, CRAG]
 # author: foDev_jeong
-date: 2024-06-22 15:10:00 +0800
+date: 2024-06-22 19:10:00 +0800
 # pin: true
 # math: true
 # mermaid: true
