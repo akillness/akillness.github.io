@@ -5,7 +5,7 @@ categories: [LLM, RAG]
 tags: [RAG, Practices]
 # author: foDev_jeong
 date: 2024-07-04 22:10:00 +0800
-# pin: true
+pin: true
 # math: true
 # mermaid: true
 # image:

@@ -5,7 +5,7 @@ categories: [LLM, RAG]
 tags: [Finetune, Embedding Model, RAG]
 # author: foDev_jeong
 date: 2024-06-05 11:00:00 +0800
-# pin: true
+pin: true
 # mermaid: true
 # render_with_liquid: false
 # image:
