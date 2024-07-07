@@ -63,6 +63,9 @@ Excited to share a new blog on how to fine-tune embedding models for financial R
 
 Go build! 🤗
 
+> Huggingface RAG : <https://huggingface.co/docs/transformers/model_doc/rag>
+{: .prompt-info}
+
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
