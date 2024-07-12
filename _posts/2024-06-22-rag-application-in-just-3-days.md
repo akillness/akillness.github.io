@@ -14,6 +14,12 @@ date: 2024-06-22 20:10:00 +0800
 #   alt: [2024 programming curriculum by honglab]
 ---
 
+
+
+{% include embed/youtube.html id='J9VWyxOSJzA' %}
+
+> Video Channel : <https://www.youtube.com/@aishwaryanr4606>
+
 ## Retrieval Augmented Generation (RAG) has emerged as a extremely popular application in the LLM space. 
 
 Its appeal lies in its lightweight design and the simplicity of integrating it with any foundational LLM.
