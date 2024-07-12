@@ -5,7 +5,7 @@ categories: [LLM, Course]
 tags: [GenAI, Course]
 # author: foDev_jeong
 date: 2024-06-30 19:10:00 +0800
-# pin: true
+pin: true
 # math: true
 # mermaid: true
 # image:
@@ -13,6 +13,14 @@ date: 2024-06-30 19:10:00 +0800
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
+
+
+{% include embed/youtube.html id='J9VWyxOSJzA?list=PLZoalK-hTD4VBBF03HAifKd6-DF68sYlC&t=6' %}
+
+> Video Channel : <https://www.youtube.com/@aishwaryanr4606>
+
+> 3 Days Course for RAG : <https://akillness.github.io/posts/rag-application-in-just-3-days/>
+{: .prompt-info}
 
 Due to character limits, I've included only about 30 courses in this post. You can find all courses and their URLs on GitHub repository: <https://github.com/aishwaryanr/awesome-generative-ai-guide?tab=readme-ov-file#book-list-of-free-genai-courses>
 
