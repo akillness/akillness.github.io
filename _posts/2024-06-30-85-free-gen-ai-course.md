@@ -24,6 +24,47 @@ pin: true
 
 Due to character limits, I've included only about 30 courses in this post. You can find all courses and their URLs on GitHub repository: <https://github.com/aishwaryanr/awesome-generative-ai-guide?tab=readme-ov-file#book-list-of-free-genai-courses>
 
+
+### 😎 This prompting report is your ultimate guide to prompt engineering! 
+
+IMO it's one of the most thorough reports that summarizes all the research so far!
+
+Kudos to Sander Schulhoff from Learn Prompting and other co-authors from OpenAI & Microsoft!
+
+👉 It starts of with clearly explaining the concept and then providing structured understanding by creating a taxonomy of prompting techniques, analyzing their use, and presenting a comprehensive vocabulary of 33 terms. 
+
+👉 It also explores 58 text-only prompting techniques and 40 techniques for other modalities, providing a meta-analysis of the entire literature on natural language prefix-prompting.
+
+I'm also going through it and jotting down notes. It's a fantastic report; definitely a must-read if you want to become proficient in prompt engineering.
+
+Here's the link: <https://arxiv.org/pdf/2406.06608>
+
+### 😨 Finding the perfect RAG setup for your use-case can be a huge pain! Think chunk size, embedding model, retrieval method and many other parameters. 
+
+To add to the issue, it's highly likely that your configuration will require numerous adjustments once it goes live and users begin interacting with it.
+
+This new paper introduces an AutoRAG framework aimed at tackling these challenges. It formulates hyperparameter tuning as search problem and defines a bandit based framework to efficiently explore large search spaces.
+
+❗ Just a heads-up: Honestly, I think It's quite an innovative idea, but implementing it could be expensive and time-consuming! Still, it's good to know about these new things :)
+
+Here are some more details:
+
+- 👉 The AutoRAG framework aligns with principles from AutoML, aiming to automate and improve the efficiency of RAG hyperparameter tuning.
+
+- 👉 Unlike prior works that often manually tune RAG hyperparameters or focus on specific tunable parameters within language model API calls, this framework emphasizes methods applicable in an online setting. It addresses the challenge of dynamically adjusting hyperparameters based on real-time feedback and varying conditions.
+
+- 👉 The paper formulates the hyperparameter selection process in RAG as an online multi-armed bandit problem. This approach allows the system to balance exploration of new hyperparameter configurations with exploitation of known effective settings, adapting to changing conditions over time.
+
+- 👉 To efficiently explore large hyperparameter search spaces in RAG, the study introduces a novel Hierarchical MAB (Hier-MAB) method. This method involves a high-level MAB guiding optimization across modules and several low-level MABs fine-tuning specific hyperparameters within each module. This hierarchical approach enhances the system's ability to find optimal configurations in complex environments.
+
+Link to the paper: <https://arxiv.org/pdf/2406.19251>
+
+![ AutoRAG-HP ](/assets/img/llm/AutoRAG-framework.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
+
+
+> AutoRAG 리뷰(야구로 이해해보자) : <https://velog.io/@autorag/AutoRAG-%ED%8C%80%EC%9D%98-AutoRAG-HP-%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0-%EC%95%BC%EA%B5%AC%EB%A1%9C-%EC%9D%B4%ED%95%B4%ED%95%B4%EB%B3%B4%EC%9E%90>
+{: .prompt-info}
+
 ### ⛳ LLM Basics and Foundations
 - Large Language Models by ETH Zurich
 - Understanding Large Language Models by Princeton

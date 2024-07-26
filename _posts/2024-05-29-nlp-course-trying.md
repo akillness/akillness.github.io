@@ -21,6 +21,11 @@ pin: true
 | NLP Course  | Course | <https://huggingface.co/learn/nlp-course/chapter1/1> |
 | The Hugging Face Course | Github | <https://github.com/huggingface/course#-jupyter-notebooks> |
 
+> Check out them
+> 1. Aishwarya Naresh Reganti - 20-Day Introductory short-video course on GenAI (Launches today) - <https://www.linkedin.com/posts/areganti_genaish-freecourse-llms-activity-7209019559704457216-9RQL/>
+> 2. Paul Iusztin - Build and deploy your LLM twin. Amazing diagrams with practical guidance. - <https://www.linkedin.com/posts/pauliusztin_machinelearning-mlops-datascience-activity-7214903237215154177-N8b5/>
+> 3. Alexey Grigorev - A man known to bless us with free bootcamps. Didn’t disappoint us this time. - <https://www.youtube.com/watch?v=ifpqpB1ksGc>
+{: .prompt-tip}
 
 ![ LLM Research Trends ](/assets/img/blog/NLP_Overview.svg){: .light  .shadow .rounded-10 w='1212' h='668' }
 

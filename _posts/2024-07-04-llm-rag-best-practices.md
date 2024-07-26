@@ -18,6 +18,18 @@ pin: true
 
 Retrieval-augmented generation (RAG) techniques address the LLM limitations by integrating up-to-date information, mitigating hallucinations, and enhancing response quality, particularly in specialized domains.
 
+### 😅 The pace of RAG research is super impressive, but not all of it is practical for real-world use cases. 
+
+Many latest research works seek to improve performance over basic RAG architectures, however, they struggle with complex implementation and long response times.
+
+This new paper investigates existing RAG approaches and their potential combinations to identify optimal practices. Through extensive experiments, the authors suggest several strategies for deploying RAG that balance both performance and efficiency.
+
+The infographic in itself (below) is extremely useful too. It breaks down the pipeline into smaller stages and lists methods for each stage.
+
+> - Github : <https://github.com/FudanDNN-NLP/RAG>
+> - Paper : <https://arxiv.org/pdf/2407.01219>
+{: .prompt-info}
+
 ### 𝐑𝐀𝐆 𝐖𝐨𝐫𝐤𝐟𝐥𝐨𝐰
 
 A typical RAG workflow usually contains multiple intervening processing steps: 
