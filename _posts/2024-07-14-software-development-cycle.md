@@ -1,5 +1,5 @@
 ---
-title: 𝗞𝗲𝘆 𝗦𝘁𝗮𝗴𝗲𝘀 𝗼𝗳 𝘁𝗵𝗲 𝗦𝗼𝗳𝘁𝘄𝗮𝗿𝗲 𝗗𝗲𝘃𝗲𝗹𝗼𝗽𝗺𝗲𝗻𝘁 𝗖𝘆𝗰𝗹𝗲
+title: Software Development Cycle
 description: Software Development Cycle
 categories: [Study, Software Development Cycle]
 tags: [Study, Software Development Cycle]
