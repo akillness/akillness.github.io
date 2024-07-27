@@ -5,7 +5,7 @@ categories: [Study, Datascience]
 tags: [Github, Datascience]
 # author: foDev_jeong
 date: 2024-07-19 15:30:00 +0800
-pin: true
+# pin: true
 # math: true
 # mermaid: true
 # image:
@@ -15,7 +15,7 @@ pin: true
 ---
 
 
-### I have compiled the 20 Best GitHub Repositories for Data Science:
+## I have compiled the 20 Best GitHub Repositories for Data Science:
 
 1. Data Scientist Roadmap: <https://github.com/MrMimic/data-scientist-roadmap>
 2. Learn Data Science: <https://github.com/nborwankar/LearnDataScience>
@@ -41,4 +41,13 @@ pin: true
 19. Data Science QnAs: <https://github.com/jayinai/data-science-question-answer>
 20. Data Science interviews: <https://github.com/alexeygrigorev/data-science-interviews>
 
-🙏 Help me spread the resources! ♻️ Kindly like, share and comment!
+
+## Multi-GPU Training Diagram by Avi Chawla
+
+Includes:
+- ▶ Model Parallelism
+- ▶ Tensor Parallelism
+- ▶ Data Parallelism
+- ▶ Pipeline Parallelism
+
+![ 4 Strategies Multi-GPU  ](/assets/img/blog/4-Strategies-Multi-GPU.gif){: .light .shadow .rounded-10 w='1212' h='668' }

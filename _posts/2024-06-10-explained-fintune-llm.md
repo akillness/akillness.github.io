@@ -52,40 +52,47 @@ Credits to Avi Chawla for great visualisation! 👏
 
 ![ Visualization 5 fine-tune LLMs  ](/assets/img/llm/LLM_Finetune_visualization.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 
+#### ❓ Why can't we use regular LoRA for pre-training LLMs ❓
+
+- 📌 LoRA (Low-Rank Adaptation), targets a subset of a neural network's parameters, specifically focusing on the weight matrices of transformer models. 
+
+It represents these large matrices as the product of smaller, low-rank matrices. This approach significantly reduces the number of parameters that need to be updated during fine-tuning.
+
+- 📌 This constraint (focusing on a small, low-rank subspace of the model's parameters) is beneficial for fine-tuning because it allows for efficient adaptation of a pre-trained model to a specific task with minimal changes to the original parameter space. 
+
+It effectively balances the need for model adaptation while retaining much of the pre-trained knowledge.
+
+- 📌 During pre-training, however, the goal is to explore and learn a broad representation of the data domain without any specific task constraints. 
+  
+Restricting the model to a low-rank subspace, as LoRA does, would constrain the model's capacity to learn diverse and general features from the data. 
+
+Pre-training benefits from having as few restrictions as possible on the model's capacity to learn and represent information, which is why the full parameter space is typically utilized.
+
+![ Visualization 5 fine-tune LLMs  ](/assets/img/llm/What-is-LoRA.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
+
 <details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Fine-Tuning Embedding Models for Semantic Search </summary>
 
-* * * 
+Marqo published a short course (free, no login) on finetuning embedding models for Semantic Search, covering the foundations of embeddings, vector databases all the way to finetuning embedding models with Sentence Transformers, Vision Transformers, and CLIP/Multimodal models.
 
-## 대규모 언어 모델을 미세 조정하려면 전통적으로 수십억 개의 매개 변수를 조정해야 했기 때문에 상당한 계산 능력과 리소스가 필요했습니다. 
+> Check it out here: <https://marqo.ai/courses/fine-tuning-embedding-models>
+{: .prompt-info}
 
-그러나 몇 가지 혁신적인 방법의 개발로 이 프로세스가 바뀌었습니다. 
+It is a very complete overview, and I'd recommend reading it & running the corresponding code to learn how to do all of this yourself. 
 
-다음은 LLM을 미세 조정하기 위한 5가지 최첨단 기술을 간략하게 설명한 것으로, 각 기법은 쉽게 이해할 수 있도록 시각적으로 설명되어 있습니다.
+Here are the current chapters:
+1. Introduction to Vector Embeddings
+2. Foundations of Embedding Models
+3. Introduction to Vector Databases
+4. Build Your First Vector Search Application
+5. Introduction to Sentence Transformers
+6. Training and Fine-Tuning Sentence Transformers
+7. Introduction to Vision Transformers
+8. Training and Fine-Tuning Vision Transformers
+9. Introduction to CLIP and Multimodal Models
+10. Fine-Tuning CLIP Models
 
-#### 로라:
+Great work on this by Ellie Sleightholm. Semantic Search/Retrieval models are oh so important, and finetuning them remains one of the best ways to get the most out of the existing models.
 
-- 가중치 행렬 W와 함께 작동하도록 두 개의 낮은 순위 행렬 A와 B를 도입합니다.
-- 거대 W 대신 이 행렬을 조정하여 업데이트를 관리할 수 있습니다.
-
-#### LoRA-FA(냉동-A):
-
-- 행렬 A를 동결하여 LoRA를 한 단계 더 발전시킵니다.
-- 매트릭스 B만 조정되어 필요한 활성화 메모리가 줄어듭니다.
-
-#### 베라:
-
-- 효율성에 관한 모든 것: 행렬 A와 B는 고정되어 있고 모든 계층에서 공유됩니다.
-- 각 레이어에서 작고 학습 가능한 스케일링 벡터에 중점을 두어 메모리 친화적으로 만듭니다.
-
-#### 델타-로라:
-
-- LoRA의 트위스트: 훈련 단계에서 행렬 A와 B의 곱 간의 차이(델타)를 주 가중치 행렬 W에 추가합니다.
-- 파라미터 업데이트에 대한 동적이면서도 제어된 접근 방식을 제공합니다.
-
-#### 로라+:
-
-- 행렬 B가 더 높은 학습률을 얻는 LoRA의 최적화된 변형입니다.
-이 조정은 더 빠르고 효과적인 학습으로 이어집니다.
 
 </details>

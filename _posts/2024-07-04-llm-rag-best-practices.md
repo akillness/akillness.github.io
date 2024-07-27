@@ -8,10 +8,10 @@ date: 2024-07-04 22:10:00 +0800
 pin: true
 # math: true
 # mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
+image:
+  path: /assets/img/llm/The-Evolution-of-RAG-Models.jpeg
+  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
+  alt: [ The Evolution of RAG Models ]
 ---
 
 ## Generative large language models are prone to producing outdated information or fabricating facts.
@@ -50,31 +50,38 @@ RAG Best Practices paper details (refer to the comments)
 
 ![ LLM RAG Best Practices ](/assets/img/llm/LLM_RAG_Best_Practices.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
+
+![ LLM RAG Best Practices ](/assets/img/llm/The-Evolution-of-RAG-Models.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
+
+
+### Let's understand RAG with a simple workflow.
+
+{% include embed/youtube.html id='TNUbBPdbsLA' %}
+
+RAG can help prevent hallucinations by providing LLMs with the most recent proprietary and contextual data, allowing them to generate a response based on both their inherent external knowledge and up-to-date internal data. 
+
+This approach can improve accuracy and reduce hallucinations.
+
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
 * * * 
 
-## 생성적 대형 언어 모델은 오래된 정보를 생성하거나 사실을 조작하는 경향이 있습니다.
+📚 'RAG(Retrieval-Augmented Generation) 시스템의 포괄적 연구' - RAG의 총정리
 
-검색 증강 생성(RAG) 기술은 특히 전문 영역에서 최신 정보를 통합하고, 환각을 완화하고, 응답 품질을 향상시켜 LLM 제한 사항을 해결합니다.
+🔍 이 논문의 핵심 포인트:
+- RAG 전체 워크플로우를 모듈별로 상세 분석
+- 각 모듈(검색, 재순위화, 요약 등)의 최적 구현 방법 제시
+- 다양한 NLP 태스크에서 RAG 성능 평가 결과 공개
+- 성능과 효율성을 모두 고려한 최적 구현 전략 제안
+- 멀티모달 RAG로의 확장 가능성 탐구
+- 생성기 미세조정을 위한 최적의 접근법 제시
 
-### RAG 작업 흐름
+💡 이런 분들에게 추천합니다:
+- AI 개발자: RAG 시스템 구현 시 실질적 가이드라인을 얻고 싶은 분
+- 연구자: RAG의 최신 트렌드와 성능 개선 방법을 파악하고 싶은 분
+- 기업 의사결정자: RAG 도입을 고려 중이신 분
 
-일반적인 RAG 워크플로우에는 일반적으로 여러 개입 처리 단계가 포함됩니다.
-- 쿼리 분류(주어진 입력 쿼리에 대해 검색이 필요한지 여부 결정),
-- 검색기(쿼리와 관련된 문서를 효율적으로 가져옴),
-- 순위 재지정(쿼리와의 관련성에 따라 검색된 문서의 순서를 재정의함)
-- 재포장(더 나은 생성을 위해 검색된 문서를 구조화된 문서로 구성),
-- 요약(리패킹된 문서에서 응답 생성을 위한 핵심 정보 추출 및 중복 제거)
-
-### 래그 인피 관행
-
-- 모범 사례 : 최고의 성능을 달성하려면 쿼리 분류 모듈을 통합하고, 검색을 위해 "Hybrid with HyDE" 방법을 사용하고, 순위 재지정을 위해 monoT5를 사용하고, 재패킹을 위해 Reverse를 선택하고, 요약을 위해 Recomp를 활용하는 것이 좋습니다.
-
-- 균형 잡힌 효율성 실천: 성능과 효율성 사이의 균형을 이루기 위해 쿼리 분류 모듈을 통합하고, 검색을 위해 Hybrid 방법을 구현하고, reranking을 위해 TILDEv2를 사용하고, repacking을 위해 Reverse를 선택하고, Recomp를 사용하는 것을 권장합니다.
-요약.
-
-RAG 모범 사례 문서 세부 정보(설명 참조)
+🤔 RAG에 관심 있는 모든 분들이 좋아할만한 정리가 되어있는데요. 많은 기업에서 관심을 가지고 있는 만큼 좋은 자료라고 생각해서 공유합니다. 
 
 </details>

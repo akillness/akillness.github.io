@@ -15,7 +15,6 @@ pin: true
 ---
 
 
-
 ### DoLa decoding, which made a conference paper at ICLR '24, has just been merged in Transformers by João Gante and Yung-Sung Chuang.
 This new decoding method is simple yet extremely impressive!
 
