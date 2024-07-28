@@ -51,9 +51,6 @@ RAG Best Practices paper details (refer to the comments)
 ![ LLM RAG Best Practices ](/assets/img/llm/LLM_RAG_Best_Practices.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
 
-![ LLM RAG Best Practices ](/assets/img/llm/The-Evolution-of-RAG-Models.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
-
-
 ### Let's understand RAG with a simple workflow.
 
 {% include embed/youtube.html id='TNUbBPdbsLA' %}
@@ -62,10 +59,61 @@ RAG can help prevent hallucinations by providing LLMs with the most recent propr
 
 This approach can improve accuracy and reduce hallucinations.
 
+* * *
+
+<details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > The vector database space  </summary>
+
+![ The Vector DB Landscape ](/assets/img/llm/The-Vector-DB-Landscape.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
+
+## 🔊 The vector database space is populated with numerous players! How do you choose the best one for your use-case?
+
+🚀 In the last year, there has been a huge surge in the variety of vector database options. I've compiled the most popular ones in the image below, although it may not encompass the entire list.
+
+
+😵 With such a large number of options, how do you navigate and discover the ideal one for your needs?
+💡 Keep in mind that there isn't a one-size-fits-all "best" vector database—selecting the right one depends on your unique requirements
+
+Here are some factors to consider:
+
+### 📈 Scalability
+Scalability is crucial for determining a vector database's ability to effectively handle rapidly expanding data volumes. 
+
+Evaluating scalability involves considering factors such as load balancing, multiple replications, and the database's ability to handle high-dimensional data and growing query loads over time.
+
+### 🏆 Performance
+Performance is crucial in assessing vector databases, using metrics like QPS, recall and latency. Benchmark tools like ANN-Benchmark and VectorDBBench offer comprehensive evaluations.
+
+### 💰 Cost
+Factor in the total cost of ownership, encompassing licensing fees, cloud hosting charges, and associated infrastructure costs. A cost-effective system should deliver satisfactory speed and accuracy at a reasonable price.
+
+### ✍ Developer Experience
+Evaluate the ease of setup, documentation clarity, and availability of SDKs for smooth development. Ensure compatibility with preferred cloud providers, LLMs, and seamless integration with existing infrastructure.
+
+### 📲 Support and Ops
+Ensure your provider meets security and compliance standards while offering expertise tailored to your needs. Confirm their availability and technical support, and assess their monitoring capabilities for efficient database management.
+
+### 💫 Additional Features
+Various vector databases differ in their feature offerings, influencing your decision-making process depending on your application's long-term objectives. For example, while most vector databases support features like multi-tenant and disk index, only a few support ephemeral indexing. However, you might require only specific features from this subset for your application.
+
+Even after factoring in these considerations, it may still be necessary to conduct individual research on each option.
+
+📖 For example, some commonly known information:
+
+- ⛳ Pinecone is well known for efficiently handling extensive collections of vectors, particularly in NLP and computer vision applications, but is a bit on the pricier side.
+- ⛳ Qdrant is an pretty lightweight and works best for geospatial data.
+- ⛳ Milvus is an is optimized for large-scale ML applications and excels in building search systems
+- ⛳ pgvector is the most straightforward choice if you have a Postgres database 
+
+
+and so on!
+
+</details>
+
+* * *
+
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
-
-* * * 
 
 📚 'RAG(Retrieval-Augmented Generation) 시스템의 포괄적 연구' - RAG의 총정리
 
