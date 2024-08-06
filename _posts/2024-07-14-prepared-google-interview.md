@@ -40,19 +40,19 @@ Here's how I would do it if I had to start from scratch:
 3. Become proficient with the language you're most comfortable in:
  I personally use C++ 17 for STL (Standard Template Library) which provides optimized and readable implementations for arrays, sorting, stacks, heaps, queues etc. Write as much code in your language of choice as you can, translating thoughts into code should be second nature to you.
 
-1. Move up to non-primitive data structures:
+4. Move up to non-primitive data structures:
    1. Trees (they have some really nice properties): <https://www.geeksforgeeks.org/tree-data-structure/>
    2. Dequeue: <https://www.geeksforgeeks.org/deque-cpp-stl/>
    3. Sets: <https://www.geeksforgeeks.org/set-in-cpp-stl/>
    4. Maps: <https://www.geeksforgeeks.org/map-associative-containers-the-c-standard-template-library-stl/>
 
-2. Build an understanding of problem-solving techniques:
+5. Build an understanding of problem-solving techniques:
    1. Sliding window: <https://www.geeksforgeeks.org/window-sliding-technique/>
    2. Binary search on the answer: <https://www.geeksforgeeks.org/binary-search-on-answer-tutorial-with-problems/>
    3. Matrix traversal: <https://www.geeksforgeeks.org/depth-first-traversal-dfs-on-a-2d-array/>
    4. Topological Sort: <https://www.geeksforgeeks.org/topological-sorting/>
 
-3. Dynamic Programming:
+6. Dynamic Programming:
  This deserves a whole post for itself!
  
 Evaluate where you are in your preparation journey and use this guide to create your roadmap.
