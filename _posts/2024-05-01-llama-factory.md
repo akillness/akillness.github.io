@@ -1,8 +1,8 @@
 ---
 title: LLama Factory is one of the best Open-source tools
-description: LLM, LLama
-categories: [LLM, LLama]
-tags: [LLM, LLama, Opensource]
+description: LLM, Llama
+categories: [LLM, Llama]
+tags: [LLM, Llama, Opensource]
 # author: foDev_jeong
 date: 2024-05-01 19:57:00 +0800
 # mermaid: true

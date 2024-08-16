@@ -1,8 +1,8 @@
 ---
 title: Llamma Finetune case 와 RLHF 정리
 description: LoRA vs GPT4, Performance
-categories: [LLM, LLama]
-tags: [LLama, RLHF]
+categories: [LLM, Llama]
+tags: [Llama, RLHF]
 # author: foDev_jeong
 date: 2024-05-16 18:22:00 +0800
 # mermaid: true

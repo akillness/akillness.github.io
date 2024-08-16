@@ -1,7 +1,7 @@
 ---
 title: Llama 3 implemented in pure NumPy
 description: Llama, Numpy
-categories: [LLM, LLama]
+categories: [LLM, Llama]
 tags: [Llama, Numpy]
 # author: foDev_jeong
 date: 2024-05-18 15:20:00 +0800

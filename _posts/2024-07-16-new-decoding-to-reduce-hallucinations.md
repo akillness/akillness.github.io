@@ -5,7 +5,7 @@ categories: [LLM, DoLa]
 tags: [DoLa, Decoding]
 # author: foDev_jeong
 date: 2024-07-16 11:30:00 +0800
-pin: true
+# pin: true
 # math: true
 # mermaid: true
 # image:

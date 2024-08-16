@@ -5,7 +5,7 @@ categories: [LLM, Engineer]
 tags: [LLM, Engineer]
 # author: foDev_jeong
 date: 2024-07-20 13:30:00 +0800
-pin: true
+# pin: true
 # math: true
 # mermaid: true
 # image:

@@ -92,14 +92,14 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
 
 ### Schedule & Planning
 > #업무정리, #일정, #단위설정, #테스트코드 , #블로그
-
+<!-- 
 ```mermaid
  gantt
   title 일정 및 계획 수립
   취업준비 :active, a, 2024-06-01, 8w
   대학원 지원서작성 :crit, b, 2024-07-01, 2w
   
-```
+``` -->
 
 | Title| Subject| Category | Detail | Part | Time |
 | :--- | :--- | :--- | :--- | :--- | :--- |

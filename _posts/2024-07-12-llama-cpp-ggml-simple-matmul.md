@@ -1,8 +1,8 @@
 ---
 title: llama.cpp의 내부 구현을 분석하다가 ggml을 이용한 간단한 matmul 샘플을 구현 사례 고찰
-description: LLAMA, CPP
-categories: [LLM, LLAMA]
-tags: [LLAMA,CPP]
+description: Llama, CPP
+categories: [LLM, Llama]
+tags: [Llama,CPP]
 # author: foDev_jeong
 date: 2024-07-12 11:00:00 +0800
 # pin: true
