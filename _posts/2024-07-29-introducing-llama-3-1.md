@@ -85,7 +85,6 @@ The most exciting thing about LLaMA is that it is almost open-source, although t
 
 - Another cool part is that the model weights are open. This can help developers build AI-powered apps. Instead of paying to use the GPT-4 API, you can now self-host your own model and pay a cloud provider a bunch of money to rent some GPUs.
 
-
 * * *
 
 ![ Llama 3.1 Ultra-Efficiently ](/assets/img/llm/llama-3-1-ultra-efficiently.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }

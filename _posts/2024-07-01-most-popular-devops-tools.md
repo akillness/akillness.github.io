@@ -14,7 +14,9 @@ date: 2024-07-01 20:10:00 +0800
 #   alt: [2024 programming curriculum by honglab]
 ---
 
-In today's fast-paced tech world, knowing how DevOps works is no longer optional—it's essential. 
+# In today's fast-paced tech world, knowing how DevOps works is no longer optional—it's essential. 
+
+![ Most Popular DevOps Tools ](/assets/img/blog/Most_Popular_DevOps_Tools.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 
 Let's break down the DevOps lifecycle and explore the most powerful tools driving innovation:
 
@@ -31,31 +33,49 @@ The DevOps infinity loop isn't just a concept—it's a roadmap to continuous imp
 
 Each phase is crucial, and the right tools can make or break your workflow.
 
-💡 Pro Tip: The key isn't just knowing these tools, but understanding how they integrate to create a seamless DevOps culture.
+>  Pro Tip: The key isn't just knowing these tools, but understanding how they integrate to create a seamless DevOps culture.💡
+{: .prompt-tip}
 
-![ Most Popular DevOps Tools ](/assets/img/blog/Most_Popular_DevOps_Tools.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 
-<details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-* * * 
-오늘날과 같이 급변하는 기술 세계에서 DevOps의 작동 방식을 아는 것은 더 이상 선택 사항이 아니라 필수입니다. 
+* * *
 
-DevOps 라이프사이클을 세분화하고 혁신을 주도하는 가장 강력한 도구를 살펴보겠습니다.
+# DevOps Engineer Roadmap 2024: Your Guide to Success
 
-- 🧠 계획: Confluence, Slack, Redmine, Taiga
-- 👨 💻 코드: GitHub, GitLab, IntelliJ, VSCode
-- 🏗️ 빌드: Gradle, Travis CI, Jenkins, Bazel, Maven, Buildbot
-- 🧪 테스트 : 우체부, 농담, 모카, 셀레늄
-- 🚀 릴리즈: GoCD, Helm, FluxCD, ArgoCD
-- ☁️ 배포: Terraform, Chef, Ansible, Puppet
-- 🔍 모니터 : Zabbix, ELK 스택, Grafana, Netdata
-- ⚙️ 운영: Azure, AWS, Kubernetes, Rancher
+![ DevOps Roadmap 2024 ](/assets/img/blog/devops-engineer-roadmap.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 
-DevOps 인피니티 루프는 단순한 개념이 아니라 지속적인 개선과 제공을 위한 로드맵입니다. 
+### Here's an up-to-date roadmap to help you navigate your journey:
 
-각 단계는 매우 중요하며, 올바른 도구는 워크플로의 성패를 좌우할 수 있습니다.
+1. Master the Basics:
+ - Linux administration
+ - Scripting (Python or Go)
+ - Networking fundamentals
+ - Git version control
 
-💡 전문가 팁: 핵심은 이러한 도구를 아는 것뿐만 아니라 원활한 DevOps 문화를 조성하기 위해 도구를 통합하는 방법을 이해하는 것입니다.
+2. Embrace Containers and Cloud:
+ - Docker containerization
+ - Cloud platforms (AWS, GCP, Azure)
 
-</details>
+3. Build Robust Delivery Pipelines:
+ - Advanced CI/CD implementation
+ - Kubernetes for container orchestration
+
+4. Focus on Observability:
+ - Monitoring and logging tools
+ - Infrastructure as Code (Terraform)
+
+5. Ensure Production Readiness:
+ - Security and compliance automation
+ - Service mesh implementation (e.g., Istio)
+ - Chaos engineering for resilience testing
+
+6. Gain Real-World Experience:
+ - Personal projects
+ - Open source contributions
+ - Entry-level DevOps roles
+
+7. Consider Certifications:
+ - AWS Certified DevOps Engineer
+ - Similar respected credentials
+
+This roadmap is a guide, not a strict rulebook. The field is constantly evolving, so adaptability is key.
