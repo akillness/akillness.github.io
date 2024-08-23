@@ -19,8 +19,8 @@ pin: true
 
 
 ## 🔷 The RAG system from the second part is modified to use LangChain.
-Article:<https://pub.towardsai.net/query-your-dataframes-with-powerful-large-language-models-using-langchain-abe25782def5>
-Notebook: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_1_RAG_langchain.ipynb>
+- Article:<https://pub.towardsai.net/query-your-dataframes-with-powerful-large-language-models-using-langchain-abe25782def5>
+- Notebook: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_1_RAG_langchain.ipynb>
 
 ## 🔷 A moderation system is created where two Models are linked, with the second one responsible for moderating and providing the response to the user. There are three examples, one with OpenAI Models, and two more with open-source models: Llama and GPT-J.
 
@@ -32,11 +32,11 @@ Article and notebook using Llama:
 - <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_2_LLAMA2_Moderation_Chat.ipynb>
 
 ## 🔷The course continues by creating a Data Analyst using an agent from the langchain_experiments library, capable of interpreting tabular data files from a .csv file. 
-Article: <https://pub.towardsai.net/create-your-own-data-analyst-assistant-with-langchain-agents-722f1cdcdd7e>
-Notebook: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_3_Data_Analyst_Agent.ipynb>
+- Article: <https://pub.towardsai.net/create-your-own-data-analyst-assistant-with-langchain-agents-722f1cdcdd7e>
+- Notebook: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_3_Data_Analyst_Agent.ipynb>
 
 ## 🔷 Finally, a chatbot is created to serve as a medical assistant using LangChain and ChromaDB with a medical data dataset. 
-Notebook: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_4_Medical_Assistant_Agent.ipynb>
+- Notebook: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_4_Medical_Assistant_Agent.ipynb>
 
 As you can see, this part of the course uses a few examples to introduce you to LangChain and reinforce the knowledge you gained in the second lesson on vector database
 
