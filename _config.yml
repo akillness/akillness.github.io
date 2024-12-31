@@ -14,7 +14,7 @@ timezone: Asia/Seoul
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Fodev Jeong # the main title
+title: Fodev JEO # the main title
 
 tagline: Fodev's Note to Development # it will display as the sub-title
 
@@ -34,7 +34,7 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: Fodev Jeong
+  name: Fodev JEO
   email: akillness38@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
