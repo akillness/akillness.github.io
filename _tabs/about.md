@@ -83,7 +83,7 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
   - Application Development
 ~~~ 
 
-> Wow !! **Hot Issue : ReLU Games, Deeplearning Game "Uncover the Smoking Gun" Open by using** Azure OpenAI GPT.
+> Wow !! **Hot Issue but Having limitations : ReLU Games, Deeplearning Game "Uncover the Smoking Gun" Open by using** Azure OpenAI GPT.
 {: .prompt-danger}
 
 {% include embed/youtube.html id='zrc1BUULVfo' %}
@@ -96,14 +96,13 @@ If you have the same idea, always please contact me :D  👉 <https://www.linked
 ```mermaid
  gantt
   title 일정 및 계획 수립
-  취업준비 :active, a, 2024-06-01, 8w
-  대학원 지원서작성 :crit, b, 2024-07-01, 2w
+  대학원 :active, a, 2024-09-01, 144w
   
 ```
 
 | Title| Subject| Category | Detail | Part | Time |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 대학원준비 | 일정준비 | | **7월 지원**  | | |
+| 대학원진학 | 과정진행 | | **2024년 9월 시작~**  | | |
 | | 게임제작| 기획 | | | |
 | | | 계획 및 일정| | | |
 | | | 프로그래밍 환경 구축 | 언리얼 (1순위), 유니티 (2순위), Flutter (3순위)| | |
