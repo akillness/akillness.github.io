@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" style=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jung Jang-young - AI Engineer &amp; Deep Learning Researcher</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+      :root {
+        --primary-deep: #1a237e;
+        --primary-main: #3949ab;
+        --primary-light: #7986cb;
+        --secondary-deep: #4a148c;
+        --secondary-main: #7b1fa2;
+        --secondary-light: #ba68c8;
+        --accent-gold: #ffc107;
+        --text-primary: #1a1a1a;
+        --text-secondary: #555;
+        --text-light: #777;
+        --bg-subtle: #f8f9ff;
+        --bg-card: #ffffff;
+        --border-light: #e3f2fd;
+        --gradient-primary: linear-gradient(135deg, #1a237e 0%, #3949ab 50%, #7b1fa2 100%);
+        --gradient-subtle: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+        --shadow-card: 0 4px 20px rgba(26, 35, 126, 0.08);
+        --shadow-elevated: 0 8px 32px rgba(26, 35, 126, 0.12);
+      }
+
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 32px 80px;
+        position: relative;
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+        background: var(--gradient-primary);
+        min-height: 100%;
+        color: var(--text-primary);
+        line-height: 1.6;
+      }
+
+      .resume-container {
+        background: var(--bg-card);
+        border-radius: 20px;
+        padding: 56px;
+        box-shadow: var(--shadow-elevated);
+        margin-bottom: 24px;
+        border: 1px solid var(--border-light);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .resume-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-primary);
+      }
+
+      .page-number {
+        position: absolute;
+        bottom: 24px;
+        right: 56px;
+        background: var(--gradient-primary);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        font-family: 'JetBrains Mono', monospace;
+        letter-spacing: 0.5px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 56px;
+        padding-bottom: 40px;
+        position: relative;
+      }
+
+      .header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 3px;
+        background: var(--gradient-primary);
+        border-radius: 2px;
+      }
+
+      .name {
+        font-size: 4rem;
+        font-weight: 800;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 20px;
+        letter-spacing: -0.02em;
+      }
+
+      .title {
+        font-size: 1.6rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+        margin-bottom: 28px;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .tagline {
+        font-size: 1.1rem;
+        color: var(--text-light);
+        font-style: italic;
+        margin-bottom: 32px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.5;
+      }
+
+      .contact-info {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--primary-main);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 12px;
+        border: 1px solid transparent;
+      }
+
+      .contact-item i {
+        font-size: 1.1rem;
+      }
+
+      .section {
+        margin-bottom: 48px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary-deep);
+        margin-bottom: 32px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--border-light);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        position: relative;
+      }
+
+      .section-title i {
+        font-size: 1.8rem;
+        color: var(--primary-main);
+      }
+
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 80px;
+        height: 2px;
+        background: var(--gradient-primary);
+      }
+
+      .objective-text {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        color: var(--text-secondary);
+        background: var(--gradient-subtle);
+        padding: 32px;
+        border-radius: 16px;
+        border-left: 5px solid var(--primary-main);
+        position: relative;
+        box-shadow: var(--shadow-card);
+      }
+
+      .objective-text::before {
+        content: '"';
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 3rem;
+        color: var(--primary-light);
+        opacity: 0.3;
+        font-family: serif;
+      }
+
+      .education-timeline {
+        position: relative;
+        padding-left: 40px;
+      }
+
+      .education-timeline::before {
+        content: '';
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--gradient-primary);
+        border-radius: 2px;
+      }
+
+      .education-item {
+        position: relative;
+        margin-bottom: 24px;
+        padding: 28px;
+        background: var(--bg-card);
+        border-radius: 16px;
+        border: 1px solid var(--border-light);
+        box-shadow: var(--shadow-card);
+      }
+
+      .education-item::before {
+        content: '';
+        position: absolute;
+        left: -48px;
+        top: 30px;
+        width: 16px;
+        height: 16px;
+        background: var(--primary-main);
+        border-radius: 50%;
+        border: 4px solid white;
+        box-shadow: 0 0 0 2px var(--primary-main);
+      }
+
+      .education-period {
+        font-weight: 700;
+        color: var(--primary-main);
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        font-family: 'JetBrains Mono', monospace;
+        margin-bottom: 8px;
+      }
+
+      .education-degree {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 6px;
+      }
+
+      .education-school {
+        color: var(--text-secondary);
+        font-weight: 500;
+        font-size: 1.05rem;
+      }
+
+      .phd-highlight {
+        background: var(--gradient-subtle);
+        border-color: var(--primary-main);
+        border-width: 2px;
+      }
+
+      .phd-highlight::before {
+        background: var(--accent-gold);
+        box-shadow: 0 0 0 2px var(--accent-gold);
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 28px;
+      }
+
+      .skill-category {
+        background: var(--gradient-subtle);
+        padding: 32px;
+        border-radius: 16px;
+        border: 1px solid var(--border-light);
+        position: relative;
+        box-shadow: var(--shadow-card);
+      }
+
+      .skill-category::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--gradient-primary);
+        border-radius: 16px 16px 0 0;
+      }
+
+      .skill-category h4 {
+        color: var(--primary-deep);
+        font-weight: 700;
+        margin-bottom: 20px;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .skill-category i {
+        color: var(--primary-main);
+        font-size: 1.1rem;
+      }
+
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .skill-tag {
+        background: var(--gradient-primary);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+
+      .strengths-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 24px;
+      }
+
+      .strength-item {
+        background: var(--gradient-primary);
+        color: white;
+        padding: 28px;
+        border-radius: 16px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.05rem;
+        box-shadow: var(--shadow-card);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .strength-item::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transform: rotate(45deg);
+      }
+
+      .strength-item i {
+        font-size: 2rem;
+        margin-bottom: 12px;
+        display: block;
+      }
+
+      .experience-timeline {
+        position: relative;
+        padding-left: 40px;
+      }
+
+      .timeline-line {
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--gradient-primary);
+        border-radius: 2px;
+      }
+
+      .experience-item {
+        position: relative;
+        margin-bottom: 40px;
+        background: var(--bg-card);
+        border-radius: 20px;
+        padding: 32px;
+        border: 1px solid var(--border-light);
+        box-shadow: var(--shadow-elevated);
+      }
+
+      .experience-item::before {
+        content: '';
+        position: absolute;
+        left: -48px;
+        top: 35px;
+        width: 16px;
+        height: 16px;
+        background: var(--primary-main);
+        border-radius: 50%;
+        border: 4px solid white;
+        box-shadow: 0 0 0 2px var(--primary-main);
+      }
+
+      .company-header {
+        background: var(--gradient-primary);
+        color: white;
+        padding: 20px 28px;
+        border-radius: 12px;
+        margin-bottom: 28px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .company-header::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1));
+        transform: skewX(-15deg);
+      }
+
+      .company-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+        letter-spacing: 0.5px;
+      }
+
+      .company-period {
+        font-size: 1rem;
+        opacity: 0.9;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .project-item {
+        margin-bottom: 32px;
+        padding: 28px;
+        background: var(--gradient-subtle);
+        border-radius: 12px;
+        border-left: 5px solid var(--primary-main);
+        position: relative;
+        box-shadow: var(--shadow-card);
+      }
+
+      .project-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary-deep);
+        margin-bottom: 10px;
+        line-height: 1.4;
+      }
+
+      .project-period {
+        font-size: 0.9rem;
+        color: var(--primary-main);
+        font-weight: 600;
+        margin-bottom: 16px;
+        font-family: 'JetBrains Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+      }
+
+      .project-details {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 20px 0;
+      }
+
+      .project-details li {
+        padding: 6px 0;
+        padding-left: 28px;
+        position: relative;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      .project-details li::before {
+        content: '◆';
+        position: absolute;
+        left: 0;
+        color: var(--primary-main);
+        font-weight: bold;
+        font-size: 0.8rem;
+      }
+
+      .tech-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .tech-badge {
+        display: inline-block;
+        background: var(--gradient-primary);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+      }
+
+      .patent-item,
+      .activity-item {
+        margin-bottom: 28px;
+        padding: 28px;
+        background: var(--bg-card);
+        border-radius: 16px;
+        border: 1px solid var(--border-light);
+        box-shadow: var(--shadow-card);
+        position: relative;
+      }
+
+      .patent-item::before,
+      .activity-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--gradient-primary);
+        border-radius: 0 16px 16px 0;
+      }
+
+      .patent-title,
+      .activity-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--primary-deep);
+        margin-bottom: 10px;
+        line-height: 1.4;
+      }
+
+      .patent-number {
+        background: var(--gradient-primary);
+        color: white;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-top: 12px;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .activity-date {
+        font-size: 0.9rem;
+        color: var(--primary-main);
+        font-weight: 600;
+        margin-bottom: 12px;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .highlight-badge {
+        display: inline-block;
+        background: var(--accent-gold);
+        color: var(--primary-deep);
+        padding: 4px 12px;
+        border-radius: 16px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        margin-left: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 16px 20px;
+        }
+
+        .resume-container {
+          padding: 32px;
+        }
+
+        .name {
+          font-size: 2.8rem;
+        }
+
+        .contact-info {
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+        }
+
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .experience-timeline {
+          padding-left: 20px;
+        }
+
+        .experience-item::before {
+          left: -28px;
+        }
+
+        .page-number {
+          right: 32px;
+          bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body style="">
+    <!-- Page 1: Profile & Core Information -->
+    <div class="resume-container">
+      <header class="header">
+        <h1 class="name">Jung Jang-young</h1>
+        <div class="title">AI Engineer &amp; Deep Learning Researcher</div>
+        <div class="tagline">
+          "Curiosity drives innovation. Through rigorous research and bold experimentation, I transform complex AI
+          theories into practical solutions that shape the future."
+        </div>
+        <div class="contact-info">
+          <a href="/cdn-cgi/l/email-protection#3c5d5755505052594f4f0f047c5b515d5550125f5351" class="contact-item">
+            <i class="bi bi-envelope-fill"></i>
+            <span class="__cf_email__" data-cfemail="fb9a90929797959e8888c8c3bb9c969a9297d5989496">[email&#160;protected]</span>
+          </a>
+          <a href="https://akillness.github.io" class="contact-item">
+            <i class="bi bi-globe"></i>
+            akillness.github.io
+          </a>
+          <a href="https://github.com/akillness" class="contact-item">
+            <i class="bi bi-github"></i>
+            github.com/akillness
+          </a>
+        </div>
+      </header>
+
+      <section class="section">
+        <h2 class="section-title">
+          <i class="bi bi-lightbulb-fill"></i>
+          Research Philosophy
+        </h2>
+        <div class="objective-text">
+          I am deeply passionate about developing practical applications that integrate Deep Learning, the core model of
+          AI technology. My goal is to solve complex problems based on intellectual curiosity and create substantial
+          value through innovative AI solutions that bridge the gap between theoretical advancement and real-world
+          impact.
+          <span class="highlight-badge">AI Specialist</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">
+          <i class="bi bi-mortarboard-fill"></i>
+          Academic Excellence
+        </h2>
+        <div class="education-timeline">
+          <div class="education-item phd-highlight">
+            <div class="education-period">Sep 2024 - Present</div>
+            <div class="education-degree">Ph.D Student in Game Engineering</div>
+            <div class="education-school">Hongik University</div>
+          </div>
+          <div class="education-item">
+            <div class="education-period">Aug 2014 - Aug 2016</div>
+            <div class="education-degree">Master of Science in Game Engineering</div>
+            <div class="education-school">Hongik University</div>
+          </div>
+          <div class="education-item">
+            <div class="education-period">Mar 2007 - Feb 2014</div>
+            <div class="education-degree">Bachelor of Science in Game Engineering</div>
+            <div class="education-school">Hongik University</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">
+          <i class="bi bi-person-badge-fill"></i>
+          Core Strengths
+        </h2>
+        <div class="strengths-grid">
+          <div class="strength-item">
+            <i class="bi bi-search-heart"></i>
+            Intellectual Curiosity
+          </div>
+          <div class="strength-item">
+            <i class="bi bi-lightning-charge-fill"></i>
+            Bold Innovation
+          </div>
+          <div class="strength-item">
+            <i class="bi bi-shield-check"></i>
+            Reliable Execution
+          </div>
+          <div class="strength-item">
+            <i class="bi bi-graph-up-arrow"></i>
+            Results Driven
+          </div>
+        </div>
+      </section>
+      <div class="page-number">01</div>
+    </div>
+
+    <!-- Page 2: Technical Skills -->
+    <div class="resume-container">
+      <section class="section">
+        <h2 class="section-title">
+          <i class="bi bi-cpu-fill"></i>
+          Technical Expertise
+        </h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h4><i class="bi bi-code-slash"></i> Programming Languages</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">C/C++</span>
+              <span class="skill-tag">C#</span>
+              <span class="skill-tag">Objective-C</span>
+              <span class="skill-tag">Dart</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">SQL</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h4><i class="bi bi-robot"></i> AI &amp; Machine Learning</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">PyTorch</span>
+              <span class="skill-tag">TensorFlow</span>
+              <span class="skill-tag">LangChain</span>
+              <span class="skill-tag">LlamaIndex</span>
+              <span class="skill-tag">OpenCV</span>
+              <span class="skill-tag">Transformers</span>
+              <span class="skill-tag">PEFT/LoRA</span>
+              <span class="skill-tag">RAG</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h4><i class="bi bi-tools"></i> Development Ecosystem</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">Visual Studio</span>
+              <span class="skill-tag">VS Code</span>
+              <span class="skill-tag">PyQt</span>
+              <span class="skill-tag">Flutter</span>
+              <span class="skill-tag">Unity3D</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Git</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h4><i class="bi bi-cloud-fill"></i> Infrastructure &amp; Platforms</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">GCP</span>
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">Linux</span>
+              <span class="skill-tag">ONNX</span>
+              <span class="skill-tag">Qdrant</span>
+              <span class="skill-tag">Ollama</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="page-number">02</div>
+    </div>
+
+    <!-- Page 3: Ph.D Student Research Projects -->
+    <div class="resume-container">
+      <section class="section">
+        <h2 class="section-title">
+          <i class="bi bi-journal-code"></i>
+          Ph.D Research Projects
+        </h2>
+
+        <div class="experience-timeline">
+          <div class="timeline-line"></div>
+
+          <div class="experience-item">
+            <div class="company-header">
+              <div class="company-name">Doctoral Research Program</div>
+              <div class="company-period">Jul 2024 – Present</div>
+            </div>
+
+            <div class="project-item">
+              <div class="project-title">VLM-based AutoQA - Context Aware Bug Reporting</div>
+              <div class="project-period">Feb 2025 – Present</div>
+              <ul class="project-details">
+                <li>Research on error detection utilizing VLM performance models based on VideoGameQA Bench</li>
+                <li>Extension of image-based AutoQA Macro Tool bug detection capabilities</li>
+                <li>Commercial-grade advanced development and optimization</li>
+              </ul>
+              <div class="tech-badges">
+                <span class="tech-badge">VLM</span>
+                <span class="tech-badge">Computer Vision</span>
+                <span class="tech-badge">AutoQA</span>
+                <span class="tech-badge">Context Analysis</span>
+              </div>
+            </div>
+
+            <div class="project-item">
+              <div class="project-title">Multi-Agentic AI Framework with Ollama, LangGraph &amp; PraisonAI</div>
+              <div class="project-period">Apr 2025 – May 2025</div>
+              <ul class="project-details">
+                <li>On-device Ollama server and multi-agent workflow process using praisonaiagens</li>
+                <li>Knowledge Graph-based Semantic Routing implementation</li>
+                <li>MCP (Model Context Protocol) and Function Calling (Crawling) Handler development</li>
+              </ul>
+              <div class="tech-badges">
+                <span class="tech-badge">Ollama</span>
+                <span class="tech-badge">LangGraph</span>
+                <span class="tech-badge">Multi-Agent</span>
+                <span class="tech-badge">Knowledge Graph</span>
+                <span class="tech-badge">MCP</span>
+              </div>
+            </div>
+
+            <div class="project-item">
+              <div class="project-title">LLM-based Game Design Agent Development</div>
+              <div class="project-period">Mar 2025</div>
+              <ul class="project-details">
+                <li>Development of Vive GameDesigner Agent functionality utilizing ChatGPT API</li>
+                <li>Score-based chunking using ColBERT embeddings with Qdrant VectorDB</li>
+                <li>Task Role operations through Task Planning (planning, system, balance, event, scenario)</li>
+                <li>Function Calling for document processing (PDF, Word, Excel, PowerPoint) and web crawling</li>
+              </ul>
+              <div class="tech-badges">
+                <span class="tech-badge">ChatGPT API</span>
+                <span class="tech-badge">ColBERT</span>
+                <span class="tech-badge">Qdrant</span>
+                <span class="tech-badge">Task Planning</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="page-number">03</div>
+    </div>
+
+    <!-- Page 4: Ph.D Research Projects Continued -->
+    <div class="resume-container">
+      <div class="experience-timeline">
+        <div class="timeline-line"></div>
+
+        <div class="experience-item">
+          <div class="project-item">
+            <div class="project-title">LLM-based RAG &amp; Agentic AI Construction Project</div>
+            <div class="project-period">Feb 2025 – Mar 2025</div>
+            <ul class="project-details">
+              <li>Implementation of resume analysis system using LlamaIndex framework</li>
+              <li>Development of coding &amp; web search Agentic AI system based on OpenAI API GPT-4o mini</li>
+            </ul>
+            <div class="tech-badges">
+              <span class="tech-badge">LlamaIndex</span>
+              <span class="tech-badge">RAG</span>
+              <span class="tech-badge">GPT-4o</span>
+              <span class="tech-badge">Agentic AI</span>
+            </div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-title">SLM-based On-Device Chatbot System Construction Project</div>
+            <div class="project-period">Jan 2025 – Feb 2025</div>
+            <ul class="project-details">
+              <li>
+                Performance evaluation and testing of SLM models TinyLlama, Deepseek R1 distill utilizing LangGraph,
+                LangChain, Zero/Few-shot prompting, and Chain of Thought
+              </li>
+              <li>
+                Model structure separation and server system construction for GPT Chatbot Web Service implementation
+              </li>
+              <li>Socket and Web Socket Server Multi-Process Python code implementation</li>
+              <li>Web Client Dart code implementation using Flutter</li>
+              <li>PEFT code implementation for pre-training systems</li>
+              <li>
+                Post-training system exploration and reinforcement learning Cartpole environment project implementation
+                including IMPALA, A2C, A3C, ACER
+              </li>
+            </ul>
+            <div class="tech-badges">
+              <span class="tech-badge">TinyLlama</span>
+              <span class="tech-badge">Deepseek R1</span>
+              <span class="tech-badge">LangChain</span>
+              <span class="tech-badge">PEFT</span>
+              <span class="tech-badge">Flutter</span>
+              <span class="tech-badge">Reinforcement Learning</span>
+            </div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-title">Image-based System-Independent AutoQA Tool Development</div>
+            <div class="project-period">Sep 2024 – Jan 2025</div>
+            <ul class="project-details">
+              <li>PyQt5-based GUI implementation with OpenCV-based Multi-Scale Template Matching</li>
+              <li>Multi-thread pool (GIL) application for speed optimization</li>
+              <li>Process Handler implementation using Pywinauto for macro functionality</li>
+              <li>Keras-OCR application for GUI Context extraction functionality</li>
+              <li>Fine-tuning DETR (Detection Transformer) testing for gameplay verification</li>
+              <li>Fine-tuning YOLOv7 application for gameplay video verification</li>
+            </ul>
+            <div class="tech-badges">
+              <span class="tech-badge">PyQt5</span>
+              <span class="tech-badge">OpenCV</span>
+              <span class="tech-badge">DETR</span>
+              <span class="tech-badge">YOLOv7</span>
+              <span class="tech-badge">OCR</span>
+            </div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-title">On-Device SLM Chatbot Optimization for Detective Game Runtime Enhancement</div>
+            <div class="project-period">Jul 2024 – Aug 2024</div>
+            <ul class="project-details">
+              <li>PEFT LoRA training for Polyglot-kr-1.3B model</li>
+              <li>LLM Python server optimization through batch separation and structural design optimization</li>
+              <li>CPU inference model ONNX exporting optimization for Unity Application service</li>
+            </ul>
+            <div class="tech-badges">
+              <span class="tech-badge">Polyglot-kr</span>
+              <span class="tech-badge">PEFT LoRA</span>
+              <span class="tech-badge">ONNX</span>
+              <span class="tech-badge">Unity</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-number">04</div>
+    </div>
+
+    <!-- Page 5: NC SOFT Experience -->
+    <div class="resume-container">
+      <section class="section">
+        <h2 class="section-title">
+          <i class="bi bi-building"></i>
+          Professional Experience
+        </h2>
+
+        <div class="experience-timeline">
+          <div class="timeline-line"></div>
+
+          <div class="experience-item">
+            <div class="company-header">
+              <div class="company-name">NC SOFT</div>
+              <div class="company-period">Mar 2018 – Jul 2024 (~6 years 4 months)</div>
+            </div>
+
+            <div class="project-item">
+              <div class="project-title">
+                Digital Double Facial 4D Scan and 4D HMC Mesh Low-poly Process Construction
+              </div>
+              <div class="project-period">Jun 2022 – Dec 2023</div>
+              <ul class="project-details">
+                <li>
+                  Latest version update of Faceform (formerly R3DS) system pipeline for 4D Scan Mesh Low-poly processing
+                </li>
+                <li>
+                  Construction of Faceform system pipeline for 4D HMC (Head Mount Camera) Mesh Low-poly processing
+                </li>
+              </ul>
+              <div class="tech-badges">
+                <span class="tech-badge">3D Scanning</span>
+                <span class="tech-badge">Faceform</span>
+                <span class="tech-badge">Computer Vision</span>
+                <span class="tech-badge">Digital Twin</span>
+              </div>
+            </div>
+
+            <div class="project-item">
+              <div class="project-title">Robot Arm Programming for Camera Calibration Automation</div>
+              <div class="project-period">Mar 2022 – Jun 2022</div>
+              <ul class="project-details">
+                <li>RobotArm utilization for Camera Calibration Checker board photography</li>
+                <li>Serial communication implementation for 5-actuator Dynamixel Openmanipulator-x (Python, C#)</li>
+              </ul>
+              <div class="tech-badges">
+                <span class="tech-badge">Robotics</span>
+                <span class="tech-badge">Dynamixel</span>
+                <span class="tech-badge">Camera Calibration</span>
+                <span class="tech-badge">Serial Communication</span>
+              </div>
+            </div>
+
+            <div class="project-item">
+              <div class="project-title">
+                Digital Twin Facial 4D Scan Mesh Low-poly Process Construction and Post-processing
+              </div>
+              <div class="project-period">Oct 2021 – Mar 2022</div>
+              <ul class="project-details">
+                <li>
+                  R3DS (Russia 3D Scan) Solution pipeline system construction for 4D Scan Mesh Low-poly processing
+                </li>
+                <li>
+                  High-volume processing system pipeline construction and post-processing result output for 4D Scan Mesh
+                  Low-poly
+                </li>
+                <li>Python code optimization for UV-based topology registration/reordering</li>
+              </ul>
+              <div class="tech-badges">
+                <span class="tech-badge">Digital Twin</span>
+                <span class="tech-badge">3D Processing</span>
+                <span class="tech-badge">Pipeline Optimization</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="page-number">05</div>
+    </div>
+
+    <!-- Page 6: NC SOFT Experience Continued -->
+    <div class="resume-container">
+      <div class="experience-timeline">
+        <div class="timeline-line"></div>
+
+        <div class="experience-item">
+          <div class="project-item">
+            <div class="project-title">
+              CA (Cellular Automata) based Match-3 Puzzle Game Difficulty Generator Web Service Development
+            </div>
+            <div class="project-period">Mar 2021 – Oct 2021</div>
+            <ul class="project-details">
+              <li>Active user testing purposes for MATCH-3 Level generator</li>
+              <li>
+                Python Flask-based web client functionality providing individual and *.zip format download of trained
+                GAN model results through parameter adjustment
+              </li>
+            </ul>
+            <div class="tech-badges">
+              <span class="tech-badge">Flask</span>
+              <span class="tech-badge">GAN</span>
+              <span class="tech-badge">Cellular Automata</span>
+              <span class="tech-badge">Web Service</span>
+            </div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-title">
+              CA (Cellular Automata) based Match-3 Puzzle Game Difficulty Generator Development
+            </div>
+            <div class="project-period">Oct 2019 – Mar 2021</div>
+            <ul class="project-details">
+              <li>Utilization of procedural content generation methods for Match-3 Level Generator in game planning</li>
+              <li>
+                CA (Cellular Automata) functionality implementation and CA model-based Level Generator development
+              </li>
+              <li>Performance improvement through CA Generative Combination proposal for more diverse patterns</li>
+              <li>Utilization of GAN (Generative Adversarial Networks) model training data</li>
+            </ul>
+            <div class="tech-badges">
+              <span class="tech-badge">Cellular Automata</span>
+              <span class="tech-badge">GAN</span>
+              <span class="tech-badge">Procedural Generation</span>
+              <span class="tech-badge">Game AI</span>
+            </div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-title">
+              MCTS (Monte Carlo Tree Search) based Match-3 Puzzle Game Difficulty Evaluation Agent Development
+            </div>
+            <div class="project-period">Mar 2018 – Sep 2019</div>
+            <ul class="project-details">
+              <li>Agent development for simulation-based evaluation of Match-3 puzzle game difficulty</li>
+              <li>MCTS (Monte Carlo Tree Search) functionality implementation and application to game Agent logic</li>
+              <li>Acceleration and achievement of meaningful results in Level difficulty evaluation</li>
+            </ul>
+            <div class="tech-badges">
+              <span class="tech-badge">MCTS</span>
+              <span class="tech-badge">Game AI</span>
+              <span class="tech-badge">Agent Development</span>
+              <span class="tech-badge">Simulation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-number">06</div>
+    </div>
+
+    <!-- Page 7: COM2US Experience -->
+    <div class="resume-container">
+      <div class="experience-timeline">
+        <div class="timeline-line"></div>
+
+        <div class="experience-item">
+          <div class="company-header">
+            <div class="company-name">COM2US</div>
+            <div class="company-period">Oct 2016 – Feb 2018 (~1 years 6 months)</div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-title">"Dungeon Delivery" In-Game Reinforcement Learning Agent Application Testing</div>
+            <div class="project-period">Jul 2017 – Dec 2017</div>
+            <ul class="project-details">
+              <li>Exploration and research on applying AI technology to developed games</li>
+              <li>
+                TensorFlow-based reinforcement learning model design and game application through socket communication
+              </li>
+              <li>
+                Gridmap design for game environment as learning environment and DQN (Deep Q-Network) application to
+                Action prediction model
+              </li>
+              <li>
+                Client-Server Network configuration between Unity3D and Python platforms for environment information and
+                Action execution, and learning progression
+              </li>
+            </ul>
+            <div class="tech-badges">
+              <span class="tech-badge">TensorFlow</span>
+              <span class="tech-badge">DQN</span>
+              <span class="tech-badge">Reinforcement Learning</span>
+              <span class="tech-badge">Unity3D</span>
+            </div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-title">
+              Developer Collaboration Site Issue Tracking Development for Process Knowledge Sharing
+            </div>
+            <div class="project-period">Apr 2017 – Jul 2017</div>
+            <ul class="project-details">
+              <li>
+                In-house web service development providing Stack Overflow-like functionality for developer collaboration
+                process sharing
+              </li>
+              <li>
+                Development using MVC (Model View Controller) Pattern with CodeIgniter (CI) framework, WYSIWYG editor
+                SummerNote, DB (MySQL), and AJAX functionality
+              </li>
+            </ul>
+            <div class="tech-badges">
+              <span class="tech-badge">CodeIgniter</span>
+              <span class="tech-badge">MySQL</span>
+              <span class="tech-badge">MVC Pattern</span>
+              <span class="tech-badge">Web Development</span>
+            </div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-title">Additional Projects and Responsibilities</div>
+            <div class="project-period">Jan 2017 – Apr 2017 / Nov 2016 – Jan 2018</div>
+            <ul class="project-details">
+              <li>
+                In-house website management (Front-End/Back-End/DB), 2 internal hackathon Unity3D game development
+                projects
+              </li>
+              <li>
+                New hire/experienced hire recruitment site management and process assistance, mobile-related
+                development/optimization technical R&amp;D
+              </li>
+              <li>Maintenance of discontinued mobile game services</li>
+            </ul>
+            <div class="tech-badges">
+              <span class="tech-badge">Full-Stack Development</span>
+              <span class="tech-badge">Mobile Optimization</span>
+              <span class="tech-badge">R&amp;D</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-number">07</div>
+    </div>
+
+    <!-- Page 8: Patents & Activities -->
+    <div class="resume-container">
+      <section class="section">
+        <h2 class="section-title">
+          <i class="bi bi-file-earmark-check-fill"></i>
+          Intellectual Property
+        </h2>
+
+        <div class="patent-item">
+          <div class="patent-title">Game Difficulty Determination Method and Apparatus</div>
+          <div class="activity-date">Aug 2019 – Dec 2020</div>
+          <div class="patent-number">Patent No. 10-2195-4710000</div>
+        </div>
+
+        <div class="patent-item">
+          <div class="patent-title">Emotion Computing Device and Its Operation Method</div>
+          <div class="activity-date">Nov 2017 – Dec 2017</div>
+          <div class="patent-number">Patent No. 10-2017-0009076</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">
+          <i class="bi bi-trophy-fill"></i>
+          Professional Activities &amp; Recognition
+        </h2>
+
+        <div class="activity-item">
+          <div class="activity-title">IEEE RAAI2024 Conference | Poster Presentation</div>
+          <div class="activity-date">Dec 20, 2024</div>
+          <ul class="project-details">
+            <li>"Image-Based Game Quality Assurance Automation Process"</li>
+          </ul>
+          <div class="tech-badges">
+            <span class="tech-badge">IEEE</span>
+            <span class="tech-badge">Conference</span>
+            <span class="tech-badge">QA Automation</span>
+          </div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-title">NC Research AVATAR Promotional Video</div>
+          <div class="activity-date">Apr 17, 2023</div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-title">NCDP2020 Conference Presentation</div>
+          <div class="activity-date">Apr 28, 2020</div>
+          <ul class="project-details">
+            <li>"MATCH-3 Puzzle Game Difficulty Generator Development" Presentation</li>
+          </ul>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-title">NCFellowship Program Management</div>
+          <div class="activity-date">Jan 2019 – Dec 2022</div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-title">JTBC Entertainment Program Technology Transfer</div>
+          <div class="activity-date">Dec 2017</div>
+          <ul class="project-details">
+            <li>Patent technology transfer related to "The Theoretically Perfect Man"</li>
+          </ul>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-title">"Love Sensor" HCI APP MARKET Encouragement Award</div>
+          <div class="activity-date">Jan 28, 2016</div>
+        </div>
+      </section>
+      <div class="page-number">08</div>
+    </div>
+
+    <!-- Page 9: Publications & Achievements -->
+    <div class="resume-container">
+      <section class="section">
+        <h2 class="section-title">
+          <i class="bi bi-journal-text"></i>
+          Publications &amp; Research Output
+        </h2>
+
+        <div class="activity-item">
+          <div class="activity-title">HCI Korea 2016 Paper</div>
+          <div class="activity-date">Jan 28, 2016</div>
+          <ul class="project-details">
+            <li>
+              Jung Jang-young, Kim Young-bin, Lee Sang-hyuk, Kang Shin-jin, "Facial Expression Change Detection System
+              for Game Play Analysis", HCI Korea, 2016
+            </li>
+          </ul>
+          <div class="tech-badges">
+            <span class="tech-badge">Computer Vision</span>
+            <span class="tech-badge">HCI</span>
+            <span class="tech-badge">Emotion Analysis</span>
+          </div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-title">PeerJ Journal Publication (SCI-E)</div>
+          <div class="activity-date">Dec 10, 2015</div>
+          <ul class="project-details">
+            <li>
+              Y. B. Kim, S. J. Kang, S. H. Lee, J. Y. Jung, H. R. Kam, J. Lee, Y. S. Kim, J. S. Lee and C. H. Kim,
+              "Efficiently Detecting Outlying Behavior in Video-Game Players", PeerJ, 2015 (SCI-E)
+            </li>
+          </ul>
+          <div class="tech-badges">
+            <span class="tech-badge">SCI-E</span>
+            <span class="tech-badge">Behavioral Analysis</span>
+            <span class="tech-badge">Game Analytics</span>
+          </div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-title">EmotionTracer Emotion Analysis Platform G-star Exhibition</div>
+          <div class="activity-date">Nov 12 – Nov 15, 2015</div>
+          <ul class="project-details">
+            <li>G-star exhibition interview participation</li>
+          </ul>
+          <div class="tech-badges">
+            <span class="tech-badge">Exhibition</span>
+            <span class="tech-badge">Emotion Analysis</span>
+            <span class="tech-badge">G-star</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">
+          <i class="bi bi-award-fill"></i>
+          Key Achievements Summary
+        </h2>
+
+        <div class="objective-text">
+          <strong>Research Excellence:</strong> Leading cutting-edge AI technology research including VLM, LLM, and
+          Multi-Agent AI through Ph.D studies, developing practical AI solutions based on over 8 years of industry
+          experience <br><br>
+          <strong>Innovation Impact:</strong> Holder of 2 patents, published SCI-E papers, participated in IEEE
+          conferences, combining academic achievements with commercialization experience through practical projects at
+          NC SOFT and COM2US <br><br>
+          <strong>Technical Leadership:</strong> Demonstrated responsible leadership and technical organization
+          management capabilities through NCFellowship program management, leading various AI projects, and team
+          mentoring <br><br>
+          <strong>Future Vision:</strong> Continuously pursuing innovative research that transcends AI technology
+          limitations based on intellectual curiosity and challenging spirit, serving as a bridge between industry and
+          academia
+        </div>
+      </section>
+      <div class="page-number">09</div>
+    </div>
+  
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body></html>
