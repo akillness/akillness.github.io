@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="ko" data-theme="light" style=""><head>
+<!doctype html>
+<html lang="ko" data-theme="light" style="">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>정장영 - AI Engineer &amp; Deep Learning Researcher</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
+      rel="stylesheet"
+    >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
       :root {
@@ -28,14 +32,15 @@
       }
 
       body {
-        max-width: 880px;
+        max-width: 1200px;
+        width: 100%;
         margin: 0 auto;
         padding: 32px 80px;
         position: relative;
         box-sizing: border-box;
         font-family: 'Inter', sans-serif;
         background: var(--gradient-primary);
-        min-height: 100%;
+        min-height: 100vh;
         color: var(--text-primary);
         line-height: 1.6;
       }
@@ -140,13 +145,20 @@
         font-weight: 500;
         padding: 8px 16px;
         border-radius: 12px;
-        transition: all 0.2s ease;
+        transition: all 0.3s ease;
         border: 1px solid transparent;
       }
 
       .contact-item:hover {
         background: var(--bg-subtle);
         border-color: var(--primary-light);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-card);
+      }
+
+      .contact-item:focus {
+        outline: 2px solid var(--primary-main);
+        outline-offset: 2px;
       }
 
       .contact-item i {
@@ -336,11 +348,13 @@
         font-size: 0.9rem;
         font-weight: 600;
         letter-spacing: 0.3px;
-        transition: transform 0.2s ease;
+        transition: all 0.3s ease;
+        cursor: default;
       }
 
       .skill-tag:hover {
-        transform: translateY(-1px);
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 6px 20px rgba(26, 35, 126, 0.15);
       }
 
       .strengths-grid {
@@ -360,6 +374,13 @@
         box-shadow: var(--shadow-card);
         position: relative;
         overflow: hidden;
+        transition: all 0.3s ease;
+        cursor: default;
+      }
+
+      .strength-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(26, 35, 126, 0.2);
       }
 
       .strength-item::before {
@@ -372,6 +393,10 @@
         background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
         transform: rotate(45deg);
         transition: all 0.5s ease;
+      }
+
+      .strength-item:hover::before {
+        left: 100%;
       }
 
       .strength-item i {
@@ -600,6 +625,14 @@
           font-size: 2.8rem;
         }
 
+        .title {
+          font-size: 1.3rem;
+        }
+
+        .tagline {
+          font-size: 1rem;
+        }
+
         .contact-info {
           flex-direction: column;
           align-items: center;
@@ -607,6 +640,10 @@
         }
 
         .skills-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .strengths-grid {
           grid-template-columns: 1fr;
         }
 
@@ -621,6 +658,45 @@
         .page-number {
           right: 32px;
           bottom: 20px;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+        }
+
+        .objective-text {
+          font-size: 1rem;
+          padding: 24px;
+        }
+      }
+
+      @media print {
+        body {
+          background: white;
+          padding: 0;
+          max-width: none;
+        }
+
+        .resume-container {
+          box-shadow: none;
+          border: none;
+          page-break-after: always;
+          margin-bottom: 0;
+        }
+
+        .resume-container:last-child {
+          page-break-after: auto;
+        }
+
+        .page-number {
+          background: var(--primary-main);
+        }
+
+        .contact-item:hover,
+        .skill-tag:hover,
+        .strength-item:hover {
+          transform: none;
+          box-shadow: none;
         }
       }
     </style>
@@ -638,7 +714,9 @@
         <div class="contact-info">
           <a href="akillness38@gmail.com" class="contact-item">
             <i class="bi bi-envelope-fill"></i>
-            <span class="__cf_email__" data-cfemail="84e5efede8e8eae1f7f7b7bcc4e3e9e5ede8aae7ebe9">[email&#160;protected]</span>
+            <span class="__cf_email__" data-cfemail="84e5efede8e8eae1f7f7b7bcc4e3e9e5ede8aae7ebe9"
+              >akillness38@gmail.com</span
+            >
           </a>
           <a href="https://akillness.github.io" class="contact-item">
             <i class="bi bi-globe"></i>
@@ -1270,17 +1348,21 @@
 
         <div class="objective-text">
           <strong>Research Excellence:</strong> Ph.D 과정을 통해 VLM, LLM, Multi-Agent AI 등 최신 AI 기술 연구를
-          선도하며, 8년 이상의 산업 경험을 바탕으로 실용적인 AI 솔루션을 개발 <br><br>
+          선도하며, 8년 이상의 산업 경험을 바탕으로 실용적인 AI 솔루션을 개발 <br>
+          <br>
           <strong>Innovation Impact:</strong> 2건의 특허 보유, SCI-E 논문 발표, IEEE 컨퍼런스 참여 등 학술적 성과와
-          더불어 NC SOFT, COM2US에서의 실무 프로젝트를 통한 상용화 경험 <br><br>
+          더불어 NC SOFT, COM2US에서의 실무 프로젝트를 통한 상용화 경험 <br>
+          <br>
           <strong>Technical Leadership:</strong> NCFellowship 운영, 다양한 AI 프로젝트 리딩, 팀 멘토링을 통한 기술 조직
-          관리 역량 및 책임감 있는 리더십 발휘 <br><br>
+          관리 역량 및 책임감 있는 리더십 발휘 <br>
+          <br>
           <strong>Future Vision:</strong> 지적 호기심과 도전 정신을 바탕으로 AI 기술의 한계를 넘어서는 혁신적인 연구를
           지속하며, 산업과 학계의 가교 역할을 수행
         </div>
       </section>
       <div class="page-number">09</div>
     </div>
-  
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body></html>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  </body>
+</html>

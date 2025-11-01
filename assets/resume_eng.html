@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light" style=""><head>
+<!doctype html>
+<html lang="en" data-theme="light" style="">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jung Jang-young - AI Engineer &amp; Deep Learning Researcher</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
+      rel="stylesheet"
+    >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
       :root {
@@ -28,14 +32,15 @@
       }
 
       body {
-        max-width: 880px;
+        max-width: 1200px;
+        width: 100%;
         margin: 0 auto;
         padding: 32px 80px;
         position: relative;
         box-sizing: border-box;
         font-family: 'Inter', sans-serif;
         background: var(--gradient-primary);
-        min-height: 100%;
+        min-height: 100vh;
         color: var(--text-primary);
         line-height: 1.6;
       }
@@ -140,7 +145,20 @@
         font-weight: 500;
         padding: 8px 16px;
         border-radius: 12px;
+        transition: all 0.3s ease;
         border: 1px solid transparent;
+      }
+
+      .contact-item:hover {
+        background: var(--bg-subtle);
+        border-color: var(--primary-light);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-card);
+      }
+
+      .contact-item:focus {
+        outline: 2px solid var(--primary-main);
+        outline-offset: 2px;
       }
 
       .contact-item i {
@@ -330,6 +348,13 @@
         font-size: 0.9rem;
         font-weight: 600;
         letter-spacing: 0.3px;
+        transition: all 0.3s ease;
+        cursor: default;
+      }
+
+      .skill-tag:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 6px 20px rgba(26, 35, 126, 0.15);
       }
 
       .strengths-grid {
@@ -349,6 +374,13 @@
         box-shadow: var(--shadow-card);
         position: relative;
         overflow: hidden;
+        transition: all 0.3s ease;
+        cursor: default;
+      }
+
+      .strength-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(26, 35, 126, 0.2);
       }
 
       .strength-item::before {
@@ -360,6 +392,11 @@
         height: 200%;
         background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
         transform: rotate(45deg);
+        transition: all 0.5s ease;
+      }
+
+      .strength-item:hover::before {
+        left: 100%;
       }
 
       .strength-item i {
@@ -588,6 +625,14 @@
           font-size: 2.8rem;
         }
 
+        .title {
+          font-size: 1.3rem;
+        }
+
+        .tagline {
+          font-size: 1rem;
+        }
+
         .contact-info {
           flex-direction: column;
           align-items: center;
@@ -595,6 +640,10 @@
         }
 
         .skills-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .strengths-grid {
           grid-template-columns: 1fr;
         }
 
@@ -609,6 +658,45 @@
         .page-number {
           right: 32px;
           bottom: 20px;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+        }
+
+        .objective-text {
+          font-size: 1rem;
+          padding: 24px;
+        }
+      }
+
+      @media print {
+        body {
+          background: white;
+          padding: 0;
+          max-width: none;
+        }
+
+        .resume-container {
+          box-shadow: none;
+          border: none;
+          page-break-after: always;
+          margin-bottom: 0;
+        }
+
+        .resume-container:last-child {
+          page-break-after: auto;
+        }
+
+        .page-number {
+          background: var(--primary-main);
+        }
+
+        .contact-item:hover,
+        .skill-tag:hover,
+        .strength-item:hover {
+          transform: none;
+          box-shadow: none;
         }
       }
     </style>
@@ -626,7 +714,9 @@
         <div class="contact-info">
           <a href="/cdn-cgi/l/email-protection#3c5d5755505052594f4f0f047c5b515d5550125f5351" class="contact-item">
             <i class="bi bi-envelope-fill"></i>
-            <span class="__cf_email__" data-cfemail="fb9a90929797959e8888c8c3bb9c969a9297d5989496">[email&#160;protected]</span>
+            <span class="__cf_email__" data-cfemail="fb9a90929797959e8888c8c3bb9c969a9297d5989496"
+              >akillness38@gmail.com</span
+            >
           </a>
           <a href="https://akillness.github.io" class="contact-item">
             <i class="bi bi-globe"></i>
@@ -1297,13 +1387,16 @@
         <div class="objective-text">
           <strong>Research Excellence:</strong> Leading cutting-edge AI technology research including VLM, LLM, and
           Multi-Agent AI through Ph.D studies, developing practical AI solutions based on over 8 years of industry
-          experience <br><br>
+          experience <br>
+          <br>
           <strong>Innovation Impact:</strong> Holder of 2 patents, published SCI-E papers, participated in IEEE
           conferences, combining academic achievements with commercialization experience through practical projects at
-          NC SOFT and COM2US <br><br>
+          NC SOFT and COM2US <br>
+          <br>
           <strong>Technical Leadership:</strong> Demonstrated responsible leadership and technical organization
           management capabilities through NCFellowship program management, leading various AI projects, and team
-          mentoring <br><br>
+          mentoring <br>
+          <br>
           <strong>Future Vision:</strong> Continuously pursuing innovative research that transcends AI technology
           limitations based on intellectual curiosity and challenging spirit, serving as a bridge between industry and
           academia
@@ -1311,6 +1404,7 @@
       </section>
       <div class="page-number">09</div>
     </div>
-  
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body></html>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  </body>
+</html>
