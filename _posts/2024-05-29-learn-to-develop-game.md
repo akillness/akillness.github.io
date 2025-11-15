@@ -14,10 +14,18 @@ image:
   alt: [Overview of ML for Games Course]
 ---
 
-## On Going 
+## Game Development Course with Unity3D Programming
+
+*Curiosity:* How can we learn game development with Unity? What's the path from beginner to capable Unity developer?
+
+**This official Unity course** teaches you to Create with Code by programming your own exciting projects from scratch in C#.
+
+### Learning Roadmap
+
+*Retrieve:* Course structure and timeline.
 
 ```mermaid
- gantt
+gantt
   title Create with Code of Unity3D
   Getting Started :active, a, 2024-05-30, 1w
   Unit 1 - Player Control :b, after a, 1w
@@ -28,31 +36,62 @@ image:
   Next Steps : crit, g, after f, 1w
 ```
 
-| Subject | Type | Link|
-| :--- | :--- | :--- |
-| Working on my Unity project | Github | <https://github.com/akillness/PlayerControl> |
+### Course Units
 
+*Innovate:* Learning progression.
 
-## Course
+| Unit | Topic | Duration | Focus |
+|:-----|:------|:---------|:------|
+| **Getting Started** | Introduction | 1 week | ⬆️ Basics |
+| **Unit 1** | Player Control | 1 week | ⬆️ Input handling |
+| **Unit 2** | Basic Game Play | 1 week | ⬆️ Core mechanics |
+| **Unit 3** | Sound and Effect | 1 week | ⬆️ Audio/visual |
+| **Unit 4** | Game Play Mechanics | 1 week | ⬆️ Advanced features |
+| **Unit 5** | User Interface | 1 week | ⬆️ UI/UX |
+| **Next Steps** | Advanced topics | 1 week | ⬆️ Mastery |
+
+### Resources
+
+*Retrieve:* Available learning materials.
+
+| Subject | Type | Link |
+|:--------|:------|:-----|
+| **Working on my Unity project** | Github | <https://github.com/akillness/PlayerControl> |
+| **Create with Code in Unity** | Tutorial | <https://learn.unity.com/course/create-with-code> |
+| **Game Maker's Toolkit** | Video | <https://www.youtube.com/@GMTK> |
+| **AI and Game** | News | <https://www.aiandgames.com/> |
+
+### Course Introduction
 
 {% include embed/youtube.html id='XtQMytORBmM' %}
 
+*Retrieve:* Course overview.
 
-| Subject | Type | Link|
-| :--- | :--- | :--- |
-| `Create with Code in Unity` | Tutorial | <https://learn.unity.com/course/create-with-code> |
-| Game Maker's Toolkit | Video | <https://www.youtube.com/@GMTK> |
-| AI and Game | News | <https://www.aiandgames.com/?utm_source=homepage_recommendations&utm_campaign=872843> |
+**Learning Process**:
+- Iterate with prototypes
+- Tackle programming challenges
+- Complete quizzes
+- Develop personal project
 
+**Outcome**: Transform from absolute beginner to capable Unity developer.
 
+**Certification**: Ready for Unity Certified User Programmer Exam (if completing through school program).
 
-## Introduction
+**Most Important**: Gain confidence that you can Create with Code.
 
-In this official course from Unity, you will learn to Create with Code as you program your own exciting projects from scratch in C#. 
+### Key Takeaways
 
-As you iterate with prototypes, tackle programming challenges, complete quizzes, and develop your own personal project, you will transform from an absolute beginner to a capable Unity developer. 
+*Retrieve:* Unity's Create with Code course provides a structured 7-week path from beginner to capable Unity developer, covering player control, gameplay, sound, mechanics, and UI.
 
-By the end of the course - if you are completing it through a school program - you will also be ready to put your skills to the test on the Unity Certified User Programmer Exam. Most importantly, though, when you complete this course, you will have the confidence that you can Create with Code. 
+*Innovate:* By following this course and building your own projects, you can learn C# programming, Unity development, and game design principles, transforming from beginner to confident game developer.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about game development, retrieve insights from Unity's structured course, and innovate by building your own games and projects.
+
+**Next Steps**:
+- Start Getting Started unit
+- Follow the roadmap
+- Build your project
+- Complete all units 
 
 
 

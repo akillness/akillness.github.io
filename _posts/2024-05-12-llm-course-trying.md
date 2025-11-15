@@ -20,43 +20,137 @@ image:
 <!-- - 👉 History : <https://modulabs.co.kr/blog/llama-3-intro/> -->
 {: .prompt-info }
 
-## Step-by-Step Guide to Building LLM Apps Basic to Advanced Components Created
+## LLM Course: Step-by-Step Guide to Building LLM Apps
 
-* * * 
+*Curiosity:* How do we progress from simple LLM apps to advanced agent systems? What's the learning path from basic prompts to fine-tuning?
+
+**This course** provides a step-by-step guide to building LLM applications from basic to advanced components, covering everything from simple prompts to fine-tuning.
+
+> **Resources**:
+> - **My GitHub**: <https://github.com/akillness/LLM_Course>
+> - **Other Course**: <https://github.com/mlabonne/llm-course>
+> - **LLM Survey**: <https://akillness.github.io/posts/llm-2024-survey/>
+{: .prompt-info}
+
+### Learning Roadmap
+
+*Retrieve:* Complete LLM application development path.
 
 ```mermaid
- gantt
-  title Gant Chart to represent LLM Study
-  Simple LLM App ( Prompt + LLM ) :crit, a, 2024-05-08, 2w
-  Chaining Prompt ( Prompt Chains + LLM ) :active, b, after a, 2w
+gantt
+  title LLM Course Learning Path
+  Simple LLM App (Prompt + LLM) :crit, a, 2024-05-08, 2w
+  Chaining Prompt (Prompt Chains + LLM) :active, b, after a, 2w
   Adding External Knowledge Base-RAG :c, after b, 2w
   Adding Memory to LLMs : d, after c, 2w
   Using External Tool with LLM : e, after d, 2w
   LLMs Making Decision-Agent : f, after e, 2w
-  Fine-Tuning LLM : crit,g, after f, 2w
+  Fine-Tuning LLM : crit, g, after f, 2w
 ```
 
-- Step.1
-  - Simple LLM App ( Prompt + LLM )
-    - My Github : <https://github.com/akillness/LLM_Course>
-    - Others : <https://github.com/mlabonne/llm-course>
-- Step.2
-  - Chaining Prompt ( Prompt Chains + LLM )
-- Step.3
-  - Adding External Knowledge Base : RAG ( Retrieval Augmented Generation)
-    - `답변에 필요한 정보를 먼저 찾아서 LLM에게 질문과 함께 넘겨주는 방식`
-    - 이를 통해 특정 문서나 서비스의 데이터베이스에 있는 정보에 기반해서 답변을 생성할 수 있다.
+### Course Structure
+
+*Innovate:* Seven-step progression from basics to advanced.
+
+| Step | Topic | Description | Duration |
+|:-----|:------|:-------------|:---------|
+| **1** | **Simple LLM App** | Prompt + LLM | 2 weeks |
+| **2** | **Chaining Prompt** | Prompt Chains + LLM | 2 weeks |
+| **3** | **RAG** | External Knowledge Base | 2 weeks |
+| **4** | **Memory** | Adding Memory to LLMs | 2 weeks |
+| **5** | **Tool Use** | External Tools with LLM | 2 weeks |
+| **6** | **Agents** | LLMs Making Decisions | 2 weeks |
+| **7** | **Fine-Tuning** | Model Fine-Tuning | 2 weeks |
+
+### Step-by-Step Breakdown
+
+*Retrieve:* Detailed course content.
+
+#### Step 1: Simple LLM App (Prompt + LLM)
+
+**Foundation**: Basic LLM interaction with prompts.
+
+**Learning Goals**:
+- Understand LLM basics
+- Create simple prompts
+- Generate responses
+
+#### Step 2: Chaining Prompt (Prompt Chains + LLM)
+
+**Progression**: Connect multiple prompts for complex workflows.
+
+**Learning Goals**:
+- Build prompt chains
+- Create multi-step workflows
+- Chain LLM calls
+
+#### Step 3: RAG (Retrieval Augmented Generation)
+
+**Enhancement**: Add external knowledge base.
+
+**Key Concept**: `답변에 필요한 정보를 먼저 찾아서 LLM에게 질문과 함께 넘겨주는 방식`
+
+**Benefits**:
+- Answer based on specific documents
+- Use service database information
+- Ground responses in knowledge
+
 ![RAG](/assets/img/llm/RAG.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
-- Step.4
-  - Adding Memory to LLMs
-- Step.5
-  - Using External Tool with LLM
-- Step.6
-  - LLMs Making Decision : Agent
-    - 에이전트는 툴, 실행 코드, 임베딩, 벡터 저장소의 조합을 통해 대화형 LLM의 개념을 확장한다. 즉, 에이전트는 RAG에 부가적인 단계를 더한 것
-    - 에이전트는 LLM을 특정 도메인에 전문화하고 LLM의 출력을 맞춤 설정하는 데 유용한 경우가 많다. LLM과 다른 소프트웨어 및 서비스의 통합을 간소화하는 다양한 플랫폼, 프레임워크, 모델이 있다.
-- Step.7
-  - Fine-Tuning LLM
+
+#### Step 4: Adding Memory to LLMs
+
+**Capability**: Enable conversation context.
+
+**Learning Goals**:
+- Implement conversation memory
+- Maintain context across turns
+- Build conversational systems
+
+#### Step 5: Using External Tool with LLM
+
+**Extension**: Connect LLMs to external tools.
+
+**Learning Goals**:
+- Integrate APIs
+- Use external services
+- Extend LLM capabilities
+
+#### Step 6: LLMs Making Decision (Agent)
+
+**Advanced**: Autonomous decision-making systems.
+
+**Key Concepts**:
+- Agents extend conversational LLMs with tools, code, embeddings, vector stores
+- Agents add additional steps beyond RAG
+- Useful for domain specialization and output customization
+
+**Learning Goals**:
+- Build autonomous agents
+- Implement decision-making
+- Create specialized systems
+
+#### Step 7: Fine-Tuning LLM
+
+**Mastery**: Customize models for specific tasks.
+
+**Learning Goals**:
+- Fine-tune models
+- Optimize for tasks
+- Deploy custom models
+
+### Key Takeaways
+
+*Retrieve:* This course provides a systematic 14-week path from simple LLM apps to fine-tuning, covering prompts, RAG, memory, tools, agents, and model customization.
+
+*Innovate:* By following this structured learning path, you can progress from basic LLM interactions to building sophisticated agent systems and fine-tuned models, mastering the full spectrum of LLM application development.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about LLM applications, retrieve insights from this structured course, and innovate by building progressively more advanced LLM systems that solve real-world problems.
+
+**Next Steps**:
+- Start with Step 1
+- Follow the roadmap
+- Build projects at each step
+- Progress to advanced topics
 
 * * *
 
@@ -101,7 +195,8 @@ image:
 
 ### 밀도의 사슬 프롬프트 사용
 - 요약을 개선하는 또 다른 방법은 컬럼비아, 세일즈포스, MIT 팀이 2023년에 [GPT-4 전용으로 제안한 밀도의 사슬(CoD: Chain-of-Density) 프롬프트](https://arxiv.org/pdf/2309.04269)를 사용하는 것이다(논문). 
-  - [KD너겟(KDnuggets)기사](https://www.kdnuggets.com/unlocking-gpt-4-summarization-with-chain-of-density-prompting)는 이 논문의 프롬프트를 더 알기 쉽게 정리하고 부가적인 설명을 더했다. 논문과 기사 모두 읽어볼 것을 권한다.
+  - [KD너겟(KDnuggets)기사](https://www.kdnuggets.com/unlocking-gpt-4-summarization-with-chain-of-density-prompting)
+  - *Retrieve:* Exploring this resource for insights는 이 논문의 프롬프트를 더 알기 쉽게 정리하고 부가적인 설명을 더했다. 논문과 기사 모두 읽어볼 것을 권한다.
 - 간단히 요약하면 CoD 프롬프트는 모델에 기본 문서의 요약을 5번 반복하면서 각 단계에서 정보 밀도를 높이도록 요청한다. 
 - 논문에 따르면 사람들은 대체로 5번의 요약 중에서 세 번째를 가장 좋아한다. 참고로 논문에서 GPT-4용으로 나온 프롬프트는 다른 모델에서는 제대로 작동하지 않거나 아예 작동하지 않을 수 있다.
 
@@ -276,7 +371,9 @@ image:
 
 ## Error
 
-VSCode를 이용해서, 디버깅시스템으로 진행해보니 아래와깉은 오류가 나온다? 엥? 뭐지 찾아보자. 찾아보니까 이것은 Streamlit 자체를 사용하는 방법이 잘못됐다.
+*Curiosity:* VSCode를 이용해서, 디버깅시스템으로 진행해보니 아래와깉은 오류가 나온다? 엥? 뭐지 찾아보자. 찾아보니까 이것은 Streamlit 자체를 사용하는 방법이 잘못됐다.
+
+
 
 오류해결 내용 : **[\[OpenAI\] Chatgpt 에러 해결 - openai.RateLimitError: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details.](https://arc-viewpoint.tistory.com/entry/OpenAI-Chatgpt-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0-openaiRateLimitError-Error-code-429-error-message-You-exceeded-your-current-quota-please-check-your-plan-and-billing-details)**
 

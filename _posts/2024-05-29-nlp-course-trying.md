@@ -6,7 +6,7 @@ tags: [LLM, NLP, Transformer]
 # author: foDev_jeong
 date: 2024-05-29 00:13:00 +0800
 pin: true
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/blog/NLP_Overview.svg
@@ -32,7 +32,9 @@ pin: true
 
 ## Introduction 
 
-This course will teach you about natural language processing (NLP) using libraries from the Hugging Face ecosystem — 🤗 Transformers, 🤗 Datasets, 🤗 Tokenizers, and 🤗 Accelerate — as well as the Hugging Face Hub. It’s completely free and without ads.
+*Curiosity:* This course will teach you about natural language processing (NLP) using libraries from the Hugging Face ecosystem — 🤗 Transformers, 🤗 Datasets, 🤗 Tokenizers, and 🤗 Accelerate — as well as the Hugging Face Hub. It’s completely free and without ads.
+
+
 
 {% include embed/youtube.html id='00GKzGyWFEs' %}
 

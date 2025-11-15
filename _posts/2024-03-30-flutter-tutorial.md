@@ -8,7 +8,7 @@ date: 2024-03-30 21:00:00 +0800
 render_with_liquid: true
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -59,7 +59,9 @@ Flutter는 Dart라는 현대적인 프로그래밍 언어로 앱을 작성하며
 
 ### Flutter 핵심 구성
 
-Flutter는 **단일 스레드(single-trheaded)** 언어인 다트(Dart)를 사용하여 작성합니다. 단일 스레드는 한 번에 한 가지의 작업만 수행할 수 있는데, 이는 플러터 앱이 한 번에 한 가지 작업만 수행 할 수 있음을 의미합니다.
+*Curiosity:* Flutter는 **단일 스레드(single-trheaded)** 언어인 다트(Dart)를 사용하여 작성합니다. 단일 스레드는 한 번에 한 가지의 작업만 수행할 수 있는데, 이는 플러터 앱이 한 번에 한 가지 작업만 수행 할 수 있음을 의미합니다.
+
+
 
 >그렇다고 Flutter 엡이 동시에 여러가지 작업을 못하는 것은 아닙니다.
 
@@ -338,7 +340,10 @@ Doctor summary (to see all details, run flutter doctor -v):
 * * *
 ### Reference 
 - [https://brunch.co.kr/@tilltue/56](https://brunch.co.kr/@tilltue/56)
+  - *Retrieve:* Exploring this resource for insights
 - [https://d2.naver.com/helloworld/3384599](https://d2.naver.com/helloworld/3384599)
+  - *Retrieve:* Exploring this resource for insights
 - [플러터 설계 컨셉](https://velog.io/@stone1098/%ED%94%8C%EB%9F%AC%ED%84%B0%EC%9D%98-%EA%B8%B0%EB%B3%B8-%EA%B0%9C%EB%85%90)
+  - *Retrieve:* Exploring this resource for insights
 - [MacOS Flutter 설치하기](https://msyu1207.tistory.com/entry/Mac%EC%97%90%EC%84%9C-Flutter-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0feat-android-studio-xcode)
 - [MD 이모티콘](https://kr.piliapp.com/twitter-symbols/)

@@ -7,7 +7,7 @@ tags: [SOTA, RAG]
 date: 2024-07-19 13:30:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -16,22 +16,100 @@ date: 2024-07-19 13:30:00 +0800
 
 ![ ColPali Efficient Document Retrieval with Vision Language Model  ](/assets/img/llm/colpali-retrieval-vision-language-model.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
-Our newest research project is out, and aims to solve one of the biggest current problem in RAG (Retrieval Augmented Generation) with PDF documents ! 
+## ColPali: Efficient Document Retrieval with Vision Language Models
 
-## 🔍 In many practical use cases, to answer a user query, it is first useful to search for relevant information in a given corpus before attempting to answer. 
+*Curiosity:* How can we simplify PDF document retrieval in RAG systems? What happens when we embed document images directly instead of extracting text?
 
-Modern "document retrieval" systems often rely on complex pipelines to first parse the PDF documents in the corpus (running OCR, segmenting pages into paragraphs / titles / figures, captioning the images, etc.), then embed all textual content using deep learning models to store the resulting vectors in an index database. 
+**ColPali** solves one of the biggest problems in RAG with PDF documents. This research project introduces an efficient approach to document retrieval using Vision Language Models.
 
-After indexing, user queries can be matched "online" rapidly to the most relevant documents in the index.
+> **Resources**:
+> - **📝 Paper**: <https://arxiv.org/abs/2407.01449>
+> - **🗃️ Benchmark**: <https://huggingface.co/vidore>
+> - **👀 Model**: <https://huggingface.co/vidore/colpali>
+> - **📰 Blog Post**: <https://huggingface.co/blog/manu/colpali>
+{: .prompt-info}
 
-❌ This whole indexing process tends to be complex and slow, and often fails to consider much of the more visual elements of a page (tables, figures, images but also fonts and text colors), that also carry a lot of the information...
+**Collaborators**: Hugues Sibille, Tony W., Bilel Omrani, Gautier Viaud (ILLUIN Technology), Celine Hudelot, Pierre Colombo (CentraleSupélec), with compute funding from CINES.
 
-💡Our concept: 
-- Instead of first extracting the text from the document, we just embed an image of the document page directly to keep most of the information ! 
-- To obtain good performance with this concept, we leverage modern Vision Language Models that are able to read and understand text, tables, and figures from the images. 
-- We also boost performance using "late interaction" mechanisms which enable us to store multiple embeddings per page to maximize information content, all the while maintaining the super fast query-matching speeds modern systems enable.
+### The Problem
 
-📈 Turns out it works super well ! Our model ColPali largely outperforms very strong baselines on visually rich document retrieval, all the while enabling orders of magnitude faster indexing speeds ! The concept has already been quite a hit in the research community, and there's still a ton of improvements we will be rolling out to continue pushing this paradigm we really believe in !
+*Retrieve:* Challenges with traditional document retrieval.
+
+**Traditional Approach**:
+1. Parse PDF documents (OCR, segmentation, captioning)
+2. Embed textual content
+3. Store vectors in index database
+4. Match queries to documents
+
+**Limitations**:
+- ❌ Complex and slow indexing
+- ❌ Ignores visual elements (tables, figures, images, fonts, colors)
+- ❌ Loses important information
+
+### ColPali Solution
+
+*Innovate:* Direct image embedding approach.
+
+```mermaid
+graph TB
+    A[PDF Document] --> B[Page Images]
+    B --> C[Vision Language Model]
+    C --> D[Multiple Embeddings per Page]
+    D --> E[Late Interaction]
+    E --> F[Vector Index]
+    
+    G[User Query] --> H[Query Embedding]
+    H --> I[Similarity Search]
+    I --> F
+    F --> J[Retrieved Documents]
+    
+    style A fill:#e1f5ff
+    style C fill:#fff3cd
+    style J fill:#d4edda
+```
+
+### Key Innovations
+
+*Retrieve:* ColPali's breakthrough concepts.
+
+| Innovation | Description | Benefit |
+|:-----------|:------------|:--------|
+| **Direct Image Embedding** | Embed page images directly | ⬆️ Preserves visual information |
+| **Vision Language Models** | Read text, tables, figures | ⬆️ Comprehensive understanding |
+| **Late Interaction** | Multiple embeddings per page | ⬆️ Maximizes information |
+| **Fast Query Matching** | Maintains speed | ⬆️ Performance |
+
+**Key Concept**:
+- Instead of extracting text, embed document page images directly
+- Leverage Vision Language Models for understanding
+- Use late interaction for multiple embeddings per page
+- Maintain fast query-matching speeds
+
+### Performance
+
+*Innovate:* ColPali's impressive results.
+
+**Results**:
+- ✅ **Largely outperforms** strong baselines on visually rich documents
+- ✅ **Orders of magnitude faster** indexing speeds
+- ✅ Preserves visual information (tables, figures, formatting)
+- ✅ Research community hit
+
+**Impact**: Enables efficient, accurate document retrieval for RAG systems.
+
+### Key Takeaways
+
+*Retrieve:* ColPali demonstrates that embedding document page images directly using Vision Language Models can outperform traditional text extraction approaches while enabling much faster indexing.
+
+*Innovate:* By leveraging Vision Language Models and late interaction mechanisms, ColPali preserves visual information that traditional methods lose, making it ideal for visually rich document retrieval in RAG systems.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about efficient document retrieval, retrieve insights from ColPali's image-based approach, and innovate by applying Vision Language Models to your document retrieval systems.
+
+**Next Steps**:
+- Read the paper
+- Explore the model on Hugging Face
+- Try the benchmark
+- Apply to your RAG systems
 
 > - 📝 The paper: <https://arxiv.org/abs/2407.01449>
 > - 🗃️ The benchmark: <https://huggingface.co/vidore>

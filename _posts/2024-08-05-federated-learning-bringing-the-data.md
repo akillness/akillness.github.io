@@ -7,39 +7,138 @@ tags: [AI, Federated Learning]
 date: 2024-08-05 12:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
 
+## Federated Learning: Training on Private Data Without Centralization
+
+*Curiosity:* How can we train ML models on private data without centralizing it? What happens when we bring the model to the data instead of bringing data to the model?
+
+**One of the main factors** preventing AI adoption in healthcare and banking is data privacy requirements. Hospitals and banks are reluctant to share sensitive data. **Federated Learning** solves this by training models on distributed data without centralization.
+
 ![ How to train on private data ](/assets/img/llm/train-on-private-data-federated-learning.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
-One of the main factors for AI having difficulty making its way into the healthcare and banking industry is the requirement for data privacy. 
+### The Challenge
 
-For example, if you build a healthcare startup, you are going to have a hard time convincing hospitals to lend you their data to train your models. 
+*Retrieve:* Why data privacy blocks AI adoption.
 
-There is so much regulation on those data that the benefits are not worth the risk!
+**Problem**: 
+- Healthcare and banking require strict data privacy
+- Regulations make data sharing risky
+- Benefits don't outweigh risks
+- Models can't access training data
 
-## One way to solve that is Federated Learning! 
+**Impact**: AI struggles to enter regulated industries.
 
-The idea is that instead of bringing the data to the model, we bring the model to the data. 
+### Federated Learning Solution
 
-That is the way Google trains its query suggestions on Android, for example. 
+*Innovate:* Bringing models to data instead of data to models.
 
-It is also an important component of how self-driving cars continuously train their ML applications. It can be summarized in the following steps:
+**Key Concept**: Instead of bringing data to the model, **bring the model to the data**.
 
-- A model is pre-trained on a centralized server and sent to user devices along with the related software applications (Gboard in the case of the query suggestion model). 
-- The users independently interact with the local models that continue to be fine-tuned locally.
-- The models or the aggregated gradients are sent back to the centralized platform after a certain amount of time, where they get averaged into one model. 
-- The remote model is then synchronized with the local models on devices.
+**Real-World Examples**:
+- Google's query suggestions on Android (Gboard)
+- Self-driving car continuous training
+- Healthcare model training
+- Banking fraud detection
 
-Depending on the application, this allows to train on data from millions of users without ever storing the data. 
+### Federated Learning Process
 
-With more and more data regulations, we are likely to see a growing trend in the usage of that framework. 
+*Retrieve:* How federated learning works.
 
-Google and Meta, for example, have invested quite a bit in developing that technology. 
+```mermaid
+graph TB
+    A[Central Server] --> B[Pre-trained Model]
+    B --> C[Device 1]
+    B --> D[Device 2]
+    B --> E[Device N]
+    
+    C --> F[Local Training]
+    D --> G[Local Training]
+    E --> H[Local Training]
+    
+    F --> I[Gradients/Model]
+    G --> I
+    H --> I
+    
+    I --> J[Aggregation]
+    J --> K[Updated Model]
+    K --> A
+    
+    style A fill:#e1f5ff
+    style F fill:#fff3cd
+    style K fill:#d4edda
+```
+
+### Step-by-Step Process
+
+*Retrieve:* Detailed federated learning workflow.
+
+| Step | Process | Purpose |
+|:-----|:---------|:--------|
+| **1. Pre-training** | Central server pre-trains model | ⬆️ Initial model |
+| **2. Distribution** | Send model to user devices | ⬆️ Local deployment |
+| **3. Local Training** | Users interact, model fine-tunes locally | ⬆️ Privacy-preserving |
+| **4. Aggregation** | Send gradients/models back to server | ⬆️ Centralized learning |
+| **5. Averaging** | Average updates into one model | ⬆️ Global improvement |
+| **6. Synchronization** | Sync updated model to devices | ⬆️ Continuous learning |
+
+**Key Benefit**: Train on data from millions of users **without ever storing the data**.
+
+### Advantages
+
+*Innovate:* Why federated learning matters.
+
+| Advantage | Description | Impact |
+|:----------|:------------|:-------|
+| **Privacy** | Data never leaves devices | ⬆️ Compliance |
+| **Regulation** | Meets privacy requirements | ⬆️ Adoption |
+| **Scale** | Millions of users | ⬆️ Training data |
+| **Efficiency** | Distributed training | ⬆️ Resource use |
+
+### Industry Adoption
+
+*Retrieve:* Growing trend in federated learning.
+
+**Trend**: With increasing data regulations, federated learning usage is growing.
+
+**Major Investors**:
+- **Google**: Significant investment in federated learning
+- **Meta**: Developing federated learning technology
+
+**Applications**:
+- Healthcare (patient data privacy)
+- Banking (financial data protection)
+- Mobile devices (on-device learning)
+- IoT (edge device training)
+
+### Resources
+
+*Retrieve:* Tools and frameworks for federated learning.
+
+> **Resources**:
+> - **Google Federated Learning**: <https://federated.withgoogle.com/>
+> - **TensorFlow Federated**: <https://www.tensorflow.org/federated/federated_learning>
+> - **OpenFL**: <https://github.com/securefederatedai/openfl>
+{: .prompt-info}
+
+### Key Takeaways
+
+*Retrieve:* Federated learning enables training on private data by bringing models to data sources instead of centralizing data, solving privacy challenges in regulated industries.
+
+*Innovate:* By implementing federated learning, you can train models on data from millions of users without storing or centralizing sensitive data, enabling AI adoption in healthcare, banking, and other privacy-sensitive domains.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about privacy-preserving ML, retrieve insights from federated learning approaches, and innovate by implementing distributed training that respects data privacy regulations.
+
+**Next Steps**:
+- Explore TensorFlow Federated
+- Try OpenFL
+- Design federated architecture
+- Deploy federated systems 
 
 > - Here is the dedicated page just for federated learning from Google: 👉 <https://federated.withgoogle.com/>
 > - TensorFlow was one of the first to provide a high-level framework for federated learning: 👉 <https://www.tensorflow.org/federated/federated_learning?hl=ko>. 

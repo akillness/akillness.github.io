@@ -7,7 +7,7 @@ tags: [Study, Datascience]
 date: 2024-07-31 12:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -18,7 +18,9 @@ date: 2024-07-31 12:00:00 +0800
 
 ## It is extremely important to ensure Data Quality upstream of ML Training and Inference Pipelines, trying to do that in the pipelines will cause unavoidable failure when working at scale. 
 
-Data Contracts can be leveraged for this goal.
+*Curiosity:* Data Contracts can be leveraged for this goal.
+
+
  
 Data Contract is an agreement between Data Producers and Data Consumers about the qualities to be met by Data being produced.
 

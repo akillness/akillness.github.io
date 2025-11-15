@@ -7,29 +7,77 @@ tags: [Paper, LLM2Vec]
 date: 2024-07-29 13:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
 
-> LLM2Vec paper 👉 <https://mcgill-nlp.github.io/llm2vec/>
+## LLM2Vec: Transform LLMs into Embedding Models
+
+*Curiosity:* Can we transform decoder-only LLMs into powerful text encoders? What happens when we enable bidirectional attention and contrastive learning in LLMs?
+
+**LLM2Vec** is a simple unsupervised approach that transforms any decoder-only LLM into a strong text encoder. This method achieves SOTA results on the MTEB benchmark without expensive adaptation or synthetic GPT-4 data.
+
+> **Paper**: <https://mcgill-nlp.github.io/llm2vec/>
 {: .prompt-info}
 
+### Method Overview
 
-## Intruction
+*Retrieve:* LLM2Vec consists of three simple steps.
 
-LLM2Vec, a simple unsupervised approach that can transform any decoder-only LLM into a strong text encoder. 
+```mermaid
+graph LR
+    A[Decoder-Only LLM] --> B[Step 1: Bidirectional Attention]
+    B --> C[Step 2: Masked Next Token Prediction]
+    C --> D[Step 3: Unsupervised Contrastive Learning]
+    D --> E[Text Encoder]
+    
+    style A fill:#e1f5ff
+    style E fill:#d4edda
+```
 
-LLM2Vec consists of three simple steps: 
-1. enabling bidirectional attention, 
-2. masked next token prediction, and 
-3. unsupervised contrastive learning. 
+### Three-Step Process
 
-LLM2Vec not only outperforms encoder-only models on word-level tasks but also achieves new SOTA results on the MTEB benchmark. 
+| Step | Description | Purpose |
+|:-----|:------------|:--------|
+| **1. Bidirectional Attention** | Enable forward and backward context | Context understanding |
+| **2. Masked Next Token Prediction** | Predict masked tokens | Language understanding |
+| **3. Unsupervised Contrastive Learning** | Learn representations | Embedding quality |
 
-To summarize, LLM2Vec shows that without expensive adaptation or synthetic GPT-4 data, LLMs can be transformed into embedding models (universal text encoders)
+### Performance
+
+*Retrieve:* LLM2Vec achieves strong performance across tasks.
+
+**Results**:
+- ✅ Outperforms encoder-only models on word-level tasks
+- ✅ **New SOTA on MTEB benchmark**
+- ✅ No expensive adaptation needed
+- ✅ No synthetic GPT-4 data required
+
+**Advantages**:
+
+| Advantage | Description | Benefit |
+|:----------|:------------|:--------|
+| **Simple** | Three-step process | ⬆️ Easy implementation |
+| **Unsupervised** | No labeled data needed | ⬇️ Data requirements |
+| **Cost-Effective** | No expensive adaptation | ⬇️ Costs |
+| **SOTA Performance** | Best on MTEB | ⬆️ Quality |
+
+### Key Takeaways
+
+*Retrieve:* LLM2Vec demonstrates that decoder-only LLMs can be transformed into powerful text encoders through bidirectional attention, masked prediction, and contrastive learning.
+
+*Innovate:* By applying LLM2Vec, you can leverage existing LLMs as embedding models, achieving SOTA performance without expensive fine-tuning or synthetic data generation.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about LLM-to-encoder transformation, retrieve insights from LLM2Vec's approach, and innovate by applying it to create powerful embedding models.
+
+**Next Steps**:
+- Read the full paper
+- Experiment with LLM2Vec
+- Apply to your embedding needs
+- Compare with encoder-only models
 
 
 

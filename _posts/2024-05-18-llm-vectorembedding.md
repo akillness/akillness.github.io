@@ -5,7 +5,7 @@ categories: [LLM, VectorEmbedding]
 tags: [LLM, VectorEmbedding]
 # author: foDev_jeong
 date: 2024-05-18 16:15:00 +0800
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/llm/LLM_evaluation_rank.jpeg
@@ -16,7 +16,9 @@ date: 2024-05-18 16:15:00 +0800
 
 ## VectorEmbeddings are the backbone of AI/ML applications. 
 
-Machines don't understand human language & that is where we need embeddings. 
+*Curiosity:* Machines don't understand human language & that is where we need embeddings. 
+
+
 
 LLMs store the meaning and context of the data fed in a specialized format known as embeddings. Imagine capturing the essence of a word, image or video in a single mathematical equation. That’s the power of vector embeddings — one of the most fascinating and influential concepts in machine learning today.
 

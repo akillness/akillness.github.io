@@ -7,7 +7,7 @@ tags: [LLMOps, Kubernetes]
 date: 2024-08-04 15:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -53,27 +53,54 @@ date: 2024-08-04 15:00:00 +0800
 
 ![ When to use kubernetes for Machine Learning ](/assets/img/blog/use-kubernetes-for-machine-learning.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
-# Should you use Kubernetes to deploy your Machine Learning models? 
+### When Should You Use Kubernetes for ML?
 
-Most likely not! When a technology is hot, there is a tendency to disregard why the tool is useful in the first place, and we see massive adoption for no good reason.
+*Retrieve:* Decision framework for Kubernetes adoption.
 
-If you need to deploy machine learning models, there are typically 2 axes to look at: how many users and how many ML teams you have. The number of users will give you a sense of how much workload you are likely to have for your ML applications, and the number of ML teams is a good proxy for the complexity of the applications.
+```mermaid
+graph TD
+    A[Need Kubernetes?] --> B{User Traffic?}
+    B -->|Low <100 req/s| C[Use EC2 Instance]
+    B -->|High >100 req/s| D{ML Teams?}
+    
+    D -->|Few <12 people| E[Consider Simpler Solution]
+    D -->|Many >12 people| F{Complexity?}
+    
+    F -->|Low| E
+    F -->|High| G[Use Kubernetes]
+    
+    G --> H[Multiple Teams]
+    G --> I[Microservices]
+    G --> J[Complex Pipelines]
+    
+    style A fill:#e1f5ff
+    style G fill:#d4edda
+    style C fill:#fff3cd
+```
 
-If you have low user traffic, you are better off deploying to a barebones EC2 instance. You could Dockerize your application, but it might not even provide a huge advantage. If fault tolerance is required, you can get 2 servers and a load balancer for redundancy. 
+**Decision Criteria**:
 
-A typical server can handle ~1000 requests per second, so if you receive less than 100 requests per second, in the worst case, you have low user traffic. If traffic increases beyond that point, elastic load balancing is better to adapt to the workload.
+| Factor | Low Complexity | High Complexity |
+|:-------|:---------------|:----------------|
+| **User Traffic** | <100 requests/second | >100 requests/second |
+| **ML Teams** | <12 people | >12 people |
+| **Applications** | Monolithic | Microservices |
+| **Infrastructure** | Simple | Complex pipelines |
 
-If the number of people working on the ML code base is low, it might be better to avoid Kubernetes. The complexity of a code base is proportional to the number of people working on it. For example, if you have teams for ML engineering, MLOps, and data engineering, they each develop separate applications that need to be orchestrated together. 
+**When NOT to Use Kubernetes**:
+- ❌ Low user traffic (<100 req/s) - Use EC2 instances
+- ❌ Small team (<12 people) - Simpler solutions suffice
+- ❌ Simple applications - Monolithic architecture works
+- ❌ Single application - Overhead not justified
 
-Containerizing becomes critical because each team has its own software practice, and applications communicate through APIs in a microservice infrastructure. ML applications become complex pipelines where data engineers might be in charge of data processing applications, ML engineers in charge of ML model inference applications, and MLOps engineers in charge of model monitoring applications, all of which have to work together seemingly. 
+**When to Use Kubernetes**:
+- ✅ High traffic requiring auto-scaling
+- ✅ Multiple ML teams with independent deployments
+- ✅ Complex microservices architecture
+- ✅ Need for resource isolation and management
+- ✅ Multiple applications requiring orchestration
 
-Teams are likely to work independently of each other and need to focus on optimizing their own piece without constantly checking on others. Kubernetes can be a good solution when that level of complexity occurs. 
-
-It abstracts the different applications into computational blocks, and they are orchestrated by the Kube cluster itself, which allows for a high level of automation. It provides a scaling mechanism similar to load balancing to adapt to high workloads. 
-
-Very few companies can pretend to have that level of complexity, and even if people belong to different teams, if the number of people involved in deploying models is less than a dozen, it is unlikely that complexity calls for Kubernetes. 
-
-Even if the code seems complex, it might be simpler for those people to work on the same code base in a monolithic application.
+**Key Insight**: Most likely not! When a technology is hot, there's a tendency to disregard why the tool is useful. Very few companies have the complexity that justifies Kubernetes. If you have fewer than 12 people deploying models, consider simpler solutions.
 
 
 * * *
@@ -81,30 +108,85 @@ Even if the code seems complex, it might be simpler for those people to work on 
 
 ![ Kubernetes Scaling Strategies ](/assets/img/blog/kubernetes-scaling-strategies.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 
-# Kubernetes Scaling Strategies:
+### Kubernetes Scaling Strategies
 
-### Horizontal Pod Autoscaling (HPA):
-- Function: Adjusts the number of pod replicas based on CPU/memory usage or other select metrics.
-- Workflow: The Metrics Server collects data → API Server communicates with the HPA controller → The HPA controller scales the number of pods up or down based on the metrics.
+*Innovate:* Multiple scaling approaches for different needs.
 
-### Vertical Pod Autoscaling (VPA):
-- Function: Adjusts the resource limits and requests (CPU/memory) for containers within pods.
-- Workflow: The Metrics Server collects data → API Server communicates with the VPA controller → The VPA controller scales the resource requests and limits for pods.
+```mermaid
+graph TB
+    A[Kubernetes Scaling] --> B[Horizontal Pod Autoscaling]
+    A --> C[Vertical Pod Autoscaling]
+    A --> D[Cluster Autoscaling]
+    A --> E[Manual Scaling]
+    A --> F[Predictive Scaling]
+    A --> G[Custom Metrics Scaling]
+    
+    style A fill:#e1f5ff
+    style B fill:#fff3cd
+    style C fill:#d4edda
+    style D fill:#f8d7da
+```
 
-### Cluster Autoscaling:
-- Function: Adjusts the number of nodes in the cluster to ensure pods can be scheduled.
-- Workflow: Scheduler identifies pending pods → Cluster Autoscaler determines the need for more nodes → New nodes are added to the cluster to accommodate the pending pods.
+#### Scaling Strategies Comparison
 
-### Manual Scaling:
-- Function: Manually adjusts the number of pod replicas.
-- Workflow: A user uses the kubectl command to scale pods → API Server processes the command → The number of pods in the backend Kubernetes system is adjusted accordingly.
+| Strategy | Function | Trigger | Use Case |
+|:---------|:---------|:--------|:---------|
+| **HPA** | Adjust pod replicas | CPU/Memory metrics | Variable load |
+| **VPA** | Adjust resource limits | Resource usage | Right-sizing |
+| **Cluster Autoscaling** | Adjust node count | Pending pods | Capacity management |
+| **Manual Scaling** | Manual replica adjustment | User command | Planned changes |
+| **Predictive Scaling** | ML-based prediction | Forecasted load | Proactive scaling |
+| **Custom Metrics** | Application-specific | Custom metrics | Business metrics |
 
-### Predictive Scaling:
-- Function: Uses machine learning models to predict future workloads and scales resources proactively.
-- Workflow: ML Forecast generates predictions → KEDA (Kubernetes-based Event Driven Autoscaling) acts on these predictions → Cluster Controller ensures resource balance by scaling resources.
+**HPA Workflow**:
 
-### Custom Metrics Based Scaling:
-- Function: Scales pods based on custom application-specific metrics.
-- Workflow: Custom Metrics Server collects and provides metrics → HPA controller retrieves these metrics → The HPA controller scales the deployment based on custom metrics.
+```mermaid
+graph LR
+    A[Metrics Server] --> B[API Server]
+    B --> C[HPA Controller]
+    C --> D{CPU/Memory > Threshold?}
+    D -->|Yes| E[Scale Up Pods]
+    D -->|No| F{CPU/Memory < Threshold?}
+    F -->|Yes| G[Scale Down Pods]
+    F -->|No| H[Maintain Current]
+    
+    style A fill:#e1f5ff
+    style C fill:#fff3cd
+    style E fill:#d4edda
+```
 
-These strategies ensure that Kubernetes environments can efficiently manage varying loads, maintain performance, and optimize resource usage. Each method offers different benefits depending on the specific needs of the application and infrastructure.
+**Detailed Scaling Strategies**:
+
+1. **Horizontal Pod Autoscaling (HPA)**
+   - Function: Adjusts the number of pod replicas based on CPU/memory usage or other select metrics
+   - Workflow: Metrics Server → API Server → HPA Controller → Scale pods
+
+2. **Vertical Pod Autoscaling (VPA)**
+   - Function: Adjusts resource limits and requests (CPU/memory) for containers within pods
+   - Workflow: Metrics Server → API Server → VPA Controller → Adjust resources
+
+3. **Cluster Autoscaling**
+   - Function: Adjusts the number of nodes in the cluster to ensure pods can be scheduled
+   - Workflow: Scheduler → Cluster Autoscaler → Add/remove nodes
+
+4. **Manual Scaling**
+   - Function: Manually adjusts the number of pod replicas
+   - Workflow: kubectl command → API Server → Adjust pod count
+
+5. **Predictive Scaling**
+   - Function: Uses ML models to predict future workloads and scales resources proactively
+   - Workflow: ML Forecast → KEDA → Cluster Controller → Scale resources
+
+6. **Custom Metrics Based Scaling**
+   - Function: Scales pods based on custom application-specific metrics
+   - Workflow: Custom Metrics Server → HPA Controller → Scale deployment
+
+### Key Takeaways
+
+*Retrieve:* Kubernetes is a powerful container orchestrator that provides horizontal scalability, self-healing, and declarative deployment for ML applications.
+
+*Innovate:* Use Kubernetes when you have high traffic, multiple teams, and complex microservices. For simpler scenarios, consider EC2 instances or simpler container solutions.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about container orchestration, retrieve knowledge of Kubernetes architecture and scaling strategies, and innovate by applying it to your ML infrastructure when complexity justifies the overhead.
+
+![ Kubernetes Scaling Strategies ](/assets/img/blog/kubernetes-scaling-strategies.gif){: .light .shadow .rounded-10 w='1212' h='668' }

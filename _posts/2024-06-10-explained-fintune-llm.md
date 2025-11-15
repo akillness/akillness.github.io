@@ -7,7 +7,7 @@ tags: [LLM, PEFT]
 date: 2024-06-10 10:10:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -19,14 +19,22 @@ date: 2024-06-10 10:10:00 +0800
 
 ## Fine-tuning large language models traditionally involved adjusting billions of parameters, demanding significant computational power and resources. 
 
-However, the development of some innovative methods have transformed this process. 
+*Curiosity:* However, the development of some innovative methods have transformed this process. 
+
+
 
 Here’s a snapshot of five cutting-edge techniques for finetuning LLMs, each explained visually for easy understanding.
 
-#### LoRA:
+### 1. LoRA (Low-Rank Adaptation)
 
-- Introduce two low-rank matrices, A and B, to work alongside the weight matrix W.
-- Adjust these matrices instead of the behemoth W, making updates manageable.
+*Retrieve:* Understanding LoRA's approach.
+
+**Method**:
+- Introduce two low-rank matrices, A and B, to work alongside weight matrix W
+- Adjust these matrices instead of the behemoth W
+- Makes updates manageable
+
+**Key Innovation**: Represents large matrices as product of smaller, low-rank matrices.
 
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Explanation of Low-Rank Adaptation (LoRA) </summary>
@@ -70,31 +78,96 @@ A method for efficiently fine-tuning pre-trained neural networks.
 </details>
 
 
-#### LoRA-FA (Frozen-A):
+### 2. LoRA-FA (Frozen-A)
 
-- Takes LoRA a step further by freezing matrix A.
-- Only matrix B is tweaked, reducing the activation memory needed.
+*Retrieve:* Memory-efficient variant.
 
-#### VeRA:
+**Method**:
+- Takes LoRA a step further by freezing matrix A
+- Only matrix B is tweaked
+- Reduces activation memory needed
 
-- All about efficiency: matrices A and B are fixed and shared across all layers.
-- Focuses on tiny, trainable scaling vectors in each layer, making it super memory-friendly.
+**Benefit**: Lower memory requirements while maintaining effectiveness.
 
-#### Delta-LoRA:
+### 3. VeRA (Vector-based Random Matrix Adaptation)
 
-- A twist on LoRA: adds the difference (delta) between products of matrices A and B across training steps to the main weight matrix W.
-- Offers a dynamic yet controlled approach to parameter updates.
+*Retrieve:* Maximum efficiency approach.
 
-#### LoRA+:
+**Method**:
+- Matrices A and B are fixed and shared across all layers
+- Focuses on tiny, trainable scaling vectors in each layer
+- Super memory-friendly
 
-- An optimized variant of LoRA where matrix B gets a higher learning rate.
-This tweak leads to faster and more effective learning.
+**Benefit**: Minimal memory footprint with shared matrices.
+
+### 4. Delta-LoRA
+
+*Retrieve:* Dynamic update approach.
+
+**Method**:
+- Adds the difference (delta) between products of matrices A and B across training steps
+- Updates main weight matrix W dynamically
+- Offers controlled approach to parameter updates
+
+**Benefit**: Dynamic yet controlled parameter updates.
+
+### 5. LoRA+
+
+*Retrieve:* Optimized learning variant.
+
+**Method**:
+- Optimized variant of LoRA
+- Matrix B gets a higher learning rate
+- Leads to faster and more effective learning
+
+**Benefit**: Faster convergence with optimized learning rates.
+
+### Comparison
+
+*Innovate:* Technique comparison.
+
+| Technique | Parameters Updated | Memory | Speed | Use Case |
+|:----------|:-------------------|:-------|:------|:---------|
+| **LoRA** | A & B matrices | Medium | Medium | General fine-tuning |
+| **LoRA-FA** | B matrix only | Low | Medium | Memory-constrained |
+| **VeRA** | Scaling vectors | Very Low | Fast | Maximum efficiency |
+| **Delta-LoRA** | Dynamic delta | Medium | Medium | Controlled updates |
+| **LoRA+** | A & B (different LR) | Medium | Fast | Faster convergence |
+
+### Why Not LoRA for Pre-Training?
+
+*Retrieve:* Understanding limitations.
+
+**Key Points**:
+- LoRA targets subset of parameters (weight matrices)
+- Represents large matrices as product of smaller, low-rank matrices
+- Constraint is beneficial for fine-tuning (task-specific adaptation)
+- **Pre-training needs**: Explore broad representation without task constraints
+- **LoRA limitation**: Restricts model capacity to learn diverse features
+
+**Conclusion**: LoRA is ideal for fine-tuning, not pre-training.
+
+### Key Takeaways
+
+*Retrieve:* Five PEFT techniques (LoRA, LoRA-FA, VeRA, Delta-LoRA, LoRA+) enable efficient fine-tuning by reducing parameters and memory requirements while maintaining performance.
+
+*Innovate:* By choosing the right PEFT technique based on your constraints (memory, speed, task), you can fine-tune LLMs efficiently without full parameter updates, enabling faster iteration and lower costs.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about efficient fine-tuning, retrieve insights from PEFT techniques, and innovate by applying the right method to your specific use case and constraints.
+
+**Next Steps**:
+- Understand each technique
+- Choose based on constraints
+- Implement PEFT fine-tuning
+- Monitor performance
 
 Credits to Avi Chawla for great visualisation! 👏
 
 ![ Visualization 5 fine-tune LLMs  ](/assets/img/llm/LLM_Finetune_visualization.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 
 #### ❓ Why can't we use regular LoRA for pre-training LLMs ❓
+
+*Curiosity:* What insights can we retrieve from this? How does this connect to innovation in the field?
 
 - 📌 LoRA (Low-Rank Adaptation), targets a subset of a neural network's parameters, specifically focusing on the weight matrices of transformer models. 
 

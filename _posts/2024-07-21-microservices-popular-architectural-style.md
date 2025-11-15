@@ -7,7 +7,7 @@ tags: [Architecture, MicroService]
 date: 2024-07-21 11:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -15,37 +15,123 @@ date: 2024-07-21 11:00:00 +0800
 ---
 
 
-## Microservices are a popular architectural style for building applications as a collection of small, independent services. 
+## Microservices: Popular Architectural Style for Modern Applications
 
-Each service is responsible for a specific business function and communicates with other services through APIs. 
+*Curiosity:* How can we build scalable, maintainable applications? What makes microservices architecture effective for modern systems?
 
-This approach can help to improve the scalability, maintainability, and resilience of applications.
+**Microservices** are a popular architectural style for building applications as a collection of small, independent services. Each service is responsible for a specific business function and communicates with other services through APIs.
 
-The infographic includes the following components:
+**Benefits**: This approach improves scalability, maintainability, and resilience of applications.
 
-### • 𝗗𝗮𝘁𝗮𝗯𝗮𝘀𝗲𝘀:  
-A variety of databases are listed, including SQL databases (such as MySQL and PostgreSQL) and NoSQL databases (such as DynamoDB and Cassandra). The type of database you choose will depend on the specific needs of your application.
- 
-### • 𝗠𝗼𝗻𝗶𝘁𝗼𝗿𝗶𝗻𝗴: 
-There are a number of tools available for monitoring the health and performance of your microservices. Some of the tools listed in the infographic include Prometheus, Grafana, and Kibana.
- 
-### • 𝗠𝗲𝘀𝘀𝗮𝗴𝗲 𝗕𝗿𝗼𝗸𝗲𝗿𝘀: 
-Message brokers are used to asynchronously send messages between microservices. Some of the message brokers listed in the infographic include Kafka, RabbitMQ, and Amazon SQS.
- 
-### • 𝗖𝗜/𝗖𝗗: 
-CI/CD (continuous integration and continuous delivery) is a practice that helps to automate the process of building, testing, and deploying microservices. Some of the CI/CD tools listed in the infographic include Jenkins, GitLab Actions, and CircleCI.
- 
-### • 𝗟𝗮𝗻𝗴𝘂𝗮𝗴𝗲𝘀: 
-A variety of programming languages can be used to develop microservices. Some of the languages listed in the infographic include Java, Node.js, Python, and Go.
- 
-### • 𝗖𝗹𝗼𝘂𝗱 𝗣𝗿𝗼𝘃𝗶𝗱𝗲𝗿𝘀: 
-Microservices can be deployed on a variety of cloud platforms, including AWS, Azure, and GCP.
- 
-### • 𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆: 
-Security is a critical consideration when designing a microservices architecture. Some of the security considerations listed in the infographic include API authorization and TLS encryption.
- 
-### • 𝗖𝗼𝗻𝘁𝗮𝗶𝗻𝗲𝗿 𝗢𝗿𝗰𝗵𝗲𝘀𝘁𝗿𝗮𝘁𝗶𝗼𝗻: 
-Container orchestration tools help to manage the deployment and scaling of containerized microservices. Some of the container orchestration tools listed in the infographic include Kubernetes, Docker Swarm, and OpenShift.
+### Microservices Architecture
+
+*Retrieve:* Understanding the architecture.
+
+```mermaid
+graph TB
+    A[Client] --> B[API Gateway]
+    B --> C[Service 1]
+    B --> D[Service 2]
+    B --> E[Service 3]
+    
+    C --> F[Database 1]
+    D --> G[Database 2]
+    E --> H[Database 3]
+    
+    C --> I[Message Broker]
+    D --> I
+    E --> I
+    
+    J[Monitoring] --> C
+    J --> D
+    J --> E
+    
+    K[Container Orchestration] --> C
+    K --> D
+    K --> E
+    
+    style A fill:#e1f5ff
+    style B fill:#fff3cd
+    style I fill:#d1ecf1
+    style K fill:#d4edda
+```
+
+### Architecture Components
+
+*Innovate:* Key components overview.
+
+| Component | Options | Purpose |
+|:----------|:--------|:--------|
+| **Databases** | SQL (MySQL, PostgreSQL), NoSQL (DynamoDB, Cassandra) | ⬆️ Data persistence |
+| **Monitoring** | Prometheus, Grafana, Kibana | ⬆️ Health & performance |
+| **Message Brokers** | Kafka, RabbitMQ, Amazon SQS | ⬆️ Async communication |
+| **CI/CD** | Jenkins, GitLab Actions, CircleCI | ⬆️ Automation |
+| **Languages** | Java, Node.js, Python, Go | ⬆️ Development |
+| **Cloud Providers** | AWS, Azure, GCP | ⬆️ Deployment |
+| **Security** | API authorization, TLS encryption | ⬆️ Protection |
+| **Orchestration** | Kubernetes, Docker Swarm, OpenShift | ⬆️ Container management |
+
+### Detailed Components
+
+*Retrieve:* Understanding each component.
+
+**1. Databases**:
+- **SQL**: MySQL, PostgreSQL
+- **NoSQL**: DynamoDB, Cassandra
+- **Selection**: Depends on application needs
+
+**2. Monitoring**:
+- **Tools**: Prometheus, Grafana, Kibana
+- **Purpose**: Monitor health and performance
+
+**3. Message Brokers**:
+- **Tools**: Kafka, RabbitMQ, Amazon SQS
+- **Purpose**: Asynchronous messaging between services
+
+**4. CI/CD**:
+- **Tools**: Jenkins, GitLab Actions, CircleCI
+- **Purpose**: Automate build, test, and deployment
+
+**5. Languages**:
+- **Options**: Java, Node.js, Python, Go
+- **Flexibility**: Choose based on service needs
+
+**6. Cloud Providers**:
+- **Options**: AWS, Azure, GCP
+- **Purpose**: Scalable deployment platforms
+
+**7. Security**:
+- **Considerations**: API authorization, TLS encryption
+- **Importance**: Critical for microservices architecture
+
+**8. Container Orchestration**:
+- **Tools**: Kubernetes, Docker Swarm, OpenShift
+- **Purpose**: Manage deployment and scaling
+
+### Key Benefits
+
+*Innovate:* Why microservices matter.
+
+**Advantages**:
+- ✅ **Scalability**: Scale services independently
+- ✅ **Maintainability**: Easier to maintain small services
+- ✅ **Resilience**: Failure isolation
+- ✅ **Technology Diversity**: Use best tool for each service
+- ✅ **Team Autonomy**: Independent development
+
+### Key Takeaways
+
+*Retrieve:* Microservices architecture uses small, independent services communicating via APIs, with components including databases, monitoring, message brokers, CI/CD, languages, cloud providers, security, and orchestration.
+
+*Innovate:* By implementing microservices with proper components (databases, monitoring, message brokers, CI/CD, orchestration), you can build scalable, maintainable, and resilient applications that can evolve independently.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about scalable architectures, retrieve insights from microservices components, and innovate by building applications that can scale and evolve independently.
+
+**Next Steps**:
+- Design service boundaries
+- Choose appropriate components
+- Implement communication patterns
+- Set up monitoring and CI/CD
 
 I hope this infographic is helpful!
 

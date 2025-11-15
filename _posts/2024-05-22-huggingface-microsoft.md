@@ -5,7 +5,7 @@ categories: [LLM, Cookbook]
 tags: [Huggingface, Microsoft]
 # author: foDev_jeong
 date: 2024-05-22 15:22:00 +0800
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/llm/LLM_evaluation_rank.jpeg
@@ -14,19 +14,90 @@ date: 2024-05-22 15:22:00 +0800
 ---
 
 
-## Hugging Face and Microsoft Deepen Collaboration
+## Hugging Face × Microsoft: Deepening Collaboration
 
-Yesterday at MS BUILD, Satya Nadella announced the expansion of our partnership between Microsoft and Hugging Face to make open models and open-source AI more accessible across hardware, starting with new AMD GPU, Cloud through Azure AI, and local inference with ONNX Runtime. 🚀
+*Curiosity:* How can partnerships between major AI platforms accelerate open-source AI adoption? What does the expanded Microsoft-Hugging Face collaboration mean for developers?
 
-- 💻 Expanded Hugging Face Collection in Azure Model Catalog with popular open models like Llama 3, Mistral 7B, and top-performing fine-tuned models
-- ⚡ Optimized Containers for the new AMD MI300X VMs on Azure using Hugging Face Text Generation Inference
-- 🤗 Open Release Microsoft Phi-3 family on Hugging Face
-- 🌐 Local inference through WebGPU with Transformers.js and ONNX Runtime Web
-- 💻 New Dev Mode for seamless integration between Hugging Face Spaces and VS Code
+**At MS BUILD**, Satya Nadella announced the expansion of the partnership between Microsoft and Hugging Face to make open models and open-source AI more accessible across hardware.
 
-Learn more: <https://huggingface.co/blog/microsoft-collaboration>
+### Partnership Expansion
 
-Let's go build together! 🤗
+*Retrieve:* Key collaboration areas.
+
+**Focus Areas**:
+- 🆕 New AMD GPU support
+- ☁️ Cloud through Azure AI
+- 💻 Local inference with ONNX Runtime
+
+### Key Announcements
+
+*Innovate:* Five major updates.
+
+| Announcement | Details | Impact |
+|:-------------|:--------|:-------|
+| **💻 Azure Model Catalog** | Expanded Hugging Face collection with Llama 3, Mistral 7B, fine-tuned models | ⬆️ Easy access |
+| **⚡ AMD MI300X** | Optimized containers using Hugging Face TGI | ⬆️ Performance |
+| **🤗 Phi-3 Family** | Open release on Hugging Face | ⬆️ Availability |
+| **🌐 WebGPU** | Local inference with Transformers.js and ONNX Runtime Web | ⬆️ Browser AI |
+| **💻 Dev Mode** | Seamless integration between Spaces and VS Code | ⬆️ Developer experience |
+
+### Collaboration Benefits
+
+*Retrieve:* Why this matters.
+
+**For Developers**:
+- ✅ Access to popular models in Azure
+- ✅ Optimized hardware support
+- ✅ Local inference capabilities
+- ✅ Better development tools
+
+**For Ecosystem**:
+- ✅ More accessible open-source AI
+- ✅ Cross-platform support
+- ✅ Hardware optimization
+- ✅ Unified developer experience
+
+### Architecture Overview
+
+*Innovate:* Partnership ecosystem.
+
+```mermaid
+graph TB
+    A[Microsoft Azure] --> B[Azure AI]
+    A --> C[AMD MI300X VMs]
+    A --> D[ONNX Runtime]
+    
+    E[Hugging Face] --> F[Model Catalog]
+    E --> G[Text Generation Inference]
+    E --> H[Transformers.js]
+    E --> I[Spaces]
+    
+    B --> F
+    C --> G
+    D --> H
+    I --> J[VS Code Dev Mode]
+    
+    style A fill:#e1f5ff
+    style E fill:#fff3cd
+    style J fill:#d4edda
+```
+
+### Key Takeaways
+
+*Retrieve:* Microsoft and Hugging Face expanded their partnership to make open-source AI more accessible across hardware, with support for AMD GPUs, Azure AI, ONNX Runtime, and improved developer tools.
+
+*Innovate:* By leveraging this collaboration, you can access popular models in Azure, use optimized AMD hardware, run local inference with WebGPU, and develop seamlessly with VS Code integration.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about AI platform partnerships, retrieve insights from Microsoft-Hugging Face collaboration, and innovate by building applications that leverage both platforms' strengths.
+
+**Next Steps**:
+- Explore Azure Model Catalog
+- Try AMD MI300X optimization
+- Test WebGPU inference
+- Use VS Code Dev Mode
+
+> **Learn More**: <https://huggingface.co/blog/microsoft-collaboration>
+{: .prompt-info}
 
 
 

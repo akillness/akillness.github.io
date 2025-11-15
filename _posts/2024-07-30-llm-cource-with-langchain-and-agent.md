@@ -7,7 +7,7 @@ tags: [LLM, Course]
 date: 2024-07-30 13:00:00 +0800
 pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -18,27 +18,263 @@ pin: true
 {: .prompt-info}
 
 
-## 🔷 The RAG system from the second part is modified to use LangChain.
-- Article:<https://pub.towardsai.net/query-your-dataframes-with-powerful-large-language-models-using-langchain-abe25782def5>
-- Notebook: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_1_RAG_langchain.ipynb>
+## Introduction to LangChain and Agents: Building Intelligent Applications
 
-## 🔷 A moderation system is created where two Models are linked, with the second one responsible for moderating and providing the response to the user. There are three examples, one with OpenAI Models, and two more with open-source models: Llama and GPT-J.
+*Curiosity:* How can we build sophisticated LLM applications that go beyond simple prompts? What patterns and frameworks enable us to create intelligent agents that can reason, retrieve information, and take actions?
 
-Article and notebook using OpenAI models: 
-- <https://pub.towardsai.net/create-a-self-moderated-commentary-system-with-langchain-and-openai-406a51ce0c8d>
-- <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_2_OpenAI_Moderation_Chat.ipynb>
-Article and notebook using Llama: 
-- <https://levelup.gitconnected.com/create-a-self-moderated-comment-system-with-llama-2-and-langchain-656f482a48be>
-- <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_2_LLAMA2_Moderation_Chat.ipynb>
+**LangChain** is a powerful framework for building LLM applications with chains, agents, and memory. This course section introduces LangChain through practical examples, from RAG systems to intelligent agents capable of data analysis and specialized assistance.
 
-## 🔷The course continues by creating a Data Analyst using an agent from the langchain_experiments library, capable of interpreting tabular data files from a .csv file. 
-- Article: <https://pub.towardsai.net/create-your-own-data-analyst-assistant-with-langchain-agents-722f1cdcdd7e>
-- Notebook: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_3_Data_Analyst_Agent.ipynb>
+### Course Structure Overview
 
-## 🔷 Finally, a chatbot is created to serve as a medical assistant using LangChain and ChromaDB with a medical data dataset. 
-- Notebook: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_4_Medical_Assistant_Agent.ipynb>
+```mermaid
+graph TB
+    A[LangChain Course] --> B[🔷 RAG with LangChain]
+    A --> C[🔷 Moderation Systems]
+    A --> D[🔷 Data Analyst Agent]
+    A --> E[🔷 Medical Assistant]
+    
+    B --> B1[DataFrame Querying]
+    C --> C1[OpenAI Models]
+    C --> C2[Open Source Models]
+    D --> D1[CSV Analysis]
+    E --> E1[ChromaDB Integration]
+    
+    style A fill:#e1f5ff
+    style B fill:#fff3cd
+    style C fill:#d4edda
+    style D fill:#f8d7da
+    style E fill:#e7d4f8
+```
 
-As you can see, this part of the course uses a few examples to introduce you to LangChain and reinforce the knowledge you gained in the second lesson on vector database
+### 🔷 Part 1: RAG System with LangChain
+
+*Retrieve:* Learn how to build RAG systems using LangChain's powerful abstractions for document loading, vector stores, and retrieval.
+
+**Key Concepts:**
+- Document loaders and text splitters
+- Vector store integration
+- Retrieval chains
+- Query processing
+
+**Resources:**
+- **Article**: [Query DataFrames with LLMs using LangChain](https://pub.towardsai.net/query-your-dataframes-with-powerful-large-language-models-using-langchain-abe25782def5)
+- **Notebook**: [RAG LangChain Implementation](https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_1_RAG_langchain.ipynb)
+
+**Example Implementation**:
+
+```python
+from langchain.document_loaders import DataFrameLoader
+from langchain.vectorstores import Chroma
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.chains import RetrievalQA
+from langchain.llms import OpenAI
+
+# Load DataFrame
+loader = DataFrameLoader(df, page_content_column="text")
+documents = loader.load()
+
+# Create vector store
+embeddings = OpenAIEmbeddings()
+vectorstore = Chroma.from_documents(documents, embeddings)
+
+# Create QA chain
+qa_chain = RetrievalQA.from_chain_type(
+    llm=OpenAI(),
+    chain_type="stuff",
+    retriever=vectorstore.as_retriever()
+)
+
+# Query
+result = qa_chain.run("What is the average sales by region?")
+print(result)
+```
+
+### 🔷 Part 2: Self-Moderated Commentary System
+
+*Innovate:* Build moderation systems where one model moderates content before another model responds, ensuring safe and appropriate interactions.
+
+**Architecture**:
+
+```mermaid
+graph LR
+    A[User Input] --> B[Moderation Model]
+    B -->|Safe| C[Response Model]
+    B -->|Unsafe| D[Filtered Response]
+    C --> E[User Output]
+    D --> E
+    
+    style A fill:#e1f5ff
+    style B fill:#fff3cd
+    style C fill:#d4edda
+    style E fill:#f8d7da
+```
+
+**Three Implementation Approaches:**
+
+| Model Type | Use Case | Resources |
+|:-----------|:---------|:----------|
+| **OpenAI Models** | Production-ready moderation | [Article](https://pub.towardsai.net/create-a-self-moderated-commentary-system-with-langchain-and-openai-406a51ce0c8d) / [Notebook](https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_2_OpenAI_Moderation_Chat.ipynb) |
+| **Llama 2** | Open-source alternative | [Article](https://levelup.gitconnected.com/create-a-self-moderated-comment-system-with-llama-2-and-langchain-656f482a48be) / [Notebook](https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_2_LLAMA2_Moderation_Chat.ipynb) |
+| **GPT-J** | Cost-effective solution | Similar pattern to Llama |
+
+**Moderation Flow**:
+
+```python
+from langchain.chains import LLMChain
+from langchain.prompts import PromptTemplate
+
+# Moderation prompt
+moderation_prompt = PromptTemplate(
+    input_variables=["input"],
+    template="Is this input appropriate? {input}\nAnswer:"
+)
+
+# Response prompt
+response_prompt = PromptTemplate(
+    input_variables=["input"],
+    template="Respond to: {input}"
+)
+
+# Create chains
+moderation_chain = LLMChain(llm=moderation_llm, prompt=moderation_prompt)
+response_chain = LLMChain(llm=response_llm, prompt=response_prompt)
+
+# Moderation check
+def moderated_response(user_input):
+    moderation_result = moderation_chain.run(user_input)
+    if "appropriate" in moderation_result.lower():
+        return response_chain.run(user_input)
+    else:
+        return "I cannot respond to that input."
+```
+
+### 🔷 Part 3: Data Analyst Agent
+
+*Retrieve:* Create intelligent agents that can analyze tabular data and answer questions using natural language.
+
+**Capabilities:**
+- CSV file interpretation
+- Data analysis and visualization
+- Natural language queries
+- Automated insights generation
+
+**Resources:**
+- **Article**: [Create Data Analyst Assistant with LangChain Agents](https://pub.towardsai.net/create-your-own-data-analyst-assistant-with-langchain-agents-722f1cdcdd7e)
+- **Notebook**: [Data Analyst Agent](https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_3_Data_Analyst_Agent.ipynb)
+
+**Agent Architecture**:
+
+```mermaid
+graph TB
+    A[User Query] --> B[Agent]
+    B --> C[Tool: Read CSV]
+    B --> D[Tool: Analyze Data]
+    B --> E[Tool: Generate Plot]
+    C --> F[DataFrame]
+    D --> G[Insights]
+    E --> H[Visualization]
+    F --> B
+    G --> I[Response]
+    H --> I
+    
+    style A fill:#e1f5ff
+    style B fill:#fff3cd
+    style I fill:#d4edda
+```
+
+**Example Usage**:
+
+```python
+from langchain.agents import create_pandas_dataframe_agent
+from langchain.llms import OpenAI
+import pandas as pd
+
+# Load data
+df = pd.read_csv("sales_data.csv")
+
+# Create agent
+agent = create_pandas_dataframe_agent(
+    OpenAI(temperature=0),
+    df,
+    verbose=True
+)
+
+# Query
+result = agent.run("What are the top 5 products by sales?")
+print(result)
+```
+
+### 🔷 Part 4: Medical Assistant Chatbot
+
+*Innovate:* Build specialized domain assistants using RAG with domain-specific knowledge bases.
+
+**Features:**
+- Medical knowledge base integration
+- ChromaDB vector storage
+- Context-aware responses
+- Specialized domain expertise
+
+**Resources:**
+- **Notebook**: [Medical Assistant Agent](https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_4_Medical_Assistant_Agent.ipynb)
+
+**System Architecture**:
+
+```python
+from langchain.vectorstores import Chroma
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.chains import ConversationalRetrievalChain
+from langchain.memory import ConversationBufferMemory
+
+# Load medical documents
+medical_docs = load_medical_documents()
+
+# Create vector store
+embeddings = OpenAIEmbeddings()
+vectorstore = Chroma.from_documents(medical_docs, embeddings)
+
+# Create memory
+memory = ConversationBufferMemory(
+    memory_key="chat_history",
+    return_messages=True
+)
+
+# Create conversational chain
+qa_chain = ConversationalRetrievalChain.from_llm(
+    OpenAI(),
+    vectorstore.as_retriever(),
+    memory=memory
+)
+
+# Chat
+response = qa_chain({"question": "What are the symptoms of diabetes?"})
+print(response["answer"])
+```
+
+### LangChain Components Summary
+
+| Component | Purpose | Example Use Case |
+|:----------|:--------|:-----------------|
+| **Chains** | Sequential operations | RAG, moderation pipelines |
+| **Agents** | Tool-using LLMs | Data analysis, web search |
+| **Memory** | Conversation history | Chatbots, assistants |
+| **Vector Stores** | Document retrieval | RAG systems, knowledge bases |
+| **Tools** | External integrations | APIs, databases, calculators |
+
+### Key Takeaways
+
+*Retrieve:* LangChain provides powerful abstractions for building complex LLM applications, from simple RAG systems to sophisticated agents.
+
+*Innovate:* By combining LangChain's components—chains, agents, memory, and vector stores—you can create intelligent applications that go far beyond simple prompt engineering.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about building intelligent applications, retrieve knowledge about LangChain patterns, and innovate by creating specialized agents for your domain.
+
+**📚 Course Repository**: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/tree/main/3-LangChain>
+
+**Next Steps**:
+- Explore LangChain documentation
+- Build your first RAG system
+- Create a specialized agent
+- Integrate with your domain knowledge
 
 * * *
 

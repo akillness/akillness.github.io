@@ -7,7 +7,7 @@ tags: [Data Analytics, Python]
 date: 2024-07-04 20:10:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -16,7 +16,9 @@ date: 2024-07-04 20:10:00 +0800
 
 ## Here's why it's crucial:In the ever-evolving landscape of data science, Python continues to be the cornerstone that bridges innovation and practical application. 
 
-As we dive deeper into the era of big data, AI, and machine learning, having a robust toolkit is not just an advantage—it’s a necessity.
+*Curiosity:* As we dive deeper into the era of big data, AI, and machine learning, having a robust toolkit is not just an advantage—it’s a necessity.
+
+
 
 This comprehensive visualization encapsulates the essence of what makes Python Coding an indispensable tool in the arsenal of data scientists and analysts worldwide. Here’s a glimpse into the multifaceted world of Python libraries that are redefining data analytics:
 

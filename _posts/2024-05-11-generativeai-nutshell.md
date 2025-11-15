@@ -5,7 +5,7 @@ categories: [Script, Generative AI]
 tags: [Study, Generative AI, Nutshell]
 # author: JAE-HONG EOM
 date: 2024-05-11 23:43:00 +0800
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/llm/LLM_evaluation_rank.jpeg
@@ -18,18 +18,34 @@ date: 2024-05-11 23:43:00 +0800
 
 
 
-# What's New? (from [JAE-HONG EOM](https://www.linkedin.com/in/jae-hong-e-93368248/))
+## Generative AI in a Nutshell: Understanding the Fundamentals
+
+*Curiosity:* How do the foundational technologies of generative AI connect? Why is understanding these fundamentals more important than immediately building applications?
+
+**Understanding the foundational technologies** of generative AI and how they connect is more important than immediately fine-tuning an LLM and adding RAG to build a QnA service. 🤨
+
+**Henrik Kniberg's Generative AI In a Nutshell** provides an excellent overview through diagrams and video.
+
+> **Source**: <https://www.crisp.se/kurser/ai-for-leaders-2024-04-23>
+> **Preparation Guide**: <https://github.com/Msrevalli/Generative-AI-Preparation>
+> **Author**: [JAE-HONG EOM](https://www.linkedin.com/in/jae-hong-e-93368248/)
+{: .prompt-info}
 
 ![Generative AI in a nutshell ](/assets/img/news/generative-AI-in-a-nutshell.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
-생성 AI 전반의 바탕이 되는 기술들과 이들이 어떻게 연관되어 있는지 이해하는 것은 당장 LLM을 하나 집어다 튜닝하고 RAG를 붙여 뭔가 업무 QnA 서비스를 만드는 것보다 사실 더 중요합니다. 🤨 
-
-자, 오늘은 Henrik Kniberg의 Generative AI In a Nutshell 다이어그램 및 비디오를 통해 생성형 AI 기본 지식을 정리해 봅시다. 😉
-
-(Source) <https://www.crisp.se/kurser/ai-for-leaders-2024-04-23>
-
-(Video) 
 {% include embed/youtube.html id='2IK3DFHRFfw' %}
+
+### Key Concepts
+
+*Retrieve:* Understanding generative AI fundamentals.
+
+**Core Understanding**: Before building applications, understand how:
+- AI models learn
+- Prompt engineering works
+- Models interact with products
+- Different techniques connect
+
+**Why It Matters**: This foundation enables better application design and more effective use of generative AI.
 
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
@@ -67,7 +83,9 @@ generative AI는 아직 완벽하지 않지만, 지수함수적으로 발전 중
 
 ### AI와 GPT의 작동 원리는?
 
-AI는 인공지능을 나타내며, '기계 학습'과 '컴퓨터 비전'과 같은 용어들이 오랫동안 사용되어 왔어요.
+*Curiosity:* AI는 인공지능을 나타내며, '기계 학습'과 '컴퓨터 비전'과 같은 용어들이 오랫동안 사용되어 왔어요.
+
+
 
 GPT는 새로운 콘텐츠를 생성하는 '생성적 AI'의 형태로, 수많은 언어 모델 중 하나에요.
 

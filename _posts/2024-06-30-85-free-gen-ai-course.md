@@ -7,7 +7,7 @@ tags: [GenAI, Course]
 date: 2024-06-30 19:10:00 +0800
 pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -25,39 +25,176 @@ pin: true
 Due to character limits, I've included only about 30 courses in this post. You can find all courses and their URLs on GitHub repository: <https://github.com/aishwaryanr/awesome-generative-ai-guide?tab=readme-ov-file#book-list-of-free-genai-courses>
 
 
-### 😎 This prompting report is your ultimate guide to prompt engineering! 
+## 85+ Free GenAI Courses: Comprehensive Learning Resources
 
-IMO it's one of the most thorough reports that summarizes all the research so far!
+*Curiosity:* How can we systematically learn Generative AI? What are the best free resources for mastering LLMs, RAG, fine-tuning, and agentic applications?
 
-Kudos to Sander Schulhoff from Learn Prompting and other co-authors from OpenAI & Microsoft!
+**Updated with over 85 free GenAI courses**, including a dedicated section for Agents! This comprehensive collection covers everything from LLM basics to advanced applications.
 
-👉 It starts of with clearly explaining the concept and then providing structured understanding by creating a taxonomy of prompting techniques, analyzing their use, and presenting a comprehensive vocabulary of 33 terms. 
+{% include embed/youtube.html id='J9VWyxOSJzA?list=PLZoalK-hTD4VBBF03HAifKd6-DF68sYlC&t=6' %}
 
-👉 It also explores 58 text-only prompting techniques and 40 techniques for other modalities, providing a meta-analysis of the entire literature on natural language prefix-prompting.
+> **Video Channel**: <https://www.youtube.com/@aishwaryanr4606>
+> 
+> **3-Day RAG Course**: <https://akillness.github.io/posts/rag-application-in-just-3-days/>
+{: .prompt-info}
 
-I'm also going through it and jotting down notes. It's a fantastic report; definitely a must-read if you want to become proficient in prompt engineering.
+> **Complete Course List**: <https://github.com/aishwaryanr/awesome-generative-ai-guide?tab=readme-ov-file#book-list-of-free-genai-courses>
+{: .prompt-tip}
 
-Here's the link: <https://arxiv.org/pdf/2406.06608>
+### Prompt Engineering Report
 
-### 😨 Finding the perfect RAG setup for your use-case can be a huge pain! Think chunk size, embedding model, retrieval method and many other parameters. 
+*Retrieve:* The ultimate guide to prompt engineering with comprehensive coverage.
 
-To add to the issue, it's highly likely that your configuration will require numerous adjustments once it goes live and users begin interacting with it.
+**Key Features**:
+- 📚 Taxonomy of prompting techniques
+- 📖 33 terms vocabulary
+- 🔬 58 text-only techniques
+- 🎨 40 multimodal techniques
+- 📊 Meta-analysis of literature
 
-This new paper introduces an AutoRAG framework aimed at tackling these challenges. It formulates hyperparameter tuning as search problem and defines a bandit based framework to efficiently explore large search spaces.
+**Link**: <https://arxiv.org/pdf/2406.06608>
 
-❗ Just a heads-up: Honestly, I think It's quite an innovative idea, but implementing it could be expensive and time-consuming! Still, it's good to know about these new things :)
+### AutoRAG Framework
 
-Here are some more details:
+*Innovate:* Automated RAG hyperparameter tuning using multi-armed bandit approach.
 
-- 👉 The AutoRAG framework aligns with principles from AutoML, aiming to automate and improve the efficiency of RAG hyperparameter tuning.
+**Key Features**:
+- 🤖 AutoML principles
+- 🔄 Online hyperparameter tuning
+- 🎯 Multi-armed bandit formulation
+- 📊 Hierarchical MAB (Hier-MAB)
 
-- 👉 Unlike prior works that often manually tune RAG hyperparameters or focus on specific tunable parameters within language model API calls, this framework emphasizes methods applicable in an online setting. It addresses the challenge of dynamically adjusting hyperparameters based on real-time feedback and varying conditions.
+**Considerations**:
+- ⚠️ Implementation can be expensive
+- ⏱️ Time-consuming setup
+- ✅ Innovative approach
 
-- 👉 The paper formulates the hyperparameter selection process in RAG as an online multi-armed bandit problem. This approach allows the system to balance exploration of new hyperparameter configurations with exploitation of known effective settings, adapting to changing conditions over time.
+**Link**: <https://arxiv.org/pdf/2406.19251>
 
-- 👉 To efficiently explore large hyperparameter search spaces in RAG, the study introduces a novel Hierarchical MAB (Hier-MAB) method. This method involves a high-level MAB guiding optimization across modules and several low-level MABs fine-tuning specific hyperparameters within each module. This hierarchical approach enhances the system's ability to find optimal configurations in complex environments.
+### Course Categories
 
-Link to the paper: <https://arxiv.org/pdf/2406.19251>
+```mermaid
+graph TB
+    A[85+ Free GenAI Courses] --> B[LLM Basics]
+    A --> C[Building Applications]
+    A --> D[Prompt Engineering & RAG]
+    A --> E[Evaluation]
+    A --> F[Multimodal]
+    A --> G[Agents]
+    
+    B --> B1[Foundations]
+    C --> C1[LLMOps]
+    D --> D1[Fine-Tuning]
+    E --> E1[Testing]
+    F --> F1[Diffusion]
+    G --> G1[Agent Systems]
+    
+    style A fill:#e1f5ff
+    style B fill:#fff3cd
+    style C fill:#d4edda
+    style D fill:#f8d7da
+    style G fill:#e7d4f8
+```
+
+### ⛳ LLM Basics and Foundations
+
+*Retrieve:* Essential courses for understanding LLM fundamentals.
+
+| Course | Provider | Focus |
+|:-------|:---------|:------|
+| **Large Language Models** | ETH Zurich | Core concepts |
+| **Understanding LLMs** | Princeton | Deep understanding |
+| **Transformers Course** | Hugging Face | Architecture |
+| **NLP Course** | Hugging Face | NLP fundamentals |
+| **CS324 - LLMs** | Stanford | Advanced topics |
+| **GenAI with LLMs** | Coursera | Practical applications |
+| **Introduction to GenAI** | Coursera | Basics |
+| **GenAI Fundamentals** | Google Cloud | Cloud perspective |
+| **Introduction to LLMs** | Google Cloud | Google's approach |
+| **GenAI Concepts** | DataCamp | Comprehensive overview |
+
+### ⛳ Building LLM Applications
+
+*Innovate:* Courses for building production-ready LLM applications.
+
+| Course | Provider | Focus |
+|:-------|:---------|:------|
+| **LLMOps** | Udacity | Production deployment |
+| **Full Stack LLM Bootcamp** | FSDL | End-to-end development |
+| **GenAI for Beginners** | Microsoft | Getting started |
+| **LLMs: Application to Production** | Databricks | Production pipeline |
+| **GenAI Foundations** | AWS | AWS ecosystem |
+| **GenAI Community Course** | ineuron | Community-driven |
+| **LLM University** | Cohere | Cohere's platform |
+| **LLM Learning Lab** | Lightning AI | Hands-on learning |
+| **Functions, Tools, Agents** | DeepLearning.AI | LangChain agents |
+| **LangChain for LLM Apps** | DeepLearning.AI | LangChain framework |
+| **LLMOps** | DeepLearning.AI | Operations |
+| **Automated Testing for LLMOps** | DeepLearning.AI | Testing strategies |
+
+### ⛳ Prompt Engineering, RAG, and Fine-Tuning
+
+*Retrieve:* Advanced techniques for optimizing LLM performance.
+
+| Course | Provider | Focus |
+|:-------|:---------|:------|
+| **LangChain & Vector DBs** | Activeloop | Production RAG |
+| **RLHF** | DeepLearning.AI | Human feedback |
+| **Building with Vector DBs** | DeepLearning.AI | Vector databases |
+| **How Diffusion Models Work** | DeepLearning.AI | Diffusion models |
+| **Finetuning LLMs** | DeepLearning.AI | Fine-tuning |
+| **LangChain: Chat with Data** | DeepLearning.AI | RAG applications |
+| **Building with ChatGPT API** | DeepLearning.AI | API integration |
+| **ChatGPT Prompt Engineering** | DeepLearning.AI | Prompt engineering |
+
+### ⛳ Evaluation
+
+*Retrieve:* Courses for evaluating and debugging LLM applications.
+
+| Course | Provider | Focus |
+|:-------|:---------|:------|
+| **Building & Evaluating RAG** | DeepLearning.AI | RAG evaluation |
+| **Evaluating GenAI Models** | DeepLearning.AI | W&B evaluation |
+
+### ⛳ Multimodal
+
+*Innovate:* Courses covering multimodal AI applications.
+
+| Course | Provider | Focus |
+|:-------|:---------|:------|
+| **How Diffusion Models Work** | DeepLearning.AI | Multimodal generation |
+
+### Learning Path Recommendation
+
+```mermaid
+graph LR
+    A[Beginner] --> B[LLM Basics]
+    B --> C[Building Apps]
+    C --> D[Advanced Topics]
+    D --> E[Production]
+    
+    B --> B1[Foundations]
+    C --> C1[LangChain]
+    D --> D1[RAG/Fine-tuning]
+    E --> E1[LLMOps]
+    
+    style A fill:#e1f5ff
+    style E fill:#d4edda
+```
+
+### Key Takeaways
+
+*Retrieve:* Over 85 free GenAI courses covering LLM basics, application building, RAG, fine-tuning, evaluation, and multimodal AI.
+
+*Innovate:* By following structured learning paths through these courses, you can systematically master Generative AI from fundamentals to production deployment.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about GenAI, retrieve knowledge from comprehensive courses, and innovate by building your own applications.
+
+**Next Steps**:
+- Explore the complete course list on GitHub
+- Choose courses based on your level
+- Follow structured learning paths
+- Build projects as you learn
 
 ![ AutoRAG-HP ](/assets/img/llm/AutoRAG-framework.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 

@@ -5,7 +5,7 @@ categories: [Script, Evaluation]
 tags: [LLM, Evaluation]
 # author: foDev_jeong
 date: 2024-05-18 10:20:00 +0800
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/llm/LLM_evaluation_rank.jpeg
@@ -15,6 +15,8 @@ date: 2024-05-18 10:20:00 +0800
 
 
 ## LLM evaluation frameworks & tools every AI/ML engineer should know.
+
+*Curiosity:* What insights can we retrieve from this? How does this connect to innovation in the field?
 
 ![ LLM evaluation frameworks ](/assets/img/news/Evaluate_llm_guid.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
@@ -27,7 +29,9 @@ Here is my article on evaluating large language models. 👉<https://levelup.git
 
 ## MMLU-Pro released by TIGER-Lab on Hugging Face, continues these vital efforts by offering a more robust and challenging massive multi-task language understanding dataset! 🎉 😍
 
-Evaluating LLMs is both crucial and challenging, especially with existing benchmarks like MMLU reaching saturation. 
+*Curiosity:* Evaluating LLMs is both crucial and challenging, especially with existing benchmarks like MMLU reaching saturation. 
+
+
 
 > TL;DR: 📊
 - 📚 12K complex questions across various disciplines with careful human verification

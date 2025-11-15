@@ -7,35 +7,102 @@ tags: [RAG Visualization, Spotlight]
 date: 2024-07-22 14:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
 
-## The article provides a step-by-step tutorial on how to create an interactive visualization for RAG embedding data with Renumics Spotlight.
+## Visualize Your RAG Data: EDA for Retrieval-Augmented Generation
 
-> This simplified tutorial will walk you through each phase of developing RAG applications, with a special focus on the role of visualizing the results.
-> - Github : <https://github.com/Renumics/renumics-rag/blob/main/notebooks/visualize_rag_tutorial.ipynb>
+*Curiosity:* How can we visualize RAG embedding data to understand retrieval quality? What insights can interactive visualizations reveal about our RAG systems?
+
+**This tutorial** provides a step-by-step guide to creating interactive visualizations for RAG embedding data using Renumics Spotlight. Visualizing results is crucial for understanding and improving RAG applications.
+
+> **Resources**:
+> - **📝 Tutorial**: <https://github.com/Renumics/renumics-rag/blob/main/notebooks/visualize_rag_tutorial.ipynb>
+> - **💻 Spotlight GitHub**: <https://github.com/Renumics/spotlight>
+> - **📰 Article**: <https://itnext.io/visualize-your-rag-data-eda-for-retrieval-augmented-generation-0701ee98768f>
+> - **👤 Author**: <https://www.linkedin.com/in/markus-stoll-b39a42138/>
 {: .prompt-info}
 
-![ UMAP dimensionality reduction of the embeddings of document snippets ](/assets/img/llm/RAG-Data-Visualization.gif){: .light .shadow .rounded-10 w='1212' h='668' }*dd*
+### What You'll Build
 
+*Retrieve:* Interactive RAG visualization system.
 
-> Author : <https://www.linkedin.com/in/markus-stoll-b39a42138/>
-> - GitHub : <https://github.com/Renumics/spotlight>
-> - Article : <https://itnext.io/visualize-your-rag-data-eda-for-retrieval-augmented-generation-0701ee98768f>
-{: .prompt-tip}
+**Components**:
+- LangChain Retrieval-Augmented Generation Application
+- ChromaDB vector database
+- OpenAI text-embedding-ada-002
+- GPT-4 for generation
+- Renumics Spotlight for visualization
 
-The article provides a step-by-step tutorial on how to create an interactive visualization for RAG embedding data with Renumics Spotlight .
+**Demo Data**: Formula One Dataset from Wikipedia (easily replaceable with your data)
 
-### 🚀 You will build a visualization for a LangChain Retrieval-Augmented Generation Application with ChromaDB based on OpenAI's text-embedding-ada-002 and GPT-4. 
+### Visualization Overview
 
-The demo data (🏎️ Formula One Dataset built from Wikipedia articles) can be easily changed to your own data.
+*Innovate:* Understanding RAG data through visualization.
 
-### 📖 Check out the full article on ITNEXT
+```mermaid
+graph TB
+    A[Documents] --> B[Embeddings]
+    B --> C[ChromaDB]
+    D[Query] --> E[Query Embedding]
+    E --> F[Similarity Search]
+    F --> C
+    C --> G[Retrieved Documents]
+    G --> H[Spotlight Visualization]
+    H --> I[UMAP Reduction]
+    I --> J[Interactive Exploration]
+    
+    style A fill:#e1f5ff
+    style H fill:#fff3cd
+    style J fill:#d4edda
+```
 
-The animation here shows the UMAP dimensionality reduction of the embeddings of document snippets, colored by their relevance to the question "Who built the Nürburgring?"
+### Key Features
+
+*Retrieve:* What Spotlight visualization provides.
+
+| Feature | Description | Benefit |
+|:--------|:------------|:--------|
+| **UMAP Visualization** | Dimensionality reduction | ⬆️ Understand embedding space |
+| **Relevance Coloring** | Color by query relevance | ⬆️ Identify patterns |
+| **Interactive Exploration** | Explore embeddings | ⬆️ Debug retrieval |
+| **Document Inspection** | View retrieved documents | ⬆️ Quality assessment |
+
+**Example**: UMAP shows embeddings colored by relevance to "Who built the Nürburgring?"
+
+### Visualization Benefits
+
+*Innovate:* Why visualize RAG data.
+
+**Insights**:
+- ✅ Understand embedding space structure
+- ✅ Identify retrieval patterns
+- ✅ Debug retrieval issues
+- ✅ Optimize chunk sizes
+- ✅ Assess embedding quality
+
+**Use Cases**:
+- EDA for RAG development
+- Quality assessment
+- Performance optimization
+- Debugging retrieval issues
+
+### Key Takeaways
+
+*Retrieve:* Interactive visualization with Renumics Spotlight enables exploratory data analysis of RAG embeddings, helping understand retrieval quality and optimize RAG systems.
+
+*Innovate:* By visualizing RAG embedding data with UMAP and interactive tools, you can identify patterns, debug issues, and optimize your retrieval systems for better performance.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about RAG data visualization, retrieve insights from Spotlight's capabilities, and innovate by building interactive visualizations that improve your RAG applications.
+
+**Next Steps**:
+- Follow the tutorial
+- Try with your data
+- Explore embeddings
+- Optimize your RAG system
 
 ![ Overview of Spotlight ](/assets/img/llm/Spotlight-Overview.gif){: .light .shadow .rounded-10 w='1212' h='668' }

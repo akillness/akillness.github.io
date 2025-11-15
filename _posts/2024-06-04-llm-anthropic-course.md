@@ -6,7 +6,7 @@ tags: [Anthropic, LLM]
 # author: foDev_jeong
 date: 2024-06-04 13:20:00 +0800
 # pin: true
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/blog/NLP_Overview.svg
@@ -16,19 +16,150 @@ date: 2024-06-04 13:20:00 +0800
 
 
 
-## You should definitely check it out if you're planning on building smarter LLM agents. It's completely free!
+## Anthropic's Tool-Use Course: Building Smarter LLM Agents
 
-Anthropic has recently enabled tool use, allowing Claude models to call external tools or APIs to solve specific tasks, such as calculations or retrieving weather reports, when they lack the necessary information. 
+*Curiosity:* How can LLMs autonomously use external tools and APIs? What makes tool-use essential for building intelligent agents?
 
-Their course on this topic is quick and very well-structured, I spent some time on it over the weekend and I highly recommend taking it
+**Anthropic's tool-use course** is a comprehensive, free resource for building smarter LLM agents. If you're planning to build intelligent agents that can interact with external tools, this course is essential.
 
-Here's the link: <https://github.com/anthropics/courses/tree/master/ToolUse>
+### What is Tool Use?
 
-- ⛳ The course is organized into 6 python notebooks
-- ⛳ It guides you from having no knowledge of tool use to building a full-scale chatbot that can autonomously use tools. 
-- ⛳Includes exercises and quizzes to reinforce your learning as you progress through the course.
+*Retrieve:* Anthropic has enabled tool use, allowing Claude models to call external tools or APIs to solve specific tasks.
 
-Do check it out!
+**Capabilities**:
+- 🔧 Call external APIs
+- 📊 Perform calculations
+- 🌤️ Retrieve real-time data (weather, etc.)
+- 🔍 Access databases
+- 🛠️ Execute complex workflows
+
+**When to Use**:
+- When the model lacks necessary information
+- For real-time data retrieval
+- For complex computations
+- For interacting with external systems
+
+### Course Overview
+
+```mermaid
+graph TB
+    A[Tool-Use Course] --> B[6 Python Notebooks]
+    B --> C[Beginner Level]
+    B --> D[Advanced Level]
+    
+    C --> C1[Tool Use Basics]
+    C --> C2[Simple Examples]
+    
+    D --> D1[Autonomous Agents]
+    D --> D2[Full-Scale Chatbot]
+    
+    E[Exercises] --> B
+    F[Quizzes] --> B
+    
+    style A fill:#e1f5ff
+    style C fill:#fff3cd
+    style D fill:#d4edda
+```
+
+### Course Structure
+
+| Module | Content | Learning Outcome |
+|:-------|:--------|:-----------------|
+| **1. Introduction** | Tool use basics | Understand concepts |
+| **2. Simple Tools** | Basic tool calling | Implement simple tools |
+| **3. Complex Tools** | Advanced integrations | Build complex workflows |
+| **4. Autonomous Agents** | Self-directed tool use | Create autonomous agents |
+| **5. Full Chatbot** | Complete application | Build production chatbot |
+| **6. Best Practices** | Optimization tips | Production-ready code |
+
+### Course Features
+
+| Feature | Description | Benefit |
+|:--------|:------------|:--------|
+| **6 Notebooks** | Structured learning path | ⬆️ Progressive learning |
+| **Hands-On** | Practical exercises | ⬆️ Real experience |
+| **Quizzes** | Knowledge reinforcement | ⬆️ Retention |
+| **Free** | No cost | ⬆️ Accessibility |
+| **Well-Structured** | Clear progression | ⬆️ Easy to follow |
+
+### Learning Path
+
+*Innovate:* The course guides you from zero knowledge to building autonomous agents.
+
+**Progression**:
+
+```mermaid
+graph LR
+    A[No Knowledge] --> B[Tool Basics]
+    B --> C[Simple Tools]
+    C --> D[Complex Tools]
+    D --> E[Autonomous Agents]
+    E --> F[Full Chatbot]
+    
+    style A fill:#e1f5ff
+    style F fill:#d4edda
+```
+
+### Example: Tool Use Implementation
+
+```python
+# Example: Weather tool use
+from anthropic import Anthropic
+
+client = Anthropic()
+
+# Define tool
+weather_tool = {
+    "name": "get_weather",
+    "description": "Get current weather for a location",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "location": {"type": "string"}
+        }
+    }
+}
+
+# Use tool in conversation
+response = client.messages.create(
+    model="claude-3-opus-20240229",
+    max_tokens=1024,
+    tools=[weather_tool],
+    messages=[{
+        "role": "user",
+        "content": "What's the weather in San Francisco?"
+    }]
+)
+
+# Claude can now call the weather tool
+```
+
+### Why This Course Matters
+
+*Retrieve:* Tool use is essential for building practical LLM applications.
+
+**Benefits**:
+- ✅ Real-world data access
+- ✅ Dynamic information retrieval
+- ✅ Complex task execution
+- ✅ Production-ready applications
+
+### Key Takeaways
+
+*Retrieve:* Anthropic's tool-use course provides a structured path from basics to building autonomous agents that can use external tools and APIs.
+
+*Innovate:* By mastering tool use, you can build LLM agents that interact with real-world systems, access live data, and execute complex workflows autonomously.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about tool use, retrieve knowledge from the course, and innovate by building intelligent agents for your specific use cases.
+
+> **Course Link**: <https://github.com/anthropics/courses/tree/master/ToolUse>
+{: .prompt-info}
+
+**Next Steps**:
+- Start with the first notebook
+- Complete exercises and quizzes
+- Build your own tool-use applications
+- Create autonomous agents
 
 
 ![ Anthropic free Course ](/assets/img/llm/LLM_Anthropic_course.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }

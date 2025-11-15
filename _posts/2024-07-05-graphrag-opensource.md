@@ -7,32 +7,127 @@ tags: [Microsoft, GraphRAG]
 date: 2024-07-05 10:10:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
 
-## Open Source RouteLLM Shows the Real Battle is in Query Routing. 
+## GraphRAG is Now Open Source!
 
-The GraphRAG project is a data pipeline and transformation suite that is designed to extract meaningful, structured data from unstructured text using the power of LLMs.
+*Curiosity:* How can we extract meaningful, structured data from unstructured text? What happens when we combine knowledge graphs with RAG?
 
-To learn more about GraphRAG and how it can be used to enhance your LLMs ability to reason about your private data, please visit the [Microsoft Research Blog Post](https://www.microsoft.com/en-us/research/blog/graphrag-unlocking-llm-discovery-on-narrative-private-data/).
+**GraphRAG** is Microsoft's open-source data pipeline and transformation suite designed to extract meaningful, structured data from unstructured text using LLMs. It creates knowledge graphs to enhance LLM reasoning about private data.
 
-## What is GraphRAG?
+> **Microsoft Research Blog**: <https://www.microsoft.com/en-us/research/blog/graphrag-unlocking-llm-discovery-on-narrative-private-data/>
+{: .prompt-info}
 
-GraphRAG is an AI-based content interpretation and search capability. Using LLMs, it parses data to create a knowledge graph and answer user questions about a user-provided private dataset.
+### What is GraphRAG?
 
+*Retrieve:* Understanding GraphRAG's capabilities.
 
-👉 <https://github.com/microsoft/graphrag/blob/main/RAI_TRANSPARENCY.md#what-is-graphrag>
+**GraphRAG** is an AI-based content interpretation and search capability that:
+- Uses LLMs to parse data
+- Creates knowledge graphs from unstructured text
+- Answers questions about private datasets
+- Enhances LLM reasoning capabilities
 
+> **Documentation**: <https://github.com/microsoft/graphrag/blob/main/RAI_TRANSPARENCY.md#what-is-graphrag>
+{: .prompt-info}
 
-## What is RAG?
+### GraphRAG Architecture
 
-As Large Language Models (LLMs) have revolutionized the world with their impressive capabilities, a crucial limitation has become apparent - their knowledge remains static and limited to what they were trained on. In today's fast-paced world, this knowledge rapidly becomes outdated.
-Retrieval Augmented Generation (RAG) tackles two significant challenges associated with LLMs: keeping their knowledge up-to-date and providing accurate sources to support their responses.
+*Innovate:* How GraphRAG transforms unstructured data.
 
-👉 <https://www.linkedin.com/pulse/what-rag-lets-dive-deeper-time-alex-wang-ln6dc/?trackingId=ZKWoHwQtTMCMC1B9Ablm5A%3D%3D>
+```mermaid
+graph TB
+    A[Unstructured Text] --> B[LLM Processing]
+    B --> C[Entity Extraction]
+    C --> D[Relationship Detection]
+    D --> E[Knowledge Graph]
+    E --> F[Graph Storage]
+    F --> G[Query Processing]
+    G --> H[Enhanced RAG]
+    H --> I[Answer Generation]
+    
+    style A fill:#e1f5ff
+    style E fill:#fff3cd
+    style I fill:#d4edda
+```
+
+### What is RAG?
+
+*Retrieve:* Understanding RAG fundamentals.
+
+**The Problem**: LLMs have static knowledge limited to training data, which rapidly becomes outdated.
+
+**RAG Solution**: Retrieval Augmented Generation tackles two challenges:
+1. **Keeping knowledge up-to-date**: Retrieves current information
+2. **Providing accurate sources**: Supports responses with evidence
+
+> **RAG Deep Dive**: <https://www.linkedin.com/pulse/what-rag-lets-dive-deeper-time-alex-wang-ln6dc/>
+{: .prompt-info}
+
+### GraphRAG vs. Traditional RAG
+
+*Innovate:* Advantages of graph-based RAG.
+
+| Feature | Traditional RAG | GraphRAG |
+|:--------|:----------------|:---------|
+| **Data Structure** | Vector embeddings | Knowledge graph |
+| **Relationships** | ❌ Limited | ✅ Explicit |
+| **Reasoning** | ⚠️ Basic | ⬆️ Enhanced |
+| **Private Data** | ⚠️ Challenging | ✅ Optimized |
+
+**Key Advantage**: GraphRAG creates structured knowledge graphs that enable better reasoning about relationships and context.
+
+### GraphRAG Workflow
+
+*Retrieve:* Step-by-step process.
+
+**1. Data Ingestion**:
+- Input unstructured text
+- Process with LLMs
+
+**2. Graph Construction**:
+- Extract entities
+- Detect relationships
+- Build knowledge graph
+
+**3. Query Processing**:
+- Parse user questions
+- Traverse knowledge graph
+- Retrieve relevant context
+
+**4. Answer Generation**:
+- Use retrieved context
+- Generate accurate answers
+- Provide source references
+
+### Use Cases
+
+*Innovate:* Applications of GraphRAG.
+
+**Ideal For**:
+- Private document analysis
+- Research paper understanding
+- Corporate knowledge bases
+- Narrative data exploration
+- Complex relationship queries
+
+### Key Takeaways
+
+*Retrieve:* GraphRAG is an open-source framework that uses LLMs to create knowledge graphs from unstructured text, enabling enhanced RAG capabilities for private datasets.
+
+*Innovate:* By combining knowledge graphs with RAG, GraphRAG enables better reasoning about relationships and context, making it ideal for analyzing narrative private data and answering complex questions.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about extracting structured data from unstructured text, retrieve insights from GraphRAG's approach, and innovate by applying graph-based RAG to your private data analysis needs.
+
+**Next Steps**:
+- Explore the GitHub repository
+- Read the Microsoft Research blog
+- Try GraphRAG on your data
+- Build knowledge graphs
 
 ![ RAG ](/assets/img/llm/RAG_img.png){: .light .shadow .rounded-10 w='1212' h='668' }

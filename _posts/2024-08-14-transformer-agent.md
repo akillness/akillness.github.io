@@ -5,7 +5,7 @@ categories: [LLM, Agents]
 tags: [Agents, Huggingface]
 # author: foDev_jeong
 date: 2024-08-14 11:20:00 +0800
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/llm/LLM_evaluation_rank.jpeg
@@ -13,43 +13,96 @@ date: 2024-08-14 11:20:00 +0800
 #   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
 
-# 𝗡𝗲𝘄 𝘃𝗲𝗿𝘀𝗶𝗼𝗻 𝗼𝗳 𝗼𝘂𝗿 𝗔𝗴𝗲𝗻𝘁𝘀 𝗳𝗿𝗮𝗺𝗲𝘄𝗼𝗿𝗸 🙌
+## Agents 2.0: New Version of Hugging Face Agents Framework
 
-Agents 2.0 is out, and it's already the best-performing agent framework using an open model! Top 1 of open models on GAIA, top 4 overall. I'm really proud to have worked on this 😃 
+*Curiosity:* How can we build better-performing agent frameworks? What makes Agents 2.0 the best-performing open model framework?
 
-### It's also:
-- ✨ 𝗦𝗶𝗺𝗽𝗹𝗲𝗿: prompt, tools, and attributes are accessible
-- 🧩 𝗠𝗼𝗱𝘂𝗹𝗮𝗿: use any LLM. Llama-3-70B-Instruct is 🔥
-- 💪 𝗣𝗲𝗿𝗳𝗼𝗿𝗺𝗮𝗻𝘁 w/ React Agents
+**Agents 2.0** is out and is already the best-performing agent framework using an open model! **Top 1 of open models on GAIA, top 4 overall**.
 
-You can access it on Hugging Face Transformers 'main' branch (v4.41.0 lands this week)
+### Key Features
 
-> Read the announcement blog post here 👉 <https://huggingface.co/blog/agents>
+*Retrieve:* What makes Agents 2.0 special.
+
+| Feature | Description | Benefit |
+|:--------|:------------|:--------|
+| **✨ Simpler** | Prompt, tools, and attributes are accessible | ⬆️ Easy to use |
+| **🧩 Modular** | Use any LLM (Llama-3-70B-Instruct is 🔥) | ⬆️ Flexibility |
+| **💪 Performant** | React Agents for better performance | ⬆️ High quality |
+
+> **Resources**:
+> - **Blog Post**: <https://huggingface.co/blog/agents>
+> - **Guide**: <https://huggingface.co/docs/transformers/main/en/agents>
 {: .prompt-info}
 
-If you've never played with Agents, the following guide gets you up to speed as to what's possible with them:
-👉 <https://huggingface.co/docs/transformers/main/en/agents>
+**Availability**: Hugging Face Transformers 'main' branch (v4.41.0 lands this week)
 
-* * *
+## AgentGen: Automating Agent Planning
 
+*Curiosity:* How can we automate and improve planning capabilities in agentic pipelines? What makes planning so important?
 
-# 💡 "Planning" is super important in agentic pipelines as it determines the entire trajectory of the agents. 
+**Planning** is super important in agentic pipelines as it determines the entire trajectory of the agents.
 
 ![ AgentGen ](/assets/img/llm/agent-gen.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
-AgentGen looks like a nice framework that can help automate and simplify this.
+**AgentGen** is a framework that can help automate and simplify planning.
 
-> Paper 👉 <https://arxiv.org/abs/2408.00764>
+> **Paper**: <https://arxiv.org/abs/2408.00764>
 {: .prompt-info}
 
-### ⛳ What is AgentGen?
-AgentGen is a framework designed to automate and improve the planning capabilities of LLM-based agents, it automates the generation of diverse environments and planning tasks, allowing for more effective agent training. 
+### What is AgentGen?
 
-It addresses the limitations of manual environment creation by using automated methods to create a wide variety of scenarios and tasks with varying difficulty levels. 
+*Retrieve:* Understanding AgentGen.
 
-### ⛳ Key Features:
-- 👉 AgentGen uses an inspiration corpus (LIMA dataset) composed of domain-specific text segments to generate a wide range of environment specifications. This approach covers numerous scenarios and domains, enhancing the training landscape for agents.
-- 👉 The authors propose Bidirectional Evolution (BI-EVOL) which creates planning tasks with a smooth difficulty curve by evolving tasks in both simpler and more complex directions. This helps facilitate the LLMs' gradual acquisition of planning skills.
-- 👉 Uses high-quality trajectory data (sequences of action-observation pairs) to instruction-tune LLMs, improving their decision-making and planning capabilities.
+**Definition**: Framework designed to automate and improve planning capabilities of LLM-based agents.
 
-AgentGen-tuned models, such as Llama-3 8B, show significant performance improvements, surpassing models like GPT-3.5 and even outperforming GPT-4 in certain tasks!
+**Approach**: Automates generation of diverse environments and planning tasks for more effective agent training.
+
+**Problem Solved**: Addresses limitations of manual environment creation by using automated methods to create wide variety of scenarios and tasks with varying difficulty levels.
+
+### Key Features
+
+*Innovate:* AgentGen's innovations.
+
+| Feature | Description | Benefit |
+|:--------|:------------|:--------|
+| **Inspiration Corpus** | Uses LIMA dataset with domain-specific text segments | ⬆️ Diverse scenarios |
+| **Bidirectional Evolution** | Creates planning tasks with smooth difficulty curve | ⬆️ Gradual skill acquisition |
+| **Trajectory Data** | Uses action-observation pairs for instruction-tuning | ⬆️ Better decision-making |
+
+**1. Inspiration Corpus**:
+- Uses LIMA dataset composed of domain-specific text segments
+- Generates wide range of environment specifications
+- Covers numerous scenarios and domains
+- Enhances training landscape for agents
+
+**2. Bidirectional Evolution (BI-EVOL)**:
+- Creates planning tasks with smooth difficulty curve
+- Evolves tasks in both simpler and more complex directions
+- Facilitates LLMs' gradual acquisition of planning skills
+
+**3. Trajectory Data**:
+- Uses high-quality trajectory data (action-observation pairs)
+- Instruction-tunes LLMs
+- Improves decision-making and planning capabilities
+
+### Performance Results
+
+*Retrieve:* AgentGen achievements.
+
+**Results**: AgentGen-tuned models, such as **Llama-3 8B**, show significant performance improvements:
+- ✅ Surpassing GPT-3.5
+- ✅ Outperforming GPT-4 in certain tasks
+
+### Key Takeaways
+
+*Retrieve:* Agents 2.0 is the best-performing open model agent framework (top 1 on GAIA), with simpler, modular design and React Agents for performance. AgentGen automates planning capabilities through inspiration corpus, bidirectional evolution, and trajectory data.
+
+*Innovate:* By using Agents 2.0 for building agents and AgentGen for automating planning, you can create high-performing agentic systems that surpass GPT-3.5 and even GPT-4 in certain tasks.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about agent frameworks, retrieve insights from Agents 2.0 and AgentGen, and innovate by building agentic systems with automated planning and improved performance.
+
+**Next Steps**:
+- Explore Agents 2.0
+- Read AgentGen paper
+- Build your agents
+- Automate planning

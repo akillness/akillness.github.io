@@ -5,7 +5,7 @@ categories: [Script, Vision Models]
 tags: [Vision Models, ELO, Compare]
 # author: foDev_jeong
 date: 2024-05-18 11:20:00 +0800
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/llm/LLM_evaluation_rank.jpeg
@@ -16,7 +16,11 @@ date: 2024-05-18 11:20:00 +0800
 
 ## 𝐕𝐢𝐬𝐢𝐨𝐧 𝐥𝐚𝐧𝐠𝐮𝐚𝐠𝐞 𝐦𝐨𝐝𝐞𝐥𝐬
 
-Andrew Reed built a cool space that shows that OS LLMs are catching up with closed source LLMs in ELO ranking in the Arena (link below).
+*Curiosity:* What insights can we retrieve from this? How does this connect to innovation in the field?
+
+*Curiosity:* Andrew Reed built a cool space that shows that OS LLMs are catching up with closed source LLMs in ELO ranking in the Arena (link below).
+
+
 For vision, the same dynamic is happening: the field is still evolving fast, but soon OS models will be able to match GPT-4o’s vision skills.
 
 I witnessed the Idefics team’s work and their many late nights before their publishing of Idefics-2-8b. Now they just published a paper that summarizes their insights!

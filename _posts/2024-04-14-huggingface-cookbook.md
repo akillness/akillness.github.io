@@ -7,20 +7,32 @@ tags: [Huggingface, Cookbook]
 date: 2024-04-17 15:10:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
 
-### VLittle know gem: the Open-source Cookbook
+## Hugging Face Cookbook: Little-Known Gem for Practical AI
 
-A collection of notebooks for building practical AI applications using open-source tools and models: <https://github.com/huggingface/cookbook>
+*Curiosity:* Where can we find practical examples for building AI applications with open-source tools? What makes the Hugging Face Cookbook valuable?
 
-Doc: <https://huggingface.co/learn/cookbook/index>
+**Hugging Face Cookbook** is a collection of notebooks for building practical AI applications using open-source tools and models.
 
-Currently contains 16 notebooks in English and Chinese:
+> **Repository**: <https://github.com/huggingface/cookbook>
+> **Documentation**: <https://huggingface.co/learn/cookbook/index>
+{: .prompt-info}
+
+### Cookbook Overview
+
+*Retrieve:* Understanding the cookbook structure.
+
+**Content**: Currently contains **16 notebooks** in English and Chinese.
+
+### Complete Notebook List
+
+*Retrieve:* All 16 notebooks.
 
  1. Using LLM-as-a-judge 🧑‍⚖️ for an automated and versatile evaluation
  2. Create a legal preference dataset

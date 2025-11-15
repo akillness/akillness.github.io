@@ -5,7 +5,7 @@ categories: [LLM, Agents]
 tags: [Agent, LLM]
 # author: foDev_jeong
 date: 2024-05-25 23:23:00 +0800
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/llm/LLM_evaluation_rank.jpeg
@@ -13,16 +13,60 @@ date: 2024-05-25 23:23:00 +0800
 #   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
 
-## 🎉 Yet another multi-agent framework has arrived!
+## Building Multi-Agent Systems: AgentGym and CrewAI
 
-AgentGym offers a wide range of environments and tasks for broad, real-time, uniform, and concurrent agent exploration! 
+*Curiosity:* What if we could create a unified playground where AI agents can explore, learn, and evolve across diverse environments? How do we build systems that enable agents to retrieve knowledge from one domain and innovate in another?
 
-Following popular releases like CrewAI and Autogen, here's another new multi-agent framework. Here are some insights:
+**AgentGym** answers these questions by offering a wide range of environments and tasks for broad, real-time, uniform, and concurrent agent exploration! Following popular releases like CrewAI and Autogen, here's another new multi-agent framework that pushes the boundaries of what's possible.
 
-- ⛳ AgentGym provides diverse environments, tasks, and goals for LLM-based agents with convenient APIs, standardized task specifications, environment settings, and observation/action spaces. This platform supports online evaluation, trajectory sampling, and interactive training.
-- ⛳ It offers a database with expanded instructions from various environments and tasks, forming a challenging test set for benchmarking, called AgentEval.
-- ⛳ It includes a uniformly formatted trajectory set, AgentTraj, for training base agents, and AgentTraj-L, an extended version for maximum performance through behavioral cloning.
-- ⛳The authors also introduce AgentEvol, a method to explore agent self-evolution beyond previously seen data across tasks and environments. AgentEvol allows agents to evolve by adaptively accessing and utilizing context based on specific tasks, achieving results comparable to state-of-the-art models while consuming fewer resources.
+### AgentGym Components
+
+| Component | Description | Purpose |
+|:----------|:------------|:--------|
+| **AgentGym Platform** | Unified environment for agent training | Provides APIs, task specs, observation/action spaces |
+| **AgentEval** | Benchmark dataset | Challenging test set for evaluating agent capabilities |
+| **AgentTraj** | Training trajectory set | Base dataset for training agents |
+| **AgentTraj-L** | Extended trajectory set | Enhanced dataset with behavioral cloning |
+| **AgentEvol** | Self-evolution method | Enables agents to adapt beyond training data |
+
+### Multi-Agent System Architecture
+
+```mermaid
+graph TB
+    subgraph "AgentGym Platform"
+        A[Task Environment] --> B[Agent 1]
+        A --> C[Agent 2]
+        A --> D[Agent N]
+    end
+    
+    B --> E[Observation]
+    C --> E
+    D --> E
+    
+    E --> F[Action Selection]
+    F --> G[Tool Execution]
+    G --> H[Result]
+    H --> A
+    
+    I[AgentEval<br/>Benchmark] --> A
+    J[AgentTraj<br/>Training Data] --> B
+    J --> C
+    J --> D
+    
+    style A fill:#e1f5ff
+    style I fill:#fff3cd
+    style J fill:#d4edda
+```
+
+### Key Features Comparison
+
+| Feature | AgentGym | CrewAI | Autogen |
+|:--------|:---------|:-------|:--------|
+| **Environment Diversity** | ✅ High | ⚠️ Medium | ⚠️ Medium |
+| **Self-Evolution** | ✅ AgentEvol | ❌ No | ❌ No |
+| **Benchmark Dataset** | ✅ AgentEval | ❌ No | ❌ No |
+| **Trajectory Training** | ✅ AgentTraj | ❌ No | ❌ No |
+| **Ease of Use** | ⚠️ Medium | ✅ High | ✅ High |
 
 The AgentGym suite, including the platform, dataset, benchmark, checkpoints, and algorithm implementations is available for the community to build and evaluate generally-capable LLM-based agents. 
 
@@ -30,19 +74,115 @@ The AgentGym suite, including the platform, dataset, benchmark, checkpoints, and
 
 ![ AgentGym framework ](/assets/img/llm/LLM_Agentgym.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
-## Let's build a crew of AI Agents
+## Building a Crew of AI Agents
 
-> A multi agent system that scrapes the web & automatically writes a blog post for you!
+*Retrieve:* A multi-agent system that scrapes the web and automatically writes blog posts.
 
-Here's what I've used:
+**Project Goal**: Build a system where agents work together like a real editorial team, automating the entire content creation pipeline from research to writing.
 
-- [crewAI](https://www.linkedin.com/company/crewai-inc/) for building a multi-agent system
-- [Ollama](https://www.linkedin.com/company/ollama/) to serve LLM locally (Llama-3)
-- [Lightning AI](https://www.linkedin.com/company/pytorch-lightning/) for development & hosting
+**Key Innovation**: Multiple AI agents collaborate to retrieve information, synthesize insights, and innovate on content structure.
 
-I published this work as a Lightning AI⚡️Studio, it's reads like a blog encapsulating all my code & environment!
+### Multi-Agent Content Creation Workflow
 
-Take it for a spin now: <https://lightning.ai/lightning-ai/studios/let-s-build-a-crew-of-ai-agents?utm_source=akshay>
+```mermaid
+graph LR
+    A[User Request] --> B[Researcher Agent]
+    B --> C[Web Scraping]
+    C --> D[Content Analysis]
+    D --> E[Writer Agent]
+    E --> F[Content Generation]
+    F --> G[Editor Agent]
+    G --> H[Review & Refine]
+    H --> I[Final Blog Post]
+    
+    style B fill:#e1f5ff
+    style E fill:#fff3cd
+    style G fill:#d4edda
+    style I fill:#f8d7da
+```
+
+### Technology Stack
+
+| Component | Technology | Purpose | Why It Matters |
+|:----------|:-----------|:--------|:---------------|
+| **Agent Framework** | [crewAI](https://www.linkedin.com/company/crewai-inc/) | Multi-agent orchestration | *Retrieve:* Role-based collaboration patterns |
+| **LLM Runtime** | [Ollama](https://www.linkedin.com/company/ollama/) | Local LLM serving (Llama-3) | *Innovate:* Fast iteration without API costs |
+| **Hosting** | [Lightning AI](https://www.linkedin.com/company/pytorch-lightning/) | Development & deployment | *Retrieve:* Seamless cloud infrastructure |
+
+### Sample CrewAI Implementation
+
+```python
+from crewai import Agent, Task, Crew, Process
+
+# Define agents with specific roles
+researcher = Agent(
+    role='Research Analyst',
+    goal='Gather comprehensive information on the topic',
+    backstory='You are an expert researcher...',
+    verbose=True
+)
+
+writer = Agent(
+    role='Content Writer',
+    goal='Create engaging blog posts',
+    backstory='You are a skilled technical writer...',
+    verbose=True
+)
+
+editor = Agent(
+    role='Editor',
+    goal='Review and refine content',
+    backstory='You are a meticulous editor...',
+    verbose=True
+)
+
+# Define tasks
+research_task = Task(
+    description='Research the topic: {topic}',
+    agent=researcher
+)
+
+write_task = Task(
+    description='Write a blog post based on research',
+    agent=writer,
+    context=[research_task]
+)
+
+edit_task = Task(
+    description='Edit and refine the blog post',
+    agent=editor,
+    context=[write_task]
+)
+
+# Create crew and execute
+crew = Crew(
+    agents=[researcher, writer, editor],
+    tasks=[research_task, write_task, edit_task],
+    process=Process.sequential
+)
+
+result = crew.kickoff(inputs={'topic': 'Multi-agent systems'})
+print(result)
+```
+
+**Lightning AI Studio**: Published as a Lightning AI⚡️Studio, reads like a blog encapsulating all code and environment!
+
+> **Try it now**: <https://lightning.ai/lightning-ai/studios/let-s-build-a-crew-of-ai-agents?utm_source=akshay>
+{: .prompt-info}
+
+### Key Takeaways
+
+*Retrieve:* AgentGym provides a unified platform for agent training and evaluation, while CrewAI enables practical multi-agent applications like automated content creation.
+
+*Innovate:* By combining frameworks like AgentGym for training and CrewAI for deployment, you can build sophisticated multi-agent systems that automate complex workflows, from research to content generation.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about multi-agent systems, retrieve insights from AgentGym and CrewAI, and innovate by building collaborative agent teams that automate real-world tasks.
+
+**Next Steps**:
+- Explore AgentGym for agent training
+- Build CrewAI applications
+- Experiment with agent collaboration
+- Deploy multi-agent systems
 
 
 <details markdown="1">

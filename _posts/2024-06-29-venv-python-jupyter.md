@@ -7,42 +7,122 @@ tags: [Venv, Jupyter]
 date: 2024-06-29 00:10:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
 
-In this post, when i use jupyter notebook explain how to add venv of python.
+## Setting Jupyter Kernel with Python Virtual Environment
 
-## Setting venv of python 
+*Curiosity:* How can we use different Python virtual environments in Jupyter Notebook? What's the best way to manage multiple kernels?
 
-- activate.bat 또는 source activate 실행
+**This guide** explains how to add a Python virtual environment as a Jupyter kernel, allowing you to use different Python environments in your notebooks.
 
-## Setting Jupyter Notebook
+### Step 1: Activate Virtual Environment
 
-~~~sh
+*Retrieve:* First, activate your Python virtual environment.
+
+**Windows**:
+```sh
+activate.bat
+```
+
+**Linux/Mac**:
+```sh
+source activate
+# or
+source venv/bin/activate
+```
+
+### Step 2: Install Jupyter Notebook
+
+*Retrieve:* Install Jupyter in your virtual environment.
+
+```sh
 pip install jupyter jupyter notebook
-~~~
+```
 
-## Install ipkernel to add Jyputer Kernel 
+### Step 3: Install ipykernel
 
-~~~sh
+*Innovate:* Install ipykernel to enable kernel registration.
+
+```sh
 pip install ipykernel
-~~~
+```
 
-## Add Jupyter Kernel
+**Purpose**: `ipykernel` allows you to register Python environments as Jupyter kernels.
 
-~~~sh
-python -m ipykernel install --user --name "virtual env name" --display-name "shown name of diplay"
-~~~
+### Step 4: Add Jupyter Kernel
 
-## Uninstall Jupyter Kernel
+*Retrieve:* Register your virtual environment as a Jupyter kernel.
 
-~~~sh
+```sh
+python -m ipykernel install --user --name "virtual env name" --display-name "shown name of display"
+```
+
+**Parameters**:
+- `--name`: Internal kernel name (used by Jupyter)
+- `--display-name`: Name shown in Jupyter UI
+- `--user`: Install for current user only
+
+**Example**:
+```sh
+python -m ipykernel install --user --name "myenv" --display-name "Python (myenv)"
+```
+
+### Step 5: Uninstall Jupyter Kernel (Optional)
+
+*Retrieve:* Remove a kernel if needed.
+
+```sh
 jupyter kernelspec uninstall .venv
-~~~
+```
+
+**Note**: Replace `.venv` with your kernel name.
+
+### Workflow Summary
+
+*Innovate:* Complete workflow for managing Jupyter kernels.
+
+```mermaid
+graph LR
+    A[Create venv] --> B[Activate venv]
+    B --> C[Install Jupyter]
+    C --> D[Install ipykernel]
+    D --> E[Register Kernel]
+    E --> F[Use in Jupyter]
+    
+    style A fill:#e1f5ff
+    style E fill:#fff3cd
+    style F fill:#d4edda
+```
+
+### Benefits
+
+*Retrieve:* Why use virtual environments with Jupyter.
+
+| Benefit | Description | Impact |
+|:--------|:------------|:-------|
+| **Isolation** | Separate dependencies | ⬆️ Clean environments |
+| **Flexibility** | Multiple Python versions | ⬆️ Project-specific |
+| **Reproducibility** | Consistent environments | ⬆️ Reliable results |
+| **Organization** | Easy to manage | ⬆️ Better workflow |
+
+### Key Takeaways
+
+*Retrieve:* Setting up Jupyter kernels with virtual environments involves activating the venv, installing Jupyter and ipykernel, then registering the kernel with a display name.
+
+*Innovate:* By using virtual environments as Jupyter kernels, you can maintain isolated Python environments for different projects, ensuring clean dependencies and reproducible results.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about managing Python environments, retrieve insights from this setup process, and innovate by organizing your Jupyter workflows with multiple kernels for different projects.
+
+**Next Steps**:
+- Set up your virtual environment
+- Install required packages
+- Register as Jupyter kernel
+- Start using in notebooks
 <!-- 
 ![ Tools for building LLM Application ](/assets/img/llm/LLM_tools_for_building.jpeg){: .light .shadow .rounded-10 w='1212' h='668' } -->
 

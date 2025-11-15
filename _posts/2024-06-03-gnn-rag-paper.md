@@ -6,7 +6,7 @@ tags: [AI, LLM, GNN-RAG]
 # author: foDev_jeong
 date: 2024-06-03 15:00:00 +0800
 # pin: true
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/blog/NLP_Overview.svg
@@ -14,35 +14,115 @@ date: 2024-06-03 15:00:00 +0800
 #   alt: [Overview of NLP Course]
 ---
 
-## TRAG meets GNNs: Integrating graphs into a modern workflow.
+## GNN-RAG: Integrating Graphs into Modern RAG Workflows
 
-Knowledge Graphs (KGs) are a powerful way to represent factual knowledge, but querying them with natural language is challenging. 
+*Curiosity:* How can we combine Knowledge Graphs with LLMs for better question answering? What happens when GNNs handle graph reasoning while LLMs handle language understanding?
 
-And Graph Neural Networks (GNNs) excel at reasoning over KGs, something Large Language Models (LLMs) are still struggling with.
+**GNN-RAG** integrates Graph Neural Networks (GNNs) with Retrieval-Augmented Generation (RAG) to solve Knowledge Graph Question Answering (KGQA). The idea: GNN handles complex graph structure, while LLM leverages language understanding for final answers.
 
-There has been a lot of work in combining these two approaches lately, but it doesn't feel like we've found the right recipe yet. 
+> **Resources**:
+> - **📄 Paper**: <https://arxiv.org/abs/2405.20139>
+> - **🌐 Project Page**: <https://medium.com/@techsachin/gnn-rag-combining-llms-language-abilities-with-gnns-reasoning-in-rag-style-d72200da376c>
+> - **💻 Code**: <https://github.com/cmavro/GNN-RAG>
+{: .prompt-info}
 
-By leaning into the popular Retrieval-augmented Generation (RAG) trend, GNN-RAG tries to change this.
+### The Challenge
 
-> The idea is for the GNN to handle the complex graph structure, while the LLM leverages its language understanding to produce the final answer. 
+*Retrieve:* Knowledge Graphs are powerful but challenging to query with natural language.
 
+| Component | Strength | Limitation |
+|:----------|:---------|:-----------|
+| **Knowledge Graphs** | Powerful factual representation | ⚠️ Hard to query with NL |
+| **GNNs** | Excel at graph reasoning | ⚠️ Limited language understanding |
+| **LLMs** | Strong language understanding | ⚠️ Struggle with graph reasoning |
 
-## 🤔 Vanilla-RAG struggles with structured knowledge sources like knowledge graphs. GNN-RAG is a very neat idea to fix this!
-
-
-### ⛳ Vanilla-RAG struggles with structured inputs like KGs because it relies heavily on LLMs for retrieval, which are not adept at handling the complex graph information inherent in KGs. This leads to suboptimal performance, especially on multi-hop and multi-entity questions that require traversing multiple relationships in the graph.
-
-### ⛳ GNN-RAG integrates the strengths of both LLMs and and Graph Neural Networks (GNNs) to solve this issue:
-- 💡 GNN: Excels at processing and reasoning over graph structures. It reasons over a dense KG subgraph to retrieve answer candidates for a given question.
-- 💡LLM: Leverages its natural language processing abilities to further reason over the information provided by the GNN.
-
-👉 Here's the workflow:
-- 🔺 A GNN processes the KG to identify and retrieve candidate answers.
-- 🔺The shortest paths connecting question entities to answer candidates in the KG are extracted to represent reasoning paths.
-- 🔺These paths are verbalized and provided as input to the LLM for final reasoning and answer generation.
+**Problem**: Vanilla RAG struggles with structured knowledge sources like KGs. 
 
 
-#### GNN-RAG achieves state-of-the-art performance on two major KGQA benchmarks, even outperforming GPT-4 in some cases. 
+### Why Vanilla RAG Struggles
+
+*Retrieve:* Vanilla RAG's limitations with Knowledge Graphs.
+
+**Issues**:
+- Relies heavily on LLMs for retrieval
+- LLMs not adept at handling complex graph information
+- Suboptimal performance on multi-hop questions
+- Struggles with multi-entity questions
+- Requires traversing multiple relationships
+
+**Impact**: Poor performance on structured knowledge sources.
+
+### GNN-RAG Solution
+
+*Innovate:* Combining GNNs and LLMs for optimal performance.
+
+**Division of Labor**:
+- **GNN**: Processes graph structures, reasons over dense KG subgraphs, retrieves answer candidates
+- **LLM**: Leverages NLP abilities, reasons over GNN-provided information, generates final answers
+
+### Workflow
+
+*Retrieve:* GNN-RAG's step-by-step process.
+
+```mermaid
+graph TB
+    A[Question] --> B[GNN Processing]
+    B --> C[KG Subgraph]
+    C --> D[Candidate Answers]
+    D --> E[Shortest Paths]
+    E --> F[Reasoning Paths]
+    F --> G[Verbalization]
+    G --> H[LLM Reasoning]
+    H --> I[Final Answer]
+    
+    style A fill:#e1f5ff
+    style B fill:#fff3cd
+    style H fill:#d4edda
+    style I fill:#f8d7da
+```
+
+**Steps**:
+1. **GNN Processing**: Processes KG to identify candidate answers
+2. **Path Extraction**: Extracts shortest paths connecting question entities to candidates
+3. **Verbalization**: Converts paths to natural language
+4. **LLM Reasoning**: Final reasoning and answer generation
+
+### Performance
+
+*Retrieve:* GNN-RAG achieves SOTA on major benchmarks.
+
+**Benchmarks**:
+- WebQSP
+- ComplexWebQuestions (CWQ)
+
+**Results**:
+- ✅ State-of-the-art performance
+- ✅ Outperforms GPT-4 in some cases
+- ✅ Particularly strong on multi-hop questions
+- ✅ Excellent on multi-entity questions
+
+### Architecture Comparison
+
+| Approach | Graph Reasoning | Language Understanding | Performance |
+|:---------|:----------------|:----------------------|:------------|
+| **Vanilla RAG** | ❌ Weak | ✅ Strong | ⚠️ Suboptimal |
+| **GNN-RAG** | ✅ Strong | ✅ Strong | ✅ SOTA |
+
+### Key Takeaways
+
+*Retrieve:* GNN-RAG combines GNNs' graph reasoning with LLMs' language understanding, achieving SOTA on KGQA benchmarks by letting each component handle what it does best.
+
+*Innovate:* By using GNNs for graph processing and LLMs for language understanding, GNN-RAG demonstrates how specialized components can work together to solve complex problems that neither can handle alone.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about Knowledge Graph Question Answering, retrieve insights from GNN-RAG's hybrid approach, and innovate by applying similar techniques to your structured knowledge applications.
+
+**Next Steps**:
+- Read the full paper
+- Explore the code repository
+- Try GNN-RAG on your KGs
+- Adapt for your use cases 
+
+*Curiosity:* What insights can we retrieve from this? How does this connect to innovation in the field?
 
 > GNN-RAG achieves state-of-the-art results on two widely used KGQA benchmarks, WebQSP and ComplexWebQuestions (CWQ) and outperforms existing methods, including GPT-4, particularly on multi-hop and multi-entity questions.
 {: .prompt-tip }

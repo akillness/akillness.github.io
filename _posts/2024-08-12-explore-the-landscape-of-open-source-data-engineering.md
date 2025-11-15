@@ -7,40 +7,129 @@ tags: [Study, Datascience]
 date: 2024-08-12 10:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
 
+## Explore the Landscape of Open Source Data Engineering
+
+*Curiosity:* What tools and platforms are available in the open-source data engineering ecosystem? How do they work together to build comprehensive data pipelines?
+
+**The open-source data engineering landscape** offers a comprehensive ecosystem of tools for storage, integration, processing, ML/AI, and analytics.
+
 ![ Open Source Data Engineering ](/assets/img/blog/open-source-data-engineering.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
+### Data Engineering Ecosystem
 
-### 1. Storage Systems: 
-- From relational OLTP databases like PostgreSQL and MySQL to distributed SQL DBMS like CockroachDB and TiDB, find the right storage solution for your needs
-- Includes NoSQL options like MongoDB and Redis for diverse data requirements.
+*Retrieve:* Nine key categories.
 
-### 2. Data Integration: 
-- Tools for CDC, log and event collection, and data integration platforms such as Kafka Connect, CloudQuery, and Airbyte ensure seamless data flow and event management.
+| Category | Tools | Purpose |
+|:---------|:------|:--------|
+| **1. Storage Systems** | PostgreSQL, MySQL, CockroachDB, TiDB, MongoDB, Redis | ⬆️ Data persistence |
+| **2. Data Integration** | Kafka Connect, CloudQuery, Airbyte | ⬆️ Data flow & events |
+| **3. Infrastructure & Monitoring** | Kubernetes, Docker, Apache Knox, Prometheus, ELK | ⬆️ Management & observability |
+| **4. Processing & Computation** | Apache Beam, Spark, Hadoop, Flink, Samza | ⬆️ Data processing |
+| **5. ML/AI Platform** | Milvus, MLflow, Kubeflow | ⬆️ ML/AI capabilities |
+| **6. Data Lake Platform** | Hadoop HDFS, Iceberg, Parquet | ⬆️ Large-scale data |
+| **7. Workflow & Data Ops** | Apache Airflow, Great Expectations, LakeFS | ⬆️ Orchestration & quality |
+| **8. Metadata Management** | Amundsen, Apache Atlas, Hive, Schema-registry | ⬆️ Data organization |
+| **9. Analytics & Visualization** | Superset, Hue, Cube, AtScale | ⬆️ Analysis & BI |
 
-### 3. Data Infrastructure & Monitoring: 
-- Manage and monitor your data infrastructure with tools for resource scheduling like Kubernetes and Docker, security solutions like Apache Knox, and observability frameworks like Prometheus and ELK.
+### Detailed Categories
 
-### 4. Data Processing & Computation: 
--  Optimize your data processing with unified processing platforms like Apache Beam and Spark, batch processing with Hadoop, and stream processing with Flink and Samza.
+*Innovate:* Understanding each category.
 
-### 5. ML/AI Platform: 
--  Empower your machine learning and AI initiatives with vector storage solutions like Milvus, MLOps platforms like MLflow and Kubeflow, and other AI tools for enhanced data insights.
+**1. Storage Systems**:
+- **OLTP**: PostgreSQL, MySQL
+- **Distributed SQL**: CockroachDB, TiDB
+- **NoSQL**: MongoDB, Redis
+- **Purpose**: Right storage solution for your needs
 
-### 6. Data Lake Platform: 
--  Efficiently manage large-scale data with distributed file systems like Hadoop HDFS, open table formats like Iceberg, and serialization frameworks like Parquet.
+**2. Data Integration**:
+- **CDC**: Change data capture tools
+- **Log/Event Collection**: Event streaming
+- **Platforms**: Kafka Connect, CloudQuery, Airbyte
+- **Purpose**: Seamless data flow and event management
 
-### 7. Workflow & Data Ops: 
--  Streamline your data operations with workflow orchestration tools like Apache Airflow, data quality solutions like Great Expectations, and data warehousing with LakeFS.
+**3. Data Infrastructure & Monitoring**:
+- **Scheduling**: Kubernetes, Docker
+- **Security**: Apache Knox
+- **Observability**: Prometheus, ELK
+- **Purpose**: Manage and monitor infrastructure
 
-### 8. Metadata Management: 
--  Organize and manage your metadata with platforms like Amundsen and Apache Atlas, and ensure data security with tools like Hive and Schema-registry.
+**4. Data Processing & Computation**:
+- **Unified**: Apache Beam, Spark
+- **Batch**: Hadoop
+- **Stream**: Flink, Samza
+- **Purpose**: Optimize data processing
 
-### 9. Analytics & Visualization: 
-- Enhance your data analysis and visualization with BI tools like Superset, query and collaboration tools like Hue, and semantic layers like Cube, AtScale, etc.
+**5. ML/AI Platform**:
+- **Vector Storage**: Milvus
+- **MLOps**: MLflow, Kubeflow
+- **Purpose**: Empower ML/AI initiatives
+
+**6. Data Lake Platform**:
+- **File Systems**: Hadoop HDFS
+- **Table Formats**: Iceberg
+- **Serialization**: Parquet
+- **Purpose**: Manage large-scale data
+
+**7. Workflow & Data Ops**:
+- **Orchestration**: Apache Airflow
+- **Quality**: Great Expectations
+- **Warehousing**: LakeFS
+- **Purpose**: Streamline data operations
+
+**8. Metadata Management**:
+- **Platforms**: Amundsen, Apache Atlas
+- **Security**: Hive, Schema-registry
+- **Purpose**: Organize and manage metadata
+
+**9. Analytics & Visualization**:
+- **BI Tools**: Superset
+- **Query/Collaboration**: Hue
+- **Semantic Layers**: Cube, AtScale
+- **Purpose**: Enhance analysis and visualization
+
+### Data Engineering Pipeline
+
+*Innovate:* How components work together.
+
+```mermaid
+graph TB
+    A[Data Sources] --> B[Data Integration]
+    B --> C[Storage Systems]
+    C --> D[Data Processing]
+    D --> E[Data Lake]
+    E --> F[ML/AI Platform]
+    F --> G[Analytics & Visualization]
+    
+    H[Workflow & Data Ops] --> B
+    H --> D
+    I[Metadata Management] --> C
+    I --> E
+    J[Infrastructure & Monitoring] --> C
+    J --> D
+    
+    style A fill:#e1f5ff
+    style D fill:#fff3cd
+    style F fill:#d1ecf1
+    style G fill:#d4edda
+```
+
+### Key Takeaways
+
+*Retrieve:* The open-source data engineering landscape includes nine key categories (storage, integration, infrastructure, processing, ML/AI, data lake, workflow, metadata, analytics) that work together to build comprehensive data pipelines.
+
+*Innovate:* By leveraging the right combination of open-source tools from each category, you can build scalable, efficient data engineering pipelines that support storage, processing, ML/AI, and analytics.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about data engineering tools, retrieve insights from the open-source ecosystem, and innovate by building comprehensive data pipelines using the right tools for your needs.
+
+**Next Steps**:
+- Explore each category
+- Choose appropriate tools
+- Build your pipeline
+- Monitor and optimize

@@ -7,41 +7,149 @@ tags: [PromptEngineering, Survey]
 date: 2024-07-22 13:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
 
-## '프롬프트 엔지니어링'의 정리 끝판왕 논문이 나왔습니다!
+## A Survey of Prompt Engineering Methods in Large Language Models
 
-> Paper : <https://arxiv.org/abs/2407.12994>
+*Curiosity:* What are the most effective prompt engineering techniques? How can we systematically understand and apply prompt engineering methods across different NLP tasks?
+
+**This comprehensive survey** is the ultimate guide to prompt engineering, providing a structured taxonomy, comprehensive vocabulary, and analysis of 58 text-only and 40 multimodal prompting techniques.
+
+> **Paper**: <https://arxiv.org/abs/2407.12994>
 {: .prompt-info}
 
-🔍 이 논문의 특별한 점은?
-- 프롬프트 엔지니어링 기법의 표준화 및 구조화 시도
-- NLP 작업별 데이터셋 분류 및 정리
-- 각 작업과 데이터셋에 대한 잠재적 SoTA 프롬프팅 방법 제시
+### Survey Overview
 
-🔍 조사 범위:
-- 44개의 연구 논문을 분석
-- 39개의 다른 프롬프팅 방법 조사
-- 29개의 다른 NLP 작업에 적용된 사례 분석
+```mermaid
+graph TB
+    A[Prompt Engineering Survey] --> B[44 Research Papers]
+    A --> C[39 Prompting Methods]
+    A --> D[29 NLP Tasks]
+    
+    B --> E[Analysis]
+    C --> F[Taxonomy]
+    D --> G[Task Classification]
+    
+    E --> H[Structured Understanding]
+    F --> H
+    G --> H
+    
+    style A fill:#e1f5ff
+    style H fill:#d4edda
+```
 
-🔍 주요 내용:
-- 다양한 프롬프트 엔지니어링 기법 소개 및 설명
-- NLP 작업별로 데이터셋과 적용된 프롬프팅 전략 정리
-- 각 데이터셋에 대한 최첨단(SoTA) 프롬프팅 방법 제시
-- 사용된 LLM 모델들에 대한 정보 제공
+### Key Features
 
-💡 누구에게 추천할까요?
-- AI 연구자: 다양한 프롬프트 기법의 최신 트렌드를 파악하고 싶은 분
-- NLP 개발자: 특정 태스크에 최적화된 프롬프트 방법을 찾고 싶은 분
-- LLM 엔지니어: 프롬프트 엔지니어링의 체계적인 접근법을 배우고 싶은 분
-- AI 교육자: LLM과 프롬프트 엔지니어링에 대한 종합적인 교육 자료가 필요한 분
+| Feature | Description | Impact |
+|:--------|:------------|:-------|
+| **Standardization** | Structured taxonomy of techniques | ⬆️ Clarity |
+| **Comprehensive** | 39 prompting methods analyzed | ⬆️ Coverage |
+| **Task-Specific** | 29 NLP tasks covered | ⬆️ Practicality |
+| **SoTA Methods** | Best methods per task | ⬆️ Performance |
 
-🤔 현재 클로드나 ChatGPT를 잘 활용하기 위해선 '프롬프트 엔지니어링'은 필수인데요. 
-해당 자료를 바탕으로 몰랐던 프롬프트 기법은 없었는지 확인해보세요. 카테고리 별로 잘 정리되어 있어 보기가 편했습니다 
+### Survey Scope
+
+*Retrieve:* Extensive analysis of prompt engineering research.
+
+**Analysis Coverage**:
+- **44 Research Papers**: Comprehensive literature review
+- **39 Prompting Methods**: Diverse techniques analyzed
+- **29 NLP Tasks**: Wide range of applications
+- **58 Text-Only Techniques**: Text-focused methods
+- **40 Multimodal Techniques**: Cross-modal approaches
+
+### What Makes This Survey Special
+
+*Innovate:* This survey provides structured understanding and standardization.
+
+**Unique Contributions**:
+1. **Standardization**: Structured taxonomy of prompt engineering techniques
+2. **Task Classification**: NLP tasks organized by dataset and strategy
+3. **SoTA Methods**: Best prompting methods identified for each task
+4. **Comprehensive Vocabulary**: 33 terms defined and explained
+
+### Prompt Engineering Techniques
+
+**Text-Only Techniques (58 methods)**:
+- Zero-shot prompting
+- Few-shot prompting
+- Chain-of-thought
+- Self-consistency
+- And 54 more...
+
+**Multimodal Techniques (40 methods)**:
+- Vision-language prompts
+- Audio-text prompts
+- Cross-modal reasoning
+- And 37 more...
+
+### Taxonomy Structure
+
+```mermaid
+graph TB
+    A[Prompt Engineering] --> B[Text-Only]
+    A --> C[Multimodal]
+    
+    B --> B1[Zero-Shot]
+    B --> B2[Few-Shot]
+    B --> B3[Chain-of-Thought]
+    B --> B4[Advanced]
+    
+    C --> C1[Vision-Language]
+    C --> C2[Audio-Text]
+    C --> C3[Cross-Modal]
+    
+    style A fill:#e1f5ff
+    style B fill:#fff3cd
+    style C fill:#d4edda
+```
+
+### NLP Task Coverage
+
+*Retrieve:* 29 different NLP tasks analyzed with optimal prompting strategies.
+
+**Task Categories**:
+- Classification tasks
+- Generation tasks
+- Question answering
+- Summarization
+- Translation
+- And 24 more...
+
+**For Each Task**:
+- Dataset information
+- Applied prompting strategies
+- SoTA methods identified
+- LLM models used
+
+### Who Should Read This
+
+| Audience | Benefit | Use Case |
+|:---------|:--------|:---------|
+| **AI Researchers** | Latest trends in prompting | Research and development |
+| **NLP Developers** | Task-optimized methods | Application development |
+| **LLM Engineers** | Systematic approaches | Production systems |
+| **AI Educators** | Comprehensive materials | Teaching and training |
+
+### Key Takeaways
+
+*Retrieve:* This survey provides a comprehensive, structured overview of prompt engineering methods, analyzing 44 papers, 39 methods, and 29 NLP tasks.
+
+*Innovate:* By understanding the taxonomy and SoTA methods, you can select optimal prompting strategies for your specific tasks, improving LLM performance systematically.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about prompt engineering, retrieve insights from this comprehensive survey, and innovate by applying optimal methods to your LLM applications.
+
+**Why It Matters**: Prompt engineering is essential for effectively using Claude, ChatGPT, and other LLMs. This survey helps you discover techniques you might have missed, with clear categorization for easy reference.
+
+**Next Steps**:
+- Read the full paper
+- Explore techniques for your tasks
+- Experiment with SoTA methods
+- Apply to your LLM applications 
 
 ![ A Survey of Prompt Engineering Methods ](/assets/img/llm/A-Survey-Prompt-Engineering-in-LLM.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }

@@ -7,58 +7,103 @@ tags: [CI, CD]
 date: 2024-06-30 19:10:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
 
-CI/CD, which stands for continuous integration and continuous delivery/deployment, is a set of practices that automates the software development process. 
+## CI/CD: Automating the Software Development Process
 
-This means that code changes can be integrated, tested, and deployed more frequently, which can help to improve the quality of your software and get it to market faster.
+*Curiosity:* How can we automate software development to improve quality and speed? What practices enable continuous integration and deployment?
 
-## 𝗛𝗲𝗿𝗲'𝘀 𝗮 𝗯𝗿𝗲𝗮𝗸𝗱𝗼𝘄𝗻 𝗼𝗳 𝗵𝗼𝘄 𝗖𝗜/𝗖𝗗 𝘄𝗼𝗿𝗸𝘀 𝗼𝗻 𝗮 𝗵𝗶𝗴𝗵 𝗹𝗲𝘃𝗲𝗹:
+**CI/CD** (Continuous Integration and Continuous Delivery/Deployment) is a set of practices that automates the software development process. Code changes can be integrated, tested, and deployed more frequently, improving quality and time to market.
 
-- • 𝗗𝗲𝘃𝗲𝗹𝗼𝗽𝗺𝗲𝗻𝘁: Developers work on their code in a local branch.
- 
-- • 𝗣𝘂𝗹𝗹 𝗥𝗲𝗾𝘂𝗲𝘀𝘁: When a developer is happy with their changes, they create a pull request. This submits their code for review by other developers.
- 
-- • 𝗣𝗲𝗲𝗿 𝗥𝗲𝘃𝗶𝗲𝘄: Other developers review the code and make sure it meets quality standards.
- 
-- • 𝗠𝗲𝗿𝗴𝗲: If the code is approved, it is merged into the main branch.
- 
-- • 𝗖𝗼𝗻𝘁𝗶𝗻𝘂𝗼𝘂𝘀 𝗜𝗻𝘁𝗲𝗴𝗿𝗮𝘁𝗶𝗼𝗻: When code is merged into the main branch, a CI pipeline is triggered. This pipeline automates the process of building, testing, and deploying the code.
- 
-- • 𝗕𝘂𝗶𝗹𝗱: The code is compiled into an executable application.
- 
-- • 𝗧𝗲𝘀𝘁𝗶𝗻𝗴: The application is then tested to ensure that it works as expected. This may include unit tests, integration tests, and end-to-end tests.
- 
-- • 𝗣𝗿𝗲-𝗣𝗿𝗼𝗱𝘂𝗰𝘁𝗶𝗼𝗻 𝗗𝗲𝗽𝗹𝗼𝘆𝗺𝗲𝗻𝘁: If the tests pass, the application is deployed to a pre-production environment. This environment is a replica of the production environment, but it is not accessible to end users.
- 
-- • 𝗣𝗿𝗼𝗱𝘂𝗰𝘁𝗶𝗼𝗻 𝗗𝗲𝗽𝗹𝗼𝘆𝗺𝗲𝗻𝘁: If the application works well in pre-production, it can be deployed to the production environment. This is the environment that end users will use.
+### CI/CD Overview
 
-## 𝗕𝗲𝗻𝗲𝗳𝗶𝘁𝘀 𝗼𝗳 𝗖𝗜/𝗖𝗗
+*Retrieve:* Understanding CI/CD fundamentals.
 
-There are many benefits to using CI/CD, including:
+```mermaid
+graph LR
+    A[Development] --> B[Pull Request]
+    B --> C[Peer Review]
+    C --> D[Merge]
+    D --> E[CI Pipeline]
+    E --> F[Build]
+    F --> G[Test]
+    G --> H[Pre-Prod Deploy]
+    H --> I[Production Deploy]
+    
+    style A fill:#e1f5ff
+    style E fill:#fff3cd
+    style I fill:#d4edda
+```
 
-- • Improved software quality: CI/CD helps to identify and fix bugs early in the development process.
- 
-- • Faster time to market: CI/CD can help you to get your software to market faster.
- 
-- • Reduced risk: CI/CD can help to reduce the risk of deploying broken code to production.
- 
-- • Increased developer productivity: CI/CD can help developers to focus on writing code instead of manual tasks.
+### How CI/CD Works
 
-## 𝗚𝗲𝘁𝘁𝗶𝗻𝗴 𝗦𝘁𝗮𝗿𝘁𝗲𝗱 𝘄𝗶𝘁𝗵 𝗖𝗜/𝗖𝗗
+*Innovate:* Step-by-step CI/CD workflow.
 
-There are a number of CI/CD tools available, such as Jenkins, GitLab, and CircleCI. 
+| Stage | Description | Purpose |
+|:------|:------------|:--------|
+| **1. Development** | Developers work in local branches | ⬆️ Isolated work |
+| **2. Pull Request** | Submit code for review | ⬆️ Code quality |
+| **3. Peer Review** | Review and ensure quality standards | ⬆️ Collaboration |
+| **4. Merge** | Approved code merged to main | ⬆️ Integration |
+| **5. CI Pipeline** | Automated build, test, deploy | ⬆️ Automation |
+| **6. Build** | Compile into executable | ⬆️ Artifact creation |
+| **7. Testing** | Unit, integration, E2E tests | ⬆️ Quality assurance |
+| **8. Pre-Prod Deploy** | Deploy to staging environment | ⬆️ Validation |
+| **9. Production Deploy** | Deploy to live environment | ⬆️ Release |
 
-These tools can help you to automate the CI/CD pipeline.
+### Testing Types
 
-If you're looking to improve your software development process, CI/CD is a great place to start. 
+*Retrieve:* Comprehensive testing in CI/CD.
 
-By automating the process of building, testing, and deploying your code, you can deliver high-quality software faster and with less risk.
+**Test Types**:
+- **Unit Tests**: Test individual components
+- **Integration Tests**: Test component interactions
+- **End-to-End Tests**: Test complete workflows
+
+**Purpose**: Ensure application works as expected before deployment.
+
+### Benefits of CI/CD
+
+*Retrieve:* Key advantages of CI/CD adoption.
+
+| Benefit | Description | Impact |
+|:--------|:------------|:-------|
+| **Improved Quality** | Identify and fix bugs early | ⬆️ Better software |
+| **Faster Time to Market** | Rapid deployment cycles | ⬆️ Competitive advantage |
+| **Reduced Risk** | Less broken code in production | ⬇️ Deployment failures |
+| **Increased Productivity** | Focus on code, not manual tasks | ⬆️ Developer efficiency |
+
+### CI/CD Tools
+
+*Innovate:* Popular tools for CI/CD automation.
+
+**Popular Tools**:
+- **Jenkins**: Open-source automation server
+- **GitLab CI/CD**: Integrated with GitLab
+- **CircleCI**: Cloud-based CI/CD
+- **GitHub Actions**: Native GitHub integration
+- **Azure DevOps**: Microsoft's solution
+
+**Purpose**: Automate the CI/CD pipeline for consistent, reliable deployments.
+
+### Key Takeaways
+
+*Retrieve:* CI/CD automates software development through continuous integration, testing, and deployment, improving quality, speed, and reducing risk.
+
+*Innovate:* By implementing CI/CD with tools like Jenkins, GitLab, or CircleCI, you can automate building, testing, and deployment, enabling faster delivery of high-quality software with reduced risk.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about software automation, retrieve insights from CI/CD practices, and innovate by implementing automated pipelines that improve your development workflow.
+
+**Next Steps**:
+- Choose a CI/CD tool
+- Set up your pipeline
+- Automate testing
+- Deploy automatically
 
 ![ How CI/CD Works ](/assets/img/blog/CI_CD_Works.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 

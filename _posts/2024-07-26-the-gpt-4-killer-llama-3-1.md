@@ -7,7 +7,7 @@ tags: [Meta, Llama3.1]
 date: 2024-07-26 10:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -25,7 +25,9 @@ date: 2024-07-26 10:00:00 +0800
 
 ## Meta's Llama-3.1 
 
-Meta's Llama-3.1 patches the 8B and 70B Llama-3 models, already top performers in their weight class, to make them even better + gives us the strongest open-source model ever with the 405B.
+*Curiosity:* Meta's Llama-3.1 patches the 8B and 70B Llama-3 models, already top performers in their weight class, to make them even better + gives us the strongest open-source model ever with the 405B.
+
+
 
 ## Two main points:
 

@@ -7,51 +7,104 @@ tags: [LLM,VectorDatabase]
 date: 2024-07-11 22:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
 
-## Vector Database significantly impacts the LLM applicaition's performance
+## Choosing the Right Vector Database for LLM Applications
+
+*Curiosity:* How does vector database choice impact LLM application performance? What factors should we consider when selecting a vector database?
+
+**Vector databases** store and index high-dimensional vectors representing embeddings of text, images, or other data in numerical format that captures semantic meaning. The choice of database significantly impacts LLM application performance.
 
 ![ Vector Database ](/assets/img/llm/Vector-Database.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
-Image credit : <https://neptune.ai/blog/building-llm-applications-with-vector-databases>
-
-Vector databases store and index high-dimensional vectors, which represent embeddings of text, images or other data in numerical format that captures their semantic meaning. 
-
-> **The choice of DB impacts** ( [Reference article](https://arxiv.org/html/2402.01763v1) ):
-> 1. Search speed 
-> 2. Accuracy of similarity matching 
-> 3. Scalability 
-> 4. Memory usage
+> **Image Credit**: <https://neptune.ai/blog/building-llm-applications-with-vector-databases>
 {: .prompt-info}
+
+### Impact of Vector Database Choice
+
+*Retrieve:* Key factors affected by database selection.
+
+> **Reference**: <https://arxiv.org/html/2402.01763v1>
+{: .prompt-info}
+
+| Factor | Impact | Importance |
+|:-------|:-------|:-----------|
+| **Search Speed** | Query latency | ⬆️ User experience |
+| **Similarity Accuracy** | Retrieval quality | ⬆️ Answer quality |
+| **Scalability** | Handle growth | ⬆️ Production readiness |
+| **Memory Usage** | Resource efficiency | ⬇️ Costs |
+
+### Vector Database Architecture
+
+*Innovate:* How vector databases work in LLM applications.
+
+```mermaid
+graph TB
+    A[Documents] --> B[Embedding Model]
+    B --> C[Vector Embeddings]
+    C --> D[Vector Database]
+    D --> E[Indexing]
+    
+    F[User Query] --> G[Query Embedding]
+    G --> H[Similarity Search]
+    H --> D
+    D --> I[Top-K Results]
+    I --> J[LLM Context]
+    J --> K[Answer Generation]
+    
+    style A fill:#e1f5ff
+    style D fill:#fff3cd
+    style K fill:#d4edda
+```
 
 ![ Vector Database Use Case ](/assets/img/llm/Use-case-Vector-Database-in-RAG-framework.png){: .light .shadow .rounded-10 w='1212' h='668' }
 
 ![ Overview that utilize Vector Database ](/assets/img/llm/Overview-that-Utilizes-Vector-Database.png){: .light .shadow .rounded-10 w='1212' h='668' }
 
-For ex.
+### Use Case Examples
 
-### (1) Real-Time Product Recommendations
+*Retrieve:* Real-world vector database selection scenarios.
 
-Scenario: An online retailer needs to recommend products to users in real-time based on their browsing history.
+#### 1. Real-Time Product Recommendations
 
-DB Choice: PINECONE, due to its high-speed query performance and scalability, allows the system to quickly retrieve and recommend products, enhancing user experience.
+*Scenario*: Online retailer needs real-time product recommendations based on browsing history.
 
-### (2) Semantic Text Search
+**DB Choice**: **PINECONE**
 
-Scenario: A research organization needs to search through a large corpus of scientific papers to find relevant documents based on semantic similarity.
+| Requirement | Why Pinecone | Benefit |
+|:------------|:-------------|:--------|
+| **High Speed** | Optimized query performance | ⬆️ Real-time responses |
+| **Scalability** | Handles large catalogs | ⬆️ Growth support |
+| **User Experience** | Fast retrieval | ⬆️ Engagement |
 
-DB Choice: MILVUS, with its robust indexing and scalability, enables efficient and accurate semantic searches across billions of document embeddings.
+#### 2. Semantic Text Search
 
-### (3) Voice Assistant
+*Scenario*: Research organization needs to search through large corpus of scientific papers.
 
-Scenario: A voice assistant needs to process and respond to user queries instantly.
+**DB Choice**: **MILVUS**
 
-DB Choice: FAISS, optimized for low latency and fast retrieval, ensures the assistant can quickly understand and respond to queries, providing a smooth user experience.
+| Requirement | Why Milvus | Benefit |
+|:------------|:-----------|:--------|
+| **Robust Indexing** | Advanced indexing algorithms | ⬆️ Search accuracy |
+| **Scalability** | Billions of embeddings | ⬆️ Large datasets |
+| **Efficiency** | Optimized for research | ⬆️ Performance |
+
+#### 3. Voice Assistant
+
+*Scenario*: Voice assistant needs instant query processing and responses.
+
+**DB Choice**: **FAISS**
+
+| Requirement | Why FAISS | Benefit |
+|:------------|:----------|:--------|
+| **Low Latency** | Optimized for speed | ⬆️ Instant responses |
+| **Fast Retrieval** | Efficient similarity search | ⬆️ User experience |
+| **Performance** | Facebook's optimization | ⬆️ Reliability |
 
 -------------------------------------
 
@@ -72,30 +125,32 @@ Choosing, optimizing, or building an efficient Vector DB is a multi-step process
 You can significantly enhance the speed, accuracy, and scalability of your LLM-based system, leading to better overall performance and user experience following the right approach. 
 
 
-## 😎 Text-to-SQL is one of the most prevalent enterprise applications of LLMs. If you're in this space, this super comprehensive survey report is a must-read!
+## Text-to-SQL: Next-Generation Database Interface
 
-> Next-Generation Database Interface 😎 
-> - Paper : <https://arxiv.org/pdf/2406.08426>
+*Retrieve:* Comprehensive survey on LLM-based Text-to-SQL systems.
+
+**Text-to-SQL** is one of the most prevalent enterprise applications of LLMs. This comprehensive survey report is essential reading for anyone in this space.
+
+> **Paper**: <https://arxiv.org/pdf/2406.08426>
 {: .prompt-danger}
 
-⛳ Here's everything the paper contains:
+### Survey Contents
 
-### 👉 Datasets and Benchmarks
- Provides an overview of commonly used datasets and benchmarks for evaluating LLM-based Text-to-SQL systems. 
- 
- It discusses the characteristics, complexity, and challenges these datasets pose for system development and evaluation.
-### 👉 Evaluation Metrics
- Presents the evaluation metrics used to assess the performance of LLM-based Text-to-SQL systems, including accuracy, exactness, and execution correctness. 
- 
- The paper also discusses the advantages and limitations of each metric and their relevance to real-world applications.
-### 👉 Methods and Models
- Explores the different methods and models employed for LLM-based text-to-SQL, including in-context learning and fine-tuning-based paradigms. 
- 
- It discusses their implementation details, strengths, and adaptations specific to the text-to-SQL task.
-### 👉 Expectations and Future Directions
- Discusses the current challenges and limitations of LLM-based Text-to-SQL, such as real-world robustness, computational efficiency, data privacy, and extensions. 
- 
- It also outlines potential future research directions and opportunities for improvement.
+*Retrieve:* What the paper covers.
+
+| Section | Content | Value |
+|:--------|:--------|:------|
+| **Datasets & Benchmarks** | Common datasets, characteristics, challenges | ⬆️ Evaluation framework |
+| **Evaluation Metrics** | Accuracy, exactness, execution correctness | ⬆️ Performance assessment |
+| **Methods & Models** | In-context learning, fine-tuning paradigms | ⬆️ Implementation guidance |
+| **Future Directions** | Challenges, limitations, opportunities | ⬆️ Research roadmap |
+
+**Key Topics**:
+- Dataset characteristics and complexity
+- Evaluation metric advantages/limitations
+- Implementation details and adaptations
+- Real-world robustness and efficiency
+- Data privacy and extensions
 
  ![ Next Generation Database Interface ](/assets/img/llm/Next-Generation-Database-Interface.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 

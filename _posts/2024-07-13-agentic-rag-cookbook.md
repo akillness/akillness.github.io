@@ -7,27 +7,138 @@ tags: [Agentic, RAG]
 date: 2024-07-13 14:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
 
-## I just published a new cookbook showing how to easily improve Retrieval Augmented Generation (RAG) with an agent system using Transformers Agents.
+## Agentic RAG Cookbook: Improving RAG with Agent Systems
 
-Vanilla RAG has the following limitations:
-- ➤ 𝗜𝘁 𝗿𝗲𝘁𝗿𝗶𝗲𝘃𝗲𝘀 𝘀𝗼𝘂𝗿𝗰𝗲 𝗱𝗼𝗰𝘂𝗺𝗲𝗻𝘁 𝗼𝗻𝗹𝘆 𝗼𝗻𝗰𝗲: if the retrieved docuents are not relevant enough the generation in turn will be bad.
-- ➤ Semantic similarity is computed 𝙬𝙞𝙩𝙝 𝙩𝙝𝙚 𝙪𝙨𝙚𝙧 𝙦𝙪𝙚𝙧𝙮 𝙖𝙨 𝙖 𝙧𝙚𝙛𝙚𝙧𝙚𝙣𝙘𝙚, which is often suboptimal: for instance, the user query will mostly be a question and the document containing the true answer will be in affirmative voice, so its similarity score will be downgraded compared to less relevant source documents in the interrogative form, leading to a risk of not selecting the relevant document.
+*Curiosity:* What if RAG systems could think more like humans—questioning their own retrievals, reformulating queries, and iterating until they find the right answer? What happens when we give RAG the ability to retrieve, critique, and retrieve again?
 
-𝙈𝙖𝙠𝙞𝙣𝙜 𝙖 𝙍𝘼𝙂 𝙖𝙜𝙚𝙣𝙩 - 𝙫𝙚𝙧𝙮 𝙨𝙞𝙢𝙥𝙡𝙮, 𝙖𝙣 𝙖𝙜𝙚𝙣𝙩 𝙖𝙧𝙢𝙚𝙙 𝙬𝙞𝙩𝙝 𝙖 𝙧𝙚𝙩𝙧𝙞𝙚𝙫𝙚𝙧 𝙩𝙤𝙤𝙡 - 𝙖𝙡𝙡𝙚𝙫𝙞𝙖𝙩𝙚𝙨 𝙗𝙤𝙩𝙝 𝙩𝙝𝙚𝙨𝙚 𝙥𝙧𝙤𝙗𝙡𝙚𝙢𝙨!
-- ✅ Formulate the query itself (query reformulation)
-- ✅ Critique the content to re-retrieve if needed (self-query)
+**A new cookbook** demonstrates how to easily improve RAG with an agent system using Transformers Agents. This approach addresses key limitations of vanilla RAG by making systems more intelligent and self-correcting.
 
-𝗛𝗼𝘄 𝗺𝘂𝗰𝗵 𝗱𝗼𝗲𝘀 𝘁𝗵𝗶𝘀 𝗮𝗴𝗲𝗻𝘁𝗶𝗰 𝘀𝗲𝘁𝘂𝗽 𝗶𝗺𝗽𝗿𝗼𝘃𝗲 𝗿𝗲𝘀𝘂𝗹𝘁𝘀? I've added to the cookbook an evaluation part with LLM-as-a-judge using Llama-3-70B. When switching from vanilla to agentic RAG, the 𝘀𝗰𝗼𝗿𝗲 𝗶𝗻𝗰𝗿𝗲𝗮𝘀𝗲𝘀 𝗯𝘆 𝟴.𝟱%! 💪
-(from 70.0% to 78.5%)
+### Vanilla RAG Limitations
 
-One important drawback though: since the system is now doing several LLM calls instead of 1, the runtime of the RAG system also increases. You have to find the right trade-off!
+*Retrieve:* Vanilla RAG systems have fundamental limitations that impact performance.
+
+**Key Limitations**:
+
+| Limitation | Description | Impact |
+|:-----------|:------------|:-------|
+| **Single Retrieval** | Retrieves documents only once | ⚠️ Poor quality if initial retrieval fails |
+| **Suboptimal Similarity** | Uses user query as reference | ⚠️ Questions vs. statements mismatch |
+| **No Self-Correction** | Cannot refine or re-retrieve | ❌ No improvement mechanism |
+
+**Problem Details**:
+- User queries are typically questions
+- Relevant documents use affirmative statements
+- Similarity scores are downgraded
+- No opportunity for improvement
+
+### Vanilla RAG vs. Agentic RAG
+
+| Aspect | Vanilla RAG | Agentic RAG |
+|:-------|:------------|:-------------|
+| **Retrieval Strategy** | Single retrieval pass | Iterative retrieval with critique |
+| **Query Handling** | Direct user query | Query reformulation & optimization |
+| **Self-Correction** | ❌ No | ✅ Yes - can re-retrieve if needed |
+| **Performance** | Baseline (70.0%) | Improved (+8.5% = 78.5%) |
+| **Latency** | Lower (1 LLM call) | Higher (multiple LLM calls) |
+| **Quality** | ⚠️ Limited | ⬆️ Better |
+
+### Agentic RAG Solution
+
+*Innovate:* Making a RAG agent—simply, an agent armed with a retriever tool—alleviates both problems!
+
+**Key Capabilities**:
+- ✅ **Query Reformulation**: Agent formulates optimized queries
+- ✅ **Self-Query**: Agent critiques content and re-retrieves if needed
+
+**Architecture**:
+
+```mermaid
+graph TD
+    A[User Query] --> B[Agent: Query Reformulation]
+    B --> C[Retrieve Documents]
+    C --> D[Agent: Critique Retrieved Content]
+    D --> E{Content<br/>Relevant?}
+    E -->|No| B
+    E -->|Yes| F[Generate Answer]
+    F --> G[Final Response]
+    
+    style B fill:#e1f5ff
+    style D fill:#fff3cd
+    style F fill:#d4edda
+    style E fill:#f8d7da
+```
+
+### Performance Comparison
+
+*Retrieve:* Evaluation with LLM-as-a-judge (Llama-3-70B) shows significant improvement.
+
+| Metric | Vanilla RAG | Agentic RAG | Improvement |
+|:-------|:------------|:-------------|:------------|
+| **Accuracy Score** | 70.0% | 78.5% | **+8.5%** 💪 |
+| **LLM Calls** | 1 | 3-5 | Higher latency |
+| **Self-Correction** | ❌ | ✅ | Better quality |
+| **Query Optimization** | ❌ | ✅ | Better retrieval |
+
+**Trade-offs**:
+- ⬆️ Better quality (+8.5%)
+- ⚠️ Higher latency (multiple LLM calls)
+- ⚖️ Balance quality vs. speed needed
+
+### Sample Agentic RAG Implementation
+
+```python
+from transformers import pipeline
+from langchain.agents import create_react_agent
+from langchain.tools import Tool
+
+# Create retrieval tool
+retrieval_tool = Tool(
+    name="retrieve_documents",
+    func=vector_store.similarity_search,
+    description="Retrieves relevant documents for a query"
+)
+
+# Create agent with retrieval tool
+agent = create_react_agent(
+    llm=llm,
+    tools=[retrieval_tool],
+    prompt=agent_prompt
+)
+
+# Agent workflow
+def agentic_rag(query):
+    # Step 1: Query reformulation
+    reformulated_query = agent.run(
+        f"Reformulate this query for better retrieval: {query}"
+    )
+    
+    # Step 2: Retrieve documents
+    docs = retrieval_tool.run(reformulated_query)
+    
+    # Step 3: Critique and potentially re-retrieve
+    critique = agent.run(
+        f"Critique these documents for relevance to: {query}\n{docs}"
+    )
+    
+    if "not relevant" in critique.lower():
+        # Re-retrieve with different strategy
+        docs = retrieval_tool.run(query, k=10)  # Get more docs
+    
+    # Step 4: Generate answer
+    answer = llm.generate(
+        context=docs,
+        question=query
+    )
+    
+    return answer
+```
 
 𝗗𝗶𝘀𝗰𝗼𝘃𝗲𝗿 𝘁𝗵𝗲 𝗰𝗼𝗼𝗸𝗯𝗼𝗼𝗸 👇
 - <https://huggingface.co/learn/cookbook/agent_rag>

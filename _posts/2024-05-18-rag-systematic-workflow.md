@@ -5,7 +5,7 @@ categories: [Script, RAG]
 tags: [RAG, System, Workflow]
 # author: foDev_jeong
 date: 2024-05-18 14:20:00 +0800
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/llm/LLM_evaluation_rank.jpeg
@@ -24,20 +24,99 @@ When the user inputs a query, the query is embedded into a vector using the same
 
 This step is critical for making sure that the records from the retrieved documents are effectively incorporated with the query. Then, the output from the augmentation module is fed to the generation module which is responsible for generating an accurate answer to the query by utilizing the retrieved chunks and the prompt through an LLM (like chatGPT by OpenAI, hugging face, and Gemini by Google). 
 
-But to make RAG work perfectly, here are some key points to consider:
-1. Quality of External Knowledge Source: The quality and relevance of the external knowledge source used for retrieval are crucial.
+*Curiosity:* But what makes RAG work *perfectly*? What are the hidden challenges that separate a working RAG system from an exceptional one?
 
-2. Embedding Model: The choice of the embedding model used for retrieving relevant documents or passages from the knowledge source is important.
+After retrieving insights from multiple implementations and experimenting with various configurations, here are the key points to consider:
 
-3. Chunk Size and Retrieval Strategy: Experiment with different chunk sizes to find the optimal length for context retrieval. Larger chunks may provide more context but could also introduce irrelevant information. Smaller chunks may focus on specific details but might lack broader context.
+### Key Considerations for RAG Systems
 
-4. Integration with Language Model: The way the retrieved information is integrated with the language model's generation process is crucial. Techniques like cross-attention or memory-augmented architectures can be used to effectively incorporate the retrieved information into the model's output.
+*Innovate:* What makes RAG work perfectly.
 
-5. Evaluation and Fine-tuning: Evaluating the performance of the RAG model on relevant datasets and tasks is important to identify areas for improvement. Fine-tuning the RAG model on domain-specific or task-specific data can further enhance its performance.
+| # | Consideration | Impact | Best Practice |
+|:--|:--------------|:-------|:--------------|
+| **1** | **Knowledge Source Quality** | Critical | Curated, domain-specific sources; validate accuracy |
+| **2** | **Embedding Model** | High | Choose domain-similar models (e.g., `text-embedding-ada-002`, `sentence-transformers`) |
+| **3** | **Chunk Size** | High | Experiment 200-1000 tokens; balance context vs. precision |
+| **4** | **Retrieval Strategy** | High | Hybrid search (semantic + keyword); implement re-ranking |
+| **5** | **Prompt Engineering** | Critical | Separate context from query; use few-shot examples |
+| **6** | **Evaluation Metrics** | High | Track precision, recall, answer quality; use LLM-as-judge |
+| **7** | **Error Handling** | Medium | Fallbacks for outdated/incorrect information |
 
-6. Ethical Considerations: Ensure that the external knowledge source is unbiased and does not contain offensive or misleading information.
+### Sample RAG Implementation
 
-7. Handling Out-of-Date or Incorrect Information: It's important to have strategies in place for handling situations where the retrieved information is out-of-date or incorrect.
+*Innovate:* Practical Python example using LangChain.
+
+```python
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.vectorstores import Chroma
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.chains import RetrievalQA
+from langchain.llms import OpenAI
+
+# Step 1: Load and chunk documents
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,
+    chunk_overlap=200
+)
+documents = text_splitter.split_documents(your_documents)
+
+# Step 2: Create embeddings and vector store
+embeddings = OpenAIEmbeddings()
+vectorstore = Chroma.from_documents(
+    documents=documents,
+    embedding=embeddings
+)
+
+# Step 3: Create retrieval chain
+qa_chain = RetrievalQA.from_chain_type(
+    llm=OpenAI(temperature=0),
+    chain_type="stuff",
+    retriever=vectorstore.as_retriever(
+        search_kwargs={"k": 3}  # Retrieve top 3 chunks
+    ),
+    return_source_documents=True
+)
+
+# Step 4: Query
+query = "What is the main topic of this document?"
+result = qa_chain({"query": query})
+print(result["result"])
+```
+
+### Chunk Size Trade-offs
+
+*Retrieve:* Understanding chunk size impact.
+
+```mermaid
+graph LR
+    A[Small Chunks<br/>200-400 tokens] --> B[High Precision]
+    A --> C[Low Context]
+    D[Medium Chunks<br/>500-800 tokens] --> E[Balanced]
+    F[Large Chunks<br/>1000+ tokens] --> G[High Context]
+    F --> H[Low Precision]
+    
+    style B fill:#d4edda
+    style C fill:#f8d7da
+    style E fill:#fff3cd
+    style G fill:#d4edda
+    style H fill:#f8d7da
+```
+
+**Recommendation**: Experiment with different chunk sizes (200-1000 tokens) to find optimal balance for your use case.
+
+### Key Takeaways
+
+*Retrieve:* RAG consists of three modules (Retrieval, Augmentation, Generation) that work together to enable LLMs to answer questions using external knowledge sources.
+
+*Innovate:* By systematically addressing key considerations—knowledge source quality, embedding models, chunk sizes, retrieval strategies, prompt engineering, evaluation, and error handling—you can build exceptional RAG systems that work perfectly.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about RAG systems, retrieve insights from systematic workflow considerations, and innovate by building RAG applications that effectively combine retrieval, augmentation, and generation.
+
+**Next Steps**:
+- Understand the three modules
+- Implement sample RAG system
+- Optimize chunk sizes
+- Evaluate and iterate
 
 
 ![ A systematic workflow ](/assets/img/llm/Systematic_RAG_workflow.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }

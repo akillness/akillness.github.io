@@ -6,7 +6,7 @@ tags: [AI, NVIDIA, FoundationPose]
 # author: foDev_jeong
 date: 2024-05-31 15:00:00 +0800
 # pin: true
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/blog/NLP_Overview.svg
@@ -14,17 +14,99 @@ date: 2024-05-31 15:00:00 +0800
 #   alt: [Overview of NLP Course]
 ---
 
-## FoundationPose is a complex solution
+## FoundationPose: Unified 6D Pose Estimation and Tracking
 
-Last week at the imec ITF conference, I finished my presentation about AI and robotics with this movie from NVIDIA Robotics... Why? their demo ran real-time on an RTX3090. That's a 4 year old GPU. Today, you get the same AI performance (in TOPS) for ~300€.
+*Curiosity:* How can we achieve real-time 6D pose estimation on consumer GPUs? What makes FoundationPose outperform previous methods?
 
-Within ~1.5s, it gets a lock on the position and orientation of the object, and then tracks it at 30Hz.
+**FoundationPose** is NVIDIA's solution for unified 6D pose estimation and tracking of novel objects. The demo ran real-time on an RTX3090—a 4-year-old GPU. Today, you can get the same AI performance (in TOPS) for ~300€.
 
-FoundationPose is a complex solution, requires an RGBD camera, and some example images (with ground truth poses!) if no textured CAD file is available. BUT, it nails it, it outperforms any prior work.
+> **Resources**:
+> - **📄 Paper**: <https://arxiv.org/abs/2312.08344>
+> - **🌐 Project Page**: <https://nvlabs.github.io/FoundationPose/>
+> - **💻 Code**: <https://github.com/NVlabs/FoundationPose>
+{: .prompt-info}
 
-With this performance (30Hz on a 'low-end' GPU) it's not going to take long to find efficiencies, smarter solutions, better synergies in the code. Once an architecture is proven to work, incremental improvements happen very fast.
+### Performance Highlights
 
-Looking forward to run this on a Jetson soon!
+*Retrieve:* FoundationPose achieves impressive real-time performance.
+
+| Metric | Value | Impact |
+|:-------|:------|:-------|
+| **Initialization** | ~1.5s | ⬆️ Fast lock-on |
+| **Tracking Rate** | 30Hz | ⬆️ Real-time |
+| **Hardware** | RTX3090 (4 years old) | ⬇️ Accessible |
+| **Cost** | ~300€ equivalent | ⬇️ Affordable |
+
+**Key Achievement**: Outperforms any prior work while running on consumer hardware.
+
+### System Requirements
+
+*Retrieve:* FoundationPose requirements and capabilities.
+
+**Required Components**:
+- RGBD camera
+- Example images with ground truth poses (if no CAD file)
+- OR textured CAD file
+
+**Complexity**: Complex solution, but delivers superior results.
+
+### Architecture Overview
+
+```mermaid
+graph LR
+    A[RGBD Camera] --> B[FoundationPose]
+    B --> C[Initialization<br/>~1.5s]
+    C --> D[Tracking<br/>30Hz]
+    D --> E[6D Pose]
+    
+    F[CAD File<br/>OR<br/>Example Images] --> B
+    
+    style A fill:#e1f5ff
+    style B fill:#fff3cd
+    style E fill:#d4edda
+```
+
+### Why This Matters
+
+*Innovate:* Real-time performance on accessible hardware opens new possibilities.
+
+**Implications**:
+- ✅ Affordable robotics applications
+- ✅ Real-time object tracking
+- ✅ Accessible to more developers
+- ✅ Fast incremental improvements
+
+**Future Potential**: With 30Hz performance on 'low-end' GPUs, we can expect:
+- Efficiency improvements
+- Smarter solutions
+- Better code synergies
+- Rapid incremental advances
+
+### Use Cases
+
+*Retrieve:* Applications enabled by FoundationPose.
+
+**Potential Applications**:
+- Robotics manipulation
+- AR/VR object tracking
+- Industrial automation
+- Autonomous systems
+
+**Jetson Deployment**: Looking forward to running on Jetson for edge deployment!
+
+### Key Takeaways
+
+*Retrieve:* FoundationPose achieves real-time 6D pose estimation and tracking on consumer GPUs, outperforming previous methods while remaining accessible.
+
+*Innovate:* By running on affordable hardware (RTX3090 equivalent for ~300€), FoundationPose makes advanced pose estimation accessible to more developers and enables rapid innovation in robotics and AR/VR applications.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about real-time pose estimation, retrieve insights from FoundationPose's performance, and innovate by building applications that leverage accessible, high-performance pose tracking.
+
+**Next Steps**:
+- Read the full paper
+- Explore the code repository
+- Test on your hardware
+- Deploy to Jetson for edge applications
 
 > 🧙Paper Authors: Bowen Wen, Wei Yang, Jan Kautz, Stan Birchfield NVIDIA 
 - 1️⃣Read the Full Paper here: <https://arxiv.org/abs/2312.08344>

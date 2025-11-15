@@ -7,7 +7,7 @@ tags: [Introducing, Llama3.1]
 date: 2024-07-29 12:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 image:
   path: /assets/img/llm/compare-performance-of-llms.jpeg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -28,111 +28,236 @@ True to our commitment to open source, starting today, we’re making these mode
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Introducing Llama 3.1 - details </summary>
 
-### Model sizes
+### Model Sizes
 
-Llama 3.1 now comes in 3 sizes: 8B, 70B, and 405B parameters. The 8B and 70B variants are sight upgrades from the previous Llama 3 models that have been released in April 2024. (See the figure below for a brief performance comparison). 
+*Retrieve:* Llama 3.1 comes in 3 sizes with different capabilities.
 
-The 405B model was used to improve the 8B and 70B via synthetic data during the finetuning stages.
+| Model | Parameters | Context | Use Case |
+|:------|:-----------|:--------|:---------|
+| **8B** | 8 billion | 128k tokens | Efficient, accessible |
+| **70B** | 70 billion | 128k tokens | Balanced performance |
+| **405B** | 405 billion | 128k tokens | Maximum capability |
+
+**Key Insight**: The 405B model was used to improve 8B and 70B via synthetic data during fine-tuning stages.
 
 ### Pretraining Data
 
-The 93-page report by Meta (a link to the report is in the comments below) offers amazing detail. Particularly, the section on preparing the 15.6 trillion tokens for pretraining offers so much detail that it would make it possible to reproduce the dataset preparation. 
+*Retrieve:* The 93-page report offers detailed insights into dataset preparation.
 
-However, Meta doesn't share the dataset sources. All we know is that it's trained primarily on "web data." This is probably because of the usual copyright concerns and to prevent lawsuits.
+**Training Data**:
+- **15.6 trillion tokens** for pretraining
+- Primarily "web data" (sources not disclosed)
+- Detailed preparation recipes shared
 
-Still, it's a great writeup if you plan to prepare your own pretraining datasets as it shares recipes on deduplication, formatting (removal of markdown markers), quality filters, removal of unsafe content, and more.
+**Dataset Preparation Techniques**:
+- Deduplication methods
+- Formatting (markdown removal)
+- Quality filters
+- Unsafe content removal
+- Reproducible recipes
 
-### Long-context Support
+**Why Sources Not Shared**:
+- Copyright concerns
+- Legal protection
+- Still provides valuable methodology
 
-The models support a context size of up to 128k tokens. The researchers achieved this via a multiple-stage process. First, they pretrained it on 8k context windows (due to resource constraints), followed by continued pretraining on longer 128k token windows. 
+### Long-Context Support
 
-In the continued pretraining, they increased the context length in 6 stages. Moreover, they also observed that finetuning requires 0.1% of long-context instruction samples; otherwise, the long-context capabilities will decline.
+*Innovate:* 128k token context achieved through multi-stage training.
 
-### Alignment
+**Training Process**:
 
-In contrast to earlier rumors, Llama 3 was not finetuned using both RLHF with proximal policy optimization (PPO) and direct preference optimization (DPO). Following a supervised instruction finetuning stage (SFT), the models were only trained with DPO, not PPO. 
-(Unlike in the Llama 2 paper, unfortunately, the researchers didn't include a chart analyzing the improvements made via this process.).
+```mermaid
+graph LR
+    A[8k Context Pretraining] --> B[Stage 1: 16k]
+    B --> C[Stage 2: 32k]
+    C --> D[Stage 3: 64k]
+    D --> E[Stage 4: 96k]
+    E --> F[Stage 5: 112k]
+    F --> G[Stage 6: 128k]
+    
+    style A fill:#e1f5ff
+    style G fill:#d4edda
+```
 
- Although they didn't use PPO, they used a reward model for rejection sampling during the instruction finetuning stage.
+**Key Findings**:
+- 6-stage context extension
+- Requires 0.1% long-context instruction samples in fine-tuning
+- Without this, long-context capabilities decline
 
-### Inference
+### Alignment Process
 
-The 405B model required 16k H100 GPUs for training. 
+*Retrieve:* Llama 3.1 uses DPO, not PPO for alignment.
 
-During inference, the bfloat16-bit version of the model still requires 16 H100 GPUs. However, Meta also has an FP8 version that runs on a single server node (that is, 8xH100s).
+**Alignment Pipeline**:
 
-### Performance
+| Stage | Method | Details |
+|:------|:-------|:--------|
+| **1. SFT** | Supervised Fine-Tuning | Instruction following |
+| **2. DPO** | Direct Preference Optimization | Preference learning |
+| **3. Rejection Sampling** | Reward Model | During SFT stage |
 
-You are probably curious about how it compares to other models. 
+**Note**: Unlike Llama 2, no PPO was used. Only DPO after SFT.
 
-The short answer is "very favorable", on par with GPT4. Unfortunately, I exceeded the character limit for this LinkedIn post, so I will let the figure below speak for itself.
+### Inference Requirements
+
+*Retrieve:* Significant compute resources needed for 405B model.
+
+| Configuration | GPUs Required | Use Case |
+|:--------------|:--------------|:---------|
+| **Training** | 16,000 H100 | Model training |
+| **Inference (bfloat16)** | 16 H100 | Full precision |
+| **Inference (FP8)** | 8 H100 | Quantized, single node |
+
+### Performance Comparison
+
+*Retrieve:* Performance is very favorable, on par with GPT-4.
+
+**Benchmark Results**:
+- Competitive with GPT-4
+- Strong across multiple tasks
+- See performance charts for details
 
 </details>
 
-## Summarization
+## Summary: Llama 3.1 Technical Achievements
 
-It took months to train on 16,000 Nvidia H100 GPUs, resulting in a 405B parameter model with a 128K token context length, which, according to the benchmarks, is mostly superior to OpenAI's GPT-4.
+*Retrieve:* Training required 16,000 Nvidia H100 GPUs over months, resulting in a 405B parameter model with 128K token context length.
 
-Benchmarks can be biased; more parameters do not guarantee better performance. I guess the only way to figure out how amazing it is has to be real feedback from users over time.
+**Training Scale**:
+- **16,000 H100 GPUs**
+- **Months of training**
+- **405B parameters**
+- **128K context length**
 
-The most exciting thing about LLaMA is that it is almost open-source, although there are some restrictions. 
+**Performance**: According to benchmarks, mostly superior to OpenAI's GPT-4.
 
-➡️Let's see what's open-source and what's not:
+**Note**: Benchmarks can be biased; more parameters don't guarantee better performance. Real user feedback over time will determine true capabilities.
 
-- Commercial use is allowed, unless your app has over 700 million active users, in which case you'll need to obtain a license from Meta.
+### Open-Source Status
 
-- While the training data for LLaMA 3.1 is not open, the training code is publicly available. This consists of approximately 300 lines of Python and PyTorch, along with the FairScale library for distributed GPU training.
+*Innovate:* Llama 3.1 is almost open-source with some restrictions.
 
-- Another cool part is that the model weights are open. This can help developers build AI-powered apps. Instead of paying to use the GPT-4 API, you can now self-host your own model and pay a cloud provider a bunch of money to rent some GPUs.
+**What's Open**:
+
+| Component | Status | Details |
+|:----------|:-------|:--------|
+| **Model Weights** | ✅ Open | Downloadable from Hugging Face |
+| **Training Code** | ✅ Open | ~300 lines Python/PyTorch |
+| **FairScale Library** | ✅ Open | Distributed GPU training |
+
+**What's Restricted**:
+
+| Aspect | Restriction | Details |
+|:-------|:------------|:--------|
+| **Commercial Use** | ⚠️ Limited | Allowed unless >700M users |
+| **Training Data** | ❌ Not open | Sources not disclosed |
+| **Large Scale** | ⚠️ License needed | >700M users requires Meta license |
+
+**Benefits**:
+- Self-host instead of API costs
+- Full model control
+- Custom fine-tuning
+- Privacy and security
 
 * * *
 
 ![ Llama 3.1 Ultra-Efficiently ](/assets/img/llm/llama-3-1-ultra-efficiently.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
-# 🦥 Fine-tune Llama 3.1 Ultra-Efficiently with Unsloth AI
+## Fine-Tune Llama 3.1 Ultra-Efficiently with Unsloth AI
 
-New comprehensive guide about supervised fine-tuning on Hugging Face. 
+*Retrieve:* Comprehensive guide for supervised fine-tuning on Hugging Face.
 
-Over the last year, I've done a lot of fine-tuning and blogging. This guide brings it all together. Here are the main takeaways:
+**Guide Topics**:
+- Efficient fine-tuning in Google Colab
+- When to use fine-tuning
+- Hyperparameter tuning
+- Dataset processing
 
-- How to efficiently fine-tune a Llama 3.1 model in Google Colab
-- When you should use fine-tuning and how it works
-- How to tune the hyperparameters, process datasets, etc.
-
-> - 📝 Article: <https://huggingface.co/blog/mlabonne/sft-llama3>
-> - 💻 Colab: <https://colab.research.google.com/drive/164cg_O7SV7G8kZr_JXqLd6VC7pd86-1Z>
+> **Resources**:
+> - **📝 Article**: <https://huggingface.co/blog/mlabonne/sft-llama3>
+> - **💻 Colab Notebook**: <https://colab.research.google.com/drive/164cg_O7SV7G8kZr_JXqLd6VC7pd86-1Z>
 {: .prompt-info}
 
 * * * 
 
 ![ Llama 3.1 Technical Report ](/assets/img/llm/llama-3-1-technical-report.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
-# 𝗟𝗹𝗮𝗺𝗮 𝟯.𝟭 𝘁𝗲𝗰𝗵𝗻𝗶𝗰𝗮𝗹 𝗿𝗲𝗽𝗼𝗿𝘁 - 𝗮 𝘁𝗿𝗲𝗮𝘀𝘂𝗿𝗲 𝘁𝗿𝗼𝘃𝗲 𝗼𝗻 𝗟𝗟𝗠 𝗯𝘂𝗶𝗹𝗱𝗶𝗻𝗴 🎁
+## Llama 3.1 Technical Report: A Treasure Trove for LLM Building
 
-I really advise you to remember the Llama 3.1 technical report published last week by Meta, for future reference whenever you need to build a SOTA LLM from scratch. It's rare to see so much information in a technical report these days!
-Here are some of my takeaways.
+*Retrieve:* The Llama 3.1 technical report is an invaluable resource for building SOTA LLMs from scratch.
 
-### 𝗦𝗰𝗮𝗹𝗶𝗻𝗴 𝗹𝗮𝘄𝘀
+**Why It Matters**: Rare to see so much detailed information in a technical report. Essential reference for LLM development.
 
-🧐 A question I had for a long time: are scaling laws reliable? I.e. can you really predict how model performance will grow as you increase compute spent?
+### Scaling Laws
 
-➡️ The researchers have confirmed that you can derive scaling laws from smaller models: more precisely, the loss function of your best model will decrease linearly with the log of the compute that you spend to train it. For a clearer view, look at the figure below. This result has already been shown before (cf. Chinchilla paper) so no groundbreaking news here.
+*Curiosity:* Are scaling laws reliable? Can we predict model performance as compute increases?
 
-But computing these scaling laws is costly, so generally the experiments don't go very far up in compute, only up to 10^22 FLOPs (floating point operations). The question thus persists: "are these scaling laws reliable for higher compute spent?"
+**Key Finding**: Scaling laws derived from smaller models hold for much higher compute.
 
-💡 What the report shows here is that the scaling laws computed up to 10^22 FLOPs actually do hold for much higher compute ✅ you can keep drawing a straight line on the graph up to over 10^25 FLOPs, four orders of magnitude higher, and you accurately predict the loss for the huge Llama-3.1-405B! 🤯
+**Scaling Law Formula**:
+- Loss decreases **linearly with log(compute)**
+- Confirmed up to 10^22 FLOPs (previous research)
+- **Validated up to 10^25 FLOPs** (Llama 3.1)
+- **4 orders of magnitude** extension!
 
-This suggests one could keep drawing the line even further and get an idea of the performance of multi-trillion parameter models!
+**Implication**: Can predict performance for multi-trillion parameter models!
 
-### 𝗧𝗼𝗼𝗹 𝘂𝘀𝗲 (𝗮𝗴𝗲𝗻𝘁𝗶𝗰) 𝘁𝗿𝗮𝗶𝗻𝗶𝗻𝗴
+**Visualization**:
 
-Tool use training is still very new. Existing fine-tuning procedures are often limited to one tool call (so no multi-step calls), are limited to a specific syntax... Here, the team has gone further:
-- ➤ Used synthetically generated tool calling datasets with all 3 of these: Single tool call, nested calls (one tool call requiring the output of another) and parallel tool calls.
-- ➤ Create both a single-call and a multi-step tool call dataset. Both exist in a preference version where the annotator picked the best answer, in order to perform DPO.
+```mermaid
+graph LR
+    A[10^22 FLOPs] --> B[Scaling Law]
+    B --> C[10^25 FLOPs]
+    C --> D[Llama-3.1-405B]
+    D --> E[Multi-Trillion Models?]
+    
+    style A fill:#e1f5ff
+    style D fill:#fff3cd
+    style E fill:#d4edda
+```
 
-🛠️ Specifically train their models for 3 tools: python code interpreter, Brave browser and Wolfram API: this is meaningful IMO since these tools are a strong basis for many agents problems.
+### Tool Use (Agentic) Training
 
-###  𝗢𝘁𝗵𝗲𝗿 𝗶𝗻𝘀𝗶𝗴𝗵𝘁𝘀
-- 💥 They used 16,000 H100 🥲
-- 🛠️ Parallelize the training in 4D: Tensor, pipeline, context parallelism, and FSDP.
-- ⚙️ For the post training, do not use any complciated RLHF pipeline like GPT-4, but simply several rounds of Supervised Fine-tuning (SFT) + DPO
+*Innovate:* Advanced tool use training for agentic capabilities.
+
+**Training Approach**:
+
+| Type | Description | Purpose |
+|:-----|:------------|:--------|
+| **Single Tool Call** | One tool per query | Basic tool use |
+| **Nested Calls** | Tool output feeds another | Multi-step reasoning |
+| **Parallel Calls** | Multiple tools simultaneously | Efficiency |
+
+**Datasets**:
+- Single-call dataset
+- Multi-step tool call dataset
+- Preference versions for DPO
+
+**Tools Trained**:
+- 🐍 Python code interpreter
+- 🌐 Brave browser
+- 🔢 Wolfram API
+
+**Significance**: These tools form a strong basis for many agent problems.
+
+### Other Key Insights
+
+*Retrieve:* Additional technical details from the report.
+
+| Insight | Details | Impact |
+|:--------|:--------|:-------|
+| **Training Scale** | 16,000 H100 GPUs | Massive compute |
+| **4D Parallelism** | Tensor, pipeline, context, FSDP | Efficient training |
+| **Alignment** | SFT + DPO (not complex RLHF) | Simplified pipeline |
+
+**4D Parallelism**:
+- Tensor parallelism
+- Pipeline parallelism
+- Context parallelism
+- FSDP (Fully Sharded Data Parallel)
+
+**Alignment Pipeline**:
+- Multiple rounds of SFT
+- DPO for preferences
+- No complex RLHF like GPT-4

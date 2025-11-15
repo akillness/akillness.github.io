@@ -5,7 +5,7 @@ categories: [LLM, Chosistency LLM]
 tags: [LLM, Consistency LLM, Efficient Parallel Decoder]
 # author: Maryam Miradi, PhD
 date: 2024-05-12 13:27:00 +0800
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/llm/LLM_evaluation_rank.jpeg
@@ -22,7 +22,9 @@ Researchers from University of California comes with a revolutionary method for 
 
 ## ⚙️Consistency Large Language Models (CLLMs)
 
-LLMs have been traditionally regarded as sequential decoders, decoding one token after another.
+*Curiosity:* LLMs have been traditionally regarded as sequential decoders, decoding one token after another.
+
+
 
 CLLMs are a new family of parallel decoders capable of reducing inference latency by efficiently decoding an -token sequence per inference step. 
 
@@ -53,6 +55,8 @@ Training Cost
 The fine-tuning cost of CLLMs is moderate, e.g., passing only around 1M tokens for LLaMA-7B to achieve a speedup.
 
 ## 💡Collocations
+
+*Curiosity:* What insights can we retrieve from this? How does this connect to innovation in the field?
 
 They observe that CLLMs acquire a crucial linguistic concept through training –collocations: a series of words or terms that co-occur more frequently than one would expect by random chance. 
 

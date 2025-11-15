@@ -7,39 +7,264 @@ tags: [RAG, Application]
 date: 2024-06-22 20:10:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
 
-## Retrieval Augmented Generation (RAG) has emerged as a extremely popular application in the LLM space. 
+## Build Your RAG Application in 3 Days: A Hands-On Roadmap
 
-Its appeal lies in its lightweight design and the simplicity of integrating it with any foundational LLM.
+*Curiosity:* How can we build a production-ready RAG application quickly? What's the fastest path from basics to advanced RAG implementation?
 
-💡 Use this 3-day guide to step into the evolving landscape of RAG and its latest developments! Spend 2-3 hours every day on the resources.
+**RAG (Retrieval Augmented Generation)** has emerged as an extremely popular LLM application. Its appeal lies in its lightweight design and the simplicity of integrating it with any foundational LLM.
 
-🥁 You'll start with the basics, move to advanced ideas, build your app using LangChain and learn how to evaluate it. I've also added resources to catch up on the latest research in the space.
-
-> The roadmap with resources: <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/resources/RAG_roadmap.md>
+> **📖 Complete Roadmap**: <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/resources/RAG_roadmap.md>
 {: .prompt-info}
 
-### ⛳ Day 1: Introduction to RAG
-- 👉 What is Retrieval Augmented Generation?
-- 👉 Key components of RAG: Ingestion, Retrieval, Synthesis
-- 👉 RAG pipeline components: Chunking, Embedding, Indexing, Top-k Retrieval and Generation
+### 3-Day Learning Path
 
-### ⛳ Day 2: Advanced RAG + Build Your Own RAG System
-- 👉 Optimizations for Advanced RAG: Self Querying Retrieval, Parent Document 👉 Retriever, Hybrid Search, Compressors, HyDE etc.
-- 👉 Build your own RAG system with LangChain and OpenAI
-Resources for building advanced RAG applications
+```mermaid
+gantt
+    title RAG Learning Roadmap (3 Days)
+    dateFormat YYYY-MM-DD
+    section Day 1
+    RAG Basics           :a1, 2024-01-01, 1d
+    Components           :a2, after a1, 1d
+    section Day 2
+    Advanced RAG         :b1, 2024-01-02, 1d
+    Build Application    :b2, after b1, 1d
+    section Day 3
+    Evaluation           :c1, 2024-01-03, 1d
+    Challenges           :c2, after c1, 1d
+```
 
-### ⛳Day 3: RAG Evaluation and Challenges
-- 👉Commonly used evaluation metrics from TruEra and RAGas
-- 👉RAG Pain Points and Solutions
+**Time Commitment**: 2-3 hours per day
 
-🥁🥁The roadmap also includes: Optional Reading Resources & Top 2024 RAG research papers
+### Day 1: Introduction to RAG
+
+*Retrieve:* Understand RAG fundamentals and core components.
+
+**Learning Objectives**:
+- ✅ What is Retrieval Augmented Generation?
+- ✅ Key components: Ingestion, Retrieval, Synthesis
+- ✅ Pipeline components: Chunking, Embedding, Indexing, Top-k Retrieval, Generation
+
+**Topics Covered**:
+
+| Topic | Description | Key Concepts |
+|:------|:------------|:-------------|
+| **RAG Basics** | What is RAG? | Retrieval + Generation |
+| **Ingestion** | Data preparation | Document loading, preprocessing |
+| **Retrieval** | Information retrieval | Vector search, similarity |
+| **Synthesis** | Answer generation | LLM integration, context |
+
+**RAG Pipeline**:
+
+```mermaid
+graph LR
+    A[Documents] --> B[Chunking]
+    B --> C[Embedding]
+    C --> D[Indexing]
+    D --> E[Vector DB]
+    
+    F[Query] --> G[Embedding]
+    G --> H[Top-k Retrieval]
+    E --> H
+    H --> I[Synthesis]
+    I --> J[Answer]
+    
+    style A fill:#e1f5ff
+    style E fill:#fff3cd
+    style I fill:#d4edda
+    style J fill:#f8d7da
+```
+
+**Key Components**:
+- **Chunking**: Split documents into manageable pieces
+- **Embedding**: Convert text to vectors
+- **Indexing**: Store in vector database
+- **Top-k Retrieval**: Find most relevant chunks
+- **Generation**: Create answer from context
+
+### Day 2: Advanced RAG + Build Your Own System
+
+*Innovate:* Learn advanced techniques and build a complete RAG application.
+
+**Learning Objectives**:
+- ✅ Advanced RAG optimizations
+- ✅ Build RAG system with LangChain and OpenAI
+- ✅ Implement advanced retrieval techniques
+
+**Advanced Techniques**:
+
+| Technique | Description | Benefit |
+|:----------|:------------|:--------|
+| **Self-Querying Retrieval** | LLM-generated queries | ⬆️ Better retrieval |
+| **Parent Document Retriever** | Hierarchical retrieval | ⬆️ Context preservation |
+| **Hybrid Search** | Semantic + keyword | ⬆️ Retrieval quality |
+| **Compressors** | Context compression | ⬇️ Token usage |
+| **HyDE** | Hypothetical documents | ⬆️ Query understanding |
+
+**Building RAG System**:
+
+```python
+# Example: Building RAG with LangChain
+from langchain.vectorstores import Chroma
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.chains import RetrievalQA
+from langchain.llms import OpenAI
+
+# 1. Load and chunk documents
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+documents = text_splitter.split_documents(load_documents())
+
+# 2. Create embeddings and vector store
+embeddings = OpenAIEmbeddings()
+vectorstore = Chroma.from_documents(documents, embeddings)
+
+# 3. Create retrieval chain
+qa_chain = RetrievalQA.from_chain_type(
+    llm=OpenAI(),
+    chain_type="stuff",
+    retriever=vectorstore.as_retriever(search_kwargs={"k": 3})
+)
+
+# 4. Query
+result = qa_chain.run("What is RAG?")
+print(result)
+```
+
+**Advanced RAG Architecture**:
+
+```mermaid
+graph TB
+    A[Query] --> B[Query Rewriting]
+    B --> C[Hybrid Search]
+    C --> D[Semantic Search]
+    C --> E[Keyword Search]
+    D --> F[Retrieval]
+    E --> F
+    F --> G[Re-ranking]
+    G --> H[Context Compression]
+    H --> I[LLM Generation]
+    I --> J[Answer]
+    
+    style A fill:#e1f5ff
+    style C fill:#fff3cd
+    style I fill:#d4edda
+    style J fill:#f8d7da
+```
+
+### Day 3: RAG Evaluation and Challenges
+
+*Retrieve:* Learn how to evaluate RAG systems and address common challenges.
+
+**Learning Objectives**:
+- ✅ Evaluation metrics (TruEra, RAGas)
+- ✅ RAG pain points and solutions
+- ✅ Production best practices
+
+**Evaluation Metrics**:
+
+| Metric | Framework | Purpose |
+|:-------|:----------|:--------|
+| **Faithfulness** | RAGas | Factual accuracy |
+| **Answer Relevancy** | RAGas | Answer quality |
+| **Context Precision** | RAGas | Retrieval quality |
+| **Context Recall** | RAGas | Coverage |
+| **TruEra Metrics** | TruEra | Comprehensive evaluation |
+
+**Evaluation Example**:
+
+```python
+from ragas import evaluate
+from datasets import Dataset
+
+# Prepare evaluation dataset
+dataset = Dataset.from_dict({
+    "question": ["What is RAG?"],
+    "contexts": [["RAG is retrieval augmented generation..."]],
+    "answer": ["RAG combines retrieval and generation..."],
+    "ground_truth": ["RAG is a technique that..."]
+})
+
+# Evaluate
+results = evaluate(
+    dataset=dataset,
+    metrics=["faithfulness", "answer_relevancy", "context_precision"]
+)
+print(results)
+```
+
+**Common RAG Challenges**:
+
+| Challenge | Description | Solution |
+|:----------|:------------|:---------|
+| **Poor Retrieval** | Irrelevant context | Better embeddings, hybrid search |
+| **Context Window** | Limited tokens | Compression, summarization |
+| **Hallucination** | Incorrect facts | Better retrieval, fact-checking |
+| **Latency** | Slow responses | Caching, optimization |
+| **Scalability** | Large datasets | Efficient indexing, sharding |
+
+### Complete Roadmap Structure
+
+```mermaid
+graph TB
+    A[3-Day RAG Roadmap] --> B[Day 1: Basics]
+    A --> C[Day 2: Advanced + Build]
+    A --> D[Day 3: Evaluation]
+    
+    B --> B1[RAG Introduction]
+    B --> B2[Components]
+    B --> B3[Pipeline]
+    
+    C --> C1[Advanced Techniques]
+    C --> C2[Build System]
+    C --> C3[LangChain + OpenAI]
+    
+    D --> D1[Evaluation Metrics]
+    D --> D2[Challenges]
+    D --> D3[Solutions]
+    
+    E[Optional Resources] --> A
+    F[Research Papers] --> A
+    
+    style A fill:#e1f5ff
+    style B fill:#fff3cd
+    style C fill:#d4edda
+    style D fill:#f8d7da
+```
+
+### Additional Resources
+
+**Optional Reading**:
+- RAG research papers
+- Advanced techniques
+- Best practices
+- Case studies
+
+**2024 RAG Research Papers**:
+- Latest RAG improvements
+- Novel architectures
+- Evaluation methods
+- Production deployments
+
+### Key Takeaways
+
+*Retrieve:* This 3-day roadmap provides a structured path from RAG basics to building and evaluating production-ready applications.
+
+*Innovate:* By following this roadmap, you'll learn advanced RAG techniques, build your own system, and understand how to evaluate and optimize RAG applications.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about RAG, retrieve knowledge through the structured roadmap, and innovate by building your own RAG applications.
+
+**Next Steps**:
+- Follow the 3-day roadmap
+- Build your RAG system
+- Evaluate and optimize
+- Deploy to production
 
 ![ 3 Day RAG Roadmap ](/assets/img/llm/RAG_Roadmap_3_days.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 

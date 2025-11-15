@@ -7,7 +7,7 @@ tags: [Cookbook, Analyst Agents]
 date: 2024-07-29 11:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -16,7 +16,11 @@ date: 2024-07-29 11:00:00 +0800
 
 ## Data analyst agent: get your data’s insights in the blink of an eye ✨
 
-In this notebook we will make a data analyst agent: a Code agent armed with data analysis libraries, that can load and transform dataframes to extract insights from your data, and even plots the results!
+*Curiosity:* What insights can we retrieve from this? How does this connect to innovation in the field?
+
+*Curiosity:* In this notebook we will make a data analyst agent: a Code agent armed with data analysis libraries, that can load and transform dataframes to extract insights from your data, and even plots the results!
+
+
 
 Let’s say I want to analyze the data from the Kaggle Titanic challenge in order to predict the survival of individual passengers. But before digging into this myself, I want an autonomous agent to prepare the analysis for me by extracting trends and plotting some figures to find insights.
 

@@ -7,7 +7,7 @@ tags: [RAG, Setup]
 date: 2024-08-03 12:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -24,7 +24,9 @@ Don’t worry, you’re not alone..
  
 ## A RAG has several moving parts: data ingestion, retrieval, re-ranking, generation etc.. Each part comes with numerous options. 
 
-If we consider a toy example, where you could choose from: 
+*Curiosity:* If we consider a toy example, where you could choose from: 
+
+
 - 5 different chunking methods,
 - 5 different chunk sizes,
 - 5 different embedding models,
@@ -38,6 +40,8 @@ If we consider a toy example, where you could choose from:
 If you could try evaluating each one in just 5 mins, that’d still take 271 days of non-stop trial-and-error effort! In short, it’s kinda impossible to find your optimal RAG setup manually.
 
 ## So, how do you determine the most optimal RAG configuration for your data and use-case?
+
+*Curiosity:* What insights can we retrieve from this? How does this connect to innovation in the field?
 
 Use hyperparameter tuning - an ML technique for identifying the optimal values for your parameters when there’s a large set of possible values.
 

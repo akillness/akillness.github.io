@@ -7,19 +7,24 @@ tags: [Study, Datascience]
 date: 2024-08-12 15:00:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
 
+## Essential Statistical Concepts Every Data Professional Must Know
+
+*Curiosity:* What statistical concepts are essential for data professionals? How do these principles form the foundation for data science, analysis, and AI?
+
+**Mastering key statistical concepts** can set you apart in the world of data. Whether you're diving into data science, data analysis, AI, or making data-driven decisions, these principles are your foundation.
+
 ![ Statistical Thinking ](/assets/img/blog/statistical-thinking.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
+### The 9 Essential Concepts
 
-In the world of data, mastering key statistical concepts can set you apart. 
-
-Whether you're diving into data science, data analysis, AI, or just looking to make data-driven decisions, these principles are your foundation:
+*Retrieve:* Core statistical principles.
 
 ## 1️⃣ Correlation ≠ Causation: 
 - Remember, just because two variables move together doesn't mean one causes the other. 

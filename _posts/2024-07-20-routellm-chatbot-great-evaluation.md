@@ -7,7 +7,7 @@ tags: [Evaluation, RouteLLM]
 date: 2024-07-20 11:30:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -17,7 +17,11 @@ date: 2024-07-20 11:30:00 +0800
 
 ### RouteLLM ⇒ 𝗰𝘂𝘁 𝟱𝟬% 𝗼𝗳 𝗰𝗼𝘀𝘁 ✂️
 
-The LMSys team maintains the ChatbotArena, which is a great evaluation system based on thousands of matches: when a user submits a query, they receive the answers from two hidden models A and B, and vote between the two. This preference data allows them to create an ELO ranking, which is a great indicator of model strength.
+*Curiosity:* What insights can we retrieve from this? How does this connect to innovation in the field?
+
+*Curiosity:* The LMSys team maintains the ChatbotArena, which is a great evaluation system based on thousands of matches: when a user submits a query, they receive the answers from two hidden models A and B, and vote between the two. This preference data allows them to create an ELO ranking, which is a great indicator of model strength.
+
+
 
 The team has found another great usage of this preference data they gathered: train a router to route user queries to the most appropriate model.
 

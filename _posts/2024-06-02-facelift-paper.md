@@ -6,7 +6,7 @@ tags: [Tracking, 2D Landmark, FaceLift]
 # author: foDev_jeong
 date: 2024-06-02 19:00:00 +0800
 # pin: true
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/blog/NLP_Overview.svg
@@ -16,17 +16,81 @@ date: 2024-06-02 19:00:00 +0800
 
 {% include embed/youtube.html id='drEB44IfZi0' %}
 
-## 👉Flawless AI unveils a novel semi-supervised approach that learns 3D landmarks by directly lifting (visible) hand-labeled 2D landmarks and ensures better definition alignment, with no need for 3D landmark datasets.
+## FaceLift: New SOTA in 2D Landmarks
 
+*Curiosity:* How can we learn 3D landmarks from 2D annotations without 3D datasets? What happens when we combine 3D-aware GANs with volumetric consistency?
 
-𝐇𝐢𝐠𝐡𝐥𝐢𝐠𝐡𝐭𝐬:
-- ✅Novel semi-supervised HQ 2D landmarks
-- ✅3D-aware GAN prior to tackle 2D-3D lifting
-- ✅Accurate 3D landmarks aligned with 2D GT
-- ✅3D ViT leveraging volumetric consistency
-- ✅Novel SOTA on 2D-3D faces datasets
+**FaceLift** is Flawless AI's novel semi-supervised approach that learns 3D landmarks by directly lifting hand-labeled 2D landmarks. This method ensures better definition alignment without needing 3D landmark datasets.
 
-👉Discussion <https://t.me/AI_DeepLearning>
+> **Resources**:
+> - **📄 Paper**: <https://arxiv.org/pdf/2405.19646>
+> - **🌐 Project Page**: <https://davidcferman.github.io/FaceLift/>
+> - **💻 Code**: Not announced yet
+{: .prompt-info}
+
+### Key Highlights
+
+*Retrieve:* FaceLift achieves SOTA performance through innovative techniques.
+
+| Feature | Description | Benefit |
+|:--------|:------------|:--------|
+| **Semi-Supervised HQ 2D** | High-quality 2D landmarks | ⬆️ Annotation quality |
+| **3D-Aware GAN Prior** | Tackles 2D-3D lifting | ⬆️ 3D accuracy |
+| **Aligned 3D Landmarks** | Aligned with 2D ground truth | ⬆️ Consistency |
+| **3D ViT** | Volumetric consistency | ⬆️ Spatial understanding |
+| **SOTA Performance** | Best on 2D-3D face datasets | ⬆️ State-of-the-art |
+
+### Architecture Overview
+
+*Innovate:* FaceLift combines multiple techniques for accurate 3D landmark estimation.
+
+```mermaid
+graph TB
+    A[2D Hand-Labeled Landmarks] --> B[3D-Aware GAN Prior]
+    B --> C[2D-3D Lifting]
+    C --> D[3D Landmarks]
+    D --> E[3D ViT]
+    E --> F[Volumetric Consistency]
+    F --> G[Refined 3D Landmarks]
+    
+    H[2D Ground Truth] --> I[Alignment]
+    D --> I
+    I --> G
+    
+    style A fill:#e1f5ff
+    style C fill:#fff3cd
+    style G fill:#d4edda
+```
+
+### Method Details
+
+*Retrieve:* FaceLift's approach to 3D landmark learning.
+
+**Key Components**:
+1. **Semi-Supervised Learning**: Uses 2D annotations without 3D data
+2. **3D-Aware GAN**: Prior knowledge for 2D-3D lifting
+3. **Volumetric Consistency**: 3D ViT ensures spatial coherence
+4. **Alignment**: 3D landmarks aligned with 2D ground truth
+
+**Advantages**:
+- ✅ No 3D landmark datasets needed
+- ✅ Better definition alignment
+- ✅ SOTA performance
+- ✅ Handles visible landmarks effectively
+
+### Key Takeaways
+
+*Retrieve:* FaceLift demonstrates that 3D landmarks can be learned from 2D annotations using 3D-aware GANs and volumetric consistency, achieving SOTA without 3D datasets.
+
+*Innovate:* By combining semi-supervised learning, 3D-aware priors, and volumetric consistency, FaceLift enables accurate 3D landmark estimation from 2D annotations, opening new possibilities for face analysis.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about 3D landmark estimation, retrieve insights from FaceLift's approach, and innovate by applying these techniques to your face analysis applications.
+
+**Next Steps**:
+- Read the full paper
+- Explore the project page
+- Wait for code release
+- Apply to face tracking/analysis
 
 
 > 🧙Paper Authors: David Ferman Pablo Garrido Gaurav Bharaj

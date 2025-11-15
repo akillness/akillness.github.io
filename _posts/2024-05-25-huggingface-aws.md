@@ -5,7 +5,7 @@ categories: [LLM, Cookbook]
 tags: [Cookbook, LLM]
 # author: foDev_jeong
 date: 2024-05-25 00:20:00 +0800
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/llm/LLM_evaluation_rank.jpeg
@@ -16,21 +16,101 @@ date: 2024-05-25 00:20:00 +0800
 
 ## Deploy Llama 3 70B on AWS Inferentia2 with Hugging Face Optimum
 
-Are you struggling with GPU access or availability and want to use Meta Llama 3 70B in your Amazon Web Services (AWS) environment? 🤔 Excited to share Meta's Llama 3 70B on AWS Inferentia2 using Hugging Face Optimum!
+*Curiosity:* How can we deploy large LLMs without GPU access? What makes AWS Inferentia2 a viable alternative for running Llama 3 70B?
 
-TL;DR: 📌
-- 🤗 Easy setup using Hugging Face Optimum and SageMaker SDK
-- 🔥 Deploy Llama 3 70B on inf2.48xlarge with Hugging Face TGI
-- ⚡Create an interactive Gradio demo with streaming responses
-- 🔓 Leverage pre-compiled configurations for Llama 3 70B from Hugging Face Hub
-- ⏰ Benchmark with llmperf with ~132.8 tokens/second and latency of 23.46 ms/token
+**Struggling with GPU access?** Deploy Meta's Llama 3 70B on AWS Inferentia2 using Hugging Face Optimum!
 
->
-- **Blog**: <https://www.philschmid.de/inferentia2-llama3-70b>
-- **Code**: <https://github.com/philschmid/huggingface-inferentia2-samples/blob/main/llama3-70b/deploy-llama-3-70b-inferentia2.ipynb>
-{: .prompt-info }
+### TL;DR
 
-Thats not the limit! We are just getting started and are already improving performance and working on more supported modes. 🤗
+*Retrieve:* Quick summary.
+
+| Feature | Details | Benefit |
+|:--------|:--------|:--------|
+| **Setup** | Hugging Face Optimum + SageMaker SDK | ⬆️ Easy deployment |
+| **Instance** | inf2.48xlarge with Hugging Face TGI | ⬆️ Optimized |
+| **Demo** | Interactive Gradio with streaming | ⬆️ User experience |
+| **Config** | Pre-compiled from Hugging Face Hub | ⬆️ Fast startup |
+| **Performance** | ~132.8 tokens/s, 23.46 ms/token | ⬆️ Efficient |
+
+### Deployment Architecture
+
+*Innovate:* System overview.
+
+```mermaid
+graph TB
+    A[AWS Account] --> B[SageMaker]
+    B --> C[Inferentia2 Instance]
+    C --> D[Hugging Face TGI]
+    D --> E[Llama 3 70B]
+    E --> F[Gradio Demo]
+    
+    G[Hugging Face Hub] --> H[Pre-compiled Config]
+    H --> D
+    
+    style A fill:#e1f5ff
+    style C fill:#fff3cd
+    style E fill:#d4edda
+    style F fill:#f8d7da
+```
+
+### Key Features
+
+*Retrieve:* Deployment highlights.
+
+**1. Easy Setup**:
+- ✅ Hugging Face Optimum
+- ✅ SageMaker SDK
+- ✅ Simple configuration
+
+**2. Optimized Deployment**:
+- ✅ inf2.48xlarge instance
+- ✅ Hugging Face TGI
+- ✅ Pre-compiled configurations
+
+**3. Interactive Demo**:
+- ✅ Gradio interface
+- ✅ Streaming responses
+- ✅ User-friendly
+
+**4. Performance**:
+- ✅ ~132.8 tokens/second
+- ✅ 23.46 ms/token latency
+- ✅ Efficient inference
+
+### AWS Inferentia2 Benefits
+
+*Retrieve:* Why Inferentia2.
+
+**Advantages**:
+- ✅ Cost-effective alternative to GPUs
+- ✅ Optimized for inference
+- ✅ High throughput
+- ✅ Low latency
+
+### Resources
+
+*Retrieve:* Available guides.
+
+> **Resources**:
+> - **📰 Blog**: <https://www.philschmid.de/inferentia2-llama3-70b>
+> - **💻 Code**: <https://github.com/philschmid/huggingface-inferentia2-samples/blob/main/llama3-70b/deploy-llama-3-70b-inferentia2.ipynb>
+{: .prompt-info}
+
+**Note**: This is just the beginning! Performance improvements and more supported modes are coming. 🤗
+
+### Key Takeaways
+
+*Retrieve:* Deploy Llama 3 70B on AWS Inferentia2 using Hugging Face Optimum provides an easy, cost-effective alternative to GPUs, with impressive performance (~132.8 tokens/s) and pre-compiled configurations.
+
+*Innovate:* By leveraging AWS Inferentia2 and Hugging Face Optimum, you can deploy large LLMs without GPU access, achieving efficient inference with optimized instances and pre-compiled configurations.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about GPU alternatives, retrieve insights from AWS Inferentia2 deployment, and innovate by deploying large models efficiently on cost-effective hardware.
+
+**Next Steps**:
+- Read the blog post
+- Follow the code notebook
+- Deploy your model
+- Benchmark performance
 
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>

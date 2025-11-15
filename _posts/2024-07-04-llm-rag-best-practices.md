@@ -7,7 +7,7 @@ tags: [RAG, Practices]
 date: 2024-07-04 22:10:00 +0800
 pin: true
 # math: true
-# mermaid: true
+mermaid: true
 image:
   path: /assets/img/llm/The-Evolution-of-RAG-Models.jpeg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -16,9 +16,13 @@ image:
 
 ## Generative large language models are prone to producing outdated information or fabricating facts.
 
-Retrieval-augmented generation (RAG) techniques address the LLM limitations by integrating up-to-date information, mitigating hallucinations, and enhancing response quality, particularly in specialized domains.
+*Curiosity:* Retrieval-augmented generation (RAG) techniques address the LLM limitations by integrating up-to-date information, mitigating hallucinations, and enhancing response quality, particularly in specialized domains.
+
+
 
 ### 😅 The pace of RAG research is super impressive, but not all of it is practical for real-world use cases. 
+
+*Curiosity:* What insights can we retrieve from this? How does this connect to innovation in the field?
 
 Many latest research works seek to improve performance over basic RAG architectures, however, they struggle with complex implementation and long response times.
 

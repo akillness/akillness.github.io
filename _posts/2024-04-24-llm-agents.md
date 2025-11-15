@@ -5,7 +5,7 @@ categories: [Script, Agents]
 tags: [LLM, agents, Generative AI]
 # author: foDev_jeong
 date: 2024-04-24 19:57:00 +0800
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 image:
   path: /assets/img/news/llm-agents.jpeg
@@ -17,28 +17,131 @@ image:
 {: .prompt-info}
 
 
-### 🎊 This weekend, check out my beginner-friendly 101 guide on LLM agents! Use this comprehensive guide to understand the concepts and then build your own LLM agent!
+## Beginner-Friendly 101 Guide on LLM Agents
 
-🥁 LLM agents are gaining quite some momentum in the generative AI space since they can process feedback, maintain memory, strategize for future actions, and collaborate with various tools to make informed decisions.
+*Curiosity:* What if LLMs could do more than just answer questions? What if they could retrieve information, make decisions, and take actions autonomously?
 
-⚡ This functionality resembles rudimentary human-like behavior, marking LLM agents as stepping stones towards the notion of Artificial General Intelligence (AGI).
+**LLM agents** are gaining momentum in generative AI. They can process feedback, maintain memory, strategize for future actions, and collaborate with various tools to make informed decisions.
 
-💡 I've developed a beginner-friendly guide to introduce you to the foundations of LLM agents which also includes free resources to create your very own agent!
+> **Key Insight**: Agents extend conversational LLMs through tools, execution code, embeddings, and vector stores. Agents add additional steps beyond RAG.
+{: .prompt-info}
 
-> Here are the topics
-- ⛳ Introduction to LLM Agents
-- ⛳ LLM Agent Framework (Memory, Planning, Tools)
-- ⛳ Multi-agent systems (MAS)
-- ⛳ Real World LLM Agents
-- ⛳ Evaluating LLM Agents
-- ⛳ Build Your Own Agent
-{: .prompt-info }
+### Why LLM Agents Matter
 
-The guide is available on my GitHub repo: <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/resources/agents_101_guide.md>
+*Retrieve:* Understanding agent capabilities.
 
-Please note that while this guide is tailored for beginners, it assumes some prior understanding of LLMs and their practical applications.
+**Capabilities**:
+- ✅ Process feedback
+- ✅ Maintain memory
+- ✅ Strategize for future actions
+- ✅ Collaborate with tools
+- ✅ Make informed decisions
 
-🚨 I post #genai content daily, follow along for the latest updates! #genai #llms #agents
+**Significance**: This functionality resembles rudimentary human-like behavior, marking LLM agents as stepping stones towards **Artificial General Intelligence (AGI)**.
+
+### LLM Agent Framework
+
+*Innovate:* Core components.
+
+```mermaid
+graph TB
+    A[LLM Agent] --> B[Agent Core]
+    A --> C[Memory Module]
+    A --> D[Planning Module]
+    A --> E[Tools]
+    
+    B --> F[Decision Making]
+    C --> G[Short-term Memory]
+    C --> H[Long-term Memory]
+    D --> I[Strategy]
+    E --> J[External APIs]
+    E --> K[Code Execution]
+    
+    style A fill:#e1f5ff
+    style B fill:#fff3cd
+    style E fill:#d4edda
+```
+
+### Guide Topics
+
+*Retrieve:* Comprehensive coverage.
+
+> **Guide Topics**:
+> - ⛳ Introduction to LLM Agents
+> - ⛳ LLM Agent Framework (Memory, Planning, Tools)
+> - ⛳ Multi-agent systems (MAS)
+> - ⛳ Real World LLM Agents
+> - ⛳ Evaluating LLM Agents
+> - ⛳ Build Your Own Agent
+{: .prompt-info}
+
+### Multi-Agent Systems (MAS)
+
+*Innovate:* Collaboration benefits.
+
+**Advantages**:
+- ✅ Diverse agent profiles
+- ✅ Agent-to-agent interactions
+- ✅ Collective decision-making
+- ✅ Specialized agents for tasks
+- ✅ Improved efficiency
+
+**Interaction Types**:
+- **Collaborative**: Agents work together
+- **Adversarial**: Agents compete/argue
+
+### Real-World Applications
+
+*Retrieve:* Practical examples.
+
+**Examples**:
+- **BabyAGI**: Task-oriented autonomous agent
+- **Virtual Assistants**: Travel planning, scheduling
+- **Code Generation**: Autonomous coding agents
+- **Research**: Information gathering and synthesis
+
+### Evaluation
+
+*Retrieve:* How to assess agents.
+
+**Benchmarks**:
+- AgentBench
+- IGLU
+- ClemBench
+- ToolBench
+- GentBench
+
+**Dimensions**:
+- Utility
+- Sociality
+- Value alignment
+- Continuous evolution
+- Adversarial robustness
+- Reliability
+
+### Resources
+
+*Retrieve:* Getting started.
+
+> **Guide**: <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/resources/agents_101_guide.md>
+> **Lilys AI Translation**: <https://lilys.ai/digest/674766>
+{: .prompt-info}
+
+**Note**: While tailored for beginners, assumes some prior understanding of LLMs and their practical applications.
+
+### Key Takeaways
+
+*Retrieve:* LLM agents extend LLMs beyond question-answering to autonomous decision-making and action-taking, using memory, planning, and tools.
+
+*Innovate:* By building LLM agents with proper frameworks (memory, planning, tools), you can create systems that process feedback, maintain context, and collaborate with external tools to solve complex problems.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about autonomous AI, retrieve insights from agent frameworks and multi-agent systems, and innovate by building your own LLM agents that solve real-world problems.
+
+**Next Steps**:
+- Read the guide
+- Understand the framework
+- Explore multi-agent systems
+- Build your first agent
 
 
 <details markdown="1">

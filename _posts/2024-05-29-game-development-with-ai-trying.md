@@ -6,7 +6,7 @@ tags: [LLM, Game, AI, Unity]
 # author: foDev_jeong
 date: 2024-05-29 23:13:00 +0800
 # pin: true
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 image:
   path: /assets/img/blog/ML_for_Games.jpeg
@@ -31,13 +31,24 @@ image:
 
 ## Introduction
 
+*Curiosity:* What happens when we combine the storytelling power of LLMs with interactive game worlds? How can AI transform NPCs from scripted entities into dynamic characters that adapt to player choices?
+
+This course answers these questions by retrieving insights from cutting-edge AI research and game design principles, then innovating on how we build game experiences.
+
 In this course, you will:
 
 - 🤖 Learn to use powerful chat models to build intelligent NPC.
+  - *Retrieve:* Understanding how LLMs can generate contextual dialogue and behavior
+  - *Innovate:* Creating NPCs that feel alive and responsive
 - 🪄 Run these powerful AI models locally or with cloud APIs.
+  - *Curiosity:* What's the trade-off between local control and cloud scalability?
+  - *Retrieve:* Exploring deployment strategies and their implications
 - 🎨 Use AI tools to accelerate your game development: generate voices with text-to-speech models using image generation tools…
+  - *Innovate:* Building entire content pipelines powered by AI
 - 🎮 Work on exciting game demos.
+  - *Retrieve:* Learning from real-world implementations and case studies
 - 👩‍🎨 Build Your Own Game Demo.
+  - *Innovation:* Turning curiosity into a playable prototype
 
 * * *
 

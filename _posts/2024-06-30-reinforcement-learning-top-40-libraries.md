@@ -7,137 +7,143 @@ tags: [Course, ReinforementLearning]
 date: 2024-06-30 20:10:00 +0800
 # pin: true
 # math: true
-# mermaid: true
+mermaid: true
 # image:
 #   path: /assets/img/cover/programming.jpeg
 #   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 #   alt: [2024 programming curriculum by honglab]
 ---
 
-RL is a type of machine learning that lets an agent interact with an environment, receive feedback, and make better decisions over time.
+## Reinforcement Learning: Terms, Policies, Models, and Top 40 Libraries
+
+*Curiosity:* What is reinforcement learning? How do agents learn to make better decisions through interaction with environments?
+
+**Reinforcement Learning (RL)** is a type of machine learning where an agent interacts with an environment, receives feedback, and makes better decisions over time through trial and error.
+
+### RL Overview
+
+*Retrieve:* Understanding reinforcement learning fundamentals.
+
+```mermaid
+graph LR
+    A[Agent] --> B[Action]
+    B --> C[Environment]
+    C --> D[State]
+    C --> E[Reward]
+    D --> A
+    E --> A
+    A --> F[Policy Update]
+    F --> A
+    
+    style A fill:#e1f5ff
+    style C fill:#fff3cd
+    style E fill:#d4edda
+```
+
+### Key Terms in RL
+
+*Retrieve:* Essential RL terminology.
+
+| Term | Symbol | Description | Purpose |
+|:-----|:-------|:------------|:--------|
+| **Environment** | - | System the agent interacts with | ⬆️ Learning context |
+| **Agent** | - | Autonomous entity | ⬆️ Decision maker |
+| **Feedback** | - | Rewards or penalties | ⬆️ Learning signal |
+| **State** | S | Current situation | ⬆️ Context |
+| **Policy** | π | Strategy for actions | ⬆️ Decision rule |
+| **Value** | V | Expected long-term return | ⬆️ State evaluation |
+| **Q-Value** | Q | Long-term return of action | ⬆️ Action evaluation |
+| **Model** | - | Environment simulation | ⬆️ Planning | 
 
 —————————
 
-## 📝 Terms Used in RL:
+### Model/Policy Classifications
 
-- ⌘ Environment: the system or situation that the agent interacts with. 
+*Retrieve:* Different approaches to RL.
 
-- ⌘ Agent: refers to an autonomous entity that interacts with an environment.
+**Model-Free vs Model-Based**:
 
-- ⌘ Feedback: refers to the information provided by the environment to the agent after the agent has taken an action (rewards or penalties).
+| Type | Description | Use Case |
+|:-----|:------------|:---------|
+| **Model-Based** | Uses environment model | ⬆️ When model available |
+| **Model-Free** | Trial-and-error learning | ⬆️ When model unknown |
 
-- ⌘ State (S): Current situation returned by the environment.
+**On-Policy vs Off-Policy**:
 
-- ⌘ Policy(π): The strategy that the agent employs to determine next action.
-
-- ⌘ Value (V): The expected long-term return 
-
-- ⌘ Q-Value (Q): the long-term return of given current action 
-
-- ⌘ Model: stands for the simulation of environment. 
-
-—————————
-
-## 📖 Model/Policy of RL:
-
-Model-Free vs Model-Based:
-
-- ๏ Model-based works with state space and action space grows
-- ๏ Model-free algorithms rely on trial-and-error to update its knowledge.
-
-On-Policy vs Off-Policy:
-
-- ๏ On-policy agent learns based on its current action a derived from the current policy, 
-- ๏ Off-policy counter part learns it based on another policy.
+| Type | Description | Learning Source |
+|:-----|:------------|:----------------|
+| **On-Policy** | Learns from current policy | ⬆️ Current actions |
+| **Off-Policy** | Learns from different policy | ⬆️ Other policy data |
 
 —————————
 
-## 🤖 Well-known RL Models:
+### Well-Known RL Models
 
-- ➊ Q-Learning:
+*Retrieve:* Popular RL algorithms and their characteristics.
 
-Model-free algorithm that uses a Q-table to store best action for a state.
+| Model | Type | Description | Advantage |
+|:------|:-----|:------------|:----------|
+| **Q-Learning** | Model-free | Q-table for best actions | ⬆️ Simple, effective |
+| **SARSA** | Model-based | Updates based on next state-action | ⬆️ On-policy learning |
+| **DQN** | Model-free | Deep networks for Q-function | ⬆️ Handles large states |
+| **DDPG** | Model-free | Deep deterministic policy | ⬆️ Continuous actions |
 
-- ➋ State-Action-Reward-State-Action (SARSA):
-
-Model-based algorithm that updates state-action value based on reward and next state-action.
-
-- ➌ Deep Q Network (DQN):
-
-Model-free algorithm that uses deep neural networks to approximate the Q-function.
-
-- ➍ Deep Deterministic Policy Gradient (DDPG):
-
-By using deep neural networks, DDPG handles more complex environments and large state spaces than traditional RL algorithms. 
+**DDPG Advantage**: Handles complex environments and large state spaces better than traditional RL algorithms. 
 
 —————————
 
-## 🛠️ Here are some applications of reinforcement learning (RL):
+### RL Applications
 
-- » Robotics
-- » Autonomous Vehicles
-- » Healthcare
-- » Finance
-- » Gaming
-- » Energy Management
-- » Marketing and Advertising
-- » Natural Language Processing
-- » Manufacturing
-- » Smart Grids
-- » Supply Chain Optimization
-- » Recommendation Systems
-- » Personalization Systems
-- » Traffic Signal Control
-- » Education and Training
-- » Agriculture
-- » Industrial Automation
-- » Space Exploration
-- » Cybersecurity
-- » Virtual Assistants
+*Innovate:* Diverse applications of reinforcement learning.
+
+| Category | Applications | Impact |
+|:---------|:-------------|:-------|
+| **Robotics** | Robot control, manipulation | ⬆️ Automation |
+| **Transportation** | Autonomous vehicles, traffic control | ⬆️ Safety, efficiency |
+| **Healthcare** | Treatment optimization | ⬆️ Patient outcomes |
+| **Finance** | Trading, portfolio management | ⬆️ Returns |
+| **Gaming** | Game AI, strategy | ⬆️ Entertainment |
+| **Energy** | Smart grids, management | ⬆️ Efficiency |
+| **Business** | Marketing, recommendations | ⬆️ Revenue |
+| **Technology** | NLP, cybersecurity | ⬆️ Capabilities |
+| **Industry** | Manufacturing, automation | ⬆️ Productivity |
+| **Research** | Space exploration, agriculture | ⬆️ Innovation |
 
 —————————
 
-These are 40 Python Libraries I found for Reinforcement Learning:
+### Top 40 Python RL Libraries
 
-- 📚 Gym
-- 📚 Baselines
-- 📚 Dopamine
-- 📚 TensorLayer
-- 📚 FinRL
-- 📚 Stable-Baselines
-- 📚 ReAgent
-- 📚 Acme
-- 📚 PARL
-- 📚 TF-Agents
-- 📚 TensorFlow
-- 📚 PyTorchRL
-- 📚 Keras-RL
-- 📚 Garage
-- 📚 TensorForce
-- 📚 RLax
-- 📚 Coach
-- 📚 RFRL
-- 📚 Rliable
-- 📚 ViZDoom
-- 📚 Ray RLlib
-- 📚 Dopamine
-- 📚 Acme
-- 📚 Tensorforce
-- 📚 ReAgent (Horizon)
-- 📚 ChainerRL
-- 📚 MushroomRL
-- 📚 TRFL
-- 📚 CleanRL
-- 📚 Tianshou
-- 📚 MAgent
-- 📚 rl-baselines3-zoo
-- 📚 PettingZoo
-- 📚 RLlib
-- 📚 RoboRL
-- 📚 H-baselines
-- 📚 DI-engine
+*Retrieve:* Comprehensive list of reinforcement learning libraries.
 
-Source in the comments ↓
+| Library | Framework | Focus | Use Case |
+|:--------|:----------|:------|:---------|
+| **Gym** | OpenAI | Environments | ⬆️ Standard environments |
+| **Stable-Baselines** | TensorFlow/PyTorch | Algorithms | ⬆️ Easy implementation |
+| **Ray RLlib** | Ray | Distributed RL | ⬆️ Scalability |
+| **TF-Agents** | TensorFlow | Agents | ⬆️ TensorFlow integration |
+| **Acme** | JAX | Research | ⬆️ Advanced research |
+| **Tianshou** | PyTorch | Algorithms | ⬆️ PyTorch ecosystem |
+| **CleanRL** | PyTorch | Clean code | ⬆️ Learning |
+| **PettingZoo** | Multi-agent | Multi-agent RL | ⬆️ Multi-agent |
+| **Dopamine** | TensorFlow | Research | ⬆️ Google research |
+| **MushroomRL** | Python | Algorithms | ⬆️ Research |
+
+**Complete List** (40 libraries):
+Gym, Baselines, Dopamine, TensorLayer, FinRL, Stable-Baselines, ReAgent, Acme, PARL, TF-Agents, TensorFlow, PyTorchRL, Keras-RL, Garage, TensorForce, RLax, Coach, RFRL, Rliable, ViZDoom, Ray RLlib, ReAgent (Horizon), ChainerRL, MushroomRL, TRFL, CleanRL, Tianshou, MAgent, rl-baselines3-zoo, PettingZoo, RLlib, RoboRL, H-baselines, DI-engine, and more.
+
+### Key Takeaways
+
+*Retrieve:* Reinforcement learning enables agents to learn through environment interaction, with various algorithms (Q-Learning, DQN, DDPG) and applications across robotics, gaming, finance, and more.
+
+*Innovate:* By leveraging Python RL libraries like Gym, Stable-Baselines, and Ray RLlib, you can build RL systems for diverse applications, from game AI to autonomous vehicles, using proven algorithms and frameworks.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about reinforcement learning, retrieve insights from RL terms, models, and libraries, and innovate by building RL applications that solve real-world problems.
+
+**Next Steps**:
+- Choose an RL library
+- Start with simple environments
+- Implement basic algorithms
+- Build your RL application
 
 ———————————————
 

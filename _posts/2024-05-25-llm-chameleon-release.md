@@ -5,7 +5,7 @@ categories: [Script, Chameleon]
 tags: [Chameleon, LLM]
 # author: foDev_jeong
 date: 2024-05-25 22:40:00 +0800
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 image:
   path: /assets/img/llm/LLM_chameleon.jpeg
@@ -16,26 +16,101 @@ image:
 
 ## Chameleon: Mixed-Modal Early-Fusion Foundation Models
 
-Will Chameleon be [Meta](https://www.linkedin.com/company/meta/) Llama 4? 🦎 🦙 Meta proposes “Chameleon: Mixed-Modal Early-Fusion Foundation Models” with a unified approach for fully token-based representations of both image and text. No Encoders or connectors. 👀
+*Curiosity:* Will Chameleon be [Meta](https://www.linkedin.com/company/meta/) Llama 4? 🦎 🦙 Meta proposes “Chameleon: Mixed-Modal Early-Fusion Foundation Models” with a unified approach for fully token-based representations of both image and text. No Encoders or connectors. 👀
 
-### Implementation:
-- 1️⃣ Trained 2 tokenizers, an image Tokenizer that encodes a 512 × 512 image into 1024 tokens from a codebook (8192) and a BPE with a vocab of 65,536, which includes the 8192 image codebook token.
-- 2️⃣ uses a Decoder architecture based on Llama 2 but incorporates query-key normalization and reordering of layer norms to stabilize training in the mixed-modal setting.
-- 3️⃣ Pretraining stage 1 (80%) unsupervised training on text-only (Llama 2, CodeLlama ⇒ 2.9T tokens), text-image (1.4B pairs/1.5T tokens), Text/Image Interleaved (400B tokens);
-- 4️⃣ Pretraining stage 2 (20%) Halved the dataset of first stage and include higher quality data and instruction data.
-- 5️⃣ Fine-tuned on ~1.8 million samples with ~100k vision samples.
 
-### Insights:
-- 🔗 Previous MLLM (Idefics, GPT-4v, Flamingo) used encoders and connectors for multimodality, which limited their ability to generate multimodal documents (image + text outputs).
-- 🦎 Chameleon can understand and generate both text and images using discrete tokens
-- 📚 Chameleon-34B trained for 2.1 epochs over our full training dataset for a total of 9.2T tokens.
-- 🔧 Code Data improved text-only reasoning tasks performance.
-- ⚖️ Challenging to maintain stable training when scaling the Chameleon models above 8B parameters and 1T tokens.
-- 🚀 The last 20% of pre-training with high-quality data significantly boosted performance.
-- 🏆 Chameleon-34B outperforms Llama2-70B and approaches Mixtral 8x7B/Gemini-Pro, GSM8K, MATH, and MMLU.
-- 📊 Chameleon-34B outperforms Flamingo-80B and IDEFICS-80B on MS-COCO and matches on Flickr30k.
-- 🎯 Chameleon-34B achieves 60.4% win rate against Gemini-Pro and a 51.6% against GPT-4V.
-- ⚖️ Balanced modality datasets are important for Fine-tuning and Alignment.
+
+### Architecture Overview
+
+*Retrieve:* Chameleon uses a unified token-based approach for multimodal understanding and generation.
+
+```mermaid
+graph TB
+    A[Input] --> B[Image Tokenizer]
+    A --> C[Text Tokenizer]
+    B --> D[1024 Image Tokens]
+    C --> E[Text Tokens]
+    D --> F[Unified Token Sequence]
+    E --> F
+    F --> G[Llama 2 Decoder]
+    G --> H[Output: Text/Image]
+    
+    style A fill:#e1f5ff
+    style F fill:#fff3cd
+    style H fill:#d4edda
+```
+
+### Implementation Details
+
+| Step | Component | Details |
+|:-----|:----------|:--------|
+| **1. Tokenizers** | Image + Text | Image: 512×512 → 1024 tokens (codebook 8192)<br>Text: BPE vocab 65,536 (includes image tokens) |
+| **2. Architecture** | Llama 2 Decoder | Query-key normalization<br>Layer norm reordering<br>Stabilized mixed-modal training |
+| **3. Pretraining Stage 1** | 80% of training | Text-only: 2.9T tokens<br>Text-image: 1.4B pairs/1.5T tokens<br>Interleaved: 400B tokens |
+| **4. Pretraining Stage 2** | 20% of training | Higher quality data<br>Instruction data<br>Half dataset size |
+| **5. Fine-tuning** | Final stage | ~1.8M samples<br>~100k vision samples |
+
+### Training Data Breakdown
+
+```mermaid
+pie title Training Data Distribution
+    "Text-only (2.9T)" : 60
+    "Text-Image (1.5T)" : 31
+    "Interleaved (400B)" : 9
+```
+
+### Key Insights
+
+*Retrieve:* Chameleon's unified token-based approach enables native multimodal understanding and generation.
+
+| Insight | Description | Impact |
+|:--------|:------------|:-------|
+| **Unified Tokens** | No encoders/connectors | ⬆️ Native multimodal generation |
+| **Training Scale** | 9.2T tokens, 2.1 epochs | ⬆️ Strong performance |
+| **Code Data** | Improved reasoning | ⬆️ Text-only tasks |
+| **Scaling Challenge** | Difficult above 8B/1T | ⚠️ Training stability |
+| **High-Quality Data** | Last 20% crucial | ⬆️ Significant boost |
+| **Performance** | Outperforms competitors | ⬆️ Strong results |
+
+### Performance Comparison
+
+*Innovate:* Chameleon-34B achieves competitive performance across benchmarks.
+
+**Text Tasks**:
+- Outperforms Llama2-70B
+- Approaches Mixtral 8x7B/Gemini-Pro
+- Strong on GSM8K, MATH, MMLU
+
+**Vision Tasks**:
+- Outperforms Flamingo-80B and IDEFICS-80B on MS-COCO
+- Matches performance on Flickr30k
+
+**Multimodal Evaluation**:
+- 60.4% win rate vs. Gemini-Pro
+- 51.6% win rate vs. GPT-4V
+
+### Comparison with Previous MLLMs
+
+| Model | Architecture | Multimodal Generation |
+|:------|:-------------|:----------------------|
+| **Idefics, GPT-4v, Flamingo** | Encoders + Connectors | ❌ Limited |
+| **Chameleon** | Unified Tokens | ✅ Native support |
+
+**Key Advantage**: Chameleon can generate both text and images using discrete tokens, enabling true multimodal document generation.
+
+### Key Takeaways
+
+*Retrieve:* Chameleon demonstrates that unified token-based representations can achieve strong multimodal performance without separate encoders or connectors.
+
+*Innovate:* By using discrete tokens for both images and text, Chameleon enables native multimodal understanding and generation, approaching GPT-4o's capabilities with a simpler architecture.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about unified multimodal models, retrieve insights from Chameleon's token-based approach, and innovate by building applications that leverage native multimodal generation.
+
+**Next Steps**:
+- Read the full paper
+- Explore Chameleon architecture
+- Compare with GPT-4o
+- Build multimodal applications
 
 > Paper: <https://huggingface.co/papers/2405.09818>
 {: .prompt-info }

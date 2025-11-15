@@ -5,7 +5,7 @@ categories: [LLM, Cookbook]
 tags: [HuggingFace, Langchain]
 # author: foDev_jeong
 date: 2024-05-16 16:20:00 +0800
-# mermaid: true
+mermaid: true
 # render_with_liquid: false
 # image:
 #   path: /assets/img/llm/LLM_evaluation_rank.jpeg
@@ -14,25 +14,67 @@ date: 2024-05-16 16:20:00 +0800
 ---
 
 
-## A new partner package in LangChain🤝
+## Hugging Face × LangChain: New Partner Package
 
-Hugging Face can now be counted as part of LangChain's partner packages.
+*Curiosity:* What happens when two major LLM ecosystems collaborate? How does this partnership benefit developers building LLM applications?
 
-> What it means:
-- 🚀 𝗙𝗮𝘀𝘁𝗲𝗿 𝗶𝗻𝘁𝗲𝗴𝗿𝗮𝘁𝗶𝗼𝗻𝘀 : New features from Hugging Face will be quickly implemented.
-- 🙏 𝗖𝗼𝗹𝗹𝗮𝗯𝗼𝗿𝗮𝘁𝗶𝘃𝗲 : Jointly maintained to ensure the best compatibility.
-- ⚖️ 𝗠𝗼𝗿𝗲 𝗯𝗮𝗹𝗮𝗻𝗰𝗲 : The content of the package will be better aligned with our vision.
-- 🤗 𝗛𝘂𝗴𝗴𝗶𝗻𝗴 𝗙𝗮𝗰𝗲 𝗲𝘅𝗽𝗲𝗿𝘁 𝗵𝗲𝗹𝗽 : We will be in the issues/PR of the package to assist you.
-{: .prompt-info }
+**Hugging Face** is now part of LangChain's partner packages, creating a powerful integration between two leading LLM platforms.
 
-You can directly install it : 𝚙𝚒𝚙 𝚒𝚗𝚜𝚝𝚊𝚕𝚕 𝚕𝚊𝚗𝚐𝚌𝚑𝚊𝚒𝚗-𝚑𝚞𝚐𝚐𝚒𝚗𝚐𝚏𝚊𝚌𝚎
+### What This Means
 
-Or first have a tour of the package content in the associated blog post 
-👉<https://huggingface.co/blog/langchain>
+*Retrieve:* Benefits of the partnership.
 
-We are looking forward to see what you'll build with it !
+| Benefit | Description | Impact |
+|:--------|:------------|:-------|
+| **🚀 Faster Integrations** | New Hugging Face features quickly implemented | ⬆️ Latest capabilities |
+| **🙏 Collaborative** | Jointly maintained for best compatibility | ⬆️ Reliability |
+| **⚖️ Better Balance** | Package aligned with LangChain vision | ⬆️ Consistency |
+| **🤗 Expert Help** | Hugging Face experts assist in issues/PRs | ⬆️ Support |
 
-𝘚𝘱𝘦𝘤𝘪𝘢𝘭 𝘵𝘩𝘢𝘯𝘬𝘴 𝘵𝘰 : Erick Friis, Kirill Kondratenko 𝘧𝘰𝘳 𝘵𝘩𝘦 𝘩𝘦𝘭𝘱 𝘰𝘯 𝘵𝘩𝘦 𝘱𝘢𝘤𝘬𝘢𝘨𝘦 𝘢𝘯𝘥 𝘵𝘰 Andrew Reed ,Aymeric Roucher 𝘧𝘰𝘳 𝘵𝘩𝘦𝘪𝘳 𝘧𝘪𝘳𝘴𝘵 𝘗𝘙𝘴 𝘪𝘯 𝘵𝘩𝘦 𝘤𝘰𝘮𝘮𝘶𝘯𝘪𝘵𝘺 𝘗𝘢𝘤𝘬𝘢𝘨𝘦
+### Installation
+
+*Retrieve:* How to get started.
+
+**Install**:
+```bash
+pip install langchain-huggingface
+```
+
+**Explore**:
+> **Blog Post**: <https://huggingface.co/blog/langchain>
+{: .prompt-info}
+
+### Partnership Benefits
+
+*Innovate:* Why this collaboration matters.
+
+**For Developers**:
+- ✅ Seamless integration
+- ✅ Latest features
+- ✅ Better support
+- ✅ Consistent API
+
+**For Ecosystem**:
+- ✅ Stronger collaboration
+- ✅ Faster innovation
+- ✅ Better compatibility
+- ✅ Unified experience
+
+### Key Takeaways
+
+*Retrieve:* Hugging Face joining LangChain's partner packages enables faster integrations, collaborative maintenance, and better alignment between the two ecosystems.
+
+*Innovate:* By using `langchain-huggingface`, you can leverage the best of both platforms—LangChain's orchestration capabilities and Hugging Face's model ecosystem—building more powerful LLM applications.
+
+*Curiosity → Retrieve → Innovation:* Start with curiosity about LLM ecosystem integration, retrieve insights from this partnership, and innovate by building applications that combine LangChain and Hugging Face capabilities.
+
+**Next Steps**:
+- Install langchain-huggingface
+- Read the blog post
+- Explore integrations
+- Build with both platforms
+
+**Special Thanks**: Erick Friis, Kirill Kondratenko, Andrew Reed, Aymeric Roucher
 
 
 ![ 𝗛𝘂𝗴𝗴𝗶𝗻𝗴 𝗙𝗮𝗰𝗲 𝘅 𝗟𝗮𝗻𝗴𝗖𝗵𝗮𝗶𝗻 ](/assets/img/llm/Huggingface_Langchain.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
