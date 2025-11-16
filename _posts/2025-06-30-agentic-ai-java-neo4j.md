@@ -3,7 +3,7 @@ title: "Agentic AI with Java and Neo4j - Building Graph-Native AI Agents"
 description: "Exploring how to build AI agents that can autonomously navigate and query graph databases using Java, bridging the gap between traditional GraphRAG and agentic AI"
 categories: [AI, Agents]
 tags: [agentic-ai, java, neo4j, graphrag, llm-agents, graph-database]
-date: 2024-06-30 03:00:00 +0800
+date: 2025-06-30 03:00:00 +0800
 mermaid: true
 ---
 
@@ -16,7 +16,7 @@ Traditional GraphRAG works well when you know exactly how to traverse your graph
 This is where **agentic GraphRAG** comes in. Instead of pre-determining the graph traversal, we give the LLM tools to explore the graph itself, letting it decide what to look at based on the question and previous discoveries.
 
 > **Curiosity:** Can we build a lightweight, production-ready framework for agentic AI in Java that works seamlessly with Neo4j?
-{: .prompt-tip}
+> {: .prompt-tip}
 
 ---
 
@@ -40,7 +40,7 @@ graph TB
     H -->|No| C
     H -->|Yes| I[Generate Response]
     I --> J[Return to User]
-    
+
     style B fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
     style C fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
     style I fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
@@ -48,10 +48,10 @@ graph TB
 
 ### Traditional GraphRAG vs. Agentic GraphRAG
 
-| Approach | How It Works | Pros | Cons | Best For |
-|:---------|:-------------|:-----|:-----|:---------|
-| **Traditional GraphRAG** | Pre-determine graph traversal, retrieve context, send to LLM | Fast, predictable, simple | Limited flexibility, requires domain knowledge | Known query patterns |
-| **Agentic GraphRAG** | Give LLM tools to explore graph, let it decide traversal | Flexible, adaptive, handles complex queries | More complex, higher latency | Unknown query patterns, exploratory questions |
+| Approach                 | How It Works                                                 | Pros                                        | Cons                                           | Best For                                      |
+| :----------------------- | :----------------------------------------------------------- | :------------------------------------------ | :--------------------------------------------- | :-------------------------------------------- |
+| **Traditional GraphRAG** | Pre-determine graph traversal, retrieve context, send to LLM | Fast, predictable, simple                   | Limited flexibility, requires domain knowledge | Known query patterns                          |
+| **Agentic GraphRAG**     | Give LLM tools to explore graph, let it decide traversal     | Flexible, adaptive, handles complex queries | More complex, higher latency                   | Unknown query patterns, exploratory questions |
 
 **Key Insight:** Traditional GraphRAG is like giving someone a map with a highlighted route. Agentic GraphRAG is like giving them the map and letting them choose the best path based on what they discover.
 
@@ -80,7 +80,7 @@ graph TB
         B --> C[Register with OpenAI API]
         C --> D[Get Assistant ID]
     end
-    
+
     subgraph "Runtime Execution"
         E[User Query] --> F[Create Thread]
         F --> G[Post Message]
@@ -92,15 +92,15 @@ graph TB
         L --> M[Submit Tool Outputs]
         M --> H
     end
-    
+
     subgraph "Tool Execution"
         N[Tool Method] --> O[Execute Business Logic]
         O --> P[Return Result as JSON]
     end
-    
+
     L --> N
     P --> M
-    
+
     style C fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
     style L fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
     style O fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
@@ -116,18 +116,18 @@ public class MyAgent extends AbstractAgent {
   public MyAgent() {
     super("sk-proj-.......", "asst_.......", 60000, false);
   }
-  
+
   @description("Summarise two integer numbers")
   public int sum(
-    @description("The first number to sum") int a, 
+    @description("The first number to sum") int a,
     @description("The second number to sum") int b
   ) {
     return a + b;
   }
-  
+
   @description("Multiply two integer numbers")
   public int mult(
-    @description("The first number to multiply") int a, 
+    @description("The first number to multiply") int a,
     @description("The second number to multiply") int b
   ) {
     return a * b;
@@ -152,20 +152,20 @@ private String promptAgent(String threadId, String prompt) throws AgentException
     String runId = runAssistant(threadId);
     long startTime = System.currentTimeMillis();
     JsonObject runStatus;
-    
+
     do {
       if (System.currentTimeMillis() - startTime > timeoutMs) {
         throw new TimeoutException("Timed out waiting for run to complete");
       }
       Thread.sleep(1500);
       runStatus = getRunStatus(threadId, runId);
-      
+
       if ("requires_action".equals(runStatus.get("status").getAsString())) {
         JsonArray toolCalls = runStatus.getAsJsonObject("required_action")
             .getAsJsonObject("submit_tool_outputs")
             .getAsJsonArray("tool_calls");
         JsonArray toolOutputs = new JsonArray();
-        
+
         for (JsonElement toolCallElem : toolCalls) {
           JsonObject toolCall = toolCallElem.getAsJsonObject();
           String functionName = toolCall.getAsJsonObject("function")
@@ -174,20 +174,20 @@ private String promptAgent(String threadId, String prompt) throws AgentException
               .parseString(toolCall.getAsJsonObject("function")
                   .get("arguments").getAsString())
               .getAsJsonObject();
-          
+
           // Use reflection to find and invoke the matching method
           Object toolResult = invokeTool(functionName, arguments);
-          
+
           JsonObject output = new JsonObject();
           output.addProperty("tool_call_id", toolCall.get("id").getAsString());
           output.addProperty("output", GSON.toJson(toolResult));
           toolOutputs.add(output);
         }
-        
+
         submitToolOutputs(threadId, runId, toolOutputs);
       }
     } while (!"completed".equals(runStatus.get("status").getAsString()));
-    
+
     return getLastAssistantMessage(threadId);
   } catch (Throwable t) {
     throw new AgentException(t);
@@ -212,7 +212,7 @@ erDiagram
     Post ||--o{ Post : "ACCEPTED_ANSWER"
     Post ||--o{ Comment : "ON_POST"
     Comment }o--|| User : "COMMENTED_BY"
-    
+
     User {
         int id
         string displayName
@@ -221,7 +221,7 @@ erDiagram
         int silverBadges
         int bronzeBadges
     }
-    
+
     Post {
         int id
         string title
@@ -230,7 +230,7 @@ erDiagram
         vector title_embedding
         vector body_embedding
     }
-    
+
     Comment {
         int id
         string text
@@ -246,9 +246,9 @@ The agent needs tools to explore the graph in different ways:
              "development processes and tools based on a Stack Overflow knowledge base. " +
              "Use the available tools to explore the graph and find relevant information.")
 public class StackOverflowAgent extends AbstractAgent {
-  
+
   private final Driver neo4jDriver;
-  
+
   @description("Search for posts by semantic similarity to a query string. " +
                "Returns the top K most similar posts with their titles and scores.")
   public List<PostResult> searchPostsBySimilarity(
@@ -264,8 +264,8 @@ public class StackOverflowAgent extends AbstractAgent {
         RETURN post.id AS id, post.title AS title, post.score AS score, score AS similarity
         ORDER BY similarity DESC
         """;
-      
-      return session.run(cypher, 
+
+      return session.run(cypher,
         Map.of("query", query, "limit", limit, "apiKey", getApiKey()))
         .list(record -> new PostResult(
           record.get("id").asInt(),
@@ -275,7 +275,7 @@ public class StackOverflowAgent extends AbstractAgent {
         ));
     }
   }
-  
+
   @description("Get a specific post by ID, including its body, score, and author information.")
   public PostDetail getPost(
     @description("The ID of the post to retrieve") int postId
@@ -284,10 +284,10 @@ public class StackOverflowAgent extends AbstractAgent {
       String cypher = """
         MATCH (p:Post {id: $postId})
         OPTIONAL MATCH (p)-[:POSTED_BY]->(u:User)
-        RETURN p.id AS id, p.title AS title, p.body AS body, 
+        RETURN p.id AS id, p.title AS title, p.body AS body,
                p.score AS score, u.displayName AS author
         """;
-      
+
       Record record = session.run(cypher, Map.of("postId", postId)).single();
       return new PostDetail(
         record.get("id").asInt(),
@@ -298,7 +298,7 @@ public class StackOverflowAgent extends AbstractAgent {
       );
     }
   }
-  
+
   @description("Get all answers and comments for a specific post, ordered by score.")
   public List<AnswerResult> getAnswersForPost(
     @description("The ID of the question post") int questionId
@@ -313,7 +313,7 @@ public class StackOverflowAgent extends AbstractAgent {
         RETURN a.id AS id, a.body AS body, a.score AS score,
                u.displayName AS author, comments
         """;
-      
+
       return session.run(cypher, Map.of("questionId", questionId))
         .list(record -> new AnswerResult(
           record.get("id").asInt(),
@@ -324,7 +324,7 @@ public class StackOverflowAgent extends AbstractAgent {
         ));
     }
   }
-  
+
   @description("Get the accepted answer for a question, if one exists.")
   public AnswerResult getAcceptedAnswer(
     @description("The ID of the question post") int questionId
@@ -338,10 +338,10 @@ public class StackOverflowAgent extends AbstractAgent {
         RETURN a.id AS id, a.body AS body, a.score AS score,
                u.displayName AS author, comments
         """;
-      
+
       Record record = session.run(cypher, Map.of("questionId", questionId)).single();
       if (record == null) return null;
-      
+
       return new AnswerResult(
         record.get("id").asInt(),
         record.get("body").asString(),
@@ -351,7 +351,7 @@ public class StackOverflowAgent extends AbstractAgent {
       );
     }
   }
-  
+
   @description("Find posts by a specific user, ordered by score.")
   public List<PostResult> getPostsByUser(
     @description("The display name of the user") String displayName,
@@ -364,7 +364,7 @@ public class StackOverflowAgent extends AbstractAgent {
         ORDER BY p.score DESC
         LIMIT $limit
         """;
-      
+
       return session.run(cypher, Map.of("displayName", displayName, "limit", limit))
         .list(record -> new PostResult(
           record.get("id").asInt(),
@@ -385,7 +385,7 @@ sequenceDiagram
     participant A as Agent
     participant O as OpenAI API
     participant N as Neo4j
-    
+
     U->>A: "How do I set up Docker for local development?"
     A->>O: Post message to thread
     O->>A: Run status: requires_action
@@ -406,13 +406,13 @@ sequenceDiagram
 
 ### Advantages Over Traditional GraphRAG
 
-| Feature | Traditional GraphRAG | Agentic GraphRAG |
-|:--------|:---------------------|:-----------------|
-| **Query Flexibility** | Fixed traversal pattern | Adaptive based on question |
-| **Context Awareness** | Single retrieval pass | Multi-step exploration |
-| **Answer Quality** | Depends on initial retrieval | Can refine search based on findings |
-| **Use of Metadata** | Hard to incorporate | Can query by score, author, etc. |
-| **Complex Queries** | Limited | Can combine multiple tools |
+| Feature               | Traditional GraphRAG         | Agentic GraphRAG                    |
+| :-------------------- | :--------------------------- | :---------------------------------- |
+| **Query Flexibility** | Fixed traversal pattern      | Adaptive based on question          |
+| **Context Awareness** | Single retrieval pass        | Multi-step exploration              |
+| **Answer Quality**    | Depends on initial retrieval | Can refine search based on findings |
+| **Use of Metadata**   | Hard to incorporate          | Can query by score, author, etc.    |
+| **Complex Queries**   | Limited                      | Can combine multiple tools          |
 
 **Example:** A user asks "What did John recommend about Docker setup?"
 
@@ -425,12 +425,12 @@ sequenceDiagram
 
 ### Performance Metrics
 
-| Metric | Value | Notes |
-|:-------|:------|:------|
-| **Average Latency** | 3-5 seconds | Depends on number of tool calls |
-| **Tool Call Overhead** | ~200ms per call | Neo4j query + JSON serialization |
-| **Concurrent Requests** | Limited by OpenAI rate limits | Consider queuing for production |
-| **Cost per Query** | ~$0.01-0.03 | Depends on model and token usage |
+| Metric                  | Value                         | Notes                            |
+| :---------------------- | :---------------------------- | :------------------------------- |
+| **Average Latency**     | 3-5 seconds                   | Depends on number of tool calls  |
+| **Tool Call Overhead**  | ~200ms per call               | Neo4j query + JSON serialization |
+| **Concurrent Requests** | Limited by OpenAI rate limits | Consider queuing for production  |
+| **Cost per Query**      | ~$0.01-0.03                   | Depends on model and token usage |
 
 ### Error Handling
 
@@ -439,7 +439,7 @@ public class AgentException extends Exception {
   public AgentException(String message) {
     super(message);
   }
-  
+
   public AgentException(Throwable cause) {
     super(cause);
   }
@@ -468,22 +468,24 @@ public List<PostResult> searchPostsBySimilarity(String query, int limit) {
 
 ## 🎯 Key Takeaways
 
-| Insight | Implication | Next Steps |
-|:--------|:------------|:-----------|
-| **Agentic AI enables adaptive graph exploration** | More flexible than traditional GraphRAG | Experiment with different tool combinations |
-| **Java framework is feasible** | Can integrate with existing Java stacks | Consider extending for other LLM providers |
-| **Reflection-based tool discovery** | Cleaner API than interface-based approaches | Add validation for tool signatures |
-| **Multi-step reasoning improves answers** | Agent can refine search based on findings | Monitor tool call patterns for optimization |
+| Insight                                           | Implication                                 | Next Steps                                  |
+| :------------------------------------------------ | :------------------------------------------ | :------------------------------------------ |
+| **Agentic AI enables adaptive graph exploration** | More flexible than traditional GraphRAG     | Experiment with different tool combinations |
+| **Java framework is feasible**                    | Can integrate with existing Java stacks     | Consider extending for other LLM providers  |
+| **Reflection-based tool discovery**               | Cleaner API than interface-based approaches | Add validation for tool signatures          |
+| **Multi-step reasoning improves answers**         | Agent can refine search based on findings   | Monitor tool call patterns for optimization |
 
 ### When to Use Agentic GraphRAG
 
 ✅ **Good fit:**
+
 - Complex queries requiring multiple steps
 - Unknown query patterns
 - Need to incorporate multiple data sources
 - Exploratory question-answering
 
 ❌ **Consider alternatives:**
+
 - Simple, well-defined queries
 - Strict latency requirements (<1s)
 - High-volume, repetitive queries
@@ -505,30 +507,37 @@ public List<PostResult> searchPostsBySimilarity(String query, int limit) {
 ## References
 
 **Original Blog Post:**
+
 - [Agentic AI With Java and Neo4j - Neo4j Blog](https://neo4j.com/blog/developer/agentic-ai-with-java-and-neo4j/)
 
 **Code & Implementation:**
+
 - [GitHub Repository - Java Agentic AI Framework](https://github.com/neo4j/neo4j-java-agentic-ai) (referenced in original post)
 
 **Neo4j Resources:**
+
 - [Neo4j Java Driver Documentation](https://neo4j.com/docs/java-manual/current/)
 - [Neo4j Vector Search](https://neo4j.com/docs/cypher-manual/current/indexes-for-vector-search/)
 - [Neo4j GenAI Functions](https://neo4j.com/docs/cypher-manual/current/functions/genai/)
 
 **Agentic AI Frameworks:**
+
 - [OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)
 - [LangChain Agents](https://python.langchain.com/docs/modules/agents/)
 - [LlamaIndex Agents](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/)
 - [Embabel Java/Kotlin Agent Library](https://github.com/embabel/embabel) (mentioned in original post)
 
 **GraphRAG Resources:**
+
 - [GraphRAG: Unlocking LLM discovery on narrative private data - Microsoft Research](https://www.microsoft.com/en-us/research/blog/graphrag-unlocking-llm-discovery-on-narrative-private-data/)
 - [Neo4j GraphRAG Documentation](https://neo4j.com/docs/graphrag/)
 
 **Research Papers:**
+
 - [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)
 - [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401)
 
 **Production Best Practices:**
+
 - [OpenAI API Best Practices](https://platform.openai.com/docs/guides/production-best-practices)
 - [Building Production LLM Applications](https://huyenchip.com/2023/04/11/llm-engineering.html)
