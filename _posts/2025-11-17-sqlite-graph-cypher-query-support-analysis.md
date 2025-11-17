@@ -2,7 +2,17 @@
 title: "SQLite as a Graph Database? Deep Dive into SQLite-Graph with Cypher Query Support"
 description: "SQLite-Graph adds powerful graph database capabilities to SQLite, including full Cypher query language support. Explore how this extension combines SQLite's reliability with Neo4j's graph query language for lightweight graph processing"
 categories: [Database, Graph, SQLite]
-tags: [sqlite, graph-database, cypher, neo4j, sqlite-graph, database-extension, graph-algorithms, python]
+tags:
+  [
+    sqlite,
+    graph-database,
+    cypher,
+    neo4j,
+    sqlite-graph,
+    database-extension,
+    graph-algorithms,
+    python
+  ]
 date: 2025-11-17 03:00:00 +0800
 mermaid: true
 image:
@@ -15,7 +25,7 @@ image:
 SQLite is the most widely deployed database engine in the world—powering everything from mobile apps to browsers to embedded systems. But what if this lightweight, reliable database could also handle complex graph queries using Cypher, the same query language used by Neo4j?
 
 > **Curiosity:** Can we combine SQLite's simplicity and reliability with the expressive power of graph databases? And what happens when you add Cypher query support to the world's most ubiquitous database?
-{: .prompt-tip}
+> {: .prompt-tip}
 
 **SQLite-Graph** answers these questions by extending SQLite with full graph database capabilities. It's not just adding graph storage—it's bringing the entire Cypher query language, graph algorithms, and graph analysis tools into the SQLite ecosystem.
 
@@ -46,14 +56,14 @@ As someone who's worked with both SQLite (for embedded systems) and Neo4j (for c
 
 **Cypher** is a declarative graph query language that makes complex graph patterns intuitive to express. SQLite-Graph supports core Cypher operations:
 
-| Cypher Operation | Description | Status |
-|:-----------------|:------------|:-------|
-| **CREATE** | Create nodes and relationships | ✅ Supported |
-| **MATCH** | Find patterns in the graph | ✅ Supported |
-| **WHERE** | Filter query results | ✅ Supported |
-| **RETURN** | Return query results | ✅ Supported |
-| **MERGE** | Create or match patterns | 🚧 In Progress |
-| **DELETE** | Remove nodes/relationships | 🚧 In Progress |
+| Cypher Operation | Description                    | Status         |
+| :--------------- | :----------------------------- | :------------- |
+| **CREATE**       | Create nodes and relationships | ✅ Supported   |
+| **MATCH**        | Find patterns in the graph     | ✅ Supported   |
+| **WHERE**        | Filter query results           | ✅ Supported   |
+| **RETURN**       | Return query results           | ✅ Supported   |
+| **MERGE**        | Create or match patterns       | 🚧 In Progress |
+| **DELETE**       | Remove nodes/relationships     | 🚧 In Progress |
 
 **Example Cypher Query:**
 
@@ -90,7 +100,7 @@ For users more comfortable with SQL, SQLite-Graph provides SQL functions for gra
 SELECT graph_node_add('Person', '{"name": "Alice", "age": 30}');
 
 -- Add an edge
-SELECT graph_edge_add('Person', 'FRIENDS', 'Person', 
+SELECT graph_edge_add('Person', 'FRIENDS', 'Person',
   '{"person_id": 1, "friend_id": 2, "since": "2020-01-01"}');
 
 -- Count nodes
@@ -101,6 +111,7 @@ SELECT graph_density();
 ```
 
 **Benefits:**
+
 - ✅ Familiar SQL syntax
 - ✅ Easy integration with existing SQL code
 - ✅ No need to learn Cypher immediately
@@ -114,11 +125,11 @@ graph TB
     A[Graph Data] --> B[Connectivity Check]
     A --> C[Density Calculation]
     A --> D[Degree Centrality]
-    
+
     B --> E[Find Connected Components]
     C --> F[Measure Graph Density]
     D --> G[Identify Important Nodes]
-    
+
     style A fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
     style B fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
     style C fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
@@ -127,11 +138,11 @@ graph TB
 
 **Available Algorithms:**
 
-| Algorithm | Purpose | Use Case |
-|:----------|:---------|:---------|
-| **Connectivity Check** | Find connected components | Network analysis, social graphs |
-| **Density Calculation** | Measure graph density | Graph structure analysis |
-| **Degree Centrality** | Identify important nodes | Influence analysis, hub detection |
+| Algorithm               | Purpose                   | Use Case                          |
+| :---------------------- | :------------------------ | :-------------------------------- |
+| **Connectivity Check**  | Find connected components | Network analysis, social graphs   |
+| **Density Calculation** | Measure graph density     | Graph structure analysis          |
+| **Degree Centrality**   | Identify important nodes  | Influence analysis, hub detection |
 
 **Example Usage:**
 
@@ -195,13 +206,13 @@ graph TB
     C --> D[Nodes Table]
     C --> E[Edges Table]
     C --> F[Properties JSON]
-    
+
     G[Cypher Query] --> H[Parser]
     H --> I[Logical Planner]
     I --> J[Physical Planner]
     J --> K[Executor]
     K --> B
-    
+
     style B fill:#4ecdc4,stroke:#0a9396,stroke-width:3px,color:#fff
     style G fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
     style K fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
@@ -214,6 +225,7 @@ graph TB
 3. **Transparent Access:** Graph data can be queried via both Cypher and SQL
 
 **Benefits:**
+
 - ✅ No data duplication
 - ✅ Leverages SQLite's proven storage engine
 - ✅ Seamless integration with existing SQLite databases
@@ -257,7 +269,7 @@ sequenceDiagram
     participant PhysicalPlanner
     participant Executor
     participant Storage
-    
+
     User->>Parser: Cypher Query String
     Parser->>Parser: Parse AST
     Parser->>LogicalPlanner: Abstract Syntax Tree
@@ -288,6 +300,7 @@ RETURN a.name, c.name
 ```
 
 **Execution Steps:**
+
 1. **Scan:** Find all Person nodes
 2. **Filter:** Keep only nodes where age > 25
 3. **Expand:** Follow FRIENDS relationships
@@ -322,6 +335,7 @@ result = conn.execute("""
 ```
 
 **Benefits:**
+
 - ✅ No server required
 - ✅ Works offline
 - ✅ Fast local queries
@@ -346,6 +360,7 @@ RETURN device.id, device.location, size(peers) as connection_count
 ```
 
 **Use Cases:**
+
 - Network topology analysis
 - Dependency mapping
 - Failure propagation analysis
@@ -372,6 +387,7 @@ LIMIT 10
 ```
 
 **Benefits:**
+
 - ✅ Lightweight deployment
 - ✅ Fast recommendation generation
 - ✅ No external service dependencies
@@ -393,6 +409,7 @@ LIMIT 20
 ```
 
 **Use Cases:**
+
 - Documentation linking
 - FAQ systems
 - Internal knowledge bases
@@ -400,24 +417,26 @@ LIMIT 20
 
 ### Comparison with Other Solutions
 
-| Solution | Pros | Cons | When to Use SQLite-Graph |
-|:---------|:-----|:-----|:-------------------------|
-| **Neo4j** | Full-featured, mature | Heavy, requires server, complex setup | Need lightweight, embedded solution |
-| **ArangoDB** | Multi-model database | Server-based, resource intensive | Mobile/edge deployment |
-| **SQL with JOINs** | Familiar, widely supported | Complex for deep relationships | Need graph query expressiveness |
-| **In-memory graphs** | Fast | Data loss on restart, memory limits | Need persistence and reliability |
+| Solution             | Pros                       | Cons                                  | When to Use SQLite-Graph            |
+| :------------------- | :------------------------- | :------------------------------------ | :---------------------------------- |
+| **Neo4j**            | Full-featured, mature      | Heavy, requires server, complex setup | Need lightweight, embedded solution |
+| **ArangoDB**         | Multi-model database       | Server-based, resource intensive      | Mobile/edge deployment              |
+| **SQL with JOINs**   | Familiar, widely supported | Complex for deep relationships        | Need graph query expressiveness     |
+| **In-memory graphs** | Fast                       | Data loss on restart, memory limits   | Need persistence and reliability    |
 
 **Key Insight:** SQLite-Graph fills the gap between full graph databases and SQL-only solutions. It's perfect when you need graph capabilities but can't deploy a separate database server.
 
 ### Performance Considerations
 
 **Strengths:**
+
 - ✅ Fast for small to medium graphs (< 1M nodes)
 - ✅ Efficient for local queries
 - ✅ Low memory footprint
 - ✅ Leverages SQLite's proven optimization
 
 **Limitations:**
+
 - ⚠️ Not optimized for very large graphs (> 10M nodes)
 - ⚠️ Single-file database (concurrent writes limited)
 - ⚠️ No distributed capabilities
@@ -458,13 +477,13 @@ class GraphDatabase:
         self.conn.enable_load_extension(True)
         self.conn.load_extension('sqlite_graph')
         self.conn.row_factory = sqlite3.Row
-    
+
     def execute_cypher(self, query: str, params: Dict = None) -> List[Dict]:
         """Execute a Cypher query and return results as dictionaries"""
         cursor = self.conn.execute(query, params or {})
         columns = [desc[0] for desc in cursor.description]
         return [dict(zip(columns, row)) for row in cursor.fetchall()]
-    
+
     def add_node(self, label: str, properties: Dict) -> int:
         """Add a node and return its ID"""
         props_json = json.dumps(properties)
@@ -473,8 +492,8 @@ class GraphDatabase:
             (label, props_json)
         )
         return cursor.fetchone()[0]
-    
-    def add_edge(self, from_label: str, from_id: int, 
+
+    def add_edge(self, from_label: str, from_id: int,
                  relationship: str, to_label: str, to_id: int,
                  properties: Dict = None) -> int:
         """Add an edge between two nodes"""
@@ -493,7 +512,7 @@ alice_id = db.add_node('Person', {'name': 'Alice', 'age': 30})
 bob_id = db.add_node('Person', {'name': 'Bob', 'age': 25})
 
 # Create friendship
-db.add_edge('Person', alice_id, 'FRIENDS', 'Person', bob_id, 
+db.add_edge('Person', alice_id, 'FRIENDS', 'Person', bob_id,
             {'since': '2020-01-01'})
 
 # Query
@@ -506,47 +525,48 @@ friends = db.execute_cypher("""
 #### JavaScript/Node.js Integration
 
 ```javascript
-const sqlite3 = require('sqlite3').verbose();
-const sqlite_graph = require('sqlite-graph');
+const sqlite3 = require("sqlite3").verbose();
+const sqlite_graph = require("sqlite-graph");
 
 class GraphDB {
-    constructor(dbPath) {
-        this.db = new sqlite3.Database(dbPath);
-        this.db.loadExtension('sqlite_graph');
-    }
-    
-    async query(cypher, params = {}) {
-        return new Promise((resolve, reject) => {
-            this.db.all(cypher, params, (err, rows) => {
-                if (err) reject(err);
-                else resolve(rows);
-            });
-        });
-    }
+  constructor(dbPath) {
+    this.db = new sqlite3.Database(dbPath);
+    this.db.loadExtension("sqlite_graph");
+  }
+
+  async query(cypher, params = {}) {
+    return new Promise((resolve, reject) => {
+      this.db.all(cypher, params, (err, rows) => {
+        if (err) reject(err);
+        else resolve(rows);
+      });
+    });
+  }
 }
 
 // Usage
-const graph = new GraphDB('graph.db');
-const results = await graph.query(`
+const graph = new GraphDB("graph.db");
+const results = await graph.query(
+  `
     MATCH (p:Person)-[:FRIENDS]->(f:Person)
     WHERE p.age > $minAge
     RETURN p.name, f.name
-`, { minAge: 25 });
+`,
+  { minAge: 25 }
+);
 ```
-
-![SQLite-Graph Query Example](/assets/img/posts/sqlite-graph-2.png){: .light .w-75 .shadow .rounded-10 w='800' h='600' }
 
 ---
 
 ## 🎯 Key Takeaways
 
-| Insight | Implication | Action Item |
-|:--------|:------------|:------------|
+| Insight                                       | Implication                      | Action Item                           |
+| :-------------------------------------------- | :------------------------------- | :------------------------------------ |
 | **SQLite-Graph combines best of both worlds** | Lightweight + graph capabilities | Evaluate for mobile/edge applications |
-| **Cypher support is expanding** | More features coming | Monitor project updates |
-| **Perfect for embedded systems** | No server required | Consider for IoT and mobile apps |
-| **Performance scales to medium graphs** | < 1M nodes optimal | Plan for graph size |
-| **Python bindings available** | Easy integration | Start with Python prototype |
+| **Cypher support is expanding**               | More features coming             | Monitor project updates               |
+| **Perfect for embedded systems**              | No server required               | Consider for IoT and mobile apps      |
+| **Performance scales to medium graphs**       | < 1M nodes optimal               | Plan for graph size                   |
+| **Python bindings available**                 | Easy integration                 | Start with Python prototype           |
 
 ### Why This Matters
 
@@ -580,61 +600,73 @@ SQLite-Graph represents a significant innovation in database technology:
 ## References
 
 **Original Article:**
+
 - [SQLite가 그래프 데이터베이스로? Cypher 쿼리까지 지원하는 SQLite-Graph 상세 분석 - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2306)
 
 **SQLite-Graph:**
+
 - [SQLite-Graph GitHub Repository](https://github.com/agentflare-ai/sqlite-graph)
 - [SQLite-Graph Documentation](https://github.com/agentflare-ai/sqlite-graph#readme)
 - [SQLite-Graph Issues & Roadmap](https://github.com/agentflare-ai/sqlite-graph/issues)
 
 **SQLite:**
+
 - [SQLite Official Website](https://www.sqlite.org/)
 - [SQLite Documentation](https://www.sqlite.org/docs.html)
 - [SQLite Virtual Tables](https://www.sqlite.org/vtab.html)
 - [SQLite JSON1 Extension](https://www.sqlite.org/json1.html)
 
 **Cypher Query Language:**
+
 - [Cypher Query Language Reference](https://neo4j.com/docs/cypher-manual/current/)
 - [Cypher Style Guide](https://neo4j.com/developer/cypher/style-guide/)
 - [Cypher Best Practices](https://neo4j.com/developer/cypher/guide-cypher-best-practices/)
 
 **Graph Databases:**
+
 - [Neo4j Official Website](https://neo4j.com/)
 - [Neo4j Graph Database Guide](https://neo4j.com/developer/graph-database/)
 - [Graph Database Use Cases](https://neo4j.com/use-cases/)
 
 **Graph Algorithms:**
+
 - [Graph Algorithms Overview](https://neo4j.com/docs/graph-algorithms/current/)
 - [Network Analysis with Graphs](https://networkx.org/documentation/stable/)
 - [Graph Theory Fundamentals](https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/describing-graphs)
 
 **Python Integration:**
+
 - [Python sqlite3 Documentation](https://docs.python.org/3/library/sqlite3.html)
 - [SQLite Python Tutorial](https://www.sqlitetutorial.net/sqlite-python/)
 - [Graph Analysis with Python](https://networkx.org/)
 
 **Performance & Optimization:**
+
 - [SQLite Performance Tuning](https://www.sqlite.org/performance.html)
 - [Query Optimization Techniques](https://www.sqlite.org/queryplanner.html)
 - [Database Indexing Strategies](https://www.sqlite.org/queryplanner.html#searching)
 
 **Use Cases & Examples:**
+
 - [Graph Database Use Cases](https://neo4j.com/use-cases/)
 - [Social Network Analysis](https://neo4j.com/use-cases/social-networking/)
 - [Recommendation Systems](https://neo4j.com/use-cases/real-time-recommendation-engine/)
 - [Knowledge Graphs](https://neo4j.com/use-cases/knowledge-graph/)
 
 **Related Projects:**
+
 - [SQLite Extensions Directory](https://www.sqlite.org/src/doc/trunk/README.md)
 - [Other SQLite Graph Extensions](https://github.com/topics/sqlite-graph)
 - [Lightweight Graph Databases](https://github.com/topics/lightweight-graph-database)
 
 **Community & Support:**
+
 - [SQLite Forum](https://sqlite.org/forum/)
 - [Neo4j Community](https://community.neo4j.com/)
 - [Graph Database Discussions](https://github.com/topics/graph-database)
 
 **Academic & Research:**
+
 - [Graph Database Survey Papers](https://arxiv.org/search/?query=graph+database&searchtype=all)
 - [SQLite Research Papers](https://www.sqlite.org/research.html)
 - [Graph Query Language Research](https://arxiv.org/search/?query=cypher+query+language)
