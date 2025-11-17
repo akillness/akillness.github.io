@@ -143,7 +143,7 @@ I'm curious about the future of infinite game content creation. What happens whe
   - _Retrieve:_ Learning from narrative design, player psychology, and language models
   - _Innovate:_ Building systems that create stories, not just content
 
-👉 **[Resume](/assets/pdf/resume.pdf)**
+👉 **[Resume](/resume_eng)**
 
 ---
 
