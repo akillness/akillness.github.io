@@ -606,41 +606,24 @@ Agents 2.0 represents a fundamental shift in how we think about AI agents:
 - [Agents 2.0 시대의 도래: 얕은 루프를 넘어서는 딥 에이전트 아키텍처 - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2311)
 - [Agents 2.0: From Shallow Loops to Deep Agents - Phil Schmid](https://www.philschmid.de/agents-2.0-deep-agents)
 
-**Research Papers:**
-
-- [Multi-Agent Systems: A Survey (Stone & Veloso, 2000)](https://www.cs.cmu.edu/~softagents/papers/stone-veloso-aimag00.pdf)
-- [Cooperative Multi-Agent Learning (Panait & Luke, 2005)](https://www.cs.utexas.edu/~pstone/Papers/bib2html-links/panait05cooperative.pdf)
-- [Multi-Agent Reinforcement Learning (Zhang et al., 2018)](https://arxiv.org/abs/1707.07460)
-
 **Frameworks & Tools:**
 
 - [LangGraph - Multi-Agent Workflows](https://langchain-ai.github.io/langgraph/)
 - [AutoGen - Multi-Agent Conversations](https://github.com/microsoft/autogen)
 - [CrewAI - Collaborative AI Agents](https://github.com/joaomdmoura/crewAI)
-- [Swarm - Multi-Agent Framework](https://github.com/ai-swarm/swarm)
-- [Agent Protocol - Standard for AI Agents](https://agentprotocol.ai/)
 
 **Documentation & Tutorials:**
 
-- [Multi-Agent Systems Tutorial](https://www.tutorialspoint.com/artificial_intelligence/artificial_intelligence_multi_agent_systems.htm)
 - [Building Multi-Agent Systems with LangGraph](https://python.langchain.com/docs/use_cases/multi_agent/)
 - [AutoGen Documentation](https://microsoft.github.io/autogen/)
 
 **Related Topics:**
 
-- [Agent Communication Languages (ACL)](https://www.fipa.org/)
 - [Distributed AI Systems](https://en.wikipedia.org/wiki/Distributed_artificial_intelligence)
 - [Swarm Intelligence](https://en.wikipedia.org/wiki/Swarm_intelligence)
-- [Game Theory in Multi-Agent Systems](https://www.cambridge.org/core/books/game-theory-and-decision-theory-in-agent-based-systems/)
+
 
 **Production Case Studies:**
 
-- [Multi-Agent Systems in Production (Microsoft)](https://www.microsoft.com/en-us/research/project/autogen/)
-- [Building Scalable Multi-Agent Systems](https://www.oreilly.com/library/view/building-scalable-web/9781492053500/)
 - [Multi-Agent Systems for Game AI](https://www.gameaipro.com/)
-
-**Community Resources:**
-
-- [Multi-Agent Systems Forum](https://www.reddit.com/r/MultiAgentSystems/)
-- [AI Agents Discord](https://discord.gg/ai-agents)
-- [Stack Overflow - Multi-Agent Systems](https://stackoverflow.com/questions/tagged/multi-agent-systems)
+koverflow.com/questions/tagged/multi-agent-systems)
