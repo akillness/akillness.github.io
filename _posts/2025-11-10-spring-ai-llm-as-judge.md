@@ -316,10 +316,6 @@ sequenceDiagram
     end
 
     Evaluator->>User: Final Response + Score
-
-    style Judge fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
-    style Evaluator fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-    style Refiner fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
 ```
 
 ### Performance Optimization
