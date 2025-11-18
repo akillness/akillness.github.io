@@ -48,12 +48,12 @@ As someone working with 3D vision systems, I've seen how complexity often creeps
 
 DA3 presents a radical simplification of 3D geometry prediction:
 
-| Aspect | Traditional Approach | DA3 Approach | Impact |
-|:-------|:---------------------|:-------------|:-------|
-| **Backbone** | Specialized 3D architectures | Plain transformer (DINOv2) | **Simplicity** |
-| **Prediction Target** | Multi-task (depth, pose, etc.) | Single depth-ray representation | **Unification** |
-| **Training** | Complex multi-task losses | Teacher-student paradigm | **Efficiency** |
-| **Architecture** | Task-specific modules | Standard transformer blocks | **Generalizability** |
+| Aspect                | Traditional Approach           | DA3 Approach                    | Impact               |
+| :-------------------- | :----------------------------- | :------------------------------ | :------------------- |
+| **Backbone**          | Specialized 3D architectures   | Plain transformer (DINOv2)      | **Simplicity**       |
+| **Prediction Target** | Multi-task (depth, pose, etc.) | Single depth-ray representation | **Unification**      |
+| **Training**          | Complex multi-task losses      | Teacher-student paradigm        | **Efficiency**       |
+| **Architecture**      | Task-specific modules          | Standard transformer blocks     | **Generalizability** |
 
 **Core Principle:** Instead of designing specialized architectures for 3D tasks, DA3 uses a standard transformer trained on a unified representation that captures all geometric information.
 
@@ -62,6 +62,7 @@ DA3 presents a radical simplification of 3D geometry prediction:
 **Input:** An arbitrary number of visual inputs (images or video frames), with or without known camera poses.
 
 **Output:** Spatially consistent geometry including:
+
 - Camera pose estimation
 - Depth maps
 - Any-view geometry
@@ -78,26 +79,26 @@ graph TB
         I2[Image 2]
         IN[Image N]
     end
-    
+
     subgraph Backbone["Plain Transformer Backbone"]
         DINO[DINOv2 Encoder<br/>Vanilla Transformer] --> AA[Self-Attention<br/>Layers]
     end
-    
+
     subgraph Representation["Depth-Ray Representation"]
         AA --> DR[Depth-Ray<br/>Prediction Head]
     end
-    
+
     subgraph Output["Output"]
         DR --> CP[Camera Poses]
         DR --> DM[Depth Maps]
         DR --> GM[Geometry Maps]
         DR --> GS[3DGS Parameters]
     end
-    
+
     I1 --> DINO
     I2 --> DINO
     IN --> DINO
-    
+
     style DINO fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
     style DR fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
     style CP fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
@@ -109,6 +110,7 @@ graph TB
 **1. Plain Transformer is Sufficient**
 
 DA3 uses a vanilla DINOv2 encoder without any architectural specialization for 3D tasks. This demonstrates that:
+
 - Standard transformer architectures can handle 3D geometry
 - No need for 3D-specific inductive biases
 - General-purpose backbones work when trained properly
@@ -116,6 +118,7 @@ DA3 uses a vanilla DINOv2 encoder without any architectural specialization for 3
 **2. Singular Depth-Ray Prediction Target**
 
 Instead of predicting multiple targets (depth, pose, point maps separately), DA3 uses a unified **depth-ray representation** that:
+
 - Encodes all geometric information in one representation
 - Eliminates need for complex multi-task learning
 - Simplifies training and inference
@@ -123,11 +126,13 @@ Instead of predicting multiple targets (depth, pose, point maps separately), DA3
 ### Depth-Ray Representation
 
 The depth-ray representation is DA3's core innovation. It unifies:
+
 - **Depth information:** Distance from camera to scene points
 - **Ray direction:** Viewing direction for each pixel
 - **Spatial consistency:** Geometric relationships across views
 
 This single representation captures everything needed for:
+
 - Camera pose estimation
 - Depth map generation
 - Multi-view geometry
@@ -139,20 +144,20 @@ class DepthAnything3:
     """
     Depth Anything 3: Minimal modeling for maximum performance
     """
-    
+
     def __init__(self):
         # Plain transformer backbone (no specialization)
         self.backbone = DINOv2Encoder()  # Vanilla transformer
         self.depth_ray_head = DepthRayHead()  # Single prediction head
-    
+
     def forward(self, images: List[Tensor], camera_poses: Optional[List[Tensor]] = None):
         """
         Predict geometry from arbitrary visual inputs
-        
+
         Args:
             images: List of N RGB images [3, H, W]
             camera_poses: Optional camera poses (if unknown, will be estimated)
-            
+
         Returns:
             {
                 'camera_poses': [pose_i] for i in 1..N,
@@ -163,16 +168,16 @@ class DepthAnything3:
         """
         # 1. Extract features with plain transformer
         features = [self.backbone(img) for img in images]
-        
+
         # 2. Predict unified depth-ray representation
         depth_rays = [self.depth_ray_head(feat) for feat in features]
-        
+
         # 3. Extract all geometric properties from depth-rays
         camera_poses = self._extract_poses(depth_rays)
         depth_maps = self._extract_depths(depth_rays)
         geometry = self._extract_geometry(depth_rays)
         gs_params = self._extract_3dgs(depth_rays)
-        
+
         return {
             'camera_poses': camera_poses,
             'depth_maps': depth_maps,
@@ -184,11 +189,13 @@ class DepthAnything3:
 ### Teacher-Student Training Paradigm
 
 DA3 uses a teacher-student training approach:
+
 - **Teacher model:** Provides supervision signals
 - **Student model:** Learns from teacher predictions
 - **Benefit:** Achieves detail and generalization on par with DA2 while maintaining simplicity
 
 This paradigm allows DA3 to:
+
 - Learn from high-quality teacher predictions
 - Maintain model simplicity
 - Achieve strong generalization
@@ -203,34 +210,35 @@ This paradigm allows DA3 to:
 
 DA3 surpasses VGGT (prior SOTA) by **35.7%** in camera pose accuracy:
 
-| Method | Rotation Error (°) | Translation Error | Improvement |
-|:-------|:------------------:|:-----------------:|:-----------:|
-| **VGGT** | Baseline | Baseline | - |
-| **DA3** | **-35.7%** | **-35.7%** | **SOTA** |
+| Method   | Rotation Error (°) | Translation Error | Improvement |
+| :------- | :----------------: | :---------------: | :---------: |
+| **VGGT** |      Baseline      |     Baseline      |      -      |
+| **DA3**  |     **-35.7%**     |    **-35.7%**     |  **SOTA**   |
 
 **2. Geometric Accuracy**
 
 DA3 improves geometric accuracy by **23.6%** over VGGT:
 
-| Method | Geometric Error | Improvement |
-|:-------|:---------------:|:-----------:|
-| **VGGT** | Baseline | - |
-| **DA3** | **-23.6%** | **SOTA** |
+| Method   | Geometric Error | Improvement |
+| :------- | :-------------: | :---------: |
+| **VGGT** |    Baseline     |      -      |
+| **DA3**  |   **-23.6%**    |  **SOTA**   |
 
 **3. Monocular Depth Estimation**
 
 DA3 outperforms Depth Anything 2 (DA2) in monocular depth estimation:
 
-| Method | Abs Rel | RMSE | Improvement |
-|:-------|:-------:|:----:|:-----------:|
-| **DA2** | Baseline | Baseline | - |
-| **DA3** | **Better** | **Better** | **SOTA** |
+| Method  |  Abs Rel   |    RMSE    | Improvement |
+| :------ | :--------: | :--------: | :---------: |
+| **DA2** |  Baseline  |  Baseline  |      -      |
+| **DA3** | **Better** | **Better** |  **SOTA**   |
 
 ### Key Applications
 
 **1. Video Reconstruction**
 
 DA3 recovers visual space from any number of views, from single view to multiple views. This enables:
+
 - Complete 3D reconstruction from video sequences
 - Handling difficult videos with challenging geometry
 - No need for camera pose initialization
@@ -238,6 +246,7 @@ DA3 recovers visual space from any number of views, from single view to multiple
 **2. SLAM for Large-Scale Scenes**
 
 Quantitative results show that replacing VGGT with DA3 (DA3-Long) in SLAM systems:
+
 - Significantly reduces drift in large-scale environments
 - Outperforms COLMAP (which takes 48+ hours)
 - Enables real-time large-scale mapping
@@ -245,6 +254,7 @@ Quantitative results show that replacing VGGT with DA3 (DA3-Long) in SLAM system
 **3. Feed-Forward 3D Gaussians Estimation**
 
 By freezing the backbone and training a DPT head to predict 3DGS parameters:
+
 - Achieves strong novel view synthesis capability
 - Generalizes well to new scenes
 - Enables real-time rendering
@@ -252,6 +262,7 @@ By freezing the backbone and training a DPT head to predict 3DGS parameters:
 **4. Spatial Perception from Multiple Cameras**
 
 For autonomous vehicles with multiple cameras (even without overlap):
+
 - Estimates stable and fusible depth maps
 - Enhances environmental understanding
 - Improves perception accuracy
@@ -259,6 +270,7 @@ For autonomous vehicles with multiple cameras (even without overlap):
 ### Benchmark Establishment
 
 DA3 establishes a new visual geometry benchmark covering:
+
 - Camera pose estimation
 - Any-view geometry
 - Visual rendering
@@ -270,6 +282,7 @@ This benchmark enables fair comparison across methods and tasks.
 **1. Data Scale Matters**
 
 DA3 is trained exclusively on public academic datasets, demonstrating that:
+
 - Large-scale training data enables generalization
 - No need for proprietary datasets
 - Public data is sufficient for SOTA performance
@@ -277,6 +290,7 @@ DA3 is trained exclusively on public academic datasets, demonstrating that:
 **2. Unified Representation**
 
 The depth-ray representation:
+
 - Captures all geometric information
 - Eliminates task-specific complexity
 - Enables end-to-end learning
@@ -284,6 +298,7 @@ The depth-ray representation:
 **3. Standard Architecture**
 
 Using plain transformers:
+
 - Leverages well-understood architectures
 - Enables transfer learning
 - Simplifies deployment
@@ -292,13 +307,13 @@ Using plain transformers:
 
 ## 🎯 Key Takeaways
 
-| Insight | Implication | Action Item |
-|:--------|:------------|:------------|
-| **Simplicity wins** | Plain transformers work for 3D | Use standard architectures first |
-| **Unified representation** | Single target beats multi-task | Design unified representations |
-| **Teacher-student helps** | Knowledge distillation improves performance | Use teacher-student training |
-| **Data scale matters** | Public datasets are sufficient | Leverage public academic datasets |
-| **Minimal modeling** | Less complexity, better performance | Simplify before specializing |
+| Insight                    | Implication                                 | Action Item                       |
+| :------------------------- | :------------------------------------------ | :-------------------------------- |
+| **Simplicity wins**        | Plain transformers work for 3D              | Use standard architectures first  |
+| **Unified representation** | Single target beats multi-task              | Design unified representations    |
+| **Teacher-student helps**  | Knowledge distillation improves performance | Use teacher-student training      |
+| **Data scale matters**     | Public datasets are sufficient              | Leverage public academic datasets |
+| **Minimal modeling**       | Less complexity, better performance         | Simplify before specializing      |
 
 ### Why This Matters
 
@@ -346,8 +361,8 @@ DA3 demonstrates several important principles:
 
 **Authors:**
 
-- Haotong Lin*, Sili Chen*, Jun Hao Liew*, Donny Y. Chen*, Zhenyu Li, Guang Shi, Jiashi Feng, Bingyi Kang*†
-- *Equal Contribution, †Project Lead
+- Haotong Lin*, Sili Chen*, Jun Hao Liew*, Donny Y. Chen*, Zhenyu Li, Guang Shi, Jiashi Feng, Bingyi Kang\*†
+- \*Equal Contribution, †Project Lead
 
 **Related Work:**
 
@@ -366,7 +381,6 @@ DA3 demonstrates several important principles:
 **3D Reconstruction:**
 
 - [NeRF: Representing Scenes as Neural Radiance Fields](https://arxiv.org/abs/2003.08934)
-- [Structure from Motion: A Survey](https://www.cs.cornell.edu/~snavely/publications/snavely2006sfm.pdf)
 - [COLMAP: Structure-from-Motion and Multi-View Stereo](https://colmap.github.io/)
 
 **SLAM:**
@@ -378,7 +392,7 @@ DA3 demonstrates several important principles:
 
 - [Depth Anything 3 GitHub](https://github.com/ByteDance-Seed/depth-anything-3)
 - [PyTorch 3D](https://pytorch3d.org/)
-- [Open3D: 3D Data Processing Library](http://www.open3d.org/)
+- [Open3D: 3D Data Processing Library](https://www.open3d.org/)
 - [3D Gaussian Splatting Implementation](https://github.com/graphdeco-inria/gaussian-splatting)
 
 **Production Applications:**
