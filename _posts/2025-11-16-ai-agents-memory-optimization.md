@@ -459,7 +459,7 @@ Memory optimization is crucial for production agent systems:
 **Memory and Context Management:**
 
 - [MemGPT: External Memory Management for LLMs](https://arxiv.org/abs/2310.08560)
-- [Needle in a Haystack: Information Retrieval in Long Contexts]()
+- Needle in a Haystack: Information Retrieval in Long Contexts
 - [Gemini 2.5 Technical Report](https://deepmind.google/technologies/gemini/)
 
 **LangGraph:**
@@ -469,7 +469,7 @@ Memory optimization is crucial for production agent systems:
 
 **Context Engineering:**
 
-- [Context Engineering: A New Discipline]()
+- Context Engineering: A New Discipline
 - [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)
 
 **Vector Databases for Memory:**
