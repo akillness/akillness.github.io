@@ -415,27 +415,26 @@ VGGT demonstrates several important principles:
 **Related Work:**
 
 - [DUSt3R: Dense and Unconstrained Stereo 3D Reconstruction](https://arxiv.org/abs/2312.14132)
-- [MASt3R: Matching Anything by Segmenting 3D](https://arxiv.org/abs/2403.19908)
+- [MASt3R: Matching Anything by Segmenting 3D]()
 - [VGGSfM: Visual Geometry Grounded Structure from Motion](https://arxiv.org/abs/2312.04563)
-- [DINO: Vision Transformer with Self-Supervised Learning](https://arxiv.org/abs/2104.14294)
+- [DINO: Vision Transformer with Self-Supervised Learning]()
 - [DPT: Dense Prediction Transformer](https://arxiv.org/abs/2103.13413)
-- [CoTracker2: Improved Point Tracking](https://arxiv.org/abs/2309.16588)
+- [CoTracker2: Improved Point Tracking]()
 
 **3D Reconstruction:**
 
 - [NeRF: Representing Scenes as Neural Radiance Fields](https://arxiv.org/abs/2003.08934)
 - [3D Gaussian Splatting for Real-Time Rendering](https://arxiv.org/abs/2308.04079)
-- [Structure from Motion: A Survey](https://www.cs.cornell.edu/~snavely/publications/snavely2006sfm.pdf)
+- [Structure from Motion: A Survey]()
 
 **Multi-View Geometry:**
 
 - [Multiple View Geometry in Computer Vision (Hartley & Zisserman)](https://www.robots.ox.ac.uk/~vgg/hzbook/)
-- [Bundle Adjustment: A Modern Synthesis](https://hal.inria.fr/inria-00548290/)
 
 **Transformer Architectures:**
 
 - [Attention Is All You Need (Vaswani et al., 2017)](https://arxiv.org/abs/1706.03762)
-- [Vision Transformers (Dosovitskiy et al., 2020)](https://arxiv.org/abs/2010.11929)
+- [Vision Transformers (Dosovitskiy et al., 2020)]()
 
 **Datasets Used:**
 
