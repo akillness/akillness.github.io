@@ -485,5 +485,5 @@ Memory optimization is crucial for production agent systems:
 
 **Related Blog Posts:**
 
-- [Agents 2.0: From Shallow Loops to Deep Agents Architecture](/posts/2025-11-16-multi-agent-systems/)
-- [LLM Agents: Memory, Planning, and Tools](/posts/2024-04-24-llm-agents/)
+- [Agents 2.0: From Shallow Loops to Deep Agents Architecture](/_posts/2025-11-16-multi-agent-systems/)
+- [LLM Agents: Memory, Planning, and Tools](/_posts/2024-04-24-llm-agents/)
