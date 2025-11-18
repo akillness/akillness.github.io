@@ -482,8 +482,3 @@ Memory optimization is crucial for production agent systems:
 
 - [Efficient LLM Inference with I/O-Aware Partial KV Cache Recomputation](https://www.themoonlight.io/ko/review/efficient-llm-inference-with-io-aware-partial-kv-cache-recomputation)
 - [Efficient LLM Inference with Activation Checkpointing and Hybrid Caching](https://arxiv.org/abs/2501.01792)
-
-**Related Blog Posts:**
-
-- [Agents 2.0: From Shallow Loops to Deep Agents Architecture](/_posts/2025-11-16-multi-agent-systems/)
-- [LLM Agents: Memory, Planning, and Tools](/_posts/2024-04-24-llm-agents/)
