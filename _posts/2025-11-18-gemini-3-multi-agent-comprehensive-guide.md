@@ -776,7 +776,7 @@ Gemini 3 is Google's most secure model yet, with the most comprehensive safety e
 - Early access to bodies like UK AISI
 - Independent assessments from Apollo, Vaultis, Dreadnode
 
-For more information, see the [Gemini 3 model card](http://deepmind.google/models/model-cards/gemini-3-pro).
+For more information, see the [Gemini 3 model card](https://deepmind.google/models/model-cards/gemini-3-pro).
 
 ---
 
@@ -867,7 +867,7 @@ class CostOptimizedMultiAgent:
 **Game AI and Production:**
 
 - [Unity ML-Agents](https://github.com/Unity-Technologies/ml-agents)
-- [Game AI Pro Book Series](http://www.gameaipro.com/)
+- [Game AI Pro Book Series](https://www.gameaipro.com/)
 - [Production LLM Best Practices](https://huyenchip.com/2023/04/11/llm-engineering.html)
 
 **Research Papers:**
