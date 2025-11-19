@@ -30,6 +30,7 @@ When deploying AI to production in game development, one of the biggest concerns
 After 8 years of developing AI-powered games at NC SOFT and COM2US, security was always an afterthought. The common approach was "build the feature first, add security later." But as LLMs became core to game functionality, security is no longer optional—it's essential.
 
 **Real-world problems:**
+
 - Players attempting to bypass game logic through prompt injection
 - Inappropriate content generation in NPC dialogue systems
 - Risk of personal information leakage from in-game databases
@@ -59,31 +60,31 @@ graph TB
     subgraph "Input Layer"
         A[User Prompt/Response] --> B[Request Router]
     end
-    
+
     subgraph "OpenGuardrails Multi-Agent Security System"
         B --> C[Agent 1: Prompt Injection Detector]
         B --> D[Agent 2: Content Safety Analyzer]
         B --> E[Agent 3: Data Leakage Monitor]
-        
+
         C --> F[Unified LLM<br/>14B→3.3B GPTQ]
         D --> F
         E --> F
-        
+
         F --> G[Semantic Understanding]
         G --> H[Risk Scoring]
     end
-    
+
     subgraph "Policy Engine"
         H --> I[Configurable Threshold<br/>τ ∈ 0,1]
         I --> J{Decision}
     end
-    
+
     subgraph "Output Layer"
         J -->|Safe| K[Allow Request]
         J -->|Risky| L[Block/Redact]
         L --> M[Detailed Report]
     end
-    
+
     style F fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
     style G fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
     style I fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
@@ -99,40 +100,40 @@ flowchart LR
         A1[Detect Jailbreaks] --> A2[Identify Manipulation]
         A2 --> A3[Score: 0-1]
     end
-    
+
     subgraph "Agent 2: Content Safety"
         B1[12 Risk Categories] --> B2[Multilingual Detection]
         B2 --> B3[Score: 0-1]
     end
-    
+
     subgraph "Agent 3: Data Leakage"
         C1[NER Pipeline] --> C2[Regex Detection]
         C2 --> C3[Score: 0-1]
     end
-    
+
     A3 --> D[Unified Risk Assessment]
     B3 --> D
     C3 --> D
-    
+
     D --> E[Policy Decision<br/>τ threshold]
     E --> F{Action}
     F -->|Pass| G[Allow]
     F -->|Fail| H[Block/Redact]
-    
+
     style D fill:#0077b6,stroke:#03045e,color:#fff
     style E fill:#ff6b6b,stroke:#c92a2a,color:#fff
 ```
 
 ### Performance Benchmarks
 
-| Metric | OpenGuardrails | Qwen3Guard-8B | Improvement |
-|:-------|:--------------:|:-------------:|:-----------:|
-| **English Prompt F1** | 87.1% | 84.3% | +2.8% |
-| **English Response F1** | 88.5% | 80.5% | +8.0% |
-| **Multilingual Prompt (RTP-LX)** | 97.3% | 85.0% | +12.3% |
-| **Multilingual Response** | 97.2% | 78.1% | +19.1% |
-| **P95 Latency** | 274.6ms | ~500ms | **-45%** |
-| **Languages Supported** | 119+ | ~50 | +138% |
+| Metric                           | OpenGuardrails | Qwen3Guard-8B | Improvement |
+| :------------------------------- | :------------: | :-----------: | :---------: |
+| **English Prompt F1**            |     87.1%      |     84.3%     |    +2.8%    |
+| **English Response F1**          |     88.5%      |     80.5%     |    +8.0%    |
+| **Multilingual Prompt (RTP-LX)** |     97.3%      |     85.0%     |   +12.3%    |
+| **Multilingual Response**        |     97.2%      |     78.1%     |   +19.1%    |
+| **P95 Latency**                  |    274.6ms     |    ~500ms     |  **-45%**   |
+| **Languages Supported**          |      119+      |      ~50      |    +138%    |
 
 **Key insight:** The unified architecture outperforms hybrid approaches in both performance and efficiency.
 
@@ -157,7 +158,7 @@ guardrails = OpenGuardrails(
             "threshold": 0.6,  # τ = 0.6 (block if risk > 60%)
             "action": "redact",  # Redact sensitive parts instead of blocking
             "categories": [
-                "hate", "harassment", "violence", 
+                "hate", "harassment", "violence",
                 "sexual", "illegal", "self_harm"
             ]
         },
@@ -198,7 +199,7 @@ class UnifiedSecurityLLM(nn.Module):
     """
     Single model handling prompt injection, content safety, and data leakage
     """
-    
+
     def __init__(self):
         self.encoder = TransformerEncoder(...)  # Shared encoder
         self.task_heads = {
@@ -206,11 +207,11 @@ class UnifiedSecurityLLM(nn.Module):
             'content_safety': MultiLabelHead(...),  # 12 categories
             'data_leakage': NERHead(...)
         }
-    
+
     def forward(self, text, task_type='all'):
         # Extract semantic representation with shared encoder
         embeddings = self.encoder(text)
-        
+
         if task_type == 'all':
             # Multi-agent: Execute all security tasks in parallel
             results = {}
@@ -226,12 +227,12 @@ class UnifiedSecurityLLM(nn.Module):
 
 The key to supporting 119 languages is the **OpenGuardrailsMixZh 97k dataset** and multilingual training:
 
-| Language Group | Coverage | F1 Score |
-|:---------------|:--------:|:--------:|
-| **English** | Native | 87.1% (Prompt), 88.5% (Response) |
-| **Chinese** | Native | 95.2% (Prompt), 94.8% (Response) |
+| Language Group            |   Coverage    |             F1 Score             |
+| :------------------------ | :-----------: | :------------------------------: |
+| **English**               |    Native     | 87.1% (Prompt), 88.5% (Response) |
+| **Chinese**               |    Native     | 95.2% (Prompt), 94.8% (Response) |
 | **Multilingual (RTP-LX)** | 119 languages | 97.3% (Prompt), 97.2% (Response) |
-| **Low-resource** | 50+ languages | >85% average |
+| **Low-resource**          | 50+ languages |           >85% average           |
 
 ---
 
@@ -248,16 +249,16 @@ graph TB
         B --> C[NPC Dialogue]
         C --> D[Quest Generation]
     end
-    
+
     subgraph "OpenGuardrails Multi-Agent Security Layer"
         D --> E[Agent 1: Player Input Validator]
         E --> F[Agent 2: NPC Response Monitor]
         F --> G[Agent 3: Quest Content Checker]
-        
+
         E --> H[Unified Security LLM]
         F --> H
         G --> H
-        
+
         H --> I[Game-Specific Policy]
         I --> J{
             Game Mode<br/>
@@ -265,14 +266,14 @@ graph TB
             Content Rating
         }
     end
-    
+
     subgraph "Game Server"
         J -->|Safe| K[Process Request]
         J -->|Risky| L[Block/Modify]
         L --> M[Log Security Event]
         M --> N[Admin Alert if Critical]
     end
-    
+
     style H fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
     style I fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
     style J fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
@@ -292,7 +293,7 @@ game_security_policies = {
         },
         "data_leakage": {"threshold": 0.9, "action": "block"}
     },
-    
+
     "mobile_casual": {
         "prompt_injection": {"threshold": 0.7, "action": "block"},
         "content_safety": {
@@ -302,7 +303,7 @@ game_security_policies = {
         },
         "data_leakage": {"threshold": 0.8, "action": "block"}
     },
-    
+
     "multiplayer_competitive": {
         "prompt_injection": {"threshold": 0.9, "action": "block"},  # Anti-cheat
         "content_safety": {
@@ -318,13 +319,13 @@ game_security_policies = {
 def apply_security_policy(game_type, player_input, llm_response):
     policy = game_security_policies[game_type]
     guardrails = OpenGuardrails(policy_config=policy)
-    
+
     result = guardrails.check(
         prompt=player_input,
         response=llm_response,
         context={"game_type": game_type}
     )
-    
+
     return result
 ```
 
@@ -337,7 +338,7 @@ class GameSecurityMultiAgent:
     """
     Multi-agent security system for game environments
     """
-    
+
     def __init__(self):
         self.agents = {
             'input_validator': PromptInjectionAgent(),
@@ -346,29 +347,29 @@ class GameSecurityMultiAgent:
             'context_analyzer': GameContextAgent()  # Understands game context
         }
         self.policy_engine = GamePolicyEngine()
-    
+
     def secure_game_interaction(self, player_input, game_state):
         """
         Security check for game interactions through multi-agent collaboration
         """
         # Agent 1: Input validation
         injection_risk = self.agents['input_validator'].check(player_input)
-        
+
         # Agent 2: Game context analysis (provides context to other agents)
         context = self.agents['context_analyzer'].analyze(game_state)
-        
+
         # Agent 3: Content safety (considering game context)
         content_risk = self.agents['content_moderator'].check(
-            player_input, 
+            player_input,
             context=context
         )
-        
+
         # Agent 4: Data leakage (considering game database access)
         leakage_risk = self.agents['data_protector'].check(
             player_input,
             game_db_schema=game_state['db_schema']
         )
-        
+
         # Unified risk assessment
         total_risk = self.policy_engine.evaluate({
             'injection': injection_risk,
@@ -376,13 +377,13 @@ class GameSecurityMultiAgent:
             'leakage': leakage_risk,
             'context': context
         })
-        
+
         # Dynamic threshold based on game mode
         threshold = self.policy_engine.get_threshold(
             game_mode=game_state['mode'],
             player_level=game_state['player_level']
         )
-        
+
         if total_risk > threshold:
             return {
                 'safe': False,
@@ -404,15 +405,16 @@ class GameSecurityMultiAgent:
 
 ### Production Performance Considerations
 
-| Consideration | OpenGuardrails | Traditional Hybrid System | Improvement |
-|:--------------|:--------------:|:------------------------:|:-----------:|
-| **Latency (P95)** | 274.6ms | ~500ms | **-45%** |
-| **Throughput** | 3,600 req/s | ~2,000 req/s | **+80%** |
-| **Model Size** | 3.3B (GPTQ) | 8B+ (multiple models) | **-59%** |
-| **Memory Usage** | ~6GB | ~16GB | **-63%** |
-| **Cost per Request** | $0.0001 | $0.0003 | **-67%** |
+| Consideration        | OpenGuardrails | Traditional Hybrid System | Improvement |
+| :------------------- | :------------: | :-----------------------: | :---------: |
+| **Latency (P95)**    |    274.6ms     |          ~500ms           |  **-45%**   |
+| **Throughput**       |  3,600 req/s   |       ~2,000 req/s        |  **+80%**   |
+| **Model Size**       |  3.3B (GPTQ)   |   8B+ (multiple models)   |  **-59%**   |
+| **Memory Usage**     |      ~6GB      |           ~16GB           |  **-63%**   |
+| **Cost per Request** |    $0.0001     |          $0.0003          |  **-67%**   |
 
 **Production insights:**
+
 - Single unified model is more efficient than multiple model combinations
 - GPTQ quantization improves both inference speed and memory usage
 - Multi-agent architecture is logical separation, not physical separation
@@ -426,32 +428,32 @@ graph TB
         A2[Game Server EU] --> B
         A3[Game Server Asia] --> B
     end
-    
+
     subgraph "OpenGuardrails Service (Docker)"
         B --> C[API Gateway]
         C --> D[Security Agent Pool]
         D --> E1[Agent Instance 1]
         D --> E2[Agent Instance 2]
         D --> E3[Agent Instance N]
-        
+
         E1 --> F[Unified LLM<br/>3.3B GPTQ]
         E2 --> F
         E3 --> F
     end
-    
+
     subgraph "Policy & Cache Layer"
         F --> G[Redis Cache<br/>Common Patterns]
         F --> H[Policy DB<br/>Game-Specific Rules]
         G --> I[Response]
         H --> I
     end
-    
+
     subgraph "Monitoring"
         I --> J[Security Event Log]
         J --> K[Alert System]
         K --> L[Admin Dashboard]
     end
-    
+
     style F fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
     style G fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
     style J fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
@@ -478,12 +480,14 @@ graph TB
 ### Applicability to Game Development
 
 ✅ **Suitable use cases:**
+
 - NPC dialogue system security
 - User-generated content (UGC) validation
 - Quest/story generation system protection
 - Multiplayer chat moderation
 
 ⚠️ **Considerations:**
+
 - 274ms latency may be burdensome for real-time action games
 - Game-specific content policies need fine-tuning
 - Open-source but requires self-hosting (not a cloud service)
@@ -504,34 +508,36 @@ graph TB
 ## References
 
 **Research Papers:**
+
 - [OpenGuardrails Tech Report (arXiv:2510.19169)](https://arxiv.org/abs/2510.19169)
-- [Prompt Injection Attacks Against LLMs (arXiv:2302.12173)](https://arxiv.org/abs/2302.12173)
 - [Jailbreaking Large Language Models (arXiv:2307.02483)](https://arxiv.org/abs/2307.02483)
-- [Multilingual Content Moderation (arXiv:2305.14151)](https://arxiv.org/abs/2305.14151)
 
 **Code & Implementation:**
+
 - [OpenGuardrails GitHub Repository](https://github.com/openguardrails/openguardrails)
 - [OpenGuardrails Hugging Face Models](https://huggingface.co/openguardrails)
-- [OpenGuardrailsMixZh Dataset (97k)](https://huggingface.co/datasets/openguardrails/openguardrails-mix-zh)
 
 **Documentation & Tutorials:**
+
 - [OpenGuardrails Official Documentation](https://www.openguardrails.com/docs)
 - [OpenGuardrails API Reference](https://www.openguardrails.com/docs/api)
 - [Docker Deployment Guide](https://www.openguardrails.com/docs/deployment)
 
 **Production Resources:**
+
 - [OpenGuardrails Platform (Free Tier Available)](https://www.openguardrails.com/platform/)
 - [Multi-Cloud Support (AWS, Azure, GCP)](https://www.openguardrails.com/integrations)
 - [Enterprise Support & Custom Training](https://www.openguardrails.com/contact)
 
 **Related Projects:**
+
 - [Guardrails AI (Alternative)](https://github.com/guardrails-ai/guardrails)
 - [Microsoft Presidio (PII Detection)](https://github.com/microsoft/presidio)
 - [OpenAI Moderation API](https://platform.openai.com/docs/guides/moderation)
 
 **Game AI Security Resources:**
+
 - [GDC Talk: AI Security in Games](https://gdcvault.com/)
-- [Game Security Best Practices](https://www.gamedeveloper.com/security)
 - [Unity ML-Agents Security](https://github.com/Unity-Technologies/ml-agents)
 
 ---
