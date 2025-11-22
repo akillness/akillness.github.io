@@ -48,6 +48,7 @@ Cognee is an open-source platform that transforms raw data into **persistent and
 ### The ECL Pipeline: Beyond RAG
 
 Traditional RAG follows a simple pattern:
+
 ```
 Documents → Chunk → Embed → Vector DB → Retrieve → LLM
 ```
@@ -82,14 +83,14 @@ graph TB
 
 ### Core Components
 
-| Component | Purpose | Traditional RAG Equivalent |
-|:----------|:--------|:-------------------------:|
-| **Extract** | Parse and chunk documents | Chunking |
-| **Cognify** | Build knowledge graph with entities and relationships | ❌ Not present |
-| **Memify** | Add memory algorithms and indexing | Embedding |
-| **Graph DB** | Store relationships between concepts | ❌ Not present |
-| **Vector DB** | Store semantic embeddings | Vector DB |
-| **Search** | Query by relationships + similarity | Vector similarity only |
+| Component     | Purpose                                               | Traditional RAG Equivalent |
+| :------------ | :---------------------------------------------------- | :------------------------: |
+| **Extract**   | Parse and chunk documents                             |          Chunking          |
+| **Cognify**   | Build knowledge graph with entities and relationships |       ❌ Not present       |
+| **Memify**    | Add memory algorithms and indexing                    |         Embedding          |
+| **Graph DB**  | Store relationships between concepts                  |       ❌ Not present       |
+| **Vector DB** | Store semantic embeddings                             |         Vector DB          |
+| **Search**    | Query by relationships + similarity                   |   Vector similarity only   |
 
 ### Architecture Deep Dive
 
@@ -167,6 +168,7 @@ NPC("Elder Grimshaw") --[LOST_FAMILY_IN]--> Event("Great Fire of 1402")
 ```
 
 This graph structure enables queries like:
+
 - "What quests did players complete after talking to Elder Grimshaw?"
 - "Which NPCs are connected to the Great Fire event?"
 - "What locations are related to quests about forest spirits?"
@@ -175,16 +177,16 @@ This graph structure enables queries like:
 
 ![Cognee Comparison](/assets/img/ai/cognee/cognee_comparison.png){: .light .shadow .rounded-10 w='1212' h='668' }
 
-| Feature | Traditional RAG | Cognee |
-|:--------|:---------------:|:------:|
-| **Search Method** | Vector similarity only | Graph traversal + Vector similarity |
-| **Relationship Understanding** | ❌ No | ✅ Yes |
-| **Multi-hop Reasoning** | ❌ Limited | ✅ Yes (via graph) |
-| **Persistent Memory** | ⚠️ Stateless | ✅ Stateful |
-| **Cross-Document Connections** | ❌ No | ✅ Yes |
-| **Query Complexity** | Simple semantic search | Graph queries + semantic search |
-| **Setup Complexity** | Low | Medium |
-| **Production Scalability** | ✅ High | ✅ High (with proper config) |
+| Feature                        |    Traditional RAG     |               Cognee                |
+| :----------------------------- | :--------------------: | :---------------------------------: |
+| **Search Method**              | Vector similarity only | Graph traversal + Vector similarity |
+| **Relationship Understanding** |         ❌ No          |               ✅ Yes                |
+| **Multi-hop Reasoning**        |       ❌ Limited       |         ✅ Yes (via graph)          |
+| **Persistent Memory**          |      ⚠️ Stateless      |             ✅ Stateful             |
+| **Cross-Document Connections** |         ❌ No          |               ✅ Yes                |
+| **Query Complexity**           | Simple semantic search |   Graph queries + semantic search   |
+| **Setup Complexity**           |          Low           |               Medium                |
+| **Production Scalability**     |        ✅ High         |    ✅ High (with proper config)     |
 
 ---
 
@@ -203,7 +205,7 @@ from datetime import datetime
 class GameAgentMemory:
     """
     Persistent memory system for game AI agents
-    
+
     Curiosity: Can agents remember player interactions across sessions?
     Retrieve: Use Cognee's graph-vector hybrid approach
     Innovation: Multi-agent shared memory with relationship tracking
@@ -233,7 +235,7 @@ class GameAgentMemory:
     ):
         """
         Add a game event to shared memory
-        
+
         Args:
             event_type: "player_action", "quest_completion", "npc_interaction"
             data: Event details
@@ -248,10 +250,10 @@ class GameAgentMemory:
         Location: {data.get('location', 'unknown')}
         Details: {data.get('details', {})}
         """
-        
+
         # Add to Cognee
         await cognee.add(event_text)
-        
+
         # Add metadata for graph relationships
         if 'relationships' in data:
             for rel_type, target in data['relationships'].items():
@@ -272,11 +274,11 @@ class GameAgentMemory:
     ) -> List[str]:
         """
         Query player's interaction history using graph + vector search
-        
+
         Args:
             player_id: Player identifier
             query: Natural language query
-            
+
         Returns:
             List of relevant memories
         """
@@ -285,7 +287,7 @@ class GameAgentMemory:
             f"Player {player_id}: {query}",
             top_k=10
         )
-        
+
         return [result for result in results]
 
     async def get_related_entities(
@@ -295,11 +297,11 @@ class GameAgentMemory:
     ) -> List[Dict]:
         """
         Use graph traversal to find related entities
-        
+
         Args:
             entity_name: Entity to start from
             relationship_type: Optional filter for relationship type
-            
+
         Returns:
             List of related entities with relationship info
         """
@@ -307,9 +309,9 @@ class GameAgentMemory:
         query = f"Find entities related to {entity_name}"
         if relationship_type:
             query += f" via {relationship_type} relationships"
-        
+
         results = await cognee.search(query, top_k=20)
-        
+
         # Parse results to extract relationships
         related = []
         for result in results:
@@ -319,14 +321,14 @@ class GameAgentMemory:
                 'entity': result,
                 'relationship': relationship_type or 'related'
             })
-        
+
         return related
 
 # Usage in production
 async def main():
     memory = GameAgentMemory()
     await memory.initialize()
-    
+
     # Agent 1: NPC Dialogue Agent records conversation
     await memory.add_game_event(
         event_type="npc_interaction",
@@ -348,7 +350,7 @@ async def main():
         },
         agent_id='npc_dialogue'
     )
-    
+
     # Agent 2: Quest Designer creates quest
     await memory.add_game_event(
         event_type="quest_created",
@@ -365,26 +367,26 @@ async def main():
         },
         agent_id='quest_designer'
     )
-    
+
     # Build knowledge graph
     await memory.build_knowledge_graph()
-    
+
     # Query: What does player_123 know about Elder Grimshaw?
     history = await memory.query_player_history(
         'player_123',
         'What interactions did I have with Elder Grimshaw?'
     )
-    
+
     print("Player History:")
     for event in history:
         print(f"  - {event}")
-    
+
     # Query: What entities are related to the Great Fire?
     related = await memory.get_related_entities(
         'Great Fire of 1402',
         relationship_type='REFERENCES'
     )
-    
+
     print("\nRelated to Great Fire of 1402:")
     for entity in related:
         print(f"  - {entity['entity']} ({entity['relationship']})")
@@ -455,12 +457,12 @@ graph TB
 
 #### 1. **Performance Optimization**
 
-| Operation | Latency Target | Cognee Approach | Optimization |
-|:----------|:-------------:|:---------------|:------------|
-| **Add Event** | <100ms | Async pipeline | Batch writes |
-| **Cognify** | <5s (per batch) | Background job | Incremental updates |
-| **Search** | <500ms | Hybrid query | Cache frequent queries |
-| **Graph Traversal** | <200ms | Indexed graph | Limit traversal depth |
+| Operation           | Latency Target  | Cognee Approach | Optimization           |
+| :------------------ | :-------------: | :-------------- | :--------------------- |
+| **Add Event**       |     <100ms      | Async pipeline  | Batch writes           |
+| **Cognify**         | <5s (per batch) | Background job  | Incremental updates    |
+| **Search**          |     <500ms      | Hybrid query    | Cache frequent queries |
+| **Graph Traversal** |     <200ms      | Indexed graph   | Limit traversal depth  |
 
 #### 2. **Scalability Architecture**
 
@@ -481,22 +483,22 @@ class ProductionCogneeMemory:
     ) -> List[str]:
         """Search with Redis caching"""
         cache_key = f"cognee:search:{hash(query)}"
-        
+
         # Check cache
         cached = self.cache.get(cache_key)
         if cached:
             return json.loads(cached)
-        
+
         # Query Cognee
         results = await cognee.search(query, top_k=top_k)
-        
+
         # Cache results
         self.cache.setex(
             cache_key,
             self.cache_ttl,
             json.dumps(results)
         )
-        
+
         return results
 ```
 
@@ -538,6 +540,7 @@ vs. Traditional RAG:
 **Problem:** NPCs forget previous conversations with players.
 
 **Solution with Cognee:**
+
 ```python
 # NPC remembers player across sessions
 async def npc_conversation(player_id: str, message: str):
@@ -546,23 +549,23 @@ async def npc_conversation(player_id: str, message: str):
         f"Player {player_id} conversations with NPC",
         top_k=5
     )
-    
+
     # Find related quests and events
     related = await cognee.search(
         f"Quests and events related to {player_id}",
         top_k=10
     )
-    
+
     # Generate contextual response
     context = f"""
     Previous conversations: {history}
     Related events: {related}
     Current message: {message}
     """
-    
+
     # LLM generates response with full context
     response = await llm.generate(context)
-    
+
     # Store new conversation
     await cognee.add(f"Player {player_id}: {message}\nNPC: {response}")
     await cognee.cognify()  # Update graph
@@ -573,6 +576,7 @@ async def npc_conversation(player_id: str, message: str):
 **Problem:** Quest designer doesn't know what NPC dialogue agent learned about players.
 
 **Solution:**
+
 ```python
 # Quest designer queries shared memory
 async def design_personalized_quest(player_id: str):
@@ -581,26 +585,26 @@ async def design_personalized_quest(player_id: str):
         f"Player {player_id} preferences and interests",
         top_k=10
     )
-    
+
     # Get player's quest history
     quest_history = await cognee.search(
         f"Quests completed by {player_id}",
         top_k=20
     )
-    
+
     # Find related NPCs and locations
     related_npcs = await cognee.get_related_entities(
         player_id,
         relationship_type='INTERACTED_WITH'
     )
-    
+
     # Design quest using all this context
     quest = await quest_designer.generate({
         'preferences': preferences,
         'history': quest_history,
         'related_npcs': related_npcs
     })
-    
+
     return quest
 ```
 
@@ -617,14 +621,14 @@ async def design_personalized_quest(player_id: str):
 
 ### When to Use Cognee vs Traditional RAG
 
-| Scenario | Use RAG | Use Cognee |
-|:---------|:-------:|:----------:|
-| **Simple document Q&A** | ✅ | ⚠️ Overkill |
-| **Multi-agent systems** | ❌ | ✅ **Perfect fit** |
-| **Relationship-heavy data** | ❌ | ✅ **Perfect fit** |
-| **Cross-session memory** | ❌ | ✅ **Perfect fit** |
-| **Real-time chat** | ✅ | ⚠️ Latency concerns |
-| **Knowledge graphs needed** | ❌ | ✅ **Perfect fit** |
+| Scenario                    | Use RAG |     Use Cognee      |
+| :-------------------------- | :-----: | :-----------------: |
+| **Simple document Q&A**     |   ✅    |     ⚠️ Overkill     |
+| **Multi-agent systems**     |   ❌    | ✅ **Perfect fit**  |
+| **Relationship-heavy data** |   ❌    | ✅ **Perfect fit**  |
+| **Cross-session memory**    |   ❌    | ✅ **Perfect fit**  |
+| **Real-time chat**          |   ✅    | ⚠️ Latency concerns |
+| **Knowledge graphs needed** |   ❌    | ✅ **Perfect fit**  |
 
 ### Production Checklist
 
@@ -656,42 +660,49 @@ async def design_personalized_quest(player_id: str):
 ## References
 
 **Research Papers:**
+
 - [Optimizing the Interface Between Knowledge Graphs and LLMs for Complex Reasoning (Markovic et al., 2025)](https://arxiv.org/abs/2505.24478) - Cognee's research foundation
 - [Retrieval-Augmented Generation (Lewis et al., 2020)](https://arxiv.org/abs/2005.11401) - RAG baseline comparison
 - [GraphRAG: Unlocking LLM discovery on narrative private data (Microsoft, 2024)](https://www.microsoft.com/en-us/research/blog/graphrag-unlocking-llm-discovery-on-narrative-private-data/) - Related graph-based RAG approach
 
 **Code & Implementation:**
+
 - [Cognee GitHub Repository](https://github.com/topoteretes/cognee) - Official implementation
 - [Cognee Documentation](https://docs.cognee.ai/) - Complete API reference
 - [Cognee Colab Tutorial](https://colab.research.google.com/drive/12Vi9zID-M3fpKpKiaqDBvkk98ElkRPWy?usp=sharing) - Interactive walkthrough
 - [Cognee Community Plugins](https://github.com/topoteretes/cognee-community) - Community extensions
 
 **Graph Databases:**
+
 - [Neo4j Documentation](https://neo4j.com/docs/) - Production graph database
 - [NetworkX Documentation](https://networkx.org/) - Python graph library
 - [Qdrant Vector Database](https://qdrant.tech/) - Vector search engine
 - [Pinecone Documentation](https://www.pinecone.io/docs/) - Managed vector DB
 
 **Multi-Agent Systems:**
+
 - [LangGraph Documentation](https://langchain-ai.github.io/langgraph/) - Multi-agent framework
 - [AutoGen Framework](https://github.com/microsoft/autogen) - Multi-agent conversations
 - [CrewAI](https://github.com/joaomdmoura/crewAI) - Multi-agent orchestration
 
 **Production Resources:**
+
 - [Cognee Cloud Platform](https://platform.cognee.ai/) - Managed Cognee hosting
 - [Building Production RAG Systems (Chip Huyen)](https://huyenchip.com/2023/04/11/llm-engineering.html) - Production best practices
 - [Knowledge Graph Best Practices](https://neo4j.com/developer/kb/) - Graph database patterns
 
 **Community & Support:**
+
 - [Cognee Discord](https://discord.gg/NQPKmU5CCg) - Community discussions
 - [r/AIMemory Subreddit](https://www.reddit.com/r/AIMemory/) - AI memory discussions
 - [Cognee Product Hunt](https://www.producthunt.com/posts/cognee) - Product launch
 
 **Game AI Resources:**
+
 - [Unity ML-Agents](https://github.com/Unity-Technologies/ml-agents) - Game AI framework
-- [Game AI Pro Book Series](http://www.gameaipro.com/) - Game AI patterns
-- [Procedural Content Generation Wiki](http://pcg.wikidot.com/) - PCG techniques
+- [Game AI Pro Book Series](https://www.gameaipro.com/) - Game AI patterns
+- [Procedural Content Generation Wiki](https://pcg.wikidot.com/) - PCG techniques
 
 ---
 
-*This post explores Cognee's potential for building persistent memory in multi-agent systems, with a focus on production game development use cases. The graph-vector hybrid approach offers significant advantages over traditional RAG for relationship-heavy domains like game narratives and player interactions.*
+_This post explores Cognee's potential for building persistent memory in multi-agent systems, with a focus on production game development use cases. The graph-vector hybrid approach offers significant advantages over traditional RAG for relationship-heavy domains like game narratives and player interactions._
