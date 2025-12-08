@@ -10,13 +10,14 @@
 
     .pin-marker {
       position: absolute;
-      top: -10px;
-      left: 10px;
-      color: #d9534f;
+      top: -12px;
+      left: -12px;
+      color: #e74c3c;
       font-size: 1.5rem;
       transform: rotate(-45deg);
-      z-index: 10;
-      filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
+      z-index: 20;
+      filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.4));
+      pointer-events: none;
 
       i {
         display: block; // Ensure icon takes up space
