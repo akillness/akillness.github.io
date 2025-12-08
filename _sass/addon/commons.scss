@@ -800,6 +800,7 @@ $btn-mb: 0.5rem;
     }
   }
 
+
   a {
     @extend %sidebar-links;
   }
@@ -1639,3 +1640,13 @@ search {
     }
   }
 } /* min-width: 1650px */
+
+/* Code Typography Overrides - Global */
+code.highlighter-rouge {
+  font-size: 1.25rem !important; /* ~20px */
+}
+
+.highlight pre {
+  font-size: 1.25rem !important; /* ~20px */
+  line-height: 2rem !important; /* Comfortable line height */
+}
