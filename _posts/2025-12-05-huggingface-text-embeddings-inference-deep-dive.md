@@ -17,9 +17,9 @@ tags:
 date: 2025-12-05 10:00:00 +0800
 mermaid: true
 math: true
-image:
-  path: /assets/img/posts/text-embeddings-inference.png
-  alt: "HuggingFace Text Embeddings Inference Architecture"
+# image:
+#   path: /assets/img/posts/text-embeddings-inference.png
+#   alt: "HuggingFace Text Embeddings Inference Architecture"
 ---
 
 ## 🤔 Curiosity: Why Do We Need a Dedicated Embedding Inference Server?
