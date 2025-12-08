@@ -136,17 +136,13 @@ import asyncio
 
 class GameTestingAgent:
     """
-    Game testing agent using FARA 7B for computer use
-    
-    Leverages FARA 7B's efficient agentic capabilities for
-    automated game testing.
+    FARA 7B-based game testing agent
     """
     
-    def __init__(self, model_name: str = "microsoft/fara-7b"):
-        self.model_name = model_name
-        self.context = []
+    def __init__(self):
+        self.model = "microsoft/fara-7b"
         self.action_history = []
-    
+        
     async def test_game_scenario(
         self,
         scenario: str,
@@ -252,6 +248,7 @@ async def run_game_tests():
         print(f"Test: {scenario}")
         print(f"Result: {'PASSED' if result['passed'] else 'FAILED'}")
 ```
+{% endraw %}
 
 ### Use Case 2: Multi-Agent Game Development Workflow
 

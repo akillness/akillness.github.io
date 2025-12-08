@@ -318,6 +318,7 @@ client = genai.Client(api_key=os.environ['GOOGLE_API_KEY'])
 
 ### Single Agent Implementation
 
+{% raw %}
 ```python
 # Curiosity: How to build a single agent with Gemini 3?
 # Retrieve: Gemini 3's function calling and tool use capabilities
@@ -405,9 +406,11 @@ result = agent.analyze_balance({
 print(f"Issues found: {len(result['issues'])}")
 print(f"Confidence: {result['confidence']:.2%}")
 ```
+{% endraw %}
 
 ### Multi-Agent System Implementation
 
+{% raw %}
 ```python
 # Curiosity: Can multiple agents share Gemini 3 while collaborating?
 # Retrieve: Gemini 3's function calling, tool use, and context sharing
@@ -625,7 +628,8 @@ class MultiAgentSystem:
             'steps': results,
             'plan': plan
         }
-
+```
+{% endraw %}
 # Usage example: Game development workflow
 async def game_development_workflow():
     """Multi-agent workflow for game development"""
