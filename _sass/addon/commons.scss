@@ -66,7 +66,7 @@ body {
         $factor: 0.23rem;
       }
 
-      font-size: 1rem + (5 - $i) * $factor;
+      font-size: 1rem + (5 - $i) * $factor * 0.8; /* Reduced header size */
     } @else {
       font-size: 1rem;
     }
@@ -283,7 +283,7 @@ i {
 
 /* Readability Improvements */
 p, li {
-  font-size: 20px !important;
+  font-size: 22px !important; /* Increased from 20px */
   line-height: 1.8;
   letter-spacing: 0.02em;
 }
@@ -575,7 +575,7 @@ main {
   color: var(--text-muted-color);
   line-height: 1.3rem;
   font-family: $font-family-heading;
-  font-size: 0.8rem;
+  font-size: 0.65rem; /* Reduced from 0.8rem */
 
   &:not(:last-child) {
     margin-right: 0.2rem;
