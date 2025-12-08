@@ -8,6 +8,8 @@
   color: var(--heading-color);
   font-weight: 400;
   font-family: $font-family-heading;
+  // Pixel text shadow - using CSS variable directly
+  text-shadow: 1px 1px 0 var(--heading-color);
 }
 
 %section {
@@ -92,7 +94,7 @@
 }
 
 %rounded {
-  border-radius: $base-radius;
+  border-radius: 0; // Pixel style - no rounded corners
 }
 
 %img-caption {

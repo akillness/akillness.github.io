@@ -31,8 +31,21 @@ body {
   padding: env(safe-area-inset-top) env(safe-area-inset-right)
     env(safe-area-inset-bottom) env(safe-area-inset-left);
   color: var(--text-color);
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: auto;
+  font-smoothing: auto;
   font-family: $font-family-base;
+  // Move dot pattern to pseudo-element to avoid opacity affecting entire body
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    @include dot-pattern(var(--main-border-color), 20px, 0.05);
+  }
 }
 
 /* --- Typography --- */
@@ -69,13 +82,32 @@ a {
 img {
   max-width: 100%;
   height: auto;
-  transition: all 0.35s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  @extend %pixel-image;
+  
+  /* 3D Frame Style for Content Images */
+  @at-root .content img#{&} {
+    border: 4px solid #fff;
+    box-shadow: 4px 4px 0 #000, 8px 8px 0 rgba(0,0,0,0.2);
+    margin: 1rem 0;
+  }
 
   .blur & {
     $blur: 20px;
 
     -webkit-filter: blur($blur);
     filter: blur($blur);
+  }
+
+  /* Force image visibility in dark mode */
+  @media (prefers-color-scheme: dark) {
+    opacity: 1 !important;
+    filter: none !important;
+  }
+  
+  [data-mode='dark'] & {
+    opacity: 1 !important;
+    filter: none !important;
   }
 }
 
@@ -114,7 +146,7 @@ blockquote {
 }
 
 kbd {
-  font-family: inherit;
+  font-family: $font-family-heading;
   display: inline-block;
   vertical-align: middle;
   line-height: 1.3rem;
@@ -124,17 +156,23 @@ kbd {
   padding-top: 0.1rem;
   color: var(--kbd-text-color);
   background-color: var(--kbd-bg-color);
-  border-radius: 0.25rem;
-  border: solid 1px var(--kbd-wrap-color);
-  box-shadow: inset 0 -2px 0 var(--kbd-wrap-color);
+  border-radius: 0;
+  @include pixel-border(var(--kbd-wrap-color), 2px);
+  box-shadow: 2px 2px 0 var(--kbd-wrap-color);
 }
 
 footer {
   background-color: var(--main-bg);
   height: $footer-height;
-  border-top: 1px solid var(--main-border-color);
+  @include pixel-border(var(--main-border-color), 3px);
+  border-top: 3px solid var(--main-border-color);
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
 
   @extend %text-xs;
+  font-family: $font-family-heading;
+  font-size: 0.7rem;
 
   a {
     @extend %text-highlight;
@@ -242,6 +280,14 @@ i {
   }
 }
 
+
+/* Readability Improvements */
+p, li {
+  font-size: 20px !important;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+
 .footnote {
   @at-root a#{&} {
     @include ml-mr(1px);
@@ -334,14 +380,47 @@ sup {
 }
 
 .post-preview {
-  @extend %rounded;
+  /* 3D Dot Game Style Update */
+  @include voxel-block(4px, var(--main-border-color), var(--card-bg));
+  border-radius: 0;
 
-  border: 0;
-  background: var(--card-bg);
-  box-shadow: var(--card-shadow);
+  /* Embedded highlight style to ensure animation works */
+}
+
+@keyframes voxel-pulse-anim {
+  0% { box-shadow: 4px 4px 0 #FF6B6B; border-color: #FF6B6B; }
+  50% { box-shadow: 4px 4px 0 #FF00FF, 0 0 10px #FF00FF; border-color: #FF00FF; }
+  100% { box-shadow: 4px 4px 0 #FF6B6B; border-color: #FF6B6B; }
+}
+
+.post-highlight-ai {
+  border: 4px solid #FF6B6B !important;
+  animation: voxel-pulse-anim 2s infinite !important;
+  position: relative;
+  
+  .card-title {
+     color: #FF00FF !important;
+     text-shadow: 2px 2px 0 #000;
+  }
+  
+  &::after {
+    content: "★ SPECIAL";
+    position: absolute;
+    top: -15px;
+    right: -10px;
+    background: #FF00FF;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border: 2px solid #000;
+    font-family: 'Press Start 2P', monospace;
+    transform: rotate(10deg);
+    z-index: 10;
+    box-shadow: 2px 2px 0 #000;
+  }
 
   &::before {
-    @extend %rounded;
+    border-radius: 0;
 
     content: '';
     width: 100%;
@@ -349,12 +428,12 @@ sup {
     position: absolute;
     background-color: var(--card-hovor-bg);
     opacity: 0;
-    transition: opacity 0.35s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
   }
 
   &:hover {
     &::before {
-      opacity: 0.3;
+      opacity: 0.2;
     }
   }
 }
@@ -490,14 +569,21 @@ main {
   display: inline-block;
   min-width: 2rem;
   text-align: center;
-  border-radius: 0.5rem;
-  border: 1px solid var(--btn-border-color);
+  border-radius: 0;
+  @include pixel-border(var(--btn-border-color), 2px);
   padding: 0 0.4rem;
   color: var(--text-muted-color);
   line-height: 1.3rem;
+  font-family: $font-family-heading;
+  font-size: 0.8rem;
 
   &:not(:last-child) {
     margin-right: 0.2rem;
+  }
+
+  &:hover {
+    background-color: var(--tag-hover);
+    transform: translateY(-1px);
   }
 }
 
@@ -684,6 +770,7 @@ $btn-mb: 0.5rem;
 
 #sidebar {
   @include pl-pr(0);
+  @include pixel-border(var(--sidebar-border-color), 3px);
 
   position: fixed;
   top: 0;
@@ -693,7 +780,10 @@ $btn-mb: 0.5rem;
   width: $sidebar-width;
   z-index: 99;
   background: var(--sidebar-bg);
-  border-right: 1px solid var(--sidebar-border-color);
+  border-right: 3px solid var(--sidebar-border-color);
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
 
   /* Hide scrollbar for Chrome, Safari and Opera */
   &::-webkit-scrollbar {
@@ -719,14 +809,15 @@ $btn-mb: 0.5rem;
     width: 7rem;
     height: 7rem;
     overflow: hidden;
-    box-shadow: var(--avatar-border-color) 0 0 0 2px;
+    @include pixel-border(var(--avatar-border-color), 3px);
     transform: translateZ(0); /* fixed the zoom in Safari */
 
     img {
-      transition: transform 0.5s;
+      @extend %pixel-image;
+      transition: transform 0.2s;
 
       &:hover {
-        transform: scale(1.2);
+        transform: scale(1.1);
       }
     }
   }
@@ -779,14 +870,18 @@ $btn-mb: 0.5rem;
 
       a.nav-link {
         @include pt-pb(0.6rem);
+        @include pixel-border(transparent, 2px);
 
         display: flex;
         align-items: center;
-        border-radius: 0.75rem;
+        border-radius: 0;
         font-weight: 600;
+        font-family: $font-family-heading;
+        font-size: 0.85rem;
 
         &:hover {
           background-color: var(--sidebar-hover-bg);
+          @include pixel-border(var(--sidebar-border-color), 2px);
         }
 
         i {
@@ -805,6 +900,7 @@ $btn-mb: 0.5rem;
         .nav-link {
           color: var(--sidebar-active-color);
           background-color: var(--sidebar-hover-bg);
+          @include pixel-border(var(--sidebar-active-color), 2px);
 
           span {
             opacity: 1;
@@ -829,17 +925,18 @@ $btn-mb: 0.5rem;
       width: $btn-size;
       height: $btn-size;
       margin-bottom: $btn-mb; // multi line gap
-      border-radius: 50%;
+      border-radius: 0;
+      @include pixel-border(var(--sidebar-border-color), 2px);
       color: var(--sidebar-btn-color);
       background-color: var(--sidebar-btn-bg);
       text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: var(--sidebar-border-color) 0 0 0 1px;
 
       &:hover {
         background-color: var(--sidebar-hover-bg);
+        transform: translateY(-1px);
       }
     }
 
@@ -910,6 +1007,10 @@ $btn-mb: 0.5rem;
 #topbar-wrapper {
   height: $topbar-height;
   background-color: var(--topbar-bg);
+  @include pixel-border(var(--main-border-color), 2px);
+  border-top: none;
+  border-left: none;
+  border-right: none;
 }
 
 #topbar {
@@ -980,8 +1081,8 @@ $btn-mb: 0.5rem;
 search {
   display: flex;
   width: 100%;
-  border-radius: 1rem;
-  border: 1px solid var(--search-border-color);
+  border-radius: 0;
+  @include pixel-border(var(--search-border-color), 2px);
   background: var(--main-bg);
   padding: 0 0.5rem;
 
@@ -1150,14 +1251,14 @@ search {
   padding: 0;
   width: $back2top-size;
   height: $back2top-size;
-  border-radius: 50%;
-  border: 1px solid var(--btn-backtotop-border-color);
-  transition: transform 0.2s ease-out;
-  -webkit-transition: transform 0.2s ease-out;
+  border-radius: 0;
+  @include pixel-border(var(--btn-backtotop-border-color), 3px);
+  transition: transform 0.1s ease-out;
+  -webkit-transition: transform 0.1s ease-out;
 
   &:hover {
-    transform: translate3d(0, -5px, 0);
-    -webkit-transform: translate3d(0, -5px, 0);
+    transform: translate3d(0, -3px, 0);
+    -webkit-transform: translate3d(0, -3px, 0);
   }
 
   i {

@@ -3,28 +3,28 @@
  */
 
 @mixin light-scheme {
-  /* Framework color */
-  --main-bg: white;
+  /* Framework color - Retro Game Light Mode */
+  --main-bg: #F0F0F0;
   --mask-bg: #c1c3c5;
-  --main-border-color: #f3f3f3;
+  --main-border-color: #000000;
 
-  /* Common color */
-  --text-color: #34343c;
-  --text-muted-color: #757575;
-  --text-muted-hightlight-color: inherit;
-  --heading-color: #2a2a2a;
-  --label-color: #585858;
-  --blockquote-border-color: #eeeeee;
-  --blockquote-text-color: #757575;
-  --link-color: #0056b2;
-  --link-underline-color: #dee2e6;
-  --button-bg: #ffffff;
-  --btn-border-color: #e9ecef;
-  --btn-backtotop-color: #686868;
-  --btn-backtotop-border-color: #f1f1f1;
-  --btn-box-shadow: #eaeaea;
-  --checkbox-color: #c5c5c5;
-  --checkbox-checked-color: #07a8f7;
+  /* Common color - Pixel Game Palette */
+  --text-color: #000000;
+  --text-muted-color: #555555;
+  --text-muted-hightlight-color: #000000;
+  --heading-color: #000000;
+  --label-color: #333333;
+  --blockquote-border-color: #000000;
+  --blockquote-text-color: #444444;
+  --link-color: #FF6B6B;
+  --link-underline-color: #FF6B6B;
+  --button-bg: #FFFFFF;
+  --btn-border-color: #000000;
+  --btn-backtotop-color: #000000;
+  --btn-backtotop-border-color: #000000;
+  --btn-box-shadow: #000000;
+  --checkbox-color: #999999;
+  --checkbox-checked-color: #4ECDC4;
   --img-bg: radial-gradient(
     circle,
     rgb(255, 255, 255) 0%,
@@ -37,38 +37,37 @@
     rgba(250, 250, 250, 0) 100%
   );
 
-  /* Sidebar */
-  --site-title-color: rgb(113, 113, 113);
-  --site-subtitle-color: #717171;
-  --sidebar-bg: #f6f8fa;
-  --sidebar-border-color: #efefef;
-  --sidebar-muted-color: #545454;
-  --sidebar-active-color: #1d1d1d;
-  --sidebar-hover-bg: rgb(223, 233, 241, 0.64);
-  --sidebar-btn-bg: white;
-  --sidebar-btn-color: #8e8e8e;
-  --avatar-border-color: white;
+  /* Sidebar - Game Menu Style */
+  --site-title-color: #000000;
+  --site-subtitle-color: #444444;
+  --sidebar-bg: #E8E8E8;
+  --sidebar-border-color: #000000;
+  --sidebar-muted-color: #666666;
+  --sidebar-active-color: #000000;
+  --sidebar-hover-bg: #D0D0D0;
+  --sidebar-btn-bg: #FFFFFF;
+  --sidebar-btn-color: #000000;
+  --avatar-border-color: #000000;
 
-  /* Topbar */
-  --topbar-bg: rgb(255, 255, 255, 0.7);
-  --topbar-text-color: rgb(78, 78, 78);
-  --search-border-color: rgb(240, 240, 240);
-  --search-icon-color: #c2c6cc;
-  --input-focus-border-color: #b8b8b8;
+  /* Topbar - Game HUD Style */
+  --topbar-bg: rgba(232, 232, 232, 0.95);
+  --topbar-text-color: #000000;
+  --search-border-color: #000000;
+  --search-icon-color: #666666;
+  --input-focus-border-color: #FF6B6B;
 
   /* Home page */
-  --post-list-text-color: dimgray;
-  --btn-patinator-text-color: #555555;
-  --btn-paginator-hover-color: var(--sidebar-bg);
+  --post-list-text-color: #000000;
+  --btn-patinator-text-color: #000000;
+  --btn-paginator-hover-color: #D0D0D0;
 
-  /* Posts */
-  --toc-highlight: #0550ae;
-  --btn-share-color: gray;
-  --btn-share-hover-color: #0d6efd;
-  --card-bg: white;
-  --card-hovor-bg: #e2e2e2;
-  --card-shadow: rgb(104, 104, 104, 0.05) 0 2px 6px 0,
-    rgba(211, 209, 209, 0.15) 0 0 0 1px;
+  /* Posts - Pixel Card Style */
+  --toc-highlight: #4ECDC4;
+  --btn-share-color: #000000;
+  --btn-share-hover-color: #FF6B6B;
+  --card-bg: #FFFFFF;
+  --card-hovor-bg: #F5F5F5;
+  --card-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
   --footnote-target-bg: lightcyan;
   --tb-odd-bg: #fbfcfd;
   --tb-border-color: #eaeaea;

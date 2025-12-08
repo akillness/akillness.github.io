@@ -1,0 +1,172 @@
+/*
+ * Pixel/Dot Game Style Utilities
+ */
+
+/* Pixel border mixin */
+@mixin pixel-border($color: #000, $width: 2px) {
+  border: $width solid $color;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Dot pattern background */
+@mixin dot-pattern($color: #000, $size: 20px, $opacity: 0.1) {
+  background-image: radial-gradient(circle, $color 1px, transparent 1px);
+  background-size: $size $size;
+  background-position: 0 0, $size $size;
+  opacity: $opacity;
+}
+
+/* Grid pattern background */
+@mixin grid-pattern($color: #000, $size: 20px, $opacity: 0.1) {
+  background-image: 
+    linear-gradient($color 1px, transparent 1px),
+    linear-gradient(90deg, $color 1px, transparent 1px);
+  background-size: $size $size;
+  opacity: $opacity;
+}
+
+/* Pixelated image rendering */
+%pixel-image {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Game button style */
+@mixin game-button($bg-color: #fff, $border-color: #000, $text-color: #000) {
+  @include pixel-border($border-color, 3px);
+  background-color: $bg-color;
+  color: $text-color;
+  padding: 0.5rem 1rem;
+  font-family: $font-family-heading;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  
+  &:hover {
+    background-color: darken($bg-color, 5%);
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Pixel card style */
+@mixin pixel-card($bg-color: #fff, $border-color: #000) {
+  @include pixel-border($border-color, 2px);
+  background-color: $bg-color;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.1s ease;
+  }
+}
+
+/* Blinking animation for game elements */
+@keyframes pixel-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+%pixel-blink {
+  animation: pixel-blink 1s infinite;
+}
+
+/* Pixel hover effect */
+@keyframes pixel-hover {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-1px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+%pixel-hover-effect {
+  &:hover {
+    animation: pixel-hover 0.3s ease;
+  }
+}
+
+/* Game button press effect */
+@keyframes button-press {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
+  100% { transform: translateY(0); }
+}
+
+/* Pixel text shadow */
+@mixin pixel-text-shadow($color: #000, $offset: 2px) {
+  // Use CSS variables directly instead of SCSS darken function
+  text-shadow: 
+    $offset $offset 0 $color;
+  
+  // For CSS variables, use a lighter approach
+  @if type-of($color) == 'color' {
+    text-shadow: 
+      $offset $offset 0 $color,
+      ($offset * 2) ($offset * 2) 0 darken($color, 10%);
+  } @else {
+    // For CSS variables, just use single shadow
+    text-shadow: $offset $offset 0 $color;
+  }
+}
+
+
+/* --- 3D Voxel / Dot Game Heroes Style --- */
+
+/* Voxel Block Effect (3D Shadow) */
+@mixin voxel-block($depth: 4px, $color: #000, $bg: #fff) {
+  background-color: $bg;
+  border: 4px solid $color;
+  box-shadow: 
+    4px 4px 0 darken($color, 10%),
+    8px 8px 0 rgba(0,0,0,0.2);
+  position: relative;
+  transition: all 0.1s ease-out;
+
+  &:active {
+    transform: translate(4px, 4px);
+    box-shadow: 
+      0 0 0 darken($color, 10%),
+      4px 4px 0 rgba(0,0,0,0.2);
+  }
+}
+
+/* Voxel Text Effect */
+@mixin voxel-text($offset: 3px, $color: #000, $bg: #fff) {
+  color: $bg;
+  -webkit-text-stroke: 1px $color;
+  text-shadow: 
+    $offset $offset 0 $color;
+  font-weight: 800;
+}
+
+/* Highlight Pulse Animation for Special Posts */
+@keyframes voxel-pulse {
+  0% { box-shadow: 4px 4px 0 #FF6B6B, 0 0 10px #FF6B6B; border-color: #FF6B6B; }
+  50% { box-shadow: 4px 4px 0 #FF00FF, 0 0 20px #FF00FF; border-color: #FF00FF; }
+  100% { box-shadow: 4px 4px 0 #FF6B6B, 0 0 10px #FF6B6B; border-color: #FF6B6B; }
+}
+
+@mixin voxel-highlight {
+  animation: voxel-pulse 2s infinite;
+  
+  &::after {
+    content: "★ SPECIAL";
+    position: absolute;
+    top: -15px;
+    right: -10px;
+    background: #FF00FF;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border: 2px solid #000;
+    font-family: 'Press Start 2P', monospace;
+    transform: rotate(10deg);
+  }
+}

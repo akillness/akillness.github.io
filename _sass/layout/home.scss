@@ -20,7 +20,7 @@
     background: none;
 
     %img-radius {
-      border-radius: $base-radius $base-radius 0 0;
+      border-radius: 0;
     }
 
     .preview-img {
@@ -28,6 +28,7 @@
 
       img {
         @extend %img-radius;
+        @extend %pixel-image;
       }
     }
 
@@ -40,6 +41,7 @@
 
         color: var(--heading-color) !important;
         font-size: 1.25rem;
+        font-family: $font-family-heading;
       }
 
       %muted {
@@ -99,21 +101,25 @@
       display: -webkit-box;
       -webkit-box-pack: center;
       -webkit-box-align: center;
-      border-radius: 0.5rem;
-      border: 0;
+      border-radius: 0;
+      @include pixel-border(var(--btn-border-color), 2px);
       background-color: inherit;
+      font-family: $font-family-heading;
+      font-size: 0.85rem;
     }
 
     &.active {
       .page-link {
         background-color: var(--btn-paginator-hover-color);
+        @include pixel-border(var(--main-border-color), 2px);
       }
     }
 
     &:not(.active) {
       .page-link {
         &:hover {
-          box-shadow: inset var(--btn-border-color) 0 0 0 1px;
+          background-color: var(--btn-paginator-hover-color);
+          transform: translateY(-1px);
         }
       }
     }

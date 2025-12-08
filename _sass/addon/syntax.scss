@@ -144,10 +144,13 @@ td.rouge-code {
 }
 
 div[class^='language-'] {
-  @extend %rounded;
   @extend %code-snippet-bg;
-
-  box-shadow: var(--language-border-color) 0 0 0 1px;
+  border-radius: 0;
+  @include voxel-block(4px, #000, var(--highlight-bg-color));
+  
+  /* Increase readability */
+  font-size: 1.1em;
+  line-height: 1.6;
 
   .content > & {
     @include ml-mr(-1rem);

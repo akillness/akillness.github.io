@@ -3,26 +3,26 @@
  */
 
 @mixin dark-scheme {
-  /* Framework color */
-  --main-bg: rgb(27, 27, 30);
+  /* Framework color - Retro Game Dark Mode */
+  --main-bg: #1A1A2E;
   --mask-bg: rgb(68, 69, 70);
-  --main-border-color: rgb(44, 45, 45);
+  --main-border-color: #00D9FF;
 
-  /* Common color */
-  --text-color: rgb(175, 176, 177);
-  --text-muted-color: #868686;
-  --text-muted-hightlight-color: #aeaeae;
-  --heading-color: #cccccc;
-  --label-color: #a7a7a7;
-  --blockquote-border-color: rgb(66, 66, 66);
-  --blockquote-text-color: #868686;
-  --link-color: rgb(138, 180, 248);
-  --link-underline-color: rgb(82, 108, 150);
-  --button-bg: #1e1e1e;
-  --btn-border-color: #2e2f31;
-  --btn-backtotop-color: var(--text-color);
-  --btn-backtotop-border-color: #212122;
-  --btn-box-shadow: var(--main-bg);
+  /* Common color - Neon Pixel Palette */
+  --text-color: #EEEEEE;
+  --text-muted-color: #AAAAAA;
+  --text-muted-hightlight-color: #FFFFFF;
+  --heading-color: #00D9FF;
+  --label-color: #CCCCCC;
+  --blockquote-border-color: #00D9FF;
+  --blockquote-text-color: #CCCCCC;
+  --link-color: #00D9FF;
+  --link-underline-color: #00D9FF;
+  --button-bg: #16213E;
+  --btn-border-color: #00D9FF;
+  --btn-backtotop-color: #00D9FF;
+  --btn-backtotop-border-color: #00D9FF;
+  --btn-box-shadow: #00D9FF;
   --card-header-bg: #292929;
   --checkbox-color: rgb(118, 120, 121);
   --checkbox-checked-color: var(--link-color);
@@ -34,43 +34,42 @@
     rgba(255, 255, 255, 0) 100%
   );
 
-  /* Sidebar */
-  --site-title-color: #717070;
-  --site-subtitle-color: #868686;
-  --sidebar-bg: #1e1e1e;
-  --sidebar-border-color: #292929;
-  --sidebar-muted-color: #868686;
-  --sidebar-active-color: rgb(255, 255, 255, 0.95);
-  --sidebar-hover-bg: #262626;
-  --sidebar-btn-bg: #232328;
-  --sidebar-btn-color: #787878;
-  --avatar-border-color: rgb(206, 206, 206, 0.9);
+  /* Sidebar - Dark Game Menu */
+  --site-title-color: #00D9FF;
+  --site-subtitle-color: #AAAAAA;
+  --sidebar-bg: #16213E;
+  --sidebar-border-color: #00D9FF;
+  --sidebar-muted-color: #888888;
+  --sidebar-active-color: #00D9FF;
+  --sidebar-hover-bg: #0F3460;
+  --sidebar-btn-bg: #1A1A2E;
+  --sidebar-btn-color: #00D9FF;
+  --avatar-border-color: #00D9FF;
 
-  /* Topbar */
-  --topbar-bg: rgb(27, 27, 30, 0.64);
-  --topbar-text-color: var(--text-color);
-  --search-border-color: rgb(55, 55, 55);
-  --search-icon-color: rgb(100, 102, 105);
-  --input-focus-border-color: rgb(112, 114, 115);
+  /* Topbar - Dark Game HUD */
+  --topbar-bg: rgba(22, 33, 62, 0.95);
+  --topbar-text-color: #00D9FF;
+  --search-border-color: #00D9FF;
+  --search-icon-color: #888888;
+  --input-focus-border-color: #FF00FF;
 
   /* Home page */
   --post-list-text-color: rgb(175, 176, 177);
   --btn-patinator-text-color: var(--text-color);
   --btn-paginator-hover-color: #2e2e2e;
 
-  /* Posts */
-  --toc-highlight: rgb(116, 178, 243);
-  --tag-hover: rgb(43, 56, 62);
-  --tb-odd-bg: #252526; /* odd rows of the posts' table */
-  --tb-even-bg: rgb(31, 31, 34); /* even rows of the posts' table */
-  --tb-border-color: var(--tb-odd-bg);
-  --footnote-target-bg: rgb(63, 81, 181);
-  --btn-share-color: #6c757d;
-  --btn-share-hover-color: #bfc1ca;
-  --card-bg: #1e1e1e;
-  --card-hovor-bg: #464d51;
-  --card-shadow: rgb(21, 21, 21, 0.72) 0 6px 18px 0,
-    rgb(137, 135, 135, 0.24) 0 0 0 1px;
+  /* Posts - Dark Pixel Cards */
+  --toc-highlight: #FF00FF;
+  --tag-hover: #0F3460;
+  --tb-odd-bg: #16213E; /* odd rows of the posts' table */
+  --tb-even-bg: #1A1A2E; /* even rows of the posts' table */
+  --tb-border-color: #00D9FF;
+  --footnote-target-bg: #0F3460;
+  --btn-share-color: #00D9FF;
+  --btn-share-hover-color: #FF00FF;
+  --card-bg: #16213E;
+  --card-hovor-bg: #0F3460;
+  --card-shadow: 4px 4px 0 rgba(0, 217, 255, 0.3);
   --kbd-wrap-color: #6a6a6a;
   --kbd-text-color: #d3d3d3;
   --kbd-bg-color: #242424;

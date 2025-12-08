@@ -71,6 +71,11 @@
     <link rel="stylesheet" href="{{ site.data.origin[type].webfonts | relative_url }}">
   {% endif %}
 
+  <!-- Pixel Fonts for Dot Game Style -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <!-- GA -->
   {% if jekyll.environment == 'production' and site.google_analytics.id != empty and site.google_analytics.id %}
     <link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials">

@@ -58,6 +58,10 @@
 
 {% include jsdelivr-combine.html urls=urls %}
 
+{% if page.mermaid %}
+  {% include mermaid.html %}
+{% endif %}
+
 {% case page.layout %}
   {% when 'home', 'categories', 'post', 'page' %}
     {% assign js = page.layout %}

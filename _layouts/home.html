@@ -43,7 +43,27 @@ refactor: true
 <div id="post-list" class="flex-grow-1 px-xl-1">
   {% for post in posts %}
     <article class="card-wrapper card">
-      <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
+      {% assign preview_class = "post-preview row g-0 flex-md-row-reverse" %}
+      {% assign highlight_keywords = "AI,LLM,Optimization,Deep Learning,Performance" | split: "," %}
+      {% assign is_highlighted = false %}
+      
+      {% for tag in post.tags %}
+        {% if highlight_keywords contains tag %}
+          {% assign is_highlighted = true %}
+        {% endif %}
+      {% endfor %}
+
+      {% for cat in post.categories %}
+        {% if highlight_keywords contains cat %}
+          {% assign is_highlighted = true %}
+        {% endif %}
+      {% endfor %}
+
+      {% if is_highlighted %}
+        {% assign preview_class = preview_class | append: " post-highlight-ai" %}
+      {% endif %}
+
+      <a href="{{ post.url | relative_url }}" class="{{ preview_class }}">
         {% assign card_body_col = '12' %}
 
         {% if post.image %}

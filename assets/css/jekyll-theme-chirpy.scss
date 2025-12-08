@@ -3,4 +3,37 @@
 
 @import 'main';
 
-/* append your custom style below */
+/* Dot Game Style Customizations */
+/* Pixel font size adjustments for better readability */
+body {
+  font-size: 20px; /* Slightly larger for pixel fonts */
+  
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+}
+
+/* Ensure headings are readable with pixel fonts */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+}
+
+/* Improve button readability */
+button, .btn {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  min-height: 2.5rem;
+}
+
+/* Code blocks maintain pixel style */
+code, pre {
+  font-family: 'VT323', monospace;
+  font-size: 1.1em;
+}
+
+/* Smooth transitions for pixel elements */
+* {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
