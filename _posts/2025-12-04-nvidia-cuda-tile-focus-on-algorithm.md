@@ -43,7 +43,7 @@ CUDA Tile introduces a fundamental shift in how we think about GPU programming. 
 
 ![CUDA Tile vs SIMT Model Comparison](/assets/img/posts/cuda-tile-figure1-comparison.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
-*Figure 1: The tile model (left) partitions data into blocks, and the compiler maps to threads. SIMT model (right) maps data to both blocks and threads.*
+_Figure 1: The tile model (left) partitions data into blocks, and the compiler maps to threads. SIMT model (right) maps data to both blocks and threads._
 
 ```mermaid
 graph TB
@@ -65,12 +65,12 @@ graph TB
 
 **Key Difference:**
 
-| Aspect | SIMT Model | Tile Model |
-|:-------|:-----------|:-----------|
-| **Data Mapping** | Application maps to blocks AND threads | Application partitions into tiles only |
-| **Thread Mapping** | Explicit thread/block configuration | Compiler handles thread mapping |
-| **Abstraction Level** | Low-level hardware control | High-level algorithmic focus |
-| **Hardware Awareness** | Developer must understand architecture | Compiler abstracts hardware details |
+| Aspect                 | SIMT Model                             | Tile Model                             |
+| :--------------------- | :------------------------------------- | :------------------------------------- |
+| **Data Mapping**       | Application maps to blocks AND threads | Application partitions into tiles only |
+| **Thread Mapping**     | Explicit thread/block configuration    | Compiler handles thread mapping        |
+| **Abstraction Level**  | Low-level hardware control             | High-level algorithmic focus           |
+| **Hardware Awareness** | Developer must understand architecture | Compiler abstracts hardware details    |
 
 > **Retrieve:** CUDA Tile shifts the responsibility: developers focus on algorithmic data partitioning, while the compiler handles hardware-specific optimizations like thread mapping, memory hierarchy, and tensor core utilization.
 > {: .prompt-info}
@@ -136,19 +136,19 @@ graph TB
 
 ![CUDA Tile Software Stack](/assets/img/posts/cuda-tile-figure2-stack.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
-*Figure 2: The Tile path of compilation fits into the full software stack, adjacent to the SIMT path.*
+_Figure 2: The Tile path of compilation fits into the full software stack, adjacent to the SIMT path._
 
 **Key Insight:** CUDA Tile IR and PTX coexist—they're complementary, not competing. Use SIMT when you need fine-grained control; use Tile when you want hardware abstraction.
 
 ### Architecture Comparison
 
-| Feature | PTX (SIMT) | CUDA Tile IR (Tile) |
-|:--------|:-----------|:-------------------|
-| **Abstraction** | Thread-level parallelism | Tile-level parallelism |
-| **Portability** | Across GPU generations | Across GPU generations |
-| **Hardware Focus** | CUDA cores, memory hierarchy | Tensor cores, TMA |
-| **Use Case** | General-purpose GPU programming | Tensor/matrix operations |
-| **Developer Control** | Explicit thread/block mapping | Algorithmic tile partitioning |
+| Feature               | PTX (SIMT)                      | CUDA Tile IR (Tile)           |
+| :-------------------- | :------------------------------ | :---------------------------- |
+| **Abstraction**       | Thread-level parallelism        | Tile-level parallelism        |
+| **Portability**       | Across GPU generations          | Across GPU generations        |
+| **Hardware Focus**    | CUDA cores, memory hierarchy    | Tensor cores, TMA             |
+| **Use Case**          | General-purpose GPU programming | Tensor/matrix operations      |
+| **Developer Control** | Explicit thread/block mapping   | Algorithmic tile partitioning |
 
 ### Coexistence, Not Replacement
 
@@ -178,10 +178,10 @@ def matrix_multiply(A, B, C, M, N, K):
     # Partition matrices into tiles
     tile_A = cutile.load_tile(A, (M, K))
     tile_B = cutile.load_tile(B, (K, N))
-    
+
     # Compute on tiles - compiler handles tensor cores
     tile_C = cutile.matmul(tile_A, tile_B)
-    
+
     # Store result
     cutile.store_tile(C, tile_C)
 
@@ -194,6 +194,7 @@ matrix_multiply(A, B, C, 1024, 1024, 1024)
 ```
 
 **Benefits:**
+
 - Python-friendly API
 - Automatic tensor core utilization
 - Architecture-agnostic code
@@ -205,7 +206,7 @@ For those building DSLs, compilers, or libraries:
 
 ```cuda
 // CUDA Tile IR example (simplified)
-tile.func @matmul_tile(%A: tensor<128x128xf16>, 
+tile.func @matmul_tile(%A: tensor<128x128xf16>,
                        %B: tensor<128x128xf16>) -> tensor<128x128xf16> {
   // Tile IR handles tensor core mapping
   %C = tile.matmul %A, %B : (tensor<128x128xf16>, tensor<128x128xf16>) -> tensor<128x128xf16>
@@ -214,6 +215,7 @@ tile.func @matmul_tile(%A: tensor<128x128xf16>,
 ```
 
 **Use Cases:**
+
 - Building domain-specific languages
 - Creating high-level frameworks
 - Targeting multiple GPU architectures
@@ -225,12 +227,12 @@ tile.func @matmul_tile(%A: tensor<128x128xf16>,
 
 ### Theoretical Advantages
 
-| Aspect | SIMT Approach | Tile Approach |
-|:-------|:--------------|:-------------|
-| **Development Time** | High (manual optimization) | Low (compiler optimization) |
-| **Code Portability** | Requires per-architecture tuning | Architecture-agnostic |
-| **Tensor Core Usage** | Manual, error-prone | Automatic, optimal |
-| **Maintenance** | High (architecture-specific code) | Low (single codebase) |
+| Aspect                | SIMT Approach                     | Tile Approach               |
+| :-------------------- | :-------------------------------- | :-------------------------- |
+| **Development Time**  | High (manual optimization)        | Low (compiler optimization) |
+| **Code Portability**  | Requires per-architecture tuning  | Architecture-agnostic       |
+| **Tensor Core Usage** | Manual, error-prone               | Automatic, optimal          |
+| **Maintenance**       | High (architecture-specific code) | Low (single codebase)       |
 
 ### Real-World Considerations
 
@@ -239,14 +241,14 @@ tile.func @matmul_tile(%A: tensor<128x128xf16>,
 ✅ **Tensor Operations:** Matrix multiplication, convolution, attention mechanisms  
 ✅ **Multi-Architecture Support:** Code that needs to run on Hopper, Ada, Blackwell  
 ✅ **Rapid Prototyping:** Fast iteration without hardware optimization  
-✅ **Team Productivity:** Algorithm-focused developers without CUDA expertise  
+✅ **Team Productivity:** Algorithm-focused developers without CUDA expertise
 
 **When SIMT Still Matters:**
 
 ✅ **Custom Memory Patterns:** Non-standard data layouts  
 ✅ **Fine-Grained Control:** Precise thread synchronization  
 ✅ **Legacy Codebases:** Existing SIMT kernels  
-✅ **Performance-Critical Paths:** Where every cycle counts  
+✅ **Performance-Critical Paths:** Where every cycle counts
 
 > **Innovation:** CUDA Tile doesn't eliminate SIMT—it complements it. Use Tile for tensor operations and rapid development; use SIMT when you need explicit hardware control. The best applications will use both.
 > {: .prompt-warning}
@@ -304,12 +306,12 @@ Build higher-level frameworks on CUDA Tile IR:
 class NeuralNetwork:
     def __init__(self):
         self.layers = []
-    
+
     def add_layer(self, layer_type, **kwargs):
         # Compiles to Tile IR, then to GPU binary
         tile_kernel = compile_to_tile_ir(layer_type, **kwargs)
         self.layers.append(tile_kernel)
-    
+
     def forward(self, input):
         for layer in self.layers:
             input = layer(input)
@@ -322,13 +324,13 @@ class NeuralNetwork:
 
 ## 🎯 Key Takeaways
 
-| Insight | Implication | Next Steps |
-|:--------|:------------|:-----------|
-| **Tile programming abstracts hardware complexity** | Focus on algorithms, not hardware details | Evaluate existing tensor operations for Tile migration |
-| **Tile and SIMT coexist** | Use the right tool for each kernel | Profile workloads to identify Tile vs SIMT candidates |
-| **CUDA Tile IR enables DSLs** | Build higher-level frameworks | Consider Tile IR for new compiler/library projects |
-| **Architecture portability** | Write once, run on multiple GPU generations | Migrate multi-architecture codebases to Tile |
-| **Tensor core optimization is automatic** | No manual tensor core programming needed | Replace manual tensor core code with Tile kernels |
+| Insight                                            | Implication                                 | Next Steps                                             |
+| :------------------------------------------------- | :------------------------------------------ | :----------------------------------------------------- |
+| **Tile programming abstracts hardware complexity** | Focus on algorithms, not hardware details   | Evaluate existing tensor operations for Tile migration |
+| **Tile and SIMT coexist**                          | Use the right tool for each kernel          | Profile workloads to identify Tile vs SIMT candidates  |
+| **CUDA Tile IR enables DSLs**                      | Build higher-level frameworks               | Consider Tile IR for new compiler/library projects     |
+| **Architecture portability**                       | Write once, run on multiple GPU generations | Migrate multi-architecture codebases to Tile           |
+| **Tensor core optimization is automatic**          | No manual tensor core programming needed    | Replace manual tensor core code with Tile kernels      |
 
 ---
 
@@ -358,7 +360,7 @@ class NeuralNetwork:
 
 - [NVIDIA CUDA Tile Documentation](https://developer.nvidia.com/cuda/tile)
 - [CUDA Tile IR Specification](https://docs.nvidia.com/cuda/tile-ir/)
-- [NVIDIA cuTile Python](http://docs.nvidia.com/cuda/cutile-python)
+- [NVIDIA cuTile Python](https://docs.nvidia.com/cuda/cutile-python)
 - [CUDA Toolkit 13.1 Release Notes](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html)
 
 **Documentation & Tutorials:**
@@ -399,7 +401,7 @@ class NeuralNetwork:
 __global__ void matrix_multiply(float* A, float* B, float* C, int N) {
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
-    
+
     if (row < N && col < N) {
         float sum = 0.0f;
         for (int k = 0; k < N; k++) {
@@ -416,6 +418,7 @@ matrix_multiply<<<gridSize, blockSize>>>(A, B, C, N);
 ```
 
 **Characteristics:**
+
 - Developer specifies thread/block layout
 - Explicit memory access patterns
 - Full control over execution model
@@ -430,10 +433,10 @@ def matrix_multiply(A, B, C, N):
     # Partition into tiles
     tile_A = cutile.load_tile(A, shape=(N, N))
     tile_B = cutile.load_tile(B, shape=(N, N))
-    
+
     # Compute - compiler handles threads and tensor cores
     tile_C = cutile.matmul(tile_A, tile_B)
-    
+
     # Store result
     cutile.store_tile(C, tile_C)
 
@@ -442,6 +445,7 @@ matrix_multiply(A, B, C, N)
 ```
 
 **Characteristics:**
+
 - Developer specifies data partitioning
 - Compiler handles thread mapping
 - Automatic tensor core utilization
@@ -450,11 +454,13 @@ matrix_multiply(A, B, C, N)
 ## Mapping Process
 
 **SIMT Mapping:**
+
 ```
 Data → Application maps to blocks → Application maps to threads → Hardware
 ```
 
 **Tile Mapping:**
+
 ```
 Data → Application partitions into tiles → Compiler maps to threads → Hardware
 ```
