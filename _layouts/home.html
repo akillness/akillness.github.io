@@ -54,6 +54,12 @@ refactor: true
       {% endif %}
 
       <a href="{{ post.url | relative_url }}" class="{{ preview_class }}">
+        {% if post.pin %}
+          <div class="pin-marker">
+            <i class="fas fa-thumbtack"></i>
+          </div>
+        {% endif %}
+
         {% assign card_body_col = '12' %}
 
         {% if post.image %}

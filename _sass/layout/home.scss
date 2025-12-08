@@ -6,6 +6,23 @@
   margin-top: 2rem;
 
   .card-wrapper {
+    position: relative;
+
+    .pin-marker {
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      color: #d9534f;
+      font-size: 1.5rem;
+      transform: rotate(-45deg);
+      z-index: 10;
+      filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
+
+      i {
+        display: block; // Ensure icon takes up space
+      }
+    }
+
     &:hover {
       text-decoration: none;
     }
