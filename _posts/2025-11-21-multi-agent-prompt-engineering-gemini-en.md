@@ -447,13 +447,11 @@ class MultiAgentPromptSystem:
         4. Examples (if needed)
 
         Return the prompt in JSON format:
-        {% raw %}
-        {{
+        {{ "{{" }}
             "prompt": "Optimized prompt",
             "rationale": "Reason for prompt design",
             "improvements": ["Improvement 1", "Improvement 2"]
         }}
-        {% endraw %}
         """
 
         response = self.client.models.generate_content(
@@ -503,10 +501,9 @@ class MultiAgentPromptSystem:
 
         Break down the task into steps and assign appropriate agents to each step.
         Return in JSON format:
-        {% raw %}
-        {{
+        {{ "{{" }}
             "steps": [
-                {{
+                {{ "{{" }}
                     "step": 1,
                     "agent": "agent_name",
                     "task": "Specific task",
@@ -514,7 +511,6 @@ class MultiAgentPromptSystem:
                 }}
             ]
         }}
-        {% endraw %}
         """
 
         plan_response = self.client.models.generate_content(
@@ -572,17 +568,15 @@ class MultiAgentPromptSystem:
         3. Expected impact
 
         Return in JSON format:
-        {% raw %}
-        {{
-            "optimized_prompts": {{
-                "agent_name": {{
+        {{ "{{" }}
+            "optimized_prompts": {{ "{{" }}
+                "agent_name": {{ "{{" }}
                     "prompt": "Improved prompt",
                     "improvements": ["Improvement 1", "Improvement 2"],
                     "expected_impact": "Expected impact"
                 }}
             }}
         }}
-        {% endraw %}
         """
 
         response = self.client.models.generate_content(
