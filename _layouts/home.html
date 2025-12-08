@@ -44,23 +44,13 @@ refactor: true
   {% for post in posts %}
     <article class="card-wrapper card">
       {% assign preview_class = "post-preview row g-0 flex-md-row-reverse" %}
-      {% assign highlight_keywords = "AI,LLM,Optimization,Deep Learning,Performance" | split: "," %}
-      {% assign is_highlighted = false %}
+      {% assign current_unix = site.time | date: '%s' %}
+      {% assign post_unix = post.date | date: '%s' %}
+      {% assign diff_seconds = current_unix | minus: post_unix %}
+      {% assign diff_days = diff_seconds | divided_by: 86400 %}
       
-      {% for tag in post.tags %}
-        {% if highlight_keywords contains tag %}
-          {% assign is_highlighted = true %}
-        {% endif %}
-      {% endfor %}
-
-      {% for cat in post.categories %}
-        {% if highlight_keywords contains cat %}
-          {% assign is_highlighted = true %}
-        {% endif %}
-      {% endfor %}
-
-      {% if is_highlighted %}
-        {% assign preview_class = preview_class | append: " post-highlight-ai" %}
+      {% if diff_days < 7 %}
+        {% assign preview_class = preview_class | append: " post-new" %}
       {% endif %}
 
       <a href="{{ post.url | relative_url }}" class="{{ preview_class }}">
@@ -124,6 +114,16 @@ refactor: true
               {% endif %}
             </div>
             <!-- .post-meta -->
+            <!-- .post-meta -->
+
+            <!-- Major Tags (Top 2) -->
+            {% if post.tags.size > 0 %}
+              <div class="major-tags d-none d-md-flex">
+                {% for tag in post.tags limit:2 %}
+                  <span class="major-tag">#{{ tag }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
           </div>
           <!-- .card-body -->
         </div>
