@@ -1,19 +1,15 @@
 ---
 title: The giant leaps of open-source models for Vision Models
 description: Vision Models, ELO, Compare
-categories: [Script, Vision Models]
-tags: [Vision Models, ELO, Compare]
-# author: foDev_jeong
+categories:
+- Development & Tools
+tags:
+- vision-models
+- elo
+- compare
 date: 2024-05-18 11:20:00 +0800
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
-
 ## 𝐕𝐢𝐬𝐢𝐨𝐧 𝐥𝐚𝐧𝐠𝐮𝐚𝐠𝐞 𝐦𝐨𝐝𝐞𝐥𝐬
 
 *Curiosity:* What insights can we retrieve from this? How does this connect to innovation in the field?

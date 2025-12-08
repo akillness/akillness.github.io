@@ -1,19 +1,16 @@
 ---
 title: Is this the architecture of OpenAI GPT-4o?
 description: LLM, Course
-categories: [Script, GPT4o]
-tags: [GPT4o, LLM, Architecture]
-# author: foDev_jeong
+categories:
+- Development & Tools
+- LLM & Language Models
+tags:
+- gpt4o
+- llm
+- architecture
 date: 2024-05-25 11:05:00 +0800
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
-
 ## Uni-MoE: Unified Multimodal LLM Architecture (GPT-4o-like)
 
 *Curiosity:* How can we build a unified model that handles audio, speech, image, text, and video? What architecture enables efficient multimodal learning?

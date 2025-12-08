@@ -1,22 +1,21 @@
 ---
-title: "Google DeepMind Introduces Nano Banana Pro: The Gemini 3 Pro Image Model for Text-Accurate and Studio-Grade Visuals"
-description: "Deep dive into Google DeepMind's Nano Banana Pro - a breakthrough image generation model based on Gemini 3 Pro architecture, delivering text-accurate rendering and studio-quality visuals"
-categories: [AI, Vision, LLM]
+title: 'Google DeepMind Introduces Nano Banana Pro: The Gemini 3 Pro Image Model for
+  Text-Accurate and Studio-Grade Visuals'
+description: Deep dive into Google DeepMind's Nano Banana Pro - a breakthrough image
+  generation model based on Gemini 3 Pro architecture, delivering text-accurate rendering
+  and studio-quality visuals
+categories:
+- LLM & Language Models
+- Machine Learning & Deep Learning
 tags:
-  [
-    nano-banana-pro,
-    gemini-3,
-    google-deepmind,
-    image-generation,
-    vision-language-model,
-    multimodal-ai,
-    production-ai,
-    game-ai
-  ]
+- nano-banana-pro
+- gemini-3
+- google-deepmind
+- image-generation
+- vision-language-model
 date: 2025-11-23 15:00:00 +0800
 mermaid: true
 ---
-
 ## 🤔 Curiosity: Can Image Generation Models Achieve Text-Accurate and Studio-Grade Quality?
 
 ![Nano Banana Pro - Google DeepMind's Gemini 3 Pro Image Model](https://www.marktechpost.com/wp-content/uploads/2025/11/blog-banner-68.png){: .light .shadow .rounded-10 w='1212' h='668' }

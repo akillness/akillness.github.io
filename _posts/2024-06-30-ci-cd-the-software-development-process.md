@@ -1,19 +1,16 @@
 ---
 title: CI/CD, which stands for continuous integration and continuous delivery/deployment
 description: Software,CI/CD
-categories: [Setting, CI/CD]
-tags: [CI, CD]
-# author: foDev_jeong
+categories:
+- Development & Tools
+tags:
+- ci
+- cd
+- development-tools
+- tools
 date: 2024-06-30 19:10:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## CI/CD: Automating the Software Development Process
 
 *Curiosity:* How can we automate software development to improve quality and speed? What practices enable continuous integration and deployment?

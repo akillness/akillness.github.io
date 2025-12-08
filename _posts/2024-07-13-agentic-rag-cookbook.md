@@ -1,19 +1,17 @@
 ---
 title: 𝐀𝐠𝐞𝐧𝐭𝐢𝐜 𝐑𝐀𝐆 ✨ new cookbook
 description: Agentic, RAG, Cookbook
-categories: [LLM, Cookbook]
-tags: [Agentic, RAG]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+- AI Agents & Multi-Agent Systems
+tags:
+- agentic
+- rag
+- llm
+- language-model
 date: 2024-07-13 14:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## Agentic RAG Cookbook: Improving RAG with Agent Systems
 
 *Curiosity:* What if RAG systems could think more like humans—questioning their own retrievals, reformulating queries, and iterating until they find the right answer? What happens when we give RAG the ability to retrieve, critique, and retrieve again?

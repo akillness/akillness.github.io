@@ -1,23 +1,20 @@
 ---
-title: "5 Engineering Skills to Prioritize in the AI-Driven Era: A Multi-Agent Perspective"
-description: "Exploring the essential engineering skills for the AI era through a multi-agent lens: architectural thinking, problem decomposition, AI communication, and more"
-categories: [AI, Engineering, Career]
+title: '5 Engineering Skills to Prioritize in the AI-Driven Era: A Multi-Agent Perspective'
+description: 'Exploring the essential engineering skills for the AI era through a
+  multi-agent lens: architectural thinking, problem decomposition, AI communication,
+  and more'
+categories:
+- Machine Learning & Deep Learning
+- AI Agents & Multi-Agent Systems
 tags:
-  [
-    engineering-skills,
-    ai-driven-era,
-    multi-agent,
-    architectural-thinking,
-    problem-decomposition,
-    ai-communication,
-    career-development,
-    production-ai,
-    game-ai
-  ]
+- engineering-skills
+- ai-driven-era
+- multi-agent
+- architectural-thinking
+- problem-decomposition
 date: 2025-11-20 15:00:00 +0800
 mermaid: true
 ---
-
 ## 🤔 Curiosity: What Engineering Skills Matter Most in the AI-Driven Era?
 
 After 8 years of building AI systems in game development, I've witnessed a fundamental shift in what it means to be an engineer. It's no longer about how many lines of code you can write—AI can do that. The question is: **What skills will make engineers indispensable in an AI-driven world?**

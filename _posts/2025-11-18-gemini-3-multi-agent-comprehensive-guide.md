@@ -1,25 +1,23 @@
 ---
-title: "Gemini 3 and Multi-Agent Systems: A Comprehensive Guide to Building with Google's Most Intelligent AI Model"
-description: "Explore Gemini 3's capabilities, multi-agent architectures, and Google Antigravity IDE - the complete guide to building agentic AI systems"
-categories: [AI, Agents, LLM]
+title: 'Gemini 3 and Multi-Agent Systems: A Comprehensive Guide to Building with Google''s
+  Most Intelligent AI Model'
+description: Explore Gemini 3's capabilities, multi-agent architectures, and Google
+  Antigravity IDE - the complete guide to building agentic AI systems
+categories:
+- AI Agents & Multi-Agent Systems
+- LLM & Language Models
 tags:
-  [
-    gemini-3,
-    multi-agent,
-    google-ai,
-    agentic-ai,
-    antigravity,
-    gemini-api,
-    production-ai,
-    game-ai
-  ]
+- gemini-3
+- multi-agent
+- google-ai
+- autonomous-agents
+- antigravity
 date: 2025-11-18 15:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/ai/gemini3/gemini-3-header.png
-  alt: "Gemini 3 - Google's Most Intelligent AI Model"
+  alt: Gemini 3 - Google's Most Intelligent AI Model
 ---
-
 ## 🤔 Curiosity: How Can Multi-Agent Systems Leverage Gemini 3's Intelligence?
 
 After 8 years of building AI-powered systems in game development, one of the biggest challenges has been **getting multiple agents to collaborate effectively on complex tasks**. A single agent has limitations—it can't simultaneously handle NPC dialogue, game balance analysis, bug detection, and player behavior prediction.

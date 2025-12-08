@@ -1,19 +1,15 @@
 ---
 title: 𝗧𝗼𝗽 𝟰 𝗠𝗼𝘀𝘁 𝗣𝗼𝗽𝘂𝗹𝗮𝗿 𝗨𝘀𝗲 𝗖𝗮𝘀𝗲𝘀 𝗳𝗼𝗿 𝗨𝗗𝗣 by ByteByteGo 💥
 description: Study, UDP
-categories: [Study, UDP]
-tags: [UDP, Use cases]
-# author: foDev_jeong
+categories:
+- Tutorials & Learning
+tags:
+- udp
+- use-cases
+- tutorial
+- learning
 date: 2024-07-27 10:00:00 +0800
-# pin: true
-# math: true
-# mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ![ Top 4 UDP Use Cases ](/assets/img/blog/top-4-udp-use-case.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 
 

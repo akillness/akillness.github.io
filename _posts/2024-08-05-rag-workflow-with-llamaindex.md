@@ -1,19 +1,17 @@
 ---
 title: Practical Implementation of Agentic RAG Workflows with Llama-Index and Qdrant
 description: LLM, Llama-Index
-categories: [LLM, Llama-Index]
-tags: [Implementation, Llama-Index]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+- AI Agents & Multi-Agent Systems
+tags:
+- implementation
+- llama-index
+- llm
+- language-model
 date: 2024-08-05 11:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ![ Agentic workflow with Llamaindex ](/assets/img/llm/llamaindex-agentic-workflow.png){: .light .shadow .rounded-10 w='1212' h='668' }
 
 In this article, we introduce “Terraform Assistant,” a cutting-edge workflow powered by Llama 3.1. This workflow demonstrates how to generate Terraform scripts 

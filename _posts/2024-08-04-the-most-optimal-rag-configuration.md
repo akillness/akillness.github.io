@@ -1,19 +1,17 @@
 ---
-title:  Struggling to Optimize Your RAG Setup? 😮
+title: Struggling to Optimize Your RAG Setup? 😮
 description: LLM, RAG
-categories: [LLM, RAG]
-tags: [RAG, Setup]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+- RAG & Retrieval Systems
+tags:
+- rag
+- setup
+- llm
+- language-model
 date: 2024-08-03 12:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ![ RAGBuilder ](/assets/img/llm/ragbuilder-optimizing-rag.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
 Not sure if you chunked your data right to enable optimal context retrieval?

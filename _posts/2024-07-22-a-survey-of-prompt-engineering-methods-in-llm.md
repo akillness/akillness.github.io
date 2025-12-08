@@ -1,19 +1,16 @@
 ---
-title: 📚 "A Survey of Prompt Engineering Methods in Large Language Models" - LLM 
+title: 📚 "A Survey of Prompt Engineering Methods in Large Language Models" - LLM
 description: LLM, PromptEngineering
-categories: [LLM, PromptEngineering]
-tags: [PromptEngineering, Survey]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- promptengineering
+- survey
+- llm
+- language-model
 date: 2024-07-22 13:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## A Survey of Prompt Engineering Methods in Large Language Models
 
 *Curiosity:* What are the most effective prompt engineering techniques? How can we systematically understand and apply prompt engineering methods across different NLP tasks?

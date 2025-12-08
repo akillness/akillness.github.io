@@ -1,19 +1,15 @@
 ---
 title: Hugging Face x AWS
 description: LLM, Course
-categories: [LLM, Cookbook]
-tags: [Cookbook, LLM]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- cookbook
+- llm
+- language-model
 date: 2024-05-25 00:20:00 +0800
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
-
 ## Deploy Llama 3 70B on AWS Inferentia2 with Hugging Face Optimum
 
 *Curiosity:* How can we deploy large LLMs without GPU access? What makes AWS Inferentia2 a viable alternative for running Llama 3 70B?

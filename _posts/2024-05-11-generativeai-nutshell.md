@@ -1,18 +1,15 @@
 ---
 title: Generative AI in a Nutshell
-description: Generative AI, Nutshell 
-categories: [Script, Generative AI]
-tags: [Study, Generative AI, Nutshell]
-# author: JAE-HONG EOM
+description: Generative AI, Nutshell
+categories:
+- Development & Tools
+tags:
+- tutorial
+- generative-ai
+- nutshell
 date: 2024-05-11 23:43:00 +0800
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
 > [`Generative AI Preparation`](https://github.com/Msrevalli/Generative-AI-Preparation) (Generative AI 개념북) Thanks to [Aishwarya Naresh Reganti](https://www.linkedin.com/in/areganti/)
 {: .prompt-warning }
 

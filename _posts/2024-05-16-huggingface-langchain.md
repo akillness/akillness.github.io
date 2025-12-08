@@ -1,19 +1,16 @@
 ---
 title: Hugging Face x Langchain
 description: HuggingFace, Langchaing
-categories: [LLM, Cookbook]
-tags: [HuggingFace, LangChain]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- huggingface
+- langchain
+- llm
+- language-model
 date: 2024-05-16 16:20:00 +0800
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
-
 ## Hugging Face × LangChain: New Partner Package
 
 *Curiosity:* What happens when two major LLM ecosystems collaborate? How does this partnership benefit developers building LLM applications?

@@ -1,19 +1,17 @@
 ---
-title: 😮😮 GPT-4, despite being one of the leading LLMs, struggles with long-context bilingual reasoning tasks. Even with text lengths shorter than 2K tokens!!
+title: 😮😮 GPT-4, despite being one of the leading LLMs, struggles with long-context
+  bilingual reasoning tasks. Even with text lengths shorter than 2K tokens!!
 description: LLM, GPT4
-categories: [LLM, GPT4]
-tags: [GPT4, LongContext]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- gpt4
+- longcontext
+- llm
+- language-model
 date: 2024-08-03 11:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## GPT-4's Struggle with Long-Context Bilingual Reasoning
 
 *Curiosity:* Despite being one of the leading LLMs, GPT-4 struggles with long-context bilingual reasoning tasks, even with text lengths shorter than 2K tokens. What are the challenges and how can we evaluate them?

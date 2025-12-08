@@ -1,18 +1,13 @@
 ---
 title: 2024 Google I/O vs ChatGPT4o
 description: Google I/O, ChatGPT4o
-categories: [Blogging, Google I/O 2024]
-tags: [Google I/O 2024, ChatGPT4o]
-# author: foDev_jeong
+categories:
+- Industry & Applications
+tags:
+- google-io-2024
+- chatgpt4o
 date: 2024-05-19 13:00:00 +0800
-# mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
 ![ Google vs OpenAI ](/assets/img/news/Google_vs_OpenAI.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
 

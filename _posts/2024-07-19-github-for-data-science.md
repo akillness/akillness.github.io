@@ -1,20 +1,17 @@
 ---
 title: Github is a free university, but 99% don't know!
 description: Github, Datascience
-categories: [Study, Datascience]
-tags: [Github, Datascience]
-# author: foDev_jeong
+categories:
+- Data Science & Analytics
+- Tutorials & Learning
+tags:
+- github
+- data-science
+- tutorial
+- learning
 date: 2024-07-19 15:30:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
-
 ## GitHub: The Free University for Data Science
 
 *Curiosity:* How can we leverage GitHub as a learning platform? What knowledge can we retrieve from the vast repository of open-source data science resources?

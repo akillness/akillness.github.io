@@ -1,19 +1,16 @@
 ---
 title: Federated Learning, One way to solve for AI having difficulty making
 description: LLM, Federated Learning
-categories: [LLM, Federated Learning]
-tags: [AI, Federated Learning]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- ai
+- federated-learning
+- llm
+- language-model
 date: 2024-08-05 12:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## Federated Learning: Training on Private Data Without Centralization
 
 *Curiosity:* How can we train ML models on private data without centralizing it? What happens when we bring the model to the data instead of bringing data to the model?

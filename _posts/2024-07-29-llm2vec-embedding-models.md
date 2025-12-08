@@ -1,19 +1,16 @@
 ---
 title: 𝐋𝐋𝐌2𝐕𝐞𝐜 - 𝐓𝐫𝐚𝐧𝐬𝐟𝐨𝐫𝐦 𝐋𝐋𝐌𝐬 𝐢𝐧𝐭𝐨 𝐄𝐦𝐛𝐞𝐝𝐝𝐢𝐧𝐠 𝐌𝐨𝐝𝐞𝐥𝐬
 description: LLM, LLM2Vec
-categories: [LLM, LLM2Vec]
-tags: [Paper, LLM2Vec]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- paper
+- llm2vec
+- llm
+- language-model
 date: 2024-07-29 13:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## LLM2Vec: Transform LLMs into Embedding Models
 
 *Curiosity:* Can we transform decoder-only LLMs into powerful text encoders? What happens when we enable bidirectional attention and contrastive learning in LLMs?

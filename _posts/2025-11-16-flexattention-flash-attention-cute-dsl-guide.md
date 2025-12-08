@@ -1,13 +1,21 @@
 ---
-title: "A User's Guide to FlexAttention in FlashAttention CuTe DSL"
-description: "Learn how to use FlexAttention in FlashAttention 3 CuTe DSL to implement various attention variants like causal, sliding window, ALiBi, and more. This guide covers score modification, mask modification, and block sparsity optimizations."
-categories: [AI, Technical]
-tags: [flash-attention, flexattention, cute-dsl, attention-mechanisms, optimization, PyTorch, gpu, performance]
+title: A User's Guide to FlexAttention in FlashAttention CuTe DSL
+description: Learn how to use FlexAttention in FlashAttention 3 CuTe DSL to implement
+  various attention variants like causal, sliding window, ALiBi, and more. This guide
+  covers score modification, mask modification, and block sparsity optimizations.
+categories:
+- Machine Learning & Deep Learning
+- Tutorials & Learning
+tags:
+- flash-attention
+- flexattention
+- cute-dsl
+- attention-mechanisms
+- optimization
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 math: true
 ---
-
 ## 🤔 Curiosity: Can We Unify All Attention Variants Under One Framework?
 
 What if we could implement causal attention, sliding window attention, ALiBi, and dozens of other attention variants using a single, elegant API? What if this unified framework could achieve 95% of FlashAttention 3's performance while being flexible enough to support novel attention patterns?

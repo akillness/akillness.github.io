@@ -1,19 +1,22 @@
 ---
 title: Game Development Course with AI
 description: LLM, Game, AI, Unity
-categories: [LLM, Game]
-tags: [LLM, Game, AI, Unity]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+- Game Development & AI
+tags:
+- llm
+- game
+- ai
+- unity
 date: 2024-05-29 23:13:00 +0800
-# pin: true
 mermaid: true
-# render_with_liquid: false
 image:
   path: /assets/img/blog/ML_for_Games.jpeg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: [Overview of ML for Games Course]
+  alt:
+  - Overview of ML for Games Course
 ---
-
 | Subject | Type | Link|
 | :--- | :--- | :--- |
 | ML For Games Course | Course | <https://huggingface.co/learn/ml-games-course/unit0/introduction> |

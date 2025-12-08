@@ -1,19 +1,17 @@
 ---
 title: 💪 The Power of Data Analytics with Python.
 description: Data Analytics, Python
-categories: [Study, Python]
-tags: [Data Analytics, Python]
-# author: foDev_jeong
+categories:
+- Tutorials & Learning
+- Data Science & Analytics
+tags:
+- data-analytics
+- python
+- tutorial
+- learning
 date: 2024-07-04 20:10:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## Here's why it's crucial:In the ever-evolving landscape of data science, Python continues to be the cornerstone that bridges innovation and practical application. 
 
 *Curiosity:* As we dive deeper into the era of big data, AI, and machine learning, having a robust toolkit is not just an advantage—it’s a necessity.

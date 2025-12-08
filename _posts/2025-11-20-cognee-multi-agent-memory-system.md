@@ -1,25 +1,24 @@
 ---
-title: "Cognee: Building Persistent Memory for Multi-Agent Systems - Beyond RAG with Graph-Based Knowledge"
-description: "Explore Cognee's ECL pipeline architecture that replaces traditional RAG with graph-vector hybrid memory for AI agents, enabling persistent and dynamic knowledge across multi-agent systems"
-categories: [AI, Agents, LLM]
+title: 'Cognee: Building Persistent Memory for Multi-Agent Systems - Beyond RAG with
+  Graph-Based Knowledge'
+description: Explore Cognee's ECL pipeline architecture that replaces traditional
+  RAG with graph-vector hybrid memory for AI agents, enabling persistent and dynamic
+  knowledge across multi-agent systems
+categories:
+- AI Agents & Multi-Agent Systems
+- LLM & Language Models
 tags:
-  [
-    cognee,
-    multi-agent,
-    agentic-ai,
-    memory-systems,
-    graph-rag,
-    knowledge-graphs,
-    production-ai,
-    game-ai
-  ]
+- cognee
+- multi-agent
+- autonomous-agents
+- memory-systems
+- graph-rag
 date: 2025-11-20 15:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/ai/cognee/cognee-logo-transparent.png
-  alt: "Cognee - Memory for AI Agents"
+  alt: Cognee - Memory for AI Agents
 ---
-
 ## 🤔 Curiosity: Can Multi-Agent Systems Truly Remember?
 
 After 8 years of building AI-powered game systems at NC SOFT and COM2US, I've seen a persistent challenge: **agents forget everything between sessions**. An NPC dialogue agent might learn a player's preferences in one conversation, but when the player returns hours later, that knowledge is gone. A game balance agent might analyze thousands of matches, but each analysis starts from scratch.

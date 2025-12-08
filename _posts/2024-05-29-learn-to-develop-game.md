@@ -1,19 +1,21 @@
 ---
 title: Game Development Course with Unity3D Programming
 description: LLM, Game, Unity
-categories: [LLM, Game]
-tags: [LLM, Game, Unity]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+- Game Development & AI
+tags:
+- llm
+- game
+- unity
 date: 2024-05-29 20:13:00 +0800
-# pin: true
 mermaid: true
-# render_with_liquid: false
 image:
   path: /assets/img/blog/Create_with_Code.png
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: [Overview of ML for Games Course]
+  alt:
+  - Overview of ML for Games Course
 ---
-
 ## Game Development Course with Unity3D Programming
 
 *Curiosity:* How can we learn game development with Unity? What's the path from beginner to capable Unity developer?

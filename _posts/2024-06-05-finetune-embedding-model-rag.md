@@ -1,19 +1,18 @@
 ---
-title: RAG or Fine Tuning? Fine-tune Embedding models for Retrieval Augmented Generation (RAG)
+title: RAG or Fine Tuning? Fine-tune Embedding models for Retrieval Augmented Generation
+  (RAG)
 description: Finetune, Embedding Model, RAG
-categories: [LLM, RAG]
-tags: [Finetune, Embedding Model, RAG]
-# author: foDev_jeong
+categories:
+- RAG & Retrieval Systems
+- LLM & Language Models
+tags:
+- finetune
+- embedding-model
+- rag
 date: 2024-06-05 11:00:00 +0800
 pin: true
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/blog/NLP_Overview.svg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Overview of NLP Course]
 ---
-
 # RAG or Fine Tuning? A simple feature comparision to decide which technique you should use!
 
 For customizing LLMs, in addition to RAG, another optimization technique is fine-tuning.

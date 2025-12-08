@@ -1,19 +1,15 @@
 ---
 title: The release of NVIDIA NIM on Hugging Face Inference Endpoints
 description: NVIDIA, EndPoint
-categories: [LLM, Cookbook]
-tags: [AI, NVIDIA, Endpoint]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- ai
+- nvidia
+- endpoint
 date: 2024-06-04 02:00:00 +0800
-# pin: true
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/blog/NLP_Overview.svg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Overview of NLP Course]
 ---
-
 ## NVIDIA NIM on Hugging Face Inference Endpoints: Simplified AI Deployment
 
 *Curiosity:* How can we simplify generative AI model deployment? What happens when NVIDIA's inference services meet Hugging Face's platform?

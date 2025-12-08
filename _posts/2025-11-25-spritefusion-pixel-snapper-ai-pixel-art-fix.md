@@ -1,27 +1,24 @@
 ---
-title: "Sprite Fusion Pixel Snapper: Fixing AI-Generated Pixel Art with Multi-Agent Image Processing"
-description: "Exploring Sprite Fusion Pixel Snapper - a Rust-based tool that fixes messy AI-generated pixel art by snapping pixels to perfect grids, quantizing colors, and preserving details through multi-agent image processing techniques"
-categories: [AI, Game Development, Image Processing]
+title: 'Sprite Fusion Pixel Snapper: Fixing AI-Generated Pixel Art with Multi-Agent
+  Image Processing'
+description: Exploring Sprite Fusion Pixel Snapper - a Rust-based tool that fixes
+  messy AI-generated pixel art by snapping pixels to perfect grids, quantizing colors,
+  and preserving details through multi-agent image processing techniques
+categories:
+- Machine Learning & Deep Learning
+- AI Agents & Multi-Agent Systems
 tags:
-  [
-    pixel-art,
-    ai-generated-art,
-    image-processing,
-    rust,
-    game-development,
-    spritefusion,
-    pixel-snapper,
-    multi-agent,
-    wasm,
-    tilemap
-  ]
+- pixel-art
+- ai-generated-art
+- image-processing
+- rust
+- game-development
 date: 2025-11-25 15:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/blog/spritefusion-pixel-snapper/hero.png
-  alt: "Sprite Fusion Pixel Snapper - Fixing AI-Generated Pixel Art"
+  alt: Sprite Fusion Pixel Snapper - Fixing AI-Generated Pixel Art
 ---
-
 ## 🤔 Curiosity: Can Multi-Agent Systems Fix AI's Pixel Art Problems?
 
 After 8 years of building AI systems in game development, one persistent challenge has been **AI-generated pixel art that looks messy and inconsistent**. Current AI image models can generate beautiful artwork, but they fundamentally don't understand the constraints of grid-based pixel art.

@@ -1,25 +1,22 @@
 ---
-title: "SQLite as a Graph Database? Deep Dive into SQLite-Graph with Cypher Query Support"
-description: "SQLite-Graph adds powerful graph database capabilities to SQLite, including full Cypher query language support. Explore how this extension combines SQLite's reliability with Neo4j's graph query language for lightweight graph processing"
-categories: [Database, Graph, SQLite]
+title: SQLite as a Graph Database? Deep Dive into SQLite-Graph with Cypher Query Support
+description: SQLite-Graph adds powerful graph database capabilities to SQLite, including
+  full Cypher query language support. Explore how this extension combines SQLite's
+  reliability with Neo4j's graph query language for lightweight graph processing
+categories:
+- Data Science & Analytics
 tags:
-  [
-    sqlite,
-    graph-database,
-    cypher,
-    neo4j,
-    sqlite-graph,
-    database-extension,
-    graph-algorithms,
-    python
-  ]
+- sqlite
+- graph-database
+- cypher
+- neo4j
+- sqlite-graph
 date: 2025-11-17 03:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/posts/sqlite-graph-1.png
-  alt: "SQLite-Graph - Graph database extension for SQLite"
+  alt: SQLite-Graph - Graph database extension for SQLite
 ---
-
 ## 🤔 Curiosity: What If SQLite Could Query Graphs Like Neo4j?
 
 SQLite is the most widely deployed database engine in the world—powering everything from mobile apps to browsers to embedded systems. But what if this lightweight, reliable database could also handle complex graph queries using Cypher, the same query language used by Neo4j?

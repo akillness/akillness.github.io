@@ -1,21 +1,15 @@
 ---
 title: Try my hands-on tutorial on implementing RAG using LangChain and SingleStore
 description: LLM, Scraping
-categories: [Script, RAG]
-tags: [RAG, LangChain, SingleStore]
-# author: foDev_jeong
+categories:
+- RAG & Retrieval Systems
+- Development & Tools
+tags:
+- rag
+- langchain
+- singlestore
 date: 2024-05-29 16:13:00 +0800
-# pin: true
-# mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/blog/NLP_Overview.svg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Overview of NLP Course]
 ---
-
-
-
 But to build #LLM-powered applications, LLMs are just not enough.
 
 You need to have supporting tools, frameworks, integrations, and an approach to make sure the applications are robust and work as expected.

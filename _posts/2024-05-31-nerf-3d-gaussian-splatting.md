@@ -1,19 +1,16 @@
 ---
-title: 3D Gaussian Splatting vs. NeRFs. What is the difference? 🤔 
+title: 3D Gaussian Splatting vs. NeRFs. What is the difference? 🤔
 description: Paper, 3DGS, NeRF
-categories: [Paper, 3DGS]
-tags: [AI, NeRF, 3DGS]
-# author: foDev_jeong
+categories:
+- Research & Papers
+- Computer Vision & Multimodal
+tags:
+- ai
+- nerf
+- 3dgs
 date: 2024-05-31 01:00:00 +0800
-# pin: true
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/blog/NLP_Overview.svg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Overview of NLP Course]
 ---
-
 ## In the world of computer vision, 3D Gaussian Splatting and NeRFs are gaining traction. 
 
 *Curiosity:* But what sets them apart? Here’s a quick breakdown:

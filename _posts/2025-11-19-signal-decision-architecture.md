@@ -1,15 +1,22 @@
 ---
-title: "Signal-Decision Architecture: Reshaping Semantic Routing at Scale"
-description: "How vLLM's new Signal-Decision Architecture scales from 14 fixed categories to unlimited intelligent routing decisions using multi-dimensional signal extraction"
-categories: [AI, LLM]
-tags: [semantic-routing, Multi-Agent, vLLM, production-ml, signal-extraction]
+title: 'Signal-Decision Architecture: Reshaping Semantic Routing at Scale'
+description: How vLLM's new Signal-Decision Architecture scales from 14 fixed categories
+  to unlimited intelligent routing decisions using multi-dimensional signal extraction
+categories:
+- LLM & Language Models
+- Machine Learning & Deep Learning
+tags:
+- semantic-routing
+- multi-agent
+- vllm
+- production-ml
+- signal-extraction
 date: 2025-11-19 12:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/semantic-router/signal-0.png
-  alt: "Signal-Decision Architecture Overview"
+  alt: Signal-Decision Architecture Overview
 ---
-
 ## 🤔 Curiosity: The Routing Problem
 
 What if we could build an AI routing system that understands not just *what* domain a query belongs to, but also *how urgent* it is, *how sensitive* the data is, and *what kind* of reasoning it requires—all at once?

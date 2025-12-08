@@ -1,27 +1,24 @@
 ---
-title: "Google Workspace Flows: The Complete Guide to Agentic AI Automation Inside Gmail, Docs, Sheets & More"
-description: "Google Workspace Flows brings AI-powered automation directly into Gmail, Docs, Sheets, Drive, Calendar, and Chat. Learn how agentic AI transforms workflow automation from simple triggers to intelligent, context-aware processes"
-categories: [AI, Automation, Productivity]
+title: 'Google Workspace Flows: The Complete Guide to Agentic AI Automation Inside
+  Gmail, Docs, Sheets & More'
+description: Google Workspace Flows brings AI-powered automation directly into Gmail,
+  Docs, Sheets, Drive, Calendar, and Chat. Learn how agentic AI transforms workflow
+  automation from simple triggers to intelligent, context-aware processes
+categories:
+- Machine Learning & Deep Learning
+- AI Agents & Multi-Agent Systems
 tags:
-  [
-    google-workspace,
-    flows,
-    agentic-ai,
-    gemini,
-    automation,
-    workflow,
-    gmail,
-    docs,
-    sheets,
-    no-code
-  ]
+- google-workspace
+- flows
+- autonomous-agents
+- gemini
+- automation
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/posts/google-workspace-flows-1.png
-  alt: "Google Workspace Flows - AI-powered automation interface"
+  alt: Google Workspace Flows - AI-powered automation interface
 ---
-
 ## 🤔 Curiosity: What If AI Could Automate Workflows Inside Your Existing Tools?
 
 Most automation tools require you to learn new platforms, manage complex integrations, and deal with permission nightmares. But what if automation could happen **inside** the tools you already use every day—Gmail, Google Docs, Sheets, Drive, Calendar, and Chat?

@@ -1,24 +1,23 @@
 ---
-title: "Memori: SQL-Native Memory Engine for LLMs and Multi-Agent Systems"
-description: "Exploring Memori's open-source approach to persistent, queryable memory for AI agents using standard SQL databases - enabling 80-90% cost savings while maintaining context across sessions"
-categories: [AI, Multi-Agent, MLOps]
+title: 'Memori: SQL-Native Memory Engine for LLMs and Multi-Agent Systems'
+description: Exploring Memori's open-source approach to persistent, queryable memory
+  for AI agents using standard SQL databases - enabling 80-90% cost savings while
+  maintaining context across sessions
+categories:
+- MLOps & Production AI
+- Machine Learning & Deep Learning
 tags:
-  [
-    multi-agent,
-    memory-system,
-    llm,
-    sql,
-    production-ml,
-    cost-optimization,
-    ai-agents
-  ]
+- multi-agent
+- memory-system
+- llm
+- sql
+- production-ml
 date: 2025-11-26 09:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/research/memori/banner.png
-  alt: "Memori - SQL-Native Memory Engine for LLMs"
+  alt: Memori - SQL-Native Memory Engine for LLMs
 ---
-
 ![Memori Banner](/assets/img/research/memori/banner.png){: .light .shadow .rounded-10 w='1212' h='668' }
 
 ## 🤔 Curiosity: Why Do AI Agents Keep Forgetting?

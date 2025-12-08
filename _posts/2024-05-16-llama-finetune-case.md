@@ -1,18 +1,21 @@
 ---
 title: Llamma Finetune case 와 RLHF 정리
 description: LoRA vs GPT4, Performance
-categories: [LLM, Llama]
-tags: [Llama, RLHF]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- llama
+- rlhf
+- llm
+- language-model
 date: 2024-05-16 18:22:00 +0800
 mermaid: true
-# render_with_liquid: false
 image:
   path: /assets/img/llm/Llamma-finetune.jpeg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: [ Workflow ]
+  alt:
+  - Workflow
 ---
-
 ## Llama 3 8B Fine-Tune Case: Salesforce's Best-in-Class Model
 
 *Curiosity:* How can we fine-tune Llama 3 8B to beat GPT-3.5? What makes Salesforce's approach with Online Iterative RLHF so effective?

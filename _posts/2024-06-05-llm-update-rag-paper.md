@@ -1,19 +1,15 @@
 ---
 title: 🔉 Meta's latest "CoPE" (Contextual Position Encoding)
 description: Meta, CoPE
-categories: [LLM, CoPE]
-tags: [Meta, Positional Encoder, CoPE]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- meta
+- positional-encoder
+- cope
 date: 2024-06-05 13:00:00 +0800
-# pin: true
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/blog/NLP_Overview.svg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Overview of NLP Course]
 ---
-
 ## CoPE: Meta's Contextual Position Encoding
 
 *Curiosity:* How can we improve positional encoding to handle higher levels of abstraction? What happens when we integrate context with position addressing?

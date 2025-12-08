@@ -1,19 +1,15 @@
 ---
 title: ❏ LLM101n, LLM AI 스토리텔러 구축하기 🛠️
 description: LLM, AI, Storyteller
-categories: [LLM, Course]
-tags: [Storyteller, Course]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- storyteller
+- course
+- llm
+- language-model
 date: 2024-06-30 19:10:00 +0800
-# pin: true
-# math: true
-# mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 며칠 전 Andrej Karpathy의 흥미로운 Course가 공개되었습니다.
 ( 아직 내용은 업데이트 중이지만, 목차내용을 참고해볼 수 있을 것 같습니다. )
 

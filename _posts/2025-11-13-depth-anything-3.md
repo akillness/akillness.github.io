@@ -1,27 +1,23 @@
 ---
-title: "[Paper] Depth Anything 3: Recovering the Visual Space from Any Views"
-description: "Depth Anything 3 (DA3) predicts spatially consistent geometry from arbitrary visual inputs using a single plain transformer and depth-ray representation, achieving SOTA performance surpassing VGGT by 35.7% in camera pose accuracy"
-categories: [Paper, CV, 3D-Vision]
+title: '[Paper] Depth Anything 3: Recovering the Visual Space from Any Views'
+description: Depth Anything 3 (DA3) predicts spatially consistent geometry from arbitrary
+  visual inputs using a single plain transformer and depth-ray representation, achieving
+  SOTA performance surpassing VGGT by 35.7% in camera pose accuracy
+categories:
+- Research & Papers
+- Computer Vision & Multimodal
 tags:
-  [
-    depth-anything-3,
-    da3,
-    depth-estimation,
-    3d-reconstruction,
-    transformer,
-    dino,
-    camera-pose,
-    geometry,
-    computer-vision,
-    multi-view
-  ]
+- depth-anything-3
+- da3
+- depth-estimation
+- 3d-reconstruction
+- transformer
 date: 2025-11-13 03:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/posts/depth-anything-3-teaser.png
-  alt: "Depth Anything 3: Recovering the Visual Space from Any Views"
+  alt: 'Depth Anything 3: Recovering the Visual Space from Any Views'
 ---
-
 ## 🤔 Curiosity: Can Minimal Modeling Achieve Maximum Performance?
 
 What if we could recover complete 3D geometry from any visual input—single images, videos, or multiple views—using the simplest possible architecture? No complex multi-task learning, no specialized 3D inductive biases, just a plain transformer trained on a single prediction target. Is radical simplicity the key to superior performance?

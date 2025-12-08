@@ -1,19 +1,17 @@
 ---
-title:  Visualize your RAG Data — EDA for Retrieval-Augmented Generation. 
+title: Visualize your RAG Data — EDA for Retrieval-Augmented Generation.
 description: LLM, RAG Visualization
-categories: [LLM, RAG Visualization]
-tags: [RAG Visualization, Spotlight]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+- RAG & Retrieval Systems
+tags:
+- rag-visualization
+- spotlight
+- llm
+- language-model
 date: 2024-07-22 14:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## Visualize Your RAG Data: EDA for Retrieval-Augmented Generation
 
 *Curiosity:* How can we visualize RAG embedding data to understand retrieval quality? What insights can interactive visualizations reveal about our RAG systems?

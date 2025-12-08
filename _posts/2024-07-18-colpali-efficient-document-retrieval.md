@@ -1,19 +1,17 @@
 ---
 title: Introducing "ColPali, Efficient Document Retrieval with Vision Language Models"
 description: LLM, RAG
-categories: [LLM, RAG]
-tags: [SOTA, RAG]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+- RAG & Retrieval Systems
+tags:
+- sota
+- rag
+- llm
+- language-model
 date: 2024-07-19 13:30:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ![ ColPali Efficient Document Retrieval with Vision Language Model  ](/assets/img/llm/colpali-retrieval-vision-language-model.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
 ## ColPali: Efficient Document Retrieval with Vision Language Models

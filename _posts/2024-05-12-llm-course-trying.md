@@ -1,20 +1,21 @@
 ---
 title: LLM Course - Let's start to make Simple LLM!
 description: LLM, Streamlit, Codespaces
-categories: [LLM, UseCase]
-tags: [Streamlit, LLM, PyTorch]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+- Industry & Applications
+tags:
+- streamlit
+- llm
+- pytorch
 date: 2024-05-12 23:57:00 +0800
-# pin: true
 mermaid: true
-# render_with_liquid: false
 image:
   path: /assets/img/llm/LLM_models.png
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: [LLM Model history since 2019 years]
+  alt:
+  - LLM Model history since 2019 years
 ---
-
-
 > - 👉 Github : <https://github.com/akillness/LLM_Course>
 - 👉 Survey : <https://akillness.github.io/posts/llm-2024-survey/>
 <!-- - 👉 History : <https://modulabs.co.kr/blog/llama-3-intro/> -->

@@ -1,19 +1,16 @@
 ---
 title: LangChain and LlamaIndex to LLM Frameworks
 description: LLM, LangChain, LlamaIndex
-categories: [Script, LangChain]
-tags: [LangChain, LLM, LlamaIndex]
-# author: Pavan Belagatti
+categories:
+- Development & Tools
+- LLM & Language Models
+tags:
+- langchain
+- llm
+- llamaindex
 date: 2024-05-12 13:27:00 +0800
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
-
 ## LangChain vs. LlamaIndex: Choosing the Right LLM Framework
 
 *Curiosity:* When should we use LangChain versus LlamaIndex? How do these frameworks differ in their approach to building LLM applications?

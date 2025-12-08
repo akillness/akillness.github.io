@@ -1,19 +1,17 @@
 ---
-title: Ensuring 𝗗𝗮𝘁𝗮 𝗤𝘂𝗮𝗹𝗶𝘁𝘆 𝗶𝗻 𝗠𝗮𝗰𝗵𝗶𝗻𝗲 𝗟𝗲𝗮𝗿𝗻𝗶𝗻𝗴 𝗦𝘆𝘀𝘁𝗲𝗺𝘀 is now as important as ever, how do we do it?
+title: Ensuring 𝗗𝗮𝘁𝗮 𝗤𝘂𝗮𝗹𝗶𝘁𝘆 𝗶𝗻 𝗠𝗮𝗰𝗵𝗶𝗻𝗲 𝗟𝗲𝗮𝗿𝗻𝗶𝗻𝗴 𝗦𝘆𝘀𝘁𝗲𝗺𝘀 is now as important as ever,
+  how do we do it?
 description: Study, Datascience
-categories: [Study, Datascience]
-tags: [Study, Datascience]
-# author: foDev_jeong
+categories:
+- Data Science & Analytics
+- Tutorials & Learning
+tags:
+- tutorial
+- data-science
+- learning
 date: 2024-07-31 12:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ![ Data Quality in Machine Learning ](/assets/img/blog/data-quality-in-machine-learning-systems.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 
 ## It is extremely important to ensure Data Quality upstream of ML Training and Inference Pipelines, trying to do that in the pipelines will cause unavoidable failure when working at scale. 

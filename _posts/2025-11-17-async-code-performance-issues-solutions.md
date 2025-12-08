@@ -1,25 +1,22 @@
 ---
-title: "Why Async Code Can Be Slower: Common Pitfalls and Performance Solutions"
-description: "Async code doesn't always mean faster code. Learn why asyncio can actually slow down your Python applications and discover proven strategies to fix performance issues, from sequential awaits to blocking libraries and CPU-bound tasks"
-categories: [Python, Performance, Async]
+title: 'Why Async Code Can Be Slower: Common Pitfalls and Performance Solutions'
+description: Async code doesn't always mean faster code. Learn why asyncio can actually
+  slow down your Python applications and discover proven strategies to fix performance
+  issues, from sequential awaits to blocking libraries and CPU-bound tasks
+categories:
+- MLOps & Production AI
 tags:
-  [
-    asyncio,
-    python,
-    async,
-    performance,
-    concurrency,
-    event-loop,
-    coroutines,
-    optimization
-  ]
+- asyncio
+- python
+- async
+- performance
+- concurrency
 date: 2025-11-17 03:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/posts/async-performance-1.png
-  alt: "Async code performance issues and solutions"
+  alt: Async code performance issues and solutions
 ---
-
 ## 🤔 Curiosity: Why Is My Async Code Slower Than Synchronous Code?
 
 You've refactored your Python code to use `async/await`, expecting significant performance improvements. But instead of getting faster, your application is actually slower. What went wrong?

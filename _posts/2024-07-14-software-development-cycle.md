@@ -1,20 +1,14 @@
 ---
 title: Software Development Cycle
 description: Software Development Cycle
-categories: [Study, Software Development Cycle]
-tags: [Study, Software Development Cycle]
-# author: foDev_jeong
+categories:
+- Tutorials & Learning
+tags:
+- tutorial
+- software-development-cycle
+- learning
 date: 2024-07-14 10:40:00 +0800
-
-# pin: true
-# math: true
-# mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ![ Software Development Cycle ](/assets/img/blog/Software-Development-cycle.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 
 𝟭. 𝗣𝗹𝗮𝗻𝗻𝗶𝗻𝗴

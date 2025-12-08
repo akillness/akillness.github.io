@@ -1,12 +1,20 @@
 ---
-title: "WorldLabs Marble - The First Commercial World Model Ushers in Spatial Intelligence Era"
-description: "Fei-Fei Li's WorldLabs launches Marble, the world's first commercial World Model. Deep dive into spatial intelligence, 3D world generation, and how this technology transforms gaming, VFX, VR, and robotics"
-categories: [AI, 3D]
-tags: [world-model, spatial-intelligence, fei-fei-li, worldlabs, marble, 3d-generation, ai-Agents]
+title: WorldLabs Marble - The First Commercial World Model Ushers in Spatial Intelligence
+  Era
+description: Fei-Fei Li's WorldLabs launches Marble, the world's first commercial
+  World Model. Deep dive into spatial intelligence, 3D world generation, and how this
+  technology transforms gaming, VFX, VR, and robotics
+categories:
+- Machine Learning & Deep Learning
+tags:
+- world-model
+- spatial-intelligence
+- fei-fei-li
+- worldlabs
+- marble
 date: 2025-11-15 03:00:00 +0800
 mermaid: true
 ---
-
 ## 🤔 Curiosity: Can AI Build Persistent 3D Worlds We Can Actually Use?
 
 On November 6, 2025, **WorldLabs**—founded by Fei-Fei Li, the Stanford professor often called the "Godmother of AI"—announced the launch of **Marble**, the world's first commercial **World Model**. This isn't just another AI tool. It's a fundamental shift in how machines understand and interact with 3D space.

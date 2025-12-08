@@ -1,12 +1,20 @@
 ---
-title: "STORM Parse vs Google Gemini File Search - A 20% Performance Advantage in RAG"
-description: "Comprehensive benchmark analysis comparing STORM Parse with Google's Gemini File Search API. Technical deep dive into why VLM-based document parsing delivers superior RAG performance"
-categories: [AI, RAG]
-tags: [storm-parse, google-gemini, file-search, RAG, document-parsing, vlm, benchmark]
+title: STORM Parse vs Google Gemini File Search - A 20% Performance Advantage in RAG
+description: Comprehensive benchmark analysis comparing STORM Parse with Google's
+  Gemini File Search API. Technical deep dive into why VLM-based document parsing
+  delivers superior RAG performance
+categories:
+- RAG & Retrieval Systems
+- Machine Learning & Deep Learning
+tags:
+- storm-parse
+- google-gemini
+- file-search
+- rag
+- document-parsing
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 ---
-
 ## 🤔 Curiosity: Can a Specialized Parser Outperform Google's Managed RAG?
 
 On November 6, 2025, Google announced the **Gemini File Search Tool**—a fully managed RAG (Retrieval-Augmented Generation) system that sent ripples through the RAG ecosystem. The pricing was particularly attention-grabbing: **$0.15 per 1M tokens for initial indexing**, with embedding storage and search completely free. Plus, it supports PDF, DOCX, XLSX, HWP, and even ZIP files up to 1TB.

@@ -1,18 +1,20 @@
 ---
 title: LLama Factory is one of the best Open-source tools
 description: LLM, Llama
-categories: [LLM, Llama]
-tags: [LLM, Llama, Opensource]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- llm
+- llama
+- opensource
 date: 2024-05-01 19:57:00 +0800
 mermaid: true
-# render_with_liquid: false
 image:
   path: /assets/img/news/Llama-factory.jpeg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: [LlaMA-Factory is one of the best open-source tools out there]
+  alt:
+  - LlaMA-Factory is one of the best open-source tools out there
 ---
-
 > [LLM Finetuning](https://github.com/lxe/simple-llm-finetuner?tab=readme-ov-file)
 {: .prompt-tip}
 

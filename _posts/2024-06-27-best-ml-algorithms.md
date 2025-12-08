@@ -1,19 +1,15 @@
 ---
-title:  𝗨𝗻𝘃𝗲𝗶𝗹𝗶𝗻𝗴 𝘁𝗵𝗲 𝗧𝗼𝗽 𝟭𝟮 𝗠𝗮𝗰𝗵𝗶𝗻𝗲 𝗟𝗲𝗮𝗿𝗻𝗶𝗻𝗴 𝗔𝗹𝗴𝗼𝗿𝗶𝘁𝗵𝗺𝘀 !
+title: 𝗨𝗻𝘃𝗲𝗶𝗹𝗶𝗻𝗴 𝘁𝗵𝗲 𝗧𝗼𝗽 𝟭𝟮 𝗠𝗮𝗰𝗵𝗶𝗻𝗲 𝗟𝗲𝗮𝗿𝗻𝗶𝗻𝗴 𝗔𝗹𝗴𝗼𝗿𝗶𝘁𝗵𝗺𝘀 !
 description: ML, Algorithm
-categories: [Study, MLAlgorithm]
-tags: [ML, Algorithm]
-# author: foDev_jeong
+categories:
+- Tutorials & Learning
+tags:
+- ml
+- algorithm
+- tutorial
+- learning
 date: 2024-06-27 20:10:00 +0800
-# pin: true
-# math: true
-# mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 - 𝗟𝗶𝗻𝗲𝗮𝗿 𝗥𝗲𝗴𝗿𝗲𝘀𝘀𝗶𝗼𝗻: A staple for any machine learning enthusiast, linear regression is like drawing a straight line through data points on a graph to predict future values.
 
 - 𝗟𝗼𝗴𝗶𝘀𝘁𝗶𝗰 𝗥𝗲𝗴𝗿𝗲𝘀𝘀𝗶𝗼𝗻: This algorithm helps us categorise data into discrete outcomes — it's all about classification, like sorting fruits into apples and oranges.

@@ -1,19 +1,15 @@
 ---
 title: llama.cpp의 내부 구현을 분석하다가 ggml을 이용한 간단한 matmul 샘플을 구현 사례 고찰
 description: Llama, CPP
-categories: [LLM, Llama]
-tags: [Llama,CPP]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- llama
+- cpp
+- llm
+- language-model
 date: 2024-07-12 11:00:00 +0800
-# pin: true
-# math: true
-# mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 > 👉 Github : <https://github.com/likejazz/ggml-simple>
 {: .prompt-info}
 

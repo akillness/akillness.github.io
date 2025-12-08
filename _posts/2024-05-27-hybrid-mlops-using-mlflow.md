@@ -1,20 +1,16 @@
 ---
 title: MLflow를 활용한 Hybrid MLOps 구축 예제
 description: MLOps, Hybrid, MLFlow
-categories: [Blogging, MLOps]
-tags: [MLOps, MLFlow]
-# author: foDev_jeong
+categories:
+- MLOps & Production AI
+- Industry & Applications
+tags:
+- mlops
+- mlflow
+- production-ml
 date: 2024-05-27 00:13:00 +0800
-# pin: true
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/blog/NLP_Overview.svg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Overview of NLP Course]
 ---
-
-
 ## Hybrid MLOps with MLflow: On-Prem Training + SageMaker Inference
 
 *Curiosity:* How can we combine on-premise GPU training with cloud-based inference? What's the best way to manage ML workflows across hybrid infrastructure?

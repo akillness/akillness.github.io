@@ -1,19 +1,21 @@
 ---
 title: All about the evaluation for LLMs.
 description: Update, Evalverse
-categories: [Script, Evaluation]
-tags: [Evaluation, LLM]
-# author: foDev_jeong
+categories:
+- Development & Tools
+tags:
+- evaluation
+- llm
+- development-tools
+- tools
 date: 2024-05-17 15:20:00 +0800
 mermaid: true
-# render_with_liquid: false
 image:
   path: /assets/img/news/Evalverse_2.jpeg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: [ Evalverse Space]
+  alt:
+  - Evalverse Space
 ---
-
-
 ## Evalverse: The Universe of LLM Evaluation
 
 *Curiosity:* How do we systematically evaluate LLM performance across diverse tasks? What benchmarks and metrics provide meaningful insights into model capabilities?

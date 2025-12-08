@@ -1,19 +1,14 @@
 ---
 title: LLM 성능 평가 ( 한국어 ) Use Case 분석해보기
 description: LLM, Evaluation
-categories: [Blogging, Evaluation]
-tags: [LLM, Evaluation]
-# author: foDev_jeong
+categories:
+- Industry & Applications
+tags:
+- llm
+- evaluation
 date: 2024-05-19 01:20:00 +0800
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
-
 ## LLM 성능 평가: 한국어 Use Case 분석
 
 *Curiosity:* GPT-4o가 한국어에서 GPT-4-turbo보다 얼마나 더 나은 성능을 보일까? 정량적 평가를 통해 어떤 인사이트를 얻을 수 있을까?

@@ -1,19 +1,13 @@
 ---
 title: 2024 Google I/O 감상평
 description: Google I/O, 2024, Review
-categories: [Blogging, Google I/O 2024]
-tags: [Google I/O 2024, Review]
-# author: foDev_jeong
+categories:
+- Industry & Applications
+tags:
+- google-io-2024
+- review
 date: 2024-05-15 12:00:00 +0800
-# mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
-
 ## 📝 구글 I/O 2024 요약 및 감상
 
 #### 내용 정리

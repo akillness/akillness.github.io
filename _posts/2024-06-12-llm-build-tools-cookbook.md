@@ -1,19 +1,16 @@
 ---
 title: Tools for Building LLM Applications
 description: Cookbook, Tools, Application
-categories: [LLM, Cookbook]
-tags: [Tools, Cookbook]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- development-tools
+- cookbook
+- llm
+- language-model
 date: 2024-06-12 15:10:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## Tools for Building LLM Applications: A Comprehensive Guide
 
 *Curiosity:* What tools and frameworks are essential for building LLM applications? How do we navigate the rich landscape of available technologies?

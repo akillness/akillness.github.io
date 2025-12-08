@@ -1,19 +1,16 @@
 ---
 title: 𝟳 𝗠𝘂𝘀𝘁-𝗸𝗻𝗼𝘄 𝗦𝘁𝗿𝗮𝘁𝗲𝗴𝗶𝗲𝘀 𝘁𝗼 𝗦𝗰𝗮𝗹𝗲 𝘆𝗼𝘂𝗿 𝗗𝗮𝘁𝗮𝗯𝗮𝘀𝗲 by ByteByteGo
 description: Study, DataBase
-categories: [Study, DataBase]
-tags: [Study, DataBase]
-# author: foDev_jeong
+categories:
+- Data Science & Analytics
+- Tutorials & Learning
+tags:
+- tutorial
+- database
+- learning
 date: 2024-08-12 12:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## 7 Must-Know Strategies to Scale Your Database
 
 *Curiosity:* How can we scale databases to handle growing workloads? What strategies work best for different scaling scenarios?

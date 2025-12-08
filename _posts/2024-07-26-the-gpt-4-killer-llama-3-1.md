@@ -1,21 +1,16 @@
 ---
 title: 𝗠𝗮𝗿𝗸 𝗭𝘂𝗰𝗸𝗲𝗿𝗯𝗲𝗿𝗴 𝗷𝘂𝘀𝘁 𝗮𝗻𝗻𝗼𝘂𝗻𝗰𝗲𝗱 𝘁𝗵𝗲 𝗚𝗣𝗧-𝟰 𝗸𝗶𝗹𝗹𝗲𝗿, 𝗟𝗹𝗮𝗺𝗮-𝟯.𝟭 💥
 description: LLM, Llama3.1
-categories: [LLM, Llama3.1]
-tags: [Meta, Llama3.1]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- meta
+- llama31
+- llm
+- language-model
 date: 2024-07-26 10:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
-
-
 ![ Overview of Llama 3.1 ](/assets/img/llm/New-King-Llama-31.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
 

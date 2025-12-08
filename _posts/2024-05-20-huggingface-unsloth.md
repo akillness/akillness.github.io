@@ -1,18 +1,16 @@
 ---
 title: Hugging Face x Unsloth
 description: Unsloth, SOTA
-categories: [LLM, Cookbook]
-tags: [Graph, Analytics]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- graph
+- analytics
+- llm
+- language-model
 date: 2024-05-20 14:10:00 +0800
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
 ## Unsloth AI: 1 Million Monthly Downloads Milestone 🎉
 
 *Curiosity:* How can we make LLM fine-tuning faster and more memory-efficient? What makes Unsloth achieve 2× speedup with 70% less memory?

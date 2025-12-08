@@ -1,19 +1,15 @@
 ---
 title: 🎭🎭 FaceLift new SOTA in 2D Landmarks 🎭🎭
 description: Paper, FaceLift, Tracking
-categories: [Paper, FaceLift]
-tags: [Tracking, 2D Landmark, FaceLift]
-# author: foDev_jeong
+categories:
+- Research & Papers
+tags:
+- tracking
+- 2d-landmark
+- facelift
 date: 2024-06-02 19:00:00 +0800
-# pin: true
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/blog/NLP_Overview.svg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Overview of NLP Course]
 ---
-
 {% include embed/youtube.html id='drEB44IfZi0' %}
 
 ## FaceLift: New SOTA in 2D Landmarks

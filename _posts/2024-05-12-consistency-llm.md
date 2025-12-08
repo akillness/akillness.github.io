@@ -1,19 +1,15 @@
 ---
 title: Consistency Large Language Models
 description: LLM, Consistency LLM
-categories: [LLM, Chosistency LLM]
-tags: [LLM, Consistency LLM, Efficient Parallel Decoder]
-# author: Maryam Miradi, PhD
+categories:
+- LLM & Language Models
+tags:
+- llm
+- consistency-llm
+- efficient-parallel-decoder
 date: 2024-05-12 13:27:00 +0800
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
-
 ### Consistency Large Language Models: Efficient Parallel Decoders and 3.4 X Faster ( from [Maryam Miradi, PhD](https://www.linkedin.com/in/maryammiradi/))
 
 

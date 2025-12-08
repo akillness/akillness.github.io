@@ -1,22 +1,20 @@
 ---
-title: "SIMA 2: When AI Agents Learn to Play, Reason, and Improve in Virtual Worlds"
-description: "DeepMind's SIMA 2 integrates Gemini models to create AI agents that don't just follow instructions—they reason, converse, and self-improve in 3D game environments. A deep dive into the future of embodied AI and gaming companions."
-categories: [AI, Games]
+title: 'SIMA 2: When AI Agents Learn to Play, Reason, and Improve in Virtual Worlds'
+description: DeepMind's SIMA 2 integrates Gemini models to create AI agents that don't
+  just follow instructions—they reason, converse, and self-improve in 3D game environments.
+  A deep dive into the future of embodied AI and gaming companions.
+categories:
+- Machine Learning & Deep Learning
+- AI Agents & Multi-Agent Systems
 tags:
-  [
-    sima-2,
-    gemini,
-    embodied-ai,
-    game-ai,
-    multi-agent,
-    reinforcement-learning,
-    deepmind,
-    agi
-  ]
+- sima-2
+- gemini
+- embodied-ai
+- game-ai
+- multi-agent
 date: 2025-11-13 03:00:00 +0800
 mermaid: true
 ---
-
 ## 🤔 Curiosity: Can AI Agents Become True Gaming Companions?
 
 What if playing a game with an AI wasn't about giving commands to a robot, but collaborating with a companion who understands context, reasons about goals, and learns from mistakes?

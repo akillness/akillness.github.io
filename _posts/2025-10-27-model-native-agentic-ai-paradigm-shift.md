@@ -1,12 +1,21 @@
 ---
-title: "Model-Native Agentic AI: The Paradigm Shift from Pipelines to Learned Intelligence"
-description: "A comprehensive survey of the evolution from Pipeline-based to Model-native Agentic AI. Explore how planning, tool use, and memory capabilities are being internalized within models through reinforcement learning, marking a fundamental shift in how we build intelligent agents."
-categories: [AI, Research]
-tags: [agentic-ai, model-native, reinforcement-learning, LLM, planning, tool-use, memory, Survey, paradigm-shift]
+title: 'Model-Native Agentic AI: The Paradigm Shift from Pipelines to Learned Intelligence'
+description: A comprehensive survey of the evolution from Pipeline-based to Model-native
+  Agentic AI. Explore how planning, tool use, and memory capabilities are being internalized
+  within models through reinforcement learning, marking a fundamental shift in how
+  we build intelligent agents.
+categories:
+- Research & Papers
+- Machine Learning & Deep Learning
+tags:
+- autonomous-agents
+- model-native
+- reinforcement-learning
+- llm
+- planning
 date: 2025-10-27 03:00:00 +0800
 mermaid: true
 ---
-
 ## 🤔 Curiosity: What If AI Agents Could Learn Intelligence Instead of Being Programmed?
 
 What if instead of orchestrating planning, tool use, and memory through external logic and pipelines, these capabilities could be internalized within the model's parameters? What if agents could learn to reason, act, and remember through experience rather than following pre-scripted rules?

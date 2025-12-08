@@ -1,19 +1,16 @@
 ---
 title: LLM 사용하는 당근마켓 케이스 확인하기
 description: pytorch, LLM, simple, prompt
-categories: [LLM, UseCase]
-tags: [UseCase, LLM, PyTorch]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+- Industry & Applications
+tags:
+- usecase
+- llm
+- pytorch
 date: 2024-05-06 18:25:00 +0800
-# pin: true
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_models.png
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [LLM Model history since 2019 years]
 ---
-
 LLM(Large Language Model) 공부하기 계획부터 실제 코드까지 작성하는 포스트를 작성한다. 
 [당근에서 LLM 사용하기](https://medium.com/daangn/%EB%8B%B9%EA%B7%BC%EC%97%90%EC%84%9C-llm-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0-76131ecebce1) 내용을 통해 LLM의 잘하는 일을 알아보고, LLM을 활용한 사례를 분석해보자.
 

@@ -1,19 +1,15 @@
 ---
 title: Want to build your first 𝗟𝗟𝗠 𝗽𝗿𝗼𝗷𝗲𝗰𝘁 but don't know where to start?
 description: LLM, System
-categories: [LLM, System]
-tags: [System, LLMOps]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- system
+- llmops
+- llm
+- language-model
 date: 2024-07-30 11:00:00 +0800
-# pin: true
-# math: true
-# mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ![ Architecture of LLM System ](/assets/img/llm/architecture-of-llm-system.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 
 ## If you want to 𝗹𝗲𝗮𝗿𝗻 in a 𝘀𝘁𝗿𝘂𝗰𝘁𝘂𝗿𝗲𝗱 𝘄𝗮𝘆 to 𝗯𝘂𝗶𝗹𝗱 𝗟𝗟𝗠 𝘀𝘆𝘀𝘁𝗲𝗺𝘀 using good 𝗟𝗟𝗠𝗢𝗽𝘀 principles... 

@@ -1,15 +1,23 @@
 ---
-title: "The Full MLOps Blueprint: Monitoring and Observability—Part A"
-description: "A comprehensive guide to MLOps monitoring and observability. Learn why models degrade in production, understand data drift vs concept drift, training-serving skew, and techniques for detecting these issues early."
-categories: [MLOps, Production]
-tags: [MLOps, monitoring, observability, model-degradation, data-drift, concept-drift, production-ml, ml-monitoring]
+title: 'The Full MLOps Blueprint: Monitoring and Observability—Part A'
+description: A comprehensive guide to MLOps monitoring and observability. Learn why
+  models degrade in production, understand data drift vs concept drift, training-serving
+  skew, and techniques for detecting these issues early.
+categories:
+- MLOps & Production AI
+- Machine Learning & Deep Learning
+tags:
+- mlops
+- monitoring
+- observability
+- model-degradation
+- data-drift
 date: 2025-11-09 03:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/posts/mlops-monitoring-observability.png
-  alt: "MLOps Monitoring and Observability: The Full Blueprint"
+  alt: 'MLOps Monitoring and Observability: The Full Blueprint'
 ---
-
 ## 🤔 Curiosity: Why Do Models Fail Silently in Production?
 
 What if your ML model's API returns 200 OK status codes with low latency, but the predictions become progressively less accurate over weeks or months? What if this silent degradation goes unnoticed until business metrics start declining?

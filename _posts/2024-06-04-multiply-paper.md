@@ -1,19 +1,15 @@
 ---
 title: 🐳🐳MultiPly in-the-wild Multi-Pax from Mono🐳🐳
 description: Paper, MultiPly, 3DRecon
-categories: [Paper, MultiPly]
-tags: [Monocular, 3DRecon, MultiPly]
-# author: foDev_jeong
+categories:
+- Research & Papers
+tags:
+- monocular
+- 3drecon
+- multiply
 date: 2024-06-04 19:00:00 +0800
-# pin: true
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/blog/NLP_Overview.svg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Overview of NLP Course]
 ---
-
 {% include embed/youtube.html id='r9giQPUp1Gw' %}
 
 ## MultiPly: Multiple People 3D Reconstruction from Monocular Videos

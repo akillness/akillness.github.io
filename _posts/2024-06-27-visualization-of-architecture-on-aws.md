@@ -1,19 +1,16 @@
 ---
-title:  Great Visualization of Resilient 3-Tier Architecture on AWS! 
+title: Great Visualization of Resilient 3-Tier Architecture on AWS!
 description: AWS, Visualization
-categories: [Study, AWS]
-tags: [Visualization, AWS]
-# author: foDev_jeong
+categories:
+- Tutorials & Learning
+tags:
+- visualization
+- aws
+- tutorial
+- learning
 date: 2024-06-27 21:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## Building Resilient 3-Tier Architecture on AWS
 
 *Curiosity:* How can you gain practical AWS experience? What's better than building To-do apps for learning cloud architecture?

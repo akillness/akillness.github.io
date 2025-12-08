@@ -1,19 +1,16 @@
 ---
-title: Top Papers in Computer Vision, NLP, Speech, Multimodal AI, Core ML, RecSys, and Graph ML 
+title: Top Papers in Computer Vision, NLP, Speech, Multimodal AI, Core ML, RecSys,
+  and Graph ML
 description: Vision Models, ELO, Compare
-categories: [Script, Papers]
-tags: [Papers]
-# author: foDev_jeong
+categories:
+- Development & Tools
+- Computer Vision & Multimodal
+tags:
+- paper-review
+- development-tools
+- tools
 date: 2024-05-18 18:20:00 +0800
-# mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
-
 ## 📝 Top Papers in Computer Vision, NLP, Speech, Multimodal AI, Core ML, RecSys, and Graph ML • 
 
 > Distilled AI : https://aman.ai/papers/

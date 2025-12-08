@@ -1,19 +1,16 @@
 ---
 title: Essential Statistical Concepts Every Data Professional Must Know!
 description: Study, Datascience
-categories: [Study, Datascience]
-tags: [Study, Datascience]
-# author: foDev_jeong
+categories:
+- Data Science & Analytics
+- Tutorials & Learning
+tags:
+- tutorial
+- data-science
+- learning
 date: 2024-08-12 15:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## Essential Statistical Concepts Every Data Professional Must Know
 
 *Curiosity:* What statistical concepts are essential for data professionals? How do these principles form the foundation for data science, analysis, and AI?

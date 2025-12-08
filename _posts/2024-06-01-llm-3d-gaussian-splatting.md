@@ -1,19 +1,16 @@
 ---
 title: 3D Language Gaussian Splatting ( LangSplat )
 description: Paper, 3DGS, LLM
-categories: [Paper, 3DGS]
-tags: [AI, LLM, 3DGS]
-# author: foDev_jeong
+categories:
+- Research & Papers
+- Computer Vision & Multimodal
+tags:
+- ai
+- llm
+- 3dgs
 date: 2024-06-01 12:00:00 +0800
-# pin: true
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/blog/NLP_Overview.svg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Overview of NLP Course]
 ---
-
 ## LangSplat: 3D Language Gaussian Splatting
 
 *Curiosity:* How can we integrate semantic understanding into 3D Gaussian Splatting? What happens when we connect 3D reconstruction with language models for localized information retrieval?

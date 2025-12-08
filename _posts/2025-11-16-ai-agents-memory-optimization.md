@@ -1,25 +1,24 @@
 ---
-title: "[Tutorial] A Practical Deep Dive Into Memory Optimization for Agentic Systems (Part A)"
-description: "Learn how to optimize memory for AI agents, understanding the difference between memory, knowledge, and tools, and why context management is crucial for production agent systems"
-categories: [Tutorial, AI, Agents]
+title: '[Tutorial] A Practical Deep Dive Into Memory Optimization for Agentic Systems
+  (Part A)'
+description: Learn how to optimize memory for AI agents, understanding the difference
+  between memory, knowledge, and tools, and why context management is crucial for
+  production agent systems
+categories:
+- AI Agents & Multi-Agent Systems
+- Machine Learning & Deep Learning
 tags:
-  [
-    ai-agents,
-    memory-optimization,
-    langgraph,
-    context-management,
-    agentic-systems,
-    llm-agents,
-    production-ai,
-    memory-management
-  ]
+- autonomous-agents
+- memory-optimization
+- langgraph
+- context-management
+- agentic-systems
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/posts/ai-agents-memory-optimization.png
-  alt: "Memory Optimization for Agentic Systems - AI Agents Crash Course Part 15"
+  alt: Memory Optimization for Agentic Systems - AI Agents Crash Course Part 15
 ---
-
 ## 🤔 Curiosity: Why Do AI Agents Need Memory Management?
 
 When you chat with ChatGPT or Claude, it seems like they remember everything you've said. But do they really? What happens when an agent needs to maintain context across multiple sessions, remember user preferences, or learn from past interactions? Is simply increasing the context window enough, or do we need something more sophisticated?

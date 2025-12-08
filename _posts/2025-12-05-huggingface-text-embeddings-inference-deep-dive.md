@@ -1,27 +1,22 @@
 ---
-title: "HuggingFace Text Embeddings Inference (TEI) - A Deep Dive into High-Performance Embedding Architecture"
-description: "Exploring how TEI combines Rust's performance with Python's flexibility to deliver blazing-fast text embeddings inference, from architecture to production deployment"
-categories: [AI, Systems, Performance]
+title: HuggingFace Text Embeddings Inference (TEI) - A Deep Dive into High-Performance
+  Embedding Architecture
+description: Exploring how TEI combines Rust's performance with Python's flexibility
+  to deliver blazing-fast text embeddings inference, from architecture to production
+  deployment
+categories:
+- MLOps & Production AI
+- Machine Learning & Deep Learning
 tags:
-  [
-    text-embeddings,
-    rust,
-    python,
-    inference,
-    production-ml,
-    huggingface,
-    candle,
-    performance,
-    architecture
-  ]
+- text-embeddings
+- rust
+- python
+- inference
+- production-ml
 date: 2025-12-05 10:00:00 +0800
 mermaid: true
 math: true
-# image:
-#   path: /assets/img/posts/text-embeddings-inference.png
-#   alt: "HuggingFace Text Embeddings Inference Architecture"
 ---
-
 ## 🤔 Curiosity: Why Do We Need a Dedicated Embedding Inference Server?
 
 After 8 years of building AI systems in game development at NC SOFT and COM2US, I've constantly faced the same challenge: **text embeddings are everywhere in modern AI applications, but Python-based inference is too slow for production.**

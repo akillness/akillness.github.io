@@ -1,25 +1,24 @@
 ---
-title: "Agents 2.0: From Shallow Loops to Deep Agents Architecture"
-description: "Explore the evolution from Agents 1.0's simple loop-based architecture to Agents 2.0's Deep Agents, featuring explicit planning, hierarchical delegation, persistent memory, and extreme context engineering for handling complex multi-step tasks"
-categories: [AI, Agents, Architecture]
+title: 'Agents 2.0: From Shallow Loops to Deep Agents Architecture'
+description: Explore the evolution from Agents 1.0's simple loop-based architecture
+  to Agents 2.0's Deep Agents, featuring explicit planning, hierarchical delegation,
+  persistent memory, and extreme context engineering for handling complex multi-step
+  tasks
+categories:
+- AI Agents & Multi-Agent Systems
+- Machine Learning & Deep Learning
 tags:
-  [
-    agents-2.0,
-    deep-agents,
-    ai-agents,
-    agent-architecture,
-    hierarchical-delegation,
-    persistent-memory,
-    explicit-planning,
-    context-engineering
-  ]
+- agents-20
+- deep-agents
+- autonomous-agents
+- agent-architecture
+- hierarchical-delegation
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/posts/agents-2.0-deep-agents.png
-  alt: "Agents 2.0: Deep Agents architecture evolution from shallow loops"
+  alt: 'Agents 2.0: Deep Agents architecture evolution from shallow loops'
 ---
-
 ## 🤔 Curiosity: Why Do AI Agents Fail at Complex, Long-Running Tasks?
 
 AI agents have rapidly evolved over the past year. But most agents still rely on a simple loop structure: "user input → LLM response → tool execution → repeat." This shallow architecture works fine for short tasks, but when trying to handle complex work that spans multiple days, fundamental limitations emerge: context overflow, goal loss, and infinite loops.

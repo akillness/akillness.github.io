@@ -1,20 +1,14 @@
 ---
 title: 𝗧𝗵𝗲 𝟱 𝗟𝗮𝘆𝗲𝗿𝘀 𝗼𝗳 𝗠𝗼𝗱𝗲𝗿𝗻 𝗦𝗼𝗳𝘁𝘄𝗮𝗿𝗲 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲 - 𝗔 𝗖𝗼𝗺𝗽𝗿𝗲𝗵𝗲𝗻𝘀𝗶𝘃𝗲 𝗚𝘂𝗶𝗱𝗲
 description: Study, Software Architecture
-categories: [Study, Software Architecture]
-tags: [Study, Software Architecture]
-# author: foDev_jeong
+categories:
+- Tutorials & Learning
+tags:
+- tutorial
+- software-architecture
+- learning
 date: 2024-07-20 15:30:00 +0800
-# pin: true
-# math: true
-# mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
-
 ## Today, I want to break down the 5 key layers that form the backbone of most modern software applications:
 
 ![ 5 layers of software ](/assets/img/blog/5-layer-of-software.gif){: .light .shadow .rounded-10 w='1212' h='668' }

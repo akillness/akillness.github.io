@@ -1,19 +1,17 @@
 ---
 title: 🤖 If you're looking to build agentic GenAI applications
 description: LLM, Application
-categories: [LLM, Application]
-tags: [Application, Design Pattern]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+- Industry & Applications
+tags:
+- application-development
+- design-pattern
+- llm
+- language-model
 date: 2024-08-05 15:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## Agentic Application Design Patterns: Building Intelligent AI Systems
 
 *Curiosity:* How do we design agentic GenAI applications? What patterns enable agents to think, plan, and collaborate effectively?

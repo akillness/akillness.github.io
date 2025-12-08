@@ -1,20 +1,14 @@
 ---
-title: Top 6 ElasticSearch Use Cases 
+title: Top 6 ElasticSearch Use Cases
 description: ElasticSearch, Use Cases
-categories: [Blogging, ElasticSearch]
-tags: [ElasticSearch, Use Cases]
-# author: foDev_jeong
+categories:
+- Industry & Applications
+tags:
+- elasticsearch
+- use-cases
 date: 2024-05-18 14:00:00 +0800
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
-
-
 ## Top 6 Elasticsearch Use Cases: Powering Modern Applications
 
 *Curiosity:* What makes Elasticsearch so versatile? How do organizations leverage its powerful search and analytics capabilities across different domains?

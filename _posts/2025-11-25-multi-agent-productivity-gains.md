@@ -1,15 +1,24 @@
 ---
-title: "Multi-Agent Systems and AI Productivity Gains - What 100,000 Real Conversations Tell Us"
-description: "Analyzing Anthropic's research on AI productivity gains through the lens of multi-agent systems - how collaborative AI agents could amplify the 80% time savings we're already seeing"
-categories: [Research, AI, Multi-Agent]
-tags: [Multi-Agent, productivity, Anthropic, claude, ai-economics, game-ai, production-ml]
+title: Multi-Agent Systems and AI Productivity Gains - What 100,000 Real Conversations
+  Tell Us
+description: Analyzing Anthropic's research on AI productivity gains through the lens
+  of multi-agent systems - how collaborative AI agents could amplify the 80% time
+  savings we're already seeing
+categories:
+- Research & Papers
+- Machine Learning & Deep Learning
+tags:
+- multi-agent
+- productivity
+- anthropic
+- claude
+- ai-economics
 date: 2025-11-25 15:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/research/anthropic-productivity/productivity-hero.png
-  alt: "AI Productivity Gains Research - Anthropic's analysis of 100,000 Claude conversations"
+  alt: AI Productivity Gains Research - Anthropic's analysis of 100,000 Claude conversations
 ---
-
 ![Anthropic Productivity Research - Multi-Agent Perspective](/assets/img/research/anthropic-productivity/productivity-hero.png){: .light .shadow .rounded-10 w='1212' h='668' }
 
 ## 🤔 Curiosity: Can Multi-Agent Systems Amplify AI Productivity Gains?

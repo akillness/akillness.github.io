@@ -1,18 +1,21 @@
 ---
 title: Beginner-friendly 101 guide on LLM agents
 description: LLM, LLM agents
-categories: [Script, Agents]
-tags: [LLM, Agents, Generative AI]
-# author: foDev_jeong
+categories:
+- AI Agents & Multi-Agent Systems
+- Development & Tools
+tags:
+- llm
+- agents
+- generative-ai
 date: 2024-04-24 19:57:00 +0800
 mermaid: true
-# render_with_liquid: false
 image:
   path: /assets/img/news/llm-agents.jpeg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: [Beginner-friendly 101 guide on LLM agents]
+  alt:
+  - Beginner-friendly 101 guide on LLM agents
 ---
-
 > 에이전트는 툴, 실행 코드, 임베딩, 벡터 저장소의 조합을 통해 대화형 LLM의 개념을 확장한다. 즉, 에이전트는 RAG에 부가적인 단계를 더한 것
 {: .prompt-info}
 

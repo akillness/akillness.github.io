@@ -1,19 +1,15 @@
 ---
 title: 🔍 Unlocking the Power of RLHF in Large Language Models 🌟
 description: LLM, RLHF
-categories: [LLM, RLHF]
-tags: [RLHF, LLM]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- rlhf
+- llm
+- language-model
 date: 2024-08-03 12:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## Unlocking the Power of RLHF in Large Language Models
 
 *Curiosity:* How do LLMs learn to align with human preferences? What is Reinforcement Learning from Human Feedback (RLHF) and how does it work?

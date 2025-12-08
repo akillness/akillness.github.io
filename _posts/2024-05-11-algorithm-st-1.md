@@ -1,19 +1,16 @@
 ---
 title: 알고리듬 압축코스 - 강의소개
 description: Algorithm, Honglab
-categories: [Algorithm, Introduce]
-tags: [Study, Algorithm, Python, C++]
-# author: foDev_jeong
+categories:
+- Industry & Applications
+tags:
+- tutorial
+- algorithm
+- python
+- c
 date: 2024-05-11 14:30:00 +0800
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
-
 # HongLab 알고리듬 압축코스 - 강의소개
 
 > **Codes :**  <https://github.com/akillness/Algorithm_Honglab>

@@ -1,13 +1,22 @@
 ---
-title: "RLHF from Scratch: Learning to Summarize from Human Feedback on a Single DGX Spark"
-description: "A complete implementation guide for reproducing RLHF (Reinforcement Learning from Human Feedback) on a single DGX Spark. Learn how to train SFT models, reward models, DPO, and GRPO for TL;DR summarization using Qwen2.5 models."
-categories: [AI, RLHF]
-tags: [RLHF, reinforcement-learning, human-feedback, dpo, grpo, ppo, summarization, qwen, dgx-spark, training]
+title: 'RLHF from Scratch: Learning to Summarize from Human Feedback on a Single DGX
+  Spark'
+description: A complete implementation guide for reproducing RLHF (Reinforcement Learning
+  from Human Feedback) on a single DGX Spark. Learn how to train SFT models, reward
+  models, DPO, and GRPO for TL;DR summarization using Qwen2.5 models.
+categories:
+- Machine Learning & Deep Learning
+- Tutorials & Learning
+tags:
+- rlhf
+- reinforcement-learning
+- human-feedback
+- dpo
+- grpo
 date: 2025-11-03 03:00:00 +0800
 mermaid: true
 math: true
 ---
-
 ## 🤔 Curiosity: Can We Train RLHF on a Single GPU Node?
 
 What if you could reproduce the entire RLHF pipeline—from supervised fine-tuning to reward modeling to policy optimization—on a single DGX Spark? What if you could train models that learn to summarize from human feedback without needing an 8-H100 cluster?

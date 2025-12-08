@@ -1,19 +1,14 @@
 ---
 title: Scaling Monosemanticity by Anthropic (블랙박스 이해하기)
 description: LLM, Scaling
-categories: [LLM, Scaling]
-tags: [Scaling, LLM]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- scaling
+- llm
+- language-model
 date: 2024-05-27 09:13:00 +0800
-# pin: true
-# mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/blog/NLP_Overview.svg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Overview of NLP Course]
 ---
-
 > Origitnal Article : <https://inblog.ai/jasonlee/%EB%B8%94%EB%9E%99%EB%B0%95%EC%8A%A4-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-scaling-monosemanticity-by-anthropic-20662>
 {: .prompt-info }
 

@@ -1,19 +1,18 @@
 ---
-title: 🗞 LazyLLM looks like a super simple low-code open-source framework for building multi-agent applications
+title: 🗞 LazyLLM looks like a super simple low-code open-source framework for building
+  multi-agent applications
 description: LLM, LazyLLM
-categories: [LLM, LazyLLM]
-tags: [Multi-agent, LazyLLM]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+- AI Agents & Multi-Agent Systems
+tags:
+- multi-agent
+- lazyllm
+- llm
+- language-model
 date: 2024-08-04 20:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## LazyLLM: Low-Code Framework for Multi-Agent Applications
 
 *Curiosity:* What if building multi-agent systems could be as simple as connecting building blocks? How can we make LLM application development accessible to developers from diverse backgrounds?

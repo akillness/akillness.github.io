@@ -1,25 +1,24 @@
 ---
-title: "LLM Response Evaluation with Spring AI: Building LLM-as-a-Judge Using Recursive Advisors"
-description: "Explore how Spring AI enables LLM-as-a-Judge pattern for automated response evaluation using recursive advisors. Learn to build production-ready evaluation systems that assess LLM output quality, relevance, and accuracy"
-categories: [AI, Spring, LLM]
+title: 'LLM Response Evaluation with Spring AI: Building LLM-as-a-Judge Using Recursive
+  Advisors'
+description: Explore how Spring AI enables LLM-as-a-Judge pattern for automated response
+  evaluation using recursive advisors. Learn to build production-ready evaluation
+  systems that assess LLM output quality, relevance, and accuracy
+categories:
+- LLM & Language Models
+- Machine Learning & Deep Learning
 tags:
-  [
-    spring-ai,
-    llm-evaluation,
-    llm-as-judge,
-    recursive-advisors,
-    response-evaluation,
-    java,
-    spring-framework,
-    ai-evaluation
-  ]
+- spring-ai
+- llm-evaluation
+- llm-as-judge
+- recursive-advisors
+- response-evaluation
 date: 2025-11-10 03:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/posts/spring-ai-llm-as-judge.png
-  alt: "Spring AI LLM as Judge: Recursive Advisors for Response Evaluation"
+  alt: 'Spring AI LLM as Judge: Recursive Advisors for Response Evaluation'
 ---
-
 ## 🤔 Curiosity: How Do We Automatically Evaluate LLM Response Quality?
 
 As LLM applications move into production, a critical question emerges: **How do we automatically assess whether an LLM's response is actually good?** Traditional evaluation methods require human reviewers, which doesn't scale. What if we could use LLMs themselves to judge the quality of other LLMs' outputs?

@@ -1,23 +1,21 @@
 ---
-title: "Building LLaMA 4 from Scratch: Understanding Mixture-of-Experts Architecture"
-description: "A deep dive into implementing LLaMA 4's Mixture-of-Experts (MoE) architecture from scratch using PyTorch. Learn how MoE enables efficient scaling to hundreds of billions of parameters while maintaining inference speed."
-categories: [AI, Research]
+title: 'Building LLaMA 4 from Scratch: Understanding Mixture-of-Experts Architecture'
+description: A deep dive into implementing LLaMA 4's Mixture-of-Experts (MoE) architecture
+  from scratch using PyTorch. Learn how MoE enables efficient scaling to hundreds
+  of billions of parameters while maintaining inference speed.
+categories:
+- Research & Papers
+- Machine Learning & Deep Learning
 tags:
-  [
-    llama-4,
-    mixture-of-experts,
-    moe,
-    transformer,
-    pytorch,
-    llm,
-    deep-learning,
-    from-scratch
-  ]
+- llama-4
+- mixture-of-experts
+- moe
+- transformer
+- pytorch
 date: 2025-05-18 03:00:00 +0800
 mermaid: true
 math: true
 ---
-
 ## 🤔 Curiosity: How Do We Scale LLMs Without Proportional Compute Costs?
 
 What if we could build a language model with hundreds of billions of parameters, but only activate a small fraction of them for each input? What if we could achieve GPT-4-level performance at roughly half the inference cost?

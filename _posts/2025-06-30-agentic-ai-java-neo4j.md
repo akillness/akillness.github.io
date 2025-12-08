@@ -1,12 +1,20 @@
 ---
-title: "Agentic AI with Java and Neo4j - Building Graph-Native AI Agents"
-description: "Exploring how to build AI agents that can autonomously navigate and query graph databases using Java, bridging the gap between traditional GraphRAG and agentic AI"
-categories: [AI, Agents]
-tags: [agentic-ai, java, neo4j, graphRAG, LLM-Agents, graph-database]
+title: Agentic AI with Java and Neo4j - Building Graph-Native AI Agents
+description: Exploring how to build AI agents that can autonomously navigate and query
+  graph databases using Java, bridging the gap between traditional GraphRAG and agentic
+  AI
+categories:
+- AI Agents & Multi-Agent Systems
+- Machine Learning & Deep Learning
+tags:
+- autonomous-agents
+- java
+- neo4j
+- graphrag
+- graph-database
 date: 2025-06-30 03:00:00 +0800
 mermaid: true
 ---
-
 ## 🤔 Curiosity: Can AI Agents Navigate Graphs Autonomously?
 
 In my 8 years building AI-powered games, I've seen the evolution from simple rule-based systems to sophisticated LLM-powered assistants. But here's a question that's been nagging at me: **What if we could give AI agents the ability to explore graph databases on their own, deciding what information to retrieve based on the conversation context?**

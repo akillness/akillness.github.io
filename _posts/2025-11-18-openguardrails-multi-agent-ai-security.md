@@ -1,25 +1,23 @@
 ---
-title: "OpenGuardrails: A Multi-Agent Perspective on AI Security Platform"
-description: "Analyzing the multi-agent architecture of an open-source AI security platform that comprehensively defends against prompt injection, content risks, and data leakage"
-categories: [AI, Security, Agents]
+title: 'OpenGuardrails: A Multi-Agent Perspective on AI Security Platform'
+description: Analyzing the multi-agent architecture of an open-source AI security
+  platform that comprehensively defends against prompt injection, content risks, and
+  data leakage
+categories:
+- AI Agents & Multi-Agent Systems
+- Machine Learning & Deep Learning
 tags:
-  [
-    openguardrails,
-    ai-security,
-    multi-agent,
-    prompt-injection,
-    content-safety,
-    data-leakage,
-    guardrails,
-    production-ai
-  ]
+- openguardrails
+- ai-security
+- multi-agent
+- prompt-injection
+- content-safety
 date: 2025-11-18 12:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/ai/openguardrails/openguardrails-homepage.png
-  alt: "OpenGuardrails - AI Security Platform for Developers"
+  alt: OpenGuardrails - AI Security Platform for Developers
 ---
-
 ## 🤔 Curiosity: Why Do We Need a Multi-Agent Approach for AI Security?
 
 When deploying AI to production in game development, one of the biggest concerns is **security**. Prompt injection attacks, inappropriate content generation, sensitive data leakage—can a single system defend against all these threats?

@@ -1,19 +1,22 @@
 ---
-title: Introducing Llama 3.1 - the most capable LLMs from Meta, free and arguably open-source!
+title: Introducing Llama 3.1 - the most capable LLMs from Meta, free and arguably
+  open-source!
 description: LLM, Llama3.1
-categories: [LLM, Llama3.1]
-tags: [Introducing, Llama3.1]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- introducing
+- llama31
+- llm
+- language-model
 date: 2024-07-29 12:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
 image:
   path: /assets/img/llm/compare-performance-of-llms.jpeg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: [ Compare Performance of LLMS by KMMLU ]
+  alt:
+  - Compare Performance of LLMS by KMMLU
 ---
-
 ![ Llama 3.1 MMLU performance ](/assets/img/llm/llama-3-1-mmlu-performance.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
 # Introducing Llama 3.1

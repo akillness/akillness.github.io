@@ -1,19 +1,15 @@
 ---
-title: 𝟭𝟮 𝗗𝗮𝘁𝗮 𝗦𝘁𝗿𝘂𝗰𝘁𝘂𝗿𝗲𝘀 𝗬𝗼𝘂 𝗠𝘂𝘀𝘁 𝗞𝗻𝗼𝘄 
+title: 𝟭𝟮 𝗗𝗮𝘁𝗮 𝗦𝘁𝗿𝘂𝗰𝘁𝘂𝗿𝗲𝘀 𝗬𝗼𝘂 𝗠𝘂𝘀𝘁 𝗞𝗻𝗼𝘄
 description: DataStuctures
-categories: [Study, DataStructure]
-tags: [Programming, DataStructure]
-# author: foDev_jeong
+categories:
+- Tutorials & Learning
+tags:
+- programming
+- datastructure
+- tutorial
+- learning
 date: 2024-06-29 02:10:00 +0800
-# pin: true
-# math: true
-# mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 Data structures are the foundation of any programming language. They are used to organize and store data in a way that makes it efficient to access and manipulate. 
 
 As a tech professional, it is essential to understand different data structures and how to use them effectively.

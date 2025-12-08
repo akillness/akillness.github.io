@@ -1,22 +1,21 @@
 ---
-title: "FARA 7B: Microsoft's Efficient Agentic Model for Computer Use - A Multi-Agent Perspective"
-description: "Deep dive into Microsoft Research's FARA 7B: an efficient 7B parameter agentic small language model for computer use with robust safety measures and competitive performance"
-categories: [AI, Agents, LLM]
+title: 'FARA 7B: Microsoft''s Efficient Agentic Model for Computer Use - A Multi-Agent
+  Perspective'
+description: 'Deep dive into Microsoft Research''s FARA 7B: an efficient 7B parameter
+  agentic small language model for computer use with robust safety measures and competitive
+  performance'
+categories:
+- AI Agents & Multi-Agent Systems
+- LLM & Language Models
 tags:
-  [
-    fara-7b,
-    microsoft-research,
-    agentic-ai,
-    computer-use,
-    small-language-model,
-    multi-agent,
-    production-ai,
-    game-ai
-  ]
+- fara-7b
+- microsoft-research
+- autonomous-agents
+- computer-use
+- small-language-model
 date: 2025-11-24 15:00:00 +0800
 mermaid: true
 ---
-
 ## 🤔 Curiosity: Can Small Language Models Compete with Large Models in Agentic Computer Use?
 
 After 8 years of building AI systems in game development, one of the biggest challenges has been **balancing model performance with computational efficiency**. Large models like GPT-4 and Claude offer excellent agentic capabilities but require significant resources, while smaller models are efficient but often lack the sophistication needed for complex computer use tasks.

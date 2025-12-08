@@ -1,19 +1,14 @@
 ---
 title: Neural Parametric Gaussian Avatars 🔴 🔴 🔴  ( NPGA )
 description: Paper, NPGA, Avatar
-categories: [Paper, NPGA]
-tags: [AI, Avatar, NPGA]
-# author: foDev_jeong
+categories:
+- Research & Papers
+tags:
+- ai
+- avatar
+- npga
 date: 2024-06-01 15:00:00 +0800
-# pin: true
-# mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/blog/NLP_Overview.svg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Overview of NLP Course]
 ---
-
 {% include embed/youtube.html id='NGRxAYbIkus' %}
 
 The creation of high-fidelity digital human heads is crucial for integrating virtual elements into daily life, demanding photo-realism and real-time rendering. 

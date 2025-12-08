@@ -1,27 +1,24 @@
 ---
-title: "NVIDIA CUDA Tile - Focus on Your Algorithm, Let Hardware Handle the Rest"
-description: "Exploring CUDA Tile, NVIDIA's revolutionary tile-based programming model that abstracts tensor core complexity, enabling higher-level GPU programming without sacrificing performance"
-categories: [AI, Systems, Performance]
+title: NVIDIA CUDA Tile - Focus on Your Algorithm, Let Hardware Handle the Rest
+description: Exploring CUDA Tile, NVIDIA's revolutionary tile-based programming model
+  that abstracts tensor core complexity, enabling higher-level GPU programming without
+  sacrificing performance
+categories:
+- MLOps & Production AI
+- Machine Learning & Deep Learning
 tags:
-  [
-    cuda,
-    gpu-programming,
-    tensor-cores,
-    performance,
-    nvidia,
-    cuda-tile,
-    tile-programming,
-    hardware-abstraction,
-    production-ml
-  ]
+- cuda
+- gpu-programming
+- tensor-cores
+- performance
+- nvidia
 date: 2025-12-04 10:00:00 +0800
 mermaid: true
 math: true
 image:
   path: /assets/img/posts/cuda-tile-hero.png
-  alt: "NVIDIA CUDA Tile - Tile-based parallel programming model"
+  alt: NVIDIA CUDA Tile - Tile-based parallel programming model
 ---
-
 ## 🤔 Curiosity: Can We Program GPUs Like We Program NumPy?
 
 After 8 years of building AI systems in game development at NC SOFT and COM2US, I've constantly wrestled with the same tension: **GPUs are incredibly powerful, but programming them efficiently requires deep hardware knowledge that distracts from the actual algorithm.**

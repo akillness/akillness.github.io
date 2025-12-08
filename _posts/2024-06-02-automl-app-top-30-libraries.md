@@ -1,19 +1,20 @@
 ---
 title: AutoML Applications, Advantages and Top 30 Libraries 📚
 description: Paper, Libraries, AutoML
-categories: [Script, AutoML]
-tags: [Libraries, AutoML]
-# author: foDev_jeong
+categories:
+- Development & Tools
+tags:
+- libraries
+- automl
+- development-tools
+- tools
 date: 2024-06-02 23:00:00 +0800
-# pin: true
-# mermaid: true
-# render_with_liquid: false
 image:
   path: /assets/img/news/AutoML_Top_30_Libraries.jpeg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: [AutoML Advantages and Top 30 Libraries]
+  alt:
+  - AutoML Advantages and Top 30 Libraries
 ---
-
 AutoML transforms ML workflows, boosting efficiency and innovation. 
 
 * * *

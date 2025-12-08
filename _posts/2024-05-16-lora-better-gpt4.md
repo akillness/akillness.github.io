@@ -1,19 +1,14 @@
 ---
 title: GPT4보다 LoRA를 적용한 결과가 전반적으로 낫더라?
 description: LoRA vs GPT4, Performance
-categories: [Blogging, LoRA]
-tags: [LoRA, GPT4]
-# author: foDev_jeong
+categories:
+- Industry & Applications
+tags:
+- lora
+- gpt4
 date: 2024-05-16 15:20:00 +0800
 mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
-
 ## LoRA-Fine-Tuned Models Outperform GPT-4: A Comprehensive Study
 
 *Curiosity:* Can fine-tuned smaller models outperform large general-purpose models on specific tasks? What insights can we retrieve from systematic fine-tuning experiments?

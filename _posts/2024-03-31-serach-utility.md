@@ -1,20 +1,15 @@
 ---
 title: Kakao API 관련해서 찾아본 내용
 description: Kakao, Utility
-categories: [Blogging, API, Kakao]
-tags: [Utility, Kakao API]
-# author: foDev_jeong
+categories:
+- Industry & Applications
+tags:
+- utility
+- kakao-api
 date: 2024-03-31 18:30:00 +0800
 render_with_liquid: true
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 카카오API를 이용해서 챗봇만들기 한번 해볼까? 해서 찾아봤는데, 간단한 챗봇기능은 OpenChat에서 방장에게 기본 제공되는 기능이 있다. (인사, 스케쥴러) 이런 기능 말고 대화 봇이나 Chat GPT 같이 메신저 등 요구하는 봇을 만들려면 카카오 개발자 사이트를 통해서 개발이 가능하다. 하지만 여기까지만 알아볼 예정 ^^
 
 ## **별거? 아닌 이야기**

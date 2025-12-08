@@ -1,20 +1,15 @@
 ---
 title: Flutter 를 공부하며 개발하기 -초급편-
 description: Kakao, Utility
-categories: [Blogging, Flutter]
-tags: [Flutter, Tutorial]
-# author: foDev_jeong
+categories:
+- Industry & Applications
+tags:
+- flutter
+- tutorial
 date: 2024-03-30 21:00:00 +0800
 render_with_liquid: true
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 > Task Planning 을 통해, Flutter의 사용방법 및 앱 개발을 위한 전반적인 사전 지식을 습득하고 앱 개발에 대한 감각을 익히는 것이 중점입니다. 해당 Task는 자발적인 학습을 통해 Flutter 의 개발과 관련된 본인의 지식을 공유하고 함께 코드를 자유롭게 수정,개발,배포할 수 있는 적정 수준까지 끌어올리는 것을 목표로 합니다.
 {: .prompt-info}
 

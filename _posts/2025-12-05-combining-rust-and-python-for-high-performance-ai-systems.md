@@ -1,21 +1,20 @@
 ---
-title: "Combining Rust and Python for High-Performance AI Systems - Bridging Speed and Productivity"
-description: "Exploring how Rust and Python complement each other in AI systems, overcoming Python's performance bottlenecks while maintaining its rich ecosystem"
-categories: [AI, Systems, Performance]
+title: Combining Rust and Python for High-Performance AI Systems - Bridging Speed
+  and Productivity
+description: Exploring how Rust and Python complement each other in AI systems, overcoming
+  Python's performance bottlenecks while maintaining its rich ecosystem
+categories:
+- MLOps & Production AI
+- Machine Learning & Deep Learning
 tags:
-  [
-    rust,
-    python,
-    ai-systems,
-    performance,
-    production-ml,
-    systems-programming,
-    pyo3
-  ]
+- rust
+- python
+- ai-systems
+- performance
+- production-ml
 date: 2025-12-05 10:00:00 +0800
 mermaid: true
 ---
-
 ## 🤔 Curiosity: Can We Have Both Speed and Productivity in AI Systems?
 
 After 8 years of building AI systems in game development at NC SOFT and COM2US, I've constantly faced the same dilemma: **Python's ecosystem is unbeatable for prototyping and research, but production demands performance that Python struggles to deliver.**

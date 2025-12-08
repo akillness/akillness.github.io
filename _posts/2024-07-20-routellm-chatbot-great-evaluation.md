@@ -1,20 +1,16 @@
 ---
 title: 𝗥𝗼𝘂𝘁𝗲 𝘆𝗼𝘂𝗿 𝗾𝘂𝗲𝗿𝘆 𝘁𝗼 𝗮 𝘀𝗺𝗮𝗹𝗹𝗲𝗿 𝗟𝗟𝗠 𝘄𝗵𝗲𝗻 𝗽𝗼𝘀𝘀𝗶𝗯𝗹𝗲
 description: Chatbot,RouteLLM
-categories: [LLM, RouteLLM]
-tags: [Evaluation, RouteLLM]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- evaluation
+- routellm
+- llm
+- language-model
 date: 2024-07-20 11:30:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
-
 ### RouteLLM ⇒ 𝗰𝘂𝘁 𝟱𝟬% 𝗼𝗳 𝗰𝗼𝘀𝘁 ✂️
 
 *Curiosity:* What insights can we retrieve from this? How does this connect to innovation in the field?

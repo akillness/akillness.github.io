@@ -1,19 +1,15 @@
 ---
 title: Data Pipelines Overview
 description: Script, Data Pipeline
-categories: [Blogging, Data Pipeline]
-tags: [Datapipeline, Cookbook]
-# author: foDev_jeong
+categories:
+- Industry & Applications
+- Data Science & Analytics
+tags:
+- datapipeline
+- cookbook
 date: 2024-04-17 15:10:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/news/data-pipeline-overview.gif)
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [ Data pipeline Overview ]
 ---
-
 ![Data Pipeline Overview ](/assets/img/news/data-pipeline-overview.gif){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
 ## Data Pipelines Overview: The 5-Phase Framework

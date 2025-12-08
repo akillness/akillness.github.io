@@ -1,19 +1,16 @@
 ---
 title: Explore the landscape of Open Source Data Engineering
 description: Study, Datascience
-categories: [Study, Datascience]
-tags: [Study, Datascience]
-# author: foDev_jeong
+categories:
+- Data Science & Analytics
+- Tutorials & Learning
+tags:
+- tutorial
+- data-science
+- learning
 date: 2024-08-12 10:00:00 +0800
-# pin: true
-# math: true
 mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 ## Explore the Landscape of Open Source Data Engineering
 
 *Curiosity:* What tools and platforms are available in the open-source data engineering ecosystem? How do they work together to build comprehensive data pipelines?

@@ -1,25 +1,21 @@
 ---
-title: "LLM Council: A Complete Architecture Analysis of Karpathy's Multi-Agent Deliberation System"
-description: "Deep dive into Andrej Karpathy's LLM Council: comprehensive analysis of all files, architecture, implementation details, and the innovative 3-stage peer review system"
-categories: [AI, Agents, LLM]
+title: 'LLM Council: A Complete Architecture Analysis of Karpathy''s Multi-Agent Deliberation
+  System'
+description: 'Deep dive into Andrej Karpathy''s LLM Council: comprehensive analysis
+  of all files, architecture, implementation details, and the innovative 3-stage peer
+  review system'
+categories:
+- AI Agents & Multi-Agent Systems
+- LLM & Language Models
 tags:
-  [
-    llm-council,
-    multi-agent,
-    karpathy,
-    openrouter,
-    peer-review,
-    deliberation,
-    architecture,
-    fastapi,
-    react,
-    production-ai,
-    game-ai
-  ]
+- llm-council
+- multi-agent
+- karpathy
+- openrouter
+- peer-review
 date: 2025-11-22 15:00:00 +0800
 mermaid: true
 ---
-
 ## 🤔 Curiosity: Can Multiple LLMs Collaborate to Produce Better Answers?
 
 After 8 years of building AI systems in game development, one of the biggest challenges has been **overcoming the limitations of a single model**. GPT-5.1 might be creative but lack accuracy, Claude Sonnet 4.5 might be precise but slow, and Gemini 3 Pro might be balanced but not optimal for every task.

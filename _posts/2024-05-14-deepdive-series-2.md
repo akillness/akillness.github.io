@@ -1,18 +1,15 @@
 ---
-title: Deep Dive into Sora’s Diffusion Transformer (DiT) by Hand 
+title: Deep Dive into Sora’s Diffusion Transformer (DiT) by Hand
 description: Sora, Diffusion,Transformer
-categories: [Blogging, Deepdive]
-tags: [Deepdive, Sora, Diffusion, Transformer]
-# author: foDev_jeong
+categories:
+- Industry & Applications
+tags:
+- deep-dive
+- sora
+- diffusion
+- transformer
 date: 2024-05-14 13:11:00 +0800
-# mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
 ### **Original Article** : 👉 <https://towardsdatascience.com/deep-dive-into-soras-diffusion-transformer-dit-by-hand-%EF%B8%8E-1e4d84ec865d>
 
 * * *

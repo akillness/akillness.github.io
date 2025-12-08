@@ -1,19 +1,15 @@
 ---
 title: Microsoft's AgentEval seems like a promising tool to assist with this!
 description: LLM, AgentEval
-categories: [LLM, AgentEval]
-tags: [Microsoft, AgentEval]
-# author: foDev_jeong
+categories:
+- LLM & Language Models
+tags:
+- microsoft
+- agenteval
+- llm
+- language-model
 date: 2024-06-09 12:00:00 +0800
-# pin: true
-# mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/blog/NLP_Overview.svg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Overview of NLP Course]
 ---
-
 🤔 As a generative AI practitioner, I spend a good chunk of time developing task-specific metrics for various tasks/domains and use-cases. Microsoft's AgentEval seems like a promising tool to assist with this!
 
 > ❗ Traditional evaluation methods focus on generic and end-to-end success metrics, which don't always capture the nuanced performance needed for complex or domain specific tasks. This creates a gap in understanding how well these applications meet user needs and developer requirements.

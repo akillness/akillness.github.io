@@ -1,26 +1,23 @@
 ---
-title: "[Paper] VGGT: Visual Geometry Grounded Transformer - CVPR 2025 Best Paper"
-description: "VGGT introduces a feed-forward transformer that performs 3D reconstruction from one to hundreds of scene views in a single forward pass, predicting camera parameters, depth maps, point maps, and 3D point tracks without post-processing"
-categories: [Paper, CV, 3D-Vision]
+title: '[Paper] VGGT: Visual Geometry Grounded Transformer - CVPR 2025 Best Paper'
+description: VGGT introduces a feed-forward transformer that performs 3D reconstruction
+  from one to hundreds of scene views in a single forward pass, predicting camera
+  parameters, depth maps, point maps, and 3D point tracks without post-processing
+categories:
+- Research & Papers
+- Computer Vision & Multimodal
 tags:
-  [
-    vggt,
-    cvpr-2025,
-    best-paper,
-    3d-reconstruction,
-    transformer,
-    multi-view,
-    depth-estimation,
-    point-tracking,
-    computer-vision
-  ]
+- vggt
+- cvpr-2025
+- best-paper
+- 3d-reconstruction
+- transformer
 date: 2025-03-14 03:00:00 +0800
 mermaid: true
 image:
   path: /assets/img/posts/vggt-fig1.webp
-  alt: "VGGT: Visual Geometry Grounded Transformer - CVPR 2025 Best Paper"
+  alt: 'VGGT: Visual Geometry Grounded Transformer - CVPR 2025 Best Paper'
 ---
-
 ## 🤔 Curiosity: Can We Reconstruct 3D from Multiple Views Without Post-Processing?
 
 Recent methods like DUSt3R and MASt3R solve 3D tasks directly with neural networks, but they can only process two images at a time. To reconstruct from more images, they rely on post-processing to fuse pairwise reconstructions. What if we could process one to hundreds of scene views in a single forward pass, predicting all 3D properties without any optimization-based post-processing?

@@ -1,12 +1,20 @@
 ---
-title: "Top LLM Papers of the Week: November Week 2, 2025"
-description: "A curated selection of the top 10 LLM research papers from November Week 2, 2025, covering agent memory evaluation, multilingual tokenization, RAG optimization, multimodal models, domain-specific LLMs, and multi-agent systems."
-categories: [AI, Research]
-tags: [LLM, Papers, Research, Agents, RAG, memory, tokenization, multimodal, text-to-sql, weekly-roundup]
+title: 'Top LLM Papers of the Week: November Week 2, 2025'
+description: A curated selection of the top 10 LLM research papers from November Week
+  2, 2025, covering agent memory evaluation, multilingual tokenization, RAG optimization,
+  multimodal models, domain-specific LLMs, and multi-agent systems.
+categories:
+- Research & Papers
+- Machine Learning & Deep Learning
+tags:
+- llm
+- paper-review
+- research
+- agents
+- rag
 date: 2025-11-13 03:00:00 +0800
 mermaid: true
 ---
-
 ## 🤔 Curiosity: What Are the Latest Breakthroughs in LLM Research?
 
 What if we could systematically evaluate hallucinations in agent memory systems? What if tokenizers could be optimized for specific language families? What if RAG systems could cache intelligently to reduce latency by 80%?

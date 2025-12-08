@@ -1,18 +1,15 @@
 ---
 title: RAG papers list newest additions
 description: RAG, Newest, Papers
-categories: [Script, RAG]
-tags: [RAG, LLM, Papers]
-# author: foDev_jeong
+categories:
+- RAG & Retrieval Systems
+- Development & Tools
+tags:
+- rag
+- llm
+- paper-review
 date: 2024-05-12 21:29:00 +0800
-# mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
 ## 🎊 My RAG papers list has now been updated with the newest additions, including those from April. It contains over 60 papers, with quick summaries and topic tags.
 
 

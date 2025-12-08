@@ -1,18 +1,13 @@
 ---
 title: 10 Algorithms Shaping the Tech World
 description: Algorithm, Introduction
-categories: [Blogging, Algorithm]
-tags: [Algorithm, Introduction]
-# author: foDev_jeong
+categories:
+- Industry & Applications
+tags:
+- algorithm
+- introduction
 date: 2024-05-19 23:46:00 +0800
-# mermaid: true
-# render_with_liquid: false
-# image:
-#   path: /assets/img/llm/LLM_evaluation_rank.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [Rankings of model performance change drastically depending on which LLM is used as the judge on KILT-NQ]
 ---
-
 ![ 10 Algorithms Shaping ](/assets/img/blog/Algorithms_top_10.gif){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 
 ### 🌟 Sorting Algorithms

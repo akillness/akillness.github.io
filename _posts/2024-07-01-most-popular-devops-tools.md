@@ -1,19 +1,14 @@
 ---
-title: DevOps Decoded, The Ultimate Toolkit for Modern Software Development 
+title: DevOps Decoded, The Ultimate Toolkit for Modern Software Development
 description: DevOps, Tools
-categories: [Setting, DevOps]
-tags: [DevOps,Tools]
-# author: foDev_jeong
+categories:
+- Development & Tools
+tags:
+- devops
+- development-tools
+- tools
 date: 2024-07-01 20:10:00 +0800
-# pin: true
-# math: true
-# mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 # In today's fast-paced tech world, knowing how DevOps works is no longer optional—it's essential. 
 
 ![ Most Popular DevOps Tools ](/assets/img/blog/Most_Popular_DevOps_Tools.gif){: .light .shadow .rounded-10 w='1212' h='668' }

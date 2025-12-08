@@ -1,22 +1,20 @@
 ---
-title: "Prompt Engineering with Multi-Agent Systems: Gemini API's Agentic Workflows and SI Template"
-description: "A practical guide to prompt engineering using Google Gemini API's multi-agent workflows and Structured Input (SI) templates"
-categories: [AI, Agents, LLM]
+title: 'Prompt Engineering with Multi-Agent Systems: Gemini API''s Agentic Workflows
+  and SI Template'
+description: A practical guide to prompt engineering using Google Gemini API's multi-agent
+  workflows and Structured Input (SI) templates
+categories:
+- AI Agents & Multi-Agent Systems
+- LLM & Language Models
 tags:
-  [
-    multi-agent,
-    prompt-engineering,
-    gemini-api,
-    agentic-workflows,
-    structured-input,
-    si-template,
-    production-ai,
-    game-ai
-  ]
+- multi-agent
+- prompt-engineering
+- gemini-api
+- agentic-workflows
+- structured-input
 date: 2025-11-21 15:00:00 +0800
 mermaid: true
 ---
-
 ## 🤔 Curiosity: Can We Do Prompt Engineering with Multi-Agent Systems?
 
 Over 8 years of building AI systems in game development, one of the biggest challenges has been **designing effective prompts that perform complex tasks**. A single prompt struggles to simultaneously handle NPC dialogue generation, game balance analysis, bug detection, and player behavior prediction.

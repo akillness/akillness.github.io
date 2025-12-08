@@ -1,19 +1,15 @@
 ---
-title: 𝐖𝐡𝐚𝐭 𝐬𝐤𝐢𝐥𝐥𝐬 𝐲𝐨𝐮 𝐧𝐞𝐞𝐝 𝐭𝐨 𝐰𝐨𝐫𝐤 𝐢𝐧 𝐂𝐥𝐨𝐮𝐝 𝐍𝐚𝐭𝐢𝐯𝐞 𝐞𝐜𝐨𝐬𝐲𝐬𝐭𝐞𝐦 ❓ 🤔 
+title: 𝐖𝐡𝐚𝐭 𝐬𝐤𝐢𝐥𝐥𝐬 𝐲𝐨𝐮 𝐧𝐞𝐞𝐝 𝐭𝐨 𝐰𝐨𝐫𝐤 𝐢𝐧 𝐂𝐥𝐨𝐮𝐝 𝐍𝐚𝐭𝐢𝐯𝐞 𝐞𝐜𝐨𝐬𝐲𝐬𝐭𝐞𝐦 ❓ 🤔
 description: ClounNative, Ecosystem
-categories: [Study, CloudNative]
-tags: [ClounNative, Ecosystem]
-# author: foDev_jeong
+categories:
+- Tutorials & Learning
+tags:
+- clounnative
+- ecosystem
+- tutorial
+- learning
 date: 2024-07-01 21:10:00 +0800
-# pin: true
-# math: true
-# mermaid: true
-# image:
-#   path: /assets/img/cover/programming.jpeg
-#   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-#   alt: [2024 programming curriculum by honglab]
 ---
-
 To learn any complex technology, it is always essential to build the root foundation. 
 Here is a breakdown of the technology & tools to invest while working or transitioning to **CloudNative**
 
