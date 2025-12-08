@@ -14,6 +14,8 @@ Ph.D. Candidate in Game Engineering @ Hongik University
 8 Years Shipping AI-Powered Games @ NC SOFT & COM2US
 ```
 
+![Overview](/assets/img/cover.jpg){: .light .shadow .rounded-10 }
+
 ---
 
 ### Curiosity → Retrieve → Innovation
