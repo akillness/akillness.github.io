@@ -42,6 +42,7 @@
     document.querySelectorAll('pre>code.language-mermaid').forEach((elem) => {
       const svgCode = elem.textContent;
       const backup = elem.parentElement;
+      if (backup.classList.contains('unloaded')) return;
       backup.classList.add('unloaded');
       /* create mermaid node */
       let mermaid = document.createElement('pre');
