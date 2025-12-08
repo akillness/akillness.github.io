@@ -20,8 +20,7 @@
 
 /* Grid pattern background */
 @mixin grid-pattern($color: #000, $size: 20px, $opacity: 0.1) {
-  background-image: 
-    linear-gradient($color 1px, transparent 1px),
+  background-image: linear-gradient($color 1px, transparent 1px),
     linear-gradient(90deg, $color 1px, transparent 1px);
   background-size: $size $size;
   opacity: $opacity;
@@ -44,12 +43,12 @@
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.1s ease;
-  
+
   &:hover {
     background-color: darken($bg-color, 5%);
     transform: translateY(-1px);
   }
-  
+
   &:active {
     transform: translateY(1px);
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -61,7 +60,7 @@
   @include pixel-border($border-color, 2px);
   background-color: $bg-color;
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
-  
+
   &:hover {
     transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.2);
@@ -71,8 +70,13 @@
 
 /* Blinking animation for game elements */
 @keyframes pixel-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 %pixel-blink {
@@ -81,9 +85,15 @@
 
 /* Pixel hover effect */
 @keyframes pixel-hover {
-  0% { transform: translate(0, 0); }
-  50% { transform: translate(-1px, -1px); }
-  100% { transform: translate(0, 0); }
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-1px, -1px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 %pixel-hover-effect {
@@ -94,21 +104,25 @@
 
 /* Game button press effect */
 @keyframes button-press {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(2px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 /* Pixel text shadow */
 @mixin pixel-text-shadow($color: #000, $offset: 2px) {
   // Use CSS variables directly instead of SCSS darken function
-  text-shadow: 
-    $offset $offset 0 $color;
-  
+  text-shadow: $offset $offset 0 $color;
+
   // For CSS variables, use a lighter approach
   @if type-of($color) == 'color' {
-    text-shadow: 
-      $offset $offset 0 $color,
+    text-shadow: $offset $offset 0 $color,
       ($offset * 2) ($offset * 2) 0 darken($color, 10%);
   } @else {
     // For CSS variables, just use single shadow
@@ -116,30 +130,30 @@
   }
 }
 
-
 /* --- 3D Voxel / Dot Game Heroes Style --- */
 
 /* Voxel Block Effect (3D Shadow) */
 @mixin voxel-block($depth: 4px, $color: #000, $bg: #fff) {
   background-color: $bg;
   border: 4px solid $color;
-  
-  $shadow-color: $color;
+
   @if type-of($color) == 'color' {
-    $shadow-color: darken($color, 10%);
+    box-shadow: 4px 4px 0 darken($color, 10%), 8px 8px 0 rgba(0, 0, 0, 0.2);
+  } @else {
+    box-shadow: 4px 4px 0 $color, 8px 8px 0 rgba(0, 0, 0, 0.2);
   }
 
-  box-shadow: 
-    4px 4px 0 $shadow-color,
-    8px 8px 0 rgba(0,0,0,0.2);
   position: relative;
   transition: all 0.1s ease-out;
 
   &:active {
     transform: translate(4px, 4px);
-    box-shadow: 
-      0 0 0 $shadow-color,
-      4px 4px 0 rgba(0,0,0,0.2);
+
+    @if type-of($color) == 'color' {
+      box-shadow: 0 0 0 darken($color, 10%), 4px 4px 0 rgba(0, 0, 0, 0.2);
+    } @else {
+      box-shadow: 0 0 0 $color, 4px 4px 0 rgba(0, 0, 0, 0.2);
+    }
   }
 }
 
@@ -147,27 +161,35 @@
 @mixin voxel-text($offset: 3px, $color: #000, $bg: #fff) {
   color: $bg;
   -webkit-text-stroke: 1px $color;
-  text-shadow: 
-    $offset $offset 0 $color;
+  text-shadow: $offset $offset 0 $color;
   font-weight: 800;
 }
 
 /* Highlight Pulse Animation for Special Posts */
 @keyframes voxel-pulse {
-  0% { box-shadow: 4px 4px 0 #FF6B6B, 0 0 10px #FF6B6B; border-color: #FF6B6B; }
-  50% { box-shadow: 4px 4px 0 #FF00FF, 0 0 20px #FF00FF; border-color: #FF00FF; }
-  100% { box-shadow: 4px 4px 0 #FF6B6B, 0 0 10px #FF6B6B; border-color: #FF6B6B; }
+  0% {
+    box-shadow: 4px 4px 0 #ff6b6b, 0 0 10px #ff6b6b;
+    border-color: #ff6b6b;
+  }
+  50% {
+    box-shadow: 4px 4px 0 #ff00ff, 0 0 20px #ff00ff;
+    border-color: #ff00ff;
+  }
+  100% {
+    box-shadow: 4px 4px 0 #ff6b6b, 0 0 10px #ff6b6b;
+    border-color: #ff6b6b;
+  }
 }
 
 @mixin voxel-highlight {
   animation: voxel-pulse 2s infinite;
-  
+
   &::after {
-    content: "★ SPECIAL";
+    content: '★ SPECIAL';
     position: absolute;
     top: -15px;
     right: -10px;
-    background: #FF00FF;
+    background: #ff00ff;
     color: white;
     font-size: 0.7rem;
     padding: 2px 6px;
