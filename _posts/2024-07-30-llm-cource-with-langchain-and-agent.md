@@ -5,7 +5,7 @@ categories: [LLM, Course]
 tags: [LLM, Course]
 # author: foDev_jeong
 date: 2024-07-30 13:00:00 +0800
-pin: false
+# pin: false
 # math: true
 mermaid: true
 # image:
