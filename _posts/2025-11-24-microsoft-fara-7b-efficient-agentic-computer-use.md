@@ -248,7 +248,7 @@ async def run_game_tests():
         print(f"Test: {scenario}")
         print(f"Result: {'PASSED' if result['passed'] else 'FAILED'}")
 ```
-{% endraw %}
+
 
 ### Use Case 2: Multi-Agent Game Development Workflow
 
