@@ -313,9 +313,27 @@ sup {
   }
 }
 
-/* --- Begin of Markdown table style --- */
 
-/* it will be created by Liquid */
+@keyframes floating {
+  0% { transform: translateZ(0) translateY(0px); }
+  50% { transform: translateZ(0) translateY(-6px); }
+  100% { transform: translateZ(0) translateY(0px); }
+}
+
+@keyframes sway {
+  0% { transform: translateZ(0) translateX(0px); }
+  50% { transform: translateZ(0) translateX(-6px); }
+  100% { transform: translateZ(0) translateX(0px); }
+}
+
+@keyframes speech-cycle {
+  0% { content: "..."; }
+  25% { content: "?"; }
+  50% { content: "!"; }
+  75% { content: "@#\$"; }
+  100% { content: "..."; }
+}
+
 .table-wrapper {
   overflow-x: auto;
   margin-bottom: 1.5rem;
@@ -828,8 +846,6 @@ $btn-mb: 0.5rem;
       color: var(--sidebar-active-color);
     }
   }
-
-
   a {
     @extend %sidebar-links;
   }
@@ -841,7 +857,8 @@ $btn-mb: 0.5rem;
     overflow: hidden;
     @include pixel-border(var(--avatar-border-color), 3px);
     transform: translateZ(0); /* fixed the zoom in Safari */
-
+    animation: sway 3s ease-in-out infinite;
+    
     img {
       @extend %pixel-image;
       transition: transform 0.2s;
@@ -850,7 +867,70 @@ $btn-mb: 0.5rem;
         transform: scale(1.1);
       }
     }
+
+    &:hover {
+      animation-play-state: paused;
+      border-color: var(--sidebar-active-color) !important;
+      box-shadow: 0 0 15px var(--sidebar-active-color);
+    }
   }
+
+  /* Speech Bubble Styles */
+  .speech-bubble {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    background: #fff;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: 'Press Start 2P', monospace; /* Pixel font */
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 100;
+    opacity: 1;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    box-shadow: 4px 4px 0px #000;
+    border: 2px solid #000;
+    animation: floating 3s ease-in-out infinite;
+
+    &::after {
+      content: "...";
+      animation: speech-cycle 4s infinite steps(1);
+    }
+    
+    &::before {
+      content: "";
+      position: absolute;
+      top: -6px; /* Arrow pointing up now? Or keep bottom? Moving bubble down implies arrow is still at bottom or top? Let's check logic. */
+      /* If top is 50px, it's below avatar top. Let's keep arrow at top of bubble pointing to avatar? No, if it's NEXT to avatar. */
+      /* Let's keep typical structure. If strictly moving Y down. */
+      /* Original top: -10px. Now 50px. */
+      
+      bottom: auto; /* Clear bottom if needed */
+      top: -6px; /* Arrow at top pointing up if it's below something? No, it's relative to bubble. */
+      /* Wait, if I move bubble down, where is it relative to avatar face? */
+      /* Avatar is 7rem (~112px). */
+      /* Top 50px is roughly middle-bottom. */
+      /* Let's keep arrow as is for now, or ensure it points to avatar. */
+      /* Actually, let's keep arrow at bottom if it's "speaking". */
+      /* Wait, speech bubbles usually go UP from mouth. If I move it DOWN, is it a thought bubble? */
+      /* User asked to "move Y position down". */
+      
+      bottom: -6px;
+      left: 10px;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #000;
+    }
+  }
+
+
+
+
 
   .profile-wrapper {
     @include mt-mb(2.5rem);
@@ -1678,4 +1758,5 @@ code.highlighter-rouge {
 .highlight pre {
   font-size: 1.25rem !important; /* ~20px */
   line-height: 2rem !important; /* Comfortable line height */
+
 }
