@@ -14,9 +14,6 @@ tags:
   ]
 date: 2025-12-05 10:00:00 +0800
 mermaid: true
-image:
-  path: /assets/img/llm/rust-python-ai-systems.png
-  alt: "Combining Rust and Python for High-Performance AI Systems"
 ---
 
 ## 🤔 Curiosity: Can We Have Both Speed and Productivity in AI Systems?
