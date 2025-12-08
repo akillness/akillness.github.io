@@ -2,7 +2,7 @@
 title: "WorldLabs Marble - The First Commercial World Model Ushers in Spatial Intelligence Era"
 description: "Fei-Fei Li's WorldLabs launches Marble, the world's first commercial World Model. Deep dive into spatial intelligence, 3D world generation, and how this technology transforms gaming, VFX, VR, and robotics"
 categories: [AI, 3D]
-tags: [world-model, spatial-intelligence, fei-fei-li, worldlabs, marble, 3d-generation, ai-agents]
+tags: [world-model, spatial-intelligence, fei-fei-li, worldlabs, marble, 3d-generation, ai-Agents]
 date: 2025-11-15 03:00:00 +0800
 mermaid: true
 ---

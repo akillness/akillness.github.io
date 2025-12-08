@@ -2,7 +2,7 @@
 title: "Kubernetes Ecosystem Shakeup: Ingress NGINX Retirement & Helm 4.0 Revolution"
 description: "Two major updates are reshaping the Kubernetes landscape: Ingress NGINX retirement signals Gateway API as the new standard, while Helm 4.0 introduces WASM plugins, Server-Side Apply, and content-based caching"
 categories: [Infrastructure, Kubernetes]
-tags: [kubernetes, ingress-nginx, gateway-api, helm-4, infrastructure, devops, wasm, server-side-apply]
+tags: [Kubernetes, ingress-nginx, gateway-api, helm-4, infrastructure, DevOps, wasm, server-side-apply]
 date: 2025-11-15 03:00:00 +0800
 mermaid: true
 ---

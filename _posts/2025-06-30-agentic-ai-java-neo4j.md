@@ -2,7 +2,7 @@
 title: "Agentic AI with Java and Neo4j - Building Graph-Native AI Agents"
 description: "Exploring how to build AI agents that can autonomously navigate and query graph databases using Java, bridging the gap between traditional GraphRAG and agentic AI"
 categories: [AI, Agents]
-tags: [agentic-ai, java, neo4j, graphrag, llm-agents, graph-database]
+tags: [agentic-ai, java, neo4j, graphRAG, LLM-Agents, graph-database]
 date: 2025-06-30 03:00:00 +0800
 mermaid: true
 ---

@@ -2,7 +2,7 @@
 title: Agents framework for LLM + AgentGen looks like a nice framework
 description: Agent, Transformer
 categories: [LLM, Agents]
-tags: [Agents, Huggingface]
+tags: [Agents, HuggingFace]
 # author: foDev_jeong
 date: 2024-08-14 11:20:00 +0800
 mermaid: true

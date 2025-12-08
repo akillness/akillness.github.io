@@ -2,7 +2,7 @@
 title: "Writing Blogs with Multi-Agent Systems - A Production Framework for AI-Powered Content Creation"
 description: "Exploring how multi-agent systems can revolutionize blog writing workflows, featuring KTransformers for efficient LLM inference and heterogeneous computing"
 categories: [AI, Multi-Agent, LLM]
-tags: [multi-agent, blog-writing, ktransformers, llm-inference, content-generation, production-ml]
+tags: [Multi-Agent, blog-writing, kTransformers, LLM-inference, content-generation, production-ml]
 date: 2025-12-01 10:00:00 +0800
 mermaid: true
 image:

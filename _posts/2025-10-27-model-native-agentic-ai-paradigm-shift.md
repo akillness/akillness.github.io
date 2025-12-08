@@ -2,7 +2,7 @@
 title: "Model-Native Agentic AI: The Paradigm Shift from Pipelines to Learned Intelligence"
 description: "A comprehensive survey of the evolution from Pipeline-based to Model-native Agentic AI. Explore how planning, tool use, and memory capabilities are being internalized within models through reinforcement learning, marking a fundamental shift in how we build intelligent agents."
 categories: [AI, Research]
-tags: [agentic-ai, model-native, reinforcement-learning, llm, planning, tool-use, memory, survey, paradigm-shift]
+tags: [agentic-ai, model-native, reinforcement-learning, LLM, planning, tool-use, memory, Survey, paradigm-shift]
 date: 2025-10-27 03:00:00 +0800
 mermaid: true
 ---

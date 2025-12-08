@@ -2,7 +2,7 @@
 title: Hugging Face x Langchain
 description: HuggingFace, Langchaing
 categories: [LLM, Cookbook]
-tags: [HuggingFace, Langchain]
+tags: [HuggingFace, LangChain]
 # author: foDev_jeong
 date: 2024-05-16 16:20:00 +0800
 mermaid: true

@@ -2,7 +2,7 @@
 title: "A User's Guide to FlexAttention in FlashAttention CuTe DSL"
 description: "Learn how to use FlexAttention in FlashAttention 3 CuTe DSL to implement various attention variants like causal, sliding window, ALiBi, and more. This guide covers score modification, mask modification, and block sparsity optimizations."
 categories: [AI, Technical]
-tags: [flash-attention, flexattention, cute-dsl, attention-mechanisms, optimization, pytorch, gpu, performance]
+tags: [flash-attention, flexattention, cute-dsl, attention-mechanisms, optimization, PyTorch, gpu, performance]
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 math: true

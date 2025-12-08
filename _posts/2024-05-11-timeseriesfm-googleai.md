@@ -2,7 +2,7 @@
 title: The weights of our Time Series Foundation Model (TimesFM) on Hugging Face
 description: FoundationModel, Huggingface
 categories: [Script, FoundationModel]
-tags: [Study, Transformer, Huggingface]
+tags: [Study, Transformer, HuggingFace]
 # author: Google AI
 date: 2024-05-10 15:41:00 +0800
 # mermaid: true

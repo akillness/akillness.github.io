@@ -2,7 +2,7 @@
 title: Beginner-friendly 101 guide on LLM agents
 description: LLM, LLM agents
 categories: [Script, Agents]
-tags: [LLM, agents, Generative AI]
+tags: [LLM, Agents, Generative AI]
 # author: foDev_jeong
 date: 2024-04-24 19:57:00 +0800
 mermaid: true

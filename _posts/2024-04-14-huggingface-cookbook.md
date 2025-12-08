@@ -2,7 +2,7 @@
 title: Little know gem the Open-source Cookbook
 description: Cookbook, Huggingface
 categories: [LLM, Cookbook]
-tags: [Huggingface, Cookbook]
+tags: [HuggingFace, Cookbook]
 # author: foDev_jeong
 date: 2024-04-17 15:10:00 +0800
 # pin: true

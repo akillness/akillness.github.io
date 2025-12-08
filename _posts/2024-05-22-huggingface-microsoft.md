@@ -2,7 +2,7 @@
 title: Hugging Face x Microsoft
 description: Graph, Analytics
 categories: [LLM, Cookbook]
-tags: [Huggingface, Microsoft]
+tags: [HuggingFace, Microsoft]
 # author: foDev_jeong
 date: 2024-05-22 15:22:00 +0800
 mermaid: true

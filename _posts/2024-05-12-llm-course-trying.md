@@ -2,7 +2,7 @@
 title: LLM Course - Let's start to make Simple LLM!
 description: LLM, Streamlit, Codespaces
 categories: [LLM, UseCase]
-tags: [Streamlit, LLM, Pytorch]
+tags: [Streamlit, LLM, PyTorch]
 # author: foDev_jeong
 date: 2024-05-12 23:57:00 +0800
 # pin: true

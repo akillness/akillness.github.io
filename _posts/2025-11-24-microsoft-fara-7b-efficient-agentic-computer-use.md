@@ -171,10 +171,9 @@ class GameTestingAgent:
         Each action should be precise and verifiable.
         
         Format your response as JSON:
-        {% raw %}
-        {{
+        {{ "{{" }}
             "actions": [
-                {{
+                {{ "{{" }}
                     "type": "click|type|navigate|wait",
                     "target": "element identifier",
                     "value": "action value if needed",
@@ -183,7 +182,6 @@ class GameTestingAgent:
             ],
             "verification": "how to verify the test passed"
         }}
-        {% endraw %}
         """
         
         # Use FARA 7B to generate test actions
