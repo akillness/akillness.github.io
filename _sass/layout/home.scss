@@ -7,15 +7,16 @@
 
   .card-wrapper {
     position: relative;
+    overflow: visible;
 
     .pin-marker {
       position: absolute;
-      top: -12px;
-      left: -12px;
+      top: 0;
+      left: 0;
       color: #e74c3c;
       font-size: 1.5rem;
       transform: rotate(-45deg);
-      z-index: 20;
+      z-index: 99; // Ensure it's on top of everything
       filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.4));
       pointer-events: none;
 

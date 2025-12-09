@@ -2,10 +2,9 @@
 layout: default
 refactor: true
 ---
-
 {% include lang.html %}
 
-{% assign pinned = site.posts | where: 'pin', 'true' %}
+{% assign pinned = site.posts | where_exp: 'item', 'item.pin == true' %}
 {% assign default = site.posts | where_exp: 'item', 'item.pin != true and item.hidden != true' %}
 
 {% assign posts = '' | split: '' %}
@@ -43,23 +42,23 @@ refactor: true
 <div id="post-list" class="flex-grow-1 px-xl-1">
   {% for post in posts %}
     <article class="card-wrapper card">
-      {% assign preview_class = "post-preview row g-0 flex-md-row-reverse" %}
+      {% assign preview_class = 'post-preview row g-0 flex-md-row-reverse' %}
       {% assign current_unix = site.time | date: '%s' %}
       {% assign post_unix = post.date | date: '%s' %}
       {% assign diff_seconds = current_unix | minus: post_unix %}
       {% assign diff_days = diff_seconds | divided_by: 86400 %}
-      
+
       {% if diff_days < 7 %}
-        {% assign preview_class = preview_class | append: " post-new" %}
+        {% assign preview_class = preview_class | append: ' post-new' %}
+      {% endif %}
+
+      {% if post.pin %}
+        <div class="pin-marker">
+          <i class="fas fa-thumbtack"></i>
+        </div>
       {% endif %}
 
       <a href="{{ post.url | relative_url }}" class="{{ preview_class }}">
-        {% if post.pin %}
-          <div class="pin-marker">
-            <i class="fas fa-thumbtack"></i>
-          </div>
-        {% endif %}
-
         {% assign card_body_col = '12' %}
 
         {% if post.image %}
@@ -125,7 +124,7 @@ refactor: true
             <!-- Major Tags (Top 2) -->
             {% if post.tags.size > 0 %}
               <div class="major-tags d-none d-md-flex">
-                {% for tag in post.tags limit:2 %}
+                {% for tag in post.tags limit: 2 %}
                   <span class="major-tag">#{{ tag }}</span>
                 {% endfor %}
               </div>
