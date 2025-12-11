@@ -9,6 +9,11 @@ on:
       - README.md
       - LICENSE
 
+  pull_request:
+    branches:
+      - main
+      - master
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -79,6 +84,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    if: github.event_name != 'pull_request'
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
