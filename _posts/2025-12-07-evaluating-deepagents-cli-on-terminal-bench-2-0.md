@@ -15,7 +15,7 @@ date: 2025-12-07 10:00:00 +0800
 mermaid: true
 math: false
 image:
-  path: /assets/img/blog/deepagents-terminal-bench-2-0.png
+  path: /assets/img/blog/deepagents-terminal-bench-2-0-header.png
   alt: "Evaluating DeepAgents CLI on Terminal Bench 2.0"
 ---
 
@@ -30,7 +30,7 @@ Most agent frameworks show impressive demos, but when you dig deeper, the evalua
 
 **The Core Question:** DeepAgents CLI is a terminal-powered coding agent built on the Deep Agents SDK. But how do we evaluate it systematically, and what does its performance tell us about the state of coding agents today?
 
-![Evaluating DeepAgents CLI on Terminal Bench 2.0](/assets/img/blog/deepagents-terminal-bench-2-0.png){: .light .w-100 .shadow .rounded-10 w='760' h='400' }
+![Evaluating DeepAgents CLI on Terminal Bench 2.0](/assets/img/blog/deepagents-terminal-bench-2-0-header.png){: .light .w-100 .shadow .rounded-10 w='760' h='435' }
 
 ---
 
