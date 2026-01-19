@@ -147,7 +147,7 @@ kramdown:
     css_class: highlight
     # default_lang: console
     span:
-      line_numbers: true
+      line_numbers: false  # 인라인 코드에는 line numbers 비활성화
     block:
       line_numbers: true
       start_line: 1
