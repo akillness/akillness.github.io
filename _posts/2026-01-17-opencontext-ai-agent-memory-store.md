@@ -59,18 +59,18 @@ The tool provides:
 
 ```mermaid
 graph TB
-    subgraph "OpenContext Multi-Agent System"
-        A[User Context] --> B[OpenContext Store<br/>~/.opencontext/contexts]
+    subgraph OpenContext["OpenContext Multi-Agent System"]
+        A[User Context] --> B[OpenContext Store]
 
-        B --> C[Cursor Agent<br/>Slash Commands]
-        B --> D[Claude Code Agent<br/>Skills + Commands]
-        B --> E[Codex Agent<br/>Skills]
+        B --> C[Cursor Agent]
+        B --> D[Claude Code Agent]
+        B --> E[Codex Agent]
         B --> F[Custom MCP Agents]
 
-        C --> C1[/opencontext-context]
-        C --> C2[/opencontext-search]
-        C --> C3[/opencontext-create]
-        C --> C4[/opencontext-iterate]
+        C --> C1[opencontext-context]
+        C --> C2[opencontext-search]
+        C --> C3[opencontext-create]
+        C --> C4[opencontext-iterate]
 
         D --> D1[Context Loading]
         D --> D2[Knowledge Search]
@@ -152,19 +152,19 @@ oc init
 
 ```mermaid
 flowchart LR
-    subgraph "Before Work (1 min)"
-        A1["/opencontext-context"]
-        A2["Load project background + pitfalls"]
+    subgraph BeforeWork["Before Work"]
+        A1[opencontext-context]
+        A2[Load project background]
     end
 
-    subgraph "During Work"
-        B1["/opencontext-search"]
-        B2["Search existing conclusions"]
+    subgraph DuringWork["During Work"]
+        B1[opencontext-search]
+        B2[Search existing conclusions]
     end
 
-    subgraph "After Work (2 min)"
-        C1["/opencontext-iterate"]
-        C2["Record decisions & next steps"]
+    subgraph AfterWork["After Work"]
+        C1[opencontext-iterate]
+        C2[Record decisions]
     end
 
     A1 --> A2
