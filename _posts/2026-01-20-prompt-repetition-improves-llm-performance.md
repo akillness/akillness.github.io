@@ -14,7 +14,7 @@ date: 2026-01-20 10:00:00 +0900
 mermaid: true
 math: true
 image:
-  path: /assets/img/llm/prompt-repetition-benchmark.png
+  path: /assets/img/research/prompt-repetition/figure1-accuracy-comparison.png
   alt: "Prompt repetition vs baseline accuracy across popular LLMs showing 47 wins out of 70 tests"
 ---
 
