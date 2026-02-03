@@ -11,9 +11,14 @@ image:
   alt: "nanobot architecture overview"
 ---
 
-![nanobot search demo](/assets/img/2026-02-02/nanobot_search.gif)
-
-![nanobot code demo](/assets/img/2026-02-02/nanobot_code.gif)
+<div style="display:flex; gap:12px; flex-wrap:wrap;">
+  <div style="flex:1; min-width:280px;">
+    <img src="/assets/img/2026-02-02/nanobot_search.gif" alt="nanobot search demo" />
+  </div>
+  <div style="flex:1; min-width:280px;">
+    <img src="/assets/img/2026-02-02/nanobot_code.gif" alt="nanobot code demo" />
+  </div>
+</div>
 
 ## 🤔 Curiosity: Do we really need 400k lines to build an agent?
 
