@@ -6,7 +6,16 @@ tags: [AgenticAI, OpenSource, Tooling, Workflow, Minimalism]
 date: 2026-02-02 22:57:00 +0900
 mermaid: true
 math: false
+image:
+  path: /assets/img/2026-02-02/nanobot_arch.png
+  alt: "nanobot architecture overview"
 ---
+
+![nanobot architecture](/assets/img/2026-02-02/nanobot_arch.png)
+
+![nanobot search demo](/assets/img/2026-02-02/nanobot_search.gif)
+
+![nanobot code demo](/assets/img/2026-02-02/nanobot_code.gif)
 
 ## 🤔 Curiosity: Do we really need 400k lines to build an agent?
 
