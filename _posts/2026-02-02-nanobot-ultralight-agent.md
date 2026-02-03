@@ -11,8 +11,6 @@ image:
   alt: "nanobot architecture overview"
 ---
 
-![nanobot architecture](/assets/img/2026-02-02/nanobot_arch.png)
-
 ![nanobot search demo](/assets/img/2026-02-02/nanobot_search.gif)
 
 ![nanobot code demo](/assets/img/2026-02-02/nanobot_code.gif)
