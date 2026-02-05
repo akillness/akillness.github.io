@@ -6,9 +6,6 @@ tags: [Claude, Skills, Workflow, Tooling, MCP]
 date: 2026-02-04 18:00:00 +0900
 mermaid: true
 math: false
-image:
-  path: /assets/img/2026-02-04-qwen3-coder-next/benchmarks.png
-  alt: "Claude skills workflow"
 ---
 
 ## 🤔 Curiosity: What if “skills” are the real unit of agent scale?
