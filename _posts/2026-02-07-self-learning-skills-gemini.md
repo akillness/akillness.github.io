@@ -67,7 +67,7 @@ Here is the production‑grade loop I recommend.
 
 ```mermaid
 graph TB
-  A[/learn <topic>] --> B[Web Search: authoritative sources]
+  A[/learn topic] --> B[Web Search: authoritative sources]
   B --> C[Browser Fetch + Extract]
   C --> D[Normalize + Summarize]
   D --> E[Generate SKILL.md + references]
