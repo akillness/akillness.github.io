@@ -67,12 +67,12 @@ Here is the production‑grade loop I recommend.
 
 ```mermaid
 graph TB
-  A[/learn topic] --> B[Web Search: authoritative sources]
-  B --> C[Browser Fetch + Extract]
+  A[learn topic] --> B[Web Search]
+  B --> C[Browser Fetch]
   C --> D[Normalize + Summarize]
-  D --> E[Generate SKILL.md + references]
-  E --> F[Install Skill to /skills]
-  F --> G[Run acceptance test prompt]
+  D --> E[Generate SKILL MD + references]
+  E --> F[Install Skill]
+  F --> G[Run acceptance test]
   G --> A
 ```
 
