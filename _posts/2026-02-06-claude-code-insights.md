@@ -71,7 +71,7 @@ Here’s a minimal loop that makes /insights useful instead of anxiety‑inducin
 
 ```mermaid
 graph LR
-  A[/insights Report] --> B[Self‑Reflection]
+  A[Insights Report] --> B[Self‑Reflection]
   B --> C[Actionable Change]
   C --> D[Workflow Update]
   D --> A
