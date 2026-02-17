@@ -78,11 +78,11 @@ Here’s a pragmatic retrieval stack that actually fits most game tools:
 
 ```mermaid
 flowchart LR
-  A[Input Query] --> B[Dense Retrieval (Zvec)]
-  A --> C[Sparse Retrieval (Zvec)]
-  B --> D[Merge Top-K]
+  A[Input Query] --> B[Dense Retrieval]
+  A --> C[Sparse Retrieval]
+  B --> D[Merge TopK]
   C --> D
-  D --> E[Cross-Encoder Rerank]
+  D --> E[Cross Encoder Rerank]
   E --> F[LLM Generation]
 ```
 

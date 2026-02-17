@@ -80,11 +80,11 @@ And at query time, you can pick modes depending on the question:
 ```mermaid
 flowchart LR
   A[Document] --> B[Chunking]
-  B --> C[LLM Entity/Relation Extraction]
+  B --> C[LLM Entity Relation Extraction]
   C --> D[Gleaning Pass]
   D --> E[Entity Normalization]
-  E --> F[Graph Store (AGE)]
-  E --> G[Vector Store (pgvector)]
+  E --> F[Graph Store AGE]
+  E --> G[Vector Store pgvector]
   H[User Query] --> I{Query Mode}
   I --> J[Graph Traversal]
   I --> K[Vector Search]
