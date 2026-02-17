@@ -1,4 +1,6 @@
 name: "Build and Deploy"
+
+enablement: true
 on:
   push:
     branches:
