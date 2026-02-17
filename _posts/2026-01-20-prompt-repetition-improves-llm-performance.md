@@ -1,15 +1,8 @@
 ---
 title: "Prompt Repetition: A Simple Trick That Improves LLM Accuracy by 67% (With Zero Latency Cost)"
-description: "Google Research reveals that simply repeating your prompt dramatically improves LLM performance without increasing latency or output length - a game-changer for production AI systems"
-  [
-    prompt-engineering,
-    llm-optimization,
-    transformer-attention,
-    production-ml,
-    google-research
-  ]
+description: "Google Research reveals that simply repeating your prompt dramatically improves LLM performance without increasing latency or output length - a game-changer for production AI systems."
 categories:
-  - LLM/Model   - LLM/모델·논문 Papers
+  - LLM/Model & Papers
 tags:
   - LLM
   - Model
@@ -148,8 +141,8 @@ _Figure 3: Comparison of accuracy, average and median response length, as well a
 ```mermaid
 sequenceDiagram
     participant User
-    participant Prefill as Prefill Stage (Parallel)
-    participant Generate as Generation Stage (Sequential)
+    participant Prefill as "Prefill Stage (Parallel)"
+    participant Generate as "Generation Stage (Sequential)"
 
     User->>Prefill: Send <QUERY><QUERY>
     Note over Prefill: Process 2x tokens in parallel
