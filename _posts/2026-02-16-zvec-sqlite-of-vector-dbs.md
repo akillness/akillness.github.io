@@ -80,9 +80,9 @@ Here’s a pragmatic retrieval stack that actually fits most game tools:
 flowchart LR
   A[Input Query] --> B[Dense Retrieval (Zvec)]
   A --> C[Sparse Retrieval (Zvec)]
-  B --> D[Merge Top‑K]
+  B --> D[Merge Top-K]
   C --> D
-  D --> E[Cross‑Encoder Rerank]
+  D --> E[Cross-Encoder Rerank]
   E --> F[LLM Generation]
 ```
 
