@@ -2,12 +2,11 @@
 title: 👚👚 ViViD Diffusion Virtual Try-ON 👚👚
 description: Paper, Generative AI, ViViD
 categories:
-- Research & Papers
+- 멀티모달/컴퓨터비전
 tags:
-- generative-ai
-- vivid
-- paper-review
-- research
+- 멀티모달
+- 비전
+- 생성모델
 date: 2024-05-23 19:00:00 +0800
 mermaid: true
 ---

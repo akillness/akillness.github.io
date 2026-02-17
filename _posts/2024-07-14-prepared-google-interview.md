@@ -2,11 +2,11 @@
 title: How to prepare for a Google interview?
 escription: Interview, Prepare
 categories:
-- Tutorials & Learning
+- 데이터과학/알고리즘
 tags:
-- tutorial
-- interview
-- learning
+- 데이터과학
+- 알고리즘
+- 분석
 date: 2024-07-14 10:00:00 +0800
 mermaid: true
 ---

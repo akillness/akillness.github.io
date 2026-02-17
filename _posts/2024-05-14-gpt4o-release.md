@@ -2,13 +2,11 @@
 title: GPT4o Release !!
 description: GPT4o, Release, News
 categories:
-- Development & Tools
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- gpt4o
-- llm
-- development-tools
-- tools
+- LLM
+- 모델
+- 논문
 date: 2024-05-14 10:00:00 +0800
 mermaid: true
 ---

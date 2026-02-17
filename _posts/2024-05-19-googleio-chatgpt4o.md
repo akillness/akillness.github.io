@@ -2,10 +2,11 @@
 title: 2024 Google I/O vs ChatGPT4o
 description: Google I/O, ChatGPT4o
 categories:
-- Industry & Applications
+- LLM/모델·논문
 tags:
-- google-io-2024
-- chatgpt4o
+- LLM
+- 모델
+- 논문
 date: 2024-05-19 13:00:00 +0800
 ---
 ![ Google vs OpenAI ](/assets/img/news/Google_vs_OpenAI.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }

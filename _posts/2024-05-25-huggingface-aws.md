@@ -2,11 +2,11 @@
 title: Hugging Face x AWS
 description: LLM, Course
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- cookbook
-- llm
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-05-25 00:20:00 +0800
 mermaid: true
 ---

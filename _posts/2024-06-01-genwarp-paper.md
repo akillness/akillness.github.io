@@ -3,11 +3,11 @@ title: Single Image to Novel Views with Semantic-Preserving Generative Warping (
   )
 description: Paper, GenWarp, Single Image
 categories:
-- Research & Papers
+- 리뷰/동향
 tags:
-- ai
-- novel-veiw
-- genwarp
+- 동향
+- 리뷰
+- 케이스
 date: 2024-06-01 11:00:00 +0800
 mermaid: true
 ---

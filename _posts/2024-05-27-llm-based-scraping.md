@@ -2,11 +2,11 @@
 title: ScrapeGraphAI - LLM and Graph Powered Web Scraping Python Library 📚
 description: LLM, Scraping
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- scraping
-- llm
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-05-27 12:13:00 +0800
 mermaid: true
 ---

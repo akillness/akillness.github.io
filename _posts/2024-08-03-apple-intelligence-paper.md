@@ -2,12 +2,11 @@
 title: 🍎 Post-training in the Apple Intelligence paper
 description: LLM, Apple, OnDevice
 categories:
-- LLM & Language Models
-- Industry & Applications
+- 리뷰/동향
 tags:
-- llm
-- apple
-- ondevice
+- 동향
+- 리뷰
+- 케이스
 date: 2024-08-03 22:00:00 +0800
 image:
   path: /assets/img/llm/apple-foundation-models.png

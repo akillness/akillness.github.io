@@ -2,12 +2,11 @@
 title: RAG papers list newest additions
 description: RAG, Newest, Papers
 categories:
-- RAG & Retrieval Systems
-- Development & Tools
+- RAG/검색
 tags:
-- rag
-- llm
-- paper-review
+- RAG
+- 임베딩
+- 검색
 date: 2024-05-12 21:29:00 +0800
 ---
 ## 🎊 My RAG papers list has now been updated with the newest additions, including those from April. It contains over 60 papers, with quick summaries and topic tags.

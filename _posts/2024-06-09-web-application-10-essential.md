@@ -2,10 +2,11 @@
 title: 10 Essential Components of a Production Web Application.
 description: Web, Application
 categories:
-- Industry & Applications
+- 리뷰/동향
 tags:
-- mewebta
-- application-development
+- 동향
+- 리뷰
+- 케이스
 date: 2024-06-09 11:00:00 +0800
 mermaid: true
 ---

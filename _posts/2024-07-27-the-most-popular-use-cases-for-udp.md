@@ -2,12 +2,11 @@
 title: 𝗧𝗼𝗽 𝟰 𝗠𝗼𝘀𝘁 𝗣𝗼𝗽𝘂𝗹𝗮𝗿 𝗨𝘀𝗲 𝗖𝗮𝘀𝗲𝘀 𝗳𝗼𝗿 𝗨𝗗𝗣 by ByteByteGo 💥
 description: Study, UDP
 categories:
-- Tutorials & Learning
+- 리뷰/동향
 tags:
-- udp
-- use-cases
-- tutorial
-- learning
+- 동향
+- 리뷰
+- 케이스
 date: 2024-07-27 10:00:00 +0800
 ---
 ![ Top 4 UDP Use Cases ](/assets/img/blog/top-4-udp-use-case.gif){: .light .shadow .rounded-10 w='1212' h='668' }

@@ -2,13 +2,11 @@
 title: Practical Implementation of Agentic RAG Workflows with Llama-Index and Qdrant
 description: LLM, Llama-Index
 categories:
-- LLM & Language Models
-- AI Agents & Multi-Agent Systems
+- RAG/검색
 tags:
-- implementation
-- llama-index
-- llm
-- language-model
+- RAG
+- 임베딩
+- 검색
 date: 2024-08-05 11:00:00 +0800
 mermaid: true
 ---

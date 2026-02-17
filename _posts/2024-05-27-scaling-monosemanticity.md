@@ -2,11 +2,11 @@
 title: Scaling Monosemanticity by Anthropic (블랙박스 이해하기)
 description: LLM, Scaling
 categories:
-- LLM & Language Models
+- 리뷰/동향
 tags:
-- scaling
-- llm
-- language-model
+- 동향
+- 리뷰
+- 케이스
 date: 2024-05-27 09:13:00 +0800
 ---
 > Origitnal Article : <https://inblog.ai/jasonlee/%EB%B8%94%EB%9E%99%EB%B0%95%EC%8A%A4-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-scaling-monosemanticity-by-anthropic-20662>

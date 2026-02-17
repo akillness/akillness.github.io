@@ -2,12 +2,11 @@
 title: 𝐋𝐋𝐌2𝐕𝐞𝐜 - 𝐓𝐫𝐚𝐧𝐬𝐟𝐨𝐫𝐦 𝐋𝐋𝐌𝐬 𝐢𝐧𝐭𝐨 𝐄𝐦𝐛𝐞𝐝𝐝𝐢𝐧𝐠 𝐌𝐨𝐝𝐞𝐥𝐬
 description: LLM, LLM2Vec
 categories:
-- LLM & Language Models
+- 리뷰/동향
 tags:
-- paper
-- llm2vec
-- llm
-- language-model
+- 동향
+- 리뷰
+- 케이스
 date: 2024-07-29 13:00:00 +0800
 mermaid: true
 ---

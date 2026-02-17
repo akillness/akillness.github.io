@@ -2,12 +2,11 @@
 title: 🤩 𝐀𝐰𝐞𝐬𝐨𝐦𝐞-𝐏𝐫𝐨𝐝𝐮𝐜𝐭𝐢𝐨𝐧-𝐋𝐋𝐌
 description: LLM, Application
 categories:
-- LLM & Language Models
-- Industry & Applications
+- 리뷰/동향
 tags:
-- llm
-- application-development
-- language-model
+- 동향
+- 리뷰
+- 케이스
 date: 2024-08-03 13:00:00 +0800
 mermaid: true
 ---

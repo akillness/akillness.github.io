@@ -2,11 +2,11 @@
 title: 🤗 NLP Course - Summary of Concept to Transformer from NLP
 description: LLM, NLP, Transformer
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- llm
-- nlp
-- transformer
+- LLM
+- 모델
+- 논문
 date: 2024-05-29 00:13:00 +0800
 pin: false
 mermaid: true

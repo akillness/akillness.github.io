@@ -2,12 +2,11 @@
 title: Self-Evolution in LLMs
 description: AGI, Self-Evolution, LLM
 categories:
-- Development & Tools
+- LLM/모델·논문
 tags:
-- agi
-- self-evolution
-- development-tools
-- tools
+- LLM
+- 모델
+- 논문
 date: 2024-05-25 03:23:00 +0800
 mermaid: true
 ---

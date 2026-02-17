@@ -2,11 +2,11 @@
 title: The weights of our Time Series Foundation Model (TimesFM) on Hugging Face
 description: FoundationModel, Huggingface
 categories:
-- Development & Tools
+- LLM/모델·논문
 tags:
-- tutorial
-- transformer
-- huggingface
+- LLM
+- 모델
+- 논문
 date: 2024-05-10 15:41:00 +0800
 ---
 # What's New? ( from [Google AI](https://twitter.com/GoogleAI))

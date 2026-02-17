@@ -2,12 +2,11 @@
 title: Release Chameleon Model
 description: LLM, Chameleon
 categories:
-- Development & Tools
+- LLM/모델·논문
 tags:
-- chameleon
-- llm
-- development-tools
-- tools
+- LLM
+- 모델
+- 논문
 date: 2024-05-25 22:40:00 +0800
 mermaid: true
 image:

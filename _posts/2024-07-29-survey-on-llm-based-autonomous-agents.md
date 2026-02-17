@@ -2,13 +2,11 @@
 title: A Survey on LLM-based Autonomous Agents
 description: LLM, Autonomous Agents
 categories:
-- LLM & Language Models
-- AI Agents & Multi-Agent Systems
+- 에이전트/오케스트레이션
 tags:
-- survey
-- autonomous-agents
-- llm
-- language-model
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2024-07-29 10:00:00 +0800
 ---
 ![ Architecture of LLM Agents ](/assets/img/llm/llm-agent-survey-architecture-1.png){: .light .shadow .rounded-10 w='1212' h='668' }

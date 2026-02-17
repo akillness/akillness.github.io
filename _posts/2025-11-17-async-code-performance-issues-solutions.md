@@ -4,13 +4,11 @@ description: Async code doesn't always mean faster code. Learn why asyncio can a
   slow down your Python applications and discover proven strategies to fix performance
   issues, from sequential awaits to blocking libraries and CPU-bound tasks
 categories:
-- MLOps & Production AI
+- 리뷰/동향
 tags:
-- asyncio
-- python
-- async
-- performance
-- concurrency
+- 동향
+- 리뷰
+- 케이스
 date: 2025-11-17 03:00:00 +0800
 mermaid: true
 image:

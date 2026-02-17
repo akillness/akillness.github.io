@@ -2,12 +2,11 @@
 title: Explore the landscape of Open Source Data Engineering
 description: Study, Datascience
 categories:
-- Data Science & Analytics
-- Tutorials & Learning
+- 데이터과학/알고리즘
 tags:
-- tutorial
-- data-science
-- learning
+- 데이터과학
+- 알고리즘
+- 분석
 date: 2024-08-12 10:00:00 +0800
 mermaid: true
 ---

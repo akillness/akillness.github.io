@@ -2,12 +2,11 @@
 title: Hugging Face x Unsloth
 description: Unsloth, SOTA
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- graph
-- analytics
-- llm
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-05-20 14:10:00 +0800
 mermaid: true
 ---

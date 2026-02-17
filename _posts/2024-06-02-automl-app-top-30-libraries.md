@@ -2,12 +2,11 @@
 title: AutoML Applications, Advantages and Top 30 Libraries 📚
 description: Paper, Libraries, AutoML
 categories:
-- Development & Tools
+- 데이터과학/알고리즘
 tags:
-- libraries
-- automl
-- development-tools
-- tools
+- 데이터과학
+- 알고리즘
+- 분석
 date: 2024-06-02 23:00:00 +0800
 image:
   path: /assets/img/news/AutoML_Top_30_Libraries.jpeg

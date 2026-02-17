@@ -2,10 +2,11 @@
 title: Recommended materials for cracking your next technical interview
 description: Tech Interview, Job
 categories:
-- Industry & Applications
+- 데이터과학/알고리즘
 tags:
-- tech-interview
-- job
+- 데이터과학
+- 알고리즘
+- 분석
 date: 2024-05-25 03:23:00 +0800
 mermaid: true
 ---

@@ -4,14 +4,11 @@ description: Exploring how to build AI agents that can autonomously navigate and
   graph databases using Java, bridging the gap between traditional GraphRAG and agentic
   AI
 categories:
-- AI Agents & Multi-Agent Systems
-- Machine Learning & Deep Learning
+- 에이전트/오케스트레이션
 tags:
-- autonomous-agents
-- java
-- neo4j
-- graphrag
-- graph-database
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2025-06-30 03:00:00 +0800
 mermaid: true
 ---

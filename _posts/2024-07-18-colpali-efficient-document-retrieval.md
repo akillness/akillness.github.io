@@ -2,13 +2,11 @@
 title: Introducing "ColPali, Efficient Document Retrieval with Vision Language Models"
 description: LLM, RAG
 categories:
-- LLM & Language Models
-- RAG & Retrieval Systems
+- RAG/검색
 tags:
-- sota
-- rag
-- llm
-- language-model
+- RAG
+- 임베딩
+- 검색
 date: 2024-07-19 13:30:00 +0800
 mermaid: true
 ---

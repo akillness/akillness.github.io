@@ -2,13 +2,11 @@
 title: Release Mistral-finetune Opensource
 description: LLM, Course
 categories:
-- Development & Tools
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- mistral
-- llm
-- development-tools
-- tools
+- LLM
+- 모델
+- 논문
 date: 2024-05-25 07:23:00 +0800
 mermaid: true
 ---

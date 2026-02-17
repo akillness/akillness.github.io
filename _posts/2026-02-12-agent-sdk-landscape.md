@@ -1,8 +1,12 @@
 ---
 title: "Build Your Own AI Agent with Agent SDKs (2026)"
 description: "A practical map of the agent SDK landscape — what each framework optimizes for, and how to choose the right harness." 
-categories: [AI, Games]
-tags: [Agents, SDK, Tooling, Workflow, Orchestration]
+categories:
+- 에이전트/오케스트레이션
+tags:
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2026-02-12 14:00:00 +0900
 mermaid: true
 math: false

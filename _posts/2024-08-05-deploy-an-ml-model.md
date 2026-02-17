@@ -2,13 +2,11 @@
 title: Deploy an ML model 🧠
 description: LLM, Application
 categories:
-- LLM & Language Models
-- Industry & Applications
+- LLM/모델·논문
 tags:
-- application-development
-- deploy
-- llm
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-08-05 17:00:00 +0800
 mermaid: true
 ---

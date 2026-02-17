@@ -5,14 +5,11 @@ description: 'Deep dive into Andrej Karpathy''s LLM Council: comprehensive analy
   of all files, architecture, implementation details, and the innovative 3-stage peer
   review system'
 categories:
-- AI Agents & Multi-Agent Systems
-- LLM & Language Models
+- 에이전트/오케스트레이션
 tags:
-- llm-council
-- multi-agent
-- karpathy
-- openrouter
-- peer-review
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2025-11-22 15:00:00 +0800
 mermaid: true
 ---

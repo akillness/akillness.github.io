@@ -4,14 +4,11 @@ description: Comprehensive benchmark analysis comparing STORM Parse with Google'
   Gemini File Search API. Technical deep dive into why VLM-based document parsing
   delivers superior RAG performance
 categories:
-- RAG & Retrieval Systems
-- Machine Learning & Deep Learning
+- RAG/검색
 tags:
-- storm-parse
-- google-gemini
-- file-search
-- rag
-- document-parsing
+- RAG
+- 임베딩
+- 검색
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 ---

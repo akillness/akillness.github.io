@@ -2,11 +2,11 @@
 title: 5 techniques to fine-tune LLMs, explained visually!
 description: LLM, PEFT, Visualization
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- llm
-- peft
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-06-10 10:10:00 +0800
 mermaid: true
 ---

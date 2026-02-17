@@ -1,8 +1,6 @@
 ---
 title: "Prompt Repetition: A Simple Trick That Improves LLM Accuracy by 67% (With Zero Latency Cost)"
 description: "Google Research reveals that simply repeating your prompt dramatically improves LLM performance without increasing latency or output length - a game-changer for production AI systems"
-categories: [Research, LLM]
-tags:
   [
     prompt-engineering,
     llm-optimization,
@@ -10,6 +8,12 @@ tags:
     production-ml,
     google-research
   ]
+categories:
+- LLM/모델·논문
+tags:
+- LLM
+- 모델
+- 논문
 date: 2026-01-20 10:00:00 +0900
 mermaid: true
 math: true

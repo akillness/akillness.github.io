@@ -2,12 +2,11 @@
 title: 💡 CRAG (Comprehensive RAG) is a new RAG benchmark dataset
 description: CRAG, LLM
 categories:
-- LLM & Language Models
+- RAG/검색
 tags:
-- rag
-- crag
-- llm
-- language-model
+- RAG
+- 임베딩
+- 검색
 date: 2024-06-22 19:10:00 +0800
 mermaid: true
 ---

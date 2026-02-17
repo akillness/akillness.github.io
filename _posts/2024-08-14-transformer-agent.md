@@ -2,13 +2,11 @@
 title: Agents framework for LLM + AgentGen looks like a nice framework
 description: Agent, Transformer
 categories:
-- LLM & Language Models
-- AI Agents & Multi-Agent Systems
+- 에이전트/오케스트레이션
 tags:
-- agents
-- huggingface
-- llm
-- language-model
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2024-08-14 11:20:00 +0800
 mermaid: true
 ---

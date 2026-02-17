@@ -2,13 +2,11 @@
 title: 𝐀𝐠𝐞𝐧𝐭𝐢𝐜 𝐑𝐀𝐆 ✨ new cookbook
 description: Agentic, RAG, Cookbook
 categories:
-- LLM & Language Models
-- AI Agents & Multi-Agent Systems
+- 리뷰/동향
 tags:
-- agentic
-- rag
-- llm
-- language-model
+- 동향
+- 리뷰
+- 케이스
 date: 2024-07-13 14:00:00 +0800
 mermaid: true
 ---

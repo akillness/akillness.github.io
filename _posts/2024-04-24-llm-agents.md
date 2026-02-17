@@ -2,12 +2,11 @@
 title: Beginner-friendly 101 guide on LLM agents
 description: LLM, LLM agents
 categories:
-- AI Agents & Multi-Agent Systems
-- Development & Tools
+- 에이전트/오케스트레이션
 tags:
-- llm
-- agents
-- generative-ai
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2024-04-24 19:57:00 +0800
 mermaid: true
 image:

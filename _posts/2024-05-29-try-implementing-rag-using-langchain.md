@@ -2,12 +2,11 @@
 title: Try my hands-on tutorial on implementing RAG using LangChain and SingleStore
 description: LLM, Scraping
 categories:
-- RAG & Retrieval Systems
-- Development & Tools
+- RAG/검색
 tags:
-- rag
-- langchain
-- singlestore
+- RAG
+- 임베딩
+- 검색
 date: 2024-05-29 16:13:00 +0800
 ---
 But to build #LLM-powered applications, LLMs are just not enough.

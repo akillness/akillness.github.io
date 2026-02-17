@@ -1,8 +1,12 @@
 ---
 title: "Stop Generating, Start Thinking: The Missing Layer in AI Coding"
 description: "A deep reflection on why code generation without human thinking is risky—and how to build with agents without losing engineering judgment."
-categories: [AI, Games]
-tags: [Agents, Coding, Workflow, Reliability, Culture]
+categories:
+- 에이전트/오케스트레이션
+tags:
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2026-02-10 13:00:00 +0900
 mermaid: true
 math: false

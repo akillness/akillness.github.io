@@ -2,15 +2,11 @@
 title: "Evaluating DeepAgents CLI on Terminal Bench 2.0"
 description: "How DeepAgents CLI performs on Terminal Bench 2.0, achieving ~42.5% accuracy with Claude Sonnet 4.5, and the infrastructure needed for isolated agent evaluation"
 categories:
-  - AI
-  - Agents
+- 에이전트/오케스트레이션
 tags:
-  - deepagents
-  - terminal-bench
-  - agent-evaluation
-  - harbor
-  - coding-agents
-  - langchain
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2025-12-07 10:00:00 +0800
 mermaid: true
 math: false

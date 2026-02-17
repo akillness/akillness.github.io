@@ -4,14 +4,11 @@ description: Depth Anything 3 (DA3) predicts spatially consistent geometry from 
   visual inputs using a single plain transformer and depth-ray representation, achieving
   SOTA performance surpassing VGGT by 35.7% in camera pose accuracy
 categories:
-- Research & Papers
-- Computer Vision & Multimodal
+- 리뷰/동향
 tags:
-- depth-anything-3
-- da3
-- depth-estimation
-- 3d-reconstruction
-- transformer
+- 동향
+- 리뷰
+- 케이스
 date: 2025-11-13 03:00:00 +0800
 mermaid: true
 image:

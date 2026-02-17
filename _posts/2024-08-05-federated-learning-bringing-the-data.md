@@ -2,12 +2,11 @@
 title: Federated Learning, One way to solve for AI having difficulty making
 description: LLM, Federated Learning
 categories:
-- LLM & Language Models
+- 리뷰/동향
 tags:
-- ai
-- federated-learning
-- llm
-- language-model
+- 동향
+- 리뷰
+- 케이스
 date: 2024-08-05 12:00:00 +0800
 mermaid: true
 ---

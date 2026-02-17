@@ -5,14 +5,11 @@ description: A complete implementation guide for reproducing RLHF (Reinforcement
   from Human Feedback) on a single DGX Spark. Learn how to train SFT models, reward
   models, DPO, and GRPO for TL;DR summarization using Qwen2.5 models.
 categories:
-- Machine Learning & Deep Learning
-- Tutorials & Learning
+- 리뷰/동향
 tags:
-- rlhf
-- reinforcement-learning
-- human-feedback
-- dpo
-- grpo
+- 동향
+- 리뷰
+- 케이스
 date: 2025-11-03 03:00:00 +0800
 mermaid: true
 math: true

@@ -2,10 +2,11 @@
 title: 3 bird flocks avoid each other in the sky
 description: Agent, BOiDS
 categories:
-- Industry & Applications
+- 개발도구/생산성
 tags:
-- algorithm
-- boids
+- 개발도구
+- 생산성
+- 참조
 date: 2024-05-14 11:20:00 +0800
 ---
 ## 3 bird flocks avoid each other in the sky. What's the dynamics?

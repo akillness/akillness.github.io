@@ -2,11 +2,11 @@
 title: Software Development Cycle
 description: Software Development Cycle
 categories:
-- Tutorials & Learning
+- 리뷰/동향
 tags:
-- tutorial
-- software-development-cycle
-- learning
+- 동향
+- 리뷰
+- 케이스
 date: 2024-07-14 10:40:00 +0800
 ---
 ![ Software Development Cycle ](/assets/img/blog/Software-Development-cycle.gif){: .light .shadow .rounded-10 w='1212' h='668' }

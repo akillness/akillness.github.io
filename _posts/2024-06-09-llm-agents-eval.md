@@ -2,12 +2,11 @@
 title: Microsoft's AgentEval seems like a promising tool to assist with this!
 description: LLM, AgentEval
 categories:
-- LLM & Language Models
+- 에이전트/오케스트레이션
 tags:
-- microsoft
-- agenteval
-- llm
-- language-model
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2024-06-09 12:00:00 +0800
 ---
 🤔 As a generative AI practitioner, I spend a good chunk of time developing task-specific metrics for various tasks/domains and use-cases. Microsoft's AgentEval seems like a promising tool to assist with this!

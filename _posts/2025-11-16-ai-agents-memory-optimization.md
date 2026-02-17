@@ -5,14 +5,11 @@ description: Learn how to optimize memory for AI agents, understanding the diffe
   between memory, knowledge, and tools, and why context management is crucial for
   production agent systems
 categories:
-- AI Agents & Multi-Agent Systems
-- Machine Learning & Deep Learning
+- 에이전트/오케스트레이션
 tags:
-- autonomous-agents
-- memory-optimization
-- langgraph
-- context-management
-- agentic-systems
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 image:

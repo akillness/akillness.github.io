@@ -5,14 +5,11 @@ description: Explore Cognee's ECL pipeline architecture that replaces traditiona
   RAG with graph-vector hybrid memory for AI agents, enabling persistent and dynamic
   knowledge across multi-agent systems
 categories:
-- AI Agents & Multi-Agent Systems
-- LLM & Language Models
+- RAG/검색
 tags:
-- cognee
-- multi-agent
-- autonomous-agents
-- memory-systems
-- graph-rag
+- RAG
+- 임베딩
+- 검색
 date: 2025-11-20 15:00:00 +0800
 mermaid: true
 image:

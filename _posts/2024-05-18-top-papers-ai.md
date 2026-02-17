@@ -3,12 +3,11 @@ title: Top Papers in Computer Vision, NLP, Speech, Multimodal AI, Core ML, RecSy
   and Graph ML
 description: Vision Models, ELO, Compare
 categories:
-- Development & Tools
-- Computer Vision & Multimodal
+- 멀티모달/컴퓨터비전
 tags:
-- paper-review
-- development-tools
-- tools
+- 멀티모달
+- 비전
+- 생성모델
 date: 2024-05-18 18:20:00 +0800
 ---
 ## 📝 Top Papers in Computer Vision, NLP, Speech, Multimodal AI, Core ML, RecSys, and Graph ML • 

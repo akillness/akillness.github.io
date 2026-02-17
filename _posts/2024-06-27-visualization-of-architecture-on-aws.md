@@ -2,12 +2,11 @@
 title: Great Visualization of Resilient 3-Tier Architecture on AWS!
 description: AWS, Visualization
 categories:
-- Tutorials & Learning
+- 인프라/시스템
 tags:
-- visualization
-- aws
-- tutorial
-- learning
+- 인프라
+- 운영
+- 아키텍처
 date: 2024-06-27 21:00:00 +0800
 mermaid: true
 ---

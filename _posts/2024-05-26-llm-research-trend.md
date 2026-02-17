@@ -2,12 +2,11 @@
 title: What are the next big trends in LLM research?
 description: LLM Research, Trends
 categories:
-- LLM & Language Models
-- Research & Papers
+- LLM/모델·논문
 tags:
-- llm
-- research
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-05-26 03:23:00 +0800
 mermaid: true
 ---

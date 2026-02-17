@@ -2,11 +2,11 @@
 title: Large Language Model Course
 description: LLM, Course
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- cookbook
-- llm
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-05-24 10:00:00 +0800
 mermaid: true
 ---

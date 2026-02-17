@@ -2,12 +2,11 @@
 title: You need more than just LLMs to create these AI agents
 description: LLM, Scraping
 categories:
-- AI Agents & Multi-Agent Systems
-- Development & Tools
+- 에이전트/오케스트레이션
 tags:
-- ai
-- agents
-- llm
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2024-05-30 03:00:00 +0800
 ---
 Today, autonomous #AIAgents are all the buzz and you need more than just LLMs to create these AI agents. 

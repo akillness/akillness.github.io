@@ -5,14 +5,11 @@ description: Explore how Spring AI enables LLM-as-a-Judge pattern for automated 
   evaluation using recursive advisors. Learn to build production-ready evaluation
   systems that assess LLM output quality, relevance, and accuracy
 categories:
-- LLM & Language Models
-- Machine Learning & Deep Learning
+- LLM/모델·논문
 tags:
-- spring-ai
-- llm-evaluation
-- llm-as-judge
-- recursive-advisors
-- response-evaluation
+- LLM
+- 모델
+- 논문
 date: 2025-11-10 03:00:00 +0800
 mermaid: true
 image:

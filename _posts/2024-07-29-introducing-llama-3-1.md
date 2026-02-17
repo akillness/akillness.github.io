@@ -3,12 +3,11 @@ title: Introducing Llama 3.1 - the most capable LLMs from Meta, free and arguabl
   open-source!
 description: LLM, Llama3.1
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- introducing
-- llama31
-- llm
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-07-29 12:00:00 +0800
 mermaid: true
 image:

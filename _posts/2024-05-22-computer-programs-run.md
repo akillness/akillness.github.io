@@ -2,12 +2,11 @@
 title: How do computer programs run
 description: Graph, Analytics
 categories:
-- Industry & Applications
-- Data Science & Analytics
+- 개발도구/생산성
 tags:
-- data-pipeline
-- process
-- computer
+- 개발도구
+- 생산성
+- 도구
 date: 2024-05-22 13:22:00 +0800
 mermaid: true
 ---

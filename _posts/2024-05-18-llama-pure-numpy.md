@@ -2,12 +2,11 @@
 title: Llama 3 implemented in pure NumPy
 description: Llama, Numpy
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- llama
-- numpy
-- llm
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-05-18 15:20:00 +0800
 mermaid: true
 ---

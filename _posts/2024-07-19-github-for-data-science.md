@@ -2,13 +2,11 @@
 title: Github is a free university, but 99% don't know!
 description: Github, Datascience
 categories:
-- Data Science & Analytics
-- Tutorials & Learning
+- 개발도구/생산성
 tags:
-- github
-- data-science
-- tutorial
-- learning
+- 개발도구
+- 생산성
+- 도구
 date: 2024-07-19 15:30:00 +0800
 mermaid: true
 ---

@@ -2,12 +2,11 @@
 title: 📌 𝟔𝟎 𝐌𝐨𝐬𝐭 𝐔𝐬𝐞𝐟𝐮𝐥 𝐀𝐈 𝐓𝐨𝐨𝐥𝐬
 description: AI, Tools
 categories:
-- Tutorials & Learning
+- 리뷰/동향
 tags:
-- ai
-- development-tools
-- tutorial
-- learning
+- 동향
+- 리뷰
+- 케이스
 date: 2024-07-01 20:10:00 +0800
 mermaid: true
 ---

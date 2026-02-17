@@ -2,11 +2,11 @@
 title: 맥북 M1/M2/M3 VSCODE C++ 설정
 description: Setting, Macbook, M2, VSCode
 categories:
-- Development & Tools
+- 개발도구/생산성
 tags:
-- setting
-- vccode
-- c
+- 개발도구
+- 생산성
+- 도구
 date: 2024-05-11 16:30:00 +0800
 ---
 # [MacOS / AppleSilicon] VSCODE C++ 설정 환경 설정 개발환경 세팅 AppleSilicon

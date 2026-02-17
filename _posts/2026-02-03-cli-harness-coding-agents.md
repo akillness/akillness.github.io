@@ -1,8 +1,12 @@
 ---
 title: "CLI Is the Best Harness for Coding Agents"
 description: "Why terminal‑native agents are winning: a comparative look at Gemini CLI, OpenCode, Claude Code, Codex CLI, Qwen Code, Copilot CLI, Kimi CLI, and Mistral Vibe."
-categories: [AI, Games]
-tags: [AgenticAI, CLI, Tooling, Workflow, OpenSource]
+categories:
+- 에이전트/오케스트레이션
+tags:
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2026-02-03 11:40:00 +0900
 mermaid: false
 math: false

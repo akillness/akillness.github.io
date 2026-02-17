@@ -3,12 +3,11 @@ title: 😮😮 GPT-4, despite being one of the leading LLMs, struggles with lon
   bilingual reasoning tasks. Even with text lengths shorter than 2K tokens!!
 description: LLM, GPT4
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- gpt4
-- longcontext
-- llm
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-08-03 11:00:00 +0800
 mermaid: true
 ---

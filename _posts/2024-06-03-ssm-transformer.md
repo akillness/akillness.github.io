@@ -2,11 +2,11 @@
 title: Transformers are SSMs
 description: Paper, SSM, Transformer
 categories:
-- Research & Papers
+- LLM/모델·논문
 tags:
-- ai
-- transformer
-- ssm
+- LLM
+- 모델
+- 논문
 date: 2024-06-03 15:00:00 +0800
 mermaid: true
 ---

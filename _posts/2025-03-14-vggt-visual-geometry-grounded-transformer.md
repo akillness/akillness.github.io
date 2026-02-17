@@ -4,14 +4,11 @@ description: VGGT introduces a feed-forward transformer that performs 3D reconst
   from one to hundreds of scene views in a single forward pass, predicting camera
   parameters, depth maps, point maps, and 3D point tracks without post-processing
 categories:
-- Research & Papers
-- Computer Vision & Multimodal
+- LLM/모델·논문
 tags:
-- vggt
-- cvpr-2025
-- best-paper
-- 3d-reconstruction
-- transformer
+- LLM
+- 모델
+- 논문
 date: 2025-03-14 03:00:00 +0800
 mermaid: true
 image:

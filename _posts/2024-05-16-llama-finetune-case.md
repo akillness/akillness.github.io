@@ -2,12 +2,11 @@
 title: Llamma Finetune case 와 RLHF 정리
 description: LoRA vs GPT4, Performance
 categories:
-- LLM & Language Models
+- 리뷰/동향
 tags:
-- llama
-- rlhf
-- llm
-- language-model
+- 동향
+- 리뷰
+- 케이스
 date: 2024-05-16 18:22:00 +0800
 mermaid: true
 image:

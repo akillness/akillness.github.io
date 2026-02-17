@@ -2,12 +2,11 @@
 title: How can we further mitigate inference bottlenecks in large LLMs
 description: Mitigate inference bottleneck
 categories:
-- LLM & Language Models
-- Research & Papers
+- LLM/모델·논문
 tags:
-- llm
-- research
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-05-26 12:10:00 +0800
 ---
 How can we further mitigate inference bottlenecks in large #LLMs like Llama3 to enable real-time applications with minimal latency and performance degradation?

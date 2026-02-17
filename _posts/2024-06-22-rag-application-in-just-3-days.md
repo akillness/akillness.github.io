@@ -3,13 +3,11 @@ title: 🔊 Create your own LLM RAG application in just 3 days using this hands-
   crafted from the best free resources!
 description: RAG, Applicaition
 categories:
-- LLM & Language Models
-- RAG & Retrieval Systems
+- RAG/검색
 tags:
-- rag
-- application-development
-- llm
-- language-model
+- RAG
+- 임베딩
+- 검색
 date: 2024-06-22 20:10:00 +0800
 mermaid: true
 ---

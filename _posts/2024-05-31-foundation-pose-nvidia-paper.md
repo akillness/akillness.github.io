@@ -2,11 +2,11 @@
 title: Unified 6D Pose Estimation and Tracking of Novel Objects
 description: Paper, FoundationPose, NVIDIA
 categories:
-- Research & Papers
+- 리뷰/동향
 tags:
-- ai
-- nvidia
-- foundationpose
+- 동향
+- 리뷰
+- 케이스
 date: 2024-05-31 15:00:00 +0800
 mermaid: true
 ---

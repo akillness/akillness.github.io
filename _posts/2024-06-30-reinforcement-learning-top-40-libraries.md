@@ -3,12 +3,11 @@ title: Reinforcing Reinforcement Learning Terms, Policies, Models and Top 40 Lib
   📚
 description: ReinforecementLearning, Library
 categories:
-- Tutorials & Learning
+- LLM/모델·논문
 tags:
-- course
-- reinforementlearning
-- tutorial
-- learning
+- LLM
+- 모델
+- 논문
 date: 2024-06-30 20:10:00 +0800
 mermaid: true
 ---

@@ -2,12 +2,11 @@
 title: Watch the concept🔥🤔, how Linux🐧 works
 description: Study, Linux
 categories:
-- Tutorials & Learning
+- 인프라/시스템
 tags:
-- os
-- linux
-- tutorial
-- learning
+- 인프라
+- 운영
+- 아키텍처
 date: 2024-08-04 17:00:00 +0800
 mermaid: true
 ---

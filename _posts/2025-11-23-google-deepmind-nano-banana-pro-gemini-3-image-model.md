@@ -5,14 +5,11 @@ description: Deep dive into Google DeepMind's Nano Banana Pro - a breakthrough i
   generation model based on Gemini 3 Pro architecture, delivering text-accurate rendering
   and studio-quality visuals
 categories:
-- LLM & Language Models
-- Machine Learning & Deep Learning
+- LLM/모델·논문
 tags:
-- nano-banana-pro
-- gemini-3
-- google-deepmind
-- image-generation
-- vision-language-model
+- LLM
+- 모델
+- 논문
 date: 2025-11-23 15:00:00 +0800
 mermaid: true
 ---

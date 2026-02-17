@@ -2,12 +2,11 @@
 title: 𝗨𝗻𝘃𝗲𝗶𝗹𝗶𝗻𝗴 𝘁𝗵𝗲 𝗧𝗼𝗽 𝟭𝟮 𝗠𝗮𝗰𝗵𝗶𝗻𝗲 𝗟𝗲𝗮𝗿𝗻𝗶𝗻𝗴 𝗔𝗹𝗴𝗼𝗿𝗶𝘁𝗵𝗺𝘀 !
 description: ML, Algorithm
 categories:
-- Tutorials & Learning
+- 리뷰/동향
 tags:
-- ml
-- algorithm
-- tutorial
-- learning
+- 동향
+- 리뷰
+- 케이스
 date: 2024-06-27 20:10:00 +0800
 ---
 - 𝗟𝗶𝗻𝗲𝗮𝗿 𝗥𝗲𝗴𝗿𝗲𝘀𝘀𝗶𝗼𝗻: A staple for any machine learning enthusiast, linear regression is like drawing a straight line through data points on a graph to predict future values.

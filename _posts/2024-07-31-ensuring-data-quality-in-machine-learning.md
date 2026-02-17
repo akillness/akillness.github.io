@@ -3,12 +3,11 @@ title: Ensuring 𝗗𝗮𝘁𝗮 𝗤𝘂𝗮𝗹𝗶𝘁𝘆 𝗶𝗻 𝗠𝗮�
   how do we do it?
 description: Study, Datascience
 categories:
-- Data Science & Analytics
-- Tutorials & Learning
+- 리뷰/동향
 tags:
-- tutorial
-- data-science
-- learning
+- 동향
+- 리뷰
+- 케이스
 date: 2024-07-31 12:00:00 +0800
 mermaid: true
 ---

@@ -2,12 +2,11 @@
 title: Generative AI Application Ecosystem
 description: Application, Ecosystem
 categories:
-- LLM & Language Models
-- Industry & Applications
+- 리뷰/동향
 tags:
-- llm
-- application-development
-- language-model
+- 동향
+- 리뷰
+- 케이스
 date: 2024-07-15 11:30:00 +0800
 mermaid: true
 ---

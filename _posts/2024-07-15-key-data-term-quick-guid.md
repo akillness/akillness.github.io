@@ -2,11 +2,11 @@
 title: 📊 Key Data Terms to Know in 2024, A Quick Guide
 description: Key Data Term, Quick Guid
 categories:
-- Tutorials & Learning
+- 데이터과학/알고리즘
 tags:
-- tutorial
-- key-data-term
-- learning
+- 데이터과학
+- 알고리즘
+- 분석
 date: 2024-07-15 11:30:00 +0800
 ---
 ![ Top 15 Data Terms ](/assets/img/blog/Top-15-data-terms.gif){: .light .shadow .rounded-10 w='1212' h='668' }

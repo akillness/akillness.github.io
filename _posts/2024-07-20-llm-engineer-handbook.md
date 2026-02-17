@@ -2,11 +2,11 @@
 title: The LLM Engineer's Handbook 👷 'Super proud to announce my new book'
 description: LLM, Engineer
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- llm
-- engineer
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-07-20 13:30:00 +0800
 mermaid: true
 ---

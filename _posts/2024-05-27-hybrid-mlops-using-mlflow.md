@@ -2,12 +2,11 @@
 title: MLflow를 활용한 Hybrid MLOps 구축 예제
 description: MLOps, Hybrid, MLFlow
 categories:
-- MLOps & Production AI
-- Industry & Applications
+- 인프라/시스템
 tags:
-- mlops
-- mlflow
-- production-ml
+- 인프라
+- 운영
+- 아키텍처
 date: 2024-05-27 00:13:00 +0800
 mermaid: true
 ---

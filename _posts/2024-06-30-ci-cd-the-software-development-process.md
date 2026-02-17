@@ -2,12 +2,11 @@
 title: CI/CD, which stands for continuous integration and continuous delivery/deployment
 description: Software,CI/CD
 categories:
-- Development & Tools
+- 인프라/시스템
 tags:
-- ci
-- cd
-- development-tools
-- tools
+- 인프라
+- 운영
+- 아키텍처
 date: 2024-06-30 19:10:00 +0800
 mermaid: true
 ---

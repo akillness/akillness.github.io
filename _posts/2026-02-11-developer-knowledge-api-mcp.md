@@ -1,8 +1,12 @@
 ---
 title: "Google’s Developer Knowledge API + MCP Server: Docs as a Live Source of Truth"
 description: "A deeper, non‑duplicative walkthrough of Google’s Developer Knowledge API and MCP server, with practical flows for agentic tooling." 
-categories: [AI, Games]
-tags: [MCP, Documentation, Agents, GoogleCloud, Tooling]
+categories:
+- 에이전트/오케스트레이션
+tags:
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2026-02-11 10:30:00 +0900
 mermaid: true
 math: false

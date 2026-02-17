@@ -2,13 +2,11 @@
 title: 🤖 If you're looking to build agentic GenAI applications
 description: LLM, Application
 categories:
-- LLM & Language Models
-- Industry & Applications
+- 에이전트/오케스트레이션
 tags:
-- application-development
-- design-pattern
-- llm
-- language-model
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2024-08-05 15:00:00 +0800
 mermaid: true
 ---

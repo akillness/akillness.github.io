@@ -2,12 +2,11 @@
 title: All about the evaluation for LLMs.
 description: Update, Evalverse
 categories:
-- Development & Tools
+- LLM/모델·논문
 tags:
-- evaluation
-- llm
-- development-tools
-- tools
+- LLM
+- 모델
+- 논문
 date: 2024-05-17 15:20:00 +0800
 mermaid: true
 image:

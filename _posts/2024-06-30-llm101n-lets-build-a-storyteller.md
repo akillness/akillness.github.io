@@ -2,12 +2,11 @@
 title: ❏ LLM101n, LLM AI 스토리텔러 구축하기 🛠️
 description: LLM, AI, Storyteller
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- storyteller
-- course
-- llm
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-06-30 19:10:00 +0800
 ---
 며칠 전 Andrej Karpathy의 흥미로운 Course가 공개되었습니다.

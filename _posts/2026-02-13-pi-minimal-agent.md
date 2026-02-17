@@ -1,8 +1,12 @@
 ---
 title: "Pi: The Minimal Agent Inside OpenClaw (and Why It Matters)"
 description: "A minimal agent with four tools, tree‑shaped sessions, and self‑extending code: Pi’s philosophy reshapes how we build agentic systems." 
-categories: [AI, Games]
-tags: [Agents, OpenClaw, Tooling, Workflow, MCP]
+categories:
+- 에이전트/오케스트레이션
+tags:
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2026-02-13 10:30:00 +0900
 mermaid: true
 math: false

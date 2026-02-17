@@ -4,14 +4,11 @@ description: Learn how to use FlexAttention in FlashAttention 3 CuTe DSL to impl
   various attention variants like causal, sliding window, ALiBi, and more. This guide
   covers score modification, mask modification, and block sparsity optimizations.
 categories:
-- Machine Learning & Deep Learning
-- Tutorials & Learning
+- 학습/가이드
 tags:
-- flash-attention
-- flexattention
-- cute-dsl
-- attention-mechanisms
-- optimization
+- 학습
+- 가이드
+- 강의
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 math: true

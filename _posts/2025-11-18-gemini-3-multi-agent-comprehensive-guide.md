@@ -4,14 +4,11 @@ title: 'Gemini 3 and Multi-Agent Systems: A Comprehensive Guide to Building with
 description: Explore Gemini 3's capabilities, multi-agent architectures, and Google
   Antigravity IDE - the complete guide to building agentic AI systems
 categories:
-- AI Agents & Multi-Agent Systems
-- LLM & Language Models
+- 에이전트/오케스트레이션
 tags:
-- gemini-3
-- multi-agent
-- google-ai
-- autonomous-agents
-- antigravity
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2025-11-18 15:00:00 +0800
 mermaid: true
 image:

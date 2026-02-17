@@ -2,13 +2,11 @@
 title: Struggling to Optimize Your RAG Setup? 😮
 description: LLM, RAG
 categories:
-- LLM & Language Models
-- RAG & Retrieval Systems
+- RAG/검색
 tags:
-- rag
-- setup
-- llm
-- language-model
+- RAG
+- 임베딩
+- 검색
 date: 2024-08-03 12:00:00 +0800
 mermaid: true
 ---

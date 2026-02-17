@@ -1,8 +1,12 @@
 ---
 title: "DeepCode + nanobot: Agentic Coding from Papers, Text, and Your Phone"
 description: "DeepCode claims SOTA on PaperBench and pairs with nanobot to turn papers, text prompts, and chat messages into working code." 
-categories: [AI, Games]
-tags: [Agents, Paper2Code, Tooling, Workflow, SDLC]
+categories:
+- 에이전트/오케스트레이션
+tags:
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2026-02-12 11:00:00 +0900
 mermaid: true
 math: false

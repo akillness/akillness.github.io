@@ -2,12 +2,11 @@
 title: 𝟳 𝗠𝘂𝘀𝘁-𝗸𝗻𝗼𝘄 𝗦𝘁𝗿𝗮𝘁𝗲𝗴𝗶𝗲𝘀 𝘁𝗼 𝗦𝗰𝗮𝗹𝗲 𝘆𝗼𝘂𝗿 𝗗𝗮𝘁𝗮𝗯𝗮𝘀𝗲 by ByteByteGo
 description: Study, DataBase
 categories:
-- Data Science & Analytics
-- Tutorials & Learning
+- 리뷰/동향
 tags:
-- tutorial
-- database
-- learning
+- 동향
+- 리뷰
+- 케이스
 date: 2024-08-12 12:00:00 +0800
 mermaid: true
 ---

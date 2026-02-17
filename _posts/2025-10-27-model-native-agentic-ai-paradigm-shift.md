@@ -5,14 +5,11 @@ description: A comprehensive survey of the evolution from Pipeline-based to Mode
   within models through reinforcement learning, marking a fundamental shift in how
   we build intelligent agents.
 categories:
-- Research & Papers
-- Machine Learning & Deep Learning
+- 에이전트/오케스트레이션
 tags:
-- autonomous-agents
-- model-native
-- reinforcement-learning
-- llm
-- planning
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2025-10-27 03:00:00 +0800
 mermaid: true
 ---

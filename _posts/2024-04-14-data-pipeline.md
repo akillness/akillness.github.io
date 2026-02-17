@@ -2,11 +2,11 @@
 title: Data Pipelines Overview
 description: Script, Data Pipeline
 categories:
-- Industry & Applications
-- Data Science & Analytics
+- 인프라/시스템
 tags:
-- datapipeline
-- cookbook
+- 인프라
+- 운영
+- 아키텍처
 date: 2024-04-17 15:10:00 +0800
 mermaid: true
 ---

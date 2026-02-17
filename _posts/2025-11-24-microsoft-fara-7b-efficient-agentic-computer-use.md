@@ -5,14 +5,11 @@ description: 'Deep dive into Microsoft Research''s FARA 7B: an efficient 7B para
   agentic small language model for computer use with robust safety measures and competitive
   performance'
 categories:
-- AI Agents & Multi-Agent Systems
-- LLM & Language Models
+- 에이전트/오케스트레이션
 tags:
-- fara-7b
-- microsoft-research
-- autonomous-agents
-- computer-use
-- small-language-model
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2025-11-24 15:00:00 +0800
 mermaid: true
 ---

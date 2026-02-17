@@ -2,12 +2,11 @@
 title: 🕹️ NVIDIA introduces RankRAG 8B & 70B
 description: NVIDIA, RankRAG
 categories:
-- LLM & Language Models
+- RAG/검색
 tags:
-- nvidia
-- rankrag
-- llm
-- language-model
+- RAG
+- 임베딩
+- 검색
 date: 2024-07-13 15:00:00 +0800
 mermaid: true
 ---

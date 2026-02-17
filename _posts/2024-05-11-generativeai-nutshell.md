@@ -2,11 +2,11 @@
 title: Generative AI in a Nutshell
 description: Generative AI, Nutshell
 categories:
-- Development & Tools
+- 리뷰/동향
 tags:
-- tutorial
-- generative-ai
-- nutshell
+- 동향
+- 리뷰
+- 케이스
 date: 2024-05-11 23:43:00 +0800
 mermaid: true
 ---

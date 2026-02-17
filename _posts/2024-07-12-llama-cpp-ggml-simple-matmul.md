@@ -2,12 +2,11 @@
 title: llama.cpp의 내부 구현을 분석하다가 ggml을 이용한 간단한 matmul 샘플을 구현 사례 고찰
 description: Llama, CPP
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- llama
-- cpp
-- llm
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-07-12 11:00:00 +0800
 ---
 > 👉 Github : <https://github.com/likejazz/ggml-simple>

@@ -2,11 +2,11 @@
 title: DevOps Decoded, The Ultimate Toolkit for Modern Software Development
 description: DevOps, Tools
 categories:
-- Development & Tools
+- 인프라/시스템
 tags:
-- devops
-- development-tools
-- tools
+- 인프라
+- 운영
+- 아키텍처
 date: 2024-07-01 20:10:00 +0800
 ---
 # In today's fast-paced tech world, knowing how DevOps works is no longer optional—it's essential. 

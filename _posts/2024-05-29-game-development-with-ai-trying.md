@@ -2,13 +2,11 @@
 title: Game Development Course with AI
 description: LLM, Game, AI, Unity
 categories:
-- LLM & Language Models
-- Game Development & AI
+- 학습/가이드
 tags:
-- llm
-- game
-- ai
-- unity
+- 학습
+- 가이드
+- 강의
 date: 2024-05-29 23:13:00 +0800
 mermaid: true
 image:

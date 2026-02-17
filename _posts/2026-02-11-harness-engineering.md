@@ -1,8 +1,12 @@
 ---
 title: "Harness Engineering: The 5 Rules That Let Agents Ship 1M Lines"
 description: "OpenAI’s Codex experiment reframes engineering: not writing code, but designing the harness. Here are the five principles that made it work." 
-categories: [AI, Games]
-tags: [Agents, Codex, Harness, Workflow, Tooling]
+categories:
+- 에이전트/오케스트레이션
+tags:
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2026-02-11 13:00:00 +0900
 mermaid: true
 math: false

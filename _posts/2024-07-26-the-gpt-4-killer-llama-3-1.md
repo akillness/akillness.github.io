@@ -2,12 +2,11 @@
 title: 𝗠𝗮𝗿𝗸 𝗭𝘂𝗰𝗸𝗲𝗿𝗯𝗲𝗿𝗴 𝗷𝘂𝘀𝘁 𝗮𝗻𝗻𝗼𝘂𝗻𝗰𝗲𝗱 𝘁𝗵𝗲 𝗚𝗣𝗧-𝟰 𝗸𝗶𝗹𝗹𝗲𝗿, 𝗟𝗹𝗮𝗺𝗮-𝟯.𝟭 💥
 description: LLM, Llama3.1
 categories:
-- LLM & Language Models
+- 리뷰/동향
 tags:
-- meta
-- llama31
-- llm
-- language-model
+- 동향
+- 리뷰
+- 케이스
 date: 2024-07-26 10:00:00 +0800
 mermaid: true
 ---

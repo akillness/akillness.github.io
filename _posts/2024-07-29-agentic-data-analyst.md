@@ -2,12 +2,11 @@
 title: 𝗔𝗴𝗲𝗻𝘁𝗶𝗰 𝗗𝗮𝘁𝗮 𝗮𝗻𝗮𝗹𝘆𝘀𝘁, 𝗱𝗿𝗼𝗽 𝘆𝗼𝘂𝗿 𝗱𝗮𝘁𝗮 𝗳𝗶𝗹𝗲, 𝗹𝗲𝘁 𝘁𝗵𝗲 𝗟𝗟𝗠 𝗱𝗼 𝘁𝗵𝗲 𝗮𝗻𝗮𝗹𝘆𝘀𝗶𝘀 📊⚙️
 description: LLM, Analyst Agents
 categories:
-- LLM & Language Models
+- 리뷰/동향
 tags:
-- cookbook
-- analyst-agents
-- llm
-- language-model
+- 동향
+- 리뷰
+- 케이스
 date: 2024-07-29 11:00:00 +0800
 mermaid: true
 ---

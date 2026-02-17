@@ -2,10 +2,11 @@
 title: LLM 성능 평가 ( 한국어 ) Use Case 분석해보기
 description: LLM, Evaluation
 categories:
-- Industry & Applications
+- LLM/모델·논문
 tags:
-- llm
-- evaluation
+- LLM
+- 모델
+- 논문
 date: 2024-05-19 01:20:00 +0800
 mermaid: true
 ---

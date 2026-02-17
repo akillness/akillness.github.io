@@ -2,11 +2,11 @@
 title: 🔉 Meta's latest "CoPE" (Contextual Position Encoding)
 description: Meta, CoPE
 categories:
-- LLM & Language Models
+- 리뷰/동향
 tags:
-- meta
-- positional-encoder
-- cope
+- 동향
+- 리뷰
+- 케이스
 date: 2024-06-05 13:00:00 +0800
 mermaid: true
 ---

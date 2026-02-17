@@ -2,11 +2,11 @@
 title: Consistency Large Language Models
 description: LLM, Consistency LLM
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- llm
-- consistency-llm
-- efficient-parallel-decoder
+- LLM
+- 모델
+- 논문
 date: 2024-05-12 13:27:00 +0800
 mermaid: true
 ---

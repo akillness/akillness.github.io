@@ -2,12 +2,11 @@
 title: Want to build your first 𝗟𝗟𝗠 𝗽𝗿𝗼𝗷𝗲𝗰𝘁 but don't know where to start?
 description: LLM, System
 categories:
-- LLM & Language Models
+- 리뷰/동향
 tags:
-- system
-- llmops
-- llm
-- language-model
+- 동향
+- 리뷰
+- 케이스
 date: 2024-07-30 11:00:00 +0800
 ---
 ![ Architecture of LLM System ](/assets/img/llm/architecture-of-llm-system.gif){: .light .shadow .rounded-10 w='1212' h='668' }

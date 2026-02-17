@@ -2,13 +2,11 @@
 title: Let's build multi-agent system
 description: Agent, LLM
 categories:
-- AI Agents & Multi-Agent Systems
-- LLM & Language Models
+- 에이전트/오케스트레이션
 tags:
-- agent
-- llm
-- autonomous-agents
-- multi-agent
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2024-05-25 23:23:00 +0800
 mermaid: true
 ---

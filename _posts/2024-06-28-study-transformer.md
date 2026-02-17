@@ -2,11 +2,11 @@
 title: All about transformer background knowledge including RNN
 description: Transformer, RNN, Knowledge
 categories:
-- Tutorials & Learning
+- LLM/모델·논문
 tags:
-- tutorial
-- transformer
-- learning
+- LLM
+- 모델
+- 논문
 date: 2024-06-28 00:10:00 +0800
 ---
 # Step to explain Transformer 

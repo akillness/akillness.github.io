@@ -2,12 +2,11 @@
 title: Is this the architecture of OpenAI GPT-4o?
 description: LLM, Course
 categories:
-- Development & Tools
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- gpt4o
-- llm
-- architecture
+- LLM
+- 모델
+- 논문
 date: 2024-05-25 11:05:00 +0800
 mermaid: true
 ---

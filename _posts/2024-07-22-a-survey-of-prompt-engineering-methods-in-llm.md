@@ -2,12 +2,11 @@
 title: 📚 "A Survey of Prompt Engineering Methods in Large Language Models" - LLM
 description: LLM, PromptEngineering
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- promptengineering
-- survey
-- llm
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-07-22 13:00:00 +0800
 mermaid: true
 ---

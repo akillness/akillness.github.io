@@ -2,13 +2,11 @@
 title: 💪 The Power of Data Analytics with Python.
 description: Data Analytics, Python
 categories:
-- Tutorials & Learning
-- Data Science & Analytics
+- 데이터과학/알고리즘
 tags:
-- data-analytics
-- python
-- tutorial
-- learning
+- 데이터과학
+- 알고리즘
+- 분석
 date: 2024-07-04 20:10:00 +0800
 mermaid: true
 ---

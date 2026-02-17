@@ -2,12 +2,11 @@
 title: How to evaluate LLM Model?
 description: LLM, Evaluation, Framework
 categories:
-- Development & Tools
+- LLM/모델·논문
 tags:
-- llm
-- evaluation
-- development-tools
-- tools
+- LLM
+- 모델
+- 논문
 date: 2024-05-18 10:20:00 +0800
 mermaid: true
 ---

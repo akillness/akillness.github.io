@@ -4,14 +4,11 @@ description: Exploring CUDA Tile, NVIDIA's revolutionary tile-based programming 
   that abstracts tensor core complexity, enabling higher-level GPU programming without
   sacrificing performance
 categories:
-- MLOps & Production AI
-- Machine Learning & Deep Learning
+- 데이터과학/알고리즘
 tags:
-- cuda
-- gpu-programming
-- tensor-cores
-- performance
-- nvidia
+- 데이터과학
+- 알고리즘
+- 분석
 date: 2025-12-04 10:00:00 +0800
 mermaid: true
 math: true

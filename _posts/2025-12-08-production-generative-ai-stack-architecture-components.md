@@ -2,14 +2,11 @@
 title: The Production Generative AI Stack - Architecture and Components
 description: Exploring the modern AI technology stack that powers production-grade generative AI applications, from accelerated compute to user experience layers
 categories:
-  - AI Engineering
-  - MLOps & Production AI
+- 인프라/시스템
 tags:
-  - generative-ai
-  - ai-architecture
-  - production-ml
-  - ai-stack
-  - infrastructure
+- 인프라
+- 운영
+- 아키텍처
 date: 2025-12-08 10:00:00 +0800
 mermaid: true
 math: false

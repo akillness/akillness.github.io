@@ -2,11 +2,11 @@
 title: 🔍 Unlocking the Power of RLHF in Large Language Models 🌟
 description: LLM, RLHF
 categories:
-- LLM & Language Models
+- LLM/모델·논문
 tags:
-- rlhf
-- llm
-- language-model
+- LLM
+- 모델
+- 논문
 date: 2024-08-03 12:00:00 +0800
 mermaid: true
 ---

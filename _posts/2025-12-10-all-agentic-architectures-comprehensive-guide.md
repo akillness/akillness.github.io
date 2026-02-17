@@ -2,15 +2,11 @@
 title: "All Agentic Architectures - A Comprehensive Guide to 17+ State-of-the-Art AI Agent Patterns"
 description: "A deep dive into the all-agentic-architectures repository covering 17+ production-ready agentic AI patterns from Reflection to Reflexive Metacognitive agents, built with LangChain and LangGraph"
 categories:
-  - AI
-  - Agents
+- 에이전트/오케스트레이션
 tags:
-  - agentic-architectures
-  - langchain
-  - langgraph
-  - multi-agent-systems
-  - ai-agents
-  - production-ai
+- 에이전트
+- 워크플로우
+- 오케스트레이션
 date: 2025-12-10 10:00:00 +0800
 mermaid: true
 math: false

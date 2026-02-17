@@ -4,14 +4,11 @@ description: A deep dive into implementing LLaMA 4's Mixture-of-Experts (MoE) ar
   from scratch using PyTorch. Learn how MoE enables efficient scaling to hundreds
   of billions of parameters while maintaining inference speed.
 categories:
-- Research & Papers
-- Machine Learning & Deep Learning
+- LLM/모델·논문
 tags:
-- llama-4
-- mixture-of-experts
-- moe
-- transformer
-- pytorch
+- LLM
+- 모델
+- 논문
 date: 2025-05-18 03:00:00 +0800
 mermaid: true
 math: true

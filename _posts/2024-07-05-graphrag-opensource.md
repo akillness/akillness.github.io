@@ -2,12 +2,11 @@
 title: GraphRAG is open source now!
 description: GraphRAG, Microsoft
 categories:
-- LLM & Language Models
+- RAG/검색
 tags:
-- microsoft
-- graphrag
-- llm
-- language-model
+- RAG
+- 임베딩
+- 검색
 date: 2024-07-05 10:10:00 +0800
 mermaid: true
 ---

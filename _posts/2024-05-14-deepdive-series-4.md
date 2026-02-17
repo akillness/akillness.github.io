@@ -2,10 +2,11 @@
 title: Deep Dive into Self-Attention by Hand
 description: Self-Attention
 categories:
-- Industry & Applications
+- 리뷰/동향
 tags:
-- deep-dive
-- attention
+- 동향
+- 리뷰
+- 케이스
 date: 2024-05-14 13:14:00 +0800
 ---
 ### **Original Article** : 👉 <https://towardsdatascience.com/deep-dive-into-self-attention-by-hand-%EF%B8%8E-f02876e49857>

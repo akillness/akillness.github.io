@@ -2,11 +2,11 @@
 title: 🎭🎭 FaceLift new SOTA in 2D Landmarks 🎭🎭
 description: Paper, FaceLift, Tracking
 categories:
-- Research & Papers
+- 리뷰/동향
 tags:
-- tracking
-- 2d-landmark
-- facelift
+- 동향
+- 리뷰
+- 케이스
 date: 2024-06-02 19:00:00 +0800
 mermaid: true
 ---
