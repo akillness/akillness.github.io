@@ -2,11 +2,11 @@
 title: 10 Algorithms Shaping the Tech World
 description: Algorithm, Introduction
 categories:
-- 데이터과학/알고리즘
+  - Data Science/Algorithms
 tags:
-- 데이터과학
-- 알고리즘
-- 분석
+  - Data Science
+  - Algorithm
+  - Analysis
 date: 2024-05-19 23:46:00 +0800
 ---
 ![ 10 Algorithms Shaping ](/assets/img/blog/Algorithms_top_10.gif){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }

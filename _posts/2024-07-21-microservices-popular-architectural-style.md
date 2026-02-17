@@ -2,11 +2,11 @@
 title: Microservices are a popular architectural style for building applications
 description: Architecture,MicroService
 categories:
-- 인프라/시스템
+  - Infrastructure/System
 tags:
-- 인프라
-- 운영
-- 아키텍처
+  - Infrastructure
+  - Operations
+  - Architecture
 date: 2024-07-21 11:00:00 +0800
 mermaid: true
 ---

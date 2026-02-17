@@ -2,11 +2,11 @@
 title: Setting Jupyter Kernel according to venv of python
 description: Python, venv, jupyter
 categories:
-- 데이터과학/알고리즘
+  - Data Science/Algorithms
 tags:
-- 데이터과학
-- 알고리즘
-- 분석
+  - Data Science
+  - Algorithm
+  - Analysis
 date: 2024-06-29 00:10:00 +0800
 mermaid: true
 ---

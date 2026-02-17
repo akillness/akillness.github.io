@@ -2,11 +2,11 @@
 title: LLM 사용하는 당근마켓 케이스 확인하기
 description: pytorch, LLM, simple, prompt
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-05-06 18:25:00 +0800
 mermaid: true
 ---

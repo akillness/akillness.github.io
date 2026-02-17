@@ -2,11 +2,11 @@
 title: "Oh‑My‑Codex (OMX): Multi‑Agent Orchestration for Codex CLI"
 description: "A deep dive into OMX—role prompts, team pipelines, hooks, and MCP servers that turn Codex into a coordinated multi‑agent system." 
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2026-02-18 10:00:00 +0900
 mermaid: true
 math: false

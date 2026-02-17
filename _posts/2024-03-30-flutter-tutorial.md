@@ -2,11 +2,11 @@
 title: Flutter 를 공부하며 개발하기 -초급편-
 description: Kakao, Utility
 categories:
-- 개발도구/생산성
+  - Development Tools/Productivity
 tags:
-- 개발도구
-- 생산성
-- 도구
+  - 개발도구
+  - 생산성
+  - Tools
 date: 2024-03-30 21:00:00 +0800
 render_with_liquid: true
 mermaid: true

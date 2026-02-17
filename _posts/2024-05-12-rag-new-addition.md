@@ -2,11 +2,11 @@
 title: RAG papers list newest additions
 description: RAG, Newest, Papers
 categories:
-- RAG/검색
+  - RAG/Search
 tags:
-- RAG
-- 임베딩
-- 검색
+  - RAG
+  - Embedding
+  - Search
 date: 2024-05-12 21:29:00 +0800
 ---
 ## 🎊 My RAG papers list has now been updated with the newest additions, including those from April. It contains over 60 papers, with quick summaries and topic tags.

@@ -9,11 +9,11 @@ description: "Google Research reveals that simply repeating your prompt dramatic
     google-research
   ]
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2026-01-20 10:00:00 +0900
 mermaid: true
 math: true

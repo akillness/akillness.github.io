@@ -2,11 +2,11 @@
 title: Neural Parametric Gaussian Avatars 🔴 🔴 🔴  ( NPGA )
 description: Paper, NPGA, Avatar
 categories:
-- 멀티모달/컴퓨터비전
+  - Multimodal/Computer Vision
 tags:
-- 멀티모달
-- 비전
-- 생성모델
+  - Multimodal
+  - Vision
+  - Generative Model
 date: 2024-06-01 15:00:00 +0800
 ---
 {% include embed/youtube.html id='NGRxAYbIkus' %}

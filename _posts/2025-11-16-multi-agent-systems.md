@@ -5,11 +5,11 @@ description: Explore the evolution from Agents 1.0's simple loop-based architect
   persistent memory, and extreme context engineering for handling complex multi-step
   tasks
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 image:

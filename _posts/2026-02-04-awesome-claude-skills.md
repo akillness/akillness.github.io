@@ -2,11 +2,11 @@
 title: "Awesome Claude Skills: From Text to Real Actions"
 description: "A deep dive into the Awesome Claude Skills list—what it is, how it’s structured, and how to build repeatable workflows across Claude.ai, Claude Code, and the Claude API."
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2026-02-04 18:00:00 +0900
 mermaid: true
 math: false

@@ -2,11 +2,11 @@
 title: 2024 Google I/O 감상평
 description: Google I/O, 2024, Review
 categories:
-- 리뷰/동향
+  - Review/Trends
 tags:
-- 동향
-- 리뷰
-- 케이스
+  - Trend
+  - Review
+  - Case
 date: 2024-05-15 12:00:00 +0800
 ---
 ## 📝 구글 I/O 2024 요약 및 감상

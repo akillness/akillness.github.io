@@ -5,11 +5,11 @@ description: Exploring Sprite Fusion Pixel Snapper - a Rust-based tool that fixe
   messy AI-generated pixel art by snapping pixels to perfect grids, quantizing colors,
   and preserving details through multi-agent image processing techniques
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2025-11-25 15:00:00 +0800
 mermaid: true
 image:

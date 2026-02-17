@@ -2,11 +2,11 @@
 title: Hugging Face x Langchain
 description: HuggingFace, Langchaing
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-05-16 16:20:00 +0800
 mermaid: true
 ---

@@ -2,11 +2,11 @@
 title: 𝐖𝐡𝐚𝐭 𝐬𝐤𝐢𝐥𝐥𝐬 𝐲𝐨𝐮 𝐧𝐞𝐞𝐝 𝐭𝐨 𝐰𝐨𝐫𝐤 𝐢𝐧 𝐂𝐥𝐨𝐮𝐝 𝐍𝐚𝐭𝐢𝐯𝐞 𝐞𝐜𝐨𝐬𝐲𝐬𝐭𝐞𝐦 ❓ 🤔
 description: ClounNative, Ecosystem
 categories:
-- 리뷰/동향
+  - Review/Trends
 tags:
-- 동향
-- 리뷰
-- 케이스
+  - Trend
+  - Review
+  - Case
 date: 2024-07-01 21:10:00 +0800
 ---
 To learn any complex technology, it is always essential to build the root foundation. 

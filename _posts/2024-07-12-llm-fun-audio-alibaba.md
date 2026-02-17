@@ -2,11 +2,11 @@
 title: Alibaba presents FunAudioLLM
 description: LLM,Voice Understanding
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-07-12 13:00:00 +0800
 ---
 > - 👉 Github : <https://github.com/FunAudioLLM>

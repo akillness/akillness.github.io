@@ -2,11 +2,11 @@
 title: Life is Short, Use Dev Tools
 description: Dev, Tools
 categories:
-- 개발도구/생산성
+  - Development Tools/Productivity
 tags:
-- 개발도구
-- 생산성
-- 참조
+  - 개발도구
+  - 생산성
+  - Reference
 date: 2024-06-04 11:00:00 +0800
 ---
 ![ Use Dev Tools ](/assets/img/news/Dev-Tools-App.gif){: .light .shadow .rounded-10 w='1212' h='668' }

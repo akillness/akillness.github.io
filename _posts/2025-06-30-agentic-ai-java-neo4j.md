@@ -4,11 +4,11 @@ description: Exploring how to build AI agents that can autonomously navigate and
   graph databases using Java, bridging the gap between traditional GraphRAG and agentic
   AI
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2025-06-30 03:00:00 +0800
 mermaid: true
 ---

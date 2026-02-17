@@ -2,11 +2,11 @@
 title: 🤩 𝐀𝐰𝐞𝐬𝐨𝐦𝐞-𝐏𝐫𝐨𝐝𝐮𝐜𝐭𝐢𝐨𝐧-𝐋𝐋𝐌
 description: LLM, Application
 categories:
-- 리뷰/동향
+  - Review/Trends
 tags:
-- 동향
-- 리뷰
-- 케이스
+  - Trend
+  - Review
+  - Case
 date: 2024-08-03 13:00:00 +0800
 mermaid: true
 ---

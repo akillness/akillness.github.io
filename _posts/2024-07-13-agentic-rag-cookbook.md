@@ -2,11 +2,11 @@
 title: 𝐀𝐠𝐞𝐧𝐭𝐢𝐜 𝐑𝐀𝐆 ✨ new cookbook
 description: Agentic, RAG, Cookbook
 categories:
-- 리뷰/동향
+  - Review/Trends
 tags:
-- 동향
-- 리뷰
-- 케이스
+  - Trend
+  - Review
+  - Case
 date: 2024-07-13 14:00:00 +0800
 mermaid: true
 ---

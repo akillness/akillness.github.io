@@ -2,11 +2,11 @@
 title: "Rnj-1 and Motif-2-12.7B: Why These Open-Source Models Are Reshaping the LLM Landscape"
 description: "Deep dive into Essential AI's Rnj-1 (8B) and Motif Technologies' Motif-2-12.7B - two open-source models that challenge the status quo with exceptional performance"
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2025-12-11 15:00:00 +0800
 mermaid: true
 math: true

@@ -2,11 +2,11 @@
 title: Deep Dive into Sora’s Diffusion Transformer (DiT) by Hand
 description: Sora, Diffusion,Transformer
 categories:
-- 멀티모달/컴퓨터비전
+  - Multimodal/Computer Vision
 tags:
-- 멀티모달
-- 비전
-- 생성모델
+  - Multimodal
+  - Vision
+  - Generative Model
 date: 2024-05-14 13:11:00 +0800
 ---
 ### **Original Article** : 👉 <https://towardsdatascience.com/deep-dive-into-soras-diffusion-transformer-dit-by-hand-%EF%B8%8E-1e4d84ec865d>

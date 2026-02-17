@@ -5,11 +5,11 @@ description: Exploring how TEI combines Rust's performance with Python's flexibi
   to deliver blazing-fast text embeddings inference, from architecture to production
   deployment
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2025-12-05 10:00:00 +0800
 mermaid: true
 math: true

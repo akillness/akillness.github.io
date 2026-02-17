@@ -2,11 +2,11 @@
 title: Software Development Cycle
 description: Software Development Cycle
 categories:
-- 리뷰/동향
+  - Review/Trends
 tags:
-- 동향
-- 리뷰
-- 케이스
+  - Trend
+  - Review
+  - Case
 date: 2024-07-14 10:40:00 +0800
 ---
 ![ Software Development Cycle ](/assets/img/blog/Software-Development-cycle.gif){: .light .shadow .rounded-10 w='1212' h='668' }

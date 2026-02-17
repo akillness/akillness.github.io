@@ -2,11 +2,11 @@
 title: 𝟭𝟮 𝗗𝗮𝘁𝗮 𝗦𝘁𝗿𝘂𝗰𝘁𝘂𝗿𝗲𝘀 𝗬𝗼𝘂 𝗠𝘂𝘀𝘁 𝗞𝗻𝗼𝘄
 description: DataStuctures
 categories:
-- 리뷰/동향
+  - Review/Trends
 tags:
-- 동향
-- 리뷰
-- 케이스
+  - Trend
+  - Review
+  - Case
 date: 2024-06-29 02:10:00 +0800
 ---
 Data structures are the foundation of any programming language. They are used to organize and store data in a way that makes it efficient to access and manipulate. 

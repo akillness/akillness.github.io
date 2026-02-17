@@ -2,11 +2,11 @@
 title: An introduction to LangChain and Agents is provided
 description: LLM, Course
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2024-07-30 13:00:00 +0800
 mermaid: true
 ---

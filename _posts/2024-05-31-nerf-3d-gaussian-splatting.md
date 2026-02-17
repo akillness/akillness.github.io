@@ -2,11 +2,11 @@
 title: 3D Gaussian Splatting vs. NeRFs. What is the difference? 🤔
 description: Paper, 3DGS, NeRF
 categories:
-- 멀티모달/컴퓨터비전
+  - Multimodal/Computer Vision
 tags:
-- 멀티모달
-- 비전
-- 생성모델
+  - Multimodal
+  - Vision
+  - Generative Model
 date: 2024-05-31 01:00:00 +0800
 mermaid: true
 ---

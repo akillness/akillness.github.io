@@ -2,11 +2,11 @@
 title: 5 Best Github Repos to help you pass Machine Learning Interview questions
 description: Study, Interview
 categories:
-- 데이터과학/알고리즘
+  - Data Science/Algorithms
 tags:
-- 데이터과학
-- 알고리즘
-- 분석
+  - Data Science
+  - Algorithm
+  - Analysis
 date: 2024-08-14 12:20:00 +0800
 mermaid: true
 ---

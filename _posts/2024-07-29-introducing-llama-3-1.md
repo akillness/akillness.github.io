@@ -3,11 +3,11 @@ title: Introducing Llama 3.1 - the most capable LLMs from Meta, free and arguabl
   open-source!
 description: LLM, Llama3.1
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-07-29 12:00:00 +0800
 mermaid: true
 image:

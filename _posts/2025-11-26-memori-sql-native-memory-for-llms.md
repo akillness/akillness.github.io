@@ -4,11 +4,11 @@ description: Exploring Memori's open-source approach to persistent, queryable me
   for AI agents using standard SQL databases - enabling 80-90% cost savings while
   maintaining context across sessions
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2025-11-26 09:00:00 +0800
 mermaid: true
 image:

@@ -2,11 +2,11 @@
 title: Power of Graph Analytics
 description: Graph, Analytics
 categories:
-- 데이터과학/알고리즘
+  - Data Science/Algorithms
 tags:
-- 데이터과학
-- 알고리즘
-- 분석
+  - Data Science
+  - Algorithm
+  - Analysis
 date: 2024-05-19 22:10:00 +0800
 mermaid: true
 ---

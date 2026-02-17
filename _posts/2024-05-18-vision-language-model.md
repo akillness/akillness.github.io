@@ -2,11 +2,11 @@
 title: The giant leaps of open-source models for Vision Models
 description: Vision Models, ELO, Compare
 categories:
-- 멀티모달/컴퓨터비전
+  - Multimodal/Computer Vision
 tags:
-- 멀티모달
-- 비전
-- 생성모델
+  - Multimodal
+  - Vision
+  - Generative Model
 date: 2024-05-18 11:20:00 +0800
 mermaid: true
 ---

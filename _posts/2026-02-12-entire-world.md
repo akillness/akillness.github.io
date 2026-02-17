@@ -2,11 +2,11 @@
 title: "Entire: The Assembly Line for the Agent Era"
 description: "Thomas Dohmke announces Entire, a new developer platform built around agent-native SDLC, git-compatible context, and Checkpoints." 
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2026-02-12 10:30:00 +0900
 mermaid: true
 math: false

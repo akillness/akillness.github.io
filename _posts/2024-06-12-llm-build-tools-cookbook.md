@@ -2,11 +2,11 @@
 title: Tools for Building LLM Applications
 description: Cookbook, Tools, Application
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-06-12 15:10:00 +0800
 mermaid: true
 ---

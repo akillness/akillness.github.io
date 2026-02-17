@@ -2,11 +2,11 @@
 title: Deep Dive into Vector Databases by Hand
 description: Graph, Analytics
 categories:
-- RAG/검색
+  - RAG/Search
 tags:
-- RAG
-- 임베딩
-- 검색
+  - RAG
+  - Embedding
+  - Search
 date: 2024-05-14 13:10:00 +0800
 ---
 ### **Original Article** : 👉 <https://medium.com/towards-data-science/deep-dive-into-vector-databases-by-hand-e9ab71f54f80>

@@ -2,11 +2,11 @@
 title: Beginner-friendly 101 guide on LLM agents
 description: LLM, LLM agents
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2024-04-24 19:57:00 +0800
 mermaid: true
 image:

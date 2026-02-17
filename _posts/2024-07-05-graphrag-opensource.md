@@ -2,11 +2,11 @@
 title: GraphRAG is open source now!
 description: GraphRAG, Microsoft
 categories:
-- RAG/검색
+  - RAG/Search
 tags:
-- RAG
-- 임베딩
-- 검색
+  - RAG
+  - Embedding
+  - Search
 date: 2024-07-05 10:10:00 +0800
 mermaid: true
 ---

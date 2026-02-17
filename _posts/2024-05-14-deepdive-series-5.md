@@ -2,11 +2,11 @@
 title: Deep Dive into Transformers by Hand
 description: Transformer
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-05-14 13:15:00 +0800
 ---
 ### **Original Article** : 👉 <https://towardsdatascience.com/deep-dive-into-transformers-by-hand-%EF%B8%8E-68b8be4bd813>

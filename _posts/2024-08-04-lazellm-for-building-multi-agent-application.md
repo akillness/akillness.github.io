@@ -3,11 +3,11 @@ title: 🗞 LazyLLM looks like a super simple low-code open-source framework for
   multi-agent applications
 description: LLM, LazyLLM
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-08-04 20:00:00 +0800
 mermaid: true
 ---

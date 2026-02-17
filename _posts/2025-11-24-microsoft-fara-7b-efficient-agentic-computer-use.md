@@ -5,11 +5,11 @@ description: 'Deep dive into Microsoft Research''s FARA 7B: an efficient 7B para
   agentic small language model for computer use with robust safety measures and competitive
   performance'
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2025-11-24 15:00:00 +0800
 mermaid: true
 ---

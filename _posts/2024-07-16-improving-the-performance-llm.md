@@ -2,11 +2,11 @@
 title: 3 common methods for improving the performance of LLM👏
 description: Performance, Improving
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-07-16 12:30:00 +0800
 pin: false
 ---

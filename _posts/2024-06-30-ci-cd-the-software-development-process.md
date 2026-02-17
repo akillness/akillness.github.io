@@ -2,11 +2,11 @@
 title: CI/CD, which stands for continuous integration and continuous delivery/deployment
 description: Software,CI/CD
 categories:
-- 인프라/시스템
+  - Infrastructure/System
 tags:
-- 인프라
-- 운영
-- 아키텍처
+  - Infrastructure
+  - Operations
+  - Architecture
 date: 2024-06-30 19:10:00 +0800
 mermaid: true
 ---

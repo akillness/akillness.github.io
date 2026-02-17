@@ -2,11 +2,11 @@
 title: 🐳🐳MultiPly in-the-wild Multi-Pax from Mono🐳🐳
 description: Paper, MultiPly, 3DRecon
 categories:
-- 리뷰/동향
+  - Review/Trends
 tags:
-- 동향
-- 리뷰
-- 케이스
+  - Trend
+  - Review
+  - Case
 date: 2024-06-04 19:00:00 +0800
 mermaid: true
 ---

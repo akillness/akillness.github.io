@@ -2,11 +2,11 @@
 title: GPT4보다 LoRA를 적용한 결과가 전반적으로 낫더라?
 description: LoRA vs GPT4, Performance
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-05-16 15:20:00 +0800
 mermaid: true
 ---

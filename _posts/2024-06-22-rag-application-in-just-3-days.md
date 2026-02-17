@@ -3,11 +3,11 @@ title: 🔊 Create your own LLM RAG application in just 3 days using this hands-
   crafted from the best free resources!
 description: RAG, Applicaition
 categories:
-- RAG/검색
+  - RAG/Search
 tags:
-- RAG
-- 임베딩
-- 검색
+  - RAG
+  - Embedding
+  - Search
 date: 2024-06-22 20:10:00 +0800
 mermaid: true
 ---

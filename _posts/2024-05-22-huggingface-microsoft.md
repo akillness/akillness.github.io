@@ -2,11 +2,11 @@
 title: Hugging Face x Microsoft
 description: Graph, Analytics
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-05-22 15:22:00 +0800
 mermaid: true
 ---

@@ -2,11 +2,11 @@
 title: Game Development Course with Unity3D Programming
 description: LLM, Game, Unity
 categories:
-- 멀티모달/컴퓨터비전
+  - Multimodal/Computer Vision
 tags:
-- 멀티모달
-- 비전
-- 생성모델
+  - Multimodal
+  - Vision
+  - Generative Model
 date: 2024-05-29 20:13:00 +0800
 mermaid: true
 image:

@@ -2,11 +2,11 @@
 title: "UI‑TARS Desktop: A Native GUI Agent Stack Built for Real Work"
 description: "A game‑dev perspective on ByteDance’s UI‑TARS Desktop and Agent TARS: why GUI agents matter, how MCP‑first stacks change workflows, and where this fits in production pipelines."
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2026-02-01 12:00:00 +0900
 mermaid: false
 math: false

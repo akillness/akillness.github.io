@@ -2,11 +2,11 @@
 title: The Top 6 "Anything as a Service" Models You Should Know in 2024
 description: As a Service
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-07-13 13:00:00 +0800
 mermaid: true
 ---

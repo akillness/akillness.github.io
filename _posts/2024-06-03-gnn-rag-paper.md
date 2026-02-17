@@ -2,11 +2,11 @@
 title: TRAG meets GNNs
 description: Paper, GNN-RAG, LLM
 categories:
-- RAG/검색
+  - RAG/Search
 tags:
-- RAG
-- 임베딩
-- 검색
+  - RAG
+  - Embedding
+  - Search
 date: 2024-06-03 15:00:00 +0800
 mermaid: true
 ---

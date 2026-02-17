@@ -2,11 +2,11 @@
 title: How do you deal with imbalanced data?
 description: Imbalanced Data, Datascience
 categories:
-- 데이터과학/알고리즘
+  - Data Science/Algorithms
 tags:
-- 데이터과학
-- 알고리즘
-- 분석
+  - Data Science
+  - Algorithm
+  - Analysis
 date: 2024-07-19 13:30:00 +0800
 ---
 ![ 4 Strategies Multi-GPU  ](/assets/img/blog/optimally-sample-imbalanced-data.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }

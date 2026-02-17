@@ -2,11 +2,11 @@
 title: Generative AI Terms, You should know.
 description: Graph, Analytics
 categories:
-- 리뷰/동향
+  - Review/Trends
 tags:
-- 동향
-- 리뷰
-- 케이스
+  - Trend
+  - Review
+  - Case
 date: 2024-05-21 11:10:00 +0800
 mermaid: true
 ---

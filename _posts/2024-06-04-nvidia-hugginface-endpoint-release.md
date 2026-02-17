@@ -2,11 +2,11 @@
 title: The release of NVIDIA NIM on Hugging Face Inference Endpoints
 description: NVIDIA, EndPoint
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-06-04 02:00:00 +0800
 mermaid: true
 ---

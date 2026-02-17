@@ -5,11 +5,11 @@ description: Fei-Fei Li's WorldLabs launches Marble, the world's first commercia
   World Model. Deep dive into spatial intelligence, 3D world generation, and how this
   technology transforms gaming, VFX, VR, and robotics
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2025-11-15 03:00:00 +0800
 mermaid: true
 ---

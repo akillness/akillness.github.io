@@ -2,11 +2,11 @@
 title: "Microsoft’s Claude Code Moment: What It Means for AI-First Game Production"
 description: "From Microsoft’s internal adoption of Claude Code to a future of mixed AI toolchains—why this shift matters for game teams, pipelines, and junior roles."
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2026-02-04 09:30:00 +0900
 mermaid: true
 math: false

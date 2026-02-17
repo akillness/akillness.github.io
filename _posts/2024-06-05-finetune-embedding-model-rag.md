@@ -3,11 +3,11 @@ title: RAG or Fine Tuning? Fine-tune Embedding models for Retrieval Augmented Ge
   (RAG)
 description: Finetune, Embedding Model, RAG
 categories:
-- RAG/검색
+  - RAG/Search
 tags:
-- RAG
-- 임베딩
-- 검색
+  - RAG
+  - Embedding
+  - Search
 date: 2024-06-05 11:00:00 +0800
 pin: false
 mermaid: true

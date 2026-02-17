@@ -2,11 +2,11 @@
 title: 3D Language Gaussian Splatting ( LangSplat )
 description: Paper, 3DGS, LLM
 categories:
-- 멀티모달/컴퓨터비전
+  - Multimodal/Computer Vision
 tags:
-- 멀티모달
-- 비전
-- 생성모델
+  - Multimodal
+  - Vision
+  - Generative Model
 date: 2024-06-01 12:00:00 +0800
 mermaid: true
 ---

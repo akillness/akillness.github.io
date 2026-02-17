@@ -4,11 +4,11 @@ description: DeepMind's SIMA 2 integrates Gemini models to create AI agents that
   just follow instructions—they reason, converse, and self-improve in 3D game environments.
   A deep dive into the future of embodied AI and gaming companions.
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2025-11-13 03:00:00 +0800
 mermaid: true
 ---

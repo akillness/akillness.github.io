@@ -2,11 +2,11 @@
 title: GPT4o Release !!
 description: GPT4o, Release, News
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-05-14 10:00:00 +0800
 mermaid: true
 ---

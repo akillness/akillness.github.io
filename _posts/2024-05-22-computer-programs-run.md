@@ -2,11 +2,11 @@
 title: How do computer programs run
 description: Graph, Analytics
 categories:
-- 개발도구/생산성
+  - Development Tools/Productivity
 tags:
-- 개발도구
-- 생산성
-- 도구
+  - 개발도구
+  - 생산성
+  - Tools
 date: 2024-05-22 13:22:00 +0800
 mermaid: true
 ---

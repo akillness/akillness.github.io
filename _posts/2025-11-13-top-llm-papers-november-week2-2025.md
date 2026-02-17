@@ -4,11 +4,11 @@ description: A curated selection of the top 10 LLM research papers from November
   2, 2025, covering agent memory evaluation, multilingual tokenization, RAG optimization,
   multimodal models, domain-specific LLMs, and multi-agent systems.
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2025-11-13 03:00:00 +0800
 mermaid: true
 ---

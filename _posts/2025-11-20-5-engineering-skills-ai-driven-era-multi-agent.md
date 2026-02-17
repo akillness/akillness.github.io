@@ -4,11 +4,11 @@ description: 'Exploring the essential engineering skills for the AI era through 
   multi-agent lens: architectural thinking, problem decomposition, AI communication,
   and more'
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2025-11-20 15:00:00 +0800
 mermaid: true
 ---

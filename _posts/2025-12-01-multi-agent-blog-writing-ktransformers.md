@@ -4,11 +4,11 @@ title: Writing Blogs with Multi-Agent Systems - A Production Framework for AI-Po
 description: Exploring how multi-agent systems can revolutionize blog writing workflows,
   featuring KTransformers for efficient LLM inference and heterogeneous computing
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2025-12-01 10:00:00 +0800
 mermaid: true
 image:

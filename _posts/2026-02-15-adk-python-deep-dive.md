@@ -2,11 +2,11 @@
 title: "ADK Python Deep Dive: Code‑First Agents That Ship"
 description: "A detailed walkthrough of Google’s Agent Development Kit (ADK) for Python—architecture, tooling, evaluation, and how it maps to production‑grade game AI pipelines." 
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2026-02-15 10:00:00 +0900
 mermaid: true
 math: false

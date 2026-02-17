@@ -2,11 +2,11 @@
 title: Agents framework for LLM + AgentGen looks like a nice framework
 description: Agent, Transformer
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2024-08-14 11:20:00 +0800
 mermaid: true
 ---

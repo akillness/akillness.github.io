@@ -2,11 +2,11 @@
 title: VectorEmbeddings are the backbone of AI/ML applications
 description: LLM, VectorEmbedding
 categories:
-- RAG/검색
+  - RAG/Search
 tags:
-- RAG
-- 임베딩
-- 검색
+  - RAG
+  - Embedding
+  - Search
 date: 2024-05-18 16:15:00 +0800
 mermaid: true
 ---

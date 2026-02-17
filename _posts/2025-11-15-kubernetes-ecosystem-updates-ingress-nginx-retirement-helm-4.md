@@ -4,11 +4,11 @@ description: 'Two major updates are reshaping the Kubernetes landscape: Ingress 
   retirement signals Gateway API as the new standard, while Helm 4.0 introduces WASM
   plugins, Server-Side Apply, and content-based caching'
 categories:
-- 인프라/시스템
+  - Infrastructure/System
 tags:
-- 인프라
-- 운영
-- 아키텍처
+  - Infrastructure
+  - Operations
+  - Architecture
 date: 2025-11-15 03:00:00 +0800
 mermaid: true
 ---

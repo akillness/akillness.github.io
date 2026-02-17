@@ -2,11 +2,11 @@
 title: LLM Course - Let's start to make Simple LLM!
 description: LLM, Streamlit, Codespaces
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-05-12 23:57:00 +0800
 mermaid: true
 image:

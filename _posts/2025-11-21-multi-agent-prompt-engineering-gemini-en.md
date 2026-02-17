@@ -4,11 +4,11 @@ title: 'Prompt Engineering with Multi-Agent Systems: Gemini API''s Agentic Workf
 description: A practical guide to prompt engineering using Google Gemini API's multi-agent
   workflows and Structured Input (SI) templates
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2025-11-21 15:00:00 +0800
 mermaid: true
 ---

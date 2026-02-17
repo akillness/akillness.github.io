@@ -2,11 +2,11 @@
 title: Kakao API 관련해서 찾아본 내용
 description: Kakao, Utility
 categories:
-- 개발도구/생산성
+  - Development Tools/Productivity
 tags:
-- 개발도구
-- 생산성
-- 참조
+  - 개발도구
+  - 생산성
+  - Reference
 date: 2024-03-31 18:30:00 +0800
 render_with_liquid: true
 mermaid: true

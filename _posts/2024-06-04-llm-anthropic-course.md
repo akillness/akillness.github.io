@@ -2,11 +2,11 @@
 title: 🙌 Anthropic's latest tool-use course
 description: LLM, Anthropic
 categories:
-- 학습/가이드
+  - Learning/Guide
 tags:
-- 학습
-- 가이드
-- 강의
+  - Learning
+  - Guide
+  - Lecture
 date: 2024-06-04 13:20:00 +0800
 mermaid: true
 ---

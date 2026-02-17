@@ -2,11 +2,11 @@
 title: 𝗥𝗼𝘂𝘁𝗲 𝘆𝗼𝘂𝗿 𝗾𝘂𝗲𝗿𝘆 𝘁𝗼 𝗮 𝘀𝗺𝗮𝗹𝗹𝗲𝗿 𝗟𝗟𝗠 𝘄𝗵𝗲𝗻 𝗽𝗼𝘀𝘀𝗶𝗯𝗹𝗲
 description: Chatbot,RouteLLM
 categories:
-- 리뷰/동향
+  - Review/Trends
 tags:
-- 동향
-- 리뷰
-- 케이스
+  - Trend
+  - Review
+  - Case
 date: 2024-07-20 11:30:00 +0800
 mermaid: true
 ---

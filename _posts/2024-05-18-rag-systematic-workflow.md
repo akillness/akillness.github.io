@@ -2,11 +2,11 @@
 title: RAG isn't dead, you just need a systematic workflow
 description: RAG, System, Workflow
 categories:
-- RAG/검색
+  - RAG/Search
 tags:
-- RAG
-- 임베딩
-- 검색
+  - RAG
+  - Embedding
+  - Search
 date: 2024-05-18 14:20:00 +0800
 mermaid: true
 ---

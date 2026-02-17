@@ -2,11 +2,11 @@
 title: Struggling to Optimize Your RAG Setup? 😮
 description: LLM, RAG
 categories:
-- RAG/검색
+  - RAG/Search
 tags:
-- RAG
-- 임베딩
-- 검색
+  - RAG
+  - Embedding
+  - Search
 date: 2024-08-03 12:00:00 +0800
 mermaid: true
 ---

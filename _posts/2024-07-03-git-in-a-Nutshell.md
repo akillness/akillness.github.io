@@ -2,11 +2,11 @@
 title: Are you leveraging the full power of Git in your development workflow?
 description: Tools, Git
 categories:
-- RAG/검색
+  - RAG/Search
 tags:
-- RAG
-- 임베딩
-- 검색
+  - RAG
+  - Embedding
+  - Search
 date: 2024-07-03 20:10:00 +0800
 ---
 ## Here's why it's crucial:

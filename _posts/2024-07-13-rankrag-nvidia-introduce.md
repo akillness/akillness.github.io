@@ -2,11 +2,11 @@
 title: 🕹️ NVIDIA introduces RankRAG 8B & 70B
 description: NVIDIA, RankRAG
 categories:
-- RAG/검색
+  - RAG/Search
 tags:
-- RAG
-- 임베딩
-- 검색
+  - RAG
+  - Embedding
+  - Search
 date: 2024-07-13 15:00:00 +0800
 mermaid: true
 ---

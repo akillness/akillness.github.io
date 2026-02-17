@@ -4,11 +4,11 @@ description: SQLite-Graph adds powerful graph database capabilities to SQLite, i
   full Cypher query language support. Explore how this extension combines SQLite's
   reliability with Neo4j's graph query language for lightweight graph processing
 categories:
-- 데이터과학/알고리즘
+  - Data Science/Algorithms
 tags:
-- 데이터과학
-- 알고리즘
-- 분석
+  - Data Science
+  - Algorithm
+  - Analysis
 date: 2025-11-17 03:00:00 +0800
 mermaid: true
 image:

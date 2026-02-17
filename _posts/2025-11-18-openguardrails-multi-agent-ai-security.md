@@ -4,11 +4,11 @@ description: Analyzing the multi-agent architecture of an open-source AI securit
   platform that comprehensively defends against prompt injection, content risks, and
   data leakage
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2025-11-18 12:00:00 +0800
 mermaid: true
 image:

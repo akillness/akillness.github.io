@@ -2,11 +2,11 @@
 title: Generative AI Application Ecosystem
 description: Application, Ecosystem
 categories:
-- 리뷰/동향
+  - Review/Trends
 tags:
-- 동향
-- 리뷰
-- 케이스
+  - Trend
+  - Review
+  - Case
 date: 2024-07-15 11:30:00 +0800
 mermaid: true
 ---

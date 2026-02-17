@@ -2,11 +2,11 @@
 title: "Easy Dataset: A Full Pipeline for LLM Data, RAG, and Evaluation"
 description: "A hands‑on overview of Easy Dataset—document parsing, smart chunking, QA generation, and built‑in evaluation for fine‑tuning and RAG." 
 categories:
-- RAG/검색
+  - RAG/Search
 tags:
-- RAG
-- 임베딩
-- 검색
+  - RAG
+  - Embedding
+  - Search
 date: 2026-02-08 20:30:00 +0900
 mermaid: true
 math: false

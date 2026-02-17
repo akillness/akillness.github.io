@@ -2,11 +2,11 @@
 title: Choice of Vector Database significantly impacts the LLM application's performance.
 description: LLM,Vector Database
 categories:
-- RAG/검색
+  - RAG/Search
 tags:
-- RAG
-- 임베딩
-- 검색
+  - RAG
+  - Embedding
+  - Search
 date: 2024-07-11 22:00:00 +0800
 mermaid: true
 ---

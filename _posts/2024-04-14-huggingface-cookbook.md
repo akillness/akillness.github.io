@@ -2,11 +2,11 @@
 title: Little know gem the Open-source Cookbook
 description: Cookbook, Huggingface
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-04-17 15:10:00 +0800
 mermaid: true
 ---

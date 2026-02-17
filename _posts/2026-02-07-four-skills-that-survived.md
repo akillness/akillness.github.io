@@ -2,11 +2,11 @@
 title: "The 4 Skills That Actually Survived My Weekend"
 description: "Out of 100,000+ open‑source agent skills, these four are the only ones I genuinely use every day—and why they matter."
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2026-02-07 18:00:00 +0900
 mermaid: true
 math: false

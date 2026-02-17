@@ -2,11 +2,11 @@
 title: Deep Dive into LlaMA 3 by Hand
 description: Llama3
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-05-14 13:13:00 +0800
 ---
 ### **Original Article** : 👉 <https://towardsdatascience.com/deep-dive-into-llama-3-by-hand-%EF%B8%8F-6c6b23dc92b2>

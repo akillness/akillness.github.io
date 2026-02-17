@@ -5,11 +5,11 @@ description: Analyzing Anthropic's research on AI productivity gains through the
   of multi-agent systems - how collaborative AI agents could amplify the 80% time
   savings we're already seeing
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2025-11-25 15:00:00 +0800
 mermaid: true
 image:

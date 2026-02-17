@@ -2,11 +2,11 @@
 title: 💡 Accelerating LLMs by 2x with Graph-structured Speculative Decoding.
 description: LLM, Graph-Structured Decoding
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-08-03 12:00:00 +0800
 mermaid: true
 ---

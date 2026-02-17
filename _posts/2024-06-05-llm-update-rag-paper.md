@@ -2,11 +2,11 @@
 title: 🔉 Meta's latest "CoPE" (Contextual Position Encoding)
 description: Meta, CoPE
 categories:
-- 리뷰/동향
+  - Review/Trends
 tags:
-- 동향
-- 리뷰
-- 케이스
+  - Trend
+  - Review
+  - Case
 date: 2024-06-05 13:00:00 +0800
 mermaid: true
 ---

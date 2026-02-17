@@ -2,11 +2,11 @@
 title: "OpenContext - Give Your AI Assistant a Persistent Memory for Multi-Agent Workflows"
 description: "A personal context store for AI agents: CLI + MCP + Desktop app to capture, search, and reuse project knowledge across agents and repos"
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2026-01-17 14:00:00 +0800
 mermaid: true
 image:

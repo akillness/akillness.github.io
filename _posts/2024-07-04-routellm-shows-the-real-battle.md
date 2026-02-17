@@ -2,11 +2,11 @@
 title: Forget GPT-4o vs. Llama 3
 description: Data Analytics, Python
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-07-04 20:10:00 +0800
 mermaid: true
 ---

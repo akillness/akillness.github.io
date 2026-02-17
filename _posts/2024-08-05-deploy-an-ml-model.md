@@ -2,11 +2,11 @@
 title: Deploy an ML model 🧠
 description: LLM, Application
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-08-05 17:00:00 +0800
 mermaid: true
 ---

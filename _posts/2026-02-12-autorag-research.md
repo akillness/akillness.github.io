@@ -2,11 +2,11 @@
 title: "AutoRAG‑Research: A Standardized RAG Lab for Benchmarks, Pipelines, and Plugins"
 description: "AutoRAG‑Research unifies datasets, ships SOTA pipelines, and lets you run RAG experiments with one command." 
 categories:
-- RAG/검색
+  - RAG/Search
 tags:
-- RAG
-- 임베딩
-- 검색
+  - RAG
+  - Embedding
+  - Search
 date: 2026-02-12 11:30:00 +0900
 mermaid: true
 math: false

@@ -2,11 +2,11 @@
 title: LLama Factory is one of the best Open-source tools
 description: LLM, Llama
 categories:
-- LLM/모델·논문
+  - LLM/Model   - LLM/모델·논문 Papers
 tags:
-- LLM
-- 모델
-- 논문
+  - LLM
+  - Model
+  - Paper
 date: 2024-05-01 19:57:00 +0800
 mermaid: true
 image:

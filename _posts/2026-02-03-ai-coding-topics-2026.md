@@ -2,11 +2,11 @@
 title: "AI Coding in 2026: The Moment Agents Become a Team"
 description: "A game-dev take on Addy Osmani’s 2026 AI coding topics: agent loops, skills ecosystems, and multi‑agent orchestration reshaping production pipelines."
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2026-02-03 02:20:00 +0900
 mermaid: true
 math: false

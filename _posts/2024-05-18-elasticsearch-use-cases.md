@@ -2,11 +2,11 @@
 title: Top 6 ElasticSearch Use Cases
 description: ElasticSearch, Use Cases
 categories:
-- 리뷰/동향
+  - Review/Trends
 tags:
-- 동향
-- 리뷰
-- 케이스
+  - Trend
+  - Review
+  - Case
 date: 2024-05-18 14:00:00 +0800
 mermaid: true
 ---

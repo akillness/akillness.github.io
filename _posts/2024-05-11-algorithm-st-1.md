@@ -2,11 +2,11 @@
 title: 알고리듬 압축코스 - 강의소개
 description: Algorithm, Honglab
 categories:
-- 학습/가이드
+  - Learning/Guide
 tags:
-- 학습
-- 가이드
-- 강의
+  - Learning
+  - Guide
+  - Lecture
 date: 2024-05-11 14:30:00 +0800
 mermaid: true
 ---

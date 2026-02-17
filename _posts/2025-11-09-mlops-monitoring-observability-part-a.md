@@ -4,11 +4,11 @@ description: A comprehensive guide to MLOps monitoring and observability. Learn 
   models degrade in production, understand data drift vs concept drift, training-serving
   skew, and techniques for detecting these issues early.
 categories:
-- 인프라/시스템
+  - Infrastructure/System
 tags:
-- 인프라
-- 운영
-- 아키텍처
+  - Infrastructure
+  - Operations
+  - Architecture
 date: 2025-11-09 03:00:00 +0800
 mermaid: true
 image:

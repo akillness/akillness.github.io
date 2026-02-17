@@ -4,11 +4,11 @@ title: Combining Rust and Python for High-Performance AI Systems - Bridging Spee
 description: Exploring how Rust and Python complement each other in AI systems, overcoming
   Python's performance bottlenecks while maintaining its rich ecosystem
 categories:
-- 데이터과학/알고리즘
+  - Data Science/Algorithms
 tags:
-- 데이터과학
-- 알고리즘
-- 분석
+  - Data Science
+  - Algorithm
+  - Analysis
 date: 2025-12-05 10:00:00 +0800
 mermaid: true
 ---

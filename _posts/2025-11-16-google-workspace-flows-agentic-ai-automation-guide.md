@@ -5,11 +5,11 @@ description: Google Workspace Flows brings AI-powered automation directly into G
   Docs, Sheets, Drive, Calendar, and Chat. Learn how agentic AI transforms workflow
   automation from simple triggers to intelligent, context-aware processes
 categories:
-- 에이전트/오케스트레이션
+  - Agent/Orchestration
 tags:
-- 에이전트
-- 워크플로우
-- 오케스트레이션
+  - Agent
+  - Workflow
+  - Orchestration
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 image:
