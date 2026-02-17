@@ -1,6 +1,4 @@
 name: "Build and Deploy"
-
-enablement: true
 on:
   push:
     branches:
@@ -91,3 +89,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+        with:
+          enablement: true
