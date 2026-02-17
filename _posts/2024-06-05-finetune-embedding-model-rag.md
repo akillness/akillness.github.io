@@ -10,7 +10,7 @@ tags:
 - embedding-model
 - rag
 date: 2024-06-05 11:00:00 +0800
-pin: true
+pin: false
 mermaid: true
 ---
 # RAG or Fine Tuning? A simple feature comparision to decide which technique you should use!

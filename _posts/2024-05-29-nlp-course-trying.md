@@ -8,7 +8,7 @@ tags:
 - nlp
 - transformer
 date: 2024-05-29 00:13:00 +0800
-pin: true
+pin: false
 mermaid: true
 ---
 | Subject | Type | Link|

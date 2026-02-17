@@ -8,7 +8,7 @@ tags:
 - improving
 - language-model
 date: 2024-07-16 12:30:00 +0800
-pin: true
+pin: false
 ---
 ### 3 comon methods
 
