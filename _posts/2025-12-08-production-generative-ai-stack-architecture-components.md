@@ -1,12 +1,8 @@
 ---
-title: The Production Generative AI Stack - Architecture and Components
+title: "The Production Generative AI Stack - Architecture and Components"
 description: Exploring the modern AI technology stack that powers production-grade generative AI applications, from accelerated compute to user experience layers
-categories:
-  - Infrastructure/System
-tags:
-  - Infrastructure
-  - Operations
-  - Architecture
+categories: [Infrastructure/System]
+tags: [Infrastructure, Operations, Architecture]
 date: 2025-12-08 10:00:00 +0800
 mermaid: true
 math: false

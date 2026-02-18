@@ -2,12 +2,8 @@
 title: 'Signal-Decision Architecture: Reshaping Semantic Routing at Scale'
 description: How vLLM's new Signal-Decision Architecture scales from 14 fixed categories
   to unlimited intelligent routing decisions using multi-dimensional signal extraction
-categories:
-  - Infrastructure/System
-tags:
-  - Infrastructure
-  - Operations
-  - Architecture
+categories: [Infrastructure/System]
+tags: [Infrastructure, Operations, Architecture]
 date: 2025-11-19 12:00:00 +0800
 mermaid: true
 image:

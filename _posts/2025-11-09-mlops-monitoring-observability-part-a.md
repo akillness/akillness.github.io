@@ -3,12 +3,8 @@ title: 'The Full MLOps Blueprint: Monitoring and Observability—Part A'
 description: A comprehensive guide to MLOps monitoring and observability. Learn why
   models degrade in production, understand data drift vs concept drift, training-serving
   skew, and techniques for detecting these issues early.
-categories:
-  - Infrastructure/System
-tags:
-  - Infrastructure
-  - Operations
-  - Architecture
+categories: [Infrastructure/System]
+tags: [Infrastructure, Operations, Architecture]
 date: 2025-11-09 03:00:00 +0800
 mermaid: true
 image:

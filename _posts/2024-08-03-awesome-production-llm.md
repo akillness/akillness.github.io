@@ -1,12 +1,8 @@
 ---
-title: 🤩 𝐀𝐰𝐞𝐬𝐨𝐦𝐞-𝐏𝐫𝐨𝐝𝐮𝐜𝐭𝐢𝐨𝐧-𝐋𝐋𝐌
-description: LLM, Application
-categories:
-  - Review/Trends
-tags:
-  - Trend
-  - Review
-  - Case
+title: "🤩 𝐀𝐰𝐞𝐬𝐨𝐦𝐞-𝐏𝐫𝐨𝐝𝐮𝐜𝐭𝐢𝐨𝐧-𝐋𝐋𝐌"
+description: "Curiosity: What are the best open-source libraries for building production-ready LLM applications?"
+categories: [Review/Trends]
+tags: [Trend, Review, Case]
 date: 2024-08-03 13:00:00 +0800
 mermaid: true
 ---

@@ -3,12 +3,8 @@ title: '5 Engineering Skills to Prioritize in the AI-Driven Era: A Multi-Agent P
 description: 'Exploring the essential engineering skills for the AI era through a
   multi-agent lens: architectural thinking, problem decomposition, AI communication,
   and more'
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-11-20 15:00:00 +0800
 mermaid: true
 ---

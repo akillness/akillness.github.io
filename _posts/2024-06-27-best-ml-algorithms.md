@@ -1,12 +1,8 @@
 ---
-title: 𝗨𝗻𝘃𝗲𝗶𝗹𝗶𝗻𝗴 𝘁𝗵𝗲 𝗧𝗼𝗽 𝟭𝟮 𝗠𝗮𝗰𝗵𝗶𝗻𝗲 𝗟𝗲𝗮𝗿𝗻𝗶𝗻𝗴 𝗔𝗹𝗴𝗼𝗿𝗶𝘁𝗵𝗺𝘀 !
-description: ML, Algorithm
-categories:
-  - Review/Trends
-tags:
-  - Trend
-  - Review
-  - Case
+title: "𝗨𝗻𝘃𝗲𝗶𝗹𝗶𝗻𝗴 𝘁𝗵𝗲 𝗧𝗼𝗽 𝟭𝟮 𝗠𝗮𝗰𝗵𝗶𝗻𝗲 𝗟𝗲𝗮𝗿𝗻𝗶𝗻𝗴 𝗔𝗹𝗴𝗼𝗿𝗶𝘁𝗵𝗺𝘀 !"
+description: "If this content helps, repost this ♻️ to your network and follow Dirk Zee."
+categories: [Review/Trends]
+tags: [Trend, Review, Case]
 date: 2024-06-27 20:10:00 +0800
 ---
 - 𝗟𝗶𝗻𝗲𝗮𝗿 𝗥𝗲𝗴𝗿𝗲𝘀𝘀𝗶𝗼𝗻: A staple for any machine learning enthusiast, linear regression is like drawing a straight line through data points on a graph to predict future values.
@@ -44,28 +40,28 @@ If this content helps, repost this ♻️ to your network and follow Dirk Zee.
 
 * * * 
 
-- 선형 회귀: 모든 기계 학습 애호가의 필수품인 선형 회귀는 그래프의 데이터 요소를 통해 직선을 그려 미래 값을 예측하는 것과 같습니다.
+- Linear Regression: A staple for every ML enthusiast, linear regression is like drawing a straight line through data points on a graph to predict future values.
 
-- 로지스틱 회귀: 이 알고리즘은 데이터를 불연속적인 결과로 분류하는 데 도움이 되며, 과일을 사과와 오렌지로 분류하는 것과 같은 분류에 관한 것입니다.
+- Logistic Regression: This algorithm helps classify data into discrete outcomes — it's all about classification, like sorting fruits into apples and oranges.
 
-- 의사 결정 트리(Decision Tree): 의사 결정 트리 알고리즘과 같은 결정을 내리기 위해 데이터를 가지고 지능적인 '20가지 질문' 게임을 한다고 상상해 보십시오.
+- Decision Tree: Imagine playing an intelligent '20 Questions' game with data to make decisions — that's the Decision Tree algorithm.
 
-- 랜덤 포레스트(Random Forest): 여러 의사 결정 트리를 결합하여 이 알고리즘은 보다 정확한 추측을 하는 데 있어 단일 '트리'를 능가하는 '포레스트'를 생성합니다.
+- Random Forest: By combining multiple Decision Trees, this algorithm creates a 'forest' that outperforms a single 'tree' in making more accurate predictions.
 
-- SVM(Support Vector Machine): SVM은 알고리즘 세계의 전략가로서 데이터 포인트 그룹을 구분하는 최상의 경계를 찾습니다.
+- Support Vector Machine (SVM): The strategist of the algorithm world, SVM finds the best boundary to separate groups of data points.
 
-- K-Nearest Neighbours: 가장 가까운 친구를 찾는 것처럼 이 알고리즘은 '가장 가까운 이웃'을 보고 그룹 소속을 예측합니다.
+- K-Nearest Neighbours: Like finding the closest friend, this algorithm looks at the 'nearest neighbors' to predict group membership.
 
-- 그래디언트 부스팅 머신(Gradient Boosting Machines): 이 알고리즘은 실수를 최소화하기 위해 의사 결정을 단계별로 개선하며, 시간이 지남에 따라 더 똑똑해지는 것이 중요합니다.
+- Gradient Boosting Machines: This algorithm improves decision-making step by step to minimize errors — it's all about getting smarter over time.
 
-- 딥 러닝: 인간의 뇌를 모방한 복잡한 신경망을 탐구하는 딥 러닝은 이미지 및 소리와 같은 데이터에서 패턴과 통찰력을 인식하는 데 탁월합니다.
+- Deep Learning: Delving into complex neural networks that mimic the human brain, Deep Learning excels at recognizing patterns and insights in data like images and sounds.
 
-- 주성분 분석(PCA): PCA는 가장 중요한 부분에 집중하여 데이터를 단순화하여 분석 및 시각화를 더 쉽게 합니다.
+- Principal Component Analysis (PCA): PCA simplifies data by focusing on the most important parts, making analysis and visualization easier.
 
-- 나이브 베이즈(Naive Bayes): 확률과 독립성 가정을 기반으로 하는 이 알고리즘은 예측을 수행하는 빠르고 지저분한 방법입니다.
+- Naive Bayes: Based on probability and independence assumptions, this algorithm is a quick and dirty way to make predictions.
 
-- 클러스터링 알고리즘 : 그룹이 무엇이어야하는지 알려주지 않고 비슷한 것들을 함께 그룹화하려고 시도한 적이 있습니까? 이것이 바로 클러스터링입니다.
+- Clustering Algorithms: Ever tried to group similar things together without being told what the groups should be? That's Clustering.
 
-- 신경망: 딥 러닝의 중추인 신경망은 우리 뇌의 상호 연결성에서 영감을 받았으며 복잡한 문제 해결에 매우 중요합니다.
+- Neural Networks: The backbone of Deep Learning, Neural Networks are inspired by the interconnectedness of our brains and are crucial for solving complex problems.
 
 </details>

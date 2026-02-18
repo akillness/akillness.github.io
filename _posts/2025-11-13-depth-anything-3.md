@@ -3,12 +3,8 @@ title: '[Paper] Depth Anything 3: Recovering the Visual Space from Any Views'
 description: Depth Anything 3 (DA3) predicts spatially consistent geometry from arbitrary
   visual inputs using a single plain transformer and depth-ray representation, achieving
   SOTA performance surpassing VGGT by 35.7% in camera pose accuracy
-categories:
-  - Review/Trends
-tags:
-  - Trend
-  - Review
-  - Case
+categories: [Review/Trends]
+tags: [Trend, Review, Case]
 date: 2025-11-13 03:00:00 +0800
 mermaid: true
 image:

@@ -1,12 +1,8 @@
 ---
 title: "Evaluating DeepAgents CLI on Terminal Bench 2.0"
 description: "How DeepAgents CLI performs on Terminal Bench 2.0, achieving ~42.5% accuracy with Claude Sonnet 4.5, and the infrastructure needed for isolated agent evaluation"
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-12-07 10:00:00 +0800
 mermaid: true
 math: false
@@ -331,7 +327,7 @@ graph LR
 ---
 
 <details markdown="1">
-<summary style="font-size:20px; font-weight:bold; cursor:pointer;">📋 Summary / 요약</summary>
+<summary style="font-size:20px; font-weight:bold; cursor:pointer;">📋 Summary</summary>
 
 ## English Summary
 
@@ -351,20 +347,20 @@ graph LR
 
 ---
 
-## 한국어 요약
+## Korean Summary
 
-**DeepAgents CLI를 Terminal Bench 2.0에서 평가하기**는 DeepAgents CLI 프레임워크와 Terminal Bench 2.0 벤치마크를 사용하여 코딩 에이전트를 체계적으로 평가하는 방법을 탐구합니다. 이 글은 다음을 다룹니다:
+**Evaluating DeepAgents CLI on Terminal Bench 2.0** explores how to systematically evaluate coding agents using the DeepAgents CLI framework and the Terminal Bench 2.0 benchmark. This article covers:
 
-- **DeepAgents CLI**: 오픈소스이며 Python 기반이고 모델에 독립적인 터미널 기반 코딩 에이전트로, 셸 실행, 파일시스템 도구, 웹 검색, 작업 계획, 영구 메모리를 제공합니다.
+- **DeepAgents CLI**: An open-source, Python-based, model-agnostic terminal-based coding agent that provides shell execution, filesystem tools, web search, task planning, and persistent memory.
 
-- **평가의 도전**: 깨끗하고 격리된 환경에서 에이전트를 실행하려면 격리, 병렬화, 안전성 문제를 해결해야 합니다. 각 테스트는 깨끗한 상태에서 시작하고, 병렬로 실행되며, 에이전트가 로컬 머신에 영향을 주지 않도록 보장해야 합니다.
+- **Evaluation Challenges**: Running agents in a clean, isolated environment requires addressing issues of isolation, parallelization, and safety. Each test must start from a clean state, run in parallel, and ensure the agent does not affect the local machine.
 
-- **Harbor 프레임워크**: 컨테이너화된 환경에서 대규모로 에이전트를 평가하는 프레임워크로, Docker, Modal, Daytona, E2B, Runloop를 지원합니다. 자동 테스트 실행, 자동화된 보상 점수 계산을 처리하며, 사전 구축된 평가 데이터셋 레지스트리를 제공합니다.
+- **Harbor Framework**: A framework for evaluating agents at scale in containerized environments, supporting Docker, Modal, Daytona, E2B, and Runloop. It handles automated test execution, automated reward score calculation, and provides a pre-built evaluation dataset registry.
 
-- **Terminal Bench 2.0**: 소프트웨어 엔지니어링, 생물학, 보안, 게임 등 다양한 도메인에서 89개의 작업을 포함하는 벤치마크로, 터미널 환경에서 에이전트가 얼마나 잘 작동하는지 자동화된 검증으로 측정합니다.
+- **Terminal Bench 2.0**: A benchmark containing 89 tasks across diverse domains including software engineering, biology, security, and gaming, measuring how well agents perform in a terminal environment with automated verification.
 
-- **결과**: Claude Sonnet 4.5를 사용한 DeepAgents CLI는 **~42.5% 정확도**를 달성했습니다 (2회 시행에서 44.9%와 40.4%). 이는 Claude Code 자체와 동등한 성능으로, DeepAgents가 코딩 에이전트를 위한 경쟁력 있는 기반임을 검증합니다.
+- **Results**: DeepAgents CLI using Claude Sonnet 4.5 achieved **~42.5% accuracy** (44.9% and 40.4% across 2 runs). This is equivalent performance to Claude Code itself, validating DeepAgents as a competitive foundation for coding agents.
 
-- **핵심 인사이트**: 평가 인프라(Harbor + Daytona)는 40개의 동시 시행을 가능하게 하여 반복 속도를 크게 향상시킵니다. 샘플링 분산(4.5% 차이)은 여러 번 실행의 중요성을 강조합니다.
+- **Key Insights**: The evaluation infrastructure (Harbor + Daytona) enables 40 concurrent trials, greatly improving iteration speed. Sampling variance (4.5% difference) highlights the importance of multiple runs.
 
 </details>

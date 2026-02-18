@@ -1,18 +1,13 @@
 ---
-title: 🍎 Post-training in the Apple Intelligence paper
-description: LLM, Apple, OnDevice
-categories:
-  - Review/Trends
-tags:
-  - Trend
-  - Review
-  - Case
+title: "🍎 Post-training in the Apple Intelligence paper"
+description: "Apple uses a classic post-training pipeline."
+categories: [Review/Trends]
+tags: [Trend, Review, Case]
 date: 2024-08-03 22:00:00 +0800
 image:
   path: /assets/img/llm/apple-foundation-models.png
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt:
-  - Overview for the Apple Foundation models
+  alt: "Overview for the Apple Foundation models"
 ---
 ![ Architecture of Apple Intelligence with adapters for the language on-device and server models ](/assets/img/llm/architecture-of-apple-intelligence.png){: .light .shadow .rounded-10 w='1212' h='668' }
 

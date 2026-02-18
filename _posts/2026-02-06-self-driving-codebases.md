@@ -1,12 +1,8 @@
 ---
 title: "Towards Self‑Driving Codebases: What Cursor’s Agent Harness Teaches Us"
 description: "A deep read of Cursor’s multi‑agent research—how they moved from single agents to a recursive planner/worker system, and what that means for production pipelines."
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2026-02-06 13:30:00 +0900
 mermaid: true
 math: false

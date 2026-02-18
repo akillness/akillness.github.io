@@ -1,12 +1,8 @@
 ---
 title: "GLM-4.7 - Your New Coding Partner with 358B Parameters"
 description: "Z.ai releases GLM-4.7, a 358B MoE model excelling in agentic coding, complex reasoning, and tool-use with interleaved thinking capabilities"
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2026-01-18 10:00:00 +0900
 mermaid: true
 math: true

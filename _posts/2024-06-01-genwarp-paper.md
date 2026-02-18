@@ -1,13 +1,9 @@
 ---
-title: Single Image to Novel Views with Semantic-Preserving Generative Warping ( GenWarp
+title: "Single Image to Novel Views with Semantic-Preserving Generative Warping ( GenWarp"
   )
-description: Paper, GenWarp, Single Image
-categories:
-  - Review/Trends
-tags:
-  - Trend
-  - Review
-  - Case
+description: "Curiosity: How can we generate novel views from a single image while preserving semantic details?"
+categories: [Review/Trends]
+tags: [Trend, Review, Case]
 date: 2024-06-01 11:00:00 +0800
 mermaid: true
 ---
@@ -23,7 +19,7 @@ mermaid: true
 > - **💻 Code**: Coming soon
 {: .prompt-info}
 
-**Organizations**: SonyAI, Sony Group Corporation, 고려대학교
+**Organizations**: SonyAI, Sony Group Corporation, Korea University
 
 ### Challenge Overview
 
@@ -117,20 +113,20 @@ graph TB
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-## 🌟논문의 몇 가지 지침
+## 🌟 Key Guidelines from the Paper
 
-- 🎯단일 이미지에서 새로운 뷰를 생성하는 것은 3D 장면의 복잡성과 모델을 훈련할 기존 다중 뷰 데이터 세트의 제한된 다양성으로 인해 어려운 작업으로 남아 있습니다.
+- 🎯 Generating novel views from a single image remains a challenging task due to the complexity of 3D scenes and the limited diversity of existing multi-view datasets used to train models.
 
-- 🎯 대규모 T2I(Text-to-Image) 모델과 MDE(단안 깊이 추정)를 결합한 최근 연구는 실제 이미지를 처리하는 데 있어 가능성을 보여주었습니다.
+- 🎯 Recent work combining large-scale T2I (Text-to-Image) models with MDE (Monocular Depth Estimation) has shown promise in handling real-world images.
 
-- 🎯이러한 방법에서 입력 뷰는 추정된 깊이 맵이 있는 새로운 뷰로 기하학적으로 뒤틀린 다음 T2I 모델에 의해 뒤틀린 이미지를 그립니다. 그러나 시끄러운 깊이 맵과 입력 보기를 새로운 관점으로 왜곡할 때 의미론적 세부 정보가 손실되는 데 어려움을 겪습니다.
+- 🎯 In these methods, the input view is geometrically warped to the new view using an estimated depth map, and then the T2I model inpaints the warped image. However, they struggle with noisy depth maps and loss of semantic detail when warping the input view to a new perspective.
 
-- 🎯이 논문에서 저자들은 T2I 생성 모델이 셀프 어텐션을 통해 크로스 뷰 어텐션을 강화하여 워프할 위치와 생성 위치를 학습할 수 있도록 하는 의미론적 보존 생성 워핑 프레임워크인 단일 샷 소설 뷰 합성을 위한 새로운 접근 방식을 제안했습니다.
+- 🎯 In this paper, the authors propose a novel approach for single-shot novel view synthesis — a semantics-preserving generative warping framework that enables T2I generative models to enhance cross-view attention via self-attention, learning where to warp and where to generate.
 
-- 🎯그들의 접근 방식은 소스 뷰 이미지에서 생성 모델을 조정하고 기하학적 뒤틀림 신호를 통합하여 기존 방법의 한계를 해결합니다.
+- 🎯 Their approach addresses the limitations of existing methods by conditioning the generative model on source-view images and incorporating geometric warping signals.
 
-🏢조직: SonyAI, Sony Group Corporation, 고려대학교 
+🏢 Organizations: SonyAI, Sony Group Corporation, Korea University 
 
-🧙논문 저자: Junyoung Seo, Kazumi Fukuda, Takashi Shibuya, Takuya Narihira, Naoki Murata, Shoukang Hu, Chieh-Hsin (Jesse) Lai, Seungryong Kim, Yuki Mitsufuji, PhD 
+🧙 Paper Authors: Junyoung Seo, Kazumi Fukuda, Takashi Shibuya, Takuya Narihira, Naoki Murata, Shoukang Hu, Chieh-Hsin (Jesse) Lai, Seungryong Kim, Yuki Mitsufuji, PhD 
 
 </details>

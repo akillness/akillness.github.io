@@ -1,12 +1,8 @@
 ---
 title: "How Claude Code Works: The Agent Loop, Tools, and Safety"
 description: "A practical breakdown of Claude Code’s agent loop, tool categories, sessions, permissions, and how to work with it effectively."
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2026-02-08 21:10:00 +0900
 mermaid: true
 math: false

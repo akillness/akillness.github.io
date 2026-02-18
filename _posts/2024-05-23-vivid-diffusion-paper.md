@@ -1,12 +1,8 @@
 ---
-title: 👚👚 ViViD Diffusion Virtual Try-ON 👚👚
-description: Paper, Generative AI, ViViD
-categories:
-  - Multimodal/Computer Vision
-tags:
-  - Multimodal
-  - Vision
-  - Generative Model
+title: "👚👚 ViViD Diffusion Virtual Try-ON 👚👚"
+description: "{% include embed/youtube.html id='r9giQPUp1Gw' %}."
+categories: [Multimodal/Computer Vision]
+tags: [Multimodal, Vision, Generative Model]
 date: 2024-05-23 19:00:00 +0800
 mermaid: true
 ---
@@ -107,15 +103,15 @@ graph TB
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-## 👉 Alibaba 는 가상 체험 작업을 처리하기 위해 강력한 확산 모델을 사용하는 새로운 프레임워크인 ViViD를 발표했습니다. 
+## 👉 Alibaba Introduces ViViD, a New Framework Using Powerful Diffusion Models for Virtual Try-On Tasks 
 
-코드 발표, 아직😢 공개되지 않음
+Code release: not yet publicly available 😢
 
-하이라이트:
-- ✅비디오 VTON을 다루는 새로운 아키텍처
-- ✅HQ 시착 비디오를 합성하기 위한 확산 모델
-- ✅시간적 일관성을 위한 포즈 + 시간적 모듈
-- ✅새로운 주목 위업. 의복을 위한 융합 기계장치
-- ✅다중 범주 데이터 세트: 9,700켤레의 HQ 의류 클립
+Highlights:
+- ✅ New architecture for video VTON
+- ✅ Diffusion model for synthesizing HQ try-on videos
+- ✅ Pose + temporal module for temporal consistency
+- ✅ New attention feature: fusion mechanism for garments
+- ✅ Multi-category dataset: 9,700 pairs of HQ clothing clips
 
 </details>

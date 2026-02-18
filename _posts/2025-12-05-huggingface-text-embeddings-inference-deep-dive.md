@@ -1,15 +1,11 @@
 ---
-title: HuggingFace Text Embeddings Inference (TEI) - A Deep Dive into High-Performance
+title: "HuggingFace Text Embeddings Inference (TEI) - A Deep Dive into High-Performance"
   Embedding Architecture
 description: Exploring how TEI combines Rust's performance with Python's flexibility
   to deliver blazing-fast text embeddings inference, from architecture to production
   deployment
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2025-12-05 10:00:00 +0800
 mermaid: true
 math: true

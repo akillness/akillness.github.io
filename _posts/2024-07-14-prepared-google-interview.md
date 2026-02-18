@@ -1,12 +1,8 @@
 ---
-title: How to prepare for a Google interview?
-escription: Interview, Prepare
-categories:
-  - Data Science/Algorithms
-tags:
-  - Data Science
-  - Algorithm
-  - Analysis
+title: "How to prepare for a Google interview?"
+description: "A structured guide to preparing for Google technical interviews, covering coding rounds, system design, behavioral questions, and study strategies."
+categories: [Data Science/Algorithms]
+tags: [Data Science, Algorithm, Analysis]
 date: 2024-07-14 10:00:00 +0800
 mermaid: true
 ---

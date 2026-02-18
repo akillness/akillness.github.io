@@ -1,19 +1,14 @@
 ---
-title: Game Development Course with AI
-description: LLM, Game, AI, Unity
-categories:
-  - Learning/Guide
-tags:
-  - Learning
-  - Guide
-  - Lecture
+title: "Game Development Course with AI"
+description: "| ML For Games Course | Course | <https://huggingface.co/learn/ml-games-course/unit0/introduction> |."
+categories: [Learning/Guide]
+tags: [Learning, Guide, Lecture]
 date: 2024-05-29 23:13:00 +0800
 mermaid: true
 image:
   path: /assets/img/blog/ML_for_Games.jpeg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt:
-  - Overview of ML for Games Course
+  alt: "Overview of ML for Games Course"
 ---
 | Subject | Type | Link|
 | :--- | :--- | :--- |
@@ -115,12 +110,4 @@ Article : <https://www.aiandgames.com/p/the-ai-of-dark-souls?utm_source=post-ema
 
 {% include embed/youtube.html id='4ke8D_FgAj0' %}
 
-<!-- <details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-* * * 
-
-## 내 가이드를 사용하여 다가오는 모든 트렌드를 따라잡으세요! 
-
-
-</details> -->

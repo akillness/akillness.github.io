@@ -1,12 +1,8 @@
 ---
 title: "nanobot: A 4K‑Line Personal Agent and Why Minimalism Matters"
 description: "A game‑dev view on HKUDS/nanobot—an ultra‑light Clawdbot‑inspired agent—why the tiny codebase changes how we learn, iterate, and ship." 
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2026-02-02 22:57:00 +0900
 mermaid: true
 math: false

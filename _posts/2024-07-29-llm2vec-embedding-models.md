@@ -1,12 +1,8 @@
 ---
-title: 𝐋𝐋𝐌2𝐕𝐞𝐜 - 𝐓𝐫𝐚𝐧𝐬𝐟𝐨𝐫𝐦 𝐋𝐋𝐌𝐬 𝐢𝐧𝐭𝐨 𝐄𝐦𝐛𝐞𝐝𝐝𝐢𝐧𝐠 𝐌𝐨𝐝𝐞𝐥𝐬
-description: LLM, LLM2Vec
-categories:
-  - Review/Trends
-tags:
-  - Trend
-  - Review
-  - Case
+title: "𝐋𝐋𝐌2𝐕𝐞𝐜 - 𝐓𝐫𝐚𝐧𝐬𝐟𝐨𝐫𝐦 𝐋𝐋𝐌𝐬 𝐢𝐧𝐭𝐨 𝐄𝐦𝐛𝐞𝐝𝐝𝐢𝐧𝐠 𝐌𝐨𝐝𝐞𝐥𝐬"
+description: "Curiosity: Can we transform decoder-only LLMs into powerful text encoders?"
+categories: [Review/Trends]
+tags: [Trend, Review, Case]
 date: 2024-07-29 13:00:00 +0800
 mermaid: true
 ---

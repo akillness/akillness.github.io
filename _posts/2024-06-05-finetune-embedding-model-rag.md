@@ -1,13 +1,9 @@
 ---
-title: RAG or Fine Tuning? Fine-tune Embedding models for Retrieval Augmented Generation
+title: "RAG or Fine Tuning? Fine-tune Embedding models for Retrieval Augmented Generation"
   (RAG)
-description: Finetune, Embedding Model, RAG
-categories:
-  - RAG/Search
-tags:
-  - RAG
-  - Embedding
-  - Search
+description: "For customizing LLMs, in addition to RAG, another optimization technique is fine-tuning."
+categories: [RAG/Search]
+tags: [RAG, Embedding, Search]
 date: 2024-06-05 11:00:00 +0800
 pin: false
 mermaid: true
@@ -266,46 +262,46 @@ There are several factors that need to be considered while selecting an embeddin
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-## RAG 또는 미세 조정? 어떤 기술을 사용해야 하는지 결정하기 위한 간단한 기능 비교!
+## RAG or Fine-Tuning? A simple capability comparison to help you decide which technique to use!
 
-LLM을 커스터마이징하기 위해 RAG 외에도 또 다른 최적화 기술이 미세 조정입니다.
+In addition to RAG, another optimization technique for customizing LLMs is fine-tuning.
 
-> **RAG는** 모델에 교과서를 제공하는 것과 유사하여 특정 쿼리를 기반으로 정보를 검색할 수 있습니다. 이 방법은 모델이 특정 정보 검색 작업을 처리해야 하는 시나리오에 적합합니다. 그러나 RAG는 모델이 광범위한 도메인을 이해하거나 새로운 언어, 형식 또는 스타일을 학습하도록 학습시키는 데는 적합하지 않습니다.
+> **RAG** is analogous to giving the model a textbook so it can retrieve information based on specific queries. This method is suitable for scenarios where the model needs to handle specific information retrieval tasks. However, RAG is not well-suited for training the model to understand broad domains or learn new languages, formats, or styles.
 {: .prompt-info }
 
-> **미세 조정은** 학생들이 광범위한 학습을 통해 지식을 내면화할 수 있도록 하는 것과 유사합니다. 미세 조정은 미세 조정되지 않은 모델의 성능을 향상시키고 상호 작용을 보다 효율적으로 만들 수 있습니다. 기본 모델의 기존 지식을 강조하고, 모델의 출력을 수정하거나 사용자 지정하고, 모델에 복잡한 지시문을 제공하는 데 특히 적합합니다. 
+> **Fine-tuning** is analogous to allowing students to internalize knowledge through extensive study. Fine-tuning can improve the performance of non-fine-tuned models and make interactions more efficient. It is particularly well-suited for emphasizing the base model's existing knowledge, modifying or customizing the model's output, and providing the model with complex instructions. 
 {: .prompt-info }
 
-때로는 한 가지 접근 방식 또는 다른 접근 방식을 선택하는 것이 간단하지 않은 것처럼 보일 수 있으므로 이 가이드는 사용 사례에 더 적합한 기술을 구별하는 데 도움이 될 것입니다!
+Sometimes choosing one approach over the other may not seem straightforward, so this guide will help you distinguish which technique is better suited for your use case!
 
-## 생산 현장에서의 RAG: 견고한 데이터 전략💥의 중요성
+## RAG in Production: The Importance of a Solid Data Strategy 💥
 
-RAG(Retrieval-Augmented Generation)는 제너레이티브 AI에서 가장 인기 있는 주제 중 하나가 되었으며, 실제 데이터로 모델 응답을 향상시킬 수 있는 강력한 방법을 제공합니다. 그러나 솔직히 말해서 견고한 데이터 전략이 없으면 밈에 어울리는 실패를 맞이하게 됩니다. 😂
+Retrieval-Augmented Generation (RAG) has become one of the most popular topics in generative AI, offering a powerful way to enhance model responses with real-world data. But honestly, without a solid data strategy, you are heading for a meme-worthy failure. 😂
 
-📈 RAG에 데이터 전략이 필요한 이유:
+📈 Why RAG needs a data strategy:
 
-1. 데이터 품질: 쓰레기 유입, 쓰레기 배출. 모델은 검색하는 데이터만큼만 우수합니다.
-2. 관련성: 데이터가 사용 사례와 관련이 있는지 확인합니다.
-3. 확장성: 증가하는 수요를 따라잡기 위해 데이터를 효율적으로 관리하고 확장합니다.
+1. Data Quality: Garbage in, garbage out. The model is only as good as the data it retrieves.
+2. Relevance: Ensure the data is relevant to your use case.
+3. Scalability: Manage and scale your data efficiently to keep up with growing demand.
 
-신중한 데이터 전략은 성공적인 RAG 구현의 중추라는 점을 기억하십시오.
+Remember that a thoughtful data strategy is the backbone of a successful RAG implementation.
 
-🚀 결론: RAG 사용 사례가 실패하지 않도록 하십시오. 데이터 전략에 투자하고 AI가 급증하는 것을 지켜보십시오! 🌟
+🚀 Conclusion: Don't let your RAG use case fail. Invest in your data strategy and watch your AI soar! 🌟
 
-##  미세 조정은 검색 속도를 크게 높일 수 있습니다. 👀
+## Fine-tuning can significantly boost retrieval speed. 👀
 
-임베딩 모델은 RAG(Retrieval-Augmented Generation) 애플리케이션에 매우 중요하지만 일반 모델은 도메인별 작업에 미치지 못하는 경우가 많습니다. 
+Embedding models are crucial for RAG (Retrieval-Augmented Generation) applications, but general models often fall short on domain-specific tasks. 
 
-Matryoshka Representation Learning과 같은 최신 연구를 사용하여 NVIDIA의 2023 SEC Filing 데이터 세트를 사용하여 금융 RAG 애플리케이션용 임베딩 모델을 미세 조정하는 방법에 대한 새로운 블로그를 공유하게 되어 기쁩니다.
+I am happy to share a new blog on how to fine-tune an embedding model for financial RAG applications using recent research like Matryoshka Representation Learning and NVIDIA's 2023 SEC Filing dataset.
 
-- 🚀 미세 조정으로 단 6.3k 샘플로 7.4%에서 22.55%까지 성능 향상
-- ✅ 기준 생성 + 학습 중 평가
-- 🧬 미세 조정에 사용되는 생성된 합성 데이터
-- ⏱️ ~10,000에 대한 교육, 소비자용 GPU에서 단 5분
-- 🪆 Matryoshka는 6배 더 작은 크기로 99%의 성능을 유지합니다.
-- 📈 미세 조정된 128-dim 모델은 기준 768-dim보다 6.51% 더 우수합니다.
-- 🆕 새로운 문장 변환기 v3 사용
+- 🚀 Fine-tuning boosts performance from 7.4% to 22.55% with just 6.3k samples
+- ✅ Baseline generation + evaluation during training
+- 🧬 Generated synthetic data used for fine-tuning
+- ⏱️ Training for ~10,000 steps in just 5 minutes on a consumer GPU
+- 🪆 Matryoshka retains 99% of performance at 6x smaller size
+- 📈 Fine-tuned 128-dim model outperforms the baseline 768-dim by 6.51%
+- 🆕 Uses new Sentence Transformers v3
 
-빌드하러 가세요! 🤗
+Go build! 🤗
 
 </details>

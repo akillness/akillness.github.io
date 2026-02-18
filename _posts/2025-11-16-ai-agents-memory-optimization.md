@@ -4,12 +4,8 @@ title: '[Tutorial] A Practical Deep Dive Into Memory Optimization for Agentic Sy
 description: Learn how to optimize memory for AI agents, understanding the difference
   between memory, knowledge, and tools, and why context management is crucial for
   production agent systems
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 image:

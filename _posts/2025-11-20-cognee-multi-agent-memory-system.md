@@ -4,12 +4,8 @@ title: 'Cognee: Building Persistent Memory for Multi-Agent Systems - Beyond RAG 
 description: Explore Cognee's ECL pipeline architecture that replaces traditional
   RAG with graph-vector hybrid memory for AI agents, enabling persistent and dynamic
   knowledge across multi-agent systems
-categories:
-  - RAG/Search
-tags:
-  - RAG
-  - Embedding
-  - Search
+categories: [RAG/Search]
+tags: [RAG, Embedding, Search]
 date: 2025-11-20 15:00:00 +0800
 mermaid: true
 image:

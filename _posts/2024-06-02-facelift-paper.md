@@ -1,12 +1,8 @@
 ---
-title: 🎭🎭 FaceLift new SOTA in 2D Landmarks 🎭🎭
-description: Paper, FaceLift, Tracking
-categories:
-  - Review/Trends
-tags:
-  - Trend
-  - Review
-  - Case
+title: "🎭🎭 FaceLift new SOTA in 2D Landmarks 🎭🎭"
+description: "{% include embed/youtube.html id='drEB44IfZi0' %}."
+categories: [Review/Trends]
+tags: [Trend, Review, Case]
 date: 2024-06-02 19:00:00 +0800
 mermaid: true
 ---
@@ -100,15 +96,15 @@ Flawless AI
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-## 👉Flawless AI는 손으로 라벨링한 2D 랜드마크를 직접 들어 올려 3D 랜드마크를 학습하고 3D 랜드마크 데이터 세트 없이 더 나은 선명도 정렬을 보장하는 새로운 반지도 접근 방식을 공개합니다.
+## 👉 Flawless AI unveils a new semi-supervised approach that directly lifts hand-labeled 2D landmarks to learn 3D landmarks and ensure better sharpness alignment without a 3D landmark dataset.
 
-발표된🥹 코드 없음
+No code released 🥹
 
-하이라이트:
-- ✅새로운 준감독 HQ 2D 랜드마크
-- ✅2D-3D 리프팅을 다루기 전 3D 인식 GAN
-- ✅2D GT에 맞춰 정렬된 정확한 3D 랜드마크
-- ✅체적 일관성을 활용하는 3D ViT
-- ✅2D-3D 얼굴 데이터 세트에 대한 새로운 SOTA
+Highlights:
+- ✅ New semi-supervised HQ 2D landmarks
+- ✅ 3D-aware GAN prior to handling 2D-3D lifting
+- ✅ Precise 3D landmarks aligned with 2D GT
+- ✅ 3D ViT leveraging volumetric consistency
+- ✅ New SOTA on 2D-3D face datasets
 
 </details>

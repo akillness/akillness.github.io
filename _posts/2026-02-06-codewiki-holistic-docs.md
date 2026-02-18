@@ -1,12 +1,8 @@
 ---
 title: "CodeWiki: Holistic AI Documentation for Massive Codebases"
 description: "A deep dive into CodeWiki—hierarchical decomposition, recursive agents, and multimodal docs for 86K–1.4M LOC repositories."
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2026-02-06 13:00:00 +0900
 mermaid: true
 math: false

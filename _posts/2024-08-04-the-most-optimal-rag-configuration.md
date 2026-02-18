@@ -1,12 +1,8 @@
 ---
-title: Struggling to Optimize Your RAG Setup? 😮
-description: LLM, RAG
-categories:
-  - RAG/Search
-tags:
-  - RAG
-  - Embedding
-  - Search
+title: "Struggling to Optimize Your RAG Setup? 😮"
+description: "Not sure if you chunked your data right to enable optimal context retrieval?"
+categories: [RAG/Search]
+tags: [RAG, Embedding, Search]
 date: 2024-08-03 12:00:00 +0800
 mermaid: true
 ---

@@ -1,12 +1,8 @@
 ---
-title: Github is a free university, but 99% don't know!
-description: Github, Datascience
-categories:
-  - Development Tools/Productivity
-tags:
-  - 개발도구
-  - 생산성
-  - Tools
+title: "Github is a free university, but 99% don't know!"
+description: "Curiosity: How can we leverage GitHub as a learning platform?"
+categories: [Development Tools/Productivity]
+tags: [Development Tools, Productivity, Tools]
 date: 2024-07-19 15:30:00 +0800
 mermaid: true
 ---

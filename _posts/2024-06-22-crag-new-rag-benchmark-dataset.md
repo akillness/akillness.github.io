@@ -1,12 +1,8 @@
 ---
-title: 💡 CRAG (Comprehensive RAG) is a new RAG benchmark dataset
-description: CRAG, LLM
-categories:
-  - RAG/Search
-tags:
-  - RAG
-  - Embedding
-  - Search
+title: "💡 CRAG (Comprehensive RAG) is a new RAG benchmark dataset"
+description: "Curiosity: How can we create a realistic benchmark for RAG systems? What makes CRAG more challenging than existing datasets?"
+categories: [RAG/Search]
+tags: [RAG, Embedding, Search]
 date: 2024-06-22 19:10:00 +0800
 mermaid: true
 ---
@@ -126,19 +122,19 @@ graph TB
 
 * * * 
 
-## 😉 다음은 RAG 파이프라인을 테스트할 수 있는 어려운 실제 벤치마크입니다! GPT-4와 같은 LLM조차도 34% 미만의 정확도를 달성하는 데 어려움을 겪고 있습니다.
+## 😉 Here is a challenging, real-world benchmark to test your RAG pipeline! Even LLMs like GPT-4 struggle to achieve less than 34% accuracy.
 
-기존 RAG 데이터 세트는 다양성이 부족하고 실제 QA 작업의 복잡성을 나타내지 못하여 성능 평가가 최적화되지 않습니다.
+Existing RAG datasets lack diversity and fail to represent the complexity of real-world QA tasks, resulting in suboptimal performance evaluation.
 
-💡 CRAG(Comprehensive RAG)는 RAG 및 QA 시스템을 평가하기 위한 강력하고 도전적인 테스트 케이스를 제공하는 새로운 RAG 벤치마크 데이터 세트로, 신뢰할 수 있는 LLM 기반 질문 답변의 발전을 장려합니다.
+💡 CRAG (Comprehensive RAG) is a new RAG benchmark dataset that provides robust and challenging test cases for evaluating RAG and QA systems, encouraging advances in reliable LLM-based question answering.
 
-- ⛳ CRAG에는 5개 도메인과 8개 질문 범주에 걸쳐 4,409개의 QA 쌍이 포함되어 있으며, 간단한 사실부터 복잡한 쿼리까지 다룹니다.
-- ⛳ 웹 및 KG(Knowledge Graph) 검색을 위한 모의 API를 제공하여 현실적인 검색 시나리오를 제공합니다.
-- ⛳ 미결 답변보다 환각에 걸린 답변에 더 많은 페널티를 주는 점수 시스템을 도입하여 신뢰할 수 있는 평가를 보장합니다.
-- ⛳ 웹 검색, 구조적 쿼리 및 요약을 위한 작업을 제공하여 RAG 솔루션을 종합적으로 평가할 수 있습니다.
+- ⛳ CRAG contains 4,409 QA pairs across 5 domains and 8 question categories, covering everything from simple facts to complex queries.
+- ⛳ It provides mock APIs for web and KG (Knowledge Graph) retrieval to simulate realistic retrieval scenarios.
+- ⛳ It introduces a scoring system that penalizes hallucinated answers more than unanswered ones, ensuring reliable evaluation.
+- ⛳ It provides tasks for web search, structured querying, and summarization, enabling comprehensive evaluation of RAG solutions.
 
-기여
-- 👉 가장 진보된 LLM은 다음과 같은 성과를 거둡니다. <34% accuracy on CRAG, highlighting the challenge.
+Contributions
+- 👉 The most advanced LLMs achieve <34% accuracy on CRAG, highlighting the challenge.
 - 👉 Direct application of RAG improves accuracy to only 44%, indicating the need for more advanced solutions.
 - 👉 State-of-the-art industry RAG solutions reach 63% accuracy without hallucination.
 

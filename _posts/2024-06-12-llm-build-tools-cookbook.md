@@ -1,12 +1,8 @@
 ---
-title: Tools for Building LLM Applications
-description: Cookbook, Tools, Application
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+title: "Tools for Building LLM Applications"
+description: "Curiosity: What tools and frameworks are essential for building LLM applications? How do we navigate the rich landscape of available technologies?"
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-06-12 15:10:00 +0800
 mermaid: true
 ---
@@ -246,29 +242,29 @@ graph TD
 
 * * * 
 
-## 🥁 LLM 어플리케이션 구축을 위한 가장 인기 있는 툴과 프레임워크에 대한 포괄적인 가이드를 확인해 보세요.
+## 🥁 Check out a comprehensive guide to the most popular tools and frameworks for building LLM applications.
 
-- 👉 LLM 어플리케이션 구축을 위한 환경은 다양한 툴과 기술로 풍부하며, 각 툴과 기술은 서로 다른 요구와 프로세스 단계를 충족시킵니다. 
+- 👉 The landscape for building LLM applications is rich with various tools and technologies, each catering to different needs and process stages. 
 
-- 👉LLM 앱에 적합한 툴과 프레임워크를 찾고 선택하는 것이 핵심이며 시간이 걸립니다. 이제 막 시작하더라도 무엇이 있고 모든 것이 어떻게 함께 작동하는지 아는 것이 매우 중요합니다!
+- 👉 Finding and selecting the right tools and frameworks for your LLM app is key and takes time. Even if you are just starting out, it is very important to know what is out there and how everything works together!
 
-⛳ 의사 결정 과정을 단순화하기 위해, LLM 애플리케이션 개발에 사용할 수 있는 방대한 옵션 풀을 탐색하는 데 도움이 되는 자세한 가이드를 작성했습니다.
+⛳ To simplify the decision-making process, a detailed guide has been written to help navigate the vast pool of options available for LLM application development.
 
-### 🔰 LLM 툴은 크게 네 가지 범주로 분류할 수 있습니다.
+### 🔰 LLM tools can be broadly categorized into four categories.
 
-- ⛳ 입력 처리 도구: 이러한 도구는 데이터 수집을 처리하고 애플리케이션에 대한 다양한 입력을 준비하도록 설계되었습니다. 여기에는 LLM을 위한 데이터를 처리하고 준비하는 데 중요한 데이터 파이프라인과 벡터 데이터베이스가 포함됩니다.
+- ⛳ Input Processing Tools: These tools are designed to handle data ingestion and prepare various inputs for the application. This includes data pipelines and vector databases, which are crucial for processing and preparing data for LLMs.
 
-- ⛳ LLM 개발 툴(LLM Development Tools): 이 카테고리에는 다음을 지원하는 툴이 포함됩니다.
-대규모 언어 모델과 상호 작용합니다. 여기에는 LLM 호출, 미세 조정, 실험 수행, 오케스트레이션 관리를 위한 서비스가 포함됩니다. 예를 들어 LLM 공급자, 오케스트레이션 플랫폼, 컴퓨팅 및 실험 플랫폼이 있습니다.
+- ⛳ LLM Development Tools: This category includes tools that support
+interacting with large language models. This includes services for calling LLMs, fine-tuning, conducting experiments, and managing orchestration. Examples include LLM providers, orchestration platforms, and computing and experimentation platforms.
 
-- ⛳ 출력 툴(Output Tools): LLM 어플리케이션의 출력을 관리하고 다듬는 포스트 프로세싱 툴이 이 범주에 속합니다. LLM이 결과물을 생성한 후의 프로세스(예: 결과물의 품질과 관련성을 평가하는 평가 프레임워크)에 초점을 맞춥니다.
+- ⛳ Output Tools: Post-processing tools that manage and refine the output of LLM applications fall into this category. The focus is on processes after the LLM generates results, such as evaluation frameworks that assess the quality and relevance of the output.
 
-- ⛳ Application Tools: LLM 어플리케이션의 모든 측면을 관리하는 툴로, 호스팅, 모니터링 등을 포함합니다.
+- ⛳ Application Tools: Tools that manage all aspects of an LLM application, including hosting, monitoring, and more.
 
-- 🎯 이 가이드에서는 이러한 유형의 도구, 다양한 옵션, 장점 및 단점에 대한 심층적인 통찰력을 제공하여 애플리케이션 빌드에 사용할 수 있는 항목과 이러한 리소스를 가장 잘 활용하는 방법에 대한 포괄적인 보기를 제공합니다.
+- 🎯 This guide provides in-depth insights into these types of tools, the various options, and their pros and cons, giving you a comprehensive view of what is available for building your application and how to best leverage these resources.
 
-🛑 이 가이드는 결코 포괄적이지 않으며 인기 있는 도구에 대한 개요만 제공하기 위한 것입니다! 
+🛑 This guide is by no means comprehensive and is only intended to provide an overview of popular tools! 
 
-이러한 툴을 분류하는 것 외에도 RAG에 필요한 툴과 LLM을 미세 조정하는 데 필요한 툴을 구분했습니다.
+In addition to categorizing these tools, a distinction has been made between the tools needed for RAG and those needed for fine-tuning LLMs.
 
 </details>

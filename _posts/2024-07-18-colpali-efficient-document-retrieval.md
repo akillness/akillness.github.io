@@ -1,12 +1,8 @@
 ---
-title: Introducing "ColPali, Efficient Document Retrieval with Vision Language Models"
-description: LLM, RAG
-categories:
-  - RAG/Search
-tags:
-  - RAG
-  - Embedding
-  - Search
+title: "Introducing \"ColPali, Efficient Document Retrieval with Vision Language Models\""
+description: "Curiosity: How can we simplify PDF document retrieval in RAG systems? What happens when we embed document images directly instead of extracting text?"
+categories: [RAG/Search]
+tags: [RAG, Embedding, Search]
 date: 2024-07-19 13:30:00 +0800
 mermaid: true
 ---

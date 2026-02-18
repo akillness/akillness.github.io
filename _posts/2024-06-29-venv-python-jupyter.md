@@ -1,12 +1,8 @@
 ---
-title: Setting Jupyter Kernel according to venv of python
-description: Python, venv, jupyter
-categories:
-  - Data Science/Algorithms
-tags:
-  - Data Science
-  - Algorithm
-  - Analysis
+title: "Setting Jupyter Kernel according to venv of python"
+description: "Curiosity: How can we use different Python virtual environments in Jupyter Notebook? What's the best way to manage multiple kernels?"
+categories: [Data Science/Algorithms]
+tags: [Data Science, Algorithm, Analysis]
 date: 2024-06-29 00:10:00 +0800
 mermaid: true
 ---

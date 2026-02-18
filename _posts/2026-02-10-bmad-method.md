@@ -1,12 +1,8 @@
 ---
 title: "BMAD Method: A Structured, Agent‑Driven Agile Workflow"
 description: "A deep dive into BMAD Method—21 specialized agents, 50+ guided workflows, and an AI‑first agile process from brief to deployment."
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2026-02-10 13:00:00 +0900
 mermaid: true
 math: false

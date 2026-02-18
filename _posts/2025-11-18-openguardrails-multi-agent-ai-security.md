@@ -3,12 +3,8 @@ title: 'OpenGuardrails: A Multi-Agent Perspective on AI Security Platform'
 description: Analyzing the multi-agent architecture of an open-source AI security
   platform that comprehensively defends against prompt injection, content risks, and
   data leakage
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-11-18 12:00:00 +0800
 mermaid: true
 image:

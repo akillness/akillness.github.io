@@ -3,12 +3,8 @@ title: 'SIMA 2: When AI Agents Learn to Play, Reason, and Improve in Virtual Wor
 description: DeepMind's SIMA 2 integrates Gemini models to create AI agents that don't
   just follow instructions—they reason, converse, and self-improve in 3D game environments.
   A deep dive into the future of embodied AI and gaming companions.
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-11-13 03:00:00 +0800
 mermaid: true
 ---

@@ -1,12 +1,8 @@
 ---
-title: Even 𝗡𝗩𝗜𝗗𝗜𝗔 𝗡𝗜𝗠 𝗶𝘀 𝗿𝘂𝗻𝗻𝗶𝗻𝗴 𝗼𝗻 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀, what is 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀?
-description: LLMOps, Kubernetes
-categories:
-  - Review/Trends
-tags:
-  - Trend
-  - Review
-  - Case
+title: "Even 𝗡𝗩𝗜𝗗𝗜𝗔 𝗡𝗜𝗠 𝗶𝘀 𝗿𝘂𝗻𝗻𝗶𝗻𝗴 𝗼𝗻 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀, what is 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀?"
+description: "👉 Today we look into the Kubernetes system from a bird's eye view."
+categories: [Review/Trends]
+tags: [Trend, Review, Case]
 date: 2024-08-04 15:00:00 +0800
 mermaid: true
 ---

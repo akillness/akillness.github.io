@@ -1,12 +1,8 @@
 ---
-title: The LLM Engineer's Handbook 👷 'Super proud to announce my new book'
-description: LLM, Engineer
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+title: "The LLM Engineer's Handbook 👷 'Super proud to announce my new book'"
+description: "Curiosity: How do we bridge the gap between LLM research and production deployment?"
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-07-20 13:30:00 +0800
 mermaid: true
 ---

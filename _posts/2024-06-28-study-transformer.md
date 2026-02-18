@@ -1,12 +1,8 @@
 ---
-title: All about transformer background knowledge including RNN
-description: Transformer, RNN, Knowledge
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+title: "All about transformer background knowledge including RNN"
+description: "<summary style= \"font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;\" > Explaining about Transformer by talker programming without cod..."
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-06-28 00:10:00 +0800
 ---
 # Step to explain Transformer 

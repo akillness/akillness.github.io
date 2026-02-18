@@ -1,12 +1,8 @@
 ---
-title: An introduction to LangChain and Agents is provided
-description: LLM, Course
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+title: "An introduction to LangChain and Agents is provided"
+description: "Curiosity: How can we build sophisticated LLM applications that go beyond simple prompts?"
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2024-07-30 13:00:00 +0800
 mermaid: true
 ---

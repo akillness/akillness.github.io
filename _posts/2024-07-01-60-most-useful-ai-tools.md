@@ -1,12 +1,8 @@
 ---
-title: 📌 𝟔𝟎 𝐌𝐨𝐬𝐭 𝐔𝐬𝐞𝐟𝐮𝐥 𝐀𝐈 𝐓𝐨𝐨𝐥𝐬
-description: AI, Tools
-categories:
-  - Review/Trends
-tags:
-  - Trend
-  - Review
-  - Case
+title: "📌 𝟔𝟎 𝐌𝐨𝐬𝐭 𝐔𝐬𝐞𝐟𝐮𝐥 𝐀𝐈 𝐓𝐨𝐨𝐥𝐬"
+description: "Curiosity: How can AI tools transform our daily work and creative processes?"
+categories: [Review/Trends]
+tags: [Trend, Review, Case]
 date: 2024-07-01 20:10:00 +0800
 mermaid: true
 ---

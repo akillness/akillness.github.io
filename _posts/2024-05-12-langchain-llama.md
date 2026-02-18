@@ -1,12 +1,8 @@
 ---
-title: LangChain and LlamaIndex to LLM Frameworks
-description: LLM, LangChain, LlamaIndex
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+title: "LangChain and LlamaIndex to LLM Frameworks"
+description: "Curiosity: When should we use LangChain versus LlamaIndex? How do these frameworks differ in their approach to building LLM applications?"
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-05-12 13:27:00 +0800
 mermaid: true
 ---

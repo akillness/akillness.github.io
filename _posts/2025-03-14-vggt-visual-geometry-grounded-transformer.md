@@ -3,12 +3,8 @@ title: '[Paper] VGGT: Visual Geometry Grounded Transformer - CVPR 2025 Best Pape
 description: VGGT introduces a feed-forward transformer that performs 3D reconstruction
   from one to hundreds of scene views in a single forward pass, predicting camera
   parameters, depth maps, point maps, and 3D point tracks without post-processing
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2025-03-14 03:00:00 +0800
 mermaid: true
 image:

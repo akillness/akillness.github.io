@@ -1,13 +1,9 @@
 ---
-title: Reinforcing Reinforcement Learning Terms, Policies, Models and Top 40 Libraries
+title: "Reinforcing Reinforcement Learning Terms, Policies, Models and Top 40 Libraries"
   📚
-description: ReinforecementLearning, Library
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+description: "Curiosity: What is reinforcement learning? How do agents learn to make better decisions through interaction with environments?"
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-06-30 20:10:00 +0800
 mermaid: true
 ---
@@ -153,85 +149,85 @@ Gym, Baselines, Dopamine, TensorLayer, FinRL, Stable-Baselines, ReAgent, Acme, P
 
 * * * 
 
-RL은 에이전트가 환경과 상호 작용하고, 피드백을 받고, 시간이 지남에 따라 더 나은 결정을 내릴 수 있도록 하는 기계 학습의 한 유형입니다.
+RL is a type of machine learning where an agent interacts with an environment, receives feedback, and makes better decisions over time.
 
 —————————
 
-## 📝 RL에서 사용되는 용어:
+## 📝 Terms Used in RL:
 
-- ⌘ 환경: 에이전트가 상호 작용하는 시스템 또는 상황입니다. 
+- ⌘ Environment: The system or situation the agent interacts with. 
 
-- ⌘ 에이전트(Agent): 환경과 상호 작용하는 자율적인 개체를 의미합니다.
+- ⌘ Agent: An autonomous entity that interacts with the environment.
 
-- ⌘ 피드백: 에이전트가 조치(보상 또는 페널티)를 취한 후 환경에서 에이전트에게 제공하는 정보를 나타냅니다.
+- ⌘ Feedback: Information provided by the environment to the agent after taking an action (reward or penalty).
 
-- ⌘ 상태(S): 환경에서 반환되는 현재 상황입니다.
+- ⌘ State (S): The current situation returned by the environment.
 
-- ⌘ 정책(π): 에이전트가 다음 행동을 결정하기 위해 사용하는 전략입니다.
+- ⌘ Policy (π): The strategy used by the agent to determine the next action.
 
-- ⌘ 가치 (V) : 예상되는 장기 수익 
+- ⌘ Value (V): Expected long-term return 
 
-- ⌘ Q-Value (Q): 주어진 현재 행동의 장기 수익 
+- ⌘ Q-Value (Q): Long-term return of a given current action 
 
-- ⌘ 모델: 환경 시뮬레이션을 의미합니다. 
-
-—————————
-
-## 📖 RL의 모델/정책:
-
-모델 프리(Model-Free) vs 모델 기반(Model-Based):
-
-- ๏ 상태 공간과 액션 공간이 커지는 모델 기반 작품
-- ๏ Model-free 알고리즘은 지식을 업데이트하기 위해 시행착오에 의존합니다.
-
-온-폴리시(On-Policy) vs 오프-폴리시(Off-Policy):
-
-- ๏ On-policy 에이전트는 현재 정책에서 파생된 현재 작업을 기반으로 학습합니다. 
-- ๏ Off-policy 카운터 파트는 다른 정책을 기반으로 학습합니다.
+- ⌘ Model: Refers to environment simulation. 
 
 —————————
 
-## 🤖 잘 알려진 RL 모델:
+## 📖 Models/Policies in RL:
 
-- ➊ Q-러닝:
+Model-Free vs Model-Based:
 
-Q-테이블을 사용하여 상태에 대한 최상의 작업을 저장하는 모델 없는 알고리즘입니다.
+- ๏ Model-based approaches work with growing state and action spaces
+- ๏ Model-free algorithms rely on trial and error to update knowledge.
 
-- ➋ 국가-행동-보상-국가-행동(SARSA):
+On-Policy vs Off-Policy:
 
-보상 및 다음 상태-행동을 기반으로 상태-행동 값을 업데이트하는 모델 기반 알고리즘입니다.
-
-- ➌ 딥 Q 네트워크(DQN):
-
-심층 신경망을 사용하여 Q-function을 근사화하는 모델 없는 알고리즘입니다.
-
-- ➍ 심층 결정론적 정책 그래디언트(DDPG):
-
-DDPG는 심층 신경망을 사용하여 기존 RL 알고리즘보다 더 복잡한 환경과 대규모 상태 공간을 처리합니다. 
+- ๏ On-policy agents learn based on current actions derived from the current policy. 
+- ๏ Off-policy counterparts learn based on a different policy.
 
 —————————
 
-## 🛠️ 다음은 강화 학습(RL)의 몇 가지 응용 분야입니다.
+## 🤖 Well-Known RL Models:
 
-- » 로보틱스
-- » 자율 주행 차량
-- » 헬스케어
-- » 금융
-- » 노름
-- » 에너지 관리
-- » 마케팅 및 광고
-- » 자연어 처리
-- » 제조업
-- » 스마트 그리드
-- » 공급망 최적화
-- » 추천 시스템
-- » 개인화 시스템
-- » 교통 신호 제어
-- » 교육 및 훈련
-- » 농업
-- » 산업 자동화
-- » 우주 탐사
-- » 사이버 보안
-- » 가상 비서
+- ➊ Q-Learning:
+
+A model-free algorithm that uses a Q-table to store the best actions for states.
+
+- ➋ State-Action-Reward-State-Action (SARSA):
+
+A model-based algorithm that updates state-action values based on rewards and next state-action pairs.
+
+- ➌ Deep Q-Network (DQN):
+
+A model-free algorithm that uses deep neural networks to approximate the Q-function.
+
+- ➍ Deep Deterministic Policy Gradient (DDPG):
+
+DDPG uses deep neural networks to handle more complex environments and large state spaces than traditional RL algorithms. 
+
+—————————
+
+## 🛠️ Here are some application areas of Reinforcement Learning (RL):
+
+- » Robotics
+- » Autonomous Vehicles
+- » Healthcare
+- » Finance
+- » Gaming
+- » Energy Management
+- » Marketing and Advertising
+- » Natural Language Processing
+- » Manufacturing
+- » Smart Grids
+- » Supply Chain Optimization
+- » Recommendation Systems
+- » Personalization Systems
+- » Traffic Signal Control
+- » Education and Training
+- » Agriculture
+- » Industrial Automation
+- » Space Exploration
+- » Cybersecurity
+- » Virtual Assistants
 
 </details>

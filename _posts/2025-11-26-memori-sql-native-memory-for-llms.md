@@ -3,12 +3,8 @@ title: 'Memori: SQL-Native Memory Engine for LLMs and Multi-Agent Systems'
 description: Exploring Memori's open-source approach to persistent, queryable memory
   for AI agents using standard SQL databases - enabling 80-90% cost savings while
   maintaining context across sessions
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-11-26 09:00:00 +0800
 mermaid: true
 image:

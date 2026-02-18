@@ -1,12 +1,8 @@
 ---
-title: 3D Language Gaussian Splatting ( LangSplat )
-description: Paper, 3DGS, LLM
-categories:
-  - Multimodal/Computer Vision
-tags:
-  - Multimodal
-  - Vision
-  - Generative Model
+title: "3D Language Gaussian Splatting ( LangSplat )"
+description: "Curiosity: How can we integrate semantic understanding into 3D Gaussian Splatting?"
+categories: [Multimodal/Computer Vision]
+tags: [Multimodal, Vision, Generative Model]
 date: 2024-06-01 12:00:00 +0800
 mermaid: true
 ---
@@ -178,16 +174,16 @@ llm_response = llm.query(
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-## 3D 재구성에서 시맨틱을 갖는 것은 세그멘테이션에 사용하거나 LLM에 연결하여 현지화된 정보를 검색할 수 있기 때문에 매우 강력합니다. 3D 가우시안 스플래팅에 대해 그렇게 할 수 있습니까?
+## Having semantics in 3D reconstruction is extremely powerful—it can be used for segmentation or connected to an LLM to retrieve localized information. This is true for 3D Gaussian Splatting as well: Can it be done?
 
-*Curiosity:* Tsinghua University 및 Harvard University 의 "LangSplat: 3D 언어 Gaussian Splatting"을 살펴보십시오.
+*Curiosity:* Take a look at "LangSplat: 3D Language Gaussian Splatting" from Tsinghua University and Harvard University.
 
 
 
-이 방법은 CLIP 기능을 3D 언어 가우시안 세트로 접지하여 LERF보다 199× 빠르면서 정확한 3D 언어 필드를 얻습니다.
+This method grounds CLIP features into a set of 3D language Gaussians, achieving a precise 3D language field that is 199× faster than LERF.
 
-그들은 SAM을 사용하여 계층적 의미론을 학습할 것을 제안하므로 다양한 규모에 걸쳐 언어 필드를 광범위하게 쿼리하고 DINO 기능을 정규화할 필요가 없습니다
+They propose using SAM to learn hierarchical semantics, allowing the language field to be queried across diverse scales without needing to normalize DINO features.
 
-현재 CVPR 2024에 승인된 이 방법을 간과했지만 다시 발견하게 되어 기쁩니다. 당신도 보세요.
+I had overlooked this method, now accepted at CVPR 2024, but I'm glad to have rediscovered it. Check it out.
 
 </details>

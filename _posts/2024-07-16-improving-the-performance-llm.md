@@ -1,12 +1,8 @@
 ---
-title: 3 common methods for improving the performance of LLM👏
-description: Performance, Improving
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+title: "3 common methods for improving the performance of LLM👏"
+description: "2. Retrieval Augmented Generation (RAG)."
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-07-16 12:30:00 +0800
 pin: false
 ---

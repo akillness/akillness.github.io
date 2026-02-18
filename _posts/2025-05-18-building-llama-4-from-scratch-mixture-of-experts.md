@@ -3,12 +3,8 @@ title: 'Building LLaMA 4 from Scratch: Understanding Mixture-of-Experts Architec
 description: A deep dive into implementing LLaMA 4's Mixture-of-Experts (MoE) architecture
   from scratch using PyTorch. Learn how MoE enables efficient scaling to hundreds
   of billions of parameters while maintaining inference speed.
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2025-05-18 03:00:00 +0800
 mermaid: true
 math: true

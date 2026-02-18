@@ -1,12 +1,8 @@
 ---
 title: "All Agentic Architectures - A Comprehensive Guide to 17+ State-of-the-Art AI Agent Patterns"
 description: "A deep dive into the all-agentic-architectures repository covering 17+ production-ready agentic AI patterns from Reflection to Reflexive Metacognitive agents, built with LangChain and LangGraph"
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-12-10 10:00:00 +0800
 mermaid: true
 math: false
@@ -546,7 +542,7 @@ class AgentEvaluator:
 ---
 
 <details markdown="1">
-<summary style="font-size:20px; font-weight:bold; cursor:pointer;">📋 Summary / 요약</summary>
+<summary style="font-size:20px; font-weight:bold; cursor:pointer;">📋 Summary / Overview</summary>
 
 ## English Summary
 
@@ -583,37 +579,37 @@ class AgentEvaluator:
 
 ---
 
-## 한국어 요약
+## Korean Summary
 
-**모든 에이전트 아키텍처 - 종합 가이드**는 LangChain과 LangGraph로 구축된 17개 이상의 최신 에이전트 AI 패턴의 상세 구현을 포함하는 [all-agentic-architectures](https://github.com/FareedKhan-dev/all-agentic-architectures) 저장소를 탐구합니다.
+**All Agentic Architectures - Comprehensive Guide** explores the [all-agentic-architectures](https://github.com/FareedKhan-dev/all-agentic-architectures) repository, which contains detailed implementations of 17+ state-of-the-art agentic AI patterns built with LangChain and LangGraph.
 
-**주요 하이라이트:**
+**Key Highlights:**
 
-- **17개 아키텍처 포함:** 저장소는 기초 패턴(Reflection, Tool Use, ReAct, Planning)부터 고급 패턴(Multi-Agent, PEV, Metacognitive, RLHF)까지 주요 에이전트 패턴을 체계적으로 매핑
+- **17 Architectures Covered:** The repository systematically maps out major agentic patterns from foundational (Reflection, Tool Use, ReAct, Planning) to advanced (Multi-Agent, PEV, Metacognitive, RLHF)
 
-- **점진적 학습 경로:** 아키텍처는 5개 부분으로 구성: 기초 패턴 → 멀티 에이전트 협업 → 고급 메모리 및 추론 → 안전성 및 신뢰성 → 학습 및 적응
+- **Progressive Learning Path:** Architectures are organized into 5 parts: Foundational Patterns → Multi-Agent Collaboration → Advanced Memory & Reasoning → Safety & Reliability → Learning & Adaptation
 
-- **프로덕션 준비 구현:** 각 아키텍처는 실제 사례(금융 분석, 코딩, 의료 분류, 연구)와 함께 실행 가능한 Jupyter 노트북에서 엔드투엔드로 구현됨
+- **Production-Ready Implementations:** Each architecture is implemented end-to-end in runnable Jupyter notebooks with real-world examples (financial analysis, coding, medical triage, research)
 
-- **평가 내장:** 대부분의 노트북은 에이전트 성능에 대한 정량적이고 객관적인 피드백을 제공하는 LLM-as-a-Judge 패턴을 특징으로 함—프로덕션 AI 시스템에 중요
+- **Evaluation Built-In:** Most notebooks feature LLM-as-a-Judge patterns for quantitative, objective feedback on agent performance—critical for production AI systems
 
-- **일관된 프레임워크:** 모든 아키텍처는 LangGraph를 핵심 오케스트레이터로 사용하여 통합된 상태 기반 순환 에이전트 설계 접근 방식 제공
+- **Consistent Framework:** All architectures use LangGraph as the core orchestrator, providing a unified, stateful, cyclical approach to agent design
 
-**아키텍처 카테고리:**
+**Architecture Categories:**
 
-1. **기초 패턴 (1-4):** Reflection, Tool Use, ReAct, Planning—단일 에이전트를 위한 필수 구성 요소
-2. **멀티 에이전트 협업 (5, 7, 11, 13):** Multi-Agent Systems, PEV, Blackboard, Meta-Controller, Ensemble—에이전트 팀 활성화
-3. **고급 메모리 및 추론 (8, 9, 12):** Episodic+Semantic Memory, Tree of Thoughts, Graph Memory—깊은 사고와 메모리
-4. **안전성 및 신뢰성 (6, 10, 14, 17):** PEV, Mental Loop, Dry-Run Harness, Metacognitive—프로덕션 신뢰 및 안전
-5. **학습 및 적응 (15, 16):** RLHF, Cellular Automata—지속적인 개선 및 창발적 행동
+1. **Foundational Patterns (1-4):** Reflection, Tool Use, ReAct, Planning—essential building blocks for single agents
+2. **Multi-Agent Collaboration (5, 7, 11, 13):** Multi-Agent Systems, PEV, Blackboard, Meta-Controller, Ensemble—enabling agent teams
+3. **Advanced Memory & Reasoning (8, 9, 12):** Episodic+Semantic Memory, Tree of Thoughts, Graph Memory—deep thinking and memory
+4. **Safety & Reliability (6, 10, 14, 17):** PEV, Mental Loop, Dry-Run Harness, Metacognitive—production trust and safety
+5. **Learning & Adaptation (15, 16):** RLHF, Cellular Automata—continuous improvement and emergent behavior
 
-**프로덕션 애플리케이션:**
+**Production Applications:**
 
-- **코드 생성:** Reflection + Tool Use + Multi-Agent로 고품질 코드 생성
-- **연구:** ReAct + Tool Use + Episodic Memory로 정보 수집
-- **고위험:** PEV + Dry-Run + Metacognitive로 안전 중요 애플리케이션
-- **개인화:** Episodic+Semantic Memory + Graph Memory로 장기 개인화
+- **Code Generation:** Quality code generation with Reflection + Tool Use + Multi-Agent
+- **Research:** Information gathering with ReAct + Tool Use + Episodic Memory
+- **High-Stakes:** Safety-critical applications with PEV + Dry-Run + Metacognitive
+- **Personalization:** Long-term personalization with Episodic+Semantic Memory + Graph Memory
 
-**기술 스택:** Python 3.10+, LangChain, LangGraph, Nebius AI Models, Jupyter Notebooks, Pydantic, Tavily Search, Neo4j, FAISS
+**Technical Stack:** Python 3.10+, LangChain, LangGraph, Nebius AI Models, Jupyter Notebooks, Pydantic, Tavily Search, Neo4j, FAISS
 
 </details>

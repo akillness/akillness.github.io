@@ -4,12 +4,8 @@ title: 'FARA 7B: Microsoft''s Efficient Agentic Model for Computer Use - A Multi
 description: 'Deep dive into Microsoft Research''s FARA 7B: an efficient 7B parameter
   agentic small language model for computer use with robust safety measures and competitive
   performance'
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-11-24 15:00:00 +0800
 mermaid: true
 ---

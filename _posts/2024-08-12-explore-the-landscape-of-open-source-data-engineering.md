@@ -1,12 +1,8 @@
 ---
-title: Explore the landscape of Open Source Data Engineering
-description: Study, Datascience
-categories:
-  - Data Science/Algorithms
-tags:
-  - Data Science
-  - Algorithm
-  - Analysis
+title: "Explore the landscape of Open Source Data Engineering"
+description: "Curiosity: What tools and platforms are available in the open-source data engineering ecosystem?"
+categories: [Data Science/Algorithms]
+tags: [Data Science, Algorithm, Analysis]
 date: 2024-08-12 10:00:00 +0800
 mermaid: true
 ---

@@ -1,12 +1,8 @@
 ---
-title: Deploy an ML model 🧠
-description: LLM, Application
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+title: "Deploy an ML model 🧠"
+description: "Curiosity: How do we deploy machine learning models in production? What are the different deployment patterns and when should we use each one?"
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-08-05 17:00:00 +0800
 mermaid: true
 ---

@@ -4,12 +4,8 @@ title: 'LLM Council: A Complete Architecture Analysis of Karpathy''s Multi-Agent
 description: 'Deep dive into Andrej Karpathy''s LLM Council: comprehensive analysis
   of all files, architecture, implementation details, and the innovative 3-stage peer
   review system'
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-11-22 15:00:00 +0800
 mermaid: true
 ---

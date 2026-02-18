@@ -1,12 +1,8 @@
 ---
-title: Hugging Face x Unsloth
-description: Unsloth, SOTA
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+title: "Hugging Face x Unsloth"
+description: "Curiosity: How can we make LLM fine-tuning faster and more memory-efficient? What makes Unsloth achieve 2× speedup with 70% less memory?"
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-05-20 14:10:00 +0800
 mermaid: true
 ---
@@ -115,16 +111,16 @@ graph TB
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
 * * * 
-🦥 Unsloth AI 오늘 Hugging Face 에서 월간 다운로드 100만 건을 돌파했습니다! 🥳 LLM 미세 조정 속도를 2배 높이고 정확도 저하 없이 메모리를 70% 적게 사용합니다!
+🦥 Unsloth AI has surpassed 1 million monthly downloads on Hugging Face today! 🥳 Speed up LLM fine-tuning by 2x and use 70% less memory without accuracy loss!
 
-Github 페이지에서 Llama-3, Mistral, Gemma에 대한 무료 미세 조정 노트북을 확인할 수 있습니다! 추론도 2배 더 빨라졌습니다!
+Check out free fine-tuning notebooks for Llama-3, Mistral, and Gemma on the Github page! Inference is also 2x faster!
 
-Llama-3 미세 조정을위한 무료 노트북 : <https://colab.research.google.com/drive/1XamvWYinY6FOSX9GLvnqSjjsNflxdhNc?usp=sharing>
+Free notebook for Llama-3 fine-tuning: <https://colab.research.google.com/drive/1XamvWYinY6FOSX9GLvnqSjjsNflxdhNc?usp=sharing>
 
-허깅 페이스 페이지: <[huggingface.co/unsloth](https://huggingface.co/unsloth)>
+Hugging Face page: <[huggingface.co/unsloth](https://huggingface.co/unsloth)>
 
-AI 농담, Q&A를 위한 Discord에 참여하세요: <https://discord.com/invite/u54VK8m8tk>
+Join Discord for AI jokes and Q&A: <https://discord.com/invite/u54VK8m8tk>
 
-그리고 Github에서 별을 보내주세요! <https://github.com/unslothai/unsloth>
+And please star us on Github! <https://github.com/unslothai/unsloth>
 
 </details>

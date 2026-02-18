@@ -1,14 +1,10 @@
 ---
-title: A User's Guide to FlexAttention in FlashAttention CuTe DSL
+title: "A User's Guide to FlexAttention in FlashAttention CuTe DSL"
 description: Learn how to use FlexAttention in FlashAttention 3 CuTe DSL to implement
   various attention variants like causal, sliding window, ALiBi, and more. This guide
   covers score modification, mask modification, and block sparsity optimizations.
-categories:
-  - Learning/Guide
-tags:
-  - Learning
-  - Guide
-  - Lecture
+categories: [Learning/Guide]
+tags: [Learning, Guide, Lecture]
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 math: true

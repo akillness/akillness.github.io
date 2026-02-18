@@ -1,12 +1,8 @@
 ---
-title: 📊 Key Data Terms to Know in 2024, A Quick Guide
-description: Key Data Term, Quick Guid
-categories:
-  - Data Science/Algorithms
-tags:
-  - Data Science
-  - Algorithm
-  - Analysis
+title: "📊 Key Data Terms to Know in 2024, A Quick Guide"
+description: "1. 𝗗𝗮𝘁𝗮 𝗠𝗶𝗻𝗶𝗻𝗴: Discovering hidden patterns in large datasets using statistical and ML methods."
+categories: [Data Science/Algorithms]
+tags: [Data Science, Algorithm, Analysis]
 date: 2024-07-15 11:30:00 +0800
 ---
 ![ Top 15 Data Terms ](/assets/img/blog/Top-15-data-terms.gif){: .light .shadow .rounded-10 w='1212' h='668' }

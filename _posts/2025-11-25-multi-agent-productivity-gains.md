@@ -1,15 +1,11 @@
 ---
-title: Multi-Agent Systems and AI Productivity Gains - What 100,000 Real Conversations
+title: "Multi-Agent Systems and AI Productivity Gains - What 100,000 Real Conversations"
   Tell Us
 description: Analyzing Anthropic's research on AI productivity gains through the lens
   of multi-agent systems - how collaborative AI agents could amplify the 80% time
   savings we're already seeing
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-11-25 15:00:00 +0800
 mermaid: true
 image:

@@ -1,12 +1,8 @@
 ---
-title: 5 techniques to fine-tune LLMs, explained visually!
-description: LLM, PEFT, Visualization
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+title: "5 techniques to fine-tune LLMs, explained visually!"
+description: "Curiosity: However, the development of some innovative methods have transformed this process."
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-06-10 10:10:00 +0800
 mermaid: true
 ---

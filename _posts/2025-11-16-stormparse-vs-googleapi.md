@@ -1,14 +1,10 @@
 ---
-title: STORM Parse vs Google Gemini File Search - A 20% Performance Advantage in RAG
+title: "STORM Parse vs Google Gemini File Search - A 20% Performance Advantage in RAG"
 description: Comprehensive benchmark analysis comparing STORM Parse with Google's
   Gemini File Search API. Technical deep dive into why VLM-based document parsing
   delivers superior RAG performance
-categories:
-  - RAG/Search
-tags:
-  - RAG
-  - Embedding
-  - Search
+categories: [RAG/Search]
+tags: [RAG, Embedding, Search]
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 ---

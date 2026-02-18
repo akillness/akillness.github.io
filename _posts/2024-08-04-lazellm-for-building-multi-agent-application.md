@@ -1,13 +1,9 @@
 ---
-title: 🗞 LazyLLM looks like a super simple low-code open-source framework for building
+title: "🗞 LazyLLM looks like a super simple low-code open-source framework for building"
   multi-agent applications
-description: LLM, LazyLLM
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+description: "Curiosity: What if building multi-agent systems could be as simple as connecting building blocks?"
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-08-04 20:00:00 +0800
 mermaid: true
 ---

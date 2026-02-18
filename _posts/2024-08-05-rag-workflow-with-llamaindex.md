@@ -1,12 +1,8 @@
 ---
-title: Practical Implementation of Agentic RAG Workflows with Llama-Index and Qdrant
-description: LLM, Llama-Index
-categories:
-  - RAG/Search
-tags:
-  - RAG
-  - Embedding
-  - Search
+title: "Practical Implementation of Agentic RAG Workflows with Llama-Index and Qdrant"
+description: "In this article, we introduce “Terraform Assistant,” a cutting-edge workflow powered by Llama 3.1."
+categories: [RAG/Search]
+tags: [RAG, Embedding, Search]
 date: 2024-08-05 11:00:00 +0800
 mermaid: true
 ---

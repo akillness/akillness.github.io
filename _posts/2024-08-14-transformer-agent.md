@@ -1,12 +1,8 @@
 ---
-title: Agents framework for LLM + AgentGen looks like a nice framework
-description: Agent, Transformer
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+title: "Agents framework for LLM + AgentGen looks like a nice framework"
+description: "Curiosity: How can we build better-performing agent frameworks? What makes Agents 2.0 the best-performing open model framework?"
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2024-08-14 11:20:00 +0800
 mermaid: true
 ---

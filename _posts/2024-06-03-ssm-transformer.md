@@ -1,12 +1,8 @@
 ---
-title: Transformers are SSMs
-description: Paper, SSM, Transformer
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+title: "Transformers are SSMs"
+description: "Curiosity: Are Transformers and State Space Models fundamentally different? What happens when we discover their deep theoretical connections?"
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-06-03 15:00:00 +0800
 mermaid: true
 ---
@@ -114,8 +110,8 @@ graph TB
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-##  구조화된 상태공간 이중성을 통한 일반화된 모델과 효율적인 알고리즘
+## Generalized Models and Efficient Algorithms via Structured State Space Duality
 
-트랜스포머는 언어 모델링에서 딥 러닝의 성공을 뒷받침하는 주요 아키텍처였지만, 최근에는 Mamba와 같은 상태 공간 모델(SSM)이 중소 규모에서 트랜스포머와 동등하거나 더 우수한 것으로 나타났습니다. 우리는 이러한 모델 계열이 실제로 매우 밀접하게 관련되어 있음을 보여주며, 잘 연구된 구조화된 반분리 가능한 행렬 클래스의 다양한 분해를 통해 연결된 SSM과 주의 변형 간의 이론적 연결에 대한 풍부한 프레임워크를 개발합니다. 상태 공간 이중성(SSD) 프레임워크를 통해 핵심 계층이 2-8배 더 빠른 Mamba의 선택적 SSM을 개선한 새로운 아키텍처(Mamba-2)를 설계하는 동시에 언어 모델링에서 Transformers와 계속 경쟁할 수 있습니다.
+Transformers have been the dominant architecture driving deep learning success in language modeling, but recently State Space Models (SSMs) like Mamba have shown comparable or superior performance at small-to-medium scale. We show that these model families are in fact closely related, and develop a rich framework for theoretical connections between SSMs and attention variants connected through various decompositions of a well-studied class of structured semiseparable matrices. Through the State Space Duality (SSD) framework, we design a new architecture (Mamba-2) that improves upon Mamba's selective SSM with a core layer that is 2-8x faster, while remaining competitive with Transformers in language modeling.
 
 </details>

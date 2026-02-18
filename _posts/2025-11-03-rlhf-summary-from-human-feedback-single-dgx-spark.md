@@ -4,12 +4,8 @@ title: 'RLHF from Scratch: Learning to Summarize from Human Feedback on a Single
 description: A complete implementation guide for reproducing RLHF (Reinforcement Learning
   from Human Feedback) on a single DGX Spark. Learn how to train SFT models, reward
   models, DPO, and GRPO for TL;DR summarization using Qwen2.5 models.
-categories:
-  - Review/Trends
-tags:
-  - Trend
-  - Review
-  - Case
+categories: [Review/Trends]
+tags: [Trend, Review, Case]
 date: 2025-11-03 03:00:00 +0800
 mermaid: true
 math: true

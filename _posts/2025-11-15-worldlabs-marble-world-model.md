@@ -1,15 +1,11 @@
 ---
-title: WorldLabs Marble - The First Commercial World Model Ushers in Spatial Intelligence
+title: "WorldLabs Marble - The First Commercial World Model Ushers in Spatial Intelligence"
   Era
 description: Fei-Fei Li's WorldLabs launches Marble, the world's first commercial
   World Model. Deep dive into spatial intelligence, 3D world generation, and how this
   technology transforms gaming, VFX, VR, and robotics
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2025-11-15 03:00:00 +0800
 mermaid: true
 ---
@@ -438,7 +434,7 @@ But that's fine—**Marble accelerates the foundation, letting you focus on what
 ## References
 
 **Original Article:**
-- [AI가 3D 세계를 구축한다? 'AI 대모' 페이페이 리의 월드랩스, 세계 최초 상용 '월드 모델' 마블 출시 - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2305)
+- [AI Builds 3D Worlds? Fei-Fei Li's World Labs Launches Marble, the World's First Commercial 'World Model' - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2305)
 
 **WorldLabs & Marble:**
 - [WorldLabs Official Website](https://www.worldlabs.ai/)

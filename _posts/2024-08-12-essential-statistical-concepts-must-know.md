@@ -1,12 +1,8 @@
 ---
-title: Essential Statistical Concepts Every Data Professional Must Know!
-description: Study, Datascience
-categories:
-  - Data Science/Algorithms
-tags:
-  - Data Science
-  - Algorithm
-  - Analysis
+title: "Essential Statistical Concepts Every Data Professional Must Know!"
+description: "Curiosity: What statistical concepts are essential for data professionals?"
+categories: [Data Science/Algorithms]
+tags: [Data Science, Algorithm, Analysis]
 date: 2024-08-12 15:00:00 +0800
 mermaid: true
 ---

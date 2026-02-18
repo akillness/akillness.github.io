@@ -4,12 +4,8 @@ title: 'Google Workspace Flows: The Complete Guide to Agentic AI Automation Insi
 description: Google Workspace Flows brings AI-powered automation directly into Gmail,
   Docs, Sheets, Drive, Calendar, and Chat. Learn how agentic AI transforms workflow
   automation from simple triggers to intelligent, context-aware processes
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 image:
@@ -649,7 +645,7 @@ Google Workspace Flows represents a fundamental shift in automation:
 
 **Original Article:**
 
-- [Google Workspace Flows 완벽 가이드: Gmail·Docs·Sheets 안에서 작동하는 진짜 AI 자동화의 시작 - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2309)
+- [Complete Guide to Google Workspace Flows: Real AI Automation Inside Gmail, Docs, and Sheets - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2309)
 
 **Google Workspace Flows:**
 

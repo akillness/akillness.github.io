@@ -1,12 +1,8 @@
 ---
 title: "Self‑Learning Skills: Let the Agent Teach Itself New Tech"
 description: "From /learn prompts to a full skill pipeline—how to combine search + browsing to build autonomous skills with Gemini 3 models."
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2026-02-07 02:10:00 +0900
 mermaid: true
 math: false

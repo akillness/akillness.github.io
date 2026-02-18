@@ -1,12 +1,8 @@
 ---
-title: RAG papers list newest additions
-description: RAG, Newest, Papers
-categories:
-  - RAG/Search
-tags:
-  - RAG
-  - Embedding
-  - Search
+title: "RAG papers list newest additions"
+description: "🔉 Over the past year, the release of new LLMs and their increasing application across various fields has also spurred a surge in research on RAG appro..."
+categories: [RAG/Search]
+tags: [RAG, Embedding, Search]
 date: 2024-05-12 21:29:00 +0800
 ---
 ## 🎊 My RAG papers list has now been updated with the newest additions, including those from April. It contains over 60 papers, with quick summaries and topic tags.

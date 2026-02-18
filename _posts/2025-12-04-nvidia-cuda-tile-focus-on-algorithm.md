@@ -1,14 +1,10 @@
 ---
-title: NVIDIA CUDA Tile - Focus on Your Algorithm, Let Hardware Handle the Rest
+title: "NVIDIA CUDA Tile - Focus on Your Algorithm, Let Hardware Handle the Rest"
 description: Exploring CUDA Tile, NVIDIA's revolutionary tile-based programming model
   that abstracts tensor core complexity, enabling higher-level GPU programming without
   sacrificing performance
-categories:
-  - Data Science/Algorithms
-tags:
-  - Data Science
-  - Algorithm
-  - Analysis
+categories: [Data Science/Algorithms]
+tags: [Data Science, Algorithm, Analysis]
 date: 2025-12-04 10:00:00 +0800
 mermaid: true
 math: true

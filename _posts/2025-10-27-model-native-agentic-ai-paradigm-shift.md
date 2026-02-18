@@ -4,12 +4,8 @@ description: A comprehensive survey of the evolution from Pipeline-based to Mode
   Agentic AI. Explore how planning, tool use, and memory capabilities are being internalized
   within models through reinforcement learning, marking a fundamental shift in how
   we build intelligent agents.
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-10-27 03:00:00 +0800
 mermaid: true
 ---

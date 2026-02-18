@@ -4,12 +4,8 @@ description: Explore the evolution from Agents 1.0's simple loop-based architect
   to Agents 2.0's Deep Agents, featuring explicit planning, hierarchical delegation,
   persistent memory, and extreme context engineering for handling complex multi-step
   tasks
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 image:
@@ -599,7 +595,7 @@ Agents 2.0 represents a fundamental shift in how we think about AI agents:
 
 **Original Articles:**
 
-- [Agents 2.0 시대의 도래: 얕은 루프를 넘어서는 딥 에이전트 아키텍처 - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2311)
+- [The Dawn of Agents 2.0: Deep Agent Architecture Beyond Shallow Loops - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2311)
 - [Agents 2.0: From Shallow Loops to Deep Agents - Phil Schmid](https://www.philschmid.de/agents-2.0-deep-agents)
 
 **Frameworks & Tools:**

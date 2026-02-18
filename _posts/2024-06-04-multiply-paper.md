@@ -1,12 +1,8 @@
 ---
-title: 🐳🐳MultiPly in-the-wild Multi-Pax from Mono🐳🐳
-description: Paper, MultiPly, 3DRecon
-categories:
-  - Review/Trends
-tags:
-  - Trend
-  - Review
-  - Case
+title: "🐳🐳MultiPly in-the-wild Multi-Pax from Mono🐳🐳"
+description: "{% include embed/youtube.html id='r9giQPUp1Gw' %}."
+categories: [Review/Trends]
+tags: [Trend, Review, Case]
 date: 2024-06-04 19:00:00 +0800
 mermaid: true
 ---
@@ -122,15 +118,15 @@ graph TB
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-## 👉ETH(+해시태그#Microsoft )는 단안 비디오에서 여러 사람을 3D로 재구성하는 새로운 프레임워크인 MultiPly를 발표했습니다. 
+## 👉 ETH (+#Microsoft) has presented MultiPly, a new framework for reconstructing multiple people in 3D from monocular video. 
 
-공개적으로 사용 가능한 데이터 세트와 야생 비디오에 대한 새로운 SOTA입니다. 소스 코드 발표 예정💙
+New SOTA on publicly available datasets and in-the-wild videos. Source code to be released 💙
 
-하이라이트:
-- ✅야생에서 온 여러 개의 상세한 3D 인간
-- ✅새롭고 강력한 인스턴스 세분화 접근 방식 
-- ✅상호 작용하는 사람들 간의 깨끗한 분리
-- ✅정확한 신뢰도 기반 최적화
-- ✅시간적/공간적 일관성 있는 3D 재구성
+Highlights:
+- ✅ Multiple detailed 3D humans from in-the-wild footage
+- ✅ Novel and robust instance segmentation approach 
+- ✅ Clean separation between interacting people
+- ✅ Accurate confidence-based optimization
+- ✅ Temporally and spatially consistent 3D reconstruction
 
 </details>

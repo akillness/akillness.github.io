@@ -1,12 +1,8 @@
 ---
-title: Forget GPT-4o vs. Llama 3
-description: Data Analytics, Python
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+title: "Forget GPT-4o vs. Llama 3"
+description: "Curiosity: What if the best LLM isn't a single model, but intelligent routing to the right model?"
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-07-04 20:10:00 +0800
 mermaid: true
 ---
@@ -107,14 +103,14 @@ graph TB
 
 * * * 
 
-## 오픈 소스 RouteLLM은 실제 전투가 쿼리 라우팅에 있음을 보여줍니다.
+## Open-Source RouteLLM Shows the Real Battle Is in Query Routing
 
-LLM 환경이 뜨거워지고 있지만 진정한 판도를 바꾸는 것은 어떤 모델이 "최고"인지 뿐만이 아닙니다.
+The LLM landscape is heating up, but the true game-changer isn't just which model is "best."
 
-UC Berkeley 연구원들은 쿼리를 작업에 적합한 모델로 교묘하게 라우팅하는 오픈 소스 프레임워크인 RouteLLM을 공개했습니다.
+UC Berkeley researchers have released RouteLLM, an open-source framework that cleverly routes queries to the most task-appropriate model.
 
-이는 기대하는 품질을 저하시키지 않으면서 엄청난 비용 절감(85% 이상)을 의미합니다. 이제 LLM을 배포하고 지능형 라우팅의 우선순위를 지정하는 방법을 다시 생각해 볼 때입니다.
+This means massive cost savings (over 85%) without sacrificing expected quality. It's time to rethink how we deploy LLMs and prioritize intelligent routing.
 
-논문을 자세히 살펴보고 데모를 시도하여 오픈 소스가 어떻게 보다 효율적인 AI 미래를 선도하는지 알아보세요.
+Dive into the paper and try the demo to see how open source is leading the way to a more efficient AI future.
 
 </details>

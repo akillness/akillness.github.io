@@ -1,12 +1,8 @@
 ---
-title: Great Visualization of Resilient 3-Tier Architecture on AWS!
-description: AWS, Visualization
-categories:
-  - Infrastructure/System
-tags:
-  - Infrastructure
-  - Operations
-  - Architecture
+title: "Great Visualization of Resilient 3-Tier Architecture on AWS!"
+description: "Curiosity: How can you gain practical AWS experience? What's better than building To-do apps for learning cloud architecture?"
+categories: [Infrastructure/System]
+tags: [Infrastructure, Operations, Architecture]
 date: 2024-06-27 21:00:00 +0800
 mermaid: true
 ---

@@ -4,12 +4,8 @@ title: 'Sprite Fusion Pixel Snapper: Fixing AI-Generated Pixel Art with Multi-Ag
 description: Exploring Sprite Fusion Pixel Snapper - a Rust-based tool that fixes
   messy AI-generated pixel art by snapping pixels to perfect grids, quantizing colors,
   and preserving details through multi-agent image processing techniques
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-11-25 15:00:00 +0800
 mermaid: true
 image:

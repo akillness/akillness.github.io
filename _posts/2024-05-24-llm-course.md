@@ -1,12 +1,8 @@
 ---
-title: Large Language Model Course
-description: LLM, Course
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+title: "Large Language Model Course"
+description: "Curiosity: How can we systematically learn to build and deploy LLM applications?"
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-05-24 10:00:00 +0800
 mermaid: true
 ---
@@ -199,28 +195,28 @@ graph TD
 
 * * * 
 
-## 🗣️ 허깅 페이스와 마이크로 소프트의 협력 강화
+## 🗣️ LLM Course Reaches 30k Stars on GitHub
 
-⭐ LLM 코스는 GitHub에서 별 30개를 받았습니다!
+⭐ The LLM Course has received 30k stars on GitHub!
 
-이 코스의 인기는 저에게 꽤 놀랍습니다. 원근법으로 말하자면, vLLM(20k) 또는 Jax(28k)와 같은 대형 프로젝트보다 더 많은 별이 있습니다. 아직 llama.cpp(58k)나 PyTorch(78k) 수준은 아니지만, 제가 상상했던 것보다 훨씬 큽니다.
+The popularity of this course is quite surprising to me. To put it in perspective, it has more stars than major projects like vLLM (20k) or Jax (28k). Not yet at the level of llama.cpp (58k) or PyTorch (78k), but still remarkable.
 
-여러분의 성원에 감사드립니다. 저는 때때로 이 강좌를 조용히 편집하고 있으며, LLM 엔지니어 로드맵에 새로운 섹션을 추가할 계획을 가지고 있습니다. 또한 이제 6개월이 된 과정의 일부 오래된 부분을 업데이트하고 싶습니다(LLM 세계에서는 정말 오랜 시간입니다!).
+Thank you for your support. I quietly edit this course from time to time, and I have plans to add new sections to the LLM Engineer Roadmap. I also want to update some older parts of the course, which is now 6 months old (the LLM world moves fast!).
 
-코스에서 보고 싶은 것과 개선할 수 있는 방법을 댓글로 알려주세요.
+Let me know in the comments what you would like to see in the course and how it can be improved.
 
-📝 LLM 과정: <https://github.com/mlabonne/llm-course>
+📝 LLM Course: <https://github.com/mlabonne/llm-course>
 
-### LLM 코스는 세 부분으로 나뉩니다:
+### The LLM Course Is Divided Into Three Parts:
 
-- 🧩 LLM 기초는 수학, 파이썬, 신경망에 관한 필수 지식을 다룹니다.
-- 🧑‍🔬 LLM 과학자는 최신 기술을 사용하여 최고의 LLM을 구축하는 데 중점을 둡니다.
-- 👷 LLM 엔지니어는 LLM 기반 응용 프로그램을 만들고 배포하는 데 중점을 둡니다.
+- 🧩 LLM Fundamentals covers essential knowledge about math, Python, and neural networks.
+- 🧑‍🔬 LLM Scientist focuses on building the best LLMs using the latest techniques.
+- 👷 LLM Engineer focuses on creating and deploying LLM-based applications.
 
-이 코스의 인터랙티브 버전을 위해, 질문에 답하고 개인 맞춤형으로 지식을 테스트할 두 명의 LLM 어시스턴트를 만들었습니다:
+For the interactive version of this course, I created two LLM assistants to answer questions and test your knowledge in a personalized way:
 
-- 🤗 [HuggingChat Assistant](https://huggingface.co/chat/): Mixtral-8x7B를 사용하는 무료 버전.
-- 🤖 [ChatGPT Assistant](https://chatgpt.com/g/g-yviLuLqvI-llm-course?oai-dm=1): 프리미엄 계정이 필요합니다.
+- 🤗 [HuggingChat Assistant](https://huggingface.co/chat/): Free version using Mixtral-8x7B.
+- 🤖 [ChatGPT Assistant](https://chatgpt.com/g/g-yviLuLqvI-llm-course?oai-dm=1): Requires a premium account.
 - ⭐[LangChain Tutorial with AWS](https://www.singlestore.com/blog/how-to-create-open-source-ai-apps-with-langchain/?utm_medium=referral&utm_source=pavan&utm_term=lnkdn&utm_content=openlang)
 
 </details>

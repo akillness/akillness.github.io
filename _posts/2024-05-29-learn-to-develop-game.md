@@ -1,19 +1,14 @@
 ---
-title: Game Development Course with Unity3D Programming
-description: LLM, Game, Unity
-categories:
-  - Multimodal/Computer Vision
-tags:
-  - Multimodal
-  - Vision
-  - Generative Model
+title: "Game Development Course with Unity3D Programming"
+description: "Curiosity: How can we learn game development with Unity? What's the path from beginner to capable Unity developer?"
+categories: [Multimodal/Computer Vision]
+tags: [Multimodal, Vision, Generative Model]
 date: 2024-05-29 20:13:00 +0800
 mermaid: true
 image:
   path: /assets/img/blog/Create_with_Code.png
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt:
-  - Overview of ML for Games Course
+  alt: "Overview of ML for Games Course"
 ---
 ## Game Development Course with Unity3D Programming
 
@@ -96,12 +91,4 @@ gantt
 
 
 
-<!-- <details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-* * * 
-
-## 내 가이드를 사용하여 다가오는 모든 트렌드를 따라잡으세요! 
-
-
-</details> -->

@@ -3,12 +3,8 @@ title: 'Gemini 3 and Multi-Agent Systems: A Comprehensive Guide to Building with
   Most Intelligent AI Model'
 description: Explore Gemini 3's capabilities, multi-agent architectures, and Google
   Antigravity IDE - the complete guide to building agentic AI systems
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2025-11-18 15:00:00 +0800
 mermaid: true
 image:

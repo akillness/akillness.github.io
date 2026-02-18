@@ -1,12 +1,8 @@
 ---
-title: 𝟳 𝗠𝘂𝘀𝘁-𝗸𝗻𝗼𝘄 𝗦𝘁𝗿𝗮𝘁𝗲𝗴𝗶𝗲𝘀 𝘁𝗼 𝗦𝗰𝗮𝗹𝗲 𝘆𝗼𝘂𝗿 𝗗𝗮𝘁𝗮𝗯𝗮𝘀𝗲 by ByteByteGo
-description: Study, DataBase
-categories:
-  - Review/Trends
-tags:
-  - Trend
-  - Review
-  - Case
+title: "𝟳 𝗠𝘂𝘀𝘁-𝗸𝗻𝗼𝘄 𝗦𝘁𝗿𝗮𝘁𝗲𝗴𝗶𝗲𝘀 𝘁𝗼 𝗦𝗰𝗮𝗹𝗲 𝘆𝗼𝘂𝗿 𝗗𝗮𝘁𝗮𝗯𝗮𝘀𝗲 by ByteByteGo"
+description: "Curiosity: How can we scale databases to handle growing workloads? What strategies work best for different scaling scenarios?"
+categories: [Review/Trends]
+tags: [Trend, Review, Case]
 date: 2024-08-12 12:00:00 +0800
 mermaid: true
 ---

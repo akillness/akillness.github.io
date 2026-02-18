@@ -1,12 +1,8 @@
 ---
-title: The weights of our Time Series Foundation Model (TimesFM) on Hugging Face
-description: FoundationModel, Huggingface
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+title: "The weights of our Time Series Foundation Model (TimesFM) on Hugging Face"
+description: "We’re excited to release the weights of our Time Series Foundation Model (TimesFM) on Hugging Face!"
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-05-10 15:41:00 +0800
 ---
 # What's New? ( from [Google AI](https://twitter.com/GoogleAI))

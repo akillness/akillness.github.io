@@ -1,16 +1,12 @@
 ---
-title: Generative AI in a Nutshell
-description: Generative AI, Nutshell
-categories:
-  - Review/Trends
-tags:
-  - Trend
-  - Review
-  - Case
+title: "Generative AI in a Nutshell"
+description: "Curiosity: How do the foundational technologies of generative AI connect?"
+categories: [Review/Trends]
+tags: [Trend, Review, Case]
 date: 2024-05-11 23:43:00 +0800
 mermaid: true
 ---
-> [`Generative AI Preparation`](https://github.com/Msrevalli/Generative-AI-Preparation) (Generative AI 개념북) Thanks to [Aishwarya Naresh Reganti](https://www.linkedin.com/in/areganti/)
+> [`Generative AI Preparation`](https://github.com/Msrevalli/Generative-AI-Preparation) (Generative AI Concept Book) Thanks to [Aishwarya Naresh Reganti](https://www.linkedin.com/in/areganti/)
 {: .prompt-warning }
 
 
@@ -49,179 +45,179 @@ mermaid: true
 
 * * * 
 
-> Lilys AI 요약노트 : <https://lilys.ai/digest/617175?videoId=2IK3DFHRFfw&result=summaryNote&source=video>
+> Lilys AI Summary Notes : <https://lilys.ai/digest/617175?videoId=2IK3DFHRFfw&result=summaryNote&source=video>
 
-> Lilys AI 요약블로그
+> Lilys AI Summary Blog
 
 
-### AI의 발전과 generative AI의 의미는?
+### What is the evolution of AI and the meaning of generative AI?
 
-컴퓨터는 과거에는 명령어에 따라 동작하는 계산기 수준이었지만, 이제 머신러닝 등을 통해 똑똑해져 인간과 유사하게 학습, 사고, 의사소통하게 되었어요.
+Computers used to be mere calculators that operated according to commands, but now through machine learning and other technologies, they have become smarter and can learn, think, and communicate similarly to humans.
 
-이러한 기술을 generative AI라고 하며, 이미 GPT와 같은 제품에서 사용하고 있어요.
+This technology is called generative AI, and it is already being used in products like GPT.
 
-이 기술은 인간만이 할 수 있었던 창의적이고 지성적인 업무를 수행할 수 있게 하며, 기업뿐만 아니라 모든 사람에게 긍정적이거나 부정적인 혜택을 줄 것이에요.
+This technology enables creative and intellectual tasks that only humans could previously perform, and it will bring both positive and negative impacts to everyone, not just businesses.
 
-generative AI는 아직 완벽하지 않지만, 지수함수적으로 발전 중이에요.
+Generative AI is not yet perfect, but it is advancing exponentially.
 
-이러한 기술에 대해 이해하고, 기업으로서 적용할 수 있게 되는 것은 기업의 경쟁력을 향상시키는데 중요해요.
+Understanding this technology and being able to apply it as a business is important for improving competitiveness.
 
 
-### '아인슈타인'이 지하실에 있을 때 얻을 수 있는 장점은 무엇인가요?
+### What are the advantages of having an 'Einstein' in your basement?
 
-모든 사람이 이른바 '아인슈타인'을 지하실에 들고 있다는 가상의 모델 정의해요.
+Imagine a hypothetical model where everyone has a so-called 'Einstein' in their basement.
 
-즉, 지하실 알고리즘으로 인간의 모든 지식에 대해 할 필요 없이, 말만 걸면 언제든지 자신이 필요한 지식을 얻을 수 있다는 거죠.
+In other words, without needing to know all of human knowledge yourself, you can simply ask and obtain the knowledge you need at any time through this basement algorithm.
 
-하지만, 이런 퀄리티의 지식을 활용하기 위해서는 명확한 의사소통, 효과적인 프롬프트 엔지니어링이 필수적이며, 이는 인공지능 시대에서 가장 중요한 스킬 중 하나라고 생각해요.
+However, to leverage this quality of knowledge, clear communication and effective prompt engineering are essential, which I believe is one of the most important skills in the age of artificial intelligence.
 
-즉, 이와 같이 가상의 아인슈타인과 매일 상호작용을 하면 의외로 파워풀한 밸류 창출 활동에 연결될 수 있다고 생각해요.
+In other words, by interacting with this virtual Einstein daily, it can surprisingly lead to powerful value creation activities.
 
 
-### AI와 GPT의 작동 원리는?
+### How do AI and GPT work?
 
-*Curiosity:* AI는 인공지능을 나타내며, '기계 학습'과 '컴퓨터 비전'과 같은 용어들이 오랫동안 사용되어 왔어요.
+*Curiosity:* AI stands for artificial intelligence, and terms like 'machine learning' and 'computer vision' have been used for a long time.
 
 
 
-GPT는 새로운 콘텐츠를 생성하는 '생성적 AI'의 형태로, 수많은 언어 모델 중 하나에요.
+GPT is a form of 'generative AI' that creates new content, and it is one of many language models.
 
-큰 언어 모델은 인공신경망으로, 입력으로 숫자를 받고 숫자 처리 과정을 거쳐 다시 텍스트로 출력해요.
+Large language models are artificial neural networks that receive numbers as input, process them, and output text.
 
-이러한 순서로 작동하며, 사용자가 입력을 추가하여 모델을 연속적으로 작동시키면 새로운 단어가 더해져요.
+They operate in this sequence, and when users add input to run the model continuously, new words are generated.
 
-언어 모델은 수많은 파라미터로 구성되어 있어 '큰' 언어 모델이라고 불려요.
+Language models consist of numerous parameters, which is why they are called 'large' language models.
 
 
-### AI 모델 'GPT'의 학습과 인간의 학습의 차이점은?
+### What is the difference between AI model 'GPT' learning and human learning?
 
-AI 모델은 학습을 거치면서, 대부분 인터넷에서 유입되는 막대한 양의 텍스트를 학습해요.
+AI models undergo training by learning from vast amounts of text, mostly sourced from the internet.
 
-점차 다음 단어를 예측하게 되고, back propagation을 통해 추가로 다듬어져요.
+They gradually learn to predict the next word and are further refined through back propagation.
 
-하지만 모델이 진짜 유용해지려면, 인간 학습을 거쳐야 해요.
+However, for the model to become truly useful, it must undergo human learning.
 
-이를 Reinforcement Learning with human feedback이라고 해요.
+This is called Reinforcement Learning with Human Feedback.
 
-이 학습은 수천 시간 동안 이뤄져요.
+This training takes thousands of hours.
 
-주로 모델의 결과물에 대한 평가와 피드백을 바탕으로 인공지능을 훈련시키고, 그 과정에서 좋은 결과를 강화하는 방식을 사용해요.
+It primarily trains the AI based on evaluations and feedback of the model outputs, using a method that reinforces good results in the process.
 
-뒤이어 모델은 대부분 백리스트가 되며, 추가적으로 미세조정으로 세밀한 조정이 가능해요.
+Subsequently, the model is mostly blocklisted, and further fine-tuning allows for detailed adjustments.
 
 
-### 다양한 AI 모델의 특징은?
+### What are the characteristics of various AI models?
 
-Chat GPT를 통해 시작된 AI 모델 발전으로, GPT외에도 많은 모델들이 등장하고 있어요.
+With the AI model development initiated by ChatGPT, many models besides GPT have emerged.
 
-모델은 속도, 기능, 가격 등 다양한 측면에서 차이가 있어 로컬에서 다운로드하여 사용할 수 있는 것도 있고, 온라인에서만 이용할 수 있는 것도 있어요.
+Models differ in various aspects such as speed, features, and price — some can be downloaded and used locally, while others are only available online.
 
-무료나 오픈 소스로 제공되는 모델도 있지만, 일부는 상용 제품입니다.
+Some models are available for free or as open source, but some are commercial products.
 
-모델별로 사용 방법과 기술적인 설정이 달라 어떤 모델은 사용이 쉽지만 다른 모델은 설정이 복잡해요.
+Usage methods and technical settings differ by model — some are easy to use while others have complex configurations.
 
-특정한 용도에 특화된 모델도 있고, 대부분의 용도에 사용할 수 있는 일반적인 모델도 있어요.
+Some models are specialized for specific purposes, while others are general-purpose models that can be used for most tasks.
 
 
-### 인공지능 모델이 발휘하는 능력은 무엇인가?
+### What capabilities do AI models demonstrate?
 
-언어 모델들은 단순한 단어 예측기에서 출발해서, 더 많은 데이터를 학습함으로써 예상치 못한 능력을 갖게 됩니다.
+Language models started as simple word predictors and, by learning from more data, have gained unexpected capabilities.
 
-이들은 롤플레잉, 시를 쓰기, 고품질 코드 쓰기, 기업 전략 토론하기, 법적·의료적 조언 제공하기, 코칭하기, 교육하기 등이 가능해졌습니다.
+They have become capable of role-playing, writing poetry, writing high-quality code, discussing corporate strategy, providing legal and medical advice, coaching, teaching, and more.
 
-인공지능 모델 GPT-4는 간단한 그림을 주면, 날카롭게 이해하지 못한 시나리오에 대해도 상당히 좋은 답을 줍니다.
+The AI model GPT-4, when given a simple drawing, provides remarkably good answers even for scenarios it has never clearly understood before.
 
-인공지능의 능력은 지수적으로 향상되는 한편, 인간의 능력은 그렇지 않으며 우리는 이제 새로운 시대로 접어들고 있는 중입니다.
+While AI capabilities are improving exponentially, human capabilities are not, and we are now entering a new era.
 
 
-### AI혁명에서는 어떤 도전이 존재하나요?
+### What challenges exist in the AI revolution?
 
-인류는 지금까지 여러 개의 혁명을 경험해왔고, AI혁명에서는 새로운 기술이 거의 즉시 전 세계에 퍼진다는 특징이 있어서 개인과 기업 모두에게 큰 도전이 됩니다.
+Humanity has experienced several revolutions so far, and the AI revolution is characterized by new technology spreading almost instantly worldwide, posing a major challenge for both individuals and businesses.
 
-개인이나 회사들은 AI에 대해 종류에 따라 두 가지 태도로 나누는데, 'AI가 내 직업을 대체하지 못한다'는 반증과 '시간이 없다'는 부정적인 생각이 있습니다.
+Individuals and companies tend to have two attitudes toward AI: the dismissal that 'AI cannot replace my job' and the negative thought that 'I don't have time for this.'
 
-그러나 이러한 태도로는 위험합니다.
+However, such attitudes are dangerous.
 
-'AI가 당신의 일을 대체하지는 않겠지만 AI를 사용하는 사람이 일을 대체할 수 있다', 한편, AI 기술은 인간과 함께 발전할 예정입니다.
+'AI won't replace your job, but someone using AI might.' Meanwhile, AI technology will continue to evolve alongside humans.
 
 
-### 인공지능이 일자리를 대체하는 상황, 어떻게 대처할까요?
+### How should we deal with AI replacing jobs?
 
-인간들은 AI로 인해 일자리가 사라질 걱정을 하지만, 이러한 사고방식은 도움이 되지 않아요.
+People worry about losing their jobs due to AI, but this mindset is not helpful.
 
-중립적인 긍정적인 사고방식이 필요한데요, AI는 개인, 팀, 회사를 놀라울 정도로 생산적으로 만들어줘요.
+A neutral and positive mindset is needed — AI can make individuals, teams, and companies remarkably productive.
 
-이러한 사고방식은 미래에 대비하고 일자리나 회사를 잃을 가능성을 줄이며, AI 시대에 성장할 수 있는 능력을 갖는데요, AI 모델은 완벽하지 않기 때문에 언제 AI의 응답을 믿을 지 결정하고, 자체 확인을 하거나 직접 작업을 수행해야 하는지 판단해야 해요.
+This mindset helps prepare for the future, reduces the risk of losing jobs or businesses, and provides the ability to grow in the AI era. Since AI models are not perfect, we need to decide when to trust AI responses and determine whether to verify them ourselves or perform the task directly.
 
-이 판단은 인간 전문가가 필요하며, AI 모델의 약점을 보완해줘요.
+This judgment requires human experts and compensates for the weaknesses of AI models.
 
 
-### AI는 어떤 동료/협력자로 인식되며 어떤 문제를 해결할 수 있을까?
+### How is AI perceived as a colleague/collaborator, and what problems can it solve?
 
-AI를 동료로 인식하고 함께 일하는 게 좋아요.
+It is beneficial to perceive AI as a colleague and work together with it.
 
-의사일 때, AI는 이미 알려지지 않은 질병의 진단을 도와주는 등, 도움이 되는 역할을 해요.
+For doctors, AI helps with diagnosing unknown diseases, playing a supportive role.
 
-변호사일 때, AI는 법률 조사 및 계약 검토 등 사양번역 작업을 대신 해 줄 수 있어 고객과 더 많은 시간을 보낼 수 있어요.
+For lawyers, AI can handle legal research and contract review tasks, allowing them to spend more time with clients.
 
-선생님이라면, AI 동료는 시험 채점, 강의 자료 생성, 개인적인 지원 등을 도와주면 더욱 높은 효율을 뽑아낼 수 있어요.
+For teachers, an AI colleague can help with grading exams, creating lecture materials, and providing personalized support, achieving higher efficiency.
 
-더불어 인터랙션에서 AI 모델과 제품을 구분할 줄 알아야 해요.
+Additionally, you need to know how to distinguish between AI models and products in interactions.
 
-제품의 웹사이트나 앱을 쓰고 있을 때, AI 모델이 작동하는 부분이 존재해도 우리는 대부분 그 부분을 볼 수 없어요.
+When using a product's website or app, even though AI models are operating within it, we usually cannot see those parts.
 
 
-### AI 모델과의 상호작용을 통해 개발 가능한 제품은?
+### What products can be developed through interaction with AI models?
 
-제품을 통해 모델의 일부가 아닌, 사용자 인터페이스와 데이터가 제공돼요.
+Through products, user interfaces and data are provided, not just the model itself.
 
-제품은 모델에 포함되지 않은 추가 기능과 데이터를 제공해요.
+Products provide additional features and data that are not included in the model.
 
-E-learning 사이트에서는 챗봇으로 강좌에 대한 질문을 처리하고 채용 회사에서는 AI를 이용한 지원자 평가가 가능해요.
+E-learning sites can use chatbots to handle course questions, and recruitment companies can evaluate applicants using AI.
 
-이러한 모델과 상호 작용하기 위해서는 API가 필요하며, 이를 통해 코드가 모델에게 명령을 내릴 수 있어요.
+An API is needed to interact with these models, enabling code to send commands to the model.
 
-제품 개발자는 외부 브레인으로 AI 모델을 사용해 제품에 지능을 넣어줄 수 있어요.
+Product developers can use AI models as an external brain to add intelligence to their products.
 
-위에서는 GPT와 상호작용할 수 있는 코드, 자동 지원자 평가 프로그램 등을 예로 들어 설명했어요.
+Above, we provided examples such as code that can interact with GPT and automated applicant evaluation programs.
 
 
-### 인공지능을 사용하기 위해 필요한 것은?
+### What is needed to use artificial intelligence?
 
-인공지능을 활용하려면 prompt engineering 혹은 prompt design(프롬프트 디자인)이 필요해요.
+To utilize artificial intelligence, prompt engineering or prompt design is required.
 
-제너레이티브 AI를 효과적으로 사용하려면 AI 모델에서 유용한 결과를 생성할 수 있는 효과적인 프롬프트를 만들어야 해요.
+To use generative AI effectively, you need to create effective prompts that can generate useful results from AI models.
 
-예를 들어 작업실을 계획하는 데 도움이 필요하다면, 작업실에 대한 컨텍스트를 알려주는 프롬프트를 작성하면 더 좋은 결과를 가져올 수 있어요.
+For example, if you need help planning a workshop, writing a prompt that provides context about the workshop can yield better results.
 
-결과가 좋지 않을 경우, 프롬프트를 수정하고, 추가 정보를 제공하기 위해 팔로업 프롬프트를 작성하며 처음부터 반복하는 과정이 필요합니다.
+If the results are not satisfactory, you need to modify the prompt, write follow-up prompts to provide additional information, and repeat the process from the beginning.
 
 
-### Prompt Engineering이란 무엇이고 AI 발전 방향은?
+### What is Prompt Engineering and what is the direction of AI development?
 
-AI에게 나를 인터뷰하도록 요청하는 것이 AI에게 내게 도움이 되기 위해 알아야 할 것들을 알려줄 수 있어요.
+Asking AI to interview you can help the AI learn what it needs to know to assist you.
 
-Prompt Engineering을 통해 더욱 숙련될수록 AI로부터 더 빠르고 좋은 결과를 얻을 수 있어요.
+The more skilled you become at Prompt Engineering, the faster and better results you can obtain from AI.
 
-의미 있는 자율적인 AI 도구를 개발해 임무 성공을 도모하며 Prompt Engineering이 중요해져요.
+Developing meaningful autonomous AI tools to drive mission success makes Prompt Engineering increasingly important.
 
 
-### 생성형 인공지능의 가능성과 한계
+### The possibilities and limitations of generative AI
 
-생성형 인공지능은 우리가 생각하는 것보다 더 강력하죠.
+Generative AI is more powerful than we think.
 
-기술의 한계보다는 우리 자신의 상상력과 프롬프트 엔지니어링 기술이 한계예요.
+The limitation is not the technology itself, but rather our own imagination and prompt engineering skills.
 
-우리가 당면한 일의 문제를 잘 정의하고 이에 맞는 데이터를 선별해 프롬프트를 디자인하는 것이 관건이에요.
+The key is to clearly define the problems at hand, select appropriate data, and design the prompts accordingly.
 
-프롬프트 엔지니어링은 중요한 기술 중 하나예요.
+Prompt engineering is one of the most important skills.
 
-열심히 생각하고 실험하며 반복적으로 연습하면서 성장할 수 있는 기회예요.
+It is an opportunity to grow by thinking hard, experimenting, and practicing iteratively.
 
-생성형 인공지능은 기업을 위해 매우 유용한 도구이며, 이를 잘 활용할 수 있는 능력이 점차 중요할 것이에요.
+Generative AI is a very useful tool for businesses, and the ability to utilize it well will become increasingly important.
 
-생성형 인공지능 기술을 이해하고 이를 내게 유리한 방향으로 활용합시다.
+Let us understand generative AI technology and use it to our advantage.
 
-이를 통해 기회가 되어, 업무 효율성을 높일 수 있어요.
+Through this, it can become an opportunity to increase work efficiency.
 
 </details>

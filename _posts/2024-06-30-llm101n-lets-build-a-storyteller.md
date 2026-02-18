@@ -1,28 +1,24 @@
 ---
-title: ❏ LLM101n, LLM AI 스토리텔러 구축하기 🛠️
-description: LLM, AI, Storyteller
-categories:
-  - LLM/Model   - LLM/모델·논문 Papers
-tags:
-  - LLM
-  - Model
-  - Paper
+title: "❏ LLM101n, Building an LLM AI Storyteller 🛠️"
+description: "A few days ago, an interesting course by Andrej Karpathy was released."
+categories: [LLM/Model & Papers]
+tags: [LLM, Model, Paper]
 date: 2024-06-30 19:10:00 +0800
 ---
-며칠 전 Andrej Karpathy의 흥미로운 Course가 공개되었습니다.
-( 아직 내용은 업데이트 중이지만, 목차내용을 참고해볼 수 있을 것 같습니다. )
+A few days ago, an interesting course by Andrej Karpathy was released.
+( The content is still being updated, but the table of contents is available for reference. )
 
-이번에 공개된 “LLM101n: Let's build a Storyteller” 코스의 특징은 아래와 같습니다.
+The features of the newly released “LLM101n: Let's build a Storyteller” course are as follows.
 
 • 𝗟𝗟𝗠𝟭𝟬𝟭𝗻: 𝗢𝘃𝗲𝗿𝘃𝗶𝗲𝘄
- - 스토리텔러 AI 대규모 언어 모델(LLM)을 직접 구축
- - 직접 구축 AI로 작은 이야기를 만들고, 다듬고, 설명 가능
- - 최소한의 컴퓨터 과학 전제 조건으로 학습 시작
- - 기초부터 ChatGPT와 유사 기능을 갖춘 웹 앱까지 E2E 구축
- - 주요 개발 언어로는 Python, C 및 CUDA로 진행
- - Course를 통해 AI, LLM, 딥러닝 전반에 대해 깊게 이해 가능
+ - Build a Storyteller AI large language model (LLM) from scratch
+ - Create, refine, and explain short stories using the AI you build
+ - Start learning with minimal computer science prerequisites
+ - E2E build from basics to a web app with ChatGPT-like functionality
+ - Primary development languages are Python, C, and CUDA
+ - Gain a deep understanding of AI, LLMs, and deep learning in general through the course
 
-특히 이 𝗟𝗟𝗠𝟭𝟬𝟭𝗻 코스는 모든걸 바닥부터 end-to-end로 다 개발해 본다는 특징이 있어, 실습 바탕의 사내 실무 교육 과정으로도 좋아 보입니다. 🤔
+In particular, this 𝗟𝗟𝗠𝟭𝟬𝟭𝗻 course is characterized by developing everything from the ground up end-to-end, which makes it look promising as a hands-on in-house training program as well. 🤔
 
 • 𝗟𝗟𝗠𝟭𝟬𝟭𝗻: 𝗦𝘆𝗹𝗹𝗮𝗯𝘂𝘀
  - Chapter 01 Bigram Language Model (language modeling)
@@ -43,7 +39,7 @@ date: 2024-06-30 19:10:00 +0800
  - Chapter 16 Deployment (API, web app)
  - Chapter 17 Multimodal (VQVAE, diffusion transformer)
 
-• 𝗔𝗽𝗽𝗲𝗻𝗱𝗶𝘅: 아래 주제들이 위 Course에 추가될 예정이라 합니다.
+• 𝗔𝗽𝗽𝗲𝗻𝗱𝗶𝘅: The following topics are expected to be added to the course above.
  - Programming languages: Assembly, C, Python
  - Data types: Integer, Float, String (ASCII, Unicode, UTF-8)
  - Tensor: shapes, views, strides, contiguous, ...
@@ -51,9 +47,9 @@ date: 2024-06-30 19:10:00 +0800
  - Neural Net Architecture: GPT (1,2,3,4), Llama (RoPE, RMSNorm, GQA), MoE, ...
  - Multimodal: Images, Audio, Video, VQVAE, VQGAN, diffusion
 
-참고로 Tesla에서 인공 지능 및 Autopilot Vision 부문을 담당했던 Karpathy는 2023년 Tesla를 떠난 이후 OpenAI에 합류, 다시 OpenAI를 떠나 근래에는 대중을 위한 여러 AI 자료들을 만들어 제공해 오고 있습니다.
+For reference, Karpathy, who led AI and Autopilot Vision at Tesla, left Tesla in 2023, joined OpenAI, left again, and has since been creating and sharing various AI resources for the general public.
 
-진정한 "모두의 인공지능"을 실현하고 있는 Andrej Karpathy, 존경스럽네요.
+Andrej Karpathy, truly realizing "AI for everyone" — truly admirable.
 
 (Source) Andrej Karpathy, Github 👍 
  - LM101n: Let's build a Storyteller : <https://github.com/karpathy/LLM101n>

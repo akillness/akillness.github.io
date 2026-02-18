@@ -3,12 +3,8 @@ title: 'Why Async Code Can Be Slower: Common Pitfalls and Performance Solutions'
 description: Async code doesn't always mean faster code. Learn why asyncio can actually
   slow down your Python applications and discover proven strategies to fix performance
   issues, from sequential awaits to blocking libraries and CPU-bound tasks
-categories:
-  - Review/Trends
-tags:
-  - Trend
-  - Review
-  - Case
+categories: [Review/Trends]
+tags: [Trend, Review, Case]
 date: 2025-11-17 03:00:00 +0800
 mermaid: true
 image:
@@ -679,7 +675,7 @@ Understanding async performance pitfalls is critical because:
 
 **Original Article:**
 
-- [Async 코드가 오히려 느려지는 이유와 해결 전략 정리 - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2310)
+- [Why Async Code Can Be Slower and How to Fix It - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2310)
 
 **Video Tutorial:**
 

@@ -1,12 +1,8 @@
 ---
 title: "Qwen3‑Coder‑Next: Small Hybrid Models, Big Agentic Leaps"
 description: "A game‑dev lens on Qwen3‑Coder‑Next and why scaling agentic training signals (not just parameters) is the next unlock for coding agents."
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2026-02-04 13:00:00 +0900
 mermaid: true
 math: false

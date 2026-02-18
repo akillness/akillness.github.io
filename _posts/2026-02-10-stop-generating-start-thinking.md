@@ -1,12 +1,8 @@
 ---
 title: "Stop Generating, Start Thinking: The Missing Layer in AI Coding"
 description: "A deep reflection on why code generation without human thinking is risky—and how to build with agents without losing engineering judgment."
-categories:
-  - Agent/Orchestration
-tags:
-  - Agent
-  - Workflow
-  - Orchestration
+categories: [Agent/Orchestration]
+tags: [Agent, Workflow, Orchestration]
 date: 2026-02-10 13:00:00 +0900
 mermaid: true
 math: false
