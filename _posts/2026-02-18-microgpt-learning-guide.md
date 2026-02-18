@@ -6,10 +6,6 @@ tags: [gpt, transformers, microgpt, learning, tutorial]
 date: 2026-02-18 13:34:00 +0900
 mermaid: true
 math: false
-image:
-  path: /assets/img/ai/microgpt-cover.jpeg
-  lqip: data:image/webp;base64,UklGRiIAAABXRUJQVlA4TAYAAAAvAAAAAAfQ//73v/+BiOh/AAA=
-  alt: "Minimal GPT concept map"
 ---
 
 ## 🤔 Curiosity: The Question
