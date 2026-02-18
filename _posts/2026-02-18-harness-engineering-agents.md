@@ -50,12 +50,12 @@ Think of it like the **engine bay + transmission + ECU** for a car: the harness 
 
 ### Why This Matters: Evidence from the Field
 
-**1) Model fixed, harness changed → leaderboard flipped**  
-LangChain ran Terminal Bench 2.0 with **GPT‑5.2‑Codex unchanged**. Only system prompt, tools, and middleware were adjusted.
+**1) LangChain’s harness upgrades (deepagents)**  
+Their coding agent moved **Top 30 → Top 5** on Terminal Bench 2.0 without changing the model (GPT‑5.2‑Codex fixed). The improvements came from **prompt + tools + middleware**, plus a trace‑analysis loop that surfaced failure modes at scale.
 
-- **Score:** 52.8 → 66.5 (top‑5 jump)
-- **Cost:** 0 training cost
-- **Key tweak:** budget split *xhigh‑high‑xhigh* vs xhigh everywhere
+- **Score:** 52.8 → 66.5 (+13.7)
+- **Levers:** system prompt, tools, middleware (not the model)
+- **Key harness moves:** self‑verification loop, trace‑driven debugging, environment context injection, time‑budget warnings
 
 **2) A formatting harness (hashline) exposed real capability**  
 Hashline tags each line with short hashes so the model edits by reference, not by exact string match.
@@ -116,5 +116,6 @@ In games, agent failure is not theoretical—it breaks QA, build pipelines, and 
 ## References
 
 - https://openai.com/index/harness-engineering/
+- https://blog.langchain.com/improving-deep-agents-with-harness-engineering/
 - https://www.techtarget.com/searchitoperations/news/366631493/Harness-takes-aim-at-AI-bottleneck-with-DevSecOps-agents
 - https://devops.com/harness-extends-scope-and-reach-of-ai-platform-for-automating-devops-workflows/
