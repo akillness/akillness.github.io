@@ -3,7 +3,7 @@ title: "Harness Engineering: The Layer That Actually Makes Agents Work"
 description: "Why orchestration beats model upgrades in production—and how a better harness can flip benchmarks without changing the model."
 categories: [AI, Agent]
 tags: [agents, harness, orchestration, evaluation, tooling]
-date: 2026-02-18 21:30:00 +0900
+date: 2026-02-18 17:30:00 +0900
 mermaid: true
 math: false
 image:
