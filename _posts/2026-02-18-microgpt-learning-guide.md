@@ -34,6 +34,86 @@ That curiosity led me to **MicroGPT**: the smallest complete GPT training and in
 5. **Autograd** (chain rule in code)
 6. **Training loop** (loss → backprop → Adam)
 
+### Key Code Walkthrough (Core Blocks)
+
+**1) Tokenizer + Vocabulary**
+```python
+uchars = sorted(set(''.join(docs)))
+BOS = len(uchars)               # Beginning-of-sequence token
+vocab_size = len(uchars) + 1
+```
+
+**2) Minimal Autograd (Value class)**
+```python
+class Value:
+    __slots__ = ('data', 'grad', '_children', '_local_grads')
+    def __init__(self, data, children=(), local_grads=()):
+        self.data = data
+        self.grad = 0
+        self._children = children
+        self._local_grads = local_grads
+
+    def __add__(self, other):
+        other = other if isinstance(other, Value) else Value(other)
+        return Value(self.data + other.data, (self, other), (1, 1))
+
+    def __mul__(self, other):
+        other = other if isinstance(other, Value) else Value(other)
+        return Value(self.data * other.data, (self, other), (other.data, self.data))
+
+    def backward(self):
+        topo, visited = [], set()
+        def build(v):
+            if v not in visited:
+                visited.add(v)
+                for c in v._children: build(c)
+                topo.append(v)
+        build(self)
+        self.grad = 1
+        for v in reversed(topo):
+            for c, lg in zip(v._children, v._local_grads):
+                c.grad += lg * v.grad
+```
+
+**3) Attention Core (Q/K/V + Softmax)**
+```python
+def softmax(logits):
+    max_val = max(val.data for val in logits)
+    exps = [(val - max_val).exp() for val in logits]
+    total = sum(exps)
+    return [e / total for e in exps]
+
+# inside gpt(...)
+q = linear(x, Wq)
+k = linear(x, Wk)
+v = linear(x, Wv)
+attn_logits = [sum(qh[j] * kh[t][j] for j in range(head_dim)) / head_dim**0.5
+               for t in range(len(kh))]
+attn_weights = softmax(attn_logits)
+head_out = [sum(attn_weights[t] * vh[t][j] for t in range(len(vh)))
+            for j in range(head_dim)]
+```
+
+**4) Training Loop (Loss → Backprop → Adam)**
+```python
+for step in range(num_steps):
+    doc = docs[step % len(docs)]
+    tokens = [BOS] + [uchars.index(ch) for ch in doc] + [BOS]
+
+    keys, values = [[] for _ in range(n_layer)], [[] for _ in range(n_layer)]
+    losses = []
+    for pos_id in range(n):
+        token_id, target_id = tokens[pos_id], tokens[pos_id + 1]
+        logits = gpt(token_id, pos_id, keys, values)
+        probs = softmax(logits)
+        loss_t = -probs[target_id].log()
+        losses.append(loss_t)
+
+    loss = (1 / n) * sum(losses)
+    loss.backward()
+    # Adam update follows...
+```
+
 ### A Minimal GPT Pipeline (Concept Flow)
 
 ```mermaid
