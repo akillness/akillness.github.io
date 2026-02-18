@@ -1,5 +1,5 @@
 ---
-title: "3 common methods for improving the performance of LLM👏"
+title: 3 common methods for improving the performance of LLM👏
 description: "2. Retrieval Augmented Generation (RAG)."
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]

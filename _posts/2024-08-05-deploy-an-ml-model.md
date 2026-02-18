@@ -1,5 +1,5 @@
 ---
-title: "Deploy an ML model 🧠"
+title: Deploy an ML model 🧠
 description: "Curiosity: How do we deploy machine learning models in production? What are the different deployment patterns and when should we use each one?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]

@@ -1,5 +1,5 @@
 ---
-title: "The release of NVIDIA NIM on Hugging Face Inference Endpoints"
+title: The release of NVIDIA NIM on Hugging Face Inference Endpoints
 description: "Curiosity: How can we simplify generative AI model deployment? What happens when NVIDIA's inference services meet Hugging Face's platform?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
@@ -107,15 +107,15 @@ graph LR
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-## Yesterday at COMPUTEX, Jensen Huang announced the launch of NVIDIA NIM for Hugging Face Inference Endpoints!
+##  어제 COMPUTEX에서 Jensen Huang 는 Hugging Face 추론 엔드포인트에 대한 NVIDIA NIM의 출시를 발표했습니다!
 
-🚀 NVIDIA NIM is an inference service designed to simplify and accelerate the deployment of generative AI models. 👀
+🚀 NVIDIA NIM은 생성형 AI 모델의 배포를 간소화하고 가속화하도록 설계된 추론 서비스입니다. 👀
 
-- 1️⃣ 1-click deployment from Hugging Face Hub to Inference Endpoints
-- 🆕 Starting with Llama 3 8B and Llama 3 70B from AWS to GCP
-- 🚀 Up to 9000 tokens/second (Llama 3 8B)
-- 🔜 Mixtral 8x22B, Phi-3, and Gemma and more coming soon.
+- 1️⃣ Hugging Face Hub에서 Inference Endpoints로 1-클릭 배포
+- 🆕 AWS의 Llama 3 8B 및 Llama 3 70B부터 GCP
+- 🚀 최대 9000 토큰/초 (Llama 3 8B)
+- 🔜 Mixtral 8x22B, Phi-3 및 Gemma 등이 곧 추가될 예정입니다.
 
-Read more: <https://developer.nvidia.com/blog/nvidia-collaborates-with-hugging-face-to-simplify-generative-ai-model-deployments>
+자세히보기: <https://developer.nvidia.com/blog/nvidia-collaborates-with-hugging-face-to-simplify-generative-ai-model-deployments>
 
 </details>

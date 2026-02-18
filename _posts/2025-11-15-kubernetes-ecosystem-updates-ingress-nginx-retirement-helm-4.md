@@ -432,7 +432,7 @@ As someone managing production Kubernetes clusters, here's what excites me:
 ## References
 
 **Original Article:**
-- [Infrastructure Engineer Alert! Two Major Updates Shaking the Kubernetes Ecosystem - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2307)
+- [인프라 엔지니어 주목! 쿠버네티스 생태계를 뒤흔들 두 가지 주요 업데이트 - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2307)
 
 **Ingress NGINX Retirement:**
 - [Ingress NGINX Retirement: What You Need to Know - Kubernetes Blog](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/)

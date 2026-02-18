@@ -1,5 +1,5 @@
 ---
-title: "Hugging Face x Microsoft"
+title: Hugging Face x Microsoft
 description: "Curiosity: How can partnerships between major AI platforms accelerate open-source AI adoption?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
@@ -100,16 +100,16 @@ graph TB
 
 * * * 
 
-## Strengthened Partnership Between Hugging Face and Microsoft
+## 허깅 페이스와 마이크로 소프트의 협력 강화
 
-At MS BUILD yesterday, Satya Nadella announced an expanded partnership between Microsoft and Hugging Face to make open models and open-source AI more accessible across hardware — starting with new AMD GPUs, cloud via Azure AI, and local inference via ONNX Runtime. 🚀
+어제 MS BUILD에서 Satya Nadella는 새로운 AMD GPU, Azure AI를 통한 클라우드, ONNX Runtime 를 통한 로컬 추론을 시작으로 하드웨어 전반에 걸쳐 개방형 모델과 오픈 소스 AI에 더 쉽게 액세스할 수 있도록 Microsoft 와 Hugging Face 간의 파트너십 확장을 발표했습니다. 🚀
 
-- 💻 Expanded the Hugging Face collection in Azure Model Catalog with popular open models like Llama 3 and Mistral 7B, as well as top-performing fine-tuned models.
-- ⚡ Optimized containers for Azure's new AMD MI300X VMs using Hugging Face Text Generation Inference
-- 🤗 Open release of the Microsoft Phi-3 family on Hugging Face
-- 🌐 Local inference via WebGPU using Transformers.js and ONNX Runtime Web
-- 💻 New dev mode for seamless integration between Hugging Face Spaces and VS Code
+- 💻 Azure Model Catalog에서 Llama 3, Mistral 7B와 같은 인기 있는 개방형 모델 및 최고 성능의 미세 조정 모델을 사용하여 포옹 얼굴 컬렉션을 확장했습니다.
+- ⚡ Hugging Face Text Generation Inference를 사용하여 Azure의 새로운 AMD MI300X VM에 최적화된 컨테이너
+- 🤗 Hugging Face의 오픈 릴리스 Microsoft Phi-3 제품군
+- 🌐 Transformers.js 및 ONNX 런타임 웹을 사용한 WebGPU를 통한 로컬 추론
+- 💻 Hugging Face Spaces와 VS Code 간의 원활한 통합을 위한 새로운 개발 모드
 
-Learn more: <https://huggingface.co/blog/microsoft-collaboration>
+자세히 알아보기: <https://huggingface.co/blog/microsoft-collaboration>
 
 </details>

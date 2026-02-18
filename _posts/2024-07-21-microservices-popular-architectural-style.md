@@ -1,5 +1,5 @@
 ---
-title: "Microservices are a popular architectural style for building applications"
+title: Microservices are a popular architectural style for building applications
 description: "Curiosity: How can we build scalable, maintainable applications? What makes microservices architecture effective for modern systems?"
 categories: [Infrastructure/System]
 tags: [Infrastructure, Operations, Architecture]

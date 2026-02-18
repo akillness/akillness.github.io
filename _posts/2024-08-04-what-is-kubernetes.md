@@ -1,5 +1,5 @@
 ---
-title: "Even 𝗡𝗩𝗜𝗗𝗜𝗔 𝗡𝗜𝗠 𝗶𝘀 𝗿𝘂𝗻𝗻𝗶𝗻𝗴 𝗼𝗻 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀, what is 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀?"
+title: Even 𝗡𝗩𝗜𝗗𝗜𝗔 𝗡𝗜𝗠 𝗶𝘀 𝗿𝘂𝗻𝗻𝗶𝗻𝗴 𝗼𝗻 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀, what is 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀?
 description: "👉 Today we look into the Kubernetes system from a bird's eye view."
 categories: [Review/Trends]
 tags: [Trend, Review, Case]

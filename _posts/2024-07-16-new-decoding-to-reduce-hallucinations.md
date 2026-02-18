@@ -1,5 +1,5 @@
 ---
-title: "𝐍𝐞𝐰 𝐝𝐞𝐜𝐨𝐝𝐢𝐧𝐠 𝐭𝐞𝐜𝐡𝐧𝐢𝐪𝐮𝐞 𝐢𝐧 𝐭𝐫𝐚𝐧𝐬𝐟𝐨𝐫𝐦𝐞𝐫𝐬 𝐬𝐢𝐠𝐧𝐢𝐟𝐢𝐜𝐚𝐧𝐭𝐥𝐲 𝐫𝐞𝐝𝐮𝐜𝐞𝐬 𝐡𝐚𝐥𝐥𝐮𝐜𝐢𝐧𝐚𝐭𝐢𝐨𝐧𝐬"
+title: 𝐍𝐞𝐰 𝐝𝐞𝐜𝐨𝐝𝐢𝐧𝐠 𝐭𝐞𝐜𝐡𝐧𝐢𝐪𝐮𝐞 𝐢𝐧 𝐭𝐫𝐚𝐧𝐬𝐟𝐨𝐫𝐦𝐞𝐫𝐬 𝐬𝐢𝐠𝐧𝐢𝐟𝐢𝐜𝐚𝐧𝐭𝐥𝐲 𝐫𝐞𝐝𝐮𝐜𝐞𝐬 𝐡𝐚𝐥𝐥𝐮𝐜𝐢𝐧𝐚𝐭𝐢𝐨𝐧𝐬
   👏
 description: "This new decoding method is simple yet extremely impressive!"
 categories: [Review/Trends]

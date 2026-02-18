@@ -1,5 +1,5 @@
 ---
-title: "Struggling to Optimize Your RAG Setup? 😮"
+title: Struggling to Optimize Your RAG Setup? 😮
 description: "Not sure if you chunked your data right to enable optimal context retrieval?"
 categories: [RAG/Search]
 tags: [RAG, Embedding, Search]

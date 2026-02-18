@@ -1,5 +1,5 @@
 ---
-title: "All about transformer background knowledge including RNN"
+title: All about transformer background knowledge including RNN
 description: "<summary style= \"font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;\" > Explaining about Transformer by talker programming without cod..."
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]

@@ -1,5 +1,5 @@
 ---
-title: "🙌 Anthropic's latest tool-use course"
+title: 🙌 Anthropic's latest tool-use course
 description: "Curiosity: How can LLMs autonomously use external tools and APIs? What makes tool-use essential for building intelligent agents?"
 categories: [Learning/Guide]
 tags: [Learning, Guide, Lecture]
@@ -158,18 +158,18 @@ response = client.messages.create(
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-## If you are planning to build smarter LLM agents, this is a must-check. It is completely free!
+## 더 똑똑한 LLM 에이전트를 구축할 계획이라면 반드시 확인해야 합니다. 완전 무료입니다!
 
-Anthropic recently enabled tool use, allowing Claude models to call external tools or APIs to handle specific tasks such as calculations or weather forecast lookups when they lack the necessary information. 
+Anthropic은 최근 도구 사용을 가능하게 하여 Claude 모델이 필요한 정보가 부족할 때 계산 또는 일기 예보 검색과 같은 특정 작업을 해결하기 위해 외부 도구 또는 API를 호출할 수 있도록 했습니다. 
 
-Their course on this topic is fast and very well structured. I spent a weekend going through it and highly recommend taking it.
+이 주제에 대한 그들의 과정은 빠르고 매우 잘 구성되어 있으며 주말 동안 시간을 보냈으며 수강하는 것이 좋습니다
 
-The link is here: https://lnkd.in/eu_TYtxP
+링크는 다음과 같습니다 https://lnkd.in/eu_TYtxP
 
-- ⛳ The course consists of 6 Python notebooks
-- ⛳ It guides you from no knowledge of tool use to building a fully functional chatbot capable of autonomously using tools. 
-- ⛳ Exercises and quizzes are included throughout the course to reinforce learning.
+- ⛳ 이 과정은 6개의 파이썬 노트북으로 구성되어 있습니다
+- ⛳ 도구 사용에 대한 지식이 없는 상태에서 자율적으로 도구를 사용할 수 있는 본격적인 챗봇을 구축하도록 안내합니다. 
+- ⛳과정을 진행하면서 학습을 강화하기 위한 연습과 퀴즈가 포함되어 있습니다.
 
-Make sure to check it out!
+꼭 봐 주세요!
 
 </details>

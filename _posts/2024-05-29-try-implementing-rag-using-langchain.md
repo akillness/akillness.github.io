@@ -1,5 +1,5 @@
 ---
-title: "Try my hands-on tutorial on implementing RAG using LangChain and SingleStore"
+title: Try my hands-on tutorial on implementing RAG using LangChain and SingleStore
 description: "But to build #LLM-powered applications, LLMs are just not enough."
 categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
@@ -23,10 +23,10 @@ Try my hands-on tutorial on implementing RAG using LangChain and SingleStore.
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-However, LLM alone is not enough to build LLM-based applications.
+하지만 LLM 기반 애플리케이션을 구축하기 위해서는 LLM만으로는 충분하지 않습니다.
 
-There must be supporting tools, frameworks, integrations, and approaches to ensure applications work reliably and as expected.
+지원 도구, 프레임워크, 통합 및 응용 프로그램이 강력하고 예상대로 작동하는지 확인하기 위한 접근 방식이 있어야 합니다.
 
-This post aims to help even non-technical readers understand and implement RAG using the LangChain framework.
+이 글은 기술자가 아닌 사람도 LangChain 프레임워크를 사용하여 RAG를 이해하고 구현할 수 있도록 하는 것을 목표로 작성되었습니다.
 
 </details>

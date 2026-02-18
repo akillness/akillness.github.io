@@ -1,5 +1,5 @@
 ---
-title: "📊 Key Data Terms to Know in 2024, A Quick Guide"
+title: 📊 Key Data Terms to Know in 2024, A Quick Guide
 description: "1. 𝗗𝗮𝘁𝗮 𝗠𝗶𝗻𝗶𝗻𝗴: Discovering hidden patterns in large datasets using statistical and ML methods."
 categories: [Data Science/Algorithms]
 tags: [Data Science, Algorithm, Analysis]

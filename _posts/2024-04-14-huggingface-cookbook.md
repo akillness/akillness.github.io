@@ -1,5 +1,5 @@
 ---
-title: "Little know gem the Open-source Cookbook"
+title: Little know gem the Open-source Cookbook
 description: "Curiosity: Where can we find practical examples for building AI applications with open-source tools? What makes the Hugging Face Cookbook valuable?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
@@ -48,29 +48,29 @@ mermaid: true
 
 * * * 
 
-### A Hidden Gem: The Open Source Cookbook
+### 거의 알려지지 않은 보석 : 오픈 소스 요리 책
 
-A collection of notebooks for building practical AI applications using open-source tools and models: <https://github.com/huggingface/cookbook>
+오픈 소스 도구 및 모델을 사용하여 실용적인 AI 애플리케이션을 구축하기 위한 노트북 모음: <https://github.com/huggingface/cookbook>
 
-Docs: <https://huggingface.co/learn/cookbook/index>
+문서: <https://huggingface.co/learn/cookbook/index>
 
-Currently includes 16 notebooks in English and Chinese.
+현재 영어와 중국어로 된 16개의 노트북이 포함되어 있습니다.
 
-1. Using LLM-as-a-judge 🧑‍⚖️ for automated multipurpose evaluation
-2. Creating a legal preference dataset
-3. Suggestions for data annotation using SetFit in zero-shot text classification
-4. Implementing semantic cache for improving RAG systems
-5. Building a RAG e-book "Librarian" using LlamaIndex
-6. Stable diffusion interpolation
-7. Building a RAG system using Gemma, MongoDB, and open-source models
-8. Prompt tuning with the PEFT library
-9. Migrating from OpenAI to open LLMs using TGI's Messages API
-10. Automatic embedding using TEI via inference endpoints
-11. Simple RAG for GitHub issues using Hugging Face Zephyr and LangChain
-12. Embedding multi-modal data for similarity search using Transformers, 🤗 Datasets, and FAISS
-13. Fine-tuning a code LLM on custom code on a single GPU
-14. RAG evaluation using synthetic data and LLM-As-A-Judge
-15. Advanced RAG with HuggingFace documentation using LangChain
-16. Detecting issues in text datasets using Cleanlab
+1. 자동화된 다목적 평가를 위해 LLM-as-a-judge 🧑 ⚖️ 사용
+2. 법적 선호도 데이터 세트 만들기
+3. Zero-shot 텍스트 분류에서 SetFit을 사용한 데이터 주석에 대한 제안
+4. RAG 시스템 개선을 위한 시맨틱 캐시 구현
+5. LlamaIndex를 사용하여 RAG 전자책 "Librarian" 구축
+6. 안정되어 있는 유포 보삽법
+7. Gemma, MongoDB 및 오픈 소스 모델을 사용한 RAG 시스템 구축
+8. PEFT 라이브러리를 사용한 프롬프트 튜닝
+9. TGI의 Messages API를 사용하여 OpenAI에서 개방형 LLM으로 마이그레이션
+10. 추론 엔드포인트를 통한 TEI를 사용한 자동 임베딩
+11. Hugging Face Zephyr 및 LangChain을 사용한 GitHub 문제에 대한 간단한 RAG
+12. 트랜스포머, 🤗 데이터 세트 및 FAISS를 사용한 🤗 유사성 검색을 위한 다중 모드 데이터 포함
+13. 단일 GPU의 사용자 지정 코드에서 코드 LLM 미세 조정
+14. 합성 데이터 및 LLM-As-A-Judge를 사용한 RAG 평가
+15. LangChain을 사용한 HuggingFace 문서의 고급 RAG
+16. Cleanlab을 사용하여 텍스트 데이터 세트에서 문제 감지
 
 </details>

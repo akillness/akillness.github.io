@@ -1,5 +1,5 @@
 ---
-title: "Research Notes on Kakao API"
+title: Kakao API 관련해서 찾아본 내용
 description: "I wondered if I could make a chatbot using Kakao API, and found that basic chatbot functions are already provided to room admins in OpenChat (greeting..."
 categories: [Development Tools/Productivity]
 tags: [Development Tools, Productivity, Reference]
@@ -7,19 +7,19 @@ date: 2024-03-31 18:30:00 +0800
 render_with_liquid: true
 mermaid: true
 ---
-I wondered if I could make a chatbot using Kakao API, and found that basic chatbot functions are already provided to room admins in OpenChat (greetings, scheduler). To create conversation bots or GPT-like messenger bots, you need to develop through the Kakao developer site. I'll stop here for now ^^
+카카오API를 이용해서 챗봇만들기 한번 해볼까? 해서 찾아봤는데, 간단한 챗봇기능은 OpenChat에서 방장에게 기본 제공되는 기능이 있다. (인사, 스케쥴러) 이런 기능 말고 대화 봇이나 Chat GPT 같이 메신저 등 요구하는 봇을 만들려면 카카오 개발자 사이트를 통해서 개발이 가능하다. 하지만 여기까지만 알아볼 예정 ^^
 
-## **Not Much of a Story**
+## **별거? 아닌 이야기**
 
-> **Note:** Always maintain your mindset, and you need your own motivation for why you should take on new challenges :D
+> **Note:** 항시 마인드 셋을 갖고, 새롭게 도전전하는 일에 대해 "왜?" 해야하는지 스스로의 동기가 필요합니다 :D
 {: .prompt-info }
 
-I looked into whether I could create something like an OpenChat function using the Kakao API, and here is a summary of what I found.
+Kakao API 를 이용해 오픈챗 같은? 기능을 만들어 볼 수 있을까 하여, 몇가지 찾아본 내용을 정리해본다.
 
-1. "Open Chatbot" (Room Admin Bot): Without using Kakao API, if you have room admin privileges in an open chat room, very simple functions (greeting on entry, scheduled comments, command-triggered comments) are available on mobile
-2. "App-linked API" function: It is continuously updated so you need to look for recent info, but you can register an ID on the [Kakao Developers](https://developers.kakao.com/) site and find sample projects to develop
+1. "오픈 챗봇"(방장봇) : Kakao API 를 이용하지 않아도, 오픈 톡방에 방장 권한만 있다면 아주 간단한 기능 (방문시 인사, 정해진 시간에 코맨트, 명령어에 따른 코맨트)은 모바일로도 충분히 가능
+2. "앱연동 API" 기능 : 계속 업데이트 되어서 최근 정보를 잘 찾아봐야하지만 [카카오개발자](https://developers.kakao.com/) 사이트에 아이디를 등록하고 샘플 프로젝트를 찾아서 개발할 수 있음
 
-I should update the above information as I find more
+위의 정보는 찾아보면서 업데이트 해야겠다
 
 
 #### Liquid Codes
@@ -39,4 +39,4 @@ I should update the above information as I find more
 ````
 
 {: .box-note}
-(Note) A site that provides free domains: [neocities](https://neocities.org/)
+(기록)무료 도메인을 제공하는 사이트 [neocities](https://neocities.org/)

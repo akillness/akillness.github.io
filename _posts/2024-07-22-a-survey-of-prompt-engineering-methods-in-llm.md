@@ -1,5 +1,5 @@
 ---
-title: "📚 \"A Survey of Prompt Engineering Methods in Large Language Models\" - LLM"
+title: 📚 "A Survey of Prompt Engineering Methods in Large Language Models" - LLM
 description: "Curiosity: What are the most effective prompt engineering techniques?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]

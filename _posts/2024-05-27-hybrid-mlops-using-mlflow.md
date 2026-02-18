@@ -1,5 +1,5 @@
 ---
-title: "Example: Building Hybrid MLOps with MLflow"
+title: MLflow를 활용한 Hybrid MLOps 구축 예제
 description: "Curiosity: How can we combine on-premise GPU training with cloud-based inference?"
 categories: [Infrastructure/System]
 tags: [Infrastructure, Operations, Architecture]

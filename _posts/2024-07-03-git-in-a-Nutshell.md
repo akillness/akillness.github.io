@@ -1,5 +1,5 @@
 ---
-title: "Are you leveraging the full power of Git in your development workflow?"
+title: Are you leveraging the full power of Git in your development workflow?
 description: "1. Commit often, push regularly."
 categories: [RAG/Search]
 tags: [RAG, Embedding, Search]

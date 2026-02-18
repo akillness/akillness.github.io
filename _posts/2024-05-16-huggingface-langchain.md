@@ -1,5 +1,5 @@
 ---
-title: "Hugging Face x Langchain"
+title: Hugging Face x Langchain
 description: "Curiosity: What happens when two major LLM ecosystems collaborate? How does this partnership benefit developers building LLM applications?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
@@ -76,24 +76,24 @@ pip install langchain-huggingface
 
 * * * 
 
-## LangChain's New Partner 🤝
+## LangChain의 새로운 파트너🤝
 
-Hugging Face can now be considered part of LangChain's partner packages.
+허깅페이스는 이제 랭체인의 파트너 패키지의 일부로 간주될 수 있습니다.
 
-> What this means:
-- 🚀 Faster Integration: New Hugging Face features will be implemented quickly.
-- 🙏 Collaboration: Jointly maintained to ensure the best compatibility.
-- ⚖️ Better Alignment: The package contents will better align with our vision.
-- 🤗 Help from Hugging Face Experts: We will help with issues/PRs for the package.
+> 의미:
+- 🚀 더 빠른 통합 : Hugging Face의 새로운 기능이 빠르게 구현됩니다.
+- 🙏 협업 : 최상의 호환성을 보장하기 위해 공동으로 유지 관리됩니다.
+- ⚖️ 더 많은 균형 : 패키지의 내용이 우리의 비전과 더 잘 맞을 것입니다.
+- 🤗 허깅페이스 전문가의 도움 : 패키지의 문제/PR에 도움을 드리겠습니다.
 {: .prompt-info }
 
-You can install it directly: pip install langchain-huggingface
+직접 설치할 수 있습니다 : pip install langchain-huggingface
 
-Or first browse the package contents in the related blog post
+또는 먼저 관련 블로그 게시물에서 패키지 콘텐츠를 둘러보세요 
 👉<https://huggingface.co/blog/langchain>
 
-We are excited to see what you will build with it!
+우리는 당신이 그것으로 무엇을 만들 것인지 기대하고 있습니다!
 
-Special thanks to: Erick Friis, Kirill Kondratenko for their help with the package, Andrew Reed for the first PR in the community package, Aymeric Roucher
+특별히 감사하는 분들: Erick Friis, 패키지에 대한 도움을 주신 Kirill Kondratenko, 커뮤니티 패키지에서 첫 번째 PR을 해주신 Andrew Reed, Aymeric Roucher
 
 </details>

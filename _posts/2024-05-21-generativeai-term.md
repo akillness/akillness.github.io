@@ -1,5 +1,5 @@
 ---
-title: "Generative AI Terms, You should know."
+title: Generative AI Terms, You should know.
 description: "Curiosity: What are the key terms in Generative AI? How can we understand the essential concepts that power modern AI systems?"
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
@@ -72,14 +72,14 @@ graph TB
 
 * * * 
 
-## Generative AI Terms You Need to Know 📚
+## 당신이 알아야 할 생성형 AI 용어 📚
 
-🎉 Confused by GenAI terminology? Time to decode it! Check out this Generative AI cheat sheet with the most frequently used terms and easy-to-understand summaries.
+🎉 GenAI 용어가 헷갈리시나요? 해독할 시간입니다! 가장 자주 사용되는 용어와 이해하기 쉬운 요약이 포함된 생성형 AI 치트 시트를 확인하세요.
 
-😎 I've compiled the most popular #genai terms into easy-to-understand one-liners. Even if you're not familiar with machine learning, these terms are easy to grasp. This cheat sheet is your ticket to joining the #genai trend!
+😎 가장 인기 있는 해시태그#genai 용어를 이해하기 쉬운 한 줄짜리 글로 정리했습니다. 기계 학습에 익숙하지 않더라도 이러한 용어는 쉽게 이해할 수 있습니다. 이 치트 시트는 해시태그#genai 트렌드에 동참할 수 있는 티켓입니다!
 
-🔊 After finishing the LLM terminology series, many people asked me to simplify broader Generative AI concepts. Here's what I came up with!
+🔊 LLM 용어 시리즈를 마친 후, 많은 사람들이 생성형 AI의 광범위한 개념을 단순화해 달라고 요청했습니다. 여기 내가 생각해 낸 것이 있습니다!
 
-Happy learning!
+행복한 학습!
 
 </details>

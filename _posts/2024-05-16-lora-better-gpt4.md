@@ -1,5 +1,5 @@
 ---
-title: "Results of Applying LoRA Are Generally Better Than GPT-4?"
+title: GPT4보다 LoRA를 적용한 결과가 전반적으로 낫더라?
 description: "Curiosity: Can fine-tuned smaller models outperform large general-purpose models on specific tasks?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
@@ -218,11 +218,11 @@ We present the workflow of Online Iterative Reinforcement Learning from Human Fe
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-RLHF Workflow
+RLHF 워크플로우
 
-From Reward Modeling to Online RLHF
+보상 모델링에서 온라인 RLHF까지
 
-This technical report presents the workflow for RLHF (Online Iterative Reinforcement Learning from Human Feedback), which has recently been widely reported to outperform offline models by a large margin in the large language model (LLM) literature. However, existing open-source RLHF projects are still limited to offline learning environments. In this technical report, we aim to bridge this gap and provide detailed recipes for online iterative RLHF that can be easily reproduced. In particular, since online human feedback is generally not feasible in the open-source community with limited resources, we construct a preference model using various open-source datasets and use the constructed proxy preference model to approximate human feedback. We then discuss the theoretical insights and algorithmic principles of online iterative RLHF, followed by detailed practical implementation. The trained LLM, SFR-Iterative-DPO-LLaMA-3-8B-R, achieves impressive performance on LLM chatbot benchmarks including AlpacaEval-2, Arena-Hard, and MT-Bench, as well as other academic benchmarks such as HumanEval and TruthfulQA. We demonstrated that supervised fine-tuning (SFT) and iterative RLHF can achieve state-of-the-art performance through fully open-source datasets. We also made the model, curated datasets, and comprehensive step-by-step codebook publicly available.
+이 기술 보고서에서는 RLHF(Online Iterative Reinforcement Learning from Human Feedback)의 워크플로우를 제시하며, 이는 최근 대규모 언어 모델(LLM) 문헌에서 오프라인 모델보다 큰 차이로 우수한 것으로 널리 보고되었습니다. 그러나 기존 오픈 소스 RLHF 프로젝트는 여전히 오프라인 학습 환경에 국한되어 있습니다. 이 기술 보고서에서는 이러한 격차를 해소하고 온라인 반복 RLHF를 위해 쉽게 재현할 수 있는 자세한 레시피를 제공하는 것을 목표로 합니다. 특히, 온라인 인적 피드백은 일반적으로 제한된 리소스를 가진 오픈 소스 커뮤니티에서 실현 가능하지 않기 때문에 다양한 오픈 소스 데이터 세트를 사용하여 선호도 모델을 구성하고 구성된 프록시 선호도 모델을 사용하여 인간의 피드백을 근사화합니다. 그런 다음 온라인 반복 RLHF의 이론적 통찰력과 알고리즘 원리에 대해 논의한 후 자세한 실제 구현에 대해 논의합니다. 훈련된 LLM인 SFR-Iterative-DPO-LLaMA-3-8B-R은 AlpacaEval-2, Arena-Hard, MT-Bench를 포함한 LLM 챗봇 벤치마크와 HumanEval 및 TruthfulQA와 같은 기타 학술 벤치마크에서 인상적인 성능을 달성합니다. 우리는 지도 미세 조정(SFT) 및 반복 RLHF가 완전한 오픈 소스 데이터 세트를 통해 최첨단 성능을 얻을 수 있음을 보여주었습니다. 또한 모델, 선별된 데이터 세트 및 포괄적인 단계별 코드 가이드북을 공개적으로 사용할 수 있도록 했습니다.
 
 >
 - paper : <https://arxiv.org/abs/2405.07863>

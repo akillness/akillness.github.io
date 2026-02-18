@@ -1,5 +1,5 @@
 ---
-title: "𝗧𝗵𝗲 𝟱 𝗟𝗮𝘆𝗲𝗿𝘀 𝗼𝗳 𝗠𝗼𝗱𝗲𝗿𝗻 𝗦𝗼𝗳𝘁𝘄𝗮𝗿𝗲 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲 - 𝗔 𝗖𝗼𝗺𝗽𝗿𝗲𝗵𝗲𝗻𝘀𝗶𝘃𝗲 𝗚𝘂𝗶𝗱𝗲"
+title: 𝗧𝗵𝗲 𝟱 𝗟𝗮𝘆𝗲𝗿𝘀 𝗼𝗳 𝗠𝗼𝗱𝗲𝗿𝗻 𝗦𝗼𝗳𝘁𝘄𝗮𝗿𝗲 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲 - 𝗔 𝗖𝗼𝗺𝗽𝗿𝗲𝗵𝗲𝗻𝘀𝗶𝘃𝗲 𝗚𝘂𝗶𝗱𝗲
 description: "As software systems become increasingly complex, understanding their architecture is crucial for developers, architects, and tech leaders."
 categories: [Review/Trends]
 tags: [Trend, Review, Case]

@@ -1,5 +1,5 @@
 ---
-title: "Beginner-friendly 101 guide on LLM agents"
+title: Beginner-friendly 101 guide on LLM agents
 description: "Curiosity: What if LLMs could do more than just answer questions?"
 categories: [Agent/Orchestration]
 tags: [Agent, Workflow, Orchestration]
@@ -8,9 +8,10 @@ mermaid: true
 image:
   path: /assets/img/news/llm-agents.jpeg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: "Beginner-friendly 101 guide on LLM agents"
+  alt:
+  - Beginner-friendly 101 guide on LLM agents
 ---
-> Agents extend the concept of conversational LLMs through a combination of tools, execution code, embeddings, and vector stores. In other words, agents add additional steps beyond RAG
+> 에이전트는 툴, 실행 코드, 임베딩, 벡터 저장소의 조합을 통해 대화형 LLM의 개념을 확장한다. 즉, 에이전트는 RAG에 부가적인 단계를 더한 것
 {: .prompt-info}
 
 
@@ -146,72 +147,72 @@ graph TB
 
 * * * 
 
-### Lilys AI Translation: https://lilys.ai/digest/674766 
-> Original: <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/resources/agents_101_guide.md>
+### Lilys ai 번역 : https://lilys.ai/digest/674766 
+> 원문 : <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/resources/agents_101_guide.md>
 
 
-#### 1. Introduction to LLM Agents and Their Capabilities
-   - LLM agents are *large language model agents*, intelligent systems that combine advanced language processing with other critical components such as planning and memory to handle complex tasks, playing an important role in building virtual assistants.
-   - For example, in the process of building a virtual assistant that helps with travel planning, they can answer complex questions related to travel topics and suggest personalized travel plans.
-   - LLM agents go beyond basic question-answering capabilities to exhibit *human-like behavior* through feedback processing, memory retention, strategy formulation for future actions, and collaboration with various tools, representing progress toward artificial general intelligence.
-   - LLM agents *do not require human intervention* in performing fully automated tasks, representing a significant advancement in AI capabilities.
+#### 1.LLM 에이전트 소개 및 기능
+   - LLM 에이전트는 *큰 언어 모델 에이전트*로, 진보된 언어 처리와 기타 중요한 구성 요소인 계획 및 기억을 결합하여 복잡한 작업을 처리하는 지능적인 시스템이며, 가상 어시스턴트를 구축할 때 중요한 역할을 한다.
+   - 이들은 예를 들어 여행 계획을 도와주는 가상 어시스턴트를 만드는 과정에서, 여행 주제와 관련된 복잡한 질문에 대답하고 개인 맞춤형 여행 계획을 제안할 수 있다.
+   - LLM 에이전트는 기본적인 질문 답변 능력을 넘어 피드백 처리, 기억 유지, 미래 행동에 대한 전략 수립 및 다양한 도구와의 협업을 통해 *사람과 유사한 행동*을 보이며, 인공 일반 지능에 대한 발전을 나타내고 있다.
+   - LLM 에이전트는 아예 자동화된 작업을 수행하는데 있어 *인간의 개입이 필요하지 않으며*, 이는 AI 기능의 상당한 발전을 나타낸다.
 
-#### 2. LLM Agent Framework and Key Components
-   - In the previous section, we discussed a framework for understanding LLM agents, which decomposed agents into three main components: brain, perception, and execution.
-   - In this section, we will examine a more widely used framework for structuring agent components.
-   - This framework consists of the following core elements: agent core, memory module, tools, and planning module.
-   - The agent core serves as the central decision-making component, overseeing the core logic and behavior patterns within the AI agent. The memory module is a critical component of AI agents, acting as a repository for storing internal logs and user interactions, divided into short-term memory and long-term memory.
-   - Tools represent predefined executable workflows used by AI agents to effectively carry out tasks, while the planning module requires a well-structured approach for complex problem-solving, and LLM-based agents utilize various techniques to handle this.
+#### 2.LLM 에이전트 프레임워크와 주요 구성 요소
+   - 기존 섹션에서 LLM 에이전트를 이해하기 위한 프레임워크를 논의했는데 에이전트를 뇌, 인식, 실행으로 세 가지 주요 구성 요소로 분해하는 것이었습니다.
+   - 이번 섹션에서는 에이전트 구성요소를 구조화하는 더 널리 사용되는 프레임워크를 살펴볼 것입니다.
+   - 이 프레임워크는 다음과 같은 핵심 요소로 구성됩니다: 에이전트 코어, 메모리 모듈, 도구, 그리고 계획 모듈.
+   - 에이전트 코어는 중심 의사결정 구성 요소로 작용하며 AI 에이전트 내의 핵심 논리와 행동 패턴을 감독합니다. 메모리 모듈은 AI 에이전트의 중요한 구성 요소로 내부 로그 및 사용자 상호 작용을 저장하는 저장소로 작용하며 단기 기억과 장기 기억으로 나뉩니다.
+   - 도구는 작업을 효과적으로 실행하기 위해 AI 에이전트가 사용하는 사전 정의된 실행 가능한 워크플로를 나타내며, 계획 모듈은 복잡한 문제 해결을 위해 잘 구조화된 접근 방식이 필요하며 LLM 기반 에이전트는 이를 처리하기 위해 다양한 기법을 활용합니다.
 
-#### 3. Advantages of Multi-Agent Systems and Collaboration
-   - LLM-based agents demonstrate outstanding text understanding and generation capabilities, but they generally operate in isolated environments due to the lack of ability to collaborate with other agents or *learn from social interactions*.
-   - These limitations hinder the potential for performance improvement through *multi-turn feedback* and collaboration in complex scenarios.
-   - LLM-based multi-agent systems focus on *diverse agent profiles, inter-agent interactions, and collective decision-making*.
-   - *Cooperation among multiple autonomous agents* in LLM-MA systems enables handling dynamic and complex tasks through *unique strategies, behaviors, and communication between agents*.
-   - LLM-based multi-agent systems are based on the principle of *division of labor*, where specialized agents with domain expertise can efficiently handle specific tasks and improve task efficiency and collective decision-making.
+#### 3.다중 에이전트 시스템의 장점 및 Collaboration
+   - LLM 기반 에이전트는 탁월한 텍스트 이해 및 생성 능력을 보여주지만, 다른 에이전트와 협력하거나 *소셜 상호작용에서 배우는 능력*이 부재해 일반적으로 고립된 환경에서 작동한다.
+   - 이러한 제한이 *다중 턴 피드백* 및 복잡한 시나리오에서의 협력을 통한 성능 향상 가능성을 저해한다.
+   - LLM 기반 다중 에이전트 시스템은 *다양한 에이전트 프로필, 에이전트 간 상호작용 및 집단 의사 결정*에 중점을 둔다.
+   - LLM-MA 시스템에서의 *다중 자율 에이전트 간 협력*은 *에이전트 간의 독특한 전략, 행동 및 의사소통*을 통해 동적이고 복잡한 작업을 처리할 수 있게 한다.
+   - LLM 기반 다중 에이전트 시스템은 *노동 분담* 원리를 기반으로 하여, 전문 지식을 갖춘 특화된 에이전트가 특정 작업을 효율적으로 처리하고, 작업 효율성과 집단 의사 결정을 향상시킬 수 있다.
 
-#### 4.️ Types of Cooperative and Adversarial Interactions
-   - Multi-agent interactions in LLM-based systems can be broadly classified into cooperative and adversarial interactions.
-   - In cooperative interactions, agents evaluate each other's needs and capabilities, actively pursuing collaborative behavior and information sharing.
-   - Image source: <https://arxiv.org/pdf/2309.07864.pdf>
+#### 4.️협력적 및 적대적 상호작용 유형
+   - LLM 기반 시스템의 다중 에이전트 상호작용은 협력적 및 적대적 상호작용으로 크게 분류될 수 있다.
+   - 협력적 상호작용에서는 에이전트들이 서로의 필요와 능력을 평가하며, 협력적인 행동과 정보 공유를 적극적으로 추구한다.
+   - 이미지 출처: <https://arxiv.org/pdf/2309.07864.pdf>
 
-#### 5. Classification of Cooperative Multi-Agent Applications
-   - They improve task efficiency and enhance collective decision-making.
-   - Existing cooperative multi-agent applications can be classified into unordered cooperation and ordered cooperation.
-   - In unordered cooperation, multiple agents within the system freely express their opinions without following a specific order or collaborative workflow.
-   - In contrast, ordered cooperation requires each agent to follow specific rules or sequences in expressing opinions or engaging in discussion.
-   - Both approaches have their respective benefits and challenges, and should be chosen based on the specific requirements and goals of the multi-agent system.
+#### 5.협력형 다중 에이전트 애플리케이션의 분류
+   - 작업 효율성을 향상시키고 집단 의사결정을 향상시킨다.
+   - 기존의 협력형 다중 에이전트 애플리케이션은 무질서한 협력과 순서있는 협력으로 분류될 수 있다.
+   - 무질서한 협력은 시스템 안의 여러 에이전트들이 특정 순서나 협업적인 워크플로우를 따르지 않고 각자 의견을 자유롭게 표현한다.
+   - 반면에 순서있는 협력은 각 에이전트가 의견 표현이나 토론에 특정 규칙이나 순서를 준수한다.
+   - 이러한 두 접근 방식은 각각의 혜택과 도전 과제가 있으며, 다중 에이전트 시스템의 특정 요구사항과 목표에 따라 선택되어야 한다.
 
-#### 6. Adversarial Interactions and Multi-Agent Systems
-   - While cooperative methods have been widely studied, the benefits of introducing game theory concepts into multi-agent systems are being recognized.
-   - Adversarial interactions promote dynamic adjustment of agent strategies, leading to robust and efficient behavior.
-   - Examples of adversarial interactions successfully applied in LLM-based multi-agent systems include debates and arguments, which improve the quality of responses and decision-making.
-   - Several challenges remain in multi-agent systems, including limitations in processing continuous discussions, increased computational costs in multi-agent environments, and the risk of converging on incorrect consensus.
-   - To advance multi-agent systems, these challenges must be addressed and human guidance should be integrated to compensate for and improve upon agent limitations.
-   - MAS is a dynamic research field with significant potential to enhance collaboration, decision-making, and problem-solving capabilities in complex environments.
-   - Continued research and development in this field is expected to open new opportunities for intelligent agent interaction and cooperation, contributing to advances in the AGI field.
+#### 6.적대적 상호작용과 다중 에이전트 시스템
+   - 협력 방법이 널리 연구되었지만 게임 이론의 개념을 다중 에이전트 시스템에 도입하는 이점이 인정받고 있다.
+   - 적대적 상호작용은 에이전트 전략의 동적 조정을 촉진하여 견고하고 효율적인 행동으로 이어진다.
+   - 적대적 상호작용이 LLM 기반 다중 에이전트 시스템에서 성공적으로 적용되는 예로는 토론과 논쟁이 있으며, 응답 및 의사 결정의 품질을 향상시킨다.
+   - 다중 에이전트 시스템에서는 지속적인 토론 처리 제한, 다중 에이전트 환경에서의 증가된 계산적 비용, 잘못된 합의로 수렴하는 위험 등 여러 가지 도전 과제가 남아 있다.
+   - 다중 에이전트 시스템의 발전을 위해서는 이러한 도전 과제를 해결하고 에이전트의 한계를 보상하고 발전시키기 위해 인간 가이드를 통합함으로써 나아가야 한다.
+   - MAS는 복잡한 환경에서의 협업, 의사 결정 및 문제 해결 능력을 향상시킬 수 있는 상당한 잠재력을 갖고 있는 동적인 연구 분야이다.
+   - 이 분야에서의 지속적인 연구와 개발은 지능적인 에이전트 상호작용 및 협력을 위한 새로운 기회를 열어주며 AGI 분야의 발전에 기여할 것으로 기대된다.
 
-#### 7. BabyAGI: An Autonomous Agent for Executing Various Tasks
-   - BabyAGI is a **popular** task-oriented autonomous agent designed to execute tasks across various domains.
-   - Its key components utilize *OpenAI*'s GPT-4 language model, the Pinecone vector search platform, and the LangChain framework.
-   - 1. GPT-4 (Agent Core):
-   - GPT-4 serves as the core of the system, completing tasks, generating new tasks based on completed results, and prioritizing tasks in real-time.
-   - 2. Pinecone (Memory Module):
-   - Pinecone is used to efficiently store and retrieve task-related data, including task descriptions, constraints, and results.
-   - 3. LangChain Framework (Tooling Module):
-   - The LangChain framework enhances the system's capabilities, particularly helping it become more powerful in task completion and decision-making processes.
+#### 7.BabyAGI: 다양한 작업을 실행하는 자율 에이전트
+   - BabyAGI는 다양한 도메인에서 작업을 실행하기 위해 설계된 **인기 있는** 작업 중심 자율 에이전트이다.
+   - 주요 구성 요소는 *OpenAI*의 GPT-4 언어 모델, Pinecone 벡터 검색 플랫폼 및 LangChain 프레임워크를 활용한다.
+   - 1. GPT-4 (에이전트 코어):
+   - GPT-4는 시스템의 핵심으로 작용하며, 작업을 완료하고 완료된 결과를 기반으로 새로운 작업을 생성하며 실시간으로 작업을 우선 순위를 지정한다.
+   - 2. Pinecone (메모리 모듈):
+   - Pinecone은 작업 설명, 제약 조건 및 결과를 포함한 작업 관련 데이터를 효율적으로 저장하고 검색하는 데 활용된다.
+   - 3. LangChain 프레임워크(툴링 모듈):
+   - LangChain 프레임워크는 시스템의 능력을 향상시키며, 특히 작업 완료 및 의사 결정 프로세스에서 더 강력해지도록 도와준다.
 
-#### 8. BabyAGI Operational Stages
-   - Task Completion: Processes tasks from the task list, generates results using GPT-4 and LangChain capabilities, and stores them in Pinecone.
-   - New Task Generation: Based on completed task results, BabyAGI generates new tasks using GPT-4, ensuring they do not overlap with existing tasks.
-   - Task Prioritization: Adjusts task priorities based on new task generation and priority criteria, with GPT-4 facilitating the prioritization process.
+#### 8.BabyAGI 운영 단계
+   - 작업 완료: Task list에서 작업을 처리하며 GPT-4와 LangChain 기능을 사용하여 결과를 생성하고, 이를 Pinecone에 저장한다.
+   - 새로운 작업 생성: 완료된 작업 결과를 기반으로 BabyAGI는 GPT-4를 활용하여 새로운 작업을 생성하며, 기존 작업과 중첩되지 않도록 한다.
+   - 작업 우선순위: 새로운 작업 생성 및 우선순위를 기준으로 작업 우선순위를 조정하며, GPT-4의 도움을 받아 우선순위 지정 프로세스를 용이하게 한다.
 
-#### 9. LLM Agent Evaluation
-   - Despite showing high performance across various fields, quantitatively and objectively *evaluating* LLM-based agents remains challenging.
-   - Several *benchmarks* have been designed to evaluate LLM agents.
-   - Examples include 'AgentBench', 'IGLU', 'ClemBench', 'ToolBench', and 'GentBench'.
-   - Beyond task-specific metrics, several dimensions for *evaluating* agents include *utility, sociality, values, continuous evolution capability, adversarial robustness,* and *reliability*.
+#### 9.LLM 에이전트 평가
+   - 다양한 분야에서 높은 성과를 보이지만, LLM 기반 에이전트를 양적, 객관적으로 *평가*하는 것은 여전히 어렵다.
+   - LLM 에이전트를 평가하기 위해 여러 *벤치마크*가 설계되었다.
+   - 예시로는 'AgentBench', 'IGLU', 'ClemBench', 'ToolBench', 그리고 'GentBench' 등이 있다.
+   - 과제 특정 메트릭 외에도, 에이전트를 *평가*하는 몇 가지 차원에는 *유틸리티, 사회성, 가치, 지속적인 진화 능력, 적대적 강건성,* 그리고 *신뢰성*이 포함된다.
 
-#### 10.️ Build Your Own Agent (Resources)
+#### 10.️ 에이전트를 직접 만들어 보세요 (자료)
 
 </details>

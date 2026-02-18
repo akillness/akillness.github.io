@@ -1,5 +1,5 @@
 ---
-title: "2024 Google I/O vs ChatGPT4o"
+title: 2024 Google I/O vs ChatGPT4o
 description: "| Google            | OpenAI          |."
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
@@ -41,12 +41,12 @@ Exciting times ahead!
 
 * * * 
 
-## ⚡ This week was OpenAI vs. Google!! Both announced a ton of amazing features! 
+## ⚡ 이번 주는 OpenAI 대 Google이었습니다!! 둘 다 수많은 멋진 기능을 발표합니다! 
 
-😁 Here's a completely non-critical summary of the major #genAI announcements in case you missed it!
+😁 다음은 당신이 따라가지 못한 경우를 대비하여 주요 해시태그#genAI 발표에 대한 완전히 비판적이지 않은 요약입니다!
 
-Google announced 100 things but we're skipping some of the smaller/non-generative AI updates for faster reading. 
+Google은 100가지를 발표했지만 더 빠른 읽기를 위해 더 작은/비생성형 AI 업데이트 중 일부를 건너뛰었습니다. 
 
-Exciting times ahead!
+가슴 설레는 시간들이 기다리고 있습니다!
 
 </details>

@@ -1,5 +1,5 @@
 ---
-title: "Agentic AI with Java and Neo4j - Building Graph-Native AI Agents"
+title: Agentic AI with Java and Neo4j - Building Graph-Native AI Agents
 description: Exploring how to build AI agents that can autonomously navigate and query
   graph databases using Java, bridging the gap between traditional GraphRAG and agentic
   AI

@@ -1,5 +1,5 @@
 ---
-title: "Great Visualization of Resilient 3-Tier Architecture on AWS!"
+title: Great Visualization of Resilient 3-Tier Architecture on AWS!
 description: "Curiosity: How can you gain practical AWS experience? What's better than building To-do apps for learning cloud architecture?"
 categories: [Infrastructure/System]
 tags: [Infrastructure, Operations, Architecture]

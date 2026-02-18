@@ -1,5 +1,5 @@
 ---
-title: "Agents framework for LLM + AgentGen looks like a nice framework"
+title: Agents framework for LLM + AgentGen looks like a nice framework
 description: "Curiosity: How can we build better-performing agent frameworks? What makes Agents 2.0 the best-performing open model framework?"
 categories: [Agent/Orchestration]
 tags: [Agent, Workflow, Orchestration]

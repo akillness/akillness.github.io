@@ -1,5 +1,5 @@
 ---
-title: "𝗥𝗼𝘂𝘁𝗲 𝘆𝗼𝘂𝗿 𝗾𝘂𝗲𝗿𝘆 𝘁𝗼 𝗮 𝘀𝗺𝗮𝗹𝗹𝗲𝗿 𝗟𝗟𝗠 𝘄𝗵𝗲𝗻 𝗽𝗼𝘀𝘀𝗶𝗯𝗹𝗲"
+title: 𝗥𝗼𝘂𝘁𝗲 𝘆𝗼𝘂𝗿 𝗾𝘂𝗲𝗿𝘆 𝘁𝗼 𝗮 𝘀𝗺𝗮𝗹𝗹𝗲𝗿 𝗟𝗟𝗠 𝘄𝗵𝗲𝗻 𝗽𝗼𝘀𝘀𝗶𝗯𝗹𝗲
 description: "Curiosity: What insights can we retrieve from this? How does this connect to innovation in the field?"
 categories: [Review/Trends]
 tags: [Trend, Review, Case]

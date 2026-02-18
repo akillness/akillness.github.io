@@ -1,5 +1,5 @@
 ---
-title: "Federated Learning, One way to solve for AI having difficulty making"
+title: Federated Learning, One way to solve for AI having difficulty making
 description: "Curiosity: How can we train ML models on private data without centralizing it?"
 categories: [Review/Trends]
 tags: [Trend, Review, Case]

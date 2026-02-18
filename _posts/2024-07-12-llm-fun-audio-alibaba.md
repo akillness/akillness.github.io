@@ -1,5 +1,5 @@
 ---
-title: "Alibaba presents FunAudioLLM"
+title: Alibaba presents FunAudioLLM
 description: "This report introduces FunAudioLLM, a model family designed to enhance natural voice interactions between humans and large language models (LLMs)."
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
@@ -29,14 +29,14 @@ By integrating these models with LLMs, FunAudioLLM enables applications such as 
 
 * * * 
 
-## Voice Understanding and Generation Foundation Model for Natural Human-LLM Interaction 
+## 인간과 LLM 간의 자연스러운 상호작용을 위한 Voice Understanding and Generation Foundation 모델 
 
-This report introduces FunAudioLLM, a family of models designed to enhance natural voice interaction between humans and large language models (LLMs). 
+이 보고서에서는 인간과 대규모 언어 모델(LLM) 간의 자연스러운 음성 상호 작용을 향상시키도록 설계된 모델 제품군인 FunAudioLLM을 소개합니다. 
 
-At its core are two innovative models: SenseVoice, handling multilingual speech recognition, emotion recognition, and audio event detection; and CosyVoice, supporting multiple languages, timbres, and speaking styles while controlling speaker identity to facilitate natural speech generation. 
+그 중심에는 두 가지 혁신적인 모델이 있습니다: 다국어 음성 인식, 감정 인식 및 오디오 이벤트 감지를 처리하는 SenseVoice; CosyVoice는 여러 언어, 음색, 말하기 스타일 및 화자 정체성을 제어하여 자연스러운 음성 생성을 용이하게 합니다. 
 
-SenseVoice-Small delivers ultra-low-latency ASR for 5 languages, SenseVoice-Large supports high-accuracy ASR for 50+ languages, and CosyVoice excels at multilingual speech generation, zero-shot in-context learning, cross-lingual voice cloning, and instruction-following. Models related to SenseVoice and CosyVoice have been open-sourced on Modelscope and Huggingface along with their respective training, inference, and fine-tuning code released on GitHub. 
+SenseVoice-Small은 5개 언어에 대해 매우 짧은 대기 시간 ASR을 제공하고, SenseVoice-Large는 50개 이상의 언어에 대해 고정밀 ASR을 지원하며, CosyVoice는 다국어 음성 생성, 제로샷 컨텍스트 내 학습, 다국어 음성 복제 및 명령 추종 기능에 탁월합니다. SenseVoice 및 CosyVoice와 관련된 모델은 GitHub에 릴리스된 해당 학습, 추론 및 미세 조정 코드와 함께 Modelscope 및 Huggingface에서 오픈 소스로 제공되었습니다. 
 
-FunAudioLLM integrates these models with LLMs to enable applications such as speech translation, emotional voice chat, interactive podcasts, and expressive audiobook narration, advancing the boundaries of natural voice interaction technology.
+FunAudioLLM은 이러한 모델을 LLM과 통합하여 음성 변환 번역, 감성 음성 채팅, 대화형 팟캐스트 및 표현력 있는 오디오북 내레이션과 같은 애플리케이션을 가능하게 하여 음성 상호 작용 기술의 경계를 넓힙니다.
 
 </details>

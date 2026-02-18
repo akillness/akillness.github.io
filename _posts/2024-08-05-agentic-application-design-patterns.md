@@ -1,5 +1,5 @@
 ---
-title: "🤖 If you're looking to build agentic GenAI applications"
+title: 🤖 If you're looking to build agentic GenAI applications
 description: "Curiosity: How do we design agentic GenAI applications? What patterns enable agents to think, plan, and collaborate effectively?"
 categories: [Agent/Orchestration]
 tags: [Agent, Workflow, Orchestration]

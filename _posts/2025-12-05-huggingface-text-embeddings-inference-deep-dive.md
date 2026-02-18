@@ -1,5 +1,5 @@
 ---
-title: "HuggingFace Text Embeddings Inference (TEI) - A Deep Dive into High-Performance"
+title: HuggingFace Text Embeddings Inference (TEI) - A Deep Dive into High-Performance
   Embedding Architecture
 description: Exploring how TEI combines Rust's performance with Python's flexibility
   to deliver blazing-fast text embeddings inference, from architecture to production

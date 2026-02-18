@@ -1,46 +1,46 @@
 ---
-title: "MacBook M1/M2/M3 VSCODE C++ Setup"
+title: 맥북 M1/M2/M3 VSCODE C++ 설정
 description: "1. VSCODE Download - If using mac OS with M1/M2/M3, download the Apple Silicon version."
 categories: [Development Tools/Productivity]
 tags: [Development Tools, Productivity, Tools]
 date: 2024-05-11 16:30:00 +0800
 ---
-# [MacOS / AppleSilicon] VSCODE C++ Configuration and Development Environment Setup AppleSilicon
+# [MacOS / AppleSilicon] VSCODE C++ 설정 환경 설정 개발환경 세팅 AppleSilicon
 
 > **Reference** <https://polarcompass.tistory.com/12>
 {: .prompt-info }
 
 
-1. VSCODE Download - If using mac OS with M1/M2/M3, download the Apple Silicon version.
+1. VSCODE 다운로드 - mac OS 환경 및 M1/M2/M3 이라면 Apple Silicon 버전 다운로드.
 
-    > Direct download <https://code.visualstudio.com/#alt-downloads>
+    > 직접 다운로드 <https://code.visualstudio.com/#alt-downloads>
     
     Visual Studio Code - Code Editing. Redefined Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications.  Visual Studio Code is free and available on your favorite platform - Linux, macOS, and Windows.code.visualstudio.com
     
-    > brew installation guide link <https://polarcompass.tistory.com/140?category=514165>
+    > brew 설치법 링크 <https://polarcompass.tistory.com/140?category=514165>
 
-2. C++ extension installation - 
-   - Search for 'c++' in the search bar 
-   - Install C++ extension
-3. Verify Clang Installation
-   - Check if clang is installed.
-   - Enter the following in the terminal window.
+2. C++ extension 설치 - 
+   - 검색창에 'c++' 검색 
+   - C++ extension 설치
+3. Clang 설치 확인
+   - clang이 설치되어 있나 확인한다.
+   - 터미널 창에 아래 내용을 입력.
    - $ clang --version
-   - If not installed, enter the code below or
+   - 만약, 설치되어 있지 않으면 아래 코드를 입력 혹은
    - $ xcode-select --install
-   - Install xcode from the Appstore.
-   - Usually installing xcode resolves the issue.
-4. Create a Folder for Running C++
-   1. Create the folder with any name you prefer, such as 'projects', 'hello_world', 'cpp', etc.
-      1. * Since you will continue working in this initially configured folder, choose a name you prefer.
-   2. The goal going forward is to configure the following three files.
+   - Appstore 에서 xcode를 설치해 준다.
+   - 보통은 xcode를 설치하면 해결됨.
+4. C++을 실행할 폴더 생성하기
+   1. 폴더 이름은 'projects', 'hello_world', 'cpp' 등등 본인이 원하는 이름으로 생성한다.
+      1. * 처음 셋팅한 이 폴더에서 앞으로 계속 작업을 할것이므로 원하는 이름을 적도록한다.
+   2. 앞으로의 설정 다음 세개의 파일을 셋팅하는 것을 목표로 한다.
       1.  tasks.json  - complier build settings
       2.  launch.json - debugger settings
       3.  c_cpp_properties.json  - complier path and IntelliSense settings
-   3.  Later, if you create a new folder, you can copy and paste the three files above to develop with the same settings.
-   4.  Create a file.
-   5.  Create filename.cpp
-   6.  Create a file named testfile.cpp, then copy and paste the code below.
+   3.  이후에 새로운 폴더를 생성하면 위의 세개 파일을 복사해서 붙여넣으면 동일한 세팅값으로 개발이 가능하다.
+   4.  파일 하나를 생성한다.
+   5.  파일제목.cpp 생성
+   6.  testfile.cpp로 파일 하나 만들어 준 후 아래 코드를 복붙한다.
 
 ~~~cpp
 #include <iostream>
@@ -61,14 +61,14 @@ int main()
 }
 ~~~
  
-   7. Save with Ctrl + S.
+   7. Ctrl + S 로 저장한다.
 
 5. Build testfile.cpp
-   1. Now we will create the tasks.json file and build testfile.cpp.
-   2. First, go to Terminal > Configure Default Build Task.
-   3. (Terminal > Configure Default Build Task...)
-   4. Select C/C++ clang++ build active file.
-   5. Once tasks.json is created, copy and paste the code below.
+   1. 이제 tasks.json 파일을 생성 후 testfile.cpp를 build 할 것이다.
+   2. 우선 Terminal > Configure Default Build Task 로 들어가 준다.
+   3. (터미널 > 기본 빌드 작업 구성...)
+   4. C/C++ clang++ build active file 선택해 준다.
+   5. tasks.json 가 생성되면 아래 코드를 복붙한다.
 
 ~~~sh
 {
@@ -103,24 +103,24 @@ int main()
 
 1. Running testfile.cpp
 
-Now go back to the testfile.cpp file and build it with Cmd+Shift+B.
+이제 testfile.cpp 파일로 돌아와서 Cmd+Shift+B  파일을 build 해준다.
 
-7. Install CodeLLDB Debugging Extension
+7. CodeLLDB 디버깅 Extension 파일 설치
 
 
 CodeLLDB
 8. Debug testfile.cpp
 
-Next, create the launch.json file. Press Fn + F5 to run the debugger.
+다음은 launch.json 을 만들어준다. Fn + F5 눌러 debug를 실행해준다.
 
-Or select Run > Add Configuration... from the main menu, then 
+혹은 메인 메뉴에서 Run > Add Configuration...을 선택 후 
 
-Select C++ (GDB/LLDB)
+C++ (GDB/LLDB) 선택
 
-Then you will see the following options.
+그 다음 다음과 같은 선택지를 보게 된다.
 
 
-After the launch.json file is created, copy and paste the code below.
+그 후  launch.json 파일이 생성 된 후 아래와 같은 코드 복붙한다.
 
 ~~~sh
 {
@@ -147,23 +147,23 @@ After the launch.json file is created, copy and paste the code below.
 ~~~
  
 
-> ※ Important Note
-The label part of tasks.json and
+> ※ 주의점
+tasks.json 의 label 부분과
 "label": "clang++ build active file",
-the preLaunchTask part of launch.json must have the same name.
+launch.json의 preLaunchTask 부분 이름이 같아야 한다.
 "preLaunchTask": "clang++ build active file"
-If it is in Korean, change it to English whenever possible.
+한글로 되어있을 경우엔 되도록 영어로 바꿔 주도록 한다.
 {: .prompt-warning }
 
-9. C/C++ Configuration Setup
+9. C/C++ configuration 세팅
 
-c_cpp_properties.json file.
+c_cpp_properties.json 파일 세팅 해준다.
 
-Ctrl+Shift+P shortcut to open the Command Palette.
+Ctrl+Shift+P 단축키로 Command Palette 열어준다.
 
-C/C++:Edit Configurations (UI)  to configure via UI, or
+C/C++:Edit Configurations (UI) 로 UI 형태로 세팅하거나
 
-C/C++:Edit Configurations (JSON)  to copy and paste the code below.
+C/C++:Edit Configurations (JSON) 으로 아래 코드를 복붙 해준다.
 
 ~~~sh
 {

@@ -1,5 +1,5 @@
 ---
-title: "Release Mistral-finetune Opensource"
+title: Release Mistral-finetune Opensource
 description: "Curiosity: How can we efficiently fine-tune Mistral's open-source models? What makes this official framework different from other fine-tuning tools?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
@@ -185,18 +185,18 @@ finetuner.save("fine-tuned-mistral-7b")
 
 * * * 
 
-## Announcing mistral-finetune
+## Mistral-finetune의 발표
 
-Official repository and guide on how to fine-tune Mistral open-source models.
+Mistral 오픈 소스 모델을 미세 조정하는 방법에 대한 공식 저장소 및 가이드.
 > Mistral open-source models : <https://github.com/mistralai/mistral-finetune>
 {: .prompt-info }
 
-mistral-finetune is a lightweight codebase that enables memory-efficient, high-performance fine-tuning of Mistral models. It is based on a training paradigm called LoRA, which keeps most weights frozen and trains only 1–2% of additional weights in the form of low-rank matrix modifications.
+mistral-finetune은 Mistral의 모델을 메모리 효율적이고 성능 좋게 미세 조정할 수 있게 해주는 경량 코드베이스입니다. 이 코드베이스는 대부분의 가중치는 고정하고 저랭크 행렬 변형의 형태로 추가 가중치의 1-2%만 훈련하는 LoRA라는 훈련 패러다임을 기반으로 합니다.
 
-For maximum efficiency, using A100 or H100 GPUs is recommended. While the codebase is optimized for multi-GPU single-node training setups, a single GPU is sufficient for smaller models like 7B.
+최대 효율성을 위해 A100 또는 H100 GPU를 사용하는 것이 권장됩니다. 이 코드베이스는 멀티 GPU-싱글 노드 훈련 설정에 최적화되어 있지만, 7B와 같은 더 작은 모델의 경우 단일 GPU로 충분합니다.
 
-> Note
-The goal of this repository is to provide a simple, guided entry point for fine-tuning Mistral models. As such, it is fairly opinionated regarding data formatting and does not aim to be comprehensive across multiple model architectures or hardware types. For a more general approach, you can check out other great projects like torchtune.
+> 참고
+이 저장소의 목표는 Mistral 모델을 미세 조정하기 위한 간단하고 가이드된 진입점을 제공하는 것입니다. 따라서 데이터 형식화와 관련하여 상당히 주관적이며 여러 모델 아키텍처나 하드웨어 유형에 대해 포괄적이기를 목표로 하지 않습니다. 보다 일반적인 접근 방식을 원한다면 torchtune과 같은 다른 훌륭한 프로젝트를 확인할 수 있습니다.
 {: .prompt-tip }
 
 </details>

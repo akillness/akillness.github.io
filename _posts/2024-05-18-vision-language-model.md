@@ -1,5 +1,5 @@
 ---
-title: "The giant leaps of open-source models for Vision Models"
+title: The giant leaps of open-source models for Vision Models
 description: "Curiosity: What insights can we retrieve from this? How does this connect to innovation in the field?"
 categories: [Multimodal/Computer Vision]
 tags: [Multimodal, Vision, Generative Model]
@@ -52,38 +52,38 @@ Congrats for this great release Léo Tronchon Hugo Laurençon Victor Sanh! 👏
 * * * 
 
 
-## A Giant Leap for Open-Source Models
+## 오픈 소스 모델의 거대한 도약
 
-Andrew Reed built a cool space that shows that OS LLMs are catching up with closed-source LLMs in ELO ranking in the Arena (link below).
-For vision, the same dynamic is happening: the field is still evolving fast, but soon OS models will be able to match GPT-4o's vision skills.
+Andrew Reed 아레나의 ELO 순위에서 OS LLM이 클로즈드 소스 LLM을 따라잡고 있음을 보여주는 멋진 공간을 구축했습니다(아래 링크).
+비전의 경우에도 동일한 역학이 일어나고 있습니다: 이 분야는 여전히 빠르게 진화하고 있지만 곧 OS 모델이 GPT-4o의 비전 기술과 일치할 수 있게 될 것입니다.
 
-I witnessed the Idefics team's work and their many late nights before their publishing of Idefics-2-8b. Now they just published a paper that summarizes their insights!
+나는 Idefics 팀의 작업과 Idefics-2-8b를 출판하기 전에 많은 늦은 밤을 목격했습니다. 이제 그들은 그들의 통찰력을 요약한 논문을 발표했습니다!
 
-Here's a summary of what they found:
+그들이 발견한 내용을 요약하면 다음과 같습니다.
 
-➤ Performance of VLMs is largely driven by the performance of their text-only backbones. In ablation studies, replacing llama-1-7b with Mistral-7b directly brings +7% performance 🤯
+➤ VLM의 성능은 주로 텍스트 전용 백본의 성능에 의해 좌우됩니다. 절제 연구에서 llama-1-7b를 Mistral-7b로 직접 대체하면 +7%의 성능을 🤯 얻을 수 있습니다.
 
-➤ They compared two competing architectures:
- - 🔀 Cross-attention architecture: images are encoded through the vision backbone, and their information is inserted within the text processing at various places.
- - 🔢 Fully autoregressive architecture: the output is directly concatenated to the sequence of text embeddings, and the entire sequence is passed as input to the LM (cf image).
-The comparison's outcome is the following ⇒ Fully autoregressive architecture outperforms cross-attention architecture when you fine-tune the whole system using LoRA.
+➤ 두 가지 경쟁 아키텍처를 비교했습니다.
+ - 🔀 크로스 어텐션 아키텍처: 이미지는 비전 백본을 통해 인코딩되고 해당 정보는 다양한 위치에서 텍스트 처리 내에 삽입됩니다.
+ - 🔢 완전 자동 회귀 아키텍처: 출력은 텍스트 임베딩 시퀀스에 직접 연결되고 전체 시퀀스는 LM에 입력으로 전달됩니다(cf 이미지).
+비교 결과는 다음과 같습니다⇒ 완전 자동 회귀 아키텍처는 LoRA를 사용하여 전체 시스템을 미세 조정할 때 교차 주의 아키텍처보다 성능이 뛰어납니다.
 
-➡️ These findings led to several architectural improvements in Idefics-2:
-➤ Replaced cross-attention architecture with fully autoregressive architecture.
+➡️ 이러한 발견은 Idefics-2의 몇 가지 아키텍처 개선으로 이어졌습니다.
+➤ cross-attention 아키텍처를 완전 자동 회귀 아키텍처로 대체했습니다.
 
-➤ Enable treating images with varying aspect ratios.
+➤ 다양한 종횡비로 이미지 처리 가능
 
-➤ Allow splitting an image into 4, to be encoded on 320 vision tokens instead of 64, if you want to increase performance at the cost of more compute.
+➤ 더 많은 컴퓨팅 비용으로 성능을 높이려면 이미지를 4개로 분할하여 64개 대신 320개의 비전 토큰으로 인코딩할 수 있습니다.
 
 
-✨ As a result, Idefics-2 reaches state-of-the-art performance for this model size! Now just a few more steps to catch up to GPT-4o!
+✨ 결과적으로 Idefics-2는 이 모델 크기에 대해 최첨단 성능에 도달했습니다! 이제 GPT-4o를 따라잡기 위한 몇 단계만 더 거치면 됩니다!
 
-Congrats for this great release Léo Tronchon Hugo Laurençon Victor Sanh! 👏
+이 멋진 릴리스 Léo Tronchon Hugo Laurençon Victor Sanh 축하합니다! 👏
 
-👉 Read the Idefics-2 paper: <https://huggingface.co/papers/2405.02246>
+👉 Idefics-2 논문 읽기: <https://huggingface.co/papers/2405.02246>
 
-🚀 Andrew's space that shows OS models catching up (for text models): <https://huggingface.co/spaces/andrewrreed/closed-vs-open-arena-elo>
+🚀 OS 모델이 따라잡는 것을 보여주는 Andrew의 공간 (텍스트 모델의 경우) : <https://huggingface.co/spaces/andrewrreed/closed-vs-open-arena-elo>
 
-⚔️ Compare vision models in the Vision arena: <https://huggingface.co/spaces/WildVision/vision-arena>
+⚔️ 비전 분야의 비전 모델 비교: <https://huggingface.co/spaces/WildVision/vision-arena>
 
 </details>

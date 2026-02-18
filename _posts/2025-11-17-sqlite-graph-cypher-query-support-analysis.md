@@ -1,5 +1,5 @@
 ---
-title: "SQLite as a Graph Database? Deep Dive into SQLite-Graph with Cypher Query Support"
+title: SQLite as a Graph Database? Deep Dive into SQLite-Graph with Cypher Query Support
 description: SQLite-Graph adds powerful graph database capabilities to SQLite, including
   full Cypher query language support. Explore how this extension combines SQLite's
   reliability with Neo4j's graph query language for lightweight graph processing
@@ -592,7 +592,7 @@ SQLite-Graph represents a significant innovation in database technology:
 
 **Original Article:**
 
-- [SQLite as a Graph Database? Detailed Analysis of SQLite-Graph with Cypher Query Support - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2306)
+- [SQLite가 그래프 데이터베이스로? Cypher 쿼리까지 지원하는 SQLite-Graph 상세 분석 - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2306)
 
 **SQLite-Graph:**
 

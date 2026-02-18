@@ -1,5 +1,5 @@
 ---
-title: "Github is a free university, but 99% don't know!"
+title: Github is a free university, but 99% don't know!
 description: "Curiosity: How can we leverage GitHub as a learning platform?"
 categories: [Development Tools/Productivity]
 tags: [Development Tools, Productivity, Tools]

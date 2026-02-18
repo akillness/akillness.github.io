@@ -1,5 +1,5 @@
 ---
-title: "🔉 Meta's latest \"CoPE\" (Contextual Position Encoding)"
+title: 🔉 Meta's latest "CoPE" (Contextual Position Encoding)
 description: "Curiosity: How can we improve positional encoding to handle higher levels of abstraction?"
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
@@ -119,15 +119,15 @@ graph TB
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-## Meta's latest "CoPE" paper is not getting the attention it deserves! The authors introduce a truly innovative approach to leveraging context during positional encoding.
+## Meta의 최신 "CoPE" 논문은 마땅히 받아야 할 관심을 받지 못하고 있습니다! 저자는 위치 인코딩 중에 컨텍스트를 활용하는 정말 혁신적인 접근 방식을 소개합니다.
 
-Here is a quick summary.
-- ⛳ Traditional PE (Positional Encoding) methods use token counts to derive positions, limiting their ability to generalize to higher-level abstractions like sentences.
-- ⛳ CoPE overcomes this by integrating context with positional addressing, enabling simultaneous representation of various levels of positional abstraction.
-- ⛳ CoPE (Contextual Position Encoding) allows conditioning positions on context by incrementing positions only for specific tokens as determined by the model. This enables more general positional addressing, such as attending to the i-th specific word, noun, or sentence.
-- ⛳ CoPE uses context vectors to determine which tokens to count and computes gate values for each previous token relative to the current token. These gate values are aggregated to determine relative positions, which can take fractional values. Position embeddings are interpolated for these fractional values and added to key vectors for use in the attention operation.
-- ⛳ CoPE excels at tasks where widely used PE methods fail, such as selective copying, counting, and Flip-Flop tasks. It also improves perplexity in language modeling and coding tasks, demonstrating real-world applicability.
+다음은 간단한 요약입니다.
+- ⛳ 기존의 PE(위치 인코딩) 방법은 토큰 수를 사용하여 위치를 파생하므로 문장과 같은 더 높은 수준의 추상화로 일반화하는 기능을 제한합니다.
+- ⛳ CoPE는 컨텍스트를 위치 주소 지정과 통합하여 다양한 수준의 위치 추상화를 동시에 표현할 수 있도록 함으로써 이를 극복합니다.
+- ⛳ CoPE(Contextual Position Encoding)를 사용하면 모델에 의해 결정된 특정 토큰에 대해서만 위치를 증가시켜 컨텍스트에 따라 위치를 조건화할 수 있습니다. 이렇게 하면 i번째 특정 단어, 명사 또는 문장에 주의를 기울이는 것과 같은 보다 일반적인 위치 주소 지정이 가능합니다.
+- ⛳ CoPE는 컨텍스트 벡터를 사용하여 계산할 토큰을 결정하고 현재 토큰을 기준으로 각 이전 토큰에 대한 게이트 값을 계산합니다. 이러한 게이트 값은 분수 값을 사용할 수 있는 상대적 위치를 결정하기 위해 집계됩니다. 위치 임베딩은 이러한 소수 값에 대해 보간되고 어텐션 작업에 사용하기 위해 키 벡터에 추가됩니다.
+- ⛳CoPE는 선택적 복사, 카운팅 및 Flip-Flop 작업과 같이 널리 사용되는 PE 방법이 실패하는 작업에 탁월합니다. 또한 언어 모델링 및 코딩 작업의 복잡성을 개선하여 실제 적용 가능성을 보여줍니다.
 
-Honestly, I think this is a very clean and functional research work that could help improve SoTA LLMs!
+솔직히 말해서 이것은 SoTA LLM을 개선하는 데 도움이 될 수 있는 매우 깔끔하고 기능적인 연구 작업이라고 생각합니다!
 
 </details>

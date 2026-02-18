@@ -1,5 +1,5 @@
 ---
-title: "A Survey on LLM-based Autonomous Agents"
+title: A Survey on LLM-based Autonomous Agents
 description: "Autonomous agents are designed to achieve specific objectives through self-guided instructions."
 categories: [Agent/Orchestration]
 tags: [Agent, Workflow, Orchestration]

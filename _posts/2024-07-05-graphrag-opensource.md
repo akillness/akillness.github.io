@@ -1,5 +1,5 @@
 ---
-title: "GraphRAG is open source now!"
+title: GraphRAG is open source now!
 description: "Curiosity: How can we extract meaningful, structured data from unstructured text? What happens when we combine knowledge graphs with RAG?"
 categories: [RAG/Search]
 tags: [RAG, Embedding, Search]

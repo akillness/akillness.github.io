@@ -1,5 +1,5 @@
 ---
-title: "Is this the architecture of OpenAI GPT-4o?"
+title: Is this the architecture of OpenAI GPT-4o?
 description: "Curiosity: How can we build a unified model that handles audio, speech, image, text, and video?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
@@ -147,16 +147,16 @@ graph LR
 
 * * * 
 
-Uni-MoE proposes a MoE-based unified MLLM (Multimodal Large Language Model) capable of processing audio, speech, images, text, and video. 👂👄👀💬🎥
+Uni-MoE는 오디오, 음성, 이미지, 텍스트 및 비디오를 처리할 수 있는 MoE 기반 통합 MLLM(Multimodal Large Language Model)을 제안합니다. 👂👄👀💬🎥
 
-Uni-MoE is a foundational multimodal MoE (Mixture of Experts) architecture with a 3-stage training strategy encompassing cross-modality alignment, expert activation, and fine-tuning via LoRA (Low-Rank Adaptation). 🤔
+Uni-MoE는 기본 멀티모달 MoE(Mixture of Experts) 아키텍처로, 교차 모달리티 정렬, 전문가 활성화 및 LoRA(Low-Rank Adaptation)를 통한 미세 조정을 포함하는 3단계 교육 전략을 갖추고 있습니다. 🤔
 
-TL;DR:
-- 🚀 Uni-MoE uses modality-specific encoders with connectors for unified multimodal representation.
-- 💡 Utilizes sparse MoE architecture for efficient training and inference
-- 🧑🏫 3-stage training: 1) Connector training for various modalities 2) Modality-specific expert training with cross-modal instruction data. 3) Fine-tuning with LoRA on mixed multimodal data.
-- 📊 Uni-MoE matches or outperforms other MLLMs across 10 tested vision and audio tasks.
-- 🏆 Surpasses existing unified multimodal models on comprehensive benchmarks.
+TL입니다. 박사:
+- 🚀 Uni-MoE는 통합 멀티모달 표현을 위해 커넥터가 있는 모달리티별 엔코더를 사용합니다.
+- 💡 효율적인 학습 및 추론을 위해 희소 MoE 아키텍처 활용
+- 🧑 🏫 3단계 교육: 1) 다양한 양식에 대한 커넥터 학습 2) 교차 양식 지침 데이터를 사용한 양식별 전문가 교육. 3) 혼합 다중 모드 데이터에서 LoRA로 미세 조정.
+- 📊 Uni-MoE는 10개의 테스트된 비전 및 오디오 작업에서 다른 MLLM과 일치하거나 더 나은 성능을 발휘합니다.
+- 🏆 포괄적인 벤치마크에서 기존 통합 멀티모달 모델을 능가합니다.
 
 >
 - Paper: <https://huggingface.co/papers/2405.11273>

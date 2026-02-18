@@ -1,5 +1,5 @@
 ---
-title: "𝗠𝗮𝗿𝗸 𝗭𝘂𝗰𝗸𝗲𝗿𝗯𝗲𝗿𝗴 𝗷𝘂𝘀𝘁 𝗮𝗻𝗻𝗼𝘂𝗻𝗰𝗲𝗱 𝘁𝗵𝗲 𝗚𝗣𝗧-𝟰 𝗸𝗶𝗹𝗹𝗲𝗿, 𝗟𝗹𝗮𝗺𝗮-𝟯.𝟭 💥"
+title: 𝗠𝗮𝗿𝗸 𝗭𝘂𝗰𝗸𝗲𝗿𝗯𝗲𝗿𝗴 𝗷𝘂𝘀𝘁 𝗮𝗻𝗻𝗼𝘂𝗻𝗰𝗲𝗱 𝘁𝗵𝗲 𝗚𝗣𝗧-𝟰 𝗸𝗶𝗹𝗹𝗲𝗿, 𝗟𝗹𝗮𝗺𝗮-𝟯.𝟭 💥
 description: LLM, Llama3.1
 categories: [Review/Trends]
 tags: [Trend, Review, Case]

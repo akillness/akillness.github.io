@@ -1,5 +1,5 @@
 ---
-title: "Software Development Cycle"
+title: Software Development Cycle
 description: Software Development Cycle
 categories: [Review/Trends]
 tags: [Trend, Review, Case]

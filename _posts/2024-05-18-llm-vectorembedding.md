@@ -1,5 +1,5 @@
 ---
-title: "VectorEmbeddings are the backbone of AI/ML applications"
+title: VectorEmbeddings are the backbone of AI/ML applications
 description: "Curiosity: Machines don't understand human language & that is where we need embeddings."
 categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
@@ -54,42 +54,42 @@ While most of us have commonly used text embedding, Embeddings can also be utili
 
 * * * 
 
-## Vector Embeddings Are the Backbone of AI/ML Applications. 
+## VectorEmbeddings AI/ML 애플리케이션의 중추입니다. 
 
-Machines cannot understand human language, which is why embeddings are needed. 
+기계는 인간의 언어를 이해하지 못하기 때문에 임베딩이 필요합니다. 
 
-LLMs store the meaning and context of data fed to them in a specialized format called embeddings. Imagine capturing the essence of a word, image, or video in a single mathematical equation — that is what a vector embedding does.
+LLM은 임베딩(embedding)이라는 특수한 형식으로 공급되는 데이터의 의미와 컨텍스트를 저장합니다. 단어, 이미지 또는 비디오의 본질을 하나의 수학 방정식으로 캡처한다고 상상해 보십시오. 이것이 바로 벡터 임베딩의 힘이며, 오늘날 기계 학습에서 가장 매력적이고 영향력 있는 개념 중 하나입니다.
 
-For example, images of animals such as cats or dogs are unstructured data and cannot be stored directly in a database. Therefore, they are converted into a machine-readable format and stored in what is called a vector database using embeddings. 
+예를 들어, 고양이나 개와 같은 동물의 이미지는 구조화되지 않은 데이터이며 데이터베이스에 직접 저장할 수 없습니다. 따라서 기계가 읽을 수 있는 형식으로 변환되어 임베딩이라고 하는 다음 벡터 데이터베이스에 저장됩니다. 
 
-By transforming unstructured high-dimensional data into a lower-dimensional space, embeddings enable more efficient execution of complex computations.
+임베딩은 구조화되지 않은 고차원 데이터를 저차원 공간으로 변환함으로써 복잡한 계산을 보다 효율적으로 수행할 수 있도록 합니다.
 
-### Types of Embeddings:
+### 임베딩 유형:
 
-Most of us typically use text embeddings, but embeddings can also be leveraged for various types of data such as images and graphs.
+우리 대부분은 일반적으로 텍스트 임베딩을 사용하지만 임베딩은 이미지, 그래프 등과 같은 다양한 유형의 데이터에도 활용할 수 있습니다.
 
-- ⮕ Word Embeddings: Embeddings of individual words. Models: Word2Vec, GloVe, and FastText.
+- ⮕ 단어 임베딩: 개별 단어의 임베딩. 모델: Word2Vec, Glove 및 FastText.
 
-- ⮕ Sentence Embeddings: Embedding entire sentences into vectors that capture the overall meaning and context. Models: USE (Universal Sentence Encoder) and SkipThought.
+- ⮕ 문장 임베딩: 문장의 전체적인 의미와 맥락을 포착하는 벡터로 전체 문장을 임베딩합니다. 모델: USE(Universal Sentence Encoder) 및 SkipThought.
 
-- ⮕ Document Embeddings: Embeddings of entire documents capturing semantic information and context. Models: Doc2Vec and Paragraph Vectors.
+- ⮕ 문서 임베딩: 전체 문서의 의미 정보와 컨텍스트를 캡처하는 전체 문장의 임베딩. 모델: Doc2Vec 및 단락 벡터.
 
-- ⮕ Image Embeddings — Capture various visual features. Models: CNN, ResNet, and VGG.
+- ⮕ 이미지 임베딩 — 다양한 시각적 기능을 캡처합니다. 모델: CNN, ResNet 및 VGG.
 
-- ⮕ User/Product Embeddings represent users/products in a system as vectors. They capture preferences, behaviors, attributes, and characteristics. These are primarily used in recommendation systems.
+- ⮕ 사용자/제품 임베딩은 시스템의 사용자/제품을 벡터로 나타냅니다. 사용자/제품 선호도, 행동, 속성 및 특성을 캡처합니다. 이들은 주로 추천 시스템에서 사용됩니다.
 
-### Here Are Some Common Embedding Models We Can Use.
-- ⮕ Cohere Embeddings: Powerful for handling short texts with fewer than 512 tokens.
+### 다음은 우리가 사용할 수 있는 몇 가지 일반적인 임베딩 모델입니다.
+- ⮕ Cohere의 임베딩: 512개 미만의 토큰이 있는 짧은 텍스트를 처리하는 데 강력합니다.
 
-- ⮕ Mistral Embedding: Powerful embeddings for AI/ML modeling such as text classification and sentiment analysis.
+- ⮕ Mistral Embedding: 텍스트 분류, 감정 분석 등과 같은 AI/ML 모델링을 위한 강력한 임베딩
 
-- ⮕ OpenAI Embeddings: OpenAI is currently one of the leaders in the embedding algorithm market. Among them, ada-002, the 2nd generation text embedding model, is known for providing top results across various use cases. 
+- ⮕ 개방형 AI 임베딩: 개방형 AI는 현재 임베딩 알고리즘 시장의 선두 주자 중 하나입니다. 그 중에서도 OpenAI 2세대 텍스트 임베딩 모델인 ada-002는 다양한 사용 사례에서 최고의 결과를 제공하는 것으로 입증되었습니다. 
 
-### Learn More About Vector Embeddings in the Articles Below.
-- ⦿ Embeddings: Types, Use Cases, and Evaluation: <https://durgiachandan.medium.com/embedding-types-use-cases-and-evaluation-part-3-of-rag-series-1fd9f64454a9>
+### 아래 기사에서 벡터 임베딩에 대해 자세히 알아보십시오.
+- ⦿ 임베딩: 유형, 사용 사례 및 평가: <https://durgiachandan.medium.com/embedding-types-use-cases-and-evaluation-part-3-of-rag-series-1fd9f64454a9>
 
-- ⦿ Vector Embeddings Explained for Developers: <https://levelup.gitconnected.com/vector-embeddings-explained-for-developers-6bd9800d3635>
+- ⦿ 개발자를 위한 벡터 임베딩 설명: <https://levelup.gitconnected.com/vector-embeddings-explained-for-developers-6bd9800d3635>
 
-- ⦿ A Complete Guide to Creating and Storing Vector Embeddings: <https://levelup.gitconnected.com/a-complete-guide-to-creating-and-storing-vector-embeddings-aaede9822bcd>
+- ⦿ 벡터 임베딩 생성 및 저장에 대한 완벽한 가이드: <https://levelup.gitconnected.com/a-complete-guide-to-creating-and-storing-vector-embeddings-aaede9822bcd>
 
 </details>

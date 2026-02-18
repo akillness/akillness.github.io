@@ -1,5 +1,5 @@
 ---
-title: "Want to build your first 𝗟𝗟𝗠 𝗽𝗿𝗼𝗷𝗲𝗰𝘁 but don't know where to start?"
+title: Want to build your first 𝗟𝗟𝗠 𝗽𝗿𝗼𝗷𝗲𝗰𝘁 but don't know where to start?
 description: "We want to announce that we just 𝗿𝗲𝗹𝗲𝗮𝘀𝗲𝗱 𝟴 𝗠𝗲𝗱𝗶𝘂𝗺 𝗹𝗲𝘀𝘀𝗼𝗻𝘀 for the 𝗛𝗮𝗻𝗱𝘀-𝗼𝗻 𝗟𝗟𝗠𝘀 𝗰𝗼𝘂𝗿𝘀𝗲 that will put you on the right track ↓."
 categories: [Review/Trends]
 tags: [Trend, Review, Case]

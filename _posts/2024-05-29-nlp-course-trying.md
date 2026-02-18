@@ -1,5 +1,5 @@
 ---
-title: "🤗 NLP Course - Summary of Concept to Transformer from NLP"
+title: 🤗 NLP Course - Summary of Concept to Transformer from NLP
 description: "| Transformer Course  | Course | <https://huggingface.co/docs/transformers/main/en/index> |."
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
@@ -61,4 +61,12 @@ The text needs to be processed in a way that enables the model to learn from it.
 
 ... (to be continue)
 
+<!-- <details markdown="1">
+<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
+* * * 
+
+## 내 가이드를 사용하여 다가오는 모든 트렌드를 따라잡으세요! 
+
+
+</details> -->

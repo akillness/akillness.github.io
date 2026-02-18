@@ -1,5 +1,5 @@
 ---
-title: "Recommended materials for cracking your next technical interview"
+title: Recommended materials for cracking your next technical interview
 description: "Curiosity: How can we systematically prepare for technical interviews? What resources should we retrieve to maximize our chances of success?"
 categories: [Data Science/Algorithms]
 tags: [Data Science, Algorithm, Analysis]
@@ -217,38 +217,38 @@ graph LR
 
 * * * 
 
-## Recommended Materials for Your Next Technical Interview
+## 다음 기술 면접을 위한 추천 자료
 
-### Coding
-- Neetcode
-- Leetcode
-- Cracking the Coding Interview Book
+### 코딩
+- 니트코드
+- 리트코드
+- 코딩 인터뷰 책 깨기
 
-### System Design Interview 
-- System Design Interview Book 1, 2 by Alex Xu, Sahn Lam
-- Grokking System Design by Design Guru
-- Designing Data-Intensive Applications Textbook
+### 시스템 설계 인터뷰 
+- 시스템 디자인 인터뷰 북 1, 2 by Alex Xu, Sahn Lam
+- Design Guru의 시스템 설계 Grokking
+- 데이터 집약적 응용 프로그램 교재 설계
 
-### Behavioral Interview
-- Tech Interview Handbook (Github Repository)
-- A Life Engineered (YT)
-- STAR Method (General Method)
+### 행동면접
+- 기술 인터뷰 핸드북(Github 리포지토리)
+- 라이프 엔지니어링(YT)
+- STAR 방법(일반 방법)
 
-### OOD Interview
-- InterviewReady
-- OOD by Educative
-- Head First Design Patterns Book
+### OOD 인터뷰
+- 인터뷰 준비
+- 교육적인 OOD
+- 헤드 퍼스트 디자인 패턴 북
 
-### Mock Interviews
-- Interviewing.io
-- Pramp
-- Meetapro
+### 모의 면접
+- 인터뷰
+- 유랑
+- 미타프로
 
-### Job Applications
-- LinkedIn
-- Monster
-- Indeed
+### 구직 신청
+- 링크드인
+- 괴물
+- 참으로
 
-For you: What are your favorite interview preparation materials?
+당신에게: 가장 좋아하는 면접 준비 자료는 무엇입니까?
 
 </details>

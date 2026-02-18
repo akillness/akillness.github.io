@@ -1,5 +1,5 @@
 ---
-title: "An introduction to LangChain and Agents is provided"
+title: An introduction to LangChain and Agents is provided
 description: "Curiosity: How can we build sophisticated LLM applications that go beyond simple prompts?"
 categories: [Agent/Orchestration]
 tags: [Agent, Workflow, Orchestration]

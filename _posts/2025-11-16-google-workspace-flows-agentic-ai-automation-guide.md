@@ -645,7 +645,7 @@ Google Workspace Flows represents a fundamental shift in automation:
 
 **Original Article:**
 
-- [Complete Guide to Google Workspace Flows: Real AI Automation Inside Gmail, Docs, and Sheets - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2309)
+- [Google Workspace Flows 완벽 가이드: Gmail·Docs·Sheets 안에서 작동하는 진짜 AI 자동화의 시작 - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2309)
 
 **Google Workspace Flows:**
 

@@ -1,5 +1,5 @@
 ---
-title: "𝗧𝗼𝗽 𝟰 𝗠𝗼𝘀𝘁 𝗣𝗼𝗽𝘂𝗹𝗮𝗿 𝗨𝘀𝗲 𝗖𝗮𝘀𝗲𝘀 𝗳𝗼𝗿 𝗨𝗗𝗣 by ByteByteGo 💥"
+title: 𝗧𝗼𝗽 𝟰 𝗠𝗼𝘀𝘁 𝗣𝗼𝗽𝘂𝗹𝗮𝗿 𝗨𝘀𝗲 𝗖𝗮𝘀𝗲𝘀 𝗳𝗼𝗿 𝗨𝗗𝗣 by ByteByteGo 💥
 description: "Many VoIP and video conferencing applications leverage UDP due to its lower overhead and ability to tolerate packet loss."
 categories: [Review/Trends]
 tags: [Trend, Review, Case]

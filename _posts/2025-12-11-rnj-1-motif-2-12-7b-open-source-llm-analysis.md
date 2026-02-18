@@ -13,7 +13,7 @@ image:
 ---
 
 <details markdown="1">
-<summary style="font-size:20px; font-weight:bold; cursor:pointer;">📋 Summary</summary>
+<summary style="font-size:20px; font-weight:bold; cursor:pointer;">📋 Summary / 요약</summary>
 
 ## English Summary
 
@@ -32,20 +32,20 @@ image:
 
 ---
 
-## Korean Summary
+## 한국어 요약
 
-**Rnj-1** (Essential AI) and **Motif-2-12.7B** (Motif Technologies) represent a new generation of open-source language models challenging the dominance of closed-source alternatives.
+**Rnj-1** (Essential AI)과 **Motif-2-12.7B** (Motif Technologies)는 폐쇄형 대안의 지배력에 도전하는 새로운 세대의 오픈소스 언어 모델을 대표합니다.
 
-**Key Highlights:**
-- **Rnj-1 (8B)**: A model created by Ashish Vaswani, first author of the Transformer paper, achieving top-tier performance in coding and math tasks despite its small size. Features global self-attention and a 32k context window.
-- **Motif-2-12.7B**: Ranks overall #1 with an average score of 66.52%, demonstrating excellent performance on MMLU (72.85%), coding (HumanEval 59.76%, MBPP 65.57%), and reasoning tasks.
-- Both models demonstrate that **open-source models can compete with or surpass closed-source alternatives when properly designed and trained**.
-- **Production Impact**: These models enable fine-tuning of high-performance models without vendor lock-in, reducing costs and increasing flexibility.
+**주요 하이라이트:**
+- **Rnj-1 (8B)**: 트랜스포머 논문 제1 저자인 아시시 바스와니가 만든 모델로, 작은 크기에도 불구하고 코딩 및 수학 작업에서 최고 수준의 성능을 달성합니다. 글로벌 셀프 어텐션과 32k 컨텍스트 창을 특징으로 합니다.
+- **Motif-2-12.7B**: 평균 점수 66.52%로 전체 1위를 기록하며, MMLU (72.85%), 코딩 (HumanEval 59.76%, MBPP 65.57%), 추론 작업에서 탁월한 성능을 보입니다.
+- 두 모델 모두 **올바르게 설계되고 훈련되면 오픈소스 모델이 폐쇄형 대안과 경쟁하거나 능가할 수 있음**을 입증합니다.
+- **프로덕션 영향**: 이러한 모델은 벤더 종속 없이 고성능 모델을 파인튜닝할 수 있게 하여 비용을 절감하고 유연성을 높입니다.
 
-**Technical Innovations:**
-- Rnj-1's global self-attention mechanism provides better context understanding
-- Motif-2-12.7B's reasoning capability competes with much larger models
-- Both prioritize pre-training quality over post-alignment, enabling better fine-tuning results
+**기술적 혁신:**
+- Rnj-1의 글로벌 셀프 어텐션 메커니즘이 더 나은 컨텍스트 이해를 제공
+- Motif-2-12.7B의 추론 능력이 훨씬 더 큰 모델과 경쟁
+- 둘 다 사후 정렬보다 사전 훈련 품질을 우선시하여 더 나은 파인튜닝 결과를 가능하게 함
 
 </details>
 

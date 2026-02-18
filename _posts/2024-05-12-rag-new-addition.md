@@ -1,5 +1,5 @@
 ---
-title: "RAG papers list newest additions"
+title: RAG papers list newest additions
 description: "🔉 Over the past year, the release of new LLMs and their increasing application across various fields has also spurred a surge in research on RAG appro..."
 categories: [RAG/Search]
 tags: [RAG, Embedding, Search]

@@ -1,5 +1,5 @@
 ---
-title: "Combining Rust and Python for High-Performance AI Systems - Bridging Speed"
+title: Combining Rust and Python for High-Performance AI Systems - Bridging Speed
   and Productivity
 description: Exploring how Rust and Python complement each other in AI systems, overcoming
   Python's performance bottlenecks while maintaining its rich ecosystem
@@ -393,70 +393,70 @@ graph TB
 ---
 
 <details markdown="1">
-<summary style="font-size:20px; font-weight:bold; cursor:pointer;">📋 Summary</summary>
+<summary style="font-size:20px; font-weight:bold; cursor:pointer;">📋 요약 (Summary in Korean)</summary>
 
-## Combining Rust and Python for High-Performance AI Systems
+## Rust와 Python을 결합한 고성능 AI 시스템
 
-### Core Idea
+### 핵심 아이디어
 
-Exploring how to combine Python's rich ecosystem with Rust's high performance to solve AI system performance bottlenecks while maintaining Python's productivity.
+Python의 풍부한 생태계와 Rust의 고성능을 결합하여 AI 시스템의 성능 병목을 해결하면서도 Python의 생산성을 유지하는 방법을 탐구합니다.
 
-### Key Points
+### 주요 내용
 
-**🤔 Curiosity:**
+**🤔 호기심 (Curiosity):**
 
-- Python's ecosystem is optimal for prototyping and research, but production requires performance Python struggles to deliver.
-- Rust provides C++-level performance and memory safety, but the AI ecosystem is Python-centric.
-- Can we combine the strengths of both languages?
+- Python의 생태계는 프로토타이핑과 연구에 최적이지만, 프로덕션에서는 성능이 부족합니다.
+- Rust는 C++ 수준의 성능과 메모리 안전성을 제공하지만, AI 생태계는 Python 중심입니다.
+- 두 언어의 장점을 결합할 수 있을까?
 
-**📚 Retrieve:**
+**📚 지식 검색 (Retrieve):**
 
-- **PyO3**: Library for writing Python bindings from Rust
-- **Maturin**: Build tool that compiles Rust code into Python packages
-- **Success Cases**: Hugging Face Tokenizers, Polars use Rust core + Python bindings pattern
-- **Five Key Advantages**: Performance, concurrency, memory safety, ecosystem synergy, production-grade services
+- **PyO3**: Rust에서 Python 바인딩을 작성하는 라이브러리
+- **Maturin**: Rust 코드를 Python 패키지로 컴파일하는 빌드 도구
+- **성공 사례**: Hugging Face Tokenizers, Polars 등이 Rust 코어 + Python 바인딩 패턴 사용
+- **5가지 핵심 장점**: 성능, 동시성, 메모리 안전성, 생태계 시너지, 프로덕션급 서비스
 
-**💡 Innovation:**
+**💡 혁신 (Innovation):**
 
-- **30x Performance Improvement**: Rust vector operations are 30x faster than pure Python
-- **Concurrency Solution**: Rust's fearless concurrency overcomes GIL limitations
-- **Easy Integration**: PyO3 and Maturin enable using Rust functions like Python modules
-- **Production Pattern**: Training in Python, inference servers in Rust
+- **30x 성능 향상**: Rust로 구현한 벡터 연산이 순수 Python 대비 30배 빠름
+- **동시성 해결**: Rust의 fearless concurrency로 GIL 제약 극복
+- **쉬운 통합**: PyO3와 Maturin으로 Rust 함수를 Python 모듈처럼 사용 가능
+- **프로덕션 패턴**: 학습은 Python, 추론 서버는 Rust로 구축
 
-### Technical Highlights
+### 기술적 하이라이트
 
-1. **PyO3 Integration**
+1. **PyO3 통합**
 
-   - Directly call Rust functions from Python
-   - Type safety and performance guarantees
-   - Perfect compatibility with existing Python code
+   - Rust 함수를 Python에서 직접 호출
+   - 타입 안전성과 성능 보장
+   - 기존 Python 코드와 완벽 호환
 
-2. **Real-World Use Cases**
+2. **실제 사용 사례**
 
-   - Hugging Face Tokenizers: Significant performance improvement with Rust rewrite
-   - Polars: Faster DataFrame library than pandas
-   - PyTorch custom operations: Safe low-level operations with tch-rs
+   - Hugging Face Tokenizers: Rust 재작성으로 대폭 성능 향상
+   - Polars: pandas보다 빠른 DataFrame 라이브러리
+   - PyTorch 커스텀 연산: tch-rs로 안전한 저수준 연산
 
-3. **Performance Comparison**
-   - Vector dot product: Python 245ms → Rust 8ms (30x)
-   - Data normalization: Python 180ms → Rust 6ms (30x)
-   - Parallel processing: Python GIL limitation → Rust 2ms (120x)
+3. **성능 비교**
+   - 벡터 내적: Python 245ms → Rust 8ms (30x)
+   - 데이터 정규화: Python 180ms → Rust 6ms (30x)
+   - 병렬 처리: Python GIL 제약 → Rust 2ms (120x)
 
-### Use Cases
+### 적용 사례
 
-✅ **Good fit:**
+✅ **적합한 경우:**
 
-- Large-scale data preprocessing pipelines
-- High-performance inference server construction
-- AI systems with high concurrency requirements
-- Edge device deployment
+- 대규모 데이터 전처리 파이프라인
+- 고성능 추론 서버 구축
+- 동시성 요구사항이 높은 AI 시스템
+- 엣지 디바이스 배포
 
-### New Questions
+### 새로운 질문들
 
-1. Can we fine-tune models in Rust?
-2. What is the optimal split between Rust and Python in production systems?
-3. What is the debugging workflow for hybrid systems?
-4. What is the deployment strategy for production environments?
+1. Rust에서도 모델 파인튜닝이 가능할까?
+2. 프로덕션 시스템에서 Rust와 Python의 최적 분할은?
+3. 하이브리드 시스템의 디버깅 워크플로우는?
+4. 프로덕션 환경에서의 배포 전략은?
 
 ---
 

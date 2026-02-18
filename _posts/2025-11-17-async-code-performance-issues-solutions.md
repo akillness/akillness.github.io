@@ -675,7 +675,7 @@ Understanding async performance pitfalls is critical because:
 
 **Original Article:**
 
-- [Why Async Code Can Be Slower and How to Fix It - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2310)
+- [Async 코드가 오히려 느려지는 이유와 해결 전략 정리 - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2310)
 
 **Video Tutorial:**
 

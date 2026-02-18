@@ -1,5 +1,5 @@
 ---
-title: "𝐀𝐠𝐞𝐧𝐭𝐢𝐜 𝐑𝐀𝐆 ✨ new cookbook"
+title: 𝐀𝐠𝐞𝐧𝐭𝐢𝐜 𝐑𝐀𝐆 ✨ new cookbook
 description: "Curiosity: What if RAG systems could think more like humans—questioning their own retrievals, reformulating queries, and iterating until they find the..."
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
@@ -158,19 +158,19 @@ The cookbook even lets the agent built its own submission to the challenge, and 
 
 * * * 
 
-## A new cookbook has just been published showing how to easily improve RAG (Retrieval Augmented Generation) with an agentic system using Transformers Agents.
+## 방금 Transformers Agents를 사용하여 에이전트 시스템으로 RAG(Retrieval Augmented Generation)를 쉽게 개선하는 방법을 보여주는 새로운 쿡북을 출판했습니다.
 
-Vanilla RAG has the following limitations.
-- ➤ It retrieves source documents only once: if the retrieved documents are not sufficiently relevant, the generation will be poor.
-- ➤ Semantic similarity is computed using the user query as reference, which is often suboptimal: for example, user queries are mostly questions while documents containing the actual answers are in affirmative voice, so similarity scores risk downgrading relevant documents compared to less relevant ones in question form, leading to poor document selection.
+Vanilla RAG에는 다음과 같은 제한 사항이 있습니다.
+- ➤ 소스 문서를 한 번만 검색합니다: 검색된 문서가 충분히 관련성이 없으면 생성이 나빠질 것입니다.
+- ➤ 의미론적 유사성은 사용자 쿼리를 참조로 사용하여 계산되며, 이는 종종 차선책입니다: 예를 들어, 사용자 쿼리는 대부분 질문이고 실제 답변을 포함하는 문서는 긍정 음성이므로 유사성 점수는 의문 형식의 관련성이 낮은 소스 문서에 비해 다운그레이드되어 관련 문서를 선택하지 않을 위험이 있습니다.
 
-Creating a RAG agent (very simply, an agent armed with a retriever tool) can mitigate both of these problems!
-- ✅ Formulates the query itself (query reformulation).
-- ✅ Critique the content to re-retrieve if needed (self-query)
+RAG 에이전트를 만들면(아주 간단하게, 리트리버 도구로 무장한 에이전트) 이 두 가지 문제를 모두 완화할 수 있습니다!
+- ✅ 쿼리 자체를 공식화합니다(쿼리 재구성).
+- ✅ 필요한 경우 다시 검색할 콘텐츠 비판(자체 쿼리)Critique the content to re-retrieve if needed (self-query)
 
-How much does this agentic setup improve results? An evaluation section using LLM-as-a-judge with Llama-3-70B has been added to the cookbook. Switching from vanilla to agentic RAG increases the score by 8.5%! 💪
-(from 70.0% to 78.5%)
+이 에이전트 설정이 결과를 얼마나 개선합니까? 요리책에 Llama-3-70B를 사용하는 LLM-as-a-judge의 평가 부분을 추가했습니다. 바닐라에서 에이전트 RAG로 전환하면 점수가 8.5% 증가합니다! 💪
+(70.0%에서 78.5%로)
 
-However, one important drawback is that the runtime of the RAG system also increases because the system makes multiple LLM calls rather than just one. The right trade-off needs to be found!
+하지만 한 가지 중요한 단점은, 시스템이 1이 아닌 여러 LLM 호출을 하기 때문에 RAG 시스템의 런타임도 증가한다는 것입니다. 적절한 절충안을 찾아야 합니다!
 
 </details>

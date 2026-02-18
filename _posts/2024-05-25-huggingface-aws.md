@@ -1,5 +1,5 @@
 ---
-title: "Hugging Face x AWS"
+title: Hugging Face x AWS
 description: "Curiosity: How can we deploy large LLMs without GPU access? What makes AWS Inferentia2 a viable alternative for running Llama 3 70B?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
@@ -109,111 +109,111 @@ graph TB
 
 * * * 
 
-## Deploy Llama 3 70B on AWS Inferentia2 Using Hugging Face Optimum
+## Hugging Face Optimum을 사용하여 AWS Inferentia2에 Llama 3 70B 배포
 
-Are you struggling with GPU access or availability and want to use Meta Llama 3 70B in an Amazon Web Services (AWS) environment? 🤔 We are excited to share deploying Meta's Llama 3 70B on AWS Inferentia2 using Hugging Face Optimum!
+GPU 액세스 또는 가용성에 어려움을 겪고 있으며 Amazon Web Services (AWS) 환경에서 Meta Llama 3 70B를 사용하고 싶습니까? 🤔 Hugging Face Optimum을 사용하여 AWS Inferentia2에서 Meta의 Llama 3 70B를 공유하게 되어 기쁩니다!
 
-TL;DR: 📌
-- 🤗 Easy setup using Hugging Face Optimum and SageMaker SDK
-- 🔥 Deploy Llama 3 70B on inf2.48xlarge using Hugging Face TGI.
-- ⚡ Create an interactive Gradio demo with streaming responses
-- 🔓 Leverage pre-compiled configurations for Llama 3 70B from Hugging Face Hub
-- ⏰ Benchmark using llmperf with ~132.8 tokens/sec and 23.46ms/token latency
+TL입니다. 박사: 📌
+- 🤗 Hugging Face Optimum 및 SageMaker SDK를 사용한 간편한 설정
+- 🔥 Hugging Face TGI를 사용하여 inf2.48xlarge에 Llama 3 70B를 배포합니다.
+- ⚡스트리밍 응답이 포함된 대화형 Gradio 데모 만들기
+- 🔓 Hugging Face Hub에서 Llama 3 70B에 대해 사전 컴파일된 구성 활용
+- ⏰ ~132.8 토큰/초 및 23.46ms/토큰의 대기 시간으로 llmperf를 사용한 벤치마크
 
 >
-- **Blog**: <https://www.philschmid.de/inferentia2-llama3-70b>
-- **Code**: <https://github.com/philschmid/huggingface-inferentia2-samples/blob/main/llama3-70b/deploy-llama-3-70b-inferentia2.ipynb>
+- **블로그**: <https://www.philschmid.de/inferentia2-llama3-70b>
+- **코드**: <https://github.com/philschmid/huggingface-inferentia2-samples/blob/main/llama3-70b/deploy-llama-3-70b-inferentia2.ipynb>
 {: .prompt-info }
 
-That's not the limit! We're just getting started and are already working on improving performance and supporting more modes. 🤗
+그게 한계가 아닙니다! 이제 막 시작했으며 이미 성능을 개선하고 더 많은 지원 모드를 작업하고 있습니다. 🤗
 
 * * *
 
-## Lillys AI Summary: <https://lilys.ai/digest/681590>
+## Lillys AI 요약 : <https://lilys.ai/digest/681590>
 
 Deploy Llama 3 70B on AWS Inferentia2 with Hugging Face Optimum
 
-### 1. About Meta's Latest Open LLM Model, Llama 3
-   - Announced in April 2024, Meta's latest open LLM, Llama 3, was trained on 15 trillion tokens and is one of the best open LLMs with a context length window supporting up to 8,000 tokens.
-   - Meta fine-tuned the conversational model with reinforcement learning from human feedback, applied to over 10 million human annotations.
-   - This blog post introduces how to deploy the Meta-Llama-3-70B-Instruct model on AWS Inferentia2 using Hugging Face Optimum.
-   - It uses the Hugging Face LLM Inf2 Container to easily deploy LLMs on AWS Inferentia2, utilizing a new purpose-built inference container powered by Text Generation Inference and Optimum Neuron.
-   - The blog covers setting up the development environment, retrieving the new Hugging Face LLM Inf2 DLC, deploying Llama 3 70B on Inferentia2, running inference and chat with the model, benchmarking Llama 3 70B on Inferentia2 with llmperf, and cleanup. 🚀
+### 1.메타의 최신 오픈 LLM 모델, Llama 3에 대한 내용
+   - 2024년 4월 발표된 Meta의 최신 오픈 LLM인 Llama 3은 15조 토큰에 대해 훈련되었으며 8천 개 토큰까지 지원하는 컨텍스트 길이 창을 가진 우수한 오픈 LLM 중 하나이다.
+   - Meta는 인간 피드백에 대한 강화 학습으로 대화형 모델을 미세 조정했으며 1천만 개 이상의 인간 주석에 대해 적용했다.
+   - 해당 블로그에서는 AWS Inferentia2에 Hugging Face Optimum을 통해 Meta-Llama-3-70B-Instruct 모델을 배포하는 방법을 소개한다.
+   - Hugging Face LLM Inf2 Container를 사용하여 AWS Inferentia2에 LLM을 쉽게 배포하는 방법, Text Generation Inference 및 Optimum Neuron에 의해 구동되는 새로운 목적지원 추론 컨테이너를 사용한다.
+   - 블로그에서는 개발 환경 설정, 새로운 Hugging Face LLM Inf2 DLC 검색, Inferentia2에 Llama 3 70B 배포, 모델로 추론 및 채팅, llmperf를 통한 Inferentia2에서 llama 3 70B 벤치마킹, 청소까지 다룬다. 🚀
 
-### 2.️Introduction to AWS Inferentia 2
-   - AWS Inferentia (Inf2) is an EC2 instance designed specifically for deep learning inference workloads.
-   - Inferentia 2 is the successor to AWS Inferentia, offering up to 4x higher throughput and up to 10x lower latency.
-   - | Instance Size | Accelerators | Neuron Cores | Accelerator Memory | vCPU | CPU Memory | On-Demand Price ($/hr) |
+### 2.️AWS Inferentia 2 소개
+   - AWS Inferentia (Inf2)은 딥러닝 추론 작업을 위한 목적으로 설계된 EC2입니다.
+   - Inferentia 2는 AWS Inferentia의 후속 제품으로, 최대 4배 더 높은 처리량 및 최대 10배 낮은 지연 시간을 제공합니다.
+   - | 인스턴스 사이즈 | 가속기 | Neuron 코어 | 가속기 메모리 | vCPU | CPU 메모리 | 온디맨드 가격 ($/시간) |
 | --- | --- | --- | --- | --- | --- | --- |
 | inf2.xlarge | 1 | 2 | 32 | 4 | 16 | 0.76 |
 | inf2.8xlarge | 1 | 2 | 32 | 32 | 128 | 1.97 |
 | inf2.24xlarge | 6 | 12 | 192 | 96 | 384 | 6.49 |
 | inf2.48xlarge | 12 | 24 | 384 | 192 | 768 | 12.98 |
-Additionally, Inferentia 2 will support custom operators in C++ and new data types such as `FP8` (cFP8).
+추가로, Inferentia 2는 C++에서 사용자 지정 연산자 및 `FP8`(cFP8)과 같은 새로운 데이터 유형을 지원할 것입니다.
 
-### 3. Development Environment Setup and SageMaker Configuration
-   - We will use the `sagemaker` Python SDK to deploy Mixtral on Amazon SageMaker.
-   - You need to configure your AWS account and have the `sagemaker` Python SDK installed.
-   - When using SageMaker in a local environment, you need access to an IAM Role with the required permissions.
-   - For more details on permissions, see [here](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html).
+### 3.개발 환경 설정 및 SageMaker 세팅
+   - Amazon SageMaker에 Mixtral을 배포하기 위해 `sagemaker` Python SDK를 사용할 것이다.
+   - AWS 계정을 구성하고 `sagemaker` Python SDK가 설치되어 있어야 한다.
+   - 로컬 환경에서 SageMaker를 사용할 경우 필요한 권한이 부여된 IAM Role에 액세스해야 한다.
+   - 권한에 관한 자세한 내용은 [여기](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)를 확인할 수 있다.
 
-### 4.️Retrieving the New Hugging Face LLM Inf2 DLC
-   - You can run inference on AWS Inferentia2 using the new Hugging Face TGI Neuronx DLC.
-   - You can use the `get_huggingface_llm_image_uri` method from the `sagemaker` SDK to retrieve the appropriate Hugging Face TGI Neuronx DLC URI based on your desired `backend`, `session`, `region`, and `version`.
-   - All available versions can be found [here](https://github.com/aws/deep-learning-containers/releases?q=tgi+AND+neuronx&expanded=true).
+### 4.️새로운 허깅페이스 LLM Inf2 DLC 검색
+   - 새로운 허깅페이스 TGI Neuronx DLC를 사용하여 AWS Inferentia2에서 추론을 실행할 수 있습니다.
+   - `sagemaker` SDK의 `get_huggingface_llm_image_uri` 메서드를 사용하여 원하는 `backend`, `session`, `region`, `version`에 기반하여 적절한 허깅페이스 TGI Neuronx DLC URI를 검색할 수 있습니다.
+   - 모든 사용 가능한 버전은 [여기](https://github.com/aws/deep-learning-containers/releases?q=tgi+AND+neuronx&expanded=true)에서 확인할 수 있습니다.
 
 ~~~python 
-# TODO: Enable upon release
+# TODO: 발매 시 활성화
 from sagemaker.huggingface import get_huggingface_llm_image_uri
  
-# Retrieve llm image uri
+# llm 이미지 uri 검색
 llm_image = get_huggingface_llm_image_uri(
   "huggingface-neuronx",
   version="0.0.22"
 )
  
-print(f"llm image uri: {llm_image}")
+print(f"llm 이미지 uri: {llm_image}")
 ~~~
 
-### 5. Deploying Llama 3 70B on Inferentia2
-   - During inference, since AWS Inferentia2 does not support dynamic *shapes*, the sequence length and batch size must be specified in advance.
-   - To maximize the power of Inferentia2, a neuron model cache was created containing pre-compiled configurations for popular models including Llama 3 70B.
-   - This eliminates the need to compile the model yourself and allows you to use pre-compiled models from the cache.
-   - To find a suitable configuration for Llama 3 70B, you can check the Hugging Face Hub, or if unavailable, compile it yourself using the Optimum CLI or request it from the cache repository.
-   - Before deploying Llama 3 70B on Inferentia2, you need to define the required TGI Neuronx Endpoint configuration, and it is recommended to use the `inf2.48xlarge` instance type.
+### 5.Llama 3 70B를 Inferentia2에 배포
+   - 추론 시, AWS Inferentia2는 동적 *모양*을 지원하지 않기 때문에 시퀀스 길이와 배치 사이즈를 사전에 지정해야 함.
+   - Inferentia2의 전원을 최대한 활용하기 위해, Llama 3 70B를 포함한 인기 있는 모델에 대한 미리 컴파일된 설정을 담은 neuron 모델 캐시를 만들었다.
+   - 이렇게 하면 모델을 직접 컴파일할 필요가 없고 캐시로부터 미리 컴파일된 모델을 사용할 수 있다.
+   - Llama 3 70B에 적합한 구성을 찾으려면 Hugging Face Hub에서 확인할 수 있으며, 없는 경우 Optimum CLI를 사용해 직접 컴파일하거나 캐시 저장소에 요청할 수 있다.
+   - Llama 3 70B를 Inferentia2에 배포하기 전에 필요한 TGI Neuronx Endpoint 구성을 정의해야 하며, `inf2.48xlarge` 인스턴스 유형을 사용할 것을 권장한다.
 
-### 6.️Running Model Inference and Chat
-   - The method for *running inference* on the deployed endpoint is straightforward.
-   - Using the Messages API, you can *interact with the model conversationally*.
-   - `system`, `assistant`, and `user` are defined as message roles.
-   - You can stream responses from the model to a Gradio application to *enhance the user experience*.
-   - Through the Gradio app with `share=True`, you can *test and share the model* for 72 hours.
+### 6.️모델 추론 및 채팅 실행
+   - 배포된 엔드포인트에서 *추론을 실행하는 방법*은 세밀하다.
+   - 메시지 API를 사용하면 *모델과 대화식으로 상호 작용할 수 있다*.
+   - `system`,`assistant`,`user`가 메시지 역할로 정의된다.
+   - 모델에서 받은 응답을 그라디오 애플리케이션에 스트리밍하여 *사용자 경험을 향상*시킬 수 있다.
+   - 그라디오 앱 `share=True`를 통해 72시간 동안 *모델을 테스트*하고 공유할 수 있다.
 
-### 7. Performance Evaluation and Benchmarking of Llama 3 70B on AWS Inferentia2
-   - We successfully deployed and tested Llama 3 70B on Amazon SageMaker.
-   - Now we want to benchmark the model to verify its performance.
-   - We will use a fork of [llmperf](https://github.com/philschmid/llmperf) that supports `sagemaker`.
-   - We will install the `llmperf` package and run the benchmark. The benchmark will be conducted with `5` concurrent users and a maximum of `50` requests.
+### 7.AWS Inferentia2로 Llama 3 70B의 성능 평가 및 벤치마킹
+   - Amazon SageMaker에 Llama 3 70B를 성공적으로 배포하고 테스트했다.
+   - 이제 모델을 벤치마킹하여 성능을 확인하려고 한다.
+   - `sagemaker`를 지원하는 [llmperf](https://github.com/philschmid/llmperf) 포크를 사용할 것이다.
+   - `llmperf` 패키지를 설치하고 벤치마크 실행할 예정이다. `5`개의 동시 사용자와 최대 `50`개 요청으로 벤치마크를 진행할 것이다.
 
-### 8. Important: For accurate measurement of `first-time-to-token` values, benchmarking should be run on the same host or in the production region.
-   - A benchmark measuring `first-time-to-token`, `latency (ms/token)`, and `throughput (tokens/s)` will be conducted.
-   - Detailed results can be found in the `results` folder.
-   - This benchmark was initiated from Europe but the endpoint is running in us-east-1, which significantly affects the `first-time-to-token` values.
-   - The `first-time-to-token` values are affected because they include network communication.
+### 8.중요: `first-time-to-token` 값의 정확한 측정을 위해서는 벤치마킹을 동일 호스트나 프로덕션 지역에서 실행해야 함.
+   - `first-time-to-token`, `latency (ms/token)`, `throughput (tokens/s)`을 측정하는 벤치마크가 진행될 것임.
+   - `results` 폴더에서 상세 내용 확인 가능.
+   - 이 벤치마크는 유럽에서 시작됐지만 엔드포인트는 us-east-1에서 실행되고 있어 `first-time-to-token` 값에 상당한 영향을 미침.
+   - 네트워크 통신을 포함하기 때문에 `first-time-to-token` 값이 영향을 받음.
 
-### 9. Python LLM Performance Test Execution Setup
-   - Configure the settings to use the Messages API and inform 'llmperf' that the Messages API is being used.
-   - When running the 'token_benchmark_ray.py' script, the settings specify the model name, 'sagemaker' LLM API, maximum 50 completion requests, 600-second timeout, 5 concurrent requests, and 'results' as the output directory.
+### 9.Python LLM 성능 테스트 실행 설정
+   - 메시지 API를 사용하는 설정을 하고, 'llmperf'에게 메시지 API를 사용 중이라고 알린다.
+   - 'token_benchmark_ray.py' 스크립트를 실행할 때 설정은 모델 이름, 'sagemaker' LLM API, 최대 완료 요청 수 50번, 제한 시간 600초, 동시 요청 수 5개, 결과 저장 디렉토리 'results'로 지정한다.
 
-### 10. Parsing and Displaying Results Cleanly
-   - *Parse* and *display* the results.
-   - Read the summary.json file and *output the results*.
-   - Output the *average input token length*, *average output token length*, *average time to first token*, *average throughput*, and *average latency* for 5 concurrent requests.
+### 10.결과값 파싱 후 깔끔하게 표시
+   - 결과값을 *구문 분석*하고 *잘 표시*합니다.
+   - summary.json 파일을 읽어 *결과를 출력*합니다.
+   - Concurrent requests가 5일 때의 *평균 입력 토큰 길이*, *평균 출력 토큰 길이*, *첫 번째 토큰 완성까지 소요 시간 평균*, *평균 처리량*, *평균 대기 시간*을 출력합니다.
 
-### 11. Benchmarking Results for Llama 3 70B on AWS Inferentia2
-   - Results of generating 150 tokens with 5 concurrent requests
-   - Successfully tested and benchmarked Llama 3 70B on AWS Inferentia2
-   - The benchmark is not a complete representation of model performance but provides a good initial indicator
-   - For production model usage, longer benchmarks are recommended, and it is advised to modify settings to better match production benchmarks and test the model by changing the number of replicas
+### 11. AWS Inferentia2에서 Llama 370B 벤치마킹 결과
+   - 5개의 동시 요청으로 150 토큰 생성 결과
+   - AWS Inferentia2에서 Llama 370B를 테스트하고 벤치마킹 성공
+   - 벤치마크는 모델 성능의 전체 표현이 아니지만 첫 번째 좋은 지표를 제공
+   - 운영중인 모델 사용 시 더 긴 벤치마크를 권장하며, 생산 벤치마크에 더 맞게 수정, 복제본 수를 변경하여 모델을 테스트할 것을 권장
 
 </details>

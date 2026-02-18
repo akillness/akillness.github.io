@@ -1,5 +1,5 @@
 ---
-title: "DevOps Decoded, The Ultimate Toolkit for Modern Software Development"
+title: DevOps Decoded, The Ultimate Toolkit for Modern Software Development
 description: "Let's break down the DevOps lifecycle and explore the most powerful tools driving innovation:."
 categories: [Infrastructure/System]
 tags: [Infrastructure, Operations, Architecture]

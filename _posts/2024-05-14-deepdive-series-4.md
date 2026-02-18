@@ -1,5 +1,5 @@
 ---
-title: "Deep Dive into Self-Attention by Hand"
+title: Deep Dive into Self-Attention by Hand
 description: "Self-Attention is a method where each word in the input sequence evaluates its relationships with all other words to assign weights."
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
@@ -11,18 +11,18 @@ date: 2024-05-14 13:14:00 +0800
 
 ### **ChatGPT4o**
 
-#### Self-Attention Mechanism Summary
-Self-Attention is a method where each word in the input sequence evaluates its relationships with all other words to assign weights. This enables better understanding of context and captures long-range dependencies.
+#### 셀프 어텐션 메커니즘 요약
+셀프 어텐션(Self-Attention)은 입력 시퀀스의 각 단어가 다른 모든 단어들과의 관계를 평가하여 가중치를 부여하는 방법입니다. 이를 통해 문맥을 더 잘 이해하고 긴 종속성을 포착할 수 있습니다.
 
-#### Key Steps
-Query (Q), Key (K), Value (V) Generation: The input matrix is linearly transformed to create Q, K, and V matrices.
+#### 주요 단계
+쿼리(Q), 키(K), 값(V) 생성: 입력 행렬을 선형 변환하여 Q, K, V 행렬을 만듭니다.
 
-- Attention Score Calculation: The similarity of each word is computed through matrix multiplication of Q and K, then normalized with the softmax function.
-- Attention Output Calculation: The normalized scores are multiplied by V to obtain the final output values.
+- 어텐션 스코어 계산: Q와 K의 행렬 곱을 통해 각 단어의 유사도를 구하고, 소프트맥스 함수로 정규화합니다.
+- 어텐션 출력 계산: 정규화된 스코어에 V를 곱하여 최종 출력 값을 얻습니다.
 
-#### Advantages
-- Enables parallel processing
-- Effective for learning long-range dependencies
+#### 장점
+- 병렬 처리 가능
+- 긴 종속성 학습에 효과적
 
 
 * * *
@@ -32,42 +32,42 @@ Query (Q), Key (K), Value (V) Generation: The input matrix is linearly transform
 
 Deep Dive into Self-Attention by Hand✍︎ | by Srijanie Dey, PhD | Apr, 2024 | Towards Data Science
 
-#### 1. A Deep Exploration of the Attention Mechanism that Powers Transformers
-   - A detailed look at the attention mechanism that drives transformers.
-   - Introduction: Let's explore the complexity of the 'attention' concept.
-   - It's not something like 'Robitmus Prime' — the power of transformers that make up neural networks comes from the concept of '**attention**'.
-   - So, what exactly does attention mean in the context of transformers? We seek to find some answers here.
+#### 1.트랜스포머를 가속하는 주의 집중의 본격적 탐구
+   - 트랜스포머를 촉진하는 주의 메커니즘을 상세히 살펴본다.
+   - 머리글: '주의' 개념에 대한 복잡성을 알아보자.
+   - '로빗머스 프라임' 같은 것이 아니라 신경망을 구성하는 트랜스포머의 힘은 '**주의**' 개념 때문이다.
+   - 그렇다면, 트랜스포머의 맥락에서 주의란 정확히 무엇을 의미하는 것일까? 여기서 몇 가지 답을 찾아보려고 한다.
 
-#### 2. Transformers and Detailed Mechanism Inference
-   - **Transformers** are neural networks that learn context from data, similar to how we seek the meaning of 'attention and context'.
-   - **How do transformers learn context from data?**: By using the *attention mechanism*.
-   - The **attention mechanism** helps the model examine all parts of the sequence at each step and determine which elements to focus on.
-   - **Self-attention** contributed to improving RNN performance, and the transformer architecture introduced in 2017 eliminated the need for RNNs and CNNs.
-   - The transformer architecture includes a **scaled dot-product** mechanism, and self-attention can be seen as a combination of an outer shell and an inner shell.
+#### 2.트랜스포머와 세부 메커니즘 추론
+   - **트랜스포머는** 데이터로부터 맥락을 학습하는 신경망으로, '주의와 맥락'의 의미를 찾는 우리와 유사하다.
+   - **트랜스포머가 데이터로부터 맥락을 어떻게 학습하는가?** : *주의 메커니즘*을 사용함.
+   - **주의 메커니즘**은 모델이 각 단계에서 시퀀스의 모든 부분을 조사하고 중점을 두어야 할 요소를 결정하는 데 도움이 된다.
+   - **셀프-주의**는 RNN의 성능을 향상시키는 데 기여하며, 2017년에 소개된 트랜스포머 아키텍처는 RNN 및 CNN의 필요성을 소멸시켰다.
+   - 트랜스포머 아키텍처에는 **스케일드 닷-프로덕트** 메커니즘이 있으며, 셀프-주의는 외부같은 셸과 내부같은 셸의 결합으로 볼 수 있다.
 
-#### 3. Understanding the Self-Attention Mechanism and Attention Weighting
-   - The attention weight matrix **A** is obtained by feeding input features into the Query-Key (QK) module.
-   - Self-attention is performed *when creating the attention weight matrix A using the QK module*.
-   - By examining various components such as Query (Q), Key (K), and Value (V), we understand the principles of Self-Attention **using illustrative examples**.
-   - Understand the actual computations of **matrix multiplication** and **scaling**, as well as *cosine similarity* between vectors and the *relationship with dimensions*.
+#### 3.️Self-Attention 메커니즘과 어텐션 웨이팅 이해
+   - 어텐션 웨이트 매트릭스 **A**는 입력 특징을 Query-Key(QK) 모듈에 피드하여 얻게 된다.
+   - 셀프 어텐션은 *QK-모듈을 사용하여 어텐션 웨이트 매트릭스 A를 만들 때* 수행된다.
+   - 쿼리(Q), 키(K), 밸류(V) 등 여러 구성요소를 살펴보며 **설명적으로 한국영 상상을 이용**하여 Self-Attention의 원리를 이해한다.
+   - **행렬 곱셈**의 과정과 **스케일링** 과정에 대한 실제 연산과 벡터 간 *코사인 유사도* 및 *차원과의 관계*를 이해한다.
 
-#### 4. The **Attention Weight Matrix** Obtained After Passing Through the QK Module in the Transformer Section.
-   - Explaining the 'scaling' part of 'scaled' dot-product attention.
-   - Three parts of the softmax step: 1. Raise e to the power of each cell's number, 2. Sum these new values along each column, 3. For each column, divide by that sum.
-   - Each column is normalized so that the numbers sum to 1. As a result, each column becomes a **probability distribution of attention**, yielding the **attention weight matrix (A)**.
-   - The **attention weight matrix** is obtained from Step 2 in the transformer section (after passing through the QK module).
-   - The softmax step assigns probabilities to the scores obtained from the previous step, helping the model determine how important each word is for the current query.
+#### 4.️ 트랜스포머 섹션에서 QK-모듈을 통과한 후 얻은 **어텐션 가중치 행렬**.
+   - '스케일링'된 닷-프로덕트 어텐션의 '스케일링' 부분 설명.
+   - 소프트맥스 단계의 세 가지 부분: 1. 각 셀의 숫자에 e의 거듭제곱을 취함, 2. 각 열을 따라 이 새로운 값들을 합함, 3. 각 열마다, 해당 합으로 나눠줌.
+   - 각 열을 정규화하여 숫자들이 1로 합쳐지도록 함. 결과적으로 각 열은 **어텐션의 확률 분포**로 되며, **어텐션 가중치 행렬 (A)**을 제공.
+   - **어텐션 가중치 행렬은** 트랜스포머 섹션에서의 단계 2(QK-모듈을 통과한 후)에서 얻은 것.
+   - 소프트맥스 단계는 이전 단계에서 얻은 점수에 확률을 할당하여 모델이 현재 쿼리에 대해 각 단어에 얼마나 중요하다고 결정하는 데 도움을 줌.
 
-#### 5. Importance of the Softmax Step and Determining Each Word's Significance
-   - The softmax step is crucial in assigning probabilities to scores from the previous step, determining how much *importance* the model should give to each word for the current query.
-   - Higher attention weights indicate greater *relevance*, helping the model capture dependencies more accurately.
-   - Scaling from the previous step becomes important here, as without scaling, values in the resulting matrix can be pushed into regions where the softmax function does not process them well, leading to vanishing gradients.
-   - Finally, through **matrix multiplication**, the value vectors (**V**s) are multiplied with the *attention weight matrix (**A**)*. These value vectors are important because they contain information associated with each word.
+#### 5.소프트맥스 스텝의 중요성과 각 단어의 중요도 판단
+   - 소프트맥스 스텝은 이전 단계에서 얻은 점수에 확률을 할당하여, 모델이 현재 쿼리에 대해 각 단어에 얼마나 *중요도*를 부여해야 하는지 결정하는 데 중요하다.
+   - 높은 주의 가중치가 더 높은 *관련성*을 나타내며, 모델이 의존성을 더 정확하게 파악하도록 돕는다.
+   - 이전 단계에서의 스케일링이 여기서 중요해지는데, 스케일링 없이 결과 행렬의 값이 소프트맥스 함수에서 잘 처리되지 못하는 영역으로 밀려 나서, 사라지는 기울기로 이어질 수 있다.
+   - 마지막으로 **행렬 곱셈**을 통해 값 벡터(**V**s)를 *주의 가중치 행렬(**A**)과 곱한다. 이 값 벡터는 각 단어에 연관된 정보를 포함하므로 중요하다.
 
-#### 6. The Final Solution of the Self-Attention Mechanism: Attention-Weighted Features Zs
-   - The final multiplication result of this step is the **attention-weighted features Z**, which is the ultimate solution of the self-attention mechanism.
-   - These attention-weighted features essentially contain **weighted representations of features**, assigning higher weights to features of greater importance based on the surrounding context.
+#### 6.자가주의 메커니즘의 최종 해결책: 주의 집중 특징 Zs
+   - 이 단계의 최종 곱셈 결과는 **주의 집중 가중 특징 Z**로, 자가 주의 메커니즘의 궁극적인 해결책이다.
+   - 이러한 주의 집중 가중 특징은 본질적으로 **특징의 가중 표현**을 담고 있으며, 주변 맥락에 따라 중요도가 높은 특징에 대해 높은 가중치를 할당한다.
 
-#### 7. Feed-Forward Layers in the Transformer Architecture and the Conclusion of Self-Attention
-   - Based on this information, we move to the next stage of the *`transformer architecture`*, where the *`feed-forward layers`* further process this information.
-   - This concludes the remarkable technique of *`self-attention`*!
+#### 7.트랜스포머 아키텍처의 피드 포워드 레이어와 자가 주의 기법의 끝
+   - 이 정보를 기반으로 *`트랜스포머 아키텍처`*의 다음 단계로 넘어가게 되는데, 여기서는 *`피드 포워드 레이어`*가 이 정보를 더 처리한다.
+   - 이로써 *`자가 주의 기법`*의 뛰어난 기법의 끝을 확인하게 됩니다!

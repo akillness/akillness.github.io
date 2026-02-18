@@ -595,7 +595,7 @@ Agents 2.0 represents a fundamental shift in how we think about AI agents:
 
 **Original Articles:**
 
-- [The Dawn of Agents 2.0: Deep Agent Architecture Beyond Shallow Loops - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2311)
+- [Agents 2.0 시대의 도래: 얕은 루프를 넘어서는 딥 에이전트 아키텍처 - Digital Bourgeois](https://digitalbourgeois.tistory.com/m/2311)
 - [Agents 2.0: From Shallow Loops to Deep Agents - Phil Schmid](https://www.philschmid.de/agents-2.0-deep-agents)
 
 **Frameworks & Tools:**

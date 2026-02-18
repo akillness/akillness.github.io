@@ -1,5 +1,5 @@
 ---
-title: "How do computer programs run"
+title: How do computer programs run
 description: "Curiosity: What happens when we click \"Run\" on a program? How does the operating system transform code into executing instructions?"
 categories: [Development Tools/Productivity]
 tags: [Development Tools, Productivity, Tools]
@@ -304,34 +304,34 @@ gantt
 
 * * * 
 
-## How Do Computer Programs Run?
+## 컴퓨터 프로그램은 어떻게 실행될까요?
 
-The diagram shows the steps.
+다이어그램은 단계를 보여줍니다. 
  
-### 🔹 User Interaction and Command Initiation
-Double-clicking a program signals the operating system to start the application through the graphical user interface.
+### 🔹 사용자 상호 작용 및 명령 시작 
+프로그램을 두 번 클릭하면 사용자가 그래픽 사용자 인터페이스를 통해 응용 프로그램을 시작하도록 운영 체제에 지시할 수 있습니다. 
  
-### 🔹 Program Pre-Loading
-When an execution request is initiated, the operating system first searches for the program's executable file.
+### 🔹 프로그램 사전 로딩 
+실행 요청이 시작되면 운영 체제는 먼저 프로그램의 실행 파일을 검색합니다. 
  
-The operating system locates this file through the file system and loads it into memory to prepare for execution.
+운영 체제는 파일 시스템을 통해 이 파일을 찾아 실행을 준비하기 위해 메모리에 로드합니다. 
  
-### 🔹 Dependency Resolution and Loading
-Most modern applications depend on multiple shared libraries such as DLLs (Dynamic Link Libraries).
+### 🔹 종속성 해결 및 로드Dependency resolution and loading 
+대부분의 최신 응용 프로그램은 DLL(동적 연결 라이브러리)과 같은 여러 공유 라이브러리에 의존합니다. 
  
-### 🔹 Memory Space Allocation
-The operating system is responsible for memory space allocation.
+### 🔹 메모리 공간 할당 
+운영 체제는 메모리 공간 할당을 담당합니다. 
  
-### 🔹 Runtime Environment Initialization
-After allocating memory, the operating system and runtime environment (e.g., JVM for Java or .NET Framework) initialize various resources needed to run the program.
+### 🔹 런타임 환경 초기화 
+메모리를 할당한 후 운영 체제 및 실행 환경(예: Java의 JVM 또는 .NET Framework)은 프로그램을 실행하는 데 필요한 다양한 리소스를 초기화합니다. 
  
-### 🔹 System Calls and Resource Management
-The program's entry point (usually a function called 'main') is called to begin execution of the code written by the programmer.
+### 🔹 시스템 호출 및 리소스 관리 
+프로그램의 진입점(일반적으로 'main'이라는 함수)은 프로그래머가 작성한 코드의 실행을 시작하기 위해 호출됩니다. 
  
-### 🔹 Von Neumann Architecture
-In the Von Neumann architecture, the CPU executes instructions stored in memory.
+### 🔹 폰 노이만 아키텍처 
+Von Neumann 아키텍처에서 CPU는 메모리에 저장된 명령을 실행합니다. 
  
-### 🔹 Program Termination
-Eventually, when the program completes its tasks or the user actively closes the application, the program initiates a cleanup phase. This includes closing open file descriptors, releasing network resources, and returning memory to the system.
+### 🔹 프로그램 종료 
+결국 프로그램이 작업을 완료하거나 사용자가 응용 프로그램을 적극적으로 종료하면 프로그램은 정리 단계를 시작합니다. 여기에는 열려 있는 파일 디스크립터를 닫고, 네트워크 리소스를 확보하고, 메모리를 시스템에 반환하는 것이 포함됩니다. 
 
 </details>

@@ -1,5 +1,5 @@
 ---
-title: "Explore the landscape of Open Source Data Engineering"
+title: Explore the landscape of Open Source Data Engineering
 description: "Curiosity: What tools and platforms are available in the open-source data engineering ecosystem?"
 categories: [Data Science/Algorithms]
 tags: [Data Science, Algorithm, Analysis]

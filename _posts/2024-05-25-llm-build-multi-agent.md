@@ -1,5 +1,5 @@
 ---
-title: "Let's build multi-agent system"
+title: Let's build multi-agent system
 description: "Curiosity: What if we could create a unified playground where AI agents can explore, learn, and evolve across diverse environments?"
 categories: [Agent/Orchestration]
 tags: [Agent, Workflow, Orchestration]
@@ -183,33 +183,33 @@ print(result)
 
 * * * 
 
-## 🎉 Yet Another Multi-Agent Framework Has Arrived!
+## 🎉 또 다른 다중 에이전트 프레임워크가 도착했습니다! 
 
-AgentGym provides a broad range of environments and tasks for extensive, real-time, uniform, and concurrent agent exploration!
+AgentGym은 광범위하고 실시간이며 균일하고 동시 에이전트 탐색을 위한 광범위한 환경과 작업을 제공합니다! 
 
-Following popular releases like CrewAI and Autogen, here is yet another new multi-agent framework. Here are some insights.
+CrewAI 및 Autogen과 같은 인기 있는 릴리스에 이어 또 다른 새로운 다중 에이전트 프레임워크가 있습니다. 다음은 몇 가지 인사이트입니다.
 
-- ⛳ AgentGym provides diverse environments, tasks, and goals for LLM-based agents with a convenient API, standardized task specifications, environment settings, observation/action spaces, and more. The platform supports online evaluation, trajectory sampling, and interactive training.
-- ⛳ Provides a database with expanded instructions for diverse environments and tasks, forming a challenging test set for benchmarking called AgentEval.
-- ⛳ This includes AgentTraj, a uniformly formatted trajectory set for basic agent training, and AgentTraj-L, an extended version for maximum performance through behavior cloning.
-- ⛳ The authors also introduce AgentEvol, a method for exploring agent self-evolution beyond previously seen data across tasks and environments. With AgentEvol, agents can adaptively access context based on specific tasks.
+- ⛳ AgentGym은 LLM 기반 에이전트를 위한 다양한 환경, 작업, 목표를 편리한 API, 표준화된 작업 사양, 환경 설정, 관찰/행동 공간 등으로 제공합니다. 이 플랫폼은 온라인 평가, 궤적 샘플링 및 대화형 교육을 지원합니다.
+- ⛳ 다양한 환경 및 작업의 확장된 지침이 포함된 데이터베이스를 제공하여 AgentEval이라는 벤치마킹을 위한 도전적인 테스트 세트를 형성합니다.
+- ⛳ 여기에는 기본 에이전트 훈련을 위한 균일한 형식의 궤적 세트인 AgentTraj와 동작 복제를 통한 최대 성능을 위한 확장 버전인 AgentTraj-L이 포함됩니다.
+- ⛳저자는 또한 작업 및 환경 전반에 걸쳐 이전에 본 데이터를 넘어 에이전트 자체 진화를 탐색하는 방법인 AgentEvol을 소개합니다. AgentEvol을 사용하면 에이전트가 특정 작업을 기반으로 컨텍스트에 적응적으로 액세스하고 활용하여 발전할 수 있으므로 더 적은 리소스를 사용하면서 최신 모델에 필적하는 결과를 얻을 수 있습니다.
 
-The AgentGym suite, including platform, datasets, benchmarks, checkpoints, and algorithm implementations, is available for the community to build and evaluate LLM-based agents.
+플랫폼, 데이터 세트, 벤치마크, 체크포인트 및 알고리즘 구현을 포함한 AgentGym 제품군은 커뮤니티에서 일반적으로 사용할 수 있는 LLM 기반 에이전트를 빌드하고 평가하는 데 사용할 수 있습니다. 
 
 - github : <https://github.com/WooooDyy/AgentGym>
 
-## Let's Build a Crew of AI Agents
+## AI 요원 크루를 구성해 봅시다
 
-A multi-agent system that scrapes the web and automatically writes blog posts!
+웹을 긁어모으고 자동으로 블로그 게시물을 작성하는 다중 에이전트 시스템!
 
-Here is what I used:
+내가 사용한 것은 다음과 같습니다.
 
-- For building multi-agent systems: [crewAI](https://www.linkedin.com/company/crewai-inc/) 
-- For serving LLMs locally: [Ollama](https://www.linkedin.com/company/ollama/) (Llama-3)
-- For development and hosting: [Lightning AI](https://www.linkedin.com/company/pytorch-lightning/)
+- 다중 에이전트 시스템 구축을 위한 [crewAI](https://www.linkedin.com/company/crewai-inc/) 
+- 현지에서 LLM을 제공하는 [Ollama](https://www.linkedin.com/company/ollama/) (Llama-3)
+- 개발 및 호스팅을 위한 [Lightning AI](https://www.linkedin.com/company/pytorch-lightning/)
 
-I published this work as a Lightning AI ⚡️Studio, which reads like a blog post encapsulating all my code and environment!
+나는이 작품을 Lightning AI ⚡️Studio로 출판했는데, 내 모든 코드 및 환경을 캡슐화하는 블로그처럼 읽힌다!
 
-Try it out now: <https://lightning.ai/lightning-ai/studios/let-s-build-a-crew-of-ai-agents?utm_source=akshay>
+지금 바로 사용해 보세요: <https://lightning.ai/lightning-ai/studios/let-s-build-a-crew-of-ai-agents?utm_source=akshay>
 
 </details>

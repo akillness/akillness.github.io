@@ -1,5 +1,5 @@
 ---
-title: "😮😮 GPT-4, despite being one of the leading LLMs, struggles with long-context"
+title: 😮😮 GPT-4, despite being one of the leading LLMs, struggles with long-context
   bilingual reasoning tasks. Even with text lengths shorter than 2K tokens!!
 description: "Curiosity: Despite being one of the leading LLMs, GPT-4 struggles with long-context bilingual reasoning tasks, even with text lengths shorter than 2K ..."
 categories: [LLM/Model & Papers]

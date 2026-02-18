@@ -1,5 +1,5 @@
 ---
-title: "Generative AI Application Ecosystem"
+title: Generative AI Application Ecosystem
 description: "Curiosity: What challenges do organizations face when deploying Generative AI?"
 categories: [Review/Trends]
 tags: [Trend, Review, Case]

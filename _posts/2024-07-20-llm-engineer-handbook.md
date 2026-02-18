@@ -1,5 +1,5 @@
 ---
-title: "The LLM Engineer's Handbook 👷 'Super proud to announce my new book'"
+title: The LLM Engineer's Handbook 👷 'Super proud to announce my new book'
 description: "Curiosity: How do we bridge the gap between LLM research and production deployment?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]

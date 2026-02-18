@@ -1,5 +1,5 @@
 ---
-title: "The weights of our Time Series Foundation Model (TimesFM) on Hugging Face"
+title: The weights of our Time Series Foundation Model (TimesFM) on Hugging Face
 description: "We’re excited to release the weights of our Time Series Foundation Model (TimesFM) on Hugging Face!"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]

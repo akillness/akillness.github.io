@@ -1,5 +1,5 @@
 ---
-title: "Writing Blogs with Multi-Agent Systems - A Production Framework for AI-Powered"
+title: Writing Blogs with Multi-Agent Systems - A Production Framework for AI-Powered
   Content Creation
 description: Exploring how multi-agent systems can revolutionize blog writing workflows,
   featuring KTransformers for efficient LLM inference and heterogeneous computing
@@ -658,63 +658,63 @@ Based on testing with KTransformers and multi-agent architecture:
 ---
 
 <details markdown="1">
-<summary style="font-size:20px; font-weight:bold; cursor:pointer;">📋 Summary (Korean Translation)</summary>
+<summary style="font-size:20px; font-weight:bold; cursor:pointer;">📋 요약 (Summary in Korean)</summary>
 
-## Blog Writing System Using Multi-Agent
+## 멀티 에이전트를 이용한 블로그 작성 시스템
 
-### Core Idea
+### 핵심 아이디어
 
-Exploring how to revolutionize the blog writing process using multi-agent systems. Through efficient LLM inference with KTransformers and heterogeneous computing, specialized agents collaborate to generate high-quality blog content.
+멀티 에이전트 시스템을 활용하여 블로그 작성 프로세스를 혁신하는 방법을 탐구합니다. KTransformers를 활용한 효율적인 LLM 추론과 이기종 컴퓨팅을 통해 전문 에이전트들이 협력하여 고품질 블로그 콘텐츠를 생성합니다.
 
-### Key Content
+### 주요 내용
 
-**🤔 Curiosity:**
-- Can we orchestrate multiple specialized agents instead of a single AI agent to write blogs?
-- Can we process each step — research, writing, editing, fact-checking — in parallel to reduce time?
+**🤔 호기심 (Curiosity):**
+- 단일 AI 에이전트가 아닌 여러 전문 에이전트를 조율하여 블로그를 작성할 수 있을까?
+- 연구, 작성, 편집, 사실 확인 등 각 단계를 병렬로 처리하여 시간을 단축할 수 있을까?
 
-**📚 Retrieve:**
-- **KTransformers**: Efficient LLM inference framework through CPU-GPU heterogeneous computing
-- **Multi-Agent Architecture**: Collaboration of specialized agents including research, writing, editing, and fact-checking agents
-- **Parallel Processing**: Simultaneous execution of independent tasks to reduce total time
+**📚 지식 검색 (Retrieve):**
+- **KTransformers**: CPU-GPU 이기종 컴퓨팅을 통한 효율적인 LLM 추론 프레임워크
+- **멀티 에이전트 아키텍처**: 연구 에이전트, 작성 에이전트, 편집 에이전트, 사실 확인 에이전트 등 전문 에이전트들의 협력
+- **병렬 처리**: 독립적인 작업들을 동시에 실행하여 전체 시간 단축
 
-**💡 Innovation:**
-- **75% time reduction**: Blog generation time reduced from 80 minutes to 20 minutes
-- **Quality improvement**: 17% quality improvement through specialized agents and multi-stage validation
-- **Cost optimization**: 75% cost reduction through KTransformers heterogeneous computing
-- **Scalability**: Efficient inference through KTransformers enables simultaneous execution of multiple agents
+**💡 혁신 (Innovation):**
+- **75% 시간 단축**: 80분 → 20분으로 블로그 생성 시간 감소
+- **품질 향상**: 전문 에이전트와 다단계 검증을 통한 17% 품질 개선
+- **비용 최적화**: KTransformers의 이기종 컴퓨팅으로 75% 비용 절감
+- **확장성**: KTransformers를 통한 효율적인 추론으로 여러 에이전트 동시 실행 가능
 
-### Technical Highlights
+### 기술적 하이라이트
 
-1. **KTransformers Integration**
-   - CPU Agents: Lightweight agents using AMX/AVX acceleration (research, fact-checking)
-   - GPU Agents: Heavy agents using FP8 optimization (writing, editing)
-   - MoE Support: Specialized agents using expert models
+1. **KTransformers 통합**
+   - CPU 에이전트: AMX/AVX 가속을 활용한 경량 에이전트 (연구, 사실 확인)
+   - GPU 에이전트: FP8 최적화를 활용한 중량 에이전트 (작성, 편집)
+   - MoE 지원: 전문 모델을 활용한 특화 에이전트
 
-2. **Multi-Agent Workflow**
-   - Research Phase: Parallel information gathering and reference finding
-   - Writing Phase: Parallel content generation by section
-   - Quality Assurance: Editing, fact-checking, SEO optimization
+2. **멀티 에이전트 워크플로우**
+   - 연구 단계: 병렬 정보 수집 및 참조 자료 찾기
+   - 작성 단계: 섹션별 병렬 콘텐츠 생성
+   - 품질 보증: 편집, 사실 확인, SEO 최적화
 
-3. **Performance Metrics**
-   - Single Agent: 80 minutes, Quality 7.5/10
-   - Multi-Agent: 20 minutes, Quality 8.8/10
-   - Fact Accuracy: 85% → 95%
-   - SEO Score: 6.2/10 → 8.5/10
+3. **성능 지표**
+   - 단일 에이전트: 80분, 품질 7.5/10
+   - 멀티 에이전트: 20분, 품질 8.8/10
+   - 사실 정확도: 85% → 95%
+   - SEO 점수: 6.2/10 → 8.5/10
 
-### Use Cases
+### 적용 사례
 
-✅ **Good fit:**
-- Technical blogs requiring research and code examples
-- Long-form content with multiple sections
-- Content requiring fact-checking and SEO optimization
-- Production systems requiring large-scale content generation
+✅ **적합한 경우:**
+- 연구와 코드 예제가 필요한 기술 블로그
+- 여러 섹션을 가진 장문 콘텐츠
+- 사실 확인과 SEO 최적화가 필요한 콘텐츠
+- 대규모 콘텐츠 생성이 필요한 프로덕션 시스템
 
-### New Questions
+### 새로운 질문들
 
-1. Can we fine-tune domain-specific agents?
-2. How do we measure and optimize the coordination overhead of multi-agent systems?
-3. What is the optimal agent architecture for different blog types?
-4. Can we create a marketplace where specialized agents compete?
+1. 도메인 특화 에이전트를 파인튜닝할 수 있을까?
+2. 멀티 에이전트 시스템의 조율 오버헤드를 어떻게 측정하고 최적화할까?
+3. 다양한 블로그 유형에 최적의 에이전트 아키텍처는 무엇일까?
+4. 전문 에이전트들이 경쟁하는 마켓플레이스를 만들 수 있을까?
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Unified 6D Pose Estimation and Tracking of Novel Objects"
+title: Unified 6D Pose Estimation and Tracking of Novel Objects
 description: "Curiosity: How can we achieve real-time 6D pose estimation on consumer GPUs? What makes FoundationPose outperform previous methods?"
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
@@ -111,16 +111,16 @@ graph LR
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
 
-##  FoundationPose is a Complex Solution
+##  FoundationPose는 복잡한 솔루션
 
-At last week's imec ITF conference, I ended my presentation on AI and robotics with this video by NVIDIA Robotics. Why? The demo runs in real time on an RTX3090 — a 4-year-old GPU. Today you can get the same AI performance (TOPS) for ~€300.
+지난주 imec ITF 컨퍼런스에서 저는 NVIDIA Robotics 이 영화로 AI와 로봇 공학에 대한 프레젠테이션을 마쳤습니다. 왜? 데모는 RTX3090에서 실시간으로 실행되었습니다. 4년 된 GPU입니다. 오늘날에는 ~300€에 동일한 AI 성능(TOPS)을 얻을 수 있습니다.
 
-It locks onto the object's position and orientation within ~1.5 seconds, then tracks at 30 Hz.
+~1.5초 이내에 물체의 위치와 방향을 잠근 다음 30Hz로 추적합니다.
 
-FoundationPose is a complex solution — it requires an RGBD camera, and a few example images (with ground-truth poses) when a textured CAD file is not available. But it nails it and outperforms any previous work.
+FoundationPose는 복잡한 솔루션으로, RGBD 카메라가 필요하며, 텍스처 CAD 파일을 사용할 수 없는 경우 몇 가지 예제 이미지(실측 포즈 포함)가 필요합니다. 그러나 그것은 그것을 못 박고 이전의 어떤 작업보다 성능이 뛰어납니다.
 
-With this level of performance (30 Hz on a 'budget' GPU), it won't take long to find efficiency gains, smarter solutions, and better synergies in the code. Once an architecture is proven to work, incremental improvements happen very quickly.
+이 성능('저가형' GPU에서 30Hz)을 사용하면 코드에서 효율성, 더 스마트한 솔루션, 더 나은 시너지 효과를 찾는 데 오랜 시간이 걸리지 않을 것입니다. 아키텍처가 작동하는 것으로 입증되면 점진적인 개선이 매우 빠르게 이루어집니다.
 
-Looking forward to running this on Jetson soon!
+곧 Jetson에서 이것을 실행하기를 기대합니다!
 
 </details>

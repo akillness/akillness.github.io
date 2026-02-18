@@ -1,5 +1,5 @@
 ---
-title: "Llama 3 implemented in pure NumPy"
+title: Llama 3 implemented in pure NumPy
 description: "Curiosity: How can we understand LLM architectures at the most fundamental level?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
@@ -204,17 +204,17 @@ graph TB
 
 * * * 
 
-🦙 Llama 3 Implemented in Pure NumPy 👩🔬
+🦙 순수 NumPy👩 🔬로 구현된 라마 3
 
-🚀 Exciting discovery! Inspired by @Andrej Karpathy, I found an interesting article about the Llama 3 model implemented in NumPy. The Llama 3 model from AI at Meta is making waves with its impressive scale and performance. 🌟
+🚀 흥미 진진한 발견! @Andrej Karpathy에서 영감을 받아 NumPy에서 구현 된 Llama 3 모델에 대한 흥미로운 기사를 발견했습니다. AI at Meta 의 라마 3 모델은 인상적인 규모와 성능으로 파장을 일으키고 있습니다. 🌟
 
-🧑 Code : <https://github.com/likejazz/llama3.np>
+🧑 코드 : <https://github.com/likejazz/llama3.np>
 
-🔍 Using 24K GPUs, 15T training data, 10M instruction data, and 1.3M GPU hours, the numbers are truly overwhelming. Despite switching to use GQA, the model structure is unchanged from Llama 2, making it a familiar yet powerful framework.
+🔍 24K GPU, 15T 훈련 데이터, 10M 명령 데이터 및 1.3M GPU 시간을 사용하면 그 수치는 정말 압도적입니다. GQA를 사용하기로 전환했음에도 불구하고 모델 구조는 Llama 2에서 변경되지 않아 친숙하면서도 강력한 프레임워크가 되었습니다.
 
-🧠 To aid understanding, the author focuses on accurate implementation using NumPy. Utilizing the stories15M model trained by Andrej Karpathy, they are converting to NumPy compressed format for a more intuitive model structure. Stay tuned as they convert Karpathy's trained Llama 2 model into working code while maintaining the clarity and precision of the approach.
+🧠 이해를 돕기 위해 저자는 NumPy를 사용하여 정확하게 구현하는 데 중점을 두고 있습니다. Andrej Karpathy가 훈련한 stories15M 모델을 활용하여 보다 직관적인 모델 구조를 위해 NumPy 압축 형식으로 변환하고 있습니다. Karpathy가 훈련한 Llama 2 모델을 실행 가능한 코드로 변환하여 접근 방식의 명확성과 정밀도를 유지하는 동안 계속 지켜봐 주십시오.
 
-📊 While integrating GQA into the code, the author does not apply GQA to the model behavior, allowing a smooth NumPy implementation to enhance interpretability. Stay tuned for more insights on this innovative approach! 
+📊 GQA를 코드에 통합하는 동안 작성자는 GQA를 모델 동작에 적용하지 않으므로 해석 가능성을 높이기 위해 NumPy를 원활하게 구현할 수 있습니다. 이 혁신적인 접근 방식에 대한 더 많은 통찰력을 계속 지켜봐 주십시오! 
 
 </details>
 

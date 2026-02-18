@@ -1,5 +1,5 @@
 ---
-title: "Watch the concept🔥🤔, how Linux🐧 works"
+title: Watch the concept🔥🤔, how Linux🐧 works
 description: "Curiosity: How does Linux boot and operate? What are the key components and processes that make Linux work?"
 categories: [Infrastructure/System]
 tags: [Infrastructure, Operations, Architecture]
