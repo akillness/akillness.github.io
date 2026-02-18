@@ -22,11 +22,6 @@ That curiosity brought me to **OpenVSCode Server**: an upstream‑aligned, minim
 ## 📚 Retrieve: The Knowledge
 
 
-![OpenVSCode architecture](/assets/img/ai/openvscode-2.png){: .light .w-75 .shadow .rounded-10 }
-
-![Docker quick start](/assets/img/ai/openvscode-3.png){: .light .w-75 .shadow .rounded-10 }
-
-![Security/token setup](/assets/img/ai/openvscode-4.jpg){: .light .w-75 .shadow .rounded-10 }
 
 ### What OpenVSCode Server Is
 
