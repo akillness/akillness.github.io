@@ -25,30 +25,49 @@ The recent wave of **ultra‑lightweight OpenClaw‑inspired frameworks** is the
 
 ### What’s emerging in the ecosystem
 
-Here’s the minimal‑agent lineup (all pulled from the linked repos):
+Here’s the minimal‑agent lineup (all pulled from the linked repos). I’m attaching **all 7 images** explicitly so they render correctly:
 
-- **NanoBot (Python)** — https://github.com/HKUDS/nanobot  
-  *Core agent functionality in ~4,000 LOC.*
+### NanoBot (Python)
+- Repo: https://github.com/HKUDS/nanobot  
+- *Core agent functionality in ~4,000 LOC.*
 
-- **PicoClaw (Go)** — https://github.com/sipeed/picoclaw  
-  *Ultra‑efficient, runs on tiny hardware.*
+![NanoBot](/assets/img/ai/minimal-openclaw-1.jpg){: .light .w-75 .shadow .rounded-10 }
 
-- **ZeroClaw (Rust)** — https://github.com/zeroclaw-labs/zeroclaw  
-  *Fast startup, zero‑overhead design.*
+### PicoClaw (Go)
+- Repo: https://github.com/sipeed/picoclaw  
+- *Ultra‑efficient, runs on tiny hardware.*
 
-- **NanoClaw (Claude Agents SDK + Containers)** — https://github.com/qwibitai/nanoclaw  
-  *Container‑ready for personal workflows.*
+![PicoClaw](/assets/img/ai/minimal-openclaw-2.jpg){: .light .w-75 .shadow .rounded-10 }
 
-- **MimiClaw (C / ESP32‑S3)** — https://github.com/memovai/mimiclaw  
-  *Runs on a $5 chip. No OS. No Node.*
-
-- **IronClaw (Rust, privacy‑first)** — https://github.com/nearai/ironclaw  
-  *Encrypted local storage + sandboxing focus.*
-
-- **TinyClaw (Multi‑Agent Teams)** — https://github.com/TinyAGI/tinyclaw  
-  *File‑queue multi‑agent teams on tiny infra.*
+### ZeroClaw (Rust)
+- Repo: https://github.com/zeroclaw-labs/zeroclaw  
+- *Fast startup, zero‑overhead design.*
 
 ![ZeroClaw](/assets/img/ai/minimal-openclaw-3.jpg){: .light .w-75 .shadow .rounded-10 }
+
+### NanoClaw (Claude Agents SDK + Containers)
+- Repo: https://github.com/qwibitai/nanoclaw  
+- *Container‑ready for personal workflows.*
+
+![NanoClaw](/assets/img/ai/minimal-openclaw-4.jpg){: .light .w-75 .shadow .rounded-10 }
+
+### MimiClaw (C / ESP32‑S3)
+- Repo: https://github.com/memovai/mimiclaw  
+- *Runs on a $5 chip. No OS. No Node.*
+
+![MimiClaw](/assets/img/ai/minimal-openclaw-5.jpg){: .light .w-75 .shadow .rounded-10 }
+
+### IronClaw (Rust, privacy‑first)
+- Repo: https://github.com/nearai/ironclaw  
+- *Encrypted local storage + sandboxing focus.*
+
+![IronClaw](/assets/img/ai/minimal-openclaw-6.jpg){: .light .w-75 .shadow .rounded-10 }
+
+### TinyClaw (Multi‑Agent Teams)
+- Repo: https://github.com/TinyAGI/tinyclaw  
+- *File‑queue multi‑agent teams on tiny infra.*
+
+![TinyClaw](/assets/img/ai/minimal-openclaw-7.jpg){: .light .w-75 .shadow .rounded-10 }
 
 ### Quick Comparison
 
