@@ -54,13 +54,10 @@ Useful references that explain this split clearly:
 ### Minimal mental model
 
 ```mermaid
-graph LR
-  A[Prompt] --> B[Prefill (KV cache)]
+flowchart LR
+  A[Prompt] --> B[Prefill / KV cache]
   B --> C[Decode loop]
   C --> D[Output]
-
-  style B fill:#4ecdc4,stroke:#0a9396,color:#fff
-  style C fill:#ff6b6b,stroke:#c92a2a,color:#fff
 ```
 
 The longer the output, the more time is spent in **decode**. The longer the prompt, the more cost you pay in **prefill**. Deployment strategy should follow that split.
