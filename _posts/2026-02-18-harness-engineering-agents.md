@@ -108,13 +108,25 @@ In games, agent failure is not theoretical—it breaks QA, build pipelines, and 
 ## 🔥 Update: Harness Engineering is now the headline, not a footnote
 
 “하네스? 가터벨트? 마구마구?” — 아니요.  
-작년 말부터 **OpenAI와 Anthropic이 나란히 언급하는 키워드**가 바로 *Harness Engineering*입니다.
+작년 말부터 **OpenAI와 Anthropic이 나란히 공식적으로 강조한 키워드**가 바로 *Harness Engineering*입니다.
 
-- **OpenAI Codex 팀**은 엔지니어 3명이 **코드 한 줄 없이 100만 줄 배포**를 달성했고,  
-  에이전트가 **1,500개 PR**을 열고 인간은 설계/검증에 집중했다고 공개했습니다.
-- **Anthropic**은 여러 컨텍스트 윈도우를 오가며 **장기 실행을 완성하는 하네스 구조**를 공유했습니다.
+### What changed (and why it matters)
 
-핵심은 **모델 교체가 아니라 하네스 설계**였습니다.
+- **OpenAI Codex 팀**은 **0라인 수동 코딩**으로 내부 제품을 만들고  
+  **~100만 LOC** 규모까지 확장했다고 공개했습니다.  
+  **1,500개 PR**을 에이전트가 열고, 인간은 설계·검증에 집중했습니다.  
+  → *핵심은 모델이 아니라 하네스였다*는 메시지입니다.  
+
+- **Anthropic**은 장기 실행 에이전트의 핵심 실패 패턴을 공개하고,  
+  **initializer agent + coding agent** 구조,  
+  **feature list + claude-progress 로그**로 컨텍스트를 이어붙이는 하네스를 설명했습니다.  
+  → *여러 컨텍스트 윈도우를 넘나드는 실행이 하네스로 가능해진다*는 증거입니다.
+
+- **Philipp Schmid**는 “모델 성능 격차는 줄어들고,  
+  진짜 차이는 장기 내구성과 하네스에서 드러난다”고 정리했습니다.
+
+- **Martin Fowler**는 하네스를 **서비스 템플릿/골든 패스**처럼 만들 수 있는지,  
+  “AI‑친화적” 아키텍처가 앞으로의 표준이 될지 질문합니다.
 
 ### Harness Engineering이란?
 
@@ -124,21 +136,20 @@ In games, agent failure is not theoretical—it breaks QA, build pipelines, and 
 
 컨텍스트 관리, 도구 접근 중재, 검증 강제, 진행 기록 — **에이전트가 일을 잘할 수 있는 환경 자체**가 하네스입니다.
 
-### 왜 지금 중요한가
+### Failure patterns (Anthropic + OpenAI가 공통으로 본 문제)
 
-에이전트 실패의 원인은 대부분 **모델이 아니라 환경**입니다.
+- 한 번에 너무 많이 시도하다 컨텍스트 소진  
+- 진행된 부분만 보고 조기 완료 선언  
+- 검증 없이 기능 완료 처리  
+- 버그를 다음 세션에 떠넘김  
 
-**대표 실패 패턴**
-- 한 번에 너무 많이 시도하다 컨텍스트 소진
-- 진행된 부분만 보고 조기 완료 선언
-- 검증 없이 기능 완료 처리
-- 버그를 다음 세션에 떠넘김
+### Harness가 해결하는 것들 (실전 설계 포인트)
 
-**하네스가 해결하는 것들**
-1) **Context Engineering** — 1,000페이지 매뉴얼이 아니라 “지도” 제공
-2) **Incremental Progress** — 기능을 한 번에 하나씩, 매번 클린 커밋
-3) **Forced Verification** — 완료 선언을 가로채고 e2e 테스트 강제
-4) **Governance & Traceability** — 누가, 왜, 어떤 권한으로 결정했는지 추적
+1) **Context Engineering** — 1,000페이지 매뉴얼이 아니라 “지도” 제공  
+2) **Incremental Progress** — 한 번에 하나의 기능, 매번 클린 커밋  
+3) **Forced Verification** — 완료 선언을 가로채 e2e/QA 테스트 강제  
+4) **Governance & Traceability** — 누가, 왜, 어떤 권한으로 결정했는지 추적  
+5) **Durable State** — progress log + feature list로 세션 간 맥락 유지  
 
 > Humans steer. Agents execute.
 
@@ -158,12 +169,11 @@ In games, agent failure is not theoretical—it breaks QA, build pipelines, and 
 ## References
 
 - https://openai.com/index/harness-engineering/
+- https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+- https://www.philschmid.de/agent-harness-2026
+- https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html
+- https://docs.langchain.com/oss/python/deepagents/harness
+- https://medium.com/@bijit211987/agent-harness-b1f6d5a7a1d1
 - https://blog.langchain.com/improving-deep-agents-with-harness-engineering/
 - https://www.techtarget.com/searchitoperations/news/366631493/Harness-takes-aim-at-AI-bottleneck-with-DevSecOps-agents
 - https://devops.com/harness-extends-scope-and-reach-of-ai-platform-for-automating-devops-workflows/
-- https://lnkd.in/ga4txpSe
-- https://lnkd.in/gHJ7q8Av
-- https://lnkd.in/gT259K6s
-- https://lnkd.in/g2UJq_uG
-- https://lnkd.in/gpUm-rt2
-- https://lnkd.in/gRFQvm6E
