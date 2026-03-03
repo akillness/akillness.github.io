@@ -107,54 +107,51 @@ In games, agent failure is not theoretical—it breaks QA, build pipelines, and 
 
 ## 🔥 Update: Harness Engineering is now the headline, not a footnote
 
-“하네스? 가터벨트? 마구마구?” — 아니요.  
-작년 말부터 **OpenAI와 Anthropic이 나란히 공식적으로 강조한 키워드**가 바로 *Harness Engineering*입니다.
+“Harness? Garter belt? Tack?” — no.  
+Since late last year, **OpenAI and Anthropic have both been explicitly elevating the same keyword: *Harness Engineering*.**
 
 ### What changed (and why it matters)
 
-- **OpenAI Codex 팀**은 **0라인 수동 코딩**으로 내부 제품을 만들고  
-  **~100만 LOC** 규모까지 확장했다고 공개했습니다.  
-  **1,500개 PR**을 에이전트가 열고, 인간은 설계·검증에 집중했습니다.  
-  → *핵심은 모델이 아니라 하네스였다*는 메시지입니다.  
+- **OpenAI’s Codex team** shipped an internal product with **zero manually‑written lines**,  
+  scaled it to **~1M LOC**, and had agents open **~1,500 PRs** while humans focused on design + verification.  
+  → The point: *the harness mattered more than the model.*
 
-- **Anthropic**은 장기 실행 에이전트의 핵심 실패 패턴을 공개하고,  
-  **initializer agent + coding agent** 구조,  
-  **feature list + claude-progress 로그**로 컨텍스트를 이어붙이는 하네스를 설명했습니다.  
-  → *여러 컨텍스트 윈도우를 넘나드는 실행이 하네스로 가능해진다*는 증거입니다.
+- **Anthropic** documented core failure patterns in long‑running agents and introduced a harness pattern with an  
+  **initializer agent + coding agent**, plus **feature lists + claude‑progress logs** to bridge context windows.  
+  → This makes multi‑window, long‑horizon execution practical.
 
-- **Philipp Schmid**는 “모델 성능 격차는 줄어들고,  
-  진짜 차이는 장기 내구성과 하네스에서 드러난다”고 정리했습니다.
+- **Philipp Schmid** argues that model gaps are shrinking, and real differentiation shows up in **durability and harness design**.
 
-- **Martin Fowler**는 하네스를 **서비스 템플릿/골든 패스**처럼 만들 수 있는지,  
-  “AI‑친화적” 아키텍처가 앞으로의 표준이 될지 질문합니다.
+- **Martin Fowler** asks whether harnesses become **service templates / golden paths**,  
+  and whether “AI‑friendly” architectures become the new standard.
 
-### Harness Engineering이란?
+### What is Harness Engineering?
 
-**AI 에이전트를 프로덕션에서 안정적으로 운영하기 위한 제어 계층 설계**입니다.
+It’s **the control layer that makes AI agents reliable in production**.
 
-> 모델이 CPU라면, 하네스는 OS.
+> If the model is the CPU, the harness is the OS.
 
-컨텍스트 관리, 도구 접근 중재, 검증 강제, 진행 기록 — **에이전트가 일을 잘할 수 있는 환경 자체**가 하네스입니다.
+Context management, tool mediation, enforced verification, and progress logging — **the environment that makes agents work**.
 
-### Failure patterns (Anthropic + OpenAI가 공통으로 본 문제)
+### Failure patterns (what Anthropic + OpenAI saw repeatedly)
 
-- 한 번에 너무 많이 시도하다 컨텍스트 소진  
-- 진행된 부분만 보고 조기 완료 선언  
-- 검증 없이 기능 완료 처리  
-- 버그를 다음 세션에 떠넘김  
+- Trying to do too much at once → context exhaustion  
+- Declaring “done” after partial progress  
+- Shipping without verification  
+- Punting bugs to the next session  
 
-### Harness가 해결하는 것들 (실전 설계 포인트)
+### What the harness fixes (practical design points)
 
-1) **Context Engineering** — 1,000페이지 매뉴얼이 아니라 “지도” 제공  
-2) **Incremental Progress** — 한 번에 하나의 기능, 매번 클린 커밋  
-3) **Forced Verification** — 완료 선언을 가로채 e2e/QA 테스트 강제  
-4) **Governance & Traceability** — 누가, 왜, 어떤 권한으로 결정했는지 추적  
-5) **Durable State** — progress log + feature list로 세션 간 맥락 유지  
+1) **Context Engineering** — provide a map, not a 1,000‑page manual  
+2) **Incremental Progress** — one feature at a time, clean commits every step  
+3) **Forced Verification** — intercept “done” and require e2e/QA tests  
+4) **Governance & Traceability** — who decided what, and why  
+5) **Durable State** — progress logs + feature lists to bridge sessions  
 
 > Humans steer. Agents execute.
 
-그리고 중요한 점: 하네스가 캡처하는 **에이전트 궤적 데이터는 다음 모델 훈련의 핵심 자산**이 됩니다.  
-이제 경쟁 우위는 프롬프트가 아니라 **하네스가 수집하는 데이터**입니다.
+One more key point: **the trajectory data captured by the harness becomes a core training asset**.  
+The competitive edge is no longer the prompt — it’s **the data the harness collects**.
 
 ---
 
