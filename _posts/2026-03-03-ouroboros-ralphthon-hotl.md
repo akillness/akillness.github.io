@@ -3,7 +3,7 @@ title: "Ouroboros at the Edge: HOTL Proven in a 7‑Hour Ralphthon"
 description: "We pushed a harness to the limit — 100k lines of code, 70k tests, and external dependencies — and it still converged." 
 categories: [AI, Research]
 tags: [agentic, harness, ralph, workflow, specification]
-date: 2026-03-03 21:00:00 +0900
+date: 2026-03-03 14:00:00 +0900
 mermaid: true
 math: true
 image:
