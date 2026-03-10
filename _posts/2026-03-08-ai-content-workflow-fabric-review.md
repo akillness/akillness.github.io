@@ -3,7 +3,7 @@ title: "AI Content Workflows: Digital Bourgeois and Daniel Miessler's Fabric"
 description: "A quick read on two useful references for AI-driven content workflows: a practical Korean analysis from Digital Bourgeois and Fabric, Daniel Miessler's open knowledge framework for prompt-driven workflows."
 categories: [AI, Tools]
 tags: [fabric, prompts, workflow, blog, digitalbourgeois]
-date: 2026-03-10 12:00:00 +0900
+date: 2026-03-08 12:00:00 +0900
 mermaid: false
 math: false
 ---
