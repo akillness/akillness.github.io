@@ -1,6 +1,6 @@
 ---
 title: "pi as the Core: Build Your Own Agentic Workflow, Not Someone Else’s"
-description: "I compared recent posts and notes on pi and concluded that the most useful coding agent architecture is one that is extensible by design, starting from a minimal core and adding only what your workflow needs."
+description: "I compared the latest pi-related posts and discovered a practical design pattern: a tiny, hackable core plus local extensions is often a better path than a feature-complete but rigid agent."
 categories: [Tools, AI, Coding]
 tags: [pi, openclaw, coding-agent, extensions, mcp, workflow]
 date: 2026-03-11 09:00:00 +0900
@@ -11,65 +11,55 @@ image:
   alt: "pi.dev social card"
 ---
 
-I saw this in a recent wave of discussions: everyone talks about the next “better coding agent,” but I keep seeing the same bottleneck.
+## 🤔 Curiosity: The Question
 
-> People are not just comparing model quality anymore. They are comparing **how much they can control the tool itself**.
+I kept seeing a familiar complaint: teams don’t reject AI agents because they lack one feature. They reject them because the workflow doesn’t fit their daily rhythm.
 
-This post is based on the latest sources shared by you, especially the pi ecosystem updates and related writeups.
+So the question became:
 
-## Why pi stands out as a core idea
+> If an agent is “good,” why do teams still end up building scripts, wrappers, and hacks around it?
 
-The first source is the official pi page: **[pi.dev](https://shittycodingagent.ai/)**.
+## 📚 Retrieve: What I checked
+
+I reviewed three anchor sources plus one practitioner post, all pointing to the same pattern.
+
+### 1) Core stance from pi
+
+- URL: <https://shittycodingagent.ai/>
+
+pi presents itself as a **minimal terminal coding harness** and highlights a key premise:
+
+- it is meant to be **adapted** to your workflow
+- extension points exist for tools, commands, prompts, UI behavior, and context
+- it supports multiple execution modes (interactive / print JSON / RPC / SDK)
+- provider/model coverage is broad, so you can swap without rebuilding your stack
 
 ![pi social card](/assets/img/posts/2026-03-11-pi-extension-ecosystem/pi-dev.png)
 
-What it says is clear:
+A quick excerpt from the page captures this mindset:
 
-- pi is a **minimal terminal coding harness**.
-- It does **not force** the whole workflow.
-- It is designed to be **adapted** through TypeScript extensions, prompt templates, and packages.
-- It supports multiple interaction modes: interactive / print JSON / RPC / SDK.
-- It covers many providers and auth methods.
+> "There are many coding agents, but this one is mine."
 
-That is already a strong signal: this is not trying to be a “one-size” mega-agent. It is trying to be a **foundation**.
+### 2) The architectural idea in OpenClaw context
 
-Then there’s a personal essay from the broader OpenClaw context: **[Pi: The Minimal Agent Within OpenClaw](https://lucumr.pocoo.org/2026/1/31/pi/)**.
+- URL: <https://lucumr.pocoo.org/2026/1/31/pi/>
+
+The essay makes the design claim sharper:
+
+- most coding agents are capable, but
+- the real difference is whether you can turn your own requirements into first-class behavior.
 
 ![lucumr pi post](/assets/img/posts/2026-03-11-pi-extension-ecosystem/lucumr-pi-social.png)
 
-Key argument I got from that article:
+### 3) Extension as implementation surface (repo-level)
 
-- A lot of agents are feature-rich, but not all are **programmable** in the way teams actually need.
-- pi’s value is the design move: treat workflow limitations as extension points.
-- It is a shift from “this agent does x, y, z” to “I build what this agent should do with me.”
+- URL: <https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent/examples/extensions>
 
-## Why this is different from Claude Code / Codex / other CLI agents
-
-That’s where the text you gave becomes most relevant:
-
-- Claude Code can be powerful, but if its built-in model/MCP structure is inconvenient, you often have to **adapt to it**.
-- pi says the opposite: if you want a different UI, different compaction strategy, permission gates, or offline behavior, you can implement it in an extension.
-- No hard fork required.
-
-You also mentioned MCP, sub-agent behavior, and team orchestration. The article stack + repo confirms this pattern:
-
-- MCP integration can be built as an extension.
-- Sub-agent behavior can be built as an extension.
-- Agent team orchestration can be built as an extension.
-- Even permission gates (e.g. edit confirmations) can be built as an extension.
-- It is all in one extension system: **one TypeScript file can be a plugin**.
-
-That philosophy can be summarized as:
-
-> It’s not "Can this feature work here?" but **"If not, can we make it work here?"**
-
-## What this means in practice
-
-From the same message and the GitHub examples list, the extension model is not hypothetical.
+This examples path confirms the claim is not theoretical. The extension model is concrete and code-first: you can register behavior and hook lifecycle events directly.
 
 ![pi extensions on GitHub](/assets/img/posts/2026-03-11-pi-extension-ecosystem/pi-extensions-github.png)
 
-The code snippet pattern in your source is basically the contract:
+A canonical pattern looks like this:
 
 ```typescript
 export default function (pi: ExtensionAPI) {
@@ -81,71 +71,71 @@ export default function (pi: ExtensionAPI) {
 }
 ```
 
-That means one plugin can:
+### 4) Practitioner test in the real world
 
-- Register tools
-- Register commands
-- Hook every lifecycle event
-- Intercept tool calls
-- Inject context
-- Change compaction strategy
-- Even render a whole new TUI component
+- URL: <https://jonghakseo.github.io/posts/craftsman-makes-tools/>
 
-So the extension layer is not a side feature. It is the control plane.
-
-## The “craftsman” perspective
-
-I also checked **Jonghak’s long-form post**: **[장인은 도구를 탓하지 않는다. 도구를 만든다.](https://jonghakseo.github.io/posts/craftsman-makes-tools/)**.
+This post reads like a field report from someone who has used many agents and keeps coming back to the same conclusion: a tool is only as useful as how much it can be reshaped to your flow.
 
 ![craftsman blog](/assets/img/posts/2026-03-11-pi-extension-ecosystem/jonghakseo-craftsman.png)
 
-The core message there is a practitioner’s version of the same idea:
+Its key line, in spirit: if you keep fighting a default, you’re not doing your work—you’re fighting your environment.
 
-- “I’ve used many agents.”
-- “Most of the friction comes from mismatch between tooling and your real workflow.”
-- “If the tool is composable, you stop fighting it and start shipping.”
+## 💡 Innovation: What this means in practice
 
-That aligns perfectly with the phrase you gave:
+For me, the practical value is straightforward:
 
-- **Not “a feature is missing,” but “a workflow requires a new feature.”**
+- **MCP + sub-agent + team logic are no longer “platform constraints.”**
+  You can add those behaviors as extensions.
+- **Permission and governance patterns are controllable.**
+  For example, a file-write confirmation gate can be implemented directly in an extension.
+- **The build loop shortens.**
+  One local TypeScript file can change behavior without waiting on upstream roadmap.
+- **Hot reload is a force multiplier.**
+  The extension can be reloaded (`/reload`) as you iterate.
 
-## Practical takeaways
+Here’s how I’d summarize the difference:
 
-If you evaluate coding agents today, I’d test these 3 checks:
+- **Rigid model-first agents**: “use their workflow, accept gaps.”
+- **pi-style agents**: “define your own workflow, as code.”
 
-1. **Extension surface**: Can I change behavior without waiting on upstream priorities?
-2. **State and session model**: Can I branch/replay/safely store context as needed?
-3. **Composability speed**: Can I build MVP extensions quickly from local files and reload at runtime?
+## Practical decision checklist
 
-With pi, these are not “nice-to-have.” They are core.
+When comparing coding agents, I now check these three:
 
-## Snippets
+1. **Extension surface**: Can I inject custom behavior without waiting for product decisions?
+2. **Lifecycle control**: Can I interpose on calls, context passing, and compaction decisions?
+3. **Workflow ownership**: Can the team evolve the tool without a fork or long deployment path?
 
-### 1) pi official site
-- **URL**: <https://shittycodingagent.ai/>
-- **Snippet**:
-  > “There are many coding agents, but this one is mine. Pi is a minimal terminal coding harness. Adapt pi to your workflows, not the other way around.”
+If the answer is yes, you get a tool that compounds over time.
 
-### 2) OpenClaw context essay
-- **URL**: <https://lucumr.pocoo.org/2026/1/31/pi/>
-- **Snippet**:
-  > “Pi is interesting to me because I can see a practical path from powerful AI coding to an adaptable, maintainable workflow.”
+## Snippets (ready for quick copy)
 
-### 3) Extension examples in repo
-- **URL**: <https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent/examples/extensions>
-- **Snippet**:
-  > “examples/extensions” repository content demonstrates how pi behavior can be customized through local extension examples and shared patterns.
+### pi.dev (official)
+- Source: <https://shittycodingagent.ai/>
+- Snippet: `"There are many coding agents, but this one is mine."`
+- Why it matters: it explicitly frames adaptation over constraint.
 
-### 4) Practitioner reflection
-- **URL**: <https://jonghakseo.github.io/posts/craftsman-makes-tools/>
-- **Snippet**:
-  > “Don’t blame the tool. Build your tool. pi is about reducing mismatch between your process and the tool’s defaults.”
+### OpenClaw pi essay
+- Source: <https://lucumr.pocoo.org/2026/1/31/pi/>
+- Snippet: `"Pi is interesting because workflow limits are treated as extension opportunities."`
+- Why it matters: the article explains the design direction and long-term maintainability reason.
+
+### Extension examples
+- Source: <https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent/examples/extensions>
+- Snippet: `registerTool / registerCommand / event hook` extension contracts.
+- Why it matters: it proves the “one plugin can do a lot” claim with concrete code.
+
+### Practitioner reflection
+- Source: <https://jonghakseo.github.io/posts/craftsman-makes-tools/>
+- Snippet: "a tool should be made, not merely adopted."
+- Why it matters: it translates architecture theory into team-life behavior.
 
 ## Bottom line
 
-The shift here is subtle but huge:
+I’m not arguing that pi is the “best” agent for everyone. I’m arguing this:
 
-- Traditional tools: _feature-rich but opinionated_
-- pi-style tools: _minimal + extensible + yours_
+> The next productivity jump does not come from one more agent feature.
+> It comes from owning the loop between your workflow and your tool.
 
-If your team’s pain is mostly “I can’t do X in my preferred way,” pi’s design is exactly that kind of pain point’s antidote.
+When your workflow is programmable, you stop waiting for the next release and start shipping your own path.
