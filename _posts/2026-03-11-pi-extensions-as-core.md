@@ -19,7 +19,7 @@ This post is based on the latest sources shared by you, especially the pi ecosys
 
 ## Why pi stands out as a core idea
 
-The first source is the official pi page: **"shittycodingagent.ai"**.
+The first source is the official pi page: **[pi.dev](https://shittycodingagent.ai/)**.
 
 ![pi social card](/assets/img/posts/2026-03-11-pi-extension-ecosystem/pi-dev.png)
 
@@ -33,7 +33,7 @@ What it says is clear:
 
 That is already a strong signal: this is not trying to be a “one-size” mega-agent. It is trying to be a **foundation**.
 
-Then there’s a personal essay from the broader OpenClaw context: **"Pi: The Minimal Agent Within OpenClaw"**.
+Then there’s a personal essay from the broader OpenClaw context: **[Pi: The Minimal Agent Within OpenClaw](https://lucumr.pocoo.org/2026/1/31/pi/)**.
 
 ![lucumr pi post](/assets/img/posts/2026-03-11-pi-extension-ecosystem/lucumr-pi-social.png)
 
@@ -79,7 +79,7 @@ export default function (pi: ExtensionAPI) {
     ...
   });
 }
-``
+```
 
 That means one plugin can:
 
@@ -95,7 +95,7 @@ So the extension layer is not a side feature. It is the control plane.
 
 ## The “craftsman” perspective
 
-I also checked **Jonghak’s long-form post**: "장인은 도구를 탓하지 않는다. 도구를 만든다.".
+I also checked **Jonghak’s long-form post**: **[장인은 도구를 탓하지 않는다. 도구를 만든다.](https://jonghakseo.github.io/posts/craftsman-makes-tools/)**.
 
 ![craftsman blog](/assets/img/posts/2026-03-11-pi-extension-ecosystem/jonghakseo-craftsman.png)
 
@@ -119,12 +119,27 @@ If you evaluate coding agents today, I’d test these 3 checks:
 
 With pi, these are not “nice-to-have.” They are core.
 
-## Links
+## Snippets
 
-1. https://lnkd.in/gSgv8UEf
-2. https://lnkd.in/ghZnAZak
-3. https://lnkd.in/gvbErswj
-4. https://lnkd.in/gDEyfFzT
+### 1) pi official site
+- **URL**: <https://shittycodingagent.ai/>
+- **Snippet**:
+  > “There are many coding agents, but this one is mine. Pi is a minimal terminal coding harness. Adapt pi to your workflows, not the other way around.”
+
+### 2) OpenClaw context essay
+- **URL**: <https://lucumr.pocoo.org/2026/1/31/pi/>
+- **Snippet**:
+  > “Pi is interesting to me because I can see a practical path from powerful AI coding to an adaptable, maintainable workflow.”
+
+### 3) Extension examples in repo
+- **URL**: <https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent/examples/extensions>
+- **Snippet**:
+  > “examples/extensions” repository content demonstrates how pi behavior can be customized through local extension examples and shared patterns.
+
+### 4) Practitioner reflection
+- **URL**: <https://jonghakseo.github.io/posts/craftsman-makes-tools/>
+- **Snippet**:
+  > “Don’t blame the tool. Build your tool. pi is about reducing mismatch between your process and the tool’s defaults.”
 
 ## Bottom line
 
