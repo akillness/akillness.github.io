@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeong Jang-young | Research-Driven AI Product Engineer</title>
+    <title>Jeong Jang-young | AI Product Engineer</title>
     <meta
       name="description"
-      content="Resume of Jeong Jang-young, a research-driven AI product engineer building multimodal QA, agent workflows, and on-device AI on top of eight years of game AI production experience."
+      content="Resume of Jeong Jang-young, an AI product engineer connecting multimodal QA, agent workflows, harness engineering, and product delivery on top of eight years of game AI production experience."
     >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
       rel="stylesheet"
     >
     <style>
@@ -54,6 +54,12 @@
         min-height: 100vh;
         line-height: 1.7;
         overflow-x: hidden;
+        word-break: keep-all;
+      }
+
+      html[lang='ko'] body {
+        font-family: 'Noto Sans KR', 'Manrope', sans-serif;
+        line-height: 1.82;
       }
 
       body::before {
@@ -203,6 +209,14 @@
         margin: 0;
         font-family: 'Space Grotesk', sans-serif;
         letter-spacing: -0.03em;
+        word-break: keep-all;
+      }
+
+      html[lang='ko'] h1,
+      html[lang='ko'] h2,
+      html[lang='ko'] h3 {
+        font-family: 'Noto Sans KR', 'Manrope', sans-serif;
+        letter-spacing: -0.04em;
       }
 
       h1 {
@@ -216,6 +230,7 @@
         font-size: 1.18rem;
         color: var(--accent-alt);
         font-weight: 700;
+        word-break: keep-all;
       }
 
       .hero-summary {
@@ -223,6 +238,18 @@
         margin: 0;
         font-size: 1.05rem;
         color: var(--muted);
+        word-break: keep-all;
+      }
+
+      html[lang='ko'] .hero-summary,
+      html[lang='ko'] .section-description,
+      html[lang='ko'] .card-copy,
+      html[lang='ko'] .timeline-copy,
+      html[lang='ko'] .timeline-impact,
+      html[lang='ko'] .stat-label,
+      html[lang='ko'] .closing-quote,
+      html[lang='ko'] .closing-note {
+        line-height: 1.82;
       }
 
       .link-row,
@@ -260,11 +287,13 @@
         padding: 10px 14px;
         border-radius: 999px;
         text-decoration: none;
+        line-height: 1.35;
       }
 
       .link-pill {
         color: var(--ink);
         font-weight: 700;
+        overflow-wrap: anywhere;
         transition:
           transform 180ms ease,
           border-color 180ms ease,
@@ -293,6 +322,7 @@
       .tag {
         color: var(--muted);
         font-size: 0.93rem;
+        overflow-wrap: anywhere;
       }
 
       .chip {
@@ -340,6 +370,7 @@
         margin-top: 10px;
         color: var(--muted);
         font-size: 0.92rem;
+        word-break: keep-all;
       }
 
       .focus-note {
@@ -409,6 +440,7 @@
         max-width: 64ch;
         margin: 0;
         color: var(--muted);
+        word-break: keep-all;
       }
 
       .card-grid {
@@ -439,6 +471,7 @@
       .timeline-copy {
         margin: 12px 0 0;
         color: var(--muted);
+        word-break: keep-all;
       }
 
       .tag-row {
@@ -506,6 +539,7 @@
         margin-top: 6px;
         color: var(--accent-alt);
         font-weight: 800;
+        word-break: keep-all;
       }
 
       .timeline-impact {
@@ -609,19 +643,6 @@
         margin-bottom: 10px;
       }
 
-      [data-reveal] {
-        opacity: 0;
-        transform: translateY(26px);
-        transition:
-          opacity 650ms ease,
-          transform 650ms ease;
-      }
-
-      [data-reveal].is-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
       @keyframes drift {
         from {
           transform: translate3d(0, 0, 0) scale(1);
@@ -682,7 +703,7 @@
         .chip,
         .tag {
           width: 100%;
-          justify-content: center;
+          justify-content: flex-start;
         }
       }
 
@@ -691,12 +712,8 @@
           scroll-behavior: auto;
         }
 
-        .ambient,
-        [data-reveal] {
+        .ambient {
           animation: none;
-          transition: none;
-          opacity: 1;
-          transform: none;
         }
       }
     </style>
@@ -817,7 +834,7 @@
             'Agents / Multimodal QA / Evals / MCP',
             'Game domain depth + product execution instinct'
           ],
-          signalsLabel: 'Selected Signals',
+          signalsLabel: '핵심 신호',
           stats: [
             { value: '8+', label: 'years building AI-powered systems in production environments' },
             { value: '2', label: 'patents backed by applied research work' },
@@ -832,7 +849,7 @@
             'Exploring AI-native product surfaces spanning games, wellness, and robotics'
           ],
           capability: {
-            kicker: 'What I Build Now',
+            kicker: '현재 만드는 것',
             title: 'Capability narratives shaped for AI product engineering',
             description:
               'This resume intentionally shifts emphasis away from a long historical record and toward the systems I am increasingly well positioned to build next. The throughline is clear: research, tools, evaluation, and product experience are converging in my recent work.',
@@ -864,7 +881,7 @@
             ]
           },
           career: {
-            kicker: 'Career Arc',
+            kicker: '경력 흐름',
             title: 'A growth path that bridges research and product systems',
             description:
               'Rather than listing every project in full, this section shows how the current AI product engineering profile was built: from production game AI, to pipeline automation, to multimodal and agentic product work.',
@@ -941,7 +958,7 @@
             ]
           },
           signals: {
-            kicker: 'Signals of Credibility',
+            kicker: '신뢰 신호',
             title: 'Research, patents, and communication signals behind the work',
             cards: [
               {
@@ -969,7 +986,7 @@
             ]
           },
           toolbox: {
-            kicker: 'Toolbox',
+            kicker: '도구 상자',
             title: 'The combinations I reach for when shipping useful systems',
             cards: [
               {
@@ -1003,7 +1020,7 @@
             ]
           },
           working: {
-            kicker: 'Working Style',
+            kicker: '작업 방식',
             title: 'My persona is also my product philosophy',
             description:
               'This framework has been consistent across my blog, research, and product work. Strong AI products do not come from bigger models alone. They come from asking the right question, retrieving the right context, and shaping the result into something people can actually use.',
@@ -1024,7 +1041,7 @@
                   'I always want the work to converge into something operational: a usable interface, a realistic workflow, a hybrid deployment path, or a structure a team can keep improving.'
               }
             ],
-            educationTitle: 'Academic Track',
+            educationTitle: '학력',
             education: [
               { title: 'Ph.D. Candidate in Game Engineering, Hongik University', date: 'Sep 2024 - Present' },
               { title: 'M.S. in Game Engineering, Hongik University', date: 'Aug 2014 - Aug 2016' },
@@ -1032,7 +1049,7 @@
             ]
           },
           next: {
-            kicker: 'Next Vector',
+            kicker: '다음 방향',
             title: 'I want to be judged by what I can build next',
             quote:
               'I am not trying to stay someone who understands research. I am actively growing into the kind of AI product engineer who can connect research to tools, evaluation, interface design, and operational delivery.',
@@ -1045,27 +1062,27 @@
           }
         },
         ko: {
-          title: '정장영 | AI Product Engineer',
+          title: '정장영 | AI 제품 엔지니어',
           description:
-            '정장영의 레주메. 게임 AI와 실전 프로덕션 경험을 바탕으로 멀티모달 QA, 에이전트 워크플로, 하네스 엔지니어링, 제품 전달 구조를 구축하는 AI Product Engineer.',
+            '정장영의 레주메. 게임 AI와 실전 프로덕션 경험을 바탕으로 멀티모달 QA, 에이전트 워크플로, 하네스 엔지니어링, 제품 전달 구조를 구축하는 AI 제품 엔지니어.',
           philosophy: 'Curiosity -> Retrieve -> Innovation',
           name: '정장영',
-          role: 'AI Product Engineer',
+          role: 'AI 제품 엔지니어',
           summary:
-            '게임 AI와 실전 프로덕션에서 출발해, 지금은 멀티모달 QA, 툴 사용형 에이전트, 하네스 엔지니어링, 제품 전달 구조를 연결하는 AI Product Engineer로 확장하고 있습니다. Supercent와 현재 연구를 통해 데모 단계의 새로움보다, 실제 팀이 평가하고 관찰하며 사용할 수 있는 시스템인지에 더 집중하고 있습니다.',
+            '게임 AI와 실전 프로덕션에서 출발해, 지금은 멀티모달 QA, 툴 사용형 에이전트, 하네스 엔지니어링, 제품 전달 구조를 연결하는 AI 제품 엔지니어로 확장하고 있습니다. Supercent와 현재 연구를 통해 데모 단계의 새로움보다, 실제 팀이 평가하고 관찰하며 사용할 수 있는 시스템인지에 더 집중하고 있습니다.',
           chips: [
-            'Supercent AI Product Developer',
+            'Supercent · AI Product Developer',
             '홍익대학교 게임공학 박사과정',
             'NCSOFT + Com2uS 실무 8년',
-            'Agents / Multimodal QA / Evals / MCP',
+            '에이전트 / 멀티모달 QA / Evals / MCP',
             '게임 도메인 깊이 + 제품 실행 감각'
           ],
-          signalsLabel: 'Selected Signals',
+          signalsLabel: '핵심 지표',
           stats: [
             { value: '8+', label: '년간 현업에서 AI 기반 시스템 구축' },
             { value: '2', label: '건의 특허와 실전형 연구 자산' },
             { value: '2+1', label: '학술 논문 2편과 IEEE 포스터 발표' },
-            { value: 'Now', label: '에이전트, 멀티모달 QA, evals, harness engineering에 집중' }
+            { value: '지금', label: '에이전트, 멀티모달 QA, evals, harness engineering에 집중' }
           ],
           focusTitle: '현재 특히 집중하는 문제',
           focusList: [
@@ -1075,31 +1092,31 @@
             '게임, 웰니스, 로보틱스를 잇는 AI-native 제품 표면을 탐색하는 방법'
           ],
           capability: {
-            kicker: 'What I Build Now',
-            title: 'AI product engineering 관점으로 재구성한 핵심 역량',
+            kicker: '현재 만드는 것',
+            title: 'AI product engineering 관점에서 정리한 핵심 역량',
             description:
               '이 레주메는 긴 연혁보다 앞으로 더 잘 만들 수 있는 시스템에 무게를 둡니다. 최근 경험은 연구, 도구, 평가, 제품 경험이 하나의 구조로 수렴하고 있다는 점을 보여 줍니다.',
             cards: [
               {
-                title: 'Agent Systems, Context, and Harness Engineering',
+                title: '에이전트 시스템, 컨텍스트, 하네스 엔지니어링',
                 copy:
                   'Ollama, LangGraph, PraisonAI, MCP, Function Calling, semantic routing, 실행 제어 구조를 조합해 역할이 분리된 워크플로를 실험하고 있습니다. 목표는 단순한 챗봇이 아니라 문서, 코드, 검색, 실행 핸들러를 연결하면서도 관찰 가능한 실제 시스템입니다.',
                 tags: ['Ollama', 'LangGraph', 'PraisonAI', 'MCP', 'Harness']
               },
               {
-                title: 'Multimodal QA & Computer Vision',
+                title: '멀티모달 QA와 컴퓨터 비전',
                 copy:
                   'Image-based AutoQA, OCR, template matching, DETR/YOLO 테스트, VLM 기반 버그 리포팅 연구를 통해 시각적 신호를 팀이 활용할 수 있는 QA 워크플로로 바꾸는 문제를 다루고 있습니다.',
                 tags: ['VLM', 'OpenCV', 'OCR', 'DETR', 'YOLOv7']
               },
               {
-                title: 'Retrieval, Planning, and Product Interfaces',
+                title: '리트리벌, 플래닝, 제품 인터페이스',
                 copy:
                   'LlamaIndex, ColBERT, Qdrant, task planning을 활용해 resume analysis, game design assistant, coding/web-search agent, bilingual portfolio surface까지 프로토타입으로 만들었습니다. retrieval과 작업 분해를 실제 제품 인터페이스로 연결하는 데 익숙합니다.',
                 tags: ['LlamaIndex', 'ColBERT', 'Qdrant', 'RAG', 'Product UI']
               },
               {
-                title: 'Delivery Constraints, Wellness, and AI-Native Surfaces',
+                title: '전달 제약, 웰니스, AI-Native 표면',
                 copy:
                   'TinyLlama, DeepSeek-R1-Distill, PEFT/LoRA, ONNX, Flutter, WebSocket 구조를 다루며 lightweight 모델과 실제 인터페이스 사이의 마찰을 줄이는 방식을 실험했습니다. 최근에는 wellness AI와 robotics로도 관심을 넓히며 모델 선택보다 배포 형태와 제품 표면을 함께 생각합니다.',
                 tags: ['ONNX', 'Flutter', 'PEFT/LoRA', 'Wellness AI', 'Robotics']
@@ -1107,7 +1124,7 @@
             ]
           },
           career: {
-            kicker: 'Career Arc',
+            kicker: '경력 흐름',
             title: '연구와 제품 시스템을 잇는 성장 곡선',
             description:
               '모든 프로젝트를 나열하는 대신, 지금의 AI product engineering 역량이 어떻게 형성됐는지를 압축해 보여 줍니다. 생산 환경의 게임 AI에서 시작해 자동화 파이프라인, 그리고 멀티모달·에이전트 제품 작업으로 이어진 흐름입니다.',
@@ -1185,11 +1202,11 @@
             ]
           },
           signals: {
-            kicker: 'Signals of Credibility',
+            kicker: '신뢰 신호',
             title: '경험을 뒷받침하는 연구·특허·커뮤니케이션 신호',
             cards: [
               {
-                title: 'Research & Intellectual Property',
+                title: '연구와 지식재산',
                 items: [
                   '게임 난이도 평가와 감성 컴퓨팅 관련 특허 2건',
                   'PeerJ SCI-E 저널 논문 게재, 2015',
@@ -1200,7 +1217,7 @@
                 meta: 'Research, Publication, Patent'
               },
               {
-                title: 'Leadership & Product Communication',
+                title: '리더십과 제품 커뮤니케이션',
                 items: [
                   'NCFellowship 운영관리, 2019 - 2022',
                   'NCDP2020 발표: Match-3 난이도 생성기',
@@ -1213,7 +1230,7 @@
             ]
           },
           toolbox: {
-            kicker: 'Toolbox',
+            kicker: '도구 상자',
             title: '실제로 시스템을 만들 때 자주 꺼내는 기술 조합',
             cards: [
               {
@@ -1247,8 +1264,8 @@
             ]
           },
           working: {
-            kicker: 'Working Style',
-            title: '제 persona는 곧 제품 철학입니다',
+            kicker: '작업 방식',
+            title: '제가 일하는 방식은 곧 제품 철학입니다',
             description:
               '이 프레임은 블로그, 연구, 제품 작업 전반에서 일관되게 유지해 온 원칙입니다. 좋은 AI 제품은 더 큰 모델만으로 나오지 않고, 올바른 질문과 맥락 회수, 그리고 실제 사용 가능한 형태로의 수렴에서 나옵니다.',
             principles: [
@@ -1268,7 +1285,7 @@
                   '결국에는 운영 가능한 형태로 수렴시키고 싶습니다. usable interface, realistic workflow, hybrid deployment path, 팀이 계속 개선할 수 있는 구조를 만드는 쪽으로 마무리합니다.'
               }
             ],
-            educationTitle: 'Academic Track',
+            educationTitle: '학력',
             education: [
               { title: '홍익대학교 게임공학 박사과정', date: 'Sep 2024 - Present' },
               { title: '홍익대학교 게임공학 석사', date: 'Aug 2014 - Aug 2016' },
@@ -1276,16 +1293,16 @@
             ]
           },
           next: {
-            kicker: 'Next Vector',
+            kicker: '다음 방향',
             title: '앞으로 무엇을 더 잘 만들 수 있는지로 평가받고 싶습니다',
             quote:
               '저는 연구를 이해하는 사람에 머물기보다, 연구를 도구, 평가, 인터페이스 설계, 운영 가능한 전달 구조로 연결하는 AI product engineer로 계속 성장하고 있습니다.',
             note:
               '다음 단계에서는 멀티모달 QA, agent UX, eval-driven delivery, open protocol 기반 tool interoperability, wellness/robotics 주변의 AI-native 경험을 더 깊게 제품화하고 싶습니다. AI가 복잡한 workflow를 안전하고 명확하게 보조해야 하는 팀에서 가장 큰 가치를 냅니다.',
-            calloutTitle: 'One-line summary',
+            calloutTitle: '한 줄 요약',
             calloutCopy:
-              '게임 AI production 경험을 기반으로, agentic, multimodal, product-oriented AI systems를 실제 제품으로 연결하고 있는 research-grounded builder입니다.',
-            calloutTags: ['Product-minded', 'Research-grounded', 'Active Learner', 'Builder']
+              '게임 AI production 경험을 기반으로, agentic, multimodal, product-oriented AI systems를 실제 제품으로 연결하고 있는 연구 기반 빌더입니다.',
+            calloutTags: ['제품 지향', '연구 기반', '학습 지속', '빌더']
           }
         }
       };
@@ -1488,18 +1505,6 @@
 
       applyLanguage(preferredLang === 'ko' ? 'ko' : 'en');
 
-      const observer = new IntersectionObserver(
-        entries => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-            }
-          }
-        },
-        { threshold: 0.16 }
-      );
-
-      document.querySelectorAll('[data-reveal]').forEach(element => observer.observe(element));
     </script>
   </body>
 </html>
