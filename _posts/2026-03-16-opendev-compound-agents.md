@@ -7,7 +7,7 @@ date: 2026-03-16 10:00:00 +0900
 mermaid: false
 math: false
 image:
-  path: /assets/img/posts/2026-03-16-opendev-llm/opendev-gh-og.png
+  path: /assets/img/posts/2026-03-16-opendev-llm/opendev-architecture.png
   alt: "OpenDev overview from PyTorch Korea discussion"
 ---
 
@@ -21,7 +21,7 @@ For coding workloads, that is often wasteful. A refactor plan, a simple grep che
 
 OpenDev immediately caught my eye because it tackles this directly by making model choice a **workflow design decision**, not a global default.
 
-![OpenDev discussion card](/assets/img/posts/2026-03-16-opendev-llm/opendev-gh-og.png)
+![OpenDev architecture](/assets/img/posts/2026-03-16-opendev-llm/opendev-architecture.png)
 
 ## 📚 Retrieve: What I checked
 
