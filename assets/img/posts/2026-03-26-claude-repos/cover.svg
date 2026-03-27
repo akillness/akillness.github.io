@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="9 GitHub Repos for Claude Code">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="70" y="190" fill="#93c5fd" font-size="34" font-family="Inter,Arial,sans-serif" font-weight="700">2026 Edition</text>
+  <text x="70" y="280" fill="#f8fafc" font-size="62" font-family="Inter,Arial,sans-serif" font-weight="800">9 GitHub Repos</text>
+  <text x="70" y="350" fill="#f8fafc" font-size="62" font-family="Inter,Arial,sans-serif" font-weight="800">for Claude Code</text>
+  <text x="70" y="430" fill="#cbd5e1" font-size="30" font-family="Inter,Arial,sans-serif">Memory · Automation · RAG · Orchestration</text>
+  <rect x="70" y="470" width="520" height="4" fill="#38bdf8"/>
+</svg>

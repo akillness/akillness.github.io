@@ -6,6 +6,9 @@ tags: [claude-code, github, ai-agents, rag, automation, developer-workflow]
 date: 2026-03-26 10:00:00 +0900
 mermaid: false
 math: false
+image:
+  path: /assets/img/posts/2026-03-26-claude-repos/cover.svg
+  alt: "9 GitHub Repos for Claude Code"
 ---
 
 ## 🤔 Curiosity: What if your next Claude Code project didn’t start from scratch?
@@ -32,8 +35,9 @@ This post introduces nine repositories that can materially improve speed, consis
 - Why it matters: Captures and reuses session context so you stop re-explaining project history every time.
 
 ## 2) UI UX Pro Max
-- Repo: `nextlevelbuild/...` (shared in the source list; verify exact repo URL before production use)
+- Repo: <https://github.com/ganavisk/nextlevelbuilder-ui-ux-pro-max-skill-Public> *(community-hosted reference discovered from current public search)*
 - Why it matters: A UI/UX-focused acceleration layer can reduce design-to-implementation friction.
+- Verification note: The originally shared `nextlevelbuild/...` path was not directly resolvable at publish time, so this entry uses the closest publicly available reference.
 
 ## 3) n8n-MCP
 - Repo: <https://github.com/czlonkowski/n8n-mcp>
