@@ -108,6 +108,115 @@ The real KPI is fewer correction cycles per completed task.
 
 ---
 
+## Practical examples: from prompt to controlled execution
+
+### Example 1) Safe refactor task prompt
+
+```text
+Refactor src/parser.ts to reduce duplication.
+Constraints:
+- Keep public API unchanged.
+- Run `npm test` and `npm run lint` before final output.
+- Show changed files and explain behavior impact.
+- If tests fail, stop and report root cause first.
+```
+
+Why this works:
+- It bounds scope (`src/parser.ts`),
+- adds hard validation gates,
+- and requires evidence (test/lint + impact summary).
+
+### Example 2) Git-guarded execution script
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+branch="agent/refactor-parser"
+git checkout -b "$branch"
+
+# (Agent performs edits)
+
+npm test
+npm run lint
+
+git add -A
+git commit -m "refactor(parser): remove duplication with no API changes"
+```
+
+This pattern makes rollback trivial and review clear.
+
+### Example 3) Delivery-mode checklist (CI gate)
+
+```yaml
+# .github/workflows/agent-delivery-gate.yml
+name: agent-delivery-gate
+on: [pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      - run: npm run typecheck
+```
+
+The point is simple: if the loop cannot pass objective checks, it should not ship.
+
+---
+
+## Leak section: why leakage evidence is critical
+
+You asked about the **Leak** part being important — and you are right.
+In agentic coding, leakage is one of the highest-impact failure classes.
+
+### What “leak” means in practice
+
+1. **Prompt/context leak**
+   - Internal instructions or private notes appear in user-visible output.
+2. **Credential leak**
+   - API keys, tokens, `.env` secrets, or private URLs appear in diffs/logs.
+3. **Data boundary leak**
+   - Work intended for one scope (branch/repo/customer) leaks into another.
+
+### Why this is evidence-grade important
+
+If leakage appears in run logs, commit diffs, or generated summaries, that is not a cosmetic bug.
+It is direct evidence that:
+- context boundaries are weak,
+- tool permissions are too broad,
+- or output redaction is missing.
+
+### Minimal leak-prevention controls
+
+```bash
+# pre-commit secret scan (example)
+git diff --cached | grep -E "(AKIA|BEGIN PRIVATE KEY|API_KEY=|SECRET=)" && {
+  echo "Potential secret leak detected. Abort commit."; exit 1;
+}
+```
+
+```text
+Policy rule:
+- Never print raw secrets in chat output.
+- Never include `.env`, token values, or internal-only prompts in summaries.
+- If sensitive strings are detected, redact and stop for confirmation.
+```
+
+### Leak-focused review checklist
+
+- [ ] Does output include hidden/system instructions?
+- [ ] Do diffs contain secrets or internal endpoints?
+- [ ] Are logs safe to share externally?
+- [ ] Is branch/repo scope isolation enforced?
+- [ ] Is redaction applied before user-facing summary?
+
+If teams ignore leak evidence, they often overestimate agent quality while underestimating operational risk.
+
+---
+
 ## Final takeaway
 
 Claude Code’s differentiator is not “better chat answers.”
@@ -117,7 +226,8 @@ Teams get the highest leverage when they combine:
 
 - precise task framing,
 - strict validation checkpoints,
-- and disciplined git workflow boundaries.
+- disciplined git workflow boundaries,
+- and explicit leak-prevention controls.
 
 That is what turns an AI coding assistant into a dependable engineering copilot.
 
