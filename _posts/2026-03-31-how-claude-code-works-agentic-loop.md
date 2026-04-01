@@ -172,6 +172,28 @@ The point is simple: if the loop cannot pass objective checks, it should not shi
 You asked about the **Leak** part being important — and you are right.
 In agentic coding, leakage is one of the highest-impact failure classes.
 
+![Source-map leak analysis cover](https://bits-bytes-nn.github.io/assets/images/insights.png)
+
+### Source-map leak analysis (evidence-first, neutral framing)
+
+A detailed external analysis post argues that a production package may have exposed source maps and internal architectural details.  
+Reference: <https://bits-bytes-nn.github.io/insights/agentic-ai/2026/03/31/claude-code-source-map-leak-analysis.html>
+
+Important: treat secondary write-ups as **claims until independently verified**.
+
+What can be treated as high-confidence engineering lessons regardless of vendor specifics:
+
+- Source-map publication is a release-policy decision, not a default safe state.
+- If `sourcesContent` is embedded, disclosure risk is materially higher.
+- Build artifacts must be audited in CI/CD, not only application code.
+- Agent systems need explicit leakage controls across prompts, tools, logs, and package outputs.
+
+What remains claim-level unless you verify package artifacts directly:
+
+- exact internal file counts,
+- detailed internal module names,
+- roadmap/feature-flag interpretations.
+
 ### What “leak” means in practice
 
 1. **Prompt/context leak**
@@ -205,6 +227,21 @@ Policy rule:
 - If sensitive strings are detected, redact and stop for confirmation.
 ```
 
+### Source-map evidence checks (release gate)
+
+```bash
+# 1) Find source maps in release artifacts
+find dist build public -type f -name "*.map" 2>/dev/null
+
+# 2) Check if original source payload is embedded
+# (sourcesContent=true usually increases disclosure risk)
+find dist build public -type f -name "*.map" -print0 \
+  | xargs -0 -I{} sh -c 'jq ".sourcesContent != null" "{}" 2>/dev/null | head -n 1'
+
+# 3) Grep for obvious sensitive patterns in shipped assets
+grep -R -nE "(API_KEY|SECRET|TOKEN|AKIA|BEGIN PRIVATE KEY|internal\\.|staging\\.)" dist build public 2>/dev/null
+```
+
 ### Leak-focused review checklist
 
 - [ ] Does output include hidden/system instructions?
@@ -212,6 +249,9 @@ Policy rule:
 - [ ] Are logs safe to share externally?
 - [ ] Is branch/repo scope isolation enforced?
 - [ ] Is redaction applied before user-facing summary?
+- [ ] Are production `*.map` files publicly reachable?
+- [ ] Do source maps include `sourcesContent` for original code?
+- [ ] Is source-map policy (off/hidden/authenticated) documented per environment?
 
 If teams ignore leak evidence, they often overestimate agent quality while underestimating operational risk.
 
@@ -237,3 +277,4 @@ That is what turns an AI coding assistant into a dependable engineering copilot.
 
 - How Claude Code works: <https://code.claude.com/docs/en/how-claude-code-works>
 - GitHub reference repo: <https://github.com/nirholas/claude-code>
+- Source-map leak analysis (external): <https://bits-bytes-nn.github.io/insights/agentic-ai/2026/03/31/claude-code-source-map-leak-analysis.html>
