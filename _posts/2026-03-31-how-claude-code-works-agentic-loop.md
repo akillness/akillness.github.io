@@ -1,6 +1,6 @@
 ---
-title: "How Claude Code Actually Works: Agentic Loop, Tooling Model, and a Practical Repo Lens"
-description: "A deep practical breakdown of Claude Code’s agentic loop from official docs, connected to real-world usage patterns in the nirholas/claude-code repository."
+title: "How Claude Code Actually Works: Agentic Loop, Tooling Model, and Operational Guardrails"
+description: "A practical breakdown of Claude Code’s agentic loop from official docs, including tools, permissions, checkpoints, session forking, and leak-risk lessons for real engineering teams."
 categories: [AI, Developer-Tools, Architecture]
 tags: [claude-code, agentic-loop, coding-agents, terminal, ai-workflows]
 date: 2026-03-31 10:00:00 +0900
@@ -34,6 +34,23 @@ From Anthropic’s “How Claude Code works” page, the system behavior is best
 Source:
 - Official docs: <https://code.claude.com/docs/en/how-claude-code-works>
 
+### What the docs make unusually explicit
+
+One reason Claude Code feels different from browser chat is that Anthropic is unusually clear about the execution surface.
+
+According to the docs, Claude Code can work with:
+
+- your project files,
+- your terminal commands,
+- your git state,
+- your `CLAUDE.md` project instructions,
+- auto-saved memory from `MEMORY.md`,
+- and configured extensions like MCP servers, skills, subagents, and browser tooling.
+
+That list matters because it changes the trust model.
+
+Claude Code is not just a text generator with a coding style. It is a bounded operator with access to the same local engineering surfaces that a human developer uses to inspect, edit, verify, and recover.
+
 ### Architecture-level implications
 
 #### 1) Terminal-native is a capability choice
@@ -57,11 +74,57 @@ Real usefulness depends on:
 - action correctness,
 - and validation depth before finalizing changes.
 
+### Built-in operating surfaces that matter in practice
+
+The official docs also expose several features that are easy to miss if you only think of Claude Code as “Claude in the terminal.”
+
+#### 1) Permission modes are part of the architecture
+
+Claude Code supports different execution modes, including default confirmation, auto-accept edits, plan mode, and a more autonomous research-preview auto mode.
+
+That is not a UX detail. It is a control boundary.
+
+Teams should treat permission mode selection the same way they treat CI permissions or production credentials: as a policy decision tied to task risk.
+
+#### 2) Sessions and forks make experimentation safer
+
+The docs expose session continuation and forking behavior through commands like:
+
+```bash
+claude --continue
+claude --resume
+claude --continue --fork-session
+```
+
+This is more important than it looks. Session forking means teams can preserve a useful context trail while branching execution paths instead of forcing one long conversation to carry every experiment.
+
+That is a practical way to reduce context pollution.
+
+#### 3) Checkpoints are a real safety primitive
+
+Anthropic explicitly documents checkpoints and undo flows, including the ability to back out changes from the session interface.
+
+That matters because agentic coding without a clean rollback mechanism is just fast damage.
+
+#### 4) `CLAUDE.md` and memory are not decoration
+
+The docs make it clear that Claude Code loads project-specific instructions and memory at session start.
+
+That means teams can shape behavior structurally, not just prompt-by-prompt.
+
+In practice, this is where high-performing teams encode:
+
+- repo conventions,
+- test commands,
+- architectural boundaries,
+- review expectations,
+- and dangerous directories or workflows the agent should avoid.
+
 ---
 
 ## Repo lens: where this shows up in practice
 
-The repository framing in `nirholas/claude-code` emphasizes:
+The original repo lens in `nirholas/claude-code` was useful because it framed Claude Code around:
 
 - terminal-native operation,
 - codebase understanding,
@@ -71,7 +134,21 @@ The repository framing in `nirholas/claude-code` emphasizes:
 Repository:
 - <https://github.com/nirholas/claude-code>
 
-This aligns cleanly with the docs-level model: the docs explain mechanics, while repo framing reflects day-to-day user value.
+But there is an important caveat now: that repository is currently unavailable behind a DMCA takedown notice.
+
+That changes how much weight it should carry as a live reference.
+
+So the stronger foundation for understanding Claude Code today is the official docs themselves, with external analysis used only as supporting evidence. The repo still helps explain how the tool was being interpreted in practice, but it is no longer a stable primary source.
+
+That is actually a useful lesson in itself.
+
+When documenting fast-moving AI tooling, teams should separate:
+
+- primary source: vendor docs and directly testable behavior,
+- secondary source: community repos and wrappers,
+- tertiary source: reverse engineering and postmortem-style analysis.
+
+Mixing those layers too casually is how architectural write-ups drift from evidence into folklore.
 
 ---
 
@@ -105,6 +182,18 @@ Fast agent iteration is useful only when rollback/review is clean.
 
 #### 5) Optimize loop convergence, not prose quality
 The real KPI is fewer correction cycles per completed task.
+
+#### 6) Use docs-native control points deliberately
+
+Claude Code already exposes several operational controls in the official surface area:
+
+- `/model` for model selection,
+- `/context` and `/compact` for context management,
+- `/init` for project instruction bootstrapping,
+- `/agents` for custom subagent configuration,
+- and branch/session workflows for controlled divergence.
+
+Advanced teams should not treat these as convenience features. They are part of the harness.
 
 ---
 
@@ -215,9 +304,10 @@ It is direct evidence that:
 
 ```bash
 # pre-commit secret scan (example)
-git diff --cached | grep -E "(AKIA|BEGIN PRIVATE KEY|API_KEY=|SECRET=)" && {
-  echo "Potential secret leak detected. Abort commit."; exit 1;
-}
+if git diff --cached | grep -E "(AKIA|BEGIN PRIVATE KEY|API_KEY=|SECRET=|TOKEN=)" >/dev/null; then
+  echo "Potential secret leak detected. Abort commit."
+  exit 1
+fi
 ```
 
 ```text
@@ -241,6 +331,25 @@ find dist build public -type f -name "*.map" -print0 \
 # 3) Grep for obvious sensitive patterns in shipped assets
 grep -R -nE "(API_KEY|SECRET|TOKEN|AKIA|BEGIN PRIVATE KEY|internal\\.|staging\\.)" dist build public 2>/dev/null
 ```
+
+### Why the source-map case matters even if some details remain disputed
+
+The external write-up is valuable not because every claim should be accepted blindly, but because it spotlights a class of failure that AI teams consistently underestimate: artifact leakage.
+
+Even if you ignore the more speculative parts, the engineering lesson is strong:
+
+- release artifacts need security review,
+- not just runtime application code,
+- and agentic tools multiply the number of surfaces where sensitive internal structure can escape.
+
+That includes:
+
+- build outputs,
+- tool transcripts,
+- generated summaries,
+- commit messages,
+- source maps,
+- and cached session state.
 
 ### Leak-focused review checklist
 
@@ -271,10 +380,16 @@ Teams get the highest leverage when they combine:
 
 That is what turns an AI coding assistant into a dependable engineering copilot.
 
+The official docs reinforce a broader point that advanced teams should not ignore:
+
+The performance ceiling of a coding agent is not set only by the model.
+
+It is set by the loop around the model — permissions, checkpoints, context discipline, branch isolation, verification, and artifact hygiene.
+
 ---
 
 ### References
 
 - How Claude Code works: <https://code.claude.com/docs/en/how-claude-code-works>
-- GitHub reference repo: <https://github.com/nirholas/claude-code>
+- GitHub reference repo (currently DMCA-disabled): <https://github.com/nirholas/claude-code>
 - Source-map leak analysis (external): <https://bits-bytes-nn.github.io/insights/agentic-ai/2026/03/31/claude-code-source-map-leak-analysis.html>
