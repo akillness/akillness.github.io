@@ -304,7 +304,8 @@ It is direct evidence that:
 
 ```bash
 # pre-commit secret scan (example)
-if git diff --cached | grep -E "(AKIA|BEGIN PRIVATE KEY|API_KEY=|SECRET=|TOKEN=)" >/dev/null; then
+PATTERN='(AKIA|BEGIN PRIVATE KEY|API_KEY=|SECRET=|TOKEN=)'
+if git diff --cached | grep -E "$PATTERN" >/dev/null; then
   echo "Potential secret leak detected. Abort commit."
   exit 1
 fi
