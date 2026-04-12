@@ -8,7 +8,7 @@ pin: false
 mermaid: true
 math: false
 image:
-  path: https://huggingface.co/blog/assets/train-sentence-transformers/st-hf-thumbnail.png
+  path: /assets/img/ai/multimodal-sentence-transformers-1.png
   alt: "Multimodal embedding and reranker models with Sentence Transformers"
 ---
 
