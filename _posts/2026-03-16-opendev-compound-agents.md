@@ -4,6 +4,7 @@ description: "OpenDev shows a different path for coding agents: split work by wo
 categories: [AI, Coding]
 tags: [opendev, open-source, coding-agent, mcp, multi-model, architecture]
 date: 2026-03-16 10:00:00 +0900
+last_modified_at: 2026-03-16 10:00:00 +0900
 mermaid: false
 math: false
 image:
