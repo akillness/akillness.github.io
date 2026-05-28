@@ -53,7 +53,7 @@ The linked sources from the page are:
 
 ## What I downloaded from the source page
 
-I saved the article media and code locally so this post does not depend on hotlinked Tistory assets.
+I saved the article media and code locally so this post does not depend on hotlinked Tistory assets. More importantly, I turned the command screenshots back into copyable snippets. Screenshots are good for visual context; they are bad as the only source of commands a developer needs to run.
 
 Representative images:
 
@@ -65,11 +65,7 @@ Representative images:
 
 ![Antigravity CLI alias setup](/assets/img/posts/2026-05-18-antigravity-cli/antigravity-cli-15.png){: .light .w-75 .shadow .rounded-10 }
 
-All downloaded image assets:
-
-- `/assets/img/posts/2026-05-18-antigravity-cli/antigravity-cli-01.png` through `/assets/img/posts/2026-05-18-antigravity-cli/antigravity-cli-20.png`
-
-Extracted sample-code files:
+Downloadable sample-code files:
 
 - [Version check and first start](/assets/code/posts/2026-05-18-antigravity-cli/01-version-and-start.sh)
 - [Interactive start](/assets/code/posts/2026-05-18-antigravity-cli/02-interactive-start.sh)
@@ -81,6 +77,83 @@ Extracted sample-code files:
 - [Back up Gemini config](/assets/code/posts/2026-05-18-antigravity-cli/08-backup-gemini-config.sh)
 - [MCP config key migration](/assets/code/posts/2026-05-18-antigravity-cli/09-mcp-config-migration.jsonc)
 - [Find MCP config](/assets/code/posts/2026-05-18-antigravity-cli/10-find-mcp-config.sh)
+
+### Copyable snippets from the source screenshots
+
+Basic verification:
+
+```bash
+# 1) Check install/version
+agy --version
+
+# 2) Start an interactive session
+agy
+```
+
+Interactive project orientation:
+
+```bash
+# Start an interactive session
+agy
+
+# Start with an initial prompt, then continue the conversation
+agy -i "Explain this project structure before making changes."
+```
+
+One-shot print mode:
+
+```bash
+# Run one prompt and print the response
+agy -p "List the three largest files in this directory and explain why they matter."
+```
+
+Resume an existing conversation:
+
+```bash
+# Continue the most recent conversation
+agy -c
+
+# Resume a specific conversation by ID
+agy --conversation <conversation-id>
+```
+
+Alias definitions:
+
+```bash
+alias ag='agy'
+alias ags='agy --sandbox'
+alias agd='agy --dangerously-skip-permissions'
+alias agr='agy --continue --dangerously-skip-permissions'
+```
+
+Install aliases in zsh:
+
+```bash
+cat >> ~/.zshrc <<'EOF'
+
+# Antigravity CLI (agy) aliases
+alias ag='agy'
+alias ags='agy --sandbox'
+alias agd='agy --dangerously-skip-permissions'
+alias agr='agy --continue --dangerously-skip-permissions'
+EOF
+
+source ~/.zshrc
+type ag ags agd agr
+```
+
+Back up Gemini-era configuration before migration:
+
+```bash
+ls -la ~/.gemini/
+cp -r ~/.gemini ~/.gemini-backup-$(date +%Y%m%d)
+```
+
+Find MCP configuration files:
+
+```bash
+find ~ -name "mcp_config.json" 2>/dev/null
+```
 
 ## The workflow model: explore, act, resume, migrate
 
