@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jangyoung Jeong | Resume</title>
+    <meta
+      name="description"
+      content="One-page resume for Jangyoung Jeong, AI Solutions Architect and AI Product Engineer."
+    >
+    <style>
+      :root {
+        --paper: #fffdf8;
+        --ink: #1f2430;
+        --muted: #5e636d;
+        --accent: #a6461e;
+        --line: #ddd5c7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      @page {
+        size: A4;
+        margin: 12mm;
+      }
+
+      body {
+        margin: 0;
+        background: #efe7d9;
+        color: var(--ink);
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.35;
+      }
+
+      main {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto;
+        padding: 12mm;
+        background: var(--paper);
+      }
+
+      h1,
+      h2,
+      h3,
+      p,
+      ul {
+        margin: 0;
+      }
+
+      .header {
+        display: grid;
+        gap: 4px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent);
+      }
+
+      .name {
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      .role {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 12px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .contact a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.6fr 0.95fr;
+        gap: 18px;
+        margin-top: 12px;
+      }
+
+      .column {
+        display: grid;
+        gap: 12px;
+      }
+
+      section {
+        display: grid;
+        gap: 6px;
+      }
+
+      .section-title {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--accent);
+      }
+
+      .summary {
+        font-size: 12px;
+      }
+
+      .skills-list,
+      .bullets,
+      .mini-list {
+        padding-left: 16px;
+      }
+
+      .skills-list li,
+      .bullets li,
+      .mini-list li {
+        margin: 2px 0;
+        font-size: 11px;
+      }
+
+      .job {
+        display: grid;
+        gap: 3px;
+        padding-top: 8px;
+        border-top: 1px solid var(--line);
+      }
+
+      .job:first-of-type {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .job-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: baseline;
+      }
+
+      .job-title {
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .job-date {
+        font-size: 10px;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      .job-subtitle {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--muted);
+      }
+
+      .note {
+        font-size: 10.5px;
+        color: var(--muted);
+      }
+
+      .education-item,
+      .signal-item {
+        display: grid;
+        gap: 2px;
+      }
+
+      .education-item strong,
+      .signal-item strong {
+        font-size: 11px;
+      }
+
+      .education-item span,
+      .signal-item span {
+        font-size: 10.5px;
+        color: var(--muted);
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        main {
+          margin: 0;
+          width: auto;
+          min-height: auto;
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="header">
+        <h1 class="name">Jangyoung Jeong</h1>
+        <p class="role">AI Solutions Architect | AI Product Engineer</p>
+        <div class="contact">
+          <span>Seoul, South Korea</span>
+          <a href="mailto:akillness38@gmail.com">akillness38@gmail.com</a>
+          <a href="https://akillness.github.io/resume_eng/">akillness.github.io/resume_eng/</a>
+          <a href="https://github.com/akillness">github.com/akillness</a>
+          <a href="https://www.linkedin.com/in/akillness38/">linkedin.com/in/akillness38</a>
+        </div>
+      </header>
+
+      <div class="grid">
+        <div class="column">
+          <section>
+            <h2 class="section-title">Summary</h2>
+            <p class="summary">
+              AI engineer and product builder with 8+ years of experience delivering production AI systems across game technology, internal platforms, multimodal QA, retrieval systems, and agentic AI workflows. Currently building end-to-end AI products including multimodal RAG, search-driven agents, and operational AI tooling, while pursuing a Ph.D. in Game Engineering focused on multimodal QA and agent workflows. Strong in translating technical ambiguity into deployable systems, aligning engineering decisions with product outcomes, and working across research, software, and business-facing execution.
+            </p>
+          </section>
+
+          <section>
+            <h2 class="section-title">Experience</h2>
+
+            <article class="job">
+              <div class="job-head">
+                <p class="job-title">Supercent</p>
+                <p class="job-date">Dec 2025 - Present</p>
+              </div>
+              <p class="job-subtitle">AI Product Developer</p>
+              <ul class="bullets">
+                <li>Designed and delivered production-facing AI workflows, including multimodal RAG systems, search-driven agents, and internal AI tooling.</li>
+                <li>Operationalized agentic workflows with emphasis on inspectability, iteration speed, maintainability, and real team adoption.</li>
+                <li>Built <strong>SAGA</strong> (Firebase App Hosting + Genkit), a game-studio knowledge brain — a RAG search engine over game design docs (RAG-Fusion, CRAG, hybrid search, Cross-Encoder reranking, Grounding-Guardian generation; 594 docs / 1,563 vectors across 15 games), in a 3-week build (Feb 2026).</li>
+                <li>Built <strong>Millie</strong> (Firebase App Hosting), a per-user RAG assistant plus a Slack-bot-driven, local-LLM "ClawTeam" autonomous-agent system with an admin control hub for knowledge sources, credentials, agent assignment, and LLM call-quality monitoring, in a 4-week build (late Mar 2026).</li>
+              </ul>
+            </article>
+
+            <article class="job">
+              <div class="job-head">
+                <p class="job-title">SK intellix</p>
+                <p class="job-date">Jul 2025 - Dec 2025</p>
+              </div>
+              <p class="job-subtitle">AI Manager</p>
+              <ul class="bullets">
+                <li>Established AI compliance and technical review structures for smart-home AI capabilities and ecosystem integrations.</li>
+                <li>Built operational web tooling and supported roadmap decisions across LLM, computer vision, and monitoring interfaces.</li>
+              </ul>
+            </article>
+
+            <article class="job">
+              <div class="job-head">
+                <p class="job-title">Hongik University</p>
+                <p class="job-date">Sep 2024 - Present</p>
+              </div>
+              <p class="job-subtitle">Ph.D. Candidate, Game Engineering</p>
+              <ul class="bullets">
+                <li>Researching multimodal QA, automated bug reporting, agent workflows, and deployable AI tooling for real production teams.</li>
+                <li>Built prototypes with VLMs, retrieval systems, and orchestration frameworks to explore evaluation, tool use, and usable delivery patterns.</li>
+              </ul>
+            </article>
+
+            <article class="job">
+              <div class="job-head">
+                <p class="job-title">NCSOFT</p>
+                <p class="job-date">Mar 2018 - Jul 2024</p>
+              </div>
+              <p class="job-subtitle">AI Engineer / Technical Builder</p>
+              <ul class="bullets">
+                <li>Built AI-enabled systems across gameplay evaluation, procedural generation, automation tooling, and digital human production pipelines.</li>
+                <li>Developed simulation-based evaluation agents and internal testing tools to reduce workflow cost and improve team effectiveness.</li>
+              </ul>
+            </article>
+
+            <article class="job">
+              <div class="job-head">
+                <p class="job-title">COM2US</p>
+                <p class="job-date">Oct 2016 - Feb 2018</p>
+              </div>
+              <p class="job-subtitle">AI / Full-Stack Developer</p>
+              <ul class="bullets">
+                <li>Developed reinforcement learning prototypes in game environments and built internal collaboration tooling across frontend, backend, and database layers.</li>
+              </ul>
+            </article>
+          </section>
+        </div>
+
+        <div class="column">
+          <section>
+            <h2 class="section-title">Core Strengths</h2>
+            <ul class="skills-list">
+              <li>Solution architecture and end-to-end AI product delivery</li>
+              <li>Agentic AI workflows, tool orchestration, and LLM application design</li>
+              <li>Multimodal QA, computer vision workflows, and evaluation-oriented systems</li>
+              <li>Retrieval systems, vector search, and AI-assisted interfaces</li>
+              <li>Production-minded AI engineering across product, research, and operations</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="section-title">Technologies</h2>
+            <ul class="skills-list">
+              <li>Python, SQL, JavaScript, C#, C/C++, Dart</li>
+              <li>PyTorch, TensorFlow, Transformers, OpenCV</li>
+              <li>LangGraph, LlamaIndex, RAG, Qdrant, MCP, PEFT/LoRA, ONNX</li>
+              <li>AWS, GCP, Docker, Linux, Git, WebSocket, PyQt, Flutter</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+              <strong>Hongik University</strong>
+              <span>Ph.D. Candidate in Game Engineering, Sep 2024 - Present</span>
+            </div>
+            <div class="education-item">
+              <strong>Hongik University</strong>
+              <span>M.S. in Game Engineering, Aug 2014 - Aug 2016</span>
+            </div>
+            <div class="education-item">
+              <strong>Hongik University</strong>
+              <span>B.S. in Game Engineering, Mar 2007 - Feb 2014</span>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="section-title">Selected Signals</h2>
+            <div class="signal-item">
+              <strong>Patents and Research</strong>
+              <span>2 patents, PeerJ SCI-E paper, HCI Korea paper, IEEE RAAI 2024 poster, 2025 publication on automated game QA reporting.</span>
+            </div>
+            <div class="signal-item">
+              <strong>Leadership and Communication</strong>
+              <span>NCFellowship program management, internal presentations, technology transfer support, and ongoing technical writing on AI workflows.</span>
+            </div>
+            <div class="signal-item">
+              <strong>Open-Source Projects</strong>
+              <span>jeo-code (Bun-based coding-agent harness/CLI framework), jeo-skills (cross-platform agent-skills catalog for harness engineering), and jeo-claw (Discord-controlled, dual-runtime agentic repo-update agent).</span>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="section-title">Profile</h2>
+            <p class="note">
+              An AI solutions builder with deep game AI production experience and growing strength in agentic, multimodal, and delivery-oriented AI systems.
+            </p>
+          </section>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
