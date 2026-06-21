@@ -649,6 +649,120 @@
         margin-bottom: 10px;
       }
 
+      .work-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 18px;
+      }
+
+      .work-card {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: var(--surface-strong);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+        transition:
+          transform 200ms ease,
+          box-shadow 200ms ease;
+      }
+
+      .work-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow);
+      }
+
+      .work-media {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        background: #efe7d8;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .work-media--code {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 1.15rem;
+        letter-spacing: 0.08em;
+        color: var(--accent-deep);
+        background:
+          linear-gradient(135deg, rgba(231, 105, 46, 0.14), rgba(31, 122, 114, 0.14)),
+          repeating-linear-gradient(45deg, rgba(31, 36, 48, 0.03) 0 10px, transparent 10px 20px);
+      }
+
+      .work-body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding: 20px;
+      }
+
+      .work-meta {
+        font-family: 'IBM Plex Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: 0.72rem;
+        color: var(--accent-deep);
+      }
+
+      .work-card h3 {
+        margin-top: 8px;
+        font-size: 1.18rem;
+      }
+
+      .work-summary {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 0.96rem;
+        word-break: keep-all;
+      }
+
+      html[lang='ko'] .work-summary,
+      html[lang='ko'] .work-role {
+        line-height: 1.78;
+      }
+
+      .work-role {
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-radius: var(--radius-md);
+        background: rgba(31, 122, 114, 0.08);
+        border: 1px solid rgba(31, 122, 114, 0.16);
+        color: var(--ink);
+        font-size: 0.9rem;
+        word-break: keep-all;
+      }
+
+      .work-role strong {
+        color: var(--accent-alt);
+      }
+
+      .work-spacer {
+        flex: 1;
+      }
+
+      .work-card .tag-row {
+        margin-top: 14px;
+      }
+
+      .work-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .work-links .link-pill {
+        padding: 8px 12px;
+        font-size: 0.86rem;
+      }
+
+
       @keyframes drift {
         from {
           transform: translate3d(0, 0, 0) scale(1);
@@ -772,6 +886,16 @@
         </div>
         <div class="timeline" id="career-timeline"></div>
       </section>
+
+      <section class="section-shell" data-reveal>
+        <div class="section-heading">
+          <div class="section-kicker" id="work-kicker"></div>
+          <h2 id="work-title"></h2>
+          <p class="section-description" id="work-description"></p>
+        </div>
+        <div class="work-grid" id="work-grid"></div>
+      </section>
+
 
       <section class="section-shell" data-reveal>
         <div class="section-heading">
@@ -971,6 +1095,181 @@
               }
             ]
           },
+          work: {
+            kicker: 'Selected work',
+            title: 'Projects I shipped, and what I contributed',
+            description:
+              'A visual tour of the systems I built — from production RAG platforms and open-source agent harnesses to multimodal QA tooling and game AI research. Each card pairs the work with my specific contribution.',
+            roleLabel: 'My contribution:',
+            projects: [
+              {
+                image: 'assets/projects/saga.png',
+                alt: 'SAGA RAG search engine operations UI',
+                meta: 'Supercent · 2026',
+                title: 'SAGA — Game-knowledge RAG engine',
+                summary:
+                  'A RAG search engine that turns 594 game-design documents (1,563 vectors across 15 games) into grounded, answer-style search for a game studio.',
+                role:
+                  'Built the full pipeline — chunking, embedding, vector indexing, RAG-Fusion + hybrid search + Cross-Encoder reranking, and a Grounding-Guardian generation pattern — plus the operations UI, in a 3-week build on Firebase App Hosting + Genkit.',
+                tags: ['RAG-Fusion', 'Hybrid Search', 'Cross-Encoder', 'Genkit', 'Firebase']
+              },
+              {
+                image: 'assets/projects/millie.png',
+                alt: 'Millie knowledge-ops control tower UI',
+                meta: 'Supercent · 2026',
+                title: 'Millie — Personal RAG Knowledge Ops',
+                summary:
+                  'A per-user RAG assistant plus a Slackbot-driven, local-LLM "ClawTeam" autonomous-agent system with an admin control tower.',
+                role:
+                  'Designed the data-grounding pipeline (text / file / URL / Drive / Notion), Slackbot credential and runtime-config recovery controls, per-channel agent routing, and LLM-usage monitoring — a 4-week build.',
+                tags: ['Knowledge Ops', 'Slackbot', 'Agents', 'Control Tower', 'Firebase']
+              },
+              {
+                codeLabel: 'jeo-code',
+                meta: 'Open source',
+                title: 'jeo-code — Coding-agent harness',
+                summary:
+                  'A Bun-based coding-agent harness / CLI framework with a uniform multi-provider tool loop, anchored-edit integrity, and a verify-before-done loop.',
+                role:
+                  'Author and maintainer — designed the harness architecture, the multi-provider tool-execution model, and the safety/verification loop.',
+                tags: ['Bun', 'Harness', 'CLI', 'Agents'],
+                links: [{ href: 'https://github.com/akillness/jeo-code', label: 'GitHub' }]
+              },
+              {
+                codeLabel: 'jeo-skills',
+                meta: 'Open source',
+                title: 'jeo-skills — Agent-skills catalog',
+                summary:
+                  'A cross-platform agent-skills catalog for harness engineering, packaging reusable skills for coding agents.',
+                role:
+                  'Author — curate and publish the skill specifications and the packaging format used across agent runtimes.',
+                tags: ['Agent Skills', 'Catalog', 'Tooling'],
+                links: [{ href: 'https://github.com/akillness/jeo-skills', label: 'GitHub' }]
+              },
+              {
+                codeLabel: 'jeo-claw',
+                meta: 'Open source',
+                title: 'jeo-claw — Chat-driven repo agent',
+                summary:
+                  'A Discord-controlled, dual-runtime agentic agent that updates repositories from chat commands.',
+                role:
+                  'Author — built the Discord control surface and the dual-runtime execution path that turns chat into repository changes.',
+                tags: ['Discord', 'Agentic', 'Automation'],
+                links: [{ href: 'https://github.com/akillness/jeo-claw', label: 'GitHub' }]
+              },
+              {
+                image: 'assets/projects/multi-agent.jpeg',
+                alt: 'Multi-agent workflow framework diagram',
+                meta: 'Personal · 2025',
+                title: 'Multi-Agent AI Framework',
+                summary:
+                  'An intelligent multi-agent workflow framework on a local Ollama server, with knowledge-graph-based semantic routing and MCP / function-calling handlers.',
+                role:
+                  'Built the multi-agent workflow process with praisonaiagents, the semantic router over a knowledge graph, and the crawling function-call handlers.',
+                tags: ['Ollama', 'LangGraph', 'PraisonAI', 'MCP', 'Knowledge Graph']
+              },
+              {
+                image: 'assets/projects/autoqa.png',
+                alt: 'AutoQA tool running on a game screen',
+                meta: 'Personal · 2024–2025',
+                title: 'AutoQA Tool',
+                summary:
+                  'An image-based, system-independent AutoQA tool: multi-scale template matching, OCR, fine-tuned YOLOv7, and VLM-based video-context error detection with LLM reporting.',
+                role:
+                  'Built the OpenCV matching engine, the thread-pool / window-handler macro layer, Paddle/Easy OCR + YOLOv7 integration, and the VLM→LLM bug-report feature.',
+                tags: ['OpenCV', 'OCR', 'YOLOv7', 'VLM', 'LLM']
+              },
+              {
+                image: 'assets/projects/ondevice-agent.gif',
+                alt: 'On-device SLM agent Flutter chat demo',
+                meta: 'Personal · 2025',
+                title: 'On-device SLM Agent',
+                summary:
+                  'An on-device agent system built on small models (DeepSeek-R1-Distill-Qwen-1.5B, TinyLlama, DistilBERT) with a Flutter chat client.',
+                role:
+                  'Tested LlamaIndex / LangChain / LangGraph + CoT pipelines, prototyped MCP-based agentic AI, and built the Flutter chat client.',
+                tags: ['DeepSeek-R1', 'TinyLlama', 'MCP', 'Flutter', 'CoT']
+              },
+              {
+                image: 'assets/projects/game-design-agent.jpeg',
+                alt: 'Game design agent output',
+                meta: 'Personal · 2025',
+                title: 'Game Design Agent',
+                summary:
+                  'A "vibe" game-design agent that produces design docs (content, system, balance, event, scenario) from links and documents.',
+                role:
+                  'Built ColBERT-embedding score-based chunking with Qdrant, task-planning over design roles, and document / crawling function calling on the ChatGPT API.',
+                tags: ['ColBERT', 'Qdrant', 'Task Planning', 'ChatGPT API']
+              },
+              {
+                image: 'assets/projects/coding-agent.jpeg',
+                alt: 'Code and web-search agent',
+                meta: 'Personal · 2025',
+                title: 'Code & Web-search Agent',
+                summary:
+                  'A vibe-coding agentic AI that generates and runs code per language and performs Google search, built on a Smol-Agent structure over the OpenAI GPT API.',
+                role:
+                  'Implemented the agent capabilities — language-specific code generation and execution, plus web search.',
+                tags: ['Smol Agent', 'OpenAI API', 'Code Exec', 'Web Search']
+              },
+              {
+                image: 'assets/projects/slm-chatbot.png',
+                alt: 'On-device SLM chatbot for a mystery game',
+                meta: 'Personal · 2024',
+                title: 'On-device SLM Chatbot',
+                summary:
+                  'A lightweight on-device SLM chatbot for a mystery game — Polyglot-Ko-1.3B trained with PEFT/LoRA and exported to ONNX for CPU inference.',
+                role:
+                  'Did the PEFT/LoRA training, split the LLM Python server into a batch structure for lightweight serving, and exported the CPU inference model to ONNX.',
+                tags: ['Polyglot-Ko', 'PEFT/LoRA', 'ONNX', 'On-device']
+              },
+              {
+                image: 'assets/projects/ncsoft-ca.png',
+                alt: 'Cellular-automata difficulty generator patterns',
+                meta: 'NCSOFT · 2018–2021',
+                title: 'CA Difficulty Generator',
+                summary:
+                  'A cellular-automata-based difficulty generator for 3-match puzzle games, using CA patterns as training data for a GAN.',
+                role:
+                  'Implemented the CA engine and CA-based generator, proposed a CA generative combination to improve co-relationship patterns, and used it as GAN training data.',
+                tags: ['Cellular Automata', 'GAN', 'PCG', 'Game AI']
+              },
+              {
+                image: 'assets/projects/ncsoft-mcts.png',
+                alt: 'MCTS difficulty evaluation agent',
+                meta: 'NCSOFT · 2018',
+                title: 'MCTS Difficulty Agent',
+                summary:
+                  'An agent that evaluates 3-match puzzle difficulty by simulation, using Monte-Carlo Tree Search.',
+                role:
+                  'Implemented MCTS, applied the agent to game logic, accelerated the simulation, and produced the difficulty-evaluation results.',
+                tags: ['MCTS', 'Simulation', 'Difficulty', 'Game AI']
+              },
+              {
+                image: 'assets/projects/com2us-rl.png',
+                alt: 'Reinforcement-learning agent in Dungeon Delivery',
+                meta: 'Com2uS · 2017',
+                title: 'RL Agent — Dungeon Delivery',
+                summary:
+                  'A reinforcement-learning agent applied to the game "Dungeon Delivery" to probe the feasibility of AI in production games.',
+                role:
+                  'Designed a TensorFlow DQN over a gridmap environment and built the server-client learning system via socket communication.',
+                tags: ['DQN', 'TensorFlow', 'RL', 'Socket']
+              },
+              {
+                image: 'assets/projects/patent-emotion.jpeg',
+                alt: 'Emotion Tracer emotion-analysis toolset',
+                meta: 'Hongik EGLab · 2017',
+                title: 'Emotion Tracer (Patent)',
+                summary:
+                  'An emotion-analysis toolset — facial-expression analyzer, bio-signal detector, and Emotion Insole — with GCP-based result visualization; the emotion-analysis technology was transferred to JTBC as a patent.',
+                role:
+                  'Built the Emotion Tracer tool and the GCP-based data-result integration service.',
+                tags: ['Emotion AI', 'Patent', 'GCP', 'Bio-signal']
+              }
+            ]
+          },
+
           signals: {
             kicker: 'Trust signals',
             title: 'Research, patents, and communication signals behind the work',
@@ -1223,6 +1522,181 @@
               }
             ]
           },
+          work: {
+            kicker: '주요 작업물',
+            title: '직접 만든 프로젝트와 제가 기여한 부분',
+            description:
+              '제가 만든 시스템을 시각적으로 둘러봅니다 — 운영 중인 RAG 플랫폼과 오픈소스 에이전트 하네스부터 멀티모달 QA 도구, 게임 AI 연구까지. 각 카드는 작업물과 제가 실제로 기여한 부분을 함께 보여줍니다.',
+            roleLabel: '기여:',
+            projects: [
+              {
+                image: 'assets/projects/saga.png',
+                alt: 'SAGA RAG 검색엔진 운영 UI',
+                meta: 'Supercent · 2026',
+                title: 'SAGA — 게임 지식 RAG 검색엔진',
+                summary:
+                  '15개 게임의 기획·문서 594개(벡터 1,563개)를 근거 기반 답변형 검색으로 바꿔주는, 게임 스튜디오용 RAG 검색엔진입니다.',
+                role:
+                  '청킹·임베딩·벡터 인덱싱부터 RAG-Fusion + 하이브리드 검색 + Cross-Encoder 재순위화, Grounding-Guardian 생성 패턴, 운영 UI까지 전체 파이프라인을 Firebase App Hosting + Genkit 위에서 3주 만에 구축했습니다.',
+                tags: ['RAG-Fusion', 'Hybrid Search', 'Cross-Encoder', 'Genkit', 'Firebase']
+              },
+              {
+                image: 'assets/projects/millie.png',
+                alt: 'Millie 지식 운영 컨트롤타워 UI',
+                meta: 'Supercent · 2026',
+                title: 'Millie — 개인형 RAG Knowledge Ops',
+                summary:
+                  '사용자별 RAG 어시스턴트와, Slackbot으로 구동되는 로컬 LLM "ClawTeam" 자율 에이전트 시스템, 그리고 관리자 컨트롤타워로 구성됩니다.',
+                role:
+                  '텍스트/파일/URL/Drive/Notion Data Grounding 파이프라인, Slackbot credential·런타임 설정 복구 제어, 채널별 에이전트 라우팅, LLM 사용량 모니터링을 4주 만에 설계·구현했습니다.',
+                tags: ['Knowledge Ops', 'Slackbot', 'Agents', 'Control Tower', 'Firebase']
+              },
+              {
+                codeLabel: 'jeo-code',
+                meta: '오픈소스',
+                title: 'jeo-code — 코딩 에이전트 하네스',
+                summary:
+                  '멀티 프로바이더 공통 tool loop, anchored-edit 무결성, verify-before-done 루프를 갖춘 Bun 기반 코딩 에이전트 하네스/CLI 프레임워크입니다.',
+                role:
+                  '제작·유지보수자 — 하네스 아키텍처, 멀티 프로바이더 tool 실행 모델, 안전성·검증 루프를 설계했습니다.',
+                tags: ['Bun', 'Harness', 'CLI', 'Agents'],
+                links: [{ href: 'https://github.com/akillness/jeo-code', label: 'GitHub' }]
+              },
+              {
+                codeLabel: 'jeo-skills',
+                meta: '오픈소스',
+                title: 'jeo-skills — 에이전트 스킬 카탈로그',
+                summary:
+                  '코딩 에이전트를 위한 재사용 가능한 스킬을 패키징하는, 하네스 엔지니어링용 크로스플랫폼 에이전트 스킬 카탈로그입니다.',
+                role:
+                  '제작자 — 여러 에이전트 런타임에서 쓰이는 스킬 명세와 패키징 포맷을 정리·배포합니다.',
+                tags: ['Agent Skills', 'Catalog', 'Tooling'],
+                links: [{ href: 'https://github.com/akillness/jeo-skills', label: 'GitHub' }]
+              },
+              {
+                codeLabel: 'jeo-claw',
+                meta: '오픈소스',
+                title: 'jeo-claw — 채팅 기반 저장소 에이전트',
+                summary:
+                  'Discord 명령으로 저장소를 업데이트하는, Discord 제어·듀얼 런타임 에이전트입니다.',
+                role:
+                  '제작자 — Discord 제어 인터페이스와, 채팅을 저장소 변경으로 연결하는 듀얼 런타임 실행 경로를 구현했습니다.',
+                tags: ['Discord', 'Agentic', 'Automation'],
+                links: [{ href: 'https://github.com/akillness/jeo-claw', label: 'GitHub' }]
+              },
+              {
+                image: 'assets/projects/multi-agent.jpeg',
+                alt: '멀티 에이전트 워크플로우 프레임워크 다이어그램',
+                meta: '개인 프로젝트 · 2025',
+                title: '멀티 에이전트 AI 프레임워크',
+                summary:
+                  '로컬 Ollama 서버 위에서 동작하는 지능형 멀티 에이전트 워크플로우 프레임워크로, 지식 그래프 기반 시맨틱 라우팅과 MCP·Function Calling 핸들러를 갖췄습니다.',
+                role:
+                  'praisonaiagents 기반 멀티 에이전트 워크플로우 프로세스, 지식 그래프 위의 시맨틱 라우터, 크롤링 Function-Call 핸들러를 구축했습니다.',
+                tags: ['Ollama', 'LangGraph', 'PraisonAI', 'MCP', 'Knowledge Graph']
+              },
+              {
+                image: 'assets/projects/autoqa.png',
+                alt: '게임 화면 위에서 동작하는 AutoQA 도구',
+                meta: '개인 프로젝트 · 2024–2025',
+                title: 'AutoQA 도구',
+                summary:
+                  '이미지 기반의 시스템 독립적 AutoQA 도구입니다. Multi-Scale Template Matching, OCR, fine-tuned YOLOv7, VLM 기반 비디오 컨텍스트 오류 탐지와 LLM 리포트를 제공합니다.',
+                role:
+                  'OpenCV 매칭 엔진, Thread Pool·Window Handler 매크로 계층, Paddle/Easy OCR + YOLOv7 연동, VLM→LLM 버그 리포트 기능을 구현했습니다.',
+                tags: ['OpenCV', 'OCR', 'YOLOv7', 'VLM', 'LLM']
+              },
+              {
+                image: 'assets/projects/ondevice-agent.gif',
+                alt: '온디바이스 SLM 에이전트 Flutter 챗 데모',
+                meta: '개인 프로젝트 · 2025',
+                title: '온디바이스 SLM 에이전트',
+                summary:
+                  '소형 모델(DeepSeek-R1-Distill-Qwen-1.5B, TinyLlama, DistilBERT) 위에 Flutter 챗 클라이언트를 올린 온디바이스 에이전트 시스템입니다.',
+                role:
+                  'LlamaIndex/LangChain/LangGraph + CoT 파이프라인을 테스트하고, MCP 기반 Agentic AI를 프로토타이핑했으며, Flutter 챗 클라이언트를 구성했습니다.',
+                tags: ['DeepSeek-R1', 'TinyLlama', 'MCP', 'Flutter', 'CoT']
+              },
+              {
+                image: 'assets/projects/game-design-agent.jpeg',
+                alt: '게임 디자인 에이전트 결과 화면',
+                meta: '개인 프로젝트 · 2025',
+                title: '게임 디자인 에이전트',
+                summary:
+                  '링크와 문서로부터 기획서(콘텐츠·시스템·밸런스·이벤트·시나리오)를 만들어내는 "바이브" 게임 디자인 에이전트입니다.',
+                role:
+                  'ColBERT 임베딩 Score 기반 청킹과 Qdrant, 디자인 역할별 Task Planning, ChatGPT API 위의 문서·크롤링 Function Calling을 구현했습니다.',
+                tags: ['ColBERT', 'Qdrant', 'Task Planning', 'ChatGPT API']
+              },
+              {
+                image: 'assets/projects/coding-agent.jpeg',
+                alt: '코드·웹 검색 에이전트',
+                meta: '개인 프로젝트 · 2025',
+                title: '코드 & 웹 검색 에이전트',
+                summary:
+                  'OpenAI GPT API 위 Smol-Agent 구조로 만든, 언어별 코드 생성·실행과 구글 검색을 수행하는 바이브 코딩 에이전트 AI입니다.',
+                role:
+                  '언어별 코딩 파일 생성·실행과 웹 검색 등 에이전트 기능을 구현했습니다.',
+                tags: ['Smol Agent', 'OpenAI API', 'Code Exec', 'Web Search']
+              },
+              {
+                image: 'assets/projects/slm-chatbot.png',
+                alt: '추리게임용 온디바이스 SLM 챗봇',
+                meta: '개인 프로젝트 · 2024',
+                title: '온디바이스 SLM 챗봇',
+                summary:
+                  '추리게임용 경량 온디바이스 SLM 챗봇입니다. Polyglot-Ko-1.3B를 PEFT/LoRA로 학습하고 CPU 추론용 ONNX로 익스포트했습니다.',
+                role:
+                  'PEFT/LoRA 학습을 수행하고, 경량화를 위해 LLM Python 서버를 batch 구조로 분리·설계했으며, CPU 추론 모델을 ONNX로 익스포트했습니다.',
+                tags: ['Polyglot-Ko', 'PEFT/LoRA', 'ONNX', 'On-device']
+              },
+              {
+                image: 'assets/projects/ncsoft-ca.png',
+                alt: '셀룰러 오토마타 난이도 생성기 패턴',
+                meta: 'NCSOFT · 2018–2021',
+                title: 'CA 난이도 생성기',
+                summary:
+                  '3-Match 퍼즐 게임을 위한 셀룰러 오토마타(CA) 기반 난이도 생성기로, CA 패턴을 GAN 학습 데이터로 활용했습니다.',
+                role:
+                  'CA 엔진과 CA 기반 Generator를 구현하고, Co-relationship 패턴을 개선하는 CA Generative Combination을 제안했으며, 이를 GAN 학습 데이터로 활용했습니다.',
+                tags: ['Cellular Automata', 'GAN', 'PCG', 'Game AI']
+              },
+              {
+                image: 'assets/projects/ncsoft-mcts.png',
+                alt: 'MCTS 난이도 평가 에이전트',
+                meta: 'NCSOFT · 2018',
+                title: 'MCTS 난이도 평가 에이전트',
+                summary:
+                  'Monte-Carlo Tree Search로 3-Match 퍼즐의 난이도를 시뮬레이션 기반으로 평가하는 에이전트입니다.',
+                role:
+                  'MCTS를 구현하고 게임 로직에 에이전트를 적용했으며, 시뮬레이션을 가속화하고 난이도 평가 결과를 도출했습니다.',
+                tags: ['MCTS', 'Simulation', 'Difficulty', 'Game AI']
+              },
+              {
+                image: 'assets/projects/com2us-rl.png',
+                alt: '던전 딜리버리 강화학습 에이전트',
+                meta: 'Com2uS · 2017',
+                title: '강화학습 에이전트 — 던전 딜리버리',
+                summary:
+                  '게임에 AI를 적용할 수 있는지 가능성을 타진하기 위해, "던전 딜리버리"에 적용한 강화학습 에이전트입니다.',
+                role:
+                  'Gridmap 환경 위에서 TensorFlow DQN 모델을 설계하고, 소켓 통신으로 Server-Client 학습 시스템을 구축했습니다.',
+                tags: ['DQN', 'TensorFlow', 'RL', 'Socket']
+              },
+              {
+                image: 'assets/projects/patent-emotion.jpeg',
+                alt: 'Emotion Tracer 감성분석 도구 세트',
+                meta: '홍익대 EGLab · 2017',
+                title: 'Emotion Tracer (특허)',
+                summary:
+                  '얼굴 표정 분석기, 생체신호 탐지기, Emotion Insole로 구성된 감성분석 도구 세트로, GCP 기반 결과 시각화를 제공합니다. 감성분석 기술은 JTBC로 특허 기술이전되었습니다.',
+                role:
+                  'Emotion Tracer 도구와 GCP 기반 데이터 결과 연동 서비스를 구축했습니다.',
+                tags: ['Emotion AI', 'Patent', 'GCP', 'Bio-signal']
+              }
+            ]
+          },
+
           signals: {
             kicker: '신뢰 신호',
             title: '경험을 뒷받침하는 연구·특허·커뮤니케이션 신호',
@@ -1449,6 +1923,35 @@
       const renderLinks = () =>
         links.map(link => `<a class="link-pill" href="${link.href}">${link.label}</a>`).join('');
 
+      const renderWorkProjects = (projects, roleLabel) =>
+
+        projects
+          .map(project => {
+            const media = project.image
+              ? `<img class="work-media" src="${project.image}" alt="${project.alt}" loading="lazy">`
+              : `<div class="work-media work-media--code" aria-hidden="true">${project.codeLabel || project.title}</div>`;
+            const links = (project.links || [])
+              .map(link => `<a class="link-pill" href="${link.href}" target="_blank" rel="noopener">${link.label}</a>`)
+              .join('');
+            return `
+              <article class="work-card">
+                ${media}
+                <div class="work-body">
+                  <span class="work-meta">${project.meta}</span>
+                  <h3>${project.title}</h3>
+                  <p class="work-role"><strong>${roleLabel}</strong> ${project.role}</p>
+
+                  <p class="work-role"><strong>${project.roleLabel}</strong> ${project.role}</p>
+                  <div class="work-spacer"></div>
+                  <div class="tag-row">${renderTags(project.tags)}</div>
+                  ${links ? `<div class="work-links">${links}</div>` : ''}
+                </div>
+              </article>
+            `;
+          })
+          .join('');
+
+
       function applyLanguage(lang) {
         const data = content[lang] || content.en;
         document.documentElement.lang = lang;
@@ -1475,6 +1978,12 @@
         setText('career-title', data.career.title);
         setText('career-description', data.career.description);
         setHtml('career-timeline', renderTimeline(data.career.items));
+
+        setText('work-kicker', data.work.kicker);
+        setText('work-title', data.work.title);
+        setText('work-description', data.work.description);
+        setHtml('work-grid', renderWorkProjects(data.work.projects, data.work.roleLabel));
+
 
         setText('signals-kicker', data.signals.kicker);
         setText('signals-title', data.signals.title);
