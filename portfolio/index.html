@@ -684,7 +684,6 @@
 
       .work-media-link {
         display: block;
-        position: relative;
         overflow: hidden;
       }
 
@@ -1953,12 +1952,12 @@
 
         projects
           .map(project => {
-            const projectLink = (project.links && project.links[0]) ? project.links[0].href : project.href;
+            const projectLink = project.links && project.links[0] && project.links[0].href;
             const mediaInner = project.image
               ? `<img class="work-media" src="${project.image}" alt="${project.alt}" loading="lazy">`
               : `<div class="work-media work-media--code" aria-hidden="true">${project.codeLabel || project.title}</div>`;
             const media = projectLink
-              ? `<a class="work-media-link" href="${projectLink}" target="_blank" rel="noopener" aria-label="${project.title}">${mediaInner}</a>`
+              ? `<a class="work-media-link" href="${projectLink}" target="_blank" rel="noopener">${mediaInner}</a>`
               : mediaInner;
             const links = (project.links || [])
               .map(link => `<a class="link-pill" href="${link.href}" target="_blank" rel="noopener">${link.label}</a>`)
