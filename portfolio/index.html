@@ -682,6 +682,26 @@
         border-bottom: 1px solid var(--line);
       }
 
+      .work-media-link {
+        display: block;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .work-media-link .work-media {
+        transition: transform 240ms ease;
+      }
+
+      .work-media-link:hover .work-media,
+      .work-media-link:focus-visible .work-media {
+        transform: scale(1.04);
+      }
+
+      .work-media-link:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: -2px;
+      }
+
       .work-media--code {
         display: flex;
         align-items: center;
@@ -1933,9 +1953,13 @@
 
         projects
           .map(project => {
-            const media = project.image
+            const projectLink = (project.links && project.links[0]) ? project.links[0].href : project.href;
+            const mediaInner = project.image
               ? `<img class="work-media" src="${project.image}" alt="${project.alt}" loading="lazy">`
               : `<div class="work-media work-media--code" aria-hidden="true">${project.codeLabel || project.title}</div>`;
+            const media = projectLink
+              ? `<a class="work-media-link" href="${projectLink}" target="_blank" rel="noopener" aria-label="${project.title}">${mediaInner}</a>`
+              : mediaInner;
             const links = (project.links || [])
               .map(link => `<a class="link-pill" href="${link.href}" target="_blank" rel="noopener">${link.label}</a>`)
               .join('');
@@ -1946,8 +1970,6 @@
                   <span class="work-meta">${project.meta}</span>
                   <h3>${project.title}</h3>
                   <p class="work-role"><strong>${roleLabel}</strong> ${project.role}</p>
-
-                  <p class="work-role"><strong>${project.roleLabel}</strong> ${project.role}</p>
                   <div class="work-spacer"></div>
                   <div class="tag-row">${renderTags(project.tags)}</div>
                   ${links ? `<div class="work-links">${links}</div>` : ''}
