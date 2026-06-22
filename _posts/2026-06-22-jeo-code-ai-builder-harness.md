@@ -39,10 +39,10 @@ But the design philosophy is what sets it apart.
 
 ```mermaid
 graph TB
-    A[🎯 Spec-First Workflow<br/>deep-interview gates] --> B[📋 Reviewed Plans<br/>ralplan consensus]
-    B --> C[🔒 Gated Execution<br/>jeo approve required]
-    C --> D[✅ Honest Verification<br/>ultragoal reports]
-    D --> E[🔄 Self-Correcting Loop<br/>post-edit hooks]
+    A["🎯 Spec-First Workflow<br/>deep-interview gates"] --> B["📋 Reviewed Plans<br/>ralplan consensus"]
+    B --> C["🔒 Gated Execution<br/>jeo approve required"]
+    C --> D["✅ Honest Verification<br/>ultragoal reports"]
+    D --> E["🔄 Self-Correcting Loop<br/>post-edit hooks"]
     E -->|New task cycle| A
 
     style A fill:#3b82f6,stroke:#1d4ed8,color:#fff,stroke-width:2px
@@ -141,7 +141,7 @@ git clone https://github.com/akillness/jeo-skills.git && bash jeo-skills/install
 ### The Skill Ecosystem Map
 
 ```mermaid
-graph LR
+flowchart LR
     subgraph Core["🏗️ Core Orchestration"]
         ooo["ooo<br/>Spec-First"]
         bmad["bmad<br/>Planning"]
@@ -360,13 +360,13 @@ The jeo-skills architecture diagram shows how skills, harnesses, and the jeo loo
 sequenceDiagram
     participant User
     participant jeo as jeo Agent
-    participant Skill as SKILL.md (e.g. scrapling)
+    participant Skill as SKILL Router
     participant Tool as Shell / File System
 
-    User->>jeo: "$scrapling fetch https://github.com/akillness/jeo-code"
+    User->>jeo: $scrapling fetch https://github.com/akillness/jeo-code
     jeo->>Skill: Load SKILL.md — read routing rules
     Skill-->>jeo: Mode: plain HTTP Fetcher (lightest path)
-    jeo->>Tool: python -c "from scrapling import Fetcher; ..."
+    jeo->>Tool: python -c 'from scrapling import Fetcher; ...'
     Tool-->>jeo: HTML content parsed
     jeo->>Skill: Check route-out: is a browser needed?
     Skill-->>jeo: No, static HTML — done
