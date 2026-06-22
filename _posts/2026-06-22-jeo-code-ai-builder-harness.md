@@ -143,9 +143,10 @@ git clone https://github.com/akillness/jeo-skills.git && bash jeo-skills/install
 ```mermaid
 graph LR
     subgraph Core["🏗️ Core Orchestration"]
-        ooo["ooo\nSpec-First"]
-        bmad["bmad\nPlanning"]
-        plannotator["plannotator\nReview"]
+        ooo["ooo<br/>Spec-First"]
+        bmad["bmad<br/>Planning"]
+        plannotator["plannotator<br/>Review"]
+
     end
 
     subgraph Research["🔬 Research & Knowledge"]
@@ -165,8 +166,9 @@ graph LR
     end
 
     subgraph Media["🎬 Media & Visual"]
-        remotion["remotion-video\nproduction"]
-        godtibo["god-tibo\nimagen"]
+        remotion["remotion-video<br/>production"]
+        godtibo["god-tibo<br/>imagen"]
+
         slidesgrb["slides-grab"]
         opendesign["open-design"]
     end
@@ -180,7 +182,8 @@ graph LR
 
     subgraph Game["🎮 Game Dev"]
         unity["unity-gamedev"]
-        gameperf["game-performance\nprofiler"]
+        gameperf["game-performance<br/>profiler"]
+
         gameci["game-ci-cd"]
     end
 
@@ -250,7 +253,8 @@ flowchart LR
     intent --> interview --> plan
     approve --> exec --> hooks
     hooks --> verify
-    verify -.new intent.-> intent
+    verify -. new intent .-> intent
+
 
     plan --> skill1 --> skill2 --> skill3
     skill3 --> exec
@@ -375,34 +379,82 @@ Every skill is **routing-first**: picks the *lightest workable path*, routes out
 
 ## 📦 Installation & Quick Start
 
+### 방법 1 — Bun (권장, 가장 빠름)
+
 ```bash
-# Step 1: Install Bun runtime
+# Bun 런타임 설치
 curl -fsSL https://bun.sh/install | bash
 
-# Step 2: Install jeo-code
+# jeo-code 전역 설치
 bun install -g jeo-code
 
-# Step 3: Verify setup
+# 설치 확인
 jeo --version
-jeo doctor
-
-# Step 4: Install jeo-skills (136 skills → ~/.agents/skills/)
-git clone https://github.com/akillness/jeo-skills.git
-cd jeo-skills && bash install.sh
 ```
 
-Then inside any repo:
+### 방법 2 — npm (Node.js 범용 환경)
 
 ```bash
-# Conversational mode
+# npm으로 전역 설치 (Node.js 18+ 필요)
+npm install -g jeo-code
+
+# 또는 npx로 일회성 실행
+npx jeo-code
+```
+
+### LLM 프로바이더 연결 (필수)
+
+jeo-code는 멀티-LLM을 지원합니다. 처음 실행 시 `jeo doctor`로 연결 상태를 확인하고 원하는 프로바이더를 설정하세요:
+
+```bash
+# 연결 상태 진단
+jeo doctor
+
+# Anthropic (Claude) 연결
+jeo /provider login anthropic
+# → ANTHROPIC_API_KEY 입력
+
+# OpenAI (GPT / Codex) 연결
+jeo /provider login openai
+# → OPENAI_API_KEY 입력
+
+# Google Gemini 연결
+jeo /provider login gemini
+# → GEMINI_API_KEY 입력
+
+# Ollama (로컬 무료)
+ollama serve          # 별도 터미널에서
+jeo /provider login ollama
+```
+
+> **팁:** `/provider login <name>`은 jeo 인터랙티브 TUI 안에서도 동작합니다.
+{: .prompt-tip}
+
+### jeo-skills 136개 설치
+
+```bash
+# 전체 설치
+git clone https://github.com/akillness/jeo-skills.git
+cd jeo-skills && bash install.sh
+# → ~/.agents/skills/ 에 136개 폴더 생성
+
+# 확인
+ls ~/.agents/skills/ | wc -l   # → 136
+```
+
+### 실행
+
+```bash
+# 대화형 모드
 jeo
 
-# One-shot with skill
+# 스킬을 포함한 원샷 실행
 jeo "$deep-dive explain the architecture then refactor the auth module"
 
-# Check your skill library
+# 스킬 라이브러리 확인
 ls ~/.agents/skills/ | wc -l   # → 136+
 ```
+
 
 ---
 
