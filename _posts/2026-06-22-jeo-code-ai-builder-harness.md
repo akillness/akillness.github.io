@@ -14,11 +14,9 @@ image:
 
 ## 🤔 Curiosity: What If Your Coding Agent Came with Its Own Skill Tree?
 
-After 8 years shipping AI-powered games at NC SOFT and COM2US, I've come to believe one thing firmly: **the bottleneck is never raw intelligence**. It's always the *harness* — the scaffolding, guardrails, and feedback loops that make that intelligence usable in a real production repo.
+Eight years shipping AI games at NC SOFT and COM2US taught me one thing: **the bottleneck is never raw intelligence — it's the *harness***, the scaffolding, guardrails, and feedback loops that make intelligence usable in a real repo. OpenAI's Codex experiment proved it: a 1M-line codebase with zero human-written code, where the heroes weren't the model weights but **the harness engineers.**
 
-I've watched teams burn weeks on fragile prompt chains. I've seen agents confidently write a thousand lines that fail silently because there was no verification step. The Codex experiment at OpenAI proved it: when an entire codebase grew to 1M lines with zero human-written code, the heroes of that story were not the model weights. **They were the harness engineers.**
-
-That question has been stuck in my head: **What if the harness itself was the product?**
+That question stuck with me: **What if the harness itself was the product?**
 
 Enter **[jeo-code](https://github.com/akillness/jeo-code)** — and its companion **[jeo-skills](https://github.com/akillness/jeo-skills)**.
 
@@ -315,7 +313,7 @@ jeo /provider login ollama
 
 ### Install All 136 jeo-skills
 
-**The fastest way — let your LLM agent install them for you.** Pipe this prompt file straight to any agent (jeo, Claude Code, Codex, Cursor…) and it reads the instructions and installs every skill automatically:
+**The fastest way — let your LLM agent install them for you.** Hand this prompt file to any agent (jeo, Claude Code, Codex, Cursor…) — it reads the instructions and installs every skill automatically:
 
 <div style="background:linear-gradient(135deg,#1a3a2f 0%,#0a0a14 100%);border:2px solid #10b981;border-radius:16px;padding:1.25rem 1.5rem;margin:1.5rem 0;box-shadow:0 8px 32px rgba(16,185,129,0.25);">
 <div style="color:#34d399;font-family:monospace;font-size:0.8rem;font-weight:700;letter-spacing:0.05em;margin-bottom:0.6rem;">⭐ RECOMMENDED — ONE-LINE AGENT INSTALL</div>
@@ -346,7 +344,7 @@ jeo
 jeo "$deep-dive explain the architecture then refactor the auth module"
 
 # Check your skill library
-ls ~/.agents/skills/ | wc -l   # → 136+
+ls ~/.agents/skills/ | wc -l   # → 136
 ```
 
 
