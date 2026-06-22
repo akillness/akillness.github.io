@@ -20,3 +20,15 @@ node_modules
 .idea
 
 # Misc
+
+# Agent internal state
+.jeo/
+.omc/
+.survey/
+
+# macOS
+.DS_Store
+
+# Personal/temp files
+hyundai_ai_application_engineer_essay.md
+plan.md
