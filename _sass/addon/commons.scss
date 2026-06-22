@@ -72,7 +72,9 @@ img {
   max-width: 100%;
   height: auto;
   transition: all 0.2s ease-in-out;
-  @extend %pixel-image;
+  /* Photos render smooth (no pixelated "dot" aliasing); pixel-art rendering
+     stays opt-in on decorative pixel art such as the sidebar avatar. */
+  image-rendering: auto;
   
   /* 3D Frame Style for Content Images */
   @at-root .content img#{&} {
@@ -1287,7 +1289,7 @@ search {
   display: none;
   font-size: 1.1rem;
   font-weight: 600;
-  font-family: sans-serif;
+  font-family: $font-family-base; /* themed (Pretendard) — was unstyled sans-serif */
   color: var(--topbar-text-color);
   text-align: center;
   width: 70%;
