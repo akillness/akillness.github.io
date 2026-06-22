@@ -59,8 +59,10 @@
         @extend %text-clip;
 
         color: var(--heading-color) !important;
-        font-size: 1.25rem;
+        font-size: clamp(1.15rem, 1rem + 0.7vw, 1.45rem);
         font-family: $font-family-heading;
+        font-weight: 700; /* bold instead of the smudged glow */
+        text-shadow: none; /* drop inherited %heading double-print "bleed" */
       }
 
       %muted {

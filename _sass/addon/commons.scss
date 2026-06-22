@@ -34,18 +34,6 @@ body {
   -webkit-font-smoothing: auto;
   font-smoothing: auto;
   font-family: $font-family-base;
-  // Move dot pattern to pseudo-element to avoid opacity affecting entire body
-  &::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
-    @include dot-pattern(var(--main-border-color), 20px, 0.05);
-  }
 }
 
 
@@ -284,9 +272,12 @@ i {
 
 /* Readability Improvements */
 p, li {
-  font-size: 22px !important; /* Increased from 20px */
-  line-height: 1.8;
-  letter-spacing: 0.02em;
+  /* Fluid type (2026 trend): scales smoothly from mobile to desktop.
+     Pretendard reads cleanly at ~18px, so we drop the old fixed 22px pixel size. */
+  font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.1875rem) !important;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  word-break: keep-all; /* avoid awkward mid-word breaks in Korean */
 }
 
 .footnote {
@@ -403,18 +394,14 @@ sup {
   @include voxel-block(4px, var(--main-border-color), var(--card-bg));
   border-radius: 0;
 
-  /* Pattern Background */
-  background-image: radial-gradient(var(--main-border-color) 1px, transparent 1px);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
-  opacity: 0.95;
+  /* Solid card surface for readability (dot nuance comes from the voxel border) */
 
   /* Embedded highlight style to ensure animation works */
 }
 
 @keyframes voxel-pulse-anim {
   0% { box-shadow: 4px 4px 0 #FF6B6B; border-color: #FF6B6B; }
-  50% { box-shadow: 4px 4px 0 #FF00FF, 0 0 10px #FF00FF; border-color: #FF00FF; }
+  50% { box-shadow: 4px 4px 0 #4ECDC4, 0 0 10px #4ECDC4; border-color: #4ECDC4; } /* Curiosity red -> Retrieve teal (persona palette), no garish magenta */
   100% { box-shadow: 4px 4px 0 #FF6B6B; border-color: #FF6B6B; }
 }
 
@@ -474,7 +461,7 @@ sup {
 }
 
 .major-tag {
-  background: #FFFF00; /* Yellow */
+  background: #FFE66D; /* Innovation yellow (persona palette) — softer than pure #FFFF00 */
   color: #000;
   font-family: 'Press Start 2P', monospace; /* Or just a bold font */
   font-size: 0.6rem;
@@ -942,13 +929,13 @@ $btn-mb: 0.5rem;
   }
 
   .site-title {
-    font-family: inherit;
-    font-weight: 900;
-    font-size: 1.75rem;
-    line-height: 1.2;
-    letter-spacing: 0.25px;
+    font-family: 'Press Start 2P', 'Galmuri14', monospace;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
     margin-top: 1.25rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
 
     a {
       @extend %clickable-transition;

@@ -29,6 +29,13 @@ $code-icon-width: 1.75rem !default;
 
 /* fonts */
 
-// Pixel fonts for dot game style
-$font-family-base: 'VT323', 'Pixelify Sans', 'Press Start 2P', monospace !default;
-$font-family-heading: 'Press Start 2P', 'Pixelify Sans', monospace;
+// 2026 typography pairing: expressive pixel DISPLAY + clean variable BODY.
+//   - Body (base): Pretendard Variable — modern, highly readable Hangul/Latin for
+//     long-form storytelling. This is the readability-first foundation.
+//   - Headings/titles/badges: Galmuri (readable Korean pixel) keeps the dot-game
+//     identity; 'Press Start 2P' stays a sparse arcade accent (site title, NEW,
+//     .major-tag, speech bubble) so the game/programmer passion still shows.
+$font-family-base:
+  'Pretendard Variable', Pretendard, 'Galmuri14', -apple-system, BlinkMacSystemFont,
+  'Apple SD Gothic Neo', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif !default;
+$font-family-heading: 'Galmuri14', 'Pixelify Sans', 'Press Start 2P', monospace;
