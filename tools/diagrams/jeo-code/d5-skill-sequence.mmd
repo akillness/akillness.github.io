@@ -1,0 +1,14 @@
+sequenceDiagram
+    actor User
+    participant jeo as jeo Agent
+    participant Skill as SKILL Router
+    participant Tool as Shell / File System
+
+    User->>jeo: $scrapling "extract pricing table"
+    jeo->>Skill: match keyword → load SKILL.md
+    Skill-->>jeo: tools, patterns, route-outs
+    Note over jeo,Skill: skill constrains the agent<br/>no hallucinated APIs
+    jeo->>Tool: read · search · bash (guided)
+    Tool-->>jeo: results
+    jeo->>jeo: post-edit hooks verify
+    jeo-->>User: done — honest summary

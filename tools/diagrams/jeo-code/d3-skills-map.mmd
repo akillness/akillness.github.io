@@ -1,0 +1,38 @@
+flowchart TB
+  root([📦 jeo-skills<br/>136 installable skills · SKILL.md each])
+
+  subgraph Build["⚙️ Build & Orchestrate"]
+    co["🎯 Core Orchestration · 15<br/>ooo · bmad · omc · omx · ohmg"]
+    pr["📋 Planning & Review · 12<br/>ralplan · plannotator · spec-kit"]
+    ad["🤖 Agent Development · 6<br/>pydantic-ai · openai-agents-python"]
+  end
+
+  subgraph Code["🧱 Code & Quality"]
+    be["⚙️ Backend · 7<br/>api-design · database-schema-design"]
+    fe["🎨 Frontend · 12<br/>react-best-practices · design-system"]
+    cq["🔍 Code Quality · 10<br/>code-review · tdd · debugging"]
+    infra["🏗 Infrastructure · 18<br/>vercel-deploy · git-workflow"]
+  end
+
+  subgraph Know["🔭 Knowledge & Media"]
+    sa["🔭 Search & Analysis · 11<br/>semble · rtk · graphify · scrapling"]
+    doc["📝 Documentation · 6<br/>technical-writing · user-guide-writing"]
+    media["🎬 Creative Media · 5<br/>remotion · god-tibo-imagen · slides-grab"]
+    mkt["📢 Marketing · 1<br/>marketing-automation"]
+  end
+
+  subgraph Ops["🎮 Domains & Ops"]
+    game["🎮 Game Development · 6<br/>unity-gamedev · steam-store-launch-ops"]
+    pm["📊 Project Management · 4<br/>vibe-kanban · clawteam"]
+    util["🔧 Utilities · 12<br/>obsidian · notebooklm · fabric"]
+    prod["🛠 Productivity · 6<br/>zoom-out · survey · triage"]
+  end
+
+  root --> Build
+  root --> Code
+  root --> Know
+  root --> Ops
+
+  style root fill:#1e3a5f,stroke:#3b82f6,stroke-width:3px,color:#fff
+  classDef cat fill:#1f2937,stroke:#60a5fa,stroke-width:1px,color:#e2e8f0;
+  class co,pr,ad,be,fe,cq,infra,sa,doc,media,mkt,game,pm,util,prod cat;

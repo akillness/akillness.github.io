@@ -1,0 +1,17 @@
+{
+  "theme": "dark",
+  "themeVariables": {
+    "fontFamily": "ui-monospace,SFMono-Regular,Menlo,monospace",
+    "fontSize": "16px",
+    "lineColor": "#60a5fa",
+    "mainBkg": "#1f2020",
+    "nodeBorder": "#ccc",
+    "textColor": "#ccc",
+    "clusterBkg": "#0d1424",
+    "clusterBorder": "#334155",
+    "edgeLabelBackground": "#0a0a14",
+    "tertiaryColor": "#0a0a14"
+  },
+  "flowchart": { "htmlLabels": true, "curve": "basis", "useMaxWidth": true },
+  "sequence": { "useMaxWidth": true }
+}

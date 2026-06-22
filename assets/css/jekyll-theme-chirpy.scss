@@ -37,3 +37,18 @@ code, pre {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
+
+/* SVG diagrams: scale to the content/screen width, not the image's intrinsic size.
+   Chirpy wraps content images in `<a class="img-link">` which is `display:inline-flex`
+   (shrink-to-fit), so a child `width:100%` would otherwise collapse to the SVG's
+   natural size. Force the wrapper to a full-width block for `.svg` figures only. */
+.content a.img-link[href$='.svg'] {
+  display: block;
+  width: 100%;
+}
+
+.content a.img-link[href$='.svg'] > img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}

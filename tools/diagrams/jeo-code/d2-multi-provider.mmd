@@ -1,0 +1,17 @@
+flowchart LR
+  jeo[🤖 jeo agent] --> A[Anthropic Claude]
+  jeo --> B[OpenAI + Codex]
+  jeo --> C[Antigravity]
+  jeo --> D[xAI Grok · Kimi]
+  jeo --> E[Ollama · LM Studio]
+  A --> tools[🛠️ Uniform JSON Tool Loop]
+  B --> tools
+  C --> tools
+  D --> tools
+  E --> tools
+  tools --> edit[Edit Files]
+  tools --> run[Run Commands]
+  tools --> read[Read Codebase]
+  tools --> verify[Verify Results]
+  style jeo fill:#1e3a5f,stroke:#3b82f6,stroke-width:3px,color:#fff
+  style tools fill:#312e81,stroke:#6366f1,stroke-width:2px,color:#fff

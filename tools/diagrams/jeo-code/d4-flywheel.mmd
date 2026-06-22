@@ -1,0 +1,34 @@
+flowchart TB
+  subgraph You["👨‍💻 You — the Builder"]
+    intent["Express Intent<br/>natural language"]
+    approve["Approve Plan<br/>jeo approve"]
+    verify["Verify Results<br/>ultragoal"]
+  end
+
+  subgraph Jeo["🤖 jeo Engine"]
+    interview["deep-interview<br/>Clarify Requirements"]
+    plan["ralplan<br/>Blueprint + Critique"]
+    exec["team<br/>Parallel Execution"]
+    hooks["Post-Edit Hooks<br/>Self-Correct"]
+  end
+
+  subgraph Skills["📦 jeo-skills Layer"]
+    skill1["Activate right skill<br/>auto-routed by keyword"]
+    skill2["Skill constrains agent<br/>no hallucinated APIs"]
+    skill3["Route out honestly<br/>when scope exceeded"]
+  end
+
+  intent --> interview
+  interview --> plan
+  plan --> skill1
+  skill1 --> skill2
+  skill2 --> skill3
+  skill3 --> exec
+  approve --> exec
+  exec --> hooks
+  hooks --> verify
+  verify -.->|new intent| intent
+
+  style Skills fill:#1a3a2f,stroke:#10b981,stroke-width:2px
+  style Jeo fill:#312e81,stroke:#6366f1,stroke-width:2px
+  style You fill:#1e3a5f,stroke:#3b82f6,stroke-width:2px
