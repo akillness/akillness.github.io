@@ -232,22 +232,22 @@ The real insight isn't "jeo runs your AI." The insight is **what changes about h
 ```mermaid
 flowchart LR
     subgraph You["👨‍💻 You — the Builder"]
-        intent["Express Intent\nnatural language"]
-        approve["Approve Plan\njeo approve"]
-        verify["Verify Results\nultragoal"]
+        intent["Express Intent<br/>natural language"]
+        approve["Approve Plan<br/>jeo approve"]
+        verify["Verify Results<br/>ultragoal"]
     end
 
     subgraph Jeo["🤖 jeo Engine"]
-        interview["deep-interview\nClarify Requirements"]
-        plan["ralplan\nBlueprint + Critique"]
-        exec["team\nParallel Execution"]
-        hooks["Post-Edit Hooks\nSelf-Correct"]
+        interview["deep-interview<br/>Clarify Requirements"]
+        plan["ralplan<br/>Blueprint + Critique"]
+        exec["team<br/>Parallel Execution"]
+        hooks["Post-Edit Hooks<br/>Self-Correct"]
     end
 
     subgraph Skills["📦 jeo-skills Layer"]
-        skill1["Activate right skill\nauto-routed by keyword"]
-        skill2["Skill constrains agent\nno hallucinated APIs"]
-        skill3["Route out honestly\nwhen scope exceeded"]
+        skill1["Activate right skill<br/>auto-routed by keyword"]
+        skill2["Skill constrains agent<br/>no hallucinated APIs"]
+        skill3["Route out honestly<br/>when scope exceeded"]
     end
 
     intent --> interview --> plan
@@ -379,79 +379,79 @@ Every skill is **routing-first**: picks the *lightest workable path*, routes out
 
 ## 📦 Installation & Quick Start
 
-### 방법 1 — Bun (권장, 가장 빠름)
+### Method 1 — Bun (recommended, fastest startup)
 
 ```bash
-# Bun 런타임 설치
+# Install Bun runtime
 curl -fsSL https://bun.sh/install | bash
 
-# jeo-code 전역 설치
+# Install jeo-code globally
 bun install -g jeo-code
 
-# 설치 확인
+# Verify
 jeo --version
 ```
 
-### 방법 2 — npm (Node.js 범용 환경)
+### Method 2 — npm (universal Node.js)
 
 ```bash
-# npm으로 전역 설치 (Node.js 18+ 필요)
+# Install globally (requires Node.js 18+)
 npm install -g jeo-code
 
-# 또는 npx로 일회성 실행
+# Or run once without installing
 npx jeo-code
 ```
 
-### LLM 프로바이더 연결 (필수)
+### Connect Your LLM Provider (required)
 
-jeo-code는 멀티-LLM을 지원합니다. 처음 실행 시 `jeo doctor`로 연결 상태를 확인하고 원하는 프로바이더를 설정하세요:
+jeo-code supports every major LLM. Run `jeo doctor` first to see connection status, then log in to your preferred provider:
 
 ```bash
-# 연결 상태 진단
+# Diagnose connection status
 jeo doctor
 
-# Anthropic (Claude) 연결
+# Anthropic (Claude)
 jeo /provider login anthropic
-# → ANTHROPIC_API_KEY 입력
+# → prompts for ANTHROPIC_API_KEY
 
-# OpenAI (GPT / Codex) 연결
+# OpenAI (GPT / Codex)
 jeo /provider login openai
-# → OPENAI_API_KEY 입력
+# → prompts for OPENAI_API_KEY
 
-# Google Gemini 연결
+# Google Gemini
 jeo /provider login gemini
-# → GEMINI_API_KEY 입력
+# → prompts for GEMINI_API_KEY
 
-# Ollama (로컬 무료)
-ollama serve          # 별도 터미널에서
+# Ollama (local, free — no API key needed)
+ollama serve          # in a separate terminal
 jeo /provider login ollama
 ```
 
-> **팁:** `/provider login <name>`은 jeo 인터랙티브 TUI 안에서도 동작합니다.
+> **Tip:** `/provider login <name>` also works from inside the jeo interactive TUI — no need to restart.
 {: .prompt-tip}
 
-### jeo-skills 136개 설치
+### Install All 136 jeo-skills
 
 ```bash
-# 전체 설치
+# Full install
 git clone https://github.com/akillness/jeo-skills.git
 cd jeo-skills && bash install.sh
-# → ~/.agents/skills/ 에 136개 폴더 생성
+# → creates 136 skill folders in ~/.agents/skills/
 
-# 확인
+# Verify
 ls ~/.agents/skills/ | wc -l   # → 136
 ```
 
-### 실행
+### Run jeo
 
 ```bash
-# 대화형 모드
+# Interactive mode
 jeo
 
-# 스킬을 포함한 원샷 실행
+# One-shot with a skill prefix
 jeo "$deep-dive explain the architecture then refactor the auth module"
 
-# 스킬 라이브러리 확인
+# Check your skill library
 ls ~/.agents/skills/ | wc -l   # → 136+
 ```
 
@@ -473,7 +473,7 @@ ls ~/.agents/skills/ | wc -l   # → 136+
 
 ---
 
-## 💡 Innovation: My Takeaways from 8 Years of Production AI
+## 🧠 Hard-Won Lessons: 8 Years of Production AI
 
 Building production AI for millions of game players taught me three things about agentic systems:
 
