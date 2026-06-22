@@ -1,0 +1,19 @@
+{
+  "name": "jeo-promo-video",
+  "version": "1.0.0",
+  "description": "Remotion promo video for jeo-code + jeo-skills",
+  "scripts": {
+    "build": "npx remotion render JeoPromo --output ../../assets/img/jeo-code/jeo-promo-remotion.mp4",
+    "studio": "npx remotion studio"
+  },
+  "remotion": {
+    "entryPoint": "src/index.ts"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.481",
+    "remotion": "^4.0.481",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@types/react": "^18.2.0"
+  }
+}
