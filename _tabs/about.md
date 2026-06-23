@@ -17,6 +17,7 @@ Ph.D. Candidate in Game Engineering @ Hongik University
 
 ![Overview](/assets/img/cover.png){: .light .shadow .rounded-10 }
 
+
 ---
 
 ### Curiosity -> Retrieve -> Innovation
@@ -37,7 +38,12 @@ I still like the same loop:
 
 I am currently focused on AI products that need more than a good demo. I care about systems that can use tools, work with multimodal inputs, stay inspectable under failure, and improve through evaluation rather than intuition alone.
 
-That means spending time on problems like:
+At Supercent I design and ship end-to-end AI products on top of multimodal-embedding RAG and agentic workflows. Two recent examples are internal Firebase/Genkit SaaS platforms I built in a matter of weeks:
+
+- **SAGA** — a game-studio "AI brain": a RAG search engine over game design docs using RAG-Fusion, CRAG, hybrid search, Cross-Encoder reranking, and a Grounding-Guardian generation pattern, indexing 594 documents / 1,563 vectors across 15 games.
+- **Millie** — a per-user RAG assistant plus a Slack-bot-driven, local-LLM "ClawTeam" autonomous-agent system, with an admin control hub for knowledge sources (Notion/Drive/Calendar), credentials, agent assignment, and LLM call-quality monitoring.
+
+Beyond shipped products, I spend time on problems like:
 
 - agent workflows that combine reasoning, tool use, and clear product boundaries
 - multimodal QA pipelines that read gameplay, images, or video and turn them into useful reports
@@ -59,7 +65,7 @@ The common thread is simple: build systems that can perceive context, make usefu
 
 ### Current Direction
 
-At Supercent, I am continuing that shift from specialized game AI into broader AI product development. Publicly visible work and activity around my profile also reflect where I am spending time now: context engineering, harness engineering, MCP-connected tools, local and open-model experiments, and practical multi-agent orchestration.
+At Supercent, I am continuing that shift from specialized game AI into broader AI product development — owning internal AI products from concept to operation, improving reliability and discoverability, and establishing the AI-native collaboration standards used by product teams. Publicly visible work and activity around my profile also reflect where I am spending time now: context engineering, harness engineering, MCP-connected tools, local and open-model experiments, and practical multi-agent orchestration.
 
 I am especially interested in the part of the ecosystem that is becoming more real and less theoretical:
 
@@ -72,13 +78,26 @@ I prefer starting with one capable agent and adding orchestration only when the 
 
 ---
 
+### Open Source
+
+I build and maintain a small family of agent-tooling projects in public:
+
+- **[jeo-code](https://github.com/akillness/jeo-code)** — a Bun-based coding-agent harness / CLI framework with a uniform multi-provider tool loop, anchored-edit integrity, and a verify-before-done loop.
+- **[jeo-skills](https://github.com/akillness/jeo-skills)** — a cross-platform agent-skills catalog for harness engineering, packaging reusable skills for coding agents.
+- **[jeo-claw](https://github.com/akillness/jeo-claw)** — a Discord-controlled, dual-runtime agentic agent that updates repositories from chat commands.
+
+---
+
 ### Selected Work
 
-**AI Product Developer, Supercent**  
-Current work centered on AI product engineering, agentic workflows, and practical product delivery.
+**AI Product Developer, Supercent (Dec 2025 - Present)**  
+Shipped SAGA and Millie — two Firebase/Genkit internal SaaS platforms — built on multimodal-embedding RAG and agentic AI workflows, plus on-premise AI product operation and team-wide AI-native collaboration standards.
 
-**Ph.D. Candidate, Hongik University**  
-Researching game engineering with a focus on AI engineering, multimodal QA automation, and production-minded applied research.
+**AI Manager, SmartHome Tech, SK Intelix (Jul 2025 - Dec 2025)**  
+Established AI feature compliance frameworks, tracked and shared Vision/LLM trends for NAMUHx Airsolution, owned TTS/STT collaboration, and delivered a real-time device-monitoring web frontend.
+
+**Ph.D. Candidate, Hongik University (Sep 2024 - Present)**  
+Researching game engineering with a focus on AutoQA tooling, VLM-based bug reporting, agentic workflows, RAG assistants, and lightweight on-device chatbots — the final twenty percent that turns a research concept into a working system.
 
 **Recent research and publications**
 
@@ -88,8 +107,8 @@ Researching game engineering with a focus on AI engineering, multimodal QA autom
 
 **Previous industry path**
 
-- AI Programmer, NCSOFT
-- Game Programmer, Com2uS
+- AI Programmer, NCSOFT (match-3 difficulty agents, CA/GAN level generation, 4D digital human pipelines)
+- Game Programmer, Com2uS (DQN reinforcement-learning prototypes, Unity↔Python socket systems, internal tooling)
 
 This path gave me a strong bias toward systems that are measurable, iterative, and useful under real constraints.
 
@@ -121,10 +140,13 @@ This site is where those threads come together.
 ### Tech I Reach For
 
 **Languages & ML**
-Python | C | C++ | C# | PyTorch | TensorFlow | OpenCV
+Python | C | C++ | C# | Dart | PyTorch | TensorFlow | Transformers | OpenCV
 
-**Interactive Systems**
-Unity | Unreal Engine
+**AI Stack**
+LangGraph | LlamaIndex | RAG | Qdrant | ColBERT | PEFT/LoRA | ONNX | MCP
+
+**Product & Infra**
+Docker | Linux | GCP | AWS | Firebase | Genkit | WebSocket | PyQt | Flutter
 
 **Current AI/Product Themes**
 Agents | MCP | A2A | Evals | Tracing | Multimodal QA | Tool Use | Product Engineering
@@ -133,6 +155,7 @@ Agents | MCP | A2A | Evals | Tracing | Multimodal QA | Tool Use | Product Engine
 
 ### Links
 
+- [Portfolio](/portfolio/)
 - [Resume](/resume_eng)
 - [LinkedIn](https://www.linkedin.com/in/akillness38/)
 - [GitHub](https://github.com/akillness)
