@@ -263,5 +263,5 @@ Osmani is more cautious than the hype he triggered, and so am I:
 - [Anthropic — building effective agents / harnesses for long-running work](https://www.anthropic.com/research/building-effective-agents)
 
 **Cross-domain (game AI loops):**
-- [Game AI Pro book series](http://www.gameaipro.com/)
+- [Game AI Pro book series](https://www.gameaipro.com/)
 - [Behavior trees in robotics and AI (Colledanchise & Ögren)](https://arxiv.org/abs/1709.00084)
