@@ -12,7 +12,8 @@ image:
   alt: "Title card from Rahul's X article — Loops: What Every AI Engineer Needs to Know in 2026."
 ---
 
-> Source breakdown of [*"Loops: What Every AI Engineer Needs to Know in 2026"* by Rahul (@sairahul1)](https://x.com/sairahul1/article/2064277888216555684), which amplifies [Peter Steinberger's "design the loops that prompt your agents"](https://x.com/steipete/status/2063697162748260627) and Addy Osmani's *loop engineering* post. Cover image is the article's own card, pulled from the X preview. Cross-checked against [The New Stack's reporting](https://thenewstack.io/loop-engineering/) and [Firecrawl's loop-engineering guide](https://www.firecrawl.dev/blog/loop-engineering). Everything below is my read as someone who has shipped AI systems into production games for eight years.
+> Source breakdown of [*"Loops: What Every AI Engineer Needs to Know in 2026"* by Rahul (@sairahul1)](https://x.com/sairahul1/article/2064277888216555684), which amplifies [Peter Steinberger's "design the loops that prompt your agents"](https://x.com/steipete/status/2063697162748260627) and [Addy Osmani's *Loop Engineering* post](https://addyo.substack.com/p/loop-engineering). Cover image is the article's own card, pulled from the X preview. The inline diagrams in this write-up are the original figures from Osmani's public post — the canonical source the X article summarizes — because the X article body itself sits behind a login wall and can't be archived directly. Cross-checked against [The New Stack's reporting](https://thenewstack.io/loop-engineering/) and [Firecrawl's loop-engineering guide](https://www.firecrawl.dev/blog/loop-engineering). Everything below is my read as someone who has shipped AI systems into production games for eight years.
+
 {: .prompt-info}
 
 ## 🤔 Curiosity: If You're Still Typing Prompts, What Are You Actually Doing?
@@ -20,6 +21,9 @@ image:
 A single sentence from Rahul's article stopped me mid-scroll. He quotes Boris Cherny — the person who *built* Claude Code at Anthropic — saying:
 
 > "I don't prompt Claude anymore. I write loops, and the loops do the work. My job is to write loops."
+
+![The shift from prompting agents to designing the systems that prompt them](/assets/img/2026-06-24-loop-engineering/loop-shift.png){: .light .w-75 .shadow .rounded-10 }
+_The opening figure from Addy Osmani's "Loop Engineering" — the same image Rahul's article leans on. The job moves from typing the prompt to designing the system that types it. (Source: [addyo.substack.com/p/loop-engineering](https://addyo.substack.com/p/loop-engineering))_
 
 Peter Steinberger (creator of OpenClaw, now at OpenAI) put the same idea more bluntly the day before: *"You shouldn't be prompting coding agents anymore. You should be designing loops that prompt your agents."* By that weekend, Google's Addy Osmani had given the pattern a name — **loop engineering** — and the whole AI-dev timeline lit up.
 
@@ -87,6 +91,9 @@ The reason the conversation exploded in June 2026 is that the building blocks we
 | **Connectors** | Reach external tools | MCP connectors + plugins | MCP servers + plugins |
 | **Sub-agents** | Separate the maker from the checker | `.codex/agents/` | `.claude/agents/`, agent teams |
 | **Memory** | Persist state between runs | `AGENTS.md`, Memories, Linear | `CLAUDE.md`, auto memory, Linear |
+
+![The loop primitives mapped across Codex and Claude Code](/assets/img/2026-06-24-loop-engineering/five-primitives.png){: .light .w-75 .shadow .rounded-10 }
+_Osmani's own figure: the same building blocks (automations, worktrees, skills, connectors/plugins, sub-agents) now ship in both Codex and Claude Code — "both products have all five now." This is the assembly that was already finished; someone just had to name it. (Source: [addyo.substack.com/p/loop-engineering](https://addyo.substack.com/p/loop-engineering))_
 
 Both products even expose a `/goal` command that keeps an agent working until a *verifiable stopping condition* holds — with Claude Code using a separate model to grade the result.
 
@@ -226,6 +233,9 @@ Osmani is more cautious than the hype he triggered, and so am I:
 - **Runaway cost.** Without an iteration cap, a no-progress check, *and* a dollar budget, an open loop can burn a billing cycle over a weekend. All three guards are in the skeleton above for a reason.
 - **Comprehension debt.** This is the sharp one. A loop ships code you never read. *"Two engineers can run an identical loop and get opposite outcomes — one moving faster on work they understand, the other avoiding understanding altogether."* The verifier protects correctness; nothing protects comprehension except you reading the diffs.
 - **It might just be cron in a hat.** The skeptics aren't wrong about *trivial* loops. The value only appears when the middle step needs *judgment* — when a fixed script genuinely can't decide what to do next.
+
+![Build the loop, but stay the engineer](/assets/img/2026-06-24-loop-engineering/stay-the-engineer.jpeg){: .light .w-75 .shadow .rounded-10 }
+_Osmani's closing image says it best: "Build the loop. But build it like someone who intends to stay the engineer, not just the person who presses go." The leverage point moved; the responsibility didn't. (Source: [addyo.substack.com/p/loop-engineering](https://addyo.substack.com/p/loop-engineering))_
 
 ### Key takeaways
 
