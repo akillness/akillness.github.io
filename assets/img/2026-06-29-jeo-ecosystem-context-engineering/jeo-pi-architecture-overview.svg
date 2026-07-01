@@ -1,0 +1,72 @@
+<svg width="1180" height="520" viewBox="0 0 1180 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d">
+  <title id="t">jeo-pi architecture</title>
+  <desc id="d">Eight bundled extensions feeding one disciplined engineering loop in the pi coding agent.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1180" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B0A10"/><stop offset="1" stop-color="#16131C"/>
+    </linearGradient>
+    <linearGradient id="core" x1="440" y1="200" x2="740" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/><stop offset="0.5" stop-color="#A78BFA"/><stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="1180" height="520" rx="18" fill="url(#bg)"/>
+  <rect x="0.5" y="0.5" width="1179" height="519" rx="18" fill="none" stroke="#2A2A35"/>
+
+  <!-- core -->
+  <rect x="430" y="218" width="320" height="84" rx="16" fill="url(#core)"/>
+  <text x="590" y="252" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="24" font-weight="700" fill="#0B0A10">agentic-harness</text>
+  <text x="590" y="282" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="15" fill="#0B0A10">clarify · goal · review · subagents · spec-* skills</text>
+
+  <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="16" fill="#E7E7EC">
+    <g>
+      <rect x="60" y="60" width="240" height="64" rx="12" fill="#15161F" stroke="#3a3147"/>
+      <text x="180" y="90" text-anchor="middle" font-weight="600">fff-search</text>
+      <text x="180" y="111" text-anchor="middle" font-size="13" fill="#9aa">find · grep · @ autocomplete</text>
+    </g>
+    <g>
+      <rect x="450" y="44" width="280" height="64" rx="12" fill="#15161F" stroke="#3a3147"/>
+      <text x="590" y="74" text-anchor="middle" font-weight="600">pi-lsp-client</text>
+      <text x="590" y="95" text-anchor="middle" font-size="13" fill="#9aa">40+ language servers</text>
+    </g>
+    <g>
+      <rect x="880" y="60" width="240" height="64" rx="12" fill="#15161F" stroke="#3a3147"/>
+      <text x="1000" y="90" text-anchor="middle" font-weight="600">pi-mcp-adapter</text>
+      <text x="1000" y="111" text-anchor="middle" font-size="13" fill="#9aa">lazy MCP proxy</text>
+    </g>
+    <g>
+      <rect x="40" y="228" width="230" height="64" rx="12" fill="#15161F" stroke="#3a3147"/>
+      <text x="155" y="258" text-anchor="middle" font-weight="600">workspace-memory</text>
+      <text x="155" y="279" text-anchor="middle" font-size="13" fill="#9aa">save · recall</text>
+    </g>
+    <g>
+      <rect x="910" y="228" width="230" height="64" rx="12" fill="#15161F" stroke="#3a3147"/>
+      <text x="1025" y="258" text-anchor="middle" font-weight="600">session-loop</text>
+      <text x="1025" y="279" text-anchor="middle" font-size="13" fill="#9aa">recurring prompts</text>
+    </g>
+    <g>
+      <rect x="60" y="400" width="250" height="64" rx="12" fill="#15161F" stroke="#3a3147"/>
+      <text x="185" y="430" text-anchor="middle" font-weight="600">nested-agents-md</text>
+      <text x="185" y="451" text-anchor="middle" font-size="13" fill="#9aa">local AGENTS.md context</text>
+    </g>
+    <g>
+      <rect x="450" y="412" width="280" height="64" rx="12" fill="#15161F" stroke="#3a3147"/>
+      <text x="590" y="442" text-anchor="middle" font-weight="600">pi-code-previews</text>
+      <text x="590" y="463" text-anchor="middle" font-size="13" fill="#9aa">syntax-highlighted tool calls</text>
+    </g>
+    <g>
+      <rect x="870" y="400" width="250" height="64" rx="12" fill="#15161F" stroke="#3a3147"/>
+      <text x="995" y="430" text-anchor="middle" font-weight="600">spec-* skills</text>
+      <text x="995" y="451" text-anchor="middle" font-size="13" fill="#9aa">interview → blueprint → verify</text>
+    </g>
+  </g>
+  <g stroke="#3a3147" stroke-width="1.5" opacity="0.6">
+    <line x1="180" y1="124" x2="470" y2="222"/>
+    <line x1="590" y1="108" x2="590" y2="218"/>
+    <line x1="1000" y1="124" x2="710" y2="222"/>
+    <line x1="270" y1="260" x2="430" y2="260"/>
+    <line x1="910" y1="260" x2="750" y2="260"/>
+    <line x1="185" y1="400" x2="470" y2="300"/>
+    <line x1="590" y1="412" x2="590" y2="302"/>
+    <line x1="995" y1="400" x2="710" y2="300"/>
+  </g>
+</svg>

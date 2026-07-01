@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="720" viewBox="0 0 1100 720" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b1622"/>
+      <stop offset="1" stop-color="#0e2233"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#5fd0c5"/>
+    </marker>
+    <style>
+      .band{fill:#10293c;stroke:#1d3b52;stroke-width:1;rx:10}
+      .node{fill:#14334a;stroke:#2a5a78;stroke-width:1.5;rx:9}
+      .hot{fill:#13343a;stroke:#2dd4bf;stroke-width:1.7;rx:9}
+      .title{fill:#e8f6ff;font-weight:700}
+      .sub{fill:#9fc4d8;font-size:12px}
+      .lbl{fill:#dff3ff;font-size:13px;font-weight:600}
+      .edge{stroke:#3f7e8f;stroke-width:1.6;fill:none}
+      .edgelbl{fill:#7fb6c8;font-size:11px}
+      .pill{fill:#0f2a3d;stroke:#2dd4bf;stroke-width:1.2;rx:12}
+    </style>
+  </defs>
+
+  <rect width="1100" height="720" fill="url(#bg)"/>
+  <text x="40" y="48" class="title" font-size="26">oh-my-jeo</text>
+  <text x="40" y="72" class="sub" font-size="14">Chat-first workflow pack for Hermes-style agents — deterministic local contracts, visible evidence boundaries, delegated coding handoffs.</text>
+  <rect x="900" y="30" width="160" height="26" class="pill"/>
+  <text x="980" y="48" text-anchor="middle" class="lbl" fill="#2dd4bf">spec-first · MIT</text>
+
+  <!-- Row 1: user + surfaces -->
+  <rect x="40" y="100" width="220" height="74" class="hot"/>
+  <text x="150" y="128" text-anchor="middle" class="lbl">User in chat</text>
+  <text x="150" y="148" text-anchor="middle" class="sub">Hermes · Discord · Slack · hosted</text>
+  <text x="150" y="164" text-anchor="middle" class="sub">plain natural-language request</text>
+
+  <rect x="300" y="100" width="220" height="74" class="node"/>
+  <text x="410" y="128" text-anchor="middle" class="lbl">Hermes Agent</text>
+  <text x="410" y="148" text-anchor="middle" class="sub">clarify · research · plan</text>
+  <text x="410" y="164" text-anchor="middle" class="sub">owns user-facing narration</text>
+
+  <rect x="560" y="100" width="220" height="74" class="node"/>
+  <text x="670" y="124" text-anchor="middle" class="lbl">Skill pack</text>
+  <text x="670" y="144" text-anchor="middle" class="sub">deep-interview · ralplan</text>
+  <text x="670" y="160" text-anchor="middle" class="sub">loop · ultragoal · web-research</text>
+
+  <rect x="820" y="100" width="220" height="74" class="node"/>
+  <text x="930" y="124" text-anchor="middle" class="lbl">omj plugin</text>
+  <text x="930" y="144" text-anchor="middle" class="sub">recommend · probe · hud</text>
+  <text x="930" y="160" text-anchor="middle" class="sub">status · role · evidence hooks</text>
+
+  <!-- Row 2: contract layer -->
+  <rect x="40" y="220" width="1000" height="150" class="band" rx="12"/>
+  <text x="60" y="246" class="title" font-size="16">omj local contract layer  (deterministic · no LLM/network calls)</text>
+
+  <rect x="60" y="262" width="150" height="92" class="node"/>
+  <text x="135" y="286" text-anchor="middle" class="lbl">routing/</text>
+  <text x="135" y="306" text-anchor="middle" class="sub">intent · policy</text>
+  <text x="135" y="322" text-anchor="middle" class="sub">recommend</text>
+  <text x="135" y="338" text-anchor="middle" class="sub">route_plan</text>
+
+  <rect x="228" y="262" width="150" height="92" class="node"/>
+  <text x="303" y="286" text-anchor="middle" class="lbl">workflows/</text>
+  <text x="303" y="306" text-anchor="middle" class="sub">materials · paper</text>
+  <text x="303" y="322" text-anchor="middle" class="sub">research · visual</text>
+  <text x="303" y="338" text-anchor="middle" class="sub">learning · memory</text>
+
+  <rect x="396" y="262" width="150" height="92" class="node"/>
+  <text x="471" y="286" text-anchor="middle" class="lbl">coding/</text>
+  <text x="471" y="306" text-anchor="middle" class="sub">delegation</text>
+  <text x="471" y="322" text-anchor="middle" class="sub">executors · isolation</text>
+  <text x="471" y="338" text-anchor="middle" class="sub">worktree · readiness</text>
+
+  <rect x="564" y="262" width="150" height="92" class="node"/>
+  <text x="639" y="286" text-anchor="middle" class="lbl">wrapper/</text>
+  <text x="639" y="306" text-anchor="middle" class="sub">contract v1</text>
+  <text x="639" y="322" text-anchor="middle" class="sub">lifecycle · sessions</text>
+  <text x="639" y="338" text-anchor="middle" class="sub">route_hints</text>
+
+  <rect x="732" y="262" width="150" height="92" class="node"/>
+  <text x="807" y="286" text-anchor="middle" class="lbl">runtime/</text>
+  <text x="807" y="306" text-anchor="middle" class="sub">artifacts · records</text>
+  <text x="807" y="322" text-anchor="middle" class="sub">prepared vs</text>
+  <text x="807" y="338" text-anchor="middle" class="sub">observed evidence</text>
+
+  <rect x="900" y="262" width="124" height="92" class="node"/>
+  <text x="962" y="286" text-anchor="middle" class="lbl">system/</text>
+  <text x="962" y="306" text-anchor="middle" class="sub">paths · ingress</text>
+  <text x="962" y="322" text-anchor="middle" class="sub">local_store</text>
+  <text x="962" y="338" text-anchor="middle" class="sub">targets</text>
+
+  <!-- Row 3: handoff + evidence -->
+  <rect x="40" y="416" width="300" height="86" class="node"/>
+  <text x="190" y="442" text-anchor="middle" class="lbl">Selected coding executor</text>
+  <text x="190" y="462" text-anchor="middle" class="sub">Codex · Claude Code · Hermes · other</text>
+  <text x="190" y="480" text-anchor="middle" class="sub">runs implementation when dispatched</text>
+
+  <rect x="400" y="416" width="300" height="86" class="node"/>
+  <text x="550" y="442" text-anchor="middle" class="lbl">Project memory</text>
+  <text x="550" y="462" text-anchor="middle" class="sub">.omj/memory — reviewed summaries</text>
+  <text x="550" y="480" text-anchor="middle" class="sub">prepared context, not execution proof</text>
+
+  <rect x="760" y="416" width="280" height="86" class="node"/>
+  <text x="900" y="442" text-anchor="middle" class="lbl">Local runtime artifacts</text>
+  <text x="900" y="462" text-anchor="middle" class="sub">JSON/JSONL evidence ledger</text>
+  <text x="900" y="480" text-anchor="middle" class="sub">status_card/v1 · observation/v1</text>
+
+  <!-- Row 4: workflow pipeline -->
+  <rect x="40" y="548" width="1000" height="132" class="band" rx="12"/>
+  <text x="60" y="574" class="title" font-size="16">Request flow</text>
+  <g>
+    <rect x="60" y="592" width="150" height="60" class="hot"/>
+    <text x="135" y="618" text-anchor="middle" class="lbl">Interview</text>
+    <text x="135" y="636" text-anchor="middle" class="sub">deep-interview</text>
+
+    <rect x="248" y="592" width="150" height="60" class="node"/>
+    <text x="323" y="618" text-anchor="middle" class="lbl">Plan</text>
+    <text x="323" y="636" text-anchor="middle" class="sub">ralplan · seed</text>
+
+    <rect x="436" y="592" width="150" height="60" class="node"/>
+    <text x="511" y="618" text-anchor="middle" class="lbl">Handoff</text>
+    <text x="511" y="636" text-anchor="middle" class="sub">coding delegate</text>
+
+    <rect x="624" y="592" width="150" height="60" class="node"/>
+    <text x="699" y="618" text-anchor="middle" class="lbl">Observe</text>
+    <text x="699" y="636" text-anchor="middle" class="sub">runtime evidence</text>
+
+    <rect x="812" y="592" width="150" height="60" class="node"/>
+    <text x="887" y="618" text-anchor="middle" class="lbl">Evolve</text>
+    <text x="887" y="636" text-anchor="middle" class="sub">workflow-learning</text>
+  </g>
+  <path class="edge" marker-end="url(#arrow)" d="M210 622 H246"/>
+  <path class="edge" marker-end="url(#arrow)" d="M398 622 H434"/>
+  <path class="edge" marker-end="url(#arrow)" d="M586 622 H622"/>
+  <path class="edge" marker-end="url(#arrow)" d="M774 622 H810"/>
+
+  <!-- edges -->
+  <path class="edge" marker-end="url(#arrow)" d="M260 137 H298"/>
+  <path class="edge" marker-end="url(#arrow)" d="M520 137 H558"/>
+  <path class="edge" marker-end="url(#arrow)" d="M780 137 H818"/>
+  <path class="edge" marker-end="url(#arrow)" d="M410 174 V218"/>
+  <text x="420" y="200" class="edgelbl">accepted plan → contract</text>
+  <path class="edge" marker-end="url(#arrow)" d="M471 354 V414"/>
+  <text x="481" y="392" class="edgelbl">prepared handoff</text>
+  <path class="edge" marker-end="url(#arrow)" d="M807 354 V414"/>
+  <text x="817" y="392" class="edgelbl">status_card/v1</text>
+  <path class="edge" marker-end="url(#arrow)" d="M340 459 H398"/>
+  <path class="edge" marker-end="url(#arrow)" d="M700 459 H758"/>
+</svg>
