@@ -4,7 +4,7 @@ description: "oh-my-jeo, jeo-code, jeo-pi, jeo-claw, and jeo-skills form one spe
 categories: [AI, Agents]
 tags: [jeo-code, oh-my-jeo, jeo-pi, jeo-claw, jeo-skills, ContextEngineering, AgentMemory, HarnessEngineering, ReasoningData, VerifierDesign]
 date: 2026-06-29 10:00:00 +0900
-pin: false
+pin: true
 mermaid: true
 math: false
 image:
