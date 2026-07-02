@@ -1,0 +1,245 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#050B14"/>
+      <stop offset="50%" stop-color="#0A1527"/>
+      <stop offset="100%" stop-color="#0D1E36"/>
+    </linearGradient>
+    <!-- Dot grid -->
+    <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="14" cy="14" r="1" fill="#1E3E66" opacity="0.3"/>
+    </pattern>
+    <!-- Rainbow top bar -->
+    <linearGradient id="topBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#831843" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#EC4899"/>
+      <stop offset="45%" stop-color="#8B5CF6"/>
+      <stop offset="65%" stop-color="#3B82F6"/>
+      <stop offset="85%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Card gradients -->
+    <linearGradient id="cardPurple" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5B21B6"/><stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="cardBlue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1D4ED8"/><stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="cardAmber" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#92400E"/><stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="cardGreen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#065F46"/><stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+    <linearGradient id="cardPink" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#831843"/><stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+
+    <!-- Mascot body gradients -->
+    <radialGradient id="bodyGrad" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#C0392B"/>
+    </radialGradient>
+    <radialGradient id="eyeGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </radialGradient>
+
+    <!-- Glow filters -->
+    <filter id="glowPink" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#000" flood-opacity="0.7"/>
+    </filter>
+    <filter id="titleGlow" x="-5%" y="-30%" width="110%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="termGlow" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Arrow marker -->
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#475569"/>
+    </marker>
+    <marker id="arrC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <!-- Rainbow bar -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#topBar)"/>
+
+  <!-- Left panel — title block (x: 0-500) -->
+  <!-- Title -->
+  <text x="80" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+        font-size="58" font-weight="900" fill="#F1F5F9" filter="url(#titleGlow)">jeo-code</text>
+  <text x="80" y="125" font-family="-apple-system, sans-serif"
+        font-size="18" font-weight="400" fill="#EC4899" letter-spacing="1">The Harness Engine</text>
+  <text x="80" y="150" font-family="-apple-system, sans-serif"
+        font-size="15" fill="#64748B" letter-spacing="2">ENCODE INTENTION · DECODE SOFTWARE</text>
+
+  <!-- Mascot: Red Crayfish (pixel-art style, simplified) -->
+  <!-- Body -->
+  <g transform="translate(240, 310)" filter="url(#glowPink)">
+    <!-- Tail segments -->
+    <rect x="-16" y="60" width="32" height="12" rx="3" fill="#B91C1C" opacity="0.8"/>
+    <rect x="-14" y="74" width="28" height="10" rx="3" fill="#991B1B" opacity="0.7"/>
+    <rect x="-10" y="86" width="20" height="8" rx="2" fill="#7F1D1D" opacity="0.6"/>
+    <!-- Main body -->
+    <ellipse cx="0" cy="30" rx="38" ry="28" fill="url(#bodyGrad)"/>
+    <!-- Head -->
+    <ellipse cx="0" cy="-5" rx="32" ry="26" fill="url(#bodyGrad)"/>
+    <!-- Eyes -->
+    <circle cx="-12" cy="-10" r="8" fill="url(#eyeGrad)"/>
+    <circle cx="12" cy="-10" r="8" fill="url(#eyeGrad)"/>
+    <circle cx="-11" cy="-9" r="4" fill="#1D4ED8"/>
+    <circle cx="13" cy="-9" r="4" fill="#1D4ED8"/>
+    <circle cx="-10" cy="-8" r="2" fill="#0F172A"/>
+    <circle cx="14" cy="-8" r="2" fill="#0F172A"/>
+    <!-- Antennae -->
+    <line x1="-12" y1="-18" x2="-40" y2="-55" stroke="#F87171" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="12" y1="-18" x2="40" y2="-55" stroke="#F87171" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Claws — left -->
+    <ellipse cx="-58" cy="5" rx="18" ry="10" fill="#DC2626" transform="rotate(-20,-58,5)"/>
+    <ellipse cx="-52" cy="-5" rx="10" ry="7" fill="#EF4444" transform="rotate(-20,-52,-5)"/>
+    <!-- Claws — right (holding terminal) -->
+    <ellipse cx="58" cy="5" rx="18" ry="10" fill="#DC2626" transform="rotate(20,58,5)"/>
+    <ellipse cx="52" cy="-5" rx="10" ry="7" fill="#EF4444" transform="rotate(20,52,-5)"/>
+    <!-- Walking legs -->
+    <line x1="-28" y1="40" x2="-55" y2="65" stroke="#B91C1C" stroke-width="3" stroke-linecap="round"/>
+    <line x1="-18" y1="48" x2="-42" y2="78" stroke="#B91C1C" stroke-width="3" stroke-linecap="round"/>
+    <line x1="28" y1="40" x2="55" y2="65" stroke="#B91C1C" stroke-width="3" stroke-linecap="round"/>
+    <line x1="18" y1="48" x2="42" y2="78" stroke="#B91C1C" stroke-width="3" stroke-linecap="round"/>
+    <!-- Terminal panel held by claw -->
+    <rect x="65" y="-28" width="90" height="60" rx="6" fill="#0B1526" stroke="#3B82F6" stroke-width="1.5" filter="url(#termGlow)"/>
+    <rect x="65" y="-28" width="90" height="16" rx="6" fill="#1D4ED8"/>
+    <rect x="65" y="-17" width="90" height="5" fill="#1D4ED8"/>
+    <text x="110" y="-15" font-family="'Courier New', monospace" font-size="9" fill="#BFDBFE" text-anchor="middle">jeo-code</text>
+    <text x="72" y="-2" font-family="'Courier New', monospace" font-size="8" fill="#34D399">$ jeo</text>
+    <text x="72" y="10" font-family="'Courier New', monospace" font-size="7" fill="#60A5FA">» deep-interview</text>
+    <text x="72" y="21" font-family="'Courier New', monospace" font-size="7" fill="#A78BFA">» ralplan</text>
+  </g>
+
+  <!-- Provider badges (left panel bottom) -->
+  <text x="80" y="490" font-family="-apple-system, sans-serif" font-size="11" fill="#475569" letter-spacing="2">MULTI-PROVIDER · ONE LOOP</text>
+  <rect x="80" y="500" width="76" height="24" rx="12" fill="#111827" stroke="#BE185D" stroke-width="1"/>
+  <text x="118" y="516" font-family="sans-serif" font-size="11" fill="#F9A8D4" text-anchor="middle">Anthropic</text>
+  <rect x="164" y="500" width="66" height="24" rx="12" fill="#111827" stroke="#059669" stroke-width="1"/>
+  <text x="197" y="516" font-family="sans-serif" font-size="11" fill="#6EE7B7" text-anchor="middle">OpenAI</text>
+  <rect x="238" y="500" width="64" height="24" rx="12" fill="#111827" stroke="#2563EB" stroke-width="1"/>
+  <text x="270" y="516" font-family="sans-serif" font-size="11" fill="#93C5FD" text-anchor="middle">Gemini</text>
+  <rect x="310" y="500" width="54" height="24" rx="12" fill="#111827" stroke="#9333EA" stroke-width="1"/>
+  <text x="337" y="516" font-family="sans-serif" font-size="11" fill="#D8B4FE" text-anchor="middle">Grok</text>
+  <rect x="372" y="500" width="72" height="24" rx="12" fill="#111827" stroke="#0891B2" stroke-width="1"/>
+  <text x="408" y="516" font-family="sans-serif" font-size="11" fill="#67E8F9" text-anchor="middle">Ollama</text>
+
+  <!-- Skill count badge -->
+  <rect x="80" y="535" width="140" height="36" rx="18" fill="#0F172A" stroke="#10B981" stroke-width="1.5"/>
+  <text x="150" y="558" font-family="-apple-system, sans-serif" font-size="14" font-weight="800"
+        fill="#34D399" text-anchor="middle">146 Skills</text>
+
+  <!-- Bun badge -->
+  <rect x="230" y="535" width="120" height="36" rx="18" fill="#0F172A" stroke="#F59E0B" stroke-width="1.5"/>
+  <text x="290" y="558" font-family="-apple-system, sans-serif" font-size="12" font-weight="700"
+        fill="#FCD34D" text-anchor="middle">Bun ≥ 1.3.14</text>
+
+  <!-- Divider line -->
+  <line x1="510" y1="20" x2="510" y2="610" stroke="#1E293B" stroke-width="1.5"/>
+
+  <!-- ============= RIGHT PANEL — Spec-first Pipeline (x: 540-1140) ============= -->
+  <text x="840" y="50" font-family="-apple-system, sans-serif"
+        font-size="12" font-weight="700" fill="#475569" text-anchor="middle" letter-spacing="2.5">
+    SPEC-FIRST WORKFLOW PIPELINE
+  </text>
+  <line x1="540" y1="60" x2="1140" y2="60" stroke="#1E293B" stroke-width="1"/>
+
+  <!-- Pipeline steps — vertical layout -->
+  <!-- Step 1: deep-interview -->
+  <g transform="translate(540, 80)" filter="url(#shadow)">
+    <rect width="570" height="80" rx="10" fill="#0B1526" stroke="#8B5CF6" stroke-width="1.5"/>
+    <rect width="570" height="30" rx="10" fill="url(#cardPurple)"/>
+    <rect y="20" width="570" height="10" fill="url(#cardPurple)"/>
+    <text x="285" y="21" font-family="-apple-system, sans-serif" font-size="14" font-weight="700"
+          fill="#FFF" text-anchor="middle">1. deep-interview</text>
+    <text x="285" y="48" font-family="-apple-system, sans-serif" font-size="12"
+          fill="#C4B5FD" text-anchor="middle">Socratic ambiguity gate · goal + constraints + acceptance criteria</text>
+    <text x="285" y="66" font-family="'Courier New', monospace" font-size="10"
+          fill="#7C3AED" text-anchor="middle">jeo deep-interview "Describe what you want to build"</text>
+  </g>
+
+  <path d="M 825 162 L 825 178" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrC)"/>
+
+  <!-- Step 2: ralplan -->
+  <g transform="translate(540, 180)" filter="url(#shadow)">
+    <rect width="570" height="80" rx="10" fill="#0B1526" stroke="#3B82F6" stroke-width="1.5"/>
+    <rect width="570" height="30" rx="10" fill="url(#cardBlue)"/>
+    <rect y="20" width="570" height="10" fill="url(#cardBlue)"/>
+    <text x="285" y="21" font-family="-apple-system, sans-serif" font-size="14" font-weight="700"
+          fill="#FFF" text-anchor="middle">2. ralplan</text>
+    <text x="285" y="48" font-family="-apple-system, sans-serif" font-size="12"
+          fill="#93C5FD" text-anchor="middle">Draft + repo-grounded critic gate · [OKAY] persisted</text>
+    <text x="285" y="66" font-family="'Courier New', monospace" font-size="10"
+          fill="#2563EB" text-anchor="middle">jeo ralplan</text>
+  </g>
+
+  <path d="M 825 262 L 825 278" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrC)"/>
+
+  <!-- Step 3: approve -->
+  <g transform="translate(540, 280)" filter="url(#shadow)">
+    <rect width="570" height="80" rx="10" fill="#0B1526" stroke="#F59E0B" stroke-width="1.5"/>
+    <rect width="570" height="30" rx="10" fill="url(#cardAmber)"/>
+    <rect y="20" width="570" height="10" fill="url(#cardAmber)"/>
+    <text x="285" y="21" font-family="-apple-system, sans-serif" font-size="14" font-weight="700"
+          fill="#FFF" text-anchor="middle">3. 🔐 approve</text>
+    <text x="285" y="48" font-family="-apple-system, sans-serif" font-size="12"
+          fill="#FCD34D" text-anchor="middle">Schema + roles + [OKAY] — unlocks execution</text>
+    <text x="285" y="66" font-family="'Courier New', monospace" font-size="10"
+          fill="#D97706" text-anchor="middle">jeo approve &lt;plan-path&gt;</text>
+  </g>
+
+  <path d="M 825 362 L 825 378" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrC)"/>
+
+  <!-- Step 4: team -->
+  <g transform="translate(540, 380)" filter="url(#shadow)">
+    <rect width="570" height="80" rx="10" fill="#0B1526" stroke="#10B981" stroke-width="1.5"/>
+    <rect width="570" height="30" rx="10" fill="url(#cardGreen)"/>
+    <rect y="20" width="570" height="10" fill="url(#cardGreen)"/>
+    <text x="285" y="21" font-family="-apple-system, sans-serif" font-size="14" font-weight="700"
+          fill="#FFF" text-anchor="middle">4. team</text>
+    <text x="285" y="48" font-family="-apple-system, sans-serif" font-size="12"
+          fill="#6EE7B7" text-anchor="middle">Serial executor · run lock · mutation audit per task</text>
+    <text x="285" y="66" font-family="'Courier New', monospace" font-size="10"
+          fill="#059669" text-anchor="middle">jeo team</text>
+  </g>
+
+  <path d="M 825 462 L 825 478" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrC)"/>
+
+  <!-- Step 5: ultragoal -->
+  <g transform="translate(540, 480)" filter="url(#shadow)">
+    <rect width="570" height="80" rx="10" fill="#0B1526" stroke="#EC4899" stroke-width="1.5"/>
+    <rect width="570" height="30" rx="10" fill="url(#cardPink)"/>
+    <rect y="20" width="570" height="10" fill="url(#cardPink)"/>
+    <text x="285" y="21" font-family="-apple-system, sans-serif" font-size="14" font-weight="700"
+          fill="#FFF" text-anchor="middle">5. ✅ ultragoal</text>
+    <text x="285" y="48" font-family="-apple-system, sans-serif" font-size="12"
+          fill="#FBCFE8" text-anchor="middle">Honest verification · suite runs once · no fabrication</text>
+    <text x="285" y="66" font-family="'Courier New', monospace" font-size="10"
+          fill="#DB2777" text-anchor="middle">jeo ultragoal</text>
+  </g>
+
+  <!-- Bottom tagline -->
+  <text x="840" y="595" font-family="-apple-system, sans-serif" font-size="13"
+        fill="#334155" text-anchor="middle" letter-spacing="1.5">
+    Real gates, no theater. State over history.
+  </text>
+</svg>

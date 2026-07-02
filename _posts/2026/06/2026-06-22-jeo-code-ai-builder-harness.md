@@ -1,6 +1,6 @@
 ---
 title: "jeo-code: The Harness Engine That Makes You a 10× AI Builder"
-description: "How a Bun-based AI coding agent plus 136 battle-tested skills turns any developer into a production AI builder — philosophy, workflow, use cases, and the real power of the jeo-skills ecosystem."
+description: "How a Bun-based AI coding agent plus 146 battle-tested skills turns any developer into a production AI builder — philosophy, workflow, use cases, and the real power of the jeo-skills ecosystem."
 categories: [AI, Agents]
 tags: [jeo-code, jeo-skills, HarnessEngineering, AIBuilder, AgentWorkflow, ClaudeCode, OpenAI, Remotion]
 date: 2026-06-22 10:00:00 +0900
@@ -95,7 +95,7 @@ The harness engine alone is powerful. With **[jeo-skills](https://github.com/aki
 
 > **[⭐ Star jeo-skills on GitHub →](https://github.com/akillness/jeo-skills)**
 
-jeo-skills is a curated collection of **136 installable skill folders** for LLM-based development workflows. Each skill is a `SKILL.md` that tells the agent exactly which tools to use, which patterns to apply, and which route-outs to respect — so the agent stops guessing and starts shipping.
+jeo-skills is a curated collection of **146 installable skill folders** for LLM-based development workflows. Each skill is a `SKILL.md` that tells the agent exactly which tools to use, which patterns to apply, and which route-outs to respect — so the agent stops guessing and starts shipping.
 
 ### Install Any Skill in One Command
 
@@ -109,9 +109,9 @@ git clone https://github.com/akillness/jeo-skills.git && bash jeo-skills/install
 
 ### The Skill Ecosystem Map
 
-<img src="/assets/img/jeo-code/d3-skills-map.svg" alt="jeo-skills ecosystem map — 136 installable skills grouped across 15 categories" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;" />
+<img src="/assets/img/jeo-code/d3-skills-map.svg" alt="jeo-skills ecosystem map — 146 installable skills grouped across 15 categories" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;" />
 
-### 136 Skills Across Every Domain
+### 146 Skills Across Every Domain
 
 | Category | Skills (sample) | Count |
 |:---------|:---------------|------:|
@@ -124,8 +124,8 @@ git clone https://github.com/akillness/jeo-skills.git && bash jeo-skills/install
 | **🤖 AI Agents** | `crewai-multi-agent`, `openai-agents-python`, `pydantic-ai`, `clawteam` | 14 |
 | **📊 Data & Analytics** | `data-analysis`, `looker-studio-bigquery`, `langsmith`, `opik` | 9 |
 | **🔒 Quality & Security** | `ultraqa`, `security-best-practices`, `backend-testing`, `web-accessibility` | 12 |
-| **… and more** | `okf`, `obsidian`, `compresso`, `rtk`, `semble`, `graphify` | 37 |
-| **Total** | | **136** |
+| **… and more** | `okf`, `obsidian`, `compresso`, `rtk`, `semble`, `graphify` | 47 |
+| **Total** | | **146** |
 
 ---
 
@@ -217,7 +217,7 @@ jeo "create a Remotion promo video + blog post for our new matchmaking AI featur
 | Manually run tests after each change | Self-correcting hook loop — agent fixes its own bugs |
 | Start from scratch each session | `.jeo/` state persists, `/resume` continues any task |
 | One model, one provider | Switch Anthropic → OpenAI → Ollama mid-task |
-| General-purpose agent guesses | 136 skills encode exactly what experts do |
+| General-purpose agent guesses | 146 skills encode exactly what experts do |
 
 ---
 
@@ -284,7 +284,7 @@ jeo /provider login ollama
 > **Tip:** `/provider login <name>` also works from inside the jeo interactive TUI — no need to restart.
 {: .prompt-tip}
 
-### Install All 136 jeo-skills
+### Install All 146 jeo-skills
 
 **The fastest way — let your LLM agent install them for you.** Hand this prompt file to any agent (jeo, Claude Code, Codex, Cursor…) — it reads the instructions and installs every skill automatically:
 
@@ -300,10 +300,10 @@ Prefer to do it by hand? The classic clone-and-run path still works:
 # Manual full install
 git clone https://github.com/akillness/jeo-skills.git
 cd jeo-skills && bash install.sh
-# → creates 136 skill folders in ~/.agents/skills/
+# → creates 146 skill folders in ~/.agents/skills/
 
 # Verify
-ls ~/.agents/skills/ | wc -l   # → 136
+ls ~/.agents/skills/ | wc -l   # → 146
 ```
 
 
@@ -317,7 +317,7 @@ jeo
 jeo "$deep-dive explain the architecture then refactor the auth module"
 
 # Check your skill library
-ls ~/.agents/skills/ | wc -l   # → 136
+ls ~/.agents/skills/ | wc -l   # → 146
 ```
 
 
@@ -331,7 +331,7 @@ ls ~/.agents/skills/ | wc -l   # → 136
 | Generic coding agent | 5 min | Medium | ⚠️ Optional | ⚠️ | ❌ |
 | Claude Code / Codex | 10 min | Fast | ⚠️ Hook only | ✅ | ❌ |
 | **jeo-code** | **10 min** | **Fast** | **✅ Honest** | **✅** | **⚠️ Manual** |
-| **jeo-code + jeo-skills** | **15 min** | **🚀 10× Faster** | **✅ Honest** | **✅** | **✅ 136 skills** |
+| **jeo-code + jeo-skills** | **15 min** | **🚀 10× Faster** | **✅ Honest** | **✅** | **✅ 146 skills** |
 
 > The skills layer is what changes the multiplier from 3× to 10×. The agent stops guessing the right approach and follows proven, tested patterns.
 {: .prompt-info}
@@ -368,7 +368,7 @@ Both repos are open source and actively maintained:
   </a>
   <a href="https://github.com/akillness/jeo-skills" target="_blank" style="flex:1; min-width:280px; display:block; background:linear-gradient(135deg,#1a3a2f,#0a0a14); border:2px solid #10b981; border-radius:16px; padding:1.5rem; text-decoration:none;">
     <div style="font-family:monospace; font-size:1.3rem; font-weight:900; color:#34d399; margin-bottom:0.5rem;">🚀 akillness/jeo-skills</div>
-    <div style="color:#cbd5e1; font-size:0.95rem;">136 skills for LLM workflows · TOON format · Claude / Codex / Ollama</div>
+    <div style="color:#cbd5e1; font-size:0.95rem;">146 skills for LLM workflows · TOON format · Claude / Codex / Ollama</div>
     <div style="color:#f59e0b; font-size:0.85rem; margin-top:0.5rem; font-family:monospace;">npx skills add https://github.com/akillness/jeo-skills --skill &lt;name&gt;</div>
   </a>
 </div>
@@ -381,7 +381,7 @@ Both repos are open source and actively maintained:
   <img src="/assets/img/jeo-code/character.png" alt="jeo-code mascot character" style="width:240px; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.5);" />
   <div>
     <p>The jeo mascot is the embodiment of the harness philosophy — methodical, precise, and always honest about what it knows. When jeo says <code>[OKAY]</code>, it means it.</p>
-    <p>Built with Bun. Powered by every major LLM. Extended by 136 battle-tested skills.</p>
+    <p>Built with Bun. Powered by every major LLM. Extended by 146 battle-tested skills.</p>
     <p><strong>This is what being a 10× AI builder actually looks like.</strong></p>
   </div>
 </div>

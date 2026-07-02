@@ -1,0 +1,276 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#050B14"/>
+      <stop offset="50%" stop-color="#0A1527"/>
+      <stop offset="100%" stop-color="#0D1E36"/>
+    </linearGradient>
+
+    <!-- Dot grid -->
+    <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="14" cy="14" r="1" fill="#1E3E66" opacity="0.3"/>
+    </pattern>
+
+    <!-- Rainbow top bar -->
+    <linearGradient id="topBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1D4ED8" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#3B82F6"/>
+      <stop offset="40%" stop-color="#8B5CF6"/>
+      <stop offset="60%" stop-color="#10B981"/>
+      <stop offset="80%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#EC4899" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Node gradients -->
+    <radialGradient id="gBlue" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </radialGradient>
+    <radialGradient id="gPurple" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="100%" stop-color="#5B21B6"/>
+    </radialGradient>
+    <radialGradient id="gPink" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F472B6"/>
+      <stop offset="100%" stop-color="#9D174D"/>
+    </radialGradient>
+    <radialGradient id="gGreen" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#065F46"/>
+    </radialGradient>
+    <radialGradient id="gAmber" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#92400E"/>
+    </radialGradient>
+    <radialGradient id="gCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="60%" stop-color="#94A3B8"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </radialGradient>
+
+    <!-- Glow filters -->
+    <filter id="glowBlue" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowPurple" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowCenter" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="titleGlow" x="-10%" y="-40%" width="120%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Pipeline step gradients -->
+    <linearGradient id="pStep1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5B21B6"/><stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="pStep2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1D4ED8"/><stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="pStep3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#92400E"/><stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="pStep4" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#065F46"/><stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+    <linearGradient id="pStep5" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#831843"/><stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+
+    <!-- Arrow marker -->
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#475569"/>
+    </marker>
+    <marker id="arrWhite" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Rainbow top accent -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#topBar)" rx="2"/>
+
+  <!-- Title block -->
+  <text x="600" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+        font-size="36" font-weight="800" fill="#F1F5F9" text-anchor="middle"
+        letter-spacing="1" filter="url(#titleGlow)">The jeo Ecosystem</text>
+  <text x="600" y="80" font-family="-apple-system, sans-serif"
+        font-size="15" fill="#64748B" text-anchor="middle" letter-spacing="3">
+    STATE OVER HISTORY · FIVE REPOS · ONE SPEC-FIRST HARNESS
+  </text>
+
+  <!-- ============= CONSTELLATION LINES (drawn before nodes) ============= -->
+  <!-- oh-my-jeo (top, 600,165) — jeo-code (right, 880,295) -->
+  <line x1="600" y1="165" x2="855" y2="280" stroke="#3B82F6" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.5"/>
+  <!-- jeo-code (880,295) — jeo-skills (bottom-right, 780,460) -->
+  <line x1="855" y1="310" x2="755" y2="445" stroke="#10B981" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.5"/>
+  <!-- jeo-skills (780,460) — jeo-claw (bottom-left, 420,460) -->
+  <line x1="755" y1="460" x2="445" y2="460" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.5"/>
+  <!-- jeo-claw (420,460) — jeopi (left, 320,295) -->
+  <line x1="445" y1="445" x2="345" y2="310" stroke="#8B5CF6" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.5"/>
+  <!-- jeopi (320,295) — oh-my-jeo (600,165) -->
+  <line x1="345" y1="280" x2="575" y2="165" stroke="#EC4899" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.5"/>
+
+  <!-- Cross connections to center (600, 315) -->
+  <line x1="600" y1="185" x2="600" y2="285" stroke="#E2E8F0" stroke-width="1" opacity="0.2"/>
+  <line x1="855" y1="295" x2="650" y2="315" stroke="#E2E8F0" stroke-width="1" opacity="0.2"/>
+  <line x1="755" y1="460" x2="635" y2="340" stroke="#E2E8F0" stroke-width="1" opacity="0.2"/>
+  <line x1="445" y1="460" x2="565" y2="340" stroke="#E2E8F0" stroke-width="1" opacity="0.2"/>
+  <line x1="345" y1="295" x2="550" y2="315" stroke="#E2E8F0" stroke-width="1" opacity="0.2"/>
+
+  <!-- ============= CENTER ORBS — STATE OVER HISTORY ============= -->
+  <!-- Outer glow ring -->
+  <circle cx="600" cy="315" r="68" fill="none" stroke="#E2E8F0" stroke-width="1" opacity="0.12"/>
+  <circle cx="600" cy="315" r="52" fill="none" stroke="#E2E8F0" stroke-width="1" opacity="0.18"/>
+  <!-- Center orb -->
+  <circle cx="600" cy="315" r="42" fill="url(#gCenter)" filter="url(#glowCenter)" opacity="0.9"/>
+  <circle cx="600" cy="315" r="42" fill="none" stroke="#94A3B8" stroke-width="1.5" opacity="0.6"/>
+  <text x="600" y="308" font-family="-apple-system, sans-serif" font-size="9" font-weight="700"
+        fill="#0F172A" text-anchor="middle" letter-spacing="1.5">STATE OVER</text>
+  <text x="600" y="322" font-family="-apple-system, sans-serif" font-size="9" font-weight="700"
+        fill="#0F172A" text-anchor="middle" letter-spacing="1.5">HISTORY</text>
+
+  <!-- ============= NODE 1: oh-my-jeo (top-center) ============= -->
+  <g transform="translate(600, 165)" filter="url(#shadow)">
+    <!-- Outer ring -->
+    <circle r="48" fill="none" stroke="#3B82F6" stroke-width="1.5" opacity="0.4"/>
+    <!-- Main orb -->
+    <circle r="36" fill="url(#gBlue)" filter="url(#glowBlue)"/>
+    <circle r="36" fill="none" stroke="#60A5FA" stroke-width="2"/>
+    <!-- Icon: Hermes H -->
+    <text x="0" y="7" font-family="'Georgia', serif" font-size="22" font-weight="800"
+          fill="#FFFFFF" text-anchor="middle">H</text>
+  </g>
+  <!-- Label -->
+  <rect x="513" y="218" width="174" height="28" rx="6" fill="#0B1526" stroke="#3B82F6" stroke-width="1" opacity="0.9"/>
+  <text x="600" y="236" font-family="-apple-system, sans-serif" font-size="13" font-weight="700"
+        fill="#93C5FD" text-anchor="middle">oh-my-jeo</text>
+
+  <!-- ============= NODE 2: jeo-code (right) ============= -->
+  <g transform="translate(880, 295)" filter="url(#shadow)">
+    <circle r="48" fill="none" stroke="#EC4899" stroke-width="1.5" opacity="0.4"/>
+    <circle r="36" fill="url(#gPink)" filter="url(#glowBlue)"/>
+    <circle r="36" fill="none" stroke="#F472B6" stroke-width="2"/>
+    <!-- Crayfish / J icon -->
+    <text x="0" y="7" font-family="-apple-system, sans-serif" font-size="20" font-weight="900"
+          fill="#FFFFFF" text-anchor="middle">jeo</text>
+  </g>
+  <rect x="795" y="344" width="170" height="28" rx="6" fill="#0B1526" stroke="#EC4899" stroke-width="1" opacity="0.9"/>
+  <text x="880" y="362" font-family="-apple-system, sans-serif" font-size="13" font-weight="700"
+        fill="#FBCFE8" text-anchor="middle">jeo-code</text>
+
+  <!-- ============= NODE 3: jeo-skills (bottom-right) ============= -->
+  <g transform="translate(780, 460)" filter="url(#shadow)">
+    <circle r="48" fill="none" stroke="#10B981" stroke-width="1.5" opacity="0.4"/>
+    <circle r="36" fill="url(#gGreen)" filter="url(#glowBlue)"/>
+    <circle r="36" fill="none" stroke="#34D399" stroke-width="2"/>
+    <!-- Skills icon: grid dots -->
+    <circle cx="-8" cy="-8" r="3" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="0" cy="-8" r="3" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="8" cy="-8" r="3" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="-8" cy="0" r="3" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="0" cy="0" r="3" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="8" cy="0" r="3" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="-8" cy="8" r="3" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="0" cy="8" r="3" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="8" cy="8" r="3" fill="#FFFFFF" opacity="0.9"/>
+  </g>
+  <rect x="690" y="508" width="180" height="28" rx="6" fill="#0B1526" stroke="#10B981" stroke-width="1" opacity="0.9"/>
+  <text x="780" y="526" font-family="-apple-system, sans-serif" font-size="13" font-weight="700"
+        fill="#6EE7B7" text-anchor="middle">jeo-skills · 146</text>
+
+  <!-- ============= NODE 4: jeo-claw (bottom-left) ============= -->
+  <g transform="translate(420, 460)" filter="url(#shadow)">
+    <circle r="48" fill="none" stroke="#F59E0B" stroke-width="1.5" opacity="0.4"/>
+    <circle r="36" fill="url(#gAmber)" filter="url(#glowBlue)"/>
+    <circle r="36" fill="none" stroke="#FCD34D" stroke-width="2"/>
+    <!-- Claw icon -->
+    <text x="0" y="9" font-family="-apple-system, sans-serif" font-size="24" fill="#FFFFFF" text-anchor="middle">⚡</text>
+  </g>
+  <rect x="333" y="508" width="174" height="28" rx="6" fill="#0B1526" stroke="#F59E0B" stroke-width="1" opacity="0.9"/>
+  <text x="420" y="526" font-family="-apple-system, sans-serif" font-size="13" font-weight="700"
+        fill="#FCD34D" text-anchor="middle">jeo-claw</text>
+
+  <!-- ============= NODE 5: jeopi (left) ============= -->
+  <g transform="translate(320, 295)" filter="url(#shadow)">
+    <circle r="48" fill="none" stroke="#8B5CF6" stroke-width="1.5" opacity="0.4"/>
+    <circle r="36" fill="url(#gPurple)" filter="url(#glowPurple)"/>
+    <circle r="36" fill="none" stroke="#A78BFA" stroke-width="2"/>
+    <!-- Pi symbol -->
+    <text x="0" y="10" font-family="'Georgia', serif" font-size="26" font-weight="700"
+          fill="#FFFFFF" text-anchor="middle">π</text>
+  </g>
+  <rect x="237" y="344" width="166" height="28" rx="6" fill="#0B1526" stroke="#8B5CF6" stroke-width="1" opacity="0.9"/>
+  <text x="320" y="362" font-family="-apple-system, sans-serif" font-size="13" font-weight="700"
+        fill="#C4B5FD" text-anchor="middle">jeopi</text>
+
+  <!-- ============= SPEC-FIRST PIPELINE BAR (bottom) ============= -->
+  <rect x="60" y="566" width="1080" height="50" rx="8" fill="#060D1A" stroke="#1E293B" stroke-width="1.5"/>
+
+  <!-- Step 1: deep-interview -->
+  <rect x="78" y="576" width="175" height="30" rx="6" fill="url(#pStep1)"/>
+  <text x="166" y="596" font-family="-apple-system, sans-serif" font-size="11" font-weight="700"
+        fill="#FFF" text-anchor="middle">deep-interview</text>
+
+  <path d="M 255 591 L 275 591" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrWhite)"/>
+
+  <!-- Step 2: ralplan -->
+  <rect x="278" y="576" width="155" height="30" rx="6" fill="url(#pStep2)"/>
+  <text x="356" y="596" font-family="-apple-system, sans-serif" font-size="11" font-weight="700"
+        fill="#FFF" text-anchor="middle">ralplan</text>
+
+  <path d="M 435 591 L 455 591" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrWhite)"/>
+
+  <!-- Step 3: approve -->
+  <rect x="458" y="576" width="155" height="30" rx="6" fill="url(#pStep3)"/>
+  <text x="536" y="596" font-family="-apple-system, sans-serif" font-size="11" font-weight="700"
+        fill="#FFF" text-anchor="middle">🔐 approve</text>
+
+  <path d="M 615 591 L 635 591" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrWhite)"/>
+
+  <!-- Step 4: team -->
+  <rect x="638" y="576" width="155" height="30" rx="6" fill="url(#pStep4)"/>
+  <text x="716" y="596" font-family="-apple-system, sans-serif" font-size="11" font-weight="700"
+        fill="#FFF" text-anchor="middle">team</text>
+
+  <path d="M 795 591 L 815 591" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrWhite)"/>
+
+  <!-- Step 5: ultragoal -->
+  <rect x="818" y="576" width="175" height="30" rx="6" fill="url(#pStep5)"/>
+  <text x="906" y="596" font-family="-apple-system, sans-serif" font-size="11" font-weight="700"
+        fill="#FFF" text-anchor="middle">✅ ultragoal</text>
+
+  <!-- State label on right -->
+  <text x="1020" y="596" font-family="-apple-system, sans-serif" font-size="10" fill="#475569"
+        text-anchor="start" letter-spacing="1">SPEC-FIRST</text>
+
+  <!-- Subtitle tags -->
+  <rect x="460" y="97" width="80" height="22" rx="11" fill="#111827" stroke="#1F3A5C" stroke-width="1"/>
+  <text x="500" y="112" font-family="sans-serif" font-size="11" fill="#60A5FA" text-anchor="middle">5 Repos</text>
+
+  <rect x="548" y="97" width="110" height="22" rx="11" fill="#111827" stroke="#1F3A5C" stroke-width="1"/>
+  <text x="603" y="112" font-family="sans-serif" font-size="11" fill="#A78BFA" text-anchor="middle">Spec-First</text>
+
+  <rect x="666" y="97" width="130" height="22" rx="11" fill="#111827" stroke="#1F3A5C" stroke-width="1"/>
+  <text x="731" y="112" font-family="sans-serif" font-size="11" fill="#34D399" text-anchor="middle">146 Skills</text>
+
+  <!-- Data pulse dots on lines (decorative) -->
+  <circle cx="740" cy="220" r="3" fill="#3B82F6" opacity="0.8"/>
+  <circle cx="815" cy="380" r="3" fill="#10B981" opacity="0.8"/>
+  <circle cx="600" cy="460" r="3" fill="#F59E0B" opacity="0.8"/>
+  <circle cx="385" cy="380" r="3" fill="#8B5CF6" opacity="0.8"/>
+  <circle cx="460" cy="218" r="3" fill="#EC4899" opacity="0.8"/>
+</svg>
