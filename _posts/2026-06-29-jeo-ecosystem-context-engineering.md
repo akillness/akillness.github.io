@@ -1,15 +1,18 @@
 ---
 title: "The jeo Ecosystem: State Over History — Five Repos That Build Agents Which Don't Forget What Matters"
-description: "oh-my-jeo, jeo-code, jeo-pi, jeo-claw, and jeo-skills form one spec-first harness. A deep dive into why agent performance comes from carrying forward failed-attempt state and evidence — not from stuffing in more history — with runnable examples from each repo."
+description: "oh-my-jeo, jeo-code, jeopi, jeo-claw, and jeo-skills form one spec-first harness. A deep dive into why agent performance comes from carrying forward failed-attempt state and evidence — not from stuffing in more history — with runnable examples from each repo."
+
 categories: [AI, Agents]
-tags: [jeo-code, oh-my-jeo, jeo-pi, jeo-claw, jeo-skills, ContextEngineering, AgentMemory, HarnessEngineering, ReasoningData, VerifierDesign]
+tags: [jeo-code, oh-my-jeo, jeopi, jeo-claw, jeo-skills, ContextEngineering, AgentMemory, HarnessEngineering, ReasoningData, VerifierDesign]
+
 date: 2026-06-29 10:00:00 +0900
 pin: true
 mermaid: true
 math: false
 image:
   path: /assets/img/2026-06-29-jeo-ecosystem-context-engineering/oh-my-jeo-hero.png
-  alt: "The jeo ecosystem — oh-my-jeo, jeo-code, jeo-pi, jeo-claw, and jeo-skills working as one spec-first harness"
+  alt: "The jeo ecosystem — oh-my-jeo, jeo-code, jeopi, jeo-claw, and jeo-skills working as one spec-first harness"
+
 ---
 
 ## 🤔 Curiosity: Why Does More Context Sometimes Make an Agent *Worse*?
@@ -21,7 +24,8 @@ It isn't. What actually predicts whether an agent finishes a task well is not *h
 > **Curiosity:** What if the actual unit of agent competence isn't "context window" or "model size," but a small, disciplined *state object* — search conditions, evidence kept, failed attempts, unconfirmed candidates — that survives across turns and tool calls?
 {: .prompt-tip }
 
-That question sent me back into five repositories I keep coming back to, all under one author, all solving a different slice of the same problem: **[oh-my-jeo](https://github.com/akillness/oh-my-jeo)**, **[jeo-code](https://github.com/akillness/jeo-code)**, **[jeo-pi](https://github.com/akillness/jeo-pi)**, **[jeo-claw](https://github.com/akillness/jeo-claw)**, and **[jeo-skills](https://github.com/akillness/jeo-skills)**. I fetched all five with `scrapling` (plain HTTP was enough — no JS rendering needed for GitHub's static README rendering path), pulled their diagrams down locally, and read every README end to end. What follows is what I found, mapped against the state-over-history thesis.
+That question sent me back into five repositories I keep coming back to, all under one author, all solving a different slice of the same problem: **[oh-my-jeo](https://github.com/akillness/oh-my-jeo)**, **[jeo-code](https://github.com/akillness/jeo-code)**, **[jeopi](https://github.com/akillness/jeopi)**, **[jeo-claw](https://github.com/akillness/jeo-claw)**, and **[jeo-skills](https://github.com/akillness/jeo-skills)**. I fetched all five with `scrapling` (plain HTTP was enough — no JS rendering needed for GitHub's static README rendering path), pulled their diagrams down locally, and read every README end to end. What follows is what I found, mapped against the state-over-history thesis.
+
 
 ---
 
@@ -92,44 +96,44 @@ jeo doctor                             # check config + model connection
 
 All of this state — the frozen spec, the plan, the approval gate, the hook diagnostics — lives under `.jeo/` with atomic writes and crash-durable, cross-process run locks. If a task crashes mid-edit, the *next* session doesn't start from zero: it resumes from a failed-task marker with a partial-edit warning, which is exactly "carry the lesson from the failure into the next action" implemented as a file on disk instead of a slogan.
 
-### 3. jeo-pi — the same discipline, reflected into a different runtime
+### 3. jeopi — the same discipline, forked into a different engine
 
-<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/jeo-pi-hero.svg" alt="jeo-pi — engineering discipline and spec-first agentic harness for pi" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;" />
+<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/jeopi-hero.png" alt="jeopi — spec-first fork of oh-my-pi. Encode intention. Decode software." style="display:block;width:100%;max-width:640px;height:auto;margin:1.25rem auto;border-radius:12px;" />
 
-**[jeo-pi](https://github.com/akillness/jeo-pi)** is proof the discipline isn't tied to one runtime. It began as a fork of [tmdgusya/roach-pi](https://github.com/tmdgusya/roach-pi) and now reflects jeo-code's **Ouroboros** workflow — *deep-interview → deep-dive → ralplan → team → ultragoal* — directly into [pi](https://pi.dev)'s native extension machinery as a five-skill family:
+**[jeopi](https://github.com/akillness/jeopi)** is proof the discipline isn't tied to one runtime — and it's a sharper proof than the repo it replaces here. It's a fork of [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) (itself a fork of [badlogic/pi-mono](https://github.com/badlogic/pi-mono) by Mario Zechner), so jeopi inherits the whole capable engine — **40+** providers, **32** built-in tools, **14** LSP ops, **28** DAP ops, **~55k** lines of Rust — and welds jeo-code's spec-first philosophy onto it rather than rewriting the engine from scratch. One command, `/jeo <what you want built>`, drives the whole spine:
 
-<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/jeo-pi-spec-loop.svg" alt="jeo-pi spec-first loop: Interview, Seed, Execute, Evaluate, Evolve" style="display:block;width:100%;max-width:640px;height:auto;margin:1.25rem auto;" />
-
-| Skill | Reflects (jeo-code) | Purpose |
-|---|---|---|
-| `spec-stack` | `deep-interview` | Ambiguity gate (`--auto` non-interactive clarification included) |
-| `spec-deep-dive` | `deep-dive` | Root-cause investigation *before* requirements, for defects with an unknown cause |
-| `spec-blueprint` | `ralplan` | Planner / Architect / Critic planning that preserves *contested* decisions |
-| `spec-execute` | `team` | Per-task executor loop against the plan |
-| `spec-verify` | `ultragoal` | Evidence-backed acceptance-criteria verification |
-
-Two details here matter more than they look. First, `spec-blueprint` explicitly **preserves contested decisions** rather than collapsing disagreement into a single silent choice — this is the direct antidote to a failure mode I've seen in multi-agent setups: when several role-agents disagree and you keep only a majority vote, you lose the *reason* they diverged, and a genuinely ambiguous judgment call gets auto-resolved as if it were a fact. jeo-pi keeps the dissent on record.
-
-Second, delegation comes in four explicit modes instead of one undifferentiated "spawn a subagent":
-
-<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/jeo-pi-architecture-overview.svg" alt="jeo-pi extension architecture overview" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;" />
-
-| Mode | Use it for |
-|---|---|
-| **Single** | One focused investigation or execution task |
-| **Parallel** | Independent reviewers, explorers, or workers |
-| **Chain** | Sequential pipelines where each step consumes the previous output |
-| **Async** | Background tasks you can wait on, check, or interrupt by run id — with `asyncDependency: "needed-before-final"` when the lead must join results before finishing |
-
-And completion is a hard gate, not a suggestion: **a target cannot be marked done until `spec-verify` returns `PASS`.** No amount of confident narration substitutes for that.
-
-```bash
-
-# Quick single-pass review of a PR, branch, or local diff — no subagents, no saved file
-/review [target]
+```
+interview        Socratic ambiguity gate — goal, constraints, out-of-scope,
+    │            checkable acceptance criteria. Vague criteria are refused.
+    ▼
+frozen seed      local://jeo-seed.md — immutable; scope changes reopen the
+    │            interview, never drift silently.
+    ▼
+plan             read-only `plan` agent; concrete files, sequencing,
+    │            per-criterion verification.
+    ▼
+critic gate      read-only `critic` agent; schema-enforced verdict
+    │            okay / iterate / reject. No okay → no execution. Ever.
+    ▼
+execute          bounded `task` subagents; a failed task feeds the lesson
+    │            into the next attempt instead of retrying unchanged.
+    ▼
+verify           suite runs once as a global signal; each criterion cites
+                 its command + observed result, or is reported unresolved.
 ```
 
+| Stage | Standing agent | What it refuses to do |
+|---|---|---|
+| Plan → gate | `critic` | Soften a real, blocking gap into `iterate` just to avoid blocking — *"that softening is the signal the gap is real"* |
+| Review | `architect` | Return a verdict without the list of files it actually inspected — a clean verdict is not the absence of inspection |
+| Execute | `task` | Call a subgoal done without verification evidence, or leave debug leftovers behind |
+
+Two mechanisms here map almost exactly onto themes this post already covers. First, `critic`'s refusal to soften a blocking gap into `iterate` is the same discipline as jeo-code's failed-task marker: a signal that something is wrong doesn't get smoothed over on the way to "done," it gets carried forward as state. Second, jeopi's **Hashline** edit format — the model points at content-hash anchors instead of retyping lines, and a stale anchor gets the patch rejected before it can corrupt the file — is the same content-anchor discipline jeo-code's own `read`/`edit` tools use, described above; Grok 4 Fast spends 61% fewer output tokens once the retry loop on bad diffs disappears. Two independent forks of two different agent engines converged on "verify the model's claimed state against the file's actual state before accepting an edit" — which is exactly the state-over-history thesis this whole post is built around.
+
+`/review` spawns dedicated `reviewer` subagents that sweep branches, single commits, or uncommitted work in parallel, then rank every issue P0 through P3 with a confidence score, so nothing important hides in a wall of prose. And completion here is a hard gate too, not a suggestion: a criterion with no command and no observed result isn't marked done — it's reported `unresolved`, never implied met.
+
 ### 4. jeo-claw — turning "learn from failure" into an actual state machine
+
 
 <img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/jeo-claw-og.png" alt="jeo-claw repository card" style="display:block;width:100%;max-width:480px;height:auto;margin:1.25rem auto;border-radius:8px;" />
 
@@ -262,17 +266,21 @@ Put the five repos together and you get one coherent lifecycle, not five separat
 flowchart LR
     subgraph Interview["🤔 Interview"]
         A1["oh-my-jeo: chat request\narrives with no code changes yet"]
-        A2["jeo-code / jeo-pi:\ndeep-interview / spec-stack\nfreezes ambiguity ≤ 0.2"]
+        A2["jeo-code / jeopi:\ndeep-interview / interview\nfreezes ambiguity ≤ 0.2"]
+
     end
     subgraph Plan["📋 Plan"]
-        B1["ralplan / spec-blueprint:\nPlanner→Architect→Critic\ncontested points preserved"]
+        B1["ralplan / jeopi plan+critic:\nPlanner→Architect→Critic\nokay / iterate / reject gate"]
+
     end
     subgraph Execute["⚙️ Execute"]
-        C1["team / spec-execute:\nbounded executor turns\n+ single/parallel/chain/async subagents"]
+        C1["team / jeopi execute:\nbounded executor turns\n+ parallel reviewer subagents"]
+
         C2["jeo-claw: A/B dispatch\nZeroClaw vs NullClaw"]
     end
     subgraph Verify["✅ Verify"]
-        D1["ultragoal / spec-verify:\nreal suite run, evidence attached\nnever fabricates a PASS"]
+        D1["ultragoal / jeopi verify:\nreal suite run, evidence attached\nnever fabricates a PASS"]
+
         D2["jeo-claw smoke:glue:\nnegative cases included"]
     end
     subgraph Evolve["♻️ Evolve"]
@@ -298,7 +306,8 @@ A worked example, using the actual commands each repo exposes:
 jeo   # inside your repo, or: pi + /clarify "add rate-limiting to the API"
 
 # 2. Plan — critic subagent must return [OKAY] before execution is allowed
-#    (jeo-code: ralplan · jeo-pi: spec-blueprint)
+#    (jeo-code: ralplan · jeopi: plan + critic gate)
+
 #    contested calls (e.g. "token bucket vs. sliding window") are kept, not voted away
 
 # 3. Execute — bounded executor turns, or an A/B pair in jeo-claw
@@ -306,7 +315,8 @@ jeo "implement the rate limiter per the approved plan"
 #    jeo-claw: dispatches the same task to ZeroClaw AND NullClaw for comparison
 
 # 4. Verify — evidence-backed, not narrated
-#    jeo-code/jeo-pi: ultragoal / spec-verify runs the real suite
+#    jeo-code/jeopi: ultragoal / verify runs the real suite
+
 #    jeo-claw: bun test && bun run check:compose && bun run smoke:glue
 
 # 5. Evolve — the lesson survives the session
@@ -324,8 +334,10 @@ bun run ops/scripts/capture-knowledge.ts \
 The same discipline that makes an *agent* reliable is the discipline that makes **reasoning training data** trustworthy, and the parallel is worth spelling out because it's easy to miss:
 
 - A problem-answer pair with no record of *how* the answer was reached is exactly like a task marked "done" with no evidence attached — you can't tell whether the signal is real or fabricated after the fact.
-- `ultragoal`/`spec-verify` refusing to synthesize a passing result when the suite didn't actually pass is the operational form of "a verifier that's weak to superficial rewording or trigger words teaches the model to game the verifier, not to reason."
-- jeo-pi's insistence on **preserving contested planning decisions** rather than collapsing them into a majority vote is the same principle as: reducing a judgment call to a single reward number erases the very distinction you needed the model to learn.
+- `ultragoal`/jeopi's `verify` stage refusing to synthesize a passing result when the suite didn't actually pass is the operational form of "a verifier that's weak to superficial rewording or trigger words teaches the model to game the verifier, not to reason."
+
+- jeopi's `critic` refusing to soften a real, blocking gap into `iterate` just to avoid blocking is the same principle as: a verifier that smooths over an inconvenient failure to keep a pipeline green stops being a verifier and starts being a rubber stamp.
+
 - jeo-claw's `raw/` (immutable) vs. `wiki/` (correctable) split is a data-provenance pattern: you always know which parts of your knowledge base are the untouched original signal and which are a later synthesis — the same separation good reasoning-trace datasets need between the teacher's raw trajectory and any downstream re-summarization.
 
 None of these five repos are training-data pipelines. But they were all built by someone solving the same underlying problem — *how do you keep a learning process honest when it's tempting to shortcut the evidence* — from the harness-engineering side. That's a stronger validation of the idea than a paper alone would be, because it shows the same principle surviving contact with five different, unrelated codebases.
@@ -339,14 +351,16 @@ None of these five repos are training-data pipelines. But they were all built by
 | Tool-call count ≠ success; correction quality does | jeo-code hooks | Post-edit tsc/eslint/test diagnostics fed back in-loop, blocking `done` until green |
 | Harness quality matters more than model size alone | oh-my-jeo | Deterministic contract layer wrapped around an unmodified chat agent |
 | Skill discoverability + held constraints matter | jeo-skills | 146 `SKILL.md` files with explicit routing conditions and route-outs |
-| Don't collapse ambiguous judgment into one vote | jeo-pi `spec-blueprint` | Contested planner/architect/critic decisions are preserved, not majority-voted away |
+| A softened verdict is a signal, not a courtesy | jeopi `critic` gate | Schema-enforced `okay`/`iterate`/`reject`; softening a real gap into `iterate` is itself evidence the gap is real |
+
 | Verifiers must resist premature or fabricated "pass" | jeo-claw `smoke:glue` | Explicit test case: approving a merge before CI/review completes must be a no-op |
 | Evidence provenance must be separable from synthesis | jeo-claw `ops/vault` | `raw/` immutable, `wiki/` LLM-owned and correctable |
 
 ### New Questions This Raises
 
 - If `raw/` vs `wiki/` separation is the right pattern for an agent's own operational memory, should reasoning-training corpora adopt the same split by default — raw teacher trajectory vs. corrected summary — rather than shipping only the final answer?
-- jeo-pi preserves contested planning decisions; could a similar mechanism preserve contested *verifier* judgments (near-miss PASS/FAIL calls) as a signal for where a rubric itself is ambiguous?
+- jeopi's `architect` verdict is invalid without the list of files it actually inspected; could a similar "show your inspected[] evidence" requirement discipline reward models that hand out a confident PASS/FAIL without citing what they checked?
+
 - jeo-claw runs two runtimes in permanent A/B. What would it take to extend that same live-comparison discipline to reasoning-data generation itself — treating "which teacher model produced this trace" as a first-class, always-on comparison instead of a one-time choice?
 
 ---
@@ -356,7 +370,8 @@ None of these five repos are training-data pipelines. But they were all built by
 **Repositories covered:**
 - [akillness/oh-my-jeo](https://github.com/akillness/oh-my-jeo) — spec-first workflow pack for chat agents (Hermes runtime)
 - [akillness/jeo-code](https://github.com/akillness/jeo-code) — Bun-based AI coding-agent CLI, the harness engine
-- [akillness/jeo-pi](https://github.com/akillness/jeo-pi) — engineering discipline extension suite for the `pi` coding agent
+- [akillness/jeopi](https://github.com/akillness/jeopi) — spec-first fork of oh-my-pi with a critic-gated plan/execute/verify spine
+
 - [akillness/jeo-claw](https://github.com/akillness/jeo-claw) — dual-runtime agentic PR orchestration with a self-evolving `ops/` doctrine
 - [akillness/jeo-skills](https://github.com/akillness/jeo-skills) — 146-skill library shared across all of the above
 
@@ -367,7 +382,8 @@ None of these five repos are training-data pipelines. But they were all built by
 
 **Upstream projects referenced by the ecosystem:**
 - [Hermes Agent](https://github.com/nousresearch/hermes-agent) (Nous Research)
-- [pi coding agent](https://github.com/earendil-works/pi) (earendil-works)
-- [tmdgusya/roach-pi](https://github.com/tmdgusya/roach-pi) — jeo-pi's upstream fork base
+- [Pi](https://github.com/badlogic/pi-mono) (Mario Zechner)
+- [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) — jeopi's direct upstream fork base
+
 - [Ouroboros](https://github.com/Q00/ouroboros) — spec-first control loop (`ooo`)
 - [semble](https://github.com/MinishLab/semble) — token-efficient code search
