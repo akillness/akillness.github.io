@@ -76,7 +76,7 @@ omj doctor
 
 ### 2. jeo-code — the harness engine that treats edits as evidence, not text
 
-<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/hero.png" alt="jeo-code autonomous coding-agent hero illustration" style="display:block;width:100%;max-width:640px;height:auto;margin:1.25rem auto;border-radius:12px;" />
+<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/jeo-code-hero.png" alt="jeo-code autonomous coding-agent hero illustration" style="display:block;width:100%;max-width:640px;height:auto;margin:1.25rem auto;border-radius:12px;" />
 
 **[jeo-code](https://github.com/akillness/jeo-code)** (`jeo` on the CLI) is the harness I use to write this very post. Its core insight is structural: a file `read` doesn't just return text, it returns text with content anchors (`42ab|`). An `edit` against those anchors is *rejected with fresh content* if the file changed underneath it — the agent is never allowed to silently corrupt a file because its mental model of "current state" drifted from reality.
 
@@ -102,7 +102,7 @@ All of this state — the frozen spec, the plan, the approval gate, the hook dia
 
 ### 3. jeopi — the same discipline, forked into a different engine
 
-<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/hero.png" alt="jeopi — spec-first fork of oh-my-pi. Encode intention. Decode software." style="display:block;width:100%;max-width:640px;height:auto;margin:1.25rem auto;border-radius:12px;" />
+<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/jeopi-hero.png" alt="jeopi — spec-first fork of oh-my-pi. Encode intention. Decode software." style="display:block;width:100%;max-width:640px;height:auto;margin:1.25rem auto;border-radius:12px;" />
 
 **[jeopi](https://github.com/akillness/jeopi)** is proof the discipline isn't tied to one runtime — and it's a sharper proof than the repo it replaces here. It's a fork of [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) (itself a fork of [badlogic/pi-mono](https://github.com/badlogic/pi-mono) by Mario Zechner), so jeopi inherits the whole capable engine — **40+** providers, **32** built-in tools, **14** LSP ops, **28** DAP ops, **~55k** lines of Rust — and welds jeo-code's spec-first philosophy onto it rather than rewriting the engine from scratch. One command, `/jeo <what you want built>`, drives the whole spine:
 
