@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">OMJ request-to-handoff interaction map</title>
+  <desc id="desc">A plain Hermes request flows through OMJ routing into a prepared handoff, then only moves to observed status after wrapper or runtime evidence is recorded.</desc>
+  <defs>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; }
+      .bg { fill: #f8fafc; }
+      .title { font-size: 34px; font-weight: 700; fill: #111827; }
+      .subtitle { font-size: 17px; fill: #4b5563; }
+      .card { fill: #ffffff; stroke: #d7dee8; stroke-width: 2; }
+      .card-blue { fill: #eff6ff; stroke: #93c5fd; stroke-width: 2; }
+      .card-green { fill: #ecfdf5; stroke: #86efac; stroke-width: 2; }
+      .card-amber { fill: #fffbeb; stroke: #fbbf24; stroke-width: 2; }
+      .card-slate { fill: #f1f5f9; stroke: #cbd5e1; stroke-width: 2; }
+      .label { font-size: 19px; font-weight: 700; fill: #111827; }
+      .small-label { font-size: 14px; font-weight: 700; fill: #1f2937; }
+      .body { font-size: 14px; fill: #374151; }
+      .muted { font-size: 13px; fill: #64748b; }
+      .pill { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; }
+      .pill-text { font-size: 13px; font-weight: 700; fill: #1f2937; }
+      .arrow-line { stroke: #2563eb; stroke-width: 4; stroke-linecap: round; }
+      .arrow-head { fill: #2563eb; }
+      .thin-arrow-line { stroke: #64748b; stroke-width: 2.5; stroke-linecap: round; }
+      .thin-arrow-head { fill: #64748b; }
+      .rule { fill: #0f172a; }
+      .rule-title { font-size: 15px; font-weight: 700; fill: #ffffff; }
+      .rule-text { font-size: 14px; fill: #cbd5e1; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="700"/>
+  <text class="title" x="72" y="62">OMJ keeps Hermes chat, handoff, and evidence in separate lanes</text>
+  <text class="subtitle" x="72" y="92">Users ask Hermes in plain language. OMJ shapes the workflow without pretending prepared work already ran.</text>
+
+  <rect class="card" x="72" y="126" width="196" height="110" rx="14"/>
+  <text class="small-label" x="96" y="160">Plain request</text>
+  <text class="body" x="96" y="188">"Can this become</text>
+  <text class="body" x="96" y="210">a safe repo change?"</text>
+
+  <line class="arrow-line" x1="282" y1="181" x2="318" y2="181"/>
+  <path class="arrow-head" d="M334 181 L316 171 L316 191 Z"/>
+
+  <rect class="card-blue" x="348" y="126" width="204" height="110" rx="14"/>
+  <text class="small-label" x="372" y="160">Hermes Agent</text>
+  <text class="body" x="372" y="188">Chat intake, memory,</text>
+  <text class="body" x="372" y="210">skills, and narration</text>
+
+  <line class="arrow-line" x1="566" y1="181" x2="602" y2="181"/>
+  <path class="arrow-head" d="M618 181 L600 171 L600 191 Z"/>
+
+  <rect class="card-green" x="632" y="126" width="222" height="110" rx="14"/>
+  <text class="small-label" x="656" y="160">OMJ workflow layer</text>
+  <text class="body" x="656" y="188">Role, playbook, status,</text>
+  <text class="body" x="656" y="210">and evidence boundary</text>
+
+  <line class="arrow-line" x1="868" y1="181" x2="904" y2="181"/>
+  <path class="arrow-head" d="M920 181 L902 171 L902 191 Z"/>
+
+  <rect class="card-amber" x="934" y="126" width="194" height="110" rx="14"/>
+  <text class="small-label" x="958" y="160">Runtime handoff</text>
+  <text class="body" x="958" y="188">Codex, Claude Code,</text>
+  <text class="body" x="958" y="210">Hermes, or wrapper</text>
+
+  <rect class="card-blue" x="72" y="304" width="320" height="244" rx="16"/>
+  <text class="label" x="104" y="344">Retained by Hermes</text>
+  <text class="muted" x="104" y="370">Guide, Researcher, Planner, Operator</text>
+  <rect class="pill" x="104" y="398" width="238" height="36" rx="18"/>
+  <text class="pill-text" x="124" y="421">route request and ask once</text>
+  <rect class="pill" x="104" y="446" width="238" height="36" rx="18"/>
+  <text class="pill-text" x="124" y="469">research, plan, or explain fit</text>
+  <rect class="pill" x="104" y="494" width="238" height="36" rx="18"/>
+  <text class="pill-text" x="124" y="517">show next visible action</text>
+
+  <rect class="card-green" x="440" y="304" width="320" height="244" rx="16"/>
+  <text class="label" x="472" y="344">Prepared handoff</text>
+  <text class="muted" x="472" y="370">Handoff Guide and Tracker</text>
+  <rect class="pill" x="472" y="398" width="238" height="36" rx="18"/>
+  <text class="pill-text" x="492" y="421">choose responsible executor</text>
+  <rect class="pill" x="472" y="446" width="238" height="36" rx="18"/>
+  <text class="pill-text" x="492" y="469">package scope and checks</text>
+  <rect class="pill" x="472" y="494" width="238" height="36" rx="18"/>
+  <text class="pill-text" x="492" y="517">mark prepared_not_observed</text>
+
+  <rect class="card-amber" x="808" y="304" width="320" height="244" rx="16"/>
+  <text class="label" x="840" y="344">Observed evidence</text>
+  <text class="muted" x="840" y="370">Reviewer, Tracker, and runtime records</text>
+  <rect class="pill" x="840" y="398" width="238" height="36" rx="18"/>
+  <text class="pill-text" x="860" y="421">dispatch, result, or artifact</text>
+  <rect class="pill" x="840" y="446" width="238" height="36" rx="18"/>
+  <text class="pill-text" x="860" y="469">tests, review, CI, readiness</text>
+  <rect class="pill" x="840" y="494" width="238" height="36" rx="18"/>
+  <text class="pill-text" x="860" y="517">merge or delivery evidence</text>
+
+  <line class="thin-arrow-line" x1="392" y1="426" x2="416" y2="426"/>
+  <path class="thin-arrow-head" d="M432 426 L416 416 L416 436 Z"/>
+  <line class="thin-arrow-line" x1="760" y1="426" x2="784" y2="426"/>
+  <path class="thin-arrow-head" d="M800 426 L784 416 L784 436 Z"/>
+
+  <rect class="rule" x="72" y="590" width="1056" height="72" rx="16"/>
+  <text class="rule-title" x="104" y="623">Public claim rule</text>
+  <text class="rule-text" x="104" y="647">Prepared handoff != observed execution until a wrapper or runtime records evidence for dispatch, result, verification, review, CI, or merge.</text>
+</svg>

@@ -49,12 +49,14 @@ Each repo below picks up a different piece of this.
 
 **[oh-my-jeo](https://github.com/akillness/oh-my-jeo)** starts from an uncomfortable but realistic premise: most of the time you *cannot* swap out the underlying model. What you *can* change is the layer around it. oh-my-jeo wraps a [Hermes-style chat agent](https://github.com/nousresearch/hermes-agent) with a thin, deterministic contract layer:
 
+It serves as a **Hermes-native wrapper orchestration layer**, deliberately separating chat continuity and planning (owned by the wrapper) from handoff, dispatch, and execution (owned by the linked runtime). It provides first-class CodeGraph support for external navigation (`@colbymchenry/codegraph`).
+
 ```text
 
 user says a plain request in chat
   -> oh-my-jeo routes it to the right skill / playbook / profile
   -> the agent explains the next action and the evidence boundary
-  -> coding is handed off to the selected runtime only when accepted
+  -> coding is handed off to the selected runtime (Codex, Claude Code, or Hermes) only when accepted
 ```
 
 <img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/oh-my-jeo-architecture.svg" alt="oh-my-jeo architecture and workflow map" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;" />
@@ -74,7 +76,7 @@ omj doctor
 
 ### 2. jeo-code — the harness engine that treats edits as evidence, not text
 
-<img src="/assets/img/jeo-code/hero.png" alt="jeo-code autonomous coding-agent hero illustration" style="display:block;width:100%;max-width:640px;height:auto;margin:1.25rem auto;border-radius:12px;" />
+<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/hero.png" alt="jeo-code autonomous coding-agent hero illustration" style="display:block;width:100%;max-width:640px;height:auto;margin:1.25rem auto;border-radius:12px;" />
 
 **[jeo-code](https://github.com/akillness/jeo-code)** (`jeo` on the CLI) is the harness I use to write this very post. Its core insight is structural: a file `read` doesn't just return text, it returns text with content anchors (`42ab|`). An `edit` against those anchors is *rejected with fresh content* if the file changed underneath it — the agent is never allowed to silently corrupt a file because its mental model of "current state" drifted from reality.
 
@@ -85,6 +87,8 @@ omj doctor
 | **Gated Execution** | `jeo approve` blocks until you explicitly confirm | Human judgment enters at the one point it changes the outcome |
 | **Honest Verification** | `ultragoal` runs real suites — never fabricates per-criterion passes | "Done" means evidence exists, not that the agent said so |
 | **Self-Correcting Loop** | Post-edit hooks (tsc/eslint/tests) feed diagnostics back to the agent | The lesson from a failed lint/test run becomes the very next action |
+
+It is built as a pure-TypeScript AI coding agent running on **Bun (≥ 1.3.14)** with zero native dependencies. It introduces a robust inline TUI rendered in the main terminal buffer, complete with full CJK width awareness, tmux integration, and seamless clipboard image paste (`Ctrl+V`) for true multimodal input.
 
 ```bash
 
@@ -98,7 +102,7 @@ All of this state — the frozen spec, the plan, the approval gate, the hook dia
 
 ### 3. jeopi — the same discipline, forked into a different engine
 
-<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/jeopi-hero.png" alt="jeopi — spec-first fork of oh-my-pi. Encode intention. Decode software." style="display:block;width:100%;max-width:640px;height:auto;margin:1.25rem auto;border-radius:12px;" />
+<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/hero.png" alt="jeopi — spec-first fork of oh-my-pi. Encode intention. Decode software." style="display:block;width:100%;max-width:640px;height:auto;margin:1.25rem auto;border-radius:12px;" />
 
 **[jeopi](https://github.com/akillness/jeopi)** is proof the discipline isn't tied to one runtime — and it's a sharper proof than the repo it replaces here. It's a fork of [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) (itself a fork of [badlogic/pi-mono](https://github.com/badlogic/pi-mono) by Mario Zechner), so jeopi inherits the whole capable engine — **40+** providers, **32** built-in tools, **14** LSP ops, **28** DAP ops, **~55k** lines of Rust — and welds jeo-code's spec-first philosophy onto it rather than rewriting the engine from scratch. One command, `/jeo <what you want built>`, drives the whole spine:
 
@@ -121,6 +125,8 @@ execute          bounded `task` subagents; a failed task feeds the lesson
 verify           suite runs once as a global signal; each criterion cites
                  its command + observed result, or is reported unresolved.
 ```
+
+Its multi-package architecture separates concerns neatly: `packages/coding-agent` for the CLI, `packages/ai` for multi-provider streaming, `packages/tui` for rendering, and `crates/pi-natives` for high-performance operations, fully embracing the **Bun ecosystem**.
 
 | Stage | Standing agent | What it refuses to do |
 |---|---|---|

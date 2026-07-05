@@ -29,7 +29,9 @@ Enter **[jeo-code](https://github.com/akillness/jeo-code)** — and its companio
 
 ![jeo-code hero illustration](/assets/img/jeo-code/hero.png){: .w-100 .shadow .rounded-10 }
 
-**jeo-code** (`jeo` on the CLI) is a pure-TypeScript, Bun-based AI coding agent with zero native dependencies. You run it inside any repository, and it reads files, edits them, executes commands, and drives tasks to completion — streaming every step live in a scroll-back-friendly inline TUI.
+**jeo-code** (`jeo` on the CLI) is a pure-TypeScript AI coding agent that runs on **Bun (≥ 1.3.14)** with zero native dependencies. It features a Spec-first workflow, deep-interview Socratic capabilities, robust TUI with TMA (tmux) integrations, and native Ouroboros compatibility. You run it inside any repository, and it reads files, edits them, executes commands, and drives tasks to completion.
+
+Its standout feature is the **gjc-style flat inline stack TUI**: completed work flushes into scrollback as glyph-led ledger lines and bordered tool cards, avoiding scrollback flooding and allowing terminal mouse-wheel scrolling mid-turn. It also supports seamless **clipboard image paste (`Ctrl+V`)** across macOS and Linux, sending images as true multimodal input on every provider.
 
 But the design philosophy is what sets it apart.
 
