@@ -1,0 +1,294 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 1056" width="100%" height="100%">
+
+<defs>
+  <linearGradient id="jcbg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+    <stop offset="0%" stop-color="#060B14"/>
+    <stop offset="50%" stop-color="#0A1525"/>
+    <stop offset="100%" stop-color="#0D1B2E"/>
+  </linearGradient>
+  <pattern id="jcdots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+    <circle cx="14" cy="14" r="1" fill="#1E3A5F" opacity="0.3"/>
+  </pattern>
+  <linearGradient id="jctop" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#1D4ED8" stop-opacity="0"/>
+    <stop offset="20%" stop-color="#3B82F6"/>
+    <stop offset="40%" stop-color="#8B5CF6"/>
+    <stop offset="60%" stop-color="#EC4899"/>
+    <stop offset="80%" stop-color="#F59E0B"/>
+    <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
+  </linearGradient>
+
+  <linearGradient id="jcUser" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1D4ED8"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+  <linearGradient id="jcBot" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4338CA"/><stop offset="100%" stop-color="#6366F1"/></linearGradient>
+  <linearGradient id="jcUI" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#831843"/><stop offset="100%" stop-color="#EC4899"/></linearGradient>
+  <linearGradient id="jcControl" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#92400E"/><stop offset="100%" stop-color="#F59E0B"/></linearGradient>
+  <linearGradient id="jcDB" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#334155"/><stop offset="100%" stop-color="#64748B"/></linearGradient>
+  <linearGradient id="jcRC" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#1D4ED8"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+  <linearGradient id="jcREV" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5B21B6"/><stop offset="100%" stop-color="#8B5CF6"/></linearGradient>
+  <linearGradient id="jcPRC" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#831843"/><stop offset="100%" stop-color="#EC4899"/></linearGradient>
+  <linearGradient id="jcMRG" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#065F46"/><stop offset="100%" stop-color="#10B981"/></linearGradient>
+  <linearGradient id="jcZC" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7F1D1D"/><stop offset="100%" stop-color="#EF4444"/></linearGradient>
+  <linearGradient id="jcNC" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0E7490"/><stop offset="100%" stop-color="#22D3EE"/></linearGradient>
+  <linearGradient id="jcRepo" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#111827"/><stop offset="100%" stop-color="#1F2937"/></linearGradient>
+  <radialGradient id="jcVS" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FDE68A"/><stop offset="100%" stop-color="#F59E0B"/></radialGradient>
+
+  <filter id="jcTitleGlow" x="-10%" y="-40%" width="120%" height="180%">
+    <feGaussianBlur stdDeviation="4" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="jcShadow" x="-8%" y="-8%" width="120%" height="130%">
+    <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#000000" flood-opacity="0.55"/>
+  </filter>
+  <filter id="jcSoftGlow" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="3" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+
+  <marker id="jcArrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,1 L9,5 L0,9 Z" fill="#3B82F6"/></marker>
+  <marker id="jcArrPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,1 L9,5 L0,9 Z" fill="#A78BFA"/></marker>
+  <marker id="jcArrPink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,1 L9,5 L0,9 Z" fill="#EC4899"/></marker>
+  <marker id="jcArrAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,1 L9,5 L0,9 Z" fill="#F59E0B"/></marker>
+  <marker id="jcArrGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,1 L9,5 L0,9 Z" fill="#10B981"/></marker>
+  <marker id="jcArrGray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,1 L9,5 L0,9 Z" fill="#475569"/></marker>
+</defs>
+
+<rect width="1280" height="1056" fill="url(#jcbg)" rx="18"/>
+<rect width="1280" height="1056" fill="url(#jcdots)" rx="18" opacity="0.6"/>
+<rect x="0" y="0" width="1280" height="3" fill="url(#jctop)" rx="2"/>
+<ellipse cx="640.0" cy="50" rx="360" ry="34" fill="#EC4899" opacity="0.04"/>
+<text x="640.0" y="48" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="30" font-weight="800" fill="#F1F5F9" text-anchor="middle" letter-spacing="0.5" filter="url(#jcTitleGlow)">jeo-claw — Dual-Runtime Hive Orchestration</text>
+<text x="640.0" y="70" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#64748B" text-anchor="middle" letter-spacing="3">DISCORD-NATIVE · A/B AGENT DISPATCH · SQLITE STATE · SELF-EVOLVING OPS/</text>
+<rect x="154.0" y="80" width="190" height="24" fill="#111827" rx="12" stroke="#1F3A5C" stroke-width="1"/>
+<text x="249.0" y="96" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11" font-weight="600" fill="#60A5FA" text-anchor="middle">18-step sequence</text>
+<rect x="358.0" y="80" width="190" height="24" fill="#111827" rx="12" stroke="#1F3A5C" stroke-width="1"/>
+<text x="453.0" y="96" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11" font-weight="600" fill="#F87171" text-anchor="middle">ZeroClaw vs NullClaw</text>
+<rect x="562.0" y="80" width="210" height="24" fill="#111827" rx="12" stroke="#1F3A5C" stroke-width="1"/>
+<text x="667.0" y="96" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11" font-weight="600" fill="#F472B6" text-anchor="middle">2 human approval gates</text>
+<rect x="786.0" y="80" width="340" height="24" fill="#111827" rx="12" stroke="#1F3A5C" stroke-width="1"/>
+<text x="956.0" y="96" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11" font-weight="600" fill="#34D399" text-anchor="middle">state machine: plan→verify→capture→evolve</text>
+<rect x="40" y="125" width="1200" height="150" fill="none" stroke="#3B82F6" stroke-width="1.4" stroke-dasharray="6,4" rx="14" opacity="0.85"/>
+<rect x="56" y="114" width="131.4" height="20" fill="#060B14" rx="4"/>
+<text x="60" y="128" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" font-weight="700" fill="#3B82F6" letter-spacing="1">DISCORD INTERFACE</text>
+<g filter="url(#jcShadow)">
+<circle cx="130" cy="215" r="34" fill="url(#jcUser)" stroke="#60A5FA" stroke-width="2"/>
+<text x="130" y="219" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">User</text>
+</g>
+<g filter="url(#jcShadow)">
+<rect x="230" y="160" width="210" height="95" fill="#0B1526" rx="10" stroke="#818CF8" stroke-width="1.5"/>
+<rect x="230" y="160" width="210" height="26" fill="url(#jcBot)" rx="10"/>
+<rect x="230" y="176" width="210" height="10" fill="url(#jcBot)"/>
+<text x="335.0" y="177.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">Control Bot</text>
+<text x="335.0" y="203" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="middle">Discord.js webhook handler</text>
+<text x="335.0" y="218" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="middle">routes chat commands</text>
+</g>
+<g filter="url(#jcShadow)">
+<rect x="500" y="150" width="580" height="115" fill="#0B1526" rx="10" stroke="#F472B6" stroke-width="1.5"/>
+<rect x="500" y="150" width="580" height="26" fill="url(#jcUI)" rx="10"/>
+<rect x="500" y="166" width="580" height="10" fill="url(#jcUI)"/>
+<text x="790.0" y="167.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">Status &amp; Approve UI</text>
+<text x="790.0" y="193" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="middle">Live blockquote status updates</text>
+</g>
+<rect x="525" y="222" width="160" height="26" fill="#111827" rx="13" stroke="#EC4899" stroke-width="1.2"/>
+<text x="605" y="239" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" font-weight="600" fill="#F9A8D4" text-anchor="middle">✓ Approve PR</text>
+<rect x="700" y="222" width="180" height="26" fill="#111827" rx="13" stroke="#EC4899" stroke-width="1.2"/>
+<text x="790" y="239" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" font-weight="600" fill="#F9A8D4" text-anchor="middle">✓ Approve Merge</text>
+<path d="M164.0,210.0 C197.0,210.0 197.0,205.0 230.0,205.0" stroke="#3B82F6" stroke-width="2.2" fill="none" marker-end="url(#jcArrBlue)" opacity="1.0"/>
+<rect x="172.9" y="184.0" width="48.2" height="15" fill="#060B14" opacity="0.85" rx="3"/>
+<text x="197.0" y="195.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="middle">1 request</text>
+<rect x="40" y="300" width="1200" height="460" fill="none" stroke="#8B5CF6" stroke-width="1.4" stroke-dasharray="6,4" rx="14" opacity="0.85"/>
+<rect x="56" y="289" width="174.6" height="20" fill="#060B14" rx="4"/>
+<text x="60" y="303" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" font-weight="700" fill="#8B5CF6" letter-spacing="1">JEO-CLAW HIVE CONTAINER</text>
+<g filter="url(#jcShadow)">
+<rect x="80" y="335" width="290" height="95" fill="#0B1526" rx="10" stroke="#FBBF24" stroke-width="1.5"/>
+<rect x="80" y="335" width="290" height="26" fill="url(#jcControl)" rx="10"/>
+<rect x="80" y="351" width="290" height="10" fill="url(#jcControl)"/>
+<text x="225.0" y="352.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">Sovereign Orchestrator</text>
+<text x="225.0" y="378" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="middle">glue/server.ts</text>
+<text x="225.0" y="393" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="middle">Discord ⇄ GitHub ⇄ DB glue</text>
+</g>
+<g filter="url(#jcShadow)">
+<path d="M410,349 v67 a85.0,14 0 0 0 170,0 v-67" fill="url(#jcDB)" stroke="#94A3B8" stroke-width="1.5"/>
+<ellipse cx="495.0" cy="349" rx="85.0" ry="14" fill="url(#jcDB)" stroke="#94A3B8" stroke-width="1.5"/>
+<ellipse cx="495.0" cy="416" rx="85.0" ry="14" fill="none" stroke="#94A3B8" stroke-width="1" opacity="0.6"/>
+<text x="495.0" y="376.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="13" font-weight="700" fill="#F1F5F9" text-anchor="middle">SQLite State DB</text>
+<text x="495.0" y="394.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">task / session state</text>
+</g>
+<path d="M370.0,378.0 C390.0,378.0 390.0,372.0 410.0,372.0" stroke="#94A3B8" stroke-width="1.6" fill="none" marker-end="url(#jcArrGray)" opacity="1.0"/>
+<path d="M410,392 C395,392 380,392 372,392" stroke="#94A3B8" stroke-width="1.6" fill="none" marker-end="url(#jcArrGray)"/>
+<rect x="80" y="478" width="500" height="148" fill="none" stroke="#A78BFA" stroke-width="1.4" stroke-dasharray="4,4" rx="14" opacity="0.85"/>
+<rect x="96" y="467" width="102.60000000000001" height="20" fill="#060B14" rx="4"/>
+<text x="100" y="481" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" font-weight="700" fill="#A78BFA" letter-spacing="1">STAGE WORKERS</text>
+<g filter="url(#jcShadow)">
+<rect x="100" y="508" width="110" height="95" fill="#0B1526" rx="10" stroke="#60A5FA" stroke-width="1.5"/>
+<rect x="100" y="508" width="110" height="26" fill="url(#jcRC)" rx="10"/>
+<rect x="100" y="524" width="110" height="10" fill="url(#jcRC)"/>
+<text x="155.0" y="525.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">Researcher‑Coder</text>
+<text x="155.0" y="551" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="middle">stage 1</text>
+</g>
+<g filter="url(#jcShadow)">
+<rect x="222" y="508" width="110" height="95" fill="#0B1526" rx="10" stroke="#A78BFA" stroke-width="1.5"/>
+<rect x="222" y="508" width="110" height="26" fill="url(#jcREV)" rx="10"/>
+<rect x="222" y="524" width="110" height="10" fill="url(#jcREV)"/>
+<text x="277.0" y="525.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">Reviewer</text>
+<text x="277.0" y="551" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="middle">stage 2</text>
+</g>
+<g filter="url(#jcShadow)">
+<rect x="344" y="508" width="110" height="95" fill="#0B1526" rx="10" stroke="#F472B6" stroke-width="1.5"/>
+<rect x="344" y="508" width="110" height="26" fill="url(#jcPRC)" rx="10"/>
+<rect x="344" y="524" width="110" height="10" fill="url(#jcPRC)"/>
+<text x="399.0" y="525.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">PR‑Creator</text>
+<text x="399.0" y="551" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="middle">stage 3</text>
+</g>
+<g filter="url(#jcShadow)">
+<rect x="466" y="508" width="105" height="95" fill="#0B1526" rx="10" stroke="#34D399" stroke-width="1.5"/>
+<rect x="466" y="508" width="105" height="26" fill="url(#jcMRG)" rx="10"/>
+<rect x="466" y="524" width="105" height="10" fill="url(#jcMRG)"/>
+<text x="518.5" y="525.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">Merger</text>
+<text x="518.5" y="551" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="middle">stage 4</text>
+</g>
+<rect x="620" y="478" width="620" height="148" fill="none" stroke="#F87171" stroke-width="1.4" stroke-dasharray="4,4" rx="14" opacity="0.85"/>
+<rect x="636" y="467" width="153.0" height="20" fill="#060B14" rx="4"/>
+<text x="640" y="481" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" font-weight="700" fill="#F87171" letter-spacing="1">AI AGENTS · LIVE A/B</text>
+<g filter="url(#jcShadow)">
+<rect x="645" y="540" width="270" height="70" fill="#0B1526" rx="10" stroke="#FCA5A5" stroke-width="1.5"/>
+<rect x="645" y="540" width="270" height="26" fill="url(#jcZC)" rx="10"/>
+<rect x="645" y="556" width="270" height="10" fill="url(#jcZC)"/>
+<text x="780.0" y="557.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">ZeroClaw</text>
+<text x="780.0" y="583" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10" fill="#93C5FD" text-anchor="middle">jeo-code · Heavy Refactoring</text>
+</g>
+<g filter="url(#jcShadow)">
+<rect x="965" y="540" width="250" height="70" fill="#0B1526" rx="10" stroke="#67E8F9" stroke-width="1.5"/>
+<rect x="965" y="540" width="250" height="26" fill="url(#jcNC)" rx="10"/>
+<rect x="965" y="556" width="250" height="10" fill="url(#jcNC)"/>
+<text x="1090.0" y="557.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">NullClaw</text>
+<text x="1090.0" y="583" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10" fill="#93C5FD" text-anchor="middle">gajae-code · Lightweight Strikes</text>
+</g>
+<circle cx="932" cy="575" r="17" fill="#0B1526" stroke="#FDE68A" stroke-width="1.5"/>
+<text x="932" y="579" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11" font-weight="800" fill="#FDE68A" text-anchor="middle">VS</text>
+<path d="M345.0,250.0 C345.0,292.5 225.0,292.5 225.0,335.0" stroke="#3B82F6" stroke-width="2.2" fill="none" marker-end="url(#jcArrBlue)" opacity="1.0"/>
+<rect x="280.4" y="289.0" width="39.2" height="15" fill="#060B14" opacity="0.85" rx="3"/>
+<text x="300.0" y="300.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="middle">2 event</text>
+<path d="M160.0,430.0 C160.0,469.0 140.0,469.0 140.0,508.0" stroke="#3B82F6" stroke-width="2.2" fill="none" marker-end="url(#jcArrBlue)" opacity="1.0"/>
+<rect x="121.7" y="452.0" width="52.6" height="15" fill="#060B14" opacity="0.85" rx="3"/>
+<text x="148.0" y="463.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="middle">3 dispatch</text>
+<path d="M215.0,555.0 C365.5,555.0 494.5,570.0 645.0,570.0" stroke="#3B82F6" stroke-width="2.2" fill="none" marker-end="url(#jcArrBlue)" opacity="1.0"/>
+<rect x="390.3" y="489.0" width="79.4" height="15" fill="#060B14" opacity="0.85" rx="3"/>
+<text x="430.0" y="500.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="middle">4 select runtime</text>
+<path d="M210.0,555.0 C216.0,555.0 216.0,555.0 222.0,555.0" stroke="#A78BFA" stroke-width="2.2" fill="none" marker-end="url(#jcArrPurple)" opacity="1.0"/>
+<text x="216.0" y="600.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10" fill="#C4B5FD" text-anchor="middle">6</text>
+<path d="M332.0,555.0 C338.0,555.0 338.0,555.0 344.0,555.0" stroke="#A78BFA" stroke-width="2.2" fill="none" marker-end="url(#jcArrPurple)" opacity="1.0"/>
+<text x="338.0" y="600.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10" fill="#C4B5FD" text-anchor="middle">7</text>
+<path d="M454.0,555.0 C460.0,555.0 460.0,555.0 466.0,555.0" stroke="#F59E0B" stroke-width="2.2" fill="none" marker-end="url(#jcArrAmber)" opacity="1.0"/>
+<text x="460.0" y="600.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10" fill="#FCD34D" text-anchor="middle">13</text>
+<path d="M225,430 C225,470 260,470 300,478 C330,490 385,500 399,508" stroke="#EC4899" stroke-width="2.2" fill="none" marker-end="url(#jcArrPink)" stroke-dasharray="5,4"/>
+<rect x="267.0" y="457.0" width="66.0" height="15" fill="#060B14" opacity="0.85" rx="3"/>
+<text x="300.0" y="468.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#F9A8D4" text-anchor="middle">11 execute PR</text>
+<path d="M280,430 C280,455 490,455 500,470 C510,485 515,498 518,508" stroke="#10B981" stroke-width="2.2" fill="none" marker-end="url(#jcArrGreen)" stroke-dasharray="5,4"/>
+<rect x="520.3" y="439.0" width="79.4" height="15" fill="#060B14" opacity="0.85" rx="3"/>
+<text x="560.0" y="450.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#6EE7B7" text-anchor="middle">17 execute merge</text>
+<path d="M399,508 C399,420 960,300 960,265" stroke="#EC4899" stroke-width="2.2" fill="none" marker-end="url(#jcArrPink)"/>
+<rect x="655.8" y="319.0" width="88.4" height="15" fill="#060B14" opacity="0.85" rx="3"/>
+<text x="700.0" y="330.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#F9A8D4" text-anchor="middle">8 request approval</text>
+<path d="M518,508 C518,440 1030,330 1030,265" stroke="#F59E0B" stroke-width="2.2" fill="none" marker-end="url(#jcArrAmber)" stroke-dasharray="5,4"/>
+<rect x="823.6" y="399.0" width="92.8" height="15" fill="#060B14" opacity="0.85" rx="3"/>
+<text x="870.0" y="410.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#FCD34D" text-anchor="middle">14 request approval</text>
+<path d="M700,265 C700,295 260,290 250,335" stroke="#F472B6" stroke-width="2.2" fill="none" marker-end="url(#jcArrPink)"/>
+<rect x="462.5" y="280.0" width="75.0" height="15" fill="#060B14" opacity="0.85" rx="3"/>
+<text x="500.0" y="291.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#F9A8D4" text-anchor="middle">10 / 16 confirm</text>
+<path d="M1090,570 C1190,570 1180,700 1150,795" stroke="#3B82F6" stroke-width="2.2" fill="none" marker-end="url(#jcArrBlue)"/>
+<rect x="1166.4" y="649.0" width="57.1" height="15" fill="#060B14" opacity="0.85" rx="3"/>
+<text x="1195.0" y="660.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="end">5 push code</text>
+<rect x="40" y="795" width="1200" height="115" fill="none" stroke="#10B981" stroke-width="1.4" stroke-dasharray="6,4" rx="14" opacity="0.85"/>
+<rect x="56" y="784" width="131.4" height="20" fill="#060B14" rx="4"/>
+<text x="60" y="798" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" font-weight="700" fill="#10B981" letter-spacing="1">TARGET REPOSITORY</text>
+<g filter="url(#jcShadow)">
+<path d="M530,836 v47 a115.0,14 0 0 0 230,0 v-47" fill="url(#jcRepo)" stroke="#34D399" stroke-width="1.5"/>
+<ellipse cx="645.0" cy="836" rx="115.0" ry="14" fill="url(#jcRepo)" stroke="#34D399" stroke-width="1.5"/>
+<ellipse cx="645.0" cy="883" rx="115.0" ry="14" fill="none" stroke="#34D399" stroke-width="1" opacity="0.6"/>
+<text x="645.0" y="853.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="13" font-weight="700" fill="#F1F5F9" text-anchor="middle">akillness/jeo‑claw</text>
+<text x="645.0" y="871.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">main branch</text>
+</g>
+<path d="M399,603 C399,720 500,795 530,835" stroke="#EC4899" stroke-width="2.2" fill="none" marker-end="url(#jcArrPink)"/>
+<rect x="389.2" y="719.0" width="61.6" height="15" fill="#060B14" opacity="0.85" rx="3"/>
+<text x="420.0" y="730.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#F9A8D4" text-anchor="middle">12 create PR</text>
+<path d="M518,603 C518,715 650,795 700,835" stroke="#10B981" stroke-width="2.2" fill="none" marker-end="url(#jcArrGreen)"/>
+<rect x="621.4" y="719.0" width="57.1" height="15" fill="#060B14" opacity="0.85" rx="3"/>
+<text x="650.0" y="730.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#6EE7B7" text-anchor="middle">18 merge PR</text>
+<text x="640" y="940" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#334155" letter-spacing="2.5" font-weight="600" text-anchor="middle">FULL 18-STEP SEQUENCE</text>
+<rect x="40.0" y="948.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#3B82F6" stroke-width="1.2" opacity="0.9"/>
+<circle cx="56.0" cy="963.0" r="9" fill="#3B82F6" opacity="0.25"/>
+<text x="56.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#3B82F6" text-anchor="middle">1</text>
+<text x="70.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">request</text>
+<rect x="174.0" y="948.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#3B82F6" stroke-width="1.2" opacity="0.9"/>
+<circle cx="190.0" cy="963.0" r="9" fill="#3B82F6" opacity="0.25"/>
+<text x="190.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#3B82F6" text-anchor="middle">2</text>
+<text x="204.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">event</text>
+<rect x="308.0" y="948.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#3B82F6" stroke-width="1.2" opacity="0.9"/>
+<circle cx="324.0" cy="963.0" r="9" fill="#3B82F6" opacity="0.25"/>
+<text x="324.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#3B82F6" text-anchor="middle">3</text>
+<text x="338.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">dispatch</text>
+<rect x="442.0" y="948.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#3B82F6" stroke-width="1.2" opacity="0.9"/>
+<circle cx="458.0" cy="963.0" r="9" fill="#3B82F6" opacity="0.25"/>
+<text x="458.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#3B82F6" text-anchor="middle">4</text>
+<text x="472.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">select runtime</text>
+<rect x="576.0" y="948.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#3B82F6" stroke-width="1.2" opacity="0.9"/>
+<circle cx="592.0" cy="963.0" r="9" fill="#3B82F6" opacity="0.25"/>
+<text x="592.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#3B82F6" text-anchor="middle">5</text>
+<text x="606.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">push code</text>
+<rect x="710.0" y="948.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#A78BFA" stroke-width="1.2" opacity="0.9"/>
+<circle cx="726.0" cy="963.0" r="9" fill="#A78BFA" opacity="0.25"/>
+<text x="726.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#A78BFA" text-anchor="middle">6</text>
+<text x="740.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">next stage</text>
+<rect x="844.0" y="948.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#A78BFA" stroke-width="1.2" opacity="0.9"/>
+<circle cx="860.0" cy="963.0" r="9" fill="#A78BFA" opacity="0.25"/>
+<text x="860.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#A78BFA" text-anchor="middle">7</text>
+<text x="874.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">next stage</text>
+<rect x="978.0" y="948.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#EC4899" stroke-width="1.2" opacity="0.9"/>
+<circle cx="994.0" cy="963.0" r="9" fill="#EC4899" opacity="0.25"/>
+<text x="994.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#EC4899" text-anchor="middle">8</text>
+<text x="1008.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">request approval</text>
+<rect x="1112.0" y="948.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#EC4899" stroke-width="1.2" opacity="0.9"/>
+<circle cx="1128.0" cy="963.0" r="9" fill="#EC4899" opacity="0.25"/>
+<text x="1128.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#EC4899" text-anchor="middle">9</text>
+<text x="1142.0" y="966.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">approve</text>
+<rect x="40.0" y="984.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#EC4899" stroke-width="1.2" opacity="0.9"/>
+<circle cx="56.0" cy="999.0" r="9" fill="#EC4899" opacity="0.25"/>
+<text x="56.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#EC4899" text-anchor="middle">10</text>
+<text x="70.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">confirm</text>
+<rect x="174.0" y="984.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#EC4899" stroke-width="1.2" opacity="0.9"/>
+<circle cx="190.0" cy="999.0" r="9" fill="#EC4899" opacity="0.25"/>
+<text x="190.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#EC4899" text-anchor="middle">11</text>
+<text x="204.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">execute PR</text>
+<rect x="308.0" y="984.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#EC4899" stroke-width="1.2" opacity="0.9"/>
+<circle cx="324.0" cy="999.0" r="9" fill="#EC4899" opacity="0.25"/>
+<text x="324.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#EC4899" text-anchor="middle">12</text>
+<text x="338.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">create PR</text>
+<rect x="442.0" y="984.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#F59E0B" stroke-width="1.2" opacity="0.9"/>
+<circle cx="458.0" cy="999.0" r="9" fill="#F59E0B" opacity="0.25"/>
+<text x="458.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#F59E0B" text-anchor="middle">13</text>
+<text x="472.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">next stage</text>
+<rect x="576.0" y="984.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#F59E0B" stroke-width="1.2" opacity="0.9"/>
+<circle cx="592.0" cy="999.0" r="9" fill="#F59E0B" opacity="0.25"/>
+<text x="592.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#F59E0B" text-anchor="middle">14</text>
+<text x="606.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">request approval</text>
+<rect x="710.0" y="984.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#F59E0B" stroke-width="1.2" opacity="0.9"/>
+<circle cx="726.0" cy="999.0" r="9" fill="#F59E0B" opacity="0.25"/>
+<text x="726.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#F59E0B" text-anchor="middle">15</text>
+<text x="740.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">approve</text>
+<rect x="844.0" y="984.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#F59E0B" stroke-width="1.2" opacity="0.9"/>
+<circle cx="860.0" cy="999.0" r="9" fill="#F59E0B" opacity="0.25"/>
+<text x="860.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#F59E0B" text-anchor="middle">16</text>
+<text x="874.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">confirm</text>
+<rect x="978.0" y="984.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#10B981" stroke-width="1.2" opacity="0.9"/>
+<circle cx="994.0" cy="999.0" r="9" fill="#10B981" opacity="0.25"/>
+<text x="994.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#10B981" text-anchor="middle">17</text>
+<text x="1008.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">execute merge</text>
+<rect x="1112.0" y="984.0" width="128" height="30" fill="#0B1526" rx="8" stroke="#10B981" stroke-width="1.2" opacity="0.9"/>
+<circle cx="1128.0" cy="999.0" r="9" fill="#10B981" opacity="0.25"/>
+<text x="1128.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#10B981" text-anchor="middle">18</text>
+<text x="1142.0" y="1002.5" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="9.5" fill="#CBD5E1">merge PR</text>
+<text x="640" y="1038" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#64748B" text-anchor="middle" font-style="italic">PR creation (11–12) and merge (17–18) are action-scoped, single-use approvals — judgment stays at the one irreversible step.</text>
+<path d="M130,181 C130,140 620,135 620,150" stroke="#3B82F6" stroke-width="2.2" fill="none" marker-end="url(#jcArrBlue)"/>
+<rect x="334.8" y="127.0" width="70.5" height="15" fill="#060B14" opacity="0.85" rx="3"/>
+<text x="370.0" y="138.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#93C5FD" text-anchor="middle">9 / 15 approve</text>
+</svg>

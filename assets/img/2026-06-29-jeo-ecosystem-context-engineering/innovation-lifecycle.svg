@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 650" width="100%" height="100%">
+
+<defs>
+  <linearGradient id="ilbg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+    <stop offset="0%" stop-color="#060B14"/>
+    <stop offset="50%" stop-color="#0A1525"/>
+    <stop offset="100%" stop-color="#0D1B2E"/>
+  </linearGradient>
+  <pattern id="ildots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+    <circle cx="14" cy="14" r="1" fill="#1E3A5F" opacity="0.3"/>
+  </pattern>
+  <linearGradient id="iltop" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#1D4ED8" stop-opacity="0"/>
+    <stop offset="20%" stop-color="#3B82F6"/>
+    <stop offset="40%" stop-color="#8B5CF6"/>
+    <stop offset="60%" stop-color="#F59E0B"/>
+    <stop offset="80%" stop-color="#10B981"/>
+    <stop offset="100%" stop-color="#EC4899" stop-opacity="0"/>
+  </linearGradient>
+
+  <linearGradient id="ilA" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#1D4ED8"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+  <linearGradient id="ilB" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5B21B6"/><stop offset="100%" stop-color="#8B5CF6"/></linearGradient>
+  <linearGradient id="ilC" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#92400E"/><stop offset="100%" stop-color="#F59E0B"/></linearGradient>
+  <linearGradient id="ilC2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7F1D1D"/><stop offset="100%" stop-color="#EF4444"/></linearGradient>
+  <linearGradient id="ilD" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#065F46"/><stop offset="100%" stop-color="#10B981"/></linearGradient>
+  <linearGradient id="ilE" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#831843"/><stop offset="100%" stop-color="#EC4899"/></linearGradient>
+
+  <filter id="ilTitleGlow" x="-10%" y="-40%" width="120%" height="180%">
+    <feGaussianBlur stdDeviation="4" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="ilShadow" x="-8%" y="-8%" width="120%" height="130%">
+    <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#000000" flood-opacity="0.55"/>
+  </filter>
+  <filter id="ilHotGlow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="5" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+
+  <marker id="ilArr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,1 L9,5 L0,9 Z" fill="#64748B"/></marker>
+  <marker id="ilArrDash" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,1 L9,5 L0,9 Z" fill="#F472B6"/></marker>
+</defs>
+
+<rect width="1280" height="650" fill="url(#ilbg)" rx="18"/>
+<rect width="1280" height="650" fill="url(#ildots)" rx="18" opacity="0.6"/>
+<rect x="0" y="0" width="1280" height="3" fill="url(#iltop)" rx="2"/>
+<ellipse cx="640.0" cy="50" rx="320" ry="32" fill="#8B5CF6" opacity="0.05"/>
+<text x="640.0" y="48" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="29" font-weight="800" fill="#F1F5F9" text-anchor="middle" letter-spacing="0.5" filter="url(#ilTitleGlow)">The Full Loop — Interview → Plan → Execute → Verify → Evolve</text>
+<text x="640.0" y="70" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#64748B" text-anchor="middle" letter-spacing="3">FIVE REPOS · ONE LIFECYCLE · STATE CARRIES FORWARD, NOT HISTORY</text>
+<rect x="40" y="130" width="220" height="340" fill="none" stroke="#3B82F6" stroke-width="1.4" stroke-dasharray="5,4" rx="14" opacity="0.85"/>
+<rect x="56" y="119" width="88.2" height="20" fill="#060B14" rx="4"/>
+<text x="60" y="133" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" font-weight="700" fill="#3B82F6" letter-spacing="1">🤔 INTERVIEW</text>
+<rect x="285" y="130" width="220" height="340" fill="none" stroke="#8B5CF6" stroke-width="1.4" stroke-dasharray="5,4" rx="14" opacity="0.85"/>
+<rect x="301" y="119" width="52.2" height="20" fill="#060B14" rx="4"/>
+<text x="305" y="133" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" font-weight="700" fill="#8B5CF6" letter-spacing="1">📋 PLAN</text>
+<rect x="530" y="130" width="220" height="340" fill="none" stroke="#F59E0B" stroke-width="1.4" stroke-dasharray="5,4" rx="14" opacity="0.85"/>
+<rect x="546" y="119" width="81.0" height="20" fill="#060B14" rx="4"/>
+<text x="550" y="133" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" font-weight="700" fill="#F59E0B" letter-spacing="1">⚙️ EXECUTE</text>
+<rect x="775" y="130" width="220" height="340" fill="none" stroke="#10B981" stroke-width="1.4" stroke-dasharray="5,4" rx="14" opacity="0.85"/>
+<rect x="791" y="119" width="66.6" height="20" fill="#060B14" rx="4"/>
+<text x="795" y="133" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" font-weight="700" fill="#10B981" letter-spacing="1">✅ VERIFY</text>
+<rect x="1020" y="130" width="220" height="340" fill="none" stroke="#EC4899" stroke-width="1.4" stroke-dasharray="5,4" rx="14" opacity="0.85"/>
+<rect x="1036" y="119" width="73.8" height="20" fill="#060B14" rx="4"/>
+<text x="1040" y="133" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" font-weight="700" fill="#EC4899" letter-spacing="1">♻️ EVOLVE</text>
+<g filter="url(#ilShadow)">
+<rect x="54" y="148" width="192" height="132" fill="#0B1526" rx="12" stroke="#60A5FA" stroke-width="1.5"/>
+<rect x="54" y="148" width="192" height="26" fill="url(#ilA)" rx="12"/>
+<rect x="54" y="164" width="192" height="10" fill="url(#ilA)"/>
+<text x="150.0" y="166" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">A1</text>
+<text x="150.0" y="215.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">oh-my-jeo: chat request</text>
+<text x="150.0" y="232.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">arrives with no code</text>
+<text x="150.0" y="249.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">changes yet</text>
+</g>
+<g filter="url(#ilHotGlow)">
+<rect x="54" y="300" width="192" height="150" fill="#0B1526" rx="12" stroke="#93C5FD" stroke-width="2"/>
+<rect x="54" y="300" width="192" height="26" fill="url(#ilA)" rx="12"/>
+<rect x="54" y="316" width="192" height="10" fill="url(#ilA)"/>
+<text x="150.0" y="318" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">A2 · gate</text>
+<text x="150.0" y="376.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">jeo-code / jeopi:</text>
+<text x="150.0" y="393.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">deep-interview / interview</text>
+<text x="150.0" y="410.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">freezes ambiguity ≤ 0.2</text>
+</g>
+<g filter="url(#ilHotGlow)">
+<rect x="299" y="148" width="192" height="302" fill="#0B1526" rx="12" stroke="#A78BFA" stroke-width="2"/>
+<rect x="299" y="148" width="192" height="26" fill="url(#ilB)" rx="12"/>
+<rect x="299" y="164" width="192" height="10" fill="url(#ilB)"/>
+<text x="395.0" y="166" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">B1 · gate</text>
+<text x="395.0" y="284.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">ralplan / jeopi plan+critic:</text>
+<text x="395.0" y="301.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle"></text>
+<text x="395.0" y="318.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">Planner → Architect → Critic</text>
+<text x="395.0" y="335.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle"></text>
+<text x="395.0" y="352.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">okay / iterate / reject gate</text>
+</g>
+<g filter="url(#ilShadow)">
+<rect x="544" y="148" width="192" height="132" fill="#0B1526" rx="12" stroke="#FBBF24" stroke-width="1.5"/>
+<rect x="544" y="148" width="192" height="26" fill="url(#ilC)" rx="12"/>
+<rect x="544" y="164" width="192" height="10" fill="url(#ilC)"/>
+<text x="640.0" y="166" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">C1</text>
+<text x="640.0" y="215.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">team / jeopi execute:</text>
+<text x="640.0" y="232.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">bounded executor turns +</text>
+<text x="640.0" y="249.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">parallel reviewer subagents</text>
+</g>
+<g filter="url(#ilShadow)">
+<rect x="544" y="300" width="192" height="150" fill="#0B1526" rx="12" stroke="#FCA5A5" stroke-width="1.5"/>
+<rect x="544" y="300" width="192" height="26" fill="url(#ilC2)" rx="12"/>
+<rect x="544" y="316" width="192" height="10" fill="url(#ilC2)"/>
+<text x="640.0" y="318" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">C2</text>
+<text x="640.0" y="384.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">jeo-claw: A/B dispatch</text>
+<text x="640.0" y="401.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">ZeroClaw vs NullClaw</text>
+</g>
+<g filter="url(#ilHotGlow)">
+<rect x="789" y="148" width="192" height="132" fill="#0B1526" rx="12" stroke="#6EE7B7" stroke-width="2"/>
+<rect x="789" y="148" width="192" height="26" fill="url(#ilD)" rx="12"/>
+<rect x="789" y="164" width="192" height="10" fill="url(#ilD)"/>
+<text x="885.0" y="166" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">D1 · gate</text>
+<text x="885.0" y="215.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">ultragoal / jeopi verify:</text>
+<text x="885.0" y="232.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">real suite run, evidence</text>
+<text x="885.0" y="249.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">attached — never fabricates PASS</text>
+</g>
+<g filter="url(#ilShadow)">
+<rect x="789" y="300" width="192" height="150" fill="#0B1526" rx="12" stroke="#34D399" stroke-width="1.5"/>
+<rect x="789" y="300" width="192" height="26" fill="url(#ilD)" rx="12"/>
+<rect x="789" y="316" width="192" height="10" fill="url(#ilD)"/>
+<text x="885.0" y="318" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">D2</text>
+<text x="885.0" y="384.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">jeo-claw smoke:glue:</text>
+<text x="885.0" y="401.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">negative cases included</text>
+</g>
+<g filter="url(#ilHotGlow)">
+<rect x="1034" y="148" width="192" height="132" fill="#0B1526" rx="12" stroke="#F472B6" stroke-width="2"/>
+<rect x="1034" y="148" width="192" height="26" fill="url(#ilE)" rx="12"/>
+<rect x="1034" y="164" width="192" height="10" fill="url(#ilE)"/>
+<text x="1130.0" y="166" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">E1 · gate</text>
+<text x="1130.0" y="215.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">capture-knowledge:</text>
+<text x="1130.0" y="232.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">raw/ immutable,</text>
+<text x="1130.0" y="249.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">wiki/ owned by LLM</text>
+</g>
+<g filter="url(#ilShadow)">
+<rect x="1034" y="300" width="192" height="150" fill="#0B1526" rx="12" stroke="#F9A8D4" stroke-width="1.5"/>
+<rect x="1034" y="300" width="192" height="26" fill="url(#ilE)" rx="12"/>
+<rect x="1034" y="316" width="192" height="10" fill="url(#ilE)"/>
+<text x="1130.0" y="318" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">E2</text>
+<text x="1130.0" y="376.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">next task reads index.md</text>
+<text x="1130.0" y="393.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">BEFORE re-deriving</text>
+<text x="1130.0" y="410.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11.5" fill="#E2E8F0" text-anchor="middle">anything</text>
+</g>
+<path d="M150.0,280 L150.0,300" stroke="#64748B" stroke-width="2" fill="none" marker-end="url(#ilArr)"/>
+<path d="M640.0,280 L640.0,300" stroke="#64748B" stroke-width="2" fill="none" marker-end="url(#ilArr)"/>
+<path d="M885.0,280 L885.0,300" stroke="#64748B" stroke-width="2" fill="none" marker-end="url(#ilArr)"/>
+<path d="M1130.0,280 L1130.0,300" stroke="#64748B" stroke-width="2" fill="none" marker-end="url(#ilArr)"/>
+<path d="M246.0,375 L299.0,375" stroke="#64748B" stroke-width="2.4" fill="none" marker-end="url(#ilArr)"/>
+<path d="M491.0,375 L544.0,290" stroke="#64748B" stroke-width="2.4" fill="none" marker-end="url(#ilArr)"/>
+<path d="M736.0,375 L789.0,290" stroke="#64748B" stroke-width="2.4" fill="none" marker-end="url(#ilArr)"/>
+<path d="M981.0,375 L1034.0,290" stroke="#64748B" stroke-width="2.4" fill="none" marker-end="url(#ilArr)"/>
+<path d="M1130.0,450 C1130.0,510 150.0,510 150.0,450" stroke="#F472B6" stroke-width="2.2" fill="none" stroke-dasharray="7,5" marker-end="url(#ilArrDash)"/>
+<rect x="502.1" y="517.0" width="275.8" height="15" fill="#060B14" opacity="0.85" rx="3"/>
+<text x="640.0" y="528.0" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="12" fill="#F9A8D4" text-anchor="middle">new ambiguity — reopens the interview, never drifts silently</text>
+<rect x="68.5" y="560" width="175" height="30" fill="#0B1526" rx="15" stroke="#3B82F6" stroke-width="1.3" opacity="0.95"/>
+<text x="156.0" y="579" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11" font-weight="600" fill="#3B82F6" text-anchor="middle">State beats history</text>
+<rect x="259.5" y="560" width="340" height="30" fill="#0B1526" rx="15" stroke="#8B5CF6" stroke-width="1.3" opacity="0.95"/>
+<text x="429.5" y="579" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11" font-weight="600" fill="#8B5CF6" text-anchor="middle">A softened verdict is a signal, not a courtesy</text>
+<rect x="615.5" y="560" width="320" height="30" fill="#0B1526" rx="15" stroke="#10B981" stroke-width="1.3" opacity="0.95"/>
+<text x="775.5" y="579" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11" font-weight="600" fill="#10B981" text-anchor="middle">Verifiers must resist a fabricated PASS</text>
+<rect x="951.5" y="560" width="260" height="30" fill="#0B1526" rx="15" stroke="#EC4899" stroke-width="1.3" opacity="0.95"/>
+<text x="1081.5" y="579" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="11" font-weight="600" fill="#EC4899" text-anchor="middle">raw/ immutable · wiki/ LLM-owned</text>
+<text x="640.0" y="624" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif" font-size="10.5" fill="#475569" text-anchor="middle" font-style="italic">oh-my-jeo · jeo-code · jeopi · jeo-claw · jeo-skills — five runtimes, one spec-first contract</text>
+</svg>

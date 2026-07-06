@@ -7,10 +7,9 @@ tags: [jeo-code, oh-my-jeo, jeopi, jeo-claw, jeo-skills, ContextEngineering, Age
 
 date: 2026-06-29 10:00:00 +0900
 pin: true
-mermaid: true
 math: false
 image:
-  path: /assets/img/2026-06-29-jeo-ecosystem-context-engineering/oh-my-jeo-hero.png
+  path: /assets/img/2026-06-29-jeo-ecosystem-context-engineering/oh-my-jeo-ecosystem-hero.png
   alt: "The jeo ecosystem — oh-my-jeo, jeo-code, jeopi, jeo-claw, and jeo-skills working as one spec-first harness"
 
 ---
@@ -61,6 +60,9 @@ user says a plain request in chat
 
 <img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/oh-my-jeo-architecture.svg" alt="oh-my-jeo architecture and workflow map" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;" />
 
+
+<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/omj-core-workflows.png" alt="OMJ Core Workflows — Plan and decide, Learn and gather, Create materials and visuals, Delegate coding and ship, Operate and observe" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;border-radius:8px;" />
+
 The `omj` command is not "more CLI surface" for its own sake — it's setup, repair, `doctor`, and a verifier that turns a plain chat message into a **reviewable contract** before any code changes happen. Workflows like `web-research`, `idea-to-deploy`, `ultragoal`, `loop`, and `ultraprocess` ship as ready-to-use playbooks, each declaring an explicit **evidence boundary**: what the agent is allowed to claim it verified, versus what it's only asserting.
 
 <img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/oh-my-jeo-spec-pipeline.svg" alt="oh-my-jeo spec pipeline diagram" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;" />
@@ -102,7 +104,7 @@ All of this state — the frozen spec, the plan, the approval gate, the hook dia
 
 ### 3. jeopi — the same discipline, forked into a different engine
 
-<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/jeopi-hero.png" alt="jeopi — spec-first fork of oh-my-pi. Encode intention. Decode software." style="display:block;width:100%;max-width:640px;height:auto;margin:1.25rem auto;border-radius:12px;" />
+<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/character.gif" alt="animated jeopi hooded doll mascot with split cyan and magenta pants, watched by a curious jeo-code crayfish" style="display:block;width:320px;max-width:100%;height:auto;margin:1.25rem auto;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.5);" />
 
 **[jeopi](https://github.com/akillness/jeopi)** is proof the discipline isn't tied to one runtime — and it's a sharper proof than the repo it replaces here. It's a fork of [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) (itself a fork of [badlogic/pi-mono](https://github.com/badlogic/pi-mono) by Mario Zechner), so jeopi inherits the whole capable engine — **40+** providers, **32** built-in tools, **14** LSP ops, **28** DAP ops, **~55k** lines of Rust — and welds jeo-code's spec-first philosophy onto it rather than rewriting the engine from scratch. One command, `/jeo <what you want built>`, drives the whole spine:
 
@@ -145,54 +147,7 @@ Two mechanisms here map almost exactly onto themes this post already covers. Fir
 
 **[jeo-claw](https://github.com/akillness/jeo-claw)** is where the "state over history" thesis gets load-bearing. It runs two agentic-PR runtimes side by side — **ZeroClaw** (`jeo-code`, for heavy refactors) and **NullClaw** (`gajae-code`, for lightweight strikes) — against the same LLM configuration, so every real task becomes a live **A/B comparison** rather than a single, unverifiable anecdote.
 
-```mermaid
-
-flowchart TB
-    subgraph Discord [Discord Interface]
-        User((User))
-        Bot[Control Bot]
-        UI[Blockquote Status & Approve Buttons]
-    end
-
-    subgraph Hive [jeo-claw Hive Container]
-        Control[Sovereign Orchestrator<br/>glue/server.ts]
-        DB[(SQLite State DB)]
-        subgraph Workers [Stage Workers]
-            RC[Researcher-Coder]
-            REV[Reviewer]
-            PRC[PR-Creator]
-            MRG[Merger]
-        end
-        subgraph Execution [AI Agents]
-            ZC[ZeroClaw / jeo-code<br/>Heavy Refactoring]
-            NC[NullClaw / gajae-code<br/>Lightweight Strikes]
-        end
-    end
-
-    subgraph GitHub [Target Repository]
-        Repo[(akillness/jeo-claw)]
-    end
-
-    User -- 1 request --> Bot
-    Bot -- 2 event --> Control
-    Control <--> DB
-    Control -- 3 dispatch --> RC
-    RC -- 4 select runtime --> Execution
-    Execution -- 5 push code --> Repo
-    RC -- 6 next stage --> REV
-    REV -- 7 next stage --> PRC
-    PRC -- 8 request approval --> UI
-    User -- 9 approve --> UI
-    UI -- 10 confirm --> Control
-    Control -- 11 execute PR --> PRC
-    PRC -- 12 create PR --> Repo
-    PRC -- 13 next stage --> MRG
-    MRG -- 14 request approval --> UI
-    User -- 15 approve --> UI
-    UI -- 16 confirm --> Control
-    Control -- 17 execute merge --> MRG
-    MRG -- 18 merge PR --> Repo
-```
+<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/jeo-claw-architecture.svg" alt="jeo-claw dual-runtime hive orchestration — Discord interface, Sovereign Orchestrator, SQLite state DB, stage workers, ZeroClaw vs NullClaw A/B execution, and the target repository across an 18-step sequence" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;border-radius:12px;" />
 
 Notice where the human sits in that diagram: **PR creation and merge are action-scoped, single-use approvals**, enforced in the `glue` orchestrator, not merely "a Discord message someone read." That's judgment kept where it belongs — at the one irreversible step — instead of sprinkled everywhere or removed entirely.
 
@@ -267,42 +222,7 @@ The `ooo` (Ouroboros) entry crystallizes the whole ecosystem's philosophy in one
 
 Put the five repos together and you get one coherent lifecycle, not five separate products:
 
-```mermaid
-
-flowchart LR
-    subgraph Interview["🤔 Interview"]
-        A1["oh-my-jeo: chat request\narrives with no code changes yet"]
-        A2["jeo-code / jeopi:\ndeep-interview / interview\nfreezes ambiguity ≤ 0.2"]
-
-    end
-    subgraph Plan["📋 Plan"]
-        B1["ralplan / jeopi plan+critic:\nPlanner→Architect→Critic\nokay / iterate / reject gate"]
-
-    end
-    subgraph Execute["⚙️ Execute"]
-        C1["team / jeopi execute:\nbounded executor turns\n+ parallel reviewer subagents"]
-
-        C2["jeo-claw: A/B dispatch\nZeroClaw vs NullClaw"]
-    end
-    subgraph Verify["✅ Verify"]
-        D1["ultragoal / jeopi verify:\nreal suite run, evidence attached\nnever fabricates a PASS"]
-
-        D2["jeo-claw smoke:glue:\nnegative cases included"]
-    end
-    subgraph Evolve["♻️ Evolve"]
-        E1["capture-knowledge:\nraw/ immutable, wiki/ owned by LLM"]
-        E2["next task reads index.md\nBEFORE re-deriving anything"]
-    end
-
-    A1 --> A2 --> B1 --> C1 --> C2 --> D1 --> D2 --> E1 --> E2
-    E2 -.new ambiguity.-> A2
-
-    style A2 fill:#ff6b6b20,stroke:#c92a2a,stroke-width:2px
-    style B1 fill:#4ecdc420,stroke:#0a9396,stroke-width:2px
-    style C1 fill:#ffe66d40,stroke:#f4a261,stroke-width:2px
-    style D1 fill:#4ecdc420,stroke:#0a9396,stroke-width:2px
-    style E1 fill:#ff6b6b20,stroke:#c92a2a,stroke-width:2px
-```
+<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/innovation-lifecycle.svg" alt="The full loop across all five repos — Interview, Plan, Execute, Verify, Evolve — with a feedback arrow from Evolve back to Interview labeled new ambiguity" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;border-radius:12px;" />
 
 A worked example, using the actual commands each repo exposes:
 
