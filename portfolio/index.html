@@ -1006,8 +1006,8 @@
               {
                 title: 'Agent Systems, Context, and Harness Engineering',
                 copy:
-                  'I have been experimenting with role-based workflows built from Ollama, LangGraph, PraisonAI, MCP, function calling, semantic routing, and explicit execution controls. The goal is not a generic chatbot. It is a useful system that can connect documents, code, search, and execution handlers while remaining inspectable. In personal open-source work I built jeo-code (a Bun-based coding-agent harness/CLI framework with a uniform multi-provider tool loop, anchored-edit integrity, and a verify-before-done loop), jeo-skills (a cross-platform agent-skills catalog for harness engineering), and jeo-claw (a Discord-controlled, dual-runtime agentic repo-update agent).',
-                tags: ['LangGraph', 'MCP', 'jeo-code', 'jeo-skills', 'jeo-claw']
+                  'I have been experimenting with role-based workflows built from Ollama, LangGraph, PraisonAI, MCP, function calling, semantic routing, and explicit execution controls. The goal is not a generic chatbot. It is a useful system that can connect documents, code, search, and execution handlers while remaining inspectable. In personal open-source work I built oh-my-jeo (a spec-first workflow pack for chat agents), jeo-code (a Bun-based coding-agent harness/CLI framework with a uniform multi-provider tool loop, anchored-edit integrity, and a verify-before-done loop), jeopi (a spec-first fork of oh-my-pi/pi-mono with a critic-gated plan/execute/verify spine), jeo-skills (a cross-platform agent-skills catalog for harness engineering), and jeo-claw (a Discord-controlled, dual-runtime agentic repo-update agent).',
+                tags: ['LangGraph', 'MCP', 'oh-my-jeo', 'jeo-code', 'jeopi', 'jeo-skills', 'jeo-claw']
               },
               {
                 title: 'Multimodal QA & Computer Vision',
@@ -1144,6 +1144,18 @@
                 tags: ['Knowledge Ops', 'Slackbot', 'Agents', 'Control Tower', 'Firebase']
               },
               {
+                image: 'assets/projects/oh-my-jeo.png',
+                alt: 'Illustration of Hermes agent hero from oh-my-jeo',
+                meta: 'Open source',
+                title: 'oh-my-jeo — Agent wrapper layer',
+                summary:
+                  'A spec-first workflow pack and deterministic contract layer wrapped around chat agents (Hermes runtime).',
+                role:
+                  'Author and maintainer — designed the Hermes-native wrapper orchestration layer and first-class CodeGraph support.',
+                tags: ['Hermes', 'Wrapper', 'CodeGraph', 'Agents'],
+                links: [{ href: 'https://github.com/akillness/oh-my-jeo', label: 'GitHub' }]
+              },
+              {
                 image: 'assets/projects/jeo-code.png',
                 alt: 'Illustration of a coding-agent CLI harness with a tool-execution loop',
                 meta: 'Open source',
@@ -1154,6 +1166,18 @@
                   'Author and maintainer — designed the harness architecture, the multi-provider tool-execution model, and the safety/verification loop.',
                 tags: ['Bun', 'Harness', 'CLI', 'Agents'],
                 links: [{ href: 'https://github.com/akillness/jeo-code', label: 'GitHub' }]
+              },
+              {
+                image: 'assets/projects/jeopi.png',
+                alt: 'Illustration of jeopi hooded doll mascot',
+                meta: 'Open source',
+                title: 'jeopi — Spec-first coding harness',
+                summary:
+                  'A spec-first fork of oh-my-pi/pi-mono with a critic-gated plan/execute/verify spine.',
+                role:
+                  'Author and maintainer — integrated the spec-first loop, critic-gated workflow, and Hashline edit integrity into a Rust-based engine.',
+                tags: ['Rust', 'Harness', 'LSP', 'DAP', 'Agents'],
+                links: [{ href: 'https://github.com/akillness/jeopi', label: 'GitHub' }]
               },
               {
                 image: 'assets/projects/jeo-skills.png',
@@ -1435,8 +1459,8 @@
               {
                 title: '에이전트 시스템, 컨텍스트, 하네스 엔지니어링',
                 copy:
-                  'Ollama, LangGraph, PraisonAI, MCP, Function Calling, semantic routing, 실행 제어 구조를 조합해 역할이 분리된 워크플로를 실험하고 있습니다. 목표는 단순한 챗봇이 아니라 문서, 코드, 검색, 실행 핸들러를 연결하면서도 관찰 가능한 실제 시스템입니다. 개인 오픈소스로는 jeo-code(Bun 기반 코딩 에이전트 하네스/CLI 프레임워크 — 멀티 프로바이더 통합 툴 루프, 앵커 기반 편집 무결성, verify-before-done 루프), jeo-skills(하네스 엔지니어링용 크로스플랫폼 에이전트 스킬 카탈로그), jeo-claw(Discord 제어·이중 런타임 agentic 저장소 업데이트 에이전트)를 직접 개발했습니다.',
-                tags: ['LangGraph', 'MCP', 'jeo-code', 'jeo-skills', 'jeo-claw']
+                  'Ollama, LangGraph, PraisonAI, MCP, Function Calling, semantic routing, 실행 제어 구조를 조합해 역할이 분리된 워크플로를 실험하고 있습니다. 목표는 단순한 챗봇이 아니라 문서, 코드, 검색, 실행 핸들러를 연결하면서도 관찰 가능한 실제 시스템입니다. 개인 오픈소스로는 oh-my-jeo(챗 에이전트용 스펙 기반 워크플로우 팩), jeo-code(Bun 기반 코딩 에이전트 하네스/CLI 프레임워크 — 멀티 프로바이더 통합 툴 루프, 앵커 기반 편집 무결성, verify-before-done 루프), jeopi(스펙 기반의 oh-my-pi/pi-mono 포크), jeo-skills(하네스 엔지니어링용 크로스플랫폼 에이전트 스킬 카탈로그), jeo-claw(Discord 제어·이중 런타임 agentic 저장소 업데이트 에이전트)를 직접 개발했습니다.',
+                tags: ['LangGraph', 'MCP', 'oh-my-jeo', 'jeo-code', 'jeopi', 'jeo-skills', 'jeo-claw']
               },
               {
                 title: '멀티모달 QA와 컴퓨터 비전',
@@ -1574,6 +1598,18 @@
                 tags: ['Knowledge Ops', 'Slackbot', 'Agents', 'Control Tower', 'Firebase']
               },
               {
+                image: 'assets/projects/oh-my-jeo.png',
+                alt: 'oh-my-jeo의 Hermes 에이전트 히어로 일러스트',
+                meta: '오픈소스',
+                title: 'oh-my-jeo — 에이전트 래퍼 레이어',
+                summary:
+                  '챗 에이전트(Hermes 런타임)를 감싸는 스펙 기반 워크플로우 팩이자 결정론적 계약 레이어입니다.',
+                role:
+                  '제작·유지보수자 — Hermes 네이티브 래퍼 오케스트레이션 레이어와 CodeGraph 연동 기능을 설계했습니다.',
+                tags: ['Hermes', 'Wrapper', 'CodeGraph', 'Agents'],
+                links: [{ href: 'https://github.com/akillness/oh-my-jeo', label: 'GitHub' }]
+              },
+              {
                 image: 'assets/projects/jeo-code.png',
                 alt: '코딩 에이전트 CLI 하네스와 툴 실행 루프 일러스트',
                 meta: '오픈소스',
@@ -1584,6 +1620,18 @@
                   '제작·유지보수자 — 하네스 아키텍처, 멀티 프로바이더 tool 실행 모델, 안전성·검증 루프를 설계했습니다.',
                 tags: ['Bun', 'Harness', 'CLI', 'Agents'],
                 links: [{ href: 'https://github.com/akillness/jeo-code', label: 'GitHub' }]
+              },
+              {
+                image: 'assets/projects/jeopi.png',
+                alt: 'jeopi 후드 인형 마스코트 일러스트',
+                meta: '오픈소스',
+                title: 'jeopi — 스펙 기반 코딩 하네스',
+                summary:
+                  'critic-gated plan/execute/verify 스파인을 갖춘 oh-my-pi/pi-mono의 스펙 기반 포크입니다.',
+                role:
+                  '제작·유지보수자 — spec-first 루프, critic-gated 워크플로우 및 Hashline 편집 무결성을 Rust 기반 엔진에 통합했습니다.',
+                tags: ['Rust', 'Harness', 'LSP', 'DAP', 'Agents'],
+                links: [{ href: 'https://github.com/akillness/jeopi', label: 'GitHub' }]
               },
               {
                 image: 'assets/projects/jeo-skills.png',

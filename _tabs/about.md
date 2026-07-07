@@ -82,7 +82,9 @@ I prefer starting with one capable agent and adding orchestration only when the 
 
 I build and maintain a small family of agent-tooling projects in public:
 
+- **[oh-my-jeo](https://github.com/akillness/oh-my-jeo)** — a spec-first workflow pack and deterministic contract layer wrapped around chat agents (Hermes runtime).
 - **[jeo-code](https://github.com/akillness/jeo-code)** — a Bun-based coding-agent harness / CLI framework with a uniform multi-provider tool loop, anchored-edit integrity, and a verify-before-done loop.
+- **[jeopi](https://github.com/akillness/jeopi)** — a spec-first fork of oh-my-pi/pi-mono with a critic-gated plan/execute/verify spine.
 - **[jeo-skills](https://github.com/akillness/jeo-skills)** — a cross-platform agent-skills catalog for harness engineering, packaging reusable skills for coding agents.
 - **[jeo-claw](https://github.com/akillness/jeo-claw)** — a Discord-controlled, dual-runtime agentic agent that updates repositories from chat commands.
 
