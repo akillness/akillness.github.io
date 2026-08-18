@@ -195,6 +195,7 @@ export UNITY_EDITOR_PATH="/Applications/Unity/Hub/Editor/2023.2.0f1/Unity.app/Co
 
 Create a **BuildScript.cs** in your Unity project (placed in Assets/Editor/):
 
+{% raw %}
 ```csharp
 // Assets/Editor/BuildScript.cs
 using UnityEditor;
@@ -302,6 +303,7 @@ public class BuildScript
     }
 }
 ```
+{% endraw %}
 
 **How to trigger this from Atomic Agent:**
 
@@ -463,6 +465,7 @@ ci_cd:
 
 Create **.github/workflows/build.yaml** for GitHub Actions + Atomic Agent:
 
+{% raw %}
 ```yaml
 name: "Atomic Agent - Game Build & Deploy"
 
@@ -528,6 +531,7 @@ jobs:
             }
 ```
 
+{% endraw %}
 ### Configuration Tips for Production Deployment
 
 **1. Environment-Specific Builds**
