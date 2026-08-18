@@ -19,6 +19,13 @@ node_modules
 # IDE configurations
 .idea
 
+# Python
+problem-solving/.venv/
+__pycache__/
+*.pyc
+.langgraph_cache/
+*.sqlite
+
 # Misc
 
 # Agent internal state

@@ -1,0 +1,304 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "Log",
+      "source_file": "log.md",
+      "id": "log",
+      "community": 1,
+      "norm_label": "log"
+    },
+    {
+      "label": "Index",
+      "source_file": "index.md",
+      "id": "index",
+      "community": 0,
+      "norm_label": "index"
+    },
+    {
+      "label": "\uc288\ud37c\uc13c\ud2b8 \uc774\ub825\uc5d0 brain \ucd94\uac00\ud574",
+      "source_file": "raw/sources/prompts/2026/08/11/135620-019ff113-d2a-brain.md",
+      "id": "raw/sources/prompts/2026/08/11/135620-019ff113-d2a-brain",
+      "community": 1,
+      "norm_label": "\u1109\u1172\u1111\u1165\u1109\u1166\u11ab\u1110\u1173 \u110b\u1175\u1105\u1167\u11a8\u110b\u1166 brain \u110e\u116e\u1100\u1161\u1112\u1162"
+    },
+    {
+      "label": "resume \ud398\uc774\uc9c0\ub294 portfolio \uc758 resume \ubd80\ubd84\ub9cc \uc5c5\ub370\uc774\ud2b8\ud558\uace0, portfolio \ubd80\ubd84\uc758 resume \ubd80\ubd84\uc5d0 \uc288\ud37c\uc13c\ud2b8 \uacbd\ub825\uc5d0 br\u2026",
+      "source_file": "raw/sources/prompts/2026/08/11/134944-019ff113-d2a-resume-portfolio-resume-portfolio-resume-br.md",
+      "id": "raw/sources/prompts/2026/08/11/134944-019ff113-d2a-resume-portfolio-resume-portfolio-resume-br",
+      "community": 0,
+      "norm_label": "resume \u1111\u1166\u110b\u1175\u110c\u1175\u1102\u1173\u11ab portfolio \u110b\u1174 resume \u1107\u116e\u1107\u116e\u11ab\u1106\u1161\u11ab \u110b\u1165\u11b8\u1103\u1166\u110b\u1175\u1110\u1173\u1112\u1161\u1100\u1169, portfolio \u1107\u116e\u1107\u116e\u11ab\u110b\u1174 resume \u1107\u116e\u1107\u116e\u11ab\u110b\u1166 \u1109\u1172\u1111\u1165\u1109\u1166\u11ab\u1110\u1173 \u1100\u1167\u11bc\u1105\u1167\u11a8\u110b\u1166 br..."
+    },
+    {
+      "label": "\uae43\ud398\uc774\uc9c0\uc5d0 \uc5c6\ub294\ub370?",
+      "source_file": "raw/sources/prompts/2026/08/11/135654-019ff113-d2a-prompt.md",
+      "id": "raw/sources/prompts/2026/08/11/135654-019ff113-d2a-prompt",
+      "community": 2,
+      "norm_label": "\u1100\u1175\u11ba\u1111\u1166\u110b\u1175\u110c\u1175\u110b\u1166 \u110b\u1165\u11b9\u1102\u1173\u11ab\u1103\u1166?"
+    },
+    {
+      "label": "\uc288\ud37c\uc13c\ud2b8 \uc774\ub825\uc5d0 brain \ucd94\uac00\ud574",
+      "source_file": "wiki/queries/2026-08-11-135620-brain.md",
+      "id": "wiki/queries/2026-08-11-135620-brain",
+      "community": 1,
+      "norm_label": "\u1109\u1172\u1111\u1165\u1109\u1166\u11ab\u1110\u1173 \u110b\u1175\u1105\u1167\u11a8\u110b\u1166 brain \u110e\u116e\u1100\u1161\u1112\u1162"
+    },
+    {
+      "label": "resume \ud398\uc774\uc9c0\ub294 portfolio \uc758 resume \ubd80\ubd84\ub9cc \uc5c5\ub370\uc774\ud2b8\ud558\uace0, portfolio \ubd80\ubd84\uc758 resume \ubd80\ubd84\uc5d0 \uc288\ud37c\uc13c\ud2b8 \uacbd\ub825\uc5d0 br\u2026",
+      "source_file": "wiki/queries/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br.md",
+      "id": "wiki/queries/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br",
+      "community": 0,
+      "norm_label": "resume \u1111\u1166\u110b\u1175\u110c\u1175\u1102\u1173\u11ab portfolio \u110b\u1174 resume \u1107\u116e\u1107\u116e\u11ab\u1106\u1161\u11ab \u110b\u1165\u11b8\u1103\u1166\u110b\u1175\u1110\u1173\u1112\u1161\u1100\u1169, portfolio \u1107\u116e\u1107\u116e\u11ab\u110b\u1174 resume \u1107\u116e\u1107\u116e\u11ab\u110b\u1166 \u1109\u1172\u1111\u1165\u1109\u1166\u11ab\u1110\u1173 \u1100\u1167\u11bc\u1105\u1167\u11a8\u110b\u1166 br..."
+    },
+    {
+      "label": "\uae43\ud398\uc774\uc9c0\uc5d0 \uc5c6\ub294\ub370?",
+      "source_file": "wiki/queries/2026-08-11-135654-prompt.md",
+      "id": "wiki/queries/2026-08-11-135654-prompt",
+      "community": 2,
+      "norm_label": "\u1100\u1175\u11ba\u1111\u1166\u110b\u1175\u110c\u1175\u110b\u1166 \u110b\u1165\u11b9\u1102\u1173\u11ab\u1103\u1166?"
+    },
+    {
+      "label": "\uc288\ud37c\uc13c\ud2b8 \uc774\ub825\uc5d0 brain \ucd94\uac00\ud574",
+      "source_file": "wiki/sources/2026-08-11-135620-brain.md",
+      "id": "wiki/sources/2026-08-11-135620-brain",
+      "community": 1,
+      "norm_label": "\u1109\u1172\u1111\u1165\u1109\u1166\u11ab\u1110\u1173 \u110b\u1175\u1105\u1167\u11a8\u110b\u1166 brain \u110e\u116e\u1100\u1161\u1112\u1162"
+    },
+    {
+      "label": "resume \ud398\uc774\uc9c0\ub294 portfolio \uc758 resume \ubd80\ubd84\ub9cc \uc5c5\ub370\uc774\ud2b8\ud558\uace0, portfolio \ubd80\ubd84\uc758 resume \ubd80\ubd84\uc5d0 \uc288\ud37c\uc13c\ud2b8 \uacbd\ub825\uc5d0 br\u2026",
+      "source_file": "wiki/sources/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br.md",
+      "id": "wiki/sources/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br",
+      "community": 0,
+      "norm_label": "resume \u1111\u1166\u110b\u1175\u110c\u1175\u1102\u1173\u11ab portfolio \u110b\u1174 resume \u1107\u116e\u1107\u116e\u11ab\u1106\u1161\u11ab \u110b\u1165\u11b8\u1103\u1166\u110b\u1175\u1110\u1173\u1112\u1161\u1100\u1169, portfolio \u1107\u116e\u1107\u116e\u11ab\u110b\u1174 resume \u1107\u116e\u1107\u116e\u11ab\u110b\u1166 \u1109\u1172\u1111\u1165\u1109\u1166\u11ab\u1110\u1173 \u1100\u1167\u11bc\u1105\u1167\u11a8\u110b\u1166 br..."
+    },
+    {
+      "label": "\uae43\ud398\uc774\uc9c0\uc5d0 \uc5c6\ub294\ub370?",
+      "source_file": "wiki/sources/2026-08-11-135654-prompt.md",
+      "id": "wiki/sources/2026-08-11-135654-prompt",
+      "community": 2,
+      "norm_label": "\u1100\u1175\u11ba\u1111\u1166\u110b\u1175\u110c\u1175\u110b\u1166 \u110b\u1165\u11b9\u1102\u1173\u11ab\u1103\u1166?"
+    }
+  ],
+  "links": [
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "log.md",
+      "source": "log",
+      "target": "raw/sources/prompts/2026/08/11/134944-019ff113-d2a-resume-portfolio-resume-portfolio-resume-br"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "log.md",
+      "source": "log",
+      "target": "wiki/sources/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "log.md",
+      "source": "log",
+      "target": "wiki/queries/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "log.md",
+      "source": "log",
+      "target": "raw/sources/prompts/2026/08/11/135620-019ff113-d2a-brain"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "log.md",
+      "source": "log",
+      "target": "wiki/sources/2026-08-11-135620-brain"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "log.md",
+      "source": "log",
+      "target": "wiki/queries/2026-08-11-135620-brain"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "log.md",
+      "source": "log",
+      "target": "raw/sources/prompts/2026/08/11/135654-019ff113-d2a-prompt"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "log.md",
+      "source": "log",
+      "target": "wiki/sources/2026-08-11-135654-prompt"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "log.md",
+      "source": "log",
+      "target": "wiki/queries/2026-08-11-135654-prompt"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.md",
+      "source": "index",
+      "target": "wiki/sources/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.md",
+      "source": "index",
+      "target": "wiki/queries/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.md",
+      "source": "index",
+      "target": "wiki/sources/2026-08-11-135620-brain"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.md",
+      "source": "index",
+      "target": "wiki/queries/2026-08-11-135620-brain"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.md",
+      "source": "index",
+      "target": "wiki/sources/2026-08-11-135654-prompt"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.md",
+      "source": "index",
+      "target": "wiki/queries/2026-08-11-135654-prompt"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "wiki/queries/2026-08-11-135620-brain.md",
+      "source": "raw/sources/prompts/2026/08/11/135620-019ff113-d2a-brain",
+      "target": "wiki/queries/2026-08-11-135620-brain"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "wiki/sources/2026-08-11-135620-brain.md",
+      "source": "raw/sources/prompts/2026/08/11/135620-019ff113-d2a-brain",
+      "target": "wiki/sources/2026-08-11-135620-brain"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "wiki/queries/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br.md",
+      "source": "raw/sources/prompts/2026/08/11/134944-019ff113-d2a-resume-portfolio-resume-portfolio-resume-br",
+      "target": "wiki/queries/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "wiki/sources/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br.md",
+      "source": "raw/sources/prompts/2026/08/11/134944-019ff113-d2a-resume-portfolio-resume-portfolio-resume-br",
+      "target": "wiki/sources/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "wiki/queries/2026-08-11-135654-prompt.md",
+      "source": "raw/sources/prompts/2026/08/11/135654-019ff113-d2a-prompt",
+      "target": "wiki/queries/2026-08-11-135654-prompt"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "wiki/sources/2026-08-11-135654-prompt.md",
+      "source": "raw/sources/prompts/2026/08/11/135654-019ff113-d2a-prompt",
+      "target": "wiki/sources/2026-08-11-135654-prompt"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "wiki/sources/2026-08-11-135620-brain.md",
+      "source": "wiki/queries/2026-08-11-135620-brain",
+      "target": "wiki/sources/2026-08-11-135620-brain"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "wiki/sources/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br.md",
+      "source": "wiki/queries/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br",
+      "target": "wiki/sources/2026-08-11-134944-resume-portfolio-resume-portfolio-resume-br"
+    },
+    {
+      "relation": "links_to",
+      "weight": 1.0,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "wiki/sources/2026-08-11-135654-prompt.md",
+      "source": "wiki/queries/2026-08-11-135654-prompt",
+      "target": "wiki/sources/2026-08-11-135654-prompt"
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "61b4e9883c28b712559a5abb43f4a8d25c7ecbef"
+}
