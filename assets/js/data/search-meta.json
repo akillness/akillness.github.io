@@ -1,0 +1,25 @@
+---
+layout: compress
+swcache: true
+---
+
+{% comment %}
+  Tier-1 search index: metadata + a short snippet only (no full post body).
+  Loaded first when the visitor opens the search box so results appear quickly;
+  `search.json` (full text) is fetched afterwards and replaces this dataset.
+  Keep the field list and the snippet definition in sync with `search.json`.
+{% endcomment %}
+[
+  {% for post in site.posts %}
+  {
+    "title": {{ post.title | jsonify }},
+    "url": {{ post.url | relative_url | jsonify }},
+    "categories": {{ post.categories | join: ', ' | jsonify }},
+    "tags": {{ post.tags | join: ', ' | jsonify }},
+    "date": "{{ post.date }}",
+    {% include no-linenos.html content=post.content %}
+    {% assign _content = content | strip_html | strip_newlines %}
+    "snippet": {{ _content | truncate: 200 | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
