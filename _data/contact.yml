@@ -26,3 +26,7 @@
 # - type: stack-overflow
 #   icon: 'fab fa-stack-overflow'
 #   url:  ''                  # Fill with your stackoverflow homepage
+
+- type: youtube
+  icon: "fab fa-youtube"
+  url: "https://www.youtube.com/channel/UCRgEfHyFhDWxdlEy5nvP_TQ"
