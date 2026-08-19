@@ -58,6 +58,26 @@ jobs:
         env:
           JEKYLL_ENV: production
 
+
+      - name: Verify ads.txt matches the configured publisher
+        run: |
+          client=$(sed -n 's/^google_ad_client:[[:space:]]*"\{0,1\}\(ca-pub-[0-9]*\)"\{0,1\}.*/\1/p' _config.yml | head -1)
+          if [ -z "$client" ]; then
+            echo "google_ad_client is empty in _config.yml - ads are disabled, skipping ads.txt check."
+            exit 0
+          fi
+          pub=${client#ca-}
+          if [ ! -f _site/ads.txt ]; then
+            echo "::error::google_ad_client is set to $client but _site/ads.txt was not built."
+            exit 1
+          fi
+          if ! grep -qE "^google\.com,[[:space:]]*$pub,[[:space:]]*DIRECT" _site/ads.txt; then
+            echo "::error::ads.txt has no DIRECT record for $pub (AdSense will report it as missing)."
+            cat _site/ads.txt
+            exit 1
+          fi
+          echo "ads.txt authorizes $pub"
+
       - name: Test site
         run: |
           bundle exec htmlproofer _site \
