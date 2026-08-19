@@ -1,3 +1,9 @@
+---
+layout: page
+title: "Google AdSense Monetization Guide"
+permalink: /docs/google-adsense-monetization-guide/
+---
+
 # Google AdSense 수익화를 위한 블로그 운영 및 글쓰기 가이드라인
 
 ## 1. 개요 및 구글 애드센스 심사/수익화 핵심 법칙

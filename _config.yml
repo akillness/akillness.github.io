@@ -198,9 +198,11 @@ compress_html:
 exclude:
   - "*.gem"
   - "*.gemspec"
-  - docs
   - tools
   - README.md
+  - LICENSE
+  - rollup.config.js
+  - package*.json
   - LICENSE
   - rollup.config.js
   - package*.json
