@@ -223,9 +223,25 @@ exclude:
   - LICENSE
   - rollup.config.js
   - package*.json
-  - LICENSE
-  - rollup.config.js
-  - package*.json
+  # Agent-generated artifacts: local-only, never published or indexed.
+  # Raw session/prompt records stay in the local DB-style stores (.jeo/);
+  # only curated Markdown under _posts/ and docs/ is public.
+  - graphify-out/
+  - llm-wiki/
+  - jeo-session-*.md
+  - test-results/
+  # Agent/tooling scaffolding at the repo root: tracked in git, but no page
+  # or layout references them, so they must not be served as public URLs.
+  - persona.md
+  - docs/prompt.md
+  - USER.md
+  - IDENTITY.md
+  - IDENTITY.html
+  - resume_data.json
+  - extract_resume.js
+  - plan.md
+  - hyundai_ai_application_engineer_essay.md
+  - 2026_naver_coding_test_guide.md
 
 include:
   - .well-known

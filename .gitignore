@@ -33,6 +33,14 @@ __pycache__/
 .omc/
 .survey/
 
+# Agent-generated artifacts (local-only; regenerable or private session records)
+graphify-out/
+llm-wiki/
+jeo-session-*.md
+.serena/
+.gjc/
+test-results/
+
 # macOS
 .DS_Store
 
