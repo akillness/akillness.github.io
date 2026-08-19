@@ -1,0 +1,29 @@
+<!--
+  Bottom-of-post AdSense unit.
+
+  The adsbygoogle loader itself is injected once per page by `adsense.html`
+  from <head>, under exactly the same condition as below, so this include only
+  emits the ad slot and its push() call.
+
+  Opt a single post out with `ads: false` in its front matter.
+-->
+{% if jekyll.environment == 'production'
+  and site.google_ad_client != empty
+  and site.google_ad_client
+  and site.google_ad_slots.post_bottom != empty
+  and site.google_ad_slots.post_bottom
+  and page.ads != false
+%}
+  <!-- jeo-code -->
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-client="{{ site.google_ad_client }}"
+    data-ad-slot="{{ site.google_ad_slots.post_bottom }}"
+    data-ad-format="auto"
+    data-full-width-responsive="true"
+  ></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+{% endif %}

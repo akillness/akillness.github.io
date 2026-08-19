@@ -83,8 +83,10 @@ tail_includes:
   </header>
 
   <div class="content">
-    {{ content }}
+    {% include post-content.html content=content %}
   </div>
+
+  <div class="post-ad-bottom my-4">{% include adsense-post.html %}</div>
 
   <div class="post-tail-wrapper text-muted">
     <!-- categories -->

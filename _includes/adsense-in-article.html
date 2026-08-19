@@ -1,0 +1,18 @@
+<!--
+  In-article AdSense unit, injected between two paragraphs of a post body by
+  `post-content.html`. The adsbygoogle loader is emitted once per page by
+  `adsense.html` from <head>, so only the slot and its push() call live here.
+-->
+<div class="post-ad-in-article my-4">
+  <ins
+    class="adsbygoogle"
+    style="display:block; text-align:center;"
+    data-ad-layout="in-article"
+    data-ad-format="fluid"
+    data-ad-client="{{ site.google_ad_client }}"
+    data-ad-slot="{{ site.google_ad_slots.post_in_article }}"
+  ></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
