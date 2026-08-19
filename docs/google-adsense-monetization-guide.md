@@ -64,4 +64,34 @@ Jekyll과 같은 정적 사이트 생생기(SSG)는 포스트 개수가 많아�
 3. **ads.txt 게시**: 루트 디렉토리에 `ads.txt` 포함하여 게시자 자격 검증
 
 ---
-*최종 업데이트: 2026-03-31*
+
+## 6. 이 저장소의 실제 연동 상태와 검증 방법
+
+### 현재 배선
+
+| 요소 | 위치 | 상태 |
+|---|---|---|
+| 게시자 ID | `ads.txt` | `pub-3706360396883624` 배포 완료 (live HTTP 200) |
+| 광고 스크립트 | `_includes/adsense.html` → `_includes/head.html` | 배선 완료, **비활성** |
+| 활성화 스위치 | `_config.yml` 의 `google_ad_client` | 의도적으로 **비움** |
+
+`_includes/adsense.html` 은 `jekyll.environment == 'production'` 이면서
+`site.google_ad_client` 가 비어 있지 않을 때만 meta 태그와 `adsbygoogle.js` 를 출력한다.
+따라서 애드센스 승인 후 `_config.yml` 에 `google_ad_client: ca-pub-3706360396883624`
+한 줄만 채우면 전체 연동이 켜진다.
+
+### 검증 스크립트
+
+로그인된 크롬 세션을 그대로 재사용해 **사이트 쪽 배선**과 **애드센스 대시보드** 를
+한 번에 점검한다:
+
+```bash
+playwriter session list                                   # 크롬 세션 ID 확인
+playwriter -s <id> --timeout 240000 -f tools/verify-adsense.mjs
+```
+
+`SITE` 항목이 통과하고 `DASHBOARD` 항목이 실패하면 저장소 배선은 정상이고 계정/승인만
+남은 상태이며, 그 반대면 배포 쪽을 먼저 확인하면 된다.
+
+---
+*최종 업데이트: 2026-03-31 (연동 검증 절차 추가)*
