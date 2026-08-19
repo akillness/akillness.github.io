@@ -90,6 +90,15 @@ Jekyll과 같은 정적 사이트 생성기(SSG)는 포스트 개수가 많아�
 
 **검증**: 빌드 후 `_site/` 루트에 남아야 하는 파일은 `404.html`, `ads.txt`, `feed.xml`, `google*.html`(Search Console 인증), `index.html`, `redirects.json`, `robots.txt`, `sitemap.xml`, `sw.min.js` 뿐입니다.
 
+**자동화**: 이 검증은 사람이 기억할 일이 아니라서 CI(`.github/workflows/pages-deploy.yml`)의 "Verify agent artifacts are neither tracked nor published" 단계가 빌드 직후 세 가지를 강제합니다.
+
+1. `git ls-files`에 `graphify-out/`, `llm-wiki/`, `test-results/`, `.jeo/`, `.serena/`, `.gjc/`, `jeo-session-*.md`가 하나라도 잡히면 실패 — `.gitignore`는 **이미 추적 중인 파일에는 효력이 없으므로**, 실수로 커밋된 기록은 이 검사로만 잡힙니다. (실제로 이 검사를 붙이자마자 `.gjc/`의 에이전트 세션 상태 JSON이 추적 중인 것이 발견되어 untrack 했습니다.)
+2. `_site/`에 제외 대상 경로가 하나라도 생성되면 실패.
+3. `sitemap.xml`이 에이전트 경로를 색인 요청하면 실패. 패턴은 호스트 바로 뒤에 앵커되어 있어 `/tags/llm-wiki/`처럼 **정상 태그 페이지는 오탐하지 않습니다**.
+
+> **git 히스토리 재작성은 하지 않습니다.** 추적을 끊어도 과거 커밋에는 내용이 남지만, 이 저장소의 경우 재작성 실익이 없습니다. 유출 항목 중 유일한 개인정보였던 이메일은 이미 `_config.yml`의 공개 연락처이자 199개 커밋의 author 필드에 들어 있어 파일을 지워도 그대로 남고, 전체 히스토리를 스캔한 결과 토큰·API 키·비밀키는 한 건도 없었습니다. 반면 `filter-repo` + force push는 모든 클론·포크를 깨뜨리고 GitHub에는 옛 SHA가 그대로 접근 가능하게 남습니다. **실제 크리덴셜이 커밋된 경우에만** 재작성을 검토하고, 그때는 재작성보다 해당 키의 폐기·재발급이 우선입니다.
+
+
 
 ---
 

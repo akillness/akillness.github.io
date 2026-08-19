@@ -58,6 +58,52 @@ jobs:
         env:
           JEKYLL_ENV: production
 
+      - name: Verify agent artifacts are neither tracked nor published
+        run: |
+          set -u
+          status=0
+
+          # 1) Machine-written records belong in the local stores (.jeo/), never in git.
+          tracked=$(git ls-files -- graphify-out llm-wiki test-results .jeo .serena .gjc 'jeo-session-*.md')
+          if [ -n "$tracked" ]; then
+            echo "::error::Agent-generated records are tracked in git. Untrack with 'git rm -r --cached <path>' (files stay on disk):"
+            echo "$tracked" | head -20
+            status=1
+          fi
+
+          # 2) Nothing in the exclude list may survive into the published site.
+          for p in graphify-out llm-wiki test-results \
+                   persona.md persona.html docs/prompt.md docs/prompt.html \
+                   USER.md USER.html IDENTITY.md IDENTITY.html \
+                   resume_data.json extract_resume.js plan.md plan.html \
+                   2026_naver_coding_test_guide.md 2026_naver_coding_test_guide.html; do
+            if [ -e "_site/$p" ]; then
+              echo "::error::_site/$p was published. Add it to the exclude: block in _config.yml."
+              status=1
+            fi
+          done
+          leaked=$(find _site -name 'jeo-session-*' -print)
+          if [ -n "$leaked" ]; then
+            echo "::error::A raw session transcript was published:"
+            echo "$leaked"
+            status=1
+          fi
+
+          # 3) Belt and braces: the sitemap must not invite crawlers into agent paths.
+          # Anchored right after the host so legitimate pages like /tags/llm-wiki/ still pass.
+          if [ -f _site/sitemap.xml ] && \
+             grep -qE '<loc>https?://[^/]+/(graphify-out|llm-wiki|jeo-session)' _site/sitemap.xml; then
+            echo "::error::sitemap.xml lists agent-generated URLs:"
+            grep -oE 'https?://[^/]+/(graphify-out|llm-wiki|jeo-session)[^<]*' _site/sitemap.xml | head -20
+            status=1
+          fi
+
+          if [ "$status" -eq 0 ]; then
+            echo "No agent-generated records are tracked or published."
+          fi
+          exit $status
+
+
 
       - name: Verify ads.txt matches the configured publisher
         run: |
