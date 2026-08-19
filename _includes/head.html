@@ -95,6 +95,9 @@
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
   {% endif %}
 
+  <!-- Google AdSense (renders only when `google_ad_client` is set in _config.yml) -->
+  {% include adsense.html %}
+
   <!-- Bootstrap -->
   <link rel="stylesheet" href="{{ site.data.origin[type].bootstrap.css | relative_url }}">
 

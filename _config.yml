@@ -51,6 +51,7 @@ social:
     # Uncomment below to add more social links
     # - https://www.facebook.com/akillness
     - https://www.linkedin.com/in/akillness38
+    - https://www.youtube.com/channel/UCRgEfHyFhDWxdlEy5nvP_TQ
 
 google_site_verification: "google06c53db253d71ce5.html" # fill in to your verification string
 
@@ -59,6 +60,16 @@ google_site_verification: "google06c53db253d71ce5.html" # fill in to your verifi
 
 google_analytics:
   id: "G-DY896ZK9GS" # fill in your Google Analytics ID
+
+# Google AdSense publisher ID, e.g. "ca-pub-3706360396883624".
+# Leave empty to keep the AdSense script off the site entirely.
+# Must stay in sync with the publisher ID declared in /ads.txt.
+#
+# Status (verified via the AdSense dashboard for akillness38@gmail.com):
+# the account pub-3706360396883624 is a *YouTube-only* AdSense account and is
+# currently deactivated for inactivity, so it cannot serve ads on this site yet.
+# Fill this in only after a full (website) AdSense account is approved.
+google_ad_client:
 
 goatcounter:
   id: # fill in your Goatcounter ID
@@ -198,10 +209,12 @@ compress_html:
 exclude:
   - "*.gem"
   - "*.gemspec"
-  - docs
   - tools
   - problem-solving
   - README.md
+  - LICENSE
+  - rollup.config.js
+  - package*.json
   - LICENSE
   - rollup.config.js
   - package*.json
