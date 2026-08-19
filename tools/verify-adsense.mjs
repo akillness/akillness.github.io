@@ -61,15 +61,20 @@ if (!wired) {
 }
 
 // ----------------------------------------------------------- 2. DASHBOARD ---
+//
+// The generic /adsense/u/0/home entry point answers "access denied" even for the
+// account that owns this publisher, so every dashboard URL is publisher-scoped.
 
-async function dashboard(name, url, waitMs = 7000) {
+const DASH = `https://adsense.google.com/adsense/u/0/${EXPECTED_PUB}`
+
+async function dashboard(url, waitMs = 9000) {
   await page.goto(url, { waitUntil: 'domcontentloaded' })
   await page.waitForTimeout(waitMs)
   const text = await page.evaluate(() => document.body.innerText)
   return { url: page.url(), text, flat: text.replace(/\s+/g, ' ') }
 }
 
-const home = await dashboard('home', 'https://adsense.google.com/adsense/u/0/home')
+const home = await dashboard(`${DASH}/home`)
 const denied = /액세스가 거부|Access denied|권한이 없는/.test(home.text)
 const needsSignup = /signup|login/.test(home.url)
 
@@ -79,18 +84,27 @@ record(
   !denied && !needsSignup,
   denied ? 'access denied for the signed-in account'
     : needsSignup ? `redirected to ${home.url.split('?')[0]}`
-      : 'dashboard reachable'
+      : `dashboard reachable as ${EXPECTED_PUB}`
 )
 
 if (!denied && !needsSignup) {
-  const sites = await dashboard('sites', 'https://adsense.google.com/adsense/u/0/sites')
+  const sites = await dashboard(`${DASH}/sites/list`)
   const found = sites.flat.includes('akillness.github.io')
   record('DASHBOARD', 'akillness.github.io listed', found,
-    found ? sites.flat.slice(0, 300) : 'site not present in the Sites list')
-  record('DASHBOARD', 'site marked Ready/준비됨',
-    /준비됨|Ready/.test(sites.flat),
-    (sites.flat.match(/(준비됨|Ready|검토 중|Getting ready|Requires review)/) || ['unknown'])[0])
+    found ? 'present in the Sites list' : 'site not present in the Sites list')
+
+  // Review states, worst to best: 검토 필요 -> 준비 중 -> 준비됨.
+  const row = (sites.flat.match(/akillness\.github\.io\s+(준비됨|준비 중|검토 필요|주의 필요|Ready|Getting ready|Requires review|Needs attention)/) || [])[1]
+  record('DASHBOARD', 'site approved (준비됨/Ready)',
+    /준비됨|Ready/.test(row || ''),
+    row ? `state: ${row}` : 'state not readable from the Sites list')
+
+  const adsTxtState = (sites.flat.match(/(승인됨|찾을 수 없음|Authorized|Not found)/) || ['unknown'])[0]
+  record('DASHBOARD', 'ads.txt seen by AdSense',
+    /승인됨|Authorized/.test(adsTxtState),
+    `AdSense ads.txt status: ${adsTxtState} (crawl can lag the deploy by ~a day)`)
 }
+
 
 // -------------------------------------------------------------- report ------
 

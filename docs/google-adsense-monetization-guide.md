@@ -72,13 +72,27 @@ Jekyll과 같은 정적 사이트 생생기(SSG)는 포스트 개수가 많아�
 | 요소 | 위치 | 상태 |
 |---|---|---|
 | 게시자 ID | `ads.txt` | `pub-3706360396883624` 배포 완료 (live HTTP 200) |
-| 광고 스크립트 | `_includes/adsense.html` → `_includes/head.html` | 배선 완료, **비활성** |
-| 활성화 스위치 | `_config.yml` 의 `google_ad_client` | 의도적으로 **비움** |
+| 광고 스크립트 | `_includes/adsense.html` → `_includes/head.html` | 배선 완료, **활성** |
+| 활성화 스위치 | `_config.yml` 의 `google_ad_client` | `ca-pub-3706360396883624` |
 
 `_includes/adsense.html` 은 `jekyll.environment == 'production'` 이면서
-`site.google_ad_client` 가 비어 있지 않을 때만 meta 태그와 `adsbygoogle.js` 를 출력한다.
-따라서 애드센스 승인 후 `_config.yml` 에 `google_ad_client: ca-pub-3706360396883624`
-한 줄만 채우면 전체 연동이 켜진다.
+`site.google_ad_client` 가 비어 있지 않을 때만 meta 태그와 `adsbygoogle.js` 로더를
+출력한다. 즉 로컬 개발 빌드에는 광고 스크립트가 절대 들어가지 않는다.
+
+기본 레이아웃을 쓰는 604개 페이지에 로더가 들어간다. `portfolio/`, `resume/`,
+`IDENTITY.html` 등 독립 HTML 페이지는 이 include 를 쓰지 않으므로 로더가 없다.
+승인 심사는 홈을 포함한 일반 페이지 기준이라 문제되지 않지만, 해당 페이지까지
+수익화하려면 각 파일 `<head>` 에 로더를 직접 넣어야 한다.
+
+### 계정 진행 상태 (2026-08-19 기준)
+
+1. 기존 **YouTube용 애드센스** 계정(`pub-3706360396883624`)을 웹사이트 계정으로 전환 완료.
+   `adsense.google.com/adsense/u/0/home` 은 이 계정에서도 접근 거부가 나므로
+   대시보드는 반드시 게시자 스코프 URL `/adsense/u/0/pub-3706360396883624/...` 로 연다.
+2. 사이트 `akillness.github.io` 등록 → 로더 스니펫 배포 → **소유권 확인 완료**.
+3. **검토 요청 완료**, 승인 상태 `준비 중`. 구글 심사 결과를 기다리는 단계.
+4. 대시보드의 `Ads.txt 상태` 는 크롤링이 배포보다 하루 정도 늦을 수 있어
+   한동안 `찾을 수 없음` 으로 보일 수 있다. 파일 자체는 이미 정상 서빙된다.
 
 ### 검증 스크립트
 
@@ -87,11 +101,13 @@ Jekyll과 같은 정적 사이트 생생기(SSG)는 포스트 개수가 많아�
 
 ```bash
 playwriter session list                                   # 크롬 세션 ID 확인
-playwriter -s <id> --timeout 240000 -f tools/verify-adsense.mjs
+playwriter -s <id> --timeout 300000 -f tools/verify-adsense.mjs
 ```
 
-`SITE` 항목이 통과하고 `DASHBOARD` 항목이 실패하면 저장소 배선은 정상이고 계정/승인만
-남은 상태이며, 그 반대면 배포 쪽을 먼저 확인하면 된다.
+`SITE` 5개 항목이 모두 통과하면 저장소/배포 쪽은 정상이다. `DASHBOARD` 의
+`site approved` 와 `ads.txt seen by AdSense` 는 구글 심사·크롤링이 끝나야 통과하므로,
+승인 대기 중에는 **7/9** 가 정상 상태다.
 
 ---
-*최종 업데이트: 2026-03-31 (연동 검증 절차 추가)*
+*최종 업데이트: 2026-08-19 (웹사이트 계정 전환·소유권 확인·검토 요청 반영)*
+
