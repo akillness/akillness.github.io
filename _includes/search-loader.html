@@ -1,6 +1,11 @@
 <!--
   Jekyll Simple Search loader
   See: <https://github.com/christian-fei/Simple-Jekyll-Search>
+
+  The index is *not* fetched on page load. It is requested the first time the
+  visitor engages with the search box, in two tiers:
+    1. `search-meta.json` — titles/tags/snippets only, small and quick;
+    2. `search.json`      — full post text, swapped in when it arrives.
 -->
 
 {% capture result_elem %}
@@ -20,28 +25,104 @@
 
 <script>
   /* Note: dependent library will be loaded in `js-selector.html` */
-  SimpleJekyllSearch({
-    searchInput: document.getElementById('search-input'),
-    resultsContainer: document.getElementById('search-results'),
-    json: '{{ '/assets/js/data/search.json' | relative_url }}',
-    searchResultTemplate: '{{ result_elem | strip_newlines }}',
-    noResultsText: '{{ not_found }}',
-    templateMiddleware: function(prop, value, template) {
-      if (prop === 'categories') {
-        if (value === '') {
-          return `${value}`;
-        } else {
-          return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+  (function () {
+    var input = document.getElementById('search-input');
+    var results = document.getElementById('search-results');
+
+    if (input === null || results === null) {
+      return;
+    }
+
+    var META_URL = '{{ '/assets/js/data/search-meta.json' | relative_url }}';
+    var FULL_URL = '{{ '/assets/js/data/search.json' | relative_url }}';
+
+    var options = {
+      resultsContainer: results,
+      searchResultTemplate: '{{ result_elem | strip_newlines }}',
+      noResultsText: '{{ not_found }}',
+      templateMiddleware: function (prop, value, template) {
+        if (prop === 'categories') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+          }
+        }
+
+        if (prop === 'tags') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+          }
         }
       }
+    };
 
-      if (prop === 'tags') {
-        if (value === '') {
-          return `${value}`;
-        } else {
-          return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
-        }
+    /* NOTE: the `compress` layout strips newlines from this page, so `//`
+       comments would swallow the rest of the script — use block comments only. */
+    var searcher = null; /* set once an index has been loaded */
+    var state = 'idle'; /* idle | loading | ready */
+
+    /* SimpleJekyllSearch binds its own `input` listener to `searchInput` on every
+       call, so it is pointed at a detached element and the query is driven from
+       here instead. That keeps the tier-2 re-initialization free of duplicate
+       handlers. */
+    function build(index) {
+      options.searchInput = document.createElement('input');
+      options.json = index;
+      searcher = SimpleJekyllSearch(options).search;
+    }
+
+    function runQuery() {
+      results.innerHTML = '';
+      if (searcher !== null && input.value !== '') {
+        searcher(input.value);
       }
     }
-  });
+
+    function fetchIndex(url) {
+      return fetch(url).then(function (res) {
+        if (!res.ok) {
+          throw new Error('failed to get ' + url + ' (' + res.status + ')');
+        }
+        return res.json();
+      });
+    }
+
+    function loadIndex() {
+      if (state !== 'idle') {
+        return;
+      }
+      state = 'loading';
+
+      fetchIndex(META_URL)
+        .then(function (index) {
+          build(index);
+          runQuery();
+        })
+        .catch(function (err) {
+          console.error(err);
+        })
+        .then(function () {
+          return fetchIndex(FULL_URL);
+        })
+        .then(function (index) {
+          build(index);
+          runQuery();
+          state = 'ready';
+        })
+        .catch(function (err) {
+          console.error(err);
+          /* keep the tier-1 index if it did load, otherwise allow a retry */
+          state = searcher === null ? 'idle' : 'ready';
+        });
+    }
+
+    input.addEventListener('focus', loadIndex);
+    input.addEventListener('input', function () {
+      loadIndex();
+      runQuery();
+    });
+  })();
 </script>

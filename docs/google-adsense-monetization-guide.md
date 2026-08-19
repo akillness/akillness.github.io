@@ -43,17 +43,33 @@ permalink: /docs/google-adsense-monetization-guide/
 
 ---
 
-## 4. SQLite / Local DB를 활용한 포스트 데이터베이스 및 검색/속도 최적화
+## 4. 포스트 데이터베이스 및 검색/속도 최적화
 
-Jekyll과 같은 정적 사이트 생생기(SSG)는 포스트 개수가 많아질수록 build 시간과 JS 검색 인덱스 파일(`search.json`)의 메모리 용량이 비대해지는 한계가 있습니다.
+Jekyll과 같은 정적 사이트 생성기(SSG)는 포스트 개수가 많아질수록 build 시간과 JS 검색 인덱스 파일(`search.json`)의 용량이 비대해지는 한계가 있습니다.
 
-### 최적화 아키텍처
-1. **Build-Time SQLite Indexing**:
-   - build 단계에서 모든 포스트의 메타데이터 및 본문 역인덱스(Inverted Index)를 SQLite DB (`assets/data/posts.sqlite` 또는 FTS5 데이터베이스)로 압축 및 생성.
-2. **WebAssembly SQLite / IndexedDB (Client-Side)**:
-   - 클라이언트 측에서 lightweight SQLite WASM 또는 IndexedDB를 이용하여 메모리 소모를 기존 대비 70% 이상 절감.
-3. **Lazy-loading & Pagination**:
-   - 전체 검색 인덱스를 한 번에 로딩하지 않고, 필요에 따라 인덱스 chunk 및 DB를 로딩하여 LCP(Largest Contentful Paint) 및 INP(Interaction to Next Paint) 향상.
+### 원칙: 원본은 Markdown, DB는 파생물
+
+포스트의 source of truth는 `_posts/*.md`로 유지합니다. 원본을 바이너리 DB로 옮기면 git diff·PR 리뷰·머지 충돌 해결이 불가능해지고, Chirpy의 카테고리/태그/피드/related-posts가 모두 `site.posts` 컬렉션 위에서 동작하기 때문에 빌드 전에 md를 다시 생성하는 왕복이 생깁니다. 따라서 DB/인덱스는 **build 단계에서 md로부터 생성되는 파생 산출물**로만 다룹니다.
+
+### 구현된 2단계 지연 로딩 인덱스
+
+`search.json` 하나를 모든 페이지 로드 시점에 통째로 내려받던 구조(287개 포스트 기준 2.2 MB, gzip 740 KB)를 다음과 같이 바꿨습니다.
+
+1. **Tier 1 — `assets/js/data/search-meta.json`** (137 KB, gzip 40 KB)
+   - 제목·URL·카테고리·태그·200자 스니펫만 포함. 검색창에 처음 포커스/입력이 발생할 때 요청됩니다.
+2. **Tier 2 — `assets/js/data/search.json`** (2.2 MB, gzip 740 KB)
+   - 본문 전문 인덱스. Tier 1이 적용된 직후 백그라운드로 받아 데이터셋을 교체하며, 이때부터 본문 전문 검색이 동작합니다.
+3. **로더 (`_includes/search-loader.html`)**
+   - 페이지 로드 시에는 아무 인덱스도 요청하지 않습니다(검색을 쓰지 않는 방문자의 전송량 = 0).
+   - SimpleJekyllSearch는 호출할 때마다 `searchInput`에 자체 리스너를 등록하므로, 실제 입력창 대신 detached 엘리먼트를 넘기고 질의는 로더가 직접 구동합니다. Tier 2 재초기화 시 핸들러가 중복되지 않습니다.
+   - 두 인덱스의 스니펫 정의가 동일하므로 Tier 1 → Tier 2 교체 시 결과 표시가 달라지지 않습니다.
+
+> `search-loader.html`의 인라인 스크립트는 `compress` 레이아웃이 개행을 제거하므로 `//` 주석을 쓰면 이후 코드 전체가 주석 처리됩니다. 블록 주석만 사용하세요.
+
+### 다음 단계 (미구현)
+
+- **Build-Time SQLite Indexing**: 본문 역인덱스를 SQLite FTS5(`assets/data/posts.sqlite`)로 생성하고, 클라이언트에서 sql.js-httpvfs의 HTTP Range 요청으로 필요한 페이지만 읽어 Tier 2의 740 KB 전송을 제거.
+- **IndexedDB 캐싱**: 재방문 시 인덱스 재다운로드 회피.
 
 ---
 
