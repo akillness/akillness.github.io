@@ -1,0 +1,22 @@
+# LangGraph 문제 풀이용 의존성 (2026-08 기준 실측 버전)
+#
+# 설치:
+#   python3 -m venv problem-solving/.venv
+#   problem-solving/.venv/bin/python -m pip install -r problem-solving/requirements.txt
+#
+# 검증된 조합 (Python 3.14.6):
+#   langgraph 1.2.11 / langgraph-checkpoint 4.2.0
+#   langgraph-checkpoint-sqlite 3.1.1 / langchain-core 1.5.4
+
+langgraph>=1.2,<2.0
+langchain-core>=1.5,<2.0
+
+# 체크포인터 — 파일 기반 영속성 (time travel, HITL 재개 검증용)
+langgraph-checkpoint-sqlite>=3.1,<4.0
+
+# 모델 프로바이더는 기본으로 넣지 않는다.
+# 검증 케이스는 오프라인·결정적이어야 하므로 실제 LLM 호출 없이 FakeChatModel 로 대체한다.
+# 실제 모델이 필요할 때만 아래를 추가:
+# langchain-openai
+# langchain-anthropic
+# langchain-google-genai

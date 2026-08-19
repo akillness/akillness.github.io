@@ -19,12 +19,27 @@ node_modules
 # IDE configurations
 .idea
 
+# Python
+problem-solving/.venv/
+__pycache__/
+*.pyc
+.langgraph_cache/
+*.sqlite
+
 # Misc
 
 # Agent internal state
 .jeo/
 .omc/
 .survey/
+
+# Agent-generated artifacts (local-only; regenerable or private session records)
+graphify-out/
+llm-wiki/
+jeo-session-*.md
+.serena/
+.gjc/
+test-results/
 
 # macOS
 .DS_Store

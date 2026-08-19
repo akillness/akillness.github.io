@@ -71,6 +71,26 @@ Jekyll과 같은 정적 사이트 생성기(SSG)는 포스트 개수가 많아�
 - **Build-Time SQLite Indexing**: 본문 역인덱스를 SQLite FTS5(`assets/data/posts.sqlite`)로 생성하고, 클라이언트에서 sql.js-httpvfs의 HTTP Range 요청으로 필요한 페이지만 읽어 Tier 2의 740 KB 전송을 제거.
 - **IndexedDB 캐싱**: 재방문 시 인덱스 재다운로드 회피.
 
+### 같은 원칙의 확장: 에이전트 기록물 (2026-08-19)
+
+"원본은 md, DB는 파생물"은 포스트뿐 아니라 **에이전트가 만들어내는 기록물**에도 그대로 적용합니다. 기준은 파일 포맷이 아니라 *누가 읽고 어떻게 접근하는가*입니다.
+
+| 성격 | 저장 형태 | 위치 | git | 공개 |
+| --- | --- | --- | --- | --- |
+| 원시 턴/프롬프트 로그 (기계가 쓰고 기계가 질의, append 중심) | DB형 (jsonl/sqlite) | `.jeo/` | 추적 안 함 | 비공개 |
+| 재생성 가능한 파생 캐시 | 도구 산출물 | `graphify-out/` | 추적 안 함 | 비공개 |
+| 지식 베이스 원문·질의 기록 | md | `llm-wiki/` | 추적 안 함 | 비공개 |
+| 큐레이션된 결과물 (사람이 리뷰) | md | `_posts/`, `docs/` | 추적 | 공개 |
+
+원시 기록을 md로 커밋하면 세션 하나가 수천 줄짜리 파일이 되어 diff·리뷰가 무의미해지고, 반대로 큐레이션 결과를 DB에 넣으면 리뷰와 링크가 불가능해집니다. 두 축을 섞지 않는 것이 핵심입니다.
+
+이 원칙을 어기면 **비공개여야 할 기록이 그대로 웹에 발행됩니다.** 실제로 2026-08-19 이전까지 `graphify-out/`(408 파일, 11 MB의 AST 캐시), `llm-wiki/`(30 파일), `jeo-session-*.md`(434 KB 세션 원문)가 git에 추적되어 `_site/`로 빌드되었고, 원시 프롬프트가 HTML 페이지로 렌더링되어 `sitemap.xml`에 11건 색인 요청까지 나가 있었습니다. 현재는 `.gitignore`로 추적을 끊고 `_config.yml`의 `exclude:`로 발행을 차단합니다.
+
+> `_config.yml`에 `exclude:` 항목을 추가할 때는 그 파일이 **정말 소스인지** 확인하세요. `redirects.json`은 `jekyll-redirect-from` 플러그인이 빌드 중 생성하는 산출물이라 `exclude`에 넣어도 `_site/`에 그대로 남습니다.
+
+**검증**: 빌드 후 `_site/` 루트에 남아야 하는 파일은 `404.html`, `ads.txt`, `feed.xml`, `google*.html`(Search Console 인증), `index.html`, `redirects.json`, `robots.txt`, `sitemap.xml`, `sw.min.js` 뿐입니다.
+
+
 ---
 
 ## 5. 애드센스 광고 배치 및 Jekyll Chirpy 적용 가이드
