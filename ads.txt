@@ -1,1 +1,4 @@
-google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+# Authorized Digital Sellers for akillness.github.io
+# Publisher ID of the Google account that owns this site (akillness38@gmail.com).
+# Keep this in sync with `google_ad_client` in _config.yml.
+google.com, pub-3706360396883624, DIRECT, f08c47fec0942fa0

@@ -1,3 +1,9 @@
-{% if site.google_ad_client %}
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.google_ad_client }}" crossorigin="anonymous"></script>
+{% if jekyll.environment == 'production' and site.google_ad_client != empty and site.google_ad_client %}
+  <meta name="google-adsense-account" content="{{ site.google_ad_client }}">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.google_ad_client }}"
+    crossorigin="anonymous"
+  ></script>
 {% endif %}
