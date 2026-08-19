@@ -1,0 +1,53 @@
+{%- comment -%}
+  Renders a post body and, when ads are enabled, injects one in-article ad unit
+  in the middle of it.
+
+  Placement rules:
+    - split the body on paragraph ends (`</p>`), keeping every byte of markup;
+    - only run on posts with at least `MIN_PARAGRAPHS` paragraphs, so short
+      posts are never interrupted;
+    - insert at the first boundary at or after the midpoint whose *next* block
+      starts a new top-level paragraph or heading, which keeps the unit out of
+      blockquotes, list items and code blocks;
+    - never insert inside the last two blocks, so the in-article unit cannot
+      collide with the bottom unit.
+
+  Opt a single post out with `ads: false` in its front matter.
+{%- endcomment -%}
+
+{%- assign MIN_PARAGRAPHS = 8 -%}
+{%- assign ANCHOR = '<!--ad-anchor-->' -%}
+
+{%- assign ads_on = false -%}
+{%- if jekyll.environment == 'production'
+  and site.google_ad_client != empty
+  and site.google_ad_client
+  and site.google_ad_slots.post_in_article != empty
+  and site.google_ad_slots.post_in_article
+  and page.ads != false
+-%}
+  {%- assign ads_on = true -%}
+{%- endif -%}
+
+{%- if ads_on -%}
+  {%- assign blocks = include.content | replace: '</p>', '</p><!--ad-anchor-->' | split: ANCHOR -%}
+{%- endif -%}
+
+{%- if ads_on == false or blocks.size < MIN_PARAGRAPHS -%}
+  {{ include.content }}
+{%- else -%}
+  {%- assign midpoint = blocks.size | divided_by: 2 -%}
+  {%- assign placed = false -%}
+  {%- for block in blocks -%}
+    {{- block -}}
+    {%- unless placed -%}
+      {%- if forloop.index >= midpoint and forloop.rindex > 2 -%}
+        {%- assign next_open = blocks[forloop.index] | strip | slice: 0, 2 -%}
+        {%- if next_open == '<p' or next_open == '<h' -%}
+          {%- include adsense-in-article.html -%}
+          {%- assign placed = true -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endunless -%}
+  {%- endfor -%}
+{%- endif -%}

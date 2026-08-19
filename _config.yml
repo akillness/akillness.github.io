@@ -72,6 +72,12 @@ google_analytics:
 # site, so the ID is enabled here; ads only serve once the review passes.
 google_ad_client: ca-pub-3706360396883624
 
+# Ad unit slot IDs, created in the AdSense dashboard.
+# Leave a slot empty to hide that placement without touching any template.
+google_ad_slots:
+  post_bottom: "2404463133" # displayed under the body of every post
+  post_in_article: "2101210804" # auto-inserted mid-post (in-article, fluid)
+
 
 goatcounter:
   id: # fill in your Goatcounter ID

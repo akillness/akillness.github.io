@@ -74,6 +74,9 @@ Jekyll과 같은 정적 사이트 생생기(SSG)는 포스트 개수가 많아�
 | 게시자 ID | `ads.txt` | `pub-3706360396883624` 배포 완료 (live HTTP 200) |
 | 광고 스크립트 | `_includes/adsense.html` → `_includes/head.html` | 배선 완료, **활성** |
 | 활성화 스위치 | `_config.yml` 의 `google_ad_client` | `ca-pub-3706360396883624` |
+| 본문 하단 광고 | `_includes/adsense-post.html` → `_layouts/post.html` | 슬롯 `2404463133`, 287개 포스트 전부 |
+| 본문 중간 광고 | `_includes/adsense-in-article.html` → `_includes/post-content.html` | 슬롯 `2101210804` (in-article/fluid), 265개 포스트 |
+| 슬롯 스위치 | `_config.yml` 의 `google_ad_slots` | `post_bottom`, `post_in_article` |
 
 `_includes/adsense.html` 은 `jekyll.environment == 'production'` 이면서
 `site.google_ad_client` 가 비어 있지 않을 때만 meta 태그와 `adsbygoogle.js` 로더를
@@ -83,6 +86,21 @@ Jekyll과 같은 정적 사이트 생생기(SSG)는 포스트 개수가 많아�
 `IDENTITY.html` 등 독립 HTML 페이지는 이 include 를 쓰지 않으므로 로더가 없다.
 승인 심사는 홈을 포함한 일반 페이지 기준이라 문제되지 않지만, 해당 페이지까지
 수익화하려면 각 파일 `<head>` 에 로더를 직접 넣어야 한다.
+
+### 광고 유닛 배치 규칙
+
+로더(`adsbygoogle.js`)는 페이지당 한 번만 `<head>` 에서 나가고, 각 유닛 include 는
+`<ins>` 와 `push({})` 만 출력한다. 두 유닛 모두 프로덕션 빌드 + `google_ad_client`
++ 해당 슬롯 ID 가 모두 채워졌을 때만 렌더링되며, 포스트 front matter 에
+`ads: false` 를 넣으면 그 글만 광고에서 제외된다.
+
+본문 중간 유닛은 `_includes/post-content.html` 이 본문을 `</p>` 경계로 잘라
+자동 삽입한다. 문단이 8개 미만인 짧은 글은 건너뛰고, 중간 지점 이후에서
+다음 블록이 최상위 `<p>` 또는 헤딩으로 시작하는 첫 경계에만 넣어
+인용문·리스트·코드블록 내부로 광고가 끼어드는 것을 막는다. 마지막 두 블록도
+제외해 하단 유닛과 붙지 않게 한다. 287개 포스트 중 265개가 이 규칙을 통과했고,
+나머지는 문단 부족(17개) 또는 후반부가 표/리스트뿐인 글(5개)이다.
+
 
 ### 계정 진행 상태 (2026-08-19 기준)
 
