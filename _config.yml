@@ -61,15 +61,17 @@ google_site_verification: "google06c53db253d71ce5.html" # fill in to your verifi
 google_analytics:
   id: "G-DY896ZK9GS" # fill in your Google Analytics ID
 
-# Google AdSense publisher ID, e.g. "ca-pub-3706360396883624".
+# Google AdSense publisher ID.
 # Leave empty to keep the AdSense script off the site entirely.
 # Must stay in sync with the publisher ID declared in /ads.txt.
 #
-# Status (verified via the AdSense dashboard for akillness38@gmail.com):
-# the account pub-3706360396883624 is a *YouTube-only* AdSense account and is
-# currently deactivated for inactivity, so it cannot serve ads on this site yet.
-# Fill this in only after a full (website) AdSense account is approved.
-google_ad_client:
+# Status (AdSense dashboard, akillness38@gmail.com):
+# the YouTube-only account pub-3706360396883624 was upgraded to a website
+# AdSense account and akillness.github.io is registered under it. AdSense
+# requires this loader snippet in <head> to verify ownership and review the
+# site, so the ID is enabled here; ads only serve once the review passes.
+google_ad_client: ca-pub-3706360396883624
+
 
 goatcounter:
   id: # fill in your Goatcounter ID
