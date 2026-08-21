@@ -41,6 +41,9 @@ jeo-session-*.md
 .gjc/
 test-results/
 
+# 지원 서류 (개인정보 포함 — 공개 저장소이므로 커밋 금지)
+apply/
+
 # macOS
 .DS_Store
 
