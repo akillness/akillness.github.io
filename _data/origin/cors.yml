@@ -5,7 +5,6 @@ cdns:
   - url: https://fonts.googleapis.com
   - url: https://fonts.gstatic.com
     args: crossorigin
-  - url: https://fonts.googleapis.com
   # jsDelivr CDN
   - url: https://cdn.jsdelivr.net
   # polyfill.io for math (cdnjs.cloudflare.com/polyfill)
