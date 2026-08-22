@@ -2,7 +2,7 @@
 title: "SuperGemma4: A Faster, Sharper Gemma 4 for Local Agent Workloads"
 description: "A practical review of SuperGemma4, the Apple Silicon MLX-tuned Gemma 4 26B variant that improves coding, logic, browser tasks, Korean prompts, and local agent responsiveness."
 categories: [AI, Local-LLM, Developer-Tools]
-tags: [supergemma4, gemma4, mlx, apple-silicon, local-llm, agents, korean, coding, hugging-face]
+tags: [supergemma4, gemma4, mlx, apple-silicon, Local-LLM, agents, korean, coding, hugging-face]
 date: 2026-04-15 09:00:00 +0900
 pin: false
 mermaid: false

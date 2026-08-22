@@ -2,7 +2,7 @@
 title: "OpenClaw Skills at Scale: How to Start from Frontend when the Catalog Has 5,000+ items"
 description: "I reviewed the OpenClaw skill ecosystem through a large Korean article and the curated Awesome OpenClaw Skills list, then distilled how frontend teams can adopt plugins without getting lost in a sea of choices."
 categories: [AI, Tools]
-tags: [openclaw, skills, frontend, web, ecosystem, productivity]
+tags: [openclaw, skills, frontend, web, ecosystem, Productivity]
 date: 2026-03-15 09:00:00 +0900
 mermaid: false
 math: false

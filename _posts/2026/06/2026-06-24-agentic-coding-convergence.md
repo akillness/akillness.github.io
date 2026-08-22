@@ -2,7 +2,7 @@
 title: "Claude Code vs. Cursor vs. Codex vs. Antigravity — Six Months of Convergence, and Why the Harness Won"
 description: "Six months in, four very different labs converged on the same agentic-coding blueprint — terminal surface, plan-then-approve, MCP, AGENTS.md, parallel subagents. The model got demoted; the harness, the price, and your team's habits now decide the winner. A developer's breakdown with runnable examples."
 categories: [AI, Agents]
-tags: [ClaudeCode, Cursor, Codex, Antigravity, GrokBuild, AGENTS, MCP, HarnessEngineering, AgentWorkflow, AICoding]
+tags: [ClaudeCode, Cursor, Codex, Antigravity, GrokBuild, agents, mcp, HarnessEngineering, AgentWorkflow, AICoding]
 date: 2026-06-24 10:00:00 +0900
 pin: false
 mermaid: true

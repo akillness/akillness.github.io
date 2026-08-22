@@ -2,7 +2,7 @@
 title: "LLM Wiki: Why Your Best Knowledge Base May Be an Agent-Maintained Wiki, Not Another RAG Stack"
 description: "A practical review of Andrej Karpathy's LLM Wiki idea, including persistent knowledge compilation, wiki maintenance loops, Obsidian workflows, and why agent-maintained markdown may beat repeated retrieval for serious research and product work."
 categories: [AI, Agents, Knowledge-Management]
-tags: [llm-wiki, rag, obsidian, ai-agents, knowledge-base, personal-knowledge-management]
+tags: [llm-wiki, RAG, Obsidian, ai-agents, knowledge-base, personal-knowledge-management]
 date: 2026-04-05 09:00:00 +0900
 pin: false
 mermaid: false

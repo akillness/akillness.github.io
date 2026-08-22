@@ -2,7 +2,7 @@
 title: "Agentic Engineering: 9 Skills That Separate Demos from Shipping"
 description: "A production‑minded take on Flowkater’s 9 agentic engineering skills — and how I’d apply them to real game pipelines." 
 categories: [AI, Research]
-tags: [agentic, engineering, workflow, agents, productivity]
+tags: [agentic, engineering, Workflow, agents, Productivity]
 date: 2026-03-01 21:30:00 +0900
 mermaid: true
 math: false

@@ -2,7 +2,7 @@
 title: "PrismML 1-bit Bonsai: Why 1-Bit LLMs Could Make On-Device AI Actually Practical"
 description: "A practical review of PrismML's 1-bit Bonsai models, intelligence density, on-device throughput, energy efficiency, and why 1-bit LLMs matter for edge AI, robotics, and persistent local agents."
 categories: [AI, Edge-AI, Developer-Tools]
-tags: [prismml, bonsai, 1-bit-llm, on-device-ai, edge-ai, llm, robotics, mlx, llama-cpp]
+tags: [prismml, bonsai, 1-bit-llm, on-device-ai, edge-ai, LLM, robotics, mlx, llama-cpp]
 date: 2026-04-02 09:00:00 +0900
 mermaid: false
 math: false

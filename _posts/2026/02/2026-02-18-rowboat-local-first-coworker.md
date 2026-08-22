@@ -2,7 +2,7 @@
 title: "Rowboat: Local‑First AI Coworker Built on a Knowledge Graph"
 description: "Why Rowboat’s long‑lived memory model changes daily knowledge work—and how to put it into practice."
 categories: [AI, Agent]
-tags: [rowboat, knowledge-graph, local-first, mcp, productivity]
+tags: [rowboat, knowledge-graph, local-first, mcp, Productivity]
 date: 2026-02-18 22:05:00 +0900
 mermaid: true
 math: false

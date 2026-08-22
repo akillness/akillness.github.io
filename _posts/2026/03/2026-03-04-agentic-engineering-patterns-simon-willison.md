@@ -2,7 +2,7 @@
 title: "Agentic Engineering Patterns: The Playbook I’d Hand to My Team"
 description: "Simon Willison’s pattern catalog for coding agents turns vague advice into concrete operating habits." 
 categories: [AI, Research]
-tags: [agentic, patterns, coding-agents, workflow, qa]
+tags: [agentic, patterns, coding-agents, Workflow, qa]
 date: 2026-03-04 21:00:00 +0900
 mermaid: true
 math: false

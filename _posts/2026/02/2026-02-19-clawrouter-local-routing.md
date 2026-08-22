@@ -2,7 +2,7 @@
 title: "ClawRouter: Local‑First Routing for Minimal OpenClaw Assistants"
 description: "Why routing matters in the new minimal‑agent ecosystem—and how ClawRouter pushes local control, cost, and reliability." 
 categories: [AI, Research]
-tags: [openclaw, routing, personal-ai, agents, llm]
+tags: [openclaw, routing, personal-ai, agents, LLM]
 date: 2026-02-19 21:30:00 +0900
 mermaid: true
 math: false

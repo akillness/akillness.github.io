@@ -2,7 +2,7 @@
 title: "Designing AI Agent Teams with Codex Subagents: A Practical Guide to Multi-Agent Workflows"
 description: "Codex subagents let you split complex tasks into specialized agents with their own model, sandbox, and tool settings. Here’s a practical guide for shipping safer, faster, and more controllable AI workflows."
 categories: [AI, Coding, Tutorial]
-tags: [codex, subagents, mcp, multi-agent, orchestration, automation]
+tags: [Codex, subagents, mcp, multi-agent, Orchestration, automation]
 date: 2026-03-17 09:00:00 +0900
 mermaid: false
 math: false

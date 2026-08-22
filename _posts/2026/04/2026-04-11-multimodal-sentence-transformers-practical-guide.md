@@ -2,7 +2,7 @@
 title: "Multimodal Sentence Transformers: A Practical Upgrade for Retrieval Systems"
 description: "Sentence Transformers v5.4 brings multimodal embeddings and rerankers into the same Python workflow, making image-aware retrieval and reranking much easier to ship."
 categories: [AI, Research]
-tags: [multimodal, sentence-transformers, embeddings, reranking, retrieval]
+tags: [Multimodal, sentence-transformers, embeddings, reranking, retrieval]
 date: 2026-04-11 09:00:00 +0900
 pin: false
 mermaid: true

@@ -2,7 +2,7 @@
 title: "Unity CLI: From Editor Installs to Verifiable Game-Production Workflows"
 description: "A practical, production-minded guide to Unity CLI, its machine-readable automation contract, and the experimental Unity Pipeline package for controlled Editor and Player workflows."
 categories: [Tutorial, Unity]
-tags: [Unity, UnityCLI, UnityPipeline, CI_CD, GameDevelopment, Automation, AIAgents]
+tags: [Unity, UnityCLI, UnityPipeline, ci-cd, GameDevelopment, automation, AIAgents]
 date: 2026-07-21 10:00:00 +0900
 pin: false
 mermaid: true

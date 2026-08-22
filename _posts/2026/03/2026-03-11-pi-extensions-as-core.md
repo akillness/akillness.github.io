@@ -2,7 +2,7 @@
 title: "pi as the Core: Build Your Own Agentic Workflow, Not Someone Else’s"
 description: "I compared the latest pi-related posts and discovered a practical design pattern: a tiny, hackable core plus local extensions is often a better path than a feature-complete but rigid agent."
 categories: [Tools, AI, Coding]
-tags: [pi, openclaw, coding-agent, extensions, mcp, workflow]
+tags: [pi, openclaw, coding-agent, extensions, mcp, Workflow]
 date: 2026-03-11 09:00:00 +0900
 mermaid: false
 math: false

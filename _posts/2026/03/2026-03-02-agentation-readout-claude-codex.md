@@ -2,7 +2,7 @@
 title: "Two Tools I Installed Instantly for Claude Code & Codex"
 description: "Agentation fixes UI feedback precision. Readout makes sessions replayable. Together they remove the two biggest frontend bottlenecks." 
 categories: [AI, Research]
-tags: [agentic, frontend, claude-code, codex, tooling]
+tags: [agentic, frontend, claude-code, Codex, tooling]
 date: 2026-03-02 21:00:00 +0900
 mermaid: true
 math: false

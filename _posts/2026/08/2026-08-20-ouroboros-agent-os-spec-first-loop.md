@@ -2,7 +2,7 @@
 title: "Ouroboros: The Agent OS That Hides the Answer Key From Its Own Workers"
 description: "A deep dive into Q00/ouroboros - the spec-first Agent OS where a Socratic interview gates code behind an ambiguity score, the grading command never reaches the worker, and an evolutionary loop runs until the ontology stops changing."
 categories: [AI, Agents]
-tags: [ouroboros, AgentOS, SpecDrivenDevelopment, HarnessEngineering, ClaudeCode, MCP, LoopEngineering, CodingAgents]
+tags: [Ouroboros, AgentOS, SpecDrivenDevelopment, HarnessEngineering, ClaudeCode, mcp, LoopEngineering, CodingAgents]
 date: 2026-08-20 10:00:00 +0900
 mermaid: true
 math: true

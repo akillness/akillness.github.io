@@ -2,7 +2,7 @@
 title: "10 GitHub Repos That Shaped My AI‑Agent Playbook"
 description: "A practical, repo‑driven map of the skills you actually need to build and ship AI agents—curated from the projects I learned from the most."
 categories: [AI, Research]
-tags: [ai-agents, llm, learning, open-source, tooling]
+tags: [ai-agents, LLM, Learning, open-source, tooling]
 date: 2026-02-21 21:30:00 +0900
 mermaid: true
 math: false

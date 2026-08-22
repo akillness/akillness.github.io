@@ -2,7 +2,7 @@
 title: "Qwen3.6-Plus Review: 1M Context, Agentic Coding, and Practical AI Agents"
 description: "A practical review of Qwen3.6-Plus covering its 1M-token context window, agentic coding strengths, multimodal reasoning, benchmark signals, and why it matters for real AI agent workflows."
 categories: [AI, Agents, Developer-Tools]
-tags: [qwen, qwen3.6-plus, ai-agents, agentic-coding, multimodal-ai, llm, developer-tools]
+tags: [qwen, qwen3.6-plus, ai-agents, agentic-coding, multimodal-ai, LLM, developer-tools]
 date: 2026-04-02 09:00:00 +0900
 mermaid: false
 math: false

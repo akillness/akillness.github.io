@@ -2,7 +2,7 @@
 title: "The Solo Founder Stack: From Building to Operating with Agents"
 description: "Automaton, Gas Town/Wasteland, Polsia, Vibe‑Kanban, and Symphony point to a new ceiling for one‑person scale." 
 categories: [AI, Research]
-tags: [solo-founder, agents, orchestration, automation, productivity]
+tags: [solo-founder, agents, Orchestration, automation, Productivity]
 date: 2026-03-06 21:30:00 +0900
 mermaid: true
 math: false

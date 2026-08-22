@@ -2,7 +2,7 @@
 title: "OpenDev and the Case for Compound AI Agents: Why Multi-Model Workflows Matter"
 description: "OpenDev shows a different path for coding agents: split work by workflow (execution, thinking, compression, critique, and vision), then bind the right model to each task."
 categories: [AI, Coding]
-tags: [opendev, open-source, coding-agent, mcp, multi-model, architecture]
+tags: [opendev, open-source, coding-agent, mcp, multi-model, Architecture]
 date: 2026-03-16 10:00:00 +0900
 last_modified_at: 2026-03-16 10:00:00 +0900
 mermaid: false

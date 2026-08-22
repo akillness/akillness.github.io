@@ -2,7 +2,7 @@
 title: "9 GitHub Repos for Claude Code That Can 10x Your Next Project (2026)"
 description: "A practical introduction to nine high-impact GitHub repositories for Claude Code workflows in 2026, covering memory, automation, RAG, orchestration, and curated ecosystem resources."
 categories: [AI, Developer-Tools, Productivity]
-tags: [claude-code, github, ai-agents, rag, automation, developer-workflow]
+tags: [claude-code, github, ai-agents, RAG, automation, developer-workflow]
 date: 2026-03-26 10:00:00 +0900
 mermaid: false
 math: false

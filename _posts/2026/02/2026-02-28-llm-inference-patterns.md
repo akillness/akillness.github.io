@@ -2,7 +2,7 @@
 title: "The 4 LLM Inference Patterns — and Why Deployment Feels Different"
 description: "Prefill vs. decode changes the economics of LLM serving. Here’s how SISO/LISO/SILO/LILO shape latency, cost, and routing." 
 categories: [AI, Research]
-tags: [llm, inference, kv-cache, serving, latency]
+tags: [LLM, inference, kv-cache, serving, latency]
 date: 2026-02-28 21:30:00 +0900
 mermaid: true
 math: false

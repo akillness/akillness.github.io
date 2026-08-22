@@ -2,7 +2,7 @@
 title: "MicroGPT: Learning GPT by Building the Smallest Possible Model"
 description: "A concept-first guide to MicroGPT with a hands-on Colab, focusing on core GPT mechanics and practical learning steps."
 categories: [AI, Research]
-tags: [gpt, transformers, microgpt, learning, tutorial]
+tags: [gpt, transformers, microgpt, Learning, tutorial]
 date: 2026-02-18 13:34:00 +0900
 mermaid: true
 math: false
