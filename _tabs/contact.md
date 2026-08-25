@@ -1,6 +1,6 @@
 ---
 icon: fas fa-envelope
-order: 6
+order: 7
 title: Contact
 description: How to reach Jang Young Jeong about the writing on this site, corrections, or collaboration.
 mermaid: false
@@ -29,7 +29,13 @@ Full background on the [About](/about/) page.
 - **Corrections.** A wrong version number, a broken benchmark claim, a mistaken reading of someone's code. Point at the specific line and I will verify and fix it, with the change noted.
 - **Takedown or attribution requests.** If your diagram, screenshot, or text appears in a post and you want it removed or credited differently, say so and I will act on it. No argument.
 - **Technical questions on a specific post.** Especially if you tried the code and it behaved differently.
-- **Collaboration on agent tooling, multimodal QA, or game AI.** The open-source projects listed on the About page are all active.
+- **Collaboration on agent tooling, multimodal QA, or game AI.** The open-source projects listed on the About page are all active. For a paid, scoped review of your own system, see [Work with Me](/work-with-me/).
+
+## Paid technical reviews
+
+Outside the free items above, I take a small number of paid, scoped engagements: **AI agent/RAG architecture diagnosis**, **Unity CI & build-automation audits**, and **multimodal QA design reviews**. Best fit is a small team (roughly 2-15 engineers) already shipping something, who wants an outside, technically literate read before committing more engineering time — not a pre-idea project or a retainer.
+
+Each engagement ends in one deliverable: a written findings document with ranked failure modes and concrete next steps, not a slide deck. Full scope and how it runs: [Work with Me](/work-with-me/). To start, email with what you're building and what decision the review needs to support.
 
 ## What I will not do
 
