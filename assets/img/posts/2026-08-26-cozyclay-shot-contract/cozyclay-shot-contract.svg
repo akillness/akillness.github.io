@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">CozyClay turns browser previs into a reusable AI video shot contract</title>
+  <desc id="desc">A dark editorial diagram showing a clay stage, camera path, and cast feeding geometry, lens, timing, and motion into blocking frame, prompt, OTIO, USD camera, and MP4 outputs.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#17131f"/>
+      <stop offset="1" stop-color="#2c2038"/>
+    </linearGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c4b5fd"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+    <pattern id="grid" width="54" height="54" patternUnits="userSpaceOnUse">
+      <path d="M54 0H0V54" fill="none" stroke="#81758f" stroke-width="1" opacity="0.35"/>
+    </pattern>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#09070c" flood-opacity="0.52"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#f5b95f"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1430" cy="110" r="260" fill="#7c3aed" opacity="0.12"/>
+  <circle cx="115" cy="820" r="260" fill="#69d2e7" opacity="0.08"/>
+
+  <text x="78" y="94" fill="#a78bfa" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="5">SOURCE AUDIT · 2026-08-26</text>
+  <text x="78" y="178" fill="#f7f2ff" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="800">CozyClay is a shot contract</text>
+  <text x="82" y="222" fill="#c8bfd2" font-family="Arial, Helvetica, sans-serif" font-size="27">AI video needed a camera department, not another prompt box.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="78" y="278" width="664" height="520" rx="28" fill="#211c2a" stroke="#44384f" stroke-width="2"/>
+    <text x="116" y="330" fill="#d9cfdf" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" letter-spacing="3">BROWSER PREVIS STAGE</text>
+    <rect x="116" y="365" width="588" height="380" rx="18" fill="#292530"/>
+    <path d="M116 615L704 615L640 745L180 745Z" fill="url(#grid)"/>
+    <path d="M116 615H704M180 745L270 615M294 745L363 615M410 745L454 615M525 745L546 615M640 745L638 615" fill="none" stroke="#81758f" stroke-width="1" opacity="0.45"/>
+    <rect x="526" y="464" width="116" height="151" rx="6" fill="#6f6a70"/>
+    <rect x="548" y="428" width="76" height="36" rx="5" fill="#8b858c"/>
+    <rect x="167" y="521" width="92" height="94" rx="7" fill="#7e7782"/>
+    <rect x="183" y="485" width="60" height="36" rx="5" fill="#a29aa5"/>
+
+    <g transform="translate(352 458)">
+      <circle cx="0" cy="0" r="27" fill="#ded5c8"/>
+      <path d="M-26 34Q0 16 26 34L34 125H-34Z" fill="#d6ccbe"/>
+      <path d="M-18 125L-28 196M18 125L31 196M-30 54L-77 103M30 55L66 108" fill="none" stroke="#d6ccbe" stroke-width="18" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(466 492) scale(.82)">
+      <circle cx="0" cy="0" r="27" fill="#bfb7ab"/>
+      <path d="M-26 34Q0 16 26 34L34 125H-34Z" fill="#b8b0a5"/>
+      <path d="M-18 125L-28 196M18 125L31 196M-30 54L-64 112M30 55L72 94" fill="none" stroke="#b8b0a5" stroke-width="18" stroke-linecap="round"/>
+    </g>
+
+    <g transform="translate(194 402)">
+      <rect x="0" y="0" width="98" height="58" rx="9" fill="#a78bfa"/>
+      <circle cx="72" cy="29" r="17" fill="#201a29"/>
+      <path d="M98 16L135 2V56L98 42Z" fill="#8b5cf6"/>
+      <path d="M38 58L23 91M58 58L74 91" stroke="#a78bfa" stroke-width="8" stroke-linecap="round"/>
+    </g>
+    <path d="M260 426C344 378 470 385 572 420C624 438 657 476 663 530" fill="none" stroke="#f5b95f" stroke-width="7" stroke-linecap="round" stroke-dasharray="15 15" marker-end="url(#arrow)"/>
+    <text x="116" y="780" fill="#a99eb1" font-family="Arial, Helvetica, sans-serif" font-size="18">Geometry is cheap to change. Inference is not.</text>
+  </g>
+
+  <path d="M765 535H818" stroke="#f5b95f" stroke-width="6" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="842" y="278" width="680" height="520" rx="28" fill="#211c2a" stroke="#44384f" stroke-width="2"/>
+    <text x="880" y="330" fill="#d9cfdf" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" letter-spacing="3">PORTABLE SHOT CONTRACT</text>
+
+    <g font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700">
+      <rect x="880" y="372" width="134" height="58" rx="12" fill="#342b41" stroke="#7c3aed"/>
+      <text x="908" y="408" fill="#eee8f4">Geometry</text>
+      <rect x="1028" y="372" width="134" height="58" rx="12" fill="#342b41" stroke="#7c3aed"/>
+      <text x="1072" y="408" fill="#eee8f4">Lens</text>
+      <rect x="1176" y="372" width="134" height="58" rx="12" fill="#342b41" stroke="#7c3aed"/>
+      <text x="1217" y="408" fill="#eee8f4">Time</text>
+      <rect x="1324" y="372" width="160" height="58" rx="12" fill="#342b41" stroke="#7c3aed"/>
+      <text x="1366" y="408" fill="#eee8f4">Motion</text>
+    </g>
+
+    <path d="M947 450V496M1095 450V496M1243 450V496M1404 450V496" stroke="#7f718c" stroke-width="3"/>
+    <path d="M947 496H1404" stroke="#7f718c" stroke-width="3"/>
+    <path d="M1175 496V535" stroke="#f5b95f" stroke-width="5" marker-end="url(#arrow)"/>
+
+    <rect x="963" y="548" width="424" height="82" rx="18" fill="url(#violet)"/>
+    <text x="1175" y="584" text-anchor="middle" fill="#1d1526" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="800" letter-spacing="3">ONE SOURCE OF TRUTH</text>
+    <text x="1175" y="611" text-anchor="middle" fill="#291c35" font-family="Arial, Helvetica, sans-serif" font-size="18">scene + camera + cut + intent</text>
+
+    <g font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">
+      <rect x="880" y="680" width="112" height="62" rx="13" fill="#2f2938" stroke="#69d2e7"/>
+      <text x="936" y="717" text-anchor="middle" fill="#dff9ff">Frame</text>
+      <rect x="1005" y="680" width="112" height="62" rx="13" fill="#2f2938" stroke="#69d2e7"/>
+      <text x="1061" y="717" text-anchor="middle" fill="#dff9ff">Prompt</text>
+      <rect x="1130" y="680" width="112" height="62" rx="13" fill="#2f2938" stroke="#69d2e7"/>
+      <text x="1186" y="717" text-anchor="middle" fill="#dff9ff">OTIO</text>
+      <rect x="1255" y="680" width="112" height="62" rx="13" fill="#2f2938" stroke="#69d2e7"/>
+      <text x="1311" y="717" text-anchor="middle" fill="#dff9ff">USD</text>
+      <rect x="1380" y="680" width="104" height="62" rx="13" fill="#2f2938" stroke="#69d2e7"/>
+      <text x="1432" y="717" text-anchor="middle" fill="#dff9ff">MP4</text>
+    </g>
+    <path d="M1175 630V655M936 655H1432M936 655V674M1061 655V674M1186 655V674M1311 655V674M1432 655V674" fill="none" stroke="#7f718c" stroke-width="3"/>
+    <text x="880" y="780" fill="#a99eb1" font-family="Arial, Helvetica, sans-serif" font-size="18">Compile intent before paying a model to guess it.</text>
+  </g>
+
+  <text x="80" y="854" fill="#8e8298" font-family="Arial, Helvetica, sans-serif" font-size="17">Original editorial diagram · Fodev JEO</text>
+  <text x="1520" y="854" text-anchor="end" fill="#8e8298" font-family="Arial, Helvetica, sans-serif" font-size="17">CozyClay v1.6.0 source audit</text>
+</svg>
