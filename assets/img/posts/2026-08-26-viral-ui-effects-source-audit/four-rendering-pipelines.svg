@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Rendering pipelines and production boundaries of four React UI effects</title>
+  <desc id="desc">Four lanes compare Liquid Gooey, Border Beam, Metal FX, and Thinking Orbs from input DOM to rendered pixels, with the production boundary found in source.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#081321"/><stop offset="1" stop-color="#101728"/></linearGradient>
+    <linearGradient id="g1"><stop stop-color="#4ddcc0"/><stop offset="1" stop-color="#6d9cff"/></linearGradient>
+    <linearGradient id="g2"><stop stop-color="#f779c8"/><stop offset=".5" stop-color="#ffd26b"/><stop offset="1" stop-color="#63e4ff"/></linearGradient>
+    <filter id="s" x="-20%" y="-30%" width="140%" height="160%"><feDropShadow dx="0" dy="10" stdDeviation="15" flood-opacity=".28"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0l10 5-10 5z" fill="#617792"/></marker>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#d4e2ff" stroke-opacity=".035"/></pattern>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/><rect width="1600" height="1000" fill="url(#grid)"/>
+  <text x="80" y="84" fill="#f3f6ff" font-family="Inter, Arial, sans-serif" font-size="46" font-weight="730" letter-spacing="-1">The demo is only the last pixel</text>
+  <text x="80" y="126" fill="#8fa1ba" font-family="Inter, Arial, sans-serif" font-size="21">Source audit: input, renderer, scheduler, then the production boundary</text>
+
+  <g font-family="Inter, Arial, sans-serif" filter="url(#s)">
+    <g transform="translate(80 176)">
+      <rect width="1440" height="172" rx="28" fill="#0e2230" stroke="#4ddcc0" stroke-opacity=".28"/>
+      <rect width="218" height="172" rx="28" fill="#143140"/>
+      <text x="28" y="48" fill="#88f1dc" font-size="16" font-weight="720" letter-spacing="1.3">LIQUID GOOEY</text>
+      <text x="28" y="92" fill="#f2f7ff" font-size="26" font-weight="680">Two layers</text>
+      <text x="28" y="124" fill="#8ca3b7" font-size="16">interactive content survives</text>
+      <g transform="translate(270 30)">
+        <rect width="210" height="112" rx="18" fill="#122d3c" stroke="#35576a"/><text x="105" y="50" text-anchor="middle" fill="#dce7f2" font-size="19" font-weight="620">Live DOM</text><text x="105" y="78" text-anchor="middle" fill="#7f95aa" font-size="15">text, focus, handlers</text>
+        <path d="M230 56h68" stroke="#617792" stroke-width="3" marker-end="url(#arrow)"/>
+        <rect x="320" width="250" height="112" rx="18" fill="#122d3c" stroke="#35576a"/><text x="445" y="46" text-anchor="middle" fill="#dce7f2" font-size="19" font-weight="620">SVG silhouette</text><text x="445" y="74" text-anchor="middle" fill="#7f95aa" font-size="15">filter + merged shadow</text>
+        <path d="M590 56h68" stroke="#617792" stroke-width="3" marker-end="url(#arrow)"/>
+        <rect x="680" width="194" height="112" rx="18" fill="#122d3c" stroke="#35576a"/><text x="777" y="50" text-anchor="middle" fill="#dce7f2" font-size="19" font-weight="620">Composited</text><text x="777" y="78" text-anchor="middle" fill="#7f95aa" font-size="15">crisp + liquid</text>
+        <rect x="914" width="226" height="112" rx="18" fill="#2b2024" stroke="#ef9a89" stroke-opacity=".6"/><text x="1027" y="39" text-anchor="middle" fill="#ffbdad" font-size="14" font-weight="720" letter-spacing="1">BOUNDARY</text><text x="1027" y="68" text-anchor="middle" fill="#f5dde0" font-size="17" font-weight="620">Reduced motion is</text><text x="1027" y="91" text-anchor="middle" fill="#f5dde0" font-size="17" font-weight="620">partial for observed modes</text>
+      </g>
+    </g>
+
+    <g transform="translate(80 374)">
+      <rect width="1440" height="172" rx="28" fill="#181a31" stroke="#9a89ff" stroke-opacity=".3"/>
+      <rect width="218" height="172" rx="28" fill="#242142"/>
+      <text x="28" y="48" fill="#c7beff" font-size="16" font-weight="720" letter-spacing="1.3">BORDER BEAM</text>
+      <text x="28" y="92" fill="#f2f7ff" font-size="26" font-weight="680">CSS first</text>
+      <text x="28" y="124" fill="#9798b7" font-size="16">shared RAF only for pulse</text>
+      <g transform="translate(270 30)">
+        <rect width="210" height="112" rx="18" fill="#20223d" stroke="#4d4e73"/><text x="105" y="50" text-anchor="middle" fill="#e4e5f5" font-size="19" font-weight="620">Child DOM</text><text x="105" y="78" text-anchor="middle" fill="#999bb7" font-size="15">radius is measured</text>
+        <path d="M230 56h68" stroke="#617792" stroke-width="3" marker-end="url(#arrow)"/>
+        <rect x="320" width="250" height="112" rx="18" fill="#20223d" stroke="#4d4e73"/><text x="445" y="46" text-anchor="middle" fill="#e4e5f5" font-size="19" font-weight="620">Unique style block</text><text x="445" y="74" text-anchor="middle" fill="#999bb7" font-size="15">gradient, mask, keyframes</text>
+        <path d="M590 56h68" stroke="#617792" stroke-width="3" marker-end="url(#arrow)"/>
+        <rect x="680" width="194" height="112" rx="18" fill="#20223d" stroke="#4d4e73"/><text x="777" y="50" text-anchor="middle" fill="#e4e5f5" font-size="19" font-weight="620">CSS paint</text><text x="777" y="78" text-anchor="middle" fill="#999bb7" font-size="15">border + bloom</text>
+        <rect x="914" width="226" height="112" rx="18" fill="#2b2024" stroke="#ef9a89" stroke-opacity=".6"/><text x="1027" y="39" text-anchor="middle" fill="#ffbdad" font-size="14" font-weight="720" letter-spacing="1">BOUNDARY</text><text x="1027" y="68" text-anchor="middle" fill="#f5dde0" font-size="17" font-weight="620">7 demo mounts emit</text><text x="1027" y="91" text-anchor="middle" fill="#f5dde0" font-size="17" font-weight="620">72.4 KB of CSS text</text>
+      </g>
+    </g>
+
+    <g transform="translate(80 572)">
+      <rect width="1440" height="172" rx="28" fill="#201925" stroke="#f0a7db" stroke-opacity=".27"/>
+      <rect width="218" height="172" rx="28" fill="#382439"/>
+      <text x="28" y="48" fill="#ffd0f0" font-size="16" font-weight="720" letter-spacing="1.3">METAL FX</text>
+      <text x="28" y="92" fill="#f2f7ff" font-size="26" font-weight="680">One shader</text>
+      <text x="28" y="124" fill="#b09aac" font-size="16">many cheap canvas copies</text>
+      <g transform="translate(270 30)">
+        <rect width="210" height="112" rx="18" fill="#2c2130" stroke="#64445f"/><text x="105" y="50" text-anchor="middle" fill="#f2e4ef" font-size="19" font-weight="620">Shared WebGL</text><text x="105" y="78" text-anchor="middle" fill="#b29aaf" font-size="15">15 fps plasma</text>
+        <path d="M230 56h68" stroke="#617792" stroke-width="3" marker-end="url(#arrow)"/>
+        <rect x="320" width="250" height="112" rx="18" fill="#2c2130" stroke="#64445f"/><text x="445" y="46" text-anchor="middle" fill="#f2e4ef" font-size="19" font-weight="620">2D canvas copy</text><text x="445" y="74" text-anchor="middle" fill="#b29aaf" font-size="15">crop + ring hole per mount</text>
+        <path d="M590 56h68" stroke="#617792" stroke-width="3" marker-end="url(#arrow)"/>
+        <rect x="680" width="194" height="112" rx="18" fill="#2c2130" stroke="#64445f"/><text x="777" y="50" text-anchor="middle" fill="#f2e4ef" font-size="19" font-weight="620">Composite</text><text x="777" y="78" text-anchor="middle" fill="#b29aaf" font-size="15">ring + SVG glow</text>
+        <rect x="914" width="226" height="112" rx="18" fill="#2b2024" stroke="#ef9a89" stroke-opacity=".6"/><text x="1027" y="39" text-anchor="middle" fill="#ffbdad" font-size="14" font-weight="720" letter-spacing="1">BOUNDARY</text><text x="1027" y="68" text-anchor="middle" fill="#f5dde0" font-size="17" font-weight="620">Preset and theme are</text><text x="1027" y="91" text-anchor="middle" fill="#f5dde0" font-size="17" font-weight="620">global, not per mount</text>
+      </g>
+    </g>
+
+    <g transform="translate(80 770)">
+      <rect width="1440" height="172" rx="28" fill="#102431" stroke="#69d3ff" stroke-opacity=".28"/>
+      <rect width="218" height="172" rx="28" fill="#173647"/>
+      <text x="28" y="48" fill="#a9eaff" font-size="16" font-weight="720" letter-spacing="1.3">THINKING ORBS</text>
+      <text x="28" y="92" fill="#f2f7ff" font-size="26" font-weight="680">Pure dots</text>
+      <text x="28" y="124" fill="#91aebe" font-size="16">portable geometry engine</text>
+      <g transform="translate(270 30)">
+        <rect width="210" height="112" rx="18" fill="#15303f" stroke="#3b6477"/><text x="105" y="50" text-anchor="middle" fill="#e1f2f8" font-size="19" font-weight="620">State preset</text><text x="105" y="78" text-anchor="middle" fill="#91aebe" font-size="15">nine semantic modes</text>
+        <path d="M230 56h68" stroke="#617792" stroke-width="3" marker-end="url(#arrow)"/>
+        <rect x="320" width="250" height="112" rx="18" fill="#15303f" stroke="#3b6477"/><text x="445" y="46" text-anchor="middle" fill="#e1f2f8" font-size="19" font-weight="620">Pure geometry</text><text x="445" y="74" text-anchor="middle" fill="#91aebe" font-size="15">z-sort + dot painter</text>
+        <path d="M590 56h68" stroke="#617792" stroke-width="3" marker-end="url(#arrow)"/>
+        <rect x="680" width="194" height="112" rx="18" fill="#15303f" stroke="#3b6477"/><text x="777" y="50" text-anchor="middle" fill="#e1f2f8" font-size="19" font-weight="620">2D canvas</text><text x="777" y="78" text-anchor="middle" fill="#91aebe" font-size="15">DPR capped at 2</text>
+        <rect x="914" width="226" height="112" rx="18" fill="#2b2024" stroke="#ef9a89" stroke-opacity=".6"/><text x="1027" y="39" text-anchor="middle" fill="#ffbdad" font-size="14" font-weight="720" letter-spacing="1">BOUNDARY</text><text x="1027" y="68" text-anchor="middle" fill="#f5dde0" font-size="17" font-weight="620">Shared phase clock,</text><text x="1027" y="91" text-anchor="middle" fill="#f5dde0" font-size="17" font-weight="620">one RAF per visible orb</text>
+      </g>
+    </g>
+  </g>
+  <text x="1518" y="978" text-anchor="end" fill="#566b84" font-family="Inter, Arial, sans-serif" font-size="14">Original diagram for this audit</text>
+</svg>

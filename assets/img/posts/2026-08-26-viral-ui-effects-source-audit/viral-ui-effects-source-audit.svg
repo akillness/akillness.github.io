@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Four viral UI effects under a source audit</title>
+  <desc id="desc">An original cover showing Liquid Gooey, Border Beam, Metal FX, and Thinking Orbs as four visual systems passing through package, runtime, and license checks.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="0.55" stop-color="#0b1728"/>
+      <stop offset="1" stop-color="#17122b"/>
+    </linearGradient>
+    <radialGradient id="haloA"><stop stop-color="#5af0d1" stop-opacity=".35"/><stop offset="1" stop-color="#5af0d1" stop-opacity="0"/></radialGradient>
+    <radialGradient id="haloB"><stop stop-color="#8c7cff" stop-opacity=".38"/><stop offset="1" stop-color="#8c7cff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ff6fb7"/><stop offset=".32" stop-color="#ffd36f"/><stop offset=".64" stop-color="#59e8ff"/><stop offset="1" stop-color="#a879ff"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#ececff"/><stop offset=".18" stop-color="#62dfff"/><stop offset=".42" stop-color="#f9aeff"/><stop offset=".68" stop-color="#fff6bd"/><stop offset="1" stop-color="#7ca6ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#000" flood-opacity=".38"/></filter>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="12" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#c9d7ff" stroke-opacity=".045"/></pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <circle cx="210" cy="150" r="320" fill="url(#haloA)"/>
+  <circle cx="1440" cy="760" r="380" fill="url(#haloB)"/>
+
+  <g transform="translate(88 72)">
+    <rect width="192" height="34" rx="17" fill="#5af0d1" fill-opacity=".12" stroke="#5af0d1" stroke-opacity=".48"/>
+    <text x="96" y="23" text-anchor="middle" fill="#8ff6df" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="15" letter-spacing="2.2">SOURCE AUDIT</text>
+    <text y="104" fill="#f6f8ff" font-family="Inter, Arial, sans-serif" font-weight="760" font-size="66" letter-spacing="-2">Four UI effects</text>
+    <text y="165" fill="#b6c3db" font-family="Inter, Arial, sans-serif" font-weight="480" font-size="31">from viral demo to runtime truth</text>
+  </g>
+
+  <g transform="translate(88 286)" filter="url(#shadow)">
+    <rect width="686" height="222" rx="34" fill="#101f30" stroke="#8cb7c8" stroke-opacity=".18"/>
+    <text x="32" y="45" fill="#90f2dd" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="1.4">LIQUID GOOEY</text>
+    <g transform="translate(88 120)" filter="url(#glow)">
+      <circle cx="0" cy="0" r="51" fill="#74ebd5"/>
+      <circle cx="72" cy="0" r="51" fill="#74ebd5"/>
+      <rect x="0" y="-35" width="72" height="70" fill="#74ebd5"/>
+    </g>
+    <text x="222" y="105" fill="#f4f7ff" font-family="Inter, Arial, sans-serif" font-size="27" font-weight="650">SVG silhouette</text>
+    <text x="222" y="141" fill="#a8b6cc" font-family="Inter, Arial, sans-serif" font-size="20">crisp live DOM above</text>
+    <text x="222" y="177" fill="#6f829d" font-family="ui-monospace, SFMono-Regular, monospace" font-size="16">filter + geometry engine</text>
+    <g transform="translate(580 32)"><circle r="17" fill="#192f3b" stroke="#5af0d1"/><path d="M-7 0l5 5L8-7" fill="none" stroke="#5af0d1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </g>
+
+  <g transform="translate(826 286)" filter="url(#shadow)">
+    <rect width="686" height="222" rx="34" fill="#151b32" stroke="#a998ff" stroke-opacity=".2"/>
+    <text x="32" y="45" fill="#c1b7ff" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="1.4">BORDER BEAM</text>
+    <g transform="translate(36 88)">
+      <rect width="154" height="86" rx="24" fill="none" stroke="url(#beam)" stroke-width="5" filter="url(#glow)"/>
+      <rect x="8" y="8" width="138" height="70" rx="18" fill="#0d1225"/>
+      <circle cx="119" cy="17" r="6" fill="#fff5a9"/>
+    </g>
+    <text x="222" y="105" fill="#f4f7ff" font-family="Inter, Arial, sans-serif" font-size="27" font-weight="650">Generated CSS</text>
+    <text x="222" y="141" fill="#a8b6cc" font-family="Inter, Arial, sans-serif" font-size="20">gradient mask + pulse RAF</text>
+    <text x="222" y="177" fill="#6f829d" font-family="ui-monospace, SFMono-Regular, monospace" font-size="16">one style block per mount</text>
+    <g transform="translate(580 32)"><circle r="17" fill="#272145" stroke="#a998ff"/><path d="M-7 0l5 5L8-7" fill="none" stroke="#c9c1ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </g>
+
+  <g transform="translate(88 548)" filter="url(#shadow)">
+    <rect width="686" height="222" rx="34" fill="#191b27" stroke="#f1bce7" stroke-opacity=".19"/>
+    <text x="32" y="45" fill="#ffd0f3" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="1.4">METAL FX</text>
+    <g transform="translate(36 89)">
+      <rect width="154" height="84" rx="42" fill="none" stroke="url(#metal)" stroke-width="7" filter="url(#glow)"/>
+      <rect x="8" y="8" width="138" height="68" rx="34" fill="#10111a"/>
+      <text x="77" y="50" text-anchor="middle" fill="#e9ebf5" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="650">Upgrade</text>
+    </g>
+    <text x="222" y="105" fill="#f4f7ff" font-family="Inter, Arial, sans-serif" font-size="27" font-weight="650">Shared WebGL</text>
+    <text x="222" y="141" fill="#a8b6cc" font-family="Inter, Arial, sans-serif" font-size="20">copied into 2D canvases</text>
+    <text x="222" y="177" fill="#6f829d" font-family="ui-monospace, SFMono-Regular, monospace" font-size="16">one global shader palette</text>
+    <g transform="translate(580 32)"><circle r="17" fill="#3a263a" stroke="#f0a8df"/><path d="M-7 0l5 5L8-7" fill="none" stroke="#ffd0f3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </g>
+
+  <g transform="translate(826 548)" filter="url(#shadow)">
+    <rect width="686" height="222" rx="34" fill="#121f2a" stroke="#79d9ff" stroke-opacity=".2"/>
+    <text x="32" y="45" fill="#a8eaff" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="1.4">THINKING ORBS</text>
+    <g transform="translate(112 132)" fill="#9ee7ff" filter="url(#glow)">
+      <circle cx="0" cy="-52" r="5"/><circle cx="35" cy="-39" r="6"/><circle cx="54" cy="-7" r="5"/><circle cx="46" cy="29" r="7"/><circle cx="16" cy="50" r="5"/><circle cx="-20" cy="47" r="7"/><circle cx="-48" cy="22" r="5"/><circle cx="-53" cy="-13" r="7"/><circle cx="-31" cy="-43" r="5"/><circle cx="0" cy="-27" r="4"/><circle cx="24" cy="-8" r="5"/><circle cx="13" cy="18" r="4"/><circle cx="-16" cy="17" r="5"/><circle cx="-24" cy="-8" r="4"/>
+    </g>
+    <text x="222" y="105" fill="#f4f7ff" font-family="Inter, Arial, sans-serif" font-size="27" font-weight="650">2D canvas geometry</text>
+    <text x="222" y="141" fill="#a8b6cc" font-family="Inter, Arial, sans-serif" font-size="20">nine semantic states</text>
+    <text x="222" y="177" fill="#6f829d" font-family="ui-monospace, SFMono-Regular, monospace" font-size="16">phase clock, per-orb RAF</text>
+    <g transform="translate(580 32)"><circle r="17" fill="#183241" stroke="#73d8ff"/><path d="M-7 0l5 5L8-7" fill="none" stroke="#a8eaff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </g>
+
+  <g transform="translate(88 830)">
+    <text fill="#7688a4" font-family="ui-monospace, SFMono-Regular, monospace" font-size="16" letter-spacing="1">DEMO</text>
+    <path d="M72 -6h44" stroke="#4a607a" stroke-width="2"/><path d="m109 -12 9 6-9 6" fill="none" stroke="#4a607a" stroke-width="2"/>
+    <text x="132" fill="#7688a4" font-family="ui-monospace, SFMono-Regular, monospace" font-size="16" letter-spacing="1">NPM</text>
+    <path d="M185 -6h44" stroke="#4a607a" stroke-width="2"/><path d="m222 -12 9 6-9 6" fill="none" stroke="#4a607a" stroke-width="2"/>
+    <text x="245" fill="#7688a4" font-family="ui-monospace, SFMono-Regular, monospace" font-size="16" letter-spacing="1">SOURCE</text>
+    <path d="M326 -6h44" stroke="#4a607a" stroke-width="2"/><path d="m363 -12 9 6-9 6" fill="none" stroke="#4a607a" stroke-width="2"/>
+    <text x="386" fill="#7688a4" font-family="ui-monospace, SFMono-Regular, monospace" font-size="16" letter-spacing="1">RUNTIME</text>
+    <path d="M487 -6h44" stroke="#4a607a" stroke-width="2"/><path d="m524 -12 9 6-9 6" fill="none" stroke="#4a607a" stroke-width="2"/>
+    <text x="547" fill="#8ff6df" font-family="ui-monospace, SFMono-Regular, monospace" font-size="16" letter-spacing="1">SHIP?</text>
+    <text x="1424" text-anchor="end" fill="#5f718d" font-family="Inter, Arial, sans-serif" font-size="15">Original visual by Fodev JEO</text>
+  </g>
+</svg>
