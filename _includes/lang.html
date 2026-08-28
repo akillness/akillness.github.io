@@ -1,9 +1,13 @@
 {% comment %}
   Detect appearance language and return it through variable "lang"
 {% endcomment %}
-{% assign requested_lang = page.lang | default: site.lang %}
-{% if site.data.locales[requested_lang] %}
-  {% assign lang = requested_lang %}
+{% assign html_lang = page.lang | default: site.lang %}
+{% assign locale_lang = html_lang %}
+{% if html_lang == 'ko' %}
+  {% assign locale_lang = 'ko-KR' %}
+{% endif %}
+{% if site.data.locales[locale_lang] %}
+  {% assign lang = locale_lang %}
 {% else %}
   {% assign lang = 'en' %}
 {% endif %}
