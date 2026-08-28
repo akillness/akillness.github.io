@@ -5,6 +5,7 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-05-12 18:57:00 +0800
 mermaid: true
+lang: ko
 ---
 ## Lilys AI: YouTube Video Summarization and Blog Generation
 

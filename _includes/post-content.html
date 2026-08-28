@@ -12,11 +12,13 @@
     - never insert inside the last two blocks, so the in-article unit cannot
       collide with the bottom unit.
 
-  Opt a single post out with `ads: false` in its front matter.
+  The parent layout passes `ads_on=true` only after the post clears the site's
+  editorial monetization threshold. `ads: false` remains an explicit opt-out.
 {%- endcomment -%}
 
 {%- assign MIN_PARAGRAPHS = 8 -%}
 {%- assign ANCHOR = '<!--ad-anchor-->' -%}
+{%- assign normalized_content = include.content | replace: '<h1', '<h2' | replace: '</h1>', '</h2>' -%}
 
 {%- assign ads_on = false -%}
 {%- if jekyll.environment == 'production'
@@ -24,17 +26,17 @@
   and site.google_ad_client
   and site.google_ad_slots.post_in_article != empty
   and site.google_ad_slots.post_in_article
-  and page.ads != false
+  and include.ads_on == true
 -%}
   {%- assign ads_on = true -%}
 {%- endif -%}
 
 {%- if ads_on -%}
-  {%- assign blocks = include.content | replace: '</p>', '</p><!--ad-anchor-->' | split: ANCHOR -%}
+  {%- assign blocks = normalized_content | replace: '</p>', '</p><!--ad-anchor-->' | split: ANCHOR -%}
 {%- endif -%}
 
 {%- if ads_on == false or blocks.size < MIN_PARAGRAPHS -%}
-  {{ include.content }}
+  {{ normalized_content }}
 {%- else -%}
   {%- assign midpoint = blocks.size | divided_by: 2 -%}
   {%- assign placed = false -%}

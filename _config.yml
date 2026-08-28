@@ -14,7 +14,7 @@ plugins:
 # The language of the webpage › http://www.lingoes.net/en/translator/langcode.htm
 # If it has the same name as one of the files in folder `_data/locales`, the layout language will also be changed,
 # otherwise, the layout language will use the default value of 'en'.
-lang: ko
+lang: en
 
 # Change to your timezone › https://kevinnovak.github.io/Time-Zone-Picker
 timezone: Asia/Seoul
@@ -40,6 +40,10 @@ github:
 
 twitter:
   username: akillness0308 # change to your twitter username
+
+author:
+  name: Jang Young Jeong
+  url: https://akillness.github.io/about/
 
 social:
   # Change to your full name.
@@ -77,8 +81,12 @@ google_ad_client: ca-pub-3706360396883624
 # Ad unit slot IDs, created in the AdSense dashboard.
 # Leave a slot empty to hide that placement without touching any template.
 google_ad_slots:
-  post_bottom: "2404463133" # displayed under the body of every post
-  post_in_article: "2101210804" # auto-inserted mid-post (in-article, fluid)
+  post_bottom: "2404463133" # eligible posts only
+  post_in_article: "2101210804" # eligible posts only (in-article, fluid)
+
+# Editorial safety threshold, not a Google policy or ranking requirement.
+# Short reference notes stay public but contain no AdSense loader, ad slot, or paid CTA.
+google_ad_min_post_words: 800
 
 
 goatcounter:
@@ -201,6 +209,27 @@ defaults:
       path: assets/js/dist
     values:
       swcache: true
+  # Static assets and JavaScript-only companion views are not search landing pages.
+  - scope:
+      path: "assets/**/*"
+    values:
+      sitemap: false
+  - scope:
+      path: "portfolio/**/*"
+    values:
+      sitemap: false
+  - scope:
+      path: "resume/**/*"
+    values:
+      sitemap: false
+  - scope:
+      path: "resume_eng/**/*"
+    values:
+      sitemap: false
+  - scope:
+      path: "google06c53db253d71ce5.html"
+    values:
+      sitemap: false
 
 sass:
   style: compressed

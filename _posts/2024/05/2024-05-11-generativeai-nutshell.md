@@ -5,6 +5,7 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-05-11 23:43:00 +0800
 mermaid: true
+lang: ko
 ---
 > [`Generative AI Preparation`](https://github.com/Msrevalli/Generative-AI-Preparation) (Generative AI 개념북) Thanks to [Aishwarya Naresh Reganti](https://www.linkedin.com/in/areganti/)
 {: .prompt-warning }

@@ -4,6 +4,7 @@ description: "| Google            | OpenAI          |."
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-19 13:00:00 +0800
+published: false
 ---
 ![ Google vs OpenAI ](/assets/img/news/Google_vs_OpenAI.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 

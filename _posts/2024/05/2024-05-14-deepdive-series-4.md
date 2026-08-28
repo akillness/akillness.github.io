@@ -4,6 +4,7 @@ description: "Self-Attention is a method where each word in the input sequence e
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-05-14 13:14:00 +0800
+lang: ko
 ---
 ### **Original Article** : 👉 <https://towardsdatascience.com/deep-dive-into-self-attention-by-hand-%EF%B8%8E-f02876e49857>
 

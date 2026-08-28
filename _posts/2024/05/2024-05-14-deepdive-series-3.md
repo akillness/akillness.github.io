@@ -4,6 +4,7 @@ description: "Deep Dive into LlaMA 3 by Hand ✍️ | by Srijanie Dey, PhD | May
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-14 13:13:00 +0800
+lang: ko
 ---
 ### **Original Article** : 👉 <https://towardsdatascience.com/deep-dive-into-llama-3-by-hand-%EF%B8%8F-6c6b23dc92b2>
 

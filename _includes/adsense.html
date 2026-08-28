@@ -1,4 +1,24 @@
-{% if jekyll.environment == 'production' and site.google_ad_client != empty and site.google_ad_client %}
+{% assign adsense_allowed = false %}
+{% assign minimum_ad_words = site.google_ad_min_post_words | default: 800 %}
+
+{% if page.layout == 'home' and page.url == '/' %}
+  {% assign adsense_allowed = true %}
+{% elsif page.layout == 'post' %}
+  {% assign post_words = page.content | strip_html | number_of_words: 'auto' %}
+  {% if page.ads != false and post_words >= minimum_ad_words %}
+    {% assign adsense_allowed = true %}
+  {% endif %}
+{% endif %}
+
+{% if page.layout == 'tag' or page.layout == 'category' or page.url == '/404.html' %}
+  {% assign adsense_allowed = false %}
+{% endif %}
+
+{% if page.robots contains 'noindex' %}
+  {% assign adsense_allowed = false %}
+{% endif %}
+
+{% if adsense_allowed and jekyll.environment == 'production' and site.google_ad_client != empty and site.google_ad_client %}
   <meta name="google-adsense-account" content="{{ site.google_ad_client }}">
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <script

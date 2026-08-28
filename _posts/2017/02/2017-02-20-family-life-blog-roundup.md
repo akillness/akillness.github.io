@@ -7,6 +7,7 @@ date: 2017-02-20 09:00:00 +0900
 pin: false
 mermaid: false
 math: false
+lang: ko
 ---
 
 Most of what I publish here is about agents, harnesses, and the systems I build. But engineering isn't the whole of a life. On the side I keep a second, much more ordinary blog in Korean — everyday notes about raising a small kid, cafes and restaurants worth the drive around Dongtan, our wedding prep years ago, a few trips, and the occasional diary entry.

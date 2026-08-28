@@ -1,9 +1,10 @@
 ---
 title: 2024 Google I/O 감상평
-description: "{% include embed/youtube.html id='s4InWsd-J6g' %}."
+description: "Google I/O 2024에서 공개된 Gemini 1.5, Project Astra, AI Overviews가 검색과 AI 생태계에 미칠 영향을 정리한 개인 감상과 분석."
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-05-15 12:00:00 +0800
+lang: ko
 ---
 ## 📝 구글 I/O 2024 요약 및 감상
 

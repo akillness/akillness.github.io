@@ -4,6 +4,7 @@ description: "Deep Dive into Vector Databases by Hand ✍︎ | by Srijanie Dey, 
 categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2024-05-14 13:10:00 +0800
+lang: ko
 ---
 ### **Original Article** : 👉 <https://medium.com/towards-data-science/deep-dive-into-vector-databases-by-hand-e9ab71f54f80>
 

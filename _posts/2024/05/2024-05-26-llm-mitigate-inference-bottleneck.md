@@ -4,6 +4,7 @@ description: Mitigate inference bottleneck
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-26 12:10:00 +0800
+published: false
 ---
 How can we further mitigate inference bottlenecks in large #LLMs like Llama3 to enable real-time applications with minimal latency and performance degradation?
 

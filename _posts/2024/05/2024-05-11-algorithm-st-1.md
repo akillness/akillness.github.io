@@ -5,6 +5,7 @@ categories: [Learning/Guide]
 tags: [Learning, Guide, Lecture]
 date: 2024-05-11 14:30:00 +0800
 mermaid: true
+lang: ko
 ---
 # HongLab 알고리듬 압축코스 - 강의소개
 

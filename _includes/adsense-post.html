@@ -1,9 +1,9 @@
 <!--
   Bottom-of-post AdSense unit.
 
-  The adsbygoogle loader itself is injected once per page by `adsense.html`
-  from <head>, under exactly the same condition as below, so this include only
-  emits the ad slot and its push() call.
+  The parent post layout calls this include only after the article clears the
+  editorial monetization threshold. `adsense.html` applies the same threshold
+  to the loader in <head>; this include only emits the slot and push() call.
 
   Opt a single post out with `ads: false` in its front matter.
 -->

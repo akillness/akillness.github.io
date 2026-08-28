@@ -4,6 +4,7 @@ description: "Deep Dive into Sora’s Diffusion Transformer (DiT) by Hand ✍︎
 categories: [Multimodal/Computer Vision]
 tags: [Multimodal, Vision, Generative Model]
 date: 2024-05-14 13:11:00 +0800
+lang: ko
 ---
 ### **Original Article** : 👉 <https://towardsdatascience.com/deep-dive-into-soras-diffusion-transformer-dit-by-hand-%EF%B8%8E-1e4d84ec865d>
 

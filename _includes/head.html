@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta
     name="viewport"
-    content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
   >
 
   {%- capture seo_tags -%}
@@ -49,6 +49,14 @@
   {% endif %}
 
   {{ seo_tags }}
+
+  {% assign robots_directive = page.robots %}
+  {% if page.layout == 'tag' or page.layout == 'category' %}
+    {% assign robots_directive = 'noindex, follow' %}
+  {% endif %}
+  {% if robots_directive %}
+    <meta name="robots" content="{{ robots_directive }}">
+  {% endif %}
 
   <title>
     {%- unless page.layout == 'home' -%}

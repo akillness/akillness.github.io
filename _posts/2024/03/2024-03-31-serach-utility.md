@@ -6,6 +6,7 @@ tags: [Development Tools, Productivity, Reference]
 date: 2024-03-31 18:30:00 +0800
 render_with_liquid: true
 mermaid: true
+lang: ko
 ---
 카카오API를 이용해서 챗봇만들기 한번 해볼까? 해서 찾아봤는데, 간단한 챗봇기능은 OpenChat에서 방장에게 기본 제공되는 기능이 있다. (인사, 스케쥴러) 이런 기능 말고 대화 봇이나 Chat GPT 같이 메신저 등 요구하는 봇을 만들려면 카카오 개발자 사이트를 통해서 개발이 가능하다. 하지만 여기까지만 알아볼 예정 ^^
 

@@ -5,6 +5,7 @@ categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-19 01:20:00 +0800
 mermaid: true
+lang: ko
 ---
 ## LLM 성능 평가: 한국어 Use Case 분석
 

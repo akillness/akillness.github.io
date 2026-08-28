@@ -11,11 +11,7 @@
     {{- '©' }}
     <time>{{ 'now' | date: '%Y' }}</time>
 
-    {% if site.social.links %}
-      <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>.
-    {% else %}
-      <em class="fst-normal">{{ site.social.name }}</em>.
-    {% endif %}
+    <a href="{{ '/about/' | relative_url }}">{{ site.author.name | default: site.social.name }}</a>.
 
     {% if site.data.locales[include.lang].copyright.brief %}
       <span

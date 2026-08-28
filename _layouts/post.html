@@ -11,7 +11,18 @@ tail_includes:
 
 {% include lang.html %}
 
-<article class="px-1">
+{% assign minimum_ad_words = site.google_ad_min_post_words | default: 800 %}
+{% assign post_words = page.content | strip_html | number_of_words: 'auto' %}
+{% assign monetization_eligible = false %}
+{% if page.ads != false and post_words >= minimum_ad_words %}
+  {% assign monetization_eligible = true %}
+{% endif %}
+
+<article
+  class="px-1"
+  data-content-words="{{ post_words }}"
+  data-monetization-eligible="{{ monetization_eligible }}"
+>
   <header>
     <h1 data-toc-skip>{{ page.title }}</h1>
 
@@ -69,7 +80,7 @@ tail_includes:
                 {% unless forloop.last %}{{ '</em>, <em>' }}{% endunless %}
               {% endfor %}
             {% else %}
-              <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>
+              <a href="{{ '/about/' | relative_url }}">{{ site.author.name | default: site.social.name }}</a>
             {% endif %}
           </em>
         </span>
@@ -83,12 +94,13 @@ tail_includes:
   </header>
 
   <div class="content">
-    {% include post-content.html content=content %}
+    {% include post-content.html content=content ads_on=monetization_eligible %}
   </div>
 
-  {% include post-cta.html %}
-
-  <div class="post-ad-bottom my-4">{% include adsense-post.html %}</div>
+  {% if monetization_eligible %}
+    {% include post-cta.html %}
+    <div class="post-ad-bottom my-4">{% include adsense-post.html %}</div>
+  {% endif %}
 
   <div class="post-tail-wrapper text-muted">
     <!-- categories -->
