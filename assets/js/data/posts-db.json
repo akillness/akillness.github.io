@@ -1,3 +1,4 @@
 {
-  "total": 287
+  "deprecated": true,
+  "replacement": ["search-meta.json", "search.json"]
 }

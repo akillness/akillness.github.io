@@ -6,7 +6,7 @@ description: Licensing of the writing and code on this site, accuracy limits, an
 mermaid: false
 ---
 
-**Last updated:** 2026-08-22
+**Last updated:** 2026-08-28
 
 Plain terms for a personal technical blog. If something here is unclear, [email me](mailto:akillness38@gmail.com) rather than guessing.
 
@@ -27,13 +27,9 @@ Attribution should name the author and link to the original post.
 
 ## Third-party material
 
-Some posts quote or reproduce material I did not create — diagrams from a paper, a screenshot of a repository, a figure from another author's article. In every such case:
+Some posts quote or reproduce material I did not create, such as diagrams from a paper, repository screenshots, or figures from another author's article. The editorial standard is to name and link the source, limit the excerpt to what the commentary requires, and add original review or technical analysis. Legacy posts that do not meet that standard are removed from search and advertising until they are rewritten or retired.
 
-- the source is named and linked in the post,
-- the excerpt is limited to what the commentary requires,
-- it is included for review, criticism, and technical discussion.
-
-Third-party material stays under its original rights. The CC BY licence above covers **my** writing, not quoted work. **If you own material reproduced here and want it removed or credited differently, email me and I will act on it promptly** — no lawyers needed.
+Third-party material stays under its original rights. The CC BY licence above covers **my** writing, not quoted work. Missing attribution is an error, not a claim of ownership. **If you own material reproduced here and want it removed or credited differently, email me and I will act on it promptly.**
 
 ## Accuracy, and the limits of it
 
@@ -48,7 +44,7 @@ Material is provided "as is", without warranty of any kind. I am not liable for 
 
 ## Advertising
 
-Post pages carry Google AdSense units. Ads are labelled and separated from the article body. I do not control which specific advertisers appear, and their presence is not an endorsement. See the [Privacy Policy](/privacy/) for what ad-serving means for your data.
+Eligible long-form post pages carry Google AdSense units. Short reference notes, `noindex` pages, generated tag and category detail pages, and the 404 page load no AdSense code. Ads are separated from the article body. I do not control which specific advertisers appear, and their presence is not an endorsement. See the [Privacy Policy](/privacy/) for what ad-serving means for your data.
 
 Posts are not sponsored. Where a source I analyse is itself sponsored — a vendor-funded article, for example — I say so in the post and verify its claims against primary documentation.
 

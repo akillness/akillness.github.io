@@ -4,6 +4,7 @@ description: Software Development Cycle
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-07-14 10:40:00 +0800
+published: false
 ---
 ![ Software Development Cycle ](/assets/img/blog/Software-Development-cycle.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 

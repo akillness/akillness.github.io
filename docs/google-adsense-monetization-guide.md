@@ -2,6 +2,8 @@
 layout: page
 title: "Google AdSense Monetization Guide"
 permalink: /docs/google-adsense-monetization-guide/
+robots: noindex, follow
+sitemap: false
 ---
 
 # Google AdSense 수익화를 위한 블로그 운영 및 글쓰기 가이드라인
@@ -20,10 +22,11 @@ permalink: /docs/google-adsense-monetization-guide/
 - **Authoritativeness (권위성)**: 출처 명시, 표준 문서를 바탕으로 한 기술 설명
 - **Trustworthiness (신뢰성)**: 작동 확인된 코드, 팩트 기반 데이터, 오개념 없는 설명
 
-### 2.2 글의 분량 및 구조화 기준
-- **최소 글 분량**: 포스트당 1,500자 ~ 2,500자 이상의 밀도 높은 내용 권장
+### 2.2 글의 깊이 및 구조화 기준
+- **고정 최소 분량 없음**: Google은 선호하는 글자 수가 없다고 명시한다. 분량 대신 질문을 충분히 해결하는 고유한 경험·분석·검증을 요구한다.
 - **구조화된 목차**: H2(`##`), H3(`###`) 헤더를 사용한 체계적인 단락 구성
 - **시각 자료 및 설명**: 서술형 설명, 코드 블록, 비교표, 다이어그램 활용
+- **공식 기준**: <https://developers.google.com/search/docs/fundamentals/creating-helpful-content>
 
 ### 2.3 금지 및 저품질 콘텐츠 요인
 - 저작권 침해 콘텐츠, 불법/복사-붙여넣기 글 (Scraped Content)
@@ -37,7 +40,7 @@ permalink: /docs/google-adsense-monetization-guide/
 1. **Meta Description & Front Matter**:
    - `title`, `description`, `categories`, `tags`, `seo` 메타데이터 작성
 2. **URL 구조**:
-   - 직관적이고 키워드가 포함된 슬러그 (e.g. `/posts/google-adsense-monetization-strategy/`)
+   - 직관적이고 키워드가 포함된 슬러그 (e.g. `/posts/viral-ui-effects-source-audit/`)
 3. **내부 및 외부 링크**:
    - 관련 이전 포스트 링크 및 공식 기술 문서(MDN, Google Publisher Docs) 참조
 
@@ -53,7 +56,7 @@ Jekyll과 같은 정적 사이트 생성기(SSG)는 포스트 개수가 많아�
 
 ### 구현된 2단계 지연 로딩 인덱스
 
-`search.json` 하나를 모든 페이지 로드 시점에 통째로 내려받던 구조(287개 포스트 기준 2.2 MB, gzip 740 KB)를 다음과 같이 바꿨습니다.
+`search.json` 하나를 모든 페이지 로드 시점에 통째로 내려받던 구조(당시 측정 2.2 MB, gzip 740 KB)를 다음과 같이 바꿨습니다.
 
 1. **Tier 1 — `assets/js/data/search-meta.json`** (137 KB, gzip 40 KB)
    - 제목·URL·카테고리·태그·200자 스니펫만 포함. 검색창에 처음 포커스/입력이 발생할 때 요청됩니다.
@@ -119,43 +122,46 @@ Jekyll과 같은 정적 사이트 생성기(SSG)는 포스트 개수가 많아�
 | 게시자 ID | `ads.txt` | `pub-3706360396883624` 배포 완료 (live HTTP 200) |
 | 광고 스크립트 | `_includes/adsense.html` → `_includes/head.html` | 배선 완료, **활성** |
 | 활성화 스위치 | `_config.yml` 의 `google_ad_client` | `ca-pub-3706360396883624` |
-| 본문 하단 광고 | `_includes/adsense-post.html` → `_layouts/post.html` | 슬롯 `2404463133`, 287개 포스트 전부 |
-| 본문 중간 광고 | `_includes/adsense-in-article.html` → `_includes/post-content.html` | 슬롯 `2101210804` (in-article/fluid), 265개 포스트 |
+| 본문 하단 광고 | `_includes/adsense-post.html` → `_layouts/post.html` | 슬롯 `2404463133`, 편집 기준을 통과한 글만 |
+| 본문 중간 광고 | `_includes/adsense-in-article.html` → `_includes/post-content.html` | 슬롯 `2101210804` (in-article/fluid), 편집 기준을 통과한 글만 |
 | 슬롯 스위치 | `_config.yml` 의 `google_ad_slots` | `post_bottom`, `post_in_article` |
+| 편집 안전 기준 | `_config.yml` 의 `google_ad_min_post_words` | 800단어, Google 정책이 아닌 이 사이트의 보수적 광고 기준 |
 
 `_includes/adsense.html` 은 `jekyll.environment == 'production'` 이면서
-`site.google_ad_client` 가 비어 있지 않을 때만 meta 태그와 `adsbygoogle.js` 로더를
-출력한다. 즉 로컬 개발 빌드에는 광고 스크립트가 절대 들어가지 않는다.
+`site.google_ad_client` 가 비어 있지 않을 때만 동작한다. 로더 허용 범위는 홈페이지와
+`google_ad_min_post_words` 기준을 통과한 포스트뿐이다. 일반 지원 페이지, `noindex`
+페이지, 태그·카테고리 상세, 404에는 meta 태그와 `adsbygoogle.js` 로더를 모두 넣지
+않는다. 즉 로컬 빌드와 저밀도 또는 검색 제외 화면에는 광고 코드가 없다.
 
-기본 레이아웃을 쓰는 604개 페이지에 로더가 들어간다. `portfolio/`, `resume/`,
-`IDENTITY.html` 등 독립 HTML 페이지는 이 include 를 쓰지 않으므로 로더가 없다.
-승인 심사는 홈을 포함한 일반 페이지 기준이라 문제되지 않지만, 해당 페이지까지
-수익화하려면 각 파일 `<head>` 에 로더를 직접 넣어야 한다.
+`portfolio/`, `resume/`, `resume_eng/` 같은 독립 HTML 페이지도 광고 로더가 없고
+`noindex`로 운영한다. 검색용 포트폴리오는 서버 렌더링되는 `/projects/`가 담당한다.
 
 ### 광고 유닛 배치 규칙
 
 로더(`adsbygoogle.js`)는 페이지당 한 번만 `<head>` 에서 나가고, 각 유닛 include 는
 `<ins>` 와 `push({})` 만 출력한다. 두 유닛 모두 프로덕션 빌드 + `google_ad_client`
-+ 해당 슬롯 ID 가 모두 채워졌을 때만 렌더링되며, 포스트 front matter 에
-`ads: false` 를 넣으면 그 글만 광고에서 제외된다.
++ 해당 슬롯 ID + 사이트의 편집 안전 기준을 모두 통과해야 렌더링된다. 포스트 front
+matter에 `ads: false`를 넣으면 분량과 무관하게 그 글을 광고에서 제외한다.
 
 본문 중간 유닛은 `_includes/post-content.html` 이 본문을 `</p>` 경계로 잘라
 자동 삽입한다. 문단이 8개 미만인 짧은 글은 건너뛰고, 중간 지점 이후에서
 다음 블록이 최상위 `<p>` 또는 헤딩으로 시작하는 첫 경계에만 넣어
 인용문·리스트·코드블록 내부로 광고가 끼어드는 것을 막는다. 마지막 두 블록도
-제외해 하단 유닛과 붙지 않게 한다. 287개 포스트 중 265개가 이 규칙을 통과했고,
-나머지는 문단 부족(17개) 또는 후반부가 표/리스트뿐인 글(5개)이다.
+제외해 하단 유닛과 붙지 않게 한다. 통과 개수는 새 글과 비공개 전환에 따라 바뀌므로
+고정 수치로 문서화하지 않고 빌드된 HTML에서 검증한다.
 
 
-### 계정 진행 상태 (2026-08-19 기준)
+### 계정 진행 상태 (2026-08-28 기준)
 
 1. 기존 **YouTube용 애드센스** 계정(`pub-3706360396883624`)을 웹사이트 계정으로 전환 완료.
    `adsense.google.com/adsense/u/0/home` 은 이 계정에서도 접근 거부가 나므로
    대시보드는 반드시 게시자 스코프 URL `/adsense/u/0/pub-3706360396883624/...` 로 연다.
 2. 사이트 `akillness.github.io` 등록 → 로더 스니펫 배포 → **소유권 확인 완료**.
 3. **검토 요청 완료**, 승인 상태 `준비 중`. 구글 심사 결과를 기다리는 단계.
-4. 대시보드의 `Ads.txt 상태` 는 크롤링이 배포보다 하루 정도 늦을 수 있어
-   한동안 `찾을 수 없음` 으로 보일 수 있다. 파일 자체는 이미 정상 서빙된다.
+4. `ads.txt`는 `google.com, pub-3706360396883624, DIRECT, f08c47fec0942fa0`으로
+   정상 서빙되며 AdSense 대시보드에서도 승인 상태를 확인했다.
+5. 2026-08-28 09:41 KST 기준 사이트 상태는 `리뷰가 요청됨`이다. 이 문서는 승인이나
+   수익을 보장하지 않으며, 심사 중에는 새 재검토 요청을 반복하지 않는다.
 
 ### 검증 스크립트
 
@@ -172,5 +178,5 @@ playwriter -s <id> --timeout 300000 -f tools/verify-adsense.mjs
 승인 대기 중에는 **7/9** 가 정상 상태다.
 
 ---
-*최종 업데이트: 2026-08-19 (웹사이트 계정 전환·소유권 확인·검토 요청 반영)*
+*최종 업데이트: 2026-08-28 (저밀도 아카이브·광고 경계·현재 심사 상태 반영)*
 

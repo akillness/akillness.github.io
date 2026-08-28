@@ -5,8 +5,6 @@ order: 5
 mermaid: false
 ---
 
-{% include google-analytics.html %}
-
 ## AI Product Engineer Growing Out of Games, Research, and Real Systems
 
 ```text
@@ -123,6 +121,12 @@ This path gave me a strong bias toward systems that are measurable, iterative, a
 - I treat evaluation, traces, and failure analysis as product work, not cleanup.
 - I care about clear interfaces because trust in AI systems is a UX problem as much as a model problem.
 - I like fast feedback loops, small experiments, and systems that get better with use.
+
+### Editorial Method and AI Assistance
+
+I write and approve every page published under my name. I use AI tools for transcription, translation, first-pass diagrams, and code-review support, but I do not treat generated text as evidence. For technical claims I prefer primary documentation, tagged source code, runnable checks, and dated measurements. When a claim cannot be reproduced or sourced, I remove it or label it as an opinion or limitation.
+
+Older reference notes are reviewed under the same standard. A post without enough original analysis is removed from search and advertising until it is rewritten or retired. Corrections can be reported through [Contact](/contact/) or the public Git history.
 
 ---
 

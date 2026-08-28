@@ -5,6 +5,7 @@ categories: [Infrastructure/System]
 tags: [Infrastructure, Operations, Architecture]
 date: 2024-07-21 11:00:00 +0800
 mermaid: true
+published: false
 ---
 ## Microservices: Popular Architectural Style for Modern Applications
 

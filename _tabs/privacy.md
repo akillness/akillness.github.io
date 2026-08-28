@@ -5,7 +5,7 @@ title: Privacy Policy
 description: What data this site collects, which third parties process it, and how to opt out.
 mermaid: false
 ---
-**Last updated:** 2026-08-22
+**Last updated:** 2026-08-28
 
 This page explains exactly what happens to data when you visit `akillness.github.io`. It lists only the services this site actually loads — nothing is included for the sake of looking thorough.
 
@@ -31,7 +31,7 @@ The site is static HTML, but three third-party services run in your browser. Eac
 | Service | Purpose | Data involved | Policy |
 | :--- | :--- | :--- | :--- |
 | **Google Analytics 4** | Aggregate traffic measurement — which posts get read, roughly where readers are | Cookies, IP address (truncated by Google), page URLs, device and browser type | [Google Privacy Policy](https://policies.google.com/privacy) |
-| **Google AdSense** | Displays the ads on post pages | Cookies and device identifiers used for ad selection and frequency capping; may include personalised advertising where permitted | [How Google uses data](https://policies.google.com/technologies/partner-sites) |
+| **Google AdSense** | Displays ads on the homepage and eligible long-form posts; it is not loaded on short reference notes, `noindex` archives, support pages, or error pages | Cookies and device identifiers used for ad selection and frequency capping; may include personalised advertising where permitted | [How Google uses data](https://policies.google.com/technologies/partner-sites) |
 | **Giscus** (comments) | Comment threads, backed by GitHub Discussions | Only if you choose to comment: your GitHub account identity and comment text, stored by GitHub | [GitHub Privacy Statement](https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement) |
 
 Static assets (fonts, JavaScript libraries) are served from **jsDelivr** and **Google Fonts**, which receive your IP address as a technical necessity of delivering the file. Site hosting is **GitHub Pages**, which may log requests per [GitHub's policy](https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement).

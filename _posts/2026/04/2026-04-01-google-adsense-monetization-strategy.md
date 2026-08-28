@@ -4,6 +4,8 @@ description: "구글 애드센스 승인 조건과 수익 극대화를 위한 �
 categories: [Blogging, Optimization]
 tags: [adsense, jekyll, sqlite, optimization, seo]
 date: 2026-04-01 10:00:00 +0900
+lang: ko
+published: false
 ---
 # 구글 애드센스 수익화 최적화 가이드 및 로컬 DB 기반 블로그 렌더링 개선
 

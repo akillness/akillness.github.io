@@ -5,6 +5,7 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-08-04 15:00:00 +0800
 mermaid: true
+published: false
 ---
 ![ Kubernetes for Machine Learning ](/assets/img/blog/kubernetes-for-machine-learning.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 

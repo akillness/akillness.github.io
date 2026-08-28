@@ -1,6 +1,6 @@
 ---
 title: 🎭🎭 FaceLift new SOTA in 2D Landmarks 🎭🎭
-description: "{% include embed/youtube.html id='drEB44IfZi0' %}."
+description: "A source-linked overview of FaceLift, which learns 3D facial landmarks from hand-labelled 2D annotations."
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-06-02 19:00:00 +0800

@@ -5,6 +5,7 @@ categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-06-12 15:10:00 +0800
 mermaid: true
+lang: ko
 ---
 ## Tools for Building LLM Applications: A Comprehensive Guide
 

@@ -1,6 +1,6 @@
 ---
 title: 🐳🐳MultiPly in-the-wild Multi-Pax from Mono🐳🐳
-description: "{% include embed/youtube.html id='r9giQPUp1Gw' %}."
+description: "A source-linked overview of MultiPly for reconstructing multiple detailed 3D people from monocular video."
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-06-04 19:00:00 +0800

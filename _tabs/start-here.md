@@ -2,11 +2,11 @@
 icon: fas fa-compass
 order: 1
 title: Start Here
-description: A guided entry point to 304 posts on AI agents, harness engineering, RAG, models, and game AI, organised by topic and format instead of by date.
+description: A guided entry point to articles on AI agents, harness engineering, RAG, models, and game AI, organised by topic and format instead of by date.
 mermaid: false
 ---
 
-304 posts in reverse-chronological order is an archive, not a way in. This page is the way in.
+A reverse-chronological archive is not a way in. This page is the way in.
 
 ## If you have five minutes
 
@@ -19,7 +19,7 @@ The four posts that best show what this blog does — read one primary source pr
 
 ## By topic
 
-### Agents & harness engineering — 116 posts
+### Agents & harness engineering
 
 The main thread. Agent loops, tool dispatch, spec-first workflows, evaluation, and the scaffolding that decides whether an agent survives contact with production.
 
@@ -30,7 +30,7 @@ The main thread. Agent loops, tool dispatch, spec-first workflows, evaluation, a
 
 → [All agent posts](/categories/agent-orchestration/)
 
-### RAG & retrieval — 25 posts
+### RAG & retrieval
 
 Retrieval that survives real corpora: reranking, hybrid search, graph memory, and the failure modes that only appear at scale.
 
@@ -41,7 +41,7 @@ Retrieval that survives real corpora: reranking, hybrid search, graph memory, an
 
 → [All RAG posts](/categories/rag-search/)
 
-### Models & papers — 62 posts
+### Models & papers
 
 Architectures read closely enough to explain, not just cite.
 
@@ -52,7 +52,7 @@ Architectures read closely enough to explain, not just cite.
 
 → [All model & paper posts](/categories/llm-model-papers/)
 
-### Infrastructure & production systems — 11 posts
+### Infrastructure & production systems
 
 What it takes to run this material rather than demo it.
 
@@ -62,7 +62,7 @@ What it takes to run this material rather than demo it.
 
 → [All infrastructure posts](/categories/infrastructure-system/)
 
-### Multimodal & vision — 10 posts
+### Multimodal & vision
 
 Coming from game AI, this is where I started: systems that read a screen and act on what they see.
 
@@ -72,7 +72,7 @@ Coming from game AI, this is where I started: systems that read a screen and act
 
 → [All multimodal posts](/categories/multimodal-computer-vision/)
 
-### Developer tooling — 8 posts
+### Developer tooling
 
 - [Unity CLI: From Editor Installs to Verifiable Game-Production Work](/posts/unity-cli-production-workflows/)
 - [Unity CLI Atomic Agent](/posts/unity-cli-atomic-agent/)
@@ -91,8 +91,8 @@ Different posts do different work. If you prefer one mode over another:
 | Format | What it looks like | Examples |
 | :--- | :--- | :--- |
 | **Runnable code** | Companion `.py` files you can download and execute; every assertion in the post was produced by running them | [Ouroboros gates](/posts/ouroboros-agent-os-spec-first-loop/) · [Durable execution](/posts/twelve-agent-concepts-durable-execution/) · [Supertonic ONNX](/posts/supertonic-onnx-runtime-tts/) |
-| **Video** | Embedded walkthroughs and demos — 21 posts carry video | [jeo-code harness](/posts/jeo-code-ai-builder-harness/) · [Gemini 3 multi-agent](/posts/gemini-3-multi-agent-comprehensive-guide/) · [SIMA 2 in 3D worlds](/posts/sima-2-gemini-powered-ai-agent-3d-worlds/) |
-| **Diagrams** | Mermaid architecture and flow diagrams, 232 posts | [Production GenAI stack](/posts/production-generative-ai-stack-architecture-components/) · [Signal-decision architecture](/posts/signal-decision-architecture/) |
+| **Video** | Embedded walkthroughs and demos | [jeo-code harness](/posts/jeo-code-ai-builder-harness/) · [Gemini 3 multi-agent](/posts/gemini-3-multi-agent-comprehensive-guide/) · [SIMA 2 in 3D worlds](/posts/sima-2-gemini-powered-ai-agent-3d-worlds/) |
+| **Diagrams** | Mermaid architecture and flow diagrams | [Production GenAI stack](/posts/production-generative-ai-stack-architecture-components/) · [Signal-decision architecture](/posts/signal-decision-architecture/) |
 | **Deep dives** | 2,500+ words, single subject, primary sources only | [Fable 5](/posts/fable-5-self-improving-agent-system/) · [MLOps blueprint](/posts/mlops-monitoring-observability-part-a/) |
 | **Async & performance** | Measurement-led, with numbers | [Why async code can be slower](/posts/async-code-performance-issues-solutions/) — includes video |
 
@@ -104,10 +104,12 @@ A few conventions worth knowing before you read:
 - **Code is executed, not illustrated.** Where a post claims code runs, the output shown is real output. Companion files are downloadable so you can check.
 - **Findings are dated.** Star counts, version numbers, and benchmarks are recorded on the date noted. They will drift; the post says when it was true.
 - **Mistakes get published too.** Several posts document where my own first calculation was wrong. That is the useful part.
+- **AI assistance is disclosed site-wide.** I use AI tools for transcription, translation, first-pass diagrams, and code-review support. I remain the author and editor, read the primary sources myself, run claimed code where practical, and remove claims that cannot be verified. AI output is never treated as evidence by itself.
+- **Legacy notes are reviewed separately.** Older reference posts without enough original analysis are removed from search and advertising until they are rewritten or retired.
 
 ## Publishing cadence
 
-Active since 2024, with **304 posts** published. Recent months: 16 posts in August 2026, 2 in July, 7 in June, 4 in May, 12 in April, 21 in March, and 43 in February. Cadence varies with a full-time engineering job and a PhD: bursts when a topic opens up, quieter when a project is consuming the week.
+Active since 2024, publishing in research and project bursts. Cadence varies with a full-time engineering job and a PhD: bursts when a topic opens up, quieter when a project is consuming the week.
 
 - [Full archive by date](/archives/)
 - [All categories](/categories/)

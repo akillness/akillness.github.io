@@ -4,6 +4,7 @@ description: "llama.cpp also started when Georgi Gerganov held a hackday over th
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-07-12 11:00:00 +0800
+lang: ko
 ---
 > 👉 Github : <https://github.com/likejazz/ggml-simple>
 {: .prompt-info}

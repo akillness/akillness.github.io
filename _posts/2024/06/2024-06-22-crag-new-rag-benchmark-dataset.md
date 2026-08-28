@@ -5,6 +5,7 @@ categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2024-06-22 19:10:00 +0800
 mermaid: true
+lang: ko
 ---
 ## CRAG: Comprehensive RAG Benchmark Dataset
 

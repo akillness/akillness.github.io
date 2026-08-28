@@ -5,6 +5,7 @@ categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2024-07-13 15:00:00 +0800
 mermaid: true
+lang: ko
 ---
 ## RankRAG: NVIDIA's Dual-Purpose Re-Ranker/Generation Models
 

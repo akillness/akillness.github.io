@@ -58,6 +58,9 @@ jobs:
         env:
           JEKYLL_ENV: production
 
+      - name: Verify content quality and index boundaries
+        run: node tools/verify-site-quality.mjs _site
+
       - name: Verify agent artifacts are neither tracked nor published
         run: |
           set -u

@@ -1,6 +1,6 @@
 ---
 title: Neural Parametric Gaussian Avatars 🔴 🔴 🔴  ( NPGA )
-description: "{% include embed/youtube.html id='NGRxAYbIkus' %}."
+description: "Notes on Neural Parametric Gaussian Avatars, with links to the paper, project page, and demonstration."
 categories: [Multimodal/Computer Vision]
 tags: [Multimodal, Vision, Generative Model]
 date: 2024-06-01 15:00:00 +0800

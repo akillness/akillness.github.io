@@ -4,6 +4,7 @@ description: "This report introduces FunAudioLLM, a model family designed to enh
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-07-12 13:00:00 +0800
+lang: ko
 ---
 > - 👉 Github : <https://github.com/FunAudioLLM>
 > - 👉 HuggingFace : <https://huggingface.co/papers/2407.04051>

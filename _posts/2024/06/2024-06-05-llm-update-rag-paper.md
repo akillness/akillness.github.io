@@ -5,6 +5,7 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-06-05 13:00:00 +0800
 mermaid: true
+lang: ko
 ---
 ## CoPE: Meta's Contextual Position Encoding
 
