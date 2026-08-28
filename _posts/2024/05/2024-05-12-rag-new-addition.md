@@ -4,6 +4,7 @@ description: "🔉 Over the past year, the release of new LLMs and their increas
 categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2024-05-12 21:29:00 +0800
+published: false
 ---
 ## 🎊 My RAG papers list has now been updated with the newest additions, including those from April. It contains over 60 papers, with quick summaries and topic tags.
 

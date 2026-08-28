@@ -4,6 +4,8 @@ description: "Notes on Neural Parametric Gaussian Avatars, with links to the pap
 categories: [Multimodal/Computer Vision]
 tags: [Multimodal, Vision, Generative Model]
 date: 2024-06-01 15:00:00 +0800
+robots: noindex, follow
+sitemap: false
 ---
 {% include embed/youtube.html id='NGRxAYbIkus' %}
 

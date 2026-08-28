@@ -4,6 +4,7 @@ description: "Not sure if you chunked your data right to enable optimal context 
 categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2024-08-03 12:00:00 +0800
+published: false
 mermaid: true
 ---
 ![ RAGBuilder ](/assets/img/llm/ragbuilder-optimizing-rag.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }

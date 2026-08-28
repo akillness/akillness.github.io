@@ -14,9 +14,11 @@ tail_includes:
 {% assign minimum_ad_words = site.google_ad_min_post_words | default: 800 %}
 {% assign post_words = page.content | strip_html | number_of_words: 'auto' %}
 {% assign monetization_eligible = false %}
-{% if page.ads != false and post_words >= minimum_ad_words %}
-  {% assign monetization_eligible = true %}
-{% endif %}
+{% unless page.robots contains 'noindex' %}
+  {% if page.ads != false and post_words >= minimum_ad_words %}
+    {% assign monetization_eligible = true %}
+  {% endif %}
+{% endunless %}
 
 <article
   class="px-1"

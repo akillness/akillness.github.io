@@ -4,6 +4,7 @@ description: Gradio, Transformer.js
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-13 15:20:00 +0800
+published: false
 ---
 🤯 Write Python code to use Transformers.js with Gradio and run your ML app completely in -browser! How cool is that? Our latest release makes this possible. 🔥 Use transformers.js 𝘱𝘪𝘱𝘦𝘭𝘪𝘯𝘦𝘴 to create cool serverless Gradio demos that run serverless on your device. 
 

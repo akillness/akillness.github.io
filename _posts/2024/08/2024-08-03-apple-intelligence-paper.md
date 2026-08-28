@@ -4,6 +4,8 @@ description: "Apple uses a classic post-training pipeline."
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-08-03 22:00:00 +0800
+robots: noindex, follow
+sitemap: false
 image:
   path: /assets/img/llm/apple-foundation-models.png
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA

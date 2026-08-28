@@ -4,6 +4,8 @@ description: "<summary style= \"font-size:24px; line-height:24px; font-weight:bo
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-06-28 00:10:00 +0800
+robots: noindex, follow
+sitemap: false
 ---
 # Step to explain Transformer 
 > Dataset : <https://github.com/NoCodeProgram/deepLearning/tree/main/rnn>

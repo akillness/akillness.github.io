@@ -33,6 +33,22 @@ sitemap: false
 - 텍스트가 적고 단일 이미지/링크 위주의 성의 없는 포스트 (Thin Content)
 - 과도한 키워드 반복 (Keyword Stuffing)
 
+### 2.4 Google Site Approvals 공식 영상에서 확인한 네 축
+
+| 축 | Google이 설명한 확인점 | 이 저장소의 실행 규칙 |
+|---|---|---|
+| 소유권과 기본 점검 | HTML 코드, Search Console 또는 `ads.txt`로 소유권을 확인할 수 있어야 한다. 사이트는 공개 상태이고 크롤러가 접근할 수 있어야 하며, 콘텐츠 없는 화면에 광고를 두지 않는다. | `/robots.txt`가 전체 크롤러와 canonical sitemap을 안내한다. `ads.txt`와 AdSense 소유권 meta를 CI에서 검사한다. 404, 지원 페이지, `noindex` 페이지에는 광고 코드가 없다. |
+| 좋은 트래픽과 나쁜 트래픽 | 실제 사용자가 자발적으로 방문해야 한다. 자동 새로고침, 숨긴 광고, 봇 위장, 클릭재킹, 애드웨어, 쿠키 스터핑 같은 인위적 트래픽은 허용되지 않는다. | 광고 클릭이나 트래픽 구매를 유도하지 않는다. CI는 게시물의 자동 새로고침, 브라우저 prerender 힌트, 숨긴 AdSense 유닛을 차단한다. |
+| 품질 콘텐츠 | 방문자에게 고유하고 실질적인 가치를 제공해야 한다. 낮은 품질의 많은 페이지보다 좋은 페이지가 적은 편이 낫고, 복제·스크랩·중복 본문과 외부 링크만 모은 글을 피한다. | 외부 발표나 데모를 짧게 옮긴 글은 비공개로 전환한다. 300단어 미만 레거시 메모는 확장, 비공개 또는 `noindex` 중 하나를 명시해야 한다. 300단어는 Google 정책이 아니라 리뷰가 필요한 글을 놓치지 않기 위한 내부 검토선이다. |
+| 탐색 | 모든 기기에서 정렬과 가독성이 유지되고, 메뉴와 아이콘이 작동하며, 링크가 약속한 정확한 페이지로 이어져야 한다. 분류는 일관되고 한눈에 이해돼야 한다. | 홈의 주요 탐색 경로 11개가 모두 빌드되는지 CI에서 검사한다. 내부 링크와 이미지는 `htmlproofer`로 검증하고, 태그·카테고리 상세는 탐색용으로 유지하되 `noindex, follow`로 운영한다. |
+
+검토 근거는 Google AdSense의 Site Approvals 영상 시리즈다.
+
+- [Site Ownership and Basic Checks](https://www.youtube.com/watch?v=WMKabXtWuFc)
+- [Good and Bad Traffic](https://www.youtube.com/watch?v=kY4oVKT2z4A)
+- [Quality Content](https://www.youtube.com/watch?v=poU80MgSvrY)
+- [Navigation](https://www.youtube.com/watch?v=X_xKMJ8m6nY)
+
 ---
 
 ## 3. SEO 및 검색 엔진 최적화 전략

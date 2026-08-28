@@ -5,6 +5,8 @@ import path from 'node:path';
 
 const siteDir = path.resolve(process.argv[2] || '_site');
 const origin = 'https://akillness.github.io';
+// This is a project review floor for legacy stubs, not a Google word-count requirement.
+const indexableWordFloor = 300;
 const failures = [];
 const check = (condition, message) => {
   if (!condition) failures.push(message);
@@ -17,6 +19,12 @@ const sitemap = exists('sitemap.xml') ? read('sitemap.xml') : '';
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) =>
   match[1].replaceAll('&amp;', '&')
 );
+
+check(exists('robots.txt'), 'robots.txt is missing');
+const robotsTxt = exists('robots.txt') ? read('robots.txt') : '';
+check(/^User-agent:\s*\*\s*$/im.test(robotsTxt), 'robots.txt does not address all crawlers');
+check(/^Sitemap:\s*https:\/\/akillness\.github\.io\/sitemap\.xml\s*$/im.test(robotsTxt), 'robots.txt does not advertise the canonical sitemap');
+check(!/^Disallow:\s*\/\s*$/im.test(robotsTxt), 'robots.txt blocks the entire site');
 
 const archivePattern = /^https:\/\/akillness\.github\.io\/(tags|categories)\/[^/]+\/$/;
 check(!locations.some((url) => archivePattern.test(url)), 'generated tag/category detail page is in sitemap.xml');
@@ -51,7 +59,15 @@ const retiredSlugs = [
   'essential-statistical-concepts-must-know',
   'explore-the-landscape-of-open-source-data-engineering',
   'strategies-to-scale-database',
-  'google-adsense-monetization-strategy'
+  'google-adsense-monetization-strategy',
+  'timeseriesfm-googleai',
+  'try-implementing-rag-using-langchain',
+  'rag-new-addition',
+  'agentic-data-analyst',
+  'gradio-transformerjs',
+  'llm-systems-using-llmops',
+  'survey-on-llm-based-autonomous-agents',
+  'the-most-optimal-rag-configuration'
 ];
 for (const slug of retiredSlugs) {
   const variants = new Set([slug, slug.toLowerCase()]);
@@ -86,6 +102,7 @@ const postEntries = fs.existsSync(postsRoot)
   : [];
 let monetizedPosts = 0;
 let nonMonetizedPosts = 0;
+let noindexPosts = 0;
 for (const entry of postEntries) {
   const file = path.join(postsRoot, entry.name, 'index.html');
   if (!fs.existsSync(file)) continue;
@@ -94,6 +111,8 @@ for (const entry of postEntries) {
   check(/<html lang="(?:en|ko)"/i.test(html), `invalid or missing html lang: ${route}`);
   check(!/<meta name="description"[^>]*\{%/i.test(html), `Liquid leaked into meta description: ${route}`);
   check(!html.includes('user-scalable=no'), `zoom is disabled: ${route}`);
+  check(!/<meta[^>]+http-equiv=["']?refresh/i.test(html), `automatic refresh is present: ${route}`);
+  check(!/<link[^>]+rel=["'][^"']*prerender/i.test(html), `browser prerender hint is present: ${route}`);
 
   const article = html.match(/<article\b[\s\S]*?<\/article>/i)?.[0] || '';
   check(Boolean(article), `article element missing: ${route}`);
@@ -103,11 +122,26 @@ for (const entry of postEntries) {
 
   const eligibility = article.match(/data-monetization-eligible="(true|false)"/i)?.[1];
   const words = Number(article.match(/data-content-words="(\d+)"/i)?.[1]);
+  const robotsDirective = html.match(/<meta name="robots" content="([^"]+)"/i)?.[1] || '';
+  const isNoindex = robotsDirective.toLowerCase().includes('noindex');
   check(Boolean(eligibility), `monetization marker missing: ${route}`);
   check(Number.isFinite(words), `content word count marker missing: ${route}`);
   const hasLoader = html.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js');
   const hasSlot = /data-ad-slot="\d+"/i.test(article);
   const hasCta = /class="[^"]*post-cta\b/i.test(article);
+  const hasHiddenAd = [...article.matchAll(/<ins\b[^>]*>/gi)].some(
+    ([tag]) => /adsbygoogle/i.test(tag) && /(display\s*:\s*none|visibility\s*:\s*hidden)/i.test(tag)
+  );
+  check(!hasHiddenAd, `hidden AdSense unit is present: ${route}`);
+  if (Number.isFinite(words) && words < indexableWordFloor) {
+    check(isNoindex, `legacy stub below ${indexableWordFloor} words is indexable (${words}): ${route}`);
+  }
+  if (isNoindex) {
+    noindexPosts += 1;
+    check(!locations.includes(`${origin}${route}`), `noindex post is in sitemap: ${route}`);
+    check(eligibility === 'false', `noindex post is monetization-eligible: ${route}`);
+    check(!hasLoader && !hasSlot && !hasCta, `noindex post has a commercial surface: ${route}`);
+  }
   if (eligibility === 'true') {
     monetizedPosts += 1;
     check(words >= 800, `post below 800 words is monetized (${words}): ${route}`);
@@ -141,6 +175,13 @@ check(nonMonetizedPosts > 0, 'no protected non-monetized posts were found');
 const home = exists('index.html') ? read('index.html') : '';
 check(/<html lang="en"/i.test(home), 'home page is not English');
 check(home.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'), 'home page is missing the AdSense ownership loader');
+check(home.includes('<meta name="google-adsense-account" content="ca-pub-3706360396883624">'), 'home page is missing the AdSense ownership meta tag');
+const navigationRoutes = ['/', '/start-here/', '/categories/', '/tags/', '/archives/', '/about/', '/projects/', '/work-with-me/', '/contact/', '/privacy/', '/terms/'];
+for (const route of navigationRoutes) {
+  const output = route === '/' ? ['index.html'] : [route.slice(1, -1), 'index.html'];
+  check(exists(...output), `primary navigation target is missing: ${route}`);
+  check(home.includes(`href="${route}"`), `home sidebar does not link to: ${route}`);
+}
 for (const route of ['about', 'projects', 'start-here', 'work-with-me', 'contact', 'privacy', 'terms', 'archives', 'categories', 'tags']) {
   const html = exists(route, 'index.html') ? read(route, 'index.html') : '';
   check(!html.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'), `/${route}/ unexpectedly loads AdSense`);
@@ -169,4 +210,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Site quality verification passed: ${locations.length} sitemap URLs, ${postEntries.length} posts, ${archiveCount} noindex archives, ${monetizedPosts} monetized posts, ${nonMonetizedPosts} protected posts.`);
+console.log(`Site quality verification passed: ${locations.length} sitemap URLs, ${postEntries.length} posts, ${archiveCount} noindex archives, ${noindexPosts} noindex posts, ${monetizedPosts} monetized posts, ${nonMonetizedPosts} protected posts.`);
