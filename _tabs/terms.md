@@ -1,6 +1,6 @@
 ---
 icon: fas fa-file-contract
-order: 9
+order: 10
 title: Terms of Use
 description: Licensing of the writing and code on this site, accuracy limits, and how to report a problem.
 mermaid: false

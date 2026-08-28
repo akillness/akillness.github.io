@@ -2,11 +2,11 @@
 icon: fas fa-compass
 order: 1
 title: Start Here
-description: A guided entry point to 294 posts on AI agents, harness engineering, RAG, models, and game AI — organised by topic and format instead of by date.
+description: A guided entry point to 304 posts on AI agents, harness engineering, RAG, models, and game AI, organised by topic and format instead of by date.
 mermaid: false
 ---
 
-294 posts in reverse-chronological order is an archive, not a way in. This page is the way in.
+304 posts in reverse-chronological order is an archive, not a way in. This page is the way in.
 
 ## If you have five minutes
 
@@ -80,6 +80,10 @@ Coming from game AI, this is where I started: systems that read a screen and act
 
 → [All tooling posts](/categories/developer-tools/)
 
+## From projects to technical evidence
+
+If you prefer to start with something I built rather than a topic label, use [Portfolio](/projects/). It connects production AI products, public agent tooling, multimodal QA research, and game automation to the articles and repositories that provide the technical trail. The separate [visual portfolio](/portfolio/) provides the full bilingual gallery and career timeline.
+
 ## By format
 
 Different posts do different work. If you prefer one mode over another:
@@ -88,7 +92,7 @@ Different posts do different work. If you prefer one mode over another:
 | :--- | :--- | :--- |
 | **Runnable code** | Companion `.py` files you can download and execute; every assertion in the post was produced by running them | [Ouroboros gates](/posts/ouroboros-agent-os-spec-first-loop/) · [Durable execution](/posts/twelve-agent-concepts-durable-execution/) · [Supertonic ONNX](/posts/supertonic-onnx-runtime-tts/) |
 | **Video** | Embedded walkthroughs and demos — 21 posts carry video | [jeo-code harness](/posts/jeo-code-ai-builder-harness/) · [Gemini 3 multi-agent](/posts/gemini-3-multi-agent-comprehensive-guide/) · [SIMA 2 in 3D worlds](/posts/sima-2-gemini-powered-ai-agent-3d-worlds/) |
-| **Diagrams** | Mermaid architecture and flow diagrams — 223 posts | [Production GenAI stack](/posts/production-generative-ai-stack-architecture-components/) · [Signal-decision architecture](/posts/signal-decision-architecture/) |
+| **Diagrams** | Mermaid architecture and flow diagrams, 232 posts | [Production GenAI stack](/posts/production-generative-ai-stack-architecture-components/) · [Signal-decision architecture](/posts/signal-decision-architecture/) |
 | **Deep dives** | 2,500+ words, single subject, primary sources only | [Fable 5](/posts/fable-5-self-improving-agent-system/) · [MLOps blueprint](/posts/mlops-monitoring-observability-part-a/) |
 | **Async & performance** | Measurement-led, with numbers | [Why async code can be slower](/posts/async-code-performance-issues-solutions/) — includes video |
 
@@ -103,7 +107,7 @@ A few conventions worth knowing before you read:
 
 ## Publishing cadence
 
-Active since 2024, with **294 posts** published. Recent months: 7 posts in August 2026, 2 in July, 7 in June, 12 in April, 21 in March, 43 in February. Cadence varies with a full-time engineering job and a PhD — bursts when a topic opens up, quieter when a project is consuming the week.
+Active since 2024, with **304 posts** published. Recent months: 16 posts in August 2026, 2 in July, 7 in June, 4 in May, 12 in April, 21 in March, and 43 in February. Cadence varies with a full-time engineering job and a PhD: bursts when a topic opens up, quieter when a project is consuming the week.
 
 - [Full archive by date](/archives/)
 - [All categories](/categories/)

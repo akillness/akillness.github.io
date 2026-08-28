@@ -1,12 +1,14 @@
 ---
 icon: fas fa-handshake
-order: 6
+order: 7
 title: Work with Me
 description: Paid, scoped reviews — AI agent/RAG architecture diagnosis, Unity CI and build-automation audits, and multimodal QA design review. What's included, who it fits, and how to start.
 mermaid: false
 ---
 
-This is separate from [Contact](/contact/). Contact is for corrections, questions about a specific post, and quick technical exchange — that stays free. This page is for teams that want a paid, scoped review of a system, from someone who has built the adjacent systems rather than read about them.
+This is separate from [Contact](/contact/). Contact is for corrections, questions about a specific post, and quick technical exchange; that stays free. This page is for teams that want a paid, scoped review of a system, from someone who has built the adjacent systems rather than read about them.
+
+The [Portfolio](/projects/) maps these review areas to shipped products, public repositories, research work, and the technical writing behind them.
 
 ## What I review
 

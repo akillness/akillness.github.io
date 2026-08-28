@@ -157,8 +157,9 @@ Agents | MCP | A2A | Evals | Tracing | Multimodal QA | Tool Use | Product Engine
 
 ### Links
 
-- [Portfolio](/portfolio/)
-- [Resume](/resume_eng)
+- [Portfolio guide](/projects/)
+- [Visual portfolio](/portfolio/)
+- [Resume](/resume_eng/)
 - [LinkedIn](https://www.linkedin.com/in/akillness38/)
 - [GitHub](https://github.com/akillness)
 - [AI Tech Blog](https://akillness.github.io)

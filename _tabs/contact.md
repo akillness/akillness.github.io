@@ -1,6 +1,6 @@
 ---
 icon: fas fa-envelope
-order: 7
+order: 8
 title: Contact
 description: How to reach Jang Young Jeong about the writing on this site, corrections, or collaboration.
 mermaid: false
@@ -22,7 +22,7 @@ Email is the reliable channel. Expect a reply within a few days; I write this bl
 
 **Jang Young Jeong** — AI Product Engineer at Supercent, Ph.D. candidate in Game Engineering at Hongik University, previously AI/game programmer at NCSOFT and Com2uS. Based in Hwaseong, Gyeonggi-do, South Korea (KST, UTC+9).
 
-Full background on the [About](/about/) page.
+Full background is on [About](/about/); selected work and its public evidence are mapped on [Portfolio](/projects/).
 
 ## What I answer quickly
 
