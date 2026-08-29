@@ -1,6 +1,7 @@
 ---
 icon: fas fa-user-shield
 order: 9
+nav: false
 title: Privacy Policy
 description: What data this site collects, which third parties process it, and how to opt out.
 mermaid: false

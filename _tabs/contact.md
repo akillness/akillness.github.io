@@ -1,6 +1,7 @@
 ---
 icon: fas fa-envelope
 order: 8
+nav: false
 title: Contact
 description: How to reach Jang Young Jeong about the writing on this site, corrections, or collaboration.
 mermaid: false

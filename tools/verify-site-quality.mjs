@@ -212,8 +212,18 @@ check(home.includes('<meta name="google-adsense-account" content="ca-pub-3706360
 const navigationRoutes = ['/', '/start-here/', '/categories/', '/tags/', '/archives/', '/about/', '/projects/', '/work-with-me/', '/contact/', '/privacy/', '/terms/'];
 for (const route of navigationRoutes) {
   const output = route === '/' ? ['index.html'] : [route.slice(1, -1), 'index.html'];
-  check(exists(...output), `primary navigation target is missing: ${route}`);
-  check(home.includes(`href="${route}"`), `home sidebar does not link to: ${route}`);
+  check(exists(...output), `navigation target is missing: ${route}`);
+}
+const sidebar = home.match(/<aside\b[^>]*id="sidebar"[\s\S]*?<\/aside>/i)?.[0] || '';
+const footer = home.match(/<footer\b[\s\S]*?<\/footer>/i)?.[0] || '';
+check(Boolean(sidebar), 'home sidebar is missing');
+check(Boolean(footer), 'home footer is missing');
+for (const route of ['/', '/start-here/', '/categories/', '/tags/', '/about/', '/projects/', '/work-with-me/']) {
+  check(sidebar.includes(`href="${route}"`), `home sidebar does not link to: ${route}`);
+}
+for (const route of ['/archives/', '/contact/', '/privacy/', '/terms/']) {
+  check(!sidebar.includes(`href="${route}"`), `home sidebar still links to footer-only route: ${route}`);
+  check(footer.includes(`href="${route}"`), `home footer does not preserve access to: ${route}`);
 }
 for (const route of ['about', 'projects', 'start-here', 'work-with-me', 'contact', 'privacy', 'terms', 'archives', 'categories', 'tags']) {
   const html = exists(route, 'index.html') ? read(route, 'index.html') : '';
