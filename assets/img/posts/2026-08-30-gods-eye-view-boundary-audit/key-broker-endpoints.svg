@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" font-family="Helvetica, Arial, sans-serif">
+  <rect width="1200" height="560" fill="#0f172a"/>
+  <text x="600" y="52" text-anchor="middle" fill="#e2e8f0" font-size="30" font-weight="bold">One Vite config, 24 server endpoints</text>
+  <text x="600" y="86" text-anchor="middle" fill="#94a3b8" font-size="18">every /api/* middleware registered inside vite.config.js @ 314a0e1, grouped by what it protects</text>
+
+  <!-- Column 1: credential brokering -->
+  <rect x="50" y="120" width="340" height="300" rx="12" fill="#172554" stroke="#3b82f6" stroke-width="2"/>
+  <text x="220" y="155" text-anchor="middle" fill="#93c5fd" font-size="19" font-weight="bold">Brokers a secret</text>
+  <g fill="#cbd5e1" font-size="15" font-family="Menlo, monospace">
+    <text x="70" y="190">/api/realtime/token</text>
+    <text x="70" y="216">/api/openai/hud-summary</text>
+    <text x="70" y="242">/api/opensky</text>
+    <text x="70" y="268">/api/opensky-track</text>
+    <text x="70" y="294">/api/ais-live</text>
+    <text x="70" y="320">/api/tomtom</text>
+    <text x="70" y="346">/api/firms</text>
+    <text x="70" y="372">/api/google/nearby-places</text>
+    <text x="70" y="398">/api/google/text-search</text>
+  </g>
+
+  <!-- Column 2: upstream shielding -->
+  <rect x="430" y="120" width="340" height="300" rx="12" fill="#14532d" stroke="#22c55e" stroke-width="2"/>
+  <text x="600" y="155" text-anchor="middle" fill="#86efac" font-size="19" font-weight="bold">Caches / bounds a public feed</text>
+  <g fill="#cbd5e1" font-size="15" font-family="Menlo, monospace">
+    <text x="450" y="190">/api/celestrak</text>
+    <text x="450" y="216">/api/launches</text>
+    <text x="450" y="242">/api/adsbdb</text>
+    <text x="450" y="268">/api/adsblol/mil</text>
+    <text x="450" y="294">/api/adsblol/trace</text>
+    <text x="450" y="320">/api/overpass</text>
+    <text x="450" y="346">/api/gbfs</text>
+    <text x="450" y="372">/api/terrain/heights</text>
+    <text x="450" y="398">/api/route</text>
+  </g>
+
+  <!-- Column 3: hardened relays -->
+  <rect x="810" y="120" width="340" height="300" rx="12" fill="#57250f" stroke="#f97316" stroke-width="2"/>
+  <text x="980" y="155" text-anchor="middle" fill="#fdba74" font-size="19" font-weight="bold">Hardened relay / composite</text>
+  <g fill="#cbd5e1" font-size="15" font-family="Menlo, monospace">
+    <text x="830" y="190">/api/cctv</text>
+    <text x="830" y="216">/api/radio</text>
+    <text x="830" y="242">/api/military-installations</text>
+    <text x="830" y="268">/api/regional-brief</text>
+    <text x="830" y="294">/api/weather-effects</text>
+    <text x="830" y="320">/api/realtime/debug-log</text>
+  </g>
+  <g fill="#94a3b8" font-size="14">
+    <text x="830" y="356">registered URLs only (SSRF)</text>
+    <text x="830" y="380">redirects rejected, TLS pinned,</text>
+    <text x="830" y="404">private-IP resolutions refused</text>
+  </g>
+
+  <text x="600" y="470" text-anchor="middle" fill="#64748b" font-size="16">The browser only ever receives two build-time values: a referrer-restricted Google Maps key</text>
+  <text x="600" y="498" text-anchor="middle" fill="#64748b" font-size="16">and an optional Cesium ion token. Everything else stays behind this middleware wall.</text>
+  <text x="600" y="536" text-anchor="middle" fill="#475569" font-size="14">Endpoint inventory extracted from vite.config.js (7,383 lines) at commit 314a0e1</text>
+</svg>
