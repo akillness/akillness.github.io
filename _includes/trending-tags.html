@@ -6,11 +6,18 @@
 {% assign tag_list = '' | split: '' %}
 
 {% for tag in site.tags %}
-  {% assign size = tag | last | size %}
-  {% assign size_list = size_list | push: size %}
+  {% assign size = 0 %}
+  {% for post in tag.last %}
+    {% unless post.hidden == true or post.robots contains 'noindex' %}
+      {% assign size = size | plus: 1 %}
+    {% endunless %}
+  {% endfor %}
 
-  {% assign tag_str = tag | first | append: '::' | append: size %}
-  {% assign tag_list = tag_list | push: tag_str %}
+  {% if size > 0 %}
+    {% assign size_list = size_list | push: size %}
+    {% assign tag_str = tag | first | append: '::' | append: size %}
+    {% assign tag_list = tag_list | push: tag_str %}
+  {% endif %}
 {% endfor %}
 
 {% assign size_list = size_list | sort | reverse %}

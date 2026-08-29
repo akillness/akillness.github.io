@@ -53,6 +53,8 @@
   {% assign robots_directive = page.robots %}
   {% if page.layout == 'tag' or page.layout == 'category' %}
     {% assign robots_directive = 'noindex, follow' %}
+  {% elsif paginator and paginator.page > 1 %}
+    {% assign robots_directive = 'noindex, follow' %}
   {% endif %}
   {% if robots_directive %}
     <meta name="robots" content="{{ robots_directive }}">

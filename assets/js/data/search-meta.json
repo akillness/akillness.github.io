@@ -9,17 +9,22 @@ swcache: true
   `search.json` (full text) is fetched afterwards and replaces this dataset.
   Keep the field list and the snippet definition in sync with `search.json`.
 {% endcomment %}
+{% assign searchable_posts = '' | split: '' %}
+{% for post in site.posts %}
+  {% unless post.hidden == true or post.robots contains 'noindex' %}
+    {% assign searchable_posts = searchable_posts | push: post %}
+  {% endunless %}
+{% endfor %}
 [
-  {% for post in site.posts %}
+  {% for post in searchable_posts %}
   {
     "title": {{ post.title | jsonify }},
     "url": {{ post.url | relative_url | jsonify }},
     "categories": {{ post.categories | join: ', ' | jsonify }},
     "tags": {{ post.tags | join: ', ' | jsonify }},
     "date": "{{ post.date }}",
-    {% include no-linenos.html content=post.content %}
-    {% assign _content = content | strip_html | strip_newlines %}
-    "snippet": {{ _content | truncate: 200 | jsonify }}
+    {% assign _snippet = post.description | default: post.excerpt | strip_html | strip_newlines %}
+    "snippet": {{ _snippet | truncate: 200 | jsonify }}
   }{% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]

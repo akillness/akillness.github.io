@@ -34,6 +34,7 @@ __pycache__/
 .survey/
 
 # Agent-generated artifacts (local-only; regenerable or private session records)
+_workspace/
 graphify-out/
 llm-wiki/
 jeo-session-*.md

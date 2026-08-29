@@ -7,14 +7,21 @@ sitemap: false
 
 {% include lang.html %}
 
+{% assign visible_posts = '' | split: '' %}
+{% for post in page.posts %}
+  {% unless post.hidden == true or post.robots contains 'noindex' %}
+    {% assign visible_posts = visible_posts | push: post %}
+  {% endunless %}
+{% endfor %}
+
 <div id="page-tag">
   <h1 class="ps-lg-2">
     <i class="fa fa-tag fa-fw text-muted"></i>
     {{ page.title }}
-    <span class="lead text-muted ps-2">{{ page.posts | size }}</span>
+    <span class="lead text-muted ps-2">{{ visible_posts | size }}</span>
   </h1>
   <ul class="content ps-0">
-    {% for post in page.posts %}
+    {% for post in visible_posts %}
       <li class="d-flex justify-content-between px-md-3">
         <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
         <span class="dash flex-grow-1"></span>

@@ -5,6 +5,9 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-05-15 12:00:00 +0800
 lang: ko
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ## 📝 구글 I/O 2024 요약 및 감상
 

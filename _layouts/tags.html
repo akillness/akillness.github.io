@@ -12,11 +12,19 @@ layout: page
   {% assign sorted_tags = tags | sort_natural %}
 
   {% for t in sorted_tags %}
-    <div>
-      <a class="tag" href="{{ t | slugify | url_encode | prepend: '/tags/' | append: '/' | relative_url }}">
-        {{ t -}}
-        <span class="text-muted">{{ site.tags[t].size }}</span>
-      </a>
-    </div>
+    {% assign visible_count = 0 %}
+    {% for post in site.tags[t] %}
+      {% unless post.hidden == true or post.robots contains 'noindex' %}
+        {% assign visible_count = visible_count | plus: 1 %}
+      {% endunless %}
+    {% endfor %}
+    {% if visible_count > 0 %}
+      <div>
+        <a class="tag" href="{{ t | slugify | url_encode | prepend: '/tags/' | append: '/' | relative_url }}">
+          {{ t -}}
+          <span class="text-muted">{{ visible_count }}</span>
+        </a>
+      </div>
+    {% endif %}
   {% endfor %}
 </div>

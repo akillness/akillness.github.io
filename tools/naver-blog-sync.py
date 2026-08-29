@@ -120,6 +120,10 @@ def render() -> None:
     lines.append("pin: false")
     lines.append("mermaid: false")
     lines.append("math: false")
+    lines.append("lang: ko")
+    lines.append("robots: noindex, follow")
+    lines.append("sitemap: false")
+    lines.append("ads: false")
     lines.append("---")
     lines.append("")
     lines.append("Most of what I publish here is about agents, harnesses, and the systems I build. "
@@ -139,7 +143,8 @@ def render() -> None:
     lines.append("{: .prompt-tip }")
     lines.append("")
     total = sum(len(v) for v in buckets.values())
-    for cat in CATEGORY_ORDER:
+    extra_categories = sorted(cat for cat in buckets if cat not in CATEGORY_ORDER)
+    for cat in [*CATEGORY_ORDER, *extra_categories]:
         items = buckets.get(cat, [])
         if not items:
             continue

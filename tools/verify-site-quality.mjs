@@ -8,6 +8,7 @@ const origin = 'https://akillness.github.io';
 // This is a project review floor for legacy stubs, not a Google word-count requirement.
 const indexableWordFloor = 300;
 const failures = [];
+const listingSurfaces = [];
 const check = (condition, message) => {
   if (!condition) failures.push(message);
 };
@@ -90,11 +91,31 @@ for (const root of ['tags', 'categories']) {
     if (!fs.existsSync(file)) continue;
     archiveCount += 1;
     const html = fs.readFileSync(file, 'utf8');
+    listingSurfaces.push({ route: `/${root}/${entry.name}/`, html });
     check(/<meta name="robots" content="[^"]*noindex[^"]*">/i.test(html), `archive lacks noindex: /${root}/${entry.name}/`);
     check(!html.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'), `archive loads AdSense: /${root}/${entry.name}/`);
   }
 }
 check(archiveCount > 0, 'no generated archive pages were found');
+
+let paginationCount = 0;
+for (const entry of fs.readdirSync(siteDir, { withFileTypes: true })) {
+  if (!entry.isDirectory() || !/^page\d+$/.test(entry.name)) continue;
+  const file = path.join(siteDir, entry.name, 'index.html');
+  if (!fs.existsSync(file)) continue;
+  paginationCount += 1;
+  const route = `/${entry.name}/`;
+  const html = fs.readFileSync(file, 'utf8');
+  listingSurfaces.push({ route, html });
+  check(/<meta name="robots" content="[^"]*noindex[^"]*">/i.test(html), `pagination lacks noindex: ${route}`);
+  const cardCount = (html.match(/<article\b[^>]*class="[^"]*card-wrapper\b/gi) || []).length;
+  check(cardCount > 0, `orphan pagination page has no visible posts: ${route}`);
+  const pageIndex = html.match(/<li class="page-index[^>]*>[\s\S]*?<span>(\d+)<\/span>[\s\S]*?<span[^>]*>\/\s*(\d+)<\/span>/i);
+  if (pageIndex) check(Number(pageIndex[1]) <= Number(pageIndex[2]), `pagination index exceeds visible total: ${route}`);
+  check(!html.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'), `pagination loads AdSense: ${route}`);
+  check(!locations.includes(`${origin}${route}`), `pagination is in sitemap.xml: ${route}`);
+}
+check(paginationCount > 0, 'no paginated home pages were found');
 
 const postsRoot = path.join(siteDir, 'posts');
 const postEntries = fs.existsSync(postsRoot)
@@ -103,6 +124,7 @@ const postEntries = fs.existsSync(postsRoot)
 let monetizedPosts = 0;
 let nonMonetizedPosts = 0;
 let noindexPosts = 0;
+const noindexRoutes = [];
 for (const entry of postEntries) {
   const file = path.join(postsRoot, entry.name, 'index.html');
   if (!fs.existsSync(file)) continue;
@@ -138,6 +160,7 @@ for (const entry of postEntries) {
   }
   if (isNoindex) {
     noindexPosts += 1;
+    noindexRoutes.push(route);
     check(!locations.includes(`${origin}${route}`), `noindex post is in sitemap: ${route}`);
     check(eligibility === 'false', `noindex post is monetization-eligible: ${route}`);
     check(!hasLoader && !hasSlot && !hasCta, `noindex post has a commercial surface: ${route}`);
@@ -171,8 +194,18 @@ for (const entry of postEntries) {
 check(postEntries.length > 0, 'no built posts were found');
 check(monetizedPosts > 0, 'no eligible monetized posts were found');
 check(nonMonetizedPosts > 0, 'no protected non-monetized posts were found');
+for (const route of [
+  '/posts/family-life-blog-roundup/',
+  '/posts/serach-utility/',
+  '/posts/study-vae/',
+  '/posts/googleio-review/',
+  '/posts/llama-cpp-ggml-simple-matmul/'
+]) {
+  check(noindexRoutes.includes(route), `required protected post is still indexable: ${route}`);
+}
 
 const home = exists('index.html') ? read('index.html') : '';
+listingSurfaces.push({ route: '/', html: home });
 check(/<html lang="en"/i.test(home), 'home page is not English');
 check(home.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'), 'home page is missing the AdSense ownership loader');
 check(home.includes('<meta name="google-adsense-account" content="ca-pub-3706360396883624">'), 'home page is missing the AdSense ownership meta tag');
@@ -188,6 +221,31 @@ for (const route of ['about', 'projects', 'start-here', 'work-with-me', 'contact
 }
 const about = exists('about', 'index.html') ? read('about', 'index.html') : '';
 check((about.match(/googletagmanager\.com\/gtag\/js/g) || []).length === 1, '/about/ must load Google Analytics exactly once');
+
+const archivesHtml = exists('archives', 'index.html') ? read('archives', 'index.html') : '';
+const feedHtml = exists('feed.xml') ? read('feed.xml') : '';
+const searchJson = exists('assets', 'js', 'data', 'search.json') ? read('assets', 'js', 'data', 'search.json') : '';
+const searchMetaJson = exists('assets', 'js', 'data', 'search-meta.json') ? read('assets', 'js', 'data', 'search-meta.json') : '';
+listingSurfaces.push({ route: '/archives/', html: archivesHtml });
+for (const route of noindexRoutes) {
+  for (const surface of listingSurfaces) {
+    check(!surface.html.includes(route), `noindex post ${route} is linked from listing ${surface.route}`);
+  }
+  check(!feedHtml.includes(route), `noindex post is present in feed.xml: ${route}`);
+  check(!searchJson.includes(route), `noindex post is present in search.json: ${route}`);
+  check(!searchMetaJson.includes(route), `noindex post is present in search-meta.json: ${route}`);
+}
+
+for (const entry of postEntries) {
+  const file = path.join(postsRoot, entry.name, 'index.html');
+  if (!fs.existsSync(file)) continue;
+  const html = fs.readFileSync(file, 'utf8');
+  const related = html.match(/<aside\b[^>]*id="related-posts"[\s\S]*?<\/aside>/i)?.[0] || '';
+  for (const route of noindexRoutes) {
+    check(!related.includes(route), `related-posts links to noindex post ${route} from /posts/${entry.name}/`);
+  }
+}
+
 const koreanPost = exists('posts', 'googleio-review', 'index.html') ? read('posts', 'googleio-review', 'index.html') : '';
 check(/<html lang="ko"/i.test(koreanPost), 'Korean post language override failed');
 const notFound = exists('404.html') ? read('404.html') : '';
@@ -210,4 +268,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Site quality verification passed: ${locations.length} sitemap URLs, ${postEntries.length} posts, ${archiveCount} noindex archives, ${noindexPosts} noindex posts, ${monetizedPosts} monetized posts, ${nonMonetizedPosts} protected posts.`);
+console.log(`Site quality verification passed: ${locations.length} sitemap URLs, ${postEntries.length} posts, ${archiveCount} noindex archives, ${paginationCount} noindex pagination pages, ${noindexPosts} noindex posts, ${monetizedPosts} monetized posts, ${nonMonetizedPosts} protected posts.`);

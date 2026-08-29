@@ -6,7 +6,6 @@ on:
       - main
       - master
     paths-ignore:
-      - .gitignore
       - README.md
       - LICENSE
 
@@ -44,6 +43,11 @@ jobs:
       - name: Install Node.js dependencies
         run: npm install
 
+      - name: Verify editorial source boundaries
+        run: |
+          node tools/verify-editorial-boundaries.mjs
+          node tools/validate-editorial-harness.mjs
+
       - name: Build assets
         run: npm run build
 
@@ -67,7 +71,7 @@ jobs:
           status=0
 
           # 1) Machine-written records belong in the local stores (.jeo/), never in git.
-          tracked=$(git ls-files -- graphify-out llm-wiki test-results .jeo .serena .gjc 'jeo-session-*.md')
+          tracked=$(git ls-files -- _workspace graphify-out llm-wiki test-results .jeo .omc .survey .serena .gjc 'jeo-session-*.md')
           if [ -n "$tracked" ]; then
             echo "::error::Agent-generated records are tracked in git. Untrack with 'git rm -r --cached <path>' (files stay on disk):"
             echo "$tracked" | head -20
@@ -75,7 +79,8 @@ jobs:
           fi
 
           # 2) Nothing in the exclude list may survive into the published site.
-          for p in graphify-out llm-wiki test-results \
+          for p in _workspace graphify-out llm-wiki test-results .claude .agents \
+                   AGENTS.md AGENTS.html CLAUDE.md CLAUDE.html \
                    persona.md persona.html docs/prompt.md docs/prompt.html \
                    USER.md USER.html IDENTITY.md IDENTITY.html \
                    resume_data.json extract_resume.js plan.md plan.html \
@@ -95,9 +100,9 @@ jobs:
           # 3) Belt and braces: the sitemap must not invite crawlers into agent paths.
           # Anchored right after the host so legitimate pages like /tags/llm-wiki/ still pass.
           if [ -f _site/sitemap.xml ] && \
-             grep -qE '<loc>https?://[^/]+/(graphify-out|llm-wiki|jeo-session)' _site/sitemap.xml; then
+             grep -qE '<loc>https?://[^/]+/(_workspace|graphify-out|llm-wiki|jeo-session|\.claude|\.agents)' _site/sitemap.xml; then
             echo "::error::sitemap.xml lists agent-generated URLs:"
-            grep -oE 'https?://[^/]+/(graphify-out|llm-wiki|jeo-session)[^<]*' _site/sitemap.xml | head -20
+            grep -oE 'https?://[^/]+/(_workspace|graphify-out|llm-wiki|jeo-session|\.claude|\.agents)[^<]*' _site/sitemap.xml | head -20
             status=1
           fi
 

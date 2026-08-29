@@ -17,6 +17,13 @@
     "build": "NODE_ENV=production npx rollup -c --bundleConfigAsCjs",
     "prewatch": "npx rimraf assets/js/dist",
     "watch": "npx rollup -c --bundleConfigAsCjs -w",
+    "editorial:boundaries": "node tools/verify-editorial-boundaries.mjs",
+    "editorial:harness": "node tools/validate-editorial-harness.mjs",
+    "editorial:harness:runtime": "node tools/validate-editorial-harness.mjs --runtime",
+    "editorial:package": "node tools/validate-editorial-package.mjs --stage final",
+    "editorial:package:draft": "node tools/validate-editorial-package.mjs --stage draft",
+    "editorial:scope": "node tools/verify-publication-scope.mjs",
+    "editorial:status": "node tools/editorial-workspace.mjs status",
     "test": "npx stylelint _sass/**/*.scss",
     "fixlint": "npm run test -- --fix"
   },

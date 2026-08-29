@@ -5,13 +5,15 @@
 {% assign all_list = '' | split: '' %}
 
 {% for post in site.posts %}
-  {% assign datetime = post.last_modified_at | default: post.date %}
+  {% unless post.hidden == true or post.robots contains 'noindex' %}
+    {% assign datetime = post.last_modified_at | default: post.date %}
 
-  {% capture elem %}
-    {{- datetime | date: "%Y%m%d%H%M%S" -}}::{{- forloop.index0 -}}
-  {% endcapture %}
+    {% capture elem %}
+      {{- datetime | date: "%Y%m%d%H%M%S" -}}::{{- forloop.index0 -}}
+    {% endcapture %}
 
-  {% assign all_list = all_list | push: elem %}
+    {% assign all_list = all_list | push: elem %}
+  {% endunless %}
 {% endfor %}
 
 {% assign all_list = all_list | sort | reverse %}

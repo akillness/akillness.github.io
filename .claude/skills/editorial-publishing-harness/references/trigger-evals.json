@@ -1,0 +1,26 @@
+{
+  "should_trigger": [
+    "Write the 2026-08-30 English blog post from this GitHub repository URL.",
+    "Run tonight's Source Audit for MCP security releases.",
+    "Search current AI agent news and prepare one evidence-first article.",
+    "Use the influencer strategy to make a Unity MCP technical post.",
+    "Resume the current editorial workspace and finish the draft.",
+    "Archive yesterday's article run and start today's one.",
+    "Research nested links and implementation before writing this blog article.",
+    "Prepare the daily 1 AM English article package.",
+    "Review and publish the approved Source Audit.",
+    "Turn this paper and its code into an original production analysis."
+  ],
+  "should_not_trigger": [
+    "Fix this Unity compiler error.",
+    "Review this pull request for security bugs.",
+    "Translate this paragraph into English.",
+    "Update only ads.txt.",
+    "Send a reply to this customer email.",
+    "Create a PowerPoint about MCP.",
+    "Summarize this web page in three bullets.",
+    "Deploy this Vercel project.",
+    "Add a reminder for tomorrow morning.",
+    "Analyze these CSV metrics without writing an article."
+  ]
+}

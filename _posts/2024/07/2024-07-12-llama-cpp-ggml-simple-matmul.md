@@ -5,6 +5,9 @@ categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-07-12 11:00:00 +0800
 lang: ko
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 > 👉 Github : <https://github.com/likejazz/ggml-simple>
 {: .prompt-info}

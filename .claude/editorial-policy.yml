@@ -1,0 +1,37 @@
+version: 1
+timezone: Asia/Seoul
+schedule_local: "01:00"
+scheduler: Aside cron
+routine_name: Daily Source Audit Publish
+language: en
+publication_mode: publish-on-green
+standing_publish_approval: true
+max_articles_per_run: 1
+max_revision_loops: 2
+minimum_primary_sources: 1
+minimum_material_claim_coverage: 1.0
+allow_empty_success: true
+canonical_format: Source Audit
+content_pillars:
+  - ai-agents-and-harness-engineering
+  - mcp-reliability-security-and-operations
+  - unity-and-game-production-automation
+  - multimodal-game-qa-and-3d-vision
+publication_scope:
+  allowed:
+    - "_posts/YYYY-MM-DD-<slug>.md"
+    - "assets/img/posts/YYYY-MM-DD-<slug>/**"
+  forbidden:
+    - ".github/**"
+    - "_config.yml"
+    - ".claude/**"
+    - "tools/**"
+    - "CLAUDE.md"
+    - "AGENTS.md"
+standing_constraints:
+  - no-newsletter-form-until-privacy-policy-update
+  - no-paid-backlinks
+  - no-seo-guest-posts
+  - no-undisclosed-sponsorship
+  - no-fabricated-first-hand-experience
+  - no-publish-without-green-gates

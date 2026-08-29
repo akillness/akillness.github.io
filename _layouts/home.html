@@ -4,40 +4,23 @@ refactor: true
 ---
 {% include lang.html %}
 
-{% assign pinned = site.posts | where_exp: 'item', 'item.pin == true' %}
-{% assign default = site.posts | where_exp: 'item', 'item.pin != true and item.hidden != true' %}
+{% assign pinned = '' | split: '' %}
+{% assign default = '' | split: '' %}
 
-{% assign posts = '' | split: '' %}
+{% for item in site.posts %}
+  {% unless item.hidden == true or item.robots contains 'noindex' %}
+    {% if item.pin == true %}
+      {% assign pinned = pinned | push: item %}
+    {% else %}
+      {% assign default = default | push: item %}
+    {% endif %}
+  {% endunless %}
+{% endfor %}
 
-<!-- Get pinned posts -->
-
+{% assign visible_posts = pinned | concat: default %}
 {% assign offset = paginator.page | minus: 1 | times: paginator.per_page %}
-{% assign pinned_num = pinned.size | minus: offset %}
-
-{% if pinned_num > 0 %}
-  {% for i in (offset..pinned.size) limit: pinned_num %}
-    {% assign posts = posts | push: pinned[i] %}
-  {% endfor %}
-{% else %}
-  {% assign pinned_num = 0 %}
-{% endif %}
-
-<!-- Get default posts -->
-
-{% assign default_beg = offset | minus: pinned.size %}
-
-{% if default_beg < 0 %}
-  {% assign default_beg = 0 %}
-{% endif %}
-
-{% assign default_num = paginator.posts | size | minus: pinned_num %}
-{% assign default_end = default_beg | plus: default_num | minus: 1 %}
-
-{% if default_num > 0 %}
-  {% for i in (default_beg..default_end) %}
-    {% assign posts = posts | push: default[i] %}
-  {% endfor %}
-{% endif %}
+{% assign posts = visible_posts | slice: offset, paginator.per_page %}
+{% assign visible_total_pages = visible_posts.size | plus: paginator.per_page | minus: 1 | divided_by: paginator.per_page %}
 
 <div id="post-list" class="flex-grow-1 px-xl-1">
   {% for post in posts %}
@@ -88,8 +71,8 @@ refactor: true
 
             <div class="card-text content mt-0 mb-3">
               <p>
-                {% include no-linenos.html content=post.content %}
-                {{ content | markdownify | strip_html | truncate: 200 | escape }}
+                {% assign preview = post.description | default: post.excerpt %}
+                {{ preview | markdownify | strip_html | strip_newlines | truncate: 200 | escape }}
               </p>
             </div>
 
@@ -138,6 +121,6 @@ refactor: true
 </div>
 <!-- #post-list -->
 
-{% if paginator.total_pages > 1 %}
-  {% include post-paginator.html %}
+{% if visible_total_pages > 1 %}
+  {% include post-paginator.html total_pages=visible_total_pages %}
 {% endif %}

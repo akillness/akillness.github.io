@@ -15,12 +15,18 @@ layout: page
 {% for category in sort_categories %}
   {% assign category_name = category | first %}
   {% assign posts_of_category = category | last %}
-  {% assign first_post = posts_of_category | first %}
+  {% assign visible_posts_of_category = '' | split: '' %}
+  {% for post in posts_of_category %}
+    {% unless post.hidden == true or post.robots contains 'noindex' %}
+      {% assign visible_posts_of_category = visible_posts_of_category | push: post %}
+    {% endunless %}
+  {% endfor %}
+  {% assign first_post = visible_posts_of_category | first %}
 
   {% if category_name == first_post.categories[0] %}
     {% assign sub_categories = '' | split: '' %}
 
-    {% for post in posts_of_category %}
+    {% for post in visible_posts_of_category %}
       {% assign second_category = post.categories[1] %}
       {% if second_category %}
         {% unless sub_categories contains second_category %}
@@ -45,7 +51,7 @@ layout: page
           <a href="{{ _category_url | relative_url }}" class="mx-2">{{ category_name }}</a>
 
           <!-- content count -->
-          {% assign top_posts_size = site.categories[category_name] | size %}
+          {% assign top_posts_size = visible_posts_of_category | size %}
           <span class="text-muted small font-weight-light">
             {% if sub_categories_size > 0 %}
               {{ sub_categories_size }}
@@ -109,7 +115,12 @@ layout: page
                 {% capture _sub_ctg_url %}/categories/{{ sub_category | slugify | url_encode }}/{% endcapture %}
                 <a href="{{ _sub_ctg_url | relative_url }}" class="mx-2">{{ sub_category }}</a>
 
-                {% assign posts_size = site.categories[sub_category] | size %}
+                {% assign posts_size = 0 %}
+                {% for post in site.categories[sub_category] %}
+                  {% unless post.hidden == true or post.robots contains 'noindex' %}
+                    {% assign posts_size = posts_size | plus: 1 %}
+                  {% endunless %}
+                {% endfor %}
                 <span class="text-muted small font-weight-light">
                   {{ posts_size }}
 

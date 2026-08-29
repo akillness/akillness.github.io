@@ -8,8 +8,15 @@ layout: page
 {% assign df_strftime_m = site.data.locales[lang].df.archives.strftime | default: '/ %m' %}
 {% assign df_dayjs_m = site.data.locales[lang].df.archives.dayjs | default: '/ MM' %}
 
+{% assign archive_posts = '' | split: '' %}
+{% for post in site.posts %}
+  {% unless post.hidden == true or post.robots contains 'noindex' %}
+    {% assign archive_posts = archive_posts | push: post %}
+  {% endunless %}
+{% endfor %}
+
 <div id="archives" class="pl-xl-3">
-  {% for post in site.posts %}
+  {% for post in archive_posts %}
     {% assign cur_year = post.date | date: '%Y' %}
 
     {% if cur_year != last_year %}
