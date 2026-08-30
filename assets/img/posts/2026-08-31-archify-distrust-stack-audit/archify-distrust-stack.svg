@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Diagram of Archify's three-layer distrust stack: contract against the agent, frozen benchmark against the model, and untrusted update manifest">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#101725"/>
+      <stop offset="1" stop-color="#1a2332"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="600" y="66" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="34" font-weight="700" fill="#e8edf5">Archify: the distrust stack under the diagrams</text>
+  <text x="600" y="98" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="17" fill="#8fa1b8">tt-a1i/archify @ 5de7275 · v2.16.0 (2026-08-30) · MIT</text>
+
+  <!-- Layer 1 -->
+  <rect x="80" y="140" width="1040" height="130" rx="14" fill="#16233a" stroke="#4f8ef7" stroke-width="2"/>
+  <text x="110" y="178" font-family="Menlo, Consolas, monospace" font-size="21" font-weight="700" fill="#7fb2ff">Layer 1 · Distrust the executing agent</text>
+  <text x="110" y="210" font-family="Menlo, Consolas, monospace" font-size="16" fill="#c7d3e3">SKILL.md contract: "A non-zero exit can never be described as success."</text>
+  <text x="110" y="238" font-family="Menlo, Consolas, monospace" font-size="16" fill="#c7d3e3">No counterfeit passes (overflow:hidden, clipping) · bounded repair, honest stop</text>
+
+  <!-- Layer 2 -->
+  <rect x="80" y="290" width="1040" height="130" rx="14" fill="#1c2a24" stroke="#34d399" stroke-width="2"/>
+  <text x="110" y="328" font-family="Menlo, Consolas, monospace" font-size="21" font-weight="700" fill="#6ee7b7">Layer 2 · Distrust the ordinary model</text>
+  <text x="110" y="360" font-family="Menlo, Consolas, monospace" font-size="16" fill="#c7d3e3">ordinary-model-floor benchmark: attempt 1 frozen, external harness revalidates</text>
+  <text x="110" y="388" font-family="Menlo, Consolas, monospace" font-size="16" fill="#c7d3e3">3 models x 5 cases: 10/15 first-pass usable · 0 semantic failures · 5 validation failures</text>
+
+  <!-- Layer 3 -->
+  <rect x="80" y="440" width="1040" height="130" rx="14" fill="#2a2030" stroke="#c084fc" stroke-width="2"/>
+  <text x="110" y="478" font-family="Menlo, Consolas, monospace" font-size="21" font-weight="700" fill="#d8b4fe">Layer 3 · Distrust its own update server</text>
+  <text x="110" y="510" font-family="Menlo, Consolas, monospace" font-size="16" fill="#c7d3e3">Remote summary never shown · fixed local sentence only · pinned URLs + SemVer guard</text>
+  <text x="110" y="538" font-family="Menlo, Consolas, monospace" font-size="16" fill="#c7d3e3">1s timeout · 32 KiB cap · 72h TTL · notification-only: "silence is never consent"</text>
+
+  <text x="600" y="608" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="14" fill="#66788f">Source Audit · akillness.github.io · evidence pinned to commit 5de7275f</text>
+</svg>
