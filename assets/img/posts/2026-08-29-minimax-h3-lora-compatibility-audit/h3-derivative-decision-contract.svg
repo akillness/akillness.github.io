@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Five-gate decision contract for MiniMax H3 derivatives</title>
+  <desc id="desc">A decision flow checks territory and license, artifact type, H3 task family, runtime and loader, then sampler and version before a model is installed.</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#e8f2fb"/>
+    </linearGradient>
+    <filter id="card" x="-15%" y="-15%" width="130%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#19324d" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#47769c"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="760" fill="url(#bg2)"/>
+  <text x="70" y="70" fill="#0f2740" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="800">The H3 derivative decision contract</text>
+  <text x="70" y="104" fill="#536d84" font-family="Arial, Helvetica, sans-serif" font-size="18">Do not ask “Which file is popular?” Ask whether five boundaries match your workflow.</text>
+
+  <path d="M184 214 H278 M418 214 H512 M652 214 H746 M886 214 H980" stroke="#47769c" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+
+  <g filter="url(#card)">
+    <rect x="54" y="146" width="190" height="136" rx="20" fill="#fff" stroke="#e29a2d" stroke-width="2"/>
+    <circle cx="84" cy="178" r="18" fill="#f59e0b"/>
+    <text x="84" y="184" text-anchor="middle" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="800">1</text>
+    <text x="111" y="183" fill="#92400e" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">TERRITORY</text>
+    <text x="74" y="217" fill="#1e293b" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">Does the license</text>
+    <text x="74" y="240" fill="#1e293b" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">grant your use?</text>
+    <text x="74" y="263" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="13">If no: seek permission.</text>
+
+    <rect x="288" y="146" width="190" height="136" rx="20" fill="#fff" stroke="#e16075" stroke-width="2"/>
+    <circle cx="318" cy="178" r="18" fill="#fb7185"/>
+    <text x="318" y="184" text-anchor="middle" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="800">2</text>
+    <text x="345" y="183" fill="#9f1239" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">ARTIFACT</text>
+    <text x="308" y="217" fill="#1e293b" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">LoRA, full model,</text>
+    <text x="308" y="240" fill="#1e293b" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">rewriter, upscaler?</text>
+    <text x="308" y="263" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="13">Choose the correct loader.</text>
+
+    <rect x="522" y="146" width="190" height="136" rx="20" fill="#fff" stroke="#2aa9cf" stroke-width="2"/>
+    <circle cx="552" cy="178" r="18" fill="#38bdf8"/>
+    <text x="552" y="184" text-anchor="middle" fill="#073047" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="800">3</text>
+    <text x="579" y="183" fill="#075985" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">BASE FAMILY</text>
+    <text x="542" y="217" fill="#1e293b" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">FL2VA or Ref2VA?</text>
+    <text x="542" y="240" fill="#1e293b" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">T2V-only or shared?</text>
+    <text x="542" y="263" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="13">Names are not interchangeable.</text>
+
+    <rect x="756" y="146" width="190" height="136" rx="20" fill="#fff" stroke="#24aa91" stroke-width="2"/>
+    <circle cx="786" cy="178" r="18" fill="#2dd4bf"/>
+    <text x="786" y="184" text-anchor="middle" fill="#053b34" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="800">4</text>
+    <text x="813" y="183" fill="#0f766e" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">RUNTIME</text>
+    <text x="776" y="217" fill="#1e293b" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">ComfyUI, LightX2V,</text>
+    <text x="776" y="240" fill="#1e293b" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">DiffSynth, PEFT?</text>
+    <text x="776" y="263" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="13">Format follows runtime.</text>
+
+    <rect x="990" y="146" width="156" height="136" rx="20" fill="#fff" stroke="#8b68d8" stroke-width="2"/>
+    <circle cx="1020" cy="178" r="18" fill="#a78bfa"/>
+    <text x="1020" y="184" text-anchor="middle" fill="#2e1065" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="800">5</text>
+    <text x="1047" y="183" fill="#6d28d9" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">SAMPLER</text>
+    <text x="1010" y="217" fill="#1e293b" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">4 or 8 NFE?</text>
+    <text x="1010" y="240" fill="#1e293b" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">Euler? shifts?</text>
+    <text x="1010" y="263" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="13">Pin app version too.</text>
+  </g>
+
+  <rect x="70" y="335" width="1060" height="333" rx="26" fill="#0d2035"/>
+  <text x="104" y="382" fill="#e2e8f0" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="800">What changes at each gate?</text>
+
+  <line x1="104" y1="412" x2="1096" y2="412" stroke="#29445f"/>
+  <text x="104" y="449" fill="#fbbf24" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">LICENSE</text>
+  <text x="254" y="449" fill="#cbd5e1" font-family="Arial, Helvetica, sans-serif" font-size="16">The upstream H3 grant excludes the EU, UK, Republic of Korea, and USA; derivative metadata does not erase that text.</text>
+
+  <line x1="104" y1="473" x2="1096" y2="473" stroke="#29445f"/>
+  <text x="104" y="510" fill="#fda4af" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">LOADER</text>
+  <text x="254" y="510" fill="#cbd5e1" font-family="Arial, Helvetica, sans-serif" font-size="16">A `.safetensors` suffix can mean an H3 LoRA, a Qwen adapter, a full diffusion model, or a custom-node checkpoint.</text>
+
+  <line x1="104" y1="534" x2="1096" y2="534" stroke="#29445f"/>
+  <text x="104" y="571" fill="#7dd3fc" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">CAPABILITY</text>
+  <text x="254" y="571" fill="#cbd5e1" font-family="Arial, Helvetica, sans-serif" font-size="16">FL2VA acceleration does not imply Ref2VA support; a T2V style adapter may not preserve references.</text>
+
+  <line x1="104" y1="595" x2="1096" y2="595" stroke="#29445f"/>
+  <text x="104" y="632" fill="#c4b5fd" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">BEHAVIOR</text>
+  <text x="254" y="632" fill="#cbd5e1" font-family="Arial, Helvetica, sans-serif" font-size="16">Distilled adapters often encode a sampler contract; ignoring steps, scheduler, shifts, or app version can invalidate the result.</text>
+
+  <rect x="70" y="696" width="1060" height="38" rx="19" fill="#dff7f1" stroke="#2dd4bf"/>
+  <text x="600" y="721" text-anchor="middle" fill="#115e59" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="800">INSTALL ONLY AFTER THE CONTRACT IS COMPLETE · UNKNOWN IS A STOP CONDITION</text>
+</svg>
