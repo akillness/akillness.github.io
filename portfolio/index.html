@@ -1056,7 +1056,7 @@
                 bullets: [
                   'Built SAGA (Firebase App Hosting + Genkit), a game-studio "AI brain" — a RAG search engine over game design docs using RAG-Fusion, CRAG, hybrid search, Cross-Encoder reranking, and a Grounding-Guardian generation pattern; indexed 594 documents / 1,563 vectors across 15 games (3-week build, Feb 2026)',
                   'Built Millie (Firebase App Hosting), a per-user RAG assistant plus a Slack-bot-driven, local-LLM "ClawTeam" autonomous-agent system, with an admin control hub for knowledge sources (Notion/Drive/Calendar), credentials, agent assignment, and LLM call-quality monitoring (4-week build, late Mar 2026)',
-                  'Built Brain, a GCP VM-hosted multimodal Knowledge Ops RAG service using Gemini Embedding 02 and a CocoIndex-based incremental pipeline; agents can search, edit, and propose changes across connected knowledge',
+                  'Built Brain, a GCP VM-hosted multimodal Knowledge Ops RAG service — a CocoIndex-based incremental pipeline (Source → Refine → Load → Serve) with Gemini Embedding indexing that re-computes only changed deltas instead of rebuilding the corpus, backed by a curated knowledge DB (Wiki) so every answer carries its source citation and agents can search, edit, and propose changes across connected knowledge',
                   'Integrated file output, Google Drive, and Notion workflows, then synchronized only approved delta changes back to the team wiki',
                   'Designed and deployed multimodal embedding RAG pipelines to improve internal search and knowledge utilization',
                   'Built retrieval-centric AI agent workflows and operationalized them for production use',
@@ -1150,12 +1150,12 @@
                 image: 'assets/projects/brain.png',
                 alt: 'Brain Knowledge Ops RAG platform UI',
                 meta: 'Supercent · Jun–Aug 2026',
-                title: 'Brain — Knowledge Ops RAG',
+                title: 'Brain — Multimodal Knowledge Ops RAG',
                 summary:
-                  'A citation-first RAG platform that centralizes curated internal knowledge as a single source of truth.',
+                  'A GCP VM-hosted multimodal RAG platform pairing a citation-first ask surface with a curated knowledge DB (Wiki), so internal knowledge stays a single source of truth that agents can search, edit, and propose changes against.',
                 role:
-                  'Built a Knowledge Ops platform with a RAG pipeline adapted from genome-pocket\'s CocoIndex-inspired Source → Refine → Load → Serve architecture, making curated internal knowledge searchable with citations.',
-                tags: ['RAG', 'genome-pocket', 'CocoIndex', 'Knowledge Ops'],
+                  'Built the full CocoIndex-based incremental pipeline (Source → Refine → Load → Serve): multimodal document ingestion and chunking, Gemini Embedding indexing, and change-driven re-indexing that recomputes only the affected delta instead of rebuilding the corpus. Paired the retrieval surface with a knowledge DB so answers cite their source document, and gated agent write-back so only human-approved deltas sync to the team wiki.',
+                tags: ['CocoIndex', 'Incremental Indexing', 'Gemini Embedding', 'Multimodal RAG', 'Knowledge DB', 'GCP'],
                 links: [{ href: 'https://brain.supercent.net/', label: 'Open service' }]
               },
               {
@@ -1559,7 +1559,7 @@
                 bullets: [
                   'SAGA(Firebase App Hosting · Genkit) 구축 — RAG-Fusion·CRAG·하이브리드 검색·Cross-Encoder 재순위·Grounding Guardian 생성을 적용한 게임 기획 데이터 AI 검색엔진(15개 게임·594개 문서·1,563개 벡터, 3주 개발, 2026.02)',
                   'Millie(Firebase App Hosting) 구축 — 사용자 개인별 RAG 시스템과 Slack Bot API 기반 로컬 LLM ClawTeam 자율비서 에이전트, 지식소스(Notion·Drive·Calendar)·권한·에이전트 할당·LLM 호출 품질 관제 허브 포함(4주 개발, 2026.03 말)',
-                  'Brain 구축 — GCP VM에 배포한 멀티모달 Knowledge Ops RAG 서비스로, Gemini Embedding 02와 CocoIndex 기반 증분 파이프라인을 적용해 연결된 지식을 에이전트가 검색·수정·제안할 수 있도록 구현',
+                  'Brain 구축 — GCP VM에 배포한 멀티모달 Knowledge Ops RAG 서비스. CocoIndex 기반 증분 파이프라인(Source → Refine → Load → Serve)에 Gemini Embedding 인덱싱을 결합해 전체 코퍼스 재구축 없이 변경된 delta만 재연산하도록 구현했고, 정제된 지식DB(Wiki)와 묶어 모든 답변에 출처 인용이 붙고 에이전트가 연결된 지식을 검색·수정·제안할 수 있게 만들었습니다',
                   '파일 출력·Google Drive·Notion 연동을 구축하고, 승인된 변경 delta만 팀 Wiki에 동기화하는 업데이트 흐름 구현',
                   '멀티모달 임베딩 기반 RAG 시스템을 설계·적용해 사내 정보 검색/활용 효율 개선',
                   '검색 기반 AI Agent 워크플로우를 구축·운영하여 업무 실행 속도와 정확도 향상',
@@ -1654,12 +1654,12 @@
                 image: 'assets/projects/brain.png',
                 alt: 'Brain Knowledge Ops RAG 플랫폼 UI',
                 meta: 'Supercent · 2026.06–08',
-                title: 'Brain — Knowledge Ops RAG',
+                title: 'Brain — 멀티모달 Knowledge Ops RAG',
                 summary:
-                  '정제된 사내 지식을 단일 공급원으로 모으는 인용 기반 RAG 지식 플랫폼입니다.',
+                  'GCP VM에 배포한 멀티모달 RAG 플랫폼으로, 인용 기반 질의 화면과 정제된 지식DB(Wiki)를 한 쌍으로 묶어 사내 지식을 단일 공급원으로 유지하고 에이전트가 검색·수정·제안까지 수행하도록 만들었습니다.',
                 role:
-                  'genome-pocket의 CocoIndex 영감 Source → Refine → Load → Serve 아키텍처를 차용한 RAG 파이프라인으로 Knowledge Ops 플랫폼을 구축해, 정제된 사내 지식을 인용과 함께 검색할 수 있게 만들었습니다.',
-                tags: ['RAG', 'genome-pocket', 'CocoIndex', 'Knowledge Ops'],
+                  'CocoIndex 기반 증분 파이프라인(Source → Refine → Load → Serve) 전 구간을 구축했습니다. 멀티모달 문서 수집·청킹, Gemini Embedding 인덱싱, 그리고 전체 코퍼스를 다시 만들지 않고 변경된 delta만 재연산하는 변경 기반 재인덱싱을 구현했습니다. 검색 결과에 출처 문서가 인용되도록 지식DB와 결합하고, 에이전트의 쓰기 작업은 사람이 승인한 delta만 팀 Wiki에 반영되도록 통제했습니다.',
+                tags: ['CocoIndex', '증분 인덱싱', 'Gemini Embedding', '멀티모달 RAG', '지식DB', 'GCP'],
                 links: [{ href: 'https://brain.supercent.net/', label: '서비스 열기' }]
               },
               {
