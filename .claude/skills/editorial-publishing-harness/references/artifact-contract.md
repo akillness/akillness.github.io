@@ -19,7 +19,9 @@ _workspace/current/
   draft/
     _posts/YYYY-MM-DD-<slug>.md
     assets/img/posts/YYYY-MM-DD-<slug>/...
+    assets/img/posts/YYYY-MM-DD-<slug>/references/...
     claim-map.json
+    source-image-manifest.json
   review/
     editorial-review.json
   validation/
@@ -87,6 +89,25 @@ Unverified claims cannot appear as assertions. Inferences must be labelled in th
 - `persona_honesty` finding
 
 Final package validation refuses a missing/non-PASS review or coverage below 1.0.
+
+## Source-image manifest fields
+
+`draft/source-image-manifest.json` is an internal sidecar (never staged or published) written only by the editorial director. Top level: `schema_version` (1), `run_id` (must match `manifest.json`), and `images[]` with 4–12 entries. Every image records:
+
+- `local_path` — unique, under `assets/img/posts/<article-stem>/references/`, extension `.png`/`.jpg`/`.jpeg`/`.webp`; the file must exist, be >0 and <=5 MiB, and match its declared raster structure, have EXIF/XMP/text metadata stripped, have a short side >=32 px and at least 16,384 pixels; all reference images combined must be <=20 MiB
+- `source_page_url` — must be an evidence-pack `source_url`
+- `download_url` — unique per image; duplicate crops/resizes of one source do not count
+- `publisher_or_creator`
+- `license_basis` — one of `public-domain`, `cc0`, `cc-by`, `cc-by-sa`, `kogl-type-1`, `repo-license-covers-assets`, `official-press-kit`; anything else fails closed; `repo-license-covers-assets` also requires `pinned_ref`
+- `license_url`
+- `license_quote` — at least 40 characters quoted from the license/rights statement
+- `retrieved_at` (ISO timestamp)
+- `sha256` — unique, must match the file on disk
+- `transformation` and `transformation_note`
+- `alt` and `attribution_text`
+- `commercial_use_allowed: true` and `redistribution_allowed: true` (strict booleans)
+
+Each item appears in exactly one adjacent `<figure class="source-image">` block in the article body with matching `img` `src`/`alt` and a `figcaption` containing the exact `source_page_url`, `license_url`, `publisher_or_creator`, and `attribution_text`. Every file in `references/` has exactly one manifest entry and every manifest item is referenced. Validation lives in `tools/lib/source-image-manifest.mjs` and reports `reference_images` and `credited_reference_images` metrics.
 
 ## Draft package
 

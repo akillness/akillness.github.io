@@ -34,7 +34,9 @@ const required = [
   'tools/editorial-workspace.mjs',
   'tools/validate-editorial-package.mjs',
   'tools/verify-editorial-boundaries.mjs',
-  'tools/verify-publication-scope.mjs'
+  'tools/verify-publication-scope.mjs',
+  'tools/lib/source-image-manifest.mjs',
+  'tools/tests/source-image-manifest.test.mjs'
 ];
 for (const file of required) check(exists(file), `Required harness file is missing: ${file}`);
 
@@ -46,7 +48,7 @@ if (exists('AGENTS.md')) {
 
 if (exists('CLAUDE.md')) {
   const contract = read('CLAUDE.md');
-  for (const phrase of ['_workspace/current/', '_workspace/archive/<run-id>/', 'Source Audit', 'draft-only', 'publish-on-green', '+0900', 'git add -A']) {
+  for (const phrase of ['_workspace/current/', '_workspace/archive/<run-id>/', 'Source Audit', 'draft-only', 'publish-on-green', '+0900', 'git add -A', 'source-image-manifest.json']) {
     check(contract.includes(phrase), `CLAUDE.md is missing contract phrase: ${phrase}`);
   }
 }
@@ -69,6 +71,34 @@ if (exists('.claude/editorial-policy.yml')) {
   check(/^routine_name:\s+Daily Source Audit (?:Draft|Publish)$/m.test(policy), 'External routine name is missing');
   check(/^timezone:\s+Asia\/Seoul$/m.test(policy), 'Editorial timezone is not Asia/Seoul');
   check(/^max_revision_loops:\s+2$/m.test(policy), 'Revision loop limit must be 2');
+  check(/^minimum_reference_images:\s+4$/m.test(policy), 'Policy must require at least 4 source-derived reference images');
+  check(/^maximum_reference_images:\s+12$/m.test(policy), 'Policy source-image maximum count must remain 12');
+  check(/^source_image_contract_effective_date:\s+"2026-09-01"$/m.test(policy), 'Source-image contract effective date drifted');
+  check(/^reference_image_max_bytes:\s+5242880$/m.test(policy), 'Policy source-image maximum must stay at 5 MiB');
+  check(/^reference_image_max_total_bytes:\s+20971520$/m.test(policy), 'Policy source-image aggregate maximum must stay at 20 MiB');
+  check(/^reference_image_require_raster_signature:\s+true$/m.test(policy), 'Policy must require raster structure verification');
+  check(/^reference_image_require_metadata_stripped:\s+true$/m.test(policy), 'Policy must require EXIF/XMP/text metadata stripping');
+  check(/^reference_image_min_pixels:\s+16384$/m.test(policy), 'Policy source-image pixel floor drifted');
+  check(/^reference_image_min_short_side:\s+32$/m.test(policy), 'Policy source-image short-side floor drifted');
+  const expectedLicenses = ['public-domain', 'cc0', 'cc-by', 'cc-by-sa', 'kogl-type-1', 'repo-license-covers-assets', 'official-press-kit'];
+  const licenseBlock = policy.match(/^reference_image_license_bases:\s*\n((?:\s+-\s*[^\n]+\n?)*)/m)?.[1] || '';
+  const policyLicenses = licenseBlock.split('\n').map((line) => line.match(/^\s+-\s*(.+)$/)?.[1]?.trim()).filter(Boolean);
+  check(JSON.stringify(policyLicenses) === JSON.stringify(expectedLicenses), `Policy source-image license allowlist drifted: ${JSON.stringify(policyLicenses)}`);
+  if (exists('tools/lib/source-image-manifest.mjs')) {
+    const helper = read('tools/lib/source-image-manifest.mjs');
+    const helperConst = (name) => helper.match(new RegExp(`^export const ${name} = (.+);$`, 'm'))?.[1];
+    check(helperConst('SOURCE_IMAGE_CONTRACT_EFFECTIVE_DATE') === "'2026-09-01'", 'Source-image helper effective date drifted from policy');
+    check(helperConst('MINIMUM_REFERENCE_IMAGES') === '4', 'Source-image helper minimum drifted from policy');
+    check(helperConst('MAXIMUM_REFERENCE_IMAGES') === '12', 'Source-image helper maximum count drifted from policy');
+    check(helperConst('MAX_REFERENCE_IMAGE_BYTES') === '5 * 1024 * 1024', 'Source-image helper per-file maximum drifted from policy');
+    check(helperConst('MAX_REFERENCE_IMAGE_TOTAL_BYTES') === '20 * 1024 * 1024', 'Source-image helper aggregate maximum drifted from policy');
+    check(helperConst('MIN_REFERENCE_IMAGE_PIXELS') === '16_384', 'Source-image helper pixel floor drifted from policy');
+    check(helperConst('MIN_REFERENCE_IMAGE_SHORT_SIDE') === '32', 'Source-image helper short-side floor drifted from policy');
+    const helperLicenseBlock = helper.match(/ALLOWED_LICENSE_BASES = \[([\s\S]*?)\]/)?.[1] || '';
+    const helperLicenses = [...helperLicenseBlock.matchAll(/'([^']+)'/g)].map((match) => match[1]);
+    check(JSON.stringify(helperLicenses) === JSON.stringify(expectedLicenses), `Source-image helper license allowlist drifted: ${JSON.stringify(helperLicenses)}`);
+    check(helper.includes('metadataSegments === 0'), 'Source-image helper no longer enforces metadata stripping');
+  }
 }
 
 const agentFiles = required.filter((file) => file.startsWith('.claude/agents/'));

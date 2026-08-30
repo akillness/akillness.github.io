@@ -2,6 +2,25 @@
   Post-specific style
 */
 
+.content .source-image {
+  margin: 2rem 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: $base-radius;
+  }
+
+  figcaption {
+    margin-top: 0.55rem;
+    color: var(--text-muted-color);
+    font-size: 0.85rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+}
+
 %btn-post-nav {
   width: 50%;
   position: relative;

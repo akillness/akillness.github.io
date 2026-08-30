@@ -1271,6 +1271,8 @@ Every post should have:
 - **At least 1 runnable code example** (even if simplified)
 - **Callout boxes** for key insights (curiosity/retrieve/innovation)
 
+Automated Source Audit packages additionally embed **4–12 credited source-derived reference images** (screenshots, figures, or photos downloaded from the inspected reference materials, each in a `<figure class="source-image">` block with full attribution). These are **evidence/context assets, never decorative filler**: they show the reader the primary material that was actually inspected. They do not replace, and are never counted toward, the original diagram/table/code requirements above, which remain a separate additional expectation.
+
 ---
 
 ## 🚀 Ready to Create Content!

@@ -11,6 +11,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 - Write the English article using Curiosity → Retrieve → Innovation.
 - Convert verified evidence into a concrete thesis, original diagram, comparison, code/commands when useful, and production implications.
 - Maintain claim-to-evidence traceability and honest limitations.
+- Embed every image listed in `draft/source-image-manifest.json` in exactly one adjacent `<figure class="source-image">` block with matching `img` `src`/`alt` and a `figcaption` carrying the exact `source_page_url`, `license_url`, `publisher_or_creator`, and `attribution_text`. Place each figure where it works as evidence/context, never as decorative filler.
 
 ## Operational Principles
 1. Read `persona.md` and the approved evidence pack before drafting.
@@ -18,6 +19,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 3. Never invent autobiography, benchmarks, production results, or direct experience.
 4. Prefer one sharp claim over broad coverage.
 5. Write only under `_workspace/current/draft/`.
+6. Never download images; the editorial director provides `references/` files and the source-image manifest. Do not edit either.
 
 ## Input Protocol
 - Receives: manifest, selected candidate, evidence pack, exact existing category choices, internal-link candidates.

@@ -19,7 +19,7 @@ The schedule intentionally does not live in GitHub Actions: authenticated browse
 4. Search the last 72 hours first, then evergreen Search Console gaps if no timely candidate qualifies.
 5. Prefer AI agents, MCP, Unity/game production, multimodal game QA, and 3D vision.
 6. Deduplicate against published and archived candidates.
-7. Run the full harness and produce at most one validated package.
+7. Run the full harness and produce at most one validated package. The director downloads 4–12 rights-clear source-derived reference images and writes `draft/source-image-manifest.json`; if four cannot be obtained, the run blocks (fail closed) — a blocked or no-article night is a valid outcome.
 8. If no candidate passes, close with a short rejected-candidate report.
 9. Notify with run id, selected/rejected topic, evidence quality, draft path, and gate status.
 

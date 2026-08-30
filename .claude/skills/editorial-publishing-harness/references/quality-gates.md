@@ -10,6 +10,7 @@ A run may advance only with evidence recorded in `run-summary.md`.
 | G4 Persona | English Curiosity → Retrieve → Innovation; honest first person | FIX |
 | G5 Non-commodity value | Original source finding, experiment, benchmark, or production decision | REJECT/FIX |
 | G6 Assets | Every local path exists; asset original or licensed; no orphans | FIX |
+| G6b Source images | 4–12 distinct rights-clear source-derived raster images in `references/`, valid `source-image-manifest.json`, each credited in exactly one top-level, visibly rendered `<figure class="source-image">` | BLOCK |
 | G7 Date safety | Automated `+0900` timestamp is strictly past at build time | BLOCK |
 | G8 Taxonomy | Existing exact category; lowercase reusable tags | FIX |
 | G9 Package/render | Front matter, fences, Mermaid, tables, internal links, secrets pass | FIX/BLOCK |
@@ -20,6 +21,10 @@ A run may advance only with evidence recorded in `run-summary.md`.
 ## Word count
 
 Google has no preferred word count. The site's 800-word ad threshold is an internal commercial-surface guard, not an SEO target. A long generic list can still fail G5; a shorter original note can remain public with `noindex`/no ads when deliberately classified.
+
+## Source-derived reference images
+
+G6b fails closed. Only director-downloaded raster images from inspected reference materials count; original/AI diagrams, logos, avatars, decorative placeholders, and duplicate crops/resizes never do, and the original-visual expectation stays separate and uncounted. The required 4–12 images are evidence/context assets, never filler. The shipped-tree gate applies to posts dated 2026-09-01 or later; older posts are migration-exempt. Each must have valid raster structure, EXIF/XMP/text metadata stripped, a short side >=32 px and at least 16,384 pixels; the combined payload must stay <=20 MiB. Fewer than four or more than twelve rights-clear images blocks the run — that is a valid outcome. Deterministic checks: `tools/lib/source-image-manifest.mjs` via `tools/validate-editorial-package.mjs` (metrics `reference_images`, `credited_reference_images`) and the 4–12 count band in `tools/verify-publication-scope.mjs`.
 
 ## Revision policy
 

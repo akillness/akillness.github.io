@@ -2,6 +2,17 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import {
+  MAX_REFERENCE_IMAGE_BYTES,
+  MAX_REFERENCE_IMAGE_TOTAL_BYTES,
+  MAXIMUM_REFERENCE_IMAGES,
+  MINIMUM_REFERENCE_IMAGES,
+  SOURCE_IMAGE_CONTRACT_EFFECTIVE_DATE,
+  extractSourceImageFigures,
+  sourceImageContractAppliesToStem,
+  hasValidImageExtension,
+  inspectRasterImage
+} from './lib/source-image-manifest.mjs';
 
 const root = path.resolve(process.argv[2] || process.cwd());
 const failures = [];
@@ -81,6 +92,83 @@ check(head.includes('paginator.page > 1'), 'head does not render pagination noin
 const scopeTool = read('tools/verify-publication-scope.mjs');
 check(scopeTool.includes("git', ['diff', '--cached'"), 'Publication scope tool does not verify staged paths');
 check(scopeTool.includes('Live article target already exists'), 'Publication scope tool does not block live article collisions');
+check(scopeTool.includes('referenceImages.length >= MINIMUM_REFERENCE_IMAGES && referenceImages.length <= MAXIMUM_REFERENCE_IMAGES'), 'Publication scope tool does not unconditionally enforce the 4–12 source-image count band');
+
+const walkFiles = (dir) => {
+  if (!fs.existsSync(dir)) return [];
+  const found = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isSymbolicLink()) check(false, `Published source-image tree contains a symlink: ${path.relative(root, full)}`);
+    else if (entry.isDirectory()) found.push(...walkFiles(full));
+    else if (entry.isFile()) found.push(full);
+    else check(false, `Published source-image tree contains a non-regular entry: ${path.relative(root, full)}`);
+  }
+  return found;
+};
+const postFiles = walkFiles(path.join(root, '_posts')).filter((file) => file.endsWith('.md'));
+const postsByStem = new Map();
+for (const file of postFiles) {
+  const stem = path.basename(file, '.md');
+  const matches = postsByStem.get(stem) || [];
+  matches.push(file);
+  postsByStem.set(stem, matches);
+}
+for (const [stem, matches] of postsByStem) {
+  if (!sourceImageContractAppliesToStem(stem)) continue;
+  check(matches.length === 1, `${stem}: source-image contract requires exactly one post for each stem`);
+  const referencesDir = path.join(root, 'assets', 'img', 'posts', stem, 'references');
+  check(fs.existsSync(referencesDir), `${stem}: posts dated ${SOURCE_IMAGE_CONTRACT_EFFECTIVE_DATE} or later must ship a references directory`);
+}
+const postAssetRoot = path.join(root, 'assets', 'img', 'posts');
+if (fs.existsSync(postAssetRoot)) {
+  for (const entry of fs.readdirSync(postAssetRoot, { withFileTypes: true })) {
+    const articleDir = path.join(postAssetRoot, entry.name);
+    if (entry.isSymbolicLink()) {
+      check(false, `Published article asset tree contains a symlink: ${path.relative(root, articleDir)}`);
+      continue;
+    }
+    if (!entry.isDirectory()) continue;
+    const referencesDir = path.join(articleDir, 'references');
+    if (!fs.existsSync(referencesDir)) continue;
+    const referenceFiles = walkFiles(referencesDir);
+    check(referenceFiles.length >= MINIMUM_REFERENCE_IMAGES, `${entry.name}: published reference folder has ${referenceFiles.length} images; expected at least ${MINIMUM_REFERENCE_IMAGES}`);
+    check(referenceFiles.length <= MAXIMUM_REFERENCE_IMAGES, `${entry.name}: published reference folder has ${referenceFiles.length} images; maximum is ${MAXIMUM_REFERENCE_IMAGES}`);
+    let totalBytes = 0;
+    const publicPaths = new Set();
+    for (const file of referenceFiles) {
+      const relative = path.relative(root, file).split(path.sep).join('/');
+      const bytes = fs.readFileSync(file);
+      totalBytes += bytes.length;
+      publicPaths.add(`/${relative}`);
+      check(hasValidImageExtension(relative), `${relative}: unsupported source-image extension`);
+      check(bytes.length > 0 && bytes.length <= MAX_REFERENCE_IMAGE_BYTES, `${relative}: source image must be non-empty and no larger than ${MAX_REFERENCE_IMAGE_BYTES} bytes`);
+      const raster = inspectRasterImage(relative, bytes);
+      check(raster.metadataSegments === 0, `${relative}: source image must have EXIF/XMP/text metadata stripped`);
+      check(raster.valid, `${relative}: bytes do not match a metadata-free plausible raster structure for the declared extension`);
+    }
+    check(totalBytes <= MAX_REFERENCE_IMAGE_TOTAL_BYTES, `${entry.name}: source images exceed the ${MAX_REFERENCE_IMAGE_TOTAL_BYTES}-byte aggregate limit`);
+
+    const matchingPosts = postsByStem.get(entry.name) || [];
+    check(matchingPosts.length === 1, `${entry.name}: expected exactly one matching post, found ${matchingPosts.length}`);
+    if (matchingPosts.length !== 1) continue;
+    const article = fs.readFileSync(matchingPosts[0], 'utf8');
+    const body = article.replace(/^---\s*\n[\s\S]*?\n---\s*\n?/, '');
+    const figures = extractSourceImageFigures(body);
+    const uses = new Map();
+    for (const figure of figures) {
+      if (!figure.src?.startsWith(`/assets/img/posts/${entry.name}/references/`)) continue;
+      uses.set(figure.src, (uses.get(figure.src) || 0) + 1);
+      check(figure.imgCount === 1 && figure.captionCount === 1, `${entry.name}: every source figure must contain exactly one image and one caption`);
+      check(figure.hidden !== true, `${entry.name}: source figure must be a top-level visibly rendered block without hidden, extra-class or inline-style attributes`);
+      const urls = new Set((figure.caption || '').match(/https?:\/\/[^"'<>\s)]+/g) || []);
+      check(urls.size >= 2, `${entry.name}: source figure must visibly carry source and license URLs: ${figure.src}`);
+      check(publicPaths.has(figure.src), `${entry.name}: source figure references an unshipped image: ${figure.src}`);
+    }
+    for (const publicPath of publicPaths) check(uses.get(publicPath) === 1, `${entry.name}: published reference image must appear in exactly one credited source figure: ${publicPath}`);
+    for (const publicPath of uses.keys()) check(publicPaths.has(publicPath), `${entry.name}: source figure has no matching published reference file: ${publicPath}`);
+  }
+}
 const workspaceTool = read('tools/editorial-workspace.mjs');
 check(workspaceTool.includes("case 'verify-archives'"), 'Workspace tool has no archive-integrity command');
 check(workspaceTool.includes("algorithm: 'sha256'"), 'Workspace archives are not sealed with SHA-256');

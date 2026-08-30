@@ -3,6 +3,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import {
+  MINIMUM_REFERENCE_IMAGES,
+  MAXIMUM_REFERENCE_IMAGES,
+  hasValidImageExtension,
+  referencesPrefix
+} from './lib/source-image-manifest.mjs';
 
 const argv = process.argv.slice(2);
 const stagedMode = argv.includes('--staged');
@@ -44,11 +50,25 @@ function expectedPackagePaths({ checkCollisions = true } = {}) {
   check(assets.length >= 1, `No packaged assets found for ${stem}`);
 
   const paths = [`_posts/${basename}`];
+  const refPrefix = referencesPrefix(stem);
+  const referenceImages = [];
   for (const asset of assets) {
     const relative = path.relative(draftRoot, asset).split(path.sep).join('/');
     check(relative.startsWith(`assets/img/posts/${stem}/`), `Asset escapes matching article folder: ${relative}`);
+    if (relative.startsWith(refPrefix)) {
+      check(hasValidImageExtension(relative), `Reference image has a forbidden extension: ${relative}`);
+      referenceImages.push(relative);
+    }
     paths.push(relative);
   }
+
+  // Source-image contract is unconditional for every new automated package.
+  // Derive the count from the walked references folder rather than trusting a
+  // sidecar or a manually authored path list.
+  check(
+    referenceImages.length >= MINIMUM_REFERENCE_IMAGES && referenceImages.length <= MAXIMUM_REFERENCE_IMAGES,
+    `Package must ship ${MINIMUM_REFERENCE_IMAGES}–${MAXIMUM_REFERENCE_IMAGES} source-derived reference images under ${refPrefix}, found ${referenceImages.length}`
+  );
 
   if (checkCollisions) {
     const livePost = path.join(repoRoot, '_posts', basename);

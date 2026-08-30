@@ -2,6 +2,11 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import {
+  collectReferenceFiles,
+  referencesPrefix,
+  validateSourceImageManifest
+} from './lib/source-image-manifest.mjs';
 
 const argv = process.argv.slice(2);
 let repoRootValue = process.cwd();
@@ -272,6 +277,25 @@ const verifiedPrimary = mappedClaims
   .filter((claim) => claim?.verification === 'verified' && (claim.pinned_ref || claim.primary === true));
 pass(verifiedPrimary.length >= 1, 'No mapped draft claim uses verified primary or pinned evidence');
 
+// Source-derived reference image contract (fails closed for every package).
+const sourceImageManifestFile = path.join(current, 'draft', 'source-image-manifest.json');
+const sourceImageManifest = fs.existsSync(sourceImageManifestFile) ? readJson(sourceImageManifestFile) : null;
+pass(fs.existsSync(sourceImageManifestFile), 'draft/source-image-manifest.json is missing; the source-image contract fails closed');
+const referenceDir = articleStem
+  ? path.join(current, 'draft', 'assets', 'img', 'posts', articleStem, 'references')
+  : null;
+const referenceFiles = referenceDir ? collectReferenceFiles(referenceDir, referencesPrefix(articleStem)) : {};
+const sourceImageResult = validateSourceImageManifest({
+  manifest: sourceImageManifest,
+  articleBody: body,
+  articleStem,
+  evidenceSourceUrls: claims.map((claim) => claim?.source_url).filter(Boolean),
+  referenceFiles,
+  expectedRunId: manifest?.run_id,
+  expectedRunStartedAt: manifest?.started_at_kst
+});
+for (const failure of sourceImageResult.failures) failures.push(failure);
+
 const summaryFile = path.join(current, 'run-summary.md');
 const summary = fs.existsSync(summaryFile) ? fs.readFileSync(summaryFile, 'utf8') : '';
 pass(Boolean(summary), 'run-summary.md is missing');
@@ -329,7 +353,10 @@ const report = {
     external_urls: externalUrls.size,
     evidence_claims: claims.length,
     mapped_claims: mappedClaims.length,
-    verified_primary_claims: verifiedPrimary.length
+    verified_primary_claims: verifiedPrimary.length,
+    reference_images: sourceImageResult.metrics.reference_images,
+    credited_reference_images: sourceImageResult.metrics.credited_reference_images,
+    total_reference_image_bytes: sourceImageResult.metrics.total_reference_image_bytes
   },
   failures,
   warnings

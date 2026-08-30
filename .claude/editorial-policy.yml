@@ -10,6 +10,25 @@ max_articles_per_run: 1
 max_revision_loops: 2
 minimum_primary_sources: 1
 minimum_material_claim_coverage: 1.0
+minimum_reference_images: 4
+maximum_reference_images: 12
+source_image_contract_effective_date: "2026-09-01"
+reference_image_max_bytes: 5242880
+reference_image_max_total_bytes: 20971520
+reference_image_require_raster_signature: true
+reference_image_require_metadata_stripped: true
+reference_image_min_pixels: 16384
+reference_image_min_short_side: 32
+reference_image_manifest: _workspace/current/draft/source-image-manifest.json
+reference_image_downloader: editorial-director
+reference_image_license_bases:
+  - public-domain
+  - cc0
+  - cc-by
+  - cc-by-sa
+  - kogl-type-1
+  - repo-license-covers-assets
+  - official-press-kit
 allow_empty_success: true
 canonical_format: Source Audit
 content_pillars:

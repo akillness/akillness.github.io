@@ -103,9 +103,19 @@ Record rejected candidates and reasons so the next run does not repeat them blin
 
 ## Phase 3: Draft
 
+### Source-derived reference images (director-only)
+
+Before or alongside drafting, the **editorial director** downloads 4–12 distinct rights-clear raster images (`.png`/`.jpg`/`.jpeg`/`.webp`, each >0 and <=5 MiB, valid raster structure, EXIF/XMP/text metadata stripped, >=32 px short side, >=16,384 pixels, <=20 MiB combined) from inspected reference materials into `_workspace/current/draft/assets/img/posts/<article-stem>/references/` and writes the internal sidecar `_workspace/current/draft/source-image-manifest.json` (`schema_version` 1, `run_id`, `images[]`; field schema in `references/artifact-contract.md`). Rules:
+
+- Allowed `license_basis`: `public-domain`, `cc0`, `cc-by`, `cc-by-sa`, `kogl-type-1`, `repo-license-covers-assets` (requires `pinned_ref`), `official-press-kit`. Anything else fails closed.
+- `source_page_url` must be an evidence-pack `source_url`; `license_quote` needs >=40 characters; local paths, hashes, and download URLs stay unique.
+- Original/AI/generated diagrams, logos, avatars, decorative placeholders, and duplicate crops/resizes do not count. The existing original-visual requirement stays additional and uncounted; the four are evidence/context assets, never filler.
+- Writer, researcher, auditor, and editor tool profiles stay read/write separated; never loosen `allowed-tools` to let them fetch or write image binaries.
+- If four rights-clear images cannot be obtained, the run blocks.
+
 Invoke `.claude/agents/source-audit-writer.md`.
 
-The writer may use only the approved evidence pack. Output must stay in:
+The writer may use only the approved evidence pack, and must embed each manifested reference image in exactly one adjacent `<figure class="source-image">` block with matching `img` `src`/`alt` and a fully credited `figcaption`. Output must stay in:
 
 ```text
 _workspace/current/draft/_posts/

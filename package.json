@@ -24,6 +24,7 @@
     "editorial:package:draft": "node tools/validate-editorial-package.mjs --stage draft",
     "editorial:scope": "node tools/verify-publication-scope.mjs",
     "editorial:status": "node tools/editorial-workspace.mjs status",
+    "editorial:tests": "node --test 'tools/tests/*.test.mjs'",
     "test": "npx stylelint _sass/**/*.scss",
     "fixlint": "npm run test -- --fix"
   },

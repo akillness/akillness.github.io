@@ -75,6 +75,7 @@ A publishable run contains:
 - `evidence/evidence-pack.json`
 - `draft/_posts/YYYY-MM-DD-<slug>.md`
 - `draft/assets/img/posts/YYYY-MM-DD-<slug>/...`
+- `draft/source-image-manifest.json` (internal sidecar; never staged or published)
 - `review/editorial-review.json`
 - `validation/validation.json`
 - `run-summary.md`
@@ -86,6 +87,17 @@ The article must include:
 - at least one primary source and enough evidence to support every material factual claim
 - local assets referenced by the post and no orphan assets in its article folder
 - explicit limitations and honest trade-offs
+- 4–12 distinct source-derived raster images (`.png`/`.jpg`/`.jpeg`/`.webp`) downloaded from inspected reference materials into `assets/img/posts/<article-stem>/references/`, each credited in exactly one adjacent `<figure class="source-image">` block
+
+### Source-derived reference images
+
+Every new automated package ships 4–12 distinct rights-clear raster images downloaded from inspected reference materials. The shipped-tree requirement applies to posts dated 2026-09-01 or later; older posts are migration-exempt. Original/AI/generated diagrams, logos, avatars, decorative placeholders, and duplicate crops/resizes do not count; the existing original-visual requirement stays additional and uncounted. These images are evidence/context assets, never filler.
+
+- The **editorial director** performs all downloads and writes `_workspace/current/draft/source-image-manifest.json` (`schema_version` 1, `run_id`, `images[]`); writer and researcher tool boundaries stay read/write separated and are never loosened for image fetching.
+- Each image records `local_path`, `source_page_url`, `download_url`, `publisher_or_creator`, `license_basis`, `license_url`, `license_quote` (>=40 chars), `retrieved_at`, `sha256`, `transformation`, `transformation_note`, `alt`, `attribution_text`, `commercial_use_allowed: true`, `redistribution_allowed: true`. Allowed `license_basis`: `public-domain`, `cc0`, `cc-by`, `cc-by-sa`, `kogl-type-1`, `repo-license-covers-assets` (requires `pinned_ref`), `official-press-kit`. Anything else fails closed.
+- `source_page_url` must be an evidence-pack `source_url`. Local paths, hashes, and download URLs are unique; each file must exist, match its hash and raster structure, have EXIF/XMP/text metadata stripped, be >0 and <=5 MiB, have a short side of at least 32 px, and contain at least 16,384 pixels. The combined reference-image payload must stay <=20 MiB.
+- Each manifest item appears in exactly one `<figure class="source-image">` HTML block in the article body (HTML figures are allowed inside Markdown) with matching `img` `src`/`alt` and a `figcaption` carrying the exact `source_page_url`, `license_url`, `publisher_or_creator`, and `attribution_text`. Every file in `references/` has exactly one manifest entry and vice versa.
+- If four rights-clear images cannot be obtained, the run blocks. No article is preferable to an under-credited one.
 
 ## Quality gates
 
@@ -96,7 +108,7 @@ A package may be `ready_for_review` only when:
 3. **Claim coverage**: every material factual claim maps to evidence; unverified assertions are removed.
 4. **Persona**: the English article follows Curiosity → Retrieve → Innovation without fabricated autobiography.
 5. **Non-commodity value**: it contains original analysis, an experiment, a source-code finding, or a production decision.
-6. **Assets**: every local reference exists and is licensed or original.
+6. **Assets**: every local reference exists and is licensed or original, and the source-derived reference image contract above validates fail-closed (4–12 credited images, valid sidecar manifest).
 7. **Date safety**: the front-matter timestamp is strictly in the past in `Asia/Seoul` when the build begins. Automated posts use `+0900`, not the legacy `+0800` convention.
 8. **Taxonomy**: categories reuse an existing exact value and tags are lowercase.
 9. **Render safety**: front matter, fences, Mermaid, tables, images, internal links, and credential scanning pass.
