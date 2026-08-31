@@ -31,12 +31,19 @@ const required = [
   '.claude/skills/editorial-publishing-harness/references/injection-defense.md',
   '.claude/skills/editorial-publishing-harness/references/trigger-evals.json',
   '.agents/skills/editorial-publishing-harness/SKILL.md',
+  '.claude/skills/authority-led-monetization/SKILL.md',
+  '.claude/skills/authority-led-monetization/references/video-evidence-and-policy.md',
+  '.claude/skills/authority-led-monetization/references/authority-brief-schema.md',
+  '.claude/skills/authority-led-monetization/references/trigger-evals.json',
+  '.agents/skills/authority-led-monetization/SKILL.md',
   'tools/editorial-workspace.mjs',
   'tools/validate-editorial-package.mjs',
   'tools/verify-editorial-boundaries.mjs',
   'tools/verify-publication-scope.mjs',
   'tools/lib/source-image-manifest.mjs',
-  'tools/tests/source-image-manifest.test.mjs'
+  'tools/lib/authority-brief.mjs',
+  'tools/tests/source-image-manifest.test.mjs',
+  'tools/tests/authority-brief.test.mjs'
 ];
 for (const file of required) check(exists(file), `Required harness file is missing: ${file}`);
 
@@ -99,6 +106,41 @@ if (exists('.claude/editorial-policy.yml')) {
     check(JSON.stringify(helperLicenses) === JSON.stringify(expectedLicenses), `Source-image helper license allowlist drifted: ${JSON.stringify(helperLicenses)}`);
     check(helper.includes('metadataSegments === 0'), 'Source-image helper no longer enforces metadata stripping');
   }
+  const exactPolicyValue = (key, expected, message) => {
+    const matches = [...policy.matchAll(new RegExp(`^${key}:\\s*([^\\n#]+)`, 'gm'))].map((match) => match[1].trim());
+    check(matches.length === 1 && matches[0] === expected, `${message}; found ${JSON.stringify(matches)}`);
+  };
+  exactPolicyValue('authority_contract_version', '1', 'Authority contract version must be 1');
+  exactPolicyValue('authority_brief_path', '_workspace/current/research/authority-brief.json', 'Authority brief path drifted');
+  exactPolicyValue('authority_site_mode', 'expert-source-audit', 'Authority site mode drifted');
+  exactPolicyValue('authority_operating_mode', 'acquisition-content', 'Authority operating mode drifted');
+  exactPolicyValue('authority_primary_lane', 'seo-and-content', 'Authority primary lane drifted');
+  exactPolicyValue('authority_revenue_model', 'ads-and-paid-technical-review', 'Authority revenue model drifted');
+  exactPolicyValue('authority_readout_after_days', '28', 'Authority readout window drifted');
+  exactPolicyValue('authority_result_status_at_publish', 'not-measured', 'Authority publish-time result status drifted');
+  for (const constraint of ['no-transcript-rewrite-articles', 'no-scaled-content-automation', 'no-unverified-outcome-claims']) {
+    check(new RegExp(`^\\s+-\\s*${constraint}$`, 'm').test(policy), `Policy standing constraint is missing: ${constraint}`);
+  }
+  if (exists('tools/lib/authority-brief.mjs')) {
+    const authorityHelper = read('tools/lib/authority-brief.mjs');
+    const authorityConst = (name) => authorityHelper.match(new RegExp(`^export const ${name} = (.+);$`, 'm'))?.[1];
+    check(authorityConst('AUTHORITY_BRIEF_SCHEMA_VERSION') === '1', 'Authority helper schema version drifted from policy');
+    check(authorityConst('AUTHORITY_SITE_MODE') === "'expert-source-audit'", 'Authority helper site mode drifted from policy');
+    check(authorityConst('AUTHORITY_OPERATING_MODE') === "'acquisition-content'", 'Authority helper operating mode drifted from policy');
+    check(authorityConst('AUTHORITY_PRIMARY_LANE') === "'seo-and-content'", 'Authority helper primary lane drifted from policy');
+    check(authorityConst('AUTHORITY_REVENUE_MODEL') === "'ads-and-paid-technical-review'", 'Authority helper revenue model drifted from policy');
+    check(authorityConst('AUTHORITY_PRIMARY_KPI') === "'work-with-me-pageviews'", 'Authority helper primary KPI drifted');
+    check(authorityConst('AUTHORITY_LEADING_SIGNAL') === "'organic-search-clicks'", 'Authority helper leading signal drifted');
+    check(authorityConst('AUTHORITY_READOUT_AFTER_DAYS') === '28', 'Authority helper readout window drifted from policy');
+    check(authorityConst('AUTHORITY_RESULT_STATUS_AT_PUBLISH') === "'not-measured'", 'Authority helper publish-time result status drifted from policy');
+  }
+  if (exists('tools/validate-editorial-package.mjs')) {
+    const packageValidator = read('tools/validate-editorial-package.mjs');
+    check(packageValidator.includes("from './lib/authority-brief.mjs'"), 'Package validator does not import the authority-brief helper');
+    check(packageValidator.includes('validateAuthorityBrief({'), 'Package validator does not call validateAuthorityBrief');
+    check(packageValidator.includes('validateAuthorityReviewFindings(review)'), 'Package validator does not enforce authority review findings');
+    check(packageValidator.includes("research/authority-brief.json is missing"), 'Package validator does not fail closed on a missing authority brief');
+  }
 }
 
 const agentFiles = required.filter((file) => file.startsWith('.claude/agents/'));
@@ -140,14 +182,36 @@ if (exists('.claude/skills/editorial-publishing-harness/SKILL.md')) {
   check(skill.includes('Maximum two'), 'Harness does not enforce bounded revision loops');
 }
 
-if (exists('.claude/skills/editorial-publishing-harness/references/trigger-evals.json')) {
+for (const evalFile of [
+  '.claude/skills/editorial-publishing-harness/references/trigger-evals.json',
+  '.claude/skills/authority-led-monetization/references/trigger-evals.json'
+]) {
+  if (!exists(evalFile)) continue;
   try {
-    const evals = JSON.parse(read('.claude/skills/editorial-publishing-harness/references/trigger-evals.json'));
-    check(Array.isArray(evals.should_trigger) && evals.should_trigger.length >= 10, 'Trigger eval needs at least 10 positive queries');
-    check(Array.isArray(evals.should_not_trigger) && evals.should_not_trigger.length >= 10, 'Trigger eval needs at least 10 negative queries');
+    const evals = JSON.parse(read(evalFile));
+    check(Array.isArray(evals.should_trigger) && evals.should_trigger.length >= 10, `${evalFile} needs at least 10 positive queries`);
+    check(Array.isArray(evals.should_not_trigger) && evals.should_not_trigger.length >= 10, `${evalFile} needs at least 10 negative queries`);
   } catch (error) {
-    failures.push(`Trigger eval JSON is invalid: ${error.message}`);
+    failures.push(`Trigger eval JSON is invalid (${evalFile}): ${error.message}`);
   }
+}
+
+if (exists('.claude/skills/authority-led-monetization/SKILL.md')) {
+  const authoritySkill = read('.claude/skills/authority-led-monetization/SKILL.md');
+  check(/^name:\s+authority-led-monetization$/m.test(authoritySkill), 'Authority skill name is incorrect');
+  const description = authoritySkill.match(/^description:\s*>-?\n((?:[ \t]+[^\n]*\n)+)/m)?.[1]?.replace(/\s+/g, ' ').trim() || '';
+  check(description.length > 0 && description.length <= 1024, `Authority skill description must be folded and <=1024 characters (found ${description.length})`);
+  const sections = authoritySkill.match(/^## /gm) || [];
+  check(sections.length === 5, `Authority skill must have exactly five sections (found ${sections.length})`);
+  for (const phrase of ['expert-source-audit', 'acquisition-content', 'seo-and-content', 'ads-and-paid-technical-review', 'research/authority-brief.json', 'not-measured', 'scaled-content', 'transcript']) {
+    check(authoritySkill.includes(phrase), `Authority skill is missing contract phrase: ${phrase}`);
+  }
+}
+
+if (exists('.claude/skills/editorial-publishing-harness/SKILL.md')) {
+  const harnessSkill = read('.claude/skills/editorial-publishing-harness/SKILL.md');
+  check(harnessSkill.includes('authority-brief.json'), 'Harness does not require the authority brief');
+  check(harnessSkill.includes('authority-led-monetization'), 'Harness does not reference the authority-led-monetization skill');
 }
 
 if (exists('.gitignore')) check(/^_workspace\/$/m.test(read('.gitignore')), '.gitignore does not ignore _workspace/');

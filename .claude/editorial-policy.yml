@@ -30,6 +30,14 @@ reference_image_license_bases:
   - repo-license-covers-assets
   - official-press-kit
 allow_empty_success: true
+authority_contract_version: 1
+authority_brief_path: _workspace/current/research/authority-brief.json
+authority_site_mode: expert-source-audit
+authority_operating_mode: acquisition-content
+authority_primary_lane: seo-and-content
+authority_revenue_model: ads-and-paid-technical-review
+authority_readout_after_days: 28
+authority_result_status_at_publish: not-measured
 canonical_format: Source Audit
 content_pillars:
   - ai-agents-and-harness-engineering
@@ -53,4 +61,7 @@ standing_constraints:
   - no-seo-guest-posts
   - no-undisclosed-sponsorship
   - no-fabricated-first-hand-experience
+  - no-transcript-rewrite-articles
+  - no-scaled-content-automation
+  - no-unverified-outcome-claims
   - no-publish-without-green-gates

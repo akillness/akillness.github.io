@@ -9,6 +9,7 @@ A run may advance only with evidence recorded in `run-summary.md`.
 | G3 Claim coverage | 100% of material claims verified or explicitly inferred | FIX, max 2 |
 | G4 Persona | English Curiosity → Retrieve → Innovation; honest first person | FIX |
 | G5 Non-commodity value | Original source finding, experiment, benchmark, or production decision | REJECT/FIX |
+| G5b Authority-led monetization | Valid evidence-bound `research/authority-brief.json`; visible AI-method disclosure; genuine related-article next action; no scaled/transcript pattern or outcome claim; independent authority findings PASS | BLOCK |
 | G6 Assets | Every local path exists; asset original or licensed; no orphans | FIX |
 | G6b Source images | 4–12 distinct rights-clear source-derived raster images in `references/`, valid `source-image-manifest.json`, each credited in exactly one top-level, visibly rendered `<figure class="source-image">` | BLOCK |
 | G7 Date safety | Automated `+0900` timestamp is strictly past at build time | BLOCK |
@@ -21,6 +22,10 @@ A run may advance only with evidence recorded in `run-summary.md`.
 ## Word count
 
 Google has no preferred word count. The site's 800-word ad threshold is an internal commercial-surface guard, not an SEO target. A long generic list can still fail G5; a shorter original note can remain public with `noindex`/no ads when deliberately classified.
+
+## Authority-led monetization
+
+G5b fails closed for every new package. The director writes the brief before the writer starts; the writer receives only the validated brief and evidence pack; the evidence editor checks it independently. A schedule never converts missing authority, reader value, visible AI disclosure, a related next action, or real measurement evidence into a warning. The publish-time measurement state remains `not-measured`; traffic, ranking, AdSense, and revenue outcomes require a later dated first-party readout.
 
 ## Source-derived reference images
 

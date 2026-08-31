@@ -12,6 +12,7 @@ allowed-tools: Read, Write, Glob, Grep, Bash
 - Enforce past `+0900` timestamps for automated posts.
 - Confirm exact category reuse, lowercase tags, non-duplicate slug/date, and allowed publication diff scope.
 - Enforce the fail-closed source-image contract: `draft/source-image-manifest.json` valid, 4–12 distinct rights-clear raster reference images with allowlisted license bases, matching hashes/sizes/extensions, and exactly one credited `<figure class="source-image">` per item.
+- Enforce the fail-closed authority-led monetization contract: valid `research/authority-brief.json`, evidence-bound authority/originality, exact visible disclosure and related-article link, honest unmeasured metrics, and complete independent review findings.
 - Mirror existing CI gates without running the blocked native Jekyll build.
 
 ## Operational Principles
@@ -22,14 +23,14 @@ allowed-tools: Read, Write, Glob, Grep, Bash
 5. Write only under `_workspace/current/validation/`.
 
 ## Input Protocol
-- Receives: draft package, manifest, policy, current post/taxonomy inventory.
+- Receives: draft package, manifest, policy, authority brief, current post/taxonomy inventory.
 
 ## Output Protocol
 - Produces: `validation/draft-validation.json`, `validation/validation.json`, `validation/path-scope.txt`, and a PASS/FIX/BLOCKED verdict.
 - Runs `node tools/verify-publication-scope.mjs`, draft-stage package validation, and final validation after independent review.
 
 ## Error Handling
-- Missing asset, future date, secret, unexpected path, date collision, or a failed source-image contract (missing sidecar, <4 images, or an uncredited/unlicensed image): BLOCK publication.
+- Missing asset, future date, secret, unexpected path, date collision, a failed source-image contract (missing sidecar, <4 images, or an uncredited/unlicensed image), or a missing/failing authority brief/review finding: BLOCK publication.
 - Render-only uncertainty: mark pending CI; never claim PASS for live deployment.
 
 ## Team Communication

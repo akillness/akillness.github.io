@@ -7,6 +7,10 @@ import {
   referencesPrefix,
   validateSourceImageManifest
 } from './lib/source-image-manifest.mjs';
+import {
+  validateAuthorityBrief,
+  validateAuthorityReviewFindings
+} from './lib/authority-brief.mjs';
 
 const argv = process.argv.slice(2);
 let repoRootValue = process.cwd();
@@ -296,6 +300,27 @@ const sourceImageResult = validateSourceImageManifest({
 });
 for (const failure of sourceImageResult.failures) failures.push(failure);
 
+// Authority-led monetization contract (fails closed for every package).
+const authorityBriefFile = path.join(current, 'research', 'authority-brief.json');
+pass(fs.existsSync(authorityBriefFile), 'research/authority-brief.json is missing; the authority-led monetization contract fails closed');
+const authorityBrief = fs.existsSync(authorityBriefFile) ? readJson(authorityBriefFile) : null;
+const policyFile = path.join(repoRoot, '.claude', 'editorial-policy.yml');
+const policyText = fs.existsSync(policyFile) ? fs.readFileSync(policyFile, 'utf8') : '';
+const contentPillars = (policyText.match(/^content_pillars:\s*\n((?:\s+-\s*[^\n]+\n?)*)/m)?.[1] || '')
+  .split('\n')
+  .map((line) => line.match(/^\s+-\s*(.+)$/)?.[1]?.trim())
+  .filter(Boolean);
+const selectedCandidate = candidates.find((candidate) => candidate?.selected === true) || null;
+const authorityResult = validateAuthorityBrief({
+  brief: authorityBrief,
+  manifest,
+  selectedCandidate,
+  evidenceClaims: claims,
+  articleBody: body,
+  contentPillars
+});
+for (const failure of authorityResult.errors) failures.push(failure);
+
 const summaryFile = path.join(current, 'run-summary.md');
 const summary = fs.existsSync(summaryFile) ? fs.readFileSync(summaryFile, 'utf8') : '';
 pass(Boolean(summary), 'run-summary.md is missing');
@@ -322,6 +347,7 @@ if (stage === 'final') {
       if (claim.supported === false) pass(nonempty(claim.required_fix), `Unsupported review claim ${label} has no required_fix`);
       if (review.verdict === 'PASS') pass(claim.supported === true, `PASS review contains unsupported claim: ${label}`);
     }
+    for (const failure of validateAuthorityReviewFindings(review).errors) failures.push(failure);
   }
   const draftValidationFile = path.join(current, 'validation', 'draft-validation.json');
   const draftValidation = fs.existsSync(draftValidationFile) ? readJson(draftValidationFile) : null;
@@ -356,7 +382,11 @@ const report = {
     verified_primary_claims: verifiedPrimary.length,
     reference_images: sourceImageResult.metrics.reference_images,
     credited_reference_images: sourceImageResult.metrics.credited_reference_images,
-    total_reference_image_bytes: sourceImageResult.metrics.total_reference_image_bytes
+    total_reference_image_bytes: sourceImageResult.metrics.total_reference_image_bytes,
+    authority_evidence_claims: authorityResult.metrics.authority_evidence_claims,
+    contribution_evidence_claims: authorityResult.metrics.contribution_evidence_claims,
+    authority_disclosure_in_body: authorityResult.metrics.disclosure_in_body,
+    authority_next_action_in_body: authorityResult.metrics.next_action_in_body
   },
   failures,
   warnings

@@ -13,6 +13,7 @@ _workspace/current/
   research/
     candidate-set.json
     existing-coverage.json
+    authority-brief.json
   evidence/
     evidence-pack.json
     source-map.md
@@ -63,6 +64,10 @@ _workspace/current/
 
 An article package has exactly one selected candidate.
 
+## Authority-led monetization brief
+
+`research/authority-brief.json` is an internal, never-published artifact written by the editorial director before drafting. It must follow `.claude/skills/authority-led-monetization/references/authority-brief-schema.md`: bind the current run and selected candidate, use one declared content pillar, map the authority basis and original contribution to non-`unverified` evidence claim ids, disclose AI research/draft assistance visibly in the article, name one genuine related `/posts/` next action present in the body, and keep all publish-time outcome values explicitly unmeasured. `tools/lib/authority-brief.mjs` validates it fail-closed at draft and final stages.
+
 ## Evidence fields
 
 Each material claim records:
@@ -87,8 +92,11 @@ Unverified claims cannot appear as assertions. Inferences must be labelled in th
 - `claims` array covering every mapped material claim, each with `claim_id`, boolean `supported`, `evidence_ref`, and `required_fix` when unsupported
 - `originality` finding
 - `persona_honesty` finding
+- `authority_fit`, `reader_value`, `monetization_honesty`, `ai_role_honesty`, and `next_action_verified`: all `true`
+- `scaled_content_risk`: `false`
+- `authority_rationale`: at least 40 characters of concrete independent reasoning
 
-Final package validation refuses a missing/non-PASS review or coverage below 1.0.
+Final package validation refuses a missing/non-PASS review, coverage below 1.0, or incomplete authority findings.
 
 ## Source-image manifest fields
 

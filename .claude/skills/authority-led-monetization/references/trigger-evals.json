@@ -1,0 +1,30 @@
+{
+  "should_trigger": [
+    "Prepare tonight's Source Audit package for publication.",
+    "Why is this article monetizable under our policy?",
+    "Check the authority brief for the current editorial run.",
+    "Align this draft with Google's people-first content guidance.",
+    "Does tonight's post satisfy the monetization honesty gates?",
+    "Review the AI-role disclosure in the current draft.",
+    "Verify the next-action internal link for this article.",
+    "How does this blog earn money from articles?",
+    "Validate the authority-led monetization contract before publishing.",
+    "Explain the measurement plan recorded for this article run.",
+    "Is this candidate a scaled-content risk?",
+    "Write the daily article and make sure the monetization contract passes."
+  ],
+  "should_not_trigger": [
+    "Update only ads.txt.",
+    "Change the AdSense slot IDs in _config.yml.",
+    "Check the AdSense console review status.",
+    "Edit the Google Analytics include template.",
+    "Add an affiliate link to an old post.",
+    "Create a newsletter signup form.",
+    "Fix this Unity compiler error.",
+    "Review this pull request for security bugs.",
+    "Send a reply to this customer email.",
+    "Summarize this YouTube video in three bullets.",
+    "Translate this paragraph into English.",
+    "Deploy this Vercel project."
+  ]
+}

@@ -45,6 +45,7 @@ Before article work, read:
 - Distribution may adapt the article for LinkedIn, X, YouTube, RSS, and Google Preferred Sources, but the blog remains the canonical source.
 - Do not add an email capture form or newsletter until Privacy Policy and consent handling are deliberately updated.
 - Work with Me is the primary direct-revenue CTA. Never sell backlinks, SEO guest posts, undisclosed sponsorship, or access to unseen systems.
+- Monetization is authority-led, never volume-led: no scaled-content automation, no transcript-rewrite articles, no unverified traffic/revenue/outcome claims. Scheduled automation never pretends a human wrote or reviewed each post; it discloses policy-bound AI assistance and relies on independent evidence review. See `.claude/skills/authority-led-monetization/SKILL.md`.
 
 ## Workspace lifecycle
 
@@ -72,6 +73,7 @@ A publishable run contains:
 
 - `manifest.json`
 - `research/candidate-set.json`
+- `research/authority-brief.json` (internal authority-led monetization brief; never staged or published)
 - `evidence/evidence-pack.json`
 - `draft/_posts/YYYY-MM-DD-<slug>.md`
 - `draft/assets/img/posts/YYYY-MM-DD-<slug>/...`
@@ -88,6 +90,11 @@ The article must include:
 - local assets referenced by the post and no orphan assets in its article folder
 - explicit limitations and honest trade-offs
 - 4–12 distinct source-derived raster images (`.png`/`.jpg`/`.jpeg`/`.webp`) downloaded from inspected reference materials into `assets/img/posts/<article-stem>/references/`, each credited in exactly one adjacent `<figure class="source-image">` block
+- the exact `ai_role.disclosure` sentence and the one `next_action` related-article link recorded in `research/authority-brief.json`, both visible in the article body
+
+### Authority-led monetization brief
+
+Every package records `research/authority-brief.json` (schema in `.claude/skills/authority-led-monetization/references/authority-brief-schema.md`), written by the editorial director before drafting. It binds the article to a declared authority basis and original contribution (both mapped to non-`unverified` evidence claims), an honest AI-role disclosure that appears verbatim in the body, one internal `/posts/<slug>/` next action, and an unmeasured-baseline measurement plan (`result_status: not-measured` at publish). `tools/lib/authority-brief.mjs` validates it fail-closed in both package stages, and the independent review must record `authority_fit`, `reader_value`, `monetization_honesty`, `ai_role_honesty`, `next_action_verified` as true with `scaled_content_risk: false`.
 
 ### Source-derived reference images
 
@@ -108,6 +115,7 @@ A package may be `ready_for_review` only when:
 3. **Claim coverage**: every material factual claim maps to evidence; unverified assertions are removed.
 4. **Persona**: the English article follows Curiosity → Retrieve → Innovation without fabricated autobiography.
 5. **Non-commodity value**: it contains original analysis, an experiment, a source-code finding, or a production decision.
+5b. **Authority brief**: `research/authority-brief.json` validates fail-closed and the independent review confirms every authority/monetization-honesty finding.
 6. **Assets**: every local reference exists and is licensed or original, and the source-derived reference image contract above validates fail-closed (4–12 credited images, valid sidecar manifest).
 7. **Date safety**: the front-matter timestamp is strictly in the past in `Asia/Seoul` when the build begins. Automated posts use `+0900`, not the legacy `+0800` convention.
 8. **Taxonomy**: categories reuse an existing exact value and tags are lowercase.
