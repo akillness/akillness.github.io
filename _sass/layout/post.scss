@@ -34,12 +34,14 @@
 }
 
 .post-header {
+  /* The global `p` rule is !important, so the eyebrow has to answer in kind. */
   .post-kicker {
     margin: 0 0 0.7rem;
     color: var(--text-muted-color);
     font-family: $font-family-heading;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
+    font-size: 0.78rem !important;
+    line-height: 1.3;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
   }
 
@@ -54,7 +56,7 @@
     max-width: 46rem;
     margin: 0 0 1.1rem;
     color: var(--text-muted-color);
-    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.16rem);
+    font-size: clamp(1.08rem, 1rem + 0.45vw, 1.32rem) !important;
     line-height: 1.6;
   }
 

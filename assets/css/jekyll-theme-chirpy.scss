@@ -51,8 +51,9 @@ code, pre {
 
 /* Diagrams are authored without a baked background, so give every SVG figure a neutral
    surface. Transparent ink stays readable in dark mode, and older diagrams that carry
-   their own background simply paint over it. */
-.content img[src$='.svg'],
-img.preview-img[src$='.svg'] {
+   their own background simply paint over it. The post hero keeps `preview-img` on the
+   wrapping anchor after content refactoring, so both shapes are covered. */
+img[src$='.svg'],
+a.preview-img[href$='.svg'] {
   background-color: #f8fafc;
 }
