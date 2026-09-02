@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="Helvetica, Arial, sans-serif" role="img" aria-label="Diagram contrasting what mjlab's continuous integration verifies with the GPU training path the project requires">
+  <text x="60" y="56" fill="#111827" font-size="29" font-weight="bold">What the green badge actually verifies</text>
+  <text x="60" y="86" fill="#4b5563" font-size="16">mjlab at commit 8ee51fb: every CI job runs on ubuntu-latest and none touches a GPU, while training requires an NVIDIA GPU.</text>
+
+  <rect x="60" y="126" width="500" height="330" rx="12" fill="none" stroke="#15803d" stroke-width="2"/>
+  <text x="86" y="158" fill="#15803d" font-size="15" font-weight="bold">COVERED BY CI</text>
+  <text x="86" y="192" fill="#111827" font-size="16">ruff lint and format</text>
+  <text x="86" y="220" fill="#111827" font-size="16">pytest on Python 3.10 to 3.13</text>
+  <text x="86" y="248" fill="#111827" font-size="16">unlocked latest-dependency resolve</text>
+  <text x="86" y="276" fill="#111827" font-size="16">pyright and ty, four runs each</text>
+  <text x="86" y="304" fill="#111827" font-size="16">MuJoCo stub freshness check</text>
+  <text x="86" y="332" fill="#111827" font-size="16">wheel and sdist smoke tests</text>
+  <text x="86" y="360" fill="#111827" font-size="16">nightly dependency canary (nightly.yml)</text>
+  <text x="86" y="404" fill="#15803d" font-size="15" font-weight="bold">runs-on: ubuntu-latest</text>
+  <text x="86" y="428" fill="#15803d" font-size="15" font-weight="bold">uv run --extra cpu</text>
+
+  <rect x="640" y="126" width="500" height="330" rx="12" fill="none" stroke="#b91c1c" stroke-width="2"/>
+  <text x="666" y="158" fill="#b91c1c" font-size="15" font-weight="bold">NOT COVERED BY CI</text>
+  <text x="666" y="192" fill="#111827" font-size="16">MuJoCo Warp GPU execution</text>
+  <text x="666" y="220" fill="#111827" font-size="16">CUDA 12.4+ kernel paths</text>
+  <text x="666" y="248" fill="#111827" font-size="16">4096-world parallel training</text>
+  <text x="666" y="276" fill="#111827" font-size="16">throughput and SPS numbers</text>
+  <text x="666" y="304" fill="#111827" font-size="16">RSL-RL training convergence</text>
+  <text x="666" y="332" fill="#111827" font-size="16">the forked BSD-3-Clause directory</text>
+  <text x="666" y="360" fill="#111827" font-size="16">Windows and WSL workflows</text>
+  <text x="666" y="404" fill="#b91c1c" font-size="15" font-weight="bold">"requires an NVIDIA GPU for training"</text>
+  <text x="666" y="428" fill="#b91c1c" font-size="15" font-weight="bold">benchmarks excluded via paths-ignore</text>
+
+  <text x="60" y="512" fill="#374151" font-size="17">The badge is honest about what it runs. It is the reader who assumes it covers the product.</text>
+  <text x="60" y="546" fill="#6b7280" font-size="14">Evidence: ci.yml runs-on lines 28, 43, 80, 96, 112, 135 and --extra cpu lines 72, 77, 93, 109, 121; paths-ignore 12, 21 · README.md line 19 · pyproject.toml 139, 151, 159</text>
+  <text x="60" y="572" fill="#6b7280" font-size="14">Original diagram · Fodev JEO Source Audit · no GPU run was performed for this audit</text>
+</svg>
