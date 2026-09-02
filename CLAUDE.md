@@ -41,6 +41,7 @@ Before article work, read:
 - Avoid commodity definitions, generic listicles, README paraphrases, and one page per query variation.
 - Reuse the strongest existing exact category strings and lowercase tags. Do not create orphan taxonomy pages casually.
 - Add editorial links to at least two genuinely related `/posts/<slug>/` articles when they exist.
+- Headlines: place the concrete subject inside the first 40 characters, target 45-65 characters, and vary the construction instead of defaulting to the `Name: claim` colon shape. Keyword clusters stay intact; see the Headline Construction section in `persona.md`.
 - Pair technical text with an original diagram, screenshot, benchmark table, or short video when useful.
 - Distribution may adapt the article for LinkedIn, X, YouTube, RSS, and Google Preferred Sources, but the blog remains the canonical source.
 - Do not add an email capture form or newsletter until Privacy Policy and consent handling are deliberately updated.

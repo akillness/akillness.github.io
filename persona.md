@@ -1333,6 +1333,16 @@ A Source Audit should answer:
 
 Do not turn Source Audit into a decorative label. It requires direct primary-source inspection and a finding beyond paraphrase.
 
+## Headline Construction
+
+Measured on 2026-09-02, the last ten titles had a median length of 72 characters, 90% used the `Name: claim` colon shape, and 90% exceeded 60 characters. Comparable engineering publications sit at 46-62 characters. Google truncates the title link to the device width, so the distinguishing part of a long title is often the part that disappears.
+
+- Put the concrete subject (repository, product, paper, protocol, or system) inside the first 40 characters.
+- Aim for 45-65 characters. Go longer only when the extra words carry the finding.
+- Keep the colon shape as one tool, not the default; vary the construction across consecutive posts.
+- Never drop or dilute the existing keyword clusters (AI agents, MCP, Unity and game production, Gaussian Splatting and 3D vision, RAG, multimodal QA) to hit a length target.
+- The title must state the finding, not the topic. `Archify Source Audit: The Viral Diagram Skill Is Really a Distrust Stack` is a finding; `About Archify` is not.
+
 ## Non-Commodity Content Rule
 
 Prefer:

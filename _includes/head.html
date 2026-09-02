@@ -69,6 +69,14 @@
 
   {% include_cached favicons.html %}
 
+  <!-- Feed autodiscovery: readers and aggregators cannot find /feed.xml without it. -->
+  <link
+    rel="alternate"
+    type="application/atom+xml"
+    title="{{ site.title }}"
+    href="{{ '/feed.xml' | relative_url }}"
+  >
+
   {% assign self_hosted_assets = false %}
   {% if site.assets.self_host.enabled %}
     {% if site.assets.self_host.env %}

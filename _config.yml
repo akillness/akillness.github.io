@@ -44,6 +44,9 @@ twitter:
 author:
   name: Jang Young Jeong
   url: https://akillness.github.io/about/
+  # Without this, jekyll-seo-tag falls back to the display name and emits
+  # `twitter:creator="@Jang Young Jeong"`, which breaks author attribution on X.
+  twitter: akillness0308
 
 social:
   # Change to your full name.
