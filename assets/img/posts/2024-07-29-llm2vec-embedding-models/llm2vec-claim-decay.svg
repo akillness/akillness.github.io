@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="Helvetica, Arial, sans-serif" role="img" aria-label="Diagram showing the three qualifiers the LLM2Vec paper attached to its MTEB claim and how this page dropped all three">
+  <text x="60" y="54" fill="#111827" font-size="29" font-weight="bold">How a hedged claim lost its hedges</text>
+  <text x="60" y="84" fill="#4b5563" font-size="16">The paper attached three qualifiers to its MTEB result. This page published none of them.</text>
+
+  <rect x="60" y="116" width="1080" height="150" rx="10" fill="none" stroke="#0f766e" stroke-width="2"/>
+  <text x="84" y="146" fill="#0f766e" font-size="14" font-weight="bold">WHAT THE PAPER SAID</text>
+  <text x="84" y="178" fill="#111827" font-size="17">"reach a new unsupervised state-of-the-art performance on the Massive Text Embeddings Benchmark"</text>
+  <text x="84" y="204" fill="#111827" font-size="17">"state-of-the-art performance on MTEB among models that train only on publicly available data</text>
+  <text x="84" y="228" fill="#111827" font-size="17">(as of May 24, 2024)"</text>
+  <text x="84" y="252" fill="#4b5563" font-size="15">and, in its own results section: "Our models achieve the 6th score in the MTEB leaderboard"</text>
+
+  <rect x="60" y="300" width="330" height="58" rx="8" fill="#ccfbf1" stroke="#0f766e" stroke-width="2"/>
+  <text x="225" y="326" fill="#134e4a" font-size="16" font-weight="bold" text-anchor="middle">Qualifier 1</text>
+  <text x="225" y="347" fill="#134e4a" font-size="15" text-anchor="middle">unsupervised only</text>
+
+  <rect x="435" y="300" width="330" height="58" rx="8" fill="#ccfbf1" stroke="#0f766e" stroke-width="2"/>
+  <text x="600" y="326" fill="#134e4a" font-size="16" font-weight="bold" text-anchor="middle">Qualifier 2</text>
+  <text x="600" y="347" fill="#134e4a" font-size="15" text-anchor="middle">public-data-only models</text>
+
+  <rect x="810" y="300" width="330" height="58" rx="8" fill="#ccfbf1" stroke="#0f766e" stroke-width="2"/>
+  <text x="975" y="326" fill="#134e4a" font-size="16" font-weight="bold" text-anchor="middle">Qualifier 3</text>
+  <text x="975" y="347" fill="#134e4a" font-size="15" text-anchor="middle">as of 24 May 2024</text>
+
+  <path d="M 225 372 L 225 412 M 600 372 L 600 412 M 975 372 L 975 412" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 5"/>
+  <path d="M 205 386 L 245 402 M 245 386 L 205 402" stroke="#dc2626" stroke-width="3"/>
+  <path d="M 580 386 L 620 402 M 620 386 L 580 402" stroke="#dc2626" stroke-width="3"/>
+  <path d="M 955 386 L 995 402 M 995 386 L 955 402" stroke="#dc2626" stroke-width="3"/>
+  <text x="1150" y="398" fill="#dc2626" font-size="14" text-anchor="end">dropped</text>
+
+  <rect x="60" y="426" width="1080" height="96" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="84" y="456" fill="#b91c1c" font-size="14" font-weight="bold">WHAT THIS PAGE PUBLISHED, UNTIL 2026-09-02</text>
+  <text x="84" y="492" fill="#7f1d1d" font-size="21" font-weight="bold">"New SOTA on MTEB benchmark"</text>
+
+  <text x="60" y="570" fill="#6b7280" font-size="14">The paper's claim was accurate and self-dated. The unqualified version was never true, and the authors never claimed it.</text>
+  <text x="60" y="594" fill="#6b7280" font-size="14">Source: arXiv:2404.05961 abstract and results section · corrected on this page 2026-09-02</text>
+</svg>
