@@ -1,20 +1,40 @@
-/**
- * Reference: https://bootsnipp.com/snippets/featured/link-to-top-page
- */
-
 export function back2top() {
-  const $window = $(window);
-  const $btn = $('#back-to-top');
+  const btn = document.querySelector('#back-to-top');
 
-  $window.on('scroll', () => {
-    if ($window.scrollTop() > 50) {
-      $btn.fadeIn();
-    } else {
-      $btn.fadeOut();
+  if (!btn) {
+    return;
+  }
+
+  let isVisible = false;
+  let scheduled = false;
+
+  function update() {
+    scheduled = false;
+    const shouldShow = window.scrollY > 50;
+
+    if (shouldShow === isVisible) {
+      return;
     }
-  });
 
-  $btn.on('click', () => {
-    $window.scrollTop(0);
+    isVisible = shouldShow;
+    btn.classList.toggle('is-visible', shouldShow);
+  }
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!scheduled) {
+        scheduled = true;
+        window.requestAnimationFrame(update);
+      }
+    },
+    { passive: true }
+  );
+
+  update();
+
+  btn.addEventListener('click', () => {
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    window.scrollTo({ top: 0, behavior });
   });
 }

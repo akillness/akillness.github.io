@@ -106,6 +106,16 @@ Every new automated package ships 4–12 distinct rights-clear raster images dow
 - Each manifest item appears in exactly one `<figure class="source-image">` HTML block in the article body (HTML figures are allowed inside Markdown) with matching `img` `src`/`alt` and a `figcaption` carrying the exact `source_page_url`, `license_url`, `publisher_or_creator`, and `attribution_text`. Every file in `references/` has exactly one manifest entry and vice versa.
 - If four rights-clear images cannot be obtained, the run blocks. No article is preferable to an under-credited one.
 
+## Visual asset policy
+
+Visualization is table-first and SVG-first. Raster images carry evidence and the cover, not explanation.
+
+- **Explanatory visuals**: prefer a comparison table or an original inline SVG diagram. Use Mermaid only when a generated graph is genuinely clearer than an authored SVG. Never add a decorative artifact to satisfy a template.
+- **SVG background**: new original SVG diagrams are authored without an opaque full-canvas background fill. Draw on transparency with ink that reads on a light surface; the theme supplies a neutral backdrop for `.svg` figures in both colour modes. Keep a baked background only when the diagram is meaningless without it, and record that exception in `run-summary.md`. Already published diagrams are exempt and are not retrofitted.
+- **AI raster images**: generate the cover/hero and any editorial illustration with `god-tibo-imagen` (`gti`, or `npx god-tibo-imagen`), which reuses the local Codex auth at `~/.codex/auth.json`. Validate the prompt with `--dry-run` first, write the file into the article asset folder, and keep `image.alt` an honest description of what the image shows.
+- **Generated images never satisfy the credited source-image contract.** The 4–12 images under `references/` remain downloads from inspected reference materials. Generated art stays outside `references/`, stays uncounted, and never replaces evidence.
+- Third-party imagery still requires a recorded license basis and visible attribution.
+
 ## Quality gates
 
 A package may be `ready_for_review` only when:

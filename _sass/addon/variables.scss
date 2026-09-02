@@ -29,13 +29,10 @@ $code-icon-width: 1.75rem !default;
 
 /* fonts */
 
-// 2026 typography pairing: expressive pixel DISPLAY + clean variable BODY.
-//   - Body (base): Pretendard Variable — modern, highly readable Hangul/Latin for
-//     long-form storytelling. This is the readability-first foundation.
-//   - Headings/titles/badges: Galmuri (readable Korean pixel) keeps the dot-game
-//     identity; 'Press Start 2P' stays a sparse arcade accent (site title, NEW,
-//     .major-tag, speech bubble) so the game/programmer passion still shows.
+// Long-form reading uses local system type to avoid a multi-megabyte font download.
+// Galmuri remains the single display face, preserving the game-engineer signature for
+// headings, labels, and navigation without competing with body copy.
 $font-family-base:
-  'Pretendard Variable', Pretendard, 'Galmuri14', -apple-system, BlinkMacSystemFont,
-  'Apple SD Gothic Neo', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif !default;
-$font-family-heading: 'Galmuri14', 'Pixelify Sans', 'Press Start 2P', monospace;
+  -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Segoe UI', Roboto,
+  'Helvetica Neue', Arial, sans-serif !default;
+$font-family-heading: 'Galmuri14', ui-rounded, 'Apple SD Gothic Neo', system-ui, sans-serif;

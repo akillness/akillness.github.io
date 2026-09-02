@@ -69,28 +69,34 @@
 
   {% include_cached favicons.html %}
 
-  {% if site.resources.ignore_env != jekyll.environment and site.resources.self_hosted %}
-    <link href="{{ site.data.origin[type].webfonts | relative_url }}" rel="stylesheet">
+  {% assign self_hosted_assets = false %}
+  {% if site.assets.self_host.enabled %}
+    {% if site.assets.self_host.env %}
+      {% if site.assets.self_host.env == jekyll.environment %}
+        {% assign self_hosted_assets = true %}
+      {% endif %}
+    {% else %}
+      {% assign self_hosted_assets = true %}
+    {% endif %}
+  {% endif %}
 
-  {% else %}
+  {% unless self_hosted_assets %}
     {% for cdn in site.data.origin[type].cdns %}
       <link rel="preconnect" href="{{ cdn.url }}" {{ cdn.args }}>
       <link rel="dns-prefetch" href="{{ cdn.url }}" {{ cdn.args }}>
     {% endfor %}
+  {% endunless %}
 
-    <link rel="stylesheet" href="{{ site.data.origin[type].webfonts | relative_url }}">
-  {% endif %}
-
-  <!-- Pixel Fonts for Dot Game Style (font origins already preconnected above) -->
+  <!-- One display face keeps the game-engineer identity; body and code use fast native stacks. -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Pixelify+Sans:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
+    rel="preload"
+    as="style"
+    href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css"
+    onload="this.onload=null;this.rel='stylesheet'"
   >
-
-  <!-- Galmuri: Korean pixel font for dot-game look with readable Hangul -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css">
-  <!-- Pretendard: modern variable Hangul font for highly readable long-form body (2026 readable-body trend) -->
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+  <noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css">
+  </noscript>
 
 
 
@@ -109,22 +115,42 @@
   <!-- Bootstrap -->
   <link rel="stylesheet" href="{{ site.data.origin[type].bootstrap.css | relative_url }}">
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ site.data.origin[type].fontawesome.css | relative_url }}">
+  <!-- Font Awesome is decorative; load it without delaying the first paint. -->
+  <link
+    rel="preload"
+    as="style"
+    href="{{ site.data.origin[type].fontawesome.css | relative_url }}"
+    onload="this.onload=null;this.rel='stylesheet'"
+  >
+  <noscript>
+    <link rel="stylesheet" href="{{ site.data.origin[type].fontawesome.css | relative_url }}">
+  </noscript>
 
   <link rel="stylesheet" href="{{ '/assets/css/jekyll-theme-chirpy.css' | relative_url }}">
 
   {% if site.toc and page.toc %}
-    <link rel="stylesheet" href="{{ site.data.origin[type].toc.css | relative_url }}">
-  {% endif %}
-
-  {% if page.layout == 'post' or page.layout == 'page' or page.layout == 'home' %}
-    <link rel="stylesheet" href="{{ site.data.origin[type]['lazy-polyfill'].css | relative_url }}">
+    <link
+      rel="preload"
+      as="style"
+      href="{{ site.data.origin[type].toc.css | relative_url }}"
+      onload="this.onload=null;this.rel='stylesheet'"
+    >
+    <noscript>
+      <link rel="stylesheet" href="{{ site.data.origin[type].toc.css | relative_url }}">
+    </noscript>
   {% endif %}
 
   {% if page.layout == 'page' or page.layout == 'post' %}
-    <!-- Manific Popup -->
-    <link rel="stylesheet" href="{{ site.data.origin[type].magnific-popup.css | relative_url }}">
+    <!-- Magnific Popup is interaction-only; do not block article paint. -->
+    <link
+      rel="preload"
+      as="style"
+      href="{{ site.data.origin[type].magnific-popup.css | relative_url }}"
+      onload="this.onload=null;this.rel='stylesheet'"
+    >
+    <noscript>
+      <link rel="stylesheet" href="{{ site.data.origin[type].magnific-popup.css | relative_url }}">
+    </noscript>
   {% endif %}
 
   <!-- JavaScript -->

@@ -2,10 +2,9 @@
   Jekyll Simple Search loader
   See: <https://github.com/christian-fei/Simple-Jekyll-Search>
 
-  The index is *not* fetched on page load. It is requested the first time the
-  visitor engages with the search box, in two tiers:
-    1. `search-meta.json` — titles/tags/snippets only, small and quick;
-    2. `search.json`      — full post text, swapped in when it arrives.
+  Search code and data load only after a visitor types. The small metadata index
+  answers title/tag queries first; the full-text index is fetched only when that
+  lightweight result set has no match.
 -->
 
 {% capture result_elem %}
@@ -24,8 +23,7 @@
 {% capture not_found %}<p class="mt-5">{{ site.data.locales[include.lang].search.no_results }}</p>{% endcapture %}
 
 <script>
-  /* Note: dependent library will be loaded in `js-selector.html` */
-  (function () {
+  document.addEventListener('DOMContentLoaded', function () {
     var input = document.getElementById('search-input');
     var results = document.getElementById('search-results');
 
@@ -35,6 +33,15 @@
 
     var META_URL = '{{ '/assets/js/data/search-meta.json' | relative_url }}';
     var FULL_URL = '{{ '/assets/js/data/search.json' | relative_url }}';
+    var SEARCH_LIBRARY = '{{ site.data.origin[type].search.js | relative_url }}';
+    var metaSearcher = null;
+    var fullSearcher = null;
+    var libraryPromise = null;
+    var metaPromise = null;
+    var fullPromise = null;
+    var metaState = 'idle';
+    var fullState = 'idle';
+    var inputTimer = null;
 
     var options = {
       resultsContainer: results,
@@ -44,41 +51,49 @@
         if (prop === 'categories') {
           if (value === '') {
             return `${value}`;
-          } else {
-            return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
           }
+          return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
         }
 
         if (prop === 'tags') {
           if (value === '') {
             return `${value}`;
-          } else {
-            return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
           }
+          return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
         }
       }
     };
 
-    /* NOTE: the `compress` layout strips newlines from this page, so `//`
-       comments would swallow the rest of the script — use block comments only. */
-    var searcher = null; /* set once an index has been loaded */
-    var state = 'idle'; /* idle | loading | ready */
+    function loadLibrary() {
+      if (window.SimpleJekyllSearch) {
+        return Promise.resolve();
+      }
 
-    /* SimpleJekyllSearch binds its own `input` listener to `searchInput` on every
-       call, so it is pointed at a detached element and the query is driven from
-       here instead. That keeps the tier-2 re-initialization free of duplicate
-       handlers. */
+      if (libraryPromise !== null) {
+        return libraryPromise;
+      }
+
+      libraryPromise = new Promise(function (resolve, reject) {
+        var script = document.createElement('script');
+        script.src = SEARCH_LIBRARY;
+        script.async = true;
+        script.onload = resolve;
+        script.onerror = function () {
+          reject(new Error('failed to load search library'));
+        };
+        document.head.appendChild(script);
+      });
+
+      return libraryPromise;
+    }
+
+    /* SimpleJekyllSearch binds its own input listener on every call. Point it at
+       a detached element and drive queries here so replacing an index does not
+       duplicate page-level listeners. */
     function build(index) {
       options.searchInput = document.createElement('input');
       options.json = index;
-      searcher = SimpleJekyllSearch(options).search;
-    }
-
-    function runQuery() {
-      results.innerHTML = '';
-      if (searcher !== null && input.value !== '') {
-        searcher(input.value);
-      }
+      return window.SimpleJekyllSearch(options).search;
     }
 
     function fetchIndex(url) {
@@ -90,39 +105,108 @@
       });
     }
 
-    function loadIndex() {
-      if (state !== 'idle') {
+    function loadMeta() {
+      if (metaState === 'ready') {
+        return Promise.resolve();
+      }
+
+      if (metaState === 'loading') {
+        return metaPromise;
+      }
+
+      metaState = 'loading';
+      metaPromise = Promise.all([loadLibrary(), fetchIndex(META_URL)])
+        .then(function (values) {
+          metaSearcher = build(values[1]);
+          metaState = 'ready';
+        })
+        .catch(function (err) {
+          metaState = 'idle';
+          throw err;
+        });
+
+      return metaPromise;
+    }
+
+    function loadFull() {
+      if (fullState === 'ready') {
+        return Promise.resolve();
+      }
+
+      if (fullState === 'loading') {
+        return fullPromise;
+      }
+
+      fullState = 'loading';
+      fullPromise = fetchIndex(FULL_URL)
+        .then(function (index) {
+          fullSearcher = build(index);
+          fullState = 'ready';
+        })
+        .catch(function (err) {
+          fullState = 'idle';
+          throw err;
+        });
+
+      return fullPromise;
+    }
+
+    function runQuery(searcher) {
+      var query = input.value.trim();
+      results.innerHTML = '';
+
+      if (searcher === null || query === '') {
+        return false;
+      }
+
+      searcher(query);
+      return results.querySelector('article') !== null;
+    }
+
+    function search() {
+      var query = input.value.trim();
+
+      if (query === '') {
+        results.innerHTML = '';
+        results.removeAttribute('aria-busy');
         return;
       }
-      state = 'loading';
 
-      fetchIndex(META_URL)
-        .then(function (index) {
-          build(index);
-          runQuery();
-        })
-        .catch(function (err) {
-          console.error(err);
-        })
+      if (fullSearcher !== null) {
+        runQuery(fullSearcher);
+        return;
+      }
+
+      loadMeta()
         .then(function () {
-          return fetchIndex(FULL_URL);
-        })
-        .then(function (index) {
-          build(index);
-          runQuery();
-          state = 'ready';
+          if (input.value.trim() !== query) {
+            return;
+          }
+
+          if (runQuery(metaSearcher)) {
+            return;
+          }
+
+          results.setAttribute('aria-busy', 'true');
+          return loadFull()
+            .then(function () {
+              if (input.value.trim() === query) {
+                runQuery(fullSearcher);
+              }
+            })
+            .finally(function () {
+              results.removeAttribute('aria-busy');
+            });
         })
         .catch(function (err) {
           console.error(err);
-          /* keep the tier-1 index if it did load, otherwise allow a retry */
-          state = searcher === null ? 'idle' : 'ready';
+          results.removeAttribute('aria-busy');
         });
     }
 
-    input.addEventListener('focus', loadIndex);
     input.addEventListener('input', function () {
-      loadIndex();
-      runQuery();
+      window.clearTimeout(inputTimer);
+      inputTimer = window.setTimeout(search, 120);
     });
-  })();
+  });
 </script>

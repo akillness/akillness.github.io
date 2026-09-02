@@ -10,8 +10,47 @@ const cover = {
   BLUR: 'blur'
 };
 
+let shimmerObserver;
+
 function removeCover(clzss) {
-  $(this).parent().removeClass(clzss);
+  const $parent = $(this).parent();
+  $parent.removeClass(clzss);
+
+  if (clzss === cover.SHIMMER) {
+    const parent = $parent[0];
+    $parent.removeClass('is-visible');
+    if (parent) {
+      shimmerObserver?.unobserve(parent);
+    }
+  }
+}
+
+function initShimmerVisibility() {
+  const shimmerElements = document.querySelectorAll('article .shimmer');
+
+  if (!shimmerElements.length) {
+    return;
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    shimmerElements.forEach((element) => element.classList.add('is-visible'));
+    return;
+  }
+
+  shimmerObserver?.disconnect();
+  shimmerObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          shimmerObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { rootMargin: '200px 0px' }
+  );
+
+  shimmerElements.forEach((element) => shimmerObserver.observe(element));
 }
 
 function handleImage() {
@@ -58,4 +97,6 @@ export function loadImg() {
   if ($lqips.length) {
     $lqips.each(switchLQIP);
   }
+
+  initShimmerVisibility();
 }

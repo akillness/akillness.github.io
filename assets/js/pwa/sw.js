@@ -8,6 +8,9 @@ const swconfUrl = '{{ '/assets/js/data/swconf.js' | relative_url }}';
 
 importScripts(swconfUrl);
 const purge = swconf.purge;
+const runtimeCacheName = `${swconf.cacheName}-runtime`;
+const maxRuntimeEntries = 60;
+const maxRuntimeBytes = 1024 * 1024;
 
 function verifyHost(url) {
   for (const host of swconf.allowHosts) {
@@ -34,6 +37,35 @@ function verifyUrl(url) {
   return true;
 }
 
+function isCacheableRuntimeResponse(request, response) {
+  if (purge || request.method !== 'GET' || !response || !response.ok) {
+    return false;
+  }
+
+  const url = new URL(request.url);
+  const mediaDestinations = ['audio', 'image', 'video'];
+  const contentLength = Number(response.headers.get('content-length') || 0);
+
+  return (
+    url.origin === location.origin &&
+    verifyUrl(request.url) &&
+    !mediaDestinations.includes(request.destination) &&
+    (!Number.isFinite(contentLength) || contentLength <= maxRuntimeBytes)
+  );
+}
+
+function trimRuntimeCache(cache) {
+  return cache.keys().then((keys) => {
+    const overflow = keys.length - maxRuntimeEntries;
+
+    if (overflow <= 0) {
+      return undefined;
+    }
+
+    return Promise.all(keys.slice(0, overflow).map((key) => cache.delete(key)));
+  });
+}
+
 if (!purge) {
   swconf.allowHosts.push(location.host);
 }
@@ -51,17 +83,16 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
+  const activeCaches = new Set([swconf.cacheName, runtimeCacheName]);
+
   event.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(
         keyList.map((key) => {
-          if (purge) {
+          if (purge || !activeCaches.has(key)) {
             return caches.delete(key);
-          } else {
-            if (key !== swconf.cacheName) {
-              return caches.delete(key);
-            }
           }
+          return undefined;
         })
       );
     })
@@ -76,24 +107,24 @@ self.addEventListener('message', (event) => {
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) {
-        return response;
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
       }
 
       return fetch(event.request).then((response) => {
-        const url = event.request.url;
-
-        if (purge || event.request.method !== 'GET' || !verifyUrl(url)) {
+        if (!isCacheableRuntimeResponse(event.request, response)) {
           return response;
         }
 
         {% comment %}See: <https://developers.google.com/web/fundamentals/primers/service-workers#cache_and_return_requests>{% endcomment %}
-        let responseToCache = response.clone();
+        const responseToCache = response.clone();
 
-        caches.open(swconf.cacheName).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
+        caches
+          .open(runtimeCacheName)
+          .then((cache) => cache.put(event.request, responseToCache).then(() => trimRuntimeCache(cache)))
+          .catch(() => undefined);
+
         return response;
       });
     })

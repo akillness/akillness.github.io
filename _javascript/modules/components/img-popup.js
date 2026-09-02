@@ -5,11 +5,13 @@
  */
 
 export function imgPopup() {
-  if ($('.popup') <= 0) {
+  const $popups = $('.popup');
+
+  if ($popups.length === 0) {
     return;
   }
 
-  $('.popup').magnificPopup({
+  $popups.magnificPopup({
     type: 'image',
     closeOnContentClick: true,
     showCloseBtn: false,

@@ -42,7 +42,11 @@
   font-family: $font-family-heading;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.1s ease;
+  transition:
+    background-color 0.1s ease,
+    color 0.1s ease,
+    box-shadow 0.1s ease,
+    transform 0.1s ease;
 
   &:hover {
     background-color: darken($bg-color, 5%);
@@ -60,11 +64,11 @@
   @include pixel-border($border-color, 2px);
   background-color: $bg-color;
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.1s ease, transform 0.1s ease;
 
   &:hover {
     transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.2);
-    transition: all 0.1s ease;
   }
 }
 
@@ -144,7 +148,7 @@
   }
 
   position: relative;
-  transition: all 0.1s ease-out;
+  transition: box-shadow 0.1s ease-out, transform 0.1s ease-out;
 
   &:active {
     transform: translate(4px, 4px);
@@ -194,7 +198,7 @@
     font-size: 0.7rem;
     padding: 2px 6px;
     border: 2px solid #000;
-    font-family: 'Press Start 2P', monospace;
+    font-family: $font-family-heading;
     transform: rotate(10deg);
   }
 }

@@ -13,6 +13,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Agent, TeamCreate, TaskCreat
 - Coordinate parallel research, writing, independent review, and validation.
 - Before drafting, write `research/authority-brief.json` from the required authority-led monetization schema, binding the selected candidate and non-`unverified` evidence to the audience job, allowed pillar, original contribution, visible AI disclosure, related-article next action, revenue path, and honest unmeasured readout plan.
 - Personally download 4–12 rights-clear source-derived reference images into `draft/assets/img/posts/<article-stem>/references/` and write `draft/source-image-manifest.json`; researchers, editors, and the writer never fetch or write image binaries.
+- Keep explanatory visuals table-first and SVG-first, author new SVG diagrams without an opaque full-canvas background fill, and generate cover/hero art with `god-tibo-imagen` outside `references/` so it stays uncounted by the source-image contract.
 - Issue PASS, FIX, REJECT, or BLOCKED verdicts with evidence paths.
 - Enforce `draft-only` unless standing `publish-on-green` approval is present.
 

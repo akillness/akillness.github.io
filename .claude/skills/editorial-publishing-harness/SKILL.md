@@ -116,6 +116,12 @@ Before or alongside drafting, the **editorial director** downloads 4–12 distin
 - Writer, researcher, auditor, and editor tool profiles stay read/write separated; never loosen `allowed-tools` to let them fetch or write image binaries.
 - If four rights-clear images cannot be obtained, the run blocks.
 
+### Original visuals and generated art (director-only)
+
+- Explanatory visuals are table-first and SVG-first; use Mermaid only when a generated graph beats an authored SVG.
+- Author new SVG diagrams without an opaque full-canvas background fill so they read on the theme's neutral `.svg` surface in light and dark mode. Justify any baked background in `run-summary.md`; never retrofit published diagrams.
+- Generate cover/hero art and editorial illustrations with `god-tibo-imagen` (`gti`, or `npx god-tibo-imagen`, reusing `~/.codex/auth.json`); validate the prompt with `--dry-run`, store the file outside `references/`, and keep `image.alt` honest. Generated art is uncounted by the source-image contract.
+
 Invoke `.claude/agents/source-audit-writer.md`.
 
 The writer may use only the approved evidence pack plus the validated authority brief. The exact disclosure must appear in a visible `> **Editorial method:** ...` blockquote, and the declared related-article path must appear as a genuine Markdown internal link. The writer must embed each manifested reference image in exactly one adjacent `<figure class="source-image">` block with matching `img` `src`/`alt` and a fully credited `figcaption`. Output must stay in:

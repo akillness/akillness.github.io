@@ -1266,10 +1266,13 @@ Total: ~$103/day = $3,090/month ✅ Acceptable
 ### Visual Standards
 
 Every post should have:
-- **At least 1 mermaid diagram** (workflow, architecture, or process)
-- **At least 1 comparison table** (techniques, metrics, or evaluations)
-- **At least 1 runnable code example** (even if simplified)
+- **At least 1 original explanatory visual**, chosen table-first and SVG-first: a comparison table (techniques, metrics, evaluations) or an authored SVG diagram (workflow, architecture, boundary map). Reach for Mermaid only when a generated graph beats an authored SVG.
+- **At least 1 runnable code example** when code clarifies the finding
 - **Callout boxes** for key insights (curiosity/retrieve/innovation)
+
+**SVG authoring rule:** ship diagrams without an opaque full-canvas background rectangle. Draw on transparency with ink that reads against a light surface, since the theme supplies a neutral backdrop for `.svg` figures in both light and dark mode. A baked background is an exception that needs a stated reason; published diagrams stay as they are.
+
+**Generated imagery:** produce cover/hero art and editorial illustrations with `god-tibo-imagen` (`gti`, or `npx god-tibo-imagen`), keep them out of `references/`, and never count them toward credited source images.
 
 Automated Source Audit packages additionally embed **4–12 credited source-derived reference images** (screenshots, figures, or photos downloaded from the inspected reference materials, each in a `<figure class="source-image">` block with full attribution). These are **evidence/context assets, never decorative filler**: they show the reader the primary material that was actually inspected. They do not replace, and are never counted toward, the original diagram/table/code requirements above, which remain a separate additional expectation.
 

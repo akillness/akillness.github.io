@@ -25,10 +25,22 @@ tail_includes:
   data-content-words="{{ post_words }}"
   data-monetization-eligible="{{ monetization_eligible }}"
 >
-  <header>
+  <header class="post-header">
+    {% assign primary_category = page.categories | first %}
+    {% if primary_category %}
+      <p class="post-kicker">
+        <i class="far fa-folder-open fa-fw" aria-hidden="true"></i>
+        {{ primary_category }}
+      </p>
+    {% endif %}
+
     <h1 data-toc-skip>{{ page.title }}</h1>
 
-    <div class="post-meta text-muted">
+    {% if page.description %}
+      <p class="post-dek">{{ page.description | markdownify | strip_html | strip_newlines | escape }}</p>
+    {% endif %}
+
+    <div class="post-meta post-meta-primary text-muted">
       <!-- published date -->
       <span>
         {{ site.data.locales[lang].post.posted }}
@@ -42,57 +54,59 @@ tail_includes:
           {% include datetime.html date=page.last_modified_at tooltip=true lang=lang %}
         </span>
       {% endif %}
+    </div>
 
-      {% if page.image %}
-        {% capture src %}src="{{ page.image.path | default: page.image }}"{% endcapture %}
-        {% capture class %}class="preview-img{% if page.image.no_bg %}{{ ' no-bg' }}{% endif %}"{% endcapture %}
-        {% capture alt %}alt="{{ page.image.alt | xml_escape | default: "Preview Image" }}"{% endcapture %}
-
-        {% if page.image.lqip %}
-          {%- capture lqip -%}lqip="{{ page.image.lqip }}"{%- endcapture -%}
+    <div class="post-byline d-flex justify-content-between text-muted">
+      <!-- author(s) -->
+      <span>
+        {% if page.author %}
+          {% assign authors = page.author %}
+        {% elsif page.authors %}
+          {% assign authors = page.authors %}
         {% endif %}
 
-        <div class="mt-3 mb-3">
-          <img {{ src }} {{ class }} {{ alt }} w="1200" h="630" {{ lqip }}>
-          {%- if page.image.alt -%}
-            <figcaption class="text-center pt-2 pb-2">{{ page.image.alt }}</figcaption>
-          {%- endif -%}
-        </div>
+        {{ site.data.locales[lang].post.written_by }}
+
+        <em>
+          {% if authors %}
+            {% for author in authors %}
+              {% if site.data.authors[author].url -%}
+                <a href="{{ site.data.authors[author].url }}">{{ site.data.authors[author].name }}</a>
+              {%- else -%}
+                {{ site.data.authors[author].name }}
+              {%- endif %}
+              {% unless forloop.last %}{{ '</em>, <em>' }}{% endunless %}
+            {% endfor %}
+          {% else %}
+            <a href="{{ '/about/' | relative_url }}">{{ site.author.name | default: site.social.name }}</a>
+          {% endif %}
+        </em>
+      </span>
+
+      <!-- read time -->
+      {% include read-time.html content=content prompt=true lang=lang %}
+    </div>
+    <!-- .post-byline -->
+
+    {% if page.image %}
+      {% capture src %}src="{{ page.image.path | default: page.image }}"{% endcapture %}
+      {% capture class %}class="preview-img{% if page.image.no_bg %}{{ ' no-bg' }}{% endif %}"{% endcapture %}
+      {% capture alt %}alt="{{ page.image.alt | xml_escape | default: "Preview Image" }}"{% endcapture %}
+      {% assign image_width = page.image.width | default: 1200 %}
+      {% assign image_height = page.image.height | default: 630 %}
+      {% capture dimensions %}width="{{ image_width }}" height="{{ image_height }}"{% endcapture %}
+
+      {% if page.image.lqip %}
+        {%- capture lqip -%}lqip="{{ page.image.lqip }}"{%- endcapture -%}
       {% endif %}
 
-      <div class="d-flex justify-content-between">
-        <!-- author(s) -->
-        <span>
-          {% if page.author %}
-            {% assign authors = page.author %}
-          {% elsif page.authors %}
-            {% assign authors = page.authors %}
-          {% endif %}
-
-          {{ site.data.locales[lang].post.written_by }}
-
-          <em>
-            {% if authors %}
-              {% for author in authors %}
-                {% if site.data.authors[author].url -%}
-                  <a href="{{ site.data.authors[author].url }}">{{ site.data.authors[author].name }}</a>
-                {%- else -%}
-                  {{ site.data.authors[author].name }}
-                {%- endif %}
-                {% unless forloop.last %}{{ '</em>, <em>' }}{% endunless %}
-              {% endfor %}
-            {% else %}
-              <a href="{{ '/about/' | relative_url }}">{{ site.author.name | default: site.social.name }}</a>
-            {% endif %}
-          </em>
-        </span>
-
-        <!-- read time -->
-        {% include read-time.html content=content prompt=true lang=lang %}
-      </div>
-      <!-- .d-flex -->
-    </div>
-    <!-- .post-meta -->
+      <figure class="post-hero mt-3 mb-3">
+        <img {{ src }} {{ class }} {{ alt }} {{ dimensions }} loading="eager" fetchpriority="high" decoding="async" {{ lqip }}>
+        {%- if page.image.alt -%}
+          <figcaption class="text-center pt-2 pb-2">{{ page.image.alt }}</figcaption>
+        {%- endif -%}
+      </figure>
+    {% endif %}
   </header>
 
   <div class="content">

@@ -3,14 +3,9 @@
 
 @import 'main';
 
-/* Dot Game Style Customizations */
-/* Pixel font size adjustments for better readability */
+/* Keep the base scale at the browser's 16px root; content copy is fluidly sized in commons.scss. */
 body {
-  font-size: 20px; /* Slightly larger for pixel fonts */
-  
-  @media (max-width: 768px) {
-    font-size: 18px;
-  }
+  font-size: 1rem;
 }
 
 /* Ensure headings are readable with pixel fonts */
@@ -26,14 +21,15 @@ button, .btn {
   min-height: 2.5rem;
 }
 
-/* Code blocks maintain pixel style */
+/* Code stays legible in long technical audits without another network font. */
 code, pre {
-  font-family: 'VT323', monospace;
-  font-size: 1.1em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 1.05em;
 }
 
-/* Smooth transitions for pixel elements */
-* {
+/* Pixel rendering is opt-in on decorative assets; diagrams and source images stay smooth. */
+.pixel-art,
+#avatar {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
@@ -51,4 +47,12 @@ code, pre {
   width: 100%;
   max-width: 100%;
   height: auto;
+}
+
+/* Diagrams are authored without a baked background, so give every SVG figure a neutral
+   surface. Transparent ink stays readable in dark mode, and older diagrams that carry
+   their own background simply paint over it. */
+.content img[src$='.svg'],
+img.preview-img[src$='.svg'] {
+  background-color: #f8fafc;
 }

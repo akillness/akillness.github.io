@@ -109,7 +109,8 @@
     {% endunless %}
 
     {% if _lqip %}
-      {% assign _lazyload = false %}
+      <!-- Keep the placeholder, but let native lazy loading defer the full image. -->
+      {% assign _lazyload = true %}
       {% assign _class = _class | append: ' blur' %}
 
       {% unless _lqip contains 'data:' %}
@@ -124,10 +125,16 @@
       {% assign _class = _class | append: ' shimmer' %}
     {% endif %}
 
-    <!-- lazy-load images -->
+    <!-- lazy-load images without overriding explicit LCP handling -->
     {% if _lazyload %}
-      {% assign _left = _left | append: ' loading="lazy"' %}
+      {% unless _left contains ' loading=' %}
+        {% assign _left = _left | append: ' loading="lazy"' %}
+      {% endunless %}
     {% endif %}
+
+    {% unless _left contains ' decoding=' %}
+      {% assign _left = _left | append: ' decoding="async"' %}
+    {% endunless %}
 
     {% if page.layout == 'home' %}
       <!-- create the image wrapper -->

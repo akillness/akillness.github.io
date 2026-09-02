@@ -33,19 +33,73 @@
   padding-right: $pr;
 }
 
-h1 + .post-meta {
-  > span + span::before {
-    @include dot;
+.post-header {
+  .post-kicker {
+    margin: 0 0 0.7rem;
+    color: var(--text-muted-color);
+    font-family: $font-family-heading;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
-  em,
-  time {
-    @extend %text-highlight;
+  h1 {
+    max-width: 25ch;
+    margin-bottom: 0.65rem;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
   }
 
-  em {
-    a {
-      color: inherit;
+  .post-dek {
+    max-width: 46rem;
+    margin: 0 0 1.1rem;
+    color: var(--text-muted-color);
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.16rem);
+    line-height: 1.6;
+  }
+
+  .post-meta-primary {
+    > span + span::before {
+      @include dot;
+    }
+
+    time {
+      @extend %text-highlight;
+    }
+  }
+
+  .post-byline {
+    gap: 0.75rem;
+    margin-top: 0.65rem;
+
+    em,
+    time {
+      @extend %text-highlight;
+    }
+
+    em {
+      a {
+        color: inherit;
+      }
+    }
+  }
+
+  .post-hero {
+    margin: 1.75rem 0 2rem;
+
+    figcaption {
+      color: var(--text-muted-color);
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+  }
+}
+
+@media all and (max-width: 576px) {
+  .post-header {
+    .post-byline {
+      align-items: flex-start;
+      flex-direction: column;
     }
   }
 }
@@ -201,7 +255,12 @@ h1 + .post-meta {
   .post-navigation {
     .btn,
     .btn::before {
-      transition: all 0.35s ease-in-out;
+      transition:
+        background-color 0.35s ease-in-out,
+        border-color 0.35s ease-in-out,
+        box-shadow 0.35s ease-in-out,
+        color 0.35s ease-in-out,
+        transform 0.35s ease-in-out;
     }
   }
 }

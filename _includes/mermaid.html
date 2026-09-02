@@ -1,59 +1,122 @@
-<!-- mermaid-js loader -->
+<!-- Mermaid is discovered on demand instead of joining the blocking page bundle. -->
 <script type="text/javascript">
-  (function () {
-    function updateMermaid(event) {
-      if (event.source === window && event.data && event.data.direction === ModeToggle.ID) {
-        const mode = event.data.message;
+  document.addEventListener('DOMContentLoaded', function () {
+    const codeBlocks = Array.from(document.querySelectorAll('pre > code.language-mermaid'));
 
-        if (typeof mermaid === 'undefined') {
-          return;
-        }
-
-        let expectedTheme = mode === ModeToggle.DARK_MODE ? 'dark' : 'default';
-        let config = { theme: expectedTheme };
-
-        /* Re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */
-        $('.mermaid').each(function () {
-          let svgCode = $(this).prev().children().html();
-          $(this).removeAttr('data-processed');
-          $(this).html(svgCode);
-        });
-
-        mermaid.initialize(config);
-        mermaid.init(undefined, '.mermaid');
-      }
+    if (codeBlocks.length === 0) {
+      return;
     }
 
-    let initTheme = 'default';
     const html = document.documentElement;
-
-    if (
+    const backups = [];
+    const diagrams = [];
+    let mermaidReady = false;
+    let mermaidLoading = false;
+    let currentTheme =
       (html.hasAttribute('data-mode') && html.getAttribute('data-mode') === 'dark') ||
       (!html.hasAttribute('data-mode') && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      initTheme = 'dark';
-    }
+        ? 'dark'
+        : 'default';
 
-    let mermaidConf = {
-      theme: initTheme /* <default|dark|forest|neutral> */
-    };
+    codeBlocks.forEach(function (codeBlock) {
+      const backup = codeBlock.parentElement;
 
-    /* Create mermaid tag */
-    document.querySelectorAll('pre>code.language-mermaid').forEach((elem) => {
-      const svgCode = elem.textContent;
-      const backup = elem.parentElement;
-      if (backup.classList.contains('unloaded')) return;
+      if (backup.classList.contains('unloaded')) {
+        return;
+      }
+
+      const diagram = document.createElement('pre');
+      diagram.className = 'mermaid';
+      diagram.dataset.mermaidSource = codeBlock.textContent;
+      diagram.textContent = codeBlock.textContent;
       backup.classList.add('unloaded');
-      /* create mermaid node */
-      let mermaid = document.createElement('pre');
-      mermaid.classList.add('mermaid');
-      const text = document.createTextNode(svgCode);
-      mermaid.appendChild(text);
-      backup.after(mermaid);
+      backup.after(diagram);
+      backups.push(backup);
+      diagrams.push(diagram);
     });
 
-    mermaid.initialize(mermaidConf);
+    function renderMermaid() {
+      window.mermaid.initialize({ theme: currentTheme });
+      window.mermaid.init(undefined, '.mermaid');
+    }
+
+    function recoverSource() {
+      diagrams.forEach(function (diagram) {
+        diagram.remove();
+      });
+      backups.forEach(function (backup) {
+        backup.classList.remove('unloaded');
+      });
+    }
+
+    function loadMermaid() {
+      if (mermaidReady) {
+        renderMermaid();
+        return;
+      }
+
+      if (mermaidLoading) {
+        return;
+      }
+
+      mermaidLoading = true;
+      const script = document.createElement('script');
+      script.src = '{{ site.data.origin[type].mermaid.js | relative_url }}';
+      script.async = true;
+      script.onload = function () {
+        mermaidReady = true;
+        mermaidLoading = false;
+        renderMermaid();
+      };
+      script.onerror = function () {
+        mermaidLoading = false;
+        recoverSource();
+      };
+      document.head.appendChild(script);
+    }
+
+    function updateMermaid(event) {
+      if (
+        typeof ModeToggle === 'undefined' ||
+        event.source !== window ||
+        !event.data ||
+        event.data.direction !== ModeToggle.ID
+      ) {
+        return;
+      }
+
+      currentTheme = event.data.message === ModeToggle.DARK_MODE ? 'dark' : 'default';
+
+      if (!mermaidReady) {
+        return;
+      }
+
+      diagrams.forEach(function (diagram) {
+        diagram.removeAttribute('data-processed');
+        diagram.textContent = diagram.dataset.mermaidSource;
+      });
+      renderMermaid();
+    }
 
     window.addEventListener('message', updateMermaid);
-  })();
+
+    if (diagrams.length === 0) {
+      return;
+    }
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        function (entries, currentObserver) {
+          if (entries.some(function (entry) { return entry.isIntersecting; })) {
+            currentObserver.disconnect();
+            loadMermaid();
+          }
+        },
+        { rootMargin: '800px 0px' }
+      );
+      observer.observe(diagrams[0]);
+    } else {
+      loadMermaid();
+    }
+  });
 </script>

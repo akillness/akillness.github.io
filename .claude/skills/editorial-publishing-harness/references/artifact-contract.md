@@ -115,6 +115,8 @@ Final package validation refuses a missing/non-PASS review, coverage below 1.0, 
 - `alt` and `attribution_text`
 - `commercial_use_allowed: true` and `redistribution_allowed: true` (strict booleans)
 
+Generated cover/hero art and editorial illustrations (produced with `god-tibo-imagen`) live in the article asset folder outside `references/`, never appear in this manifest, and never count toward the 4–12 requirement.
+
 Each item appears in exactly one adjacent `<figure class="source-image">` block in the article body with matching `img` `src`/`alt` and a `figcaption` containing the exact `source_page_url`, `license_url`, `publisher_or_creator`, and `attribution_text`. Every file in `references/` has exactly one manifest entry and every manifest item is referenced. Validation lives in `tools/lib/source-image-manifest.mjs` and reports `reference_images` and `credited_reference_images` metrics.
 
 ## Draft package

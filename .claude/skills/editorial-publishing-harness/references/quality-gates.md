@@ -31,6 +31,10 @@ G5b fails closed for every new package. The director writes the brief before the
 
 G6b fails closed. Only director-downloaded raster images from inspected reference materials count; original/AI diagrams, logos, avatars, decorative placeholders, and duplicate crops/resizes never do, and the original-visual expectation stays separate and uncounted. The required 4–12 images are evidence/context assets, never filler. The shipped-tree gate applies to posts dated 2026-09-01 or later; older posts are migration-exempt. Each must have valid raster structure, EXIF/XMP/text metadata stripped, a short side >=32 px and at least 16,384 pixels; the combined payload must stay <=20 MiB. Fewer than four or more than twelve rights-clear images blocks the run — that is a valid outcome. Deterministic checks: `tools/lib/source-image-manifest.mjs` via `tools/validate-editorial-package.mjs` (metrics `reference_images`, `credited_reference_images`) and the 4–12 count band in `tools/verify-publication-scope.mjs`.
 
+## Visualization and generated imagery
+
+Explanatory visuals are table-first and SVG-first; Mermaid is used only when a generated graph beats an authored SVG. New original SVG diagrams omit an opaque full-canvas background fill so they stay readable on the theme's neutral `.svg` surface in both colour modes; a baked background is an exception that must be justified in `run-summary.md`, and published diagrams are never retrofitted. Cover/hero art and editorial illustrations are generated with `god-tibo-imagen` (`gti`, or `npx god-tibo-imagen`) using local Codex auth, stored outside `references/`, and described honestly in `image.alt`. Generated imagery is uncounted by G6b and never substitutes for downloaded evidence.
+
 ## Revision policy
 
 - Maximum two writer revision loops.

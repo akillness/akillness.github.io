@@ -5,8 +5,6 @@
 {% assign urls = site.data.origin[type].jquery.js
   | append: ','
   | append: site.data.origin[type].bootstrap.js
-  | append: ','
-  | append: site.data.origin[type].search.js
 %}
 
 <!-- layout specified -->
@@ -14,8 +12,6 @@
 {% assign js_dist = '/assets/js/dist/' %}
 
 {% if page.layout == 'post' or page.layout == 'page' or page.layout == 'home' %}
-  {% assign urls = urls | append: ',' | append: site.data.origin[type]['lazy-polyfill'].js %}
-
   {% unless page.layout == 'home' %}
     <!-- image lazy-loading & popup & clipboard -->
     {% assign urls = urls
@@ -48,12 +44,10 @@
   %}
 {% endif %}
 
-{% if page.content contains '<h2' or page.content contains '<h3' and site.toc and page.toc %}
-  {% assign urls = urls | append: ',' | append: site.data.origin[type].toc.js %}
-{% endif %}
-
-{% if page.mermaid %}
-  {% assign urls = urls | append: ',' | append: site.data.origin[type].mermaid.js %}
+{% if site.toc and page.toc %}
+  {% if page.content contains '<h2' or page.content contains '<h3' %}
+    {% assign urls = urls | append: ',' | append: site.data.origin[type].toc.js %}
+  {% endif %}
 {% endif %}
 
 {% include jsdelivr-combine.html urls=urls %}
@@ -95,7 +89,6 @@
       }
     };
   </script>
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="{{ site.data.origin[type].mathjax.js | relative_url }}"></script>
 {% endif %}
 
