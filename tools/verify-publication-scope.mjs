@@ -98,7 +98,9 @@ if (stagedMode) {
   for (const file of expected) {
     const packaged = path.join(current, 'draft', file);
     check(fs.existsSync(packaged), `Validated package file is missing: ${file}`);
-    const stagedBlob = spawnSync('git', ['show', `:${file}`], { cwd: repoRoot });
+    // Reference images routinely exceed Node's 1 MiB default stdout buffer, which would
+    // otherwise fail with ENOBUFS and be misread as an unreadable staged file.
+    const stagedBlob = spawnSync('git', ['show', `:${file}`], { cwd: repoRoot, maxBuffer: 64 * 1024 * 1024 });
     check(stagedBlob.status === 0, `Cannot read staged file content: ${file}`);
     if (fs.existsSync(packaged) && stagedBlob.status === 0) {
       check(stagedBlob.stdout.equals(fs.readFileSync(packaged)), `Staged file differs from validated package: ${file}`);
