@@ -27,3 +27,7 @@
 - type: youtube
   icon: "fab fa-youtube"
   url: "https://www.youtube.com/channel/UCRgEfHyFhDWxdlEy5nvP_TQ"
+
+- type: naver-blog
+  icon: "fa-solid fa-blog"
+  url: "https://blog.naver.com/akillness" # Korean edition of this blog

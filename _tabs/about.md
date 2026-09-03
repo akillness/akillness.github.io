@@ -167,5 +167,6 @@ Agents | MCP | A2A | Evals | Tracing | Multimodal QA | Tool Use | Product Engine
 - [LinkedIn](https://www.linkedin.com/in/akillness38/)
 - [GitHub](https://github.com/akillness)
 - [AI Tech Blog](https://akillness.github.io)
+- [Naver Blog (Korean edition)](https://blog.naver.com/akillness)
 
 If you are building AI products that need to be grounded in real workflows, multimodal inputs, or interactive systems, I am always interested in comparing notes.
