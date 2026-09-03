@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="Helvetica, Arial, sans-serif" role="img" aria-label="ECC applied its context-tax rule to MCP connectors, retiring six defaults and leaving one, while its default install still advertises 286 skills, 68 agents, 94 commands, and 23 hooks">
+  <title>ECC's context tax: connectors audited, catalog not</title>
+  <text x="600" y="64" text-anchor="middle" font-size="34" font-weight="bold" fill="#1f2a3a">One rule, two surfaces</text>
+  <text x="600" y="100" text-anchor="middle" font-size="19" fill="#5a6878">&#8220;Tool schemas load into every session; each default connector taxes every user&#8217;s context window&#8221;</text>
+  <!-- left: MCP connectors -->
+  <g>
+    <rect x="80" y="150" width="480" height="380" rx="16" fill="none" stroke="#2c7a5b" stroke-width="3"/>
+    <text x="320" y="196" text-anchor="middle" font-size="24" font-weight="bold" fill="#2c7a5b">MCP connectors</text>
+    <text x="320" y="228" text-anchor="middle" font-size="17" fill="#3c4a5c">governed by MCP-CONNECTOR-POLICY.md</text>
+    <text x="320" y="290" text-anchor="middle" font-size="52" font-weight="bold" fill="#1f2a3a">6 &#8594; retired</text>
+    <text x="320" y="330" text-anchor="middle" font-size="17" fill="#3c4a5c">one default remains: chrome-devtools</text>
+    <text x="130" y="380" font-size="16" fill="#7a4a3a">github &#183; ~30 tool schemas &#8220;taxed every session&#8221;</text>
+    <text x="130" y="412" font-size="16" fill="#7a4a3a">sequential-thinking &#183; &#8220;a prompting pattern&#8221;</text>
+    <text x="130" y="444" font-size="16" fill="#7a4a3a">memory &#183; playwright &#183; exa &#183; context7</text>
+    <text x="130" y="496" font-size="17" font-weight="bold" fill="#2c7a5b">the one survivor is the stateful-CDP case</text>
+  </g>
+  <!-- right: catalog -->
+  <g>
+    <rect x="640" y="150" width="480" height="380" rx="16" fill="none" stroke="#b3593a" stroke-width="3"/>
+    <text x="880" y="196" text-anchor="middle" font-size="24" font-weight="bold" fill="#b3593a">Default install surface</text>
+    <text x="880" y="228" text-anchor="middle" font-size="17" fill="#3c4a5c">skill policies cover placement, not cost</text>
+    <text x="880" y="290" text-anchor="middle" font-size="52" font-weight="bold" fill="#1f2a3a">286 skills</text>
+    <text x="880" y="330" text-anchor="middle" font-size="17" fill="#3c4a5c">86,219 bytes of name+description metadata</text>
+    <text x="690" y="380" font-size="16" fill="#7a4a3a">68 agents &#183; 94 command shims &#183; rules &#8220;always loaded&#8221;</text>
+    <text x="690" y="412" font-size="16" fill="#7a4a3a">23 lifecycle hooks &#183; 4 PreToolUse matches per Bash call</text>
+    <text x="690" y="444" font-size="16" fill="#7a4a3a">7 Stop hooks after every response</text>
+    <text x="690" y="496" font-size="17" font-weight="bold" fill="#b3593a">mitigation: selective/manual profiles</text>
+  </g>
+  <text x="600" y="586" text-anchor="middle" font-size="16" fill="#5a6878">affaan-m/ECC audited at commit 22e8cf01 &#183; measured 2026-09-04 KST</text>
+</svg>
