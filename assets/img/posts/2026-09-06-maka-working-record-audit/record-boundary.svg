@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="Helvetica, Arial, sans-serif">
+  <title>One artifact class crossing three policy surfaces in apache/maka</title>
+  <!-- lane headers -->
+  <text x="30" y="40" font-size="22" font-weight="bold" fill="#4C8DFF">git tree — the working record</text>
+  <text x="30" y="330" font-size="22" font-weight="bold" fill="#2FA36B">ASF source archive — the product</text>
+  <line x1="30" y1="300" x2="930" y2="300" stroke="#8892A0" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="930" y="292" font-size="13" fill="#8892A0" text-anchor="end">release boundary: .gitattributes export-ignore + asf-source-release.mjs forbidden lists + tests (JS + Rust)</text>
+
+  <!-- timeline axis -->
+  <line x1="60" y1="220" x2="900" y2="220" stroke="#5B6472" stroke-width="2"/>
+  <!-- Aug 3 -->
+  <circle cx="120" cy="220" r="7" fill="#4C8DFF"/>
+  <text x="120" y="250" font-size="14" fill="#5B6472" text-anchor="middle">Aug 3</text>
+  <text x="120" y="150" font-size="13.5" fill="#39424E" text-anchor="middle">maka-proposal-zh-review.txt</text>
+  <text x="120" y="168" font-size="13.5" fill="#39424E" text-anchor="middle">lands at root (PR #1972)</text>
+  <!-- Aug 7 -->
+  <circle cx="300" cy="220" r="7" fill="#D97706"/>
+  <text x="300" y="250" font-size="14" fill="#5B6472" text-anchor="middle">Aug 7</text>
+  <text x="300" y="132" font-size="13.5" fill="#39424E" text-anchor="middle">.gitignore rule (PR #2376):</text>
+  <text x="300" y="150" font-size="13.5" font-style="italic" fill="#39424E" text-anchor="middle">"attach on GitHub, do not commit"</text>
+  <text x="300" y="168" font-size="13.5" fill="#39424E" text-anchor="middle">— but only for docs/ paths</text>
+  <!-- Aug 20 -->
+  <circle cx="540" cy="220" r="7" fill="#C2413B"/>
+  <text x="540" y="250" font-size="14" fill="#5B6472" text-anchor="middle">Aug 20</text>
+  <text x="540" y="114" font-size="13.5" fill="#39424E" text-anchor="middle">8 agent screenshots land in</text>
+  <text x="540" y="132" font-size="13.5" fill="#39424E" text-anchor="middle">.maka-shots/ at root (PR #2919)</text>
+  <text x="540" y="150" font-size="13.5" fill="#39424E" text-anchor="middle">same day: release workflow</text>
+  <text x="540" y="168" font-size="13.5" fill="#39424E" text-anchor="middle">quarantines the path (PR #3278)</text>
+  <!-- Aug 24-25 -->
+  <circle cx="760" cy="220" r="7" fill="#C2413B"/>
+  <text x="760" y="250" font-size="14" fill="#5B6472" text-anchor="middle">Aug 24–25</text>
+  <text x="760" y="132" font-size="13.5" fill="#39424E" text-anchor="middle">6 more before/after shots</text>
+  <text x="760" y="150" font-size="13.5" fill="#39424E" text-anchor="middle">(PRs #3617, #3648, #3674)</text>
+  <text x="760" y="168" font-size="13.5" fill="#39424E" text-anchor="middle">14 files, ~3.0 MiB tracked</text>
+
+  <!-- outcome boxes -->
+  <rect x="60" y="360" width="390" height="130" rx="10" fill="none" stroke="#4C8DFF" stroke-width="2"/>
+  <text x="80" y="392" font-size="15" font-weight="bold" fill="#4C8DFF">every git clone carries</text>
+  <text x="80" y="418" font-size="13.5" fill="#39424E">14 PR-evidence screenshots (.maka-shots/)</text>
+  <text x="80" y="438" font-size="13.5" fill="#39424E">the Chinese proposal review copy (22.9 KB)</text>
+  <text x="80" y="458" font-size="13.5" fill="#39424E">.claude/launch.json harness config</text>
+  <rect x="510" y="360" width="390" height="130" rx="10" fill="none" stroke="#2FA36B" stroke-width="2"/>
+  <text x="530" y="392" font-size="15" font-weight="bold" fill="#2FA36B">the ASF source archive ships</text>
+  <text x="530" y="418" font-size="13.5" fill="#39424E">none of them — forbiddenSegments and</text>
+  <text x="530" y="438" font-size="13.5" fill="#39424E">forbiddenRootFiles strip every working note,</text>
+  <text x="530" y="458" font-size="13.5" fill="#39424E">asserted by tests in two languages</text>
+</svg>
