@@ -55,6 +55,21 @@
     {% assign robots_directive = 'noindex, follow' %}
   {% elsif paginator and paginator.page > 1 %}
     {% assign robots_directive = 'noindex, follow' %}
+  {% elsif page.layout == 'post' and robots_directive == nil %}
+    {% comment %}
+      Published editorial standard (see /about/ and /start-here/): a post without
+      enough original analysis is removed from search AND advertising until it is
+      rewritten or retired. The advertising half was already enforced by the same
+      word threshold in `adsense.html` and `_layouts/post.html`; this is the search
+      half, so the promise and the implementation stay in agreement automatically.
+      The identical expression is used in all three places on purpose - it cannot
+      drift, because a post either clears the threshold everywhere or nowhere.
+    {% endcomment %}
+    {% assign minimum_index_words = site.google_ad_min_post_words | default: 800 %}
+    {% assign head_post_words = page.content | strip_html | number_of_words: 'auto' %}
+    {% if head_post_words < minimum_index_words %}
+      {% assign robots_directive = 'noindex, follow' %}
+    {% endif %}
   {% endif %}
   {% if robots_directive %}
     <meta name="robots" content="{{ robots_directive }}">

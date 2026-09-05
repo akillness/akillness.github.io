@@ -86,8 +86,30 @@ check(plugin.includes("post.data['hidden'] = true"), 'noindex posts are not hidd
 check(plugin.includes('priority :highest'), 'noindex pagination policy does not run before jekyll-paginate');
 check(plugin.includes('page.url.match?'), 'archive policy does not classify pagination URLs');
 check(plugin.includes("page.data['sitemap'] = false"), 'archive policy does not exclude generated pages from sitemap');
+check(plugin.includes('data-monetization-eligible="false"'), 'archive policy does not read the rendered monetization verdict back off the built posts');
+check(plugin.includes('ineligible_paths'), 'archive policy does not strip search-excluded post URLs from the built sitemap');
 const head = read('_includes/head.html');
 check(head.includes('paginator.page > 1'), 'head does not render pagination noindex as a fallback');
+
+// The published editorial standard on /about/, /start-here/ and /terms/ promises
+// that a post without enough original analysis leaves search AND advertising.
+// Advertising was enforced by word count from the start; search was not, so for a
+// long time the site advertised a boundary it did not apply. Keep the promise and
+// the two enforcement points locked to each other.
+const promisePages = ['_tabs/about.md', '_tabs/start-here.md', '_tabs/terms.md'];
+for (const file of promisePages) {
+  check(read(file).includes('removed from search and advertising'), `${file} no longer states the search-and-advertising boundary`);
+}
+check(head.includes('minimum_index_words'), 'head does not apply the editorial word threshold to indexing');
+check(head.includes('site.google_ad_min_post_words'), 'head indexing gate does not share the advertising word threshold');
+check(head.includes("page.layout == 'post' and robots_directive == nil"), 'head indexing gate does not defer to an explicit per-post robots value');
+const adsense = read('_includes/adsense.html');
+check(adsense.includes('ad_client_configured'), 'adsense include does not separate publisher configuration from ad eligibility');
+check(
+  /\{%\s*if ad_client_configured\s*%\}\s*<meta name="google-adsense-account"/.test(adsense),
+  'ownership meta tag is still gated behind ad eligibility instead of shipping site-wide'
+);
+check(adsense.includes('{% if adsense_allowed and ad_client_configured %}'), 'ad loader is no longer gated by the editorial ad boundary');
 
 const scopeTool = read('tools/verify-publication-scope.mjs');
 check(scopeTool.includes("git', ['diff', '--cached'"), 'Publication scope tool does not verify staged paths');

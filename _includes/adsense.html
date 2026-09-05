@@ -18,8 +18,25 @@
   {% assign adsense_allowed = false %}
 {% endif %}
 
-{% if adsense_allowed and jekyll.environment == 'production' and site.google_ad_client != empty and site.google_ad_client %}
+{% assign ad_client_configured = false %}
+{% if jekyll.environment == 'production' and site.google_ad_client != empty and site.google_ad_client %}
+  {% assign ad_client_configured = true %}
+{% endif %}
+
+{% comment %}
+  Ownership verification is not monetization. AdSense verifies site ownership from
+  a tag present on every page, but ad code should only load where an ad is allowed
+  to render. Gating both behind `adsense_allowed` meant the ~40% of posts held back
+  from advertising also carried no ownership tag at all, which is why the console
+  kept asking to verify ownership. The account meta tag is one of the three
+  verification methods AdSense offers, so it ships site-wide; the ad loader stays
+  behind the editorial gate.
+{% endcomment %}
+{% if ad_client_configured %}
   <meta name="google-adsense-account" content="{{ site.google_ad_client }}">
+{% endif %}
+
+{% if adsense_allowed and ad_client_configured %}
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <script
     async
