@@ -5,6 +5,9 @@ categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-04-17 15:10:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ## Hugging Face Cookbook: Little-Known Gem for Practical AI
 

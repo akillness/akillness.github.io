@@ -9,6 +9,9 @@ math: false
 image:
   path: "https://storage.googleapis.com/gweb-research2023-media/images/Open_Graph.width-800.format-jpeg.jpg"
   alt: "Vibe Coding XR"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: Why is XR still so hard to prototype quickly?

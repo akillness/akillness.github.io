@@ -10,6 +10,9 @@ math: false
 image:
   path: /assets/img/posts/2026-03-16-opendev-llm/opendev-architecture.png
   alt: "OpenDev overview from PyTorch Korea discussion"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: Why do we still route everything through one LLM?

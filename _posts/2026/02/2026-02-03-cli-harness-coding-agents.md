@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-03-cli-agents/gemini-cli.png
   alt: "Gemini CLI in the terminal"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Gemini CLI](/assets/img/2026-02-03-cli-agents/gemini-cli.png)

@@ -5,6 +5,9 @@ categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2024-07-19 13:30:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ![ ColPali Efficient Document Retrieval with Vision Language Model  ](/assets/img/llm/colpali-retrieval-vision-language-model.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 

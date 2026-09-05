@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-03/ai-coding.jpg
   alt: "AI coding and agent workflows"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![AI coding workflow](/assets/img/2026-02-03/ai-coding.jpg)

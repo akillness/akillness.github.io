@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/ai/harness-techtarget.jpg
   alt: "Agent orchestration stack"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question

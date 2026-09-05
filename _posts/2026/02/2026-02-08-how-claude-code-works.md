@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-08-claude-code-works/agentic-loop.svg
   alt: "Claude Code agentic loop"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Claude Code agentic loop](/assets/img/2026-02-08-claude-code-works/agentic-loop.svg)

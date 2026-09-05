@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-12-entire-world/cover.png
   alt: "Entire funding announcement"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Entire funding announcement](/assets/img/2026-02-12-entire-world/cover.png)

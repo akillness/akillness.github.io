@@ -5,6 +5,9 @@ categories: [Multimodal/Computer Vision]
 tags: [Multimodal, Vision, Generative Model]
 date: 2024-05-23 19:00:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 {% include embed/youtube.html id='r9giQPUp1Gw' %}
 

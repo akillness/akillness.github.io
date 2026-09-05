@@ -10,6 +10,9 @@ image:
   path: /assets/img/ai/ouroboros-1.png
   lqip: data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAACQBQCdASogABcAPxF0tFMsJiUisBgIAYAiCWcABRAEb78b/TDtxl9FCOFh9I7M0vaTmPcR8AD+7U1FJ+CZKz1bHw1vpfT4C7puHsnpZJFQPrKWCx+VAkganfMF609GEW7BLxvzDVeGXqtRH8iGXAxr3KVQdo7KPXdRb/sknT1Gl7apzv9aOLNMnWDds7qIeKcjdQhIq48HU/GiDk+fL7kCyyvR2RgEAAA=
   alt: "Ouroboros specification-first harness"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question

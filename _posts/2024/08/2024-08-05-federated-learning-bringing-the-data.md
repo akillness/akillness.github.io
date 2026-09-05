@@ -5,6 +5,9 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-08-05 12:00:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ## Federated Learning: Training on Private Data Without Centralization
 

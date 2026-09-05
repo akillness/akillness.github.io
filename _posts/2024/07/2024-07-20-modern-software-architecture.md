@@ -4,6 +4,9 @@ description: "As software systems become increasingly complex, understanding the
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-07-20 15:30:00 +0800
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ## Today, I want to break down the 5 key layers that form the backbone of most modern software applications:
 

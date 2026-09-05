@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-11-developer-knowledge/cover.png
   alt: "Developer Knowledge API"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Developer Knowledge API](/assets/img/2026-02-11-developer-knowledge/cover.png)

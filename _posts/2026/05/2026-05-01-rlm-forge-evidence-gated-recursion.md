@@ -4,6 +4,9 @@ description: "A practical review of Q00/rlm-forge and its core claim: recursion 
 date: 2026-05-01 10:00:00 +0900
 categories: [AI, Systems]
 tags: [RLM, Hermes, Ouroboros, TraceGuard, evaluation, hallucination, agent-runtime]
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## The Question I Started With

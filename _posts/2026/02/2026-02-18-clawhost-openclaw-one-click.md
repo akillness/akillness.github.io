@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/ai/clawhost-1.jpg
   alt: "ClawHost one‑click deployment"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question

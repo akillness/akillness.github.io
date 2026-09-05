@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-09-openclaw-phone/cover.jpg
   alt: "OpenClaw on an old Android phone"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![OpenClaw on an old Android phone](/assets/img/2026-02-09-openclaw-phone/cover.jpg)

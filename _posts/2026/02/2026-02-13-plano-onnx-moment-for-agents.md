@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-13-plano/logo.svg
   alt: "Plano logo"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Plano logo](/assets/img/2026-02-13-plano/logo.svg){: .light .w-75 .shadow .rounded-10 }

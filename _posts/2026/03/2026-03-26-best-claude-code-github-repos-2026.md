@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/posts/2026-03-26-claude-repos/cover.svg
   alt: "9 GitHub Repos for Claude Code"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: What if your next Claude Code project didn’t start from scratch?

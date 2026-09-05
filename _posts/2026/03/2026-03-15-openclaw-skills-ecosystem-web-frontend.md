@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/posts/2026-03-15-openclaw-skills-web-frontend/digitalbourgeois-2878.png
   alt: "OpenClaw skill ecosystem overview from digitalbourgeois"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: What are we optimizing for, really?

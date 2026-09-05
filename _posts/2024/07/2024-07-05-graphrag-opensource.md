@@ -5,6 +5,9 @@ categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2024-07-05 10:10:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ## GraphRAG is Now Open Source!
 

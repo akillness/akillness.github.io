@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/ai/clawd-control-1.jpg
   alt: "Clawd Control dashboard"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question

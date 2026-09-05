@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-13-pi-agent/cover.png
   alt: "Pi minimal agent"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Pi minimal agent](/assets/img/2026-02-13-pi-agent/cover.png)

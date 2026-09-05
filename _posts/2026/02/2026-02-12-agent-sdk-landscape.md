@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-12-agent-sdk/cover.png
   alt: "Agent SDK landscape"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Agent SDK landscape](/assets/img/2026-02-12-agent-sdk/cover.png)

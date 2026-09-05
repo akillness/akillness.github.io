@@ -5,6 +5,9 @@ categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-07-22 13:00:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ## A Survey of Prompt Engineering Methods in Large Language Models
 

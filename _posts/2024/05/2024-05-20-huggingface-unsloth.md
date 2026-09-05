@@ -5,6 +5,9 @@ categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-20 14:10:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ## Unsloth AI: 1 Million Monthly Downloads Milestone 🎉
 

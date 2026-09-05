@@ -6,6 +6,9 @@ tags: [LLM, Model, Paper]
 date: 2024-05-29 00:13:00 +0800
 pin: false
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 | Subject | Type | Link|
 | :--- | :--- | :--- |

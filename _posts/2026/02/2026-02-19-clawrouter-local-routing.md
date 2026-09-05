@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/ai/clawrouter-ecosystem-1.jpg
   alt: "Minimal OpenClaw ecosystem snapshot"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question

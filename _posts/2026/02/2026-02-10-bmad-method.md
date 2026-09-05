@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-10-bmad-method/banner.png
   alt: "BMAD Method"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![BMAD Method](/assets/img/2026-02-10-bmad-method/banner.png)

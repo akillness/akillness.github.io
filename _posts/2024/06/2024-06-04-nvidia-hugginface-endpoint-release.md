@@ -5,6 +5,9 @@ categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-06-04 02:00:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ## NVIDIA NIM on Hugging Face Inference Endpoints: Simplified AI Deployment
 

@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-05-mcp-toolbox/architecture.png
   alt: "MCP Toolbox architecture"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![MCP Toolbox architecture](/assets/img/2026-02-05-mcp-toolbox/architecture.png)

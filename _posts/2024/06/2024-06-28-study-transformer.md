@@ -6,6 +6,7 @@ tags: [LLM, Model, Paper]
 date: 2024-06-28 00:10:00 +0800
 robots: noindex, follow
 sitemap: false
+ads: false
 ---
 # Step to explain Transformer 
 > Dataset : <https://github.com/NoCodeProgram/deepLearning/tree/main/rnn>

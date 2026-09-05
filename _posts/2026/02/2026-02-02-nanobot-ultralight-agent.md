@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-02/nanobot_arch.png
   alt: "nanobot architecture overview"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 <div style="display:flex; gap:12px; flex-wrap:wrap;">

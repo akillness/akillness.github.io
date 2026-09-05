@@ -86,23 +86,20 @@ check(plugin.includes("post.data['hidden'] = true"), 'noindex posts are not hidd
 check(plugin.includes('priority :highest'), 'noindex pagination policy does not run before jekyll-paginate');
 check(plugin.includes('page.url.match?'), 'archive policy does not classify pagination URLs');
 check(plugin.includes("page.data['sitemap'] = false"), 'archive policy does not exclude generated pages from sitemap');
-check(plugin.includes('data-monetization-eligible="false"'), 'archive policy does not read the rendered monetization verdict back off the built posts');
-check(plugin.includes('ineligible_paths'), 'archive policy does not strip search-excluded post URLs from the built sitemap');
 const head = read('_includes/head.html');
 check(head.includes('paginator.page > 1'), 'head does not render pagination noindex as a fallback');
 
 // The published editorial standard on /about/, /start-here/ and /terms/ promises
 // that a post without enough original analysis leaves search AND advertising.
-// Advertising was enforced by word count from the start; search was not, so for a
-// long time the site advertised a boundary it did not apply. Keep the promise and
-// the two enforcement points locked to each other.
+// Advertising was enforced by word count from the start; search was not, so the
+// site advertised a boundary it only half applied. The three front-matter keys are
+// what actually carry the boundary through every listing, feed, search tier and
+// the sitemap, so they must always travel together: withdrawing ads without
+// withdrawing the page from search is the exact contradiction to prevent.
 const promisePages = ['_tabs/about.md', '_tabs/start-here.md', '_tabs/terms.md'];
 for (const file of promisePages) {
   check(read(file).includes('removed from search and advertising'), `${file} no longer states the search-and-advertising boundary`);
 }
-check(head.includes('minimum_index_words'), 'head does not apply the editorial word threshold to indexing');
-check(head.includes('site.google_ad_min_post_words'), 'head indexing gate does not share the advertising word threshold');
-check(head.includes("page.layout == 'post' and robots_directive == nil"), 'head indexing gate does not defer to an explicit per-post robots value');
 const adsense = read('_includes/adsense.html');
 check(adsense.includes('ad_client_configured'), 'adsense include does not separate publisher configuration from ad eligibility');
 check(
@@ -129,6 +126,28 @@ const walkFiles = (dir) => {
   return found;
 };
 const postFiles = walkFiles(path.join(root, '_posts')).filter((file) => file.endsWith('.md'));
+
+// A post held back from advertising must also be held back from search, and the
+// reverse. Enforcing the triple at the source is what makes the boundary cascade:
+// every listing, the feed, both search tiers, related-posts and the sitemap all
+// key off `robots: noindex`, and `ads: false` is what keeps the ad loader off the
+// page. Splitting them is how the site ended up advertising a search boundary it
+// never applied to 109 posts.
+let boundedPosts = 0;
+for (const file of postFiles) {
+  const frontMatter = fs.readFileSync(file, 'utf8').split(/^---\s*$/m)[1] || '';
+  const noindex = /^robots:\s*noindex, follow$/m.test(frontMatter);
+  const outOfSitemap = /^sitemap:\s*false$/m.test(frontMatter);
+  const noAds = /^ads:\s*false$/m.test(frontMatter);
+  if (!noindex && !outOfSitemap && !noAds) continue;
+  boundedPosts += 1;
+  const relative = path.relative(root, file);
+  check(noindex, `${relative}: withheld from advertising or the sitemap but still indexable`);
+  check(outOfSitemap, `${relative}: noindex but still submitted in the sitemap`);
+  check(noAds, `${relative}: removed from search but does not explicitly disable ads`);
+}
+check(boundedPosts >= protectedPosts.length, 'editorial boundary is applied to fewer posts than the protected set');
+
 const postsByStem = new Map();
 for (const file of postFiles) {
   const stem = path.basename(file, '.md');

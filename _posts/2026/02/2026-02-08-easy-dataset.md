@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-08-easy-dataset/bg2.png
   alt: "Easy Dataset"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Easy Dataset](/assets/img/2026-02-08-easy-dataset/bg2.png)

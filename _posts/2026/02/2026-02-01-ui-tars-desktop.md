@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-01-ui-tars/ui-tars-icon.png
   alt: "UI‑TARS Desktop"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![UI‑TARS Desktop](/assets/img/2026-02-01-ui-tars/ui-tars-icon.png)

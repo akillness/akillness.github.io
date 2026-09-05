@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/ai/rowboat-1.jpg
   alt: "Rowboat local-first AI coworker"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question

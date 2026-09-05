@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-15-adk/cover.png
   alt: "Agent Development Kit overview"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Agent Development Kit overview](/assets/img/2026-02-15-adk/cover.png){: .light .w-75 .shadow .rounded-10 }

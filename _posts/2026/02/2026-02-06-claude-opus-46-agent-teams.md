@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-06-claude-opus-46/opus46.png
   alt: "Claude Opus 4.6"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Claude Opus 4.6](/assets/img/2026-02-06-claude-opus-46/opus46.png)

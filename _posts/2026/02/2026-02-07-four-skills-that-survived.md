@@ -6,6 +6,9 @@ tags: [Agent, Workflow, Orchestration]
 date: 2026-02-07 18:00:00 +0900
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: Why do 90% of skills die after install?

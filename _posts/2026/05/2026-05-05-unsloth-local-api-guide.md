@@ -6,6 +6,9 @@ categories: [AI, MLOps]
 tags: [Unsloth, Local-LLM, API, GGUF, Anthropic, OpenAI, Tool-Calling, inference]
 image:
   path: /assets/img/posts/2026-05-05-unsloth-api/unsloth-api-overview.png
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 If you’ve ever wanted to keep models local *and* keep your modern agent workflow, Unsloth is one of the cleanest paths today.

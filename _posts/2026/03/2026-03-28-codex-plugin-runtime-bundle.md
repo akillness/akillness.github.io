@@ -9,6 +9,9 @@ math: false
 image:
   path: "https://media.licdn.com/dms/image/v2/D5612AQELTa4UktPQ5A/article-cover_image-shrink_720_1280/B56Z0t10i6JgAI-/0/1774590577696?e=2147483647&v=beta&t=Kbw87unhsHnFXA3WFeazD2MtsPBUd0koFpCYfYVyBwQ"
   alt: "Codex plugin architecture"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: Why do many teams misunderstand plugins?

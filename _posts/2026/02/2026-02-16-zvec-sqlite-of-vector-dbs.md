@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-16-zvec/logo.svg
   alt: "Zvec logo"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Zvec logo](/assets/img/2026-02-16-zvec/logo.svg){: .light .w-75 .shadow .rounded-10 }

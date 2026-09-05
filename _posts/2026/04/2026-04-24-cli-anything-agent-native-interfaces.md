@@ -10,6 +10,9 @@ math: false
 image:
   path: /assets/img/posts/2026-04-24-cli-anything/teaser.png
   alt: "CLI-Anything teaser image"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: Why do many capable agents still fail on real software tasks?

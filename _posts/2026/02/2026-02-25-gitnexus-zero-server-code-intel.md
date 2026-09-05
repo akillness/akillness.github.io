@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/ai/gitnexus-1.jpg
   alt: "GitNexus repository overview"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question

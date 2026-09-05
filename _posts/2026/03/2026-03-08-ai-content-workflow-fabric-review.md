@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/posts/2026-03-08-ai-content-workflow-fabric-review/fabric-github.png
   alt: "Fabric GitHub repository screenshot"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: Why this topic now?

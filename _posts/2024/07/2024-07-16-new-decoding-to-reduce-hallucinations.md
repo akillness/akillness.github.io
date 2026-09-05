@@ -5,6 +5,9 @@ description: "This new decoding method is simple yet extremely impressive!"
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-07-16 11:30:00 +0800
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ### DoLa decoding, which made a conference paper at ICLR '24, has just been merged in Transformers by João Gante and Yung-Sung Chuang.
 This new decoding method is simple yet extremely impressive!

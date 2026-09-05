@@ -6,6 +6,9 @@ tags: [Agent, Workflow, Orchestration]
 date: 2026-02-06 22:45:00 +0900
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: What happens when the tool starts evaluating the developer?

@@ -4,6 +4,9 @@ description: "Complex but... also simple. Let me explain:."
 categories: [Development Tools/Productivity]
 tags: [Development Tools, Productivity, Reference]
 date: 2024-05-14 11:20:00 +0800
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ## 3 bird flocks avoid each other in the sky. What's the dynamics?
 Complex but... also simple. Let me explain:

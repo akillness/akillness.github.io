@@ -6,6 +6,9 @@ tags: [Agent, Workflow, Orchestration]
 date: 2026-02-07 02:10:00 +0900
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: What if a skill could *create itself*?

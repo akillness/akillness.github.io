@@ -10,6 +10,9 @@ image:
   path: /assets/img/ai/agentation-readout-1.png
   lqip: data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQBACdASogABEAPxF4sVIsJySisBgIAYAiCWcAAI918jqMXpaiZVRuwAD+8cTtjUzLjzrj+wTmSzUTPzu7xuR46EKz2tiWcWAc+YKV1SU8gcL/h5Ii+jWrPUvDpk28KYAAAA==
   alt: "Agentation and Readout tools for agentic coding"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question

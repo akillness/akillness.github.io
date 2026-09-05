@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-12-deepcode/cover.png
   alt: "DeepCode logo"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![DeepCode logo](/assets/img/2026-02-12-deepcode/cover.png)

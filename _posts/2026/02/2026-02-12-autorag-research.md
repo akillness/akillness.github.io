@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-12-autorag-research/cover.png
   alt: "AutoRAG-Research"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![AutoRAG-Research](/assets/img/2026-02-12-autorag-research/cover.png)

@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/ai/agent-repos-1.jpg
   alt: "AI agent learning repositories"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question

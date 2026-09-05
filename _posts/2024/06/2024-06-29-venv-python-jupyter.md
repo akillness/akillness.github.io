@@ -5,6 +5,9 @@ categories: [Data Science/Algorithms]
 tags: [Data Science, Algorithm, Analysis]
 date: 2024-06-29 00:10:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ## Setting Jupyter Kernel with Python Virtual Environment
 

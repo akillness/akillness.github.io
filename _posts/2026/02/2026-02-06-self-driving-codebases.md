@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-06-self-driving-codebases/cover.png
   alt: "Self‑driving codebases"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Self‑driving codebases](/assets/img/2026-02-06-self-driving-codebases/cover.png)

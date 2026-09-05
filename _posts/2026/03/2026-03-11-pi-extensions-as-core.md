@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/posts/2026-03-11-pi-extension-ecosystem/pi-dev.png
   alt: "pi.dev social card"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question

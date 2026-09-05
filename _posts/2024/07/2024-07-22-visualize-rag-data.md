@@ -5,6 +5,9 @@ categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2024-07-22 14:00:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ## Visualize Your RAG Data: EDA for Retrieval-Augmented Generation
 

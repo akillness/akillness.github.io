@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-04-qwen3-coder-next/benchmarks.png
   alt: "Qwen3‑Coder‑Next benchmarks"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Qwen3‑Coder‑Next benchmarks](/assets/img/2026-02-04-qwen3-coder-next/benchmarks.png)

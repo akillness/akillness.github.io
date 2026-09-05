@@ -5,6 +5,9 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-07-20 11:30:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ### RouteLLM ⇒ 𝗰𝘂𝘁 𝟱𝟬% 𝗼𝗳 𝗰𝗼𝘀𝘁 ✂️
 

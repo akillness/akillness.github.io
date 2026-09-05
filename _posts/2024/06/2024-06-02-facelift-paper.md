@@ -5,6 +5,9 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-06-02 19:00:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 {% include embed/youtube.html id='drEB44IfZi0' %}
 

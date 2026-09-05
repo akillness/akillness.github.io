@@ -6,6 +6,9 @@ tags: [Agent, Workflow, Orchestration]
 date: 2026-02-04 18:00:00 +0900
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: What if “skills” are the real unit of agent scale?

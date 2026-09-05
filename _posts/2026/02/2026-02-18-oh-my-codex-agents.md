@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-18-oh-my-codex/hero.png
   alt: "oh-my-codex character"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![oh-my-codex character](/assets/img/2026-02-18-oh-my-codex/hero.png){: .light .w-75 .shadow .rounded-10 }

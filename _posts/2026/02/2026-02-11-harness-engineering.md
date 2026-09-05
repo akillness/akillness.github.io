@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-11-harness-engineering/cover.jpg
   alt: "Harness engineering"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Harness engineering](/assets/img/2026-02-11-harness-engineering/cover.jpg)

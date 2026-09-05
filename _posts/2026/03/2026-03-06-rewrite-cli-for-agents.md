@@ -10,6 +10,9 @@ image:
   path: /assets/img/ai/rewrite-cli-agents-1.png
   lqip: data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAABQAwCdASogABEAPxF+s1QsKCQjKAqpgCIJZwC4qBV5M4Z+GAD+7VSrPMbYXafsXgn6cc7A2k74BLUB9cQiF+rNsAbcAmWzX2MAAA==
   alt: "Rewrite your CLI for AI agents"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question

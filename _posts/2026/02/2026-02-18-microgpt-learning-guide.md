@@ -6,6 +6,9 @@ tags: [gpt, transformers, microgpt, Learning, tutorial]
 date: 2026-02-18 13:34:00 +0900
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question

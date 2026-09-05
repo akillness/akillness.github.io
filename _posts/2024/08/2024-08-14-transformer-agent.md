@@ -5,6 +5,9 @@ categories: [Agent/Orchestration]
 tags: [Agent, Workflow, Orchestration]
 date: 2024-08-14 11:20:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ## Agents 2.0: New Version of Hugging Face Agents Framework
 

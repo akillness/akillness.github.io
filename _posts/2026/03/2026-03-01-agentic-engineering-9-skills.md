@@ -10,6 +10,9 @@ image:
   path: /assets/img/ai/agentic-engineering-9-skills-1.png
   lqip: data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAABQBACdASogABEAPxF8sFGsKCSisBgIAYAiCWkAAC5yTiaNpnrLJEgE5E4AAP7rFKRrTwLEUw1ou/d4RmPHggDe2lNQIRWIJkOYmZTrQvw6UFTzl02Q+4Oh2+7gDY21IG7TgdgHscAAAA==
   alt: "Flowkater: Agentic Engineering 9 Skills"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question

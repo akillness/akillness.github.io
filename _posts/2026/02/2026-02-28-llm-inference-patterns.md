@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/ai/llm-inference-patterns-1.jpg
   alt: "LLM inference patterns overview"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question

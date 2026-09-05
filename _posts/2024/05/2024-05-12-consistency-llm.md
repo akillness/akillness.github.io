@@ -5,6 +5,9 @@ categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-12 13:27:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ### Consistency Large Language Models: Efficient Parallel Decoders and 3.4 X Faster ( from [Maryam Miradi, PhD](https://www.linkedin.com/in/maryammiradi/))
 

@@ -172,6 +172,11 @@ for (const entry of postEntries) {
   } else if (eligibility === 'false') {
     nonMonetizedPosts += 1;
     check(!hasLoader && !hasSlot && !hasCta, `ineligible post has a commercial surface: ${route}`);
+    // /about/, /start-here/ and /terms/ promise removal from search *and*
+    // advertising. Withdrawing the ads while leaving the page in the index is the
+    // half-applied boundary that made 40% of the indexed archive contradict the
+    // published standard, so the artifact has to prove both halves together.
+    check(isNoindex, `post held back from advertising is still indexable (${words}): ${route}`);
   }
 
   const jsonScripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi)];

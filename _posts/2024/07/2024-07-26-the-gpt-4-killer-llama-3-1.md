@@ -5,6 +5,9 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-07-26 10:00:00 +0800
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 ![ Overview of Llama 3.1 ](/assets/img/llm/New-King-Llama-31.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 

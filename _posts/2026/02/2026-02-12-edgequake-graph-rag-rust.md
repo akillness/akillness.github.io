@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/2026-02-12-edgequake/screenshot.png
   alt: "EdgeQuake UI screenshot"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![EdgeQuake UI screenshot](/assets/img/2026-02-12-edgequake/screenshot.png){: .light .w-75 .shadow .rounded-10 }

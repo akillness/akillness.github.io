@@ -10,6 +10,9 @@ image:
   path: /assets/img/ai/localcowork-demo-1.png
   lqip: data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAABQBQCdASogABYAPwVssFArpiUisAwBcCCJYwDAQ1/AWWRymoC3vXEksaMFSqAMyDtttAAA/u/EOxDYcPCE4j6m0cNPV7jcCdUk/ud8jpHP8dYh7TgPsyimgz9IG5639YQDJSaAtrXAHBYO9wI2C7Nc70iyQ6oVvaf2Dj3OjD8EoSgIAAA=
   alt: "LocalCowork demo (Liquid AI blog)"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## 🤔 Curiosity: The Question
