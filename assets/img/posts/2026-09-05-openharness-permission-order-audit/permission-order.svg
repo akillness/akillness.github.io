@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="900" height="520" role="img" aria-label="Order of checks inside the OpenHarness permission checker, showing the allow list returning before user command and path deny rules">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#B45309"/>
+    </marker>
+    <style>
+      .s{fill:none;stroke:#24324A;stroke-width:1.6}
+      .t{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;fill:#24324A}
+      .n{font-size:14px}.m{font-size:12.5px;fill:#4A5568}.h{font-size:15px;font-weight:600}
+      .stop{fill:#FDE8E4;stroke:#C2410C}
+      .go{fill:#E6F4EA;stroke:#2F855A}
+      .skip{fill:#F4F5F7;stroke:#A0AEC0;stroke-dasharray:5 4}
+      .amber{stroke:#B45309;stroke-width:2.2;fill:none}
+    </style>
+  </defs>
+
+  <text class="t h" x="20" y="26">PermissionChecker.evaluate() — order of checks at commit 9b2efd7</text>
+
+  <!-- step boxes -->
+  <g>
+    <rect class="s stop" x="20" y="48" width="470" height="42" rx="6"/>
+    <text class="t n" x="34" y="66">1. Built-in SENSITIVE_PATH_PATTERNS</text>
+    <text class="t m" x="34" y="82">hard-coded credential paths — cannot be overridden</text>
+
+    <rect class="s stop" x="20" y="102" width="470" height="42" rx="6"/>
+    <text class="t n" x="34" y="120">2. denied_tools (tool name)</text>
+    <text class="t m" x="34" y="136">explicit deny still wins</text>
+
+    <rect class="s go" x="20" y="156" width="470" height="46" rx="6"/>
+    <text class="t n" x="34" y="175">3. allowed_tools (tool name)</text>
+    <text class="t m" x="34" y="191">returns allowed = true and stops here</text>
+
+    <rect class="s skip" x="20" y="216" width="470" height="42" rx="6"/>
+    <text class="t n" x="34" y="234">4. path_rules — your deny globs</text>
+    <text class="t m" x="34" y="250">never reached once step 3 matches</text>
+
+    <rect class="s skip" x="20" y="270" width="470" height="42" rx="6"/>
+    <text class="t n" x="34" y="288">5. denied_commands — your command globs</text>
+    <text class="t m" x="34" y="304">never reached once step 3 matches</text>
+
+    <rect class="s" x="20" y="324" width="470" height="42" rx="6"/>
+    <text class="t n" x="34" y="342">6-9. full_auto / read-only / plan / confirm</text>
+    <text class="t m" x="34" y="358">mode-based fallbacks</text>
+  </g>
+
+  <!-- short circuit arc -->
+  <path class="amber" d="M500 179 C 610 179, 610 345, 500 345" marker-end="url(#a)"/>
+  <text class="t n" x="620" y="252" fill="#B45309">short-circuit</text>
+  <text class="t m" x="620" y="270">steps 4 and 5 are skipped</text>
+
+  <!-- outcome panel -->
+  <g>
+    <text class="t h" x="620" y="70">What still holds</text>
+    <text class="t m" x="620" y="92">• credential paths (step 1)</text>
+    <text class="t m" x="620" y="110">• tool-name denies (step 2)</text>
+    <text class="t h" x="620" y="146">What is bypassed</text>
+    <text class="t m" x="620" y="168">• your path deny globs</text>
+    <text class="t m" x="620" y="186">• your command deny globs</text>
+  </g>
+
+  <text class="t m" x="20" y="396">Reproduced 2026-09-05 by executing the pinned evaluate() directly.</text>
+  <text class="t m" x="20" y="416">allowed_tools = ["bash"], denied_commands = ["rm -rf /*", "rm -rf /"]  →  allowed = true</text>
+  <text class="t m" x="20" y="436">without allowed_tools, the same command  →  allowed = false ("Command matches deny pattern")</text>
+</svg>
