@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="Helvetica, Arial, sans-serif">
+  <!-- No opaque full-canvas background: drawn on transparency by policy -->
+  <text x="600" y="52" text-anchor="middle" font-size="30" font-weight="bold" fill="#1a2a3a">One benchmark number, three surfaces</text>
+  <text x="600" y="82" text-anchor="middle" font-size="17" fill="#4a5a6a">aipoch/open-science · BiomniBench-DA "Public 50" · audited at commit 37a159df</text>
+
+  <!-- Surface 1: internal workbook -->
+  <rect x="60" y="120" width="320" height="150" rx="12" fill="none" stroke="#7a8a9a" stroke-width="2.5" stroke-dasharray="7 5"/>
+  <text x="220" y="152" text-anchor="middle" font-size="19" font-weight="bold" fill="#4a5a6a">Private workbook</text>
+  <text x="220" y="182" text-anchor="middle" font-size="15" fill="#4a5a6a">internal run · gpt-5.6-sol (xhigh)</text>
+  <text x="220" y="206" text-anchor="middle" font-size="15" fill="#4a5a6a">dual-judge mean 79.05</text>
+  <text x="220" y="230" text-anchor="middle" font-size="15" fill="#4a5a6a">no public run artifacts</text>
+  <text x="220" y="254" text-anchor="middle" font-size="14" font-style="italic" fill="#8a5a2a">runner-up cell: other judge count, other model</text>
+
+  <!-- Arrow to blog -->
+  <path d="M 380 195 L 430 195" stroke="#7a8a9a" stroke-width="2.5" fill="none" marker-end="url(#arr)"/>
+
+  <!-- Surface 2: blog -->
+  <rect x="435" y="120" width="320" height="150" rx="12" fill="none" stroke="#2a7a4a" stroke-width="2.5"/>
+  <text x="595" y="152" text-anchor="middle" font-size="19" font-weight="bold" fill="#2a7a4a">Blog · Aug 31</text>
+  <text x="595" y="182" text-anchor="middle" font-size="15" fill="#3a5a4a">"not an official first-place listing"</text>
+  <text x="595" y="206" text-anchor="middle" font-size="15" fill="#3a5a4a">"internal run" · not yet listed externally</text>
+  <text x="595" y="230" text-anchor="middle" font-size="15" fill="#3a5a4a">no statistically established lead</text>
+  <text x="595" y="254" text-anchor="middle" font-size="14" font-style="italic" fill="#2a7a4a">hedges present</text>
+
+  <!-- Arrow to README -->
+  <path d="M 755 195 L 805 195" stroke="#7a8a9a" stroke-width="2.5" fill="none" marker-end="url(#arr)"/>
+
+  <!-- Surface 3: README -->
+  <rect x="810" y="120" width="320" height="150" rx="12" fill="none" stroke="#b33a3a" stroke-width="3"/>
+  <text x="970" y="152" text-anchor="middle" font-size="19" font-weight="bold" fill="#b33a3a">README · Sep 1</text>
+  <text x="970" y="184" text-anchor="middle" font-size="24" font-weight="bold" fill="#b33a3a">&#127942; #1 badge</text>
+  <text x="970" y="212" text-anchor="middle" font-size="15" fill="#7a3a3a">"achieved the highest ranking score"</text>
+  <text x="970" y="236" text-anchor="middle" font-size="15" fill="#7a3a3a">evidence shipped: one JPEG</text>
+  <text x="970" y="258" text-anchor="middle" font-size="14" font-style="italic" fill="#b33a3a">hedges gone</text>
+
+  <!-- Divider -->
+  <line x1="60" y1="320" x2="1130" y2="320" stroke="#9aa8b5" stroke-width="1.5" stroke-dasharray="4 6"/>
+  <text x="600" y="356" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a2a3a">Meanwhile, inside the same product's code</text>
+
+  <!-- Provenance engine box -->
+  <rect x="150" y="386" width="900" height="180" rx="14" fill="none" stroke="#2a5a9a" stroke-width="2.5"/>
+  <text x="600" y="420" text-anchor="middle" font-size="18" font-weight="bold" fill="#2a5a9a">Artifact provenance subsystem (src/main/artifacts/)</text>
+  <text x="600" y="452" text-anchor="middle" font-size="15" fill="#3a4a6a">every artifact version: checksum re-verified at read · producer run id bound · environment manifest hashed</text>
+  <text x="600" y="480" text-anchor="middle" font-size="15" fill="#3a4a6a">evidence states: available · partial · unavailable (typed reason) — mismatch throws ProvenanceIntegrityError</text>
+  <text x="600" y="512" text-anchor="middle" font-size="15" fill="#3a4a6a">e2e certification: provenance must survive an app relaunch</text>
+  <text x="600" y="546" text-anchor="middle" font-size="16" font-weight="bold" font-style="italic" fill="#8a5a2a">The README badge would not pass the rules the product enforces for its users' artifacts.</text>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#7a8a9a"/>
+    </marker>
+  </defs>
+</svg>
