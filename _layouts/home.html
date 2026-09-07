@@ -29,6 +29,14 @@ refactor: true
       <h1>{{ site.tagline }}</h1>
       <p>{{ site.description }}</p>
     </header>
+    <nav class="home-reading-paths" aria-labelledby="reading-paths-heading">
+      <h2 id="reading-paths-heading">Start with a decision</h2>
+      <ul>
+        <li><a href="{{ '/start-here/#agents--harness-engineering' | relative_url }}">Build a more reliable agent workflow</a></li>
+        <li><a href="{{ '/start-here/#rag--retrieval' | relative_url }}">Choose a retrieval or memory approach</a></li>
+        <li><a href="{{ '/start-here/#multimodal--vision' | relative_url }}">Evaluate vision and game-AI research</a></li>
+      </ul>
+    </nav>
   {% endif %}
 
   {% assign in_pinned_section = false %}

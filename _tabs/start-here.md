@@ -24,9 +24,9 @@ The four posts that best show what this blog does — read one primary source pr
 The main thread. Agent loops, tool dispatch, spec-first workflows, evaluation, and the scaffolding that decides whether an agent survives contact with production.
 
 - [DeepSeek Harness: What If the Agent Loop Itself Were Just Another Plugin?](/posts/deepseek-harness-everything-is-a-plugin/)
-- [jeo-code: The Harness Engine That Makes You a 10× AI Builder](/posts/jeo-code-ai-builder-harness/) — includes video
+- [jeo-code Puts Skills and Approval Gates Around Coding Agents](/posts/jeo-code-ai-builder-harness/) — includes video
 - [One Memory Setup, Every Harness: Omnigent's Hindsight Bridge](/posts/omnigent-hindsight-universal-memory/)
-- [Agentic Engineering: 9 Skills](/posts/agentic-engineering-9-skills/)
+- [OpenHarness Lets Its Allow List Outrank Your Deny Rules](/posts/openharness-permission-order-audit/)
 
 → [All agent posts](/categories/agent-orchestration/)
 
@@ -47,7 +47,7 @@ Architectures read closely enough to explain, not just cite.
 
 - [Diffusion Models, Visually: How Noise Becomes an Image](/posts/diffusion-model-visual-breakdown/)
 - [Building LLaMA 4 from Scratch: Mixture-of-Experts](/posts/building-llama-4-from-scratch-mixture-of-experts/)
-- [LLM Inference Patterns](/posts/llm-inference-patterns/)
+- [NPGA: tracking and rendering measured separately](/posts/npga-paper/)
 - [LLM Course — Let's build a simple LLM](/posts/llm-course-trying/)
 
 → [All model & paper posts](/categories/llm-model-papers/)
@@ -104,7 +104,7 @@ A few conventions worth knowing before you read:
 - **Code is executed, not illustrated.** Where a post claims code runs, the output shown is real output. Companion files are downloadable so you can check.
 - **Findings are dated.** Star counts, version numbers, and benchmarks are recorded on the date noted. They will drift; the post says when it was true.
 - **Mistakes get published too.** Several posts document where my own first calculation was wrong. That is the useful part.
-- **AI assistance is disclosed site-wide.** I use AI tools for transcription, translation, first-pass diagrams, and code-review support. I remain the author and editor, read the primary sources myself, run claimed code where practical, and remove claims that cannot be verified. AI output is never treated as evidence by itself.
+- **AI assistance is disclosed site-wide.** AI can assist research, drafting, translation, diagrams, and code review. Scheduled audits may publish under standing approval after independent evidence review and automated checks, not per-page human approval. I remain accountable for the editorial rules and corrections. The [editorial method](/about/#editorial-method-and-ai-assistance) explains this boundary; AI output is never evidence by itself.
 - **Legacy notes are reviewed separately.** Older reference posts without enough original analysis are removed from search and advertising until they are rewritten or retired.
 
 ## Publishing cadence

@@ -5,8 +5,8 @@ swcache: true
 
 {% comment %}
   Tier-1 search index: metadata + a short snippet only (no full post body).
-  Loaded first when the visitor opens the search box so results appear quickly;
-  `search.json` (full text) is fetched afterwards and replaces this dataset.
+  Loaded when the visitor first types a query. `search.json` (full text) is
+  fetched only if metadata has no match, then serves subsequent queries.
   Keep the field list and the snippet definition in sync with `search.json`.
 {% endcomment %}
 {% assign searchable_posts = '' | split: '' %}

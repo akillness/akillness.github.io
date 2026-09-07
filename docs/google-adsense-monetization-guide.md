@@ -75,13 +75,14 @@ Jekyll과 같은 정적 사이트 생성기(SSG)는 포스트 개수가 많아�
 `search.json` 하나를 모든 페이지 로드 시점에 통째로 내려받던 구조(당시 측정 2.2 MB, gzip 740 KB)를 다음과 같이 바꿨습니다.
 
 1. **Tier 1 — `assets/js/data/search-meta.json`** (137 KB, gzip 40 KB)
-   - 제목·URL·카테고리·태그·200자 스니펫만 포함. 검색창에 처음 포커스/입력이 발생할 때 요청됩니다.
+   - 제목·URL·카테고리·태그·200자 스니펫만 포함. 비어 있지 않은 검색어를 처음 입력할 때 요청됩니다.
 2. **Tier 2 — `assets/js/data/search.json`** (2.2 MB, gzip 740 KB)
-   - 본문 전문 인덱스. Tier 1이 적용된 직후 백그라운드로 받아 데이터셋을 교체하며, 이때부터 본문 전문 검색이 동작합니다.
+   - 본문 전문 인덱스. Tier 1에서 일치 결과가 없을 때만 추가로 받아 검색합니다. 제목·태그·스니펫으로 답할 수 있으면 내려받지 않습니다. 한 번 받아 둔 뒤에는 이후 질의에도 사용합니다.
 3. **로더 (`_includes/search-loader.html`)**
    - 페이지 로드 시에는 아무 인덱스도 요청하지 않습니다(검색을 쓰지 않는 방문자의 전송량 = 0).
    - SimpleJekyllSearch는 호출할 때마다 `searchInput`에 자체 리스너를 등록하므로, 실제 입력창 대신 detached 엘리먼트를 넘기고 질의는 로더가 직접 구동합니다. Tier 2 재초기화 시 핸들러가 중복되지 않습니다.
    - 두 인덱스의 스니펫 정의가 동일하므로 Tier 1 → Tier 2 교체 시 결과 표시가 달라지지 않습니다.
+   - 검색 중·결과 수·무결과·통신 실패를 상태 영역으로 알립니다. 실패는 무결과와 구분하며 재시도 버튼을 제공합니다. 비운 검색어·취소·이전 질의의 늦은 응답은 현재 화면을 덮어쓰지 않습니다.
 
 > `search-loader.html`의 인라인 스크립트는 `compress` 레이아웃이 개행을 제거하므로 `//` 주석을 쓰면 이후 코드 전체가 주석 처리됩니다. 블록 주석만 사용하세요.
 
@@ -144,10 +145,12 @@ Jekyll과 같은 정적 사이트 생성기(SSG)는 포스트 개수가 많아�
 | 편집 안전 기준 | `_config.yml` 의 `google_ad_min_post_words` | 800단어, Google 정책이 아닌 이 사이트의 보수적 광고 기준 |
 
 `_includes/adsense.html` 은 `jekyll.environment == 'production'` 이면서
-`site.google_ad_client` 가 비어 있지 않을 때만 동작한다. 로더 허용 범위는 홈페이지와
-`google_ad_min_post_words` 기준을 통과한 포스트뿐이다. 일반 지원 페이지, `noindex`
-페이지, 태그·카테고리 상세, 404에는 meta 태그와 `adsbygoogle.js` 로더를 모두 넣지
-않는다. 즉 로컬 빌드와 저밀도 또는 검색 제외 화면에는 광고 코드가 없다.
+`site.google_ad_client` 가 비어 있지 않을 때만 동작한다. 소유권 확인용
+`google-adsense-account` meta 태그는 Jekyll 공개 페이지에 유지하지만, 실제 광고
+로더는 `layout: post`이며 `google_ad_min_post_words` 기준을 통과한 포스트에만
+들어간다. 홈·지원 페이지·`noindex` 페이지·태그·카테고리 상세·404에는 로더와
+광고 유닛을 넣지 않는다. 소유권 메타 태그의 존재는 광고 요청이나 승인과 다르다.
+GA는 이 광고 경계와 독립적으로 유지한다.
 
 `portfolio/`, `resume/`, `resume_eng/` 같은 독립 HTML 페이지도 광고 로더가 없고
 `noindex`로 운영한다. 검색용 포트폴리오는 서버 렌더링되는 `/projects/`가 담당한다.
@@ -158,6 +161,9 @@ Jekyll과 같은 정적 사이트 생성기(SSG)는 포스트 개수가 많아�
 `<ins>` 와 `push({})` 만 출력한다. 두 유닛 모두 프로덕션 빌드 + `google_ad_client`
 + 해당 슬롯 ID + 사이트의 편집 안전 기준을 모두 통과해야 렌더링된다. 포스트 front
 matter에 `ads: false`를 넣으면 분량과 무관하게 그 글을 광고에서 제외한다.
+현재 콘텐츠 품질 보류 정책은 이 값을 `robots: noindex, follow` 및 `sitemap: false`와
+함께 사용하며, 이 결합 규칙은 `verify-editorial-boundaries.mjs`가 검사한다.
+광고만 끄고 색인은 유지하는 별도 정책으로 조용히 해석하거나 변경하지 않는다.
 
 본문 중간 유닛은 `_includes/post-content.html` 이 본문을 `</p>` 경계로 잘라
 자동 삽입한다. 문단이 8개 미만인 짧은 글은 건너뛰고, 중간 지점 이후에서

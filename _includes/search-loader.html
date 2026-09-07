@@ -20,193 +20,248 @@
   </article>
 {% endcapture %}
 
-{% capture not_found %}<p class="mt-5">{{ site.data.locales[include.lang].search.no_results }}</p>{% endcapture %}
-
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var input = document.getElementById('search-input');
     var results = document.getElementById('search-results');
+    var status = document.getElementById('search-status');
+    var retry = document.getElementById('search-retry');
+    var cancel = document.getElementById('search-cancel');
 
-    if (input === null || results === null) {
+    if (!input || !results || !status || !retry) {
       return;
     }
 
     var META_URL = '{{ '/assets/js/data/search-meta.json' | relative_url }}';
     var FULL_URL = '{{ '/assets/js/data/search.json' | relative_url }}';
     var SEARCH_LIBRARY = '{{ site.data.origin[type].search.js | relative_url }}';
-    var metaSearcher = null;
-    var fullSearcher = null;
     var libraryPromise = null;
     var metaPromise = null;
     var fullPromise = null;
-    var metaState = 'idle';
-    var fullState = 'idle';
+    var metaSearcher = null;
+    var fullSearcher = null;
     var inputTimer = null;
+    var request = 0;
+
+    function escapeText(value) {
+      return String(value == null ? '' : value).replace(/[&<>"']/g, function (character) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character];
+      });
+    }
+
+    function safeUrl(value) {
+      try {
+        if (typeof value !== 'string' || /[\\\u0000-\u0020\u007f]/.test(value)) {
+          return '#';
+        }
+        var url = new URL(value, window.location.href);
+        if (!/^https?:$/.test(url.protocol) || url.origin !== window.location.origin || url.username || url.password) {
+          return '#';
+        }
+        /* Use a validated absolute URL: a path beginning // must not become external. */
+        return url.href;
+      } catch (error) {
+        return '#';
+      }
+    }
 
     var options = {
       resultsContainer: results,
       searchResultTemplate: '{{ result_elem | strip_newlines }}',
-      noResultsText: '{{ not_found }}',
-      templateMiddleware: function (prop, value, template) {
-        if (prop === 'categories') {
-          if (value === '') {
-            return `${value}`;
-          }
-          return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+      noResultsText: '',
+      templateMiddleware: function (prop, value) {
+        var text = escapeText(value);
+        if (prop === 'url') {
+          return escapeText(safeUrl(value));
         }
-
-        if (prop === 'tags') {
-          if (value === '') {
-            return `${value}`;
-          }
-          return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+        if (prop === 'categories' && text !== '') {
+          return '<div class="me-sm-4"><i class="far fa-folder fa-fw" aria-hidden="true"></i>' + text + '</div>';
         }
+        if (prop === 'tags' && text !== '') {
+          return '<div><i class="fa fa-tag fa-fw" aria-hidden="true"></i>' + text + '</div>';
+        }
+        return text;
       }
     };
 
+    function setState(message, busy, failed) {
+      results.setAttribute('aria-busy', String(busy));
+      status.textContent = message;
+      retry.hidden = !failed;
+      retry.disabled = busy;
+    }
+
     function loadLibrary() {
-      if (window.SimpleJekyllSearch) {
+      if (typeof window.SimpleJekyllSearch === 'function') {
         return Promise.resolve();
       }
-
       if (libraryPromise !== null) {
         return libraryPromise;
       }
-
+      var script = document.createElement('script');
       libraryPromise = new Promise(function (resolve, reject) {
-        var script = document.createElement('script');
         script.src = SEARCH_LIBRARY;
         script.async = true;
-        script.onload = resolve;
+        script.onload = function () {
+          if (typeof window.SimpleJekyllSearch === 'function') {
+            resolve();
+          } else {
+            reject(new Error('Search library did not initialize.'));
+          }
+        };
         script.onerror = function () {
-          reject(new Error('failed to load search library'));
+          reject(new Error('Search library could not load.'));
         };
         document.head.appendChild(script);
+      }).catch(function (error) {
+        script.remove();
+        libraryPromise = null;
+        throw error;
       });
-
       return libraryPromise;
     }
 
-    /* SimpleJekyllSearch binds its own input listener on every call. Point it at
-       a detached element and drive queries here so replacing an index does not
-       duplicate page-level listeners. */
+    /* SJS has singleton state. Once the full index is built, always use it.
+       Detached inputs prevent its per-build listeners from binding to the UI. */
     function build(index) {
       options.searchInput = document.createElement('input');
       options.json = index;
       return window.SimpleJekyllSearch(options).search;
     }
 
-    function fetchIndex(url) {
-      return fetch(url).then(function (res) {
-        if (!res.ok) {
-          throw new Error('failed to get ' + url + ' (' + res.status + ')');
+    function fetchIndex(url, full) {
+      return fetch(url).then(function (response) {
+        if (!response.ok) {
+          throw new Error('Search index could not load (' + response.status + ').');
         }
-        return res.json();
+        return response.json();
+      }).then(function (index) {
+        if (!Array.isArray(index)) {
+          throw new Error('Search index is malformed.');
+        }
+        var fields = ['title', 'url', 'categories', 'tags', 'date', 'snippet'];
+        if (full) {
+          fields.push('content');
+        }
+        return index.map(function (item) {
+          var record = {};
+          fields.forEach(function (field) {
+            if (!item || typeof item[field] !== 'string') {
+              throw new Error('Search index record is malformed.');
+            }
+            record[field] = item[field];
+          });
+          return record;
+        });
       });
     }
 
     function loadMeta() {
-      if (metaState === 'ready') {
-        return Promise.resolve();
-      }
-
-      if (metaState === 'loading') {
-        return metaPromise;
-      }
-
-      metaState = 'loading';
-      metaPromise = Promise.all([loadLibrary(), fetchIndex(META_URL)])
-        .then(function (values) {
-          metaSearcher = build(values[1]);
-          metaState = 'ready';
-        })
-        .catch(function (err) {
-          metaState = 'idle';
-          throw err;
+      /* Cache the index independently of the library so a library retry cannot
+         duplicate an index request that is still in flight. */
+      if (metaPromise === null) {
+        metaPromise = fetchIndex(META_URL, false).catch(function (error) {
+          metaPromise = null;
+          throw error;
         });
-
-      return metaPromise;
+      }
+      return Promise.all([loadLibrary(), metaPromise]).then(function (values) {
+        if (metaSearcher === null && fullSearcher === null) {
+          metaSearcher = build(values[1]);
+        }
+      });
     }
 
     function loadFull() {
-      if (fullState === 'ready') {
-        return Promise.resolve();
-      }
-
-      if (fullState === 'loading') {
-        return fullPromise;
-      }
-
-      fullState = 'loading';
-      fullPromise = fetchIndex(FULL_URL)
-        .then(function (index) {
+      if (fullPromise === null) {
+        fullPromise = fetchIndex(FULL_URL, true).then(function (index) {
           fullSearcher = build(index);
-          fullState = 'ready';
-        })
-        .catch(function (err) {
-          fullState = 'idle';
-          throw err;
+        }).catch(function (error) {
+          fullPromise = null;
+          throw error;
         });
-
+      }
       return fullPromise;
     }
 
-    function runQuery(searcher) {
-      var query = input.value.trim();
+    function isCurrent(id, query) {
+      return id === request && input.value.trim() === query;
+    }
+
+    function runQuery(searcher, query) {
       results.innerHTML = '';
-
-      if (searcher === null || query === '') {
-        return false;
-      }
-
       searcher(query);
-      return results.querySelector('article') !== null;
+      return results.querySelectorAll('article').length;
+    }
+
+    function complete(count) {
+      setState(count ? count + (count === 1 ? ' result shown.' : ' results shown.') : 'No matching articles found.', false, false);
     }
 
     function search() {
+      var id = ++request;
       var query = input.value.trim();
-
+      results.innerHTML = '';
       if (query === '') {
-        results.innerHTML = '';
-        results.removeAttribute('aria-busy');
+        setState('Type to search articles.', false, false);
         return;
       }
-
-      if (fullSearcher !== null) {
-        runQuery(fullSearcher);
-        return;
-      }
-
-      loadMeta()
-        .then(function () {
-          if (input.value.trim() !== query) {
-            return;
+      setState('Searching articles...', true, false);
+      Promise.resolve().then(function () {
+        if (!isCurrent(id, query)) {
+          return;
+        }
+        return fullSearcher === null ? loadMeta() : undefined;
+      }).then(function () {
+        if (!isCurrent(id, query)) {
+          return;
+        }
+        var count = runQuery(fullSearcher || metaSearcher, query);
+        if (count || fullSearcher !== null) {
+          complete(count);
+          return;
+        }
+        setState('Searching full article text...', true, false);
+        return loadFull().then(function () {
+          if (isCurrent(id, query)) {
+            complete(runQuery(fullSearcher, query));
           }
-
-          if (runQuery(metaSearcher)) {
-            return;
-          }
-
-          results.setAttribute('aria-busy', 'true');
-          return loadFull()
-            .then(function () {
-              if (input.value.trim() === query) {
-                runQuery(fullSearcher);
-              }
-            })
-            .finally(function () {
-              results.removeAttribute('aria-busy');
-            });
-        })
-        .catch(function (err) {
-          console.error(err);
-          results.removeAttribute('aria-busy');
         });
+      }).catch(function (error) {
+        if (isCurrent(id, query)) {
+          results.innerHTML = '';
+          setState('Search is temporarily unavailable. Please try again.', false, true);
+          console.error(error);
+        }
+      });
     }
 
-    input.addEventListener('input', function () {
+    function invalidate() {
+      ++request;
       window.clearTimeout(inputTimer);
-      inputTimer = window.setTimeout(search, 120);
+      results.innerHTML = '';
+      setState('Type to search articles.', false, false);
+    }
+
+    function schedule() {
+      invalidate();
+      if (input.value.trim() !== '') {
+        setState('Searching articles...', true, false);
+        inputTimer = window.setTimeout(search, 120);
+      }
+    }
+
+    input.addEventListener('input', schedule);
+    /* Native search clear/Escape may also emit a search event. Do not prevent
+       keyboard defaults or take over the existing jQuery panel visibility. */
+    input.addEventListener('search', schedule);
+    if (cancel) {
+      cancel.addEventListener('click', invalidate);
+    }
+    retry.addEventListener('click', function () {
+      invalidate();
+      input.focus();
+      search();
     });
   });
 </script>

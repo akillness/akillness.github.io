@@ -5,6 +5,9 @@
     <div id="search-hints">
       {% include_cached trending-tags.html %}
     </div>
-    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+    <p id="search-help" class="text-muted mt-3">Search article titles, categories, and tags. Full text is searched when needed.</p>
+    <p id="search-status" role="status" aria-live="polite" aria-atomic="true">Type to search articles.</p>
+    <button id="search-retry" type="button" class="btn btn-outline-primary" aria-controls="search-results" hidden>Retry search</button>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3" role="region" aria-label="Search results" aria-busy="false"></div>
   </div>
 </div>

@@ -24,41 +24,54 @@ const record = (area, name, ok, detail) => results.push({ area, name, ok, detail
 
 // ---------------------------------------------------------------- 1. SITE ---
 
-const adsTxt = await page.evaluate(async (site) => {
-  const res = await fetch(`${site}/ads.txt`, { cache: 'no-store' })
-  return { status: res.status, body: res.ok ? (await res.text()).slice(0, 500) : '' }
+const EXPECTED_CLIENT = 'ca-' + EXPECTED_PUB
+const siteEvidence = await page.evaluate(async (site) => {
+  async function read(url) {
+    const res = await fetch(url, { cache: 'no-store' })
+    const body = await res.text()
+    const doc = new DOMParser().parseFromString(body, 'text/html')
+    return {
+      status: res.status, url: res.url, body,
+      meta: [...doc.querySelectorAll('meta[name="google-adsense-account"]')].map(el => el.content),
+      loaders: [...doc.querySelectorAll('script[src]')].map(el => el.getAttribute('src')).filter(src => /adsbygoogle\.js/i.test(src)),
+      slots: [...doc.querySelectorAll('ins.adsbygoogle, ins[data-ad-slot]')].map(el => ({ client: el.getAttribute('data-ad-client'), slot: el.getAttribute('data-ad-slot') })),
+      eligible: doc.querySelector('article[data-monetization-eligible]')?.getAttribute('data-monetization-eligible'),
+      robots: doc.querySelector('meta[name="robots"]')?.content || '',
+      ga: !!doc.querySelector('script[src*="googletagmanager.com/gtag/js"]'),
+      links: [...doc.querySelectorAll('a[href]')].map(el => new URL(el.getAttribute('href'), res.url).href).filter(url => url.startsWith(site + '/posts/'))
+    }
+  }
+  const ads = await fetch(site + '/ads.txt', { cache: 'no-store' })
+  const adsTxt = { status: ads.status, body: await ads.text() }
+  const home = await read(site + '/?adsense-check=' + Date.now())
+  let eligible = null
+  for (const url of [...new Set(home.links)].slice(0, 30)) {
+    const candidate = await read(url)
+    if (candidate.status === 200 && candidate.eligible === 'true' && !candidate.robots.includes('noindex')) { eligible = candidate; break }
+  }
+  const protectedPages = await Promise.all(['/about/', '/categories/', '/tags/', '/archives/', '/404.html', '/posts/googleio-review/'].map(route => read(site + route)))
+  return { adsTxt, home, eligible, protectedPages }
 }, SITE)
 
-record('SITE', 'ads.txt reachable', adsTxt.status === 200, `HTTP ${adsTxt.status}`)
-record(
-  'SITE',
-  'ads.txt names expected publisher',
-  adsTxt.body.includes(EXPECTED_PUB),
-  (adsTxt.body.match(/^google\.com.*$/m) || ['<no google.com line>'])[0]
-)
-
-await page.goto(`${SITE}/?adsense-check=${Date.now()}`, { waitUntil: 'domcontentloaded' })
-await page.waitForTimeout(4000)
-
-const head = await page.evaluate(() => ({
-  metaPub: document.querySelector('meta[name="google-adsense-account"]')?.content || null,
-  loader: document.querySelector('script[src*="adsbygoogle"]')?.src || null,
-  ga: !!document.querySelector('script[src*="googletagmanager"]')
-}))
-
-const wired = Boolean(head.metaPub && head.loader)
-record('SITE', 'google-adsense-account meta tag', Boolean(head.metaPub), head.metaPub || 'absent')
-record('SITE', 'adsbygoogle.js loader', Boolean(head.loader), head.loader || 'absent')
-record('SITE', 'GA4 tag still present', head.ga, head.ga ? 'googletagmanager loaded' : 'missing')
-
-if (!wired) {
-  record(
-    'SITE',
-    'ad markup expected?',
-    true,
-    'no — `google_ad_client` in _config.yml is empty on purpose, so adsense.html is skipped'
-  )
+record('SITE', 'ads.txt reachable', siteEvidence.adsTxt.status === 200, 'HTTP ' + siteEvidence.adsTxt.status)
+const googleLines = siteEvidence.adsTxt.body.split(/\r?\n/).map(line => line.replace(/\s*#.*$/, '').trim()).filter(line => /^google\.com\s*,/i.test(line))
+const expectedAdsLine = new RegExp('^google\\.com\\s*,\\s*' + EXPECTED_PUB + '\\s*,\\s*DIRECT\\s*,\\s*f08c47fec0942fa0\\s*$')
+record('SITE', 'ads.txt exact publisher record', googleLines.length === 1 && expectedAdsLine.test(googleLines[0]), googleLines.join('; ') || 'missing')
+function checkPage(evidence, label, adsAllowed) {
+  record('SITE', label + ' reachable', evidence.status === 200, 'HTTP ' + evidence.status)
+  record('SITE', label + ' exact ownership', evidence.meta.length === 1 && evidence.meta[0] === EXPECTED_CLIENT, evidence.meta.join(', ') || 'absent')
+  const exactLoader = src => {
+    let url; try { url = new URL(src) } catch { return false }
+    return url.origin === 'https://pagead2.googlesyndication.com' && url.pathname === '/pagead/js/adsbygoogle.js' && url.searchParams.getAll('client').length === 1 && url.searchParams.get('client') === EXPECTED_CLIENT
+  }
+  record('SITE', label + ' loader boundary', adsAllowed ? evidence.loaders.length === 1 && exactLoader(evidence.loaders[0]) : evidence.loaders.length === 0, evidence.loaders.join(', ') || 'absent (expected on protected pages)')
+  record('SITE', label + ' unit boundary', adsAllowed ? evidence.slots.length > 0 && evidence.slots.every(unit => unit.client === EXPECTED_CLIENT && /^\d+$/.test(unit.slot || '')) : evidence.slots.length === 0, evidence.slots.length + ' units')
 }
+checkPage(siteEvidence.home, 'home', false)
+record('SITE', 'GA4 tag still present', siteEvidence.home.ga, siteEvidence.home.ga ? 'googletagmanager present' : 'missing')
+record('SITE', 'eligible article discovered', Boolean(siteEvidence.eligible), siteEvidence.eligible?.url || 'none among first 30 distinct home article links; inspect discovery separately')
+if (siteEvidence.eligible) checkPage(siteEvidence.eligible, 'eligible article', true)
+for (const protectedPage of siteEvidence.protectedPages) checkPage(protectedPage, new URL(protectedPage.url).pathname, false)
 
 // ----------------------------------------------------------- 2. DASHBOARD ---
 //

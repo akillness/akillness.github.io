@@ -1,9 +1,7 @@
 {% assign adsense_allowed = false %}
 {% assign minimum_ad_words = site.google_ad_min_post_words | default: 800 %}
 
-{% if page.layout == 'home' and page.url == '/' %}
-  {% assign adsense_allowed = true %}
-{% elsif page.layout == 'post' %}
+{% if page.layout == 'post' and page.url != '/' and page.url != '/404.html' %}
   {% assign post_words = page.content | strip_html | number_of_words: 'auto' %}
   {% if page.ads != false and post_words >= minimum_ad_words %}
     {% assign adsense_allowed = true %}
@@ -24,13 +22,9 @@
 {% endif %}
 
 {% comment %}
-  Ownership verification is not monetization. AdSense verifies site ownership from
-  a tag present on every page, but ad code should only load where an ad is allowed
-  to render. Gating both behind `adsense_allowed` meant the ~40% of posts held back
-  from advertising also carried no ownership tag at all, which is why the console
-  kept asking to verify ownership. The account meta tag is one of the three
-  verification methods AdSense offers, so it ships site-wide; the ad loader stays
-  behind the editorial gate.
+  Ownership verification is separate from ad eligibility. The account meta tag
+  ships site-wide; the ad loader is restricted to eligible article pages.
+  This template cannot determine the current account review status.
 {% endcomment %}
 {% if ad_client_configured %}
   <meta name="google-adsense-account" content="{{ site.google_ad_client }}">

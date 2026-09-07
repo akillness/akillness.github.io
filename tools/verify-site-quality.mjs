@@ -3,6 +3,74 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+
+import { fileURLToPath } from 'node:url';
+
+// Dependency-free reader for this repository's deliberately scalar ad settings.
+export function readAdConfig(file = new URL('../_config.yml', import.meta.url)) {
+  const text = fs.readFileSync(file, 'utf8');
+  const scalar = (v = '') => v.replace(/\s+#.*$/, '').trim().replace(/^(['"])(.*)\1$/, '$2');
+  const setting = (key) => scalar(text.match(new RegExp('^' + key + ':([^\\n]*)', 'm'))?.[1]);
+  const slots = text.match(/^google_ad_slots:\s*\n((?:[ \t]+[^\n]*\n|\n)*)/m)?.[1] || '';
+  const slot = (key) => scalar(slots.match(new RegExp('^\\s+' + key + ':([^\\n]*)', 'm'))?.[1]);
+  const config = { client: setting('google_ad_client'), minimum: Number(setting('google_ad_min_post_words') || 800), bottom: slot('post_bottom'), inArticle: slot('post_in_article') };
+  if (!/^ca-pub-\d+$/.test(config.client) || !Number.isFinite(config.minimum) || config.minimum <= 0 || !/^\d+$/.test(config.bottom) || !/^\d+$/.test(config.inArticle)) throw new Error('Invalid or missing configured ad publisher, word minimum, or slots');
+  return config;
+}
+const attributes = (tag) => Object.fromEntries([...tag.matchAll(/([\w-]+)\s*=\s*(["'])(.*?)\2/gs)].map((m) => [m[1].toLowerCase(), m[3]]));
+export function contentRegion(html, className) {
+  const opening = [...html.matchAll(/<div\b[^>]*>/gi)].find((m) => (attributes(m[0]).class || '').split(/\s+/).includes(className));
+  if (!opening) return null;
+  const start = opening.index + opening[0].length;
+  let depth = 1;
+  for (const match of html.slice(start).matchAll(/<\/?div\b[^>]*>/gi)) {
+    depth += /^<\//.test(match[0]) ? -1 : 1;
+    if (depth === 0) return { body: html.slice(start, start + match.index), start: opening.index, end: start + match.index + match[0].length };
+  }
+  return null;
+}
+export function expectsInArticle(content) {
+  // Mirrors current post-content.html, not the superseded 600-word heuristic.
+  let region;
+  while ((region = contentRegion(content, 'post-ad-in-article'))) content = content.slice(0, region.start) + content.slice(region.end);
+  const blocks = content.replaceAll('</p>', '</p><!--ad-anchor-->').split('<!--ad-anchor-->');
+  while (blocks.at(-1) === '') blocks.pop(); // Ruby Liquid split drops empty tails.
+  if (blocks.length < 8) return false;
+  const midpoint = Math.floor(blocks.length / 2);
+  return blocks.some((_, i) => i + 1 >= midpoint && blocks.length - i > 2 && ['<p', '<h'].includes((blocks[i + 1] || '').trim().slice(0, 2)));
+}
+export function verifyAdBoundary(html, { route, eligible = false, config, inArticleExpected = false, ownership = true }) {
+  html = html.replace(/<!--[\s\S]*?-->/g, '');
+  const errors = [];
+  const require = (ok, message) => { if (!ok) errors.push(message + ': ' + route); };
+  const metas = [...html.matchAll(/<meta\b[^>]*>/gi)].map((m) => attributes(m[0])).filter((a) => a.name === 'google-adsense-account');
+  if (ownership) require(metas.length === 1 && metas[0].content === config.client, 'ownership meta must name configured publisher exactly once');
+  const loaders = [...html.matchAll(/<script\b[^>]*>/gi)].map((m) => attributes(m[0])).filter((a) => /adsbygoogle\.js/i.test(a.src || ''));
+  require(loaders.length === (eligible ? 1 : 0), eligible ? 'eligible post must have exactly one loader' : 'protected page has an ad loader');
+  for (const loader of loaders) {
+    let url; try { url = new URL(loader.src.replaceAll('&amp;', '&')); } catch {}
+    require(url?.origin === 'https://pagead2.googlesyndication.com' && url.pathname === '/pagead/js/adsbygoogle.js' && url.searchParams.getAll('client').length === 1 && url.searchParams.get('client') === config.client, 'loader must use exact configured publisher');
+  }
+  const units = [...html.matchAll(/<ins\b[^>]*>/gi)].map((m) => attributes(m[0])).filter((a) => (a.class || '').split(/\s+/).includes('adsbygoogle') || a['data-ad-slot']);
+  const expected = eligible ? [config.bottom, ...(inArticleExpected ? [config.inArticle] : [])] : [];
+  require(units.length === expected.length, 'unexpected ad unit count (expected ' + expected.length + ', got ' + units.length + ')');
+  for (const slot of new Set(expected)) require(units.filter((a) => a['data-ad-slot'] === slot).length === expected.filter((s) => s === slot).length, 'configured slot missing or duplicated ' + slot);
+  for (const unit of units) {
+    require(unit['data-ad-client'] === config.client, 'ad unit has wrong publisher');
+    require(expected.includes(unit['data-ad-slot']), 'unexpected ad slot');
+    require(!/(display\s*:\s*none|visibility\s*:\s*hidden)/i.test(unit.style || ''), 'hidden ad unit');
+  }
+  if (eligible) {
+    for (const [className, slot] of [['post-ad-bottom', config.bottom], ...(inArticleExpected ? [['post-ad-in-article', config.inArticle]] : [])]) {
+      const body = contentRegion(html, className)?.body || '';
+      require([...body.matchAll(/<ins\b[^>]*>/gi)].some((m) => attributes(m[0])['data-ad-slot'] === slot), 'configured slot outside ' + className);
+    }
+  }
+  return errors;
+}
+
+function main() {
+const adConfig = readAdConfig();
 const siteDir = path.resolve(process.argv[2] || '_site');
 const origin = 'https://akillness.github.io';
 // This is a project review floor for legacy stubs, not a Google word-count requirement.
@@ -93,7 +161,7 @@ for (const root of ['tags', 'categories']) {
     const html = fs.readFileSync(file, 'utf8');
     listingSurfaces.push({ route: `/${root}/${entry.name}/`, html });
     check(/<meta name="robots" content="[^"]*noindex[^"]*">/i.test(html), `archive lacks noindex: /${root}/${entry.name}/`);
-    check(!html.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'), `archive loads AdSense: /${root}/${entry.name}/`);
+    failures.push(...verifyAdBoundary(html, { route: `/${root}/${entry.name}/`, config: adConfig }));
   }
 }
 check(archiveCount > 0, 'no generated archive pages were found');
@@ -112,7 +180,7 @@ for (const entry of fs.readdirSync(siteDir, { withFileTypes: true })) {
   check(cardCount > 0, `orphan pagination page has no visible posts: ${route}`);
   const pageIndex = html.match(/<li class="page-index[^>]*>[\s\S]*?<span>(\d+)<\/span>[\s\S]*?<span[^>]*>\/\s*(\d+)<\/span>/i);
   if (pageIndex) check(Number(pageIndex[1]) <= Number(pageIndex[2]), `pagination index exceeds visible total: ${route}`);
-  check(!html.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'), `pagination loads AdSense: ${route}`);
+  failures.push(...verifyAdBoundary(html, { route, config: adConfig }));
   check(!locations.includes(`${origin}${route}`), `pagination is in sitemap.xml: ${route}`);
 }
 check(paginationCount > 0, 'no paginated home pages were found');
@@ -150,6 +218,9 @@ for (const entry of postEntries) {
   check(Number.isFinite(words), `content word count marker missing: ${route}`);
   const hasLoader = html.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js');
   const hasSlot = /data-ad-slot="\d+"/i.test(article);
+  const body = contentRegion(article, 'content');
+  check(Boolean(body), 'article content region missing: ' + route);
+  failures.push(...verifyAdBoundary(html, { route, config: adConfig, eligible: eligibility === 'true' && !isNoindex, inArticleExpected: expectsInArticle(body?.body || '') }));
   const hasCta = /class="[^"]*post-cta\b/i.test(article);
   const hasHiddenAd = [...article.matchAll(/<ins\b[^>]*>/gi)].some(
     ([tag]) => /adsbygoogle/i.test(tag) && /(display\s*:\s*none|visibility\s*:\s*hidden)/i.test(tag)
@@ -167,7 +238,7 @@ for (const entry of postEntries) {
   }
   if (eligibility === 'true') {
     monetizedPosts += 1;
-    check(words >= 800, `post below 800 words is monetized (${words}): ${route}`);
+    check(words >= adConfig.minimum, `post below configured ${adConfig.minimum} words is monetized (${words}): ${route}`);
     check(hasLoader && hasSlot && hasCta, `eligible post is missing loader, slot, or CTA: ${route}`);
   } else if (eligibility === 'false') {
     nonMonetizedPosts += 1;
@@ -212,8 +283,7 @@ for (const route of [
 const home = exists('index.html') ? read('index.html') : '';
 listingSurfaces.push({ route: '/', html: home });
 check(/<html lang="en"/i.test(home), 'home page is not English');
-check(home.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'), 'home page is missing the AdSense ownership loader');
-check(home.includes('<meta name="google-adsense-account" content="ca-pub-3706360396883624">'), 'home page is missing the AdSense ownership meta tag');
+failures.push(...verifyAdBoundary(home, { route: '/', config: adConfig }));
 const navigationRoutes = ['/', '/start-here/', '/categories/', '/tags/', '/archives/', '/about/', '/projects/', '/work-with-me/', '/contact/', '/privacy/', '/terms/'];
 for (const route of navigationRoutes) {
   const output = route === '/' ? ['index.html'] : [route.slice(1, -1), 'index.html'];
@@ -232,7 +302,7 @@ for (const route of ['/archives/', '/contact/', '/privacy/', '/terms/']) {
 }
 for (const route of ['about', 'projects', 'start-here', 'work-with-me', 'contact', 'privacy', 'terms', 'archives', 'categories', 'tags']) {
   const html = exists(route, 'index.html') ? read(route, 'index.html') : '';
-  check(!html.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'), `/${route}/ unexpectedly loads AdSense`);
+  failures.push(...verifyAdBoundary(html, { route: `/${route}/`, config: adConfig }));
 }
 const about = exists('about', 'index.html') ? read('about', 'index.html') : '';
 check((about.match(/googletagmanager\.com\/gtag\/js/g) || []).length === 1, '/about/ must load Google Analytics exactly once');
@@ -264,10 +334,13 @@ for (const entry of postEntries) {
 const koreanPost = exists('posts', 'googleio-review', 'index.html') ? read('posts', 'googleio-review', 'index.html') : '';
 check(/<html lang="ko"/i.test(koreanPost), 'Korean post language override failed');
 const notFound = exists('404.html') ? read('404.html') : '';
-check(!notFound.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'), '404 page loads AdSense');
+failures.push(...verifyAdBoundary(notFound, { route: '/404.html', config: adConfig }));
+// Search is currently an in-page panel, not a standalone route. Guard a future standalone page if present.
+if (exists('search', 'index.html')) failures.push(...verifyAdBoundary(read('search', 'index.html'), { route: '/search/', config: adConfig }));
 for (const route of ['portfolio', 'resume', 'resume_eng']) {
   const html = exists(route, 'index.html') ? read(route, 'index.html') : '';
   check(/<meta name="robots" content="[^"]*noindex[^"]*">/i.test(html), `/${route}/ lacks noindex`);
+  failures.push(...verifyAdBoundary(html, { route: `/${route}/`, config: adConfig, ownership: false }));
 }
 const portfolio = exists('portfolio', 'index.html') ? read('portfolio', 'index.html') : '';
 check(portfolio.includes('<link rel="canonical" href="https://akillness.github.io/projects/">'), '/portfolio/ canonical does not point to /projects/');
@@ -275,7 +348,7 @@ const internalGuide = exists('docs', 'google-adsense-monetization-guide', 'index
   ? read('docs', 'google-adsense-monetization-guide', 'index.html')
   : '';
 check(/<meta name="robots" content="[^"]*noindex[^"]*">/i.test(internalGuide), 'internal AdSense guide lacks noindex');
-check(!internalGuide.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'), 'internal AdSense guide loads AdSense');
+failures.push(...verifyAdBoundary(internalGuide, { route: '/docs/google-adsense-monetization-guide/', config: adConfig }));
 
 if (failures.length) {
   console.error(`Site quality verification failed with ${failures.length} issue(s):`);
@@ -284,3 +357,7 @@ if (failures.length) {
 }
 
 console.log(`Site quality verification passed: ${locations.length} sitemap URLs, ${postEntries.length} posts, ${archiveCount} noindex archives, ${paginationCount} noindex pagination pages, ${noindexPosts} noindex posts, ${monetizedPosts} monetized posts, ${nonMonetizedPosts} protected posts.`);
+
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();

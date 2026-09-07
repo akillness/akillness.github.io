@@ -57,3 +57,64 @@ img[src$='.svg'],
 a.preview-img[href$='.svg'] {
   background-color: #f8fafc;
 }
+
+/* Legacy .light illustrations often have no dark counterpart. Keep those visible,
+   while retaining the theme's intentional paired light/dark image behavior. */
+.content:not(:has(a.img-link.dark, img.dark)) a.img-link.light {
+  display: inline-flex;
+}
+
+.home-reading-paths {
+  margin: 0 auto 2rem;
+  max-width: 47rem;
+}
+
+.home-reading-paths h2 {
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+
+.home-reading-paths ul {
+  display: grid;
+  gap: 0.6rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+.home-reading-paths a {
+  display: block;
+  border: 1px solid var(--main-border-color);
+  border-left: 3px solid #4ecdc4;
+  border-radius: 0.3rem;
+  padding: 0.65rem 0.85rem;
+  text-decoration: none;
+}
+
+.home-reading-paths a:hover,
+.home-reading-paths a:focus-visible {
+  background: var(--card-bg);
+}
+
+.article-correction {
+  padding: 1rem 1.2rem;
+  margin: 1.5rem 0;
+  border-left: 3px solid #4ecdc4;
+  background: var(--card-bg);
+}
+
+.article-correction p {
+  margin: 0;
+  font-size: 1rem !important;
+  line-height: 1.6;
+}
+
+.article-correction .correction-scope {
+  margin-top: 0.5rem;
+  color: var(--text-muted-color);
+  font-size: 0.9rem !important;
+}
+
+#search-status {
+  font-size: 1rem !important;
+}

@@ -302,7 +302,7 @@ None of these five repos are training-data pipelines. But they were all built by
 - [akillness/jeo-skills](https://github.com/akillness/jeo-skills) — 146-skill library shared across all of the above
 
 **Related reading on this blog:**
-- [jeo-code: The Harness Engine That Makes You a 10× AI Builder](/posts/jeo-code-ai-builder-harness/)
+- [jeo-code Puts Skills and Approval Gates Around Coding Agents](/posts/jeo-code-ai-builder-harness/)
 - [The Vault That Rewrites Itself: An AI-First Second Brain for Game Teams](/posts/obsidian-second-brain-self-rewriting-vault/)
 - [Claude Code vs. Cursor vs. Codex vs. Antigravity — Why the Harness Won](/posts/agentic-coding-convergence/)
 

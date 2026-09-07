@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "liquidjs": "10.29.0",
+    "yaml": "2.9.0"
+  }
+}

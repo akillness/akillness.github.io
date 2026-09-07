@@ -1,9 +1,11 @@
 ---
-title: "jeo-code: The Harness Engine That Makes You a 10× AI Builder"
-description: "How a Bun-based AI coding agent plus 146 battle-tested skills turns any developer into a production AI builder — philosophy, workflow, use cases, and the real power of the jeo-skills ecosystem."
+title: "jeo-code Puts Skills and Approval Gates Around Coding Agents"
+description: "An affiliated overview of jeo-code's skill-driven workflow, approval gates and proposed use cases, with a measurement plan instead of unverified productivity promises."
 categories: [AI, Agents]
 tags: [jeo-code, jeo-skills, HarnessEngineering, AIBuilder, AgentWorkflow, ClaudeCode, OpenAI, Remotion]
 date: 2026-06-22 10:00:00 +0900
+correction_date: "2026-09-07"
+correction_note: "Withdrew unmeasured productivity multipliers, setup-time rankings and delivery-time claims; identified the examples as illustrative and replaced the comparison with a measurement plan. Feature descriptions, skill counts and installation commands were not fully re-audited."
 pin: true
 mermaid: false
 math: false
@@ -14,13 +16,15 @@ image:
 
 ## 🤔 Curiosity: What If Your Coding Agent Came with Its Own Skill Tree?
 
-Eight years shipping AI games at NC SOFT and COM2US taught me one thing: **the bottleneck is never raw intelligence — it's the *harness***, the scaffolding, guardrails, and feedback loops that make intelligence usable in a real repo. OpenAI's Codex experiment proved it: a 1M-line codebase with zero human-written code, where the heroes weren't the model weights but **the harness engineers.**
+My interest is in the **harness**: the scaffolding, approval boundaries and feedback loops around a coding agent. This article describes that design direction, not a controlled comparison of developer productivity.
 
 That question stuck with me: **What if the harness itself was the product?**
 
 Enter **[jeo-code](https://github.com/akillness/jeo-code)** — and its companion **[jeo-skills](https://github.com/akillness/jeo-skills)**.
 
-> **Curiosity:** Can a coding agent with a built-in skill tree make any developer 10× more productive than one using raw LLM APIs?
+I maintain the linked jeo-code and jeo-skills projects. This is an affiliated overview, not an independent product review. The retained feature and catalog descriptions are historical context, not a verified current installation guide; check the linked repositories before following commands.
+
+> **Curiosity:** Can reusable skills and explicit approval gates make repeated engineering tasks easier to inspect and reproduce?
 {: .prompt-tip}
 
 ---
@@ -41,11 +45,11 @@ But the design philosophy is what sets it apart.
 
 | Principle | What It Means | Why It Matters |
 |:----------|:--------------|:---------------|
-| **Spec-First** | `deep-interview` Socratic gate before any code | No wasted cycles on ambiguous tasks |
-| **Reviewed Plans** | `ralplan` critic subagent whose `[OKAY]` is persisted and *required* | Real consensus, not theater |
-| **Gated Execution** | `jeo approve` blocks until you explicitly confirm | You stay in control |
-| **Honest Verification** | `ultragoal` runs real suites — never fabricates per-criterion passes | Trust the output |
-| **Self-Correcting Loop** | Post-edit hooks (tsc/eslint/tests) feed diagnostics back to the agent | Bugs fixed in-loop |
+| **Spec-First** | Requirements interview before execution | Make ambiguous requirements explicit |
+| **Reviewed Plans** | A critic reviews the proposed plan | Keep a review decision available for inspection |
+| **Gated Execution** | An approval step before execution | State who may authorize the work |
+| **Honest Verification** | Completion claims checked against test output | Retain evidence, including failures |
+| **Self-Correcting Loop** | Post-edit diagnostics returned to the agent | Make errors available for another iteration |
 
 ### Multi-Provider, One Loop
 
@@ -75,7 +79,7 @@ jeo doctor                             # check config + model connection
 
 ## 📺 See It In Action
 
-Here is the official demo of jeo-code in the wild — watch the agent interview, plan, execute, and verify a real coding task:
+A promotional overview accompanies the workflow description. Treat it as an illustration, not a measurement of developer productivity:
 
 <video src="/assets/img/jeo-code/jeo-code-promo.mp4" controls muted playsinline width="100%" style="border-radius:12px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); margin: 1.5rem 0;"></video>
 
@@ -85,7 +89,7 @@ And here is the **Remotion-animated promo** rendered as React code for this post
 
 <video src="/assets/img/jeo-code/jeo-promo-remotion.mp4" controls muted playsinline width="100%" style="border-radius:12px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); margin: 1.5rem 0;"></video>
 
-> The Remotion source lives at [`tools/jeo-promo-video/src/JeoPromo.tsx`](https://github.com/akillness/akillness.github.io/tree/main/tools/jeo-promo-video) in this blog's repo.
+> The Remotion source lives at [`tools/jeo-promo-video/src/JeoPromo.tsx`](https://github.com/akillness/akillness.github.io/blob/9abcb5d1c99b5471e1e676ec37d9a40bb15abcce/tools/jeo-promo-video/src/JeoPromo.tsx) in this blog's repo.
 
 ---
 
@@ -131,7 +135,7 @@ git clone https://github.com/akillness/jeo-skills.git && bash jeo-skills/install
 
 ---
 
-## 💡 Innovation: Becoming a 10× AI Builder
+## Innovation: A Workflow That Can Be Evaluated
 
 ![jeo philosophy: curiosity retrieve innovation](/assets/img/jeo-code/philosophy.png){: .w-100 .shadow .rounded-10 }
 
@@ -142,6 +146,8 @@ The real insight isn't "jeo runs your AI." The insight is **what changes about h
 <img src="/assets/img/jeo-code/d4-flywheel.svg" alt="The Builder's Flywheel — you, the jeo engine, and the jeo-skills layer running in a continuous loop" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;" />
 
 ### Use Cases
+
+These are illustrative scenarios, not measured delivery reports. The questions, task split and time required depend on the repository, model and acceptance criteria.
 
 <details markdown="1">
 <summary style="font-size:20px; font-weight:bold; cursor:pointer;">🎮 Use Case 1: Game Feature Development</summary>
@@ -185,7 +191,7 @@ jeo "$deep-dive implement context-aware retrieval system from arxiv 2506.xxxxx
 5. `ralplan` blueprints the implementation with honest tradeoff tables
 6. `team` builds the retrieval layer, embedding pipeline, and eval harness
 
-**Time saved:** What takes a 2-person team 2 weeks, jeo handles in hours — with citations.
+**What to measure:** record research, implementation and review time for the same acceptance criteria. This scenario has no measured time-saving result.
 
 </details>
 
@@ -206,20 +212,22 @@ jeo "create a Remotion promo video + blog post for our new matchmaking AI featur
 4. Blog post authored with crisp SVG workflow diagrams, embedded video, GitHub links
 5. `vercel-deploy` or Jekyll build deploys the post
 
-**This very post you're reading was built exactly this way.** 🎉
+This article includes diagrams and promotional media. Those artifacts do not establish that an agent completed the end-to-end scenario above.
 
 </details>
 
-### The Compounding Effect
+### What the Workflow Should Make Explicit
 
-| Without jeo | With jeo + jeo-skills |
-|:-----------|:----------------------|
-| Write prompts, iterate blindly | `deep-interview` crystallizes requirements first |
-| Hope the agent doesn't hallucinate | `ralplan` critic + `[OKAY]` gate blocks bad plans |
-| Manually run tests after each change | Self-correcting hook loop — agent fixes its own bugs |
-| Start from scratch each session | `.jeo/` state persists, `/resume` continues any task |
-| One model, one provider | Switch Anthropic → OpenAI → Ollama mid-task |
-| General-purpose agent guesses | 146 skills encode exactly what experts do |
+These are evaluation questions, not a claim that other coding agents lack the same capabilities.
+
+| Design concern | Question to check on a real task |
+|:---------------|:--------------------------------|
+| Requirements | Were the acceptance criteria written before execution? |
+| Approval | Did the executed steps stay within the approved scope? |
+| Verification | Can each completion claim be traced to actual test output? |
+| Recovery | Can a fresh session recover the relevant state and evidence? |
+| Provider choice | Does the selected provider support the tools and inputs required? |
+| Skill fit | Did the selected procedure help this task, or cause rework? |
 
 ---
 
@@ -325,30 +333,32 @@ ls ~/.agents/skills/ | wc -l   # → 146
 
 ---
 
-## 📊 Performance Comparison
+## How to Measure the Difference
 
-| Approach | Setup Time | Iteration Speed | Verification | Resume After Crash | Skills |
-|:---------|:----------:|:---------------:|:------------:|:------------------:|:------:|
-| Raw LLM API | 0 min | Slow (manual) | ❌ Manual | ❌ | ❌ |
-| Generic coding agent | 5 min | Medium | ⚠️ Optional | ⚠️ | ❌ |
-| Claude Code / Codex | 10 min | Fast | ⚠️ Hook only | ✅ | ❌ |
-| **jeo-code** | **10 min** | **Fast** | **✅ Honest** | **✅** | **⚠️ Manual** |
-| **jeo-code + jeo-skills** | **15 min** | **🚀 10× Faster** | **✅ Honest** | **✅** | **✅ 146 skills** |
+No controlled productivity benchmark is supplied in this article. The earlier setup-time and speed rankings have been withdrawn. A useful comparison would run the same tasks under the same model, budget and acceptance tests, both with and without the skill layer.
 
-> The skills layer is what changes the multiplier from 3× to 10×. The agent stops guessing the right approach and follows proven, tested patterns.
-{: .prompt-info}
+| Metric | Definition | Evidence to retain |
+|:-------|:-----------|:-------------------|
+| Setup effort | Active time required before the first valid run | Setup log and environment versions |
+| Completion time | Wall-clock time and human intervention time | Timestamped run record |
+| Correctness | The same acceptance tests for every approach | Full test results, including failures |
+| Rework | Corrections needed after the first proposed completion | Review findings and patches |
+| Cost | Provider usage plus review effort | Usage records and stated accounting method |
+| Repeatability | Variation across repeated fresh runs | Per-run results, not only the best run |
+
+A workflow may help one task and hurt another. Until those measurements exist, a productivity multiplier is unknown.
 
 ---
 
-## 🧠 Hard-Won Lessons: 8 Years of Production AI
+## Engineering Judgments, Not Performance Results
 
-Building production AI for millions of game players taught me three things about agentic systems:
+My experience in production game AI suggests three design priorities. These are engineering judgments, not measured outcomes from using jeo-code:
 
 **1. Gates beat guidelines.** Telling an agent "be careful" does nothing. A gate that blocks `done` until `ultragoal` passes — that's a mechanical constraint that actually works.
 
 **2. Skills encode institutional knowledge.** Each skill in jeo-skills is a distilled answer to "what does an expert do when they encounter this?" Agents with skills don't reinvent — they apply. The difference is the same as a junior developer Googling vs a senior who already knows the answer.
 
-**3. The harness compounds.** The first week with jeo is about speed. The second week is about consistency. By the third week, you've stopped thinking about *how* to use the agent and started thinking about *what* to build. That mental shift is the real 10× multiplier.
+**3. Reuse needs evaluation.** A reusable workflow can reduce repeated setup, but stale or poorly matched instructions can also create rework. Test that trade-off on the tasks you actually repeat rather than assuming a gain.
 
 ### New Questions This Raises
 
@@ -383,8 +393,8 @@ Both repos are open source and actively maintained:
   <img src="/assets/img/jeo-code/character.png" alt="jeo-code mascot character" style="width:240px; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.5);" />
   <div>
     <p>The jeo mascot is the embodiment of the harness philosophy — methodical, precise, and always honest about what it knows. When jeo says <code>[OKAY]</code>, it means it.</p>
-    <p>Built with Bun. Powered by every major LLM. Extended by 146 battle-tested skills.</p>
-    <p><strong>This is what being a 10× AI builder actually looks like.</strong></p>
+    <p>Built with Bun. This overview presents a multi-provider loop extended through the jeo-skills catalog.</p>
+    <p><strong>The workflow is a design proposal, not a measured productivity guarantee.</strong></p>
   </div>
 </div>
 

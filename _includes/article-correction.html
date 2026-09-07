@@ -1,0 +1,6 @@
+{% if page.correction_date and page.correction_note and page.correction_date != empty and page.correction_note != empty %}
+  <aside class="article-correction" aria-label="Article correction">
+    <p><strong>Correction, <time datetime="{{ page.correction_date | date: '%Y-%m-%d' | escape }}">{{ page.correction_date | date: '%B %e, %Y' | escape }}</time>:</strong> {{ page.correction_note | escape }}</p>
+    <p class="correction-scope">This records a scoped correction, not a new publication or a full re-review of the article.</p>
+  </aside>
+{% endif %}

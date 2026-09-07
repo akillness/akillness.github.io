@@ -44,7 +44,15 @@ jobs:
       - name: Install Node.js dependencies
         run: npm ci
 
+      - name: Install pinned template-test dependencies outside the repository
+        run: |
+          mkdir -p "$RUNNER_TEMP/ak-template-tests"
+          cp tools/template-test-deps/package*.json "$RUNNER_TEMP/ak-template-tests/"
+          npm ci --prefix "$RUNNER_TEMP/ak-template-tests" --ignore-scripts --no-audit --no-fund
+
       - name: Verify editorial source boundaries
+        env:
+          TEST_NODE_MODULES: ${{ runner.temp }}/ak-template-tests/node_modules
         run: |
           node tools/verify-editorial-boundaries.mjs
           node tools/validate-editorial-harness.mjs

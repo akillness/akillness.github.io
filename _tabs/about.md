@@ -124,9 +124,9 @@ This path gave me a strong bias toward systems that are measurable, iterative, a
 
 ### Editorial Method and AI Assistance
 
-I write and approve every page published under my name. I use AI tools for transcription, translation, first-pass diagrams, and code-review support, but I do not treat generated text as evidence. For technical claims I prefer primary documentation, tagged source code, runnable checks, and dated measurements. When a claim cannot be reproduced or sourced, I remove it or label it as an opinion or limitation.
+I am accountable for this publication and its editorial rules. AI tools assist research, drafting, translation, diagrams, and code review; their output is not evidence. Scheduled source audits may publish under a standing, evidence-gated policy after independent evidence review and automated checks, without a separate human approval for each page. That review is not a claim that I personally performed every check. Technical claims should point to primary documentation, pinned source code, runnable checks, or dated measurements. Unsupported claims are removed or marked as opinion or limitation.
 
-Older reference notes are reviewed under the same standard. A post without enough original analysis is removed from search and advertising until it is rewritten or retired. Corrections can be reported through [Contact](/contact/) or the public Git history.
+Older reference notes are reviewed under the same standard. A post without enough original analysis is removed from search and advertising until it is rewritten or retired. Corrections can be reported through [Contact](/contact/) or the public Git history. A dated correction notice identifies the scope of a material correction. It does not mean every other claim was re-reviewed. Repository change dates can also include metadata maintenance, so they should not be read as independent source-review dates.
 
 ---
 

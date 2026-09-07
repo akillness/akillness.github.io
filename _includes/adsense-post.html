@@ -3,11 +3,20 @@
 
   The parent post layout calls this include only after the article clears the
   editorial monetization threshold. `adsense.html` applies the same threshold
-  to the loader in <head>; this include only emits the slot and push() call.
+  to the loader in <head>; this include independently rechecks eligibility before emitting a slot.
 
   Opt a single post out with `ads: false` in its front matter.
 -->
+{% assign minimum_ad_words = site.google_ad_min_post_words | default: 800 %}
+{% assign post_words = page.content | strip_html | number_of_words: 'auto' %}
+{% assign unit_eligible = false %}
+{% if page.layout == 'post' and page.url != '/' and page.url != '/404.html' and page.ads != false and post_words >= minimum_ad_words %}
+  {% unless page.robots contains 'noindex' %}
+    {% assign unit_eligible = true %}
+  {% endunless %}
+{% endif %}
 {% if jekyll.environment == 'production'
+  and unit_eligible
   and site.google_ad_client != empty
   and site.google_ad_client
   and site.google_ad_slots.post_bottom != empty

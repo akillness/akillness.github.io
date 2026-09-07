@@ -71,7 +71,7 @@ My open-source agent work is public enough to inspect directly:
 
 The associated articles are not release announcements. They document design pressure and failure boundaries:
 
-- [jeo-code: The Harness Engine That Makes You a 10x AI Builder](/posts/jeo-code-ai-builder-harness/)
+- [jeo-code Puts Skills and Approval Gates Around Coding Agents](/posts/jeo-code-ai-builder-harness/)
 - [DeepSeek Harness: What If the Agent Loop Itself Were Just Another Plugin?](/posts/deepseek-harness-everything-is-a-plugin/)
 - [The New MCP Roadmap](/posts/mcp-roadmap-agentic-infrastructure/)
 
