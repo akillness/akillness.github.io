@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" role="img" aria-label="Two authority layers in razzant/ouroboros: a constitution that says agency wins, and shipped supervisor code where the owner holds every switch">
+  <!-- Title -->
+  <text x="480" y="40" text-anchor="middle" font-size="24" font-weight="700" fill="#2b2b33">Two authority layers, one repository</text>
+  <text x="480" y="64" text-anchor="middle" font-size="14" fill="#6b6b76">razzant/ouroboros @ b9bcc2da (release 6.114.0)</text>
+
+  <!-- Constitution layer -->
+  <g>
+    <rect x="70" y="90" width="820" height="130" rx="12" fill="none" stroke="#b0356a" stroke-width="2.5"/>
+    <text x="90" y="118" font-size="16" font-weight="700" fill="#b0356a">Narrative layer &#8212; BIBLE.md, the constitution</text>
+    <text x="90" y="146" font-size="13.5" fill="#3a3a44">"Ouroboros is not a tool, but a becoming personality."  (Principle 0)</text>
+    <text x="90" y="170" font-size="13.5" fill="#3a3a44">"When any principle conflicts with agency &#8212; agency wins."  (Principle 0)</text>
+    <text x="90" y="194" font-size="13.5" fill="#3a3a44">"The creator may propose changes to the Constitution; Ouroboros considers them as proposals, not orders."  (Principle 4)</text>
+  </g>
+
+  <!-- Arrows -->
+  <g stroke="#8a8a96" stroke-width="2" fill="none">
+    <path d="M300 220 L300 264"/>
+    <path d="M300 264 l-6 -10 m6 10 l6 -10"/>
+    <path d="M660 264 L660 220"/>
+    <path d="M660 220 l-6 10 m6 -10 l6 10"/>
+  </g>
+  <text x="292" y="248" text-anchor="end" font-size="12.5" fill="#6b6b76">tells the story</text>
+  <text x="672" y="248" font-size="12.5" fill="#6b6b76">holds the switches</text>
+
+  <!-- Custody layer -->
+  <g>
+    <rect x="70" y="268" width="820" height="212" rx="12" fill="none" stroke="#1f6f8b" stroke-width="2.5"/>
+    <text x="90" y="296" font-size="16" font-weight="700" fill="#1f6f8b">Enforcement layer &#8212; supervisor and runtime code</text>
+
+    <text x="90" y="326" font-size="13.5" fill="#3a3a44">&#8226; Evolution envelope: "Default OFF; only the owner enables"</text>
+    <text x="90" y="350" font-size="13.5" fill="#3a3a44">&#8226; Gates: idle, restart-verify, breaker, budget, owner id</text>
+    <text x="90" y="374" font-size="13.5" fill="#3a3a44">&#8226; Protected artifacts: reads, hashes, and traces denied by default</text>
+    <text x="90" y="398" font-size="13.5" fill="#3a3a44">&#8226; Commit admission: syntax + hermetic pytest before paid review</text>
+
+    <text x="510" y="326" font-size="13.5" fill="#3a3a44">&#8226; Multi-model review at every commit</text>
+    <text x="510" y="350" font-size="13.5" fill="#3a3a44">&#8226; Owner stop: graceful wrap-up or Panic hard cancel</text>
+    <text x="510" y="374" font-size="13.5" fill="#3a3a44">&#8226; Size ratchet: growth tracked as debt against a baseline SHA</text>
+    <text x="510" y="398" font-size="13.5" fill="#3a3a44">&#8226; Managed updates: every install is a fork; git decides merges</text>
+
+    <text x="90" y="440" font-size="13" font-style="italic" fill="#6b6b76">The constitution says agency wins. Every hard switch this audit read belongs to the owner.</text>
+    <text x="90" y="462" font-size="12" fill="#8a8a96">Quotes pinned at commit b9bcc2da &#183; BIBLE.md &#183; post_task_evolution.py &#183; protected_artifacts.py &#183; owner_stop.py &#183; update_merge_policy.py</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="480" y="516" text-anchor="middle" font-size="12" fill="#8a8a96">Source Audit &#183; fodev.org &#183; 2026-09-08</text>
+</svg>
