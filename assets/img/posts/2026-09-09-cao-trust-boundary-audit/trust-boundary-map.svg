@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Map of the CAO trust boundary: network-edge defenses guard the outside while supervisor and worker agents share one trust domain inside, and a phantom CAO_AUTH_ENABLED switch floats disconnected">
+  <style>
+    .t { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; }
+    .title { font-size: 30px; font-weight: 700; fill: #24324a; }
+    .label { font-size: 20px; font-weight: 600; fill: #24324a; }
+    .small { font-size: 16px; fill: #3d4a63; }
+    .tiny { font-size: 14px; fill: #55627d; }
+    .ghost { font-size: 17px; font-style: italic; fill: #a4423d; }
+  </style>
+  <text x="600" y="44" text-anchor="middle" class="t title">CAO 2.5.0 &#8212; where the shipped defenses actually sit</text>
+
+  <!-- outer boundary: network edge -->
+  <rect x="60" y="80" width="1080" height="470" rx="18" fill="none" stroke="#2f6f8f" stroke-width="3"/>
+  <text x="90" y="115" class="t label" fill="#2f6f8f">Defended edge: the network boundary of one machine</text>
+  <text x="90" y="145" class="t small">127.0.0.1:9889 bind &#183; TrustedHost allowlist (DNS rebinding) &#183; CORS loopback list</text>
+  <text x="90" y="170" class="t small">WS PTY: client-IP allowlist + Origin check (CWE-1385) &#183; OAuth 2.1 / RFC 9728 stack &#8212; default-off</text>
+
+  <!-- inner domain -->
+  <rect x="90" y="200" width="1020" height="310" rx="14" fill="#f3e9d2" fill-opacity="0.45" stroke="#c9a227" stroke-width="2" stroke-dasharray="9 6"/>
+  <text x="120" y="235" class="t label" fill="#8a6d1a">Inside: one trust domain, no boundary between agents</text>
+
+  <!-- supervisor + workers -->
+  <rect x="130" y="265" width="240" height="70" rx="10" fill="none" stroke="#24324a" stroke-width="2"/>
+  <text x="250" y="295" text-anchor="middle" class="t label">Supervisor CLI</text>
+  <text x="250" y="320" text-anchor="middle" class="t tiny">full scopes by default</text>
+
+  <rect x="430" y="265" width="200" height="70" rx="10" fill="none" stroke="#24324a" stroke-width="2"/>
+  <text x="530" y="295" text-anchor="middle" class="t label">Worker CLI</text>
+  <text x="530" y="320" text-anchor="middle" class="t tiny">full scopes by default</text>
+
+  <rect x="690" y="265" width="200" height="70" rx="10" fill="none" stroke="#24324a" stroke-width="2"/>
+  <text x="790" y="295" text-anchor="middle" class="t label">Worker CLI</text>
+  <text x="790" y="320" text-anchor="middle" class="t tiny">full scopes by default</text>
+
+  <rect x="930" y="265" width="150" height="70" rx="10" fill="none" stroke="#24324a" stroke-width="2"/>
+  <text x="1005" y="295" text-anchor="middle" class="t label">cao-server</text>
+  <text x="1005" y="320" text-anchor="middle" class="t tiny">loopback API</text>
+
+  <line x1="370" y1="300" x2="430" y2="300" stroke="#55627d" stroke-width="2"/>
+  <line x1="630" y1="300" x2="690" y2="300" stroke="#55627d" stroke-width="2"/>
+  <line x1="890" y1="300" x2="930" y2="300" stroke="#55627d" stroke-width="2"/>
+
+  <text x="130" y="385" class="t small">&#8220;group is an organizational label, not a security boundary&#8221; &#8212; docs/api.md</text>
+  <text x="130" y="412" class="t small">&#8220;a worker already has local shell access to this API&#8221; &#8212; docs/api.md</text>
+  <text x="130" y="439" class="t small">scope pre-checks: &#8220;a UX gate; the FastAPI boundary is the real enforcement point&#8221; &#8212; security/decorators.py</text>
+  <text x="130" y="466" class="t small">fleet mode: &#8220;the network is the trust boundary&#8221;, &#8220;no per-request API auth on a node&#8221; &#8212; docs/fleet-coordinator.md</text>
+
+  <!-- phantom switch -->
+  <g>
+    <rect x="800" y="390" width="300" height="90" rx="10" fill="none" stroke="#a4423d" stroke-width="2" stroke-dasharray="4 5"/>
+    <text x="950" y="425" text-anchor="middle" class="t ghost">CAO_AUTH_ENABLED</text>
+    <text x="950" y="452" text-anchor="middle" class="t tiny">cited in 4 places &#8212; read by no code;</text>
+    <text x="950" y="470" text-anchor="middle" class="t tiny">auth activates on IdP config presence</text>
+  </g>
+
+  <text x="600" y="590" text-anchor="middle" class="t tiny">Coordinates: awslabs/cli-agent-orchestrator @ ce18db23 (v2.5.0) &#183; audited 2026-09-08 UTC</text>
+</svg>
