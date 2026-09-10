@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" font-family="Helvetica, Arial, sans-serif">
+  <!-- No full-canvas background: drawn on transparency per site visual policy -->
+  <text x="480" y="34" text-anchor="middle" font-size="22" font-weight="bold" fill="#3730a3">Where &#8220;same input, same output&#8221; is actually verified</text>
+  <text x="480" y="56" text-anchor="middle" font-size="13" fill="#555">heygen-com/hyperframes at d4fba55a &#8212; 79 golden fixtures in packages/producer/tests</text>
+
+  <!-- Tier 1: byte equality -->
+  <rect x="60" y="80" width="840" height="86" rx="10" fill="none" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="80" y="106" font-size="15" font-weight="bold" fill="#166534">Byte equality &#8212; png-sequence output only</text>
+  <text x="80" y="126" font-size="12.5" fill="#333">renderedBytes.equals(snapshotBytes), frame by frame &#8212; the sole byte-exact branch in regression-harness.ts</text>
+  <text x="80" y="144" font-size="12.5" fill="#333">Valid inside one pinned Docker image: chrome-headless-shell 148.0.7778.167 + Debian ffmpeg (apt, unpinned)</text>
+  <text x="860" y="110" text-anchor="end" font-size="13" font-weight="bold" fill="#166534">1 format</text>
+
+  <!-- Tier 2: PSNR -->
+  <rect x="60" y="180" width="840" height="104" rx="10" fill="none" stroke="#4f46e5" stroke-width="2.5"/>
+  <text x="80" y="206" font-size="15" font-weight="bold" fill="#3730a3">PSNR floors at 100 sampled checkpoints &#8212; encoded formats (png-sequence keeps its floor but branches to bytes)</text>
+  <text x="80" y="226" font-size="12.5" fill="#333">Declared minPsnr floors (78 fixtures): 20 dB &#215;4 &#8226; 25 dB &#215;10 &#8226; 28 dB &#215;3 &#8226; 30 dB &#215;58 &#8226; 40 dB &#215;1 &#8226; 45 dB &#215;2</text>
+  <text x="80" y="244" font-size="12.5" fill="#333">15 fixtures tolerate 2&#8211;10 failing checkpoints; audio passes on correlation &#8805; threshold, not sample equality</text>
+  <text x="80" y="262" font-size="12.5" fill="#555">One checkpoint per 1% of duration &#8212; frames between checkpoints are not compared</text>
+  <text x="860" y="210" text-anchor="end" font-size="13" font-weight="bold" fill="#3730a3">77 fixtures</text>
+
+  <!-- Tier 3: structural -->
+  <rect x="60" y="298" width="840" height="72" rx="10" fill="none" stroke="#d97706" stroke-width="2.5"/>
+  <text x="80" y="324" font-size="15" font-weight="bold" fill="#92400e">Structure only &#8212; Windows CI canary</text>
+  <text x="80" y="344" font-size="12.5" fill="#333">ffprobe asserts 1920&#215;1080, 30/1 fps, ~8 s duration; golden MP4 comparison is &#8220;Docker / Linux-only tooling&#8221;</text>
+  <text x="860" y="328" text-anchor="end" font-size="13" font-weight="bold" fill="#92400e">no pixels</text>
+
+  <!-- Tier 4: never ran -->
+  <rect x="60" y="384" width="840" height="104" rx="10" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="7 5"/>
+  <text x="80" y="410" font-size="15" font-weight="bold" fill="#991b1b">Recorded as never verified in CI &#8212; shard-schedule.json, its own words</text>
+  <text x="80" y="430" font-size="12.5" fill="#333">25 fixtures: &#8220;has never run in CI and its cost and pass state are unknown&#8221;</text>
+  <text x="80" y="448" font-size="12.5" fill="#333">3 fixtures: meta.json invalid &#8212; &#8220;never run despite looking scheduled-able&#8221;</text>
+  <text x="80" y="466" font-size="12.5" fill="#555">Ledger is CI-enforced: an unaccounted fixture fails the shard planner; 50 of 79 are scheduled</text>
+  <text x="860" y="414" text-anchor="end" font-size="13" font-weight="bold" fill="#991b1b">28 of 79</text>
+
+  <text x="480" y="530" text-anchor="middle" font-size="12" fill="#777">Counts and quotes from the pinned tree d4fba55a (2026-09-10); diagram authored for this audit</text>
+</svg>
