@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="Helvetica, Arial, sans-serif">
+  <!-- transparent canvas; ink for light surface -->
+  <text x="480" y="36" text-anchor="middle" font-size="24" font-weight="bold" fill="#1a1a2e">SkillHub publish pipeline at d824a049: three paths, one observer</text>
+  <text x="480" y="58" text-anchor="middle" font-size="14" fill="#4a4a5a">The scan verdict is recorded and displayed &#8212; no lifecycle transition reads it</text>
+
+  <!-- Path 1: super admin -->
+  <rect x="40" y="90" width="200" height="52" rx="8" fill="none" stroke="#b3541e" stroke-width="2"/>
+  <text x="140" y="112" text-anchor="middle" font-size="14" font-weight="bold" fill="#b3541e">super-admin publish</text>
+  <text x="140" y="130" text-anchor="middle" font-size="12" fill="#b3541e">autoPublish = isSuperAdmin</text>
+  <line x1="240" y1="116" x2="360" y2="116" stroke="#b3541e" stroke-width="2" marker-end="url(#a1)"/>
+  <rect x="360" y="90" width="150" height="52" rx="8" fill="none" stroke="#b3541e" stroke-width="3"/>
+  <text x="435" y="112" text-anchor="middle" font-size="14" font-weight="bold" fill="#b3541e">PUBLISHED</text>
+  <text x="435" y="130" text-anchor="middle" font-size="11" fill="#b3541e">before the scan completes</text>
+
+  <!-- Path 2: private -->
+  <rect x="40" y="170" width="200" height="52" rx="8" fill="none" stroke="#2d6a4f" stroke-width="2"/>
+  <text x="140" y="192" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d6a4f">PRIVATE publish</text>
+  <text x="140" y="210" text-anchor="middle" font-size="12" fill="#2d6a4f">no review task created</text>
+  <line x1="240" y1="196" x2="360" y2="196" stroke="#2d6a4f" stroke-width="2" marker-end="url(#a2)"/>
+  <rect x="360" y="170" width="150" height="52" rx="8" fill="none" stroke="#2d6a4f" stroke-width="2"/>
+  <text x="435" y="192" text-anchor="middle" font-size="14" fill="#2d6a4f">UPLOADED</text>
+  <text x="435" y="210" text-anchor="middle" font-size="11" fill="#2d6a4f">self-confirm by owner/admin</text>
+  <line x1="510" y1="196" x2="620" y2="196" stroke="#2d6a4f" stroke-width="2" marker-end="url(#a2)"/>
+  <rect x="620" y="170" width="150" height="52" rx="8" fill="none" stroke="#2d6a4f" stroke-width="2"/>
+  <text x="695" y="200" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d6a4f">PUBLISHED</text>
+
+  <!-- Path 3: public -->
+  <rect x="40" y="250" width="200" height="52" rx="8" fill="none" stroke="#1d5b79" stroke-width="2"/>
+  <text x="140" y="272" text-anchor="middle" font-size="14" font-weight="bold" fill="#1d5b79">public publish</text>
+  <text x="140" y="290" text-anchor="middle" font-size="12" fill="#1d5b79">default path</text>
+  <line x1="240" y1="276" x2="360" y2="276" stroke="#1d5b79" stroke-width="2" marker-end="url(#a3)"/>
+  <rect x="360" y="250" width="150" height="52" rx="8" fill="none" stroke="#1d5b79" stroke-width="2"/>
+  <text x="435" y="272" text-anchor="middle" font-size="13" fill="#1d5b79">PENDING_REVIEW</text>
+  <text x="435" y="290" text-anchor="middle" font-size="11" fill="#1d5b79">human reviewer decides</text>
+  <line x1="510" y1="276" x2="620" y2="276" stroke="#1d5b79" stroke-width="2" marker-end="url(#a3)"/>
+  <rect x="620" y="250" width="150" height="52" rx="8" fill="none" stroke="#1d5b79" stroke-width="2"/>
+  <text x="695" y="280" text-anchor="middle" font-size="14" font-weight="bold" fill="#1d5b79">PUBLISHED</text>
+
+  <!-- Observer scanner -->
+  <rect x="40" y="360" width="330" height="120" rx="10" fill="none" stroke="#6c5b7b" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="205" y="386" text-anchor="middle" font-size="15" font-weight="bold" fill="#6c5b7b">security scanner (observer)</text>
+  <text x="205" y="408" text-anchor="middle" font-size="12" fill="#6c5b7b">verdict: SAFE / SUSPICIOUS / DANGEROUS / BLOCKED</text>
+  <text x="205" y="428" text-anchor="middle" font-size="12" fill="#6c5b7b">stored on the audit row, rendered as a badge</text>
+  <text x="205" y="448" text-anchor="middle" font-size="12" font-weight="bold" fill="#6c5b7b">consumed by no publish, review, or download path</text>
+  <text x="205" y="468" text-anchor="middle" font-size="11" fill="#6c5b7b">post-scan transition depends on visibility only</text>
+
+  <!-- Hard gate -->
+  <rect x="430" y="360" width="330" height="120" rx="10" fill="none" stroke="#9d0208" stroke-width="3"/>
+  <text x="595" y="386" text-anchor="middle" font-size="15" font-weight="bold" fill="#9d0208">the one hard scan gate</text>
+  <text x="595" y="408" text-anchor="middle" font-size="12" fill="#9d0208">scanner crash / timeout after retries</text>
+  <text x="595" y="428" text-anchor="middle" font-size="13" font-weight="bold" fill="#9d0208">version &#8594; SCAN_FAILED (blocked)</text>
+  <text x="595" y="448" text-anchor="middle" font-size="12" fill="#9d0208">recovery: explicit publisher retry</text>
+  <text x="595" y="468" text-anchor="middle" font-size="11" fill="#9d0208">it fires on availability, not on findings</text>
+
+  <text x="480" y="516" text-anchor="middle" font-size="12" fill="#4a4a5a">Source: iflytek/skillhub, pinned commit d824a049 &#8212; SecurityScanService, SkillPublishService, SkillScannerAdapter</text>
+
+  <defs>
+    <marker id="a1" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b3541e"/></marker>
+    <marker id="a2" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#2d6a4f"/></marker>
+    <marker id="a3" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#1d5b79"/></marker>
+  </defs>
+</svg>
