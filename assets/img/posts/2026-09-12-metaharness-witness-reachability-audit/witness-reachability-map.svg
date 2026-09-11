@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="Helvetica, Arial, sans-serif">
+  <!-- Transparent canvas; ink tuned for light surfaces per repo visual policy -->
+  <text x="480" y="34" text-anchor="middle" font-size="22" font-weight="bold" fill="#1f2937">MetaHarness witness signing at d5833dc6: implementation vs. reachability</text>
+
+  <!-- Column 1: real crypto -->
+  <rect x="30" y="70" width="270" height="180" rx="10" fill="none" stroke="#15803d" stroke-width="2.5"/>
+  <text x="165" y="98" text-anchor="middle" font-size="16" font-weight="bold" fill="#15803d">Rust kernel (real Ed25519)</text>
+  <text x="48" y="126" font-size="13" fill="#1f2937">crates/kernel/src/witness.rs &#8212; 272 lines</text>
+  <text x="48" y="148" font-size="13" fill="#1f2937">sign_manifest / verify_manifest</text>
+  <text x="48" y="170" font-size="13" fill="#1f2937">ed25519-dalek + canonicaliser</text>
+  <text x="48" y="192" font-size="13" fill="#1f2937">Criterion benches: witness_sign,</text>
+  <text x="48" y="210" font-size="13" fill="#1f2937">witness_canon</text>
+  <text x="48" y="236" font-size="12" font-style="italic" fill="#4b5563">The cryptography exists and is tested.</text>
+
+  <!-- Column 2: bridges -->
+  <rect x="345" y="70" width="270" height="180" rx="10" fill="none" stroke="#b45309" stroke-width="2.5"/>
+  <text x="480" y="98" text-anchor="middle" font-size="16" font-weight="bold" fill="#b45309">Shipped bridges</text>
+  <text x="363" y="126" font-size="13" fill="#1f2937">kernel-wasm: 7 exports, 0 witness</text>
+  <text x="363" y="148" font-size="13" fill="#1f2937">kernel-napi: 0 witness references</text>
+  <text x="363" y="170" font-size="13" fill="#1f2937">@metaharness/kernel (TS): 0 witness</text>
+  <text x="363" y="192" font-size="13" fill="#1f2937">code in its backend surface</text>
+  <text x="363" y="236" font-size="12" font-style="italic" fill="#4b5563">No export carries the signer across.</text>
+
+  <!-- Column 3: user-visible behaviour -->
+  <rect x="660" y="70" width="270" height="180" rx="10" fill="none" stroke="#b91c1c" stroke-width="2.5"/>
+  <text x="795" y="98" text-anchor="middle" font-size="16" font-weight="bold" fill="#b91c1c">What CLI paths do instead</text>
+  <text x="678" y="126" font-size="13" fill="#1f2937">sign: public_key = 'a' &#215; 64,</text>
+  <text x="678" y="144" font-size="13" fill="#1f2937">signature = 'b' &#215; 128 (placeholder)</text>
+  <text x="678" y="166" font-size="13" fill="#1f2937">verify: valid:true + unverified:true</text>
+  <text x="678" y="188" font-size="13" fill="#1f2937">validate: missing witness = exit 0</text>
+  <text x="678" y="210" font-size="13" fill="#1f2937">publish: missing witness accepted</text>
+  <text x="678" y="236" font-size="12" font-style="italic" fill="#4b5563">Shape checks stand in for signatures.</text>
+
+  <!-- Arrows -->
+  <line x1="300" y1="160" x2="345" y2="160" stroke="#6b7280" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="615" y1="160" x2="660" y2="160" stroke="#6b7280" stroke-width="2" marker-end="url(#arr)"/>
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#6b7280"/>
+    </marker>
+  </defs>
+
+  <!-- Bottom band: spec vs shipped -->
+  <rect x="30" y="290" width="440" height="210" rx="10" fill="none" stroke="#4b5563" stroke-width="2"/>
+  <text x="250" y="318" text-anchor="middle" font-size="15" font-weight="bold" fill="#374151">ADR-011 spec (Status: Proposed) &#8594; hits in shipped code</text>
+  <text x="52" y="348" font-size="13" fill="#1f2937">package.json harnessWitnessKey countersign &#8212; 0</text>
+  <text x="52" y="372" font-size="13" fill="#1f2937">.harness/witness-pubkey.json &#8212; 0</text>
+  <text x="52" y="396" font-size="13" fill="#1f2937">witness rotate-key (dual-sign rotation) &#8212; 0</text>
+  <text x="52" y="420" font-size="13" fill="#1f2937">verification-history.jsonl temporal log &#8212; 0</text>
+  <text x="52" y="444" font-size="13" fill="#1f2937">RFC 8785 canonicalisation &#8212; 0 (serde_json order)</text>
+  <text x="52" y="478" font-size="12" font-style="italic" fill="#4b5563">Counted by grep over ts/rs sources, node_modules excluded</text>
+
+  <rect x="500" y="290" width="430" height="210" rx="10" fill="none" stroke="#15803d" stroke-width="2"/>
+  <text x="715" y="318" text-anchor="middle" font-size="15" font-weight="bold" fill="#15803d">The contrast: meta-proxy install</text>
+  <text x="522" y="348" font-size="13" fill="#1f2937">MetaHarness's own separately-shipped binary is</text>
+  <text x="522" y="372" font-size="13" fill="#1f2937">verified against an Ed25519 public key pinned</text>
+  <text x="522" y="396" font-size="13" fill="#1f2937">in the client before installation.</text>
+  <text x="522" y="430" font-size="13" fill="#374151">A real trust anchor exists in this codebase &#8212;</text>
+  <text x="522" y="454" font-size="13" fill="#374151">it protects the vendor's binary, not the</text>
+  <text x="522" y="478" font-size="13" fill="#374151">user's generated harness.</text>
+</svg>
