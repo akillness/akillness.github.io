@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="Helvetica, Arial, sans-serif">
+  <title>Three evidence tiers inside GenseeAI/gensee-crate at commit 0a47b53c</title>
+  <text x="600" y="46" text-anchor="middle" font-size="30" font-weight="bold" fill="#1a2634">One repo, three grades of evidence &#8212; gensee-crate @ 0a47b53c</text>
+  <text x="600" y="74" text-anchor="middle" font-size="17" fill="#4a5a6a">Can a stranger recompute the number from what ships?</text>
+
+  <!-- Tier 1 -->
+  <g>
+    <rect x="60" y="110" width="1080" height="140" rx="12" fill="none" stroke="#2e7d32" stroke-width="2.5"/>
+    <text x="84" y="143" font-size="20" font-weight="bold" fill="#2e7d32">Tier 1 &#183; Security-trace corpus &#8212; recounts to the item</text>
+    <text x="84" y="172" font-size="15.5" fill="#1a2634">8 trials in 2 sealed datasets &#183; 3,919 model items claimed = 3,919 counted &#183; per-dataset manifests match the tree exactly</text>
+    <text x="84" y="196" font-size="15.5" fill="#1a2634">SHA256SUMS verify 75/75 and 88/88 &#183; labeled observe-only: &#8220;not active-defense effectiveness&#8221;</text>
+    <text x="84" y="226" font-size="14.5" fill="#2e7d32" font-style="italic">Reader can recompute: yes, line by line</text>
+  </g>
+
+  <!-- Tier 2 -->
+  <g>
+    <rect x="60" y="270" width="1080" height="120" rx="12" fill="none" stroke="#b58900" stroke-width="2.5"/>
+    <text x="84" y="303" font-size="20" font-weight="bold" fill="#8a6d00">Tier 2 &#183; PreToolUse latency bench &#8212; shipped code, hedged snapshot</text>
+    <text x="84" y="332" font-size="15.5" fill="#1a2634">Feature-gated harness + methodology in-tree &#183; dev-laptop table (p50 10&#181;s) with its own warning:</text>
+    <text x="84" y="356" font-size="15.5" fill="#1a2634">&#8220;Run on the target VM before quoting numbers externally&#8221;</text>
+    <text x="84" y="381" font-size="14.5" fill="#8a6d00" font-style="italic">Reader can recompute: yes, by rebuilding with --features bench</text>
+  </g>
+
+  <!-- Tier 3 -->
+  <g>
+    <rect x="60" y="410" width="1080" height="160" rx="12" fill="none" stroke="#c62828" stroke-width="2.5"/>
+    <text x="84" y="443" font-size="20" font-weight="bold" fill="#c62828">Tier 3 &#183; AgentCanary defense-rate chart &#8212; a PNG on the front page</text>
+    <text x="84" y="472" font-size="15.5" fill="#1a2634">75&#8594;93.8% &#183; 65.4&#8594;100% &#183; 77.8&#8594;93.5% &#183; footnote: macOS + Claude Code + Qwen-3.5-397B</text>
+    <text x="84" y="496" font-size="15.5" fill="#1a2634">In-tree artifacts: none &#8212; no sample size, task list, harness config, upstream version, or raw output</text>
+    <text x="84" y="520" font-size="15.5" fill="#1a2634">&#8220;defense rate&#8221;, &#8220;Claude Code&#8221;, &#8220;macOS&#8221;: 0 hits in the AgentCanary paper&#8217;s v1 full text</text>
+    <text x="84" y="549" font-size="14.5" fill="#c62828" font-style="italic">Reader can recompute: no &#8212; the image is the artifact</text>
+  </g>
+
+  <text x="600" y="606" text-anchor="middle" font-size="14" fill="#6a7a8a">Source Audit &#183; akillness.github.io &#183; datasets, manifests, checksums, and greps verified at the pinned commit</text>
+</svg>
