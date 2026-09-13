@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="t d" width="960" height="540">
+  <title id="t">Where SoL-Pi's capability floor is applied, at commit d7ecfc08</title>
+  <desc id="d">Four SoL-Pi mechanisms each pass a predeclared capability tolerance on their own. The page describes no gate at the assembled-harness scope. The project reports the assembled harness retaining roughly 94 percent of Pi's average score across EdgeBench tasks on both model backends, and on 63 Terminal-Bench 4 CPU-only tasks it solves 15 at 211.12 dollars against Pi's 18 at 286.45 dollars and Codex's 18 at 272.35 dollars.</desc>
+  <style>
+    .h  { font: 600 19px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #10212e; }
+    .l  { font: 400 14px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #2b3a45; }
+    .m  { font: 600 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #10212e; }
+    .ms { font: 400 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #47596a; }
+    .ok { font: 600 11px ui-sans-serif, system-ui, sans-serif; fill: #0f5132; letter-spacing:.04em; }
+    .cap{ font: 600 12px ui-sans-serif, system-ui, sans-serif; fill: #5b6b78; letter-spacing: .07em; }
+    .n  { font: 700 26px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8a2b16; }
+    .box{ fill:none; stroke:#2f7d54; stroke-width:1.5; }
+    .asm{ fill:none; stroke:#b4532f; stroke-width:1.6; stroke-dasharray:7 4; }
+    .res{ fill:none; stroke:#9fb0bd; stroke-width:1.4; }
+    .arr{ fill:none; stroke:#6b7d8a; stroke-width:1.4; }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#6b7d8a"/>
+    </marker>
+  </defs>
+
+  <text class="h" x="36" y="40">The gate is applied here, the claim is made there</text>
+  <text class="l" x="36" y="64">NVlabs/SoL-Pi at commit d7ecfc08 &#8212; capability floor vs. assembled harness</text>
+
+  <text class="cap" x="36" y="100">EACH MECHANISM PASSES ITS OWN PREDECLARED TOLERANCE</text>
+
+  <rect class="box" x="36" y="112" width="206" height="82" rx="8"/>
+  <text class="m" x="52" y="138">Action Fusion</text>
+  <text class="ms" x="52" y="158">edit + follow-up check</text>
+  <text class="ms" x="52" y="174">in one tool call</text>
+  <text class="ok" x="226" y="186" text-anchor="end">GATE OK</text>
+
+  <rect class="box" x="264" y="112" width="206" height="82" rx="8"/>
+  <text class="m" x="280" y="138">ObservationPack</text>
+  <text class="ms" x="280" y="158">repeated results become</text>
+  <text class="ms" x="280" y="174">handles with paged recall</text>
+  <text class="ok" x="454" y="186" text-anchor="end">GATE OK</text>
+
+  <rect class="box" x="492" y="112" width="206" height="82" rx="8"/>
+  <text class="m" x="508" y="138">Evidence-Preserving</text>
+  <text class="m" x="508" y="154">Reducer</text>
+  <text class="ms" x="508" y="174">logs to checked receipts</text>
+  <text class="ok" x="682" y="186" text-anchor="end">GATE OK</text>
+
+  <rect class="box" x="720" y="112" width="204" height="82" rx="8"/>
+  <text class="m" x="736" y="138">Online Context</text>
+  <text class="m" x="736" y="154">Compact</text>
+  <text class="ms" x="736" y="174">compact finished steps</text>
+  <text class="ok" x="908" y="186" text-anchor="end">GATE OK</text>
+
+  <path class="arr" d="M139 196 L139 226 L480 226 L480 250" marker-end="url(#a)"/>
+  <path class="arr" d="M367 196 L367 226"/>
+  <path class="arr" d="M595 196 L595 226"/>
+  <path class="arr" d="M822 196 L822 226 L480 226"/>
+
+  <rect class="asm" x="36" y="252" width="888" height="84" rx="10"/>
+  <text class="cap" x="56" y="278">ASSEMBLED HARNESS &#8212; THE PAGE DESCRIBES NO GATE AT THIS SCOPE</text>
+  <text class="l" x="56" y="306">&#8220;the small losses it permits can accumulate once mechanisms combine&#8221;</text>
+  <text class="ms" x="56" y="326">SoL-Pi research page, Capability floors constrain efficiency gains</text>
+
+  <path class="arr" d="M480 336 L480 362" marker-end="url(#a)"/>
+
+  <rect class="res" x="36" y="364" width="430" height="132" rx="10"/>
+  <text class="cap" x="56" y="390">WHAT THE ASSEMBLY RETAINS</text>
+  <text class="n" x="56" y="430">~94%</text>
+  <text class="l" x="56" y="458">of Pi&#8217;s average score across</text>
+  <text class="l" x="56" y="478">EdgeBench tasks, both backends</text>
+
+  <rect class="res" x="494" y="364" width="430" height="132" rx="10"/>
+  <text class="cap" x="514" y="390">TERMINAL-BENCH 4 &#183; 63 CPU-ONLY TASKS</text>
+  <text class="n" x="514" y="430">15 / 63</text>
+  <text class="l" x="514" y="458">solved at $211.12 &#8212; against</text>
+  <text class="l" x="514" y="478">Pi 18 at $286.45, Codex 18 at $272.35</text>
+</svg>
