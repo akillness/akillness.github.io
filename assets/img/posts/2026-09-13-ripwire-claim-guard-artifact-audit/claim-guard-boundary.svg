@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc" width="960" height="540">
+  <title id="title">Where ripwire's gate-count guard stops at commit 1cf3086e</title>
+  <desc id="desc">The loop in test/regression.sh names 612 gate scripts. Eight marked sites in three source files are rewritten by docs/gatecount_build.py and asserted by test/manifestcheck.sh, and all eight read 612. Two committed build artifacts, ripwire-showcase.pptx and ripwire-showcase.pdf, sit outside that family and still read 606, because they were last rebuilt six hours and thirty-five minutes before the loop grew.</desc>
+
+  <style>
+    .h  { font: 600 19px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #10212e; }
+    .l  { font: 400 14px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #2b3a45; }
+    .m  { font: 400 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #10212e; }
+    .ms { font: 400 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #47596a; }
+    .n  { font: 700 28px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #0f5132; }
+    .nb { font: 700 28px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8a2b16; }
+    .cap{ font: 600 12px ui-sans-serif, system-ui, sans-serif; fill: #5b6b78; letter-spacing: .07em; }
+    .box{ fill: none; stroke: #9fb0bd; stroke-width: 1.4; }
+    .boxg{ fill: none; stroke: #2f7d54; stroke-width: 1.6; }
+    .boxr{ fill: none; stroke: #b4532f; stroke-width: 1.6; stroke-dasharray: 7 4; }
+    .arr{ fill: none; stroke: #6b7d8a; stroke-width: 1.5; }
+  </style>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#6b7d8a"/>
+    </marker>
+  </defs>
+
+  <text class="h" x="36" y="42">One number, two publication surfaces</text>
+  <text class="l" x="36" y="66">redhat-et/ripwire at commit 1cf3086e — the gate count, re-derived</text>
+
+  <rect class="box" x="36" y="94" width="330" height="100" rx="8"/>
+  <text class="cap" x="54" y="122">AUTHORITY</text>
+  <text class="m" x="54" y="150">test/regression.sh:271</text>
+  <text class="ms" x="54" y="174">names on the for-loop line</text>
+  <text class="n" x="346" y="164" text-anchor="end">612</text>
+
+  <text class="ms" x="372" y="114">rewritten by</text>
+  <path class="arr" d="M372 124 L460 124" marker-end="url(#a)"/>
+  <rect class="box" x="468" y="104" width="320" height="40" rx="8"/>
+  <text class="m" x="484" y="130">docs/gatecount_build.py:38</text>
+
+  <path class="arr" d="M372 170 L460 170" marker-end="url(#a)"/>
+  <text class="ms" x="374" y="190">asserted by</text>
+  <rect class="box" x="468" y="150" width="320" height="40" rx="8"/>
+  <text class="m" x="484" y="176">test/manifestcheck.sh:143</text>
+
+  <rect class="boxg" x="36" y="228" width="888" height="116" rx="10"/>
+  <text class="cap" x="56" y="254">INSIDE THE FAMILY — EIGHT MARKED SITES IN THREE SOURCE FILES</text>
+  <text class="m" x="56" y="288">README.md:1800, :1802</text>
+  <text class="m" x="56" y="314">docs/EVALS.md:24, :5837, :6849</text>
+  <text class="m" x="340" y="288">present/deck5_ripwire_build.js:1071, :1095, :1345</text>
+  <text class="ms" x="340" y="314">:1095 — “so it cannot go stale quietly”</text>
+  <text class="n" x="900" y="306" text-anchor="end">612</text>
+
+  <path class="arr" d="M480 344 L480 368" marker-end="url(#a)"/>
+
+  <rect class="boxr" x="36" y="370" width="888" height="140" rx="10"/>
+  <text class="cap" x="56" y="396">OUTSIDE IT — BUILD ARTIFACTS, COMMITTED AND LINKED FROM THE README</text>
+  <text class="m" x="56" y="428">present/ripwire-showcase.pptx</text>
+  <text class="ms" x="56" y="450">slides 24 and 32 · split run on 25</text>
+  <text class="m" x="340" y="428">present/ripwire-showcase.pdf</text>
+  <text class="ms" x="340" y="450">badge row and deck preview link here</text>
+  <text class="nb" x="900" y="440" text-anchor="end">606</text>
+  <text class="ms" x="56" y="478">last rebuilt 29cc420a · 2026-09-12T17:04:23Z — correct at 606 when built</text>
+  <text class="ms" x="56" y="496">loop grew at 63f62630 · 2026-09-12T23:39:33Z — 6 h 35 min later</text>
+</svg>
