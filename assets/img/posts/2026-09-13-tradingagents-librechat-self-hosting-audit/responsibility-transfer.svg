@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-labelledby="titleId descId" font-family="Inter, Helvetica, Arial, sans-serif">
+  <title id="titleId">What adopting an open-source AI stack moves and what it leaves with you</title>
+  <desc id="descId">Two columns. The left column lists what open source transfers: who runs the software, who maintains the deployment, where conversation and run data sit, and the software licence line item. The right column lists what it does not remove: model API calls, market and news data access, hosting and uptime, upgrades and security response, and judging whether the output is any good. A bottom strip shows the two audited projects answering different jobs: TradingAgents is a research-only multi-agent trading framework, LibreChat is a self-hosted chat interface over providers you bring.</desc>
+
+  <text x="60" y="70" font-size="34" font-weight="700" fill="#1b2733">Open source changes the operator, not the bill</text>
+  <text x="60" y="106" font-size="20" fill="#4a5a6a">Read at TradingAgents be952b8e and LibreChat e18606e5</text>
+
+  <g>
+    <rect x="60" y="140" width="510" height="300" rx="16" fill="#2f7d5a" fill-opacity="0.08" stroke="#2f7d5a" stroke-width="2"/>
+    <text x="88" y="182" font-size="23" font-weight="700" fill="#215c42">What adoption really transfers</text>
+    <text x="88" y="228" font-size="20" fill="#1b2733">• Who runs the software: a vendor → your team</text>
+    <text x="88" y="266" font-size="20" fill="#1b2733">• Who maintains the deployment and its config</text>
+    <text x="88" y="304" font-size="20" fill="#1b2733">• Where conversation and run data sit</text>
+    <text x="88" y="342" font-size="20" fill="#1b2733">• The software licence line item itself</text>
+    <text x="88" y="394" font-size="18" fill="#4a5a6a">Apache-2.0 and MIT are the source notes,</text>
+    <text x="88" y="418" font-size="18" fill="#4a5a6a">not a statement about your running cost.</text>
+  </g>
+
+  <g>
+    <rect x="630" y="140" width="510" height="300" rx="16" fill="#b4472e" fill-opacity="0.08" stroke="#b4472e" stroke-width="2"/>
+    <text x="658" y="182" font-size="23" font-weight="700" fill="#8f3320">What it does not remove</text>
+    <text x="658" y="228" font-size="20" fill="#1b2733">• Model API calls you still pay for or host</text>
+    <text x="658" y="266" font-size="20" fill="#1b2733">• Market, news and data-provider access</text>
+    <text x="658" y="304" font-size="20" fill="#1b2733">• Hosting, uptime and backup</text>
+    <text x="658" y="342" font-size="20" fill="#1b2733">• Upgrades, auth and security response</text>
+    <text x="658" y="380" font-size="20" fill="#1b2733">• Judging whether the output is any good</text>
+    <text x="658" y="418" font-size="18" fill="#4a5a6a">Both READMEs say this in their own words.</text>
+  </g>
+
+  <line x1="315" y1="452" x2="315" y2="492" stroke="#4a5a6a" stroke-width="2"/>
+  <line x1="885" y1="452" x2="885" y2="492" stroke="#4a5a6a" stroke-width="2"/>
+
+  <g>
+    <rect x="60" y="492" width="510" height="104" rx="14" fill="none" stroke="#4a5a6a" stroke-width="2" stroke-dasharray="6 5"/>
+    <text x="88" y="528" font-size="21" font-weight="700" fill="#1b2733">TradingAgents</text>
+    <text x="88" y="558" font-size="18" fill="#4a5a6a">Multi-agent research framework; the README</text>
+    <text x="88" y="580" font-size="18" fill="#4a5a6a">states it is not financial or trading advice.</text>
+  </g>
+
+  <g>
+    <rect x="630" y="492" width="510" height="104" rx="14" fill="none" stroke="#4a5a6a" stroke-width="2" stroke-dasharray="6 5"/>
+    <text x="658" y="528" font-size="21" font-weight="700" fill="#1b2733">LibreChat</text>
+    <text x="658" y="558" font-size="18" fill="#4a5a6a">Self-hosted chat platform that unifies the</text>
+    <text x="658" y="580" font-size="18" fill="#4a5a6a">providers you already bring to it.</text>
+  </g>
+
+  <text x="600" y="470" font-size="19" font-style="italic" fill="#4a5a6a" text-anchor="middle">Different jobs — not substitutes for each other</text>
+</svg>
