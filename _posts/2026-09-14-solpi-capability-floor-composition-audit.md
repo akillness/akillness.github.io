@@ -1,6 +1,6 @@
 ---
 title: "SoL-Pi's Capability Floor Is Per Mechanism, Not Per Harness"
-description: "Source Audit of NVlabs/SoL-Pi at d7ecfc08: a per-mechanism capability gate permits losses that accumulate until the assembled harness retains roughly 94% of Pi's score."
+description: "Source Audit of NVlabs/SoL-Pi: a per-mechanism capability gate permits losses that accumulate until the assembled harness retains roughly 94% of Pi's EdgeBench average."
 categories: [AI, Agents]
 tags: [ai-agents, harness-engineering, benchmarks, open-source, tooling]
 date: 2026-09-14 00:41:41 +0900
@@ -11,13 +11,13 @@ image:
   alt: "Diagram of SoL-Pi's capability floor at commit d7ecfc08: each of four mechanisms passes a predeclared tolerance gate on its own, while the assembled harness is reported at roughly 94 percent of Pi's average score across EdgeBench tasks and solves 15 of 63 Terminal-Bench 4 tasks against Pi's 18"
 ---
 
-![SoL-Pi gates each mechanism against a capability floor one at a time; the assembled harness is reported at roughly 94% of Pi's average score and solves 15 of 63 Terminal-Bench 4 tasks to Pi's 18](/assets/img/posts/2026-09-14-solpi-capability-floor-composition-audit/capability-floor-composition.svg)
+![SoL-Pi gates each mechanism against a capability floor one at a time; the assembled harness is reported at roughly 94% of Pi's average score across EdgeBench tasks on both model backends, and solves 15 of 63 Terminal-Bench 4 tasks to Pi's 18](/assets/img/posts/2026-09-14-solpi-capability-floor-composition-audit/capability-floor-composition.svg)
 
 > **Editorial method:** This Source Audit was researched and drafted with AI assistance under an evidence-gated editorial harness; every number was read from the pinned commit d7ecfc08 or the project's own published pages before publication.
 
 ## 🤔 Curiosity: What does "without getting less done" have to survive?
 
-[NVlabs/SoL-Pi](https://github.com/NVlabs/SoL-Pi/tree/d7ecfc089944f0d04b80122a0a9a6ca0d786f3d0) is eleven days old and already carries 1,608 stars. It is MIT-licensed TypeScript, created on 2026-09-02, and the README frames it as an add-on rather than a replacement: "a standalone extension for [Pi](https://github.com/earendil-works/pi)" and "not an official distribution of Pi." The research page does call SoL-Pi an agent harness in its own right. Four efficiency mechanisms — Action Fusion, ObservationPack, Evidence-Preserving Reducer, and Online Context Compact — install on top of an unmodified Pi release, and every one is disabled by default.
+[NVlabs/SoL-Pi](https://github.com/NVlabs/SoL-Pi/tree/d7ecfc089944f0d04b80122a0a9a6ca0d786f3d0) is eleven days old and already carries 1,608 stars. It is MIT-licensed TypeScript, created on 2026-09-02, and the README frames it as an add-on rather than a replacement: "a standalone extension for [Pi](https://github.com/earendil-works/pi)" and "not an official distribution of Pi." The research page is less cautious and calls SoL-Pi an agent harness in its own right — which is the first place the two scopes in this article drift apart. Four efficiency mechanisms — Action Fusion, ObservationPack, Evidence-Preserving Reducer, and Online Context Compact — install on top of an unmodified Pi release, and every one is disabled by default.
 
 The pitch is a promise about what the savings must not cost. The research page leads with **"Spend less without getting less done."** The README says the same thing in longer form: spend less "without making the agent do less useful work."
 
@@ -47,7 +47,7 @@ That is a defensible engineering position. It is not what the hero line promises
 | Scope | What is measured or promised | Where it is stated |
 |---|---|---|
 | One mechanism | stays inside a predeclared capability tolerance | research page, *Capability floors constrain efficiency gains* |
-| Assembled harness | retains **roughly 94%** of Pi's average score | same paragraph, next sentence |
+| Assembled harness | retains **roughly 94%** of Pi's average score across EdgeBench tasks, on both model backends | capability-floor paragraph; the scope wording is in *Results* |
 | Whole product | "Spend less **without getting less done**" | research page hero |
 | Shipped artifact | Pi **0.84.2** required by the install instructions | `README.md`, Requirements |
 | Measured artifact | placeholder variant on Pi **0.80.10**, 11 EdgeBench tasks | footer of the ObservationPack panel |
@@ -99,7 +99,7 @@ That independence is exactly why the gate cannot see the sum. A tolerance applie
 
 The transferable lesson here has nothing to do with agents specifically. It is about where a quality gate is applied.
 
-**A tolerance is a budget, and budgets add.** If each of four mechanisms may cost up to some small amount of capability and each is judged alone, the system has authorised four withdrawals against one account that nobody reconciles. SoL-Pi's page reports the reconciliation as roughly 94% of Pi's average score. The fix is not a stricter per-mechanism gate — that would reject good mechanisms — but a second gate on the assembled harness, which is a different experiment with a different cost.
+**A tolerance is a budget, and budgets add.** If each of four mechanisms may cost up to some small amount of capability and each is judged alone, the system has authorised four withdrawals against one account that nobody reconciles. SoL-Pi's page reports the reconciliation as roughly 94% of Pi's average score across EdgeBench tasks, on both model backends. The fix is not a stricter per-mechanism gate — that would reject good mechanisms — but a second gate on the assembled harness, which is a different experiment with a different cost.
 
 **The claim and the gate must share a scope.** "Spend less without getting less done" is a claim about the harness. The capability floor is a criterion about a mechanism. Any promise stated at the system level needs a measurement at the system level, or the promise silently becomes a promise about components.
 
