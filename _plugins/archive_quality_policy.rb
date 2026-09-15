@@ -32,6 +32,63 @@ module Jekyll
     end
   end
 
+  # A generated tag page whose whole body is one heading and one link is an
+  # auto-generated page with no original content. `sitemap: false` only removed
+  # those pages from search; it never removed them from the crawlable surface,
+  # because /tags/ still links every one of them. Stop building the thin ones and
+  # publish the surviving set so that every template which links a tag filters on
+  # the same list the pages were built from. Counting mirrors _layouts/tag.html:
+  # a post hidden from listings or held back from search is not a visible post.
+  #
+  # Runs at :low, after jekyll-archives (:normal) has created the archives and
+  # before ArchiveQualityPolicy (:lowest) stamps the survivors.
+  class ThinTagArchivePolicy < Generator
+    safe true
+    priority :low
+
+    DEFAULT_MINIMUM = 2
+
+    def generate(site)
+      minimum = Integer(site.config['tag_archive_min_posts'] || DEFAULT_MINIMUM)
+      counts = {}
+      thin = []
+
+      site.pages.each do |page|
+        next unless page.data['layout'] == 'tag'
+        next unless page.respond_to?(:posts) && page.respond_to?(:title)
+
+        title = page.title
+        next unless title.is_a?(String)
+
+        # Keyed by the raw tag, which is also what `page.tags` yields, so a chip
+        # and its archive agree. Two raw tags can still slugify to one URL; if
+        # both survive, verify-site-quality compares the hub's link count against
+        # the number of pages actually built and fails on the collision.
+        count = visible_posts(page).size
+        counts[title] = count
+        thin << page if count < minimum
+      end
+
+      site.pages.reject! { |page| thin.include?(page) }
+      archives = site.config['archives']
+      archives.reject! { |archive| thin.include?(archive) } if archives.respond_to?(:reject!)
+
+      site.data['tag_visible_counts'] = counts
+      site.data['linkable_tags'] =
+        counts.reject { |_, count| count < minimum }.keys.sort_by(&:downcase)
+
+      Jekyll.logger.info 'Tags:',
+                         "kept #{site.data['linkable_tags'].size}, " \
+                         "dropped #{thin.size} below #{minimum} visible post(s)"
+    end
+
+    def visible_posts(page)
+      Array(page.posts).reject do |post|
+        post.data['hidden'] == true || post.data['robots'].to_s.include?('noindex')
+      end
+    end
+  end
+
   class ArchiveQualityPolicy < Generator
     safe true
     priority :lowest

@@ -1,0 +1,25 @@
+<!--
+  Tag chips for the post tail.
+
+  A tag is a link only when its archive page was actually built. Tags below
+  `tag_archive_min_posts` have no page, so they stay visible as plain labels
+  instead of pointing at a 404. The surviving set is written by
+  _plugins/archive_quality_policy.rb, which is also what decided the pages.
+-->
+{% if page.tags.size > 0 %}
+  <div class="post-tags">
+    <i class="fa fa-tags fa-fw me-1"></i>
+    {% for tag in page.tags %}
+      {% if site.data.linkable_tags contains tag %}
+        <a
+          href="{{ site.baseurl }}/tags/{{ tag | slugify | url_encode }}/"
+          class="post-tag no-text-decoration"
+        >
+          {{- tag -}}
+        </a>
+      {% else %}
+        <span class="post-tag no-text-decoration">{{- tag -}}</span>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

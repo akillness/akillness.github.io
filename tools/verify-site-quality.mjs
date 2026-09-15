@@ -69,8 +69,18 @@ export function verifyAdBoundary(html, { route, eligible = false, config, inArti
   return errors;
 }
 
+// The tag-archive floor lives in _config.yml so the plugin that builds the pages
+// and the verifier that audits them read one number.
+export function readTagArchiveMinimum(file = new URL('../_config.yml', import.meta.url)) {
+  const raw = fs.readFileSync(file, 'utf8').match(/^tag_archive_min_posts:([^\n]*)/m)?.[1];
+  const value = Number((raw ?? '').replace(/\s+#.*$/, '').trim());
+  if (!Number.isInteger(value) || value < 2) throw new Error('tag_archive_min_posts must be an integer >= 2');
+  return value;
+}
+
 function main() {
 const adConfig = readAdConfig();
+const tagArchiveMinimum = readTagArchiveMinimum();
 const siteDir = path.resolve(process.argv[2] || '_site');
 const origin = 'https://akillness.github.io';
 // This is a project review floor for legacy stubs, not a Google word-count requirement.
@@ -150,6 +160,7 @@ for (const slug of retiredSlugs) {
 }
 
 let archiveCount = 0;
+const builtArchiveSlugs = { tags: new Set(), categories: new Set() };
 for (const root of ['tags', 'categories']) {
   const dir = path.join(siteDir, root);
   if (!fs.existsSync(dir)) continue;
@@ -158,13 +169,59 @@ for (const root of ['tags', 'categories']) {
     const file = path.join(dir, entry.name, 'index.html');
     if (!fs.existsSync(file)) continue;
     archiveCount += 1;
+    builtArchiveSlugs[root].add(entry.name);
     const html = fs.readFileSync(file, 'utf8');
     listingSurfaces.push({ route: `/${root}/${entry.name}/`, html });
     check(/<meta name="robots" content="[^"]*noindex[^"]*">/i.test(html), `archive lacks noindex: /${root}/${entry.name}/`);
     failures.push(...verifyAdBoundary(html, { route: `/${root}/${entry.name}/`, config: adConfig }));
+    if (root !== 'tags') continue;
+    // An archive that lists fewer posts than the floor is an auto-generated page
+    // with no content of its own; _plugins/archive_quality_policy.rb must not
+    // have built it. Assert on the artifact, not on the plugin's own report.
+    const listed = (html.match(/<li class="d-flex justify-content-between/g) || []).length;
+    const advertised = Number(html.match(/<span class="lead text-muted ps-2">\s*(\d+)\s*<\/span>/)?.[1] ?? NaN);
+    check(listed >= tagArchiveMinimum, `tag archive lists ${listed} post(s), below the ${tagArchiveMinimum} floor: /tags/${entry.name}/`);
+    check(advertised === listed, `tag archive advertises ${advertised} but lists ${listed}: /tags/${entry.name}/`);
   }
 }
 check(archiveCount > 0, 'no generated archive pages were found');
+check(builtArchiveSlugs.tags.size > 0, 'no generated tag pages were found');
+
+// Removing pages only helps if nothing still points at them. Walk every built
+// page and require each archive link to resolve, so the page set and the link
+// set cannot drift the way search and advertising once did.
+const builtHtmlFiles = [];
+(function collectHtml(dir) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      if (entry.name !== 'assets') collectHtml(full);
+    } else if (entry.name.endsWith('.html')) {
+      builtHtmlFiles.push(full);
+    }
+  }
+})(siteDir);
+const archiveHrefPattern = /href="(?:https:\/\/akillness\.github\.io)?\/(tags|categories)\/([^/"#?]+)\/"/g;
+const danglingArchiveLinks = new Map();
+for (const file of builtHtmlFiles) {
+  const html = fs.readFileSync(file, 'utf8');
+  for (const [, root, slug] of html.matchAll(archiveHrefPattern)) {
+    if (builtArchiveSlugs[root].has(slug)) continue;
+    const key = `/${root}/${slug}/`;
+    if (danglingArchiveLinks.has(key)) continue;
+    danglingArchiveLinks.set(key, `/${path.relative(siteDir, file).split(path.sep).join('/')}`.replace(/index\.html$/, ''));
+  }
+}
+for (const [target, source] of danglingArchiveLinks) {
+  check(false, `link points at an archive page that was not built: ${target} (from ${source})`);
+}
+
+const tagsHubHtml = exists('tags', 'index.html') ? read('tags', 'index.html') : '';
+const hubTagSlugs = new Set([...tagsHubHtml.matchAll(/class="tag" href="\/tags\/([^/"#?]+)\/"/g)].map((match) => match[1]));
+check(
+  hubTagSlugs.size === builtArchiveSlugs.tags.size,
+  `/tags/ lists ${hubTagSlugs.size} tag pages but ${builtArchiveSlugs.tags.size} were built`
+);
 
 let paginationCount = 0;
 for (const entry of fs.readdirSync(siteDir, { withFileTypes: true })) {
@@ -356,7 +413,7 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Site quality verification passed: ${locations.length} sitemap URLs, ${postEntries.length} posts, ${archiveCount} noindex archives, ${paginationCount} noindex pagination pages, ${noindexPosts} noindex posts, ${monetizedPosts} monetized posts, ${nonMonetizedPosts} protected posts.`);
+console.log(`Site quality verification passed: ${locations.length} sitemap URLs, ${postEntries.length} posts, ${archiveCount} noindex archives (${builtArchiveSlugs.tags.size} tags at >= ${tagArchiveMinimum} posts, ${builtArchiveSlugs.categories.size} categories), ${paginationCount} noindex pagination pages, ${noindexPosts} noindex posts, ${monetizedPosts} monetized posts, ${nonMonetizedPosts} protected posts.`);
 
 }
 

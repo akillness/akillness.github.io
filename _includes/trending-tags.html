@@ -5,17 +5,16 @@
 {% assign size_list = '' | split: '' %}
 {% assign tag_list = '' | split: '' %}
 
-{% for tag in site.tags %}
-  {% assign size = 0 %}
-  {% for post in tag.last %}
-    {% unless post.hidden == true or post.robots contains 'noindex' %}
-      {% assign size = size | plus: 1 %}
-    {% endunless %}
-  {% endfor %}
+<!--
+  Only tags whose archive page was actually built are linkable. The surviving set
+  and its visible counts come from _plugins/archive_quality_policy.rb.
+-->
+{% for tag_name in site.data.linkable_tags %}
+  {% assign size = site.data.tag_visible_counts[tag_name] %}
 
   {% if size > 0 %}
     {% assign size_list = size_list | push: size %}
-    {% assign tag_str = tag | first | append: '::' | append: size %}
+    {% assign tag_str = tag_name | append: '::' | append: size %}
     {% assign tag_list = tag_list | push: tag_str %}
   {% endif %}
 {% endfor %}

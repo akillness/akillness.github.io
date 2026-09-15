@@ -133,19 +133,7 @@ tail_includes:
     {% endif %}
 
     <!-- tags -->
-    {% if page.tags.size > 0 %}
-      <div class="post-tags">
-        <i class="fa fa-tags fa-fw me-1"></i>
-        {% for tag in page.tags %}
-          <a
-            href="{{ site.baseurl }}/tags/{{ tag | slugify | url_encode }}/"
-            class="post-tag no-text-decoration"
-          >
-            {{- tag -}}
-          </a>
-        {% endfor %}
-      </div>
-    {% endif %}
+    {% include post-tags.html %}
 
     <div
       class="

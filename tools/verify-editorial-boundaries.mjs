@@ -42,15 +42,34 @@ const sourceChecks = [
   ['_layouts/tag.html', "robots contains 'noindex'"],
   ['_layouts/category.html', "robots contains 'noindex'"],
   ['_layouts/categories.html', "robots contains 'noindex'"],
-  ['_layouts/tags.html', "robots contains 'noindex'"],
   ['_includes/update-list.html', "robots contains 'noindex'"],
-  ['_includes/trending-tags.html', "robots contains 'noindex'"],
   ['_includes/related-posts.html', "robots contains 'noindex'"],
   ['assets/js/data/search.json', "robots contains 'noindex'"],
   ['assets/js/data/search-meta.json', "robots contains 'noindex'"],
   ['assets/feed.xml', "robots contains 'noindex'"]
 ];
 for (const [file, phrase] of sourceChecks) check(read(file).includes(phrase), `${file} does not filter ${phrase}`);
+
+// Tag surfaces no longer count visible posts in Liquid. A generated tag page
+// below the floor is not built at all, so the one place that applies the
+// noindex/hidden predicate is the plugin that decides the pages, and every
+// template that links a tag must consume that same surviving set. Keep the
+// predicate, the floor and all three consumers locked together.
+const tagPolicy = read('_plugins/archive_quality_policy.rb');
+check(tagPolicy.includes("post.data['hidden'] == true"), 'tag policy does not exclude hidden posts');
+check(tagPolicy.includes("post.data['robots'].to_s.include?('noindex')"), 'tag policy does not exclude noindex posts');
+check(tagPolicy.includes("site.config['tag_archive_min_posts']"), 'tag policy does not read the configured floor');
+check(tagPolicy.includes('site.pages.reject!'), 'tag policy does not remove thin tag archives from the build');
+check(tagPolicy.includes("site.data['linkable_tags']"), 'tag policy does not publish the surviving tag set');
+check(tagPolicy.includes("site.data['tag_visible_counts']"), 'tag policy does not publish visible tag counts');
+check(/^tag_archive_min_posts:\s*[2-9]\d*\s*$/m.test(read('_config.yml')), '_config.yml does not set a tag archive floor of at least 2');
+for (const file of ['_layouts/tags.html', '_includes/trending-tags.html', '_includes/post-tags.html']) {
+  const text = read(file);
+  check(text.includes('site.data.linkable_tags'), `${file} does not filter on the surviving tag set`);
+  check(!/\bsite\.tags\b/.test(text), `${file} still enumerates the unfiltered tag list`);
+}
+check(read('_includes/post-tags.html').includes('site.data.linkable_tags contains tag'), '_includes/post-tags.html does not gate each chip on the surviving tag set');
+check(read('_layouts/post.html').includes('include post-tags.html'), '_layouts/post.html does not route tag chips through the guarded include');
 
 const related = read('_includes/related-posts.html');
 check(!related.includes('push: site.categories'), 'related-posts still pushes a category array as one nested item');
@@ -225,6 +244,7 @@ check(!/paths-ignore:\s*\n\s*- \.gitignore/m.test(workflow), 'CI still ignores .
 const liquidFiles = [
   '_includes/head.html',
   '_includes/post-paginator.html',
+  '_includes/post-tags.html',
   '_includes/related-posts.html',
   '_includes/trending-tags.html',
   '_includes/update-list.html',

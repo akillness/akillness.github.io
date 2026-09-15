@@ -91,6 +91,12 @@ google_ad_slots:
 # Short reference notes stay public but contain no AdSense loader, ad slot, or paid CTA.
 google_ad_min_post_words: 800
 
+# A generated tag page that links a single post is an auto-generated page with no
+# original content of its own. Tag archives below this floor are not built, and
+# every template that links a tag filters on the surviving set (see
+# _plugins/archive_quality_policy.rb).
+tag_archive_min_posts: 2
+
 
 goatcounter:
   id: # fill in your Goatcounter ID
