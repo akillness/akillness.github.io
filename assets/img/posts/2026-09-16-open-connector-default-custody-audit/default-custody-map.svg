@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="Helvetica, Arial, sans-serif">
+  <title>OpenConnector at commit 493def09: the SECURITY.md out-of-scope list mapped to the shipped defaults</title>
+  <text x="480" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#2f3e4e">oomol-lab/open-connector &#8212; commit 493def09</text>
+  <text x="480" y="66" text-anchor="middle" font-size="15" fill="#5c6b7a">SECURITY.md &#8220;do not report&#8221; list vs. what `docker compose up` ships</text>
+
+  <rect x="40" y="95" width="420" height="380" rx="10" fill="none" stroke="#b3543f" stroke-width="2"/>
+  <text x="250" y="122" text-anchor="middle" font-size="15" font-weight="bold" fill="#b3543f">Out of scope for vulnerability reports</text>
+  <text x="250" y="140" text-anchor="middle" font-size="11.5" fill="#7a5a50">SECURITY.md lines 97&#8211;99</text>
+
+  <text x="62" y="176" font-size="13.5" fill="#43352f">&#8220;running without</text>
+  <text x="62" y="193" font-size="13.5" font-weight="bold" fill="#43352f">OOMOL_CONNECT_ENCRYPTION_KEY&#8221;</text>
+  <text x="62" y="248" font-size="13.5" fill="#43352f">&#8220;running without</text>
+  <text x="62" y="265" font-size="13.5" font-weight="bold" fill="#43352f">OOMOL_CONNECT_ADMIN_TOKEN&#8221;</text>
+  <text x="62" y="320" font-size="13.5" fill="#43352f">&#8220;binding to <tspan font-weight="bold">0.0.0.0</tspan> on an</text>
+  <text x="62" y="337" font-size="13.5" fill="#43352f">untrusted network&#8221;</text>
+  <text x="62" y="392" font-size="13.5" fill="#43352f">&#8220;exposing the SQLite/PostgreSQL/</text>
+  <text x="62" y="409" font-size="13.5" fill="#43352f">D1/R2 data store&#8221;</text>
+
+  <rect x="500" y="95" width="420" height="380" rx="10" fill="none" stroke="#3f6cb3" stroke-width="2"/>
+  <text x="710" y="122" text-anchor="middle" font-size="15" font-weight="bold" fill="#3f6cb3">Shipped default at the same commit</text>
+  <text x="710" y="140" text-anchor="middle" font-size="11.5" fill="#50607a">read from the pinned tree</text>
+
+  <text x="522" y="176" font-size="13.5" fill="#2f3a4e">No key &#8594; <tspan font-weight="bold">PlainTextSecretCodec</tspan></text>
+  <text x="522" y="193" font-size="12" fill="#5c6b7a">secret-codec.ts:55 &#8212; encode/decode are identity</text>
+  <text x="522" y="248" font-size="13.5" fill="#2f3a4e">No tokens &#8594; <tspan font-weight="bold">pass-through middleware</tspan></text>
+  <text x="522" y="265" font-size="12" fill="#5c6b7a">auth.ts:43&#8211;52 &#8212; every request calls next()</text>
+  <text x="522" y="320" font-size="13.5" fill="#2f3a4e">Docker image &#8594; <tspan font-weight="bold">ENV HOST=0.0.0.0</tspan></text>
+  <text x="522" y="337" font-size="12" fill="#5c6b7a">docker/Dockerfile:17; compose publishes 3000:3000</text>
+  <text x="522" y="392" font-size="13.5" fill="#2f3a4e">SQLite volume beside the container</text>
+  <text x="522" y="409" font-size="12" fill="#5c6b7a">docker-compose.yml &#8212; connector-data volume</text>
+
+  <line x1="460" y1="185" x2="500" y2="185" stroke="#8a94a0" stroke-width="1.6"/>
+  <line x1="460" y1="257" x2="500" y2="257" stroke="#8a94a0" stroke-width="1.6"/>
+  <line x1="460" y1="329" x2="500" y2="329" stroke="#8a94a0" stroke-width="1.6"/>
+  <line x1="460" y1="401" x2="500" y2="401" stroke="#8a94a0" stroke-width="1.6"/>
+
+  <text x="480" y="508" text-anchor="middle" font-size="13" fill="#5c6b7a">Anonymous proxy calls are fail-open; scoped runtime tokens are fail-closed (action-policy.ts:84&#8211;94, 130&#8211;174)</text>
+</svg>
