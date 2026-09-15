@@ -7,6 +7,11 @@
 // No outcome (traffic, revenue, ranking) may be claimed at publish time.
 
 export const AUTHORITY_BRIEF_SCHEMA_VERSION = 1;
+export const AUTHORITY_BRIEF_SCHEMA_VERSION_V2 = 2;
+export const AUTHORITY_BRIEF_SCHEMA_VERSIONS = [
+  AUTHORITY_BRIEF_SCHEMA_VERSION,
+  AUTHORITY_BRIEF_SCHEMA_VERSION_V2
+];
 export const AUTHORITY_SITE_MODE = 'expert-source-audit';
 export const AUTHORITY_OPERATING_MODE = 'acquisition-content';
 export const AUTHORITY_PRIMARY_LANE = 'seo-and-content';
@@ -47,6 +52,17 @@ export const BRIEF_TOP_LEVEL_FIELDS = [
   'next_action',
   'measurement'
 ];
+
+export const V2_BRIEF_TOP_LEVEL_FIELDS = [
+  ...BRIEF_TOP_LEVEL_FIELDS,
+  'derivative_distribution'
+];
+
+export const DERIVATIVE_DISTRIBUTION_STATUSES = [
+  'not-planned',
+  'planned'
+];
+export const DERIVATIVE_CHANNELS = ['naver-blog', 'tistory'];
 
 export const REQUIRED_AUTHORITY_REVIEW_FINDINGS = [
   ['authority_fit', true],
@@ -110,9 +126,13 @@ export function validateAuthorityBrief({ brief, manifest, selectedCandidate, evi
     return { errors, metrics };
   }
   const visibleBody = visibleArticleBody(articleBody);
+  const isV2 = brief.schema_version === AUTHORITY_BRIEF_SCHEMA_VERSION_V2;
+  const allowedTopLevelFields = isV2 ? V2_BRIEF_TOP_LEVEL_FIELDS : BRIEF_TOP_LEVEL_FIELDS;
 
-  checkUnknownKeys(errors, brief, BRIEF_TOP_LEVEL_FIELDS, 'authority brief');
-  if (brief.schema_version !== AUTHORITY_BRIEF_SCHEMA_VERSION) errors.push(`authority brief schema_version must be ${AUTHORITY_BRIEF_SCHEMA_VERSION}`);
+  checkUnknownKeys(errors, brief, allowedTopLevelFields, 'authority brief');
+  if (!AUTHORITY_BRIEF_SCHEMA_VERSIONS.includes(brief.schema_version)) {
+    errors.push(`authority brief schema_version must be one of ${AUTHORITY_BRIEF_SCHEMA_VERSIONS.join('|')}`);
+  }
   if (!nonempty(brief.run_id) || brief.run_id !== manifest?.run_id) errors.push(`authority brief run_id does not match the manifest run_id: ${brief.run_id}`);
   if (!nonempty(brief.selected_candidate_id)) errors.push('authority brief selected_candidate_id is missing');
   else if (brief.selected_candidate_id !== selectedCandidate?.candidate_id) errors.push(`authority brief selected_candidate_id does not match the selected candidate: ${brief.selected_candidate_id}`);
@@ -127,6 +147,23 @@ export function validateAuthorityBrief({ brief, manifest, selectedCandidate, evi
     errors.push(`authority brief content_pillar does not match the selected candidate pillar: ${brief.content_pillar} vs ${selectedCandidate.content_pillar}`);
   }
   if (brief.revenue_model !== AUTHORITY_REVENUE_MODEL) errors.push(`authority brief revenue_model must be ${AUTHORITY_REVENUE_MODEL}`);
+
+  if (isV2) {
+    const distribution = brief.derivative_distribution;
+    if (!plainObject(distribution)) errors.push('v2 authority brief derivative_distribution must be an object');
+    else {
+      checkUnknownKeys(errors, distribution, ['status', 'source_role', 'allowed_channels', 'transformation_requirement', 'human_review_required'], 'derivative_distribution');
+      if (!DERIVATIVE_DISTRIBUTION_STATUSES.includes(distribution.status)) errors.push(`derivative_distribution.status must be one of ${DERIVATIVE_DISTRIBUTION_STATUSES.join('|')}`);
+      if (distribution.source_role !== 'canonical-original') errors.push('derivative_distribution.source_role must be canonical-original');
+      if (!Array.isArray(distribution.allowed_channels) || distribution.allowed_channels.some((channel) => !DERIVATIVE_CHANNELS.includes(channel)) || new Set(distribution.allowed_channels).size !== distribution.allowed_channels.length) {
+        errors.push(`derivative_distribution.allowed_channels must be a unique subset of ${DERIVATIVE_CHANNELS.join('|')}`);
+      }
+      if (distribution.status === 'not-planned' && distribution.allowed_channels.length !== 0) errors.push('derivative_distribution.allowed_channels must be empty when status is not-planned');
+      if (distribution.status === 'planned' && distribution.allowed_channels.length === 0) errors.push('derivative_distribution.allowed_channels must be non-empty when status is planned');
+      if (!nonempty(distribution.transformation_requirement, MIN_SUMMARY_LENGTH)) errors.push(`derivative_distribution.transformation_requirement needs at least ${MIN_SUMMARY_LENGTH} characters`);
+      if (distribution.human_review_required !== true) errors.push('derivative_distribution.human_review_required must be true');
+    }
+  }
 
   const claims = Array.isArray(evidenceClaims) ? evidenceClaims : [];
   const claimById = new Map(claims.filter((claim) => nonempty(claim?.claim_id)).map((claim) => [claim.claim_id, claim]));
