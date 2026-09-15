@@ -67,6 +67,24 @@
 
 Baselines and thresholds are set only by a later human-visible readout against real Search Console/Analytics data. A publish-time brief that carries numbers is fabrication and fails.
 
+## Version 2: derivative distribution declaration
+
+Version 1 remains valid for sealed historical briefs. New runs that intend to
+adapt an article for Naver Blog or Tistory use `schema_version: 2` and add
+`derivative_distribution`:
+
+| Field | Rule |
+|---|---|
+| `status` | `not-planned` or `planned` |
+| `source_role` | exactly `canonical-original` |
+| `allowed_channels` | unique subset of `naver-blog`, `tistory`; empty for `not-planned`, non-empty for `planned` |
+| `transformation_requirement` | >=40 chars; states the reader-specific original value required before republishing |
+| `human_review_required` | exactly `true` |
+
+This declaration grants no automatic publication authority. A derivative post
+must also pass its destination harness, preserve source and retrieval dates,
+and record the rendered canonical separately from the source link.
+
 ## Independent review findings
 
 `review/editorial-review.json` must additionally record, from the evidence editor's own inspection:
