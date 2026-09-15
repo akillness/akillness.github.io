@@ -127,7 +127,7 @@ const failsWith = (mutateBrief, phrase, mutateFixture) => {
 };
 
 test('fails on identity and mode drift', () => {
-  failsWith((b) => { b.schema_version = 2; }, 'schema_version must be 1');
+  failsWith((b) => { b.schema_version = 3; }, 'schema_version must be one of 1|2');
   failsWith((b) => { b.run_id = 'other-run'; }, 'run_id does not match');
   failsWith((b) => { delete b.selected_candidate_id; }, 'selected_candidate_id is missing');
   failsWith((b) => { b.selected_candidate_id = 'cand-9'; }, 'does not match the selected candidate');
@@ -216,6 +216,29 @@ test('fails safely on missing nested objects', () => {
     failsWith((b) => { delete b[key]; }, `${key} must be an object`);
     failsWith((b) => { b[key] = 'not-an-object'; }, `${key} must be an object`);
   }
+});
+
+test('v2 requires an explicit, human-reviewed derivative distribution contract', () => {
+  const v2 = makeFixture({ mutateBrief: (brief) => {
+    brief.schema_version = 2;
+    brief.derivative_distribution = {
+      status: 'planned',
+      source_role: 'canonical-original',
+      allowed_channels: ['tistory'],
+      transformation_requirement: 'The destination must add a Korean decision checklist and verify every time-sensitive claim before publication.',
+      human_review_required: true
+    };
+  } });
+  assert.deepEqual(run(v2).errors, []);
+  const missing = makeFixture({ mutateBrief: (brief) => { brief.schema_version = 2; } });
+  assert.ok(run(missing).errors.some((e) => e.includes('derivative_distribution')));
+  const copied = makeFixture({ mutateBrief: (brief) => {
+    brief.schema_version = 2;
+    brief.derivative_distribution = { status: 'planned', source_role: 'canonical-original', allowed_channels: ['tistory'], transformation_requirement: 'short', human_review_required: false };
+  } });
+  const errors = run(copied).errors.join('\n');
+  assert.match(errors, /transformation_requirement/);
+  assert.match(errors, /human_review_required/);
 });
 
 test('review findings: compliant review passes, drifted review fails', () => {
