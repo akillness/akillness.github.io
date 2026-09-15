@@ -5,6 +5,9 @@ categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2024-05-14 13:10:00 +0800
 lang: ko
+# Retired 2026-09-15: machine summary / rewrite of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ### **Original Article** : 👉 <https://medium.com/towards-data-science/deep-dive-into-vector-databases-by-hand-e9ab71f54f80>
 

@@ -6,6 +6,9 @@ tags: [Trend, Review, Case]
 date: 2024-05-11 23:43:00 +0800
 mermaid: true
 lang: ko
+# Retired 2026-09-15: machine summary / rewrite of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 > [`Generative AI Preparation`](https://github.com/Msrevalli/Generative-AI-Preparation) (Generative AI 개념북) Thanks to [Aishwarya Naresh Reganti](https://www.linkedin.com/in/areganti/)
 {: .prompt-warning }

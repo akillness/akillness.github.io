@@ -5,6 +5,9 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-05-14 13:14:00 +0800
 lang: ko
+# Retired 2026-09-15: machine summary / rewrite of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ### **Original Article** : 👉 <https://towardsdatascience.com/deep-dive-into-self-attention-by-hand-%EF%B8%8E-f02876e49857>
 
