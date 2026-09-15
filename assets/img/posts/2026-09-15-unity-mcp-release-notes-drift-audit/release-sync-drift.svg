@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660" role="img" aria-label="Diagram comparing the unity-mcp release feed against the two documentation files its sync automation owns, and the two generated-docs workflows in the same repository">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <style>
+    .t   { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #1f2937; }
+    .h   { font-size: 27px; font-weight: 700; }
+    .sub { font-size: 16px; fill: #475569; }
+    .lbl { font-size: 15px; font-weight: 600; }
+    .sm  { font-size: 13px; fill: #475569; }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; fill: #1f2937; }
+    .ok  { fill: #15803d; }
+    .bad { fill: #b91c1c; }
+  </style>
+
+  <text class="t h" x="40" y="46">Four releases shipped. Two generated files did not move.</text>
+  <text class="t sub" x="40" y="74">CoplayDev/unity-mcp at beta commit 2fcc1795, read 2026-09-15</text>
+
+  <!-- Release feed -->
+  <text class="t lbl" x="40" y="126">GitHub Releases API — the source of truth</text>
+  <line x1="40" y1="150" x2="1160" y2="150" stroke="#cbd5e1" stroke-width="2"/>
+  <g>
+    <circle cx="120" cy="150" r="9" fill="#2563eb"/>
+    <text class="t mono" x="120" y="181" text-anchor="middle">v10.0.0</text>
+    <text class="t sm" x="120" y="199" text-anchor="middle">2026-06-30</text>
+
+    <circle cx="380" cy="150" r="9" fill="#2563eb"/>
+    <text class="t mono" x="380" y="181" text-anchor="middle">v10.0.2</text>
+    <text class="t sm" x="380" y="199" text-anchor="middle">2026-07-13</text>
+
+    <circle cx="620" cy="150" r="9" fill="#2563eb"/>
+    <text class="t mono" x="620" y="181" text-anchor="middle">v10.1.0</text>
+    <text class="t sm" x="620" y="199" text-anchor="middle">2026-07-13</text>
+
+    <circle cx="860" cy="150" r="9" fill="#2563eb"/>
+    <text class="t mono" x="860" y="181" text-anchor="middle">v10.1.2</text>
+    <text class="t sm" x="860" y="199" text-anchor="middle">2026-08-02</text>
+
+    <circle cx="1090" cy="150" r="11" fill="#1d4ed8"/>
+    <text class="t mono" x="1090" y="181" text-anchor="middle">v10.2.0</text>
+    <text class="t sm" x="1090" y="199" text-anchor="middle">2026-09-01</text>
+  </g>
+
+  <!-- Synced files -->
+  <text class="t lbl" x="40" y="252">Files owned by tools/sync_release_notes.py</text>
+  <line x1="40" y1="276" x2="1160" y2="276" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6"/>
+  <circle cx="120" cy="276" r="9" fill="#b91c1c"/>
+  <text class="t mono" x="120" y="307" text-anchor="middle">v10.0.0</text>
+  <text class="t sm" x="120" y="325" text-anchor="middle">newest entry</text>
+
+  <text class="t sm" x="210" y="270">README.md &#8220;Recent Updates&#8221; block &#8212; on beta and on main</text>
+  <text class="t sm" x="210" y="292">website/docs/releases.md &#8212; 63 entries, newest v10.0.0</text>
+  <text class="t bad lbl" x="210" y="322">4 releases behind, a 63-day gap to the newest tag</text>
+
+  <path d="M1090 165 L1090 240 L150 240 L128 264" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ar)" opacity="0.65"/>
+  <text class="t sm" x="700" y="232" text-anchor="middle">the sync that should have carried these forward did not land</text>
+
+  <!-- Workflow comparison -->
+  <rect x="40" y="378" width="540" height="238" rx="10" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <text class="t lbl" x="64" y="410">.github/workflows/docs-generate.yml</text>
+  <text class="t sm" x="64" y="434">generated tool reference</text>
+  <text class="t mono" x="64" y="466">on: pull_request [beta, main] (paths)</text>
+  <text class="t mono" x="64" y="490">on: push [beta] + workflow_dispatch</text>
+  <text class="t mono ok" x="64" y="522">runs generate_docs_reference.py --check</text>
+  <text class="t mono ok" x="64" y="546">plus a decorator-vs-page count check</text>
+  <text class="t ok lbl" x="64" y="584">Drift fails a matching pull request</text>
+
+  <rect x="620" y="378" width="540" height="238" rx="10" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <text class="t lbl" x="644" y="410">.github/workflows/sync-releases.yml</text>
+  <text class="t sm" x="644" y="434">generated release notes</text>
+  <text class="t mono" x="644" y="466">on: release [published, edited, ...]</text>
+  <text class="t mono" x="644" y="490">on: workflow_dispatch only</text>
+  <text class="t mono bad" x="644" y="522">runs sync_release_notes.py (write mode)</text>
+  <text class="t mono bad" x="644" y="546">--check exists in the tool, never invoked</text>
+  <text class="t bad lbl" x="644" y="584">Nothing fails when the file is stale</text>
+</svg>
