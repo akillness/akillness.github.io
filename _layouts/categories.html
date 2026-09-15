@@ -47,8 +47,17 @@ layout: page
         <span class="ms-2">
           <i class="far fa-folder{% if sub_categories_size > 0 %}-open{% endif %} fa-fw"></i>
 
-          {% capture _category_url %}/categories/{{ category_name | slugify | url_encode }}/{% endcapture %}
-          <a href="{{ _category_url | relative_url }}" class="mx-2">{{ category_name }}</a>
+          {% comment %}
+            A category links to its archive only when that page was built
+            (site.data.linkable_categories, written by
+            _plugins/archive_quality_policy.rb). Below the floor it is a label.
+          {% endcomment %}
+          {% if site.data.linkable_categories contains category_name %}
+            {% capture _category_url %}/categories/{{ category_name | slugify | url_encode }}/{% endcapture %}
+            <a href="{{ _category_url | relative_url }}" class="mx-2">{{ category_name }}</a>
+          {% else %}
+            <span class="mx-2">{{ category_name }}</span>
+          {% endif %}
 
           <!-- content count -->
           {% assign top_posts_size = visible_posts_of_category | size %}
@@ -112,8 +121,12 @@ layout: page
               <li class="list-group-item">
                 <i class="far fa-folder fa-fw"></i>
 
-                {% capture _sub_ctg_url %}/categories/{{ sub_category | slugify | url_encode }}/{% endcapture %}
-                <a href="{{ _sub_ctg_url | relative_url }}" class="mx-2">{{ sub_category }}</a>
+                {% if site.data.linkable_categories contains sub_category %}
+                  {% capture _sub_ctg_url %}/categories/{{ sub_category | slugify | url_encode }}/{% endcapture %}
+                  <a href="{{ _sub_ctg_url | relative_url }}" class="mx-2">{{ sub_category }}</a>
+                {% else %}
+                  <span class="mx-2">{{ sub_category }}</span>
+                {% endif %}
 
                 {% assign posts_size = 0 %}
                 {% for post in site.categories[sub_category] %}

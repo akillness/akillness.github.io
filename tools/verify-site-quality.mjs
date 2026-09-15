@@ -72,15 +72,25 @@ export function verifyAdBoundary(html, { route, eligible = false, config, inArti
 // The tag-archive floor lives in _config.yml so the plugin that builds the pages
 // and the verifier that audits them read one number.
 export function readTagArchiveMinimum(file = new URL('../_config.yml', import.meta.url)) {
-  const raw = fs.readFileSync(file, 'utf8').match(/^tag_archive_min_posts:([^\n]*)/m)?.[1];
+  return readArchiveMinimum('tag_archive_min_posts', file);
+}
+
+// Same contract for generated category pages.
+export function readCategoryArchiveMinimum(file = new URL('../_config.yml', import.meta.url)) {
+  return readArchiveMinimum('category_archive_min_posts', file);
+}
+
+function readArchiveMinimum(key, file) {
+  const raw = fs.readFileSync(file, 'utf8').match(new RegExp(`^${key}:([^\\n]*)`, 'm'))?.[1];
   const value = Number((raw ?? '').replace(/\s+#.*$/, '').trim());
-  if (!Number.isInteger(value) || value < 2) throw new Error('tag_archive_min_posts must be an integer >= 2');
+  if (!Number.isInteger(value) || value < 2) throw new Error(`${key} must be an integer >= 2`);
   return value;
 }
 
 function main() {
 const adConfig = readAdConfig();
 const tagArchiveMinimum = readTagArchiveMinimum();
+const categoryArchiveMinimum = readCategoryArchiveMinimum();
 const siteDir = path.resolve(process.argv[2] || '_site');
 const origin = 'https://akillness.github.io';
 // This is a project review floor for legacy stubs, not a Google word-count requirement.
@@ -174,14 +184,15 @@ for (const root of ['tags', 'categories']) {
     listingSurfaces.push({ route: `/${root}/${entry.name}/`, html });
     check(/<meta name="robots" content="[^"]*noindex[^"]*">/i.test(html), `archive lacks noindex: /${root}/${entry.name}/`);
     failures.push(...verifyAdBoundary(html, { route: `/${root}/${entry.name}/`, config: adConfig }));
-    if (root !== 'tags') continue;
     // An archive that lists fewer posts than the floor is an auto-generated page
     // with no content of its own; _plugins/archive_quality_policy.rb must not
     // have built it. Assert on the artifact, not on the plugin's own report.
+    const floor = root === 'tags' ? tagArchiveMinimum : categoryArchiveMinimum;
+    const kind = root === 'tags' ? 'tag' : 'category';
     const listed = (html.match(/<li class="d-flex justify-content-between/g) || []).length;
     const advertised = Number(html.match(/<span class="lead text-muted ps-2">\s*(\d+)\s*<\/span>/)?.[1] ?? NaN);
-    check(listed >= tagArchiveMinimum, `tag archive lists ${listed} post(s), below the ${tagArchiveMinimum} floor: /tags/${entry.name}/`);
-    check(advertised === listed, `tag archive advertises ${advertised} but lists ${listed}: /tags/${entry.name}/`);
+    check(listed >= floor, `${kind} archive lists ${listed} post(s), below the ${floor} floor: /${root}/${entry.name}/`);
+    check(advertised === listed, `${kind} archive advertises ${advertised} but lists ${listed}: /${root}/${entry.name}/`);
   }
 }
 check(archiveCount > 0, 'no generated archive pages were found');
@@ -413,7 +424,7 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Site quality verification passed: ${locations.length} sitemap URLs, ${postEntries.length} posts, ${archiveCount} noindex archives (${builtArchiveSlugs.tags.size} tags at >= ${tagArchiveMinimum} posts, ${builtArchiveSlugs.categories.size} categories), ${paginationCount} noindex pagination pages, ${noindexPosts} noindex posts, ${monetizedPosts} monetized posts, ${nonMonetizedPosts} protected posts.`);
+console.log(`Site quality verification passed: ${locations.length} sitemap URLs, ${postEntries.length} posts, ${archiveCount} noindex archives (${builtArchiveSlugs.tags.size} tags at >= ${tagArchiveMinimum} posts, ${builtArchiveSlugs.categories.size} categories at >= ${categoryArchiveMinimum} posts), ${paginationCount} noindex pagination pages, ${noindexPosts} noindex posts, ${monetizedPosts} monetized posts, ${nonMonetizedPosts} protected posts.`);
 
 }
 

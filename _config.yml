@@ -97,6 +97,13 @@ google_ad_min_post_words: 800
 # _plugins/archive_quality_policy.rb).
 tag_archive_min_posts: 2
 
+# The same floor for generated category pages. A category that holds a single
+# post renders one heading and one link (2026-09-15 live measurement: 83-92
+# characters of unique text), which is the auto-generated surface AdSense
+# flagged as "low value content". Category archives below this floor are not
+# built; post tails and the categories hub degrade those names to plain text.
+category_archive_min_posts: 2
+
 
 goatcounter:
   id: # fill in your Goatcounter ID

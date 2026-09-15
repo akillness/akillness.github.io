@@ -1,0 +1,22 @@
+<!--
+  Category links for the post tail.
+
+  A category is a link only when its archive page was actually built.
+  Categories below `category_archive_min_posts` have no page, so they stay
+  visible as plain labels instead of pointing at a 404. The surviving set is
+  written by _plugins/archive_quality_policy.rb, which is also what decided the
+  pages.
+-->
+{% if page.categories.size > 0 %}
+  <div class="post-meta mb-3">
+    <i class="far fa-folder-open fa-fw me-1"></i>
+    {% for category in page.categories %}
+      {% if site.data.linkable_categories contains category %}
+        <a href="{{ site.baseurl }}/categories/{{ category | slugify | url_encode }}/">{{ category }}</a>
+      {% else %}
+        <span>{{ category }}</span>
+      {% endif %}
+      {%- unless forloop.last -%},{%- endunless -%}
+    {% endfor %}
+  </div>
+{% endif %}

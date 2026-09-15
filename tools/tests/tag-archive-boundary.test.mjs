@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
-import { readTagArchiveMinimum } from '../verify-site-quality.mjs';
+import { readTagArchiveMinimum, readCategoryArchiveMinimum } from '../verify-site-quality.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 assert.ok(process.env.TEST_NODE_MODULES, 'FAIL CLOSED: set TEST_NODE_MODULES to the external node_modules installed from tools/template-test-deps/package-lock.json; never install inside this repository.');
@@ -33,6 +33,8 @@ const site = {
   data: {
     linkable_tags: ['Agent', 'deep-tag'],
     tag_visible_counts: { Agent: 25, 'deep-tag': minimum, 'thin-tag': 1 },
+    linkable_categories: ['AI', 'Model & Paper'],
+    category_visible_counts: { AI: 57, 'Model & Paper': 31, Unity: 1 },
     locales: { en: { panel: { trending_tags: 'Trending Tags' } } }
   }
 };
@@ -75,6 +77,24 @@ test('post tag chips link surviving tags and degrade thin ones to plain labels',
 
 test('a post with no tags renders no tag block at all', async () => {
   assert.equal(markup(await renderInclude('post-tags.html', { tags: [] })), '');
+});
+
+// Category archives share the tag contract: the same floor, the same surviving
+// set, and the same plain-label degradation for names whose page was not built.
+test('the configured category floor is a shared integer, not a template literal', () => {
+  assert.equal(readCategoryArchiveMinimum(), config.category_archive_min_posts);
+  assert.ok(Number.isInteger(config.category_archive_min_posts) && config.category_archive_min_posts >= 2);
+});
+
+test('post category links point only at archives that were built', async () => {
+  const html = await renderInclude('post-categories.html', { categories: ['AI', 'Model & Paper', 'Unity'] });
+  assert.deepEqual(hrefs(html), ['/categories/ai/', '/categories/model-paper/']);
+  assert.match(html, /<span>Unity<\/span>/);
+  assert.doesNotMatch(html, /\/categories\/unity\//);
+});
+
+test('a post with no categories renders no category block at all', async () => {
+  assert.equal(markup(await renderInclude('post-categories.html', { categories: [] })), '');
 });
 
 test('trending tags never advertise a tag whose page was not built', async () => {

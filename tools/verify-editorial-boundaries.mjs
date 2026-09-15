@@ -58,11 +58,23 @@ for (const [file, phrase] of sourceChecks) check(read(file).includes(phrase), `$
 const tagPolicy = read('_plugins/archive_quality_policy.rb');
 check(tagPolicy.includes("post.data['hidden'] == true"), 'tag policy does not exclude hidden posts');
 check(tagPolicy.includes("post.data['robots'].to_s.include?('noindex')"), 'tag policy does not exclude noindex posts');
-check(tagPolicy.includes("site.config['tag_archive_min_posts']"), 'tag policy does not read the configured floor');
+// Match the invariant (the config key and the site.data keys the templates
+// consume), not one Ruby spelling of how the plugin reaches them.
+check(/['"]tag_archive_min_posts['"]/.test(tagPolicy), 'tag policy does not read the configured floor');
 check(tagPolicy.includes('site.pages.reject!'), 'tag policy does not remove thin tag archives from the build');
-check(tagPolicy.includes("site.data['linkable_tags']"), 'tag policy does not publish the surviving tag set');
-check(tagPolicy.includes("site.data['tag_visible_counts']"), 'tag policy does not publish visible tag counts');
+check(/['"]linkable_tags['"]/.test(tagPolicy), 'tag policy does not publish the surviving tag set');
+check(/['"]tag_visible_counts['"]/.test(tagPolicy), 'tag policy does not publish visible tag counts');
 check(/^tag_archive_min_posts:\s*[2-9]\d*\s*$/m.test(read('_config.yml')), '_config.yml does not set a tag archive floor of at least 2');
+// Category archives share the contract: floor in _config.yml, surviving set
+// published for the post tail and the categories hub.
+check(/['"]category_archive_min_posts['"]/.test(tagPolicy), 'category policy does not read the configured floor');
+check(/['"]linkable_categories['"]/.test(tagPolicy), 'category policy does not publish the surviving category set');
+check(/['"]category_visible_counts['"]/.test(tagPolicy), 'category policy does not publish visible category counts');
+check(/^category_archive_min_posts:\s*[2-9]\d*\s*$/m.test(read('_config.yml')), '_config.yml does not set a category archive floor of at least 2');
+for (const file of ['_layouts/categories.html', '_includes/post-categories.html']) {
+  check(read(file).includes('site.data.linkable_categories contains'), `${file} links categories without filtering on the surviving set`);
+}
+check(!read('_layouts/post.html').includes('/categories/'), '_layouts/post.html still links categories directly instead of through post-categories.html');
 for (const file of ['_layouts/tags.html', '_includes/trending-tags.html', '_includes/post-tags.html']) {
   const text = read(file);
   check(text.includes('site.data.linkable_tags'), `${file} does not filter on the surviving tag set`);
@@ -244,6 +256,7 @@ check(!/paths-ignore:\s*\n\s*- \.gitignore/m.test(workflow), 'CI still ignores .
 const liquidFiles = [
   '_includes/head.html',
   '_includes/post-paginator.html',
+  '_includes/post-categories.html',
   '_includes/post-tags.html',
   '_includes/related-posts.html',
   '_includes/trending-tags.html',

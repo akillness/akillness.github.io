@@ -32,38 +32,40 @@ module Jekyll
     end
   end
 
-  # A generated tag page whose whole body is one heading and one link is an
-  # auto-generated page with no original content. `sitemap: false` only removed
-  # those pages from search; it never removed them from the crawlable surface,
-  # because /tags/ still links every one of them. Stop building the thin ones and
-  # publish the surviving set so that every template which links a tag filters on
-  # the same list the pages were built from. Counting mirrors _layouts/tag.html:
-  # a post hidden from listings or held back from search is not a visible post.
-  #
-  # Runs at :low, after jekyll-archives (:normal) has created the archives and
-  # before ArchiveQualityPolicy (:lowest) stamps the survivors.
-  class ThinTagArchivePolicy < Generator
-    safe true
-    priority :low
+  # A generated tag or category page whose whole body is one heading and one
+  # link is an auto-generated page with no original content. `sitemap: false`
+  # only removed those pages from search; it never removed them from the
+  # crawlable surface, because /tags/ and /categories/ still link every one of
+  # them. Stop building the thin ones and publish the surviving set so that every
+  # template which links an archive filters on the same list the pages were
+  # built from. Counting mirrors _layouts/tag.html and _layouts/category.html: a
+  # post hidden from listings or held back from search is not a visible post.
+  module ThinArchivePolicy
+    module_function
 
     DEFAULT_MINIMUM = 2
 
-    def generate(site)
-      minimum = Integer(site.config['tag_archive_min_posts'] || DEFAULT_MINIMUM)
+    # layout:       the jekyll-archives layout name ('tag' or 'category')
+    # config_key:   _config.yml key holding the integer floor
+    # counts_key:   site.data key that receives { raw name => visible count }
+    # linkable_key: site.data key that receives the sorted surviving names
+    def prune(site, layout:, config_key:, counts_key:, linkable_key:, label:)
+      minimum = Integer(site.config[config_key] || DEFAULT_MINIMUM)
       counts = {}
       thin = []
 
       site.pages.each do |page|
-        next unless page.data['layout'] == 'tag'
+        next unless page.data['layout'] == layout
         next unless page.respond_to?(:posts) && page.respond_to?(:title)
 
         title = page.title
         next unless title.is_a?(String)
 
-        # Keyed by the raw tag, which is also what `page.tags` yields, so a chip
-        # and its archive agree. Two raw tags can still slugify to one URL; if
-        # both survive, verify-site-quality compares the hub's link count against
-        # the number of pages actually built and fails on the collision.
+        # Keyed by the raw name, which is also what `page.tags` / `page.categories`
+        # yield, so a chip and its archive agree. Two raw names can still slugify
+        # to one URL; if both survive, verify-site-quality compares the hub's link
+        # count against the number of pages actually built and fails on the
+        # collision.
         count = visible_posts(page).size
         counts[title] = count
         thin << page if count < minimum
@@ -73,12 +75,12 @@ module Jekyll
       archives = site.config['archives']
       archives.reject! { |archive| thin.include?(archive) } if archives.respond_to?(:reject!)
 
-      site.data['tag_visible_counts'] = counts
-      site.data['linkable_tags'] =
+      site.data[counts_key] = counts
+      site.data[linkable_key] =
         counts.reject { |_, count| count < minimum }.keys.sort_by(&:downcase)
 
-      Jekyll.logger.info 'Tags:',
-                         "kept #{site.data['linkable_tags'].size}, " \
+      Jekyll.logger.info "#{label}:",
+                         "kept #{site.data[linkable_key].size}, " \
                          "dropped #{thin.size} below #{minimum} visible post(s)"
     end
 
@@ -86,6 +88,39 @@ module Jekyll
       Array(page.posts).reject do |post|
         post.data['hidden'] == true || post.data['robots'].to_s.include?('noindex')
       end
+    end
+  end
+
+  # Runs at :low, after jekyll-archives (:normal) has created the archives and
+  # before ArchiveQualityPolicy (:lowest) stamps the survivors.
+  class ThinTagArchivePolicy < Generator
+    safe true
+    priority :low
+
+    def generate(site)
+      ThinArchivePolicy.prune(site,
+                              layout: 'tag',
+                              config_key: 'tag_archive_min_posts',
+                              counts_key: 'tag_visible_counts',
+                              linkable_key: 'linkable_tags',
+                              label: 'Tags')
+    end
+  end
+
+  # Same floor for category archives. Consumers: _includes/post-categories.html
+  # (post tail) and _layouts/categories.html (hub) link a category only when it
+  # is in site.data.linkable_categories.
+  class ThinCategoryArchivePolicy < Generator
+    safe true
+    priority :low
+
+    def generate(site)
+      ThinArchivePolicy.prune(site,
+                              layout: 'category',
+                              config_key: 'category_archive_min_posts',
+                              counts_key: 'category_visible_counts',
+                              linkable_key: 'linkable_categories',
+                              label: 'Categories')
     end
   end
 
