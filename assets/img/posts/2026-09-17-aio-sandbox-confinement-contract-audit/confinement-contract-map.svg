@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="Helvetica, Arial, sans-serif">
+  <title>AIO Sandbox confinement contract map at commit 7f1afaf8</title>
+  <!-- left: stock container -->
+  <g>
+    <rect x="40" y="60" width="400" height="200" rx="12" fill="none" stroke="#4a90d9" stroke-width="3"/>
+    <text x="240" y="92" text-anchor="middle" font-size="19" font-weight="bold" fill="#4a90d9">Stock Docker container</text>
+    <text x="240" y="124" text-anchor="middle" font-size="14" fill="#7a8aa0">default seccomp profile applied</text>
+    <rect x="70" y="145" width="340" height="44" rx="8" fill="#4a90d9" opacity="0.15"/>
+    <text x="240" y="172" text-anchor="middle" font-size="14" fill="#33608c">~44 of 300+ syscalls filtered (Docker docs)</text>
+    <text x="240" y="228" text-anchor="middle" font-size="13" fill="#7a8aa0">"not recommended to change the default profile"</text>
+  </g>
+  <!-- right: AIO documented run -->
+  <g>
+    <rect x="520" y="60" width="400" height="200" rx="12" fill="none" stroke="#d9714a" stroke-width="3" stroke-dasharray="10 6"/>
+    <text x="720" y="92" text-anchor="middle" font-size="19" font-weight="bold" fill="#d9714a">AIO Sandbox, documented run</text>
+    <text x="720" y="124" text-anchor="middle" font-size="14" fill="#a06a55">--security-opt seccomp=unconfined</text>
+    <rect x="550" y="145" width="340" height="44" rx="8" fill="#d9714a" opacity="0.15"/>
+    <text x="720" y="172" text-anchor="middle" font-size="14" fill="#a04c2e">syscall filter removed; 66 occurrences in 34 files</text>
+    <text x="720" y="228" text-anchor="middle" font-size="13" fill="#a06a55">browser + shell + code-server + Jupyter + MCP inside</text>
+  </g>
+  <!-- bottom band: contract facts -->
+  <g>
+    <rect x="40" y="310" width="880" height="80" rx="12" fill="none" stroke="#8a8f98" stroke-width="2"/>
+    <text x="480" y="340" text-anchor="middle" font-size="16" font-weight="bold" fill="#5a606a">Shipped API contracts: sandbox v1 (123 paths) + daemon v1/v2 (131/65 paths)</text>
+    <text x="480" y="370" text-anchor="middle" font-size="14" fill="#7a8088">securitySchemes: none declared - "Without SANDBOX_API_KEY, services remain open"</text>
+  </g>
+  <g>
+    <rect x="40" y="420" width="880" height="80" rx="12" fill="none" stroke="#8a8f98" stroke-width="2"/>
+    <text x="480" y="450" text-anchor="middle" font-size="16" font-weight="bold" fill="#5a606a">Runtime source: not in the Apache-2.0 repository</text>
+    <text x="480" y="480" text-anchor="middle" font-size="14" fill="#7a8088">docker/ holds only .gitkeep; no Dockerfile in any fetched ref's history; image ships prebuilt from ghcr.io</text>
+  </g>
+  <text x="480" y="34" text-anchor="middle" font-size="21" font-weight="bold" fill="#3a3f47">Where the AIO Sandbox confinement contract actually lives (commit 7f1afaf8)</text>
+</svg>
