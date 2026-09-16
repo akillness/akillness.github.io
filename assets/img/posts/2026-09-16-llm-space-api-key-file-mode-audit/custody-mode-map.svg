@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420" role="img" aria-labelledby="t d">
+  <title id="t">Which settings writers in deer-flow/llm-space pass a file mode</title>
+  <desc id="d">The shared atomicWriteJsonFileSync writer in the centre. Left: plugin settings and its backup pass mode 0o600. Right: models.json (provider API keys), analytics.json, search settings and network settings pass no mode and inherit Node's 0o666 default masked by umask.</desc>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#555"/></marker>
+  </defs>
+  <g font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#222">
+    <text x="480" y="28" text-anchor="middle" font-size="17" font-weight="600">deer-flow/llm-space @ e65eea24 &#8212; who asks the atomic JSON writer for a mode</text>
+    <rect x="360" y="170" width="240" height="78" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
+    <text x="480" y="200" text-anchor="middle" font-weight="600">atomicWriteJsonFileSync</text>
+    <text x="480" y="220" text-anchor="middle" font-size="12">packages/core/src/server/json-file.ts</text>
+    <text x="480" y="238" text-anchor="middle" font-size="12">openSync(tmp, O_CREAT|O_EXCL|O_WRONLY, options.mode)</text>
+    <rect x="40" y="90" width="260" height="60" rx="8" fill="none" stroke="#2a7" stroke-width="1.5"/>
+    <text x="170" y="114" text-anchor="middle" font-weight="600">plugin settings file</text>
+    <text x="170" y="134" text-anchor="middle" font-size="12">PluginSettingsStore._write &#8594; { mode: 0o600 }</text>
+    <rect x="40" y="250" width="260" height="60" rx="8" fill="none" stroke="#2a7" stroke-width="1.5"/>
+    <text x="170" y="274" text-anchor="middle" font-weight="600">plugin settings backup</text>
+    <text x="170" y="294" text-anchor="middle" font-size="12">_saveLastKnownGood &#8594; { mode: 0o600 }</text>
+    <line x1="300" y1="120" x2="360" y2="190" stroke="#2a7" stroke-width="1.5" marker-end="url(#a)"/>
+    <line x1="300" y1="280" x2="360" y2="228" stroke="#2a7" stroke-width="1.5" marker-end="url(#a)"/>
+    <rect x="660" y="60" width="260" height="60" rx="8" fill="none" stroke="#c44" stroke-width="1.5"/>
+    <text x="790" y="84" text-anchor="middle" font-weight="600">settings/models.json</text>
+    <text x="790" y="104" text-anchor="middle" font-size="12">provider profiles incl. apiKey &#8594; no mode</text>
+    <rect x="660" y="140" width="260" height="60" rx="8" fill="none" stroke="#c44" stroke-width="1.5"/>
+    <text x="790" y="164" text-anchor="middle" font-weight="600">settings/analytics.json</text>
+    <text x="790" y="184" text-anchor="middle" font-size="12">install id + opt-out flag &#8594; no mode</text>
+    <rect x="660" y="220" width="260" height="60" rx="8" fill="none" stroke="#c44" stroke-width="1.5"/>
+    <text x="790" y="244" text-anchor="middle" font-weight="600">search settings</text>
+    <text x="790" y="264" text-anchor="middle" font-size="12">SearchSettingsManager &#8594; no mode</text>
+    <rect x="660" y="300" width="260" height="60" rx="8" fill="none" stroke="#c44" stroke-width="1.5"/>
+    <text x="790" y="324" text-anchor="middle" font-weight="600">network settings</text>
+    <text x="790" y="344" text-anchor="middle" font-size="12">NetworkSettingsManager &#8594; no mode</text>
+    <line x1="600" y1="195" x2="660" y2="90" stroke="#c44" stroke-width="1.5" marker-end="url(#a)"/>
+    <line x1="600" y1="205" x2="660" y2="170" stroke="#c44" stroke-width="1.5" marker-end="url(#a)"/>
+    <line x1="600" y1="220" x2="660" y2="250" stroke="#c44" stroke-width="1.5" marker-end="url(#a)"/>
+    <line x1="600" y1="235" x2="660" y2="330" stroke="#c44" stroke-width="1.5" marker-end="url(#a)"/>
+    <text x="170" y="360" text-anchor="middle" font-size="12" fill="#2a7">explicit 0o600: owner read/write only</text>
+    <text x="790" y="390" text-anchor="middle" font-size="12" fill="#c44">no mode: Node default 0o666 &amp; ~umask (0644 under umask 022)</text>
+    <text x="480" y="400" text-anchor="middle" font-size="11" fill="#666">Read from the pinned commit; permission bits are inferred from documented defaults, not measured on disk.</text>
+  </g>
+</svg>
