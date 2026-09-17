@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="Helvetica, Arial, sans-serif">
+  <!-- No opaque full-canvas background: drawn on transparency per site visual policy -->
+  <text x="60" y="64" font-size="30" font-weight="700" fill="#1f2933">Orca telemetry at commit 0d23ea6 &#8212; 83 registered events</text>
+  <text x="60" y="96" font-size="19" fill="#52606d">Docs: &#8220;Every field we transmit is either a fixed enum value, a version string, or the anonymous local ID.&#8221;</text>
+
+  <!-- 83-tile grid: 12 columns x 7 rows, last row 11 -->
+  <g>
+    <!-- rows of enum-locked tiles -->
+    <g fill="#9fb3c8" stroke="#627d98" stroke-width="1">
+      <!-- generated grid, tile 62 (row 6 col 3) replaced by the red tile below -->
+      <rect x="60" y="130" width="64" height="40" rx="6"/><rect x="136" y="130" width="64" height="40" rx="6"/><rect x="212" y="130" width="64" height="40" rx="6"/><rect x="288" y="130" width="64" height="40" rx="6"/><rect x="364" y="130" width="64" height="40" rx="6"/><rect x="440" y="130" width="64" height="40" rx="6"/><rect x="516" y="130" width="64" height="40" rx="6"/><rect x="592" y="130" width="64" height="40" rx="6"/><rect x="668" y="130" width="64" height="40" rx="6"/><rect x="744" y="130" width="64" height="40" rx="6"/><rect x="820" y="130" width="64" height="40" rx="6"/><rect x="896" y="130" width="64" height="40" rx="6"/>
+      <rect x="60" y="182" width="64" height="40" rx="6"/><rect x="136" y="182" width="64" height="40" rx="6"/><rect x="212" y="182" width="64" height="40" rx="6"/><rect x="288" y="182" width="64" height="40" rx="6"/><rect x="364" y="182" width="64" height="40" rx="6"/><rect x="440" y="182" width="64" height="40" rx="6"/><rect x="516" y="182" width="64" height="40" rx="6"/><rect x="592" y="182" width="64" height="40" rx="6"/><rect x="668" y="182" width="64" height="40" rx="6"/><rect x="744" y="182" width="64" height="40" rx="6"/><rect x="820" y="182" width="64" height="40" rx="6"/><rect x="896" y="182" width="64" height="40" rx="6"/>
+      <rect x="60" y="234" width="64" height="40" rx="6"/><rect x="136" y="234" width="64" height="40" rx="6"/><rect x="212" y="234" width="64" height="40" rx="6"/><rect x="288" y="234" width="64" height="40" rx="6"/><rect x="364" y="234" width="64" height="40" rx="6"/><rect x="440" y="234" width="64" height="40" rx="6"/><rect x="516" y="234" width="64" height="40" rx="6"/><rect x="592" y="234" width="64" height="40" rx="6"/><rect x="668" y="234" width="64" height="40" rx="6"/><rect x="744" y="234" width="64" height="40" rx="6"/><rect x="820" y="234" width="64" height="40" rx="6"/><rect x="896" y="234" width="64" height="40" rx="6"/>
+      <rect x="60" y="286" width="64" height="40" rx="6"/><rect x="136" y="286" width="64" height="40" rx="6"/><rect x="212" y="286" width="64" height="40" rx="6"/><rect x="288" y="286" width="64" height="40" rx="6"/><rect x="364" y="286" width="64" height="40" rx="6"/><rect x="440" y="286" width="64" height="40" rx="6"/><rect x="516" y="286" width="64" height="40" rx="6"/><rect x="592" y="286" width="64" height="40" rx="6"/><rect x="668" y="286" width="64" height="40" rx="6"/><rect x="744" y="286" width="64" height="40" rx="6"/><rect x="820" y="286" width="64" height="40" rx="6"/><rect x="896" y="286" width="64" height="40" rx="6"/>
+      <rect x="60" y="338" width="64" height="40" rx="6"/><rect x="136" y="338" width="64" height="40" rx="6"/><rect x="212" y="338" width="64" height="40" rx="6"/><rect x="288" y="338" width="64" height="40" rx="6"/><rect x="364" y="338" width="64" height="40" rx="6"/><rect x="440" y="338" width="64" height="40" rx="6"/><rect x="516" y="338" width="64" height="40" rx="6"/><rect x="592" y="338" width="64" height="40" rx="6"/><rect x="668" y="338" width="64" height="40" rx="6"/><rect x="744" y="338" width="64" height="40" rx="6"/><rect x="820" y="338" width="64" height="40" rx="6"/><rect x="896" y="338" width="64" height="40" rx="6"/>
+      <rect x="60" y="390" width="64" height="40" rx="6"/><rect x="136" y="390" width="64" height="40" rx="6"/><rect x="288" y="390" width="64" height="40" rx="6"/><rect x="364" y="390" width="64" height="40" rx="6"/><rect x="440" y="390" width="64" height="40" rx="6"/><rect x="516" y="390" width="64" height="40" rx="6"/><rect x="592" y="390" width="64" height="40" rx="6"/><rect x="668" y="390" width="64" height="40" rx="6"/><rect x="744" y="390" width="64" height="40" rx="6"/><rect x="820" y="390" width="64" height="40" rx="6"/><rect x="896" y="390" width="64" height="40" rx="6"/>
+      <rect x="60" y="442" width="64" height="40" rx="6"/><rect x="136" y="442" width="64" height="40" rx="6"/><rect x="212" y="442" width="64" height="40" rx="6"/><rect x="288" y="442" width="64" height="40" rx="6"/><rect x="364" y="442" width="64" height="40" rx="6"/><rect x="440" y="442" width="64" height="40" rx="6"/><rect x="516" y="442" width="64" height="40" rx="6"/><rect x="592" y="442" width="64" height="40" rx="6"/><rect x="668" y="442" width="64" height="40" rx="6"/><rect x="744" y="442" width="64" height="40" rx="6"/><rect x="820" y="442" width="64" height="40" rx="6"/>
+    </g>
+    <!-- the one free-form tile -->
+    <rect x="212" y="390" width="64" height="40" rx="6" fill="#ef4e4e" stroke="#ab091e" stroke-width="2"/>
+  </g>
+
+  <!-- callout from red tile -->
+  <path d="M 276 410 C 400 410 400 500 456 505" fill="none" stroke="#ab091e" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <g>
+    <rect x="460" y="470" width="680" height="70" rx="10" fill="none" stroke="#ab091e" stroke-width="2"/>
+    <text x="480" y="498" font-size="17" font-weight="700" fill="#ab091e">agent_hook_install_failed.error_message &#8212; z.string().max(200)</text>
+    <text x="480" y="525" font-size="14" fill="#1f2933" font-family="Menlo, monospace">EACCES: permission denied, open '/Users/&lt;name&gt;/.claude/settings.json'</text>
+  </g>
+
+  <text x="60" y="505" font-size="18" fill="#52606d">82 events: enum / count /</text>
+  <text x="60" y="528" font-size="18" fill="#52606d">regex-locked fields only</text>
+
+  <text x="60" y="592" font-size="17" fill="#52606d">The only free-form field across all 83 event schemas carries error.message verbatim from 14 hook installers</text>
+  <text x="60" y="616" font-size="17" fill="#52606d">that write inside the user's home directory &#8212; where Node fs errors embed the account username.</text>
+</svg>
