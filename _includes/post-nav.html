@@ -1,16 +1,59 @@
 <!-- Navigation buttons at the bottom of the post. -->
 
+{%- comment -%}
+  Neighbours come from the search-eligible post set, not from raw `page.previous`
+  / `page.next`. Retired machine-summary reposts carry `robots: noindex` and are
+  already out of the sitemap, the feed, the paginated home, /archives/, the tag
+  and category archives, search.json and related-posts. This nav was the last
+  template that still linked them, so a crawler walking one live post reached
+  every retired one through the older/newer chain (2026-09-18 live crawl: 381
+  reachable pages, 117 of them retired reposts pulled in by exactly this nav).
+
+  `_plugins/archive_quality_policy.rb` already marks every noindex post
+  `hidden: true`, the same flag the paginator honours, so both conditions are
+  checked here. The retired post stays reachable at its own permalink.
+{%- endcomment -%}
+
+{% assign nav_posts = '' | split: '' %}
+{% for candidate in site.posts %}
+  {% unless candidate.hidden == true or candidate.robots contains 'noindex' %}
+    {% assign nav_posts = nav_posts | push: candidate %}
+  {% endunless %}
+{% endfor %}
+
+<!-- site.posts is newest first, so index + 1 is older and index - 1 is newer. -->
+{% assign current_index = -1 %}
+{% for candidate in nav_posts %}
+  {% if candidate.url == page.url %}
+    {% assign current_index = forloop.index0 %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% assign older_post = false %}
+{% assign newer_post = false %}
+{% if current_index >= 0 %}
+  {% assign older_index = current_index | plus: 1 %}
+  {% if older_index < nav_posts.size %}
+    {% assign older_post = nav_posts[older_index] %}
+  {% endif %}
+  {% if current_index > 0 %}
+    {% assign newer_index = current_index | minus: 1 %}
+    {% assign newer_post = nav_posts[newer_index] %}
+  {% endif %}
+{% endif %}
+
 <nav class="post-navigation d-flex justify-content-between" aria-label="Post Navigation">
   {% assign previous = site.data.locales[include.lang].post.button.previous %}
   {% assign next = site.data.locales[include.lang].post.button.next %}
 
-  {% if page.previous.url %}
+  {% if older_post %}
     <a
-      href="{{ site.baseurl }}{{ page.previous.url }}"
+      href="{{ site.baseurl }}{{ older_post.url }}"
       class="btn btn-outline-primary"
       aria-label="{{ previous }}"
     >
-      <p>{{ page.previous.title }}</p>
+      <p>{{ older_post.title }}</p>
     </a>
   {% else %}
     <div class="btn btn-outline-primary disabled" aria-label="{{ previous }}">
@@ -18,13 +61,13 @@
     </div>
   {% endif %}
 
-  {% if page.next.url %}
+  {% if newer_post %}
     <a
-      href="{{ site.baseurl }}{{page.next.url}}"
+      href="{{ site.baseurl }}{{ newer_post.url }}"
       class="btn btn-outline-primary"
       aria-label="{{ next }}"
     >
-      <p>{{ page.next.title }}</p>
+      <p>{{ newer_post.title }}</p>
     </a>
   {% else %}
     <div class="btn btn-outline-primary disabled" aria-label="{{ next }}">

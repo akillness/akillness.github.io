@@ -389,6 +389,13 @@ for (const route of noindexRoutes) {
   check(!searchMetaJson.includes(route), `noindex post is present in search-meta.json: ${route}`);
 }
 
+// Removing a post from search, the sitemap, the feed and every listing does not
+// remove it from the crawlable surface while one live post still links it. The
+// older/newer nav walked raw site.posts, so a crawler starting at any live post
+// reached all 117 retired reposts through it (2026-09-18 live crawl). Assert on
+// the built artifact: neither related-posts nor post-navigation may name one.
+let postsWithNavLink = 0;
+const noindexRouteSet = new Set(noindexRoutes);
 for (const entry of postEntries) {
   const file = path.join(postsRoot, entry.name, 'index.html');
   if (!fs.existsSync(file)) continue;
@@ -397,7 +404,17 @@ for (const entry of postEntries) {
   for (const route of noindexRoutes) {
     check(!related.includes(route), `related-posts links to noindex post ${route} from /posts/${entry.name}/`);
   }
+  const nav = html.match(/<nav\b[^>]*class="[^"]*post-navigation\b[\s\S]*?<\/nav>/i)?.[0] || '';
+  check(Boolean(nav), `post-navigation is missing: /posts/${entry.name}/`);
+  const navTargets = [...nav.matchAll(/href="(?:https:\/\/akillness\.github\.io)?(\/posts\/[^"#?]*\/)"/g)].map((match) => match[1]);
+  if (navTargets.length) postsWithNavLink += 1;
+  for (const target of navTargets) {
+    check(!noindexRouteSet.has(target), `post-navigation links to noindex post ${target} from /posts/${entry.name}/`);
+  }
 }
+// Fail closed on the opposite mistake: a filter that drops every neighbour would
+// also pass the check above while silently deleting the whole nav.
+check(postsWithNavLink > 0, 'no post links a neighbour from post-navigation');
 
 const koreanPost = exists('posts', 'googleio-review', 'index.html') ? read('posts', 'googleio-review', 'index.html') : '';
 check(/<html lang="ko"/i.test(koreanPost), 'Korean post language override failed');
