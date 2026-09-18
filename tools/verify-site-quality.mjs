@@ -115,6 +115,21 @@ check(/^User-agent:\s*\*\s*$/im.test(robotsTxt), 'robots.txt does not address al
 check(/^Sitemap:\s*https:\/\/akillness\.github\.io\/sitemap\.xml\s*$/im.test(robotsTxt), 'robots.txt does not advertise the canonical sitemap');
 check(!/^Disallow:\s*\/\s*$/im.test(robotsTxt), 'robots.txt blocks the entire site');
 
+// Google honours <lastmod> only while it stays verifiably accurate. `_tabs` is a
+// collection, so a tab with no front-matter date inherits site.time and every
+// deploy restamped all ten navigation pages with the build clock (2026-09-18:
+// ten identical timestamps for pages last touched between 2026-08-22 and 09-07).
+// _plugins/posts-lastmod-hook.rb now reads each file's commit date instead.
+// Assert the bug's signature on the artifact, not the plugin's own report.
+const lastmodByLoc = new Map(
+  [...sitemap.matchAll(/<url>\s*<loc>([^<]+)<\/loc>\s*(?:<lastmod>([^<]*)<\/lastmod>)?/g)]
+    .map((match) => [match[1].replaceAll('&amp;', '&'), match[2] || ''])
+);
+const tabRoutes = ['/about/', '/projects/', '/start-here/', '/work-with-me/', '/contact/', '/privacy/', '/terms/', '/archives/', '/categories/', '/tags/'];
+const tabLastmods = tabRoutes.map((route) => lastmodByLoc.get(`${origin}${route}`)).filter(Boolean);
+check(tabLastmods.length === tabRoutes.length, `a navigation page has no <lastmod> in sitemap.xml (${tabLastmods.length}/${tabRoutes.length} present)`);
+check(new Set(tabLastmods).size > 1, 'every navigation page carries one identical <lastmod>: the build clock is being published instead of each page\'s commit date');
+
 const archivePattern = /^https:\/\/akillness\.github\.io\/(tags|categories)\/[^/]+\/$/;
 check(!locations.some((url) => archivePattern.test(url)), 'generated tag/category detail page is in sitemap.xml');
 check(!locations.some((url) => url.startsWith(`${origin}/assets/`)), 'static asset is in sitemap.xml');
