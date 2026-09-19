@@ -437,6 +437,8 @@ check(Boolean(serviceWorker), 'sw.min.js is missing');
 check(/chirpy-navigation-network-v1/.test(serviceWorker), 'service worker lacks the one-time stale-navigation migration marker');
 check(/skipWaiting\(\)/.test(serviceWorker), 'service worker does not activate the stale-navigation migration immediately');
 check(/clients\.claim\(\)/.test(serviceWorker), 'service worker does not claim open tabs after activation');
+// The source-level regression test owns ordering; this built-artifact guard
+// deliberately checks only strategy signals that survive minification.
 check(/["']navigate["']/.test(serviceWorker), 'service worker has no navigation-specific strategy');
 check(/fetch\(/.test(serviceWorker) && /caches\.match\(/.test(serviceWorker), 'service worker lacks network and cache navigation paths');
 // Search is currently an in-page panel, not a standalone route. Guard a future standalone page if present.
