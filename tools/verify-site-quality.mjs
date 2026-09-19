@@ -434,6 +434,13 @@ check(notFound.includes('older imported and translated articles'), '/404.html do
 // only 8 pages, sending readers from stale cards into valid 404 responses.
 const serviceWorker = exists('sw.min.js') ? read('sw.min.js') : '';
 check(Boolean(serviceWorker), 'sw.min.js is missing');
+if (serviceWorker) {
+  try {
+    new Function(serviceWorker);
+  } catch (error) {
+    failures.push(`sw.min.js has invalid JavaScript: ${error.message}`);
+  }
+}
 check(/chirpy-navigation-network-v1/.test(serviceWorker), 'service worker lacks the one-time stale-navigation migration marker');
 check(/skipWaiting\(\)/.test(serviceWorker), 'service worker does not activate the stale-navigation migration immediately');
 check(/clients\.claim\(\)/.test(serviceWorker), 'service worker does not claim open tabs after activation');
