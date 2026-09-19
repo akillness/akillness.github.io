@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Safe command resolution for MEX on macOS</title>
+  <desc id="desc">A resolver rejects the TeX Live mex command, chooses an unambiguous mex-agent wrapper, then reaches the MEX code graph.</desc>
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b7cfa"/>
+      <stop offset="1" stop-color="#19b7a5"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#17233d" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5b6b87"/>
+    </marker>
+  </defs>
+
+  <text x="70" y="82" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="750" fill="#18233b">The command exists. Is it the right program?</text>
+  <text x="70" y="126" font-family="Inter, system-ui, sans-serif" font-size="21" fill="#51617e">MEX package name, executable identity, and project memory are three separate checks.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="205" width="275" height="220" rx="24" fill="#fff" stroke="#dce3ef" stroke-width="2"/>
+    <circle cx="116" cy="251" r="19" fill="#edf1ff"/>
+    <text x="109" y="259" font-family="ui-monospace, SFMono-Regular, monospace" font-size="24" font-weight="700" fill="#526ee8">$</text>
+    <text x="70" y="480" font-family="Inter, system-ui, sans-serif" font-size="16" fill="#6a7892">PATH lookup</text>
+    <text x="101" y="316" font-family="ui-monospace, SFMono-Regular, monospace" font-size="26" font-weight="700" fill="#18233b">mex --version</text>
+    <text x="101" y="359" font-family="Inter, system-ui, sans-serif" font-size="18" fill="#51617e">Inspect behavior, not just</text>
+    <text x="101" y="387" font-family="Inter, system-ui, sans-serif" font-size="18" fill="#51617e">whether a name exists.</text>
+  </g>
+
+  <path d="M 345 315 C 405 315, 405 235, 465 235" fill="none" stroke="#d85c68" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M 345 315 C 405 315, 405 415, 465 415" fill="none" stroke="#5b7cfa" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="465" y="170" width="285" height="150" rx="22" fill="#fff4f4" stroke="#efa8ad" stroke-width="2"/>
+    <text x="495" y="215" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#b33a47">REJECT</text>
+    <text x="495" y="254" font-family="ui-monospace, SFMono-Regular, monospace" font-size="21" fill="#18233b">/opt/homebrew/bin/mex</text>
+    <text x="495" y="287" font-family="Inter, system-ui, sans-serif" font-size="17" fill="#6b4750">pdfTeX, not project memory</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="465" y="350" width="285" height="150" rx="22" fill="#f2f5ff" stroke="#aebcf5" stroke-width="2"/>
+    <text x="495" y="395" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#526ee8">ACCEPT</text>
+    <text x="495" y="434" font-family="ui-monospace, SFMono-Regular, monospace" font-size="21" fill="#18233b">~/.local/bin/mex-agent</text>
+    <text x="495" y="467" font-family="Inter, system-ui, sans-serif" font-size="17" fill="#51617e">semantic version + fixed wrapper</text>
+  </g>
+
+  <path d="M 750 425 C 815 425, 815 330, 875 330" fill="none" stroke="url(#accent)" stroke-width="5" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="875" y="230" width="255" height="205" rx="26" fill="#effbf8" stroke="#8dd9cd" stroke-width="2"/>
+    <path d="M 925 275 h48 v48 h-48 z M 939 289 h20 v20 h-20 z" fill="none" stroke="#139b8d" stroke-width="4"/>
+    <text x="915" y="360" font-family="Inter, system-ui, sans-serif" font-size="25" font-weight="750" fill="#18233b">MEX graph</text>
+    <text x="915" y="395" font-family="Inter, system-ui, sans-serif" font-size="17" fill="#51617e">symbol-grounded context</text>
+  </g>
+
+  <rect x="70" y="555" width="1060" height="64" rx="18" fill="url(#accent)" opacity="0.12"/>
+  <text x="100" y="594" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="650" fill="#263b66">Resolver order: explicit override → mex-agent → ~/.local/bin/mex-agent → bare mex only after identity check</text>
+</svg>
