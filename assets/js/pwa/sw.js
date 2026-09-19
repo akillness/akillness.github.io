@@ -76,9 +76,9 @@ self.addEventListener('install', (event) => {
     ? Promise.resolve()
     : caches.open(swconf.cacheName).then((cache) => cache.addAll(swconf.resources));
 
-  // Migrate existing cache-first clients immediately once. A persistent marker
-  // restores the normal update prompt on later content deploys, avoiding a
-  // forced reload every time a new article changes swconf.js.
+  /* Migrate existing cache-first clients immediately once. A persistent marker
+   * restores the normal update prompt on later content deploys, avoiding a
+   * forced reload every time a new article changes swconf.js. */
   const activateMigration = caches.keys().then((keyList) => {
     if (!keyList.includes(navigationMigrationCacheName)) {
       return self.skipWaiting();
@@ -129,10 +129,10 @@ function cacheRuntimeResponse(request, response) {
 }
 
 self.addEventListener('fetch', (event) => {
-  // HTML navigations must prefer the network. Cache-first navigation kept an
-  // 18-page home index alive after the live site had shrunk to 8 pages, so
-  // readers followed retired post links into 404s. The cache remains an
-  // offline fallback, but it is no longer the source of truth while online.
+  /* HTML navigations must prefer the network. Cache-first navigation kept an
+   * 18-page home index alive after the live site had shrunk to 8 pages, so
+   * readers followed retired post links into 404s. The cache remains an
+   * offline fallback, but it is no longer the source of truth while online. */
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request)
