@@ -9,6 +9,7 @@ const swconfUrl = '{{ '/assets/js/data/swconf.js' | relative_url }}';
 importScripts(swconfUrl);
 const purge = swconf.purge;
 const runtimeCacheName = `${swconf.cacheName}-runtime`;
+const navigationMigrationCacheName = 'chirpy-navigation-network-v1';
 const maxRuntimeEntries = 60;
 const maxRuntimeBytes = 1024 * 1024;
 
@@ -71,32 +72,40 @@ if (!purge) {
 }
 
 self.addEventListener('install', (event) => {
-  if (purge) {
-    return;
-  }
+  const precache = purge
+    ? Promise.resolve()
+    : caches.open(swconf.cacheName).then((cache) => cache.addAll(swconf.resources));
 
-  event.waitUntil(
-    caches.open(swconf.cacheName).then((cache) => {
-      return cache.addAll(swconf.resources);
-    })
-  );
+  // Migrate existing cache-first clients immediately once. A persistent marker
+  // restores the normal update prompt on later content deploys, avoiding a
+  // forced reload every time a new article changes swconf.js.
+  const activateMigration = caches.keys().then((keyList) => {
+    if (!keyList.includes(navigationMigrationCacheName)) {
+      return self.skipWaiting();
+    }
+    return undefined;
+  });
+
+  event.waitUntil(Promise.all([precache, activateMigration]));
 });
 
 self.addEventListener('activate', (event) => {
-  const activeCaches = new Set([swconf.cacheName, runtimeCacheName]);
+  const activeCaches = new Set([swconf.cacheName, runtimeCacheName, navigationMigrationCacheName]);
 
-  event.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(
-        keyList.map((key) => {
-          if (purge || !activeCaches.has(key)) {
-            return caches.delete(key);
-          }
-          return undefined;
-        })
-      );
-    })
-  );
+  const deleteOldCaches = caches.keys().then((keyList) => {
+    return Promise.all(
+      keyList.map((key) => {
+        if (purge || !activeCaches.has(key)) {
+          return caches.delete(key);
+        }
+        return undefined;
+      })
+    );
+  });
+
+  const markNavigationMigration = purge ? Promise.resolve() : caches.open(navigationMigrationCacheName);
+
+  event.waitUntil(Promise.all([deleteOldCaches, markNavigationMigration]).then(() => self.clients.claim()));
 });
 
 self.addEventListener('message', (event) => {
@@ -105,28 +114,48 @@ self.addEventListener('message', (event) => {
   }
 });
 
+function cacheRuntimeResponse(request, response) {
+  if (!isCacheableRuntimeResponse(request, response)) {
+    return Promise.resolve(response);
+  }
+
+  const responseToCache = response.clone();
+
+  return caches
+    .open(runtimeCacheName)
+    .then((cache) => cache.put(request, responseToCache).then(() => trimRuntimeCache(cache)))
+    .catch(() => undefined)
+    .then(() => response);
+}
+
 self.addEventListener('fetch', (event) => {
+  // HTML navigations must prefer the network. Cache-first navigation kept an
+  // 18-page home index alive after the live site had shrunk to 8 pages, so
+  // readers followed retired post links into 404s. The cache remains an
+  // offline fallback, but it is no longer the source of truth while online.
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => cacheRuntimeResponse(event.request, response))
+        .catch(() =>
+          caches.match(event.request).then((cachedResponse) => {
+            if (cachedResponse) {
+              return cachedResponse;
+            }
+            return caches.match('{{ '/' | relative_url }}').then((home) => home || Response.error());
+          })
+        )
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
         return cachedResponse;
       }
 
-      return fetch(event.request).then((response) => {
-        if (!isCacheableRuntimeResponse(event.request, response)) {
-          return response;
-        }
-
-        {% comment %}See: <https://developers.google.com/web/fundamentals/primers/service-workers#cache_and_return_requests>{% endcomment %}
-        const responseToCache = response.clone();
-
-        caches
-          .open(runtimeCacheName)
-          .then((cache) => cache.put(event.request, responseToCache).then(() => trimRuntimeCache(cache)))
-          .catch(() => undefined);
-
-        return response;
-      });
+      return fetch(event.request).then((response) => cacheRuntimeResponse(event.request, response));
     })
   );
 });
