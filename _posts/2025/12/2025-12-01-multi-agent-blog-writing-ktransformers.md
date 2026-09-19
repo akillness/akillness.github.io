@@ -11,6 +11,9 @@ image:
   path: /assets/img/llm/ktransformers.png
   alt: KTransformers - A Flexible Framework for Experiencing Heterogeneous LLM Inference/Fine-tune
     Optimizations
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ![KTransformers - Multi-Agent Blog Writing Framework](/assets/img/llm/ktransformers.png){: .light .shadow .rounded-10 w='1212' h='668' }
 

@@ -5,6 +5,9 @@ categories: [Infrastructure/System]
 tags: [Infrastructure, Operations, Architecture]
 date: 2024-08-04 17:00:00 +0800
 mermaid: true
+# Retired 2026-09-19: copied social/newsletter post later rewritten by an LLM
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## How Linux Works: A Comprehensive Guide
 

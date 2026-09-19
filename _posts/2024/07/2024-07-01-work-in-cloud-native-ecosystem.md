@@ -4,6 +4,9 @@ description: "To learn any complex technology, it is always essential to build t
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-07-01 21:10:00 +0800
+# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 To learn any complex technology, it is always essential to build the root foundation. 
 Here is a breakdown of the technology & tools to invest while working or transitioning to **CloudNative**

@@ -10,6 +10,9 @@ mermaid: true
 image:
   path: /assets/img/posts/sqlite-graph-1.png
   alt: SQLite-Graph - Graph database extension for SQLite
+# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: What If SQLite Could Query Graphs Like Neo4j?
 

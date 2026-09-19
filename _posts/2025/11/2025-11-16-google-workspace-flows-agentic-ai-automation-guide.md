@@ -11,6 +11,9 @@ mermaid: true
 image:
   path: /assets/img/posts/google-workspace-flows-1.png
   alt: Google Workspace Flows - AI-powered automation interface
+# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: What If AI Could Automate Workflows Inside Your Existing Tools?
 

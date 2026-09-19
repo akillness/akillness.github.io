@@ -36,9 +36,9 @@ That loop is the site's operating model. I begin with a problem I have encounter
 
 | Project thread | Production problem | What I owned | Public trail |
 | :--- | :--- | :--- | :--- |
-| **AI products and RAG** | Make private studio knowledge searchable, grounded, and operable | Retrieval pipelines, agent workflows, product surfaces, and operational controls | [RAG writing](/categories/rag-search/) and the [visual portfolio](/portfolio/) |
-| **Agent harness engineering** | Make tool-using agents finish bounded work without hiding failure | Execution loops, edit integrity, critic gates, skills, and verification contracts | Public repositories plus [agent writing](/categories/agent-orchestration/) |
-| **Multimodal QA** | Turn screenshots and gameplay video into useful QA signals | CV pipelines, OCR, detection, VLM interpretation, and report design | Research record, [vision writing](/categories/multimodal-computer-vision/), and portfolio evidence |
+| **AI products and RAG** | Make private studio knowledge searchable, grounded, and operable | Retrieval pipelines, agent workflows, product surfaces, and operational controls | [Retrieval and memory writing](/start-here/#retrieval--agent-memory) and the [visual portfolio](/portfolio/) |
+| **Agent harness engineering** | Make tool-using agents finish bounded work without hiding failure | Execution loops, edit integrity, critic gates, skills, and verification contracts | Public repositories plus [agent writing](/categories/agents/) |
+| **Multimodal QA** | Turn screenshots and gameplay video into useful QA signals | CV pipelines, OCR, detection, VLM interpretation, and report design | Research record, [multimodal and game AI writing](/start-here/#multimodal-video--game-ai), and portfolio evidence |
 | **Game AI and build automation** | Evaluate game state and make production workflows reproducible | Simulation agents, procedural systems, Unity tooling, and coding-agent-driven builds | Playable work and [Unity production articles](/posts/unity-cli-production-workflows/) |
 
 ## Production AI products: retrieval has to become operations
@@ -51,8 +51,8 @@ At Supercent, I built AI products where retrieval was only the middle of the sys
 The portfolio shows these as shipped products. The related writing explains the reusable engineering questions:
 
 - [From RAG to Context Layer](/posts/ontology-graphrag-agent-memory/) asks what changes when retrieval becomes shared agent memory.
-- [Signal-Decision Architecture](/posts/signal-decision-architecture/) separates routing signals from the actions they authorize.
-- [The Production Generative AI Stack](/posts/production-generative-ai-stack-architecture-components/) maps the components that surround a model in a real service.
+- [One Memory Setup, Every Harness](/posts/omnigent-hindsight-universal-memory/) reads a memory bridge at the seam where retrieval becomes shared agent state.
+- [LLM Wiki](/posts/llm-wiki-persistent-knowledge-base/) asks when an agent-maintained knowledge base beats another RAG stack.
 
 The practical lesson is that retrieval quality, permissions, observability, and user experience cannot be reviewed independently. A good answer is not enough if nobody can trace its source, correct the knowledge, or understand why the system chose a tool.
 
@@ -84,7 +84,7 @@ _AutoQA work combines classical vision, learned detectors, and language-based re
 
 My graduate research and personal tooling connect image-based QA, OCR, multi-scale template matching, fine-tuned detection models, video context, and VLM-assisted bug reporting. The interesting problem is not whether a model can describe a frame. It is whether a team can turn visual observations into a reproducible QA workflow with known false negatives and reviewable evidence.
 
-This thread includes an IEEE RAAI 2024 poster on image-based game QA automation and a 2025 publication on automated QA reporting from natural-language captions. The [multimodal and vision archive](/categories/multimodal-computer-vision/) provides the wider technical context behind that work.
+This thread includes an IEEE RAAI 2024 poster on image-based game QA automation and a 2025 publication on automated QA reporting from natural-language captions. The [multimodal, video and game AI section of Start Here](/start-here/#multimodal-video--game-ai) provides the wider technical context behind that work.
 
 Internal data and unpublished research artifacts are not public evidence. Where I cannot share a dataset, customer document, or source repository, I state the boundary instead of replacing it with a stronger claim.
 {: .prompt-warning }

@@ -6,6 +6,9 @@ tags: [Data Science, Algorithm, Analysis]
 description: "A structured guide to preparing for Google technical interviews, covering coding rounds, system design, behavioral questions, and study strategies."
 date: 2024-07-14 10:00:00 +0800
 mermaid: true
+# Retired 2026-09-19: copied social/newsletter post later rewritten by an LLM
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ![ NVIDIA RankRAG ](/assets/img/algorithm/Mindmap-to-Learn.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 

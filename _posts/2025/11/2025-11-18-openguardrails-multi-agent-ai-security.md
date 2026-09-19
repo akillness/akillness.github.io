@@ -10,6 +10,9 @@ mermaid: true
 image:
   path: /assets/img/ai/openguardrails/openguardrails-homepage.png
   alt: OpenGuardrails - AI Security Platform for Developers
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Why Do We Need a Multi-Agent Approach for AI Security?
 

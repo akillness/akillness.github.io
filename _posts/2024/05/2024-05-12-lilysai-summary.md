@@ -6,6 +6,9 @@ tags: [Trend, Review, Case]
 date: 2024-05-12 18:57:00 +0800
 mermaid: true
 lang: ko
+# Retired 2026-09-19: machine (Lilys AI) summary of third-party content
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## Lilys AI: YouTube Video Summarization and Blog Generation
 

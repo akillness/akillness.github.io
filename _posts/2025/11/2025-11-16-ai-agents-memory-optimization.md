@@ -11,6 +11,9 @@ mermaid: true
 image:
   path: /assets/img/posts/ai-agents-memory-optimization.png
   alt: Memory Optimization for Agentic Systems - AI Agents Crash Course Part 15
+# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Why Do AI Agents Need Memory Management?
 

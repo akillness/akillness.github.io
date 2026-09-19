@@ -5,6 +5,9 @@ categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-07-13 13:00:00 +0800
 mermaid: true
+# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ![ Top 6 Xaas ](/assets/img/blog/Top-6-Xaas.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 

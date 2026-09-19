@@ -5,6 +5,9 @@ categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-25 07:23:00 +0800
 mermaid: true
+# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## Mistral-Finetune: Official Fine-Tuning Framework for Mistral Models
 

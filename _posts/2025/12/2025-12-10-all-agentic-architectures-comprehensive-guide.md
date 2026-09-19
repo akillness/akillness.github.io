@@ -6,6 +6,9 @@ tags: [Agent, Workflow, Orchestration]
 date: 2025-12-10 10:00:00 +0800
 mermaid: true
 math: false
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 
 ## 🤔 Curiosity: How Do We Build Production-Ready AI Agents?

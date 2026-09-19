@@ -7,6 +7,9 @@ categories: [Infrastructure/System]
 tags: [Infrastructure, Operations, Architecture]
 date: 2025-11-15 03:00:00 +0800
 mermaid: true
+# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: What Happens When a De Facto Standard Gets Retired?
 

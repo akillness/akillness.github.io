@@ -6,6 +6,9 @@ tags: [LLM, Model, Paper]
 date: 2024-05-19 01:20:00 +0800
 mermaid: true
 lang: ko
+# Retired 2026-09-19: summary of a third-party evaluation repo presented as our own
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## LLM 성능 평가: 한국어 Use Case 분석
 

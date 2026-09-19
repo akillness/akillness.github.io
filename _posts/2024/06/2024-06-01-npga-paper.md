@@ -95,13 +95,13 @@ Rights split by venue, and the split matters if you want to reuse anything. The 
 
 ## 💡 Innovation: what I would take into a game pipeline
 
-**Budget the tracker and the consuming architecture together.** Neither lever dominates here: at fixed tracking the framework is worth 2.01 PSNR, and at fixed framework the tracking is worth 1.44. A pipeline stuck at "the face looks slightly wrong" can be failing on either side, so measure both before spending. My earlier comparison of [Gaussian Splatting and NeRF](/posts/nerf-3d-gaussian-splatting/) covers the representation side of that trade-off.
+**Budget the tracker and the consuming architecture together.** Neither lever dominates here: at fixed tracking the framework is worth 2.01 PSNR, and at fixed framework the tracking is worth 1.44. A pipeline stuck at "the face looks slightly wrong" can be failing on either side, so measure both before spending.
 
 **Do not assume a richer prior drops into an existing pipeline.** GHA plus NPHM going backwards is the cheapest warning in the paper. NPGA's architecture includes a distillation step converting backward deformations into rasterizer-compatible forward ones. But this comparison does not remove only that step, so it does not isolate its contribution. The authors instead hypothesize that missing motion-prior initialization makes the expression codes harder to use.
 
 **Treat masked metrics as a scope statement.** When a benchmark masks neck and torso, the number describes a face, not a character. Write down which parts your own evaluation excludes, because that list is the honest boundary of the claim.
 
-**Price the cast, not the shot.** At roughly 30 GPU-hours per identity, a twelve-character cast is a scheduling problem before it is a rendering problem. Semantic control of a scene, the direction I looked at in the [LangSplat audit](/posts/llm-3d-gaussian-splatting/), has the same shape: per-scene cost decides whether a technique ships.
+**Price the cast, not the shot.** At roughly 30 GPU-hours per identity, a twelve-character cast is a scheduling problem before it is a rendering problem. Semantic control of a scene, the direction LangSplat-style language fields take, has the same shape: per-scene cost decides whether a technique ships.
 
 **Read the ethics section as a requirements list.** The paper flags identity theft and deepfakes among its concerns. A studio adopting person-specific avatars inherits consent, retention, and revocation questions that no PSNR column measures.
 

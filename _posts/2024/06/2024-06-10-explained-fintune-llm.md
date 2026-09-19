@@ -5,6 +5,9 @@ categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-06-10 10:10:00 +0800
 mermaid: true
+# Retired 2026-09-19: copied social/newsletter post later rewritten by an LLM
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 > Check more PEFT (Parameters Efficient Fine-Tuning) methods : <https://huggingface.co/docs/peft/index>
 {: .prompt-info }

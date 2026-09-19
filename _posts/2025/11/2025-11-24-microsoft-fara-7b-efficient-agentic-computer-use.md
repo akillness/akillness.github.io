@@ -8,6 +8,9 @@ categories: [Agent/Orchestration]
 tags: [Agent, Workflow, Orchestration]
 date: 2025-11-24 15:00:00 +0800
 mermaid: true
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Can Small Language Models Compete with Large Models in Agentic Computer Use?
 

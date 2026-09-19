@@ -11,6 +11,9 @@ math: true
 image:
   path: /assets/img/posts/cuda-tile-hero.png
   alt: NVIDIA CUDA Tile - Tile-based parallel programming model
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Can We Program GPUs Like We Program NumPy?
 

@@ -5,6 +5,9 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-08-03 13:00:00 +0800
 mermaid: true
+# Retired 2026-09-19: copied social/newsletter post later rewritten by an LLM
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## Awesome Production LLM: Curated Open-Source Libraries
 

@@ -5,6 +5,9 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-07-13 14:00:00 +0800
 mermaid: true
+# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## Agentic RAG Cookbook: Improving RAG with Agent Systems
 

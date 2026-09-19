@@ -11,6 +11,9 @@ mermaid: true
 image:
   path: /assets/img/ai/cognee/cognee-logo-transparent.png
   alt: Cognee - Memory for AI Agents
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Can Multi-Agent Systems Truly Remember?
 

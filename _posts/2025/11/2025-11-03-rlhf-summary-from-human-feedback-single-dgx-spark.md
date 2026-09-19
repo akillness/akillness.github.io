@@ -9,6 +9,9 @@ tags: [Trend, Review, Case]
 date: 2025-11-03 03:00:00 +0800
 mermaid: true
 math: true
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Can We Train RLHF on a Single GPU Node?
 

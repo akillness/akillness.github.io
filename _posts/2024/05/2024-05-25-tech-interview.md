@@ -5,6 +5,9 @@ categories: [Data Science/Algorithms]
 tags: [Data Science, Algorithm, Analysis]
 date: 2024-05-25 03:23:00 +0800
 mermaid: true
+# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## Recommended Materials for Cracking Your Next Technical Interview
 

@@ -4,6 +4,9 @@ description: "Essential for organizing data, sorting algorithms streamline tasks
 categories: [Data Science/Algorithms]
 tags: [Data Science, Algorithm, Analysis]
 date: 2024-05-19 23:46:00 +0800
+# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ![ 10 Algorithms Shaping ](/assets/img/blog/Algorithms_top_10.gif){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 

@@ -5,6 +5,9 @@ categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2024-05-18 16:15:00 +0800
 mermaid: true
+# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## VectorEmbeddings are the backbone of AI/ML applications. 
 

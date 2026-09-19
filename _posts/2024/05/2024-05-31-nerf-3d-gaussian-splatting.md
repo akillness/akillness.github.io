@@ -5,6 +5,9 @@ categories: [Multimodal/Computer Vision]
 tags: [Multimodal, Vision, Generative Model]
 date: 2024-05-31 01:00:00 +0800
 mermaid: true
+# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## In the world of computer vision, 3D Gaussian Splatting and NeRFs are gaining traction. 
 

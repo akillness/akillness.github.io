@@ -10,6 +10,9 @@ mermaid: true
 image:
   path: /assets/img/posts/async-performance-1.png
   alt: Async code performance issues and solutions
+# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Why Is My Async Code Slower Than Synchronous Code?
 

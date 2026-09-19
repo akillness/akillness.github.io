@@ -8,6 +8,9 @@ tags: [LLM, Model, Paper]
 date: 2025-05-18 03:00:00 +0800
 mermaid: true
 math: true
+# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: How Do We Scale LLMs Without Proportional Compute Costs?
 

@@ -11,6 +11,9 @@ mermaid: true
 image:
   path: /assets/img/posts/agents-2.0-deep-agents.png
   alt: 'Agents 2.0: Deep Agents architecture evolution from shallow loops'
+# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Why Do AI Agents Fail at Complex, Long-Running Tasks?
 

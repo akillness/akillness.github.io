@@ -5,6 +5,9 @@ categories: [Agent/Orchestration]
 tags: [Agent, Workflow, Orchestration]
 date: 2024-08-05 15:00:00 +0800
 mermaid: true
+# Retired 2026-09-19: copied social/newsletter post later rewritten by an LLM
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## Agentic Application Design Patterns: Building Intelligent AI Systems
 

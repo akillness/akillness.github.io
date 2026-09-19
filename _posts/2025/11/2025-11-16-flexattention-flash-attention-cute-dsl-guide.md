@@ -8,6 +8,9 @@ tags: [Learning, Guide, Lecture]
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
 math: true
+# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Can We Unify All Attention Variants Under One Framework?
 

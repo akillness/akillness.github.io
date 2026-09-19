@@ -11,6 +11,9 @@ mermaid: true
 image:
   path: /assets/img/posts/spring-ai-llm-as-judge.png
   alt: 'Spring AI LLM as Judge: Recursive Advisors for Response Evaluation'
+# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: How Do We Automatically Evaluate LLM Response Quality?
 

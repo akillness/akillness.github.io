@@ -5,6 +5,9 @@ categories: [Learning/Guide]
 tags: [Learning, Guide, Lecture]
 date: 2024-06-04 13:20:00 +0800
 mermaid: true
+# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## Anthropic's Tool-Use Course: Building Smarter LLM Agents
 

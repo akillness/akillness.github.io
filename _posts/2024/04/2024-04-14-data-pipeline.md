@@ -5,6 +5,9 @@ categories: [Infrastructure/System]
 tags: [Infrastructure, Operations, Architecture]
 date: 2024-04-17 15:10:00 +0800
 mermaid: true
+# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ![Data Pipeline Overview ](/assets/img/news/data-pipeline-overview.gif){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
 

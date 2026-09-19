@@ -28,49 +28,50 @@ The main thread. Agent loops, tool dispatch, spec-first workflows, evaluation, a
 - [One Memory Setup, Every Harness: Omnigent's Hindsight Bridge](/posts/omnigent-hindsight-universal-memory/)
 - [OpenHarness Lets Its Allow List Outrank Your Deny Rules](/posts/openharness-permission-order-audit/)
 
-→ [All agent posts](/categories/agent-orchestration/)
+→ [All agent posts](/categories/agents/)
 
-### RAG & retrieval
+### Retrieval & agent memory
 
-Retrieval that survives real corpora: reranking, hybrid search, graph memory, and the failure modes that only appear at scale.
+Retrieval that survives real corpora: graph memory, agent-maintained knowledge bases, multimodal embeddings, and the seams where a memory layer meets a harness.
 
-- [Cognee: Building Persistent Memory for Multi-Agent Systems](/posts/cognee-multi-agent-memory-system/)
 - [From RAG to Context Layer: Ontology, LLM Wiki, HyGRAG](/posts/ontology-graphrag-agent-memory/)
-- [STORM Parse vs Google Gemini File Search](/posts/stormparse-vs-googleapi/)
-- [RAG or Fine-Tuning? Fine-tuning embedding models for retrieval](/posts/finetune-embedding-model-rag/)
+- [One Memory Setup, Every Harness: Omnigent's Hindsight Bridge](/posts/omnigent-hindsight-universal-memory/)
+- [LLM Wiki: an agent-maintained knowledge base instead of another RAG stack](/posts/llm-wiki-persistent-knowledge-base/)
+- [Multimodal Sentence Transformers: a practical upgrade for retrieval systems](/posts/multimodal-sentence-transformers-practical-guide/)
 
-→ [All RAG posts](/categories/rag-search/)
+→ [Posts tagged agent memory](/tags/agentmemory/)
 
 ### Models & papers
 
 Architectures read closely enough to explain, not just cite.
 
 - [Diffusion Models, Visually: How Noise Becomes an Image](/posts/diffusion-model-visual-breakdown/)
-- [Building LLaMA 4 from Scratch: Mixture-of-Experts](/posts/building-llama-4-from-scratch-mixture-of-experts/)
+- [FreeToken: 284B on a Gaming Desktop, 753B on One Workstation GPU](/posts/freetoken-edge-native-moe-serving/)
 - [NPGA: tracking and rendering measured separately](/posts/npga-paper/)
-- [LLM Course — Let's build a simple LLM](/posts/llm-course-trying/)
+- [LLM2Vec, Two Years On: The Thesis Won, the Recipe Did Not](/posts/llm2vec-embedding-models/)
 
-→ [All model & paper posts](/categories/llm-model-papers/)
+→ [All research posts](/categories/research/)
 
 ### Infrastructure & production systems
 
 What it takes to run this material rather than demo it.
 
-- [The Full MLOps Blueprint: Monitoring and Observability](/posts/mlops-monitoring-observability-part-a/)
-- [The Production Generative AI Stack](/posts/production-generative-ai-stack-architecture-components/)
-- [Signal-Decision Architecture: Semantic Routing at Scale](/posts/signal-decision-architecture/)
+- [Superlog: When Your Telemetry Stack Starts Investigating Incidents](/posts/superlog-agentic-telemetry/)
+- [SQLite in Games: A Save File Is Never Just a File](/posts/sqlite-game-save-contract/)
+- [Metal Cannot Preempt: What oMLX Rediscovers From Game Engines](/posts/omlx-metal-residency/)
 
-→ [All infrastructure posts](/categories/infrastructure-system/)
+→ [All tooling posts](/categories/tooling/)
 
-### Multimodal & vision
+### Multimodal, video & game AI
 
-Coming from game AI, this is where I started: systems that read a screen and act on what they see.
+Coming from game AI, this is where I started: systems that read a screen and act on what they see, and the generative stacks that now feed game content.
 
-- [3D Gaussian Splatting vs NeRFs: what is the difference?](/posts/nerf-3d-gaussian-splatting/)
-- [3D Language Gaussian Splatting (LangSplat)](/posts/llm-3d-gaussian-splatting/) — includes video
-- [The giant leaps of open-source vision models](/posts/vision-language-model/)
+- [MiniMax H3 LoRAs Are Not a Folder: A 19-Release Compatibility Audit](/posts/minimax-h3-lora-compatibility-audit/)
+- [After Seedance 2.0, I Re-Audited Four AI Drama Stacks](/posts/seedance-2-ai-drama-stack-audit/)
+- [CozyClay: AI Video Needed a Shot Contract, Not Another Prompt Box](/posts/cozyclay-shot-contract/)
+- [Hugging Face's AI Game Development Course, Audited in 2026](/posts/game-development-with-ai-trying/) — includes video
 
-→ [All multimodal posts](/categories/multimodal-computer-vision/)
+→ [Posts tagged AI video](/tags/ai-video/)
 
 ### Developer tooling
 
@@ -91,10 +92,10 @@ Different posts do different work. If you prefer one mode over another:
 | Format | What it looks like | Examples |
 | :--- | :--- | :--- |
 | **Runnable code** | Companion `.py` files you can download and execute; every assertion in the post was produced by running them | [Ouroboros gates](/posts/ouroboros-agent-os-spec-first-loop/) · [Durable execution](/posts/twelve-agent-concepts-durable-execution/) · [Supertonic ONNX](/posts/supertonic-onnx-runtime-tts/) |
-| **Video** | Embedded walkthroughs and demos | [jeo-code harness](/posts/jeo-code-ai-builder-harness/) · [Gemini 3 multi-agent](/posts/gemini-3-multi-agent-comprehensive-guide/) · [SIMA 2 in 3D worlds](/posts/sima-2-gemini-powered-ai-agent-3d-worlds/) |
-| **Diagrams** | Mermaid architecture and flow diagrams | [Production GenAI stack](/posts/production-generative-ai-stack-architecture-components/) · [Signal-decision architecture](/posts/signal-decision-architecture/) |
-| **Deep dives** | 2,500+ words, single subject, primary sources only | [Fable 5](/posts/fable-5-self-improving-agent-system/) · [MLOps blueprint](/posts/mlops-monitoring-observability-part-a/) |
-| **Async & performance** | Measurement-led, with numbers | [Why async code can be slower](/posts/async-code-performance-issues-solutions/) — includes video |
+| **Video** | Embedded walkthroughs and demos | [jeo-code harness](/posts/jeo-code-ai-builder-harness/) · [MoneyPrinterTurbo control plane](/posts/moneyprinterturbo-production-control-plane/) · [AI game development course](/posts/game-development-with-ai-trying/) |
+| **Diagrams** | Mermaid architecture and flow diagrams | [Prompt repetition](/posts/prompt-repetition-improves-llm-performance/) · [DeepSeek Harness](/posts/deepseek-harness-everything-is-a-plugin/) · [SQLite game saves](/posts/sqlite-game-save-contract/) |
+| **Deep dives** | 2,500+ words, single subject, primary sources only | [Fable 5](/posts/fable-5-self-improving-agent-system/) · [TradingAgents and LibreChat](/posts/tradingagents-librechat-self-hosting-audit/) · [FreeToken](/posts/freetoken-edge-native-moe-serving/) |
+| **Source audits** | One repository, paper, or release read at a pinned commit; what the README claims versus what the code does | [OpenHarness permission order](/posts/openharness-permission-order-audit/) · [HyperFrames determinism](/posts/hyperframes-determinism-audit/) · [Unity MCP drift check](/posts/unity-mcp-release-notes-drift-audit/) |
 
 ## How this blog works
 

@@ -10,6 +10,9 @@ mermaid: true
 image:
   path: /assets/img/posts/vggt-fig1.webp
   alt: 'VGGT: Visual Geometry Grounded Transformer - CVPR 2025 Best Paper'
+# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Can We Reconstruct 3D from Multiple Views Without Post-Processing?
 

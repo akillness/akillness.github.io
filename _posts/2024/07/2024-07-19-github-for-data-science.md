@@ -5,6 +5,9 @@ categories: [Development Tools/Productivity]
 tags: [Development Tools, Productivity, Tools]
 date: 2024-07-19 15:30:00 +0800
 mermaid: true
+# Retired 2026-09-19: copied social/newsletter post later rewritten by an LLM
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## GitHub: The Free University for Data Science
 

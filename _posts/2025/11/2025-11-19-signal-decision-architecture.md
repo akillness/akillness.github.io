@@ -9,6 +9,9 @@ mermaid: true
 image:
   path: /assets/img/semantic-router/signal-0.png
   alt: Signal-Decision Architecture Overview
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: The Routing Problem
 

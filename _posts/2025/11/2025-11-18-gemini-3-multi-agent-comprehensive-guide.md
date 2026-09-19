@@ -10,6 +10,9 @@ mermaid: true
 image:
   path: /assets/img/ai/gemini3/gemini-3-header.png
   alt: Gemini 3 - Google's Most Intelligent AI Model
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: How Can Multi-Agent Systems Leverage Gemini 3's Intelligence?
 

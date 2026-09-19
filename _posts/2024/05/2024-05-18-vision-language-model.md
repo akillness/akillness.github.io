@@ -5,6 +5,9 @@ categories: [Multimodal/Computer Vision]
 tags: [Multimodal, Vision, Generative Model]
 date: 2024-05-18 11:20:00 +0800
 mermaid: true
+# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 𝐕𝐢𝐬𝐢𝐨𝐧 𝐥𝐚𝐧𝐠𝐮𝐚𝐠𝐞 𝐦𝐨𝐝𝐞𝐥𝐬
 

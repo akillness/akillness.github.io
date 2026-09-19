@@ -9,6 +9,9 @@ math: false
 image:
   path: /assets/img/blog/deepagents-terminal-bench-2-0-header.png
   alt: "Evaluating DeepAgents CLI on Terminal Bench 2.0"
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 
 ## 🤔 Curiosity: How Well Do Coding Agents Actually Perform?

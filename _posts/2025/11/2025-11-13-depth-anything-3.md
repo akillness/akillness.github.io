@@ -10,6 +10,9 @@ mermaid: true
 image:
   path: /assets/img/posts/depth-anything-3-teaser.png
   alt: 'Depth Anything 3: Recovering the Visual Space from Any Views'
+# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Can Minimal Modeling Achieve Maximum Performance?
 

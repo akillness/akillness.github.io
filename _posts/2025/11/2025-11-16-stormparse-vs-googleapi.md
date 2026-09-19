@@ -7,6 +7,9 @@ categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2025-11-16 03:00:00 +0800
 mermaid: true
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Can a Specialized Parser Outperform Google's Managed RAG?
 

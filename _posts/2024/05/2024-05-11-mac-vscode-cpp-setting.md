@@ -4,6 +4,9 @@ description: "1. VSCODE Download - If using mac OS with M1/M2/M3, download the A
 categories: [Development Tools/Productivity]
 tags: [Development Tools, Productivity, Tools]
 date: 2024-05-11 16:30:00 +0800
+# Retired 2026-09-19: setup notes copied from a third-party Tistory guide
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 # [MacOS / AppleSilicon] VSCODE C++ 설정 환경 설정 개발환경 세팅 AppleSilicon
 

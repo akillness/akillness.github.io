@@ -4,6 +4,9 @@ description: "Data structures are the foundation of any programming language."
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-06-29 02:10:00 +0800
+# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 Data structures are the foundation of any programming language. They are used to organize and store data in a way that makes it efficient to access and manipulate. 
 

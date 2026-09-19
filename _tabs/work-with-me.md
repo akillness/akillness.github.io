@@ -16,7 +16,7 @@ The [Portfolio](/projects/) maps these review areas to shipped products, public 
 
 A structured read of an existing or planned agent or retrieval system: where retrieval is silently wrong, where the agent loop is missing a verify-before-done gate, where tool-calling boundaries are unclear, and where evaluation is missing rather than "just not automated yet."
 
-Grounded in **SAGA** and **Millie** — two internal RAG/agent platforms I designed and shipped at Supercent. SAGA is a RAG-Fusion + CRAG + hybrid-search + cross-encoder-reranking search engine over 594 game-design documents (1,563 vectors) across 15 games; Millie is a per-user RAG assistant plus a Slack-driven, local-LLM autonomous-agent system. See the [agent-orchestration posts](/categories/agent-orchestration/) for how I think about this in public.
+Grounded in **SAGA** and **Millie** — two internal RAG/agent platforms I designed and shipped at Supercent. SAGA is a RAG-Fusion + CRAG + hybrid-search + cross-encoder-reranking search engine over 594 game-design documents (1,563 vectors) across 15 games; Millie is a per-user RAG assistant plus a Slack-driven, local-LLM autonomous-agent system. See the [agent posts](/categories/agents/) for how I think about this in public.
 
 **Output:** a written findings document — architecture diagram, ranked failure modes with evidence, and a prioritised fix list. No slide deck.
 
@@ -32,7 +32,7 @@ Grounded in production Unity engineering at Com2uS (Unity↔Python socket toolin
 
 A review of a QA or test-automation design that reads screenshots, gameplay video, or other visual state and produces a verdict or report — the pipeline design, not a one-off model recommendation.
 
-Grounded in Ph.D. research on VLM-based bug reporting and AutoQA tooling at Hongik University, an IEEE RAAI 2024 poster on image-based game QA automation, and a 2025 publication on automated QA reporting from natural-language captions. See the [multimodal & vision posts](/categories/multimodal-computer-vision/) for the public version of this thinking.
+Grounded in Ph.D. research on VLM-based bug reporting and AutoQA tooling at Hongik University, an IEEE RAAI 2024 poster on image-based game QA automation, and a 2025 publication on automated QA reporting from natural-language captions. See the [multimodal, video and game AI posts](/start-here/#multimodal-video--game-ai) for the public version of this thinking.
 
 **Output:** a design review covering data flow, model and prompt choices, failure modes specific to visual QA (rare-state false negatives, caption drift), and what to measure before trusting the output.
 

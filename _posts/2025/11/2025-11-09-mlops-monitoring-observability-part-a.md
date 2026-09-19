@@ -10,6 +10,9 @@ mermaid: true
 image:
   path: /assets/img/posts/mlops-monitoring-observability.png
   alt: 'MLOps Monitoring and Observability: The Full Blueprint'
+# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Why Do Models Fail Silently in Production?
 

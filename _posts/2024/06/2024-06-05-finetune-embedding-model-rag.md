@@ -7,6 +7,9 @@ tags: [RAG, Embedding, Search]
 date: 2024-06-05 11:00:00 +0800
 pin: false
 mermaid: true
+# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 # RAG or Fine Tuning? A simple feature comparision to decide which technique you should use!
 

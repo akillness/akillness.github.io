@@ -7,6 +7,9 @@ categories: [Data Science/Algorithms]
 tags: [Data Science, Algorithm, Analysis]
 date: 2025-12-05 10:00:00 +0800
 mermaid: true
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Can We Have Both Speed and Productivity in AI Systems?
 

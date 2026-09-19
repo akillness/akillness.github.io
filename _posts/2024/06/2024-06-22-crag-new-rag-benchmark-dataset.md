@@ -6,6 +6,9 @@ tags: [RAG, Embedding, Search]
 date: 2024-06-22 19:10:00 +0800
 mermaid: true
 lang: ko
+# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## CRAG: Comprehensive RAG Benchmark Dataset
 

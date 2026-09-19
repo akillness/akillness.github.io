@@ -11,6 +11,9 @@ mermaid: true
 image:
   path: /assets/img/blog/spritefusion-pixel-snapper/hero.png
   alt: Sprite Fusion Pixel Snapper - Fixing AI-Generated Pixel Art
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Can Multi-Agent Systems Fix AI's Pixel Art Problems?
 

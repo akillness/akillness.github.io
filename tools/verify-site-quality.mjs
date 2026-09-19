@@ -140,39 +140,27 @@ for (const required of [`${origin}/`, `${origin}/about/`, `${origin}/projects/`,
   check(locations.includes(required), `${required} is missing from sitemap.xml`);
 }
 
-const retiredSlugs = [
-  'web-gl',
-  'what-is-kubernetes',
-  'googleio-chatgpt4o',
-  'generativeai-term',
-  'use-dev-tools',
-  'llm-agents-eval',
-  'llm-mitigate-inference-bottleneck',
-  'graph-analytic',
-  'visualization-of-architecture-on-aws',
-  'most-popular-devops-tools',
-  '60-most-useful-ai-tools',
-  'git-in-a-Nutshell',
-  'software-development-cycle',
-  'generative-ai-eco-system',
-  'key-data-term-quick-guid',
-  'improving-the-performance-llm',
-  'microservices-popular-architectural-style',
-  'the-most-popular-use-cases-for-udp',
-  'ensuring-data-quality-in-machine-learning',
-  'essential-statistical-concepts-must-know',
-  'explore-the-landscape-of-open-source-data-engineering',
-  'strategies-to-scale-database',
-  'google-adsense-monetization-strategy',
-  'timeseriesfm-googleai',
-  'try-implementing-rag-using-langchain',
-  'rag-new-addition',
-  'agentic-data-analyst',
-  'gradio-transformerjs',
-  'llm-systems-using-llmops',
-  'survey-on-llm-based-autonomous-agents',
-  'the-most-optimal-rag-configuration'
-];
+// Retired posts carry `published: false` in their front matter (31 legacy drafts
+// on 2026-08-28, 10 machine-summary reposts on 2026-09-15, 97 third-party
+// rewrites/translations on 2026-09-19). Read that set from the source tree so
+// the artifact check cannot drift from the retirement list.
+const retiredSlugs = [];
+(function collectRetired(dir) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      collectRetired(full);
+      continue;
+    }
+    if (!entry.name.endsWith('.md')) continue;
+    const frontMatter = fs.readFileSync(full, 'utf8').split(/^---\s*$/m)[1] || '';
+    if (!/^published:\s*false\s*$/m.test(frontMatter)) continue;
+    const permalink = frontMatter.match(/^permalink:\s*\/posts\/([^/\s]+)\/\s*$/m)?.[1];
+    const stem = entry.name.match(/^\d{4}-\d{2}-\d{2}-(.+)\.md$/)?.[1];
+    retiredSlugs.push(permalink || stem);
+  }
+})(fileURLToPath(new URL('../_posts', import.meta.url)));
+check(retiredSlugs.length >= 138, `only ${retiredSlugs.length} retired posts were found in _posts; the retirement set has shrunk`);
 for (const slug of retiredSlugs) {
   const variants = new Set([slug, slug.toLowerCase()]);
   for (const variant of variants) {
@@ -444,11 +432,9 @@ for (const route of ['portfolio', 'resume', 'resume_eng']) {
 }
 const portfolio = exists('portfolio', 'index.html') ? read('portfolio', 'index.html') : '';
 check(portfolio.includes('<link rel="canonical" href="https://akillness.github.io/projects/">'), '/portfolio/ canonical does not point to /projects/');
-const internalGuide = exists('docs', 'google-adsense-monetization-guide', 'index.html')
-  ? read('docs', 'google-adsense-monetization-guide', 'index.html')
-  : '';
-check(/<meta name="robots" content="[^"]*noindex[^"]*">/i.test(internalGuide), 'internal AdSense guide lacks noindex');
-failures.push(...verifyAdBoundary(internalGuide, { route: '/docs/google-adsense-monetization-guide/', config: adConfig }));
+// The internal AdSense operating guide is excluded from the build (_config.yml)
+// since 2026-09-19. It used to be served noindex; now it must not exist at all.
+check(!exists('docs', 'google-adsense-monetization-guide', 'index.html'), 'internal AdSense guide was built: /docs/google-adsense-monetization-guide/');
 
 if (failures.length) {
   console.error(`Site quality verification failed with ${failures.length} issue(s):`);

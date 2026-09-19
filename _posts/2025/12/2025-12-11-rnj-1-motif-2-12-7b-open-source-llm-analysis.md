@@ -10,6 +10,9 @@ image:
   path: /assets/img/llm/rnj-1-model.png
   lqip: data:image/webp;base64,UklGRnoBAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZ
   alt: "Rnj-1 and Motif-2-12.7B Open Source LLM Models"
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 
 <details markdown="1">

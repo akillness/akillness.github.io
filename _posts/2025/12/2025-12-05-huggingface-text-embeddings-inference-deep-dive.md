@@ -9,6 +9,9 @@ tags: [LLM, Model, Paper]
 date: 2025-12-05 10:00:00 +0800
 mermaid: true
 math: true
+# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Why Do We Need a Dedicated Embedding Inference Server?
 

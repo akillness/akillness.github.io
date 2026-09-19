@@ -295,6 +295,12 @@ exclude:
   - plan.md
   - hyundai_ai_application_engineer_essay.md
   - 2026_naver_coding_test_guide.md
+  # docs/ holds the theme's upstream CHANGELOG/CONTRIBUTING/SECURITY files and
+  # the internal AdSense operating guide. The guide was served at
+  # /docs/google-adsense-monetization-guide/ (noindex, unlinked) and the theme
+  # files as raw .md until 2026-09-19; none of it is reader content, and an
+  # operator note has no place on a site under content review.
+  - docs/
 
 include:
   - .well-known

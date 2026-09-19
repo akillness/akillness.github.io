@@ -8,6 +8,9 @@ categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2025-11-15 03:00:00 +0800
 mermaid: true
+# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
+# (AdSense replicated-content boundary). Restore by removing `published: false`.
+published: false
 ---
 ## 🤔 Curiosity: Can AI Build Persistent 3D Worlds We Can Actually Use?
 
