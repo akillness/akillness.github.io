@@ -2,6 +2,8 @@
 layout: page
 title: "404: Page not found"
 permalink: /404.html
+robots: noindex, follow
+ads: false
 
 redirect_from:
   - /norobots/
@@ -11,4 +13,21 @@ redirect_from:
 
 {% include lang.html %}
 
-<p class="lead">{{ site.data.locales[lang].not_found.statment }}</p>
+<p class="lead">This address is no longer published, or the URL has changed.</p>
+
+<p>
+  The site recently retired older imported and translated articles that did not meet the current
+  original-research standard. If you arrived from an old bookmark or a cached page, use one of the
+  maintained paths below.
+</p>
+
+<nav aria-label="Page recovery" class="d-flex flex-wrap gap-2 mt-4">
+  <a class="btn btn-outline-primary" href="{{ '/' | relative_url }}">Latest articles</a>
+  <a class="btn btn-outline-primary" href="{{ '/start-here/' | relative_url }}">Start here</a>
+  <a class="btn btn-outline-primary" href="{{ '/archives/' | relative_url }}">Browse archives</a>
+  <a class="btn btn-outline-primary" href="{{ '/categories/' | relative_url }}">Browse categories</a>
+</nav>
+
+<p class="text-muted mt-4 mb-0">
+  If the old page is still visible in another tab, reload it once to replace the offline cache.
+</p>
