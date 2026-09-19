@@ -5,7 +5,6 @@ date: 2026-09-20 00:08:04 +0900
 last_modified_at: 2026-09-20 01:21:55 +0900
 categories: ["AI"]
 tags: ["mex", "agent memory", "code graph", "macos", "cli", "agents.md"]
-author: "jangyoung"
 image:
   path: /assets/img/posts/2026-09-20-mex-macos-command-collision/mex-command-resolution.svg
   alt: "A safe resolver rejects the TeX Live mex command and selects the mex-agent wrapper before querying the MEX graph"
