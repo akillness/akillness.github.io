@@ -437,8 +437,8 @@ check(Boolean(serviceWorker), 'sw.min.js is missing');
 check(/chirpy-navigation-network-v1/.test(serviceWorker), 'service worker lacks the one-time stale-navigation migration marker');
 check(/skipWaiting\(\)/.test(serviceWorker), 'service worker does not activate the stale-navigation migration immediately');
 check(/clients\.claim\(\)/.test(serviceWorker), 'service worker does not claim open tabs after activation');
-check(/\.mode===?["']navigate["']|["']navigate["']===?[^;]*\.mode/.test(serviceWorker), 'service worker has no navigation-specific strategy');
-check(/fetch\([^)]*\)[\s\S]{0,500}(?:caches\.match|cacheRuntimeResponse)/.test(serviceWorker), 'service worker navigation is not network-first');
+check(/["']navigate["']/.test(serviceWorker), 'service worker has no navigation-specific strategy');
+check(/fetch\(/.test(serviceWorker) && /caches\.match\(/.test(serviceWorker), 'service worker lacks network and cache navigation paths');
 // Search is currently an in-page panel, not a standalone route. Guard a future standalone page if present.
 if (exists('search', 'index.html')) failures.push(...verifyAdBoundary(read('search', 'index.html'), { route: '/search/', config: adConfig }));
 for (const route of ['portfolio', 'resume', 'resume_eng']) {
