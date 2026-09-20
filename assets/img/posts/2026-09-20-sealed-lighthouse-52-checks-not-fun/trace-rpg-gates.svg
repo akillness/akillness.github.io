@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">Conformance is not a player study</title>
+  <desc id="desc">A transparent three-step diagram separating deterministic checks, presentation wiring, and human experience evidence.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#ff8a65"/>
+    </marker>
+  </defs>
+  <text x="60" y="62" fill="#ff8a65" font-family="system-ui, sans-serif" font-size="28" font-weight="700">THE EVIDENCE BOUNDARY</text>
+  <text x="60" y="101" fill="#e7edf5" font-family="system-ui, sans-serif" font-size="18">Green engineering receipts do not become player outcomes by implication.</text>
+  <g fill="none" stroke="#8aa4bf" stroke-width="2">
+    <rect x="60" y="160" width="300" height="230" rx="18"/>
+    <rect x="450" y="160" width="300" height="230" rx="18"/>
+    <rect x="840" y="160" width="300" height="230" rx="18"/>
+  </g>
+  <g font-family="system-ui, sans-serif">
+    <text x="90" y="207" fill="#7dd3fc" font-size="20" font-weight="700">1 · ENGINE</text>
+    <text x="90" y="251" fill="#e7edf5" font-size="18">52/52 core</text>
+    <text x="90" y="283" fill="#e7edf5" font-size="18">+ 4/4 extension</text>
+    <text x="90" y="326" fill="#aab9c8" font-size="16">replay, state, UI contracts</text>
+    <text x="90" y="355" fill="#aab9c8" font-size="16">deterministic evidence</text>
+    <text x="480" y="207" fill="#86efac" font-size="20" font-weight="700">2 · RELEASE</text>
+    <text x="480" y="251" fill="#e7edf5" font-size="18">8/8 smoke</text>
+    <text x="480" y="283" fill="#e7edf5" font-size="18">5/5 scripted rotations</text>
+    <text x="480" y="326" fill="#aab9c8" font-size="16">current artifact and receipt</text>
+    <text x="480" y="355" fill="#aab9c8" font-size="16">still not a human study</text>
+    <text x="870" y="207" fill="#fca5a5" font-size="20" font-weight="700">3 · PLAYER</text>
+    <text x="870" y="251" fill="#e7edf5" font-size="18">fun / usability</text>
+    <text x="870" y="283" fill="#e7edf5" font-size="18">agency / immersion</text>
+    <text x="870" y="326" fill="#fca5a5" font-size="16" font-weight="700">not measured</text>
+    <text x="870" y="355" fill="#aab9c8" font-size="16">needs participants</text>
+  </g>
+  <path d="M365 275 H440" stroke="#ff8a65" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M755 275 H830" stroke="#ff8a65" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="60" y="470" fill="#aab9c8" font-family="system-ui, sans-serif" font-size="17">D-074 keeps the third box deliberately open.</text>
+</svg>
