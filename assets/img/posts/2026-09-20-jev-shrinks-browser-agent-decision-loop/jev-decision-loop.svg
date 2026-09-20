@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Jev's indexed browser-agent decision loop</title>
+  <desc id="desc">An original diagram showing an observed element table entering Jev operation and target heads, then a freshness check before execution, with a separate small text model used only for prepared text fields.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#6b7280"/>
+    </marker>
+    <style>
+      .title{font:700 28px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#24324a}
+      .label{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#24324a}
+      .body{font:500 16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#3e4b63}
+      .mono{font:600 15px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#24324a}
+      .small{font:500 14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#52617a}
+    </style>
+  </defs>
+  <text class="title" x="56" y="58">A smaller action space, not a magic speed claim</text>
+  <text class="small" x="56" y="88">Jev chooses a compatible operation and target from one observed state, then the executor checks freshness.</text>
+
+  <rect x="56" y="138" width="245" height="250" rx="18" fill="#dff5f0" stroke="#1e8f82" stroke-width="3"/>
+  <text class="label" x="80" y="178">1. Observe</text>
+  <text class="body" x="80" y="207">DOM / ARIA controls</text>
+  <rect x="80" y="232" width="194" height="128" rx="10" fill="#ffffff" stroke="#9ccfc7"/>
+  <text class="mono" x="96" y="260">[1] button  Search</text>
+  <text class="mono" x="96" y="289">[2] textbox Origin</text>
+  <text class="mono" x="96" y="318">[3] combobox Date</text>
+  <text class="small" x="80" y="372">Indexed elements only</text>
+
+  <path d="M301 263 H359" fill="none" stroke="#6b7280" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="359" y="138" width="350" height="250" rx="18" fill="#fff1cf" stroke="#d98c16" stroke-width="3"/>
+  <text class="label" x="386" y="178">2. Ask Jev once</text>
+  <text class="body" x="386" y="207">One TypeSafe request</text>
+  <rect x="386" y="232" width="138" height="88" rx="10" fill="#fffaf0" stroke="#e4b45e"/>
+  <text class="mono" x="402" y="260">operation</text>
+  <text class="mono" x="402" y="286">CLICK</text>
+  <text class="mono" x="402" y="312">TYPE_TEXT</text>
+  <rect x="548" y="232" width="134" height="88" rx="10" fill="#fffaf0" stroke="#e4b45e"/>
+  <text class="mono" x="564" y="260">target head</text>
+  <text class="mono" x="564" y="286">[1] only</text>
+  <text class="mono" x="564" y="312">compatible</text>
+  <text class="small" x="386" y="356">Speculative heads are ignored unless selected</text>
+
+  <path d="M709 263 H767" fill="none" stroke="#6b7280" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="767" y="138" width="360" height="250" rx="18" fill="#e7eafe" stroke="#5b67c8" stroke-width="3"/>
+  <text class="label" x="795" y="178">3. Guard and execute</text>
+  <text class="body" x="795" y="207">Freshness, geometry, outcome</text>
+  <rect x="795" y="232" width="303" height="42" rx="10" fill="#f8f9ff" stroke="#a4abe5"/>
+  <text class="mono" x="812" y="259">re-observe → validate → act</text>
+  <rect x="795" y="292" width="303" height="42" rx="10" fill="#f8f9ff" stroke="#a4abe5"/>
+  <text class="mono" x="812" y="319">DONE needs independent proof</text>
+  <text class="small" x="795" y="366">Browser calls fall when invalid choices disappear</text>
+
+  <path d="M880 388 V460 H690" fill="none" stroke="#6b7280" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="388" y="460" width="600" height="142" rx="18" fill="#f6e5ef" stroke="#b34d7a" stroke-width="3"/>
+  <text class="label" x="418" y="500">TYPE_TEXT is the narrow exception</text>
+  <text class="body" x="418" y="530">A separate small LLM supplies the field value.</text>
+  <text class="mono" x="418" y="565">prepared goal + field context → JSON text → browser</text>
+  <text class="small" x="418" y="589">Jev chooses the field; it does not turn arbitrary model text into a selector.</text>
+</svg>
