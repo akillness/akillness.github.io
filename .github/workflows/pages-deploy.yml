@@ -50,11 +50,12 @@ jobs:
           cp tools/template-test-deps/package*.json "$RUNNER_TEMP/ak-template-tests/"
           npm ci --prefix "$RUNNER_TEMP/ak-template-tests" --ignore-scripts --no-audit --no-fund
 
-      - name: Verify editorial source boundaries
+      - name: Verify editorial source boundaries and harness
         env:
           TEST_NODE_MODULES: ${{ runner.temp }}/ak-template-tests/node_modules
         run: |
-          node tools/verify-editorial-boundaries.mjs
+          # Keep CI on the same contract used by the local pre-push hook.
+          npm run editorial:prepush
           node tools/validate-editorial-harness.mjs
           npm run editorial:tests
 

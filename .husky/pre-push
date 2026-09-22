@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "Running editorial pre-push contract checks..."
+npm run editorial:prepush
