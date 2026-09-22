@@ -66,8 +66,10 @@ Memory has at least two species.
 
 **Long-term memory** persists across sessions: user preferences, project conventions, prior decisions, post-mortems, and constraints. This is the layer teams often underinvest in because it has no immediate demo effect.
 
-![Layers of AI agent memory, from the short-term context window to long-term decision records](/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/memory-layers.jpg){: .w-75 .shadow .rounded-10 }
-_The memory stack has different update speeds. Session context changes every turn. Project memory changes when decisions change. Episodic records change when the team learns from an outcome. (Source: [Unsplash](https://unsplash.com/), public image source)_
+<figure class="source-image">
+  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/memory-layers.jpg" alt="Layers of AI agent memory, from the short-term context window to long-term decision records">
+  <figcaption>The memory stack has different update speeds. Session context changes every turn. Project memory changes when decisions change. Episodic records change when the team learns from an outcome. Image source: <a href="https://unsplash.com/s/photos/ai-memory">Unsplash AI memory collection</a>. Licence: <a href="https://unsplash.com/license">Unsplash License</a>.</figcaption>
+</figure>
 
 Raw conversation history is a poor long-term memory format. It grows too quickly and forces every future run to re-read the same irrelevant turns. A better design extracts durable facts: what was decided, why, which evidence supported it, what happened afterward, and when the fact should be rechecked.
 
@@ -148,15 +150,24 @@ Before proposing a change, the guardrail can ask:
 
 The result should not blindly block the designer. It should surface the evidence and make the decision legible. "This was reverted before" is a useful challenge. It is not automatically a veto because the product, cohort, and patch may have changed.
 
-![A retrieval pipeline showing ranked evidence flowing into a context assembly layer](/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/retrieval-pipeline.jpg){: .w-75 .shadow .rounded-10 }
-_Retrieval is not just search. It is ranking, filtering, and assembly with a declared purpose. (Source: [Unsplash](https://unsplash.com/), public image source)_
+<figure class="source-image">
+  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/retrieval-pipeline.jpg" alt="A retrieval pipeline showing ranked evidence flowing into a context assembly layer">
+  <figcaption>Retrieval is not just search. It is ranking, filtering, and assembly with a declared purpose. Image source: <a href="https://unsplash.com/s/photos/data-pipeline">Unsplash data pipeline collection</a>. Licence: <a href="https://unsplash.com/license">Unsplash License</a>.</figcaption>
+</figure>
 
 ### MCP as a retrieval bus
 
 The Model Context Protocol is useful here because production context is heterogeneous. A game team may have a Git repository, a telemetry warehouse, a design wiki, a ticket tracker, and a balance database. Each source can expose a tool surface instead of forcing every agent pipeline to contain bespoke retrieval code.
 
-![Multiple project sources flowing into one agent context window](/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/context-window.jpg){: .w-75 .shadow .rounded-10 }
-_MCP does not solve relevance by itself. It gives different sources a consistent way to participate in context assembly. The ranking and freshness policy still belong to the product team. (Source: [Unsplash](https://unsplash.com/), public image source)_
+<figure class="source-image">
+  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/context-window.jpg" alt="Multiple project sources flowing into one agent context window">
+  <figcaption>MCP does not solve relevance by itself. It gives different sources a consistent way to participate in context assembly. The ranking and freshness policy still belong to the product team. Image source: <a href="https://unsplash.com/s/photos/software-engineering">Unsplash software engineering collection</a>. Licence: <a href="https://unsplash.com/license">Unsplash License</a>.</figcaption>
+</figure>
+
+<figure class="source-image">
+  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/agent-workstation.jpg" alt="A developer reviewing multiple data sources flowing into an AI agent context layer">
+  <figcaption>A context window is assembled from multiple sources rather than dumped from one transcript. Image source: <a href="https://unsplash.com/s/photos/ai-developer">Unsplash AI developer collection</a>. Licence: <a href="https://unsplash.com/license">Unsplash License</a>.</figcaption>
+</figure>
 
 ### Honest tradeoffs
 
