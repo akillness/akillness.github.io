@@ -142,7 +142,8 @@ Jekyll과 같은 정적 사이트 생성기(SSG)는 포스트 개수가 많아�
 | 본문 하단 광고 | `_includes/adsense-post.html` → `_layouts/post.html` | 슬롯 `2404463133`, 편집 기준을 통과한 글만 |
 | 본문 중간 광고 | `_includes/adsense-in-article.html` → `_includes/post-content.html` | 슬롯 `2101210804` (in-article/fluid), 편집 기준을 통과한 글만 |
 | 슬롯 스위치 | `_config.yml` 의 `google_ad_slots` | `post_bottom`, `post_in_article` |
-| 편집 안전 기준 | `_config.yml` 의 `google_ad_min_post_words` | 800단어, Google 정책이 아닌 이 사이트의 보수적 광고 기준 |
+| 광고 안전 기준 | `_config.yml` 의 `google_ad_min_post_words` | 800단어, Google 정책이 아닌 이 사이트의 보수적 광고 기준 |
+| 검색 품질 경계 | `_config.yml` 의 `google_index_min_post_words` | 800단어 미만은 확장 전 `noindex` + 사이트맵 제외 + 광고 제외 |
 
 `_includes/adsense.html` 은 `jekyll.environment == 'production'` 이면서
 `site.google_ad_client` 가 비어 있지 않을 때만 동작한다. 소유권 확인용
@@ -163,7 +164,11 @@ GA는 이 광고 경계와 독립적으로 유지한다.
 matter에 `ads: false`를 넣으면 분량과 무관하게 그 글을 광고에서 제외한다.
 현재 콘텐츠 품질 보류 정책은 이 값을 `robots: noindex, follow` 및 `sitemap: false`와
 함께 사용하며, 이 결합 규칙은 `verify-editorial-boundaries.mjs`가 검사한다.
-광고만 끄고 색인은 유지하는 별도 정책으로 조용히 해석하거나 변경하지 않는다.
+광고만 끄고 색인은 유지하는 별도 정책으로 조용히 해석하거나 변경하지 않는다. 현재는
+`google_index_min_post_words` 미만의 게시물도 같은 세 가지 경계(`robots: noindex, follow`,
+`sitemap: false`, `ads: false`)를 함께 요구한다. 이 800단어는 Google의 승인 기준이나
+검색 순위 공식이 아니라, 미완성·저밀도 메모가 사이트 전체의 품질 신호가 되지 않도록 하는
+이 저장소의 편집 경계다.
 
 본문 중간 유닛은 `_includes/post-content.html` 이 본문을 `</p>` 경계로 잘라
 자동 삽입한다. 문단이 8개 미만인 짧은 글은 건너뛰고, 중간 지점 이후에서
@@ -173,17 +178,21 @@ matter에 `ads: false`를 넣으면 분량과 무관하게 그 글을 광고에�
 고정 수치로 문서화하지 않고 빌드된 HTML에서 검증한다.
 
 
-### 계정 진행 상태 (2026-08-28 기준)
+### 계정 진행 상태 (2026-09-24 기준)
 
-1. 기존 **YouTube용 애드센스** 계정(`pub-3706360396883624`)을 웹사이트 계정으로 전환 완료.
-   `adsense.google.com/adsense/u/0/home` 은 이 계정에서도 접근 거부가 나므로
-   대시보드는 반드시 게시자 스코프 URL `/adsense/u/0/pub-3706360396883624/...` 로 연다.
-2. 사이트 `akillness.github.io` 등록 → 로더 스니펫 배포 → **소유권 확인 완료**.
-3. **검토 요청 완료**, 승인 상태 `준비 중`. 구글 심사 결과를 기다리는 단계.
-4. `ads.txt`는 `google.com, pub-3706360396883624, DIRECT, f08c47fec0942fa0`으로
-   정상 서빙되며 AdSense 대시보드에서도 승인 상태를 확인했다.
-5. 2026-08-28 09:41 KST 기준 사이트 상태는 `리뷰가 요청됨`이다. 이 문서는 승인이나
-   수익을 보장하지 않으며, 심사 중에는 새 재검토 요청을 반복하지 않는다.
+1. 기존 **YouTube용 애드센스** 계정(`pub-3706360396883624`)을 웹사이트 계정으로 전환했고,
+   `akillness.github.io`를 등록했다. 대시보드는 게시자 스코프 URL
+   `/adsense/u/0/pub-3706360396883624/...`로 연다.
+2. 소유권 확인용 AdSense 코드가 사이트에 배포되어 있고, `ads.txt`는
+   `google.com, pub-3706360396883624, DIRECT, f08c47fec0942fa0`으로 서빙되며
+   대시보드에서도 `승인됨`이다.
+3. 2026-08-28, 09-05, 09-15, 09-23의 Google 메일은 모두 같은 일반 판정문을 보냈고,
+   구체 사유는 메일이 아니라 AdSense 사이트 화면에서 확인된다.
+4. 2026-09-23 23:41 KST 현재 사이트 상태는 `주의 필요 / 가치가 별로 없는 콘텐츠`다.
+   화면의 세부 기준은 고유 가치, 지속적인 큐레이션·구조 유지관리, 실제 사용자 관심이다.
+5. 이번 개선은 미완성 Flutter 페이지를 은퇴하고, 800단어 미만 XOR 메모를 검색·사이트맵·
+   광고에서 제외하며, 같은 누락을 CI에서 막는 규칙을 추가한 것이다. 배포 후 라이브 URL,
+   사이트맵, AdSense 상태를 다시 확인한 뒤 재검토를 요청한다.
 
 ### 검증 스크립트
 
@@ -200,5 +209,5 @@ playwriter -s <id> --timeout 300000 -f tools/verify-adsense.mjs
 승인 대기 중에는 **7/9** 가 정상 상태다.
 
 ---
-*최종 업데이트: 2026-08-28 (저밀도 아카이브·광고 경계·현재 심사 상태 반영)*
+*최종 업데이트: 2026-09-24 (저밀도 게시물의 검색 경계와 AdSense 사이트 화면 상태 반영)*
 

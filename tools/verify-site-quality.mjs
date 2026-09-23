@@ -80,6 +80,13 @@ export function readCategoryArchiveMinimum(file = new URL('../_config.yml', impo
   return readArchiveMinimum('category_archive_min_posts', file);
 }
 
+export function readIndexablePostMinimum(file = new URL('../_config.yml', import.meta.url)) {
+  const raw = fs.readFileSync(file, 'utf8').match(/^google_index_min_post_words:([^\n]*)/m)?.[1];
+  const value = Number((raw ?? '').replace(/\s+#.*$/, '').trim());
+  if (!Number.isInteger(value) || value <= 0) throw new Error('google_index_min_post_words must be a positive integer');
+  return value;
+}
+
 function readArchiveMinimum(key, file) {
   const raw = fs.readFileSync(file, 'utf8').match(new RegExp(`^${key}:([^\\n]*)`, 'm'))?.[1];
   const value = Number((raw ?? '').replace(/\s+#.*$/, '').trim());
@@ -91,10 +98,9 @@ function main() {
 const adConfig = readAdConfig();
 const tagArchiveMinimum = readTagArchiveMinimum();
 const categoryArchiveMinimum = readCategoryArchiveMinimum();
+const indexableWordFloor = readIndexablePostMinimum();
 const siteDir = path.resolve(process.argv[2] || '_site');
 const origin = 'https://akillness.github.io';
-// This is a project review floor for legacy stubs, not a Google word-count requirement.
-const indexableWordFloor = 300;
 const failures = [];
 const listingSurfaces = [];
 const check = (condition, message) => {
@@ -298,7 +304,7 @@ for (const entry of postEntries) {
   );
   check(!hasHiddenAd, `hidden AdSense unit is present: ${route}`);
   if (Number.isFinite(words) && words < indexableWordFloor) {
-    check(isNoindex, `legacy stub below ${indexableWordFloor} words is indexable (${words}): ${route}`);
+    check(isNoindex, `post below configured ${indexableWordFloor} index words is indexable (${words}): ${route}`);
   }
   if (isNoindex) {
     noindexPosts += 1;

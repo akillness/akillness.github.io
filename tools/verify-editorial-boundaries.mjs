@@ -20,6 +20,14 @@ const check = (condition, message) => {
   if (!condition) failures.push(message);
 };
 const read = (relative) => fs.readFileSync(path.join(root, relative), 'utf8');
+const indexablePostMinimum = Number(read('_config.yml').match(/^google_index_min_post_words:\s*(\d+)/m)?.[1]);
+check(Number.isInteger(indexablePostMinimum) && indexablePostMinimum > 0, '_config.yml does not set a positive google_index_min_post_words');
+const sourceWordCount = (body) => body
+  .replace(/```[\s\S]*?```/g, ' ')
+  .replace(/<[^>]+>/g, ' ')
+  .split(/\s+/)
+  .filter(Boolean)
+  .length;
 
 const protectedPosts = [
   '_posts/2017/02/2017-02-20-family-life-blog-roundup.md',
@@ -166,10 +174,16 @@ const postFiles = walkFiles(path.join(root, '_posts')).filter((file) => file.end
 // never applied to 109 posts.
 let boundedPosts = 0;
 for (const file of postFiles) {
-  const frontMatter = fs.readFileSync(file, 'utf8').split(/^---\s*$/m)[1] || '';
+  const source = fs.readFileSync(file, 'utf8');
+  const frontMatter = source.split(/^---\s*$/m)[1] || '';
+  const body = source.replace(/^---\s*\n[\s\S]*?\n---\s*\n?/, '');
+  const published = !/^published:\s*false$/m.test(frontMatter);
   const noindex = /^robots:\s*noindex, follow$/m.test(frontMatter);
   const outOfSitemap = /^sitemap:\s*false$/m.test(frontMatter);
   const noAds = /^ads:\s*false$/m.test(frontMatter);
+  if (published && sourceWordCount(body) < indexablePostMinimum) {
+    check(noindex && outOfSitemap && noAds, `${path.relative(root, file)}: short published post must be noindex, sitemap false, and ads false`);
+  }
   if (!noindex && !outOfSitemap && !noAds) continue;
   boundedPosts += 1;
   const relative = path.relative(root, file);

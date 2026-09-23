@@ -33,6 +33,7 @@ Before article work, read:
 - Explain what the README or announcement misses, what was tested, what failed, and why it matters in production.
 - Do not invent personal experience, employer results, benchmarks, user counts, revenue, or performance numbers.
 - A valid nightly run may end with **no article** when no candidate clears the evidence and novelty gates.
+- Posts below `google_index_min_post_words` must be expanded into original long-form work or carry `robots: noindex, follow`, `sitemap: false`, and `ads: false`. This is an editorial quality boundary, not a Google word-count claim.
 
 ## 2026 search and influencer strategy
 

@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
-import { readAdConfig, expectsInArticle, verifyAdBoundary } from '../verify-site-quality.mjs';
+import { readAdConfig, readIndexablePostMinimum, expectsInArticle, verifyAdBoundary } from '../verify-site-quality.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 assert.ok(process.env.TEST_NODE_MODULES, 'FAIL CLOSED: set TEST_NODE_MODULES to the external node_modules installed from tools/template-test-deps/package-lock.json; never install inside this repository.');
@@ -41,6 +41,7 @@ const noAdMarkup = (html) => assert.doesNotMatch(html, /<ins\b|adsbygoogle\.js|\
 
 test('native config reader agrees with YAML and does not hardcode publisher or slots', () => {
   assert.deepEqual(config, { client: site.google_ad_client, minimum: site.google_ad_min_post_words, bottom: String(site.google_ad_slots.post_bottom), inArticle: String(site.google_ad_slots.post_in_article) });
+  assert.equal(readIndexablePostMinimum(), site.google_index_min_post_words);
 });
 test('eligible include rendering emits exact ownership, one loader and both positioned slots', async () => {
   const page = post(); const { html } = await rendered(page);
