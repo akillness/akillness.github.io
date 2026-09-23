@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" role="img" aria-labelledby="title desc">
+  <title id="title">One GameDevBench leaderboard, two isolation eras</title>
+  <desc id="desc">An original timeline of the pinned GameDevBench repository. Seventeen leaderboard rows were published before the 2026-09-01 strict confinement series, when each agent CLI ran with its own permission mode in a temporary task copy. One row, GPT 6 Astra (High) at 68.8 percent, was run on 2026-09-07 inside the strict bubblewrap box. The top two published intervals overlap.</desc>
+  <defs>
+    <style>
+      .title{font:700 28px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#24324a}
+      .sub{font:500 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#52617a}
+      .date{font:700 16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#24324a}
+      .ev{font:500 14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#3e4b63}
+      .label{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#24324a}
+      .body{font:500 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#3e4b63}
+      .mono{font:600 14px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#24324a}
+      .count{font:800 20px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#24324a}
+      .note{font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#24324a}
+    </style>
+  </defs>
+
+  <text class="title" x="56" y="56">One leaderboard, two isolation eras</text>
+  <text class="sub" x="56" y="84">GameDevBench repository history, pinned at a604ca9e. Timeline is ordered, not to scale.</text>
+
+  <line x1="80" y1="190" x2="1120" y2="190" stroke="#6b7280" stroke-width="3"/>
+  <line x1="700" y1="120" x2="700" y2="540" stroke="#d9480f" stroke-width="3" stroke-dasharray="8 7"/>
+
+  <circle cx="120" cy="190" r="9" fill="#6b7280"/>
+  <text class="date" x="120" y="150" text-anchor="middle">Feb 13</text>
+  <text class="ev" x="120" y="170" text-anchor="middle">Public release</text>
+
+  <circle cx="300" cy="190" r="9" fill="#6b7280"/>
+  <text class="date" x="300" y="150" text-anchor="middle">Jun 30</text>
+  <text class="ev" x="300" y="170" text-anchor="middle">Paper v2: best 53.8%</text>
+
+  <circle cx="490" cy="190" r="9" fill="#6b7280"/>
+  <text class="date" x="490" y="150" text-anchor="middle">Aug 13</text>
+  <text class="ev" x="490" y="170" text-anchor="middle">Leaderboard at 17 rows</text>
+
+  <circle cx="700" cy="190" r="11" fill="#d9480f"/>
+  <text class="date" x="700" y="110" text-anchor="middle">Sep 1</text>
+  <text class="ev" x="700" y="130" text-anchor="middle">Strict box by default</text>
+
+  <circle cx="885" cy="190" r="9" fill="#1e8f82"/>
+  <text class="date" x="885" y="150" text-anchor="middle">Sep 7</text>
+  <text class="ev" x="885" y="170" text-anchor="middle">Astra run: 229/333</text>
+
+  <circle cx="1065" cy="190" r="9" fill="#6b7280"/>
+  <text class="date" x="1065" y="150" text-anchor="middle">Sep 22</text>
+  <text class="ev" x="1065" y="170" text-anchor="middle">Newer Godot optional</text>
+
+  <rect x="56" y="230" width="624" height="300" rx="18" fill="#fff1cf" stroke="#d98c16" stroke-width="3"/>
+  <text class="label" x="82" y="268">Before Sep 1: each CLI brought its own boundary</text>
+  <text class="body" x="82" y="298">Task copied into a temp directory; no bwrap namespace yet.</text>
+  <text class="mono" x="82" y="334">Codex        -a never -s danger-full-access</text>
+  <text class="mono" x="82" y="362">Claude Code  permission_mode=bypassPermissions</text>
+  <text class="mono" x="82" y="390">Gemini CLI   --yolo</text>
+  <text class="mono" x="82" y="418">Muse         --disable-approval --disable-sandbox</text>
+  <text class="body" x="82" y="450">Defaults at commit 3a80dfd. Result files do not record the mode.</text>
+  <text class="count" x="82" y="500">17 of 18 leaderboard rows</text>
+
+  <rect x="720" y="230" width="424" height="300" rx="18" fill="#dff5f0" stroke="#1e8f82" stroke-width="3"/>
+  <text class="label" x="744" y="268">Since Sep 1: strict confinement</text>
+  <text class="body" x="744" y="298">bubblewrap mount, PID, home, tmp,</text>
+  <text class="body" x="744" y="320">and network namespaces per solver.</text>
+  <text class="body" x="744" y="352">Only the filtered task workspace</text>
+  <text class="body" x="744" y="374">is writable; ground truth is not mounted.</text>
+  <text class="body" x="744" y="406">HTTPS only to allowlisted providers.</text>
+  <text class="body" x="744" y="438">Result files record confinement=strict.</text>
+  <text class="count" x="744" y="500">1 of 18 rows: Astra, 68.8%</text>
+
+  <rect x="56" y="560" width="1088" height="64" rx="14" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text class="note" x="600" y="599" text-anchor="middle">Rank 1 vs rank 2: 68.8% ±5.0 (strict box) vs 67.3% ±5.0 (pre-box harness). The published intervals overlap.</text>
+</svg>
