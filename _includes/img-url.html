@@ -13,13 +13,28 @@
 {% assign url = include.src %}
 
 {%- if url -%}
-  {% unless url contains ':' %}
-    {%- comment -%} Add page image path prefix {%- endcomment -%}
-    {% assign url = include.img_path | default: '' | append: '/' | append: url %}
+  {% assign url_prefix = url | slice: 0, 2 %}
 
-    {%- comment -%} Prepend CND URL {%- endcomment -%}
+  {% unless url contains ':' or url_prefix == '//' %}
+    {% assign url_first_character = url | slice: 0, 1 %}
+
+    {% if url_first_character == '/' %}
+      {%- comment -%} Root-relative paths already include their own directory. {%- endcomment -%}
+      {% assign url = url | remove_first: '/' %}
+    {% else %}
+      {%- comment -%} Resolve bare filenames against the post image directory. {%- endcomment -%}
+      {% assign url = include.img_path | default: '' | append: '/' | append: url %}
+      {% assign url_first_character = url | slice: 0, 1 %}
+
+      {% if url_first_character == '/' %}
+        {% assign url = url | remove_first: '/' %}
+      {% endif %}
+    {% endif %}
+
     {% if site.img_cdn %}
       {% assign url = site.img_cdn | append: '/' | append: url %}
+    {% else %}
+      {% assign url = url | prepend: '/' %}
     {% endif %}
 
     {% assign url = url | replace: '///', '/' | replace: '//', '/' | replace: ':/', '://' %}

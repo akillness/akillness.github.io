@@ -3,6 +3,7 @@
 */
 
 #post-list {
+  min-width: 0;
   margin-top: 2rem;
 
   .home-intro {
@@ -43,6 +44,7 @@
 
   .home-feed-header {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
     gap: 0.85rem;
     margin: 0 0 1rem;
@@ -59,7 +61,9 @@
     }
 
     h2 {
+      min-width: 0;
       margin: 0;
+      overflow-wrap: anywhere;
       font-size: clamp(1.15rem, 1rem + 0.5vw, 1.45rem);
       letter-spacing: 0.02em;
     }
@@ -119,12 +123,15 @@
     }
 
     .card-body {
+      min-width: 0;
       height: 100%;
       padding: 1rem;
 
       .card-title {
         @extend %text-clip;
 
+        min-width: 0;
+        overflow-wrap: anywhere;
         color: var(--heading-color) !important;
         font-size: clamp(1.15rem, 1rem + 0.7vw, 1.45rem);
         font-family: $font-family-heading;
@@ -142,6 +149,7 @@
         p {
           @extend %text-clip;
 
+          overflow-wrap: anywhere;
           line-height: 1.5;
           margin: 0;
         }
@@ -164,9 +172,9 @@
 
         > div:first-child {
           display: block;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          min-width: 0;
+          white-space: normal;
+          overflow-wrap: anywhere;
         }
       }
     }
@@ -280,4 +288,37 @@
       display: none;
     }
   } /* .pagination */
+}
+
+
+/* Let home-card text use the available mobile width instead of clipping it. */
+@media all and (max-width: 576px) {
+  #post-list {
+    .home-intro {
+      margin-bottom: 2rem;
+      padding: 1.1rem 1rem;
+    }
+
+    .home-feed-header {
+      align-items: flex-start;
+      gap: 0.5rem 0.75rem;
+
+      h2 {
+        flex-basis: 100%;
+      }
+    }
+
+    .card .card-body {
+      padding: 0.85rem;
+
+      .card-title,
+      .card-text.content p {
+        display: block;
+        overflow: visible;
+        text-overflow: clip;
+        -webkit-line-clamp: unset;
+        -webkit-box-orient: initial;
+      }
+    }
+  }
 }

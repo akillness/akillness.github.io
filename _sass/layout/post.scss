@@ -2,6 +2,40 @@
   Post-specific style
 */
 
+article,
+.post-header,
+.content,
+.post-tail-wrapper {
+  min-width: 0;
+}
+
+.post-header,
+.content,
+.post-tail-wrapper {
+  overflow-wrap: anywhere;
+}
+
+.content {
+  pre {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-wrap: normal;
+  }
+
+  code {
+    overflow-wrap: anywhere;
+  }
+
+  .table-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .img-link {
+    max-width: 100%;
+  }
+}
+
 .content .source-image {
   margin: 2rem 0;
 
@@ -71,6 +105,7 @@
   }
 
   .post-byline {
+    min-width: 0;
     gap: 0.75rem;
     margin-top: 0.65rem;
 
@@ -88,6 +123,13 @@
 
   .post-hero {
     margin: 1.75rem 0 2rem;
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
 
     figcaption {
       color: var(--text-muted-color);

@@ -85,9 +85,8 @@ refactor: true
 
         {% if post.image %}
           {% assign src = post.image.path | default: post.image %}
-          {% unless src contains '//' %}
-            {% assign src = post.img_path | append: '/' | append: src | replace: '//', '/' %}
-          {% endunless %}
+          {% capture resolved_src %}{% include img-url.html src=src img_path=post.img_path %}{% endcapture %}
+          {% assign src = resolved_src | strip %}
 
           {% assign alt = post.image.alt | xml_escape | default: 'Preview Image' %}
           {% assign image_width = post.image.width | default: 1200 %}
@@ -101,10 +100,10 @@ refactor: true
 
           <div class="col-md-5">
             {% if first_image_seen == false %}
-              <img src="{{ src }}" alt="{{ alt }}" width="{{ image_width }}" height="{{ image_height }}" loading="eager" fetchpriority="high" decoding="async" {{ lqip }}>
+              <img src="{{ src | escape }}" alt="{{ alt }}" width="{{ image_width }}" height="{{ image_height }}" loading="eager" fetchpriority="high" decoding="async" {{ lqip }}>
               {% assign first_image_seen = true %}
             {% else %}
-              <img src="{{ src }}" alt="{{ alt }}" width="{{ image_width }}" height="{{ image_height }}" loading="lazy" decoding="async" {{ lqip }}>
+              <img src="{{ src | escape }}" alt="{{ alt }}" width="{{ image_width }}" height="{{ image_height }}" loading="lazy" decoding="async" {{ lqip }}>
             {% endif %}
           </div>
 

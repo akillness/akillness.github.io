@@ -41,6 +41,8 @@ body {
 
 @for $i from 1 through 5 {
   h#{$i} {
+    overflow-wrap: anywhere;
+
     @extend %heading;
 
     @if $i > 1 {
@@ -276,6 +278,7 @@ p, li {
   line-height: 1.75;
   letter-spacing: 0.01em;
   word-break: keep-all; /* avoid awkward mid-word breaks in Korean */
+  overflow-wrap: anywhere; /* allow long URLs and tokens to wrap before causing horizontal overflow */
 }
 
 .footnote {
