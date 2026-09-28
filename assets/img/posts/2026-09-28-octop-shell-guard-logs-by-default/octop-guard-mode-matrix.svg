@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" width="960" height="500" role="img" aria-label="Octop octop-harness 1.0.0 guard modes: warn logs and runs; block rejects HIGH and CRITICAL; require approval pauses MEDIUM and above; POSIX default root is slash">
+  <title>Octop's source-traced shell guard modes and default root</title>
+  <style>
+    text{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#1f2937}
+    .h{font-size:18px;font-weight:700}
+    .c{font-size:16px}
+    .s{font-size:13px;fill:#4b5563}
+    .run{fill:#fde2e1;stroke:#dc2626;stroke-width:1.5}
+    .stop{fill:#dcfce7;stroke:#16a34a;stroke-width:1.5}
+    .wait{fill:#fef3c7;stroke:#d97706;stroke-width:1.5}
+    .hd{fill:#eef2f7;stroke:#94a3b8;stroke-width:1}
+  </style>
+  <text x="24" y="34" class="h">Octop tool guard: what happens after a rule matches</text>
+  <text x="24" y="58" class="s">octop-harness 1.0.0 from Octop's current lockfile. Source-traced behavior, not a live engine run.</text>
+  <rect x="24" y="80" width="250" height="44" rx="6" class="hd"/><text x="40" y="108" class="c">Mode</text>
+  <rect x="284" y="80" width="200" height="44" rx="6" class="hd"/><text x="300" y="108" class="c">MEDIUM</text>
+  <rect x="494" y="80" width="200" height="44" rx="6" class="hd"/><text x="510" y="108" class="c">HIGH (13 rules)</text>
+  <rect x="704" y="80" width="232" height="44" rx="6" class="hd"/><text x="720" y="108" class="c">CRITICAL (7 rules)</text>
+  <rect x="24" y="134" width="250" height="70" rx="6" class="hd"/><text x="40" y="164" class="c">warn</text><text x="40" y="186" class="s">Octop no-row default</text>
+  <rect x="284" y="134" width="200" height="70" rx="6" class="run"/><text x="300" y="175" class="c">log, then run</text>
+  <rect x="494" y="134" width="200" height="70" rx="6" class="run"/><text x="510" y="175" class="c">log, then run</text>
+  <rect x="704" y="134" width="232" height="70" rx="6" class="run"/><text x="720" y="175" class="c">log, then run</text>
+  <rect x="24" y="214" width="250" height="70" rx="6" class="hd"/><text x="40" y="244" class="c">block</text><text x="40" y="266" class="s">operator-selected mode</text>
+  <rect x="284" y="214" width="200" height="70" rx="6" class="run"/><text x="300" y="255" class="c">run</text>
+  <rect x="494" y="214" width="200" height="70" rx="6" class="stop"/><text x="510" y="255" class="c">refused</text>
+  <rect x="704" y="214" width="232" height="70" rx="6" class="stop"/><text x="720" y="255" class="c">refused</text>
+  <rect x="24" y="294" width="250" height="70" rx="6" class="hd"/><text x="40" y="324" class="c">require_approval</text><text x="40" y="346" class="s">approval pending</text>
+  <rect x="284" y="294" width="200" height="70" rx="6" class="wait"/><text x="300" y="335" class="c">paused</text>
+  <rect x="494" y="294" width="200" height="70" rx="6" class="wait"/><text x="510" y="335" class="c">paused</text>
+  <rect x="704" y="294" width="232" height="70" rx="6" class="wait"/><text x="720" y="335" class="c">paused</text>
+  <text x="24" y="400" class="c">Separate HITL switch is off; if enabled, its default list includes bash, execute, write_file, edit_file, delete.</text>
+  <text x="24" y="426" class="s">The bundled rule file has no MEDIUM rules; the MEDIUM column shows engine behavior for user-added rules.</text>
+  <text x="24" y="450" class="s">Sources: octop-harness 1.0.0 engine.py and middleware/tool_guard.py; Octop policy_store.py.</text>
+  <text x="24" y="477" class="s">Default local-shell root on POSIX: /. Bubblewrap needs Linux, virtual mode, bwrap, and a non-host root.</text>
+</svg>
