@@ -3,48 +3,53 @@ icon: fas fa-briefcase
 order: 6
 title: Portfolio
 permalink: /projects/
-description: Selected AI product, agent tooling, multimodal QA, and game AI projects, connected to public evidence, technical writing, and a visual portfolio.
-mermaid: true
+description: A compact evidence map of AI products, agent tooling, multimodal QA, and game AI, with clear links to inspectable work and a visual portfolio.
 ---
 
-The [visual portfolio](/portfolio/) and this blog answer different questions. The visual portfolio shows the career arc and finished work. This page explains the bridge between those projects and the technical writing on this site: what problem each project addressed, what I personally built, what evidence is public, and what remains private.
+The [visual portfolio](/portfolio/) is the gallery; this page is the evidence map. Each thread connects the problem, what I built, and evidence readers can inspect. Private data and unpublished work are clearly separated from public evidence.
+{: .project-evidence-intro }
 
-- Open the [full visual portfolio](/portfolio/) for bilingual project cards and the complete timeline.
-- Read [About](/about/) for my background across Supercent, NCSOFT, Com2uS, and Hongik University.
-- Use [Start Here](/start-here/) to enter the technical archive by topic and format.
-- See [Work with Me](/work-with-me/) if your team needs a scoped technical review.
+<nav class="project-quick-links" aria-label="Related pages">
+  <a href="/portfolio/">Visual portfolio</a>
+  <a href="/about/">About</a>
+  <a href="/start-here/">Technical archive</a>
+  <a href="/work-with-me/">Work with me</a>
+</nav>
 
-![AI product engineering portfolio overview](/assets/img/pages/portfolio/portfolio-overview.jpg){: .w-100 .shadow .rounded-10 }
-_The visual portfolio is the gallery. This page is the evidence map._
+<p class="project-evidence-note"><strong>Evidence boundary.</strong> Shipped internal systems, public repositories, and published technical analysis are different evidence types.</p>
 
-> I separate three kinds of evidence: shipped internal systems, public repositories, and published technical analysis. They do not prove the same thing, so I do not present them as if they do.
-{: .prompt-info }
+## Project map
 
-## From a project to a useful article
+<table class="project-evidence-table">
+<thead>
+<tr><th scope="col">Project thread</th><th scope="col">Problem, contribution, and evidence</th></tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row"><a href="#project-ai-products">AI products &amp; RAG</a></th>
+<td><strong>Problem:</strong> Make private studio knowledge searchable, grounded, and operable.<br><strong>Built:</strong> Retrieval pipelines, agent workflows, product surfaces, and operational controls.<br><strong>Evidence:</strong> <a href="#project-ai-products">Project details</a>, <a href="/start-here/#retrieval--agent-memory">retrieval writing</a>, and the <a href="/portfolio/">visual portfolio</a>.</td>
+</tr>
+<tr>
+<th scope="row"><a href="#project-agent-harness">Agent harness</a></th>
+<td><strong>Problem:</strong> Help tool-using agents finish bounded work without hiding failure.<br><strong>Built:</strong> Execution loops, edit integrity, critic gates, reusable skills, and verification contracts.<br><strong>Evidence:</strong> <a href="https://github.com/akillness">Public repositories</a> and <a href="/categories/agents/">agent writing</a>.</td>
+</tr>
+<tr>
+<th scope="row"><a href="#project-multimodal-qa">Multimodal QA</a></th>
+<td><strong>Problem:</strong> Turn gameplay screenshots and video into reviewable QA signals.<br><strong>Built:</strong> CV, OCR, detection, VLM interpretation, and report workflows.<br><strong>Evidence:</strong> <a href="#project-multimodal-qa">Research details</a> and <a href="/start-here/#multimodal-video--game-ai">multimodal writing</a>.</td>
+</tr>
+<tr>
+<th scope="row"><a href="#project-game-ai">Game AI &amp; automation</a></th>
+<td><strong>Problem:</strong> Make game evaluation and production workflows reproducible.<br><strong>Built:</strong> Simulation agents, procedural systems, Unity tooling, and agent-driven builds.<br><strong>Evidence:</strong> <a href="/posts/unity-cli-production-workflows/">Unity production articles</a> and playable projects below.</td>
+</tr>
+</tbody>
+</table>
 
-A project card can show an outcome, but it rarely shows the decisions behind it. The writing on this site starts where a portfolio card ends.
-
-```mermaid
-flowchart LR
-    A["A real product problem"] --> B["What I built"]
-    B --> C["Evidence and constraints"]
-    C --> D["Technical writing"]
-    D --> E["What I would improve next"]
-```
-
-That loop is the site's operating model. I begin with a problem I have encountered, retrieve evidence from source code, papers, experiments, or production constraints, and then publish the part that another engineer can inspect or reuse.
-
-| Project thread | Production problem | What I owned | Public trail |
-| :--- | :--- | :--- | :--- |
-| **AI products and RAG** | Make private studio knowledge searchable, grounded, and operable | Retrieval pipelines, agent workflows, product surfaces, and operational controls | [Retrieval and memory writing](/start-here/#retrieval--agent-memory) and the [visual portfolio](/portfolio/) |
-| **Agent harness engineering** | Make tool-using agents finish bounded work without hiding failure | Execution loops, edit integrity, critic gates, skills, and verification contracts | Public repositories plus [agent writing](/categories/agents/) |
-| **Multimodal QA** | Turn screenshots and gameplay video into useful QA signals | CV pipelines, OCR, detection, VLM interpretation, and report design | Research record, [multimodal and game AI writing](/start-here/#multimodal-video--game-ai), and portfolio evidence |
-| **Game AI and build automation** | Evaluate game state and make production workflows reproducible | Simulation agents, procedural systems, Unity tooling, and coding-agent-driven builds | Playable work and [Unity production articles](/posts/unity-cli-production-workflows/) |
-
-## Production AI products: retrieval has to become operations
+## AI products: retrieval in real workflows
+{: #project-ai-products }
 
 ![SAGA RAG search engine operations interface](/assets/img/pages/portfolio/saga.jpg){: .w-100 .shadow .rounded-10 }
 _SAGA connects retrieval quality to a product surface that a game studio can actually operate._
+{: .project-image-caption }
 
 At Supercent, I built AI products where retrieval was only the middle of the system. **SAGA** indexes 594 game-design documents and 1,563 vectors across 15 games, combining RAG-Fusion, CRAG, hybrid search, cross-encoder reranking, and a grounding-oriented generation pattern. **Millie** extends that direction into per-user knowledge operations and a Slack-driven local-agent system. **Brain** focuses on citation-first knowledge operations with incremental ingestion and connected editing workflows.
 
@@ -56,10 +61,12 @@ The portfolio shows these as shipped products. The related writing explains the 
 
 The practical lesson is that retrieval quality, permissions, observability, and user experience cannot be reviewed independently. A good answer is not enough if nobody can trace its source, correct the knowledge, or understand why the system chose a tool.
 
-## Agent tooling: the harness is part of the product
+## Agent tooling: verification is part of the product
+{: #project-agent-harness }
 
 ![jeo-code coding-agent harness](/assets/img/pages/portfolio/jeo-code.jpg){: .w-100 .shadow .rounded-10 }
 _jeo-code is one part of a public tool family built around bounded execution and verification._
+{: .project-image-caption }
 
 My open-source agent work is public enough to inspect directly:
 
@@ -77,10 +84,12 @@ The associated articles are not release announcements. They document design pres
 
 I treat agent orchestration as earned complexity. One capable agent with clear tools and a visible completion contract is usually better than a large cast of agents with vague authority.
 
-## Multimodal QA: a screen is evidence, not a verdict
+## Multimodal QA: evidence, not verdict
+{: #project-multimodal-qa }
 
 ![AutoQA tooling running against a game screen](/assets/img/pages/portfolio/autoqa.jpg){: .w-100 .shadow .rounded-10 }
 _AutoQA work combines classical vision, learned detectors, and language-based reporting rather than assuming one model can own the whole verdict._
+{: .project-image-caption }
 
 My graduate research and personal tooling connect image-based QA, OCR, multi-scale template matching, fine-tuned detection models, video context, and VLM-assisted bug reporting. The interesting problem is not whether a model can describe a frame. It is whether a team can turn visual observations into a reproducible QA workflow with known false negatives and reviewable evidence.
 
@@ -89,10 +98,12 @@ This thread includes an IEEE RAAI 2024 poster on image-based game QA automation 
 Internal data and unpublished research artifacts are not public evidence. Where I cannot share a dataset, customer document, or source repository, I state the boundary instead of replacing it with a stronger claim.
 {: .prompt-warning }
 
-## Game AI and automation: where the production instinct started
+## Game AI and automation: repeatable production
+{: #project-game-ai }
 
 ![Castle War physics siege gameplay](/assets/img/pages/portfolio/castle-war.jpg){: .w-100 .shadow .rounded-10 }
 _Castle War is a playable project, but the main experiment was the coding-agent-driven production workflow behind it._
+{: .project-image-caption }
 
 At NCSOFT and Com2uS, I worked on simulation-based difficulty evaluation, cellular-automata and GAN-based generation, reinforcement-learning prototypes, Unity-to-Python systems, and internal production tools. That experience shaped a simple bias: an AI feature is unfinished until the surrounding workflow is measurable and reproducible.
 
@@ -116,16 +127,14 @@ Search rankings, GitHub stars, and a polished screenshot are weak substitutes fo
 
 This does not make every post equally useful to every reader. It does make the origin, method, and boundary of the work visible.
 
-## Choose the view you need
+## Further reading
 
-| If you want to see... | Start here |
-| :--- | :--- |
-| The visual career and project gallery | [Full visual portfolio](/portfolio/) |
-| The person and career path behind the work | [About](/about/) |
-| The strongest technical articles by topic and format | [Start Here](/start-here/) |
-| Public source repositories | [GitHub](https://github.com/akillness) |
-| A concise career document | [Resume](/resume_eng/) |
-| A scoped review of your own system | [Work with Me](/work-with-me/) |
-| Corrections, questions, or collaboration | [Contact](/contact/) |
+<nav class="project-more-links" aria-label="More pages">
+  <a href="/start-here/">Start Here</a>
+  <a href="/resume_eng/">Resume</a>
+  <a href="https://github.com/akillness">Public repositories</a>
+  <a href="/work-with-me/">Work with Me</a>
+  <a href="/contact/">Contact</a>
+</nav>
 
-The portfolio is the record of what I built. The blog is where I expose the reasoning, evidence, and unresolved questions behind it.
+<p class="project-evidence-closing">The visual portfolio records what I built; this page and the technical writing expose the reasoning, evidence, and open questions behind that work.</p>

@@ -118,3 +118,155 @@ a.preview-img[href$='.svg'] {
 #search-status {
   font-size: 1rem !important;
 }
+
+
+/* Projects evidence map: clearer type, less repeated scaffolding, no wide-table overflow. */
+main article:has(.project-evidence-intro) > h1 {
+  font-size: clamp(2rem, 2.4vw, 2.25rem) !important;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+main article:has(.project-evidence-intro) .content > p {
+  font-size: 1.28rem !important;
+  line-height: 1.55;
+  margin-bottom: 0.8rem;
+}
+
+main article:has(.project-evidence-intro) .content > p.project-evidence-intro {
+  max-width: 66ch;
+  margin-bottom: 0.75rem;
+}
+
+main article:has(.project-evidence-intro) .content > p.project-evidence-note {
+  padding: 0.75rem 0.9rem;
+  border-left: 3px solid #4ecdc4;
+  background: var(--card-bg);
+  font-size: 1.1rem !important;
+  line-height: 1.45;
+  margin: 0.65rem 0 1rem;
+}
+
+main article:has(.project-evidence-intro) .content h2 {
+  font-size: clamp(1.6rem, 1.9vw, 1.8rem) !important;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  margin-top: 1.7rem;
+  margin-bottom: 0.75rem;
+}
+
+main article:has(.project-evidence-intro) .content li {
+  font-size: 1.28rem !important;
+  line-height: 1.55;
+}
+
+main article:has(.project-evidence-intro) .content > ul,
+main article:has(.project-evidence-intro) .content > ol {
+  margin-bottom: 0.85rem;
+}
+
+main article:has(.project-evidence-intro) .content > p.project-image-caption {
+  font-size: 1.05rem !important;
+  line-height: 1.45;
+  color: var(--text-muted-color);
+  margin-top: 0.1rem;
+  margin-bottom: 0.9rem;
+}
+
+.project-quick-links,
+.project-more-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.project-quick-links a,
+.project-more-links a {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--main-border-color);
+  border-left: 3px solid #4ecdc4;
+  border-radius: 0.3rem;
+  padding: 0.55rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.project-quick-links a:hover,
+.project-more-links a:hover {
+  background: var(--card-bg);
+}
+
+.project-quick-links a:focus-visible,
+.project-more-links a:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+  background: var(--card-bg);
+}
+
+main article:has(.project-evidence-intro) .content table.project-evidence-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  table-layout: fixed;
+}
+
+main article:has(.project-evidence-intro) .content .project-evidence-table th,
+main article:has(.project-evidence-intro) .content .project-evidence-table td {
+  font-size: 1.1rem !important;
+  line-height: 1.45;
+  padding: 0.7rem 0.75rem;
+  vertical-align: top;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+main article:has(.project-evidence-intro) .content .project-evidence-table thead th:first-child,
+main article:has(.project-evidence-intro) .content .project-evidence-table tbody th[scope='row'] {
+  width: 28%;
+}
+
+main article:has(.project-evidence-intro) .content .project-evidence-table tbody th[scope='row'] {
+  font-weight: 700;
+}
+
+main article:has(.project-evidence-intro) .content .project-evidence-table tbody tr + tr > th,
+main article:has(.project-evidence-intro) .content .project-evidence-table tbody tr + tr > td {
+  border-top: 1px solid var(--main-border-color);
+}
+
+main article:has(.project-evidence-intro) .content .project-evidence-table a {
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+main article:has(.project-evidence-intro) .content > p.project-evidence-closing {
+  max-width: 66ch;
+  font-size: 1.2rem !important;
+  line-height: 1.5;
+}
+
+@media all and (max-width: 600px) {
+  main article:has(.project-evidence-intro) .content > p,
+  main article:has(.project-evidence-intro) .content li {
+    font-size: 1.18rem !important;
+    line-height: 1.55;
+  }
+
+  .project-quick-links a {
+    flex: 1 1 calc(50% - 0.5rem);
+    justify-content: center;
+  }
+
+  main article:has(.project-evidence-intro) .content .project-evidence-table th,
+  main article:has(.project-evidence-intro) .content .project-evidence-table td {
+    font-size: 1rem !important;
+    padding: 0.55rem 0.5rem;
+  }
+
+  main article:has(.project-evidence-intro) .content .project-evidence-table thead th:first-child,
+  main article:has(.project-evidence-intro) .content .project-evidence-table tbody th[scope='row'] {
+    width: 32%;
+  }
+}
