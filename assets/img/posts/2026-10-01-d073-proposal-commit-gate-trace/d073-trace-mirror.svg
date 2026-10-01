@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">D-073 reconstructs a proposal trace, then checks it against the writer</title>
+  <desc id="desc">A proposal and committed pre-state feed an evaluation-trace mirror. The hash-bound machine independently returns refusal codes. The dashboard compares unique failure-code sets: a match permits explicit trace states; a mismatch returns no family states instead of a false pass.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L10,5 L0,10 z" fill="#3977a8"/></marker>
+    <marker id="dash-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L10,5 L0,10 z" fill="#7a8793"/></marker>
+    <style>
+      text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif; fill: #172b3b; }
+      .eyebrow { font-size: 16px; font-weight: 700; letter-spacing: 2px; fill: #3977a8; }
+      .title { font-size: 28px; font-weight: 750; }
+      .label { font-size: 22px; font-weight: 700; }
+      .body { font-size: 17px; font-weight: 500; }
+      .small { font-size: 15px; font-weight: 600; fill: #536575; }
+      .node { fill: #f7fafc; stroke: #9aafbf; stroke-width: 2; }
+      .machine { fill: #fff5e8; stroke: #d29b57; stroke-width: 2; }
+      .compare { fill: #eaf4fb; stroke: #3977a8; stroke-width: 2.5; }
+      .good { fill: #edf7f0; stroke: #45946a; stroke-width: 2; }
+      .guard { fill: #fff0ee; stroke: #ce6f65; stroke-width: 2; }
+      .line { fill: none; stroke: #3977a8; stroke-width: 3; marker-end: url(#arrow); }
+      .branch { fill: none; stroke: #7a8793; stroke-width: 2.5; stroke-dasharray: 8 7; marker-end: url(#dash-arrow); }
+    </style>
+  </defs>
+  <text x="60" y="48" class="eyebrow">D-073 · ONE PROPOSAL, TWO VIEWS</text>
+  <text x="60" y="88" class="title">Reconstruct first. Trust the trace only after agreement.</text>
+
+  <rect x="60" y="175" width="225" height="150" rx="18" class="node"/>
+  <text x="82" y="218" class="label">Proposal</text>
+  <text x="82" y="251" class="body">operation + arguments</text>
+  <text x="82" y="282" class="small">shared committed PRE-state</text>
+  <text x="82" y="306" class="small">same input · mirror runs first</text>
+
+  <rect x="365" y="100" width="330" height="135" rx="18" class="node"/>
+  <text x="389" y="143" class="label">Trace mirror</text>
+  <text x="389" y="175" class="body">reconstruct ordered checks</text>
+  <text x="389" y="204" class="small">predicts failures; no state writes</text>
+
+  <rect x="365" y="300" width="330" height="135" rx="18" class="machine"/>
+  <text x="389" y="343" class="label">Hash-bound machine</text>
+  <text x="389" y="375" class="body">apply the same proposal</text>
+  <text x="389" y="404" class="small">canonical decision + returned codes</text>
+
+  <rect x="780" y="190" width="340" height="145" rx="18" class="compare"/>
+  <text x="805" y="234" class="label">Consistency check</text>
+  <text x="805" y="267" class="body">compare unique failure-code sets</text>
+  <text x="805" y="296" class="small">set match, not order or multiplicity proof</text>
+
+  <path d="M285 214 C320 214 327 168 350 168" class="line"/>
+  <path d="M285 286 C320 286 327 367 350 367" class="line"/>
+  <path d="M695 168 C731 168 743 221 765 229" class="line"/>
+  <path d="M695 367 C731 367 743 304 765 296" class="line"/>
+  <path d="M950 335 V438 H330 V456" class="line"/>
+  <path d="M950 438 H870 V456" class="line"/>
+
+  <rect x="80" y="456" width="500" height="80" rx="16" class="good"/>
+  <text x="108" y="488" class="label">Match → explicit trace states</text>
+  <text x="108" y="518" class="small">pass · fail · skipped · out_of_scope</text>
+
+  <rect x="620" y="456" width="500" height="80" rx="16" class="guard"/>
+  <text x="648" y="488" class="label">Mismatch → empty family states</text>
+  <text x="648" y="518" class="small">dashboard says “state missing,” never pass</text>
+</svg>
