@@ -93,8 +93,6 @@ This post is intentionally narrower than my [D-074 release audit](/posts/sealed-
 
 Which runtime-level test would add the most confidence per unit of work: replaying a small set of canonical proposal snapshots, property-testing every mirror branch against the machine, or capturing both results in an engine-level test harness? The next experiment should choose one and name its coverage, rather than letting another static check stand in for execution.
 
-And if a hold is mechanically correct, can a player explain why it happened and choose a valid next action? This trace can help an engineer inspect the gate. It cannot answer that human question. The D-074 audit keeps that separate measurement boundary open.
-
 ## References
 
 ### Primary project evidence
