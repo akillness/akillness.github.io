@@ -64,6 +64,27 @@ const walk = (dir, predicate) => {
   return found;
 };
 
+const policyFile = path.join(repoRoot, '.claude', 'editorial-policy.yml');
+const policyText = fs.existsSync(policyFile) ? fs.readFileSync(policyFile, 'utf8') : '';
+const policyScalar = (key) => {
+  const match = policyText.match(new RegExp(`^${key}:\\s*(?:"([^"]*)"|'([^']*)'|([^\\n#]+))\\s*(?:#.*)?$`, 'm'));
+  return (match?.[1] ?? match?.[2] ?? match?.[3] ?? '').trim();
+};
+const policyList = (key) => {
+  const block = policyText.match(new RegExp(`^${key}:\\s*\\n((?:\\s+-\\s*[^\\n]+\\n?)*)`, 'm'))?.[1] || '';
+  return block.split('\n').map((line) => {
+    const match = line.match(/^\s+-\s*(?:"([^"]*)"|'([^']*)'|(.+))$/);
+    return (match?.[1] ?? match?.[2] ?? match?.[3] ?? '').trim();
+  }).filter(Boolean);
+};
+const firstPartyScreenshotPolicy = {
+  scope: policyScalar('reference_image_first_party_scope'),
+  allowedArticleStems: policyList('reference_image_first_party_article_stems'),
+  allowedSourcePageUrls: policyList('reference_image_first_party_source_page_urls'),
+  owner: policyScalar('reference_image_first_party_owner'),
+  ownerReuseAttestation: policyScalar('reference_image_first_party_owner_reuse_attestation')
+};
+
 pass(fs.existsSync(current), '_workspace/current is missing');
 const manifestFile = path.join(current, 'manifest.json');
 const manifest = fs.existsSync(manifestFile) ? readJson(manifestFile) : null;
@@ -296,7 +317,8 @@ const sourceImageResult = validateSourceImageManifest({
   evidenceSourceUrls: claims.map((claim) => claim?.source_url).filter(Boolean),
   referenceFiles,
   expectedRunId: manifest?.run_id,
-  expectedRunStartedAt: manifest?.started_at_kst
+  expectedRunStartedAt: manifest?.started_at_kst,
+  firstPartyScreenshotPolicy
 });
 for (const failure of sourceImageResult.failures) failures.push(failure);
 
@@ -304,8 +326,6 @@ for (const failure of sourceImageResult.failures) failures.push(failure);
 const authorityBriefFile = path.join(current, 'research', 'authority-brief.json');
 pass(fs.existsSync(authorityBriefFile), 'research/authority-brief.json is missing; the authority-led monetization contract fails closed');
 const authorityBrief = fs.existsSync(authorityBriefFile) ? readJson(authorityBriefFile) : null;
-const policyFile = path.join(repoRoot, '.claude', 'editorial-policy.yml');
-const policyText = fs.existsSync(policyFile) ? fs.readFileSync(policyFile, 'utf8') : '';
 const contentPillars = (policyText.match(/^content_pillars:\s*\n((?:\s+-\s*[^\n]+\n?)*)/m)?.[1] || '')
   .split('\n')
   .map((line) => line.match(/^\s+-\s*(.+)$/)?.[1]?.trim())

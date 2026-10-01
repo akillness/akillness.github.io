@@ -106,15 +106,16 @@ Record rejected candidates and reasons so the next run does not repeat them blin
 
 ## Phase 3: Draft
 
-### Source-derived reference images (director-only)
+### Source-derived reference images and first-party captures (director-only)
 
-Before or alongside drafting, the **editorial director** downloads 4–12 distinct rights-clear raster images (`.png`/`.jpg`/`.jpeg`/`.webp`, each >0 and <=5 MiB, valid raster structure, EXIF/XMP/text metadata stripped, >=32 px short side, >=16,384 pixels, <=20 MiB combined) from inspected reference materials into `_workspace/current/draft/assets/img/posts/<article-stem>/references/` and writes the internal sidecar `_workspace/current/draft/source-image-manifest.json` (`schema_version` 1, `run_id`, `images[]`; field schema in `references/artifact-contract.md`). Rules:
+Before or alongside drafting, the **editorial director** assembles 4–12 distinct rights-clear raster references (`.png`/`.jpg`/`.jpeg`/`.webp`, each >0 and <=5 MiB, valid raster structure, EXIF/XMP/text metadata stripped, >=32 px short side, >=16,384 pixels, <=20 MiB combined) under `_workspace/current/draft/assets/img/posts/<article-stem>/references/` and writes the internal sidecar `_workspace/current/draft/source-image-manifest.json` (`schema_version` 1, `run_id`, `images[]`; field schema in `references/artifact-contract.md`). The normal path is downloaded material from inspected references with license evidence. Direct screenshots from an owner-controlled public interface are a separate, narrowly scoped basis allowed only for the akillness Git blog after explicit owner permission is recorded; this exception does not transfer to JellyGGumi.
 
-- Allowed `license_basis`: `public-domain`, `cc0`, `cc-by`, `cc-by-sa`, `kogl-type-1`, `repo-license-covers-assets` (requires `pinned_ref`), `official-press-kit`. Anything else fails closed.
-- `source_page_url` must be an evidence-pack `source_url`; `license_quote` needs >=40 characters; local paths, hashes, and download URLs stay unique.
-- Original/AI/generated diagrams, logos, avatars, decorative placeholders, and duplicate crops/resizes do not count. The existing original-visual requirement stays additional and uncounted; the four are evidence/context assets, never filler.
+- Licensed downloads use `public-domain`, `cc0`, `cc-by`, `cc-by-sa`, `kogl-type-1`, `repo-license-covers-assets` (requires `pinned_ref`), or `official-press-kit`; they require a unique `download_url`, `license_url`, and a verbatim `license_quote` of >=40 characters.
+- First-party captures use `own-screenshot-of-public-interface`; they require an HTTPS evidence-pack `source_page_url` and article stem explicitly allowlisted in `.claude/editorial-policy.yml`, plus exact matches for `owner_reuse_scope`, `publisher_or_creator`, and `owner_reuse_attestation` against that repo policy. Keep a unique `capture_state` and visible owner-permission attribution. Omit `download_url`, `license_url`, and `license_quote`; do not invent a third-party license.
+- Local paths and hashes are unique; downloaded-image URLs and screenshot capture states are unique within their respective basis. All items retain the same raster, size, metadata, attribution, and commercial-use/redistribution checks.
+- Original/AI/generated diagrams, logos, avatars, decorative placeholders, and duplicate crops/resizes do not count. The existing original-visual requirement stays additional and uncounted; references are evidence/context assets, never filler.
 - Writer, researcher, auditor, and editor tool profiles stay read/write separated; never loosen `allowed-tools` to let them fetch or write image binaries.
-- If four rights-clear images cannot be obtained, the run blocks.
+- If four qualifying rights-clear images cannot be obtained, the run blocks.
 
 ### Original visuals and generated art (director-only)
 

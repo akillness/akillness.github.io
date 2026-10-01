@@ -104,11 +104,8 @@ Final package validation refuses a missing/non-PASS review, coverage below 1.0, 
 
 - `local_path` — unique, under `assets/img/posts/<article-stem>/references/`, extension `.png`/`.jpg`/`.jpeg`/`.webp`; the file must exist, be >0 and <=5 MiB, and match its declared raster structure, have EXIF/XMP/text metadata stripped, have a short side >=32 px and at least 16,384 pixels; all reference images combined must be <=20 MiB
 - `source_page_url` — must be an evidence-pack `source_url`
-- `download_url` — unique per image; duplicate crops/resizes of one source do not count
 - `publisher_or_creator`
-- `license_basis` — one of `public-domain`, `cc0`, `cc-by`, `cc-by-sa`, `kogl-type-1`, `repo-license-covers-assets`, `official-press-kit`; anything else fails closed; `repo-license-covers-assets` also requires `pinned_ref`
-- `license_url`
-- `license_quote` — at least 40 characters quoted from the license/rights statement
+- `license_basis` — licensed downloads use `public-domain`, `cc0`, `cc-by`, `cc-by-sa`, `kogl-type-1`, `repo-license-covers-assets`, or `official-press-kit`; `repo-license-covers-assets` also requires `pinned_ref`. The separate `own-screenshot-of-public-interface` basis is allowed only for the akillness Git blog under explicit scoped owner permission; it is not a third-party license.
 - `retrieved_at` (ISO timestamp)
 - `sha256` — unique, must match the file on disk
 - `transformation` and `transformation_note`
@@ -117,7 +114,9 @@ Final package validation refuses a missing/non-PASS review, coverage below 1.0, 
 
 Generated cover/hero art and editorial illustrations (produced with `god-tibo-imagen`) live in the article asset folder outside `references/`, never appear in this manifest, and never count toward the 4–12 requirement.
 
-Each item appears in exactly one adjacent `<figure class="source-image">` block in the article body with matching `img` `src`/`alt` and a `figcaption` containing the exact `source_page_url`, `license_url`, `publisher_or_creator`, and `attribution_text`. Every file in `references/` has exactly one manifest entry and every manifest item is referenced. Validation lives in `tools/lib/source-image-manifest.mjs` and reports `reference_images` and `credited_reference_images` metrics.
+Licensed downloads additionally record a unique `download_url`, `license_url`, and verbatim `license_quote` (>=40 characters); duplicate crops/resizes of one download do not count. First-party screenshots instead record the exact `owner_reuse_scope`, `publisher_or_creator`, and `owner_reuse_attestation` values from `.claude/editorial-policy.yml`, plus a unique `capture_state`; both the `articleStem` and HTTPS evidence-pack `source_page_url` must match the explicit policy allowlists. `attribution_text` must visibly identify owner permission, and `download_url`, `license_url`, and `license_quote` must be omitted. Do not fabricate a license citation for an owner screenshot.
+
+Each item appears in exactly one adjacent `<figure class="source-image">` block in the article body with matching `img` `src`/`alt` and a `figcaption` containing the exact `source_page_url`, `publisher_or_creator`, and `attribution_text`; licensed downloads also require the exact `license_url`. Every file in `references/` has exactly one manifest entry and every manifest item is referenced. Validation lives in `tools/lib/source-image-manifest.mjs` and reports `reference_images` and `credited_reference_images` metrics.
 
 ## Draft package
 

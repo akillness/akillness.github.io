@@ -1274,7 +1274,7 @@ Every post should have:
 
 **Generated imagery:** produce cover/hero art and editorial illustrations with `god-tibo-imagen` (`gti`, or `npx god-tibo-imagen`), keep them out of `references/`, and never count them toward credited source images.
 
-Automated Source Audit packages additionally embed **4–12 credited source-derived reference images** (screenshots, figures, or photos downloaded from the inspected reference materials, each in a `<figure class="source-image">` block with full attribution). These are **evidence/context assets, never decorative filler**: they show the reader the primary material that was actually inspected. They do not replace, and are never counted toward, the original diagram/table/code requirements above, which remain a separate additional expectation.
+Automated Source Audit packages additionally embed **4–12 credited source-derived reference images**: raster images downloaded from inspected reference materials, or direct screenshots of an owner-controlled public interface only when the article stem and HTTPS source URL are explicitly allowlisted in `.claude/editorial-policy.yml` for the akillness Git blog. Each appears in a `<figure class="source-image">` block with full visible attribution; first-party captures also require exact owner, scope, and permission-attestation matches from policy, a unique traceable UI state, and no fabricated third-party license metadata. These are **evidence/context assets, never decorative filler**: they show the reader material actually inspected. They do not replace, and are never counted toward, the original diagram/table/code requirements above, which remain a separate additional expectation.
 
 ---
 

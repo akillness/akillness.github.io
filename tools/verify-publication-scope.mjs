@@ -67,7 +67,7 @@ function expectedPackagePaths({ checkCollisions = true } = {}) {
   // sidecar or a manually authored path list.
   check(
     referenceImages.length >= MINIMUM_REFERENCE_IMAGES && referenceImages.length <= MAXIMUM_REFERENCE_IMAGES,
-    `Package must ship ${MINIMUM_REFERENCE_IMAGES}–${MAXIMUM_REFERENCE_IMAGES} source-derived reference images under ${refPrefix}, found ${referenceImages.length}`
+    `Package must ship ${MINIMUM_REFERENCE_IMAGES}–${MAXIMUM_REFERENCE_IMAGES} qualifying source-derived reference images under ${refPrefix}, found ${referenceImages.length}`
   );
 
   if (checkCollisions) {

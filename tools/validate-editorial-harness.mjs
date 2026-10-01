@@ -91,6 +91,19 @@ if (exists('.claude/editorial-policy.yml')) {
   const licenseBlock = policy.match(/^reference_image_license_bases:\s*\n((?:\s+-\s*[^\n]+\n?)*)/m)?.[1] || '';
   const policyLicenses = licenseBlock.split('\n').map((line) => line.match(/^\s+-\s*(.+)$/)?.[1]?.trim()).filter(Boolean);
   check(JSON.stringify(policyLicenses) === JSON.stringify(expectedLicenses), `Policy source-image license allowlist drifted: ${JSON.stringify(policyLicenses)}`);
+  check(/^reference_image_first_party_basis:\s+own-screenshot-of-public-interface$/m.test(policy), 'Policy first-party screenshot basis drifted');
+  check(/^reference_image_first_party_scope:\s+akillness-git-blog-only$/m.test(policy), 'First-party screenshot permission scope widened or drifted');
+  const policyList = (key) => {
+    const block = policy.match(new RegExp(`^${key}:\\s*\\n((?:\\s+-\\s*[^\\n]+\\n?)*)`, 'm'))?.[1] || '';
+    return block.split('\n').map((line) => {
+      const match = line.match(/^\s+-\s*(?:"([^"]*)"|'([^']*)'|(.+))$/);
+      return (match?.[1] ?? match?.[2] ?? match?.[3] ?? '').trim();
+    }).filter(Boolean);
+  };
+  check(JSON.stringify(policyList('reference_image_first_party_article_stems')) === JSON.stringify(['2026-10-01-d073-proposal-commit-gate-trace']), 'First-party screenshot article allowlist widened or drifted');
+  check(JSON.stringify(policyList('reference_image_first_party_source_page_urls')) === JSON.stringify(['https://sealed-lighthouse-trace-rpg.vercel.app/dashboard/']), 'First-party screenshot source URL allowlist widened or drifted');
+  check(/^reference_image_first_party_owner:\s+"akillness \/ neural_symbolic_in_game project"$/m.test(policy), 'First-party screenshot owner identity drifted');
+  check(/^reference_image_first_party_owner_reuse_attestation:\s+"The project owner explicitly approved these archived public-dashboard captures for reuse in this akillness Git blog draft only; no third-party license is implied\."$/m.test(policy), 'First-party screenshot owner attestation drifted');
   if (exists('tools/lib/source-image-manifest.mjs')) {
     const helper = read('tools/lib/source-image-manifest.mjs');
     const helperConst = (name) => helper.match(new RegExp(`^export const ${name} = (.+);$`, 'm'))?.[1];
@@ -104,8 +117,12 @@ if (exists('.claude/editorial-policy.yml')) {
     const helperLicenseBlock = helper.match(/ALLOWED_LICENSE_BASES = \[([\s\S]*?)\]/)?.[1] || '';
     const helperLicenses = [...helperLicenseBlock.matchAll(/'([^']+)'/g)].map((match) => match[1]);
     check(JSON.stringify(helperLicenses) === JSON.stringify(expectedLicenses), `Source-image helper license allowlist drifted: ${JSON.stringify(helperLicenses)}`);
+    check(helperConst('FIRST_PARTY_SCREENSHOT_BASIS') === "'own-screenshot-of-public-interface'", 'Source-image helper first-party screenshot basis drifted');
+    check(helperConst('FIRST_PARTY_SCREENSHOT_SCOPE') === "'akillness-git-blog-only'", 'Source-image helper first-party screenshot scope drifted');
+    check(helperConst('MIN_OWNER_REUSE_ATTESTATION_LENGTH') === '40', 'Source-image helper owner-attestation minimum drifted');
     check(helper.includes('metadataSegments === 0'), 'Source-image helper no longer enforces metadata stripping');
   }
+  check(read('tools/validate-editorial-package.mjs').includes('firstPartyScreenshotPolicy'), 'Package validator does not pass the explicit first-party screenshot policy to the manifest validator');
   const exactPolicyValue = (key, expected, message) => {
     const matches = [...policy.matchAll(new RegExp(`^${key}:\\s*([^\\n#]+)`, 'gm'))].map((match) => match[1].trim());
     check(matches.length === 1 && matches[0] === expected, `${message}; found ${JSON.stringify(matches)}`);

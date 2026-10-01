@@ -6,7 +6,10 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import {
+  ALLOWED_IMAGE_BASES,
   ALLOWED_LICENSE_BASES,
+  FIRST_PARTY_SCREENSHOT_BASIS,
+  FIRST_PARTY_SCREENSHOT_SCOPE,
   MINIMUM_REFERENCE_IMAGES,
   MAXIMUM_REFERENCE_IMAGES,
   MAX_REFERENCE_IMAGE_BYTES,
@@ -78,12 +81,46 @@ function makeItem(i, overrides = {}) {
 }
 
 function figureHtml(item) {
+  const licenseCredit = item.license_basis === FIRST_PARTY_SCREENSHOT_BASIS
+    ? ''
+    : ` (<a href="${item.license_url}">license</a>)`;
   return [
     '<figure class="source-image">',
     `  <img src="/${item.local_path}" alt="${item.alt}" />`,
-    `  <figcaption>Source: <a href="${item.source_page_url}">${item.publisher_or_creator}</a> — ${item.attribution_text} (<a href="${item.license_url}">license</a>)</figcaption>`,
+    `  <figcaption>Source: <a href="${item.source_page_url}">${item.publisher_or_creator}</a> — ${item.attribution_text}${licenseCredit}</figcaption>`,
     '</figure>'
   ].join('\n');
+}
+
+const DASHBOARD_URL = 'https://sealed-lighthouse-trace-rpg.vercel.app/dashboard/';
+const SCREENSHOT_OWNER = 'akillness / neural_symbolic_in_game project';
+const OWNER_REUSE_ATTESTATION = 'The project owner explicitly approved these archived public-dashboard captures for reuse in this akillness Git blog draft only; no third-party license is implied.';
+const OWNER_SCREENSHOT_ATTRIBUTION = 'Direct screenshot of the public dashboard, captured and reused with the interface owner’s permission.';
+const TEST_FIRST_PARTY_SCREENSHOT_POLICY = {
+  scope: FIRST_PARTY_SCREENSHOT_SCOPE,
+  allowedArticleStems: [STEM],
+  allowedSourcePageUrls: [DASHBOARD_URL],
+  owner: SCREENSHOT_OWNER,
+  ownerReuseAttestation: OWNER_REUSE_ATTESTATION
+};
+
+function configureOwnerScreenshots(items, {
+  sourceUrl = DASHBOARD_URL,
+  attestation = OWNER_REUSE_ATTESTATION,
+  attribution = OWNER_SCREENSHOT_ATTRIBUTION
+} = {}) {
+  for (const [index, item] of items.entries()) {
+    item.source_page_url = sourceUrl;
+    item.publisher_or_creator = SCREENSHOT_OWNER;
+    item.license_basis = FIRST_PARTY_SCREENSHOT_BASIS;
+    item.owner_reuse_scope = FIRST_PARTY_SCREENSHOT_SCOPE;
+    item.owner_reuse_attestation = attestation;
+    item.capture_state = `distinct-dashboard-state-${index + 1}`;
+    item.attribution_text = attribution;
+    delete item.download_url;
+    delete item.license_url;
+    delete item.license_quote;
+  }
 }
 
 function makeFixture({ count = MINIMUM_REFERENCE_IMAGES, mutateItems, mutateFixture } = {}) {
@@ -98,7 +135,8 @@ function makeFixture({ count = MINIMUM_REFERENCE_IMAGES, mutateItems, mutateFixt
       items.map((item) => [item.local_path, { regular: true, size: 1024, sha256: item.sha256, validRaster: true }])
     ),
     expectedRunId: RUN_ID,
-    expectedRunStartedAt: '2026-08-31T01:00:00+09:00'
+    expectedRunStartedAt: '2026-08-31T01:00:00+09:00',
+    firstPartyScreenshotPolicy: TEST_FIRST_PARTY_SCREENSHOT_POLICY
   };
   if (mutateFixture) mutateFixture(fixture);
   return fixture;
@@ -145,6 +183,160 @@ test('every allowed license basis is accepted', () => {
     );
     assert.deepEqual(failures, [], `license basis ${basis} should pass`);
   }
+});
+
+test('true positive: owner-authorized public-interface screenshots need no invented download or license fields', () => {
+  assert.ok(ALLOWED_IMAGE_BASES.includes(FIRST_PARTY_SCREENSHOT_BASIS));
+  const { failures, metrics } = run(
+    makeFixture({
+      mutateItems: configureOwnerScreenshots,
+      mutateFixture: (fixture) => {
+        fixture.evidenceSourceUrls = [DASHBOARD_URL];
+      }
+    })
+  );
+  assert.deepEqual(failures, []);
+  assert.equal(metrics.reference_images, 4);
+  assert.equal(metrics.credited_reference_images, 4);
+});
+
+test('fails closed when first-party screenshot policy is absent or does not allow the article/source', () => {
+  const missingPolicy = run(
+    makeFixture({
+      mutateItems: configureOwnerScreenshots,
+      mutateFixture: (fixture) => {
+        fixture.evidenceSourceUrls = [DASHBOARD_URL];
+        fixture.firstPartyScreenshotPolicy = null;
+      }
+    })
+  );
+  assert.ok(missingPolicy.failures.some((f) => f.includes('not explicitly allowlisted')));
+
+  const wrongSource = run(
+    makeFixture({
+      mutateItems: (items) => configureOwnerScreenshots(items, { sourceUrl: 'https://not-owner.example/dashboard/' }),
+      mutateFixture: (fixture) => {
+        fixture.evidenceSourceUrls = ['https://not-owner.example/dashboard/'];
+      }
+    })
+  );
+  assert.ok(wrongSource.failures.some((f) => f.includes('not explicitly allowlisted')));
+
+  const wrongStem = run(
+    makeFixture({
+      mutateItems: configureOwnerScreenshots,
+      mutateFixture: (fixture) => {
+        fixture.evidenceSourceUrls = [DASHBOARD_URL];
+        fixture.firstPartyScreenshotPolicy = {
+          ...TEST_FIRST_PARTY_SCREENSHOT_POLICY,
+          allowedArticleStems: ['2026-09-01-another-post']
+        };
+      }
+    })
+  );
+  assert.ok(wrongStem.failures.some((f) => f.includes('not explicitly allowlisted')));
+});
+
+test('fails closed when owner identity, scope, or attestation differs from repo policy', () => {
+  const wrongScope = run(
+    makeFixture({
+      mutateItems: (items) => {
+        configureOwnerScreenshots(items);
+        items[0].owner_reuse_scope = 'all-blogs';
+      },
+      mutateFixture: (fixture) => { fixture.evidenceSourceUrls = [DASHBOARD_URL]; }
+    })
+  );
+  assert.ok(wrongScope.failures.some((f) => f.includes('owner_reuse_scope')));
+
+  const wrongAttestation = run(
+    makeFixture({
+      mutateItems: (items) => configureOwnerScreenshots(items, { attestation: 'This screenshot is public, so it is approved for reuse.' }),
+      mutateFixture: (fixture) => { fixture.evidenceSourceUrls = [DASHBOARD_URL]; }
+    })
+  );
+  assert.ok(wrongAttestation.failures.some((f) => f.includes('owner_reuse_attestation')));
+
+  const wrongOwner = run(
+    makeFixture({
+      mutateItems: (items) => {
+        configureOwnerScreenshots(items);
+        items[0].publisher_or_creator = 'Unverified dashboard owner';
+      },
+      mutateFixture: (fixture) => { fixture.evidenceSourceUrls = [DASHBOARD_URL]; }
+    })
+  );
+  assert.ok(wrongOwner.failures.some((f) => f.includes('allowlisted interface owner')));
+});
+
+test('fails closed when an owner screenshot lacks its scoped authorization attestation', () => {
+  const { failures } = run(
+    makeFixture({
+      mutateItems: (items) => {
+        configureOwnerScreenshots(items);
+        delete items[0].owner_reuse_attestation;
+      }
+    })
+  );
+  assert.ok(failures.some((f) => f.includes('owner_reuse_attestation')));
+});
+
+test('fails closed when an owner screenshot is given third-party license metadata or an insecure source URL', () => {
+  const fakeLicense = run(
+    makeFixture({
+      mutateItems: (items) => {
+        configureOwnerScreenshots(items);
+        items[0].license_url = 'https://example.com/license';
+      }
+    })
+  );
+  assert.ok(fakeLicense.failures.some((f) => f.includes('must not claim external download/license metadata')));
+
+  const insecure = run(
+    makeFixture({
+      mutateItems: (items) => {
+        configureOwnerScreenshots(items);
+        items[0].source_page_url = 'http://example.com/dashboard';
+      },
+      mutateFixture: (fixture) => {
+        fixture.evidenceSourceUrls[0] = 'http://example.com/dashboard';
+      }
+    })
+  );
+  assert.ok(insecure.failures.some((f) => f.includes('must use an HTTPS public-interface source_page_url')));
+});
+
+test('fails closed when a first-party screenshot has no explicit owner attribution in the caption', () => {
+  const fixture = makeFixture({
+    mutateItems: (items) => {
+      configureOwnerScreenshots(items);
+      items[0].attribution_text = 'Screenshot of the dashboard.';
+    }
+  });
+  const { failures } = run(fixture);
+  assert.ok(failures.some((f) => f.includes('owner screenshot attribution must identify owner permission')));
+});
+
+test('fails closed when first-party screenshot states are missing or duplicated', () => {
+  const missing = run(
+    makeFixture({
+      mutateItems: (items) => {
+        configureOwnerScreenshots(items);
+        delete items[0].capture_state;
+      }
+    })
+  );
+  assert.ok(missing.failures.some((f) => f.includes('capture_state')));
+
+  const duplicate = run(
+    makeFixture({
+      mutateItems: (items) => {
+        configureOwnerScreenshots(items);
+        items[1].capture_state = items[0].capture_state;
+      }
+    })
+  );
+  assert.ok(duplicate.failures.some((f) => f.includes('duplicate capture_state')));
 });
 
 test('fails closed when the sidecar manifest is missing', () => {
@@ -506,7 +698,7 @@ test('publication scope fails closed when the references directory is absent', (
     const scopeTool = path.resolve(process.cwd(), 'tools', 'verify-publication-scope.mjs');
     const result = spawnSync(process.execPath, [scopeTool, '--root', root], { encoding: 'utf8' });
     assert.notEqual(result.status, 0);
-    assert.match(`${result.stdout}${result.stderr}`, /4–12 source-derived reference images/);
+    assert.match(`${result.stdout}${result.stderr}`, /4–12 qualifying source-derived reference images/);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

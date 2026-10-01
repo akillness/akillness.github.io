@@ -29,6 +29,14 @@ reference_image_license_bases:
   - kogl-type-1
   - repo-license-covers-assets
   - official-press-kit
+reference_image_first_party_basis: own-screenshot-of-public-interface
+reference_image_first_party_scope: akillness-git-blog-only
+reference_image_first_party_article_stems:
+  - 2026-10-01-d073-proposal-commit-gate-trace
+reference_image_first_party_source_page_urls:
+  - "https://sealed-lighthouse-trace-rpg.vercel.app/dashboard/"
+reference_image_first_party_owner: "akillness / neural_symbolic_in_game project"
+reference_image_first_party_owner_reuse_attestation: "The project owner explicitly approved these archived public-dashboard captures for reuse in this akillness Git blog draft only; no third-party license is implied."
 allow_empty_success: true
 authority_contract_version: 1
 authority_brief_path: _workspace/current/research/authority-brief.json

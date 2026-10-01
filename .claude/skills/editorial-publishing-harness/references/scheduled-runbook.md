@@ -20,7 +20,7 @@ The schedule intentionally does not live in GitHub Actions: authenticated browse
 5. Prefer AI agents, MCP, Unity/game production, multimodal game QA, and 3D vision.
 6. Deduplicate against published and archived candidates.
 7. For a selected candidate, the director writes and validates `research/authority-brief.json` before drafting. It must bind the Fodev JEO audience job, allowed pillar, primary-source authority basis, original contribution, visible AI-role disclosure, one existing related `/posts/` next action, and the honest unmeasured 28-day plan. Transcript rewrites, scaled-content patterns, fabricated experience, and unverified outcome claims block the run.
-8. Run the full harness and produce at most one validated package. The director downloads 4–12 rights-clear source-derived reference images and writes `draft/source-image-manifest.json`; if four cannot be obtained, the run blocks (fail closed) — a blocked or no-article night is a valid outcome.
+8. Run the full harness and produce at most one validated package. The director assembles 4–12 rights-clear source-derived raster references and writes `draft/source-image-manifest.json`: third-party assets must be downloaded with license evidence, while direct captures from an owner-controlled public interface are allowed only under scoped explicit permission for the akillness Git blog. If four qualifying images cannot be obtained, the run blocks (fail closed); a blocked or no-article night is a valid outcome.
 9. If no candidate passes, close with a short rejected-candidate report.
 10. Notify with run id, selected/rejected topic, evidence quality, draft path, and gate status.
 

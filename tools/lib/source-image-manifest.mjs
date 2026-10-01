@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 // Pure validation core for the source-derived reference image contract.
 // The fail-closed rule: every new automated article package ships at least
-// MINIMUM_REFERENCE_IMAGES distinct rights-clear raster images downloaded from
-// inspected reference materials, credited in exactly one adjacent
-// <figure class="source-image"> block each, and described by the internal
-// sidecar _workspace/current/draft/source-image-manifest.json.
+// MINIMUM_REFERENCE_IMAGES distinct, rights-cleared raster references, either
+// downloaded from inspected reference materials or directly captured from an
+// owner-controlled public interface under explicit scoped permission. Each is
+// credited in exactly one adjacent <figure class="source-image"> block and
+// described by _workspace/current/draft/source-image-manifest.json.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -19,6 +20,9 @@ export const MAX_REFERENCE_IMAGE_TOTAL_BYTES = 20 * 1024 * 1024;
 export const MIN_REFERENCE_IMAGE_PIXELS = 16_384;
 export const MIN_REFERENCE_IMAGE_SHORT_SIDE = 32;
 export const MIN_LICENSE_QUOTE_LENGTH = 40;
+export const MIN_OWNER_REUSE_ATTESTATION_LENGTH = 40;
+export const FIRST_PARTY_SCREENSHOT_BASIS = 'own-screenshot-of-public-interface';
+export const FIRST_PARTY_SCREENSHOT_SCOPE = 'akillness-git-blog-only';
 export const VALID_IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.webp'];
 export const ALLOWED_LICENSE_BASES = [
   'public-domain',
@@ -29,14 +33,12 @@ export const ALLOWED_LICENSE_BASES = [
   'repo-license-covers-assets',
   'official-press-kit'
 ];
+export const ALLOWED_IMAGE_BASES = [...ALLOWED_LICENSE_BASES, FIRST_PARTY_SCREENSHOT_BASIS];
 export const REQUIRED_IMAGE_FIELDS = [
   'local_path',
   'source_page_url',
-  'download_url',
   'publisher_or_creator',
   'license_basis',
-  'license_url',
-  'license_quote',
   'retrieved_at',
   'sha256',
   'transformation',
@@ -57,6 +59,13 @@ const nonempty = (value, minimum = 1) => typeof value === 'string' && value.trim
 const isHttpUrl = (value) => {
   try {
     return ['http:', 'https:'].includes(new URL(value).protocol);
+  } catch {
+    return false;
+  }
+};
+const isHttpsUrl = (value) => {
+  try {
+    return new URL(value).protocol === 'https:';
   } catch {
     return false;
   }
@@ -275,6 +284,7 @@ export function extractSourceImageFigures(articleBody) {
  *        repo-relative path -> observed file facts for every entry in references/
  * @param {string} [options.expectedRunId] workspace manifest run_id
  * @param {string} [options.expectedRunStartedAt] workspace manifest started_at_kst
+ * @param {object|null} [options.firstPartyScreenshotPolicy] explicit source/stem/owner allowlist from the repo policy
  * @returns {{failures:string[],metrics:{reference_images:number,credited_reference_images:number}}}
  */
 export function validateSourceImageManifest({
@@ -284,7 +294,8 @@ export function validateSourceImageManifest({
   evidenceSourceUrls,
   referenceFiles,
   expectedRunId,
-  expectedRunStartedAt
+  expectedRunStartedAt,
+  firstPartyScreenshotPolicy = null
 }) {
   const failures = [];
   const fail = (message) => failures.push(`source-image: ${message}`);
@@ -329,6 +340,7 @@ export function validateSourceImageManifest({
   const seenLocalPaths = new Map();
   const seenShas = new Map();
   const seenDownloadUrls = new Map();
+  const seenCaptureStates = new Map();
   const figures = extractSourceImageFigures(articleBody);
   const figureUseCount = new Map();
   for (const figure of figures) {
@@ -350,6 +362,7 @@ export function validateSourceImageManifest({
     for (const field of REQUIRED_IMAGE_FIELDS) {
       if (item[field] === undefined || item[field] === null) fail(`${label} is missing required field ${field}`);
     }
+    const firstPartyScreenshot = item.license_basis === FIRST_PARTY_SCREENSHOT_BASIS;
 
     const localPath = String(item.local_path || '');
     if (!localPath.startsWith(prefix) || localPath.includes('..')) {
@@ -361,26 +374,74 @@ export function validateSourceImageManifest({
     if (seenLocalPaths.has(localPath)) fail(`duplicate local_path: ${localPath}`);
     seenLocalPaths.set(localPath, item);
 
-    if (!isHttpUrl(item.source_page_url)) fail(`${label} has an invalid source_page_url`);
-    else if (!evidenceUrls.has(item.source_page_url)) {
+    if (firstPartyScreenshot ? !isHttpsUrl(item.source_page_url) : !isHttpUrl(item.source_page_url)) {
+      fail(firstPartyScreenshot
+        ? `${label} must use an HTTPS public-interface source_page_url`
+        : `${label} has an invalid source_page_url`);
+    } else if (!evidenceUrls.has(item.source_page_url)) {
       fail(`${label} source_page_url is not an evidence-pack source_url: ${item.source_page_url}`);
     }
-    if (!isHttpUrl(item.download_url)) fail(`${label} has an invalid download_url`);
-    else if (seenDownloadUrls.has(item.download_url)) {
-      fail(`${label} reuses download_url ${item.download_url}; duplicate crops/resizes of one source image do not count`);
-    }
-    seenDownloadUrls.set(item.download_url, label);
 
-    if (!nonempty(item.publisher_or_creator)) fail(`${label} has no publisher_or_creator`);
-    if (!ALLOWED_LICENSE_BASES.includes(item.license_basis)) {
+    if (!ALLOWED_IMAGE_BASES.includes(item.license_basis)) {
       fail(`${label} license_basis "${item.license_basis}" is not in the allowlist; the contract fails closed`);
     }
     if (item.license_basis === 'repo-license-covers-assets' && !nonempty(item.pinned_ref)) {
       fail(`${label} uses repo-license-covers-assets without a pinned_ref`);
     }
-    if (!isHttpUrl(item.license_url)) fail(`${label} has an invalid license_url`);
-    if (!nonempty(item.license_quote, MIN_LICENSE_QUOTE_LENGTH)) {
-      fail(`${label} license_quote must be at least ${MIN_LICENSE_QUOTE_LENGTH} characters`);
+    if (firstPartyScreenshot) {
+      const policy = firstPartyScreenshotPolicy && typeof firstPartyScreenshotPolicy === 'object'
+        ? firstPartyScreenshotPolicy
+        : null;
+      const allowedArticleStems = Array.isArray(policy?.allowedArticleStems) ? policy.allowedArticleStems : [];
+      const allowedSourcePageUrls = Array.isArray(policy?.allowedSourcePageUrls) ? policy.allowedSourcePageUrls : [];
+      if (policy?.scope !== FIRST_PARTY_SCREENSHOT_SCOPE
+        || !allowedArticleStems.includes(articleStem)
+        || !allowedSourcePageUrls.includes(item.source_page_url)) {
+        fail(`${label} first-party screenshot is not explicitly allowlisted for this article and source URL`);
+      }
+      if (!nonempty(item.owner_reuse_scope) || item.owner_reuse_scope !== policy?.scope) {
+        fail(`${label} owner_reuse_scope must exactly match the repo policy scope`);
+      }
+      if (!nonempty(item.owner_reuse_attestation, MIN_OWNER_REUSE_ATTESTATION_LENGTH)
+        || item.owner_reuse_attestation !== policy?.ownerReuseAttestation) {
+        fail(`${label} owner_reuse_attestation must exactly match the repo policy attestation`);
+      }
+      if (!nonempty(policy?.owner) || item.publisher_or_creator !== policy.owner) {
+        fail(`${label} publisher_or_creator must exactly match the allowlisted interface owner`);
+      }
+      for (const field of ['download_url', 'license_url', 'license_quote']) {
+        if (item[field] !== undefined && item[field] !== null) {
+          fail(`${label} must not claim external download/license metadata for an owner screenshot`);
+        }
+      }
+      if (!/\bowner\b/i.test(String(item.attribution_text || '')) || !/permission/i.test(String(item.attribution_text || ''))) {
+        fail(`${label} owner screenshot attribution must identify owner permission`);
+      }
+      if (!nonempty(item.capture_state)) {
+        fail(`${label} owner screenshot is missing capture_state`);
+      } else {
+        const captureState = item.capture_state.trim().toLocaleLowerCase('en-US');
+        if (seenCaptureStates.has(captureState)) {
+          fail(`${label} has duplicate capture_state ${captureState}`);
+        }
+        seenCaptureStates.set(captureState, label);
+      }
+    } else {
+      if (!isHttpUrl(item.download_url)) fail(`${label} has an invalid download_url`);
+      else if (seenDownloadUrls.has(item.download_url)) {
+        fail(`${label} reuses download_url ${item.download_url}; duplicate crops/resizes of one source image do not count`);
+      }
+      seenDownloadUrls.set(item.download_url, label);
+      if (!isHttpUrl(item.license_url)) fail(`${label} has an invalid license_url`);
+      if (!nonempty(item.license_quote, MIN_LICENSE_QUOTE_LENGTH)) {
+        fail(`${label} license_quote must be at least ${MIN_LICENSE_QUOTE_LENGTH} characters`);
+      }
+      if (item.owner_reuse_attestation !== undefined && item.owner_reuse_attestation !== null) {
+        fail(`${label} must not mix owner-reuse attestation with an external license basis`);
+      }
+      if (item.capture_state !== undefined && item.capture_state !== null) {
+        fail(`${label} must not include capture_state for an externally licensed download`);
+      }
     }
     const retrievedAt = Date.parse(item.retrieved_at);
     const runStartedAt = Date.parse(expectedRunStartedAt);
@@ -435,12 +496,13 @@ export function validateSourceImageManifest({
         credited = false;
       }
       const caption = figure.caption || '';
-      for (const [creditField, value] of [
+      const figureCredits = [
         ['source_page_url', item.source_page_url],
-        ['license_url', item.license_url],
         ['publisher_or_creator', item.publisher_or_creator],
         ['attribution_text', item.attribution_text]
-      ]) {
+      ];
+      if (!firstPartyScreenshot) figureCredits.push(['license_url', item.license_url]);
+      for (const [creditField, value] of figureCredits) {
         if (!nonempty(String(value ?? '')) || !caption.includes(String(value))) {
           fail(`${label} figcaption is missing exact ${creditField}`);
           credited = false;
