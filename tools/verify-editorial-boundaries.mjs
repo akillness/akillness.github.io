@@ -11,6 +11,7 @@ import {
   extractSourceImageFigures,
   sourceImageContractAppliesToStem,
   hasValidImageExtension,
+  hasValidSourceFigureRightsCaption,
   inspectRasterImage
 } from './lib/source-image-manifest.mjs';
 
@@ -20,6 +21,28 @@ const check = (condition, message) => {
   if (!condition) failures.push(message);
 };
 const read = (relative) => fs.readFileSync(path.join(root, relative), 'utf8');
+const policyLines = read('.claude/editorial-policy.yml').split(/\r?\n/);
+const policyScalar = (key) => {
+  const line = policyLines.find((entry) => entry.startsWith(`${key}:`));
+  return (line?.slice(key.length + 1).split('#')[0] || '').trim().replace(/^['"]|['"]$/g, '');
+};
+const policyList = (key) => {
+  const start = policyLines.findIndex((entry) => entry.startsWith(`${key}:`));
+  if (start < 0) return [];
+  const values = [];
+  for (const line of policyLines.slice(start + 1)) {
+    if (!line.trim().startsWith('-')) break;
+    values.push(line.trim().slice(1).trim().replace(/^['"]|['"]$/g, ''));
+  }
+  return values;
+};
+const firstPartyScreenshotPolicy = {
+  scope: policyScalar('reference_image_first_party_scope'),
+  allowedArticleStems: policyList('reference_image_first_party_article_stems'),
+  allowedSourcePageUrls: policyList('reference_image_first_party_source_page_urls'),
+  owner: policyScalar('reference_image_first_party_owner'),
+  ownerReuseAttestation: policyScalar('reference_image_first_party_owner_reuse_attestation')
+};
 const indexablePostMinimum = Number(read('_config.yml').match(/^google_index_min_post_words:\s*(\d+)/m)?.[1]);
 check(Number.isInteger(indexablePostMinimum) && indexablePostMinimum > 0, '_config.yml does not set a positive google_index_min_post_words');
 const sourceWordCount = (body) => body
@@ -247,8 +270,10 @@ if (fs.existsSync(postAssetRoot)) {
       uses.set(figure.src, (uses.get(figure.src) || 0) + 1);
       check(figure.imgCount === 1 && figure.captionCount === 1, `${entry.name}: every source figure must contain exactly one image and one caption`);
       check(figure.hidden !== true, `${entry.name}: source figure must be a top-level visibly rendered block without hidden, extra-class or inline-style attributes`);
-      const urls = new Set((figure.caption || '').match(/https?:\/\/[^"'<>\s)]+/g) || []);
-      check(urls.size >= 2, `${entry.name}: source figure must visibly carry source and license URLs: ${figure.src}`);
+      check(
+        hasValidSourceFigureRightsCaption(figure.caption, entry.name, firstPartyScreenshotPolicy),
+        `${entry.name}: source figure must visibly carry source and license URLs or the exact owner-authorized first-party credit: ${figure.src}`
+      );
       check(publicPaths.has(figure.src), `${entry.name}: source figure references an unshipped image: ${figure.src}`);
     }
     for (const publicPath of publicPaths) check(uses.get(publicPath) === 1, `${entry.name}: published reference image must appear in exactly one credited source figure: ${publicPath}`);

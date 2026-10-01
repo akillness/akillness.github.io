@@ -15,6 +15,7 @@ import {
   MAX_REFERENCE_IMAGE_BYTES,
   MAX_REFERENCE_IMAGE_TOTAL_BYTES,
   collectReferenceFiles,
+  hasValidSourceFigureRightsCaption,
   rasterSignatureMatches,
   referencesPrefix,
   sourceImageContractAppliesToStem,
@@ -198,6 +199,22 @@ test('true positive: owner-authorized public-interface screenshots need no inven
   assert.deepEqual(failures, []);
   assert.equal(metrics.reference_images, 4);
   assert.equal(metrics.credited_reference_images, 4);
+});
+
+test('one-URL first-party captions require the exact allowlisted source, owner, permission, and scope', () => {
+  const caption = `Source: <a href="${DASHBOARD_URL}">${DASHBOARD_URL}</a>. Publisher/creator: ${SCREENSHOT_OWNER}. First-party capture reproduced with project-owner permission for the akillness Git blog draft only; no third-party license is asserted.`;
+  assert.equal(hasValidSourceFigureRightsCaption(caption, STEM, TEST_FIRST_PARTY_SCREENSHOT_POLICY), true);
+  assert.equal(hasValidSourceFigureRightsCaption(caption, '2026-09-01-another-post', TEST_FIRST_PARTY_SCREENSHOT_POLICY), false);
+  assert.equal(hasValidSourceFigureRightsCaption(caption.replaceAll(DASHBOARD_URL, 'https://other.example/dashboard/'), STEM, TEST_FIRST_PARTY_SCREENSHOT_POLICY), false);
+  assert.equal(hasValidSourceFigureRightsCaption(caption.replace(SCREENSHOT_OWNER, 'unknown owner'), STEM, TEST_FIRST_PARTY_SCREENSHOT_POLICY), false);
+  assert.equal(hasValidSourceFigureRightsCaption(caption.replace('project-owner permission', 'public page'), STEM, TEST_FIRST_PARTY_SCREENSHOT_POLICY), false);
+  assert.equal(hasValidSourceFigureRightsCaption(caption.replace('akillness Git blog draft only', 'all blogs'), STEM, TEST_FIRST_PARTY_SCREENSHOT_POLICY), false);
+  assert.equal(hasValidSourceFigureRightsCaption(caption.replace('no third-party license is asserted', 'license status unknown'), STEM, TEST_FIRST_PARTY_SCREENSHOT_POLICY), false);
+});
+
+test('two-URL source and license citations still pass without first-party policy', () => {
+  const caption = 'Source: https://example.com/page License: https://example.com/license';
+  assert.equal(hasValidSourceFigureRightsCaption(caption, STEM), true);
 });
 
 test('fails closed when first-party screenshot policy is absent or does not allow the article/source', () => {

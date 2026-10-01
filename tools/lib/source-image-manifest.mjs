@@ -271,6 +271,29 @@ export function extractSourceImageFigures(articleBody) {
   return figures;
 }
 
+export function hasValidSourceFigureRightsCaption(caption, articleStem, firstPartyScreenshotPolicy = null) {
+  const text = String(caption || '');
+  const urls = new Set(text.match(/https?:\/\/[^"'<>\s)]+/g) || []);
+  if (urls.size >= 2) return true;
+  if (urls.size !== 1) return false;
+
+  const [sourceUrl] = urls;
+  const policy = firstPartyScreenshotPolicy && typeof firstPartyScreenshotPolicy === 'object'
+    ? firstPartyScreenshotPolicy
+    : null;
+  const allowedArticleStems = Array.isArray(policy?.allowedArticleStems) ? policy.allowedArticleStems : [];
+  const allowedSourcePageUrls = Array.isArray(policy?.allowedSourcePageUrls) ? policy.allowedSourcePageUrls : [];
+  const attestationScope = String(policy?.ownerReuseAttestation || '').match(/for reuse in this (.+? only);/i)?.[1];
+  return policy?.scope === FIRST_PARTY_SCREENSHOT_SCOPE
+    && allowedArticleStems.includes(articleStem)
+    && allowedSourcePageUrls.includes(sourceUrl)
+    && nonempty(policy?.owner)
+    && text.includes(policy.owner)
+    && /project-owner permission/i.test(text)
+    && Boolean(attestationScope && text.includes(attestationScope))
+    && /no third-party license (?:is asserted|is implied)/i.test(text);
+}
+
 /**
  * Pure validator. All inputs are plain data so true positive/negative tests
  * need no filesystem.

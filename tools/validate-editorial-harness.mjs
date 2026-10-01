@@ -123,6 +123,9 @@ if (exists('.claude/editorial-policy.yml')) {
     check(helper.includes('metadataSegments === 0'), 'Source-image helper no longer enforces metadata stripping');
   }
   check(read('tools/validate-editorial-package.mjs').includes('firstPartyScreenshotPolicy'), 'Package validator does not pass the explicit first-party screenshot policy to the manifest validator');
+  const boundaryValidator = read('tools/verify-editorial-boundaries.mjs');
+  check(boundaryValidator.includes('firstPartyScreenshotPolicy'), 'Editorial boundary verifier does not load the first-party screenshot policy');
+  check(boundaryValidator.includes('hasValidSourceFigureRightsCaption'), 'Editorial boundary verifier does not validate the visible owner-authorized screenshot credit');
   const exactPolicyValue = (key, expected, message) => {
     const matches = [...policy.matchAll(new RegExp(`^${key}:\\s*([^\\n#]+)`, 'gm'))].map((match) => match[1].trim());
     check(matches.length === 1 && matches[0] === expected, `${message}; found ${JSON.stringify(matches)}`);
