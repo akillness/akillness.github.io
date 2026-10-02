@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="900" height="440" role="img" aria-labelledby="t d">
+<title id="t">Tokens before and after the default Headroom 0.39.1 proxy</title>
+<desc id="d">Original chart from this audit. Three benchmark-shaped requests keep the same token count after the proxy; a JSON tool-result control drops from 4,844 to 2,863 tokens.</desc>
+<style>text{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;fill:#1f2937}.h{font-size:20px;font-weight:700}.s{font-size:13px;fill:#475569}.l{font-size:14px}.v{font-size:13px;font-weight:600}</style>
+<text class="h" x="24" y="36">What the default Headroom proxy forwarded (x-headroom token headers)</text>
+<text class="s" x="24" y="58">Headroom 0.39.1 wheel, default profile, local stub upstream, 2026-10-03. Grey = tokens in, teal = tokens forwarded.</text>
+<text class="l" x="24" y="109">GSM8K, single user message (5-shot)</text>
+<rect x="330" y="95" width="42" height="14" rx="2" fill="#94a3b8"/>
+<rect x="330" y="113" width="42" height="14" rx="2" fill="#0e7490"/>
+<text class="v" x="382" y="117">643 → 643 (0 saved)</text>
+<text class="l" x="24" y="181">GSM8K, multi-turn (5-shot)</text>
+<rect x="330" y="167" width="45" height="14" rx="2" fill="#94a3b8"/>
+<rect x="330" y="185" width="45" height="14" rx="2" fill="#0e7490"/>
+<text class="v" x="385" y="189">679 → 679 (0 saved)</text>
+<text class="l" x="24" y="253">TruthfulQA, single user message</text>
+<rect x="330" y="239" width="4" height="14" rx="2" fill="#94a3b8"/>
+<rect x="330" y="257" width="4" height="14" rx="2" fill="#0e7490"/>
+<text class="v" x="344" y="261">59 → 59 (0 saved)</text>
+<text class="l" x="24" y="325">Control: tool result, 100-item JSON</text>
+<rect x="330" y="311" width="320" height="14" rx="2" fill="#94a3b8"/>
+<rect x="330" y="329" width="189" height="14" rx="2" fill="#0e7490"/>
+<text class="v" x="660" y="333">4,844 → 2,863 (1,981 saved)</text>
+<line x1="24" y1="375" x2="876" y2="375" stroke="#cbd5e1" stroke-width="1"/>
+<text class="s" x="24" y="397">lm-eval 0.4.13 with Headroom's own flags (--apply_chat_template, --limit 5): 10 of 10 GSM8K and TruthfulQA</text>
+<text class="s" x="24" y="415">requests reached the upstream with message arrays byte-identical to a direct run.</text>
+</svg>
