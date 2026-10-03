@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Three approval lanes in Cloudflare OS at commit 5cae880e</title>
+  <desc id="d">A call from the agent reaches a Gatekeeper and takes one of three lanes: a native simulated write that lets the agent continue, an awaitDecision write that pauses the agent turn while a manual decision is pending, or an MCP tool labelled readOnlyHint true that runs immediately with no approval.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 8" refX="10" refY="4" markerWidth="10" markerHeight="8" orient="auto"><path d="M0 0 10 4 0 8z" fill="#475569"/></marker>
+  </defs>
+  <text x="480" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Where a Cloudflare OS agent call goes (commit 5cae880e)</text>
+  <text x="480" y="62" text-anchor="middle" font-size="14" fill="#475569">Read from source; lanes are per Gatekeeper write path, not a platform-wide default</text>
+
+  <rect x="30" y="220" width="170" height="90" rx="12" fill="none" stroke="#0f172a" stroke-width="2"/>
+  <text x="115" y="258" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a">Agent turn</text>
+  <text x="115" y="282" text-anchor="middle" font-size="13" fill="#475569">Code Mode snippet</text>
+
+  <path d="M200 265 C 250 265, 250 140, 300 140" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M200 265 L 300 265" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M200 265 C 250 265, 250 400, 300 400" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="300" y="95" width="630" height="100" rx="12" fill="none" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="320" y="125" font-size="17" font-weight="700" fill="#15803d">1. Simulated write: the agent keeps working</text>
+  <text x="320" y="150" font-size="13.5" fill="#1e293b">Native Gatekeepers with hand-built overlays (GitHub, Google, Notion, Home Assistant, ...).</text>
+  <text x="320" y="172" font-size="13.5" fill="#1e293b">Reads replay the pending journal; the user approves or rejects later.</text>
+
+  <rect x="300" y="220" width="630" height="100" rx="12" fill="none" stroke="#d97706" stroke-width="2.5"/>
+  <text x="320" y="250" font-size="17" font-weight="700" fill="#b45309">2. awaitDecision write: the agent turn pauses</text>
+  <text x="320" y="275" font-size="13.5" fill="#1e293b">MCP tool calls not labelled read-only, Supabase mutating SQL, ZoomInfo paid enrichment.</text>
+  <text x="320" y="297" font-size="13.5" fill="#1e293b">Suspends while a manual decision is pending; resumes when all are approved; a denial ends it.</text>
+
+  <rect x="300" y="345" width="630" height="110" rx="12" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="8 5"/>
+  <text x="320" y="375" font-size="17" font-weight="700" fill="#b91c1c">3. Read on the server's word: no approval at all</text>
+  <text x="320" y="400" font-size="13.5" fill="#1e293b">An MCP tool whose annotation says readOnlyHint: true runs immediately and is logged</text>
+  <text x="320" y="422" font-size="13.5" fill="#1e293b">as an observation, on both trust tiers. A mislabelled destructive tool lands here too.</text>
+  <text x="320" y="444" font-size="13.5" fill="#1e293b">Other tools queue; write auto-approval needs a vetted portal, two hints, a user rule.</text>
+
+  <text x="480" y="505" text-anchor="middle" font-size="13" fill="#475569">Sources: gatekeeper-kit/src/actions.ts, mcp-shared/src/session.ts and tools.ts, workshop-backend/src/overseer.ts</text>
+</svg>
