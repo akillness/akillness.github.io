@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Microsoft’s Claude Code Moment: What It Means for AI-First Game Production"
 description: "From Microsoft’s internal adoption of Claude Code to a future of mixed AI toolchains—why this shift matters for game teams, pipelines, and junior roles."
 categories: [Agent/Orchestration]

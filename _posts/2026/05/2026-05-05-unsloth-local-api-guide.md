@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Unsloth Local API Guide: Run Claude/OpenAI-Style Clients on Your Own Machine"
 description: "A practical, code-first guide to exposing local GGUF models as authenticated Anthropic/OpenAI-compatible APIs with Unsloth."
 date: 2026-05-05 13:00:00 +0900

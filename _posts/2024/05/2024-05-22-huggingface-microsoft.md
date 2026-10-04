@@ -1,4 +1,5 @@
 ---
+published: false
 title: Hugging Face x Microsoft
 description: "Curiosity: How can partnerships between major AI platforms accelerate open-source AI adoption?"
 categories: [LLM/Model & Papers]

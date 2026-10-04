@@ -1,4 +1,5 @@
 ---
+published: false
 title: "MicroGPT: Learning GPT by Building the Smallest Possible Model"
 description: "A concept-first guide to MicroGPT with a hands-on Colab, focusing on core GPT mechanics and practical learning steps."
 categories: [AI, Research]

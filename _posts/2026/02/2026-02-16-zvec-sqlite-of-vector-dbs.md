@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Zvec: The SQLite Moment for Vector Databases"
 description: "Alibaba’s Zvec is an in‑process vector database built on Proxima—fast, lightweight, and perfect for local RAG and edge agents. Here’s why it matters for production." 
 categories: [RAG/Search]

@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Towards Self‑Driving Codebases: What Cursor’s Agent Harness Teaches Us"
 description: "A deep read of Cursor’s multi‑agent research—how they moved from single agents to a recursive planner/worker system, and what that means for production pipelines."
 categories: [Agent/Orchestration]

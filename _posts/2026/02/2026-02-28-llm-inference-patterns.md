@@ -1,4 +1,5 @@
 ---
+published: false
 title: "The 4 LLM Inference Patterns — and Why Deployment Feels Different"
 description: "Prefill vs. decode changes the economics of LLM serving. Here’s how SISO/LISO/SILO/LILO shape latency, cost, and routing." 
 categories: [AI, Research]

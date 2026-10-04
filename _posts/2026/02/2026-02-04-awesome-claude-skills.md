@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Awesome Claude Skills: From Text to Real Actions"
 description: "A deep dive into the Awesome Claude Skills list—what it is, how it’s structured, and how to build repeatable workflows across Claude.ai, Claude Code, and the Claude API."
 categories: [Agent/Orchestration]

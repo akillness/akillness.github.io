@@ -1,4 +1,5 @@
 ---
+published: false
 title: Introducing "ColPali, Efficient Document Retrieval with Vision Language Models"
 description: "Curiosity: How can we simplify PDF document retrieval in RAG systems? What happens when we embed document images directly instead of extracting text?"
 categories: [RAG/Search]

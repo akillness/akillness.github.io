@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Self‑Learning Skills: Let the Agent Teach Itself New Tech"
 description: "From /learn prompts to a full skill pipeline—how to combine search + browsing to build autonomous skills with Gemini 3 models."
 categories: [Agent/Orchestration]

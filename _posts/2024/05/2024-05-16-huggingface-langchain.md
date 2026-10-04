@@ -1,4 +1,5 @@
 ---
+published: false
 title: Hugging Face x Langchain
 description: "Curiosity: What happens when two major LLM ecosystems collaborate? How does this partnership benefit developers building LLM applications?"
 categories: [LLM/Model & Papers]

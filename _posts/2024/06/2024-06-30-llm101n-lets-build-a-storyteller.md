@@ -1,4 +1,5 @@
 ---
+published: false
 title: ❏ LLM101n, LLM AI 스토리텔러 구축하기 🛠️
 description: "A few days ago, an interesting course by Andrej Karpathy was released."
 categories: [LLM/Model & Papers]

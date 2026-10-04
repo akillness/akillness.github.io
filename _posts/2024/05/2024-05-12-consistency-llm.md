@@ -1,4 +1,5 @@
 ---
+published: false
 title: Consistency Large Language Models
 description: "Researchers from University of California comes with a revolutionary method for LLMs, CLLMs."
 categories: [LLM/Model & Papers]

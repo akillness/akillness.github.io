@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Rewrite Your CLI for Agents: Human DX Is Not Agent DX"
 description: "Agent-first CLIs need JSON payloads, schema introspection, and input hardening—retrofits rarely survive." 
 categories: [AI, Research]

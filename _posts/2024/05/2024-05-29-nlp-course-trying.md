@@ -1,4 +1,5 @@
 ---
+published: false
 title: 🤗 NLP Course - Summary of Concept to Transformer from NLP
 description: "| Transformer Course  | Course | <https://huggingface.co/docs/transformers/main/en/index> |."
 categories: [LLM/Model & Papers]

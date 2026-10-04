@@ -1,4 +1,5 @@
 ---
+published: false
 title: Unified 6D Pose Estimation and Tracking of Novel Objects
 description: "Curiosity: How can we achieve real-time 6D pose estimation on consumer GPUs? What makes FoundationPose outperform previous methods?"
 categories: [Review/Trends]

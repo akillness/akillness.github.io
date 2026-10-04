@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Vibe Coding XR: How Gemini and XR Blocks Could Change XR Prototyping"
 description: "A practical look at Google’s Vibe Coding XR approach and why Gemini plus XR Blocks could lower the cost of prototyping interactive XR experiences."
 categories: [AI, XR, Developer-Tools]

@@ -1,4 +1,5 @@
 ---
+published: false
 title: Transformers are SSMs
 description: "Curiosity: Are Transformers and State Space Models fundamentally different? What happens when we discover their deep theoretical connections?"
 categories: [LLM/Model & Papers]

@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Claude Opus 4.6 + Agent Teams: The Workflow Bomb"
 description: "Opus 4.6 raises the ceiling on coding agents, and Claude Code Agent Teams changes how we orchestrate them. Here’s why the workflow has to evolve."
 categories: [Agent/Orchestration]

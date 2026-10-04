@@ -1,4 +1,5 @@
 ---
+published: false
 title: Visualize your RAG Data — EDA for Retrieval-Augmented Generation.
 description: "Curiosity: How can we visualize RAG embedding data to understand retrieval quality?"
 categories: [RAG/Search]

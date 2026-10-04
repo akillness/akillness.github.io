@@ -1,4 +1,5 @@
 ---
+published: false
 title: "RLM-FORGE: Why Evidence-Gated Recursion Matters More Than Recursive Hype"
 description: "A practical review of Q00/rlm-forge and its core claim: recursion is only reliable when parent synthesis is constrained by deterministic evidence contracts."
 date: 2026-05-01 10:00:00 +0900

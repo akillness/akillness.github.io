@@ -1,4 +1,5 @@
 ---
+published: false
 title: 🍎 Post-training in the Apple Intelligence paper
 description: "Apple uses a classic post-training pipeline."
 categories: [Review/Trends]

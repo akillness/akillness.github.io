@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Claude Code /insights: When Your Tool Starts Reviewing You"
 description: "A deep dive into Claude Code’s /insights command—how it analyzes your workflow, where it can misread context, and how to turn AI feedback into a production advantage."
 categories: [Agent/Orchestration]

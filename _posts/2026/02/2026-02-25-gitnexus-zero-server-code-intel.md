@@ -1,4 +1,5 @@
 ---
+published: false
 title: "GitNexus: Zero‑Server Code Intelligence for Agent‑Safe Refactors"
 description: "A local‑first knowledge‑graph engine that gives AI agents architectural context—without shipping your code to a server."
 categories: [AI, Research]

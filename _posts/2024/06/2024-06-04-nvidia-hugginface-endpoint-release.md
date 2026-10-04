@@ -1,4 +1,5 @@
 ---
+published: false
 title: The release of NVIDIA NIM on Hugging Face Inference Endpoints
 description: "Curiosity: How can we simplify generative AI model deployment? What happens when NVIDIA's inference services meet Hugging Face's platform?"
 categories: [LLM/Model & Papers]

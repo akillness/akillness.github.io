@@ -482,4 +482,3 @@ The article closes with the failure modes. I've reordered them by how expensive 
 **Related Posts on This Blog:**
 - [Loop Engineering: What AI Engineers Need to Know](/posts/loop-engineering-what-ai-engineers-need-to-know/)
 - [The jeo Ecosystem: State Over History](/posts/jeo-ecosystem-context-engineering/)
-- [Harness Engineering: Reliable Agent Systems](/posts/harness-reliable-agent-systems/)

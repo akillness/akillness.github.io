@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Harness: A Practical Way to Turn AI Agent Experiments into Reliable Systems"
 description: "An introduction to revfactory/harness and why structured team design, specialized agent roles, and generated skills can improve repeatability in production AI agent workflows."
 categories: [AI, Developer-Tools, Architecture]

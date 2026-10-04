@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Harness Engineering: The 5 Rules That Let Agents Ship 1M Lines"
 description: "OpenAI’s Codex experiment reframes engineering: not writing code, but designing the harness. Here are the five principles that made it work." 
 categories: [Agent/Orchestration]

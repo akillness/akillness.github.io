@@ -1,4 +1,5 @@
 ---
+published: false
 title: Is this the architecture of OpenAI GPT-4o?
 description: "Curiosity: How can we build a unified model that handles audio, speech, image, text, and video?"
 categories: [LLM/Model & Papers]

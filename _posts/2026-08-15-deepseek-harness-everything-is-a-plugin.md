@@ -389,4 +389,3 @@ Two details worth internalizing from that snippet. The bundled runtime needs **n
 
 **Related Reading on This Blog:**
 - [Atomic Agent + Unity CLI](/posts/unity-cli-atomic-agent) — the local-first automation angle on the same problem
-- [Harness Engineering](/posts/harness-engineering) — why the scaffolding around the model is the actual product

@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Codex Plugins Are Runtime Bundles, Not Just App Connectors"
 description: "A practical introduction to how Codex plugins actually work: skills, manifests, connector surfaces, and MCP-based tool routing in one runtime bundle."
 categories: [AI, Developer-Tools, Architecture]

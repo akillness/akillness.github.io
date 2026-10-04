@@ -1,4 +1,5 @@
 ---
+published: false
 title: "How Claude Code Works: The Agent Loop, Tools, and Safety"
 description: "A practical breakdown of Claude Code’s agent loop, tool categories, sessions, permissions, and how to work with it effectively."
 categories: [Agent/Orchestration]

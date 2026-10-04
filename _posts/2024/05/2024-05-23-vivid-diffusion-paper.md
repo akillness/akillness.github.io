@@ -1,4 +1,5 @@
 ---
+published: false
 title: 👚👚 ViViD Diffusion Virtual Try-ON 👚👚
 description: "A source-linked overview of ViViD, a diffusion framework for temporally consistent video virtual try-on."
 categories: [Multimodal/Computer Vision]

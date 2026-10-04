@@ -1,4 +1,5 @@
 ---
+published: false
 title: "MCP Toolbox for Databases: A Single Backend for Secure Agentic SQL"
 description: "Why Google’s open-source MCP Toolbox simplifies database tools for AI agents—connections, auth, observability, and schema-aware SQL in one place."
 categories: [Agent/Orchestration]

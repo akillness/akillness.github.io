@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Build Your Own AI Assistant — The Minimal OpenClaw Ecosystem"
 description: "A snapshot of the ultra‑lightweight, open‑source AI assistant frameworks inspired by OpenClaw—and why ownership beats vendor roadmaps."
 categories: [AI, Research]

@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Agentic Engineering Patterns: The Playbook I’d Hand to My Team"
 description: "Simon Willison’s pattern catalog for coding agents turns vague advice into concrete operating habits." 
 categories: [AI, Research]

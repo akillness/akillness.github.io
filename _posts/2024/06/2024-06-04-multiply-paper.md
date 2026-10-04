@@ -1,4 +1,5 @@
 ---
+published: false
 title: 🐳🐳MultiPly in-the-wild Multi-Pax from Mono🐳🐳
 description: "A source-linked overview of MultiPly for reconstructing multiple detailed 3D people from monocular video."
 categories: [Review/Trends]

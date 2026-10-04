@@ -1,4 +1,5 @@
 ---
+published: false
 title: How do you deal with imbalanced data?
 description: "If you don't have too much data and the imbalance is not too extreme, the typical way to deal with it is to simply reweigh the samples such that the l..."
 categories: [Data Science/Algorithms]

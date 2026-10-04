@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Agentic Engineering: 9 Skills That Separate Demos from Shipping"
 description: "A production‑minded take on Flowkater’s 9 agentic engineering skills — and how I’d apply them to real game pipelines." 
 categories: [AI, Research]

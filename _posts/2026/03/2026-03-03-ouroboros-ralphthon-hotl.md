@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Ouroboros at the Edge: HOTL Proven in a 7‑Hour Ralphthon"
 description: "We pushed a harness to the limit — 100k lines of code, 70k tests, and external dependencies — and it still converged." 
 categories: [AI, Research]

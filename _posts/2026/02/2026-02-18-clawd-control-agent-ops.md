@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Clawd Control: Real‑Time Ops for Clawdbot Agent Fleets"
 description: "A concept‑first guide to Clawd Control—why agent ops dashboards matter, how this one works, and how to run it safely."
 categories: [AI, Agent]

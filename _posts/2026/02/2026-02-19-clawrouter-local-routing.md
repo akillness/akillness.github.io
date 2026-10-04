@@ -1,4 +1,5 @@
 ---
+published: false
 title: "ClawRouter: Local‑First Routing for Minimal OpenClaw Assistants"
 description: "Why routing matters in the new minimal‑agent ecosystem—and how ClawRouter pushes local control, cost, and reliability." 
 categories: [AI, Research]

@@ -1,4 +1,5 @@
 ---
+published: false
 title: "LocalCowork: A No‑Cloud Agent That Finally Feels Instant"
 description: "LFM2‑24B‑A2B hits ~385ms tool dispatch on a MacBook with 67 tools and 14.5GB memory — all local, zero network calls." 
 categories: [AI, Research]

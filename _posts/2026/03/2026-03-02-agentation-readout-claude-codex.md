@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Two Tools I Installed Instantly for Claude Code & Codex"
 description: "Agentation fixes UI feedback precision. Readout makes sessions replayable. Together they remove the two biggest frontend bottlenecks." 
 categories: [AI, Research]

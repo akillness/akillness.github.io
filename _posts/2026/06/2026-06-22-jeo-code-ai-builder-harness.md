@@ -408,11 +408,6 @@ Both repos are open source and actively maintained:
 - [jeo-code Usage Guide](https://github.com/akillness/jeo-code/blob/main/docs/usage-guide.md)
 - [jeo-skills CHANGELOG](https://github.com/akillness/jeo-skills/blob/main/CHANGELOG.md)
 
-**Harness Engineering:**
-- [Harness Engineering: The 5 Rules That Let Agents Ship 1M Lines](/posts/harness-engineering)
-- [CLI Harness for Coding Agents](/posts/cli-harness-coding-agents)
-- [Reliable Agent Systems](/posts/harness-reliable-agent-systems)
-
 **Tools Used in This Post:**
 - [Remotion v4](https://remotion.dev) — code-first video production from React components
 - [god-tibo-imagen](https://github.com/NomaDamas/god-tibo-imagen) — AI image generation via Codex backend

@@ -1,4 +1,5 @@
 ---
+published: false
 title: "CLI Is the Best Harness for Coding Agents"
 description: "Why terminal‑native agents are winning: a comparative look at Gemini CLI, OpenCode, Claude Code, Codex CLI, Qwen Code, Copilot CLI, Kimi CLI, and Mistral Vibe."
 categories: [Agent/Orchestration]

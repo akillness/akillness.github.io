@@ -1,4 +1,5 @@
 ---
+published: false
 title: "15 Repos Every AI Engineer Should Know to Run LLMs Faster (Without Burning GPU Budget)"
 description: "A production-focused breakdown of 15 open-source repos that improve LLM throughput, latency, and memory efficiency without brute-force GPU scaling."
 categories: [AI, Research]

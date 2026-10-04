@@ -1,4 +1,5 @@
 ---
+published: false
 title: "OpenVSCode Server: A Practical Path to Remote IDEs"
 description: "Why OpenVSCode Server matters, how it works, and what a production‑ready setup needs—based on the official repo and a deployment guide."
 categories: [AI, Agent]

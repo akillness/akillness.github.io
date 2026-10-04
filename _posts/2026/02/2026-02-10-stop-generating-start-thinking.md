@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Stop Generating, Start Thinking: The Missing Layer in AI Coding"
 description: "A deep reflection on why code generation without human thinking is risky—and how to build with agents without losing engineering judgment."
 categories: [Agent/Orchestration]

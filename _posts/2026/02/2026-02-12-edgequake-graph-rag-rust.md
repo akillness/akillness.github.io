@@ -1,4 +1,5 @@
 ---
+published: false
 title: "EdgeQuake: Graph‑RAG in Rust for Production‑Grade Retrieval"
 description: "A detailed look at EdgeQuake, a high‑performance Graph‑RAG framework built in Rust—knowledge graphs, multi‑mode querying, and why it matters for real‑world agent stacks." 
 categories: [RAG/Search]

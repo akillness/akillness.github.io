@@ -1,4 +1,5 @@
 ---
+published: false
 title: How to evaluate LLM Model?
 description: "Curiosity: What insights can we retrieve from this? How does this connect to innovation in the field?"
 categories: [LLM/Model & Papers]

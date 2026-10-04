@@ -1,4 +1,5 @@
 ---
+published: false
 title: 🗞 LazyLLM looks like a super simple low-code open-source framework for building
   multi-agent applications
 description: "Curiosity: What if building multi-agent systems could be as simple as connecting building blocks?"

@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Entire: The Assembly Line for the Agent Era"
 description: "Thomas Dohmke announces Entire, a new developer platform built around agent-native SDLC, git-compatible context, and Checkpoints." 
 categories: [Agent/Orchestration]

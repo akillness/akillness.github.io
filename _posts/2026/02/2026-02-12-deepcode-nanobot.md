@@ -1,4 +1,5 @@
 ---
+published: false
 title: "DeepCode + nanobot: Agentic Coding from Papers, Text, and Your Phone"
 description: "DeepCode claims SOTA on PaperBench and pairs with nanobot to turn papers, text prompts, and chat messages into working code." 
 categories: [Agent/Orchestration]

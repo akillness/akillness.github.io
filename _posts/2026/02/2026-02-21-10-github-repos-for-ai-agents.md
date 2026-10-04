@@ -1,4 +1,5 @@
 ---
+published: false
 title: "10 GitHub Repos That Shaped My AI‑Agent Playbook"
 description: "A practical, repo‑driven map of the skills you actually need to build and ship AI agents—curated from the projects I learned from the most."
 categories: [AI, Research]

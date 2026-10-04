@@ -1,4 +1,5 @@
 ---
+published: false
 title: "AutoRAG‑Research: A Standardized RAG Lab for Benchmarks, Pipelines, and Plugins"
 description: "AutoRAG‑Research unifies datasets, ships SOTA pipelines, and lets you run RAG experiments with one command." 
 categories: [RAG/Search]

@@ -1,4 +1,5 @@
 ---
+published: false
 title: "CLI-Anything: Why Agent-Native Interfaces Matter More Than Bigger Models"
 description: "CLI-Anything reframes agent reliability as an interface and harness problem: structured CLIs, deterministic execution, and installable tool surfaces that scale beyond demos."
 categories: [AI, Agents, Developer-Tools]

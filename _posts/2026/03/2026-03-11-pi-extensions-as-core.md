@@ -1,4 +1,5 @@
 ---
+published: false
 title: "pi as the Core: Build Your Own Agentic Workflow, Not Someone Else’s"
 description: "I compared the latest pi-related posts and discovered a practical design pattern: a tiny, hackable core plus local extensions is often a better path than a feature-complete but rigid agent."
 categories: [Tools, AI, Coding]

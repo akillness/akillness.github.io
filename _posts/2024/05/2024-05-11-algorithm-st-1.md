@@ -1,4 +1,5 @@
 ---
+published: false
 title: 알고리듬 압축코스 - 강의소개
 description: "1. An important concept that improves skills (your capabilities) (coding test + ability)."
 categories: [Learning/Guide]

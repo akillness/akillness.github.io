@@ -1,4 +1,5 @@
 ---
+published: false
 title: "UI‑TARS Desktop: A Native GUI Agent Stack Built for Real Work"
 description: "A game‑dev perspective on ByteDance’s UI‑TARS Desktop and Agent TARS: why GUI agents matter, how MCP‑first stacks change workflows, and where this fits in production pipelines."
 categories: [Agent/Orchestration]

@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Pi: The Minimal Agent Inside OpenClaw (and Why It Matters)"
 description: "A minimal agent with four tools, tree‑shaped sessions, and self‑extending code: Pi’s philosophy reshapes how we build agentic systems." 
 categories: [Agent/Orchestration]

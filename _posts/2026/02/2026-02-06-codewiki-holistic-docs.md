@@ -1,4 +1,5 @@
 ---
+published: false
 title: "CodeWiki: Holistic AI Documentation for Massive Codebases"
 description: "A deep dive into CodeWiki—hierarchical decomposition, recursive agents, and multimodal docs for 86K–1.4M LOC repositories."
 categories: [Agent/Orchestration]

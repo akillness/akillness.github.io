@@ -1,4 +1,5 @@
 ---
+published: false
 title: Game Development Course with Unity3D Programming
 description: "Curiosity: How can we learn game development with Unity? What's the path from beginner to capable Unity developer?"
 categories: [Multimodal/Computer Vision]

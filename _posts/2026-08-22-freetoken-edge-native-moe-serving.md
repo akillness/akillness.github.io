@@ -381,5 +381,3 @@ Coming at this as someone who builds AI systems for games, here is my actual que
 
 **Related posts on this blog:**
 - [PrismML 1-bit Bonsai: Why 1-Bit LLMs Could Make On-Device AI Actually Practical](/posts/prismml-1-bit-bonsai-on-device-ai/)
-- [15 Repos Every AI Engineer Should Know to Run LLMs Faster](/posts/15-repos-for-faster-llm-serving/)
-- [Unsloth Local API Guide: Run Claude/OpenAI-Style Clients on Your Own Machine](/posts/unsloth-local-api-guide/)

@@ -1,4 +1,5 @@
 ---
+published: false
 title: "nanobot: A 4K‑Line Personal Agent and Why Minimalism Matters"
 description: "A game‑dev view on HKUDS/nanobot—an ultra‑light Clawdbot‑inspired agent—why the tiny codebase changes how we learn, iterate, and ship." 
 categories: [Agent/Orchestration]
