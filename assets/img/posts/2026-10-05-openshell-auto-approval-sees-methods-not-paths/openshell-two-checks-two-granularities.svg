@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="t d">
+  <title id="t">Two OpenShell checks, two granularities</title>
+  <desc id="d">An existing credentialed rule allows PUT on one docs folder and a new proposal allows PUT on every repository path. The gateway proposal risk check keys findings by binary, host, port, category and method, so, reading the source at commit 71c3cd95 without running it, both rules produce the same key and the verdict is no new findings, passing both risk gates in auto mode. The existing rule is a hypothetical scenario. The standalone boundary check, which has no gateway caller at that commit and which was run from the released 0.1.2 binary, compares method and path and reports exceeds boundary with the counterexample PUT /repos/a.</desc>
+  <style>
+    .h{font:700 30px system-ui,-apple-system,Segoe UI,sans-serif;fill:#1f2937}
+    .s{font:600 19px system-ui,-apple-system,Segoe UI,sans-serif;fill:#1f2937}
+    .b{font:400 17px system-ui,-apple-system,Segoe UI,sans-serif;fill:#374151}
+    .m{font:500 16px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#111827}
+    .ok{font:700 18px system-ui,-apple-system,Segoe UI,sans-serif;fill:#b45309}
+    .no{font:700 18px system-ui,-apple-system,Segoe UI,sans-serif;fill:#047857}
+  </style>
+  <text x="40" y="52" class="h">Same agent proposal, two OpenShell checks</text>
+  <text x="40" y="84" class="b">Existing credentialed rule for /usr/bin/curl on api.github.com:443, plus one proposed rule</text>
+
+  <rect x="40" y="104" width="540" height="96" rx="12" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="60" y="136" class="s">Existing rule (hypothetical scenario)</text>
+  <text x="60" y="170" class="m">PUT /repos/NVIDIA/OpenShell/contents/docs/**</text>
+  <rect x="620" y="104" width="540" height="96" rx="12" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="640" y="136" class="s">Proposed by the agent</text>
+  <text x="640" y="170" class="m">PUT /repos/**</text>
+
+  <rect x="40" y="232" width="540" height="360" rx="14" fill="none" stroke="#b45309" stroke-width="2.5"/>
+  <text x="60" y="268" class="s">Proposal risk check (gateway)</text>
+  <text x="330" y="268" class="b">read from source, not run</text>
+  <text x="60" y="294" class="b">Risk gate for auto-approval. Finding key:</text>
+  <text x="60" y="326" class="m">binary | host:port | category | method</text>
+  <text x="60" y="370" class="b">Existing  →</text>
+  <text x="160" y="370" class="m">curl|api.github.com:443|…|PUT</text>
+  <text x="60" y="400" class="b">Proposed →</text>
+  <text x="160" y="400" class="m">curl|api.github.com:443|…|PUT</text>
+  <text x="60" y="440" class="b">The path never enters the key, so the</text>
+  <text x="60" y="464" class="b">delta is empty.</text>
+  <text x="60" y="510" class="ok">prover: no new findings</text>
+  <text x="60" y="540" class="b">Both risk gates pass in auto mode</text>
+  <text x="60" y="566" class="b">(other non-risk conditions still apply)</text>
+
+  <rect x="620" y="232" width="540" height="360" rx="14" fill="none" stroke="#047857" stroke-width="2.5"/>
+  <text x="640" y="268" class="s">Boundary check (openshell-prover CLI)</text>
+  <text x="640" y="294" class="b">Standalone; no gateway caller at 71c3cd95.</text>
+  <text x="640" y="326" class="m">compares method AND path</text>
+  <text x="640" y="370" class="b">candidate = existing + proposed</text>
+  <text x="640" y="400" class="b">boundary  = existing</text>
+  <text x="640" y="440" class="b">Exit code 1, with one counterexample:</text>
+  <text x="640" y="510" class="no">exceeds_boundary</text>
+  <text x="640" y="540" class="m">method=PUT path=/repos/a</text>
+  <text x="640" y="566" class="b">(ran released openshell-prover 0.1.2)</text>
+</svg>
