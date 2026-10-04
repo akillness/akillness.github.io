@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Context Engineering Is the Missing Layer Between Your Agent and Its Memory"
 description: "Prompt engineering tells the model what to do. Context engineering tells it what to know. A practical game-production view of retrieval, memory, context assembly, and reasoning scaffolds."
 categories: [AI, Agents]

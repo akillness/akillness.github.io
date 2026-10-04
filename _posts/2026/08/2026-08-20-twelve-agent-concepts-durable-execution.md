@@ -135,7 +135,7 @@ The article's case study is a lakehouse graph with git-style branching on object
 ![Omnigraph README](/assets/img/2026-08-20-agent-concepts/graph-based-agent-memory-4.png){: .w-75 .shadow .rounded-10 }
 _Declared as code, parallel isolated branches per agent, reviewed merges, S3-compatible storage. Screenshot: [Neo Kim, systemdesign.one](https://newsletter.systemdesign.one/p/graph-based-agent-memory)._
 
-I covered adjacent ground in [my GraphRAG-to-context-layer post](/posts/ontology-graphrag-agent-memory/) and again in [the Hindsight memory bridge post](/posts/omnigent-hindsight-universal-memory/). The addition here is the concurrency framing: not *how do I store knowledge*, but *how do a hundred agents write to shared knowledge without corrupting it*. Git-style branch-and-merge is a genuinely good answer to a question the vector-database era never had to ask.
+I covered adjacent ground in [the Hindsight memory bridge post](/posts/omnigent-hindsight-universal-memory/). The addition here is the concurrency framing: not *how do I store knowledge*, but *how do a hundred agents write to shared knowledge without corrupting it*. Git-style branch-and-merge is a genuinely good answer to a question the vector-database era never had to ask.
 
 ---
 
@@ -344,7 +344,6 @@ Twelve links, six paywalls, one 200-line reimplementation later, that holds up. 
 - [`durable.py`](/assets/code/posts/2026-08-20-agent-concepts/durable.py) — checkpointing, memoized replay, idempotency keys, suspend/resume across processes. 26 executable checks, stdlib only.
 
 **Related Posts**
-- [From RAG to Context Layer: Ontology, LLM Wiki, HyGRAG](/posts/ontology-graphrag-agent-memory/)
 - [One Memory Setup, Every Harness: Omnigent's Hindsight Bridge](/posts/omnigent-hindsight-universal-memory/)
 - [Ouroboros: The Agent OS That Hides the Answer Key](/posts/ouroboros-agent-os-spec-first-loop/)
 

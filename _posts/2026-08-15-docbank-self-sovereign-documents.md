@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Docbank: What If Your Agents Needed a Filing Cabinet, Not a Cloud Drive?"
 description: "A look at Docbank, a self-sovereign, local-first document system built for stable IDs, immutable versions, and an agent-ready HTTP contract — and what it teaches about building tools AI agents can trust."
 categories: [AI, Tooling]

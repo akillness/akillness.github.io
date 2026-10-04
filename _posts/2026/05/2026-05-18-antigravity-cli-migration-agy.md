@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Antigravity CLI Migration: A Production-Minded agy Checklist After Gemini CLI"
 description: "An English, production-oriented walkthrough of the Goddaehee Antigravity CLI guide: why Gemini CLI migration matters, how agy is used, which aliases are useful, and what to verify before trusting it in real work."
 categories: [AI, Developer-Tools, Workflow]

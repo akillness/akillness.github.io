@@ -92,7 +92,7 @@ The same docs currently say a packaged Go Harness is not available. Go users can
 
 If I were porting an agent between Python and .NET, I would make one small compatibility test before tuning prompts. Start each implementation in a clean temporary working directory, then assert the provider set, Skills discovery, memory path, file-access scope, web-search availability, and the documented release stage of optional features. The test should use the exact package versions the app will ship, because a live Learn page and a pinned source snapshot answer different questions.
 
-That checklist also protects against a common demo-reading mistake. A polished DevUI view, a Foundry hosted-session screen, or prerecorded Computer Use screenshots can illustrate an adjacent sample. None tells us which behavior the Harness creates by default. For a separate look at keeping an agent's memory boundary explicit, see my [OpenContext source audit](/posts/opencontext-ai-agent-memory-store/).
+That checklist also protects against a common demo-reading mistake. A polished DevUI view, a Foundry hosted-session screen, or prerecorded Computer Use screenshots can illustrate an adjacent sample. None tells us which behavior the Harness creates by default.
 
 ### Key takeaways
 

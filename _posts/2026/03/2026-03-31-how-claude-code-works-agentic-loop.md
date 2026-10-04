@@ -1,4 +1,5 @@
 ---
+published: false
 title: "How Claude Code Actually Works: Agentic Loop, Tooling Model, and Operational Guardrails"
 description: "A practical breakdown of Claude Code’s agentic loop from official docs, including tools, permissions, checkpoints, session forking, and leak-risk lessons for real engineering teams."
 categories: [AI, Developer-Tools, Architecture]

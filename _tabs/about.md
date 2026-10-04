@@ -7,6 +7,8 @@ mermaid: false
 
 ## AI Product Engineer Growing Out of Games, Research, and Real Systems
 
+I am **Jang Young Jeong** (Fodev JEO), the author of this blog, based in Hwaseong, Gyeonggi-do, South Korea. Reach me through [Contact](/contact/).
+
 ```text
 AI Product Developer @ Supercent
 Ph.D. Candidate in Game Engineering @ Hongik University
@@ -162,6 +164,7 @@ Agents | MCP | A2A | Evals | Tracing | Multimodal QA | Tool Use | Product Engine
 ### Links
 
 - [Portfolio guide](/projects/)
+- [Contact](/contact/)
 - [Visual portfolio](/portfolio/)
 - [Resume](/resume_eng/)
 - [LinkedIn](https://www.linkedin.com/in/akillness38/)

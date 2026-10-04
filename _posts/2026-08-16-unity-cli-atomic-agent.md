@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Atomic Agent + Unity CLI: Automating Game Builds Without Touching the Editor"
 description: "Can AI agents revolutionize game CI/CD? Exploring Atomic Agent's local-first approach to automate Unity builds, asset pipelines, and deployment workflows entirely from the command line."
 categories: [AI, Game-Development, DevOps]

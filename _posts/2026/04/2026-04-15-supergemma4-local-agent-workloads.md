@@ -1,4 +1,5 @@
 ---
+published: false
 title: "SuperGemma4: A Faster, Sharper Gemma 4 for Local Agent Workloads"
 description: "A practical review of SuperGemma4, the Apple Silicon MLX-tuned Gemma 4 26B variant that improves coding, logic, browser tasks, Korean prompts, and local agent responsiveness."
 categories: [AI, Local-LLM, Developer-Tools]

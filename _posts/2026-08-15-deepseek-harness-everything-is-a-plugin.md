@@ -386,6 +386,3 @@ Two details worth internalizing from that snippet. The bundled runtime needs **n
 - [subagent.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/subagent.md) — the named-provider registry, including Codex and Claude Code providers
 - [skills.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/skills.md) — layered skill discovery
 - [postmortems](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/postmortem/README.md) — four written-up failures worth reading before you trust any harness
-
-**Related Reading on This Blog:**
-- [Atomic Agent + Unity CLI](/posts/unity-cli-atomic-agent) — the local-first automation angle on the same problem

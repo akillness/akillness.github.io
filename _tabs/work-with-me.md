@@ -24,7 +24,7 @@ Grounded in **SAGA** and **Millie** — two internal RAG/agent platforms I desig
 
 A review of a Unity project's build pipeline: CI configuration, Editor and module version pinning, licence-activation failure modes, cache correctness, and where a build is silently non-reproducible.
 
-Grounded in production Unity engineering at Com2uS (Unity↔Python socket tooling) and NCSOFT, plus published work on [Unity CLI production workflows](/posts/unity-cli-production-workflows/) and the [Unity CLI atomic agent](/posts/unity-cli-atomic-agent/).
+Grounded in production Unity engineering at Com2uS (Unity↔Python socket tooling) and NCSOFT, plus a published audit of [a release-notes drift check that no CI workflow runs in MCP for Unity](/posts/unity-mcp-release-notes-drift-audit/).
 
 **Output:** an annotated list of pipeline failure points, a reproducibility checklist specific to the project, and concrete CI configuration changes.
 

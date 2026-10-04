@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Loops: What Every AI Engineer Needs to Know in 2026"
 description: "The fastest-moving idea in AI dev tooling isn't a model — it's the loop around it. Why Boris Cherny, Peter Steinberger, and Addy Osmani stopped prompting agents and started designing loops, with runnable examples and a game-production lens."
 categories: [AI, Agents]

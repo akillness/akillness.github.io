@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Fable 5 Isn't a Faster Chat Model — It's the Substrate for Self-Improving Agent Systems"
 description: "A 14-step field guide to building agent systems that compound with Claude Fable 5 — loops, dynamic workflows, routines, state files, and vision self-checks — read through the lens of shipping AI into production games."
 categories: [AI, Agents]

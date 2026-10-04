@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Unity CLI: From Editor Installs to Verifiable Game-Production Workflows"
 description: "A practical, production-minded guide to Unity CLI, its machine-readable automation contract, and the experimental Unity Pipeline package for controlled Editor and Player workflows."
 categories: [Tutorial, Unity]

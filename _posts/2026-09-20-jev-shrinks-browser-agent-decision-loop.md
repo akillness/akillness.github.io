@@ -188,7 +188,7 @@ The design hypothesis is not that every game tool should call Jev. It is that **
 
 That distinction helps avoid a common agent failure mode: improving the model's action selection while accidentally widening what the model is allowed to do. A faster click loop should not gain permission to publish a build, spend money, delete a save, or send a player-facing message.
 
-The [Docbank audit](/posts/docbank-self-sovereign-documents/) makes a complementary argument at the data layer: an agent should not be asked to be careful with paths and revisions when the system can enforce stable identity and optimistic concurrency mechanically. Jev applies the same instinct to UI actions. Put the constraint in the interface between observation, decision, and execution.
+The same argument holds at the data layer: an agent should not be asked to be careful with paths and revisions when the system can enforce stable identity and optimistic concurrency mechanically. Jev applies the same instinct to UI actions. Put the constraint in the interface between observation, decision, and execution.
 
 ### A bounded adoption checklist
 
@@ -267,4 +267,3 @@ Those are better questions than "Is Jev 200 times faster?" They tell us what to 
 ### Related reading
 
 - [Orca's privacy page survives 82 of its 83 telemetry events](/posts/orca-telemetry-universal-claim-audit/)
-- [Docbank and the agent-ready document contract](/posts/docbank-self-sovereign-documents/)

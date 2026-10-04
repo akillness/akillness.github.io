@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Designing AI Agent Teams with Codex Subagents: A Practical Guide to Multi-Agent Workflows"
 description: "Codex subagents let you split complex tasks into specialized agents with their own model, sandbox, and tool settings. Here’s a practical guide for shipping safer, faster, and more controllable AI workflows."
 categories: [AI, Coding, Tutorial]

@@ -157,8 +157,6 @@ This incident produced a reusable sequence:
 
 The key shift is simple: installation is not a state. It is a chain of independently testable boundaries.
 
-For the architectural layer behind that chain, read [From RAG to Context Layer: What Genie Ontology, LLM Wiki Memory, and HyGRAG Tell Us About the Next Stack](/posts/ontology-graphrag-agent-memory/). It explains how durable memory, provenance, and maintained knowledge fit around the local executable and graph concerns audited here.
-
 ## 🤔 New Questions
 
 Two upstream boundaries matter before copying this integration elsewhere.

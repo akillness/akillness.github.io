@@ -158,7 +158,7 @@ In a real harness, x is the number the Doc's meta-attention idea shrinks: if con
 
 The second lesson is about evidence, and it applies to anyone building on this discussion. Before quoting a synthesis, trace each number to where it lives today. The two numbers most likely to be repeated from this PDF, the "plausible" session shape and the 56.2% reading-and-searching share, turn out to be a ChatGPT guess and a withdrawn paper.
 
-If Jev is the first system-one model you have looked at, my earlier audit of [Jev's browser-agent decision loop](/posts/jev-shrinks-browser-agent-decision-loop/) covers what its speed claims do and do not show. For the context-assembly side of this argument, see [context engineering and agent memory design](/posts/context-engineering-agent-memory-design/) and the broader [harness engineering](/posts/harness-engineering-agents/) notes.
+If Jev is the first system-one model you have looked at, my earlier audit of [Jev's browser-agent decision loop](/posts/jev-shrinks-browser-agent-decision-loop/) covers what its speed claims do and do not show.
 
 ## 🎯 Key Takeaways
 
@@ -206,5 +206,3 @@ This audit compares text, not intent: the Doc is an informal working note and it
 
 **Related posts:**
 - [Jev shrinks the browser-agent decision loop for faster actions](/posts/jev-shrinks-browser-agent-decision-loop/)
-- [Context engineering and agent memory design](/posts/context-engineering-agent-memory-design/)
-- [Harness engineering for agents](/posts/harness-engineering-agents/)

@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Claw Dev: One Terminal Coding Agent, Multiple Model Backends"
 description: "A practical breakdown of Claw Dev, a multi-provider coding assistant launcher that keeps a Claude Code–style terminal workflow while routing requests to Anthropic, OpenAI, Gemini, Groq, OpenRouter, Copilot, z.ai, or Ollama."
 categories: [AI, Developer-Tools, Agents]

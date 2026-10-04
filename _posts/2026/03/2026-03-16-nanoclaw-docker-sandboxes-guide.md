@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Deploying NanoClaw in Docker Sandboxes: A Practical Security-First Guide"
 description: "A step-by-step guide to run each NanoClaw agent in isolated Docker Sandboxes, with hardening checks and real operational patterns for small teams and production rollouts."
 categories: [AI, Coding, Security]

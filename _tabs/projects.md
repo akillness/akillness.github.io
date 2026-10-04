@@ -39,7 +39,7 @@ The [visual portfolio](/portfolio/) is the gallery; this page is the evidence ma
 </tr>
 <tr>
 <th scope="row"><a href="#project-game-ai">Game AI &amp; automation</a></th>
-<td><strong>Problem:</strong> Make game evaluation and production workflows reproducible.<br><strong>Built:</strong> Simulation agents, procedural systems, Unity tooling, and agent-driven builds.<br><strong>Evidence:</strong> <a href="/posts/unity-cli-production-workflows/">Unity production articles</a> and playable projects below.</td>
+<td><strong>Problem:</strong> Make game evaluation and production workflows reproducible.<br><strong>Built:</strong> Simulation agents, procedural systems, Unity tooling, and agent-driven builds.<br><strong>Evidence:</strong> <a href="#project-game-ai">Project details</a> and playable projects below.</td>
 </tr>
 </tbody>
 </table>
@@ -55,9 +55,8 @@ At Supercent, I built AI products where retrieval was only the middle of the sys
 
 The portfolio shows these as shipped products. The related writing explains the reusable engineering questions:
 
-- [From RAG to Context Layer](/posts/ontology-graphrag-agent-memory/) asks what changes when retrieval becomes shared agent memory.
+- [LLM2Vec, Two Years On](/posts/llm2vec-embedding-models/) checks an embedding paper's SOTA claim against its own leaderboard placement and two years of download data.
 - [One Memory Setup, Every Harness](/posts/omnigent-hindsight-universal-memory/) reads a memory bridge at the seam where retrieval becomes shared agent state.
-- [LLM Wiki](/posts/llm-wiki-persistent-knowledge-base/) asks when an agent-maintained knowledge base beats another RAG stack.
 
 The practical lesson is that retrieval quality, permissions, observability, and user experience cannot be reviewed independently. A good answer is not enough if nobody can trace its source, correct the knowledge, or understand why the system chose a tool.
 
@@ -80,7 +79,6 @@ The associated articles are not release announcements. They document design pres
 
 - [jeo-code Puts Skills and Approval Gates Around Coding Agents](/posts/jeo-code-ai-builder-harness/)
 - [DeepSeek Harness: What If the Agent Loop Itself Were Just Another Plugin?](/posts/deepseek-harness-everything-is-a-plugin/)
-- [The New MCP Roadmap](/posts/mcp-roadmap-agentic-infrastructure/)
 
 I treat agent orchestration as earned complexity. One capable agent with clear tools and a visible completion contract is usually better than a large cast of agents with vague authority.
 
@@ -109,8 +107,7 @@ At NCSOFT and Com2uS, I worked on simulation-based difficulty evaluation, cellul
 
 Recent public work carries that idea into build automation and agent-driven game production:
 
-- [Unity CLI: From Editor Installs to Verifiable Game-Production Workflows](/posts/unity-cli-production-workflows/)
-- [Atomic Agent + Unity CLI](/posts/unity-cli-atomic-agent/)
+- [MCP for Unity Ships a Drift Check No Workflow Ever Runs](/posts/unity-mcp-release-notes-drift-audit/)
 - [Castle War, playable build](https://jellyggumi.github.io/games/castle-war/)
 - [Abyssal Lantern, playable build](https://akillness.github.io/hongT/)
 

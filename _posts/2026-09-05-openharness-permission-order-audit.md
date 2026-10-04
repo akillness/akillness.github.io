@@ -106,7 +106,7 @@ So the allow list is reachable from the CLI, decisive in the checker, and absent
 
 **The fix is small.** Moving the allow-list return below the path and command loops would make the operator's deny globs authoritative while leaving cases E and F unchanged. That is a reordering, not a redesign.
 
-For game teams this generalises past coding agents. A build agent with a shell tool allow-listed for convenience is a build agent whose destructive-command deny pattern is decorative. If you are weighing how much autonomy to hand a coding agent in the first place, [why the harness layer decides that more than the model does](/posts/agentic-coding-convergence/) is the next thing worth reading.
+For game teams this generalises past coding agents. A build agent with a shell tool allow-listed for convenience is a build agent whose destructive-command deny pattern is decorative.
 
 <figure class="source-image">
   <img src="/assets/img/posts/2026-09-05-openharness-permission-order-audit/references/scene-context.png" alt="OpenHarness illustration of context and memory handling">
@@ -149,7 +149,3 @@ Nothing here is a vulnerability report. It is an ordering choice with an undocum
 **Official metadata**
 
 - GitHub REST API: <https://api.github.com/repos/HKUDS/OpenHarness>
-
-**Related on this site**
-
-- [Claude Code vs. Cursor vs. Codex vs. Antigravity — why the harness won](/posts/agentic-coding-convergence/)

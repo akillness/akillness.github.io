@@ -1,4 +1,5 @@
 ---
+published: false
 title: "The Vault That Rewrites Itself: An AI-First Second Brain for Game Teams"
 description: "obsidian-second-brain turns a note vault into a self-maintaining, AI-first knowledge base across Claude Code, Codex, Gemini, and OpenCode. Why a self-rewriting vault is the cure for game-studio amnesia — with the 4-layer architecture, the 7 AI-first rules, and runnable examples."
 categories: [AI, Agents]

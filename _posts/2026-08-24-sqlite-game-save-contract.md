@@ -188,7 +188,7 @@ The contract I would ship is short:
 - Run interruption tests that kill the game during an autosave, checkpoint, and synchronization boundary.
 - Batch local writes in a transaction, then measure on target hardware before treating a benchmark as a promise.
 
-This is related to the system-of-record idea behind [DocBank's self-sovereign document model](/posts/docbank-self-sovereign-documents/): durable local state becomes valuable when the application makes ownership, integrity, and version boundaries explicit. SQLite gives games a mature primitive for that job. It does not make those decisions on their behalf.
+Durable local state becomes valuable when the application makes ownership, integrity, and version boundaries explicit. SQLite gives games a mature primitive for that job. It does not make those decisions on their behalf.
 
 ### Key Takeaways
 

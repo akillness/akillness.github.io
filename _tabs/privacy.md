@@ -6,7 +6,7 @@ title: Privacy Policy
 description: What data this site collects, which third parties process it, and how to opt out.
 mermaid: false
 ---
-**Last updated:** 2026-09-24
+**Last updated:** 2026-10-05
 
 This page explains exactly what happens to data when you visit `akillness.github.io`. It lists only the services this site actually loads — nothing is included for the sake of looking thorough.
 
@@ -39,10 +39,10 @@ Static assets (fonts, JavaScript libraries) are served from **jsDelivr** and **G
 
 ## Cookies and advertising
 
-Google and its partners use cookies to serve ads based on your prior visits to this and other websites.
+Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this website and other websites. Google's use of advertising cookies enables it and its partners to serve ads to you based on your visits to this site and/or other sites on the Internet. Google's own explanation is at [How Google uses cookies in advertising](https://policies.google.com/technologies/ads).
 
 - You can opt out of personalised advertising at [Google Ads Settings](https://adssettings.google.com/).
-- For opt-outs across many networks at once, see [aboutads.info](https://www.aboutads.info/choices/) or [Your Online Choices](https://www.youronlinechoices.com/) (EU).
+- For opt-outs from third-party vendors' use of cookies for personalised advertising across many networks at once, see [www.aboutads.info](https://www.aboutads.info/choices/) or [Your Online Choices](https://www.youronlinechoices.com/) (EU).
 - Blocking cookies in your browser also works. Nothing on this site breaks if you do — there is no functionality gated behind a cookie.
 
 Where required by law, ad personalisation is limited and a consent mechanism is presented by Google's own consent management before personalised ads are served.

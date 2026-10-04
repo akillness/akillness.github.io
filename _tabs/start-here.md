@@ -14,8 +14,8 @@ The four posts that best show what this blog does — read one primary source pr
 
 - **[Ouroboros: The Agent OS That Hides the Answer Key From Its Own Workers](/posts/ouroboros-agent-os-spec-first-loop/)** — a spec-first agent OS where the grading command never reaches the worker. Includes a stdlib reimplementation of its two mathematical gates, plus one documentation defect found by reading the source instead of the docs.
 - **[Twelve Concepts, One Missing Layer](/posts/twelve-agent-concepts-durable-execution/)** — worked through a 12-article agent curriculum and found the load-bearing layer missing from its own summary. Durable execution implemented and verified from scratch.
-- **[Fable 5 Isn't a Faster Chat Model](/posts/fable-5-self-improving-agent-system/)** — the substrate for self-improving agents, read as a systems question rather than a benchmark race.
-- **[Prompt Repetition: A Simple Trick That Improves LLM Accuracy](/posts/prompt-repetition-improves-llm-performance/)** — when a cheap trick genuinely works, and the narrow conditions where it stops working.
+- **[In my rerun, Headroom saved 0 tokens on its GSM8K eval prompts](/posts/headroom-gsm8k-prompts-saved-zero-tokens/)** — the seeded savings table reproduced to the last token, but the requests Headroom's own GSM8K and TruthfulQA eval generates passed through the default proxy byte-identical.
+- **[diagram-design Hash-Locks Its Screenshots, Not Its Storefront](/posts/diagram-design-drift-audit/)** — all 78 screenshot digests recomputed byte-exactly against the pinned manifest, and the one drift no in-repo verifier can reach: a GitHub description that still says 38 types while the tree ships 39.
 
 ## By topic
 
@@ -32,20 +32,17 @@ The main thread. Agent loops, tool dispatch, spec-first workflows, evaluation, a
 
 ### Retrieval & agent memory
 
-Retrieval that survives real corpora: graph memory, agent-maintained knowledge bases, multimodal embeddings, and the seams where a memory layer meets a harness.
+Memory that has to survive real use: a shared memory layer across harnesses, concurrent agents writing to shared knowledge, and a forgetting fix checked against what its benchmark actually measured.
 
-- [From RAG to Context Layer: Ontology, LLM Wiki, HyGRAG](/posts/ontology-graphrag-agent-memory/)
+- [Twelve Concepts, One Missing Layer: graph memory and durable execution](/posts/twelve-agent-concepts-durable-execution/)
 - [One Memory Setup, Every Harness: Omnigent's Hindsight Bridge](/posts/omnigent-hindsight-universal-memory/)
-- [LLM Wiki: an agent-maintained knowledge base instead of another RAG stack](/posts/llm-wiki-persistent-knowledge-base/)
-- [Multimodal Sentence Transformers: a practical upgrade for retrieval systems](/posts/multimodal-sentence-transformers-practical-guide/)
-
-→ [Posts tagged agent memory](/tags/agentmemory/)
+- [mini-AGI's forgetting fix is measured on reading, not on chat](/posts/mini-agi-forgetting-fix-reading-not-chat/)
 
 ### Models & papers
 
 Architectures read closely enough to explain, not just cite.
 
-- [Diffusion Models, Visually: How Noise Becomes an Image](/posts/diffusion-model-visual-breakdown/)
+- [LongCat-Video: The Continuation State Is the Product](/posts/longcat-video-stateful-continuation/)
 - [FreeToken: 284B on a Gaming Desktop, 753B on One Workstation GPU](/posts/freetoken-edge-native-moe-serving/)
 - [NPGA: tracking and rendering measured separately](/posts/npga-paper/)
 - [LLM2Vec, Two Years On: The Thesis Won, the Recipe Did Not](/posts/llm2vec-embedding-models/)
@@ -56,7 +53,7 @@ Architectures read closely enough to explain, not just cite.
 
 What it takes to run this material rather than demo it.
 
-- [Superlog: When Your Telemetry Stack Starts Investigating Incidents](/posts/superlog-agentic-telemetry/)
+- [TradingAgents and LibreChat Are Not Drop-In Replacements](/posts/tradingagents-librechat-self-hosting-audit/)
 - [SQLite in Games: A Save File Is Never Just a File](/posts/sqlite-game-save-contract/)
 - [Metal Cannot Preempt: What oMLX Rediscovers From Game Engines](/posts/omlx-metal-residency/)
 
@@ -75,11 +72,11 @@ Coming from game AI, this is where I started: systems that read a screen and act
 
 ### Developer tooling
 
-- [Unity CLI: From Editor Installs to Verifiable Game-Production Work](/posts/unity-cli-production-workflows/)
-- [Unity CLI Atomic Agent](/posts/unity-cli-atomic-agent/)
-- [Antigravity CLI Migration: a production-minded checklist](/posts/antigravity-cli-migration-agy/)
+- [MCP for Unity Ships a Drift Check No Workflow Ever Runs](/posts/unity-mcp-release-notes-drift-audit/)
+- [MEX on macOS Broke Before Project Memory Even Loaded](/posts/mex-macos-command-collision/)
+- [CodeBurn's $15 hard cap denies tools when it could stop Claude](/posts/codeburn-guard-hard-cap-audit/)
 
-→ [All tooling posts](/categories/developer-tools/)
+→ [Posts tagged CI](/tags/ci/)
 
 ## From projects to technical evidence
 
@@ -91,10 +88,10 @@ Different posts do different work. If you prefer one mode over another:
 
 | Format | What it looks like | Examples |
 | :--- | :--- | :--- |
-| **Runnable code** | Companion `.py` files you can download and execute; every assertion in the post was produced by running them | [Ouroboros gates](/posts/ouroboros-agent-os-spec-first-loop/) · [Durable execution](/posts/twelve-agent-concepts-durable-execution/) · [Supertonic ONNX](/posts/supertonic-onnx-runtime-tts/) |
+| **Runnable code** | Companion `.py` files you can download and execute; every assertion in the post was produced by running them | [Ouroboros gates](/posts/ouroboros-agent-os-spec-first-loop/) · [Durable execution](/posts/twelve-agent-concepts-durable-execution/) |
 | **Video** | Embedded walkthroughs and demos | [jeo-code harness](/posts/jeo-code-ai-builder-harness/) · [MoneyPrinterTurbo control plane](/posts/moneyprinterturbo-production-control-plane/) · [AI game development course](/posts/game-development-with-ai-trying/) |
-| **Diagrams** | Mermaid architecture and flow diagrams | [Prompt repetition](/posts/prompt-repetition-improves-llm-performance/) · [DeepSeek Harness](/posts/deepseek-harness-everything-is-a-plugin/) · [SQLite game saves](/posts/sqlite-game-save-contract/) |
-| **Deep dives** | 2,500+ words, single subject, primary sources only | [Fable 5](/posts/fable-5-self-improving-agent-system/) · [TradingAgents and LibreChat](/posts/tradingagents-librechat-self-hosting-audit/) · [FreeToken](/posts/freetoken-edge-native-moe-serving/) |
+| **Diagrams** | Mermaid architecture and flow diagrams | [LongCat-Video continuation](/posts/longcat-video-stateful-continuation/) · [DeepSeek Harness](/posts/deepseek-harness-everything-is-a-plugin/) · [SQLite game saves](/posts/sqlite-game-save-contract/) |
+| **Deep dives** | 2,500+ words, single subject, primary sources only | [Moli benchmark provenance](/posts/moli-benchmark-provenance-audit/) · [TradingAgents and LibreChat](/posts/tradingagents-librechat-self-hosting-audit/) · [FreeToken](/posts/freetoken-edge-native-moe-serving/) |
 | **Source audits** | One repository, paper, or release read at a pinned commit; what the README claims versus what the code does | [OpenHarness permission order](/posts/openharness-permission-order-audit/) · [HyperFrames determinism](/posts/hyperframes-determinism-audit/) · [Unity MCP drift check](/posts/unity-mcp-release-notes-drift-audit/) |
 
 ## How this blog works

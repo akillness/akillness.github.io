@@ -1,4 +1,5 @@
 ---
+published: false
 title: "The New MCP Roadmap - Reading the Protocol's Five Bets on Agentic Infrastructure"
 description: "MCP just published an updated roadmap: sessions are gone, transports are unifying on HTTP, and agent identity is now a first-class priority. Here's what each of the five areas means if you're shipping agent-powered tools."
 categories: [AI, Agents]

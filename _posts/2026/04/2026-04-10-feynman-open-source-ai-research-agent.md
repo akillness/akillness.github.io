@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Feynman: An Open-Source AI Research Agent That Actually Thinks Beyond Search"
 description: "A practical review of Feynman covering its research-first CLI workflows, multi-agent research roles, paper-to-code audit flow, experiment execution stack, and why it matters beyond AI search."
 categories: [AI, Agents, Developer-Tools]

@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Supertonic 3: What On-Device TTS Starts to Look Like When ONNX Is the Contract"
 description: "A production-minded look at Supertonic 3, Supertone AI's lightweight ONNX Runtime TTS system, with links, downloaded assets, and sample code for Python, Node.js, and browser deployment."
 categories: [AI, Speech, Edge-AI]

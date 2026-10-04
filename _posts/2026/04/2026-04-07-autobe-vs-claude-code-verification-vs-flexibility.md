@@ -1,4 +1,5 @@
 ---
+published: false
 title: "AutoBE vs. Claude Code: Verification Beats Raw Agent Flexibility on Big Backend Builds"
 description: "A practical engineering read on AutoBE vs. Claude Code: why the real divide is not model quality, but whether reliability comes from human review loops or compiler-backed verification."
 categories: [AI, Developer-Tools, Architecture]

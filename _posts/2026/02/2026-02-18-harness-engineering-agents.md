@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Harness Engineering: The Layer That Actually Makes Agents Work"
 description: "Why orchestration beats model upgrades in production—and how a better harness can flip benchmarks without changing the model."
 categories: [AI, Agent]

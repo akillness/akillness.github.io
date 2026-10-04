@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Why AI Coding Agents Fail — and Why the Harness Matters More Than the Model"
 description: "Engineering Discipline is an open-source harness for AI coding agents that adds clarification, complexity routing, worker-validator separation, checkpoint recovery, implementation guardrails, and AI code cleanup."
 categories: [AI, Agents, Developer-Tools]

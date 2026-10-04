@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Diffusion Models, Visually: How Noise Becomes an Image (and Why a Game Studio Should Care)"
 description: "A visual, equation-light breakdown of diffusion models — forward noising, the noise-prediction loss, timestep embeddings, U-Nets, latent diffusion, classifier-free guidance, and diffusion transformers — read through the lens of shipping game content."
 categories: [Research, ML]

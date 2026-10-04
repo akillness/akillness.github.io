@@ -129,7 +129,7 @@ If I were wiring this into a personal assistant or a studio tool today, I would 
 - **Pass `--lr` explicitly** when reading your own files, for example the 5e-5 the README intends, and point `--held-out` at a folder that actually exists.
 - **Copy the weights directory before any `--save`.** The README says the directory is the model, so a copy is your only undo.
 - **Score held-out loss after every learning session**, and treat changes smaller than 0.03 as noise, as the README advises.
-- **Keep product memory outside the weights** until the chat path is measured. The [Fable 5 self-improving agent system post](/posts/fable-5-self-improving-agent-system/) covers that design: the model stays fixed and the system around it improves. The [context engineering and agent memory post](/posts/context-engineering-agent-memory-design/) covers the external-memory side.
+- **Keep product memory outside the weights** until the chat path is measured.
 
 None of this argues against the project. It argues for measuring the chat path with the same care the author gave the corpus path.
 
@@ -167,8 +167,3 @@ None of this argues against the project. It argues for measuring the chat path w
 - [`config.yaml`](https://github.com/volotat/mini-AGI/blob/efd4a16822d7e46008847186df750ea3ff9fa00b/config.yaml)
 - [`minagi/config.py`](https://github.com/volotat/mini-AGI/blob/efd4a16822d7e46008847186df750ea3ff9fa00b/minagi/config.py)
 - [MIT License at the pinned commit](https://raw.githubusercontent.com/volotat/mini-AGI/efd4a16822d7e46008847186df750ea3ff9fa00b/LICENSE)
-
-### Related reading
-
-- [Fable 5 self-improving agent system](/posts/fable-5-self-improving-agent-system/)
-- [Context engineering and agent memory design](/posts/context-engineering-agent-memory-design/)

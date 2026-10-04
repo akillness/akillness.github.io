@@ -1,4 +1,5 @@
 ---
+published: false
 title: "From RAG to Context Layer: What Genie Ontology, LLM Wiki Memory, and HyGRAG Tell Us About the Next Stack"
 description: "Three signals on the same day point at one trajectory — RAG → GraphRAG → Agent Memory → Enterprise Ontology — and game studios should read it as a context-layer problem, not a chatbot problem."
 categories: [AI, Agents]

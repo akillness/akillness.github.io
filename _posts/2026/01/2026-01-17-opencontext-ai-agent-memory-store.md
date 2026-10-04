@@ -1,4 +1,5 @@
 ---
+published: false
 title: "OpenContext - Give Your AI Assistant a Persistent Memory for Multi-Agent Workflows"
 description: "A personal context store for AI agents: CLI + MCP + Desktop app to capture, search, and reuse project knowledge across agents and repos"
 categories: [Agent/Orchestration]

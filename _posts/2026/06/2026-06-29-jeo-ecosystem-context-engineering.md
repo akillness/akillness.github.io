@@ -303,8 +303,6 @@ None of these five repos are training-data pipelines. But they were all built by
 
 **Related reading on this blog:**
 - [jeo-code Puts Skills and Approval Gates Around Coding Agents](/posts/jeo-code-ai-builder-harness/)
-- [The Vault That Rewrites Itself: An AI-First Second Brain for Game Teams](/posts/obsidian-second-brain-self-rewriting-vault/)
-- [Claude Code vs. Cursor vs. Codex vs. Antigravity — Why the Harness Won](/posts/agentic-coding-convergence/)
 
 **Upstream projects referenced by the ecosystem:**
 - [Hermes Agent](https://github.com/nousresearch/hermes-agent) (Nous Research)

@@ -191,7 +191,7 @@ The error is **returned to the model as tool output**, not raised. A well-instru
 
 ### The wiring, as I would write it for a team
 
-The pattern I care about is not one assistant with a diary. It is **several specialized agents sharing one project memory** — the arrangement I have been circling since I wrote about [ontology and agent memory as a context layer](/posts/ontology-graphrag-agent-memory/).
+The pattern I care about is not one assistant with a diary. It is **several specialized agents sharing one project memory**.
 
 ```yaml
 # balance-agent/config.yaml — one of several agents on the same bank
@@ -339,6 +339,4 @@ For memory, that is a fine trade — notes-to-self are exactly what you want to 
 **Related posts:**
 
 - [DeepSeek Harness: What If the Agent Loop Itself Were Just Another Plugin?](/posts/deepseek-harness-everything-is-a-plugin/) — the same seam argument, one layer down
-- [From RAG to Context Layer](/posts/ontology-graphrag-agent-memory/) — why agent memory is a context-layer problem
 - [The JEO Ecosystem: Context Engineering](/posts/jeo-ecosystem-context-engineering/) — my own take on persistent context across sessions
-- [Atomic Agent + Unity CLI](/posts/unity-cli-atomic-agent/) — the custom harness I would wire this into first

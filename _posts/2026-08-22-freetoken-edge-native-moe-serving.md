@@ -378,6 +378,3 @@ Coming at this as someone who builds AI systems for games, here is my actual que
 
 **Models referenced:**
 - [DeepSeek-V4-Flash-0731](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731) (284B-A13B, MXFP4) · [nvidia/GLM-5.2-NVFP4](https://huggingface.co/nvidia/GLM-5.2-NVFP4) (753B-A40B) · [Qwen3.6-35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B)
-
-**Related posts on this blog:**
-- [PrismML 1-bit Bonsai: Why 1-Bit LLMs Could Make On-Device AI Actually Practical](/posts/prismml-1-bit-bonsai-on-device-ai/)
