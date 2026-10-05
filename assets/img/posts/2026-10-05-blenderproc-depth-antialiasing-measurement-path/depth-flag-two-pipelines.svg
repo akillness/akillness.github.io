@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="Helvetica, Arial, sans-serif" role="img" aria-label="Diagram of BlenderProc's enable_depth_output at commit 76bd8b8: activate_antialiasing True routes through the Mist distance pass and a dist2depth conversion at load, False routes through the Z pass without conversion, and both end in the same depth output key">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+
+  <text x="60" y="56" fill="#111827" font-size="29" font-weight="bold">One flag, two depth measurements, one output key</text>
+  <text x="60" y="86" fill="#4b5563" font-size="16">BlenderProc at commit 76bd8b8: enable_depth_output(activate_antialiasing=...) as read from source, not executed.</text>
+
+  <rect x="60" y="255" width="230" height="96" rx="12" fill="none" stroke="#111827" stroke-width="2"/>
+  <text x="80" y="287" fill="#111827" font-size="16" font-weight="bold">enable_depth_output(</text>
+  <text x="80" y="309" fill="#111827" font-size="16" font-weight="bold">activate_antialiasing=?)</text>
+  <text x="80" y="335" fill="#4b5563" font-size="14">one call, two pipelines</text>
+
+  <rect x="330" y="130" width="250" height="96" rx="12" fill="none" stroke="#b45309" stroke-width="2"/>
+  <text x="348" y="160" fill="#b45309" font-size="15" font-weight="bold">True: distance path</text>
+  <text x="348" y="184" fill="#111827" font-size="14">enable_distance_output(...,</text>
+  <text x="348" y="204" fill="#111827" font-size="14">convert_to_depth=True)</text>
+
+  <rect x="620" y="130" width="260" height="96" rx="12" fill="none" stroke="#b45309" stroke-width="2"/>
+  <text x="638" y="160" fill="#b45309" font-size="15" font-weight="bold">Mist pass, then EXR</text>
+  <text x="638" y="182" fill="#111827" font-size="14">LINEAR falloff, start 0</text>
+  <text x="638" y="200" fill="#111827" font-size="14">Map Range 0..1 to 0..max</text>
+  <text x="638" y="218" fill="#111827" font-size="14">max = antialiasing_distance_max</text>
+  <text x="620" y="248" fill="#b45309" font-size="13">config default 10000: a setting, not a measured range</text>
+
+  <rect x="330" y="380" width="250" height="96" rx="12" fill="none" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="348" y="410" fill="#1d4ed8" font-size="15" font-weight="bold">False: Z pass</text>
+  <text x="348" y="434" fill="#111827" font-size="14">use_pass_z = True</text>
+  <text x="348" y="454" fill="#111827" font-size="14">render layer output "Depth"</text>
+
+  <rect x="620" y="380" width="260" height="96" rx="12" fill="none" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="638" y="410" fill="#1d4ed8" font-size="15" font-weight="bold">Z pass, then EXR</text>
+  <text x="638" y="432" fill="#111827" font-size="14">loaded without conversion</text>
+  <text x="638" y="450" fill="#111827" font-size="14">the branch the inspected</text>
+  <text x="638" y="468" fill="#111827" font-size="14">raytracing test selects</text>
+  <text x="620" y="498" fill="#1d4ed8" font-size="13">test definition read, not run</text>
+
+  <rect x="910" y="255" width="240" height="96" rx="12" fill="none" stroke="#111827" stroke-width="2"/>
+  <text x="928" y="285" fill="#111827" font-size="15" font-weight="bold">data["depth"]</text>
+  <text x="928" y="307" fill="#111827" font-size="14">default key, depth_####.exr</text>
+  <text x="928" y="325" fill="#b45309" font-size="14">True only: dist2depth at</text>
+  <text x="928" y="343" fill="#b45309" font-size="14">load, f = K[0,0]</text>
+
+  <path d="M290 290 C 310 290, 310 178, 326 178" fill="none" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M290 316 C 310 316, 310 428, 326 428" fill="none" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M580 178 L 616 178" fill="none" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M580 428 L 616 428" fill="none" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M880 178 C 900 178, 890 285, 906 285" fill="none" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M880 428 C 900 428, 890 325, 906 325" fill="none" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <text x="60" y="540" fill="#374151" font-size="17">Same name downstream, different measurement upstream: record the flag in the dataset manifest.</text>
+  <text x="60" y="568" fill="#6b7280" font-size="13">Evidence: RendererUtility.py L195-196, L221-232, L250-256, L276-278, L300, L313 · WriterUtility.py L129-132 · PostProcessingUtility.py L30-44 · testCameraProjection.py L83</text>
+  <text x="60" y="592" fill="#6b7280" font-size="13">Original diagram · Fodev JEO Source Audit · static source reading at 76bd8b8; no Blender render or test was run</text>
+</svg>
