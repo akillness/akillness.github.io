@@ -2,7 +2,7 @@
 
 ## Schedule
 
-- Recurrence: daily at 01:00
+- Recurrence: Tuesday and Friday at 01:00
 - Timezone: `Asia/Seoul`
 - Maximum output: one article package
 - Safe baseline mode: `draft-only`
@@ -10,6 +10,8 @@
 - Runtime registration: an external Aside cron named `Daily Source Audit Publish`
 
 The schedule intentionally does not live in GitHub Actions: authenticated browser research and routine memory run in Aside. Verify the external routine separately; repository CI remains build/deploy-only.
+
+Execute each configured round. Separately authorized manual publication or publication the prior day does not complete, defer or cancel that round. Preserve pending manual work and every quality gate; report a genuine blocker rather than invent filler or change the schedule from inside a run.
 
 ## Run sequence
 
