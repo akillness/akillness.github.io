@@ -134,6 +134,11 @@ tail_includes:
       "
     >
       <div class="license-wrapper">
+        {% if page.article_license %}
+          This article is distributed under <a href="{{ page.article_license.url | relative_url | escape }}">{{ page.article_license.name | escape }}</a>.
+          {{ page.article_license.notice | escape }}
+          <a href="{{ page.article_license.rights_notice | relative_url | escape }}">Rights notice</a>.
+        {% else %}
         {% if site.data.locales[lang].copyright.license.template %}
           {% capture _replacement %}
         <a href="{{ site.data.locales[lang].copyright.license.link }}">
@@ -142,6 +147,7 @@ tail_includes:
         {% endcapture %}
 
           {{ site.data.locales[lang].copyright.license.template | replace: ':LICENSE_NAME', _replacement }}
+        {% endif %}
         {% endif %}
       </div>
 
