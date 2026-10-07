@@ -94,6 +94,38 @@ function readArchiveMinimum(key, file) {
   return value;
 }
 
+// htmlproofer disables external checks, which also skips absolute self-links.
+// Check only this site's /posts/ namespace against built files, not sibling
+// GitHub Pages projects such as /hongT/ or the site's indexing eligibility.
+export function verifyPostLinks(html, { route, builtFiles, origin = 'https://akillness.github.io' }) {
+  const errors = new Set();
+  const visibleHtml = html.replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '');
+  for (const [tag] of visibleHtml.matchAll(/<a\b(?:[^"'<>]|"[^"]*"|'[^']*')*>/gi)) {
+    const attribute = [...tag.matchAll(/([^\s=<>/]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g)]
+      .find((match) => match[1].toLowerCase() === 'href');
+    if (!attribute) continue;
+    const href = (attribute[2] ?? attribute[3] ?? attribute[4]).replaceAll('&amp;', '&')
+      .replace(/&#(x[\da-f]+|\d+);/gi, (entity, value) => {
+        const code = /^x/i.test(value) ? parseInt(value.slice(1), 16) : Number(value);
+        return code <= 0x10ffff ? String.fromCodePoint(code) : entity;
+      });
+    let url;
+    try { url = new URL(href, new URL(route, origin)); } catch { continue; }
+    if (!['https:', 'http:'].includes(url.protocol) || url.host !== new URL(origin).host || !url.pathname.startsWith('/posts/')) continue;
+    let target;
+    try { target = decodeURIComponent(url.pathname); } catch {
+      errors.add(`post link has invalid URL encoding: ${href} (from ${route})`);
+      continue;
+    }
+    const candidates = [target, `${target.replace(/\/$/, '')}/index.html`, `${target}.html`];
+    if (!candidates.some((file) => builtFiles.has(file))) {
+      errors.add(`link points at a post that was not built: ${target} (from ${route})`);
+    }
+  }
+  return [...errors];
+}
+
 function main() {
 const adConfig = readAdConfig();
 const tagArchiveMinimum = readTagArchiveMinimum();
@@ -223,8 +255,11 @@ const builtHtmlFiles = [];
 })(siteDir);
 const archiveHrefPattern = /href="(?:https:\/\/akillness\.github\.io)?\/(tags|categories)\/([^/"#?]+)\/"/g;
 const danglingArchiveLinks = new Map();
+const builtFiles = new Set(builtHtmlFiles.map((file) => `/${path.relative(siteDir, file).split(path.sep).join('/')}`));
 for (const file of builtHtmlFiles) {
   const html = fs.readFileSync(file, 'utf8');
+  const route = `/${path.relative(siteDir, file).split(path.sep).join('/')}`.replace(/index\.html$/, '');
+  failures.push(...verifyPostLinks(html, { route, builtFiles, origin }));
   for (const [, root, slug] of html.matchAll(archiveHrefPattern)) {
     if (builtArchiveSlugs[root].has(slug)) continue;
     const key = `/${root}/${slug}/`;
