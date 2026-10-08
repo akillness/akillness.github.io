@@ -2,7 +2,7 @@
 title: Microsoft Agent Framework Harness Defaults Vary by Language
 description: Compare Microsoft Agent Framework Harness defaults in Python and .NET, including Skills, file access, and configuration-dependent features.
 date: 2026-10-01 21:00:00 +0900
-categories: AI
+categories: [AI, Agents]
 tags: [agent-framework, harness, agents, python, dotnet]
 image:
   path: /assets/img/posts/2026-10-01-microsoft-agent-framework-harness-defaults-vary-by-language/microsoft-agent-framework-banner.png
@@ -14,15 +14,13 @@ math: false
 
 A one-call agent factory sounds portable. Then you move a small agent from Python to .NET and discover that one language loads Skills by default while the other waits for you to opt in. The interesting question is not whether the Harness has useful defaults. It does. The question is which defaults survive the language boundary.
 
-Editorial method: AI assisted source collection and the first-draft comparison. The current Microsoft Learn guidance was checked against implementation files pinned to repository commit [f1fb145](https://github.com/microsoft/agent-framework/tree/f1fb145c4d80191aa86b3480d12112d828233763). No Harness run or first-hand product result is claimed; documentation and implementation are treated as separate evidence layers.
-
-## 🤔 Curiosity: Does “batteries included” mean feature parity?
+## Does “batteries included” mean feature parity?
 
 Microsoft's release announcement describes a stable, batteries-included Harness in Python and .NET. It lists function invocation, history persistence, compaction, todos, modes, file memory, Skills, web search, approvals, and telemetry. The same announcement separates background agents, file access, looping, and shell tooling as opt-in features that were not yet released at the time of that post. That is a useful starting map, not a guarantee that every feature is present in every language with the same default.
 
 The current [Python](https://learn.microsoft.com/en-us/agent-framework/concepts/harness?pivots=programming-language-python) and [.NET](https://learn.microsoft.com/en-us/agent-framework/concepts/harness?pivots=programming-language-csharp) Harness guidance gives a more precise answer. The pinned implementation is a separate check on those docs, because “the docs say it is on” still leaves a practical question: what exactly gets composed when the factory or builder runs?
 
-## 📚 Retrieve: separate the shared baseline from the language split
+## Technical Analysis: separate the shared baseline from the language split
 
 The common baseline is real. Todo tracking, plan and execute modes, session file memory, per-service-call history persistence during tool-calling runs, telemetry, and the tool-approval layer are part of the default composition in both languages. But several nearby capabilities are conditional, and one default is explicitly different.
 
@@ -88,7 +86,7 @@ Current Learn guidance labels background agents, file access, and looping as exp
 
 The same docs currently say a packaged Go Harness is not available. Go users can compose the corresponding agent, context-provider, compaction, and middleware pieces directly, but that is a different starting point from the Python factory or .NET HarnessAgent.
 
-## 💡 Innovation: make the default set an explicit test
+## Key Takeaways: make the default set an explicit test
 
 If I were porting an agent between Python and .NET, I would make one small compatibility test before tuning prompts. Start each implementation in a clean temporary working directory, then assert the provider set, Skills discovery, memory path, file-access scope, web-search availability, and the documented release stage of optional features. The test should use the exact package versions the app will ship, because a live Learn page and a pinned source snapshot answer different questions.
 

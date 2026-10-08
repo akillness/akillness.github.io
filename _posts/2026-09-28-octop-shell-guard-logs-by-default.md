@@ -11,9 +11,7 @@ image:
   alt: "Original diagram showing Octop's warn-only shell guard, disabled tool approval, and the POSIX / default root"
 ---
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under a policy-bound evidence harness; I traced pinned source code, but did not install Octop or run its guard in a live process.
-
-## 🤔 Curiosity: Does Octop's shell guard stop a match, or only report it?
+## Does Octop's shell guard stop a match, or only report it?
 
 [Octop](https://github.com/TencentCloud/Octop) is TencentCloud's MIT-licensed, self-hosted assistant with a shared multi-user workspace. The source pin in this audit is commit [`232030f`](https://github.com/TencentCloud/Octop/tree/232030f46c5450801ca87809f8a4da57aefc5a05), from the `1.0.2b4` release line. Its lockfile resolves the shell-guard dependency to `octop-harness` **1.0.0**, the version examined below.
 
@@ -32,7 +30,7 @@ The source gives two defaults to separate. If no `security_policy` row exists, t
 
 The rules exist. The practical questions are what action the guard takes and whether the shell has a real execution boundary.
 
-## 📚 Retrieve: What the pinned code shows
+## Technical Analysis: What the pinned code shows
 
 I pinned Octop at commit [`232030f`](https://github.com/TencentCloud/Octop/tree/232030f46c5450801ca87809f8a4da57aefc5a05) and read its current README, security policy store and test, default-agent and invite code, backend documentation, dashboard strings, and `uv.lock`. The lock now resolves `octop-harness` to **1.0.0**. I traced that tagged package's source rather than reusing the earlier draft's `orcakit-harness-agent` 1.0.14 engine probe.
 
@@ -98,7 +96,7 @@ Octop is not just a chat window with an occasional tool call. Its user guide doc
 
 The current English dashboard strings offer **"Block (HIGH/CRITICAL)"**, **"Require approval (includes MEDIUM)"**, and **"Log warnings only"**, plus a separate **"Require human approval for tools"** switch. The harness's default HITL tool list includes `bash`, `execute`, `write_file`, `edit_file`, and `delete`. The controls exist; the gap is that the no-row policy does not turn them on.
 
-## 💡 Innovation: Set the guard, then set a real boundary
+## Key Takeaways: Set the guard, then set a real boundary
 
 Before inviting anyone to a shared Octop instance, configure three separate controls.
 

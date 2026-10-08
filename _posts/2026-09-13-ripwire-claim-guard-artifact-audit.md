@@ -13,9 +13,7 @@ image:
 
 ![Where ripwire's gate-count guard stops: the loop names 612, the three guarded source files say 612, and the two committed build artifacts still say 606](/assets/img/posts/2026-09-13-ripwire-claim-guard-artifact-audit/claim-guard-boundary.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under an evidence-gated editorial harness; every count was re-derived from the pinned commit 1cf3086e before publication.
-
-## 🤔 Curiosity: If a project gates its own numbers, where can one still go stale?
+## If a project gates its own numbers, where can one still go stale?
 
 [redhat-et/ripwire](https://github.com/redhat-et/ripwire/tree/1cf3086e8f7c1eb67368bca90a86e5438d911517) does not ask you to take its figures on trust, and it says so loudly. It is a C++23 CLI and MCP server the project calls zero-dependency — every dependency is vendored in-tree — and it hands a coding agent a ranked call graph instead of letting it grep around. Its pitch is not only speed. It is that every number it publishes has a committed instrument behind it. The repository is Apache-2.0, was created on 2026-07-29, and at retrieval carried 1,928 stars with a push timestamped 2026-09-13T03:07:28Z.
 
@@ -28,7 +26,7 @@ At commit `1cf3086e` that sentence is true of three files and false of two.
   <figcaption>The deck preview the README uses as the link to <code>present/ripwire-showcase.pdf</code>; the PDF behind this image is the artifact that still states 606 &mdash; Image from redhat-et/ripwire (Apache-2.0), commit 1cf3086e. Source: <a href="https://github.com/redhat-et/ripwire/blob/1cf3086e8f7c1eb67368bca90a86e5438d911517/README.md">https://github.com/redhat-et/ripwire/blob/1cf3086e8f7c1eb67368bca90a86e5438d911517/README.md</a>. Publisher: redhat-et (redhat-et/ripwire). Licence: <a href="https://github.com/redhat-et/ripwire/blob/1cf3086e8f7c1eb67368bca90a86e5438d911517/LICENSE">Apache-2.0</a>.</figcaption>
 </figure>
 
-## 📚 Retrieve: Counting the same number on five surfaces
+## Technical Analysis: Counting the same number on five surfaces
 
 I cloned the tree at `1cf3086e`, counted the authority myself, read each stated surface at its line, and extracted the text of both committed binaries. Every figure below is a recount, not a quotation of the project's own summary.
 
@@ -105,7 +103,7 @@ Two more committed files are worth naming, because they are the reason this audi
   <figcaption>The product itself: a ranked call graph over 120 of 607 symbols, with the legend naming the root, ranker and top-k that produced it and the rules file saved beside it &mdash; Image from redhat-et/ripwire (Apache-2.0), commit 1cf3086e. Source: <a href="https://github.com/redhat-et/ripwire/blob/1cf3086e8f7c1eb67368bca90a86e5438d911517/README.md">https://github.com/redhat-et/ripwire/blob/1cf3086e8f7c1eb67368bca90a86e5438d911517/README.md</a>. Publisher: redhat-et (redhat-et/ripwire). Licence: <a href="https://github.com/redhat-et/ripwire/blob/1cf3086e8f7c1eb67368bca90a86e5438d911517/LICENSE">Apache-2.0</a>.</figcaption>
 </figure>
 
-## 💡 Innovation: A drift gate's blast radius is its file list, not its idea
+## Key Takeaways: A drift gate's blast radius is its file list, not its idea
 
 The useful lesson here is not "ripwire has a bug". Six is a small delta on a number no reader will act on, and the project caught this failure mode twice already without anyone outside noticing. The lesson is structural, and it generalises to any repository that publishes a derived figure.
 

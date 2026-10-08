@@ -9,15 +9,13 @@ image:
   alt: "Four evidence layers: editor presentation, scene resources, saved project state, and a separately captured runtime result"
 ---
 
-> **Editorial method:** AI assisted research and drafting; the evidence-gated editorial harness owns editorial judgment. This is a static read of pinned Godot documentation and source, not a Godot editor run, game build, runtime test, or claim of personal production experience.
-
-## 🤔 Curiosity: What did that preview actually prove?
+## What did that preview actually prove?
 
 A Godot scene can look finished in the 3D editor while the running project shows a different sky, lighting setup, or camera view. The tempting explanation is often that the engine ignored a setting. Before changing render code, ask a more basic question: was the visible environment part of the scene at all, or was it an editor preview helping someone work?
 
 That distinction matters whenever a screenshot is used in a bug report, review, tutorial, or acceptance check. An image can faithfully show what the editor displayed without showing what the saved scene contains, and neither fact alone establishes what a running project rendered. The Godot documentation makes that boundary unusually explicit: its preview sun and sky are visible in the editor, not in the running project.
 
-## 📚 Retrieve: What the pinned sources say
+## Technical Analysis: What the pinned sources say
 
 I read Godot's environment documentation at the pinned documentation revision 9adca4c1c72917bfe1b7be3108abed5ce26696a6 and followed the relevant implementation in Godot Engine source pinned to 5b4e0cb0fd279832bbdd69fed5354d4e5ad26f88. This was a static documentation and source review. I did not build Godot, open an editor, run a project, or capture runtime output.
 
@@ -53,7 +51,7 @@ The preview settings dialog adds another useful distinction. Godot documents con
 
 The source boundaries are worth keeping precise. Documentation states the editor-only limitation. The source code trace shows the camera preview wired to the editor viewport. Together, they support the narrow finding that an editor preview is not runtime scene evidence. They do not establish a regression, a rendering defect, or the behavior of every Godot version and project configuration.
 
-## 💡 Innovation: A small evidence packet for scene reviews
+## Key Takeaways: A small evidence packet for scene reviews
 
 I would separate a visual review into four evidence layers rather than ask one screenshot to answer every question:
 

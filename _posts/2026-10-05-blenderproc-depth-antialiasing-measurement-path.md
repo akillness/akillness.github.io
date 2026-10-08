@@ -13,14 +13,11 @@ image:
 
 In [BlenderProc](https://github.com/DLR-RM/BlenderProc/tree/76bd8b82ee19489843578ff045298642197bf883), `enable_depth_output(activate_antialiasing=True)` is not a smoother copy of the same depth image. At the commit I read, the flag selects a different measurement pipeline. `True` renders Blender's Mist pass over a configured range and converts the result from distance to depth when the file is loaded. `False` reads the Z pass directly. With default arguments both land under the same `depth` key with the same file names, and the one depth-equality test I inspected is defined only for `False`.
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance inside an evidence-gated editorial harness; every BlenderProc claim is pinned to commit 76bd8b8, read statically on 2026-10-05, and no Blender render or test was run.
-{: .prompt-info }
-
 **Scope, stated once and plainly.** Static audit date: 2026-10-05. Pinned commit: `76bd8b82ee19489843578ff045298642197bf883`, which was still `main` HEAD at retrieval; it was committed on 2026-01-07, and the repository's last push was 2026-01-20. This is not news about a new release. I read source, tests, documentation and examples. I did not install Blender or BlenderProc, render a frame, or run a test, so nothing below is a benchmark, an accuracy figure, or a pass/fail result.
 
 Throughout, I label four kinds of statement separately: **source finding** (what the pinned code does), **test definition** (what a test asserts, not whether it passes), **proposal** (a checklist I derived, not one I have run), and **open question** (untested).
 
-## 🤔 Curiosity: can a depth image get smoother without changing what it measures?
+## can a depth image get smoother without changing what it measures?
 
 Synthetic RGB-D is attractive for 3D vision, robotics and game QA because the renderer holds the exact scene geometry. A rendered depth map can seed a point cloud, check that an occlusion test agrees with the scene, or provide labels a physical sensor cannot. The appeal is that the renderer *knows* the answer.
 
@@ -28,7 +25,7 @@ Antialiasing in an RGB image is a visual decision: blend the colours at an edge 
 
 The renderer tutorial gives a short answer: the distance output is antialiased, the depth output is the z-buffer "without any smoothing effects". The source gives a more specific one, and it is the one your dataset inherits.
 
-## 📚 Retrieve: what the pinned source actually does
+## Technical Analysis: what the pinned source actually does
 
 ### Source finding: one call, two pipelines
 
@@ -102,7 +99,7 @@ Now a labelled **inference**. In the depth panel of Figure 1, the colour bands a
 
 Figure 2 is the reason a depth file without its pose is half a datum. Both examples load the bundled `scene.obj` and `camera_positions` resources, and each frame's depth only becomes geometry once you know which camera-to-world pose and which `K` it belongs to. This is the same question [HyperFrames forced about "same video"](/posts/hyperframes-determinism-audit/): before you compare two renders, decide what unit equality is asserted in.
 
-## 💡 Innovation: record the measurement, not just the file
+## Key Takeaways: record the measurement, not just the file
 
 ### Proposal: a depth manifest for every synthetic dataset
 

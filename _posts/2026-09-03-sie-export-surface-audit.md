@@ -12,7 +12,7 @@ image:
   alt: "Two-zone diagram of the SIE repository: an examples zone developed through public pull requests, and an engine zone that arrives as a 300-file sync commit, with the changelog citing PR #478 while the public sequence ends at #248 and no .github directory present at v0.7.2"
 ---
 
-## 🤔 Curiosity: what can you audit in a vendor-run open-source repo?
+## what can you audit in a vendor-run open-source repo?
 
 [SIE](https://github.com/superlinked/sie), the Superlinked Inference Engine, is having a moment. It appeared on GitHub's daily Trending list on 3 September 2026 with 60 stars that day and 2,999 overall, and it makes a pitch squarely aimed at agent builders: "an open-source inference engine that runs the models behind every agent task through one API: search and retrieval, document-to-markdown conversion, structured output, content safety, and the agent loop itself."
 
@@ -20,10 +20,7 @@ I went in to audit the engine. I came out having audited something more interest
 
 That distinction matters to anyone deciding whether to build on it, and it is invisible from the README. So this audit reconstructs it from the evidence a repository cannot help but carry.
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance inside an evidence-gated editorial harness; every repository claim is pinned to commit 9a7e8d35 or to GitHub API responses recorded in the run's evidence pack, and nothing was executed.
-{: .prompt-info }
-
-## 📚 Retrieve: what the pinned tree and the API record show
+## Technical Analysis: what the pinned tree and the API record show
 
 I read the tree at commit `9a7e8d3599f7f16ee57c5218f2ad3822e45c129f` — the commit the `v0.7.2` tag and the v0.7.2 GitHub release (published 2026-08-27) both point at — plus the GitHub REST API's commit, tree, tag, release and issue records. Nothing was cloned or executed.
 
@@ -98,7 +95,7 @@ None of this means the artifact is thin. The opposite: the tree carries an unusu
   <figcaption>The sie_mcp architecture diagram from the package docs. Source: <a href="https://github.com/superlinked/sie/blob/9a7e8d3599f7f16ee57c5218f2ad3822e45c129f/packages/sie_mcp/README.md">https://github.com/superlinked/sie/blob/9a7e8d3599f7f16ee57c5218f2ad3822e45c129f/packages/sie_mcp/README.md</a> · License: <a href="https://github.com/superlinked/sie/blob/9a7e8d3599f7f16ee57c5218f2ad3822e45c129f/LICENSE">https://github.com/superlinked/sie/blob/9a7e8d3599f7f16ee57c5218f2ad3822e45c129f/LICENSE</a> · Superlinked (superlinked/sie), Apache-2.0, commit 9a7e8d35</figcaption>
 </figure>
 
-## 💡 Innovation: the export-surface test
+## Key Takeaways: the export-surface test
 
 Put together, the audit yields a reproducible four-check test you can run on any vendor-run repository in a few minutes, with nothing but the API:
 

@@ -11,11 +11,9 @@ image:
 
 In the Godot source I inspected, **Physics Time is the longest completed sampled physics window in one main-loop iteration, not their sum**. And **Physics Frame % divides by the fixed physics update interval**, not by measured Physics Time. A calm-looking row can therefore answer a narrower question than “how much physics work did this frame contain?”
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under a standing-approved, evidence-gated editorial policy. The finding is a static source trace plus synthetic arithmetic, not a Godot runtime measurement; no personal production experience is claimed.
-
 **Scope:** Source Audit, October 6, 2026. Engine source is pinned to `ed1daf0b` (resolved from `4.7.2-stable`); documentation is pinned separately to `9adca4c1`. I read the timing producer, debugger transfer and editor consumer. I did not build Godot, run a game, capture profiler traffic or measure a slowdown. The executable check below tests synthetic arithmetic only. The official screenshots are documentation examples, not captures from this audit. This is an evergreen measurement-contract finding, not a claim about a newly released regression.
 
-## 🤔 Curiosity: what does a physics row actually measure?
+## what does a physics row actually measure?
 
 Suppose a delayed main-loop iteration performs several physics updates. You want to decide whether those updates consumed too much time together, whether one update was unusually expensive, or whether rendering is the real problem. Those are different questions. A label that says “Physics Time” does not tell you which reducer sits underneath it.
 
@@ -28,7 +26,7 @@ The same documentation says profiling is performance-intensive and off by defaul
   <figcaption>Official profiler orientation example. It shows the timing table, scope selector and graph; its displayed values are not evidence for this audit’s physics finding. Source: <a href="https://github.com/godotengine/godot-docs/blob/9adca4c1c72917bfe1b7be3108abed5ce26696a6/tutorials/scripting/debug/the_profiler.rst">https://github.com/godotengine/godot-docs/blob/9adca4c1c72917bfe1b7be3108abed5ce26696a6/tutorials/scripting/debug/the_profiler.rst</a>. Publisher/creator: Juan Linietsky, Ariel Manzur and the Godot community. Attribution: Godot documentation image profiler.png, CC BY 3.0, reproduced unmodified; no endorsement implied. License: <a href="https://github.com/godotengine/godot-docs/blob/9adca4c1c72917bfe1b7be3108abed5ce26696a6/LICENSE.txt">https://github.com/godotengine/godot-docs/blob/9adca4c1c72917bfe1b7be3108abed5ce26696a6/LICENSE.txt</a> (<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>).</figcaption>
 </figure>
 
-## 📚 Retrieve: the reducer survives all the way to the label
+## Technical Analysis: the reducer survives all the way to the label
 
 ### One iteration, several samples, one maximum
 
@@ -98,7 +96,7 @@ Switching to Self removes time spent in calls made by each function. In the docu
   <figcaption>Official Self example, a distinct scope state paired with the previous illustration. The reduced caller rows explain why nested costs should not be blamed on every caller. Source: <a href="https://github.com/godotengine/godot-docs/blob/9adca4c1c72917bfe1b7be3108abed5ce26696a6/tutorials/scripting/debug/the_profiler.rst">https://github.com/godotengine/godot-docs/blob/9adca4c1c72917bfe1b7be3108abed5ce26696a6/tutorials/scripting/debug/the_profiler.rst</a>. Publisher/creator: Juan Linietsky, Ariel Manzur and the Godot community. Attribution: Godot documentation image self_curve.png, CC BY 3.0, reproduced unmodified; no endorsement implied. License: <a href="https://github.com/godotengine/godot-docs/blob/9adca4c1c72917bfe1b7be3108abed5ce26696a6/LICENSE.txt">https://github.com/godotengine/godot-docs/blob/9adca4c1c72917bfe1b7be3108abed5ce26696a6/LICENSE.txt</a> (<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>).</figcaption>
 </figure>
 
-## 💡 Innovation: give every diagnostic number a contract
+## Key Takeaways: give every diagnostic number a contract
 
 My proposed diagnostic sequence is deliberately small:
 

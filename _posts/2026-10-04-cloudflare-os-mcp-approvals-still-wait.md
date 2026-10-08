@@ -11,9 +11,7 @@ image:
   alt: "Original diagram: an agent call in Cloudflare OS takes one of three lanes, a simulated native write that lets the agent continue, an awaitDecision write that pauses the turn while a manual decision is pending, or an MCP tool labelled readOnlyHint true that runs with no approval"
 ---
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under a policy-bound evidence harness; I read the pinned source and ran its MCP tool classifier locally, but I did not deploy Cloudflare OS or watch an agent turn suspend.
-
-## 🤔 Curiosity: Does the approve-later trick reach your MCP servers?
+## Does the approve-later trick reach your MCP servers?
 
 [Cloudflare OS](https://github.com/cloudflare/cloudflare-os) is Cloudflare's open-source agent workspace: an agent chat, AI-built personal apps called Gadgets, and a guardrail layer called Gatekeepers. It is an Apache-2.0 repository created on April 15, 2026, and it had **more than 10,000 GitHub stars** when I checked on October 4, 2026.
 
@@ -32,7 +30,7 @@ At the pinned commit, it does not. No MCP write is simulated. Every MCP tool cal
   <figcaption>The README's hero image: an agent built a slide deck Gadget. The "accepted changes" line is the chat's record of a person merging a Gadget's draft changes, a different step from the external-action approvals this audit traces. Source: <a href="https://github.com/cloudflare/cloudflare-os/blob/5cae880e5e54563895a067e7f4dae67514e581be/README.md">https://github.com/cloudflare/cloudflare-os/blob/5cae880e5e54563895a067e7f4dae67514e581be/README.md</a>. Publisher/creator: cloudflare/cloudflare-os contributors. License: <a href="https://raw.githubusercontent.com/cloudflare/cloudflare-os/5cae880e5e54563895a067e7f4dae67514e581be/LICENSE">https://raw.githubusercontent.com/cloudflare/cloudflare-os/5cae880e5e54563895a067e7f4dae67514e581be/LICENSE</a>. Attribution: cloudflare/cloudflare-os contributors, docs/images/q3-planning-workspace.png, Apache License 2.0, pinned at commit 5cae880e.</figcaption>
 </figure>
 
-## 📚 Retrieve: What the pinned source says
+## Technical Analysis: What the pinned source says
 
 I pinned the audit to commit [`5cae880e`](https://github.com/cloudflare/cloudflare-os/tree/5cae880e5e54563895a067e7f4dae67514e581be), committed on October 2, 2026. I read the README, the shared approval toolkit in `packages/gatekeeper-kit`, the shared MCP code in `packages/mcp-shared`, the two MCP Gatekeepers, the Supabase and ZoomInfo Gatekeepers, the shared Gatekeeper interface, and the parts of the backend "overseer" that decide when an agent turn stops. Then I ran one local experiment on the MCP tool classifier.
 
@@ -111,7 +109,7 @@ The classifier does what its comments say. The strict `=== true` checks fail clo
 
 The project's test also states its threat model: acting on a false read-only claim "only skips a prompt for a call the server would have answered anyway." That is right for a malicious server, which can misbehave on any call, approved or not. In my reading, it is weaker for an honest server with a wrong label. That is a bug, not an attack, and an approval prompt would at least give a person a chance to catch it. This is my inference about the risk model, not something the source says.
 
-## 💡 Innovation: Pick the approval lane before you pick the integration
+## Key Takeaways: Pick the approval lane before you pick the integration
 
 The README describes one approval experience. The source implements three. How the service was integrated decides whether a write can be simulated and whether it is even eligible for auto-approval; deployment trust, the user's auto-approve rules, and the pending queue then decide whether an eligible write actually pauses.
 

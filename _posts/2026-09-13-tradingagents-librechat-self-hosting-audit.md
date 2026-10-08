@@ -13,11 +13,9 @@ image:
 
 ![Two-column diagram contrasting what adopting an open-source AI stack transfers with what it leaves on the adopting team, with TradingAgents and LibreChat shown as answers to different jobs](/assets/img/posts/2026-09-13-tradingagents-librechat-self-hosting-audit/responsibility-transfer.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under an evidence-gated editorial harness; every claim was re-read from the pinned repository commits rather than from the social post that surfaced them.
-
 > **Not financial advice:** This article is a documentation audit of two repositories. The reference images reproduced below are example outputs shipped inside the TradingAgents README, and two of them render a directional call on a named security. They are documentation examples, not results produced or endorsed here. Nothing in this article is financial, investment, or trading advice, and no security is recommended.
 
-## 🤔 Curiosity: What does "replace the software you pay for" actually move?
+## What does "replace the software you pay for" actually move?
 
 A post on X put a list of GitHub repositories in front of me with a simple promise: a lot of these projects "can straight-up replace the software you're paying monthly for." Its first two entries were [TauricResearch/TradingAgents](https://github.com/TauricResearch/TradingAgents) and [danny-avila/LibreChat](https://github.com/danny-avila/LibreChat).
 
@@ -27,7 +25,7 @@ The question worth spending an evening on is not whether either project is good.
 
 Both READMEs answer that question themselves, in their own words, and the answers do not match the replacement framing that carried them to me.
 
-## 📚 Retrieve: Reading both repositories against the claim made for them
+## Technical Analysis: Reading both repositories against the claim made for them
 
 ### The discovery link, scoped precisely
 
@@ -156,7 +154,7 @@ Here is the part the list framing obscures. These two repositories are not compe
 
 Both were sizeable projects at retrieval — TradingAgents around 105,000 stars, LibreChat around 43,000 — and those retrieval-time counts say something about attention and nothing about whether either fits your job. Scoring them against each other is a category error. The only defensible comparison is each project against the specific job you are trying to stop paying for.
 
-## 💡 Innovation: Open source moves the operator, not the bill
+## Key Takeaways: Open source moves the operator, not the bill
 
 The useful reframing is a single sentence: **open source changes who runs and maintains an AI workflow; it does not by itself remove the model, data or hosting cost, and it does not remove the operational responsibility.**
 

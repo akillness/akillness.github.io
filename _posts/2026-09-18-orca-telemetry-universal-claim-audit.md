@@ -13,9 +13,7 @@ image:
 
 ![Diagram of Orca's 83 registered telemetry events at commit 0d23ea6 as a tile grid: 82 tiles marked enum, count or regex-locked, and one red tile for agent_hook_install_failed.error_message, annotated with a sample Node fs error message embedding a home-directory path](/assets/img/posts/2026-09-18-orca-telemetry-universal-claim-audit/telemetry-claim-map.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under an evidence-gated editorial harness; every documentation sentence, schema line, emitter path and consent-pipeline stage quoted here was read from the pinned commit 0d23ea6, the live docs page, or a bounded local Node check before publication.
-
-## 🤔 Curiosity: Can a privacy page's universal quantifier survive a grep?
+## Can a privacy page's universal quantifier survive a grep?
 
 [stablyai/orca](https://github.com/stablyai/orca/tree/0d23ea6e688410c878096dab8b1779857354b7d4) is a desktop orchestrator for running Codex, Claude Code, OpenCode and roughly two dozen other CLI agents side by side, each in its own git worktree. At retrieval it carried 70,892 stars under the MIT license, the repository was created on 2026-03-17, and the pinned commit is the tip of `main` from 2026-09-17.
 
@@ -32,7 +30,7 @@ Universal claims are the easiest kind to audit, because one counterexample settl
   <figcaption>The README hero: parallel agents in parallel worktrees, with the mobile companion overlaid &mdash; Image from stablyai/orca (MIT), commit 0d23ea6. Source: <a href="https://github.com/stablyai/orca/blob/0d23ea6e688410c878096dab8b1779857354b7d4/README.md">https://github.com/stablyai/orca/blob/0d23ea6e688410c878096dab8b1779857354b7d4/README.md</a>. Publisher: Orca contributors (stablyai/orca). Licence: <a href="https://github.com/stablyai/orca/blob/0d23ea6e688410c878096dab8b1779857354b7d4/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## 📚 Retrieve: 83 event schemas, four strings, one exception
+## Technical Analysis: 83 event schemas, four strings, one exception
 
 ### The claim, in the repository's own words
 
@@ -117,7 +115,7 @@ The timeline makes the disagreement legible: the telemetry docs page was last mo
   <figcaption>Parallel worktrees, the surface the hook installers exist to observe &mdash; Image from stablyai/orca (MIT), commit 0d23ea6. Source: <a href="https://github.com/stablyai/orca/blob/0d23ea6e688410c878096dab8b1779857354b7d4/README.md">https://github.com/stablyai/orca/blob/0d23ea6e688410c878096dab8b1779857354b7d4/README.md</a>. Publisher: Orca contributors (stablyai/orca). Licence: <a href="https://github.com/stablyai/orca/blob/0d23ea6e688410c878096dab8b1779857354b7d4/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## 💡 Innovation: Audit allow-list telemetry claims with one grep
+## Key Takeaways: Audit allow-list telemetry claims with one grep
 
 The reusable method here is cheap enough to run against any product that claims enum-only telemetry:
 

@@ -1,7 +1,7 @@
 ---
 title: "Hugging Face's AI Game Development Course, Audited in 2026"
 description: "The free ML for Games course stopped shipping units in 2024, it offers no certificate, and four tools it teaches have been renamed, rebranded or abandoned. What still holds up."
-categories: [Learning/Guide]
+categories: [AI, Research]
 tags: [Learning, Guide, Lecture]
 date: 2024-05-29 23:13:00 +0800
 image:
@@ -12,7 +12,7 @@ image:
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 ---
 
-## 🤔 Curiosity: does the free course still teach the field?
+## does the free course still teach the field?
 
 Search for an AI game development course and you land on the free track this page has recommended since 2024: Hugging Face's **ML for Games**. Two years later the honest question is not whether the course is good, but whether it still describes the field a game developer is about to enter.
 
@@ -23,7 +23,7 @@ So I audited it against two things: its own repository, and the field's own map 
 
 *Originally published 2024-05-29. Re-audited and rewritten on 2026-09-02.*
 
-## 📚 Retrieve: what the course actually is now
+## Technical Analysis: what the course actually is now
 
 ### Finding 1 — It is finished, and it says so
 
@@ -114,7 +114,7 @@ The Secret Reward Systems of Dark Souls II:
 
 {% include embed/youtube.html id='4ke8D_FgAj0' %}
 
-## 💡 Innovation: how I would use this course in 2026
+## Key Takeaways: how I would use this course in 2026
 
 **Take it for the map, not the build steps.** Read Units 0 to 3 for the shape of the problem, then implement against current package names. Unit 1's idea survives; its `Sentis` references do not.
 
@@ -168,9 +168,6 @@ The Secret Reward Systems of Dark Souls II:
 - AI Agents course: <https://huggingface.co/learn/agents-course/unit0/introduction>
 - LLM course: <https://huggingface.co/learn/llm-course/chapter1/1>
 - Audio course: <https://huggingface.co/learn/audio-course/chapter0/introduction>
-
-> **Editorial method:** this audit was researched and drafted with AI assistance under an evidence-gated editorial process, then revised across independent review passes. Course facts are read from the live course pages and its GitHub repository on 2026-09-02, with one page checked against the Internet Archive, and survey quotations from arXiv:2402.18659v5.
-{: .prompt-info }
 
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > 한국어 요약 </summary>

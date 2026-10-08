@@ -14,7 +14,7 @@ image:
 
 ---
 
-## 🤔 Curiosity: Why Does More Context Sometimes Make an Agent *Worse*?
+## Why Does More Context Sometimes Make an Agent *Worse*?
 
 Eight years shipping AI systems into production games taught me to distrust a very seductive idea: that if an agent just had a **longer memory**, it would perform better. Give it the whole chat log, the whole diff history, every tool call it ever made — surely more signal is more help?
 
@@ -28,7 +28,7 @@ That question sent me back into five repositories I keep coming back to, all und
 
 ---
 
-## 📚 Retrieve: Five Repos, One Underlying Bet
+## Technical Analysis: Five Repos, One Underlying Bet
 
 Before the tour, here's the bet these five projects share, stated as plainly as I can:
 
@@ -218,7 +218,7 @@ The `ooo` (Ouroboros) entry crystallizes the whole ecosystem's philosophy in one
 
 ---
 
-## 💡 Innovation: Walking the Full Loop, End to End
+## Key Takeaways: Walking the Full Loop, End to End
 
 Put the five repos together and you get one coherent lifecycle, not five separate products:
 

@@ -1,7 +1,7 @@
 ---
 title: "The Software Factory Is a Queue, Not a Commit Counter"
 description: "HoYeon Lee reports a 300-commit-a-day Software Factory. Here is what that number measures, what it leaves unknown, and how to track accepted work instead."
-categories: [AI, Agent]
+categories: [AI, Agents]
 tags: [agents, human-review, pull-requests, software-factory, workflow-metrics]
 date: 2026-10-07 15:16:31 +0900
 mermaid: true
@@ -14,7 +14,7 @@ image:
 
 **Source Audit:** A measured read of HoYeon Lee's Software Factory post.
 
-## Curiosity: What does a 300-commit day measure?
+## What does a 300-commit day measure?
 
 A 300-commit day is a vivid activity signal. It is not automatically a throughput result. HoYeon Lee's LinkedIn post says a Software Factory produced 300 commits per day during the Chuseok holiday. I have not independently verified the count. The post is a first-person report, not an activity export or external audit.
 
@@ -22,7 +22,7 @@ A commit answers one question: did Git record a change? It does not answer what 
 
 The better question is not “How many commits did the factory make?” It is “How much accepted work cleared the system, with what review cost and what evidence?”
 
-## Retrieve: The post already names the hard part
+## Technical Analysis: The post already names the hard part
 
 Lee does not present the factory as a commit-count contest. The post describes a multi-agent platform refactored from Swift to Electron over the holiday. A PRD became tasks; task dependencies were analyzed; pull requests were opened automatically; and Lee kept human review for key tasks.
 
@@ -32,7 +32,7 @@ Lee's proposed boundary is human-centered. Tasks should carry intent and a verif
 
 Those are meaningful design details, and the qualitative result should be attributed accurately. The post does not give a baseline or a measured drift rate. It also does not report how many tasks were accepted, how many pull requests merged, first-pass CI results, escaped regressions, rollbacks, rework, or time spent waiting for human review. The public post therefore supports a workflow description and a self-reported commit rate, not an independently measured productivity conclusion.
 
-## Innovation: Build an acceptance ledger, not a counter
+## Key Takeaways: Build an acceptance ledger, not a counter
 
 A factory needs a queue with explicit units, state changes, and evidence. A commit is a trace in that queue, not its finish line.
 
@@ -91,8 +91,6 @@ Human review should also be risk-aware. Reversible, well-tested changes may be s
 For a narrower example of how an agent action crosses a review boundary, read the [Cloudflare OS MCP approval source audit](/posts/cloudflare-os-mcp-approvals-still-wait/).
 
 For a reminder to separate published proxy numbers from inspected requests, see [the Headroom evaluation audit](/posts/headroom-gsm8k-prompts-saved-zero-tokens/). These audits concern approval and measurement boundaries; they do not validate Lee’s factory.
-
-> **Editorial method:** This draft uses AI-assisted source research and drafting; factual claims are linked to checked sources, and no first-hand experience is claimed.
 
 ## Key Takeaways
 

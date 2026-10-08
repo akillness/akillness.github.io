@@ -13,9 +13,7 @@ image:
 
 ![A stock Docker container keeps the default seccomp profile that filters around 44 syscalls, while the documented AIO Sandbox quick starts and compose file pass seccomp=unconfined; the shipped API contracts declare no security schemes and the runtime source is not in the repository](/assets/img/posts/2026-09-17-aio-sandbox-confinement-contract-audit/confinement-contract-map.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under an evidence-gated editorial harness; every command, API contract, and default described was read from the pinned commit 7f1afaf8, the shipped OpenAPI documents, or Docker's published documentation before publication.
-
-## 🤔 Curiosity: What does a sandbox promise when it asks you to unconfine it?
+## What does a sandbox promise when it asks you to unconfine it?
 
 [agent-infra/sandbox](https://github.com/agent-infra/sandbox/tree/7f1afaf8d82bd30531a19caeb1a24dfebbc97d8c), marketed as AIO Sandbox, is an all-in-one execution environment for AI agents: browser, shell, file API, MCP services, JupyterLab, and VS Code Server in a single Docker container. At retrieval on 2026-09-16 it carried 5,927 stars under an Apache-2.0 license, created 2025-08-06 and pushed as recently as 2026-09-14. This audit pins the tree at commit `7f1afaf8`.
 
@@ -36,7 +34,7 @@ docker run --security-opt seccomp=unconfined --rm -it \
   <figcaption>The four-pane workspace the README leads with: editor, browser preview, terminal, and notebook sharing one filesystem &mdash; Image from agent-infra/sandbox (Apache-2.0), commit 7f1afaf8. Source: <a href="https://github.com/agent-infra/sandbox/blob/7f1afaf8d82bd30531a19caeb1a24dfebbc97d8c/website/docs/public/images/aio-index.png">https://github.com/agent-infra/sandbox/blob/7f1afaf8d82bd30531a19caeb1a24dfebbc97d8c/website/docs/public/images/aio-index.png</a>. Publisher: Agent Infra team (agent-infra/sandbox). Licence: <a href="https://github.com/agent-infra/sandbox/blob/7f1afaf8d82bd30531a19caeb1a24dfebbc97d8c/LICENSE">Apache-2.0</a>.</figcaption>
 </figure>
 
-## 📚 Retrieve: Reading the run commands, the contracts, and the tree
+## Technical Analysis: Reading the run commands, the contracts, and the tree
 
 ### The flag is everywhere, and the security guide never discusses it
 
@@ -103,7 +101,7 @@ This matters for a specific reason: the README's headline safety claim — "Sand
   <figcaption>JupyterLab with three Python kernels: one of the execution surfaces whose "safety guarantees" have no source in the repository to audit &mdash; Image from agent-infra/sandbox (Apache-2.0), commit 7f1afaf8. Source: <a href="https://github.com/agent-infra/sandbox/blob/7f1afaf8d82bd30531a19caeb1a24dfebbc97d8c/website/docs/public/images/code-jupyterlab.png">https://github.com/agent-infra/sandbox/blob/7f1afaf8d82bd30531a19caeb1a24dfebbc97d8c/website/docs/public/images/code-jupyterlab.png</a>. Publisher: Agent Infra team (agent-infra/sandbox). Licence: <a href="https://github.com/agent-infra/sandbox/blob/7f1afaf8d82bd30531a19caeb1a24dfebbc97d8c/LICENSE">Apache-2.0</a>.</figcaption>
 </figure>
 
-## 💡 Innovation: Treat the container as the workload, not the boundary
+## Key Takeaways: Treat the container as the workload, not the boundary
 
 To be fair to the project: several of its documents are more honest than the category norm. The quick start explains *why* it binds `127.0.0.1`. The cloud guide flatly says not to expose port 8080. The security guide names its own scope — trusted local development — and ships working JWT verification. The README admits in plain text that services remain open without a key. None of the three findings here required adversarial reading; each is printed in the project's own files.
 

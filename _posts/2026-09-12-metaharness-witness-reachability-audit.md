@@ -13,9 +13,7 @@ image:
 
 ![Map of MetaHarness witness signing at commit d5833dc6: real Ed25519 code in the Rust kernel, bridges that export no witness function, CLI paths that fall back to placeholders and shape checks](/assets/img/posts/2026-09-12-metaharness-witness-reachability-audit/witness-reachability-map.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under an evidence-gated editorial harness; every claim was verified against the pinned commit d5833dc6 before publication.
-
-## 🤔 Curiosity: Who can actually verify a "witness-signed" harness?
+## Who can actually verify a "witness-signed" harness?
 
 [MetaHarness](https://github.com/ruvnet/metaharness/tree/d5833dc6512ac1adeeef91a331c29055cd8a4dbb) calls itself "a factory for agent frameworks": point `npx metaharness` at a GitHub repo and it mints a branded agent harness with its own CLI, MCP server, memory, and governance policy. The repository is MIT-licensed, created 2026-06-13, and carried 648 stars with a last push on 2026-09-11 at retrieval; the npm package reached 0.4.16 on 2026-09-02, its 49th version in under three months.
 
@@ -30,7 +28,7 @@ The short version: the cryptography is real, and the paths that reach it are not
   <figcaption>The Agent Harness Studio's Create tab, whose tagline promises to "emit a signed-ready, npm-publishable runtime" &mdash; Screenshot from ruvnet/metaharness (MIT License), commit d5833dc6. Source: <a href="https://github.com/ruvnet/metaharness/tree/d5833dc6512ac1adeeef91a331c29055cd8a4dbb/docs/web-ui">https://github.com/ruvnet/metaharness/tree/d5833dc6512ac1adeeef91a331c29055cd8a4dbb/docs/web-ui</a>. Publisher: RuvNet (ruvnet/metaharness). Licence: <a href="https://github.com/ruvnet/metaharness/blob/d5833dc6512ac1adeeef91a331c29055cd8a4dbb/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## 📚 Retrieve: Following the signature from crate to CLI
+## Technical Analysis: Following the signature from crate to CLI
 
 I audited the pinned tree through a shallow clone at `d5833dc6` plus the GitHub and npm registry APIs. Every quote below carries its file coordinate; nothing in this section comes from running the hosted Studio.
 
@@ -101,7 +99,7 @@ The CI story completes the picture. The `harness sign` help text says the signin
   <figcaption>The Studio's Compose flow offers "Witness signing" as a selectable primitive alongside CLI, memory namespace, and release gates &mdash; Screenshot from ruvnet/metaharness (MIT License), commit d5833dc6. Source: <a href="https://github.com/ruvnet/metaharness/tree/d5833dc6512ac1adeeef91a331c29055cd8a4dbb/docs/web-ui">https://github.com/ruvnet/metaharness/tree/d5833dc6512ac1adeeef91a331c29055cd8a4dbb/docs/web-ui</a>. Publisher: RuvNet (ruvnet/metaharness). Licence: <a href="https://github.com/ruvnet/metaharness/blob/d5833dc6512ac1adeeef91a331c29055cd8a4dbb/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## 💡 Innovation: Reachability is part of the feature
+## Key Takeaways: Reachability is part of the feature
 
 The interesting failure here is not "project overstates security" — that story is common. It is that every individual layer behaves defensibly, and the composition still ships a provenance feature whose median real-world outcome is a shape check:
 

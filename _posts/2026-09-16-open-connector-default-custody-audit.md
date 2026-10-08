@@ -13,9 +13,7 @@ image:
 
 ![The four entries of SECURITY.md's out-of-scope list each map to a shipped default at the same commit: no encryption key selects the plaintext codec, no admin token selects the pass-through middleware, the Docker image pins HOST=0.0.0.0, and the compose file mounts the SQLite volume](/assets/img/posts/2026-09-16-open-connector-default-custody-audit/default-custody-map.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under an evidence-gated editorial harness; every default described was read from the pinned commit 493def09 or a bounded live API call before publication.
-
-## 🤔 Curiosity: What does a credential gateway enforce before you configure it?
+## What does a credential gateway enforce before you configure it?
 
 [oomol-lab/open-connector](https://github.com/oomol-lab/open-connector/tree/493def090c95a92ee312b95594c489c9856a16af) is an open-source connector gateway for AI agents: connect a user's SaaS accounts once, then expose the catalog to agents over SDK, HTTP, and MCP. It is Apache-2.0 licensed, written in TypeScript, created 2026-06-29, and at retrieval it carried 5,753 stars and 497 forks. Its hosted catalog reported 1,512 providers and 16,988 actions the same night.
 
@@ -27,7 +25,7 @@ The project answers that question in an unusual place — its own security polic
 
 Each of those four examples is a code path I could go read at the pinned commit. So I did. All four are the shipped default.
 
-## 📚 Retrieve: Reading the four defaults the policy excludes
+## Technical Analysis: Reading the four defaults the policy excludes
 
 The mapping, before the detail:
 
@@ -106,7 +104,7 @@ But custody is not only about bytes. Under the all-defaults deployment, any proc
   <figcaption>The Overview page counts what the runtime can reach: 1,019 providers and 9,912 local actions in this in-tree capture. Under defaults, that entire capability surface is the anonymous caller's &mdash; Image from oomol-lab/open-connector (Apache-2.0), commit 493def09. Source: <a href="https://github.com/oomol-lab/open-connector/blob/493def090c95a92ee312b95594c489c9856a16af/assets/overview-page-en.jpg">https://github.com/oomol-lab/open-connector/blob/493def090c95a92ee312b95594c489c9856a16af/assets/overview-page-en.jpg</a>. Publisher: oomol-lab (oomol-lab/open-connector). Licence: <a href="https://github.com/oomol-lab/open-connector/blob/493def090c95a92ee312b95594c489c9856a16af/LICENSE.txt">Apache-2.0</a>.</figcaption>
 </figure>
 
-## 💡 Innovation: Reading scope boundaries as configuration documentation
+## Key Takeaways: Reading scope boundaries as configuration documentation
 
 The pattern worth carrying out of this tree is that a security policy's scope section can be read as a map of what the project already knows its defaults do. OpenConnector's maintainers did not hide any of this. The startup logs warn three separate times on an all-defaults boot — admin auth disabled, runtime auth disabled, encryption disabled. The hardening guide is detailed and accurate against the code. The out-of-scope list exists precisely because the project understands these configurations are reachable.
 

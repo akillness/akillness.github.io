@@ -13,9 +13,7 @@ image:
 
 ![Map of the CAO trust boundary: defended network edge outside, one shared agent trust domain inside, and a disconnected CAO_AUTH_ENABLED switch](/assets/img/posts/2026-09-09-cao-trust-boundary-audit/trust-boundary-map.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance inside an evidence-gated harness, then checked against the pinned commit before publication.
-
-## 🤔 Curiosity: When twelve AI CLIs share one machine, what separates them?
+## When twelve AI CLIs share one machine, what separates them?
 
 [CLI Agent Orchestrator](https://github.com/awslabs/cli-agent-orchestrator/tree/ce18db239553407c01a817aba52129fc54657818) (CAO) is the awslabs project that coordinates AI coding CLIs — its prerequisites list links twelve provider guides, from Kiro CLI and Claude Code to Codex, Cursor, and Grok Build — so a supervisor agent can delegate work to specialist workers. The repository is Apache-2.0, created 2025-07-29, and carried 1,238 stars with a last push on 2026-09-08 at retrieval. This audit pins the tree at commit `ce18db23`, whose `pyproject.toml` declares version 2.5.0.
 
@@ -28,7 +26,7 @@ So I read the security surface of the pinned tree end to end: the auth core, the
   <figcaption>The shipped topology: one supervisor, delegated workers, and provider CLIs underneath &mdash; Architecture diagram from the awslabs/cli-agent-orchestrator repository, Apache-2.0 licensed, pinned at commit ce18db23. Source: <a href="https://github.com/awslabs/cli-agent-orchestrator/tree/ce18db239553407c01a817aba52129fc54657818">https://github.com/awslabs/cli-agent-orchestrator/tree/ce18db239553407c01a817aba52129fc54657818</a>. Publisher: Amazon Web Services Labs (awslabs/cli-agent-orchestrator contributors). Licence: <a href="https://github.com/awslabs/cli-agent-orchestrator/blob/ce18db239553407c01a817aba52129fc54657818/LICENSE">https://github.com/awslabs/cli-agent-orchestrator/blob/ce18db239553407c01a817aba52129fc54657818/LICENSE</a>.</figcaption>
 </figure>
 
-## 📚 Retrieve: Classifying every defense as enforcement, UX gate, or prose
+## Technical Analysis: Classifying every defense as enforcement, UX gate, or prose
 
 I audited the pinned tree through a shallow clone at `ce18db23` plus the GitHub API. Every quote below carries its file coordinate; nothing in this section comes from running the server.
 
@@ -97,7 +95,7 @@ One more boundary deserves its classification. Writes to the machine-wide shared
   <figcaption>Agent-to-agent messaging &mdash; the docs treat sibling metadata as "agent-authored, untrusted content", the same trust class as these messages &mdash; Multi-role messaging diagram from the awslabs/cli-agent-orchestrator repository, Apache-2.0 licensed, pinned at commit ce18db23. Source: <a href="https://github.com/awslabs/cli-agent-orchestrator/tree/ce18db239553407c01a817aba52129fc54657818">https://github.com/awslabs/cli-agent-orchestrator/tree/ce18db239553407c01a817aba52129fc54657818</a>. Publisher: Amazon Web Services Labs (awslabs/cli-agent-orchestrator contributors). Licence: <a href="https://github.com/awslabs/cli-agent-orchestrator/blob/ce18db239553407c01a817aba52129fc54657818/LICENSE">https://github.com/awslabs/cli-agent-orchestrator/blob/ce18db239553407c01a817aba52129fc54657818/LICENSE</a>.</figcaption>
 </figure>
 
-## 💡 Innovation: What this classification is worth in production
+## Key Takeaways: What this classification is worth in production
 
 The audit yields a three-way classification that transfers to any orchestrator you evaluate:
 

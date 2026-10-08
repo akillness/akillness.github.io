@@ -13,9 +13,7 @@ image:
 
 ![Flat vector illustration of a scatter chart whose single plotted point is stitched from two separate report sheets, representing a benchmark figure assembled from two different runs](/assets/img/posts/2026-09-17-moli-benchmark-provenance-audit/cover.png)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under an evidence-gated editorial harness; every version, task count, threshold and README sentence quoted here was read from the pinned commit d56bbd7, the two linked Lexbench report files at their own pinned commits, or a bounded live API call before publication.
-
-## 🤔 Curiosity: Which run is the README's efficiency map actually showing?
+## Which run is the README's efficiency map actually showing?
 
 [lexmount/moli](https://github.com/lexmount/moli/tree/d56bbd7c28706769df3ab35b144d730b5a413bf5) is a headless browser written in Rust for agent workloads. Its pitch is a cost model rather than a feature: the DOM and style state are the source of truth, and layout and paint run only when an operation needs them. At retrieval it carried 2,031 stars, the repository was created on 2026-08-10, and the pinned commit is the tip of `main` from 2026-09-16.
 
@@ -35,7 +33,7 @@ None of these is a hidden defect in the browser. They are provenance gaps in the
   <figcaption>The chart this audit is about. The README's alt text describes it with different numbers (697, 92, 34 and 39 MiB), and the two axes of the described chart were produced by two different runs on the same day, with different corpora and different k &mdash; Image from lexmount/moli (MIT OR Apache-2.0 at d56bbd7), commit d56bbd7. Source: <a href="https://github.com/lexmount/moli/blob/d56bbd7c28706769df3ab35b144d730b5a413bf5/README.md">https://github.com/lexmount/moli/blob/d56bbd7c28706769df3ab35b144d730b5a413bf5/README.md</a>. Publisher: Moli contributors (lexmount/moli). Licence: <a href="https://github.com/lexmount/moli/blob/d56bbd7c28706769df3ab35b144d730b5a413bf5/LICENSE-MIT">MIT</a>.</figcaption>
 </figure>
 
-## 📚 Retrieve: The benchmark section, traced number by number
+## Technical Analysis: The benchmark section, traced number by number
 
 ### What the README says the numbers are
 
@@ -123,7 +121,7 @@ Counting the sources restores a structure the README flattens. The crawl, agent-
 
 That third harness is, from a reader's point of view, the most trustworthy of the three, because it runs on the code under review rather than on a build from August. It is also the one whose numbers are not in the README.
 
-## 💡 Innovation: Read a vendor benchmark section by restoring its provenance columns
+## Key Takeaways: Read a vendor benchmark section by restoring its provenance columns
 
 The practical output of this audit is a checklist, because the pattern is not specific to Moli. Any project that imports charts from a benchmark repository into a README will, over time, drift from the build that was measured and will be tempted to compose one figure from several runs. Before a chart from a README enters a comparison document, restore four columns the README usually drops.
 

@@ -10,7 +10,7 @@ image:
   alt: "Original diagram separating interactive and batch agent workloads under a shared local GPU residency budget"
 ---
 
-## 🤔 Curiosity: Why Does the Local Agent Freeze?
+## Why Does the Local Agent Freeze?
 
 A Mac Studio can feel like a small private AI cluster. One person is asking a coding agent to read a repository, another is running log triage, and a designer is iterating on dialogue. Then one request arrives with a huge prompt and the useful, interactive work suddenly feels stuck.
 
@@ -39,7 +39,7 @@ Game teams already know the basic moves: page data, pin what the frame needs, ev
 
 ---
 
-## 📚 Retrieve: The Source Code Behind the Feature List
+## Technical Analysis: The Source Code Behind the Feature List
 
 ### A source audit, not a README paraphrase
 
@@ -113,7 +113,7 @@ The related setting that remains is more modest and more trustworthy. oMLX defau
 
 ---
 
-## 💡 Innovation: Give Every Local Agent a Residency Class
+## Key Takeaways: Give Every Local Agent a Residency Class
 
 The useful output is a workload policy, not a leaderboard position. Before tuning a local inference server, classify what work needs responsiveness and what work only needs eventual completion.
 

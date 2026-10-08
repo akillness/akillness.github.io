@@ -11,9 +11,7 @@ image:
   alt: "Original bar chart comparing a pure frontier-model session with a large-to-small-to-large routed session under two price pairs and two context sizes"
 ---
 
-> **Editorial method:** This source audit was researched and drafted with AI assistance under an evidence policy. I checked the cited documents and live price tables; I did not run a live Jev or routed-agent test.
-
-## 🤔 Curiosity: Does the polished PDF still say what the notes said?
+## Does the polished PDF still say what the notes said?
 
 A [12-page PDF titled **"Jev Engineering for Coding Agents"**](https://drive.google.com/file/d/17h982xvsL3E7b80iGmOCfKp9qTOW9ohv/view) is typeset like a conference paper, with an abstract, index terms, numbered sections, and original diagrams. Its front page identifies it as an independently compiled synthesis for study, "based on design notes by Diogo Almeida (TypeSafe)", and says it is not affiliated with or endorsed by TypeSafe.
 
@@ -25,7 +23,7 @@ A synthesis is only as good as its fidelity to the source, though. This audit as
 
 The short answer: the arithmetic is reproduced correctly, but its verdict depends on the price ratio between the two models, and with the current Opus 5.5/Sonnet 5 pair it flips for small contexts. The token statistic both documents cite comes from a preprint whose public arXiv record is marked withdrawn; its submission history shows June 30, 2026. The record gives no reason. The PDF also drops two visible cues from the Doc: that the sample proportions were a ChatGPT-generated guess and the "SLOP" appendix heading.
 
-## 📚 Retrieve: What the sources show
+## Technical Analysis: What the sources show
 
 ### The primary source is a public Google Doc
 
@@ -132,7 +130,7 @@ The Doc's appendix lists tools a TypeSafe-native harness could integrate: headro
   <figcaption>fff's published Opus 4.6 feature-completion chart (20-run average) with and without fff MCP; token and timing figures are the project's own, not independently remeasured here. Source: <a href="https://github.com/dmtrKovalenko/fff/tree/e3f694a2e4f82bb755418e8d305dcff779c59c27">https://github.com/dmtrKovalenko/fff/tree/e3f694a2e4f82bb755418e8d305dcff779c59c27</a>. Publisher/creator: Dmitriy Kovalenko (dmtrKovalenko/fff). License: <a href="https://raw.githubusercontent.com/dmtrKovalenko/fff/e3f694a2e4f82bb755418e8d305dcff779c59c27/LICENSE">https://raw.githubusercontent.com/dmtrKovalenko/fff/e3f694a2e4f82bb755418e8d305dcff779c59c27/LICENSE</a>. Attribution: fff chart.png, MIT License, Copyright (c) 2025 Dmitriy Kovalenko, pinned at commit e3f694a2.</figcaption>
 </figure>
 
-## 💡 Innovation: What I would take into a harness
+## Key Takeaways: What I would take into a harness
 
 The Doc's real contribution is the framing: price routing **per context rebuild**, not per token. That survives the audit intact. What changes is that the routing decision should be computed, not assumed. The break-even is cheap enough to evaluate before every hand-off:
 

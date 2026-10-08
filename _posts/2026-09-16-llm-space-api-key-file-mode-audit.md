@@ -13,9 +13,7 @@ image:
 
 ![Diagram of deer-flow/llm-space at commit e65eea24: the shared atomic JSON writer in the middle, with plugin settings and its backup passing mode 0o600 on the left, and models.json, analytics.json, search and network settings passing no mode on the right, so they inherit the process default of 0o666 masked by umask](/assets/img/posts/2026-09-16-llm-space-api-key-file-mode-audit/custody-mode-map.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under an evidence-gated editorial harness; every file mode, event map, and default described was read from the pinned commit e65eea24 or a bounded live API call before publication.
-
-## 🤔 Curiosity: Which of the two local-first promises does the code actually keep?
+## Which of the two local-first promises does the code actually keep?
 
 [deer-flow/llm-space](https://github.com/deer-flow/llm-space/tree/e65eea24c87ee5b91618b7eb50e2af77a30ef042) is a desktop workbench for agent builders: write prompts and tools, trace every model call and tool run, replay a failed run, and export a thread as a runnable LangGraph agent. It is MIT-licensed, written in TypeScript, created 2026-06-28, and the pinned commit is the 4.19.0 release from 2026-09-13. At retrieval it carried 1,896 stars.
 
@@ -25,7 +23,7 @@ So I audited both halves at the same commit. The telemetry half holds up better 
 
 That asymmetry is the finding. Not a leak, not a vulnerability report, just a custody detail the README's sentence does not cover and that anyone running the app on a shared devbox should know.
 
-## 📚 Retrieve: The two promises, read from the pinned tree
+## Technical Analysis: The two promises, read from the pinned tree
 
 Before the detail, the map of who asks for which file mode when writing under `~/.llm-space/settings/`:
 
@@ -103,7 +101,7 @@ Where this matters is not a single-user laptop, where the home directory is typi
   <figcaption>A custom provider's configuration. Custom provider names are collapsed to the literal "custom" in telemetry, but the API key entered here is stored the same way as a builtin provider's key &mdash; Image from deer-flow/llm-space (MIT), commit e65eea24. Source: <a href="https://github.com/deer-flow/llm-space/blob/e65eea24c87ee5b91618b7eb50e2af77a30ef042/docs/images/settings-05-custom-provider.png">https://github.com/deer-flow/llm-space/blob/e65eea24c87ee5b91618b7eb50e2af77a30ef042/docs/images/settings-05-custom-provider.png</a>. Publisher: deer-flow (deer-flow/llm-space). Licence: <a href="https://github.com/deer-flow/llm-space/blob/e65eea24c87ee5b91618b7eb50e2af77a30ef042/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## 💡 Innovation: Grade local-first claims by which file gets the mode
+## Key Takeaways: Grade local-first claims by which file gets the mode
 
 The lesson I take from this tree is a small, reusable test for any "your keys stay on your machine" claim: find the project's own atomic file writer, list every caller, and note which callers pass a mode. The callers that do are the files the authors thought of as secret-bearing. The callers that do not are where the README's sentence stops and the umask starts.
 

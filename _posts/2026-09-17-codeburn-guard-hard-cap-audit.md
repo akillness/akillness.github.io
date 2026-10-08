@@ -13,9 +13,7 @@ image:
 
 ![Flat vector illustration of a spending gauge whose needle has passed a red limit line while a fuel nozzle stays attached to a running machine that keeps emitting token discs, with a closed red barrier over a small tool port](/assets/img/posts/2026-09-17-codeburn-guard-hard-cap-audit/cover.png)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under an evidence-gated editorial harness; every hook branch, threshold default, pricing fallback and README sentence quoted here was read from the pinned commit 3684f1d or the live Claude Code hook documentation before publication.
-
-## 🤔 Curiosity: What does a "hard cap" on a Claude Code session actually cap?
+## What does a "hard cap" on a Claude Code session actually cap?
 
 [getagentseal/codeburn](https://github.com/getagentseal/codeburn/tree/3684f1d5f0824cbf2cb6112d9c00b02eb5d4066d) is a local cost tracker for AI coding tools. It reads the session files that Claude Code, Cursor, Codex, Gemini and 37 other tools already leave on disk and breaks the spend down by model, project and task. It is MIT-licensed, written in TypeScript, created 2026-04-13, and at retrieval it carried 11,053 stars; the pinned commit 3684f1d is from 2026-09-16.
 
@@ -28,7 +26,7 @@ I audited the second promise. The question is not whether the guard is useful; a
   <figcaption>The surface most readers meet first: the terminal dashboard from the README. The guard reuses the same per-call cost path this view aggregates &mdash; Image from getagentseal/codeburn (MIT LICENSE at 3684f1d), commit 3684f1d. Source: <a href="https://github.com/getagentseal/codeburn/blob/3684f1d5f0824cbf2cb6112d9c00b02eb5d4066d/README.md">https://github.com/getagentseal/codeburn/blob/3684f1d5f0824cbf2cb6112d9c00b02eb5d4066d/README.md</a>. Publisher: CodeBurn (getagentseal/codeburn). Licence: <a href="https://github.com/getagentseal/codeburn/blob/3684f1d5f0824cbf2cb6112d9c00b02eb5d4066d/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## 📚 Retrieve: The guard, read from the pinned tree
+## Technical Analysis: The guard, read from the pinned tree
 
 ### The hook can deny a tool call and nothing more
 
@@ -94,7 +92,7 @@ Both behaviours are consequences of the fail-open rule the README states out lou
   <figcaption>The optimize report from the README flags projects and sessions where spend looked like waste; the guard's SessionStart opener reuses these flags &mdash; Image from getagentseal/codeburn (MIT LICENSE at 3684f1d), commit 3684f1d. Source: <a href="https://github.com/getagentseal/codeburn/blob/3684f1d5f0824cbf2cb6112d9c00b02eb5d4066d/README.md">https://github.com/getagentseal/codeburn/blob/3684f1d5f0824cbf2cb6112d9c00b02eb5d4066d/README.md</a>. Publisher: CodeBurn (getagentseal/codeburn). Licence: <a href="https://github.com/getagentseal/codeburn/blob/3684f1d5f0824cbf2cb6112d9c00b02eb5d4066d/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## 💡 Innovation: Treat the guard as a signal, and put the control where tokens are billed
+## Key Takeaways: Treat the guard as a signal, and put the control where tokens are billed
 
 The useful reframing is that CodeBurn guard is a **signal** with one **tool-level brake**, not a **budget control**. Three consequences for anyone running it:
 

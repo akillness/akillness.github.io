@@ -1,7 +1,7 @@
 ---
 title: "LLM2Vec, Two Years On: The Thesis Won, the Recipe Did Not"
 description: "The paper claimed unsupervised MTEB SOTA as of May 2024 and put itself 6th overall. This page dropped every qualifier. What the download numbers say now."
-categories: [Review/Trends]
+categories: [AI, Research]
 tags: [Trend, Review, Case]
 date: 2024-07-29 13:00:00 +0800
 image:
@@ -11,7 +11,7 @@ image:
   alt: "Diagram showing the three qualifiers the LLM2Vec paper attached to its MTEB claim - unsupervised only, public-data-only models, as of 24 May 2024 - each crossed out above the unqualified claim this page published"
 ---
 
-## 🤔 Curiosity: what happens to a benchmark claim with an expiry date on it?
+## what happens to a benchmark claim with an expiry date on it?
 
 LLM2Vec's authors did something unusual. They wrote their headline result with a date stamp inside the sentence: state of the art on MTEB among models trained only on publicly available data, **"as of May 24, 2024"**.
 
@@ -24,7 +24,7 @@ So this is two audits in one: what the paper actually claimed, and what two year
 
 *Originally published 2024-07-29. Re-audited and rewritten on 2026-09-02 against arXiv:2404.05961v2.*
 
-## 📚 Retrieve: what the pinned sources say
+## Technical Analysis: what the pinned sources say
 
 **LLM2Vec: Large Language Models Are Secretly Powerful Text Encoders** is by Parishad BehnamGhader, Vaibhav Adlakha, Marius Mosbach, Dzmitry Bahdanau, Nicolas Chapados and Siva Reddy (McGill University and Mila, with ServiceNow Research), published at **COLM 2024**. Two arXiv versions exist: v1 on 2024-04-09 and v2 on 2024-08-21.
 
@@ -100,7 +100,7 @@ In March 2026 the same group published **LLM2Vec-Gen: Generative Embeddings from
 
 Appendix A lists three limitations, and the first one aged into the main practical objection: a 7B model emits **4096-dimensional** vectors against BERT's 768, which the authors note makes them "more memory and compute intensive for creating vector indexes for large document collections." They also flag possible pre-training contamination they could not rule out, and that everything was evaluated **in English only**.
 
-## 💡 Innovation: what I take from this
+## Key Takeaways: what I take from this
 
 **Treat a dated claim as perishable food.** The authors wrote "as of May 24, 2024" because they knew. Any summary that removes that date is manufacturing a stronger claim than the source. When re-publishing a benchmark result, carry the qualifiers or do not carry the result.
 
@@ -145,9 +145,6 @@ Appendix A lists three limitations, and the first one aged into the main practic
 - <https://huggingface.co/Qwen/Qwen3-Embedding-0.6B>
 - <https://huggingface.co/google/embeddinggemma-300m>
 - <https://huggingface.co/BAAI/bge-m3>
-
-> **Editorial method:** this audit was researched and drafted with AI assistance under an evidence-gated editorial process, then revised across independent review passes. Paper quotations come from arXiv:2404.05961v2; download counts, repository state and licence facts were read from the Hugging Face and GitHub APIs on 2026-09-02 and will drift.
-{: .prompt-info }
 
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > 한국어 요약 </summary>

@@ -11,9 +11,7 @@ image:
   alt: "Original bar chart: three benchmark-shaped requests keep the same token count through the default Headroom proxy, while a JSON tool-result control drops from 4,844 to 2,863 tokens"
 ---
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under a policy-bound evidence harness; the reruns used a local stub instead of OpenAI, and I have not run Headroom on production agent traffic.
-
-## 🤔 Curiosity: What does Headroom's accuracy table actually test?
+## What does Headroom's accuracy table actually test?
 
 [Headroom](https://github.com/headroomlabs-ai/headroom) calls itself the context compression layer for AI agents, and it ships as a library, a proxy, and an MCP server. It is an Apache-2.0 repository created on January 7, 2026, and it had **74,273 GitHub stars** when I pulled its metadata for this audit. Its GitHub description promises 20% fewer tokens for coding agents, 60-95% fewer for JSON, and **"same answers."** In my [TypeSafe routing audit](/posts/typesafe-routing-verdict-hinges-on-price-ratio/) Headroom appeared only as an appendix tool, and I wrote that its savings claims had not been rerun. This post does the rerun.
 
@@ -25,7 +23,7 @@ So my question was narrow:
 
 The answer from my rerun is zero. The token-savings table reproduces to the last token. But when I replayed the GSM8K and TruthfulQA requests that Headroom's own eval command generates, the default proxy forwarded them unchanged.
 
-## 📚 Retrieve: What the pinned repository and three reruns show
+## Technical Analysis: What the pinned repository and three reruns show
 
 I pinned the audit to release tag [`v0.39.1`](https://github.com/headroomlabs-ai/headroom/tree/d13e1966f820220b482a33c30bde1e926743939a), commit `d13e1966`, committed on September 26, 2026. Its `pyproject.toml` declares version 0.39.1, the same version as the `headroom-ai` 0.39.1 wheel I installed from PyPI. I read the README, the evaluation package, the evaluation workflow, the Benchmarks docs page, and the wiki at that tag, then ran three local experiments on macOS (Apple silicon) with Python 3.11.
 
@@ -110,7 +108,7 @@ One more drift is worth knowing about. At the same tag, `wiki/index.md` still sh
   <figcaption>In this screenshot, savings are reported in tokens and dollars, and the Compression Quality card reports waste signals, not answers. Source: <a href="https://github.com/headroomlabs-ai/headroom/blob/d13e1966f820220b482a33c30bde1e926743939a/docs/screenshots/subscription_window_active.png">https://github.com/headroomlabs-ai/headroom/blob/d13e1966f820220b482a33c30bde1e926743939a/docs/screenshots/subscription_window_active.png</a>. Publisher/creator: headroomlabs-ai/headroom contributors. License: <a href="https://raw.githubusercontent.com/headroomlabs-ai/headroom/d13e1966f820220b482a33c30bde1e926743939a/LICENSE">https://raw.githubusercontent.com/headroomlabs-ai/headroom/d13e1966f820220b482a33c30bde1e926743939a/LICENSE</a>. Attribution: headroomlabs-ai/headroom contributors, docs/screenshots/subscription_window_active.png, Apache License 2.0, pinned at tag v0.39.1 (d13e1966).</figcaption>
 </figure>
 
-## 💡 Innovation: How to read a compression benchmark
+## Key Takeaways: How to read a compression benchmark
 
 My inference from the three reruns is this: in the configuration I reproduced, the GSM8K and TruthfulQA rows compare two runs that send the model the same messages. Their deltas therefore measure the run-to-run variation of the upstream model, not the effect of compression on answers. That is consistent with the README's own reading of the TruthfulQA +0.030 as noise. It does not mean the published run was misreported. I do not know the model version, lm-eval version, proxy profile, or environment behind the published table, and a different setup could compress these prompts.
 

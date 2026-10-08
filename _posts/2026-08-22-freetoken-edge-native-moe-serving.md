@@ -11,7 +11,7 @@ image:
   alt: "FreeToken serves models on the cost-capability Pareto frontier at interactive speed on consumer hardware"
 ---
 
-## 🤔 Curiosity: Why Is My Gaming PC Idle While I Pay Per Token?
+## Why Is My Gaming PC Idle While I Pay Per Token?
 
 Every shipped game I worked on had the same brutal constraint written on a whiteboard somewhere: **the working set does not fit in VRAM**. Not the textures, not the meshes, not the streaming audio. And nobody ever solved that by buying a bigger GPU. We solved it by getting good at *residency* — what lives on the card right now, what streams in next frame, what stays in system RAM, and who decides.
 
@@ -33,7 +33,7 @@ The question I brought to this paper is not "does it go fast." It is:
 
 ---
 
-## 📚 Retrieve: Three Problems, Not One
+## Technical Analysis: Three Problems, Not One
 
 ### Why MoE is both the opportunity and the trap
 
@@ -229,7 +229,7 @@ Three details I keep coming back to:
 
 ---
 
-## 💡 Innovation: What This Actually Means
+## Key Takeaways: What This Actually Means
 
 ### The pattern is texture streaming, and that should make us optimistic
 

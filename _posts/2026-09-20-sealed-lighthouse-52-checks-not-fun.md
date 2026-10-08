@@ -3,7 +3,7 @@ title: "The Sealed Lighthouse Passed 52 Checks Without Proving Fun"
 description: "A D-074 audit separates engine conformance from player claims: 52/52 core checks and a 4/4 extension passed, while player benefit remains unmeasured."
 date: 2026-09-20 15:47:00 +0900
 last_modified_at: 2026-09-20 15:47:00 +0900
-categories: ["AI"]
+categories: [AI, Research]
 tags: ["game-ai", "godot", "qa", "evidence", "interactive-systems"]
 image:
   path: /assets/img/posts/2026-09-20-sealed-lighthouse-52-checks-not-fun/trace-rpg-gates.svg
@@ -19,9 +19,7 @@ That is not a rhetorical warning in the latest release of [TRACE-RPG — The Sea
 
 This is the boundary I wanted to preserve: a green conformance packet is valuable, but it is not a player study.
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under a policy-bound evidence harness; no first-hand playtest or human participant result is claimed.
-
-## 🤔 Curiosity: when does a playable build become evidence?
+## when does a playable build become evidence?
 
 The repository describes *The Sealed Lighthouse* as a turn-based investigation micro-RPG in Godot 4.7.1. A generated event is treated as an untrusted transaction proposal, and a deterministic symbolic commit gate decides whether it can become canonical state. A hold leaves state unchanged, names the gate family, and teaches a rule; a commit adds a contribution and extends a SHA-256 receipt chain.
 
@@ -34,7 +32,7 @@ The distinction matters for any AI-assisted game loop. The system can prove that
   <figcaption>Release evidence capture from the authored route, frame 24. Source: <a href="https://github.com/akillness/neural_symbolic_in_game/blob/4382f69909b21ea25dfe92b0859c1fbd1acc5144/neuro-symbolic-interactive-game-research-2026/_workspace/current/qa/releases/2026-09-18/route-frame-24.png">pinned project asset</a> by akillness/neural_symbolic_in_game; License URL: https://github.com/akillness/neural_symbolic_in_game/tree/4382f69909b21ea25dfe92b0859c1fbd1acc5144; Publisher/creator: akillness / neural_symbolic_in_game project; Attribution: Official release capture from akillness/neural_symbolic_in_game, D-074, pinned at 4382f699. Project source: <a href="https://github.com/akillness/neural_symbolic_in_game/blob/4382f69909b21ea25dfe92b0859c1fbd1acc5144/README.md">repository README</a>.</figcaption>
 </figure>
 
-## 📚 Retrieve: what D-074 actually proves
+## Technical Analysis: what D-074 actually proves
 
 The useful part of the release is not the largest number. It is the separation of evidence lanes.
 
@@ -72,7 +70,7 @@ But the evidence label still matters. The fixes show that the team found and cor
   <figcaption>Third release evidence capture from the pinned D-074 route packet, frame 58. Source: <a href="https://github.com/akillness/neural_symbolic_in_game/blob/4382f69909b21ea25dfe92b0859c1fbd1acc5144/neuro-symbolic-interactive-game-research-2026/_workspace/current/qa/releases/2026-09-18/route-frame-58.png">pinned project asset</a> by akillness/neural_symbolic_in_game; License URL: https://github.com/akillness/neural_symbolic_in_game/tree/4382f69909b21ea25dfe92b0859c1fbd1acc5144; Publisher/creator: akillness / neural_symbolic_in_game project; Attribution: Official release capture from akillness/neural_symbolic_in_game, D-074, pinned at 4382f699. Project source: <a href="https://github.com/akillness/neural_symbolic_in_game/blob/4382f69909b21ea25dfe92b0859c1fbd1acc5144/README.md">repository README</a>.</figcaption>
 </figure>
 
-## 💡 Innovation: make the evidence boundary part of the build
+## Key Takeaways: make the evidence boundary part of the build
 
 The production decision here is simple enough to reuse:
 

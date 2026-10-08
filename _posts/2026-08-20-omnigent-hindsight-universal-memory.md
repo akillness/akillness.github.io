@@ -11,7 +11,7 @@ image:
   alt: "Omnigent + Hindsight — one memory setup, every harness"
 ---
 
-## 🤔 Curiosity: If Every Tool Needs Memory, Who Should Own It?
+## If Every Tool Needs Memory, Who Should Own It?
 
 I now run four coding agents on any given week. Claude Code for the long refactors, Codex when I want a second opinion, Cursor when I am reading more than writing, and a small in-house harness that drives Unity builds. Each one is brilliant. Each one is an amnesiac.
 
@@ -29,7 +29,7 @@ That is a seam argument, not a feature announcement. And seam arguments are wort
 
 ---
 
-## 📚 Retrieve: What the Source Says
+## Technical Analysis: What the Source Says
 
 ### The two pieces
 
@@ -144,7 +144,7 @@ The row that is actually new is **custom harness: usually none**. That is my Uni
 
 ---
 
-## 💡 Innovation: What I Would Ship, and What I Would Not Trust Yet
+## Key Takeaways: What I Would Ship, and What I Would Not Trust Yet
 
 ### The one thing to fix before you copy the announcement
 

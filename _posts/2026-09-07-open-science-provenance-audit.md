@@ -13,9 +13,7 @@ image:
 
 ![Diagram of one benchmark number crossing three surfaces in aipoch/open-science](/assets/img/posts/2026-09-07-open-science-provenance-audit/claim-surfaces.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance inside an evidence-gated harness, then checked against the pinned commit before publication.
-
-## 🤔 Curiosity: What does a provenance-first product owe its own marketing claims?
+## What does a provenance-first product owe its own marketing claims?
 
 [AIPOCH Open Science](https://github.com/aipoch/open-science/tree/37a159df669ec84711354c03fa7d5e0fc63c4f76) is an Apache-2.0 desktop research workbench built around one promise: evidence you can trust. Its README promises that immutable artifact versions retain the production evidence Open Science can verify, and explicitly mark evidence it cannot. At commit `37a159df` the repository was created 2026-07-03, carried 3,733 stars at retrieval, and had shipped four releases in five days — v0.23.0 through v0.25.1 between August 30 and September 3, the most recent three days before this audit's retrieval.
 
@@ -28,7 +26,7 @@ So the question this audit answers: does the benchmark claim meet the evidence s
   <figcaption>The product under audit: the Open Science workspace from the README product tour &mdash; Workspace product-tour screenshot from the aipoch/open-science repository, Apache-2.0 licensed, pinned at commit 37a159df. Source: <a href="https://github.com/aipoch/open-science/tree/37a159df669ec84711354c03fa7d5e0fc63c4f76">https://github.com/aipoch/open-science/tree/37a159df669ec84711354c03fa7d5e0fc63c4f76</a>. Publisher: AIPOCH (aipoch/open-science contributors). Licence: <a href="https://github.com/aipoch/open-science/blob/37a159df669ec84711354c03fa7d5e0fc63c4f76/LICENSE">https://github.com/aipoch/open-science/blob/37a159df669ec84711354c03fa7d5e0fc63c4f76/LICENSE</a>.</figcaption>
 </figure>
 
-## 📚 Retrieve: Five surfaces of one number
+## Technical Analysis: Five surfaces of one number
 
 I read the repository at the pinned SHA through the GitHub API and raw file fetches, then put five surfaces of the same claim side by side: the product's provenance code, the README badge, the org's own blog post, the third-party comparison the numbers trace back to, and the benchmark paper's protocol. Every quote below was verified verbatim during this run.
 
@@ -90,7 +88,7 @@ That comparison was controlled in exactly the way the workbook is not: seven bac
 
 [BiomniBench](https://www.biorxiv.org/content/10.64898/2026.05.12.724604v2.full) is a serious benchmark — 100 biomedical data-analysis tasks drawn from 21 high-impact publications, expert-designed rubrics, sandboxed Harbor v3 runs. Its paper adopts a single judge, validated against human experts: "We adopt Gemini 3.1 Pro as the judge throughout the paper." The dataset release keeps 50 tasks public and holds 50 private. Two of the paper's findings frame this audit. First: "The agent harness shifts scores by more than the gap between successive model generations" — harness comparison is precisely what this benchmark is sensitive to, which is why mixing base models across rows matters so much. Second: "Even the best configuration scores below 75 of 100 on average" across the configurations the paper evaluated on its full task set. AIPOCH's 79.05 comes from a different task subset, a different judge protocol, and an unpublished run; the numbers are not comparable, in either direction. That incomparability is the point.
 
-## 💡 Innovation: Marketing surfaces need a provenance state too
+## Key Takeaways: Marketing surfaces need a provenance state too
 
 The finding, stated plainly: this team knows how to mark unverifiable evidence — they shipped a type system for it — and their own benchmark claim never got a state assigned. Every hedge existed in writing on August 31. The README that most people will actually read carries none of them.
 

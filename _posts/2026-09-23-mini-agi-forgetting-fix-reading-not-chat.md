@@ -11,9 +11,7 @@ image:
   alt: "Original diagram of mini-AGI's three learning paths: the measured corpus run, the file-reading path, and the unmeasured chat path"
 ---
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under a policy-bound evidence harness; I read the pinned repository but did not train, serve, or chat with mini-AGI myself.
-
-## 🤔 Curiosity: Which part of mini-AGI learns without forgetting?
+## Which part of mini-AGI learns without forgetting?
 
 [mini-AGI](https://github.com/volotat/mini-AGI) is Alexey Borsky's new MIT-licensed project, created on September 19, 2026. Its README describes a **continual learning byte-level language model** that assembles its own architecture, trains from scratch on a single 8 GB VRAM GPU, and keeps learning from everything it reads. The author is careful to add that, for now, it is a small toy-level model.
 
@@ -27,7 +25,7 @@ The pinned code says only partly. The forgetting probe measures corpus reading w
 
 To be fair to the author, most of this is visible in the repository itself. The code is unusually candid. The gap is between the Motivation paragraph and what has been measured so far.
 
-## 📚 Retrieve: What the pinned repository shows
+## Technical Analysis: What the pinned repository shows
 
 I pinned the repository at commit [`efd4a168`](https://github.com/volotat/mini-AGI/tree/efd4a16822d7e46008847186df750ea3ff9fa00b) from September 23 and read the README, `serve.py`, `minagi/live.py`, `train.py`, `config.yaml`, and `minagi/config.py`. The repository had 20 commits at that point, and the MIT license was added on September 21.
 
@@ -111,7 +109,7 @@ The README reports **2.450 bits per byte on the PG19 test split**, a fitted powe
   <figcaption>Data scaling with the fitted power law, as published. Source: <a href="https://github.com/volotat/mini-AGI/blob/efd4a16822d7e46008847186df750ea3ff9fa00b/README.md">https://github.com/volotat/mini-AGI/blob/efd4a16822d7e46008847186df750ea3ff9fa00b/README.md</a>. Publisher/creator: Alexey Borsky (volotat/mini-AGI). License: <a href="https://raw.githubusercontent.com/volotat/mini-AGI/efd4a16822d7e46008847186df750ea3ff9fa00b/LICENSE">https://raw.githubusercontent.com/volotat/mini-AGI/efd4a16822d7e46008847186df750ea3ff9fa00b/LICENSE</a>. Attribution: Alexey Borsky, mini-AGI data scaling chart, MIT License, pinned at commit efd4a168.</figcaption>
 </figure>
 
-## 💡 Innovation: Treat each learning path as its own claim
+## Key Takeaways: Treat each learning path as its own claim
 
 The useful move is to stop reading "continual learning without forgetting" as one property of the model. In mini-AGI it is three paths with three evidence levels.
 

@@ -11,9 +11,7 @@ image:
   alt: "Original diagram of Jev's indexed browser-agent decision loop from observed controls to operation and target heads, freshness checks, and a narrow text helper"
 ---
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under a policy-bound evidence harness; no first-hand playtest or human participant result is claimed.
-
-## 🤔 Curiosity: Is Jev faster, or is it simply asked fewer bad questions?
+## Is Jev faster, or is it simply asked fewer bad questions?
 
 A recent X post makes a dramatic claim: Jev is **20 to 200 times faster** and **40 to 400 times cheaper**. The post then points readers to ten Jev-related projects, including [Browser Use's `jev-ultrafast`](https://github.com/browser-use/jev-ultrafast) and [Jev Desktop](https://github.com/yikangy873-gif/jev-desktop).
 
@@ -31,7 +29,7 @@ Jev Ultrafast's interesting optimization is not a claim that a language model su
 
 That is a much narrower claim than the X post. It is also more useful to engineers.
 
-## 📚 Retrieve: What the pinned repositories actually implement
+## Technical Analysis: What the pinned repositories actually implement
 
 ### The decision loop is an indexed table, not a screenshot prompt
 
@@ -168,7 +166,7 @@ The README is also unusually direct about performance: it **does not yet prove a
 
 That is the sentence I would want more projects to write. A decision layer can improve structure, safety, and inspectability without having earned a speedup claim yet.
 
-## 💡 Innovation: The production pattern is a validity budget
+## Key Takeaways: The production pattern is a validity budget
 
 My read is that Jev's useful abstraction is a **validity budget**.
 

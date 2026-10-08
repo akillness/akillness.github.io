@@ -1,7 +1,7 @@
 ---
 title: "NPGA Audit: Neural Parametric Gaussian Avatars, Two Years On"
 description: "A source audit of NPGA against its own tables: the framework is worth 2.01 PSNR at fixed tracking, the expression space 1.44, and the code is still unreleased."
-categories: [Multimodal/Computer Vision]
+categories: [AI, Research]
 tags: [Multimodal, Vision, Generative Model]
 date: 2024-06-01 15:00:00 +0800
 correction_date: "2026-09-07"
@@ -13,7 +13,7 @@ image:
 
 {% include embed/youtube.html id='NGRxAYbIkus' %}
 
-## 🤔 Curiosity: which half of an avatar paper is doing the work?
+## which half of an avatar paper is doing the work?
 
 Every Gaussian-avatar paper ships two things at once: a **driving signal**, the expression space that says what the face is doing, and a **renderer**, the primitives and tricks that make pixels sharp. My prior going in was that announcements mostly sell the renderer while production teams mostly pay for the driving signal. The paper's own numbers turned out to be less tidy than that.
 
@@ -24,7 +24,7 @@ NPGA is a good place to test that, because the authors ran the experiments that 
 > **Correction (2026-09-02).** An earlier version of this note credited the wrong authors. The names previously listed here belong to [LangSplat](https://arxiv.org/abs/2312.16084), a different paper. The correct NPGA authors are recorded below.
 {: .prompt-warning }
 
-## 📚 Retrieve: what the pinned sources say
+## Technical Analysis: what the pinned sources say
 
 **NPGA: Neural Parametric Gaussian Avatars** appeared at **SIGGRAPH Asia 2024** (DOI [10.1145/3680528.3687689](https://doi.org/10.1145/3680528.3687689)), by **Simon Giebenhain**, **Tobias Kirschstein**, **Martin Rünz**, **Lourdes Agapito**, and **Matthias Nießner** (TU Munich, Synthesia, University College London). Every metric below is read from [arXiv:2405.19331v2](https://arxiv.org/abs/2405.19331v2), the September 2024 revision; repository and project-page facts are dated separately and linked in the References.
 
@@ -93,7 +93,7 @@ The data path is gated as well. NeRSemble is public in the sense that anyone may
 
 Rights split by venue, and the split matters if you want to reuse anything. The ACM version carries `© rightsretained`, and the project page states no reuse terms for its figures or videos. The arXiv version, however, is published under **CC BY 4.0**, so its figures are reusable with attribution. This post still uses an original diagram, not because the source figures are off limits but because the decomposition it plots is one the paper never draws.
 
-## 💡 Innovation: what I would take into a game pipeline
+## Key Takeaways: what I would take into a game pipeline
 
 **Budget the tracker and the consuming architecture together.** Neither lever dominates here: at fixed tracking the framework is worth 2.01 PSNR, and at fixed framework the tracking is worth 1.44. A pipeline stuck at "the face looks slightly wrong" can be failing on either side, so measure both before spending.
 
@@ -144,9 +144,6 @@ Rights split by venue, and the split matters if you want to reuse anything. The 
 - <https://github.com/SimonGiebenhain/MonoNPHM>
 - <https://github.com/SimonGiebenhain/pixel3dmm>
 - <https://github.com/tobias-kirschstein/nersemble-data>
-
-> **Editorial method:** this audit was researched and drafted with AI assistance under an evidence-gated editorial process, then revised across three independent review passes. Every metric above is read from arXiv:2405.19331v2 or from the primary pages linked in this section, and the figure is original rather than reproduced, because the decomposition it plots does not appear in the paper.
-{: .prompt-info }
 
 <details markdown="1">
 <summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > 한국어 요약 </summary>

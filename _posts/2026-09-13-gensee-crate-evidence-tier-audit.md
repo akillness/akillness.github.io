@@ -13,9 +13,7 @@ image:
 
 ![Three evidence tiers inside gensee-crate at commit 0a47b53c: sealed traces that recount exactly, a self-hedged latency bench, and a defense-rate chart that ships only as a PNG](/assets/img/posts/2026-09-13-gensee-crate-evidence-tier-audit/evidence-tier-ladder.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under an evidence-gated editorial harness; every claim was verified against the pinned commit 0a47b53c before publication.
-
-## 🤔 Curiosity: Which of a safety vendor's numbers can you actually check?
+## Which of a safety vendor's numbers can you actually check?
 
 [Gensee Crate](https://github.com/GenseeAI/gensee-crate/tree/0a47b53c4a05fe8af3fa6ecc8099507093fac973) is an open-source "safety and control layer for autonomous AI" from GenseeAI, a UCSD-research-backed team. It wraps coding-agent harnesses — Codex, Claude Code, Cursor, Copilot, Antigravity, Omnigent — with policy hooks, scope-drift detection, recovery points, and a review queue. The repository is Apache-2.0, created 2026-06-23, badged `status: alpha`, and carried 124 stars with a last push on 2026-09-07 at retrieval.
 
@@ -33,7 +31,7 @@ That combination invites a specific question: **for each number this repository 
   <figcaption>The Review Queue groups a flagged Claude request with its tool-call, files-touched, and outside-intent counts and a recovery point; scope-drift detection is one of the surfaces the benchmark chart summarizes &mdash; Image from GenseeAI/gensee-crate (Apache-2.0), commit 0a47b53c. Source: <a href="https://github.com/GenseeAI/gensee-crate/blob/0a47b53c4a05fe8af3fa6ecc8099507093fac973/README.md">https://github.com/GenseeAI/gensee-crate/blob/0a47b53c4a05fe8af3fa6ecc8099507093fac973/README.md</a>. Publisher: GenseeAI (GenseeAI/gensee-crate). Licence: <a href="https://github.com/GenseeAI/gensee-crate/blob/0a47b53c4a05fe8af3fa6ecc8099507093fac973/LICENSE">Apache-2.0</a>.</figcaption>
 </figure>
 
-## 📚 Retrieve: Recounting every number in the tree
+## Technical Analysis: Recounting every number in the tree
 
 I audited the pinned tree through a shallow clone at `0a47b53c`, the GitHub API, the AgentCanary paper's v1 HTML, and the pinned upstream benchmark repository at `5072b782`. Every quote carries its file coordinate.
 
@@ -106,7 +104,7 @@ Writing detections for known attack shapes is legitimate defense engineering, an
   <figcaption>The configuration audit reviews agent config statically &mdash; the same product family whose memory-poison scanner names the AgentCanary corpus shape in its doc comment &mdash; Image from GenseeAI/gensee-crate (Apache-2.0), commit 0a47b53c. Source: <a href="https://github.com/GenseeAI/gensee-crate/blob/0a47b53c4a05fe8af3fa6ecc8099507093fac973/README.md">https://github.com/GenseeAI/gensee-crate/blob/0a47b53c4a05fe8af3fa6ecc8099507093fac973/README.md</a>. Publisher: GenseeAI (GenseeAI/gensee-crate). Licence: <a href="https://github.com/GenseeAI/gensee-crate/blob/0a47b53c4a05fe8af3fa6ecc8099507093fac973/LICENSE">Apache-2.0</a>.</figcaption>
 </figure>
 
-## 💡 Innovation: The recount test
+## Key Takeaways: The recount test
 
 The useful output of this audit is not "gensee-crate bad." The trace corpus is among the most verifiable security data releases I have audited in this series, and the same repository demonstrates evidence discipline three separate ways. The useful output is a test you can run against any security vendor's repo in under an hour:
 

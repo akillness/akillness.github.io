@@ -1,7 +1,7 @@
 ---
 title: "MiniMax H3 LoRAs Are Not a Folder: A 19-Release Compatibility Audit"
 description: "A source audit of 19 MiniMax H3 downloads: four are not H3 LoRAs, real adapters carry runtime contracts, and the license excludes Korea, the US, EU, and UK."
-categories: [Multimodal/Computer Vision]
+categories: [AI, Research]
 tags: [minimax-h3, lora, ai-video, video-generation, comfyui, model-licensing, multimodal-ai]
 date: 2026-08-29 23:50:00 +0900
 mermaid: true
@@ -10,7 +10,7 @@ image:
   alt: "MiniMax H3 compatibility audit separating 15 H3 adapters from four downloads that require different models or loaders"
 ---
 
-## 🤔 Curiosity: Can 19 `.safetensors` Files Really Share One Folder?
+## Can 19 `.safetensors` Files Really Share One Folder?
 
 A roundup published on August 28 collected [19 MiniMax H3 “LoRAs and variants”](https://www.stablediffusiontutorials.com/2026/08/minimax-h3-lora-models.html), pointed readers to a separate base-model workflow, then reduced adapter setup to one global instruction: download any LoRA and save it in `ComfyUI/models/loras`.
 
@@ -34,7 +34,7 @@ I did **not** download the weights or generate videos for this audit. I therefor
 > **Verification note:** This post occupies the requested August 29 editorial slot; the primary-source snapshot was completed on August 30, 2026 KST. Model cards and metadata can change after that snapshot.
 {: .prompt-info}
 
-## 📚 Retrieve: First Define What “Open H3” Contains
+## Technical Analysis: First Define What “Open H3” Contains
 
 MiniMax's announcement describes H3 as a general-purpose multimodal system that accepts text, images, video, and audio, then generates video with stereo sound for up to 15 seconds at up to 2K. The open repository makes the system boundary more precise.
 
@@ -161,7 +161,7 @@ Metadata is not a legal judgment. A README may add terms that its front matter o
 
 That lesson matches my [Seedance 2.0 stack audit](/posts/seedance-2-ai-drama-stack-audit/): public source, local execution, and commercial permission are three independent axes. “Open weights” only answers one of them.
 
-## 💡 Innovation: Replace the LoRA Folder with a Five-Gate Contract
+## Key Takeaways: Replace the LoRA Folder with a Five-Gate Contract
 
 The most reusable output of this audit is not a better top-19 ranking. It is a manifest I can review before any video-model artifact enters a production graph.
 

@@ -1,7 +1,7 @@
 ---
 title: "After Seedance 2.0, I Re-Audited Four AI Drama Stacks. The Shortlist Was Wrong"
 description: "Huobao Drama, Toonflow, waoowaoo, and Moyin Creator automate real short-drama pipelines. A source audit shows that none of them is simultaneously free to operate, unrestricted for commercial use, and fully local."
-categories: [Review/Trends]
+categories: [AI, Research]
 tags: [seedance-2.0, ai-video, short-drama, agent-workflows, open-source, self-hosting, licensing, content-pipeline]
 date: 2026-08-26 10:00:00 +0800
 mermaid: true
@@ -10,7 +10,7 @@ image:
   alt: "Source audit of Huobao Drama, Toonflow, waoowaoo, and Moyin Creator across license and runtime boundaries"
 ---
 
-## Curiosity: Did Seedance 2.0 Make the Old Tool Stack Obsolete?
+## Did Seedance 2.0 Make the Old Tool Stack Obsolete?
 
 When Seedance 2.0 arrived, my saved list of AI video tools suddenly felt much less useful. A model that can accept several images, video references, audio, and a long prompt changes the job. I no longer need ten disconnected utilities if one production layer can preserve characters, plan shots, submit multimodal jobs, retry failures, and join the results.
 
@@ -53,7 +53,7 @@ The product images below are excerpts from official repository READMEs, included
 
 ---
 
-## Retrieve: What the Source Actually Says
+## Technical Analysis: What the Source Actually Says
 
 ### The boundary that Seedance 2.0 does not remove
 
@@ -231,7 +231,7 @@ This does not replace a legal review or a security test. It does stop the most c
 
 ---
 
-## Innovation: Choose a Production Contract, Not a Star Count
+## Key Takeaways: Choose a Production Contract, Not a Star Count
 
 ### My practical selection map
 

@@ -112,8 +112,6 @@ This is the same failure shape I wrote about in [the Orca telemetry audit](/post
 - The blast radius is total, not partial. `matlab.md` and `objc.md` share zero identical rule bullets across 95 and 109 lines.
 - Case sensitivity is not the problem. `resolveDetail` lowercases both sides before matching.
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under a policy-bound evidence harness, and every claim is pinned to primary source at a named commit rather than to first-hand operation of the tool.
-
 ## 🤔 New Questions
 
 How often does the gap fire in practice? That needs a corpus of real Octave `.m` files, counted by whether their first non-blank line starts with `#` and no space. I did not measure it, so I will not guess at it.

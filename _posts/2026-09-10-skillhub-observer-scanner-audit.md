@@ -13,9 +13,7 @@ image:
 
 ![Map of SkillHub's three publish paths with the security scanner drawn as an observer and the only hard scan gate firing on scanner failure](/assets/img/posts/2026-09-10-skillhub-observer-scanner-audit/scan-gate-map.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance inside an evidence-gated harness, then checked against the pinned commit before publication.
-
-## 🤔 Curiosity: When a registry says "security scanning," what does the verdict actually gate?
+## When a registry says "security scanning," what does the verdict actually gate?
 
 [SkillHub](https://github.com/iflytek/skillhub/tree/d824a0498ca0c5722d2bf51d71b44d87daaf2a13) is iFlytek's self-hosted, enterprise agent-skill registry: publish and version skill packages, govern them with RBAC and audit logs, deploy behind your firewall. The repository is Apache-2.0, created 2026-03-11, and carried 5,072 stars with a last push on 2026-09-09 at retrieval. This audit pins the tree at commit `d824a049`.
 
@@ -28,7 +26,7 @@ So I asked the question I now ask every governance product: when the scanner ret
   <figcaption>The governed storefront: a self-hosted registry homepage with curated collections &mdash; Screenshot: iFlytek SkillHub documentation (homepage.png), Apache-2.0, pinned at d824a049. Source: <a href="https://github.com/iflytek/skillhub/tree/d824a0498ca0c5722d2bf51d71b44d87daaf2a13">https://github.com/iflytek/skillhub/tree/d824a0498ca0c5722d2bf51d71b44d87daaf2a13</a>. Publisher: iFlytek SkillHub maintainers. Licence: <a href="https://github.com/iflytek/skillhub/blob/d824a0498ca0c5722d2bf51d71b44d87daaf2a13/LICENSE">https://github.com/iflytek/skillhub/blob/d824a0498ca0c5722d2bf51d71b44d87daaf2a13/LICENSE</a>.</figcaption>
 </figure>
 
-## 📚 Retrieve: Tracing the verdict from the scanner to nowhere
+## Technical Analysis: Tracing the verdict from the scanner to nowhere
 
 I audited the pinned tree through a shallow clone at `d824a049` plus the GitHub API. Every quote below carries its file coordinate; nothing in this section comes from running the server.
 
@@ -101,7 +99,7 @@ The enforcement that does exist at upload time is `SkillPackagePolicy`: 500 file
 | Super-admin publish | (not advertised) | `PUBLISHED` before the scan completes |
 | Upload gate | Extension allowlist | Magic bytes for images/PDF, UTF-8 for text, no check for office formats |
 
-## 💡 Innovation: Grade the scanner by its consumers, not its engines
+## Key Takeaways: Grade the scanner by its consumers, not its engines
 
 To be fair to SkillHub: asynchronous, advisory scanning is a defensible design. Blocking uploads on a scanner adds a hard availability dependency — and SkillHub's own engineering shows they take that dependency seriously (idempotency locks, bounded retries, temp-file cleanup discipline in `ScanTaskConsumer`). Routing every public skill through human review is a real gate, and bounding pre-review downloads to draft managers is real too. The defect is narrower and more instructive: the product documents an enforcement behavior — "automatically blocked" — that terminates in a badge.
 

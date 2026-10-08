@@ -3,7 +3,7 @@ layout: post
 title: "Krita Color Smudge changes what brush spacing means"
 description: "A source audit of why lower spacing smooths Smearing but strengthens Dulling, with a mode-first preset handoff and an unexecuted comparison plan."
 date: 2026-10-07 09:00:00 +0900
-categories: [Research]
+categories: [AI, Research]
 tags: [krita, game-art, source-audit]
 image:
   path: /assets/img/posts/2026-10-07-krita-color-smudge-spacing-modes/cover.png
@@ -24,7 +24,7 @@ Editorial additions: AI-assisted Fodev JEO editorial article, 2026. Publisher: F
 
 Copyright in source material remains with the Krita Manual contributors. Copyright (c) 2026 Jang Young Jeong, original editorial additions. Article-specific distribution terms: Permission is granted to copy, distribute and/or modify this document under the GNU Free Documentation License, Version 1.3 or any later version published by the Free Software Foundation, with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. See the [complete license](/assets/img/posts/2026-10-07-krita-color-smudge-spacing-modes/licenses/GFDL-1.3.txt) and [rights notice](/assets/img/posts/2026-10-07-krita-color-smudge-spacing-modes/licenses/NOTICE-v3.md).
 
-## Curiosity: why does the same spacing change feel different?
+## why does the same spacing change feel different?
 
 Should a game artist reduce brush spacing when a color transition looks rough? In Krita’s Color Smudge Brush, the useful answer starts one decision earlier: **which mode is doing the mixing?**
 
@@ -32,11 +32,9 @@ The official manual describes a meaningful asymmetry. Reducing spacing makes Sme
 
 That is the reader decision here: choose between carrying existing surface detail and mixing sampled color into the brush dab before tuning spacing. For a game-art team, I would treat that choice as part of the asset-production recipe, not an incidental brush preference. This is a workflow recommendation derived from documentation, not a claim that I painted a shipped asset with it.
 
-> **Editorial method:** AI assisted with primary-source retrieval, image-rights preflight, and this documentation-based analysis. No Krita runtime experiment was performed for this article.
-
 The research package inspected the official manual and its source at documentation commit [87d1c035](https://invent.kde.org/documentation/docs-krita-org/-/raw/87d1c035f7db9696eae7badfe9ac38a7eb6bf984/reference_manual/brushes/brush_engines/color_smudge_engine.rst), inspected the four illustrations below, and compared downloaded image bytes with the immutable repository copies. The rendered manual reports revision f04d5f9; its Color Smudge source text matches the pinned source exactly. The pin identifies documentation, not Krita executable code. This is not a new-release report.
 
-## Retrieve: one slider, two mixing operations
+## Technical Analysis: one slider, two mixing operations
 
 ### Smearing carries an area; Dulling fills a dab
 
@@ -88,7 +86,7 @@ The manual warns that Smearing can pick up the hard lines of its rectangle examp
 
 For a painted game asset, that suggests a practical debugging question: did an unwanted edge come from the sampled image content, rather than from the chosen foreground color? That is an inference worth testing, not a diagnosis of an unseen painting. The right-hand example also changes size and rotation dynamics, so it must not be presented as a controlled measurement of Scatter alone.
 
-## Innovation: hand off a mixing recipe, not a brush number
+## Key Takeaways: hand off a mixing recipe, not a brush number
 
 My proposed handoff is small: record the **mode, brush tip, spacing, opacity, Color Rate, Smudge Length, applicable Smudge Radius, Smear Alpha, dynamics, and algorithm-toggle state**, together with the Krita version. Color Rate is the documented foreground-color contribution; it should not be silently equated with the amount of existing paint being moved. The manual describes version-dependent algorithm interactions, so the toggle state belongs in the record even though this article does not prescribe a checkbox position.
 

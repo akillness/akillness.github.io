@@ -13,9 +13,7 @@ image:
 
 ![Flat vector illustration of a document with a seal that flips between two states above a timeline with three markers, representing a repository whose license file changed three times](/assets/img/posts/2026-09-17-openocta-license-drift-audit/cover.png)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under an evidence-gated editorial harness; every license text, commit, diff line count, and README line quoted here was read from the pinned commit 0c7dac2 or a bounded GitHub API call before publication.
-
-## 🤔 Curiosity: Which license does OpenOcta actually ship under?
+## Which license does OpenOcta actually ship under?
 
 [openocta/openocta](https://github.com/openocta/openocta/tree/0c7dac2284211facdfc813166fe648d093153bb6) is an AIOps agent that installs on Windows and macOS and answers natural-language inspection, alerting, and remediation questions about a company's infrastructure. At retrieval it carried 3,189 stars, was created on 2026-02-26, and its most recent push landed on 2026-09-16. That push is the commit this audit is pinned to, and its message is three words long: "Add LICENSE file".
 
@@ -23,7 +21,7 @@ That message is what made me look: a license file being "added" seven months aft
 
 For an operations agent this matters more than it would for a library. OpenOcta is meant to sit on an ops host, run inspections, and take remediation actions. The teams that adopt it are exactly the teams whose compliance reviews ask one question first: under what terms is this thing on our machines?
 
-## 📚 Retrieve: Three surfaces, three answers
+## Technical Analysis: Three surfaces, three answers
 
 ### The pinned tree says three different things
 
@@ -97,7 +95,7 @@ The latest GitHub release at retrieval was v1.0.9, published 2026-09-09, a week 
   <figcaption>Model configuration from the README tour. The provider keys entered here are the operator's; the license question is about redistributing or embedding the client that holds them &mdash; Image from openocta/openocta (GPL-3.0 LICENSE file at 0c7dac2), commit 0c7dac2. Source: <a href="https://github.com/openocta/openocta/blob/0c7dac2284211facdfc813166fe648d093153bb6/imgs/readmePIC/QQ20260709-211248.png">https://github.com/openocta/openocta/blob/0c7dac2284211facdfc813166fe648d093153bb6/imgs/readmePIC/QQ20260709-211248.png</a>. Publisher: OpenOcta (openocta/openocta). Licence: <a href="https://github.com/openocta/openocta/blob/0c7dac2284211facdfc813166fe648d093153bb6/LICENSE">GPL-3.0</a>.</figcaption>
 </figure>
 
-## 💡 Innovation: Read the license the way you read a config default
+## Key Takeaways: Read the license the way you read a config default
 
 The pattern here is the same one that keeps showing up in these audits: a project's prose describes one contract and its artifacts implement another. Yesterday it was a settings writer that never asked for a file mode while the plugin store did ([LLM Space](/posts/llm-space-api-key-file-mode-audit/)); this morning it was a sandbox whose quick starts turn off Docker's default seccomp filter ([AIO Sandbox](/posts/aio-sandbox-confinement-contract-audit/)). Licenses drift the same way, and the fix is the same: check the artifact, not the summary, at a pinned commit.
 

@@ -10,7 +10,7 @@ image:
   alt: "Three stacked layers labelled distrust the executing agent, distrust the ordinary model, and distrust its own update server, summarizing Archify's engineering"
 ---
 
-## 🤔 Curiosity: Why does a diagram tool need this much paranoia?
+## Why does a diagram tool need this much paranoia?
 
 [Archify](https://github.com/tt-a1i/archify) is the repository everyone saw on GitHub trending this week. Third-party daily boards placed it at rank 1 on both August 27 and August 29, reporting 25,187 stars on the 29th; when I read the GitHub API directly on August 31 at 01:02 KST it showed **33,581 stars and 2,125 forks** — roughly 8,400 stars added in about two days, comparing those two differently-sourced observations. The pitch is simple: agents author a small typed JSON IR, and a Node.js renderer deterministically compiles it into a self-contained interactive HTML diagram. Stable **v2.16.0 shipped on August 30**, one day before this audit.
 
@@ -22,7 +22,7 @@ Pretty diagrams go viral every month. That is not a reason to write. The reason 
 
 The counterparty being distrusted here is the agent running the skill. That inversion — a tool whose primary threat model is its own operator — is the actual story, and it runs through three distinct layers of the codebase.
 
-## 📚 Retrieve: Three layers of engineered distrust
+## Technical Analysis: Three layers of engineered distrust
 
 I audited the working tree (483 files excluding `.git`) statically: contracts, renderer source, tests, benchmark receipts, and the full `LICENSE` text. I did not execute Archify's code, and every repository claim below is pinned to `5de7275f` unless marked otherwise.
 
@@ -91,7 +91,7 @@ A Source Audit owes you the gaps too:
 - **Provenance is disclosed, not hidden.** `SKILL.md` metadata declares `based_on: Cocoon-AI/architecture-diagram-generator (MIT, v1.0)`, and the LICENSE file carries dual copyright lines (tt-a1i 2026, Cocoon AI 2025) over a clean 22-line MIT text with no appended restrictions. I read the full text — after [last week's MiniMax H3 audit](/posts/minimax-h3-lora-compatibility-audit/), where the "open" license excluded four jurisdictions, this is the check I no longer skip.
 - **The distribution story connects to a familiar harness.** Archify ships an isolated DeepSeek Harness bundle (`integrations/deepseek-harness`, published as `@tt-a1i/archify-dsh`) whose test suite asserts the host-loaded adapter "does not open a second execution, network, credential, or telemetry surface." That is the plugin-boundary discipline I examined in [the DeepSeek Harness audit](/posts/deepseek-harness-everything-is-a-plugin/) — applied from the plugin author's side this time.
 
-## 💡 Innovation: What harness engineers should actually copy
+## Key Takeaways: What harness engineers should actually copy
 
 The trending story is "JSON in, pretty diagram out." The production story is a working answer to a question every agent team currently faces: **how do you let an unreliable optimizer operate a quality-gated tool without letting it negotiate the gate?**
 

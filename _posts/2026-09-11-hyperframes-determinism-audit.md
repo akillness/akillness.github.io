@@ -13,9 +13,7 @@ image:
 
 ![Four-tier ladder of how hyperframes verifies rendering, from byte equality for one format down to 28 fixtures recorded as never verified in CI](/assets/img/posts/2026-09-11-hyperframes-determinism-audit/determinism-ladder.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance inside an evidence-gated harness, then checked against the pinned commit before publication.
-
-## 🤔 Curiosity: What does "deterministic" survive contact with an encoder?
+## What does "deterministic" survive contact with an encoder?
 
 [HyperFrames](https://github.com/heygen-com/hyperframes/tree/d4fba55a4ee632f74484c6c7498a132b9928ce03) is HeyGen's open-source HTML-to-video renderer — "Write HTML. Render video. Built for agents." The repository is Apache-2.0, created 2026-03-10, and carried 48,651 stars with a last push on 2026-09-10 at retrieval; the npm CLI sits at 0.8.33. This audit pins the tree at commit `d4fba55a`.
 
@@ -30,7 +28,7 @@ The answer has four tiers, and only one of them is bytes.
   <figcaption>Production pedigree, committed as test input: a HeyGen editor screenshot shipped as a source asset of the heygen-promo-preview-assets golden fixture &mdash; a fixture the shard schedule lists as never having run in CI &mdash; Screenshot: HeyGen product editor, committed as a promo-fixture asset in heygen-com/hyperframes (hero-prism.png), Apache-2.0, pinned at d4fba55a. Source: <a href="https://github.com/heygen-com/hyperframes/tree/d4fba55a4ee632f74484c6c7498a132b9928ce03">https://github.com/heygen-com/hyperframes/tree/d4fba55a4ee632f74484c6c7498a132b9928ce03</a>. Publisher: HeyGen (heygen-com/hyperframes maintainers). Licence: <a href="https://github.com/heygen-com/hyperframes/blob/d4fba55a4ee632f74484c6c7498a132b9928ce03/LICENSE">https://github.com/heygen-com/hyperframes/blob/d4fba55a4ee632f74484c6c7498a132b9928ce03/LICENSE</a>.</figcaption>
 </figure>
 
-## 📚 Retrieve: Reading the verification, not the promise
+## Technical Analysis: Reading the verification, not the promise
 
 I audited the pinned tree through a shallow clone at `d4fba55a` plus the GitHub and npm APIs. Every quote below carries its file coordinate; nothing in this section comes from running a render.
 
@@ -107,7 +105,7 @@ Cross-platform, the tiers drop again. The Windows workflow's own comment explain
 
 The public docs, interestingly, already speak this more careful language. The introduction page describes the property as "**Reliable render**" — a slow machine "does not drop moments from the finished video" — without using the word deterministic on that page. The absolute register lives in the README.
 
-## 💡 Innovation: Determinism is a ladder, and you should label your rungs
+## Key Takeaways: Determinism is a ladder, and you should label your rungs
 
 I went in expecting to test a claim and came out adopting a taxonomy. What HyperFrames actually ships is a four-rung ladder, and the audit's real lesson is that every rendering pipeline has one, written down or not:
 

@@ -13,9 +13,7 @@ image:
 
 ![Diagram of the two authority layers in razzant/ouroboros — constitution above, owner-gated supervisor code below](/assets/img/posts/2026-09-08-ouroboros-agency-custody-audit/authority-layers.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance inside an evidence-gated harness, then checked against the pinned commit before publication.
-
-## 🤔 Curiosity: When an agent can rewrite itself, who actually holds authority?
+## When an agent can rewrite itself, who actually holds authority?
 
 [Ouroboros](https://github.com/razzant/ouroboros/tree/b9bcc2da71e0bd51b6f5f906890b3b80265defed) is an MIT-licensed desktop and headless agent created 2026-02-11 that, per its own README, "can rewrite the implementation it runs on, including its code, architecture, prompts, tools, and dependencies." At retrieval the repository carried 1,277 stars and 622 forks, its last push landed 2026-09-07, and this audit pins the tree at commit `b9bcc2da` — the `release: 6.114.0` commit of 2026-09-01. Its technical report, [arXiv:2608.08311](https://arxiv.org/abs/2608.08311) (v3, 2026-08-31), is titled with the phrase "Reviewed Core Evolution."
 
@@ -28,7 +26,7 @@ That is the sharpest possible version of a question every harness engineer now f
   <figcaption>The product under audit: a committed project-room screenshot where the agent builds and visually verifies a 3D game &mdash; Project-room product screenshot from the razzant/ouroboros repository, MIT licensed, pinned at commit b9bcc2da. Source: <a href="https://github.com/razzant/ouroboros/tree/b9bcc2da71e0bd51b6f5f906890b3b80265defed">https://github.com/razzant/ouroboros/tree/b9bcc2da71e0bd51b6f5f906890b3b80265defed</a>. Publisher: Anton Razzhigaev (razzant/ouroboros contributors). Licence: <a href="https://github.com/razzant/ouroboros/blob/b9bcc2da71e0bd51b6f5f906890b3b80265defed/LICENSE">https://github.com/razzant/ouroboros/blob/b9bcc2da71e0bd51b6f5f906890b3b80265defed/LICENSE</a>.</figcaption>
 </figure>
 
-## 📚 Retrieve: Reading both authority layers at one SHA
+## Technical Analysis: Reading both authority layers at one SHA
 
 I audited the pinned tree through a shallow clone at `b9bcc2da`, the GitHub API, and the arXiv v3 abstract. Every quote below carries its file coordinate; nothing in this section comes from running the app.
 
@@ -82,7 +80,7 @@ And because each install is a lineage, distribution is deliberately boring: pack
 
 The README claims self-reported state-of-the-art results — and the arXiv v3 abstract reports 86.74% on Terminal-Bench 2.1 and 90.69% on OSWorld-Verified from Opus 5 runs, plus a 161-day "Hope" deployment. I did not verify any score against a third-party leaderboard in this run. What is worth noting for readers of my earlier audit of [self-reported benchmark presentation](/posts/open-science-provenance-audit/) is the hedging discipline: the README says "self-reported" in the first sentence of its benchmark section, calls its SWE-bench Pro pair "a statistical tie with Codex CLI," discloses that a GAIA trace capsule "is still pending," and instructs readers to "Read every row as model plus harness." Whatever the numbers turn out to be worth, that presentation keeps its provenance state attached — which, as the paper itself argues, is the point: "operational safety becomes a primary design problem: guardrails must remain authoritative under evolutionary and public social pressure."
 
-## 💡 Innovation: The custody lattice is the product
+## Key Takeaways: The custody lattice is the product
 
 Read as marketing, Ouroboros is a story about a digital being whose "agency wins." Read at the SHA, it is one of the more complete owner-custody implementations among the harnesses this site has audited, and the two layers are not actually in contradiction — they are partitioned. The agency story lives in prompts, constitution, and identity files: the layer the LLM reads. The authority lives in supervisor code: the layer the LLM cannot vote on. The constitution's own text quietly concedes the split with its "Hardcode the floor, never the ceiling" rule: "Invariants — truth, custody, budgets, authority, acceptance — earn their hardness in code precisely so that everything above them can stay free." And in the code I read, enabling evolution, choosing advisory over blocking review, setting budgets, and Panic all sit with the owner.
 

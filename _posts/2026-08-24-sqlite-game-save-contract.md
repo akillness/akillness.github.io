@@ -10,7 +10,7 @@ image:
   alt: "Decision guide showing which game data is a strong, conditional, or poor fit for SQLite"
 ---
 
-## 🤔 Curiosity: When Is a Save File More Than a File?
+## When Is a Save File More Than a File?
 
 A game save is often treated as an implementation detail right up to the moment it destroys a player's evening. Then it becomes a production problem: an autosave races a cloud-sync daemon, a console build cannot see the path it used on desktop, a modded file turns into untrusted input, or the process dies halfway through a checkpoint.
 
@@ -37,7 +37,7 @@ The source article is right to push teams away from needless distributed systems
 
 ---
 
-## 📚 Retrieve: The Local Database Contract
+## Technical Analysis: The Local Database Contract
 
 ### A source audit, not a slogan audit
 
@@ -136,7 +136,7 @@ SQLite's own framing is also proportional: this is not an emergency, and its obs
 
 ---
 
-## 💡 Innovation: The SQLite Game Save Contract
+## Key Takeaways: The SQLite Game Save Contract
 
 The useful innovation is not "replace every game service with SQLite." It is a small storage contract that teams can review per data class.
 

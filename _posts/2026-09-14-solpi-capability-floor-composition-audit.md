@@ -13,9 +13,7 @@ image:
 
 ![SoL-Pi gates each mechanism against a capability floor one at a time; the assembled harness is reported at roughly 94% of Pi's average score across EdgeBench tasks on both model backends, and solves 15 of 63 Terminal-Bench 4 tasks to Pi's 18](/assets/img/posts/2026-09-14-solpi-capability-floor-composition-audit/capability-floor-composition.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under an evidence-gated editorial harness; every number was read from the pinned commit d7ecfc08 or the project's own published pages before publication.
-
-## 🤔 Curiosity: What does "without getting less done" have to survive?
+## What does "without getting less done" have to survive?
 
 [NVlabs/SoL-Pi](https://github.com/NVlabs/SoL-Pi/tree/d7ecfc089944f0d04b80122a0a9a6ca0d786f3d0) is eleven days old and already carries 1,608 stars. It is MIT-licensed TypeScript, created on 2026-09-02, and the README frames it as an add-on rather than a replacement: "a standalone extension for [Pi](https://github.com/earendil-works/pi)" and "not an official distribution of Pi." The research page is less cautious and calls SoL-Pi an agent harness in its own right — which is the first place the two scopes in this article drift apart. Four efficiency mechanisms — Action Fusion, ObservationPack, Evidence-Preserving Reducer, and Online Context Compact — install on top of an unmodified Pi release, and every one is disabled by default.
 
@@ -30,7 +28,7 @@ The promise holds one mechanism at a time. The page says so itself, and in the v
   <figcaption>The published ObservationPack result. The footer names the measured artifact: a placeholder variant in <code>neural-harness-pi</code> at a ref that is not publicly available, on Pi 0.80.10, over 11 EdgeBench tasks &mdash; Image from NVlabs/SoL-Pi (MIT), commit d7ecfc08. Source: <a href="https://nvlabs.github.io/SoL-Pi/">https://nvlabs.github.io/SoL-Pi/</a>. Publisher: NVlabs (NVlabs/SoL-Pi). Licence: <a href="https://github.com/NVlabs/SoL-Pi/blob/d7ecfc089944f0d04b80122a0a9a6ca0d786f3d0/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## 📚 Retrieve: Reading the gate, then the totals
+## Technical Analysis: Reading the gate, then the totals
 
 ### The gate is predeclared, and it is per mechanism
 
@@ -95,7 +93,7 @@ That independence is exactly why the gate cannot see the sum. A tolerance applie
   <figcaption>The surface SoL-Pi plugs into: Pi loads extensions from npm and from a project <code>.pi/extensions</code> directory, and its status line already reports the token counters, dollar cost and context-window pressure that SoL-Pi sets out to reduce &mdash; Image from earendil-works/pi (MIT), commit 71dca871. Source: <a href="https://github.com/earendil-works/pi">https://github.com/earendil-works/pi</a>. Publisher: Mario Zechner (earendil-works/pi). Licence: <a href="https://github.com/earendil-works/pi/blob/71dca871bc80b6bc97be37f0ca3189399d651fff/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## 💡 Innovation: Per-component tolerances do not compose
+## Key Takeaways: Per-component tolerances do not compose
 
 The transferable lesson here has nothing to do with agents specifically. It is about where a quality gate is applied.
 

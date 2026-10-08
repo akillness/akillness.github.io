@@ -10,7 +10,7 @@ image:
   alt: "Diagram of God's Eye View's three boundaries: a localhost key-broker server, a 28-tool voice-agent dispatch surface, and an MIT license carve-out for third-party data"
 ---
 
-## 🤔 Curiosity: What Does a "Spy Satellite Simulator in Your Browser" Actually Trust?
+## What Does a "Spy Satellite Simulator in Your Browser" Actually Trust?
 
 Last week, on 2026-08-24 (UTC), Bilawal Sidhu open-sourced [God's Eye View](https://github.com/bilawalsidhu/gods-eye-view) — the project behind his viral "spy satellite" video series — with the tagline: *"A spy-satellite simulator in your browser — then you realize the sources are public and the data is real."* By the time I pulled the repository on 2026-08-30 KST, it sat at **12,125 stars**, climbing at roughly 1,870 stars that day on GitHub trending.
 
@@ -25,7 +25,7 @@ The answer inverted my mental model of the project. The globe is the demo. The d
 
 ![Diagram of God's Eye View's three boundaries: process, model, and license](/assets/img/posts/2026-08-30-gods-eye-view-boundary-audit/gods-eye-view-boundary-audit.svg){: .w-100 .shadow .rounded-10 }
 
-## 📚 Retrieve: Reading the Repository Instead of the GIFs
+## Technical Analysis: Reading the Repository Instead of the GIFs
 
 First, the shape of the thing. This is a **framework-free** client: the only runtime dependencies in `package.json` are `cesium` (^1.124), `satellite.js` (^6.0.2) for SGP4 propagation, `mgrs`, `egm96-universal`, `pbf`, and `@mapbox/vector-tile`. No React, no state library. The client bulk lives in monolithic files — `src/ui.js` alone is 10,293 lines — across 143 source JS files totaling roughly 3.8 MB.
 
@@ -101,7 +101,7 @@ graph LR
     style D fill:#14532d,stroke:#22c55e,color:#fff
 ```
 
-## 💡 Innovation: What I Am Taking Into My Own Agent and Game-Tool Work
+## Key Takeaways: What I Am Taking Into My Own Agent and Game-Tool Work
 
 I did not run the app for this audit — no Google Maps key was spent; this is a static read of the pinned tree plus repository metadata. That limitation matters, and it also sharpens the point: everything above was learnable from the source, which is exactly what the viral coverage skips.
 

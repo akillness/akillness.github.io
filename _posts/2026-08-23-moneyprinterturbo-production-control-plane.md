@@ -10,7 +10,7 @@ image:
   alt: "MoneyPrinterTurbo WebUI showing video-generation settings and task controls"
 ---
 
-## 🤔 Curiosity: What Does an "AI Video Generator" Actually Generate?
+## What Does an "AI Video Generator" Actually Generate?
 
 When a game team says, "we need an AI tool for trailers," the useful question is not whether a model can produce a beautiful five-second clip. It is whether the team can repeatedly turn an approved idea into a reviewable video, swap the wrong shot, trace where an asset came from, fix a subtitle, and render another version without rebuilding the whole job by hand.
 
@@ -38,7 +38,7 @@ The practical opportunity is not "replace every editor with one prompt." It is t
 
 ---
 
-## 📚 Retrieve: Read the Pipeline, Not the Landing-Page Promise
+## Technical Analysis: Read the Pipeline, Not the Landing-Page Promise
 
 ### The source audit
 
@@ -158,7 +158,7 @@ This is not a reason to dismiss the project. It is the reason to use it for the 
 
 ---
 
-## 💡 Innovation: Treat Video Automation Like a Build System
+## Key Takeaways: Treat Video Automation Like a Build System
 
 The innovation I see here is not a new diffusion architecture. It is the decision to turn short-form video into a composable job with stable stages. That makes MoneyPrinterTurbo closer to a build system than a camera.
 

@@ -3,7 +3,7 @@ title: "MEX on macOS Broke Before Project Memory Even Loaded"
 description: "A Source Audit of a real mex command collision, the resolver that fixed it, and a stale graph coordinate that only a clean rebuild exposed."
 date: 2026-09-20 00:08:04 +0900
 last_modified_at: 2026-09-20 01:21:55 +0900
-categories: ["AI"]
+categories: [AI, Tooling]
 tags: ["mex", "agent memory", "code graph", "macos", "cli", "agents.md"]
 image:
   path: /assets/img/posts/2026-09-20-mex-macos-command-collision/mex-command-resolution.svg
@@ -29,7 +29,7 @@ That distinction matters because the npm package is named `mex-agent`, but its p
 
 This audit follows the failure through three separate gates: executable identity, project-anchor loading, and a real graph query. It also keeps an important version boundary visible. The installed runtime measured below is `mex-agent` 0.7.1; npm release 0.8.2 was inspected on 2026-09-20 KST without upgrading the installed runtime.
 
-## 🤔 Curiosity: a successful lookup was the first failure
+## a successful lookup was the first failure
 
 The collision looks trivial until its false conclusions are expressed explicitly:
 
@@ -49,7 +49,7 @@ The upstream 0.8.2 package manifest inspected on 2026-09-20 KST makes the namesp
 
 The dashboard is useful context, but it cannot prove which binary a shell invoked. That proof must come first.
 
-## 📚 Retrieve: MEX has three different kinds of state
+## Technical Analysis: MEX has three different kinds of state
 
 The upstream documentation separates canonical team memory from local indexes. Repository Markdown, selected project instructions, and curated wiki material can be committed. Files such as `.mex/graph.db`, `.mex/wiki.db`, and `.mex/local/` are rebuildable or machine-local and should stay out of Git.
 
@@ -74,7 +74,7 @@ The 0.8.2 setup inspected on 2026-09-20 KST has moved further than the installed
 
 jeo, gjc, and jeopi use a root `AGENTS.md` contract. For `--tool codex` or `multiple`, the published installer preserves an existing root `AGENTS.md`; otherwise it mirrors `CLAUDE.md`, or creates a bridge when `.mex/AGENTS.md` exists. The workstation anchors and `.mex/` state observed in this audit were untracked and are not part of the public implementation commit.
 
-## 💡 Innovation: resolve capability, not command names
+## Key Takeaways: resolve capability, not command names
 
 The published fix in [`akillness/jeo-skills`](https://github.com/akillness/jeo-skills/commit/a71ddf92a07fbb56ee16f17167db9b411d265315) uses a narrow resolution order:
 
@@ -214,4 +214,3 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under a policy-bound evidence harness. A separate jeopi agent run replayed CLI checks, regression fixtures, and graph queries; this was not independent human review or verification that graph coordinates matched the pinned source.

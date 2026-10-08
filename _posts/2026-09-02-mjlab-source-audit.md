@@ -12,16 +12,13 @@ image:
   alt: "Two columns contrasting what mjlab's CI verifies, all on ubuntu-latest with no GPU, against the GPU training path, benchmarks and forked directory that CI never touches"
 ---
 
-## 🤔 Curiosity: what does a green badge on a GPU project actually prove?
+## what does a green badge on a GPU project actually prove?
 
 [mjlab](https://github.com/mujocolab/mjlab) is one of the more interesting things to appear in robot learning this year: Isaac Lab's manager-based environment API, rebuilt on MuJoCo Warp so that physics runs on the GPU, without dragging in Isaac Sim. It has 2,951 stars as of 2 September 2026, monthly releases since January, a backing paper, and at the pinned commit its CI run concluded successfully.
 
 I went looking for the seam between what such a project claims and what its repository can actually verify. It is a habit worth having on any simulation stack, because the failure mode is not a crash. It is a policy that trains to convergence and behaves subtly wrong.
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance inside an evidence-gated editorial harness; every repository claim is pinned to commit 8ee51fb and no GPU run was performed.
-{: .prompt-info }
-
-## 📚 Retrieve: what the pinned tree shows
+## Technical Analysis: what the pinned tree shows
 
 I read the working tree at commit `8ee51fbcf806a7419189f706d9e394cbeb7790fa` statically: README, docs, packaging metadata, CI workflows, benchmark scripts and licence headers. I did not execute anything, and I have no GPU measurements of my own to offer.
 
@@ -112,7 +109,7 @@ None of the above makes this a weak project, and the documentation is unusually 
 
 The API is also a genuine reimplementation rather than a thin wrapper. Isaac Lab appears nowhere in the dependency list; the forked code is leaf maths, string and import helpers. The migration guide, however, still carries a "work in progress" warning.
 
-## 💡 Innovation: what I would take into a production evaluation
+## Key Takeaways: what I would take into a production evaluation
 
 **Ask what the badge covers before you trust it.** This is not a criticism unique to mjlab. Any project whose value lives on an accelerator will have a CI story shaped by what runners cost. The useful move is to read `runs-on` and the test invocation flags before treating a green check as coverage, and to write your own GPU smoke test as the first thing you add.
 

@@ -13,9 +13,7 @@ image:
 
 ![Order of checks inside the OpenHarness permission checker](/assets/img/posts/2026-09-05-openharness-permission-order-audit/permission-order.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance inside an evidence-gated harness, then checked against the pinned commit before publication.
-
-## 🤔 Curiosity: If I write a deny rule into my agent, does it actually run?
+## If I write a deny rule into my agent, does it actually run?
 
 Every agent harness eventually ships the same three knobs: a mode, an allow list, and a deny list. The interesting question is not whether they exist. It is what happens when two of them disagree.
 
@@ -28,7 +26,7 @@ Every agent harness eventually ships the same three knobs: a mode, an allow list
 
 So I read the checker instead of the README, and then I ran it.
 
-## 📚 Retrieve: The order of checks is the whole story
+## Technical Analysis: The order of checks is the whole story
 
 `src/openharness/permissions/checker.py` is 200 lines. `evaluate()` walks its rules in a fixed order and returns on the first match. That order is the finding.
 
@@ -96,7 +94,7 @@ So the allow list is reachable from the CLI, decisive in the checker, and absent
   <figcaption>The bundled tool surface an allow list is most likely to be applied to &mdash; Toolkit scene illustration from the OpenHarness repository, MIT licensed, pinned at commit 9b2efd7. Source: <a href="https://github.com/HKUDS/OpenHarness/tree/9b2efd795c6aa09f88b0c257d269a9e518da6ae7">https://github.com/HKUDS/OpenHarness/tree/9b2efd795c6aa09f88b0c257d269a9e518da6ae7</a>. Publisher: OpenHarness Contributors (HKUDS/OpenHarness). Licence: <a href="https://github.com/HKUDS/OpenHarness/blob/9b2efd795c6aa09f88b0c257d269a9e518da6ae7/LICENSE">https://github.com/HKUDS/OpenHarness/blob/9b2efd795c6aa09f88b0c257d269a9e518da6ae7/LICENSE</a>.</figcaption>
 </figure>
 
-## 💡 Innovation: What this changes for anyone running a harness
+## Key Takeaways: What this changes for anyone running a harness
 
 **Treat an allow list as a scope, not a shortcut.** In this implementation `allowed_tools` does not mean *skip confirmation for this tool*. It means *stop evaluating*. Those are different powers, and only one of them is what most operators want when they type the flag.
 

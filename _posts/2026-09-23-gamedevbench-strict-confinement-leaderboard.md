@@ -11,9 +11,7 @@ image:
   alt: "Original timeline showing 17 GameDevBench leaderboard rows published before the September 1 strict confinement series and one strict-confined top row"
 ---
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under a policy-bound evidence harness; I read the pinned repository and paper but did not run GameDevBench or any model myself.
-
-## 🤔 Curiosity: Did GPT 6 Astra win, or did the box change?
+## Did GPT 6 Astra win, or did the box change?
 
 On September 9, 2026, the GameDevBench repository added a new first-place row: **GPT 6 Astra (High), 229 of 333 tasks, 68.8%**, run through Codex "with runtime-video and strict confinement." The previous leader, Claude Fable 5 (xhigh), now sits one row below at 67.3%.
 
@@ -27,7 +25,7 @@ The pinned history says no. Strict confinement did not exist until a series of c
 
 That is not a scandal, and the maintainers' own run notes acknowledge the harness change. It is a measurement boundary. Game teams building their own agent benchmarks will hit the same boundary, so it is worth reading closely.
 
-## 📚 Retrieve: What the pinned repository records
+## Technical Analysis: What the pinned repository records
 
 I pinned the repository at commit [`a604ca9e`](https://github.com/waynchi/gamedevbench/tree/a604ca9e0d26be2047d56ce3aa8d571d6e12c256) from September 22, 2026, and read the README, the leaderboard CSV, the three result folders, the confinement commits, and the pre-September solver code. I also read the [arXiv v2 paper](https://arxiv.org/abs/2602.11103v2), which is licensed CC BY 4.0.
 
@@ -121,7 +119,7 @@ The paper's failure analysis is a good reminder of what the benchmark does catch
 
 That is the kind of error an engine-backed validator exists to catch, and it is why an engine-backed benchmark is worth protecting from measurement drift.
 
-## 💡 Innovation: Read the board as two tables
+## Key Takeaways: Read the board as two tables
 
 The September changes make GameDevBench more trustworthy going forward. The problem is the table, not the box. Right now one list ranks runs from two isolation eras, and the leaderboard itself does not mark which era a row belongs to.
 

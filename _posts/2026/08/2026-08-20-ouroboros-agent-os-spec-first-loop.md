@@ -11,7 +11,7 @@ image:
   alt: "Ouroboros - the Agent OS for replayable AI coding workflows"
 ---
 
-## 🤔 Curiosity: What Happens When You Show a Model Its Own Answer Key?
+## What Happens When You Show a Model Its Own Answer Key?
 
 Eight years of shipping AI systems at NC SOFT and COM2US taught me to distrust a passing test I did not write carefully. Not because the model cheats maliciously - because **optimization is not malice**. If a system can see the check, the cheapest path to "pass" runs straight through the check rather than through the problem.
 
@@ -31,7 +31,7 @@ _The serpent devouring its own tail. In Ouroboros this is not decoration - it is
 
 ---
 
-## 📚 Retrieve: What Ouroboros Actually Is
+## Technical Analysis: What Ouroboros Actually Is
 
 Ouroboros calls itself an **Agent OS**: a local-first runtime layer that turns non-deterministic agent work into a replayable, policy-bound execution contract. Strip the framing away and the claim is concrete - it replaces ad-hoc prompting with five enforced stages.
 

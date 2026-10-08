@@ -1,7 +1,7 @@
 ---
 title: "Four Viral UI Effects, Audited: What the Demos Do Not Tell You"
 description: "A source, runtime, package, and license audit of Liquid Gooey, Border Beam, Metal FX, and Thinking Orbs beyond a viral X demo."
-categories: [Development Tools/Productivity]
+categories: [AI, Tooling]
 tags: [react, ui-animation, webgl, svg, canvas, open-source, npm, accessibility]
 date: 2026-08-26 17:00:00 +0900
 mermaid: true
@@ -10,7 +10,7 @@ image:
   alt: "Four viral React UI effects passing through source, runtime, package, and license checks"
 ---
 
-## 🤔 Curiosity: When Does a Beautiful Demo Become a Production Dependency?
+## When Does a Beautiful Demo Become a Production Dependency?
 
 A short [X post from Kartikey Singh](https://x.com/askwhykartik/status/2092227759057641685) put four links under one irresistible promise: "Free UI resources that actually slap."
 
@@ -41,7 +41,7 @@ All four projects are primarily by [Jakub Antalik](https://github.com/Jakubantal
 
 GitHub, X, and npm counters below are point-in-time context, not quality scores.
 
-## 📚 Retrieve: Follow the Pixel Back to Its Source
+## Technical Analysis: Follow the Pixel Back to Its Source
 
 ### My audit path
 
@@ -217,7 +217,7 @@ This is an engineering checklist, not legal advice.
 
 The release workflow deserves one final note. The monorepo's [npm workflow](https://github.com/Jakubantalik/Libraries/blob/b47ff34dbb37c6fb801cbfc195ec840c8b1924b2/.github/workflows/publish.yml#L21-L52) installs dependencies and publishes through each package's build hook. It does not run the available typecheck, spec extraction, browser parity, or native test suites as publish gates. The Swift ports do contain snapshot and golden tests, but those checks are not automatically coupled to an npm release.
 
-## 💡 Innovation: Turn an Effect Into a Motion Capability Contract
+## Key Takeaways: Turn an Effect Into a Motion Capability Contract
 
 The source audit changed how I would integrate these packages. I would not expose four raw components across a product. I would place them behind one motion policy and make the fallback part of the API.
 

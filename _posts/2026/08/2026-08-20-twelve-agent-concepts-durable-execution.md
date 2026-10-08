@@ -11,7 +11,7 @@ image:
   alt: "Durable execution - retry only the failed step, replay the rest from checkpoint"
 ---
 
-## 🤔 Curiosity: Which of the Twelve Is Load-Bearing?
+## Which of the Twelve Is Load-Bearing?
 
 A LinkedIn post crossed my feed with a promise I have learned to distrust: *"If you want to become god-level with AI agents, then learn these 12 concepts."* Twelve links, one per concept, from [Neo Kim](https://newsletter.systemdesign.one/) — an explainer with a 245K-engineer newsletter behind him.
 
@@ -26,7 +26,7 @@ The answer surprised me, and it is the reason this post exists. The most consequ
 
 ---
 
-## 📚 Retrieve: What the Twelve Actually Cover
+## Technical Analysis: What the Twelve Actually Cover
 
 All twelve `lnkd.in` links resolve to `newsletter.systemdesign.one`. Here is the real map, with publication dates:
 
@@ -139,7 +139,7 @@ I covered adjacent ground in [the Hindsight memory bridge post](/posts/omnigent-
 
 ---
 
-## 💡 Innovation: The Layer That Decides Everything
+## Key Takeaways: The Layer That Decides Everything
 
 Now the thing I actually came away with.
 

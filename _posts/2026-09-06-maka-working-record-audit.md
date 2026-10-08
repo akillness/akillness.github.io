@@ -13,9 +13,7 @@ image:
 
 ![Timeline of one artifact class in apache/maka crossing three policy surfaces](/assets/img/posts/2026-09-06-maka-working-record-audit/record-boundary.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance inside an evidence-gated harness, then checked against the pinned commit before publication.
-
-## 🤔 Curiosity: When agents build software, where does their homework go?
+## When agents build software, where does their homework go?
 
 Agent-first development produces a new artifact class that classic repository hygiene never named: the working evidence agents generate while doing the job. Before/after screenshots for a PR. A review copy of a governance document. The harness launch config itself. None of it is source. All of it is record.
 
@@ -28,7 +26,7 @@ Agent-first development produces a new artifact class that classic repository hy
 
 So here is the question this audit actually answers: a project whose runtime treats the log as the source of truth also develops itself with agents. What happens when the agents' own working record starts landing in the git tree?
 
-## 📚 Retrieve: The tree already contains the answer, dated
+## Technical Analysis: The tree already contains the answer, dated
 
 I cloned the repository and checked out `dd7d1d59`, then reconstructed one artifact class's history with per-file `git log` and tree-wide greps. Every claim below is pinned to that commit.
 
@@ -117,7 +115,7 @@ The result is a two-surface truth model. The git tree is the complete working re
 
 The incubation context matters for reading this. Maka has not made an Apache release yet, and `DISCLAIMER-WIP` says plainly that the software grant and committer ICLAs are not yet complete and that incubating releases may not be fully ASF-policy compliant. The release boundary machinery exists ahead of the first release it will guard.
 
-## 💡 Innovation: Name the artifact class, then pick its surface
+## Key Takeaways: Name the artifact class, then pick its surface
 
 The generic version of what happened here is worth stating, because most teams running agent-first development will hit it within weeks.
 

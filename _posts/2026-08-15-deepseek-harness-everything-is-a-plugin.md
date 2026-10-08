@@ -11,7 +11,7 @@ image:
   alt: "The DeepSeek Harness Web UI settings panel configuring a model provider"
 ---
 
-## 🤔 Curiosity: Why Does Every Agent Framework Rot the Same Way?
+## Why Does Every Agent Framework Rot the Same Way?
 
 I've now built or inherited enough agent scaffolding to recognize the decay pattern, and it's always architectural rather than technical.
 
@@ -30,7 +30,7 @@ That question isn't academic for a game studio. A harness that survives contact 
 
 ---
 
-## 📚 Retrieve: What "Everything Is a Plugin" Actually Means Here
+## Technical Analysis: What "Everything Is a Plugin" Actually Means Here
 
 `dsh` is MIT-licensed TypeScript, it went public on **2026-08-13**, and it is explicitly labeled **developer preview** — the README's own words are *"THERE WILL BE COMPATIBILITY-BREAKING CHANGES."* Read the rest of this post with that stamped on it.
 
@@ -223,7 +223,7 @@ That last row is the one that made me stop. There are more files of **agent note
 
 ---
 
-## 💡 Innovation: The Three Things I Didn't Expect
+## Key Takeaways: The Three Things I Didn't Expect
 
 Reading a 219-package harness, most of it is competent-and-expected. Three things weren't.
 

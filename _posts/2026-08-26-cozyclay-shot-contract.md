@@ -10,7 +10,7 @@ image:
   alt: "CozyClay browser previs stage compiling geometry, lens, timing, and motion into an AI video shot contract"
 ---
 
-## 🤔 Curiosity: Why Does AI Video Need a Camera Department?
+## Why Does AI Video Need a Camera Department?
 
 A prompt can ask for "a low wide shot, 35 mm, slow push-in." It cannot guarantee that the next generation will interpret *low*, *wide*, or *slow* the same way.
 
@@ -42,7 +42,7 @@ The pace is unusually fast. That creates both the appeal and the risk: this is a
 
 ---
 
-## 📚 Retrieve: Read the Shot Contract, Not the Demo Reel
+## Technical Analysis: Read the Shot Contract, Not the Demo Reel
 
 ### What I audited
 
@@ -249,7 +249,7 @@ COZYCLAY_TELEMETRY=0 npx cozyclay
 
 ---
 
-## 💡 Innovation: Build an AI Video Pipeline Around the Shot, Not the Model
+## Key Takeaways: Build an AI Video Pipeline Around the Shot, Not the Model
 
 CozyClay is early, but its central direction is right. Video-model adapters will change. Seedance, Veo, Kling, Runway, and whatever follows will expose different duration, frame, audio, path, and reference-image contracts. A production team should not let any one provider own the scene decision.
 

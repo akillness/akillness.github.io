@@ -11,7 +11,7 @@ image:
   alt: "LongCat-Video examples across text-to-video, image-to-video, and video-continuation tasks"
 ---
 
-## 🤔 Curiosity: Is a Long Video Really Just a Better Next Frame?
+## Is a Long Video Really Just a Better Next Frame?
 
 When I build a game sequence, continuity is never an afterthought. A character must still be holding the sword they picked up one shot earlier. A camera move needs to land where the previous move left it. A player expects the world state to survive the cut, not to be repainted from a new prompt every six seconds.
 
@@ -36,7 +36,7 @@ The distinction matters. In game development, a gorgeous offline cinematic pipel
 
 ---
 
-## 📚 Retrieve: One Model, One Condition Contract
+## Technical Analysis: One Model, One Condition Contract
 
 ### The source audit
 
@@ -246,7 +246,7 @@ The repository now also contains [LongCat-Video-Avatar-1.5](https://meigen-ai.gi
 
 ---
 
-## 💡 Innovation: What I Would Actually Ship With It
+## Key Takeaways: What I Would Actually Ship With It
 
 The practical product is not "an AI that makes a whole game video." It is an **offline, stateful previsualization and authoring loop** that gives a team a faster way to explore directed motion, transitions, and shot continuity.
 

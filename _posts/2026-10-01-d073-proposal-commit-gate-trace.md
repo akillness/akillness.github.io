@@ -2,7 +2,7 @@
 title: "D-073 Makes Each Proposal's Commit Gate Traceable"
 description: "A source audit of D-073’s trace mirror: it rebuilds each proposal’s checks from committed state and reports gate states only when the hash-bound writer agrees on refusal codes."
 date: 2026-10-01 18:00:00 +0900
-categories: ["AI"]
+categories: [AI, Research]
 tags: ["game-ai", "godot", "qa", "evidence", "interactive-systems"]
 image:
   path: /assets/img/posts/2026-10-01-d073-proposal-commit-gate-trace/d073-trace-mirror.svg
@@ -16,9 +16,7 @@ A commit-gate trace can look authoritative while still being only a second summa
 
 I inspected the pinned source, its Python drift test, and archived first-party dashboard captures. This is an implementation audit, not a claim that the trace is a native event log or a record of what a player understood.
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under a policy-bound evidence harness; no first-hand playtest or human participant result is claimed.
-
-## 🤔 Curiosity: what does a “per-proposal trace” actually prove?
+## what does a “per-proposal trace” actually prove?
 
 When a proposal is held, the useful question is not merely “which color appeared?” It is: which checks were evaluated, which one first refused the proposal, which checks were skipped after that refusal, and which gate families did not apply at all?
 
@@ -33,7 +31,7 @@ That gives the trace a useful boundary: it can explain a decision without becomi
 
 This first capture is the dialogue-choice route: D-073 calls the disclosure mirror and the machine's disclosure validator directly for <code>ask_secret</code>. The table below covers the separate <code>acquire_object</code>, <code>install_lens</code>, and <code>reveal_hint</code> branches in <code>EvaluationTrace.reconstruct()</code>; the screenshot is not a fourth branch in that table.
 
-## 📚 Retrieve: the mirror reconstructs; the machine remains the writer
+## Technical Analysis: the mirror reconstructs; the machine remains the writer
 
 At the D-073 commit, `evaluation_trace.gd` declares a SHA-256 pin for the exact `sealed_lighthouse_machine.gd` source. The retained engine evidence binds the same machine hash. The Python test checks that the mirror pin equals both the current machine bytes and the hash recorded in that evidence manifest. The mirror therefore has a version boundary: a machine-source change should force its plan to be re-audited instead of silently inheriting old authority.
 
@@ -72,7 +70,7 @@ There is another useful fail-closed detail. If the mirror's failure-code set doe
 
 The screenshots above are historical captures of four specific dashboard states. Their original capture times are shown separately from their retrieval into this draft package. They do not claim that the later, stage-0 live-dashboard check produced those traces.
 
-## 💡 Innovation: keep instrumentation an observer, not a second policy engine
+## Key Takeaways: keep instrumentation an observer, not a second policy engine
 
 The reusable engineering rule is simple: **a reconstructed trace may explain a decision, but the canonical writer must remain the source of truth**. Bind the mirror to an exact machine version, derive it from the same PRE-state, compare its failure set with the writer's output, and make disagreement visibly non-evidentiary.
 

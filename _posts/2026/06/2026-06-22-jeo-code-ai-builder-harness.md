@@ -14,7 +14,7 @@ image:
   alt: "jeo-code — AI builder harness engine"
 ---
 
-## 🤔 Curiosity: What If Your Coding Agent Came with Its Own Skill Tree?
+## What If Your Coding Agent Came with Its Own Skill Tree?
 
 My interest is in the **harness**: the scaffolding, approval boundaries and feedback loops around a coding agent. This article describes that design direction, not a controlled comparison of developer productivity.
 
@@ -29,7 +29,7 @@ I maintain the linked jeo-code and jeo-skills projects. This is an affiliated ov
 
 ---
 
-## 📚 Retrieve: What Is jeo-code?
+## Technical Analysis: What Is jeo-code?
 
 ![jeo-code hero illustration](/assets/img/jeo-code/hero.png){: .w-100 .shadow .rounded-10 }
 
@@ -135,7 +135,7 @@ git clone https://github.com/akillness/jeo-skills.git && bash jeo-skills/install
 
 ---
 
-## Innovation: A Workflow That Can Be Evaluated
+## Key Takeaways: A Workflow That Can Be Evaluated
 
 ![jeo philosophy: curiosity retrieve innovation](/assets/img/jeo-code/philosophy.png){: .w-100 .shadow .rounded-10 }
 

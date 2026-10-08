@@ -13,9 +13,7 @@ image:
 
 ![The unity-mcp release feed advanced four times between 2026-06-30 and 2026-09-01 while the two files its sync automation owns stayed on v10.0.0; the sibling docs workflow gates drift with --check on pull requests, the release-notes workflow never calls --check at all](/assets/img/posts/2026-09-15-unity-mcp-release-notes-drift-audit/release-sync-drift.svg)
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under an evidence-gated editorial harness; every version, date and workflow trigger was read from the GitHub Releases API or from the pinned commit 2fcc1795 before publication.
-
-## 🤔 Curiosity: Which version string in this repository is load-bearing?
+## Which version string in this repository is load-bearing?
 
 [CoplayDev/unity-mcp](https://github.com/CoplayDev/unity-mcp/tree/2fcc17957823f2494b7b1f7ade92c0fb56f4adb1) is a widely adopted Unity MCP bridge. It is MIT-licensed, created 2025-03-18, and at retrieval it carried 14,221 stars and 1,493 forks, far ahead of the other Unity Editor MCP servers I found while scoping this audit, the largest of which carried 243. It advertises "47 focused MCP tool entrypoints, any client, free & MIT" and is explicit that it "is not affiliated with Unity Technologies."
 
@@ -29,7 +27,7 @@ Four releases shipped in between: v10.0.2 and v10.1.0 on 2026-07-13, v10.1.2 on 
 
 That is a 63-day gap between what the documentation calls current and what the project actually shipped. The interesting part is not the gap. It is that this repository already built the machine to prevent it, and then built a second one that works.
 
-## 📚 Retrieve: Reading the generator, then the workflow that runs it
+## Technical Analysis: Reading the generator, then the workflow that runs it
 
 ### The stale block is generated, not written
 
@@ -162,7 +160,7 @@ The README tells you to `pin #v10.0.0`. By the table above, that pin is an older
 
 There is a second-order effect on the default path too. The documented install URL ends in `#main`, but the screenshot that illustrates it carries no fragment at all, and the repository's default branch is `beta`. A fragment-less git URL resolves the default branch, so the picture installs a prerelease line — `10.2.1-beta.6` at the audited commit — while the text installs the stable one.
 
-## 💡 Innovation: A generator without a gate is just a slower hand-edit
+## Key Takeaways: A generator without a gate is just a slower hand-edit
 
 The useful lesson here is not "this project has stale docs." It is that the project **correctly diagnosed the problem, built the right tool, and then wired it into the wrong shape** — and that the correct shape was already sitting in the same `.github/workflows/` directory.
 

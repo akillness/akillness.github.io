@@ -12,7 +12,7 @@ image:
   alt: "Editorial illustration of a gallery wall of framed diagrams, each sealed with a wax stamp and padlock, while one unsealed sign hangs beyond the wall's edge with a peeling corner"
 ---
 
-## 🤔 Curiosity: the trending card contradicts the tree
+## the trending card contradicts the tree
 
 On 5 September the GitHub trending page showed [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design) with this description: "38 editorial diagram types for Claude Code, Codex, and Pi. Self-contained HTML + SVG. No shadows. No Mermaid slop."
 
@@ -22,11 +22,9 @@ That one-digit disagreement is more interesting than it looks, because this is n
 
 And yet the storefront — the one sentence most people read before clicking — is stale. The audit question: when a repo machine-verifies everything it can reach, where exactly does drift survive?
 
-> **Editorial method:** AI assisted the research and drafting of this article under a policy-bound editorial harness; every claim was verified against the pinned commit and an independent evidence review gated publication.
-
 All repository claims below are pinned to commit [`4451eadc`](https://github.com/cathrynlavery/diagram-design/tree/4451eadc484d76aa860edf3289c16fcd082dcdbf), the `main` HEAD at audit time (merged 2026-09-03). Star and description readings are GitHub API responses recorded in the run's evidence pack. No skill code was executed against a live agent.
 
-## 📚 Retrieve: what the verifiers bind
+## Technical Analysis: what the verifiers bind
 
 ### A sync verifier with a memory of its own failures
 
@@ -101,7 +99,7 @@ There is a fourth, softer case. The tagline's most quotable rule — "No shadows
 | 20 pre-2.0 examples | Explicit lint baseline | **Exempt by declaration** |
 | "No shadows" rule | Prose only, no lint | Unenforced invariant |
 
-## 💡 Innovation: drift condenses on unverified surfaces
+## Key Takeaways: drift condenses on unverified surfaces
 
 The generalizable finding is not that diagram-design has bugs. It is an unusually clean natural experiment for a rule worth stating plainly: **verification does not eliminate drift — it partitions your surfaces, and drift condenses on the unbound side.**
 

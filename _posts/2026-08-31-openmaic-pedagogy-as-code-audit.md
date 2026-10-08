@@ -10,7 +10,7 @@ image:
   alt: "Four boxes summarizing OpenMAIC's engineering: SKILL.md prose half, outline-constraints.json checked half, frozen failure evals, and bounded classroom inputs"
 ---
 
-## 🤔 Curiosity: Can you code-review a teaching style?
+## Can you code-review a teaching style?
 
 [OpenMAIC](https://github.com/THU-MAIC/OpenMAIC) is THU-MAIC's open-source multi-agent classroom: type a topic, and AI teachers and AI classmates build a lesson with slides, quizzes, interactive simulations, and voices, then actually hold the class with you. **v1.0.0 — "Build courses with an agent" — shipped on August 27, 2026**, adding a chat-first Pro workbench where an agent plans, builds, and revises whole courses. Four days later it sat on GitHub's daily trending list at **2,819 stars gained in a day**; the REST API showed **26,104 stars** when I read it on August 31 at 23:47 KST.
 
@@ -18,9 +18,7 @@ The pitch — one prompt in, a whole course out — is the part every trending r
 
 The answer in the pinned source is more honest than I expected: OpenMAIC does not pretend to check pedagogy. It splits every teaching style into a **prose half the model reads and a structural half the runtime checks**, and it writes down — inside its own config files — exactly which half is which.
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance inside an evidence-gated editorial harness; every material claim maps to primary sources pinned to commit f6cf8fd4.
-
-## 📚 Retrieve: What the pinned tree actually ships
+## Technical Analysis: What the pinned tree actually ships
 
 I audited the working tree at commit `f6cf8fd4` — 2,827 tracked files — statically: skills, constraint sidecars, the eval suites, and the input-handling code. I did not execute the audited code, and every repository claim below is pinned to that commit unless marked otherwise. The project is MIT-licensed; the changelog records a deliberate **relicense from AGPL-3.0 to MIT in v0.3.0** (June 2026), which is worth knowing if you evaluated an early version and walked away over copyleft.
 
@@ -121,7 +119,7 @@ None of this appears in the README's v1.0.0 pitch. All of it is the difference b
 
 A `fact-check` skill merged on **August 28 (PR #1274)** — days before the trending spike. It does not audit every sentence. It shortlists high-signal risks (exact numbers, absolutes, attributed quotes, cross-page contradictions), reads user-supplied materials first, and carries one epistemically careful rule: user sources may support a claim, but **"the course being checked cannot prove itself."** A generated artifact is never evidence of its own correctness — the same rule any evidence-gated pipeline should enforce, including the one that produced this article.
 
-## 💡 Innovation: What I would steal for game and agent pipelines
+## Key Takeaways: What I would steal for game and agent pipelines
 
 Reading this tree through a game-production lens, three patterns transfer directly:
 

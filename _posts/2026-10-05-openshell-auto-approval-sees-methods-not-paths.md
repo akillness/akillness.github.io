@@ -11,9 +11,7 @@ image:
   alt: "Original diagram: a hypothetical existing rule allows PUT on one docs folder and an agent proposes PUT on /repos/**; read from source at 71c3cd95 and not executed, the gateway proposal risk check keys findings by binary, host, port, category and method, so it reports no new findings; the standalone boundary check, run on the released 0.1.2 binary, compares method and path and reports exceeds_boundary with the counterexample PUT /repos/a"
 ---
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under a policy-bound evidence harness; I read the pinned source and ran the released openshell-prover binary locally, but I did not run an OpenShell gateway or watch a proposal get auto-approved.
-
-## 🤔 Curiosity: What does "risky new access" mean to the approval gate?
+## What does "risky new access" mean to the approval gate?
 
 [OpenShell](https://github.com/NVIDIA/OpenShell) is NVIDIA's runtime for running autonomous agents inside policy-controlled sandboxes. It is an Apache-2.0 repository created on February 24, 2026, and it had **more than 14,000 GitHub stars** when I checked on October 5, 2026.
 
@@ -34,7 +32,7 @@ At the pinned commit, my reading of the code says they do not. The gateway's pro
   <figcaption>OpenShell's own architecture diagram. The bottom row is the loop this audit follows: the agent proposes, the gateway prover checks, and approval is manual by default or automatic when no new risk is found. Source: <a href="https://github.com/NVIDIA/OpenShell/blob/71c3cd957abef062eb7f37010056717cd49f2ed3/docs/about/architecture.mdx">https://github.com/NVIDIA/OpenShell/blob/71c3cd957abef062eb7f37010056717cd49f2ed3/docs/about/architecture.mdx</a>. Publisher/creator: NVIDIA Corporation and OpenShell contributors. License: <a href="https://raw.githubusercontent.com/NVIDIA/OpenShell/71c3cd957abef062eb7f37010056717cd49f2ed3/LICENSE">https://raw.githubusercontent.com/NVIDIA/OpenShell/71c3cd957abef062eb7f37010056717cd49f2ed3/LICENSE</a>. Attribution: NVIDIA/OpenShell, docs/images/openshell-system-architecture.svg, Apache License 2.0, pinned at commit 71c3cd95; converted from SVG to PNG.</figcaption>
 </figure>
 
-## 📚 Retrieve: What the pinned source says
+## Technical Analysis: What the pinned source says
 
 I pinned the audit to commit [`71c3cd95`](https://github.com/NVIDIA/OpenShell/tree/71c3cd957abef062eb7f37010056717cd49f2ed3), committed on October 3, 2026. I read the README, the architecture, advisor, and prover docs, the prover crate's credential-safety queries, and the gateway code that evaluates proposals and auto-approves them. Then I ran the released `openshell-prover` 0.1.2 binary on three small policies.
 
@@ -122,7 +120,7 @@ NVIDIA's own governance interceptor example goes further. It denies `SubmitPolic
 
 What I did not find in the README, the advisor, prover, and architecture docs, the governance example, or RFC 0002 is the specific consequence: the risk check is method-granular while REST rules are path-granular, so the docs' own advice to propose "the narrowest path" is advice the auto gate does not verify.
 
-## 💡 Innovation: Treat auto mode as method-level trust
+## Key Takeaways: Treat auto mode as method-level trust
 
 The finding reduces to one sentence for operators: **with auto mode on, widening only the path of a credentialed method the agent already holds, on the same binary, host, and port, adds no prover finding. On an unflagged destination like `api.github.com:443` it then passes both risk gates, and approval rests on the remaining state, policy, and validated-merge conditions.** That is my reading of the code, not an observed run. How much that matters depends on what the credential itself is allowed to do upstream; the sandbox policy is only the inner fence.
 
