@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "BMAD Method: A Structured, Agent‑Driven Agile Workflow"
 description: "A deep dive into BMAD Method—21 specialized agents, 50+ guided workflows, and an AI‑first agile process from brief to deployment."
 categories: [Agent/Orchestration]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-10-bmad-method/banner.png
   alt: "BMAD Method"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![BMAD Method](/assets/img/2026-02-10-bmad-method/banner.png)

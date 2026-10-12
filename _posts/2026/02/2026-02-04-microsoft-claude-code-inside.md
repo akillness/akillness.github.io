@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Microsoft’s Claude Code Moment: What It Means for AI-First Game Production"
 description: "From Microsoft’s internal adoption of Claude Code to a future of mixed AI toolchains—why this shift matters for game teams, pipelines, and junior roles."
 categories: [Agent/Orchestration]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-03/ai-coding.jpg
   alt: "AI coding workflows in production"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![AI coding workflows](/assets/img/2026-02-03/ai-coding.jpg)

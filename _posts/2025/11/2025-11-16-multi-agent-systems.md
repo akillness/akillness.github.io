@@ -13,7 +13,9 @@ image:
   alt: 'Agents 2.0: Deep Agents architecture evolution from shallow loops'
 # Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## 🤔 Curiosity: Why Do AI Agents Fail at Complex, Long-Running Tasks?
 

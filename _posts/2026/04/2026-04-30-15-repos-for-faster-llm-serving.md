@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "15 Repos Every AI Engineer Should Know to Run LLMs Faster (Without Burning GPU Budget)"
 description: "A production-focused breakdown of 15 open-source repos that improve LLM throughput, latency, and memory efficiency without brute-force GPU scaling."
 categories: [AI, Research]
@@ -7,9 +7,8 @@ tags: [LLM, inference, serving, optimization, vllm, llama-cpp, deepspeed]
 date: 2026-04-30 20:10:00 +0900
 mermaid: true
 math: false
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: The Question

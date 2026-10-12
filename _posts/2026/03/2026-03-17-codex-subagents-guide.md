@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Designing AI Agent Teams with Codex Subagents: A Practical Guide to Multi-Agent Workflows"
 description: "Codex subagents let you split complex tasks into specialized agents with their own model, sandbox, and tool settings. Here’s a practical guide for shipping safer, faster, and more controllable AI workflows."
 categories: [AI, Coding, Tutorial]
@@ -10,6 +10,8 @@ math: false
 image:
   path: /assets/img/posts/2026-03-17-codex-subagents-guide/openai-codex-og.png
   alt: "OpenAI Codex subagents documentation"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why not just one stronger model?

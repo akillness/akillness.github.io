@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Rewrite Your CLI for Agents: Human DX Is Not Agent DX"
 description: "Agent-first CLIs need JSON payloads, schema introspection, and input hardening—retrofits rarely survive." 
 categories: [AI, Research]
@@ -11,9 +11,8 @@ image:
   path: /assets/img/ai/rewrite-cli-agents-1.png
   lqip: data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAABQAwCdASogABEAPxF+s1QsKCQjKAqpgCIJZwC4qBV5M4Z+GAD+7VSrPMbYXafsXgn6cc7A2k74BLUB9cQiF+rNsAbcAmWzX2MAAA==
   alt: "Rewrite your CLI for AI agents"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: The Question

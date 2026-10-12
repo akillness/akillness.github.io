@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Unsloth Local API Guide: Run Claude/OpenAI-Style Clients on Your Own Machine"
 description: "A practical, code-first guide to exposing local GGUF models as authenticated Anthropic/OpenAI-compatible APIs with Unsloth."
 date: 2026-05-05 13:00:00 +0900
@@ -7,9 +7,8 @@ categories: [AI, MLOps]
 tags: [Unsloth, Local-LLM, API, GGUF, Anthropic, OpenAI, Tool-Calling, inference]
 image:
   path: /assets/img/posts/2026-05-05-unsloth-api/unsloth-api-overview.png
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 If you’ve ever wanted to keep models local *and* keep your modern agent workflow, Unsloth is one of the cleanest paths today.

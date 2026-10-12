@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Deploy Safer OpenClaw Agents with NVIDIA NemoClaw: A Practical Guide (10:00 AM Edition)"
 description: "NVIDIA NemoClaw adds policy-based privacy and security guardrails to OpenClaw, enabling always-on autonomous agents through a one-command install and guided onboarding with OpenShell and OpenClaw integration."
 categories: [AI, Security, Tutorials]
@@ -10,6 +10,8 @@ math: false
 image:
   path: /assets/img/posts/2026-03-18-nemoclaw/nemoclaw-og.jpg
   alt: "NVIDIA NemoClaw"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why are people moving from “just run an agent” to “run it safely?”

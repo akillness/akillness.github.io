@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Supertonic 3: What On-Device TTS Starts to Look Like When ONNX Is the Contract"
 description: "A production-minded look at Supertonic 3, Supertone AI's lightweight ONNX Runtime TTS system, with links, downloaded assets, and sample code for Python, Node.js, and browser deployment."
 categories: [AI, Speech, Edge-AI]
@@ -10,6 +10,8 @@ math: false
 image:
   path: /assets/img/posts/2026-05-18-supertonic/supertonic-3-banner.jpeg
   alt: "Supertonic 3 banner from the PyTorch Korea discussion page"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## Curiosity: Can speech become a local runtime feature?

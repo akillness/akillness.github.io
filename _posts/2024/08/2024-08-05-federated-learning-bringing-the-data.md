@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: Federated Learning, One way to solve for AI having difficulty making
 description: "Curiosity: How can we train ML models on private data without centralizing it?"
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-08-05 12:00:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## Federated Learning: Training on Private Data Without Centralization
 

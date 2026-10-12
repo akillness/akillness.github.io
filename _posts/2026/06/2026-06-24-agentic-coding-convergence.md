@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Claude Code vs. Cursor vs. Codex vs. Antigravity — Six Months of Convergence, and Why the Harness Won"
 description: "Six months in, four very different labs converged on the same agentic-coding blueprint — terminal surface, plan-then-approve, MCP, AGENTS.md, parallel subagents. The model got demoted; the harness, the price, and your team's habits now decide the winner. A developer's breakdown with runnable examples."
 categories: [AI, Agents]
@@ -11,6 +11,8 @@ math: false
 image:
   path: /assets/img/2026-06-24-agentic-coding-convergence/cover.jpg
   alt: "Thermal-imaging visualization of everyday tools in neon cyan, magenta and yellow — four agentic coding tools converging on one shape."
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 > Source breakdown of [*"Claude Code vs. Cursor vs. Codex vs. Antigravity — six months in"* (The New Stack, June 2026)](https://thenewstack.io/claude-code-vs-cursor-vs-codex-vs-antigravity-2026/). Cover photo by Logan Voss on Unsplash. Everything below is my read as someone who has shipped AI systems into production games for eight years.

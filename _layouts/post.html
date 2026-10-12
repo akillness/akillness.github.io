@@ -111,8 +111,16 @@ tail_includes:
 
   {% include article-correction.html %}
 
+  {% assign article_content = content %}
+  {% if page.restored_archive %}
+    <aside class="alert alert-secondary" aria-label="Historical archive note" data-restored-archive="{{ page.restored_archive | escape }}">
+      Historical reference note restored on {{ page.restored_archive | escape }}. The original publication date is retained; restoration is not a fresh fact-check. Advertising is disabled. <a href="{{ '/about/#editorial-method-and-ai-assistance' | relative_url }}">Archive policy</a>.
+    </aside>
+    {% assign article_content = content | replace: '<h1', '<h2' | replace: '</h1>', '</h2>' %}
+  {% endif %}
+
   <div class="content">
-    {% include post-content.html content=content ads_on=monetization_eligible %}
+    {% include post-content.html content=article_content ads_on=monetization_eligible %}
   </div>
 
   {% if monetization_eligible %}

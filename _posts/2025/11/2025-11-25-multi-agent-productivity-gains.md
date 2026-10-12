@@ -13,7 +13,9 @@ image:
   alt: AI Productivity Gains Research - Anthropic's analysis of 100,000 Claude conversations
 # Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ![Anthropic Productivity Research - Multi-Agent Perspective](/assets/img/research/anthropic-productivity/productivity-hero.png){: .light .shadow .rounded-10 w='1212' h='668' }
 

@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "OpenClaw on an Old Android Phone: A Builder’s Guide to Safe Agent Experiments"
 description: "A practical, hands‑on guide inspired by Ganesh Venkataraman’s LinkedIn experiment—how to turn unused hardware into a safe OpenClaw sandbox and explore multi‑agent behavior."
 categories: [Agent/Orchestration]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-09-openclaw-phone/cover.jpg
   alt: "OpenClaw on an old Android phone"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![OpenClaw on an old Android phone](/assets/img/2026-02-09-openclaw-phone/cover.jpg)

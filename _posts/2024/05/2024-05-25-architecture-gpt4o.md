@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: Is this the architecture of OpenAI GPT-4o?
 description: "Curiosity: How can we build a unified model that handles audio, speech, image, text, and video?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-25 11:05:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## Uni-MoE: Unified Multimodal LLM Architecture (GPT-4o-like)
 

@@ -7,7 +7,9 @@ tags: [Multimodal, Vision, Generative Model]
 date: 2024-05-18 18:20:00 +0800
 # Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## 📝 Top Papers in Computer Vision, NLP, Speech, Multimodal AI, Core ML, RecSys, and Graph ML • 
 

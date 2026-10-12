@@ -5,7 +5,9 @@ categories: [Blogging, Optimization]
 tags: [adsense, jekyll, sqlite, optimization, seo]
 date: 2026-04-01 10:00:00 +0900
 lang: ko
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 # 구글 애드센스 수익화 최적화 가이드 및 로컬 DB 기반 블로그 렌더링 개선
 

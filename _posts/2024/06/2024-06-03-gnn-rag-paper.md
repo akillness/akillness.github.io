@@ -7,7 +7,9 @@ date: 2024-06-03 15:00:00 +0800
 mermaid: true
 # Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## GNN-RAG: Integrating Graphs into Modern RAG Workflows
 

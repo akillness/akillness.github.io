@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Harness: A Practical Way to Turn AI Agent Experiments into Reliable Systems"
 description: "An introduction to revfactory/harness and why structured team design, specialized agent roles, and generated skills can improve repeatability in production AI agent workflows."
 categories: [AI, Developer-Tools, Architecture]
@@ -10,9 +10,8 @@ math: false
 image:
   path: "https://opengraph.githubassets.com/e93614bb98daa89a0db440dff5e6f6ad01cb68a25a7cd910d4db22d8a54720a9/revfactory/harness"
   alt: "revfactory harness"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why do so many agent projects work in demos but fail in production?

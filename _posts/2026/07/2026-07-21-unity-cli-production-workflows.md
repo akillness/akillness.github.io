@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Unity CLI: From Editor Installs to Verifiable Game-Production Workflows"
 description: "A practical, production-minded guide to Unity CLI, its machine-readable automation contract, and the experimental Unity Pipeline package for controlled Editor and Player workflows."
 categories: [Tutorial, Unity]
@@ -11,6 +11,8 @@ math: false
 image:
   path: /assets/img/2026-07-21-unity-cli-production-workflows/unity-cli.png
   alt: "Unity CLI command-line interface"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: What if the Unity Editor were a dependable production surface?

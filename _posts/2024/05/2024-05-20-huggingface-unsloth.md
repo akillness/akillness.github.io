@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: Hugging Face x Unsloth
 description: "Curiosity: How can we make LLM fine-tuning faster and more memory-efficient? What makes Unsloth achieve 2× speedup with 70% less memory?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-20 14:10:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## Unsloth AI: 1 Million Monthly Downloads Milestone 🎉
 

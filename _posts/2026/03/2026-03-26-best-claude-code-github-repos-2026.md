@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "9 GitHub Repos for Claude Code That Can 10x Your Next Project (2026)"
 description: "A practical introduction to nine high-impact GitHub repositories for Claude Code workflows in 2026, covering memory, automation, RAG, orchestration, and curated ecosystem resources."
 categories: [AI, Developer-Tools, Productivity]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/posts/2026-03-26-claude-repos/cover.svg
   alt: "9 GitHub Repos for Claude Code"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: What if your next Claude Code project didn’t start from scratch?

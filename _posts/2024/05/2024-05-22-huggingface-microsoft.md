@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: Hugging Face x Microsoft
 description: "Curiosity: How can partnerships between major AI platforms accelerate open-source AI adoption?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-22 15:22:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## Hugging Face × Microsoft: Deepening Collaboration
 

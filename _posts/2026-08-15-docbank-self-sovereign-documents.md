@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Docbank: What If Your Agents Needed a Filing Cabinet, Not a Cloud Drive?"
 description: "A look at Docbank, a self-sovereign, local-first document system built for stable IDs, immutable versions, and an agent-ready HTTP contract — and what it teaches about building tools AI agents can trust."
 categories: [AI, Tooling]
@@ -10,6 +10,8 @@ image:
   path: /assets/img/posts/2026-08-15-docbank-self-sovereign-documents/docbank-web-vault-browser.png
   lqip: data:image/webp;base64,UklGRiYAAABXRUJQVlA4IBIAAAAwAQCdASoBAAEAAQAcJZACdLoAA3AA
   alt: "The Docbank web application browsing a synthetic vault and showing a document's stable authority"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: What Happens When an Agent Writes to Your Files?

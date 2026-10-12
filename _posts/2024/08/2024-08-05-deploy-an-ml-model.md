@@ -7,7 +7,9 @@ date: 2024-08-05 17:00:00 +0800
 mermaid: true
 # Retired 2026-09-19: copied social/newsletter post later rewritten by an LLM
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## ML Model Deployment Strategies: A Comprehensive Guide
 

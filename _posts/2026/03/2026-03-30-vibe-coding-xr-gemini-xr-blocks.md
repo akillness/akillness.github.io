@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Vibe Coding XR: How Gemini and XR Blocks Could Change XR Prototyping"
 description: "A practical look at Google’s Vibe Coding XR approach and why Gemini plus XR Blocks could lower the cost of prototyping interactive XR experiences."
 categories: [AI, XR, Developer-Tools]
@@ -10,9 +10,8 @@ math: false
 image:
   path: "https://storage.googleapis.com/gweb-research2023-media/images/Open_Graph.width-800.format-jpeg.jpg"
   alt: "Vibe Coding XR"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why is XR still so hard to prototype quickly?

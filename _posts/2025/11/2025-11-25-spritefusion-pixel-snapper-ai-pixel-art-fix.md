@@ -13,7 +13,9 @@ image:
   alt: Sprite Fusion Pixel Snapper - Fixing AI-Generated Pixel Art
 # Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## 🤔 Curiosity: Can Multi-Agent Systems Fix AI's Pixel Art Problems?
 

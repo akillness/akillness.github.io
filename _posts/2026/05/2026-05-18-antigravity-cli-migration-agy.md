@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Antigravity CLI Migration: A Production-Minded agy Checklist After Gemini CLI"
 description: "An English, production-oriented walkthrough of the Goddaehee Antigravity CLI guide: why Gemini CLI migration matters, how agy is used, which aliases are useful, and what to verify before trusting it in real work."
 categories: [AI, Developer-Tools, Workflow]
@@ -10,6 +10,8 @@ math: false
 image:
   path: /assets/img/posts/2026-05-18-antigravity-cli/antigravity-cli-01.png
   alt: "Antigravity CLI guide cover image from Goddaehee's Tistory post"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: What happens when a daily AI CLI changes underneath us?

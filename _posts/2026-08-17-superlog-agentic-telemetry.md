@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Superlog: When Your Telemetry Stack Starts Investigating Incidents For You"
 description: "Superlog is an open-source agentic telemetry system built on OpenTelemetry — it ingests traces, logs, and metrics, groups noisy signals into incidents, and hands them to an agent runner. Here is what that architecture means for game backends."
 categories: [AI, DevOps, Observability]
@@ -10,6 +10,8 @@ image:
   path: /assets/img/posts/2026-08-17-superlog-agentic-telemetry/superlog-hero.png
   lqip: data:image/webp;base64,UklGRiYAAABXRUJQVlA4IBIAAAAwAQCdASoBAAEAAQAcJZACdLoAA3AA
   alt: "Superlog — open-source agentic telemetry system"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why Do We Still Read Logs By Hand?

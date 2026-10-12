@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "From Friction to Flow: Why Fabric is Useful for AI Content Ops"
 description: "I checked Daniel Miessler's Fabric GitHub and a March 8 Korean deep-dive to compare how a prompt-first workflow can reduce AI operating friction in daily content and development workflows."
 categories: [AI, Tools]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/posts/2026-03-08-ai-content-workflow-fabric-review/fabric-github.png
   alt: "Fabric GitHub repository screenshot"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why this topic now?

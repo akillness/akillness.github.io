@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Qwen3.6-Plus Review: 1M Context, Agentic Coding, and Practical AI Agents"
 description: "A practical review of Qwen3.6-Plus covering its 1M-token context window, agentic coding strengths, multimodal reasoning, benchmark signals, and why it matters for real AI agent workflows."
 categories: [AI, Agents, Developer-Tools]
@@ -10,6 +10,8 @@ math: false
 image:
   path: "https://qianwen-res.oss-accelerate.aliyuncs.com/Qwen3.6/Figures/3.6_plus_banner.png"
   alt: "Qwen3.6-Plus main banner"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: When does an AI model stop feeling like a chatbot and start feeling like a working agent?

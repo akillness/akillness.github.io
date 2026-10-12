@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: 🔍 Unlocking the Power of RLHF in Large Language Models 🌟
 description: "Curiosity: How do LLMs learn to align with human preferences? What is Reinforcement Learning from Human Feedback (RLHF) and how does it work?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-08-03 12:00:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## Unlocking the Power of RLHF in Large Language Models
 

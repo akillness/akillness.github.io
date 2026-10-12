@@ -8,7 +8,9 @@ mermaid: true
 lang: ko
 # Retired 2026-09-19: machine (Lilys AI) summary of third-party content
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## Lilys AI: YouTube Video Summarization and Blog Generation
 

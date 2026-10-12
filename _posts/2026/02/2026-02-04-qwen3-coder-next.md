@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Qwen3‑Coder‑Next: Small Hybrid Models, Big Agentic Leaps"
 description: "A game‑dev lens on Qwen3‑Coder‑Next and why scaling agentic training signals (not just parameters) is the next unlock for coding agents."
 categories: [Agent/Orchestration]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-04-qwen3-coder-next/benchmarks.png
   alt: "Qwen3‑Coder‑Next benchmarks"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![Qwen3‑Coder‑Next benchmarks](/assets/img/2026-02-04-qwen3-coder-next/benchmarks.png)

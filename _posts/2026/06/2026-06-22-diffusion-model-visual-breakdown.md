@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Diffusion Models, Visually: How Noise Becomes an Image (and Why a Game Studio Should Care)"
 description: "A visual, equation-light breakdown of diffusion models — forward noising, the noise-prediction loss, timestep embeddings, U-Nets, latent diffusion, classifier-free guidance, and diffusion transformers — read through the lens of shipping game content."
 categories: [Research, ML]
@@ -11,6 +11,8 @@ math: true
 image:
   path: /assets/img/2026-06-22-diffusion-model-visual-breakdown/01-cover-noise-to-image.gif
   alt: "A diffusion model gradually turning Gaussian noise into a clean image"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 > This post is my game-developer reading of Mayank Pratap Singh's excellent visual breakdown, [*Diffusion Model Visual Breakdown*](https://vizuara.substack.com/p/diffusion-model-visual-breakdown) (Vizuara, Jun 2026). All figures are from that article; the framing, code, and production angle are mine.

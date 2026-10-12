@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "gogcli: The Google Workspace CLI I Wish Every Agent Had"
 description: "A fast, JSON-first Google Workspace CLI that turns Gmail/Calendar/Drive/Docs into automatable agent tools." 
 categories: [AI, Research]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/ai/harness-techtarget.jpg
   alt: "Agent automation tooling"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: The Question

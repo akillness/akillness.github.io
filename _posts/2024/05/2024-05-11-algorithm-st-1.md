@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: 알고리듬 압축코스 - 강의소개
 description: "1. An important concept that improves skills (your capabilities) (coding test + ability)."
 categories: [Learning/Guide]
@@ -7,9 +7,8 @@ tags: [Learning, Guide, Lecture]
 date: 2024-05-11 14:30:00 +0800
 mermaid: true
 lang: ko
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 # HongLab 알고리듬 압축코스 - 강의소개
 

@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "The New MCP Roadmap - Reading the Protocol's Five Bets on Agentic Infrastructure"
 description: "MCP just published an updated roadmap: sessions are gone, transports are unifying on HTTP, and agent identity is now a first-class priority. Here's what each of the five areas means if you're shipping agent-powered tools."
 categories: [AI, Agents]
@@ -9,6 +9,8 @@ mermaid: true
 image:
   path: /assets/img/posts/2026-08-21-mcp-roadmap/priority-areas.svg
   alt: "MCP Roadmap: five priority areas — agentic messaging primitives, HTTP-native transport unification and hardening, agent identity and enterprise-ready security, improved primitives, and improved SDK developer experience"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: What Does a Protocol Prioritize When Agents Stop Being Chatbots?

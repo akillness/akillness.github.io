@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "DeepCode + nanobot: Agentic Coding from Papers, Text, and Your Phone"
 description: "DeepCode claims SOTA on PaperBench and pairs with nanobot to turn papers, text prompts, and chat messages into working code." 
 categories: [Agent/Orchestration]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-12-deepcode/cover.png
   alt: "DeepCode logo"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![DeepCode logo](/assets/img/2026-02-12-deepcode/cover.png)

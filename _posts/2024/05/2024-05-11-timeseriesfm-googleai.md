@@ -4,7 +4,9 @@ description: "We’re excited to release the weights of our Time Series Foundati
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-10 15:41:00 +0800
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 # What's New? ( from [Google AI](https://twitter.com/GoogleAI))
 

@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Awesome Claude Skills: From Text to Real Actions"
 description: "A deep dive into the Awesome Claude Skills list—what it is, how it’s structured, and how to build repeatable workflows across Claude.ai, Claude Code, and the Claude API."
 categories: [Agent/Orchestration]
@@ -7,9 +7,8 @@ tags: [Agent, Workflow, Orchestration]
 date: 2026-02-04 18:00:00 +0900
 mermaid: true
 math: false
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: What if “skills” are the real unit of agent scale?

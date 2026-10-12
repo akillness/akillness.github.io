@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: Visualize your RAG Data — EDA for Retrieval-Augmented Generation.
 description: "Curiosity: How can we visualize RAG embedding data to understand retrieval quality?"
 categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2024-07-22 14:00:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## Visualize Your RAG Data: EDA for Retrieval-Augmented Generation
 

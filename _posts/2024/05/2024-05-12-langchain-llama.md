@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: LangChain and LlamaIndex to LLM Frameworks
 description: "Curiosity: When should we use LangChain versus LlamaIndex? How do these frameworks differ in their approach to building LLM applications?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-12 13:27:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## LangChain vs. LlamaIndex: Choosing the Right LLM Framework
 

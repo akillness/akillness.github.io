@@ -1,13 +1,12 @@
 ---
-published: false
+published: true
 title: "RLM-FORGE: Why Evidence-Gated Recursion Matters More Than Recursive Hype"
 description: "A practical review of Q00/rlm-forge and its core claim: recursion is only reliable when parent synthesis is constrained by deterministic evidence contracts."
 date: 2026-05-01 10:00:00 +0900
 categories: [AI, Systems]
 tags: [RLM, Hermes, Ouroboros, TraceGuard, evaluation, hallucination, agent-runtime]
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## The Question I Started With

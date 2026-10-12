@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Easy Dataset: A Full Pipeline for LLM Data, RAG, and Evaluation"
 description: "A hands‑on overview of Easy Dataset—document parsing, smart chunking, QA generation, and built‑in evaluation for fine‑tuning and RAG." 
 categories: [RAG/Search]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-08-easy-dataset/bg2.png
   alt: "Easy Dataset"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![Easy Dataset](/assets/img/2026-02-08-easy-dataset/bg2.png)

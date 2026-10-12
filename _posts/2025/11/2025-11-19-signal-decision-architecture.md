@@ -11,7 +11,9 @@ image:
   alt: Signal-Decision Architecture Overview
 # Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## 🤔 Curiosity: The Routing Problem
 

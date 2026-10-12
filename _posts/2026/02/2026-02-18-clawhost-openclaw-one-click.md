@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "ClawHost: One‑Click OpenClaw on VPS (and Why It Matters)"
 description: "A practical, concept‑first guide to ClawHost’s architecture, deployment flow, and why self‑hosted AI infra is becoming the default."
 categories: [AI, Agent]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/ai/clawhost-1.jpg
   alt: "ClawHost one‑click deployment"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: The Question

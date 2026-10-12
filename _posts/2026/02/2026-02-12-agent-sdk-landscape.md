@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Build Your Own AI Agent with Agent SDKs (2026)"
 description: "A practical map of the agent SDK landscape — what each framework optimizes for, and how to choose the right harness." 
 categories: [Agent/Orchestration]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-12-agent-sdk/cover.png
   alt: "Agent SDK landscape"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![Agent SDK landscape](/assets/img/2026-02-12-agent-sdk/cover.png)

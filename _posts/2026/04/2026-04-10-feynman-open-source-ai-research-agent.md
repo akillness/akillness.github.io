@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Feynman: An Open-Source AI Research Agent That Actually Thinks Beyond Search"
 description: "A practical review of Feynman covering its research-first CLI workflows, multi-agent research roles, paper-to-code audit flow, experiment execution stack, and why it matters beyond AI search."
 categories: [AI, Agents, Developer-Tools]
@@ -11,6 +11,8 @@ math: false
 image:
   path: "https://github.com/getcompanion-ai/feynman/raw/main/assets/hero.png"
   alt: "Feynman CLI hero image"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why do most “research agents” still feel like glorified search boxes?

@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: 👚👚 ViViD Diffusion Virtual Try-ON 👚👚
 description: "A source-linked overview of ViViD, a diffusion framework for temporally consistent video virtual try-on."
 categories: [Multimodal/Computer Vision]
 tags: [Multimodal, Vision, Generative Model]
 date: 2024-05-23 19:00:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 {% include embed/youtube.html id='r9giQPUp1Gw' %}
 

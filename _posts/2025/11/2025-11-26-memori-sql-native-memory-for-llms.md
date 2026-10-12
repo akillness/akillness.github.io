@@ -12,7 +12,9 @@ image:
   alt: Memori - SQL-Native Memory Engine for LLMs
 # Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ![Memori Banner](/assets/img/research/memori/banner.png){: .light .shadow .rounded-10 w='1212' h='668' }
 

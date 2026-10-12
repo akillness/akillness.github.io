@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: Forget GPT-4o vs. Llama 3
 description: "Curiosity: What if the best LLM isn't a single model, but intelligent routing to the right model?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-07-04 20:10:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## RouteLLM: The Real Battle is in Query Routing
 

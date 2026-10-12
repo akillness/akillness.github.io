@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Why AI Coding Agents Fail — and Why the Harness Matters More Than the Model"
 description: "Engineering Discipline is an open-source harness for AI coding agents that adds clarification, complexity routing, worker-validator separation, checkpoint recovery, implementation guardrails, and AI code cleanup."
 categories: [AI, Agents, Developer-Tools]
@@ -11,6 +11,8 @@ math: false
 image:
   path: "https://opengraph.githubassets.com/06b3d92437a4a53267c8c28d9741fd0021b2a33d7f9e84c55747d685ced1f7db/tmdgusya/engineering-discipline"
   alt: "Engineering Discipline GitHub preview"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why do we still route everything through one LLM?

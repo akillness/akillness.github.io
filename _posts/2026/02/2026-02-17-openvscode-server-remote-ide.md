@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "OpenVSCode Server: A Practical Path to Remote IDEs"
 description: "Why OpenVSCode Server matters, how it works, and what a production‑ready setup needs—based on the official repo and a deployment guide."
 categories: [AI, Agent]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/ai/openvscode-1.jpg
   alt: "OpenVSCode Server in the browser"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: The Question

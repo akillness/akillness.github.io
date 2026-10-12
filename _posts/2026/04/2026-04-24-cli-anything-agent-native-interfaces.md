@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "CLI-Anything: Why Agent-Native Interfaces Matter More Than Bigger Models"
 description: "CLI-Anything reframes agent reliability as an interface and harness problem: structured CLIs, deterministic execution, and installable tool surfaces that scale beyond demos."
 categories: [AI, Agents, Developer-Tools]
@@ -11,9 +11,8 @@ math: false
 image:
   path: /assets/img/posts/2026-04-24-cli-anything/teaser.png
   alt: "CLI-Anything teaser image"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why do many capable agents still fail on real software tasks?

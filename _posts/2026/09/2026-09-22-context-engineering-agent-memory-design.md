@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Context Engineering Is the Missing Layer Between Your Agent and Its Memory"
 description: "Prompt engineering tells the model what to do. Context engineering tells it what to know. A practical game-production view of retrieval, memory, context assembly, and reasoning scaffolds."
 categories: [AI, Agents]
@@ -8,20 +8,17 @@ date: 2026-09-22 12:00:00 +0900
 pin: false
 mermaid: true
 math: false
-image:
-  path: /assets/img/posts/2026-09-22-context-engineering-agent-memory-design/cover.jpg
-  alt: "A developer reviewing AI context pipelines, memory layers, and retrieval flows."
+ads: false
+restored_archive: "2026-10-12"
 ---
 
-> This post draws on Sourcegraph's [Context Engineering: A Practical Guide for AI Agents](https://sourcegraph.com/blog/context-engineering) and mem0's complementary guide to agent memory. The cited definitions and architecture claims come from those sources. Everything else is my read as someone who has shipped AI systems into production games for eight years at NC SOFT and COM2US.
+> This historical note links Sourcegraph's [context engineering guide](https://sourcegraph.com/blog/context-engineering), the [MemGPT paper](https://arxiv.org/html/2310.08560v2), and the [A-Mem paper](https://proceedings.neurips.cc/paper_files/paper/2025/hash/19909c36f51abc4856b4560aff3d36d6-Abstract-Conference.html). The four-layer game-production lens below is my organizing framework, not Sourcegraph's four-pillar enumeration. The balance-review scenario and patch outcomes are hypothetical examples, not reported production measurements.
 {: .prompt-info}
 
-![A developer reviewing AI context pipelines, memory layers, and retrieval flows](/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/cover.jpg){: .light .w-75 .shadow .rounded-10 }
-_The mental shift is simple: instead of searching for the perfect prompt, design what the agent is allowed to know, when it receives it, and how that information is ranked. (Source: [Unsplash](https://unsplash.com/), public image source)_
 
 ## 🤔 Curiosity: Why Do Smart Agents Make Dumb Mistakes?
 
-I have seen this failure in live-ops work.
+Consider a hypothetical live-ops failure, not a reported production incident.
 
 A capable agent had access to patch notes, telemetry exports, and a vector search over the team's decision history. On paper, the setup looked complete. In practice, it kept recommending balance changes that had already been reverted two patches earlier, complete with confident explanations.
 
@@ -29,7 +26,7 @@ The agent was not stupid. Its reasoning was coherent. The problem was that the r
 
 This is the problem that **context engineering** names. Prompt engineering tells a model what to do. Context engineering designs the information that makes reliable action possible in the first place.
 
-Sourcegraph defines context engineering as the systematic practice of designing, selecting, and structuring the information an AI agent receives so it can reason, plan, and act reliably across sessions. The phrase "across sessions" matters. A single-session agent is a calculator. An agent that can carry decisions, constraints, and failures forward becomes infrastructure.
+Sourcegraph describes context engineering as deliberately designing what a language model sees on each inference call, including retrieved documents, conversation history, tool definitions, and long-term memory. Cross-session state is one important part of that broader pipeline. An agent that can carry decisions, constraints, and failures forward needs deliberate memory design.
 
 > **The question:** if the system prompt tells the model what to do, what tells it what to know?
 {: .prompt-tip}
@@ -59,6 +56,11 @@ graph LR
 
 In a balance review, the useful retrieval result might combine the ability definition, the owning system, the last three related decisions, and the telemetry window for the affected cohort. A pile of loosely related snippets is not context. It is noise with citations.
 
+<figure class="source-image">
+  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/retrieval-pipeline.png" alt="MemGPT Figure 2: recall-storage search retrieves prior conversation records for a response">
+  <figcaption>MemGPT Figure 2 shows recall_storage.search returning earlier conversation records and the agent using a relevant fact in its response. Source: <a href="https://arxiv.org/html/2310.08560v2">Charles Packer, Sarah Wooders, Kevin Lin, Vivian Fang, Shishir G. Patil, Ion Stoica, and Joseph E. Gonzalez</a>. MemGPT Figure 2, CC BY 4.0; original diagram, metadata stripped. Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</figcaption>
+</figure>
+
 ### 2. Memory: separate the session from the history
 
 Memory has at least two species.
@@ -67,14 +69,20 @@ Memory has at least two species.
 
 **Long-term memory** persists across sessions: user preferences, project conventions, prior decisions, post-mortems, and constraints. This is the layer teams often underinvest in because it has no immediate demo effect.
 
+
 <figure class="source-image">
-  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/memory-layers.jpg" alt="Layers of AI agent memory, from the short-term context window to long-term decision records">
-  <figcaption>The memory stack has different update speeds. Session context changes every turn. Project memory changes when decisions change. Episodic records change when the team learns from an outcome. Image source: <a href="https://unsplash.com/s/photos/ai-memory">Unsplash AI memory collection</a>. Licence: <a href="https://unsplash.com/license">Unsplash License</a>.</figcaption>
+  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/memory-layers.png" alt="MemGPT Figure 1: a limited-context alert prompts a working-memory update with durable conversation facts">
+  <figcaption>MemGPT Figure 1 shows a memory-pressure alert followed by a working-context append. This is an example of extracting useful facts rather than retaining only raw turns. Source: <a href="https://arxiv.org/html/2310.08560v2">Charles Packer, Sarah Wooders, Kevin Lin, Vivian Fang, Shishir G. Patil, Ion Stoica, and Joseph E. Gonzalez</a>. MemGPT Figure 1, CC BY 4.0; original diagram, metadata stripped. Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</figcaption>
 </figure>
 
 Raw conversation history is a poor long-term memory format. It grows too quickly and forces every future run to re-read the same irrelevant turns. A better design extracts durable facts: what was decided, why, which evidence supported it, what happened afterward, and when the fact should be rechecked.
 
-For a live-service team, the durable record is not "the agent said this in turn 47." It is "the cooldown reduction shipped in patch 7.2, raised pick rate, reduced D7 retention in the affected cohort, and was reverted in 7.5." That is the unit an agent can use later.
+For a live-service team, the durable record is not "the agent said this in turn 47." A hypothetical record might say "the cooldown reduction shipped in patch 7.2, raised pick rate, reduced D7 retention in the affected cohort, and was reverted in 7.5." These patch numbers and outcomes are illustrative, not measured results. A real record would need its own evidence.
+
+<figure class="source-image">
+  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/context-window.png" alt="MemGPT Figure 4: new conversation evidence replaces a stale boyfriend fact in working-context memory">
+  <figcaption>MemGPT Figure 4 shows an existing memory being corrected when the conversation supplies changed information. It illustrates why retained facts need updates. Source: <a href="https://arxiv.org/html/2310.08560v2">Charles Packer, Sarah Wooders, Kevin Lin, Vivian Fang, Shishir G. Patil, Ion Stoica, and Joseph E. Gonzalez</a>. MemGPT Figure 4, CC BY 4.0; original diagram, metadata stripped. Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</figcaption>
+</figure>
 
 ### 3. Context assembly: relevance beats recency
 
@@ -103,6 +111,11 @@ graph TB
 ```
 
 Context assembly should therefore be an explicit design decision. Even heuristic relevance scores are better than an implicit order nobody can inspect. A prior rollback may deserve more weight than a newly indexed design note. A current telemetry window may outrank a six-month-old assumption. The system should make that judgement visible.
+
+<figure class="source-image">
+  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/agent-workstation.png" alt="A-Mem Figure 2: note construction, link generation, memory evolution, and embedding-based memory retrieval">
+  <figcaption>A-Mem Figure 2 connects structured note attributes, links between memories, memory evolution, and query-based retrieval. It is a research architecture, not a measurement of the hypothetical game guardrail below. Source: <a href="https://proceedings.neurips.cc/paper_files/paper/2025/hash/19909c36f51abc4856b4560aff3d36d6-Abstract-Conference.html">Wujiang Xu, Zujie Liang, Kai Mei, Hang Gao, Juntao Tan, and Yongfeng Zhang</a>. A-Mem Figure 2, CC BY 4.0; rasterized from PDF page 4 and cropped to the diagram. Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</figcaption>
+</figure>
 
 ### 4. Reasoning scaffolds: use the context before acting
 
@@ -151,24 +164,12 @@ Before proposing a change, the guardrail can ask:
 
 The result should not blindly block the designer. It should surface the evidence and make the decision legible. "This was reverted before" is a useful challenge. It is not automatically a veto because the product, cohort, and patch may have changed.
 
-<figure class="source-image">
-  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/retrieval-pipeline.jpg" alt="A retrieval pipeline showing ranked evidence flowing into a context assembly layer">
-  <figcaption>Retrieval is not just search. It is ranking, filtering, and assembly with a declared purpose. Image source: <a href="https://unsplash.com/s/photos/data-pipeline">Unsplash data pipeline collection</a>. Licence: <a href="https://unsplash.com/license">Unsplash License</a>.</figcaption>
-</figure>
 
 ### MCP as a retrieval bus
 
 The Model Context Protocol is useful here because production context is heterogeneous. A game team may have a Git repository, a telemetry warehouse, a design wiki, a ticket tracker, and a balance database. Each source can expose a tool surface instead of forcing every agent pipeline to contain bespoke retrieval code.
 
-<figure class="source-image">
-  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/context-window.jpg" alt="Multiple project sources flowing into one agent context window">
-  <figcaption>MCP does not solve relevance by itself. It gives different sources a consistent way to participate in context assembly. The ranking and freshness policy still belong to the product team. Image source: <a href="https://unsplash.com/s/photos/software-engineering">Unsplash software engineering collection</a>. Licence: <a href="https://unsplash.com/license">Unsplash License</a>.</figcaption>
-</figure>
 
-<figure class="source-image">
-  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/agent-workstation.jpg" alt="A developer reviewing multiple data sources flowing into an AI agent context layer">
-  <figcaption>A context window is assembled from multiple sources rather than dumped from one transcript. Image source: <a href="https://unsplash.com/s/photos/ai-developer">Unsplash AI developer collection</a>. Licence: <a href="https://unsplash.com/license">Unsplash License</a>.</figcaption>
-</figure>
 
 ### Honest tradeoffs
 

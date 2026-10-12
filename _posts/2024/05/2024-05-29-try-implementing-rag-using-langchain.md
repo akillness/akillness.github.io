@@ -4,7 +4,9 @@ description: "But to build #LLM-powered applications, LLMs are just not enough."
 categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2024-05-29 16:13:00 +0800
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 But to build #LLM-powered applications, LLMs are just not enough.
 

@@ -5,7 +5,9 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-07-15 11:30:00 +0800
 mermaid: true
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## Generative AI Application Ecosystem: Challenges and Best Practices
 

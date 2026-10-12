@@ -13,7 +13,9 @@ image:
   - Compare Performance of LLMS by KMMLU
 # Retired 2026-09-19: copied social/newsletter post later rewritten by an LLM
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ![ Llama 3.1 MMLU performance ](/assets/img/llm/llama-3-1-mmlu-performance.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 

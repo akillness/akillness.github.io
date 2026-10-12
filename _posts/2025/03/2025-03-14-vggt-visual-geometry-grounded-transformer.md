@@ -12,7 +12,9 @@ image:
   alt: 'VGGT: Visual Geometry Grounded Transformer - CVPR 2025 Best Paper'
 # Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## 🤔 Curiosity: Can We Reconstruct 3D from Multiple Views Without Post-Processing?
 

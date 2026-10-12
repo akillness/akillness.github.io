@@ -6,7 +6,9 @@ tags: [Development Tools, Productivity, Tools]
 date: 2024-05-11 16:30:00 +0800
 # Retired 2026-09-19: setup notes copied from a third-party Tistory guide
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 # [MacOS / AppleSilicon] VSCODE C++ 설정 환경 설정 개발환경 세팅 AppleSilicon
 

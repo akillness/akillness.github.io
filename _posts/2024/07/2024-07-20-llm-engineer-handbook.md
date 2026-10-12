@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: The LLM Engineer's Handbook 👷 'Super proud to announce my new book'
 description: "Curiosity: How do we bridge the gap between LLM research and production deployment?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-07-20 13:30:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## The LLM Engineer's Handbook: Building Production-Ready LLM Applications
 

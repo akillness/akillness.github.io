@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: MLflow를 활용한 Hybrid MLOps 구축 예제
 description: "Curiosity: How can we combine on-premise GPU training with cloud-based inference?"
 categories: [Infrastructure/System]
 tags: [Infrastructure, Operations, Architecture]
 date: 2024-05-27 00:13:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## Hybrid MLOps with MLflow: On-Prem Training + SageMaker Inference
 

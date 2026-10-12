@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Agents Need Their ONNX Moment — Plano Is That Layer"
 description: "Plano separates the agent inner loop (logic) from the outer loop (routing, guardrails, observability). Here’s why that infra shift matters for production‑grade agents." 
 categories: [Agent/Orchestration]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-13-plano/logo.svg
   alt: "Plano logo"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![Plano logo](/assets/img/2026-02-13-plano/logo.svg){: .light .w-75 .shadow .rounded-10 }

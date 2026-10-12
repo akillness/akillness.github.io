@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Deploying NanoClaw in Docker Sandboxes: A Practical Security-First Guide"
 description: "A step-by-step guide to run each NanoClaw agent in isolated Docker Sandboxes, with hardening checks and real operational patterns for small teams and production rollouts."
 categories: [AI, Coding, Security]
@@ -10,6 +10,8 @@ math: false
 image:
   path: /assets/img/posts/2026-03-16-nanoclaw-sandboxes-guide/nanoclaw-social-preview.jpg
   alt: "NanoClaw Docker Sandboxes in one-command install"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why isolate agents by default now?

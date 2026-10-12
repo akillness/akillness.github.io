@@ -15,6 +15,11 @@ on:
       - master
 
   workflow_dispatch:
+    inputs:
+      build_only:
+        description: Validate the complete site without deploying
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -160,7 +165,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-24.04
     needs: build
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && !(github.event_name == 'workflow_dispatch' && inputs.build_only)
 
     steps:
       - name: Deploy to GitHub Pages

@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "10 GitHub Repos That Shaped My AI‑Agent Playbook"
 description: "A practical, repo‑driven map of the skills you actually need to build and ship AI agents—curated from the projects I learned from the most."
 categories: [AI, Research]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/ai/agent-repos-1.jpg
   alt: "AI agent learning repositories"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: The Question

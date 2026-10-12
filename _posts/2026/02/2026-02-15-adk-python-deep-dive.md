@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "ADK Python Deep Dive: Code‑First Agents That Ship"
 description: "A detailed walkthrough of Google’s Agent Development Kit (ADK) for Python—architecture, tooling, evaluation, and how it maps to production‑grade game AI pipelines." 
 categories: [Agent/Orchestration]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-15-adk/cover.png
   alt: "Agent Development Kit overview"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![Agent Development Kit overview](/assets/img/2026-02-15-adk/cover.png){: .light .w-75 .shadow .rounded-10 }

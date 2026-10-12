@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Clawd Control: Real‑Time Ops for Clawdbot Agent Fleets"
 description: "A concept‑first guide to Clawd Control—why agent ops dashboards matter, how this one works, and how to run it safely."
 categories: [AI, Agent]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/ai/clawd-control-1.jpg
   alt: "Clawd Control dashboard"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: The Question

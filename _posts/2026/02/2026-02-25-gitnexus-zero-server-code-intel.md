@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "GitNexus: Zero‑Server Code Intelligence for Agent‑Safe Refactors"
 description: "A local‑first knowledge‑graph engine that gives AI agents architectural context—without shipping your code to a server."
 categories: [AI, Research]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/ai/gitnexus-1.jpg
   alt: "GitNexus repository overview"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: The Question

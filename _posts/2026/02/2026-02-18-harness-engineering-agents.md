@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Harness Engineering: The Layer That Actually Makes Agents Work"
 description: "Why orchestration beats model upgrades in production—and how a better harness can flip benchmarks without changing the model."
 categories: [AI, Agent]
@@ -10,6 +10,8 @@ math: false
 image:
   path: /assets/img/ai/harness-techtarget.jpg
   alt: "Agent harness engineering cover"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: The Question

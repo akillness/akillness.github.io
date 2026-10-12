@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "From RAG to Context Layer: What Genie Ontology, LLM Wiki Memory, and HyGRAG Tell Us About the Next Stack"
 description: "Three signals on the same day point at one trajectory — RAG → GraphRAG → Agent Memory → Enterprise Ontology — and game studios should read it as a context-layer problem, not a chatbot problem."
 categories: [AI, Agents]
@@ -11,6 +11,8 @@ math: false
 image:
   path: /assets/img/2026-06-16-ontology-graphrag-agent-memory/databricks-genie-img-1.png
   alt: "Genie Ontology living context graph announced by Databricks"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why Did Three Different Teams Ship the Same Idea on the Same Day?

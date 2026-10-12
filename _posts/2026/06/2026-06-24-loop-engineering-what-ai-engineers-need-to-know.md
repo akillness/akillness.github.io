@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Loops: What Every AI Engineer Needs to Know in 2026"
 description: "The fastest-moving idea in AI dev tooling isn't a model — it's the loop around it. Why Boris Cherny, Peter Steinberger, and Addy Osmani stopped prompting agents and started designing loops, with runnable examples and a game-production lens."
 categories: [AI, Agents]
@@ -11,6 +11,8 @@ math: false
 image:
   path: /assets/img/2026-06-24-loop-engineering/cover.png
   alt: "Title card from Rahul's X article — Loops: What Every AI Engineer Needs to Know in 2026."
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 > Source breakdown of [*"Loops: What Every AI Engineer Needs to Know in 2026"* by Rahul (@sairahul1)](https://x.com/sairahul1/article/2064277888216555684), which amplifies [Peter Steinberger's "design the loops that prompt your agents"](https://x.com/steipete/status/2063697162748260627) and [Addy Osmani's *Loop Engineering* post](https://addyo.substack.com/p/loop-engineering). Cover image is the article's own card, pulled from the X preview. The inline diagrams in this write-up are the original figures from Osmani's public post — the canonical source the X article summarizes — because the X article body itself sits behind a login wall and can't be archived directly. Cross-checked against [The New Stack's reporting](https://thenewstack.io/loop-engineering/) and [Firecrawl's loop-engineering guide](https://www.firecrawl.dev/blog/loop-engineering). Everything below is my read as someone who has shipped AI systems into production games for eight years.

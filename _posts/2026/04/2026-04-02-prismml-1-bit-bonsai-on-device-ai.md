@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "PrismML 1-bit Bonsai: Why 1-Bit LLMs Could Make On-Device AI Actually Practical"
 description: "A practical review of PrismML's 1-bit Bonsai models, intelligence density, on-device throughput, energy efficiency, and why 1-bit LLMs matter for edge AI, robotics, and persistent local agents."
 categories: [AI, Edge-AI, Developer-Tools]
@@ -10,6 +10,8 @@ math: false
 image:
   path: "https://cdn.prod.website-files.com/699604cc2b9dd89bdbda0608/69c95982b95e9720e8868afc_prism-og-img.png"
   alt: "PrismML 1-bit Bonsai"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: What if the next AI breakthrough is not a larger model, but a smaller one that can actually live on your device?

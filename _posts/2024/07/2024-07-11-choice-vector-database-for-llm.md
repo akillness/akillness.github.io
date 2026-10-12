@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: Choice of Vector Database significantly impacts the LLM application's performance.
 description: "Curiosity: How does vector database choice impact LLM application performance? What factors should we consider when selecting a vector database?"
 categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2024-07-11 22:00:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## Choosing the Right Vector Database for LLM Applications
 

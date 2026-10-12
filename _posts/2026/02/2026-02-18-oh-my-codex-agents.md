@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Oh‑My‑Codex (OMX): Multi‑Agent Orchestration for Codex CLI"
 description: "A deep dive into OMX—role prompts, team pipelines, hooks, and MCP servers that turn Codex into a coordinated multi‑agent system." 
 categories: [Agent/Orchestration]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-18-oh-my-codex/hero.png
   alt: "oh-my-codex character"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![oh-my-codex character](/assets/img/2026-02-18-oh-my-codex/hero.png){: .light .w-75 .shadow .rounded-10 }

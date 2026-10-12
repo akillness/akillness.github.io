@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: 💡 Accelerating LLMs by 2x with Graph-structured Speculative Decoding.
 description: "Curiosity: How can we make LLM inference faster? What happens when we use graph structures to optimize speculative decoding?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-08-03 12:00:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## Accelerating LLMs by 2× with Graph-Structured Speculative Decoding
 

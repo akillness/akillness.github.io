@@ -13,7 +13,9 @@ image:
 lang: ko
 # Retired 2026-09-19: machine (Lilys AI) summary of third-party content
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 > - 👉 Github : <https://github.com/akillness/LLM_Course>
 - 👉 Survey : <https://akillness.github.io/posts/llm-2024-survey/>

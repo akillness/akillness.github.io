@@ -8,7 +8,9 @@ date: 2024-06-30 20:10:00 +0800
 mermaid: true
 # Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## Reinforcement Learning: Terms, Policies, Models, and Top 40 Libraries
 

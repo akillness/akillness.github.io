@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: Transformers are SSMs
 description: "Curiosity: Are Transformers and State Space Models fundamentally different? What happens when we discover their deep theoretical connections?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-06-03 15:00:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## Transformers are SSMs: State Space Duality Framework
 

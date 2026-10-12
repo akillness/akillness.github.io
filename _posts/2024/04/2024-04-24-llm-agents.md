@@ -12,7 +12,9 @@ image:
   - Beginner-friendly 101 guide on LLM agents
 # Retired 2026-09-15: machine summary / rewrite of a third-party article
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 > 에이전트는 툴, 실행 코드, 임베딩, 벡터 저장소의 조합을 통해 대화형 LLM의 개념을 확장한다. 즉, 에이전트는 RAG에 부가적인 단계를 더한 것
 {: .prompt-info}

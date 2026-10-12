@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Stop Generating, Start Thinking: The Missing Layer in AI Coding"
 description: "A deep reflection on why code generation without human thinking is risky—and how to build with agents without losing engineering judgment."
 categories: [Agent/Orchestration]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-10-stop-generating/cover.png
   alt: "Stop generating, start thinking"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![Stop generating, start thinking](/assets/img/2026-02-10-stop-generating/cover.png)

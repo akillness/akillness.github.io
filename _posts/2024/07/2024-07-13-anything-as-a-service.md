@@ -7,7 +7,9 @@ date: 2024-07-13 13:00:00 +0800
 mermaid: true
 # Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ![ Top 6 Xaas ](/assets/img/blog/Top-6-Xaas.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 

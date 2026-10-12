@@ -1,13 +1,12 @@
 ---
-published: false
+published: true
 title: ❏ LLM101n, LLM AI 스토리텔러 구축하기 🛠️
 description: "A few days ago, an interesting course by Andrej Karpathy was released."
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-06-30 19:10:00 +0800
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 며칠 전 Andrej Karpathy의 흥미로운 Course가 공개되었습니다.
 ( 아직 내용은 업데이트 중이지만, 목차내용을 참고해볼 수 있을 것 같습니다. )

@@ -7,7 +7,7 @@ description: Licensing of the writing and code on this site, accuracy limits, an
 mermaid: false
 ---
 
-**Last updated:** 2026-08-28
+**Last updated:** 2026-10-12
 
 Plain terms for a personal technical blog. If something here is unclear, [email me](mailto:akillness38@gmail.com) rather than guessing.
 
@@ -28,7 +28,7 @@ Attribution should name the author and link to the original post.
 
 ## Third-party material
 
-Some posts quote or reproduce material I did not create, such as diagrams from a paper, repository screenshots, or figures from another author's article. The editorial standard is to name and link the source, limit the excerpt to what the commentary requires, and add original review or technical analysis. Legacy posts that do not meet that standard are removed from search and advertising until they are rewritten or retired.
+Some posts quote or reproduce material I did not create, such as diagrams from a paper, repository screenshots, or figures from another author's article. The editorial standard is to name and link the source, limit the excerpt to what the commentary requires, and add original review or technical analysis. On 2026-10-12, the site owner approved restoring a fixed archive of 283 historical notes to public search while keeping advertising disabled. Their original publication dates and source credits are retained; restoration does not certify new original analysis or a fresh fact-check of every claim. This search exception does not grant new rights over third-party material or relax attribution, privacy, or new-article evidence requirements. Outside this exact restored cohort, notes without sufficient original analysis are removed from search and advertising. The five existing search-excluded notes remain excluded.
 
 Third-party material stays under its original rights. The CC BY licence above covers **my** writing, not quoted work. Missing attribution is an error, not a claim of ownership. **If you own material reproduced here and want it removed or credited differently, email me and I will act on it promptly.**
 
@@ -45,7 +45,7 @@ Material is provided "as is", without warranty of any kind. I am not liable for 
 
 ## Advertising
 
-Eligible long-form post pages carry Google AdSense units. Short reference notes, `noindex` pages, generated tag and category detail pages, and the 404 page load no AdSense code. Ads are separated from the article body. I do not control which specific advertisers appear, and their presence is not an endorsement. See the [Privacy Policy](/privacy/) for what ad-serving means for your data.
+Eligible long-form post pages carry Google AdSense units. The restored historical archive, short reference notes, `noindex` pages, generated tag and category detail pages, and the 404 page load no AdSense code. Ads are separated from the article body. I do not control which specific advertisers appear, and their presence is not an endorsement. See the [Privacy Policy](/privacy/) for what ad-serving means for your data.
 
 Posts are not sponsored. Where a source I analyse is itself sponsored — a vendor-funded article, for example — I say so in the post and verify its claims against primary documentation.
 

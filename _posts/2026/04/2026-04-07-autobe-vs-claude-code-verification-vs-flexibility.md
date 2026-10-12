@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "AutoBE vs. Claude Code: Verification Beats Raw Agent Flexibility on Big Backend Builds"
 description: "A practical engineering read on AutoBE vs. Claude Code: why the real divide is not model quality, but whether reliability comes from human review loops or compiler-backed verification."
 categories: [AI, Developer-Tools, Architecture]
@@ -11,6 +11,8 @@ image:
   path: "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F33k8cy27q4y2s1uumiiw.png"
   alt: "AutoBE vs. Claude Code article cover"
 pin: false
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: What actually separates the next generation of coding agents?

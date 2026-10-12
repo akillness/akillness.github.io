@@ -2,6 +2,8 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { validateArchiveRestoration, APPROVED_RESTORATION_ID } from './lib/archive-restoration-policy.mjs';
+import { parsePostFrontMatter } from './lib/public-post-cohort.mjs';
 import {
   MAX_REFERENCE_IMAGE_BYTES,
   MAX_REFERENCE_IMAGE_TOTAL_BYTES,
@@ -45,6 +47,10 @@ const firstPartyScreenshotPolicy = {
 };
 const indexablePostMinimum = Number(read('_config.yml').match(/^google_index_min_post_words:\s*(\d+)/m)?.[1]);
 check(Number.isInteger(indexablePostMinimum) && indexablePostMinimum > 0, '_config.yml does not set a positive google_index_min_post_words');
+const restorationValidation = validateArchiveRestoration(JSON.parse(read('_data/archive_restoration.json')));
+failures.push(...restorationValidation.errors);
+const restoredSources = restorationValidation.restoredSources;
+for (const file of restoredSources) check(fs.existsSync(path.join(root, file)), `approved restored source is missing: ${file}`);
 const sourceWordCount = (body) => body
   .replace(/```[\s\S]*?```/g, ' ')
   .replace(/<[^>]+>/g, ' ')
@@ -204,12 +210,20 @@ for (const file of postFiles) {
   const noindex = /^robots:\s*noindex, follow$/m.test(frontMatter);
   const outOfSitemap = /^sitemap:\s*false$/m.test(frontMatter);
   const noAds = /^ads:\s*false$/m.test(frontMatter);
+  const relative = path.relative(root, file).split(path.sep).join('/');
+  const fields = parsePostFrontMatter(source).fields;
+  if (restoredSources.has(relative)) {
+    check(published && noAds && fields.published === 'true' && fields.restored_archive === APPROVED_RESTORATION_ID && !/noindex/i.test(fields.robots || '') && fields.sitemap !== 'false' && fields.hidden !== 'true', `${relative}: approved restoration must be public and indexable with advertising explicitly disabled`);
+    // Only the indexing coupling is excepted. The independent source-image,
+    // privacy, template and advertising checks below still cover this source.
+    continue;
+  }
+  check(!fields.restored_archive, `${relative}: unapproved archive exception marker`);
   if (published && sourceWordCount(body) < indexablePostMinimum) {
     check(noindex && outOfSitemap && noAds, `${path.relative(root, file)}: short published post must be noindex, sitemap false, and ads false`);
   }
   if (!noindex && !outOfSitemap && !noAds) continue;
   boundedPosts += 1;
-  const relative = path.relative(root, file);
   check(noindex, `${relative}: withheld from advertising or the sitemap but still indexable`);
   check(outOfSitemap, `${relative}: noindex but still submitted in the sitemap`);
   check(noAds, `${relative}: removed from search but does not explicitly disable ads`);

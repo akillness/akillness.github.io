@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Fable 5 Isn't a Faster Chat Model — It's the Substrate for Self-Improving Agent Systems"
 description: "A 14-step field guide to building agent systems that compound with Claude Fable 5 — loops, dynamic workflows, routines, state files, and vision self-checks — read through the lens of shipping AI into production games."
 categories: [AI, Agents]
@@ -11,6 +11,8 @@ math: false
 image:
   path: /assets/img/2026-07-09-fable-5-self-improving-agent-system/cover.jpg
   alt: "Self-Improving Agent System with Fable 5 — a 14-step full course for loops, dynamic workflows, and routines"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why Do We Use Days-Long Models in 5-Minute Sessions?

@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: Little know gem the Open-source Cookbook
 description: "Curiosity: Where can we find practical examples for building AI applications with open-source tools? What makes the Hugging Face Cookbook valuable?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-04-17 15:10:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## Hugging Face Cookbook: Little-Known Gem for Practical AI
 

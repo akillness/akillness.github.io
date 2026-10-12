@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Agentic Engineering Patterns: The Playbook I’d Hand to My Team"
 description: "Simon Willison’s pattern catalog for coding agents turns vague advice into concrete operating habits." 
 categories: [AI, Research]
@@ -11,9 +11,8 @@ image:
   path: /assets/img/ai/agentic-engineering-9-skills-1.png
   lqip: data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAABQBACdASogABEAPxF8sFGsKCSisBgIAYAiCWkAAC5yTiaNpnrLJEgE5E4AAP7rFKRrTwLEUw1ou/d4RmPHggDe2lNQIRWIJkOYmZTrQvw6UFTzl02Q+4Oh2+7gDY21IG7TgdgHscAAAA==
   alt: "Agentic engineering patterns"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: The Question

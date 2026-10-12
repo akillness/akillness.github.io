@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "The Vault That Rewrites Itself: An AI-First Second Brain for Game Teams"
 description: "obsidian-second-brain turns a note vault into a self-maintaining, AI-first knowledge base across Claude Code, Codex, Gemini, and OpenCode. Why a self-rewriting vault is the cure for game-studio amnesia — with the 4-layer architecture, the 7 AI-first rules, and runnable examples."
 categories: [AI, Agents]
@@ -11,6 +11,8 @@ math: false
 image:
   path: /assets/img/2026-06-25-obsidian-second-brain/cover.png
   alt: "obsidian-second-brain banner — one brain, four CLIs: a cross-CLI Obsidian skill for Claude Code, Codex CLI, Gemini CLI, and OpenCode."
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 > Source breakdown of [**obsidian-second-brain**](https://github.com/akillness/obsidian-second-brain) — a cross-CLI Obsidian skill (built upstream by [Eugeniu Ghelbur](https://github.com/eugeniughelbur/obsidian-second-brain)) that turns your note vault into a self-maintaining, AI-first second brain across Claude Code, Codex CLI, Gemini CLI, and OpenCode. The banner and every quoted command/schema below are pulled directly from the repository's `README.md`, `references/ai-first-rules.md`, and `architecture.md`. The project itself extends [Andrej Karpathy's LLM-Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f). Everything else is my read as someone who has shipped AI systems into production games for eight years.

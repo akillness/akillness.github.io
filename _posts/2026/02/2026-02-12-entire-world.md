@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Entire: The Assembly Line for the Agent Era"
 description: "Thomas Dohmke announces Entire, a new developer platform built around agent-native SDLC, git-compatible context, and Checkpoints." 
 categories: [Agent/Orchestration]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-12-entire-world/cover.png
   alt: "Entire funding announcement"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![Entire funding announcement](/assets/img/2026-02-12-entire-world/cover.png)

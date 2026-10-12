@@ -4,8 +4,10 @@ description: "Curiosity: What insights can we retrieve from this? How does this 
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-07-29 11:00:00 +0800
-published: false
+published: true
 mermaid: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## Data analyst agent: get your data’s insights in the blink of an eye ✨
 

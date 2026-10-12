@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: How to evaluate LLM Model?
 description: "Curiosity: What insights can we retrieve from this? How does this connect to innovation in the field?"
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-18 10:20:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## LLM evaluation frameworks & tools every AI/ML engineer should know.
 

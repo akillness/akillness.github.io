@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Google’s Developer Knowledge API + MCP Server: Docs as a Live Source of Truth"
 description: "A deeper, non‑duplicative walkthrough of Google’s Developer Knowledge API and MCP server, with practical flows for agentic tooling." 
 categories: [Agent/Orchestration]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-11-developer-knowledge/cover.png
   alt: "Developer Knowledge API"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![Developer Knowledge API](/assets/img/2026-02-11-developer-knowledge/cover.png)

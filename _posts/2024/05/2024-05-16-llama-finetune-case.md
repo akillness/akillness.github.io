@@ -12,7 +12,9 @@ image:
   - Workflow
 # Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## Llama 3 8B Fine-Tune Case: Salesforce's Best-in-Class Model
 

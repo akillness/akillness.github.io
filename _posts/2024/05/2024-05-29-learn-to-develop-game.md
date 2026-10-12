@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: Game Development Course with Unity3D Programming
 description: "Curiosity: How can we learn game development with Unity? What's the path from beginner to capable Unity developer?"
 categories: [Multimodal/Computer Vision]
@@ -11,9 +11,8 @@ image:
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
   alt:
   - Overview of ML for Games Course
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ## Game Development Course with Unity3D Programming
 

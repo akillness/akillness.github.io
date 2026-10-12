@@ -4,7 +4,9 @@ description: "1. Commit often, push regularly."
 categories: [RAG/Search]
 tags: [RAG, Embedding, Search]
 date: 2024-07-03 20:10:00 +0800
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## Here's why it's crucial:
 

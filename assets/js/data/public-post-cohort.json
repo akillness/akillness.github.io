@@ -1,0 +1,21 @@
+---
+layout: null
+sitemap: false
+permalink: /assets/js/data/public-post-cohort.json
+---
+{
+  "built_at": {{ site.time | date_to_xmlschema | jsonify }},
+  "posts": [
+    {% for post in site.posts %}
+    {
+      "path": {{ post.path | jsonify }},
+      "url": {{ post.url | jsonify }},
+      "title": {{ post.title | jsonify }},
+      "date": {{ post.date | date_to_xmlschema | jsonify }},
+      "noindex": {% if post.robots contains 'noindex' %}true{% else %}false{% endif %},
+      "hidden": {% if post.hidden %}true{% else %}false{% endif %},
+      "restored_archive": {% if post.restored_archive %}true{% else %}false{% endif %}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}

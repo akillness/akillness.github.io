@@ -13,7 +13,9 @@ image:
   alt: Memory Optimization for Agentic Systems - AI Agents Crash Course Part 15
 # Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## 🤔 Curiosity: Why Do AI Agents Need Memory Management?
 

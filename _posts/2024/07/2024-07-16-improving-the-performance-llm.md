@@ -5,7 +5,9 @@ categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-07-16 12:30:00 +0800
 pin: false
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ### 3 comon methods
 

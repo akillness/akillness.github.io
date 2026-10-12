@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Qwen3.5-Medium: Open-Source Models Hitting Sonnet 4.5-Class Performance"
 description: "Alibaba’s Qwen3.5 Medium series pairs MoE efficiency with 1M+ context and strong benchmarks — a new local-first frontier for builders." 
 categories: [AI, Research]
@@ -11,9 +11,8 @@ image:
   path: /assets/img/ai/qwen35-venturebeat-1.png
   lqip: data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAADQBQCdASogABIAPxFysFAsJqSisAgBgCIJYgC1Gt184TGAn9CjOBhWduA3GogQcvQPBuRjqM7AAP7FgsYJ3KJyDbvIsuAcV6+o8xeCJp2IraTUY/TWOJMTwYzTRRJuVF5QvdjKVlyy2qR96GE0RVHhlmsFt/iwtSjyVb9l3FJ17FAA
   alt: "Qwen3.5 Medium models announced by Alibaba (VentureBeat image)"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: The Question

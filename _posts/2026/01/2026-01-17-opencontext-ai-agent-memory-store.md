@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "OpenContext - Give Your AI Assistant a Persistent Memory for Multi-Agent Workflows"
 description: "A personal context store for AI agents: CLI + MCP + Desktop app to capture, search, and reuse project knowledge across agents and repos"
 categories: [Agent/Orchestration]
@@ -9,6 +9,8 @@ mermaid: true
 image:
   path: /assets/img/ai/opencontext/demo.gif
   alt: "OpenContext Demo - AI Agent Context Management"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: How Can We Give AI Agents Persistent Memory?

@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: Alibaba presents FunAudioLLM
 description: "This report introduces FunAudioLLM, a model family designed to enhance natural voice interactions between humans and large language models (LLMs)."
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-07-12 13:00:00 +0800
 lang: ko
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 > - 👉 Github : <https://github.com/FunAudioLLM>
 > - 👉 HuggingFace : <https://huggingface.co/papers/2407.04051>

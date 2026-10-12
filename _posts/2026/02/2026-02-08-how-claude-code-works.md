@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "How Claude Code Works: The Agent Loop, Tools, and Safety"
 description: "A practical breakdown of Claude Code’s agent loop, tool categories, sessions, permissions, and how to work with it effectively."
 categories: [Agent/Orchestration]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-08-claude-code-works/agentic-loop.svg
   alt: "Claude Code agentic loop"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![Claude Code agentic loop](/assets/img/2026-02-08-claude-code-works/agentic-loop.svg)

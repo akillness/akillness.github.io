@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: 𝐍𝐞𝐰 𝐝𝐞𝐜𝐨𝐝𝐢𝐧𝐠 𝐭𝐞𝐜𝐡𝐧𝐢𝐪𝐮𝐞 𝐢𝐧 𝐭𝐫𝐚𝐧𝐬𝐟𝐨𝐫𝐦𝐞𝐫𝐬 𝐬𝐢𝐠𝐧𝐢𝐟𝐢𝐜𝐚𝐧𝐭𝐥𝐲 𝐫𝐞𝐝𝐮𝐜𝐞𝐬 𝐡𝐚𝐥𝐥𝐮𝐜𝐢𝐧𝐚𝐭𝐢𝐨𝐧𝐬
   👏
 description: "This new decoding method is simple yet extremely impressive!"
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-07-16 11:30:00 +0800
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ### DoLa decoding, which made a conference paper at ICLR '24, has just been merged in Transformers by João Gante and Yung-Sung Chuang.
 This new decoding method is simple yet extremely impressive!

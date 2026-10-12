@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "OpenClaw Skills at Scale: How to Start from Frontend when the Catalog Has 5,000+ items"
 description: "I reviewed the OpenClaw skill ecosystem through a large Korean article and the curated Awesome OpenClaw Skills list, then distilled how frontend teams can adopt plugins without getting lost in a sea of choices."
 categories: [AI, Tools]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/posts/2026-03-15-openclaw-skills-web-frontend/digitalbourgeois-2878.png
   alt: "OpenClaw skill ecosystem overview from digitalbourgeois"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: What are we optimizing for, really?

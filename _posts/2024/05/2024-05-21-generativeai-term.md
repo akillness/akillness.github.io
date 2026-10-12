@@ -5,7 +5,9 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-05-21 11:10:00 +0800
 mermaid: true
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## Generative AI Terms You Should Know: Essential Cheat Sheet
 

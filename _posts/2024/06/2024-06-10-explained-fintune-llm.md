@@ -7,7 +7,9 @@ date: 2024-06-10 10:10:00 +0800
 mermaid: true
 # Retired 2026-09-19: copied social/newsletter post later rewritten by an LLM
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 > Check more PEFT (Parameters Efficient Fine-Tuning) methods : <https://huggingface.co/docs/peft/index>
 {: .prompt-info }

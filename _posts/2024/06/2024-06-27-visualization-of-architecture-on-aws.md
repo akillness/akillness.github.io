@@ -5,7 +5,9 @@ categories: [Infrastructure/System]
 tags: [Infrastructure, Operations, Architecture]
 date: 2024-06-27 21:00:00 +0800
 mermaid: true
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## Building Resilient 3-Tier Architecture on AWS
 

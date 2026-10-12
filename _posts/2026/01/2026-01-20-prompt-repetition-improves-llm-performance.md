@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Prompt Repetition: A Simple Trick That Improves LLM Accuracy by 67% (With Zero Latency Cost)"
 description: "Google Research reveals that simply repeating your prompt dramatically improves LLM performance without increasing latency or output length - a game-changer for production AI systems."
 categories: [LLM/Model & Papers]
@@ -10,6 +10,8 @@ math: true
 image:
   path: /assets/img/research/prompt-repetition/figure1-accuracy-comparison.png
   alt: "Prompt repetition vs baseline accuracy across popular LLMs showing 47 wins out of 70 tests"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why Do Reasoning Models Repeat the Question?

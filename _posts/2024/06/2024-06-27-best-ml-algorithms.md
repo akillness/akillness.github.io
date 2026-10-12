@@ -6,7 +6,9 @@ tags: [Trend, Review, Case]
 date: 2024-06-27 20:10:00 +0800
 # Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 - 𝗟𝗶𝗻𝗲𝗮𝗿 𝗥𝗲𝗴𝗿𝗲𝘀𝘀𝗶𝗼𝗻: A staple for any machine learning enthusiast, linear regression is like drawing a straight line through data points on a graph to predict future values.
 

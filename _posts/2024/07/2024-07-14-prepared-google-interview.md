@@ -8,7 +8,9 @@ date: 2024-07-14 10:00:00 +0800
 mermaid: true
 # Retired 2026-09-19: copied social/newsletter post later rewritten by an LLM
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ![ NVIDIA RankRAG ](/assets/img/algorithm/Mindmap-to-Learn.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 

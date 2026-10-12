@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Rowboat: Local‑First AI Coworker Built on a Knowledge Graph"
 description: "Why Rowboat’s long‑lived memory model changes daily knowledge work—and how to put it into practice."
 categories: [AI, Agent]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/ai/rowboat-1.jpg
   alt: "Rowboat local-first AI coworker"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: The Question

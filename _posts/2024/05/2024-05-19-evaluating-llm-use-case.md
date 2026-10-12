@@ -8,7 +8,9 @@ mermaid: true
 lang: ko
 # Retired 2026-09-19: summary of a third-party evaluation repo presented as our own
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## LLM 성능 평가: 한국어 Use Case 분석
 

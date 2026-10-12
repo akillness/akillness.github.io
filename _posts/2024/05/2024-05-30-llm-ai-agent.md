@@ -6,7 +6,9 @@ tags: [Agent, Workflow, Orchestration]
 date: 2024-05-30 03:00:00 +0800
 # Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 Today, autonomous #AIAgents are all the buzz and you need more than just LLMs to create these AI agents. 
 

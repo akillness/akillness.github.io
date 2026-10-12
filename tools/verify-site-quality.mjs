@@ -5,6 +5,8 @@ import path from 'node:path';
 
 
 import { fileURLToPath } from 'node:url';
+import { validatePublicPostCohort, compareRouteSets, parsePostFrontMatter } from './lib/public-post-cohort.mjs';
+import { validateArchiveRestoration } from './lib/archive-restoration-policy.mjs';
 
 // Dependency-free reader for this repository's deliberately scalar ad settings.
 export function readAdConfig(file = new URL('../_config.yml', import.meta.url)) {
@@ -126,7 +128,19 @@ export function verifyPostLinks(html, { route, builtFiles, origin = 'https://aki
   return [...errors];
 }
 
-function main() {
+export function verifyIndexBoundary({ route, words, minimum, noindex, eligibility, restored = false }) {
+  const errors = [];
+  if (restored) {
+    if (noindex) errors.push(`approved restored archive is still noindex: ${route}`);
+    if (eligibility !== 'false') errors.push(`restored archive must remain non-monetized: ${route}`);
+  } else {
+    if (Number.isFinite(words) && words < minimum && !noindex) errors.push(`post below configured ${minimum} index words is indexable (${words}): ${route}`);
+    if (eligibility === 'false' && !noindex) errors.push(`post held back from advertising is still indexable (${words}): ${route}`);
+  }
+  return errors;
+}
+
+async function main() {
 const adConfig = readAdConfig();
 const tagArchiveMinimum = readTagArchiveMinimum();
 const categoryArchiveMinimum = readCategoryArchiveMinimum();
@@ -198,7 +212,37 @@ const retiredSlugs = [];
     retiredSlugs.push(permalink || stem);
   }
 })(fileURLToPath(new URL('../_posts', import.meta.url)));
-check(retiredSlugs.length >= 138, `only ${retiredSlugs.length} retired posts were found in _posts; the retirement set has shrunk`);
+// Retirement follows current source flags, not a permanently frozen count.
+// The separate source-to-built cohort check below catches any dropped page.
+const repoRoot = fileURLToPath(new URL('../', import.meta.url));
+const cohortPath = ['assets', 'js', 'data', 'public-post-cohort.json'];
+check(exists(...cohortPath), 'public-post-cohort.json is missing');
+let cohortManifest = null;
+try { if (exists(...cohortPath)) cohortManifest = JSON.parse(read(...cohortPath)); }
+catch (error) { failures.push(`invalid public-post-cohort.json: ${error.message}`); }
+const cohort = await validatePublicPostCohort({ root: repoRoot, manifest: cohortManifest, now: cohortManifest?.built_at || new Date() });
+failures.push(...cohort.errors);
+const restoration = JSON.parse(fs.readFileSync(path.join(repoRoot, '_data', 'archive_restoration.json'), 'utf8'));
+const restorationValidation = validateArchiveRestoration(restoration);
+failures.push(...restorationValidation.errors);
+const restoredSources = restorationValidation.restoredSources;
+const restoredRoutes = new Set();
+for (const [route, source] of Object.entries(cohort.routeToSource || {})) {
+  if (!restoredSources.has(source.path)) {
+    check(!source.restored_archive, `unapproved source opts into archive indexing exception: ${source.path}`);
+    continue;
+  }
+  const fields = parsePostFrontMatter(fs.readFileSync(path.join(repoRoot, source.path), 'utf8')).fields;
+  check(fields.published === 'true' && fields.ads === 'false' && fields.restored_archive === restoration.restoration_id, `restored source flags drifted: ${source.path}`);
+  check(!source.noindex && !source.hidden, `restored source is hidden or noindex: ${source.path}`);
+  restoredRoutes.add(route);
+}
+check(restoredRoutes.size === restoredSources.size, `only ${restoredRoutes.size}/${restoredSources.size} approved restored sources were built`);
+for (const sourcePath of restoration.protected_noindex_sources || []) {
+  const fields = parsePostFrontMatter(fs.readFileSync(path.join(repoRoot, sourcePath), 'utf8')).fields;
+  check(/noindex/i.test(fields.robots || ''), `existing protected source lost noindex: ${sourcePath}`);
+}
+check(restoration.protected_noindex_sources?.length === 5, 'the existing five protected sources must remain in the restoration record');
 for (const slug of retiredSlugs) {
   const variants = new Set([slug, slug.toLowerCase()]);
   for (const variant of variants) {
@@ -338,9 +382,7 @@ for (const entry of postEntries) {
     ([tag]) => /adsbygoogle/i.test(tag) && /(display\s*:\s*none|visibility\s*:\s*hidden)/i.test(tag)
   );
   check(!hasHiddenAd, `hidden AdSense unit is present: ${route}`);
-  if (Number.isFinite(words) && words < indexableWordFloor) {
-    check(isNoindex, `post below configured ${indexableWordFloor} index words is indexable (${words}): ${route}`);
-  }
+  failures.push(...verifyIndexBoundary({ route, words, minimum: indexableWordFloor, noindex: isNoindex, eligibility, restored: restoredRoutes.has(route) }));
   if (isNoindex) {
     noindexPosts += 1;
     noindexRoutes.push(route);
@@ -355,11 +397,9 @@ for (const entry of postEntries) {
   } else if (eligibility === 'false') {
     nonMonetizedPosts += 1;
     check(!hasLoader && !hasSlot && !hasCta, `ineligible post has a commercial surface: ${route}`);
-    // /about/, /start-here/ and /terms/ promise removal from search *and*
-    // advertising. Withdrawing the ads while leaving the page in the index is the
-    // half-applied boundary that made 40% of the indexed archive contradict the
-    // published standard, so the artifact has to prove both halves together.
-    check(isNoindex, `post held back from advertising is still indexable (${words}): ${route}`);
+    // Non-commercial indexing is allowed only for the exact owner-approved
+    // restoration cohort. verifyIndexBoundary still enforces the old boundary
+    // for every other post; all ad-loader/slot/CTA checks above remain intact.
   }
 
   const jsonScripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi)];
@@ -426,6 +466,24 @@ const feedHtml = exists('feed.xml') ? read('feed.xml') : '';
 const searchJson = exists('assets', 'js', 'data', 'search.json') ? read('assets', 'js', 'data', 'search.json') : '';
 const searchMetaJson = exists('assets', 'js', 'data', 'search-meta.json') ? read('assets', 'js', 'data', 'search-meta.json') : '';
 listingSurfaces.push({ route: '/archives/', html: archivesHtml });
+const postLinks = (html) => [...html.matchAll(/href="(?:https:\/\/akillness\.github\.io)?(\/posts\/[^"#?]*\/)"/g)].map((match) => match[1].replaceAll('&amp;', '&'));
+const builtPostRoutes = postEntries.filter((entry) => exists('posts', entry.name, 'index.html')).map((entry) => `/posts/${entry.name}/`);
+failures.push(...compareRouteSets(builtPostRoutes, cohort.expectedPublishedRoutes, 'built post pages').errors);
+failures.push(...compareRouteSets(locations.filter((url) => url.startsWith(`${origin}/posts/`)).map((url) => url.slice(origin.length)), cohort.expectedVisibleRoutes, 'sitemap post URLs').errors);
+const homeSurfaces = listingSurfaces.filter((surface) => surface.route === '/' || /^\/page\d+\/$/.test(surface.route));
+// Compare actual cards, not sidebar/navigation links or a deduplicated count.
+const homeRoutes = homeSurfaces.flatMap((surface) => [...surface.html.matchAll(/<article\b(?=[^>]*class="[^"]*card-wrapper\b)[^>]*>[\s\S]*?<\/article>/gi)].map((match) => postLinks(match[0])[0]).filter(Boolean));
+failures.push(...compareRouteSets(homeRoutes, cohort.expectedVisibleRoutes, 'home pagination').errors);
+failures.push(...compareRouteSets([...new Set(postLinks(archivesHtml))], cohort.expectedVisibleRoutes, 'Archives').errors);
+for (const [label, json] of [['search.json', searchJson], ['search-meta.json', searchMetaJson]]) {
+  try {
+    const records = JSON.parse(json);
+    const routes = records.map((entry) => entry.url);
+    failures.push(...compareRouteSets(routes, cohort.expectedVisibleRoutes, label).errors);
+  } catch (error) { failures.push(`invalid ${label}: ${error.message}`); }
+}
+const feedRoutes = [...feedHtml.matchAll(/<entry\b[\s\S]*?<link\b[^>]*href="https:\/\/akillness\.github\.io(\/posts\/[^"?#]*\/)"/g)].map((match) => match[1].replaceAll('&amp;', '&'));
+failures.push(...compareRouteSets(feedRoutes, cohort.expectedFeedRoutes, 'latest-five feed').errors);
 for (const route of noindexRoutes) {
   for (const surface of listingSurfaces) {
     check(!surface.html.includes(route), `noindex post ${route} is linked from listing ${surface.route}`);
@@ -514,4 +572,6 @@ console.log(`Site quality verification passed: ${locations.length} sitemap URLs,
 
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((error) => { console.error(error); process.exitCode = 1; });
+}

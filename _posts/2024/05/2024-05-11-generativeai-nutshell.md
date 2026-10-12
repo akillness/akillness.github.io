@@ -8,7 +8,9 @@ mermaid: true
 lang: ko
 # Retired 2026-09-15: machine summary / rewrite of a third-party article
 # (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 > [`Generative AI Preparation`](https://github.com/Msrevalli/Generative-AI-Preparation) (Generative AI 개념북) Thanks to [Aishwarya Naresh Reganti](https://www.linkedin.com/in/areganti/)
 {: .prompt-warning }

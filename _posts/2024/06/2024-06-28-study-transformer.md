@@ -1,13 +1,12 @@
 ---
-published: false
+published: true
 title: All about transformer background knowledge including RNN
 description: "<summary style= \"font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;\" > Explaining about Transformer by talker programming without cod..."
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-06-28 00:10:00 +0800
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 # Step to explain Transformer 
 > Dataset : <https://github.com/NoCodeProgram/deepLearning/tree/main/rnn>

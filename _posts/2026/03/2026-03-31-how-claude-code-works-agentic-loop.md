@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "How Claude Code Actually Works: Agentic Loop, Tooling Model, and Operational Guardrails"
 description: "A practical breakdown of Claude Code’s agentic loop from official docs, including tools, permissions, checkpoints, session forking, and leak-risk lessons for real engineering teams."
 categories: [AI, Developer-Tools, Architecture]
@@ -10,6 +10,8 @@ math: false
 image:
   path: "https://repository-images.githubusercontent.com/1197057157/a4d7e718-9c4e-48a1-8465-cb9ecb9dbd9c"
   alt: "Claude Code repository"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why does Claude Code feel different from chat-style coding?

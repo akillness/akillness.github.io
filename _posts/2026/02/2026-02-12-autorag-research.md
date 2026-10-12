@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "AutoRAG‑Research: A Standardized RAG Lab for Benchmarks, Pipelines, and Plugins"
 description: "AutoRAG‑Research unifies datasets, ships SOTA pipelines, and lets you run RAG experiments with one command." 
 categories: [RAG/Search]
@@ -10,9 +10,8 @@ math: false
 image:
   path: /assets/img/2026-02-12-autorag-research/cover.png
   alt: "AutoRAG-Research"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ![AutoRAG-Research](/assets/img/2026-02-12-autorag-research/cover.png)

@@ -103,7 +103,7 @@ A few conventions worth knowing before you read:
 - **Findings are dated.** Star counts, version numbers, and benchmarks are recorded on the date noted. They will drift; the post says when it was true.
 - **Mistakes get published too.** Several posts document where my own first calculation was wrong. That is the useful part.
 - **AI assistance is disclosed site-wide.** AI can assist research, drafting, translation, diagrams, and code review. Scheduled audits may publish under standing approval after independent evidence review and automated checks, not per-page human approval. I remain accountable for the editorial rules and corrections. The [editorial method](/about/#editorial-method-and-ai-assistance) explains this boundary; AI output is never evidence by itself.
-- **Legacy notes are reviewed separately.** Older reference posts without enough original analysis are removed from search and advertising until they are rewritten or retired.
+- **Historical notes have a separate archive boundary.** The 283-note archive restored on 2026-10-12 is publicly searchable with original dates retained, but carries no advertising. Restoration is not a fresh fact-check of every historical claim. New audits keep the evidence-gated standard, and the five existing search-excluded notes remain excluded. Outside this exact restored cohort, notes without sufficient original analysis are removed from search and advertising.
 
 ## Publishing cadence
 

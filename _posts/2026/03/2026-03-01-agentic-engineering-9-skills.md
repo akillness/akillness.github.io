@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Agentic Engineering: 9 Skills That Separate Demos from Shipping"
 description: "A production‑minded take on Flowkater’s 9 agentic engineering skills — and how I’d apply them to real game pipelines." 
 categories: [AI, Research]
@@ -11,9 +11,8 @@ image:
   path: /assets/img/ai/agentic-engineering-9-skills-1.png
   lqip: data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAABQBACdASogABEAPxF8sFGsKCSisBgIAYAiCWkAAC5yTiaNpnrLJEgE5E4AAP7rFKRrTwLEUw1ou/d4RmPHggDe2lNQIRWIJkOYmZTrQvw6UFTzl02Q+4Oh2+7gDY21IG7TgdgHscAAAA==
   alt: "Flowkater: Agentic Engineering 9 Skills"
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: The Question

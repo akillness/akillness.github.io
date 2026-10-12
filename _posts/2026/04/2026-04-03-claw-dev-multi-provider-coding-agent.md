@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Claw Dev: One Terminal Coding Agent, Multiple Model Backends"
 description: "A practical breakdown of Claw Dev, a multi-provider coding assistant launcher that keeps a Claude Code–style terminal workflow while routing requests to Anthropic, OpenAI, Gemini, Groq, OpenRouter, Copilot, z.ai, or Ollama."
 categories: [AI, Developer-Tools, Agents]
@@ -11,6 +11,8 @@ math: false
 image:
   path: "https://opengraph.githubassets.com/4e683afe902ed8918d04394316b48753f5febbfc36101ad783fb21693a0a52f9/akillness/claw-dev"
   alt: "Claw Dev GitHub preview"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: Why does every coding agent still want to lock you into one model stack?

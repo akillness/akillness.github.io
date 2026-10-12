@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "SuperGemma4: A Faster, Sharper Gemma 4 for Local Agent Workloads"
 description: "A practical review of SuperGemma4, the Apple Silicon MLX-tuned Gemma 4 26B variant that improves coding, logic, browser tasks, Korean prompts, and local agent responsiveness."
 categories: [AI, Local-LLM, Developer-Tools]
@@ -11,6 +11,8 @@ math: false
 image:
   path: "https://cdn-thumbnails.huggingface.co/social-thumbnails/models/Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2.png"
   alt: "SuperGemma4 model card social preview"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: What if the best local Gemma 4 experience is not the official one, but the one tuned for actual agent work?

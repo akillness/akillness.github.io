@@ -4,7 +4,9 @@ description: "We want to announce that we just 𝗿𝗲𝗹𝗲𝗮𝘀𝗲𝗱 
 categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-07-30 11:00:00 +0800
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ![ Architecture of LLM System ](/assets/img/llm/architecture-of-llm-system.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 

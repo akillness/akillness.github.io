@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "LLM Wiki: Why Your Best Knowledge Base May Be an Agent-Maintained Wiki, Not Another RAG Stack"
 description: "A practical review of Andrej Karpathy's LLM Wiki idea, including persistent knowledge compilation, wiki maintenance loops, Obsidian workflows, and why agent-maintained markdown may beat repeated retrieval for serious research and product work."
 categories: [AI, Agents, Knowledge-Management]
@@ -11,6 +11,8 @@ math: false
 image:
   path: "https://github.githubassets.com/assets/gist-og-image-54fd7dc0713e.png"
   alt: "LLM Wiki gist preview image"
+ads: false
+restored_archive: "2026-10-12"
 ---
 
 ## 🤔 Curiosity: What if the real problem with knowledge work is not retrieval, but forgetting everything you already learned?

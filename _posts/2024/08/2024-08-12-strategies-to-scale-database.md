@@ -5,7 +5,9 @@ categories: [Review/Trends]
 tags: [Trend, Review, Case]
 date: 2024-08-12 12:00:00 +0800
 mermaid: true
-published: false
+published: true
+ads: false
+restored_archive: "2026-10-12"
 ---
 ## 7 Must-Know Strategies to Scale Your Database
 

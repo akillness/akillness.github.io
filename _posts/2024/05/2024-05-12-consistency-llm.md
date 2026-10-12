@@ -1,14 +1,13 @@
 ---
-published: false
+published: true
 title: Consistency Large Language Models
 description: "Researchers from University of California comes with a revolutionary method for LLMs, CLLMs."
 categories: [LLM/Model & Papers]
 tags: [LLM, Model, Paper]
 date: 2024-05-12 13:27:00 +0800
 mermaid: true
-robots: noindex, follow
-sitemap: false
 ads: false
+restored_archive: "2026-10-12"
 ---
 ### Consistency Large Language Models: Efficient Parallel Decoders and 3.4 X Faster ( from [Maryam Miradi, PhD](https://www.linkedin.com/in/maryammiradi/))
 
