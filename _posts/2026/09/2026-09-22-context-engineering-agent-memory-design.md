@@ -10,6 +10,8 @@ mermaid: true
 math: false
 ads: false
 restored_archive: "2026-10-12"
+correction_date: "2026-10-12"
+correction_note: "Four uncredited stock reference images were replaced with licensed MemGPT and A-Mem figures, and an uncredited cover was removed. An unsupported Sourcegraph attribution was corrected; unmeasured live-ops claims are now labelled hypothetical. Other historical claims were not newly re-reviewed."
 ---
 
 > This historical note links Sourcegraph's [context engineering guide](https://sourcegraph.com/blog/context-engineering), the [MemGPT paper](https://arxiv.org/html/2310.08560v2), and the [A-Mem paper](https://proceedings.neurips.cc/paper_files/paper/2025/hash/19909c36f51abc4856b4560aff3d36d6-Abstract-Conference.html). The four-layer game-production lens below is my organizing framework, not Sourcegraph's four-pillar enumeration. The balance-review scenario and patch outcomes are hypothetical examples, not reported production measurements.

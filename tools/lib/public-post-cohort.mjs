@@ -18,11 +18,21 @@ export function parsePostFrontMatter(source) {
   const match = text.match(/^---\s*\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
   if (!match) return { fields: {}, error: 'missing YAML front matter' };
   const fields = {};
-  for (const line of match[1].split(/\r?\n/)) {
+  const lines = match[1].split(/\r?\n/);
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
     if (!line.trim() || /^\s*#/.test(line)) continue;
     const entry = line.match(/^([A-Za-z_][\w-]*):\s*(.*?)\s*$/);
     if (!entry) continue;
-    fields[entry[1]] = scalar(entry[2]);
+    let value = entry[2];
+    // Jekyll/Psych folds indented continuation lines in a plain/quoted title.
+    // Keep the original YAML untouched rather than shortening legacy titles.
+    if (entry[1] === 'title' && value && !/^(?:[>|]|\[|\{)/.test(value)) {
+      while (/^\s+\S/.test(lines[i + 1] || '') && !/^\s*#/.test(lines[i + 1])) {
+        value += ' ' + lines[++i].trim();
+      }
+    }
+    fields[entry[1]] = scalar(value);
   }
   return { fields, error: null };
 }

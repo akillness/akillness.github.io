@@ -3,7 +3,19 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
-import { compareRouteSets, validatePublicPostCohort } from '../lib/public-post-cohort.mjs';
+import { compareRouteSets, validatePublicPostCohort, parsePostFrontMatter } from '../lib/public-post-cohort.mjs';
+
+test('folds original YAML title continuations without swallowing the next field', () => {
+  const result = parsePostFrontMatter('---\ntitle: Top Papers in Computer Vision, NLP, Speech, Multimodal AI, Core ML, RecSys,\n  and Graph ML\ndate: 2024-05-18 18:20:00 +0800\npublished: true\n---\nBody.');
+  assert.equal(result.fields.title, 'Top Papers in Computer Vision, NLP, Speech, Multimodal AI, Core ML, RecSys, and Graph ML');
+  assert.equal(result.fields.date, '2024-05-18 18:20:00 +0800');
+  assert.equal(result.fields.published, 'true');
+});
+test('folds a wrapped quoted title but does not include a following comment', () => {
+  const result = parsePostFrontMatter('---\ntitle: "A wrapped\n  title"\n  # editorial comment\nads: false\n---\nBody.');
+  assert.equal(result.fields.title, 'A wrapped title');
+  assert.equal(result.fields.ads, 'false');
+});
 
 const now = new Date('2026-10-12T12:00:00.000Z');
 const testTempRoot = process.env.PUBLIC_POST_COHORT_TEST_TMP || process.env.RUNNER_TEMP || os.tmpdir();
