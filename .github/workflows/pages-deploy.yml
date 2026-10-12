@@ -27,7 +27,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  # A validation-only branch run must never cancel a production deployment.
+  group: ${{ github.event_name == 'workflow_dispatch' && inputs.build_only && format('pages-validation-{0}', github.ref) || 'pages' }}
   cancel-in-progress: true
 
 jobs:
