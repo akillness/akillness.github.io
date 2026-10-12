@@ -113,6 +113,16 @@ layout: page
       </div>
       <!-- .card-header -->
 
+      {% unless site.data.linkable_categories contains category_name %}
+        <ul class="list-group list-group-flush" aria-label="Notes in {{ category_name | escape }}">
+          {% for post in visible_posts_of_category %}
+            <li class="list-group-item">
+              <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endunless %}
+
       <!-- Sub-categories -->
       {% if sub_categories_size > 0 %}
         <div id="{{ LIST_PREFIX }}{{ group_index }}" class="collapse show" aria-expanded="true">

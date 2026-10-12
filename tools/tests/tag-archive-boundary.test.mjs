@@ -108,3 +108,21 @@ test('trending tags stay hidden when nothing survives the floor', async () => {
   const html = await engine.renderFile('trending-tags.html', { site: empty, page: { url: '/' }, include: { lang: 'en' } });
   assert.equal(markup(html), '');
 });
+
+test('a thin category exposes its note directly without inventing an archive or leaking protected notes', async () => {
+  const posts = [
+    { title: 'Visible note', url: '/posts/visible-note/', categories: ['Unity'] },
+    { title: 'Hidden note', url: '/posts/hidden-note/', categories: ['Unity'], hidden: true },
+    { title: 'Protected note', url: '/posts/protected-note/', categories: ['Unity'], robots: 'noindex, follow' }
+  ];
+  const localSite = { ...site, categories: [['Unity', posts]], data: { ...site.data, linkable_categories: [] } };
+  const html = await engine.parseAndRender(layout('categories.html'), { site: localSite, page: {}, jekyll: { environment: 'production' } });
+  assert.deepEqual(hrefs(html), ['/posts/visible-note/']);
+  assert.doesNotMatch(html, /\/categories\/unity\/|Hidden note|Protected note/);
+});
+test('a built category keeps its archive link instead of duplicating a direct-note list', async () => {
+  const posts = [{ title: 'First', url: '/posts/first/', categories: ['AI'] }, { title: 'Second', url: '/posts/second/', categories: ['AI'] }];
+  const localSite = { ...site, categories: [['AI', posts]] };
+  const html = await engine.parseAndRender(layout('categories.html'), { site: localSite, page: {}, jekyll: { environment: 'production' } });
+  assert.deepEqual(hrefs(html), ['/categories/ai/']);
+});

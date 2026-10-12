@@ -475,6 +475,10 @@ const homeSurfaces = listingSurfaces.filter((surface) => surface.route === '/' |
 const homeRoutes = homeSurfaces.flatMap((surface) => [...surface.html.matchAll(/<article\b(?=[^>]*class="[^"]*card-wrapper\b)[^>]*>[\s\S]*?<\/article>/gi)].map((match) => postLinks(match[0])[0]).filter(Boolean));
 failures.push(...compareRouteSets(homeRoutes, cohort.expectedVisibleRoutes, 'home pagination').errors);
 failures.push(...compareRouteSets([...new Set(postLinks(archivesHtml))], cohort.expectedVisibleRoutes, 'Archives').errors);
+const categoriesIndexHtml = exists('categories', 'index.html') ? read('categories', 'index.html') : '';
+listingSurfaces.push({ route: '/categories/', html: categoriesIndexHtml });
+const categoryRoutes = [...new Set(listingSurfaces.filter(surface => /^\/categories\/(?:[^/]+\/)?$/.test(surface.route)).flatMap(surface => postLinks(surface.html)))];
+failures.push(...compareRouteSets(categoryRoutes, cohort.expectedVisibleRoutes, 'category discovery union').errors);
 for (const [label, json] of [['search.json', searchJson], ['search-meta.json', searchMetaJson]]) {
   try {
     const records = JSON.parse(json);
