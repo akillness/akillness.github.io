@@ -7,7 +7,7 @@ date: 2026-09-28 19:14:05 +0900
 mermaid: false
 math: false
 image:
-  path: /assets/img/posts/2026-09-28-octop-shell-guard-logs-by-default/octop-guard-mode-matrix.svg
+  path: /assets/img/posts/2026-09-28-octop-shell-guard-posix-root-default/octop-guard-mode-matrix.svg
   alt: "Original diagram showing Octop's warn-only shell guard, disabled tool approval, and the POSIX / default root"
 ---
 
@@ -16,7 +16,7 @@ image:
 [Octop](https://github.com/TencentCloud/Octop) is TencentCloud's MIT-licensed, self-hosted assistant with a shared multi-user workspace. The source pin in this audit is commit [`232030f`](https://github.com/TencentCloud/Octop/tree/232030f46c5450801ca87809f8a4da57aefc5a05), from the `1.0.2b4` release line. Its lockfile resolves the shell-guard dependency to `octop-harness` **1.0.0**, the version examined below.
 
 <figure class="source-image">
-  <img src="/assets/img/posts/2026-09-28-octop-shell-guard-logs-by-default/references/octop-dashboard-home.png" alt="Octop web dashboard home in the README, with a sidebar that includes Terminal AI+, Browser AI+, Remote Desktop, ACP, and Subagents">
+  <img src="/assets/img/posts/2026-09-28-octop-shell-guard-posix-root-default/references/octop-dashboard-home.png" alt="Octop web dashboard home in the README, with a sidebar that includes Terminal AI+, Browser AI+, Remote Desktop, ACP, and Subagents">
   <figcaption>Product-interface context from the earlier README snapshot at `c04aacc6`; this image is not evidence of the current security defaults. Source: <a href="https://github.com/TencentCloud/Octop/blob/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/README.md">https://github.com/TencentCloud/Octop/blob/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/README.md</a>. Publisher/creator: TencentCloud (Octop contributors). License: <a href="https://raw.githubusercontent.com/TencentCloud/Octop/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/LICENSE">https://raw.githubusercontent.com/TencentCloud/Octop/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/LICENSE</a>. Attribution: TencentCloud, Octop README dashboard screenshot, MIT License, pinned at commit c04aacc6.</figcaption>
 </figure>
 
@@ -57,7 +57,7 @@ I did not import or execute `octop-harness` 1.0.0. I traced the current rule, se
 A rule match is not the same thing as an enforced decision.
 
 <figure>
-  <img src="/assets/img/posts/2026-09-28-octop-shell-guard-logs-by-default/octop-guard-mode-matrix.svg" alt="Original diagram: warn logs and runs every finding, block refuses HIGH and CRITICAL, require_approval pauses MEDIUM and above; tool approval is a separate switch that is off by default">
+  <img src="/assets/img/posts/2026-09-28-octop-shell-guard-posix-root-default/octop-guard-mode-matrix.svg" alt="Original diagram: warn logs and runs every finding, block refuses HIGH and CRITICAL, require_approval pauses MEDIUM and above; tool approval is a separate switch that is off by default">
   <figcaption>Original diagram of the modes in `octop-harness` 1.0.0 as wired by Octop's no-row policy fallback. Source-traced, not runtime-tested; the MEDIUM column describes mode behavior because the bundled file has no MEDIUM rules.</figcaption>
 </figure>
 
@@ -70,7 +70,7 @@ The separate `FilesystemGuardMiddleware` maps path checks for `ls`, `read_file`,
 Octop bootstraps a default agent for the first admin, and invite redemption calls the same default-agent bootstrap for a new account. The factory uses the user's *effective* `workspace_root_dir` policy. If there is no effective value, `default_home_local_backend()` uses `host_fs_tree_root()` and `virtual_mode=True`. That helper returns **`/` on POSIX** and the home drive's root on Windows. Octop's `effective_workspace_root_dir()` returns `None` when the process is detected as running in a container, deliberately ignoring the stored host policy. In those deployments, the stored setting does not narrow the shell by itself; inspect the actual backend root, mounts, and permissions.
 
 <figure class="source-image">
-  <img src="/assets/img/posts/2026-09-28-octop-shell-guard-logs-by-default/references/octop-expert-library.png" alt="Octop user guide screenshot of the expert library page, a grid of specialist agent templates used to create a new agent">
+  <img src="/assets/img/posts/2026-09-28-octop-shell-guard-posix-root-default/references/octop-expert-library.png" alt="Octop user guide screenshot of the expert library page, a grid of specialist agent templates used to create a new agent">
   <figcaption>Product-interface context from the earlier user-guide snapshot at `c04aacc6`; it does not show shell-root or guard configuration. Source: <a href="https://github.com/TencentCloud/Octop/blob/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/docs/user-guide.md">https://github.com/TencentCloud/Octop/blob/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/docs/user-guide.md</a>. Publisher/creator: TencentCloud (Octop contributors). License: <a href="https://raw.githubusercontent.com/TencentCloud/Octop/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/LICENSE">https://raw.githubusercontent.com/TencentCloud/Octop/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/LICENSE</a>. Attribution: TencentCloud, Octop user guide expert library screenshot, MIT License, pinned at commit c04aacc6.</figcaption>
 </figure>
 
@@ -83,12 +83,12 @@ This is a source-based inference, not a live run: a newly bootstrapped agent wit
 Octop is not just a chat window with an occasional tool call. Its user guide documents scheduled agent jobs and a remote-desktop surface. **Operational inference:** a cron run may fire when no approver is present. In that situation, a server-log warning is not a synchronous approval gate.
 
 <figure class="source-image">
-  <img src="/assets/img/posts/2026-09-28-octop-shell-guard-logs-by-default/references/octop-cron-tasks.png" alt="Octop user guide screenshot of the scheduled task management page for agent cron jobs">
+  <img src="/assets/img/posts/2026-09-28-octop-shell-guard-posix-root-default/references/octop-cron-tasks.png" alt="Octop user guide screenshot of the scheduled task management page for agent cron jobs">
   <figcaption>Scheduled task management, figure 5.5 in the user guide. Source: <a href="https://github.com/TencentCloud/Octop/blob/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/docs/user-guide.md">https://github.com/TencentCloud/Octop/blob/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/docs/user-guide.md</a>. Publisher/creator: TencentCloud (Octop contributors). License: <a href="https://raw.githubusercontent.com/TencentCloud/Octop/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/LICENSE">https://raw.githubusercontent.com/TencentCloud/Octop/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/LICENSE</a>. Attribution: TencentCloud, Octop user guide scheduled tasks screenshot, MIT License, pinned at commit c04aacc6.</figcaption>
 </figure>
 
 <figure class="source-image">
-  <img src="/assets/img/posts/2026-09-28-octop-shell-guard-logs-by-default/references/octop-remote-desktop.png" alt="Octop user guide screenshot of the remote desktop page with a ready-status banner and a prompt to connect to a desktop session">
+  <img src="/assets/img/posts/2026-09-28-octop-shell-guard-posix-root-default/references/octop-remote-desktop.png" alt="Octop user guide screenshot of the remote desktop page with a ready-status banner and a prompt to connect to a desktop session">
   <figcaption>The remote desktop panel, figure 5.7 in the user guide. Source: <a href="https://github.com/TencentCloud/Octop/blob/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/docs/user-guide.md">https://github.com/TencentCloud/Octop/blob/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/docs/user-guide.md</a>. Publisher/creator: TencentCloud (Octop contributors). License: <a href="https://raw.githubusercontent.com/TencentCloud/Octop/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/LICENSE">https://raw.githubusercontent.com/TencentCloud/Octop/c04aacc604a23ac05c00538f1bd4bc586fee6bb6/LICENSE</a>. Attribution: TencentCloud, Octop user guide remote desktop screenshot, MIT License, pinned at commit c04aacc6.</figcaption>
 </figure>
 
