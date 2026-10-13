@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">LLM inference parallelism is a rank-topology problem</title>
+  <desc id="desc">A transparent-background editorial diagram compares documented vLLM GPU accounting for tensor and pipeline parallelism, data and tensor parallelism, derived expert parallelism, and decode context parallelism that reuses GPUs.</desc>
+  <defs>
+    <style>
+      .eyebrow { font: 700 17px Inter, Arial, sans-serif; letter-spacing: 2px; fill: #9b4f2e; }
+      .headline { font: 750 42px Inter, Arial, sans-serif; fill: #172434; }
+      .subhead { font: 400 20px Inter, Arial, sans-serif; fill: #425465; }
+      .card-title { font: 700 19px Inter, Arial, sans-serif; fill: #172434; }
+      .formula { font: 750 27px Inter, Arial, sans-serif; fill: #9b4f2e; }
+      .small { font: 500 15px Inter, Arial, sans-serif; fill: #425465; }
+      .label { font: 700 13px Inter, Arial, sans-serif; letter-spacing: 1.2px; fill: #526474; }
+      .node { fill: #f7fbfc; stroke: #4b7181; stroke-width: 2; }
+      .node-hot { fill: #fff5eb; stroke: #bd6d42; stroke-width: 2; }
+      .line { stroke: #7b909d; stroke-width: 2; stroke-dasharray: 6 6; }
+    </style>
+  </defs>
+  <text x="62" y="58" class="eyebrow">A FIELD GUIDE FOR SERVING ENGINEERS</text>
+  <text x="62" y="116" class="headline">Count rank groups, not strategy labels.</text>
+  <text x="62" y="153" class="subhead">One documented vLLM topology can use the same eight GPUs for multiple, differently scoped groups.</text>
+
+  <rect x="62" y="190" width="520" height="200" rx="18" fill="#fff5eb" stroke="#e8c7b3" stroke-width="2" />
+  <text x="88" y="228" class="label">MODEL SPLIT ACROSS STAGES</text>
+  <text x="88" y="274" class="card-title">Tensor parallel × pipeline parallel</text>
+  <text x="88" y="319" class="formula">TP 4 × PP 2 = 8 GPUs</text>
+  <text x="88" y="354" class="small">vLLM single-node example. TP spans GPUs; PP spans stages.</text>
+  <g transform="translate(88 367)">
+    <circle cx="8" cy="0" r="7" class="node-hot"/><circle cx="29" cy="0" r="7" class="node-hot"/><circle cx="50" cy="0" r="7" class="node-hot"/><circle cx="71" cy="0" r="7" class="node-hot"/>
+    <line x1="88" y1="0" x2="120" y2="0" class="line"/>
+    <circle cx="143" cy="0" r="7" class="node"/><circle cx="164" cy="0" r="7" class="node"/><circle cx="185" cy="0" r="7" class="node"/><circle cx="206" cy="0" r="7" class="node"/>
+  </g>
+
+  <rect x="618" y="190" width="520" height="200" rx="18" fill="#eef6f4" stroke="#b8d4ce" stroke-width="2" />
+  <text x="644" y="228" class="label">REPLICAS WITH TENSOR SHARDS</text>
+  <text x="644" y="274" class="card-title">Data parallel × tensor parallel</text>
+  <text x="644" y="319" class="formula">DP 4 × TP 2 = 8 GPUs</text>
+  <text x="644" y="354" class="small">Four DP engines, each with TP 2; KV caches are independent.</text>
+  <g transform="translate(644 367)">
+    <circle cx="8" cy="0" r="7" class="node"/><circle cx="29" cy="0" r="7" class="node"/><circle cx="50" cy="0" r="7" class="node"/><circle cx="71" cy="0" r="7" class="node"/>
+    <circle cx="104" cy="0" r="7" class="node"/><circle cx="125" cy="0" r="7" class="node"/><circle cx="146" cy="0" r="7" class="node"/><circle cx="167" cy="0" r="7" class="node"/>
+    <line x1="85" y1="-13" x2="85" y2="13" class="line"/>
+  </g>
+
+  <rect x="62" y="421" width="520" height="205" rx="18" fill="#f2f3fa" stroke="#c9cce1" stroke-width="2" />
+  <text x="88" y="460" class="label">MOE EXPERT GROUP, SAME RANK BUDGET</text>
+  <text x="88" y="506" class="card-title">Expert parallelism is derived in vLLM</text>
+  <text x="88" y="550" class="formula">EP size = TP × DP</text>
+  <text x="88" y="585" class="small">With TP 2 and DP 4, EP spans the existing eight ranks.</text>
+  <g transform="translate(88 609)">
+    <circle cx="8" cy="0" r="7" class="node"/><circle cx="29" cy="0" r="7" class="node"/><circle cx="50" cy="0" r="7" class="node"/><circle cx="71" cy="0" r="7" class="node"/>
+    <circle cx="104" cy="0" r="7" class="node"/><circle cx="125" cy="0" r="7" class="node"/><circle cx="146" cy="0" r="7" class="node"/><circle cx="167" cy="0" r="7" class="node"/>
+    <path d="M0 -13 H175" fill="none" stroke="#bd6d42" stroke-width="2"/>
+  </g>
+
+  <rect x="618" y="421" width="520" height="205" rx="18" fill="#fff5eb" stroke="#e8c7b3" stroke-width="2" />
+  <text x="644" y="460" class="label">DECODE KV CACHE, NOT MORE GPU SLOTS</text>
+  <text x="644" y="506" class="card-title">Decode context parallelism (DCP)</text>
+  <text x="644" y="550" class="formula">Shard KV along T</text>
+  <text x="644" y="585" class="small">vLLM docs: DCP size does not add launched GPUs.</text>
+  <g transform="translate(644 609)">
+    <circle cx="8" cy="0" r="8" class="node-hot"/><circle cx="36" cy="0" r="8" class="node-hot"/><circle cx="64" cy="0" r="8" class="node-hot"/><circle cx="92" cy="0" r="8" class="node-hot"/>
+    <line x1="109" y1="0" x2="164" y2="0" class="line"/>
+    <text x="180" y="5" class="small">same GPU set</text>
+  </g>
+  <text x="62" y="672" class="small">Illustrative framework-specific examples, not a universal world-size formula.</text>
+</svg>
