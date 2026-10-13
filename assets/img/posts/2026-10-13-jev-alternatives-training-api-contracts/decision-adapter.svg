@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">A proposed decision-backend boundary</title><desc id="desc">JavaScript requests pass through a contract gate to a selected decision backend, returning typed results with provenance. This is a proposed architecture, not an implemented or executed integration.</desc>
+<style>text{font-family:system-ui,-apple-system,Segoe UI,sans-serif;fill:#243447}.muted{fill:#536579}.accent{fill:#235a9f}.box{fill:#5b8eb8;fill-opacity:.08;stroke:#6595b8;stroke-width:2}.line{stroke:#427da6;stroke-width:3;fill:none}@media(prefers-color-scheme:dark){text{fill:#e0ebf4}.muted{fill:#b3c6d6}.accent{fill:#91c9ed}.box{stroke:#7db5da}.line{stroke:#7db5da}}</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#6595b8"/></marker></defs>
+<text x="58" y="75" font-size="19" letter-spacing="3" class="accent">JEV-STYLE BACKEND MIGRATION</text>
+<text x="58" y="128" font-size="39" font-weight="650">Replace an interface, not an assumption.</text>
+<text x="58" y="166" font-size="21" class="muted">A proposed adapter boundary. No candidate model was executed.</text>
+<rect class="box" x="58" y="230" width="245" height="185" rx="18"/><rect class="box" x="345" y="230" width="245" height="185" rx="18"/><rect class="box" x="632" y="230" width="245" height="185" rx="18"/><rect class="box" x="919" y="230" width="223" height="185" rx="18"/>
+<path class="line" d="M305 320H337" marker-end="url(#arrow)"/><path class="line" d="M592 320H624" marker-end="url(#arrow)"/><path class="line" d="M879 320H911" marker-end="url(#arrow)"/>
+<text x="79" y="267" font-size="16" class="accent">01 REQUEST</text><text x="79" y="308" font-size="25" font-weight="600">JavaScript</text><text x="79" y="347" font-size="18">State and stable IDs</text><text x="79" y="377" font-size="18">Choice / Score / Noul</text>
+<text x="366" y="267" font-size="16" class="accent">02 VALIDATE</text><text x="366" y="308" font-size="25" font-weight="600">Contract gate</text><text x="366" y="347" font-size="18">Limits and permissions</text><text x="366" y="377" font-size="18">Exact confidence rule</text>
+<text x="653" y="267" font-size="16" class="accent">03 EXECUTE</text><text x="653" y="308" font-size="25" font-weight="600">One backend</text><text x="653" y="347" font-size="18">Bound checkpoint/head</text><text x="653" y="377" font-size="18">Verified serving mode</text>
+<text x="940" y="267" font-size="16" class="accent">04 RETURN</text><text x="940" y="308" font-size="25" font-weight="600">Typed result</text><text x="940" y="347" font-size="18">Raw probabilities</text><text x="940" y="377" font-size="18">Revision and provenance</text>
+<path class="line" d="M180 435V479H1030V435"/>
+<text x="58" y="539" font-size="22" font-weight="600">Unsupported input, error or unsafe confidence: review or fail safely.</text>
+<text x="58" y="578" font-size="19" class="muted">Model output is evidence. It is not an authorization record.</text>
+</svg>
