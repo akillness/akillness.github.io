@@ -31,9 +31,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-14",
+      "survey_note": "Re-read NeRF arXiv 2003.08934v2 and 3DGS 2308.04079v1; inspected original repositories, SH and compositing code, separate software license grants, current gsplat rendering.py and nested Unity integration docs at pinned commits. Replaced the thin quality-versus-production ranking with independently reviewed reconstruction, runtime and rights gates. Executed CPU compositing arithmetic only; no GPU scene benchmark. Removed unlicensed illustration reference and Korean translation; retained original URL/date and added original SVG and two live related links."
     },
     {
       "path": "_posts/2024/06/2024-06-01-llm-3d-gaussian-splatting.md",
