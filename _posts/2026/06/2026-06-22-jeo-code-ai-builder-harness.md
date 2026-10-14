@@ -77,7 +77,7 @@ jeo doctor                             # check config + model connection
 
 ---
 
-## 📺 See It In Action
+## See It In Action
 
 A promotional overview accompanies the workflow description. Treat it as an illustration, not a measurement of developer productivity:
 
@@ -93,7 +93,7 @@ And here is the **Remotion-animated promo** rendered as React code for this post
 
 ---
 
-## 🚀 Where It Gets Powerful: jeo-skills
+## Where It Gets Powerful: jeo-skills
 
 ![jeo skills ecosystem](/assets/img/jeo-code/skills-ecosystem.png){: .w-100 .shadow .rounded-10 }
 
@@ -231,7 +231,7 @@ These are evaluation questions, not a claim that other coding agents lack the sa
 
 ---
 
-## 🏗️ Architecture Deep Dive
+## Architecture Deep Dive
 
 The jeo-skills architecture diagram shows how skills, harnesses, and the jeo loop interconnect:
 
@@ -245,7 +245,7 @@ Every skill is **routing-first**: picks the *lightest workable path*, routes out
 
 ---
 
-## 📦 Installation & Quick Start
+## Installation & Quick Start
 
 ### Method 1 — Bun (recommended, fastest startup)
 
@@ -368,7 +368,7 @@ My experience in production game AI suggests three design priorities. These are 
 
 ---
 
-## ⭐ Star the Projects
+## Star the Projects
 
 Both repos are open source and actively maintained:
 
@@ -387,7 +387,7 @@ Both repos are open source and actively maintained:
 
 ---
 
-## 🎮 Meet the jeo Character
+## Meet the jeo Character
 
 <div style="display:flex; align-items:center; gap:2rem; flex-wrap:wrap; margin:1.5rem 0;">
   <img src="/assets/img/jeo-code/character.png" alt="jeo-code mascot character" style="width:240px; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.5);" />

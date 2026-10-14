@@ -96,7 +96,7 @@ Octop is not just a chat window with an occasional tool call. Its user guide doc
 
 The current English dashboard strings offer **"Block (HIGH/CRITICAL)"**, **"Require approval (includes MEDIUM)"**, and **"Log warnings only"**, plus a separate **"Require human approval for tools"** switch. The harness's default HITL tool list includes `bash`, `execute`, `write_file`, `edit_file`, and `delete`. The controls exist; the gap is that the no-row policy does not turn them on.
 
-## Key Takeaways: Set the guard, then set a real boundary
+## Set the guard, then set a real boundary
 
 Before inviting anyone to a shared Octop instance, configure three separate controls.
 
@@ -108,7 +108,7 @@ For the project, the smallest honest README fix is to distinguish capability fro
 
 This is the same pattern I keep finding in agent tools, and it is why I read defaults before features. The [AIO Sandbox audit](/posts/aio-sandbox-confinement-contract-audit/) found a sandbox that asks Docker to relax confinement, and the [OpenConnector audit](/posts/open-connector-default-custody-audit/) found a tool that places its own defaults out of scope. The feature list describes what a tool can do. The defaults describe what it does.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - Octop's current no-row policy fallback disables tool approval and sets the shell guard to `warn`.
 - In `octop-harness` 1.0.0, a `warn` match is logged and the handler still runs; this conclusion is traced from source, not a live command test.
@@ -124,7 +124,7 @@ This is the same pattern I keep finding in agent tools, and it is why I read def
 - Regex rules cannot catch harmful commands they do not match. `block` and approval add controls only within their configured rule/tool scope.
 - The four product screenshots are retained from the earlier `c04aacc6` documentation snapshot and are interface context, not proof of current security settings.
 
-## 🤔 New Questions
+## New Questions
 
 - Does any supported setup or invite flow automatically set `workspace_root_dir`, or is the POSIX `/` fallback common in real deployments?
 - Which Docker/container mounts are exposed to Octop's local-shell process by default?

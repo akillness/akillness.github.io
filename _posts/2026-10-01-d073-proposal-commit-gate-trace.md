@@ -16,7 +16,7 @@ A commit-gate trace can look authoritative while still being only a second summa
 
 I inspected the pinned source, its Python drift test, and archived first-party dashboard captures. This is an implementation audit, not a claim that the trace is a native event log or a record of what a player understood.
 
-## what does a “per-proposal trace” actually prove?
+## What does a “per-proposal trace” actually prove?
 
 When a proposal is held, the useful question is not merely “which color appeared?” It is: which checks were evaluated, which one first refused the proposal, which checks were skipped after that refusal, and which gate families did not apply at all?
 
@@ -70,7 +70,7 @@ There is another useful fail-closed detail. If the mirror's failure-code set doe
 
 The screenshots above are historical captures of four specific dashboard states. Their original capture times are shown separately from their retrieval into this draft package. They do not claim that the later, stage-0 live-dashboard check produced those traces.
 
-## Key Takeaways: keep instrumentation an observer, not a second policy engine
+## Keep instrumentation an observer, not a second policy engine
 
 The reusable engineering rule is simple: **a reconstructed trace may explain a decision, but the canonical writer must remain the source of truth**. Bind the mirror to an exact machine version, derive it from the same PRE-state, compare its failure set with the writer's output, and make disagreement visibly non-evidentiary.
 
@@ -78,7 +78,7 @@ That still leaves a worthwhile verification step. A small engine-driven differen
 
 This post is intentionally narrower than my [D-074 release audit](/posts/sealed-lighthouse-52-checks-not-fun/). That article asks what a large set of conformance receipts can say about player benefit. Here, the unit of analysis is one proposal's trace provenance. For a parallel example of checking an explicit contract against the exact data surface, see [the Orca telemetry audit](/posts/orca-telemetry-universal-claim-audit/).
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - D-073 reconstructs proposal checks against committed PRE-state; the hash-bound machine remains the canonical writer.
 - A consistent trace reports `pass`, `fail`, `skipped`, and `out_of_scope` as different states.
@@ -87,7 +87,7 @@ This post is intentionally narrower than my [D-074 release audit](/posts/sealed-
 - A mismatch yields missing trace state, not a green family result.
 - None of these implementation receipts measures player comprehension, usability, or efficacy.
 
-## 🤔 New Questions
+## New Questions
 
 Which runtime-level test would add the most confidence per unit of work: replaying a small set of canonical proposal snapshots, property-testing every mirror branch against the machine, or capturing both results in an engine-level test harness? The next experiment should choose one and name its coverage, rather than letting another static check stand in for execution.
 

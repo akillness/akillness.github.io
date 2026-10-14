@@ -123,6 +123,12 @@ tail_includes:
     {% include post-content.html content=article_content ads_on=monetization_eligible %}
   </div>
 
+  {% unless page.restored_archive %}
+    <p class="editorial-method-note text-muted small" data-editorial-method="site-level">
+      Editorial method: claims in this article point to primary documentation, pinned source code, runnable checks, or dated measurements, with AI-assisted research under the site's evidence-gated policy. <a href="{{ '/about/#editorial-method-and-ai-assistance' | relative_url }}">How this site verifies claims and discloses AI assistance</a> &middot; <a href="{{ '/contact/' | relative_url }}">Report a correction</a>.
+    </p>
+  {% endunless %}
+
   {% if monetization_eligible %}
     {% include post-cta.html %}
     <div class="post-ad-bottom my-4">{% include adsense-post.html %}</div>

@@ -104,7 +104,7 @@ Writing detections for known attack shapes is legitimate defense engineering, an
   <figcaption>The configuration audit reviews agent config statically &mdash; the same product family whose memory-poison scanner names the AgentCanary corpus shape in its doc comment &mdash; Image from GenseeAI/gensee-crate (Apache-2.0), commit 0a47b53c. Source: <a href="https://github.com/GenseeAI/gensee-crate/blob/0a47b53c4a05fe8af3fa6ecc8099507093fac973/README.md">https://github.com/GenseeAI/gensee-crate/blob/0a47b53c4a05fe8af3fa6ecc8099507093fac973/README.md</a>. Publisher: GenseeAI (GenseeAI/gensee-crate). Licence: <a href="https://github.com/GenseeAI/gensee-crate/blob/0a47b53c4a05fe8af3fa6ecc8099507093fac973/LICENSE">Apache-2.0</a>.</figcaption>
 </figure>
 
-## Key Takeaways: The recount test
+## The recount test
 
 The useful output of this audit is not "gensee-crate bad." The trace corpus is among the most verifiable security data releases I have audited in this series, and the same repository demonstrates evidence discipline three separate ways. The useful output is a test you can run against any security vendor's repo in under an hour:
 
@@ -120,7 +120,7 @@ There is also a general lesson about benchmark-coupled defenses. AgentCanary's p
 
 For a next step on this exact pattern, read my audit of [Open Science's provenance engine rejecting its own #1 badge](/posts/open-science-provenance-audit/) — it audits the same failure family in a research product: a benchmark claim published without runnable artifacts, resolved by tracing the vendor's own blog admission.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **Recount before you trust**: gensee-crate's trace corpus reproduces to the item (3,919 model items exact; every per-dataset count byte-exact; 75/75 and 88/88 checksums OK), which is what a checkable security data release looks like.
 - **The front-page defense-rate chart is a Tier-3 artifact at `0a47b53c`**: a case-insensitive tree-wide grep finds no AgentCanary config, task list, sample size, upstream pin, or raw output — the PNG is the entire in-repo basis for 93.8%, 100%, and 93.5%.
@@ -128,7 +128,7 @@ For a next step on this exact pattern, read my audit of [Open Science's provenan
 - **The shipped memory-poison detector names the benchmark corpus in its own comment** — a literal-substring list plus a trigger→action check "that the AgentCanary memory-poisoning corpus uses" — so the chart's memory-poisoning lift cannot be read as generalization evidence.
 - **The repo's own standards are the sharpest critique**: its trace dataset warns that "one positive among four trials is not an attack-rate or defense-rate estimate," a sentence the front page has not yet applied to itself.
 
-## 🤔 New Questions This Raises
+## New Questions This Raises
 
 - What is the minimal disclosure that makes a vendor-run benchmark number auditable — is N + benchmark commit + task manifest + scored outputs enough, and should that quartet become a README convention the way badges are?
 - When a defense tunes to a public corpus's shape, what held-out complement would demonstrate generalization — paraphrase-mutated corpora, a second benchmark family, or adversarial rewrites of the same tasks?

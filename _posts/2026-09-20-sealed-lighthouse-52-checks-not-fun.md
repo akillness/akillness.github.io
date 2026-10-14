@@ -19,7 +19,7 @@ That is not a rhetorical warning in the latest release of [TRACE-RPG — The Sea
 
 This is the boundary I wanted to preserve: a green conformance packet is valuable, but it is not a player study.
 
-## when does a playable build become evidence?
+## When does a playable build become evidence?
 
 The repository describes *The Sealed Lighthouse* as a turn-based investigation micro-RPG in Godot 4.7.1. A generated event is treated as an untrusted transaction proposal, and a deterministic symbolic commit gate decides whether it can become canonical state. A hold leaves state unchanged, names the gate family, and teaches a rule; a commit adds a contribution and extends a SHA-256 receipt chain.
 
@@ -70,7 +70,7 @@ But the evidence label still matters. The fixes show that the team found and cor
   <figcaption>Third release evidence capture from the pinned D-074 route packet, frame 58. Source: <a href="https://github.com/akillness/neural_symbolic_in_game/blob/4382f69909b21ea25dfe92b0859c1fbd1acc5144/neuro-symbolic-interactive-game-research-2026/_workspace/current/qa/releases/2026-09-18/route-frame-58.png">pinned project asset</a> by akillness/neural_symbolic_in_game; License URL: https://github.com/akillness/neural_symbolic_in_game/tree/4382f69909b21ea25dfe92b0859c1fbd1acc5144; Publisher/creator: akillness / neural_symbolic_in_game project; Attribution: Official release capture from akillness/neural_symbolic_in_game, D-074, pinned at 4382f699. Project source: <a href="https://github.com/akillness/neural_symbolic_in_game/blob/4382f69909b21ea25dfe92b0859c1fbd1acc5144/README.md">repository README</a>.</figcaption>
 </figure>
 
-## Key Takeaways: make the evidence boundary part of the build
+## Make the evidence boundary part of the build
 
 The production decision here is simple enough to reuse:
 
@@ -90,7 +90,7 @@ The strongest part of the release is therefore not the green score. It is the re
   <figcaption>Ending capture included in the project's latest public evidence documentation. Source: <a href="https://github.com/akillness/neural_symbolic_in_game/blob/4382f69909b21ea25dfe92b0859c1fbd1acc5144/neuro-symbolic-interactive-game-research-2026/game-track/godot/docs/latest/ending.png">pinned project asset</a> by akillness/neural_symbolic_in_game; License URL: https://github.com/akillness/neural_symbolic_in_game/tree/4382f69909b21ea25dfe92b0859c1fbd1acc5144; Publisher/creator: akillness / neural_symbolic_in_game project; Attribution: Official release capture from akillness/neural_symbolic_in_game, D-074, pinned at 4382f699. Project source: <a href="https://github.com/akillness/neural_symbolic_in_game/blob/4382f69909b21ea25dfe92b0859c1fbd1acc5144/README.md">repository README</a>.</figcaption>
 </figure>
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - `52/52` is a conformance result for the authored checks, not a player satisfaction score.
 - `5/5` scripted rotations show deterministic breadth, not five human play styles.
@@ -100,7 +100,7 @@ The strongest part of the release is therefore not the green score. It is the re
 
 The related [MEX command-collision audit](/posts/mex-macos-command-collision/) makes the same boundary concrete at the CLI layer: a command can resolve and run while still being the wrong capability. In both cases, “green” only means what the gate actually measured.
 
-## 🤔 New Questions
+## New Questions
 
 The next honest experiment is not another score increase. It is a small, preregistered human packet that asks whether a participant can explain why a proposal was held, recover from the rule, and complete the deduction without a coach.
 

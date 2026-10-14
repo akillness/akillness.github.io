@@ -18,7 +18,7 @@ The editorial moat is not volume. It is first-hand, reproducible evidence that a
 
 Before article work, read:
 
-1. `persona.md` for voice and the Curiosity → Retrieve → Innovation structure.
+1. `persona.md` for voice, the Curiosity → Retrieve → Innovation reasoning order (an internal arc, never a heading skeleton), and the low-value-content standard.
 2. `.claude/skills/editorial-publishing-harness/SKILL.md` for the production workflow.
 3. `_workspace/current/manifest.json` when it exists. Resume or archive that run before starting another.
 4. `git status --short`, `git worktree list`, and `git branch -vv`. Never assume this checkout is clean or unique.
@@ -34,6 +34,23 @@ Before article work, read:
 - Do not invent personal experience, employer results, benchmarks, user counts, revenue, or performance numbers.
 - A valid nightly run may end with **no article** when no candidate clears the evidence and novelty gates.
 - Posts below `google_index_min_post_words` must be expanded into original long-form work or carry `robots: noindex, follow`, `sitemap: false`, and `ads: false`. This is an editorial quality boundary, not a Google word-count claim.
+
+## Low-value-content standard (AdSense policy alignment, 2026-10-14)
+
+On 2026-10-08 AdSense declined `akillness.github.io` for `가치가 별로 없는 콘텐츠` (low value content). The console asks a publisher to confirm three things before resubmitting; each one is an enforceable rule here, not a slogan.
+
+| AdSense check | Rule in this repository | Enforced by |
+|---|---|---|
+| Provide reliable, high-quality information, tools, or services | Every article is a Source Audit with a pinned primary source and a finding the source does not state itself. No README paraphrase, listicle, translated/stitched summary, or AI-generated page that adds nothing a reader could not get from the source (Google Search spam policies: scaled content abuse, scraping; Google Publisher Policies: replicated content). Named author, About, Contact, Privacy, and Terms stay current. | G2, G3, G5, G5b; `tools/verify-editorial-boundaries.mjs`; `tools/verify-site-quality.mjs` |
+| Maintain ongoing content curation and structural maintenance | Exactly three top-level categories (`AI, Agents`, `AI, Research`, `AI, Tooling`); no new category without an owner decision. Thin tag/category archives are not built. Posts without enough original analysis leave search and advertising together (`robots: noindex, follow` + `sitemap: false` + `ads: false`). Corrections use the dated `correction_date`/`correction_note` front matter. The restored historical archive (`restored_archive`) stays labeled, non-commercial, and outside the editorial cohort. | `_config.yml` floors, `_plugins/archive_quality_policy.rb`, `tools/verify-editorial-boundaries.mjs`, `_data/archive_restoration.json` |
+| Attract and retain genuine user interest | Headlines state the finding; the opening H2 asks the reader's real question; sections carry finding-specific headings, not a reusable skeleton; two or more editorial links to genuinely related articles; at most one scheduled post per run on Tuesday and Friday, and a run may publish nothing. | `tools/validate-editorial-package.mjs`, `.claude/editorial-policy.yml` |
+
+Structural consequences:
+
+- **Headings are content, not scaffolding.** The `🤔 Curiosity / 📚 Retrieve / 💡 Innovation / 🎯 Key Takeaways / 🤔 New Questions` emoji skeleton is retired. H2 headings must be plain text that names the article's own question or finding. `Key Takeaways`, `New Questions` (or `Open Questions`), and `References` remain as the three closing sections, exactly once each. The package validator rejects emoji-led or stage-labelled H2s and duplicate headings.
+- **No per-post AI disclaimer boilerplate.** The approved 2026-10-08 remediation removed the `> **Editorial method:** …` blockquote from every published post because an identical self-describing disclaimer on each page is a templated low-value signal. The AI-role disclosure lives in `research/authority-brief.json` and is published once at `/about/#editorial-method-and-ai-assistance`; `_layouts/post.html` links every current article to it. The validator rejects the boilerplate if it reappears.
+- **Archive exception is bounded.** The 283 restored historical notes approved on 2026-10-12 keep their original dates, carry the archive notice, and stay `ads: false`. They are not evidence of editorial capacity and are never counted toward cadence, categories, or quality metrics. Changing their indexability or scope is an owner decision, not a routine action.
+- **Google sets no word count.** `google_index_min_post_words` is the site's own commercial-surface guard. Length never substitutes for a finding.
 
 ## 2026 search and influencer strategy
 
@@ -87,16 +104,16 @@ A publishable run contains:
 The article must include:
 
 - complete front matter (`title`, `description`, existing category, lowercase tags, safe past date, `image.path`, `image.alt`)
-- Curiosity, Retrieve, Innovation, Key Takeaways, New Questions, and categorized References
+- an opening H2 that states the article's real question, body sections whose H2 headings name their own findings (no emoji or stage-label skeleton), then exactly one `Key Takeaways`, one `New Questions`/`Open Questions`, and one categorized `References` section
 - at least one primary source and enough evidence to support every material factual claim
 - local assets referenced by the post and no orphan assets in its article folder
 - explicit limitations and honest trade-offs
 - 4–12 distinct rights-clear source-derived raster images (`.png`/`.jpg`/`.jpeg`/`.webp`) under `assets/img/posts/<article-stem>/references/`, downloaded from inspected materials or, only for the akillness Git blog and under explicit scoped owner permission, captured directly from an owner-controlled public interface; credit each in exactly one adjacent `<figure class="source-image">` block
-- the exact `ai_role.disclosure` sentence and the one `next_action` related-article link recorded in `research/authority-brief.json`, both visible in the article body
+- the one `next_action` related-article link recorded in `research/authority-brief.json`, visible in the article body as a genuine Markdown link; the `ai_role.disclosure` sentence stays in the brief and is published site-wide at `/about/#editorial-method-and-ai-assistance`, never as a per-post blockquote
 
 ### Authority-led monetization brief
 
-Every package records `research/authority-brief.json` (schema in `.claude/skills/authority-led-monetization/references/authority-brief-schema.md`), written by the editorial director before drafting. It binds the article to a declared authority basis and original contribution (both mapped to non-`unverified` evidence claims), an honest AI-role disclosure that appears verbatim in the body, one internal `/posts/<slug>/` next action, and an unmeasured-baseline measurement plan (`result_status: not-measured` at publish). `tools/lib/authority-brief.mjs` validates it fail-closed in both package stages, and the independent review must record `authority_fit`, `reader_value`, `monetization_honesty`, `ai_role_honesty`, `next_action_verified` as true with `scaled_content_risk: false`.
+Every package records `research/authority-brief.json` (schema in `.claude/skills/authority-led-monetization/references/authority-brief-schema.md`), written by the editorial director before drafting. It binds the article to a declared authority basis and original contribution (both mapped to non-`unverified` evidence claims), an honest AI-role disclosure recorded in the brief and published site-wide on `/about/`, one internal `/posts/<slug>/` next action visible in the body, and an unmeasured-baseline measurement plan (`result_status: not-measured` at publish). `tools/lib/authority-brief.mjs` validates it fail-closed in both package stages, and the independent review must record `authority_fit`, `reader_value`, `monetization_honesty`, `ai_role_honesty`, `next_action_verified` as true with `scaled_content_risk: false`.
 
 ### Source-derived reference images and owner-authorized captures
 
@@ -125,7 +142,7 @@ A package may be `ready_for_review` only when:
 1. **Novelty**: it is not a near-duplicate of an existing post.
 2. **Primary evidence**: at least one authoritative source or commit-pinned implementation was read directly.
 3. **Claim coverage**: every material factual claim maps to evidence; unverified assertions are removed.
-4. **Persona**: the English article follows Curiosity → Retrieve → Innovation without fabricated autobiography.
+4. **Persona**: the English article follows the Curiosity → Retrieve → Innovation reasoning order with finding-specific plain-text headings and without fabricated autobiography or per-post disclaimer boilerplate.
 5. **Non-commodity value**: it contains original analysis, an experiment, a source-code finding, or a production decision.
 5b. **Authority brief**: `research/authority-brief.json` validates fail-closed and the independent review confirms every authority/monetization-honesty finding.
 6. **Assets**: every local reference exists and is licensed or original, and the source-derived reference image contract above validates fail-closed (4–12 credited images, valid sidecar manifest).
@@ -156,7 +173,7 @@ The machine-readable mode is in `.claude/editorial-policy.yml`.
 
 ## Scheduled 01:00 run
 
-The daily routine runs at 01:00 `Asia/Seoul`.
+The routine runs at 01:00 `Asia/Seoul` on the days listed in `.claude/editorial-policy.yml` (`schedule_days`, currently Tuesday and Friday), at most one article per run.
 
 1. Archive the previous `current` run.
 2. Search current official sources, repositories, papers, Search Console/Trends signals when available, and credible secondary context.

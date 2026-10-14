@@ -115,7 +115,7 @@ The timeline makes the disagreement legible: the telemetry docs page was last mo
   <figcaption>Parallel worktrees, the surface the hook installers exist to observe &mdash; Image from stablyai/orca (MIT), commit 0d23ea6. Source: <a href="https://github.com/stablyai/orca/blob/0d23ea6e688410c878096dab8b1779857354b7d4/README.md">https://github.com/stablyai/orca/blob/0d23ea6e688410c878096dab8b1779857354b7d4/README.md</a>. Publisher: Orca contributors (stablyai/orca). Licence: <a href="https://github.com/stablyai/orca/blob/0d23ea6e688410c878096dab8b1779857354b7d4/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## Key Takeaways: Audit allow-list telemetry claims with one grep
+## Audit allow-list telemetry claims with one grep
 
 The reusable method here is cheap enough to run against any product that claims enum-only telemetry:
 
@@ -139,7 +139,7 @@ The account-custody surface — how Orca stores hot-swappable Claude and Codex c
 - The frequency of real-world hook-install failures is unknown to me; the finding is about what the schema permits and the emitter sends on failure, not about observed volume.
 - The mobile relay, push gateway, and managed account credential storage were surveyed but not audited to the same depth; no claims are made about them beyond what their own README states.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **Universal privacy claims are grep-auditable.** Orca's "every field is a fixed enum value, a version string, or the anonymous local ID" is checkable in one pass over its schema registry — and fails on exactly one of 83 events.
 - **The exception is `agent_hook_install_failed.error_message`.** A free-form `z.string().max(200)` fed `error.message` verbatim from 14 hook installers that write inside the user's home directory; Node fs errors embed the absolute path, and the path embeds the username.
@@ -147,7 +147,7 @@ The account-custody surface — how Orca stores hot-swappable Claude and Codex c
 - **Intent comments are not content guarantees.** "Config-shape errors (not user content)" classified the field by why it exists; the privacy page classified by what it carries. Runtime error formats decide who is right.
 - **The fix is already in the codebase.** `agent_error` maps failures to a coarse enum; applying the same pattern (or redacting paths in `describeError`) would make the privacy page's universal sentence true.
 
-## 🤔 New Questions
+## New Questions
 
 - How often does `agent_hook_install_failed` fire in production, and has anyone at Stably read the collected messages against their own privacy page?
 - Orca's account switcher captures Claude keychain credentials into managed per-account storage and writes them back to the global `Claude Code-credentials` keychain item on swap — what does that shared mutation mean for other tools reading the same item?

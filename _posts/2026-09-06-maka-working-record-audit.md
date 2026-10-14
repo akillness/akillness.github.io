@@ -115,7 +115,7 @@ The result is a two-surface truth model. The git tree is the complete working re
 
 The incubation context matters for reading this. Maka has not made an Apache release yet, and `DISCLAIMER-WIP` says plainly that the software grant and committer ICLAs are not yet complete and that incubating releases may not be fully ASF-policy compliant. The release boundary machinery exists ahead of the first release it will guard.
 
-## Key Takeaways: Name the artifact class, then pick its surface
+## Name the artifact class, then pick its surface
 
 The generic version of what happened here is worth stating, because most teams running agent-first development will hit it within weeks.
 
@@ -132,14 +132,14 @@ The generic version of what happened here is worth stating, because most teams r
 - The negative claims — no references to the screenshots, no `.claude` gitignore entry, no retention rationale — are bounded to tracked files at commit `dd7d1d59`; GitHub PR threads and issue comments were not exhaustively searched.
 - Star and commit counts are point-in-time API and clone measurements from this run's retrieval window.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **Agent-first development creates a new artifact class** — working evidence — and it will land in your tree unless a class-level rule, not a path rule, says otherwise.
 - **Apache Maka runs a two-surface truth model**: the git tree keeps everything (14 PR screenshots, a 22.9 KB proposal review copy, a harness config), while the ASF source archive strips all of it via export-ignore, a forbidden list, and tests in JS and Rust.
 - **The boundary landed the same day as the first leak** (2026-08-20), which reads as a deliberate design, but the decision itself is recorded nowhere in the tree.
 - **The runtime's provenance claims check out in code** — sealed append-only stores and `model_visibility` match the README — and the eval reports name their own gaps, which deserves credit.
 
-## 🤔 New Questions
+## New Questions
 
 - Will `.maka-shots/` get a retention or compaction policy before clone size becomes a contributor complaint, or will the class-level rule eventually be written?
 - When Maka cuts its first ASF release, will the Incubator's licensing review accept a source tree whose git history permanently carries unreferenced working artifacts?

@@ -125,7 +125,7 @@ Before or alongside drafting, the **editorial director** assembles 4–12 distin
 
 Invoke `.claude/agents/source-audit-writer.md`.
 
-The writer may use only the approved evidence pack plus the validated authority brief. The exact disclosure must appear in a visible `> **Editorial method:** ...` blockquote, and the declared related-article path must appear as a genuine Markdown internal link. The writer must embed each manifested reference image in exactly one adjacent `<figure class="source-image">` block with matching `img` `src`/`alt` and a fully credited `figcaption`. Output must stay in:
+The writer may use only the approved evidence pack plus the validated authority brief. The declared related-article path must appear as a genuine Markdown internal link. The AI-role disclosure stays in the brief and is published site-wide at `/about/#editorial-method-and-ai-assistance`; a per-post `> **Editorial method:** ...` blockquote is rejected by the validator. H2 headings are plain text naming the article's question and findings; emoji-led or `Curiosity/Retrieve/Innovation` stage labels and duplicate H2s are rejected. The writer must embed each manifested reference image in exactly one adjacent `<figure class="source-image">` block with matching `img` `src`/`alt` and a fully credited `figcaption`. Output must stay in:
 
 ```text
 _workspace/current/draft/_posts/

@@ -195,6 +195,39 @@ matter에 `ads: false`를 넣으면 분량과 무관하게 그 글을 광고에�
    GitHub Actions 성공을 확인한 뒤 **2026-09-24 00:19 KST에 검토 요청을 제출**했고,
    현재 화면 상태는 `준비 중 / 리뷰가 요청됨`이다. 결과가 나올 때까지 재요청하지 않는다.
 
+### 2026-10-14 저가치 콘텐츠 정책 정렬 (가장 최근 상태)
+
+2026-10-08 05:18 KST에 `akillness.github.io`는 다시 `주의 필요 / 가치가 별로 없는 콘텐츠`가 됐고,
+검토 요청 횟수 소진으로 2026-10-14 이후에만 재요청할 수 있었다. 2026-10-14 10:11 KST 확인에서도
+콘솔은 같은 제한 문구를 표시했고 확인 체크박스·검토 요청 버튼은 렌더되지 않았다(재요청 0건).
+
+콘솔이 제시하는 재제출 전 확인 사항 세 가지를 저장소 규칙으로 고정했다. 근거 문서는
+[AdSense 콘텐츠 및 사용자 환경](https://support.google.com/adsense/answer/10015918),
+[Google 게시자 정책의 복제 콘텐츠 조항](https://support.google.com/publisherpolicies/answer/11190248),
+[Google 검색 스팸 정책](https://developers.google.com/search/docs/essentials/spam-policies)
+(scaled content abuse, scraping, doorway abuse)이다.
+
+| 콘솔 확인 사항 | 저장소 규칙 | 집행 지점 |
+|---|---|---|
+| 신뢰할 수 있는 고품질 정보·도구·서비스 | 모든 글은 고정 커밋/버전의 1차 출처를 읽고 출처가 스스로 말하지 않는 발견을 담는 Source Audit. README 요약·번역·짜깁기·"X란 무엇인가" 글은 발행하지 않는다. | G2·G3·G5·G5b, `tools/verify-editorial-boundaries.mjs` |
+| 지속적인 콘텐츠 큐레이션·구조적 유지관리 | 카테고리는 `AI, Agents` / `AI, Research` / `AI, Tooling` 세 축만. 얇은 태그·카테고리 아카이브는 생성하지 않는다. 기준 미달 글은 검색·광고에서 함께 제외하거나 보강한다. 복원 아카이브 283편은 라벨·광고 비활성 상태로 편집 코호트 밖에 둔다. | `_config.yml` 하한, `_plugins/archive_quality_policy.rb`, `_data/archive_restoration.json` |
+| 실제 사용자 관심 유도·유지 | 제목은 발견을 진술하고, 첫 H2는 독자의 질문을 그대로 묻는다. 소제목은 글마다 고유한 평문이며 재사용 템플릿이 아니다. 관련 글 2건 이상 링크. 화·금 회당 최대 1편, 후보가 없으면 0편. | `tools/validate-editorial-package.mjs`, `.claude/editorial-policy.yml` |
+
+구조적으로 바뀐 것:
+
+- `🤔 Curiosity / 📚 Retrieve / 💡 Innovation / 🎯 Key Takeaways / 🤔 New Questions` 이모지 소제목 템플릿을 폐기했다.
+  2026-10-08 개선(`7e7acda5`) 이후 발행된 글 4편이 하니스 검증기 때문에 같은 템플릿으로 되돌아갔고
+  57편에는 `🎯 Key Takeaways`·중복 Key Takeaways가 남아 있었다. 현행 코호트 전체(67편 수정)를 평문 소제목으로
+  정리하고, 검증기가 이모지·단계 라벨·중복 H2를 거부하도록 바꿨다.
+- 글마다 반복되던 `> **Editorial method:** …` AI 디스클레이머를 제거했다. AI 보조 공개는 About의
+  `#editorial-method-and-ai-assistance` 한 곳에서 하고, `_layouts/post.html`이 모든 현행 글에서 그곳으로 링크한다.
+  검증기는 글 본문의 디스클레이머 재삽입을 거부한다.
+- `persona.md`의 3단 구조는 소제목 골격이 아니라 **추론 순서**로 재정의했고, 예시 글의 1인칭 수치는
+  발행 불가 placeholder임을 명시했다. `docs/prompt.md` 사본은 포인터로 대체했다.
+
+이 변경은 사이트 쪽 규칙과 콘텐츠를 정책에 맞춘 것이지 AdSense 승인·재검토 접수의 증거가 아니다.
+재검토 요청은 콘솔에 체크박스와 버튼이 다시 렌더될 때 별도로 제출한다.
+
 ### 검증 스크립트
 
 로그인된 크롬 세션을 그대로 재사용해 **사이트 쪽 배선**과 **애드센스 대시보드** 를
@@ -210,5 +243,5 @@ playwriter -s <id> --timeout 300000 -f tools/verify-adsense.mjs
 `승인됨`이다. 검토 요청 직후에는 사이트 상태가 `준비 중 / 리뷰가 요청됨`인 것이 정상이다.
 
 ---
-*최종 업데이트: 2026-09-24 (저밀도 게시물의 검색 경계와 AdSense 사이트 화면 상태 반영)*
+*최종 업데이트: 2026-10-14 (저가치 콘텐츠 정책 정렬: 소제목 템플릿·디스클레이머 폐기, 검증기·persona 갱신)*
 

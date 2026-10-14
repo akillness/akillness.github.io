@@ -88,7 +88,7 @@ That comparison was controlled in exactly the way the workbook is not: seven bac
 
 [BiomniBench](https://www.biorxiv.org/content/10.64898/2026.05.12.724604v2.full) is a serious benchmark — 100 biomedical data-analysis tasks drawn from 21 high-impact publications, expert-designed rubrics, sandboxed Harbor v3 runs. Its paper adopts a single judge, validated against human experts: "We adopt Gemini 3.1 Pro as the judge throughout the paper." The dataset release keeps 50 tasks public and holds 50 private. Two of the paper's findings frame this audit. First: "The agent harness shifts scores by more than the gap between successive model generations" — harness comparison is precisely what this benchmark is sensitive to, which is why mixing base models across rows matters so much. Second: "Even the best configuration scores below 75 of 100 on average" across the configurations the paper evaluated on its full task set. AIPOCH's 79.05 comes from a different task subset, a different judge protocol, and an unpublished run; the numbers are not comparable, in either direction. That incomparability is the point.
 
-## Key Takeaways: Marketing surfaces need a provenance state too
+## Marketing surfaces need a provenance state too
 
 The finding, stated plainly: this team knows how to mark unverifiable evidence — they shipped a type system for it — and their own benchmark claim never got a state assigned. Every hedge existed in writing on August 31. The README that most people will actually read carries none of them.
 
@@ -113,7 +113,7 @@ This pattern is becoming a genre. The [Maka audit](/posts/maka-working-record-au
 - The blog page is unversioned and could change after my retrieval; all its quotes were substring-verified during this run.
 - Star counts, release cadence, and README wording are point-in-time observations from this run's retrieval window.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **The provenance engine is real.** Checksum-bound content status, typed evidence states, integrity errors on mismatch, relaunch-certified in e2e — the trust implementation in `src/main/artifacts/` holds up under source reading.
 - **The badge does not meet the product's own standard.** The `#1` claim ships with one JPEG in-tree; no harness, transcripts, or judge prompts match the scan at the pinned SHA.
@@ -121,7 +121,7 @@ This pattern is becoming a genre. The [Maka audit](/posts/maka-working-record-au
 - **The margin is protocol-shaped.** 79.05 (two judges, gpt-5.6-sol) vs 78.80 (one judge, gpt-5.5) is a 0.25pp lead across incommensurable cells, by the org's own description.
 - **The controlled comparison could not include the product.** The third-party same-model, same-judge comparison excluded it as unscorable and crowned a different tool.
 
-## 🤔 New Questions
+## New Questions
 
 - Would AIPOCH publish the run package — configs, transcripts, judge prompts — and would the number survive the paper's single-judge protocol on the same tasks?
 - What would a machine-readable claim state for README badges look like — a `benchmark.provenance.json` next to the chart that CI checks the way this repo already checks visual baselines?

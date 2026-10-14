@@ -136,7 +136,7 @@ SQLite's own framing is also proportional: this is not an emergency, and its obs
 
 ---
 
-## Key Takeaways: The SQLite Game Save Contract
+## The SQLite Game Save Contract
 
 The useful innovation is not "replace every game service with SQLite." It is a small storage contract that teams can review per data class.
 

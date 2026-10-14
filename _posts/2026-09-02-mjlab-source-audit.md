@@ -12,7 +12,7 @@ image:
   alt: "Two columns contrasting what mjlab's CI verifies, all on ubuntu-latest with no GPU, against the GPU training path, benchmarks and forked directory that CI never touches"
 ---
 
-## what does a green badge on a GPU project actually prove?
+## What does a green badge on a GPU project actually prove?
 
 [mjlab](https://github.com/mujocolab/mjlab) is one of the more interesting things to appear in robot learning this year: Isaac Lab's manager-based environment API, rebuilt on MuJoCo Warp so that physics runs on the GPU, without dragging in Isaac Sim. It has 2,951 stars as of 2 September 2026, monthly releases since January, a backing paper, and at the pinned commit its CI run concluded successfully.
 
@@ -109,7 +109,7 @@ None of the above makes this a weak project, and the documentation is unusually 
 
 The API is also a genuine reimplementation rather than a thin wrapper. Isaac Lab appears nowhere in the dependency list; the forked code is leaf maths, string and import helpers. The migration guide, however, still carries a "work in progress" warning.
 
-## Key Takeaways: what I would take into a production evaluation
+## What I would take into a production evaluation
 
 **Ask what the badge covers before you trust it.** This is not a criticism unique to mjlab. Any project whose value lives on an accelerator will have a CI story shaped by what runners cost. The useful move is to read `runs-on` and the test invocation flags before treating a green check as coverage, and to write your own GPU smoke test as the first thing you add.
 
@@ -121,7 +121,7 @@ The API is also a genuine reimplementation rather than a thin wrapper. Isaac Lab
 
 **Weigh the open-issue themes, not the count.** Thirty-three open items is unremarkable. The theme is what matters: the cluster concerns actuator and sampling semantics, which is the class of defect that produces a trained policy that looks converged and transfers badly, rather than an error you can see. The same trap appears on the reconstruction side of 3D work, where I found that [an avatar method's gain split between its tracking signal and its framework](/posts/npga-paper/) rather than sitting where the summaries put it.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - Every CI job runs on `ubuntu-latest` and none touches a GPU, so the green badge attests to CPU correctness while the GPU training path that defines the project has no automated gate in the repository.
 - The nightly benchmark record stores task and environment counts but **no GPU model, driver or CUDA version**, and benchmark paths are excluded from CI triggers.
@@ -130,7 +130,7 @@ The API is also a genuine reimplementation rather than a thin wrapper. Isaac Lab
 - "Minimal dependencies" is a comparison against Isaac Sim, not a small install: twenty runtime dependencies, with `wandb` mandatory and the RL backend pinned to one library.
 - The Apache-2.0 package vendors BSD-3-Clause code, discloses it well, ships no `NOTICE`, and excludes exactly that directory from ruff, pyright and `ty`.
 
-## 🤔 New Questions
+## New Questions
 
 - Would a single self-hosted GPU smoke test, even one short training step at a small world count, close most of the verification gap without the cost of a full GPU CI fleet?
 - If the benchmark record added GPU model and driver fields, would the published nightly series remain comparable across its own history?

@@ -144,7 +144,7 @@ The row that is actually new is **custom harness: usually none**. That is my Uni
 
 ---
 
-## Key Takeaways: What I Would Ship, and What I Would Not Trust Yet
+## What I Would Ship, and What I Would Not Trust Yet
 
 ### The one thing to fix before you copy the announcement
 

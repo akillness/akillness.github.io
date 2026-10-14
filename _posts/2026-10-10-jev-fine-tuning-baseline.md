@@ -10,13 +10,13 @@ image:
   alt: "Decision-model evaluation feeding a deterministic permission gate and independent verifier"
 ---
 
-## 🤔 Curiosity
+## Does a decision model need fine-tuning at all?
 
 A decision model can return a probability distribution over a fixed set of options instead of generating an answer in prose. That makes it useful for routing, classification, and bounded checks. It does not automatically make fine-tuning necessary, and it does not turn a model score into permission to act.
 
 An email titled “Train your own Jev-style decision model locally!” links a hosted video and two implementation articles. It reports a short-run result, but the accessed player page showed only a media player, not a transcript or run configuration. I could not independently reproduce the setup from that page, so I treat the email's 37%→65% headline as a lead, not as a reproduced benchmark. The current Unsloth guide contains several different model and evaluation rows; they should not be stitched together into one result.
 
-## 📚 Retrieve
+## Technical Analysis: What the training guides actually report
 
 ### Keep the numbers attached to their own rows
 
@@ -97,7 +97,7 @@ A useful baseline packet is small enough to rerun and explicit enough to catch a
 
 This protocol makes the trade-off visible. Fine-tuning is worth keeping when it produces a repeatable improvement on the task that matters, at an acceptable error profile and operating cost. If it only raises one headline metric while weakening calibration, rare classes, or conversational behavior, the result is not automatically a win.
 
-## 💡 Innovation
+## Write the baseline before the training run
 
 ### A model judgment is not an authorization
 
@@ -112,20 +112,18 @@ That is the boundary I would preserve in a production harness:
 
 
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - Compare the base model and the fine-tuned model on the same frozen examples before keeping a training pipeline.
 - Keep model, task, split, metric, and hardware attached to every benchmark number; do not merge the email claim with different documentation rows.
 - Treat lexical decontamination as one safeguard, not proof that a benchmark is leak-free.
 - Use model confidence to inform a bounded decision, never as permission to perform a side effect or as proof that the task finished.
 
-## 🤔 New Questions
+## New Questions
 
 - Which real error category would fine-tuning reduce that a prompt or label-contract fix cannot?
 - Does the probability threshold remain calibrated on a separate evaluation set and across the rare classes that matter?
 - Can an independent verifier confirm completion without trusting the decision model's own report?
-
-> **Editorial method:** AI assisted with research and drafting; the evidence-gated editorial harness owns publication decisions.
 
 If you are adding a decision model to a retrieval pipeline, read [RAG vs. Jev + RAG: Why Ranking Is Not Answerability](/posts/rag-vs-jev-rag-why-ranking-is-not-answerability/) next. It addresses a separate question: whether the retrieved evidence actually supports an answer. For a separate implementation example, see [Jev shrinks the browser-agent decision loop for faster actions](/posts/jev-shrinks-browser-agent-decision-loop/).
 

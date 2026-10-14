@@ -152,7 +152,7 @@ Two mechanisms, both leaning on "the host pool is the source of truth":
 
 ---
 
-## 📊 The Numbers
+## The Numbers
 
 ### Test systems
 
@@ -229,7 +229,7 @@ Three details I keep coming back to:
 
 ---
 
-## Key Takeaways: What This Actually Means
+## What This Actually Means
 
 ### The pattern is texture streaming, and that should make us optimistic
 

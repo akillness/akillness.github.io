@@ -17,7 +17,7 @@ In [BlenderProc](https://github.com/DLR-RM/BlenderProc/tree/76bd8b82ee1948984357
 
 Throughout, I label four kinds of statement separately: **source finding** (what the pinned code does), **test definition** (what a test asserts, not whether it passes), **proposal** (a checklist I derived, not one I have run), and **open question** (untested).
 
-## can a depth image get smoother without changing what it measures?
+## Can a depth image get smoother without changing what it measures?
 
 Synthetic RGB-D is attractive for 3D vision, robotics and game QA because the renderer holds the exact scene geometry. A rendered depth map can seed a point cloud, check that an occlusion test agrees with the scene, or provide labels a physical sensor cannot. The appeal is that the renderer *knows* the answer.
 
@@ -99,7 +99,7 @@ Now a labelled **inference**. In the depth panel of Figure 1, the colour bands a
 
 Figure 2 is the reason a depth file without its pose is half a datum. Both examples load the bundled `scene.obj` and `camera_positions` resources, and each frame's depth only becomes geometry once you know which camera-to-world pose and which `K` it belongs to. This is the same question [HyperFrames forced about "same video"](/posts/hyperframes-determinism-audit/): before you compare two renders, decide what unit equality is asserted in.
 
-## Key Takeaways: record the measurement, not just the file
+## Record the measurement, not just the file
 
 ### Proposal: a depth manifest for every synthetic dataset
 
@@ -165,7 +165,7 @@ Figures 1 to 4 are example images checked into DLR-RM/BlenderProc at commit 76bd
 - **No warranty:** as the GPL states, these files come without warranty.
 - **Excluded:** BlenderProc examples that rely on external datasets (BOP, ShapeNet, 3D-FRONT and others) carry those datasets' own terms; none of their images are used here.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 | Kind | Takeaway | What to do |
 |---|---|---|
@@ -177,7 +177,7 @@ Figures 1 to 4 are example images checked into DLR-RM/BlenderProc at commit 76bd
 | Source finding | The example point cloud is one view's sampled surface, unprojected with the `K` of the resolution current at that moment. | Store pose index and unprojection resolution; never call a single-view cloud complete geometry. |
 | Proposal | The YAML manifest above. | Adapt it; it is a starting point, not a validated schema. |
 
-## 🤔 New Questions
+## New Questions
 
 All of these are **untested** here; they are the experiments I would run first with a renderer available.
 

@@ -9,15 +9,13 @@ image:
   alt: "Editorial illustration of capsule characters with separate desired and adjusted direction arrows"
 ---
 
-## 🤔 Curiosity: Why does avoidance go quiet after arrival?
+## Why does avoidance go quiet after arrival?
 
 A character can keep receiving movement intent while the navigation agent stops forwarding desired velocities to avoidance. The setter still accepts a vector, but the inspected forwarding branch is gated by target submission.
 
 This is a source-level finding, not a reported runtime bug. I inspected Godot source at `ed1daf0bf001b61586d9930840f2f1394092c079` (4.7.2 stable) and the matching 4.7 docs snapshot at `6d86d7c7f3b8f4f56c71e113022d72fe80b2c84d`. These are separate engine and documentation pins. No project was run and no benchmark or measured jitter is claimed.
 
-> **Editorial method:** AI assisted the research and draft under the evidence-gated editorial harness; an independent evidence review checked the pinned sources. No human review, Godot runtime test, or first-hand production result is claimed.
-
-## 📚 Retrieve: Technical Analysis of the controller handoff
+## Technical Analysis of the controller handoff
 
 The documented navigation pattern has three owners. A path query provides the next position; the game script turns that into desired movement; then the character body applies movement. Godot explicitly says the navigation system never moves the agent's parent. For `CharacterBody3D`, the official example connects `velocity_computed`, submits desired velocity when avoidance is enabled, and in the callback assigns the resulting safe velocity to the body before `move_and_slide()`.
 
@@ -90,13 +88,13 @@ The practical controller choice is narrower: submit a destination when a command
 
 For that follow-up, first decide what the profiler should measure: [Godot Physics Time and the Slowest Step](/posts/godot-physics-time-slowest-step/) is a useful controller-measurement companion. When comparing editor imagery with actual behavior, [Godot Editor Preview Is Not Runtime Evidence](/posts/godot-editor-preview-is-not-runtime-evidence/) offers a different caution about interpreting configuration views. Here, the screenshots document settings and signal hookup only; they do not stand in for a game run.
 
-## 💡 Innovation: Make the handoff observable
+## Make the handoff observable
 
 For a controller review, observe four boundaries: target submission, desired velocity, `velocity_computed`, and parent-body movement. This separates calculated intent, forwarded intent, and applied movement without claiming these observations diagnose every navigation issue.
 
 A focused test can observe desired-velocity submission and callback during an active path, completion, and a subsequent target. Avoidance-only use still needs a target position according to the docs. Until run, the post-arrival explanation remains a conditional deduction from pinned 4.7.2 source, not a reproduced symptom or a claim about all releases.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - `set_velocity()` stores controller intent; the inspected forwarding path also requires a parent, a submitted target, and enabled avoidance.
 - Arrival clears the target-submitted flag and, when avoidance is enabled, resets normal and forced avoidance velocities. Later setter calls alone therefore do not pass through the inspected forwarding branch until a target is submitted again. This is a source-level inference.
@@ -104,7 +102,7 @@ A focused test can observe desired-velocity submission and callback during an ac
 - Do not use repeated identical-target calls as a keepalive: the setter requests repathing even when the target is unchanged. No cost or jitter magnitude was measured.
 - Navigation layers, avoidance masks, mesh baking, avoidance obstacles, and physics collision solve different parts of the problem.
 
-## 🤔 New Questions
+## New Questions
 
 1. In a minimal Godot 4.7.2 scene, does callback delivery resume immediately after a new target is submitted following `navigation_finished`?
 2. Which controller state should own target submission when an arrived actor may idle, accept a new command, or continue moving?

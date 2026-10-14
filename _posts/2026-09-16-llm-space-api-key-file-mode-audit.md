@@ -101,7 +101,7 @@ Where this matters is not a single-user laptop, where the home directory is typi
   <figcaption>A custom provider's configuration. Custom provider names are collapsed to the literal "custom" in telemetry, but the API key entered here is stored the same way as a builtin provider's key &mdash; Image from deer-flow/llm-space (MIT), commit e65eea24. Source: <a href="https://github.com/deer-flow/llm-space/blob/e65eea24c87ee5b91618b7eb50e2af77a30ef042/docs/images/settings-05-custom-provider.png">https://github.com/deer-flow/llm-space/blob/e65eea24c87ee5b91618b7eb50e2af77a30ef042/docs/images/settings-05-custom-provider.png</a>. Publisher: deer-flow (deer-flow/llm-space). Licence: <a href="https://github.com/deer-flow/llm-space/blob/e65eea24c87ee5b91618b7eb50e2af77a30ef042/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## Key Takeaways: Grade local-first claims by which file gets the mode
+## Grade local-first claims by which file gets the mode
 
 The lesson I take from this tree is a small, reusable test for any "your keys stay on your machine" claim: find the project's own atomic file writer, list every caller, and note which callers pass a mode. The callers that do are the files the authors thought of as secret-bearing. The callers that do not are where the README's sentence stops and the umask starts.
 
@@ -120,7 +120,7 @@ For readers who followed the [OpenConnector default-custody audit](/posts/open-c
 - Repository metrics (stars, dates) are point-in-time API reads from 2026-09-16 and will drift.
 - I did not audit the LangGraph project generator, the run-history replay store, or the MCP settings page; they are out of scope for this custody question.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - At commit e65eea24, `TELEMETRY.md`'s three structural claims — typed event map, single egress, PostHog EU — are what the code does, with `$process_person_profile: false` and `disableGeoip: true` on every event.
 - Telemetry is opt-out; `app_opened` is captured at boot before the onboarding notice can be acted on.
@@ -128,7 +128,7 @@ For readers who followed the [OpenConnector default-custody audit](/posts/open-c
 - The same writer is called with `{ mode: 0o600 }` for the plugin settings file and its backup — the project already has the pattern, just not on the file that holds the keys.
 - The `$ENV_VAR` reference form stores a variable name instead of the secret and is the safer path today, especially for remote runtimes where model settings live on the SSH host.
 
-## 🤔 New Questions
+## New Questions
 
 - Would a `{ mode: 0o600 }` on `models.json` be enough, or should the settings directory itself be created `0700` so the analytics id and network settings inherit it?
 - Should the "Discovered" flow store `$OPENAI_API_KEY`-style references by default when it finds keys in the environment, rather than asking the user to type the literal?

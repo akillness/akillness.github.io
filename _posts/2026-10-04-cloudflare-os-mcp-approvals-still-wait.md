@@ -109,7 +109,7 @@ The classifier does what its comments say. The strict `=== true` checks fail clo
 
 The project's test also states its threat model: acting on a false read-only claim "only skips a prompt for a call the server would have answered anyway." That is right for a malicious server, which can misbehave on any call, approved or not. In my reading, it is weaker for an honest server with a wrong label. That is a bug, not an attack, and an approval prompt would at least give a person a chance to catch it. This is my inference about the risk model, not something the source says.
 
-## Key Takeaways: Pick the approval lane before you pick the integration
+## Pick the approval lane before you pick the integration
 
 The README describes one approval experience. The source implements three. How the service was integrated decides whether a write can be simulated and whether it is even eligible for auto-approval; deployment trust, the user's auto-approve rules, and the pending queue then decide whether an eligible write actually pauses.
 
@@ -148,7 +148,7 @@ This connects to two earlier audits. In [OpenHarness](/posts/openharness-permiss
 - The five-line census is a text search at one commit. A Gatekeeper could set the flag without that literal, and later commits may change these findings.
 - This is not a vulnerability report. The project documents the MCP limitations and the `readOnlyHint` trade-off in its package READMEs, connect form, and tests. The gap is between the top-level README's single description of simulation, on line 77 with no exceptions named, and where those exceptions are written down.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 | Insight | Implication | Next step |
 |---|---|---|
@@ -157,7 +157,7 @@ This connects to two earlier audits. In [OpenHarness](/posts/openharness-permiss
 | `readOnlyHint: true` skips approval on both trust tiers | A mislabelled destructive tool runs without a prompt | Review read-only labels and turn off unneeded tools in the portal |
 | Write auto-approval needs a vetted portal, two hints, and a user rule | Servers cannot auto-approve their own writes by default | Keep `MCP_PORTAL_TRUST_ANNOTATIONS` off for servers you do not control |
 
-## 🤔 New Questions
+## New Questions
 
 - Could a portal or Gatekeeper attach approval policy to specific tools, so that a read-only label from an untrusted server still prompts the first time?
 - Would a generic "dry-run" convention in MCP, even a voluntary one, let a client simulate common write tools instead of suspending the turn?

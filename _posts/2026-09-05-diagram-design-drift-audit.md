@@ -12,7 +12,7 @@ image:
   alt: "Editorial illustration of a gallery wall of framed diagrams, each sealed with a wax stamp and padlock, while one unsealed sign hangs beyond the wall's edge with a peeling corner"
 ---
 
-## the trending card contradicts the tree
+## The trending card contradicts the tree
 
 On 5 September the GitHub trending page showed [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design) with this description: "38 editorial diagram types for Claude Code, Codex, and Pi. Self-contained HTML + SVG. No shadows. No Mermaid slop."
 
@@ -99,7 +99,7 @@ There is a fourth, softer case. The tagline's most quotable rule — "No shadows
 | 20 pre-2.0 examples | Explicit lint baseline | **Exempt by declaration** |
 | "No shadows" rule | Prose only, no lint | Unenforced invariant |
 
-## Key Takeaways: drift condenses on unverified surfaces
+## Drift condenses on unverified surfaces
 
 The generalizable finding is not that diagram-design has bugs. It is an unusually clean natural experiment for a rule worth stating plainly: **verification does not eliminate drift — it partitions your surfaces, and drift condenses on the unbound side.**
 
@@ -125,7 +125,7 @@ For prior context on how agent skills handle the trust side of this problem, my 
 - I did not run the skill against a live agent, so this audit says nothing about generation quality, token cost, or how reliably models follow the 40 KB SKILL.md.
 - The "no shadows in lint" finding is a grep over `.py` files at one commit; a shadow check could live in review practice or land tomorrow.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **diagram-design binds every surface it can parse.** Eleven enumerated drift classes, dual-hash screenshot manifests (78/78 digests reproduced), font/resource/script lint, geometric label verification, and machine-owned version bumps — at 30,704 stars and v2.6.12.
 - **Drift survives outside the tree.** The GitHub description has said "38 types" on the trending page for at least sixteen days while every verified surface says 39 — because a settings field is the one product sentence no in-repo verifier can diff.
@@ -133,7 +133,7 @@ For prior context on how agent skills handle the trust side of this problem, my 
 - **Declared debt beats silent drift.** A 20-file lint baseline you can count is healthier than a tagline rule ("No shadows") that no lint enforces.
 - **Transfer:** inventory the surfaces your CI cannot reach — registry summaries, store listings, description fields — and either script them or accept, explicitly, that your stalest sentence will live there.
 
-## 🤔 New Questions
+## New Questions
 
 1. Would the maintainer accept a `verify-repo-description.py` that needs a token and a network call, when every existing verifier is hermetic by design? The hermetic/networked boundary seems to be exactly where this repo's discipline stops.
 2. The lint baseline froze at 20 pre-2.0 files. Does it shrink? A release-over-release count would show whether declared debt actually gets paid or just gets grandfathered forever.

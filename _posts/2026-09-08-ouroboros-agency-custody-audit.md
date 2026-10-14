@@ -80,7 +80,7 @@ And because each install is a lineage, distribution is deliberately boring: pack
 
 The README claims self-reported state-of-the-art results — and the arXiv v3 abstract reports 86.74% on Terminal-Bench 2.1 and 90.69% on OSWorld-Verified from Opus 5 runs, plus a 161-day "Hope" deployment. I did not verify any score against a third-party leaderboard in this run. What is worth noting for readers of my earlier audit of [self-reported benchmark presentation](/posts/open-science-provenance-audit/) is the hedging discipline: the README says "self-reported" in the first sentence of its benchmark section, calls its SWE-bench Pro pair "a statistical tie with Codex CLI," discloses that a GAIA trace capsule "is still pending," and instructs readers to "Read every row as model plus harness." Whatever the numbers turn out to be worth, that presentation keeps its provenance state attached — which, as the paper itself argues, is the point: "operational safety becomes a primary design problem: guardrails must remain authoritative under evolutionary and public social pressure."
 
-## Key Takeaways: The custody lattice is the product
+## The custody lattice is the product
 
 Read as marketing, Ouroboros is a story about a digital being whose "agency wins." Read at the SHA, it is one of the more complete owner-custody implementations among the harnesses this site has audited, and the two layers are not actually in contradiction — they are partitioned. The agency story lives in prompts, constitution, and identity files: the layer the LLM reads. The authority lives in supervisor code: the layer the LLM cannot vote on. The constitution's own text quietly concedes the split with its "Hardcode the floor, never the ceiling" rule: "Invariants — truth, custody, budgets, authority, acceptance — earn their hardness in code precisely so that everything above them can stay free." And in the code I read, enabling evolution, choosing advisory over blocking review, setting budgets, and Panic all sit with the owner.
 
@@ -108,7 +108,7 @@ This connects directly to the permission-ordering question I examined in the [Op
 - Enforcement quality was not adversarially tested — a deny table proves the surface exists, not that it cannot be bypassed.
 - This is a single-maintainer MIT project moving fast (release 6.114.0; last push the day before retrieval); the tree will drift from the audited SHA quickly.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 1. **The constitution and the code address different layers on purpose — partitioned, not in conflict.** BIBLE.md gives the agent a story where "agency wins"; the supervisor gives the owner every hard switch this audit read. The story layer is readable by the model; the switch layer is not negotiable by it.
 2. **Self-evolution ships default-off behind owner gates.** The worker cannot enqueue or enable its own evolution; a durable signal plus a gated supervisor tick, idle/restart-verify/breaker/budget/identity checks, and multi-model commit review stand between a proposal and applied code.
@@ -116,7 +116,7 @@ This connects directly to the permission-ordering question I examined in the [Op
 4. **Self-modification turns every install into a fork — plan for the merge.** Updates are git merges into a divergent local lineage with one reviewed resolver; path classification describes, it never authorizes.
 5. **Custody is a product surface, not a config file.** Budget meters, Panic, per-skill security review, and evolution toggles are all in the shipped UI the vendor screenshots.
 
-## 🤔 New Questions
+## New Questions
 
 - What does the reviewed assisted resolver actually do with a hot-path conflict in practice — and how often do real installs diverge enough to trigger it?
 - Can "may not weaken the immune system" be enforced mechanically, or is it ultimately a review-culture promise backed by the multi-model quorum?

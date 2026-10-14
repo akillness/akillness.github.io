@@ -11,7 +11,7 @@ allowed-tools: Read, Glob, Grep, WebFetch
 - Re-read pinned primary evidence independently.
 - Verify every material claim, quotation, number, date, and implementation statement.
 - Check that the article adds analysis rather than paraphrasing or stitching sources.
-- Independently verify `research/authority-brief.json`: authority fit, reader job, evidence-bound original contribution, monetization honesty, exact visible AI-role disclosure, genuine related-article next action, and absence of scaled-content/transcript-rewrite patterns.
+- Independently verify `research/authority-brief.json`: authority fit, reader job, evidence-bound original contribution, monetization honesty, AI-role disclosure recorded in the brief (and absence of per-post disclaimer boilerplate in the body), genuine related-article next action, and absence of scaled-content/transcript-rewrite patterns.
 - Detect fabricated first-person experience and unsupported employer/product claims.
 
 ## Operational Principles

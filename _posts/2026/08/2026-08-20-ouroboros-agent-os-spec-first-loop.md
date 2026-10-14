@@ -100,7 +100,7 @@ _`ouroboros setup refresh` installing into each host in the shape that host expe
 
 ---
 
-## 🔬 The Two Mathematical Gates
+## The Two Mathematical Gates
 
 Most "spec-first" tooling stops at *"write a spec first."* Ouroboros compiles that advice into two numbers that can block execution. This is what makes it worth studying rather than just installing.
 
@@ -212,7 +212,7 @@ That ordering is a deliberate design property, not an accident. A retype is a se
 
 ---
 
-## 🔒 Innovation: The Hidden Checklist
+## The Hidden Checklist
 
 Here is the mechanism that made me write this post. It shipped in `v0.51.12` under a title that reads like a design principle carved into a wall: **"Verification Must Never Rewrite Reality."**
 
@@ -300,7 +300,7 @@ A completed task proves execution finished. It does not prove the acceptance cri
 
 ---
 
-## 🌀 The Loop That Does Not Stop
+## The Loop That Does Not Stop
 
 `ooo ralph` runs the evolutionary loop across session boundaries. Each step is stateless - the EventStore reconstructs the full lineage - so a machine restart does not lose the thread.
 
@@ -351,7 +351,7 @@ The six consensus triggers are a good list to steal for any review policy: Seed 
 
 ---
 
-## ⚖️ Where I Push Back
+## Where I Push Back
 
 An honest read requires naming what does not hold up. Three things.
 
@@ -365,7 +365,7 @@ To its credit the same doc *does* flag one removal in a note - the old `double_d
 
 ---
 
-## 💡 What I Am Taking Into My Own Harness
+## What I Am Taking Into My Own Harness
 
 | Insight | Why it matters | What I am doing with it |
 | :--- | :--- | :--- |
@@ -415,7 +415,7 @@ Not *"how do I do this?"* but *"what IS this, really?"* When you answer *"what I
 
 ---
 
-## 📚 References
+## References
 
 **Source & Package**
 - [Q00/ouroboros - GitHub](https://github.com/Q00/ouroboros) (MIT, 5.6k+ stars)

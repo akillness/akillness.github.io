@@ -10,7 +10,7 @@ image:
   alt: "Proposed JavaScript decision-backend boundary with contract validation, typed results and provenance, not an implemented integration"
 ---
 
-## 🤔 Curiosity
+## What would replace a hosted Jev call?
 
 What would it take to replace a hosted Jev call with a local decision backend that can later be trained for a specific task?
 
@@ -20,7 +20,7 @@ This audit compares eight public alternatives through that migration problem. Th
 
 The observation date is **October 13, 2026**. Findings come from public papers, model cards, source code and license texts. No candidate weights were downloaded, no candidate model or training job was run, and no TypeSafe or other paid inference endpoint was called. The recommendations below are conditional investigation priorities, not independently reproduced performance rankings or legal clearance.
 
-## 📚 Retrieve
+## Technical Analysis: Recipes, checkpoints, and servers are different deliverables
 
 ### Separate a recipe, a checkpoint and a server
 
@@ -104,7 +104,7 @@ Two naming collisions matter before deployment:
 
 For every candidate, review the exact base, adapter/head, code, training data and teacher-output terms independently. A permissive code file or model-card declaration is not a legal clearance of the entire training lineage. The four paper diagrams in this article have their own CC BY 4.0 attribution; that does not license unrelated model weights or repository assets.
 
-## 💡 Innovation
+## Put the migration boundary in a project-owned adapter
 
 ### Put a project-owned adapter at the migration boundary
 
@@ -129,20 +129,18 @@ The next runtime investigation needs separate authorization. Before it starts, e
 
 Laya's multilingual Korean intent result does not establish broad Korean operational decision quality. A backbone's general multilingual coverage does not establish that either. No shared Korean evaluation or Apple-Silicon runtime reproduction was performed here.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - Select a training or serving boundary before selecting a winner. Recipes, checkpoints and servers are different deliverables.
 - Preserve candidate scoring, confidence semantics and loaded-artifact identity when replacing an API.
 - Keep code rights separate from weights, data and teacher outputs. Unresolved rights stay unresolved.
 - Treat published benchmarks as source-attributed evidence under their own conditions. This audit did not run the candidates.
 
-## 🤔 New Questions
+## New Questions
 
 - Does the proposed server actually load the selected checkpoint and learned head, or use another readout?
 - Which confidence definition would the application's threshold consume after migration?
 - Which Korean failure category justifies training rather than a contract or prompt fix?
-
-> **Editorial method:** Aside AI assisted with public-source research and drafting. Publication decisions belong to an evidence-gated editorial harness; no first-hand model execution or measured commercial outcome is claimed.
 
 For the next step, use the [fine-tuning baseline and evaluation checklist](/posts/jev-fine-tuning-baseline/). It complements this implementation-selection audit by showing how to judge whether a training result is worth keeping without merging unlike benchmark rows.
 

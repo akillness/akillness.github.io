@@ -94,7 +94,7 @@ So the allow list is reachable from the CLI, decisive in the checker, and absent
   <figcaption>The bundled tool surface an allow list is most likely to be applied to &mdash; Toolkit scene illustration from the OpenHarness repository, MIT licensed, pinned at commit 9b2efd7. Source: <a href="https://github.com/HKUDS/OpenHarness/tree/9b2efd795c6aa09f88b0c257d269a9e518da6ae7">https://github.com/HKUDS/OpenHarness/tree/9b2efd795c6aa09f88b0c257d269a9e518da6ae7</a>. Publisher: OpenHarness Contributors (HKUDS/OpenHarness). Licence: <a href="https://github.com/HKUDS/OpenHarness/blob/9b2efd795c6aa09f88b0c257d269a9e518da6ae7/LICENSE">https://github.com/HKUDS/OpenHarness/blob/9b2efd795c6aa09f88b0c257d269a9e518da6ae7/LICENSE</a>.</figcaption>
 </figure>
 
-## Key Takeaways: What this changes for anyone running a harness
+## What this changes for anyone running a harness
 
 **Treat an allow list as a scope, not a shortcut.** In this implementation `allowed_tools` does not mean *skip confirmation for this tool*. It means *stop evaluating*. Those are different powers, and only one of them is what most operators want when they type the flag.
 
@@ -117,7 +117,7 @@ This audit is pinned to commit `9b2efd7`, last pushed 2026-06-04. Later commits 
 
 Nothing here is a vulnerability report. It is an ordering choice with an undocumented consequence, in an MIT-licensed project that already ships the strongest part of the protection — the credential list — ahead of everything else.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 | Insight | Implication | Next step |
 |---|---|---|
@@ -126,7 +126,7 @@ Nothing here is a vulnerability report. It is an ordering choice with an undocum
 | The allow list appears in no Markdown file in the tree | The interaction cannot be discovered from the docs | Document precedence explicitly in any harness you ship |
 | One enforcement site for `denied_commands` | No second gate downstream compensates | Grep for enforcement count, not mentions |
 
-## 🤔 New Questions
+## New Questions
 
 - Should a harness allow list ever short-circuit a deny rule, or should deny always be terminal?
 - What is the right default when an operator supplies both an allow list and deny globs — intersection, or ordered precedence?

@@ -80,7 +80,7 @@ function makeFixture({ mutateBrief, mutateFixture } = {}) {
       { claim_id: 'c3', verification: 'inferred' },
       { claim_id: 'c-bad', verification: 'unverified' }
     ],
-    articleBody: `Intro.\n\n> **Editorial method:** ${DISCLOSURE}\n\nRead the follow-up in [the related audit](${NEXT_PATH}).\n\nOutro.`,
+    articleBody: `Intro.\n\nRead the follow-up in [the related audit](${NEXT_PATH}).\n\nOutro.`,
     contentPillars: PILLARS
   };
   if (mutateFixture) mutateFixture(fixture);
@@ -94,7 +94,8 @@ test('true positive: a fully compliant authority brief passes with metrics', () 
   assert.deepEqual(errors, []);
   assert.equal(metrics.authority_evidence_claims, 2);
   assert.equal(metrics.contribution_evidence_claims, 1);
-  assert.equal(metrics.disclosure_in_body, true);
+  assert.equal(metrics.disclosure_recorded, true);
+  assert.equal(metrics.disclosure_surface, '/about/#editorial-method-and-ai-assistance');
   assert.equal(metrics.next_action_in_body, true);
 });
 
@@ -162,31 +163,36 @@ test('fails on dishonest AI-role records', () => {
   failsWith((b) => { b.ai_role.disclosure = 'AI helped.'; }, 'disclosure must be one safe line of at least 40 characters');
 });
 
-test('fails when the disclosure text is not visible in the article body', () => {
-  const fixture = makeFixture({ mutateFixture: (f) => { f.articleBody = f.articleBody.replace(DISCLOSURE, 'A different disclosure sentence long enough to pass length checks alone.'); } });
-  assert.ok(run(fixture).errors.some((e) => e.includes('does not appear in a visible Editorial method blockquote')));
+test('fails when the article body still carries the per-post Editorial method boilerplate', () => {
+  const visible = makeFixture({ mutateFixture: (f) => { f.articleBody = `Intro.\n\n> **Editorial method:** ${DISCLOSURE}\n\n[related](${NEXT_PATH})`; } });
+  assert.ok(run(visible).errors.some((e) => e.includes('per-post Editorial method boilerplate is not allowed')));
+
+  const indented = makeFixture({ mutateFixture: (f) => { f.articleBody = `    > **Editorial method:** ${DISCLOSURE}\n\n[related](${NEXT_PATH})`; } });
+  assert.ok(run(indented).errors.some((e) => e.includes('per-post Editorial method boilerplate is not allowed')));
+
+  const hidden = makeFixture({ mutateFixture: (f) => { f.articleBody = `<div hidden>\n> **Editorial method:** ${DISCLOSURE}\n</div>\n\n[related](${NEXT_PATH})`; } });
+  assert.ok(run(hidden).errors.some((e) => e.includes('per-post Editorial method boilerplate is not allowed')));
 });
 
-test('hidden disclosure and next-action text do not satisfy the visible contract', () => {
-  const commented = makeFixture({ mutateFixture: (f) => { f.articleBody = `<!-- > **Editorial method:** ${DISCLOSURE}\n[related](${NEXT_PATH}) -->`; } });
-  const commentedErrors = run(commented).errors;
-  assert.ok(commentedErrors.some((e) => e.includes('visible Editorial method blockquote')));
-  assert.ok(commentedErrors.some((e) => e.includes('visible Markdown internal link')));
+test('the disclosure is recorded in the brief and published site-wide, not per post', () => {
+  const { errors, metrics } = run(makeFixture());
+  assert.deepEqual(errors, []);
+  assert.equal(metrics.disclosure_recorded, true);
+  assert.equal(metrics.disclosure_surface, '/about/#editorial-method-and-ai-assistance');
+});
 
-  const fenced = makeFixture({ mutateFixture: (f) => { f.articleBody = `\`\`\`markdown\n> **Editorial method:** ${DISCLOSURE}\n[related](${NEXT_PATH})\n\`\`\``; } });
-  const fencedErrors = run(fenced).errors;
-  assert.ok(fencedErrors.some((e) => e.includes('visible Editorial method blockquote')));
-  assert.ok(fencedErrors.some((e) => e.includes('visible Markdown internal link')));
+test('hidden next-action text does not satisfy the visible contract', () => {
+  const commented = makeFixture({ mutateFixture: (f) => { f.articleBody = `<!-- [related](${NEXT_PATH}) -->`; } });
+  assert.ok(run(commented).errors.some((e) => e.includes('visible Markdown internal link')));
 
-  const indented = makeFixture({ mutateFixture: (f) => { f.articleBody = `    > **Editorial method:** ${DISCLOSURE}\n    [related](${NEXT_PATH})`; } });
-  const indentedErrors = run(indented).errors;
-  assert.ok(indentedErrors.some((e) => e.includes('visible Editorial method blockquote')));
-  assert.ok(indentedErrors.some((e) => e.includes('visible Markdown internal link')));
+  const fenced = makeFixture({ mutateFixture: (f) => { f.articleBody = `\`\`\`markdown\n[related](${NEXT_PATH})\n\`\`\``; } });
+  assert.ok(run(fenced).errors.some((e) => e.includes('visible Markdown internal link')));
 
-  const hidden = makeFixture({ mutateFixture: (f) => { f.articleBody = `<div hidden>\n> **Editorial method:** ${DISCLOSURE}\n[related](${NEXT_PATH})\n</div>`; } });
-  const hiddenErrors = run(hidden).errors;
-  assert.ok(hiddenErrors.some((e) => e.includes('visible Editorial method blockquote')));
-  assert.ok(hiddenErrors.some((e) => e.includes('visible Markdown internal link')));
+  const indented = makeFixture({ mutateFixture: (f) => { f.articleBody = `    [related](${NEXT_PATH})`; } });
+  assert.ok(run(indented).errors.some((e) => e.includes('visible Markdown internal link')));
+
+  const hidden = makeFixture({ mutateFixture: (f) => { f.articleBody = `<div hidden>\n[related](${NEXT_PATH})\n</div>`; } });
+  assert.ok(run(hidden).errors.some((e) => e.includes('visible Markdown internal link')));
 });
 
 test('fails on invalid or unembedded next action', () => {

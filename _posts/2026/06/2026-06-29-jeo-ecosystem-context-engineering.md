@@ -218,7 +218,7 @@ The `ooo` (Ouroboros) entry crystallizes the whole ecosystem's philosophy in one
 
 ---
 
-## Key Takeaways: Walking the Full Loop, End to End
+## Walking the Full Loop, End to End
 
 Put the five repos together and you get one coherent lifecycle, not five separate products:
 

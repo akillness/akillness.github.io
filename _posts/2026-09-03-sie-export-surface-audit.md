@@ -12,7 +12,7 @@ image:
   alt: "Two-zone diagram of the SIE repository: an examples zone developed through public pull requests, and an engine zone that arrives as a 300-file sync commit, with the changelog citing PR #478 while the public sequence ends at #248 and no .github directory present at v0.7.2"
 ---
 
-## what can you audit in a vendor-run open-source repo?
+## What can you audit in a vendor-run open-source repo?
 
 [SIE](https://github.com/superlinked/sie), the Superlinked Inference Engine, is having a moment. It appeared on GitHub's daily Trending list on 3 September 2026 with 60 stars that day and 2,999 overall, and it makes a pitch squarely aimed at agent builders: "an open-source inference engine that runs the models behind every agent task through one API: search and retrieval, document-to-markdown conversion, structured output, content safety, and the agent loop itself."
 
@@ -95,7 +95,7 @@ None of this means the artifact is thin. The opposite: the tree carries an unusu
   <figcaption>The sie_mcp architecture diagram from the package docs. Source: <a href="https://github.com/superlinked/sie/blob/9a7e8d3599f7f16ee57c5218f2ad3822e45c129f/packages/sie_mcp/README.md">https://github.com/superlinked/sie/blob/9a7e8d3599f7f16ee57c5218f2ad3822e45c129f/packages/sie_mcp/README.md</a> · License: <a href="https://github.com/superlinked/sie/blob/9a7e8d3599f7f16ee57c5218f2ad3822e45c129f/LICENSE">https://github.com/superlinked/sie/blob/9a7e8d3599f7f16ee57c5218f2ad3822e45c129f/LICENSE</a> · Superlinked (superlinked/sie), Apache-2.0, commit 9a7e8d35</figcaption>
 </figure>
 
-## Key Takeaways: the export-surface test
+## The export-surface test
 
 Put together, the audit yields a reproducible four-check test you can run on any vendor-run repository in a few minutes, with nothing but the API:
 
@@ -112,7 +112,7 @@ To be precise about what this audit does *not* claim: Apache-2.0 is a real grant
 
 If you are weighing SIE as self-hosted inference for agent workloads, the natural next read is my audit of the competing edge-serving approach in [FreeToken: 284B on a gaming desktop](/posts/freetoken-edge-native-moe-serving/), which examines what that repository could and could not verify about its own performance story.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **The public SIE repo is a delivery surface.** Release engine work arrives inside single-parent squash commits authored as `github-actions[bot]` — 34 to 64 files for sampled earlier releases, 300 files for the `sync source: v0.7.2` commit the tag points at — and the changelog at that tag does not yet contain a v0.7.2 section.
 - **The changelog proves the private loop.** It cites PR #478 review feedback and a PR #659 adapter credit while the public repository's issue/PR sequence has only reached #248 and `pulls/478` returns 404.
@@ -120,7 +120,7 @@ If you are weighing SIE as self-hosted inference for agent workloads, the natura
 - **The seam is provenance, not permission.** The v0.7.2 sync touched 231 files in `packages/` and zero in `examples/`; community PRs merge publicly in both zones — but every sampled changelog entry arrived inside a bot squash, not as reviewable public history.
 - **Audit the artifact, price in the process.** Apache-2.0 grants rights to the code; it grants no visibility into how the code was reviewed, tested, or gated.
 
-## 🤔 New Questions This Raises
+## New Questions This Raises
 
 - The changelog's PR numbers reach at least #659 while the public sequence stops at #248 — what do those hundreds of invisible reviews contain, and would Superlinked publish the private CI definition on request?
 - How common is the export-surface pattern among agent-infrastructure vendors, and would the four-check test above cleanly classify, say, the repositories behind other trending inference engines?

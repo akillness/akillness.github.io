@@ -104,7 +104,7 @@ But custody is not only about bytes. Under the all-defaults deployment, any proc
   <figcaption>The Overview page counts what the runtime can reach: 1,019 providers and 9,912 local actions in this in-tree capture. Under defaults, that entire capability surface is the anonymous caller's &mdash; Image from oomol-lab/open-connector (Apache-2.0), commit 493def09. Source: <a href="https://github.com/oomol-lab/open-connector/blob/493def090c95a92ee312b95594c489c9856a16af/assets/overview-page-en.jpg">https://github.com/oomol-lab/open-connector/blob/493def090c95a92ee312b95594c489c9856a16af/assets/overview-page-en.jpg</a>. Publisher: oomol-lab (oomol-lab/open-connector). Licence: <a href="https://github.com/oomol-lab/open-connector/blob/493def090c95a92ee312b95594c489c9856a16af/LICENSE.txt">Apache-2.0</a>.</figcaption>
 </figure>
 
-## Key Takeaways: Reading scope boundaries as configuration documentation
+## Reading scope boundaries as configuration documentation
 
 The pattern worth carrying out of this tree is that a security policy's scope section can be read as a map of what the project already knows its defaults do. OpenConnector's maintainers did not hide any of this. The startup logs warn three separate times on an all-defaults boot — admin auth disabled, runtime auth disabled, encryption disabled. The hardening guide is detailed and accurate against the code. The out-of-scope list exists precisely because the project understands these configurations are reachable.
 
@@ -122,13 +122,13 @@ I ran the same default-versus-documentation question against an agent orchestrat
 
 This audit reads one pinned commit, `493def09`, and two bounded live API responses; later commits may change any default named here. I did not deploy the gateway or exercise the proxy against live providers — every behavioral claim is bound to the code path quoted, not to a runtime observation. The project's documentation is unusually candid about each individual default, and the localhost-first framing is a real mitigation for the Node path; my findings concern the composition of defaults along the documented Docker quickstart, not concealment. The out-of-scope practice itself is common across open-source security policies, and nothing here asserts bad faith by the maintainers.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **The out-of-scope list is the default configuration.** The four example configurations SECURITY.md excludes from vulnerability reports — no encryption key, no admin token, 0.0.0.0 binding, an exposed data store — are what the pinned tree ships when you follow the README's `docker compose up`.
 - **Absent credentials disable the middleware, not just the check.** With no tokens configured, the auth layer returns a pass-through function, and the plaintext codec stores secrets as typed — both selected by presence checks, both warned about at startup, neither enforced against.
 - **Anonymous callers outrank scoped tokens on the proxy surface.** Runtime tokens get deny-by-default proxy grants; the tokenless default gets allow-by-default. If you deploy this gateway, set `OOMOL_CONNECT_ADMIN_TOKEN`, `OOMOL_CONNECT_ENCRYPTION_KEY`, and either a proxy allowlist or `OOMOL_CONNECT_BLOCKED_PROXIES="*"` before the first credential is stored, and treat the quickstart's hardening section as step one rather than an appendix.
 
-## 🤔 New Questions
+## New Questions
 
 - How many of the category's other gateways — Pipedream, Composio, and the self-hosted alternatives OpenConnector names as comparisons — show the same overlap between their vulnerability-scope exclusions and their quickstart output?
 - Would a first-run wizard that refuses to store the first credential until an admin token and encryption key exist measurably change adoption, or is the frictionless quickstart load-bearing for a project at this stage?

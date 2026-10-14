@@ -95,7 +95,7 @@ The latest GitHub release at retrieval was v1.0.9, published 2026-09-09, a week 
   <figcaption>Model configuration from the README tour. The provider keys entered here are the operator's; the license question is about redistributing or embedding the client that holds them &mdash; Image from openocta/openocta (GPL-3.0 LICENSE file at 0c7dac2), commit 0c7dac2. Source: <a href="https://github.com/openocta/openocta/blob/0c7dac2284211facdfc813166fe648d093153bb6/imgs/readmePIC/QQ20260709-211248.png">https://github.com/openocta/openocta/blob/0c7dac2284211facdfc813166fe648d093153bb6/imgs/readmePIC/QQ20260709-211248.png</a>. Publisher: OpenOcta (openocta/openocta). Licence: <a href="https://github.com/openocta/openocta/blob/0c7dac2284211facdfc813166fe648d093153bb6/LICENSE">GPL-3.0</a>.</figcaption>
 </figure>
 
-## Key Takeaways: Read the license the way you read a config default
+## Read the license the way you read a config default
 
 The pattern here is the same one that keeps showing up in these audits: a project's prose describes one contract and its artifacts implement another. Yesterday it was a settings writer that never asked for a file mode while the plugin store did ([LLM Space](/posts/llm-space-api-key-file-mode-audit/)); this morning it was a sandbox whose quick starts turn off Docker's default seccomp filter ([AIO Sandbox](/posts/aio-sandbox-confinement-contract-audit/)). Licenses drift the same way, and the fix is the same: check the artifact, not the summary, at a pinned commit.
 
@@ -134,7 +134,7 @@ The honest version of the last row is that the license text and the vendor's exp
 - The READMEs may be corrected after this audit. Every line number and quotation here is tied to commit 0c7dac2, and the drift check above is meant to be re-run, not trusted.
 - The package manifests without a `license` field are the frontend and the Wails bootstrap; I did not audit the Go module's third-party dependency licenses, and the bundled libffi carries its own notice.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - At commit 0c7dac2 the LICENSE file is GPL-3.0, both READMEs say Apache-2.0, the Windows installer text says GPLv3 with two added conditions, and the two package manifests say nothing.
 - The LICENSE file was GPL-3.0 (Feb 28), then Apache-2.0 (Jul 10, +201 −674), then GPL-3.0 again (Sep 16, +674 −201, byte-identical to February). The commit that restored it is titled "Add LICENSE file".
@@ -142,7 +142,7 @@ The honest version of the last row is that the license text and the vendor's exp
 - The project's own business plan treats the community edition as GPLv3 with commercial licensing for SaaS and multi-tenant hosting, and asks whether that boundary has been legally confirmed; GPLv3's text says network interaction without transfer "is not conveying".
 - Read the license artifact at a pinned commit and diff it against the prose before an ops agent goes on production hosts.
 
-## 🤔 New Questions
+## New Questions
 
 - Will the READMEs be updated to GPL-3.0, or will the LICENSE file move a third time? The commit history of that one file is a better predictor than the README.
 - Does the project intend AGPL semantics for hosted use? If so, the file that implements that intent is a different license text, not a business document.

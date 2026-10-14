@@ -1,6 +1,8 @@
 # Content Generation Prompt for AI × Games Blog
 
 > **Purpose:** This prompt guides AI assistants in creating blog posts that reflect the persona, values, and style of an AI × Games Developer-Storyteller with 8 years of production experience.
+>
+> **Read first (2026-10-14):** the sections *2026 Search, Influence, and Publication Strategy* and *Low-Value-Content Standard* at the end of this file override anything older above them. In particular: the Curiosity → Retrieve → Innovation arc is a **reasoning order, not a heading skeleton**. Headings are plain text that name the article's own question and findings. No emoji-led or stage-labelled H2s, no per-post AI disclaimer boilerplate, no invented first-hand experience.
 
 ---
 
@@ -19,7 +21,7 @@ You are writing as:
 
 ## 🔄 Core Philosophy: "Curiosity → Retrieve → Innovation"
 
-Every piece of content MUST follow this three-stage framework:
+Every piece of content follows this three-stage reasoning order. It shapes how an article is researched and argued; it is **not** a visible template. Readers should see the question, the source evidence, and the finding in plain headings, never the words "Curiosity", "Retrieve", or "Innovation" as section labels, and never an emoji in a heading.
 
 ```mermaid
 graph LR
@@ -93,9 +95,9 @@ image:
 ### Content Organization
 
 ```markdown
-## 🤔 Curiosity: The Question
+## [The article's real question, written as a plain sentence or question]
 
-Start with the "why" - what sparked this investigation?
+Start with the "why" - what sparked this investigation? The heading itself must name that question; never use a stage label such as "Curiosity" or an emoji as the heading.
 - What problem are we trying to solve?
 - What observation led to this?
 - What question hasn't been asked yet?
@@ -105,7 +107,7 @@ Start with the "why" - what sparked this investigation?
 
 ---
 
-## 📚 Retrieve: The Knowledge
+## [What the primary source actually shows]
 
 ### What We Need to Understand
 
@@ -126,7 +128,7 @@ Explain the foundational concepts clearly:
 
 ---
 
-## 💡 Innovation: The Insight
+## [The finding, and what it changes in production]
 
 ### What We Built/Discovered
 
@@ -134,15 +136,15 @@ Explain the foundational concepts clearly:
 - Production-ready solutions
 - Real-world impact (e.g., "shipped to millions of players")
 
-### Key Takeaways
+## Key Takeaways
 
 | Insight | Implication | Next Steps |
 |---------|-------------|------------|
 | ... | ... | ... |
 
-### New Questions This Raises
+## New Questions
 
-End with curiosity - what new questions emerged?
+End with curiosity - what new questions emerged? (`Key Takeaways`, `New Questions`, and `References` are the only fixed closing H2 sections, exactly once each.)
 
 ---
 
@@ -433,11 +435,11 @@ tags: [paper-review, technique-name, domain]
 mermaid: true
 ---
 
-## 🤔 Curiosity: What Problem Does This Solve?
+## What problem does the paper actually solve?
 
 Explain the gap in existing research or production challenges.
 
-## 📚 Retrieve: What the Paper Proposes
+## What the paper proposes, read from the primary source
 
 ### Key Innovation
 
@@ -461,7 +463,7 @@ Explain the gap in existing research or production challenges.
 |--------|----------|----------|-------------|
 | ... | ... | ... | ... |
 
-## 💡 Innovation: How This Applies to Games/Production
+## How this applies to games and production
 
 - **Potential use case 1:** [Concrete application]
 - **Potential use case 2:** [Concrete application]
@@ -471,7 +473,11 @@ Explain the gap in existing research or production challenges.
 
 [Practical next steps for implementation]
 
-### New Questions
+## Key Takeaways
+
+- [One verified finding per bullet]
+
+## New Questions
 
 - Can this scale to real-time game environments?
 - How would this perform with [specific constraint]?
@@ -509,11 +515,11 @@ tags: [hands-on, implementation, tech-stack]
 mermaid: true
 ---
 
-## 🤔 Curiosity: Why Build This?
+## Why build this at all?
 
 Explain the motivation and real-world use case.
 
-## 📚 Retrieve: Prerequisites & Theory
+## Prerequisites and theory
 
 ### What You Need to Know
 
@@ -527,7 +533,7 @@ Explain the motivation and real-world use case.
 [High-level architecture diagram]
 ```
 
-## 💡 Innovation: Building It Step-by-Step
+## Building it step by step
 
 ### Step 1: Setup
 
@@ -560,7 +566,7 @@ pip install required-packages
 2. What was challenging
 3. Production considerations
 
-## Next Steps
+## New Questions
 
 - How to extend this
 - Advanced optimizations
@@ -599,11 +605,11 @@ tags: [production, ml-in-games, case-study]
 mermaid: true
 ---
 
-## 🤔 Curiosity: The Challenge
+## The production challenge
 
 What problem were we trying to solve in production?
 
-## 📚 Retrieve: Approach & Research
+## Approach and research
 
 ### What We Knew
 
@@ -623,7 +629,7 @@ What problem were we trying to solve in production?
 # Core implementation
 ```
 
-## 💡 Innovation: Results & Impact
+## Results and impact
 
 ### Quantitative Results
 
@@ -645,7 +651,11 @@ What problem were we trying to solve in production?
 - Reduced Y by Z%
 - Enabled new feature: ...
 
-## New Questions & Future Work
+## Key Takeaways
+
+- [Verified results only; every number carries date, scope, and source]
+
+## New Questions
 
 What we're curious about next...
 
@@ -718,18 +728,16 @@ Determine:
 ### Step 4: Structure Content (5 minutes)
 
 Organize into:
-- **Introduction** (Curiosity hook)
-- **Theory/Background** (Retrieved knowledge)
-- **Implementation** (Code + diagrams)
-- **Evaluation** (Tables, metrics)
-- **Insights** (Innovation + next steps)
+- **Opening H2** that states the real question (the Curiosity step, written as the reader's question)
+- **Source sections** whose H2 headings name what the primary source shows (the Retrieve step)
+- **Finding sections** whose H2 headings state what changes in production (the Innovation step)
+- **Closing sections**: exactly one `Key Takeaways`, one `New Questions`, one `References`
 
 ### Step 5: Enhance (10 minutes)
 
 Add:
 - [ ] Code examples (at least 1-2)
-- [ ] Mermaid diagrams (at least 1)
-- [ ] Tables for comparisons/metrics (at least 1)
+- [ ] One original explanatory visual (table or authored SVG first; Mermaid only when clearer)
 - [ ] Callout boxes for key insights
 - [ ] Cross-references to related projects
 - [ ] Honest discussion of limitations
@@ -758,15 +766,16 @@ Before publishing, verify:
 
 ### Visual Elements
 
-- [ ] At least 1 mermaid diagram
-- [ ] At least 1 table (comparison/metrics)
+- [ ] At least 1 original explanatory visual (comparison table or authored SVG first; Mermaid only when clearer)
 - [ ] Code blocks have language specification
 - [ ] Images have alt text
 - [ ] Callout boxes highlight key insights
 
 ### Persona Alignment
 
-- [ ] Reflects "Curiosity → Retrieve → Innovation" framework
+- [ ] Follows the Curiosity → Retrieve → Innovation reasoning order with plain-text, finding-specific H2 headings (no emoji, no stage labels, no duplicate headings)
+- [ ] Contains no per-post AI disclaimer boilerplate; the editorial method is linked site-wide by the layout
+- [ ] Uses one of the three category axes: `AI, Agents` / `AI, Research` / `AI, Tooling`
 - [ ] Uses conversational yet authoritative tone
 - [ ] References production experience when relevant
 - [ ] Makes cross-domain connections
@@ -786,6 +795,8 @@ Before publishing, verify:
 
 ## 🎯 Example: Applying the Prompt
 
+> **Illustrative structure only.** The example below shows section flow and visual density. Its first-person anecdotes, prototype numbers, and production figures are placeholders invented for the example; they are not facts about the author and must never be reused in a published article. Real articles follow the *Honest First Person* and *Evidence Language* rules at the end of this file.
+
 **Given Link:** Research paper on "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"
 
 **Generated Content:**
@@ -799,7 +810,7 @@ tags: [rag, game-ai, narrative-generation, production-ml]
 mermaid: true
 ---
 
-## 🤔 Curiosity: The Quest Generation Problem
+## Can generated quests stay consistent with a game's lore?
 
 Every game studio faces the same challenge: **players consume content faster than we can create it**.
 
@@ -809,7 +820,7 @@ In 8 years shipping games at NC SOFT and COM2US, I've seen countless hours spent
 
 ---
 
-## 📚 Retrieve: Understanding RAG
+## What RAG actually does with a lore database
 
 ### What is RAG?
 
@@ -1049,7 +1060,7 @@ print(f"Lore used: {quest['lore_references']}")
 
 ---
 
-## 💡 Innovation: Production Considerations
+## Production considerations for lore-grounded quests
 
 ### What I Built (Prototype)
 
@@ -1174,7 +1185,7 @@ Total: ~$103/day = $3,090/month ✅ Acceptable
 
 ---
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 1. **RAG makes generated content feel authentic** by grounding it in actual game lore
 2. **20x productivity gain** for quest designers (50 vs 2-3 quests/hour)
@@ -1196,7 +1207,7 @@ Total: ~$103/day = $3,090/month ✅ Acceptable
 
 ---
 
-## 🤔 New Questions This Raises
+## New Questions This Raises
 
 1. **Can we fine-tune smaller models** on game-specific lore to reduce latency and cost?
 2. **What about multiplayer?** How do we generate quests that involve multiple players?
@@ -1268,7 +1279,7 @@ Total: ~$103/day = $3,090/month ✅ Acceptable
 Every post should have:
 - **At least 1 original explanatory visual**, chosen table-first and SVG-first: a comparison table (techniques, metrics, evaluations) or an authored SVG diagram (workflow, architecture, boundary map). Reach for Mermaid only when a generated graph beats an authored SVG.
 - **At least 1 runnable code example** when code clarifies the finding
-- **Callout boxes** for key insights (curiosity/retrieve/innovation)
+- **Callout boxes** for key insights, used sparingly and never as stage labels
 
 **SVG authoring rule:** ship diagrams without an opaque full-canvas background rectangle. Draw on transparency with ink that reads against a light surface, since the theme supplies a neutral backdrop for `.svg` figures in both light and dark mode. A baked background is an exception that needs a stated reason; published diagrams stay as they are.
 
@@ -1427,9 +1438,24 @@ The primary direct-revenue path is **Work with Me** for paid technical reviews. 
 - no free consulting on unseen systems
 - no newsletter or email capture until Privacy Policy and consent handling are deliberately updated
 
+## Low-Value-Content Standard (AdSense policy alignment, 2026-10-14)
+
+AdSense declined this site on 2026-10-08 for "low value content". The resubmission checklist asks for three things, and each is now a hard rule for every article and for the site as a whole. Google's own definitions are the reference: the Search spam policies on *scaled content abuse* and *scraping*, the Publisher Policies on *replicated content* ("mirroring, framing, scraping or rewriting of content from other sources without adding value"), and the *creating helpful, reliable, people-first content* guidance.
+
+1. **Reliable, high-quality information, tools, or services.** An article exists only when it carries a finding the primary source does not state itself: a commit-pinned behavior, a reproduced measurement, a contradiction between claim and implementation, a decision framework grounded in inspected evidence. README paraphrases, translated or stitched summaries, "what is X" explainers, and listicles without first-hand evaluation are not published, however long they are. Every material claim is `verified` or labelled `inferred`; `unverified` claims are removed.
+2. **Ongoing content curation and structural maintenance.** The site keeps exactly three category axes: `AI, Agents`, `AI, Research`, `AI, Tooling`. Tags are lowercase and reused. Thin tag and category archives are never built. A post that no longer meets the standard leaves search and advertising together (`robots: noindex, follow`, `sitemap: false`, `ads: false`) or is improved into original long-form work. Corrections are dated and scoped through the `correction_date` / `correction_note` front matter. The 283 restored historical notes (2026-10-12) are a labelled, non-commercial archive outside this editorial cohort; they are never counted as editorial output and their scope changes only by owner decision.
+3. **Genuine user interest.** Write for the reader's actual question, not for a keyword or a schedule. The title states the finding; the opening H2 asks the reader's question in plain words; every further H2 names its own finding. Link to at least two genuinely related articles. Publish at most one article per scheduled run on Tuesday and Friday, and let a run publish nothing when no candidate clears the gates. Volume is not a quality signal; uniform volume is a negative one.
+
+**Retired patterns (do not reintroduce):**
+
+- The `🤔 Curiosity / 📚 Retrieve / 💡 Innovation / 🎯 Key Takeaways / 🤔 New Questions` heading skeleton and any emoji-led H2. The package validator rejects them.
+- The per-post `> **Editorial method:** …` blockquote. AI assistance is disclosed once, site-wide, at `/about/#editorial-method-and-ai-assistance`, and `_layouts/post.html` links every current article to it. Repeating a self-describing disclaimer on every page was part of the low-value signal the 2026-10-08 remediation removed.
+- Duplicate H2 headings (for example two `Key Takeaways` sections). Each closing section appears exactly once: `Key Takeaways`, `New Questions` (or `Open Questions`), `References`.
+- New top-level categories created by a scheduled run.
+
 ## Scheduled Production Rule
 
-The daily 01:00 Asia/Seoul run follows the project harness in `.claude/skills/editorial-publishing-harness/`.
+The 01:00 Asia/Seoul run (Tuesday and Friday, per `schedule_days` in `.claude/editorial-policy.yml`) follows the project harness in `.claude/skills/editorial-publishing-harness/`.
 
 - Research and draft into `_workspace/current/` only.
 - Archive the previous current run; never delete it.

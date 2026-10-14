@@ -101,7 +101,7 @@ This matters for a specific reason: the README's headline safety claim — "Sand
   <figcaption>JupyterLab with three Python kernels: one of the execution surfaces whose "safety guarantees" have no source in the repository to audit &mdash; Image from agent-infra/sandbox (Apache-2.0), commit 7f1afaf8. Source: <a href="https://github.com/agent-infra/sandbox/blob/7f1afaf8d82bd30531a19caeb1a24dfebbc97d8c/website/docs/public/images/code-jupyterlab.png">https://github.com/agent-infra/sandbox/blob/7f1afaf8d82bd30531a19caeb1a24dfebbc97d8c/website/docs/public/images/code-jupyterlab.png</a>. Publisher: Agent Infra team (agent-infra/sandbox). Licence: <a href="https://github.com/agent-infra/sandbox/blob/7f1afaf8d82bd30531a19caeb1a24dfebbc97d8c/LICENSE">Apache-2.0</a>.</figcaption>
 </figure>
 
-## Key Takeaways: Treat the container as the workload, not the boundary
+## Treat the container as the workload, not the boundary
 
 To be fair to the project: several of its documents are more honest than the category norm. The quick start explains *why* it binds `127.0.0.1`. The cloud guide flatly says not to expose port 8080. The security guide names its own scope — trusted local development — and ships working JWT verification. The README admits in plain text that services remain open without a key. None of the three findings here required adversarial reading; each is printed in the project's own files.
 
@@ -116,7 +116,7 @@ If you deploy this — and the product's coordination story is genuinely useful 
 
 For the same who-owns-the-default question examined on a credential gateway — one whose security policy formally declares its own shipped defaults out of scope — see the [OpenConnector default-custody audit](/posts/open-connector-default-custody-audit/).
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **The documented run posture weakens the outer container.** The `seccomp=unconfined` flag appears 66 times across 34 files at commit `7f1afaf8`, from the quick starts to the shipped compose file; Docker's default profile would have filtered around 44 syscalls, and Docker recommends against changing it.
 - **The stated reason is the browser; the cost is never discussed.** The FAQ ties the flag to Chromium startup, and the security guide never mentions what unconfined removes.
@@ -124,7 +124,7 @@ For the same who-owns-the-default question examined on a credential gateway — 
 - **The runtime is a prebuilt image, not open code.** No Dockerfile has ever existed in any fetched ref of the Apache-2.0 repository, so the "safety guarantees" of its execution surfaces cannot be verified from source.
 - **Positional security is real security only when you control the position.** The 127.0.0.1 guidance is sound; everything reachable past it is a shell.
 
-## 🤔 New Questions
+## New Questions
 
 - When `SANDBOX_API_KEY` is set, is it enforced uniformly across every co-hosted surface — API, VNC, code-server, Jupyter, terminal, and MCP — or only at the gateway? Only a live-container test can answer this; the contracts are silent.
 - Could the docker run surfaces adopt a tailored seccomp profile instead of dropping the filter entirely? The Kubernetes guide already gestures at this for its own surface — it offers "a `Localhost` profile installed on the node, or `Unconfined`" for the Chromium container — but every docker run and compose surface documents only unconfined.

@@ -246,7 +246,7 @@ The repository now also contains [LongCat-Video-Avatar-1.5](https://meigen-ai.gi
 
 ---
 
-## Key Takeaways: What I Would Actually Ship With It
+## What I Would Actually Ship With It
 
 The practical product is not "an AI that makes a whole game video." It is an **offline, stateful previsualization and authoring loop** that gives a team a faster way to explore directed motion, transitions, and shot continuity.
 

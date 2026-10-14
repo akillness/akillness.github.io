@@ -194,15 +194,23 @@ if (draftPath && manifest?.target_date) {
   pass(manifest.asset_dir === `assets/img/posts/${articleStem}/`, `Manifest asset_dir does not match draft: ${manifest.asset_dir}`);
 }
 
-const requiredHeadings = [
-  /^##\s+🤔\s+Curiosity\b/m,
-  /^##\s+📚\s+Retrieve\b/m,
-  /^##\s+💡\s+Innovation\b/m,
-  /^##\s+🎯\s+Key Takeaways\b/m,
-  /^##\s+🤔\s+New Questions\b/m,
-  /^##\s+References\b/m
-];
-for (const heading of requiredHeadings) pass(heading.test(body), `Required persona heading missing: ${heading}`);
+// Section structure (editorial policy, 2026-10-14). The Curiosity → Retrieve →
+// Innovation arc is a reasoning order, not a heading skeleton: every H2 must
+// state the article's own question or finding in plain words. Emoji-led labels
+// and the templated "🤔 Curiosity / 📚 Retrieve / 💡 Innovation" skeleton are
+// rejected because an identical scaffold on every page is a scaled-content
+// signal and hides the finding from readers and crawlers alike.
+const h2Headings = [...body.replace(/```[\s\S]*?```/g, ' ').matchAll(/^##\s+(.+?)\s*$/gm)].map((match) => match[1]);
+pass(h2Headings.length >= 4, `Article needs at least four H2 sections (found ${h2Headings.length})`);
+const templatedHeading = /^(?:[\p{Extended_Pictographic}\uFE0F\u200D]+\s*)|^(?:Curiosity|Retrieve|Innovation)\b\s*(?:[:：-]|$)/u;
+for (const heading of h2Headings) pass(!templatedHeading.test(heading), `Templated or emoji-led H2 heading is not allowed: ${heading}`);
+const opening = h2Headings[0] || '';
+pass(/\?\s*$/.test(opening) || opening.split(/\s+/).length >= 4, `The opening H2 must state the article question or finding in its own words: ${opening || '(missing)'}`);
+pass(h2Headings.filter((heading) => /^Key Takeaways$/i.test(heading)).length === 1, 'Exactly one "Key Takeaways" H2 section is required');
+pass(h2Headings.filter((heading) => /^(?:New|Open) Questions\b/i.test(heading)).length === 1, 'Exactly one "New Questions" or "Open Questions" H2 section is required');
+pass(h2Headings.filter((heading) => /^References$/i.test(heading)).length === 1, 'Exactly one "References" H2 section is required');
+pass(new Set(h2Headings.map((heading) => heading.toLowerCase())).size === h2Headings.length, 'Duplicate H2 headings are not allowed');
+pass(!/^\s*>\s*\*\*Editorial method:\*\*/m.test(body), 'Per-post "Editorial method" boilerplate is not allowed; the layout links every article to the site-level editorial method note');
 
 const hangulCount = (body.match(/[가-힣]/g) || []).length;
 const latinCount = (body.match(/[A-Za-z]/g) || []).length;
@@ -245,6 +253,13 @@ for (const post of walk(path.join(repoRoot, '_posts'), (file) => file.endsWith('
 }
 pass(categoryNormalized.length >= 1, 'At least one category is required');
 for (const category of categoryNormalized) pass(existingCategories.has(category), `Category is not reused from the existing corpus: ${category}`);
+// Ongoing curation (2026-10-14): new automated articles use one of the three
+// consolidated category axes declared in .claude/editorial-policy.yml. A new
+// top-level category is an owner decision, never a scheduled-run side effect.
+const categoryAllowlist = policyList('category_allowlist').map((entry) => entry.replace(/^\[|\]$/g, '').split(',').map((v) => stripQuotes(v.trim())).filter(Boolean).join(', '));
+if (categoryAllowlist.length) {
+  pass(categoryAllowlist.includes(categoryNormalized.join(', ')), `Categories must match one policy category axis (${categoryAllowlist.join(' | ')}): ${categoryNormalized.join(', ')}`);
+}
 
 const tags = tagsValue.replace(/^\[|\]$/g, '').split(',').map((v) => stripQuotes(v.trim())).filter(Boolean);
 pass(tags.length >= 2, 'At least two tags are required');
@@ -405,7 +420,8 @@ const report = {
     total_reference_image_bytes: sourceImageResult.metrics.total_reference_image_bytes,
     authority_evidence_claims: authorityResult.metrics.authority_evidence_claims,
     contribution_evidence_claims: authorityResult.metrics.contribution_evidence_claims,
-    authority_disclosure_in_body: authorityResult.metrics.disclosure_in_body,
+    authority_disclosure_recorded: authorityResult.metrics.disclosure_recorded,
+    authority_disclosure_surface: authorityResult.metrics.disclosure_surface,
     authority_next_action_in_body: authorityResult.metrics.next_action_in_body
   },
   failures,

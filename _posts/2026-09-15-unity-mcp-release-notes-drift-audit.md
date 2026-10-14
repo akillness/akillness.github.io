@@ -160,7 +160,7 @@ The README tells you to `pin #v10.0.0`. By the table above, that pin is an older
 
 There is a second-order effect on the default path too. The documented install URL ends in `#main`, but the screenshot that illustrates it carries no fragment at all, and the repository's default branch is `beta`. A fragment-less git URL resolves the default branch, so the picture installs a prerelease line — `10.2.1-beta.6` at the audited commit — while the text installs the stable one.
 
-## Key Takeaways: A generator without a gate is just a slower hand-edit
+## A generator without a gate is just a slower hand-edit
 
 The useful lesson here is not "this project has stale docs." It is that the project **correctly diagnosed the problem, built the right tool, and then wired it into the wrong shape** — and that the correct shape was already sitting in the same `.github/workflows/` directory.
 
@@ -178,7 +178,7 @@ For a Unity team adopting this bridge, the practical takeaways are small and con
 
 None of this makes the project unsafe or unserious. It is MIT, it moves fast, its security policy is specific about fail-closed network defaults, and its tool-reference pipeline is better gated than most repositories manage. That is exactly what makes the gap legible: the standard applied to one generated file is visibly higher than the standard applied to the other.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - At beta commit `2fcc1795`, the newest release is **v10.2.0** (2026-09-01), while the README "Recent Updates" block and `website/docs/releases.md` both stop at **v10.0.0** (2026-06-30) — four releases and a 63-day gap.
 - `tools/sync_release_notes.py` was written specifically because a hand-maintained `releases.md` went stale by one minor version. The automated replacement is now four releases stale.
@@ -187,7 +187,7 @@ None of this makes the project unsafe or unserious. It is MIT, it moves fast, it
 - `sync-releases.yml` fires only on release events and `workflow_dispatch`, runs the script in write mode, and pushes to a protected branch. Its own comment calls release events "the only time the synced files can legitimately go stale."
 - The README says to `pin #v10.0.0`; `SECURITY.md` says older releases are not supported. Both statements are live at the same commit.
 
-## 🤔 New Questions This Raises
+## New Questions This Raises
 
 - If the sync push is being rejected by branch protection, does the workflow surface a red run, or does it fail in a way maintainers have learned to scroll past?
 - Is there a general rule for when a generated artifact needs a verifier on an independent trigger — or should every `--check` flag ship with a mandatory second workflow by convention?

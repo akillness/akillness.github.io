@@ -166,7 +166,7 @@ The README is also unusually direct about performance: it **does not yet prove a
 
 That is the sentence I would want more projects to write. A decision layer can improve structure, safety, and inspectability without having earned a speedup claim yet.
 
-## Key Takeaways: The production pattern is a validity budget
+## The production pattern is a validity budget
 
 My read is that Jev's useful abstraction is a **validity budget**.
 
@@ -203,7 +203,7 @@ If I were evaluating a Jev-like layer for an internal game tool, I would require
 
 The order matters. If the action-space and authority contracts are vague, a lower latency number only tells us that the agent can move faster inside an unclear box.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 | Finding | What it actually means | What it does not mean |
 |---|---|---|
@@ -224,7 +224,7 @@ The order matters. If the action-space and authority contracts are vague, a lowe
 - **TypeSafe is a service dependency.** The loop needs endpoint availability, credentials, latency, and a clear data boundary.
 - **Speed is not authority.** A fast selector should not be allowed to cross a consequential-action boundary.
 
-## 🤔 New Questions
+## New Questions
 
 Jev makes the browser loop easier to reason about, but it also exposes the next research questions:
 

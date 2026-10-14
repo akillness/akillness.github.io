@@ -105,7 +105,7 @@ Cross-platform, the tiers drop again. The Windows workflow's own comment explain
 
 The public docs, interestingly, already speak this more careful language. The introduction page describes the property as "**Reliable render**" — a slow machine "does not drop moments from the finished video" — without using the word deterministic on that page. The absolute register lives in the README.
 
-## Key Takeaways: Determinism is a ladder, and you should label your rungs
+## Determinism is a ladder, and you should label your rungs
 
 I went in expecting to test a claim and came out adopting a taxonomy. What HyperFrames actually ships is a four-rung ladder, and the audit's real lesson is that every rendering pipeline has one, written down or not:
 
@@ -120,14 +120,14 @@ The half-pinned box is the actionable nit. Chrome is pinned to `148.0.7778.167`;
 
 And if you are pointing an agent at video output, size your expectations by rung, the way [CozyClay's shot contract](/posts/cozyclay-shot-contract/) sizes shots before generation: ask for byte-stability only pre-encode, assert decibels post-encode, and treat any cross-platform pixel promise with suspicion until you find the fixture that proves it runs.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **The claim and the contract are in different units.** The README of heygen-com/hyperframes (pinned at `d4fba55a`) promises "same input, same frames, same output"; the shipped harness verifies encoded output at 100 sampled checkpoints against per-fixture PSNR floors of 20-45 dB, with audio passing on correlation, not equality.
 - **Byte equality exists for exactly one output format.** Only unencoded png-sequence frames are compared with `Buffer.equals`; the project's own docs scope byte reproducibility to one Docker image whose Chrome is patch-pinned while its ffmpeg is not.
 - **28 of 79 golden fixtures are recorded as never verified in CI.** The shard schedule's CI-enforced excluded list says so verbatim — 25 "pass state unknown", 3 rejected for invalid metadata — an unusually candid ledger, recording a debt the project's own README never mentions.
 - **The determinism engineering itself is genuine.** A nine-flag deterministic Chrome launch, SwiftShader-by-default, seeded-time authoring rules for agents, and a documented fix to their own PSNR instrument — the input side is rigorous; the verification side is tolerance-banded.
 
-## 🤔 New Questions This Raises
+## New Questions This Raises
 
 - When a golden suite bands tolerance at 30 dB, what class of real regression lives *below* the floor — color management, font hinting, sub-checkpoint flicker — and how often would byte-goldens have caught one?
 - Could the 25 never-ran fixtures be burned down mechanically — schedule one per PR with a recorded timing — and would their pass states surprise the maintainers?

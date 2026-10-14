@@ -51,7 +51,7 @@ The preview settings dialog adds another useful distinction. Godot documents con
 
 The source boundaries are worth keeping precise. Documentation states the editor-only limitation. The source code trace shows the camera preview wired to the editor viewport. Together, they support the narrow finding that an editor preview is not runtime scene evidence. They do not establish a regression, a rendering defect, or the behavior of every Godot version and project configuration.
 
-## Key Takeaways: A small evidence packet for scene reviews
+## A small evidence packet for scene reviews
 
 I would separate a visual review into four evidence layers rather than ask one screenshot to answer every question:
 
@@ -75,14 +75,14 @@ For a related Godot measurement example, see [why Physics Time keeps the slowest
 
 The practical question to carry into the next review is simple: what exact state does this artifact prove? If the answer is only “the editor displayed this,” that is still valuable evidence. It just is not a substitute for the scene file or a runtime result.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - The pinned documentation calls the preview sun and sky editor-only, not runtime output.
 - The Camera3D image shows an empty slot, not a successfully assigned Environment.
 - Camera-preview routing is a separately scoped static source example, not implementation proof for the environment-preview controls.
 - The four-layer packet is a proposed review aid. No Godot project was built or run here.
 
-## 🤔 New Questions
+## New Questions
 
 - Which engine revision, scene revision and active camera would a runtime capture need to identify in a particular project?
 - How should a team retain scene/resource evidence when an editor screenshot shows changes that have not yet been saved?

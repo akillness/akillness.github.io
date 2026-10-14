@@ -223,7 +223,7 @@ That last row is the one that made me stop. There are more files of **agent note
 
 ---
 
-## Key Takeaways: The Three Things I Didn't Expect
+## The Three Things I Didn't Expect
 
 Reading a 219-package harness, most of it is competent-and-expected. Three things weren't.
 
@@ -329,7 +329,7 @@ Two details worth internalizing from that snippet. The bundled runtime needs **n
 
 ---
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 | Insight | Implication | What I'd do |
 |:--|:--|:--|
@@ -342,7 +342,7 @@ Two details worth internalizing from that snippet. The bundled runtime needs **n
 
 ---
 
-## 🤔 New Questions This Raises
+## New Questions This Raises
 
 1. **What's the real blast radius of `cordis_define`?** An agent authoring and mounting host-half plugins is the most powerful and most alarming thing in the repo. Immutable versions and no-auto-apply are good fences — but what does a production approval policy around runtime self-extension actually look like, and who reviews the plugin the agent wrote at 3 AM?
 2. **Does the plugin claim hold under a hostile swap?** Replacing `ctx.agentLoop` with a genuinely different driver — say, one that batches steps for offline level generation — is the test that separates architecture from documentation. Nothing I read says it can't. Nothing I ran says it can.

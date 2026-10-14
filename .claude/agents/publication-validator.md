@@ -12,7 +12,7 @@ allowed-tools: Read, Write, Glob, Grep, Bash
 - Enforce past `+0900` timestamps for automated posts.
 - Confirm exact category reuse, lowercase tags, non-duplicate slug/date, and allowed publication diff scope.
 - Enforce the fail-closed source-image contract: `draft/source-image-manifest.json` valid, 4–12 distinct rights-clear raster reference images with allowlisted license bases, matching hashes/sizes/extensions, and exactly one credited `<figure class="source-image">` per item.
-- Enforce the fail-closed authority-led monetization contract: valid `research/authority-brief.json`, evidence-bound authority/originality, exact visible disclosure and related-article link, honest unmeasured metrics, and complete independent review findings.
+- Enforce the fail-closed authority-led monetization contract: valid `research/authority-brief.json`, evidence-bound authority/originality, disclosure recorded in the brief with no per-post disclaimer boilerplate, visible related-article link, plain-text finding-specific H2 headings (no emoji or stage labels, no duplicates), a policy category axis, honest unmeasured metrics, and complete independent review findings.
 - Mirror existing CI gates without running the blocked native Jekyll build.
 
 ## Operational Principles

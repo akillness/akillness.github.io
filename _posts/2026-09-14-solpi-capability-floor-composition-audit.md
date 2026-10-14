@@ -93,7 +93,7 @@ That independence is exactly why the gate cannot see the sum. A tolerance applie
   <figcaption>The surface SoL-Pi plugs into: Pi loads extensions from npm and from a project <code>.pi/extensions</code> directory, and its status line already reports the token counters, dollar cost and context-window pressure that SoL-Pi sets out to reduce &mdash; Image from earendil-works/pi (MIT), commit 71dca871. Source: <a href="https://github.com/earendil-works/pi">https://github.com/earendil-works/pi</a>. Publisher: Mario Zechner (earendil-works/pi). Licence: <a href="https://github.com/earendil-works/pi/blob/71dca871bc80b6bc97be37f0ca3189399d651fff/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## Key Takeaways: Per-component tolerances do not compose
+## Per-component tolerances do not compose
 
 The transferable lesson here has nothing to do with agents specifically. It is about where a quality gate is applied.
 
@@ -110,7 +110,7 @@ The transferable lesson here has nothing to do with agents specifically. It is a
   <figcaption>The redundancy the four mechanisms target, in one screen: a single session tree of 2,759 messages in which reads, greps and validation commands repeat within and across turns &mdash; Image from earendil-works/pi (MIT), commit 71dca871. Source: <a href="https://github.com/earendil-works/pi">https://github.com/earendil-works/pi</a>. Publisher: Mario Zechner (earendil-works/pi). Licence: <a href="https://github.com/earendil-works/pi/blob/71dca871bc80b6bc97be37f0ca3189399d651fff/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - SoL-Pi's capability floor is applied to one mechanism at a time. The project states that the permitted losses accumulate and that the assembled harness retains roughly **94%** of Pi's average score across EdgeBench tasks, on both model backends.
 - On 63 Terminal-Bench 4 CPU-only tasks the page reports **SoL-Pi 15 solved at $211.12** against **Pi 18 at $286.45** and **Codex 18 at $272.35** — cheaper, and three tasks short.
@@ -119,7 +119,7 @@ The transferable lesson here has nothing to do with agents specifically. It is a
 - EdgeBench is a third-party ByteDance Seed suite of **134** day-long tasks with an initial **51** released; SoL-Pi treats it as held out and says so.
 - Generalisable rule: a claim stated about a system needs a gate measured on that system. Per-component tolerances are budgets, and budgets add.
 
-## 🤔 New Questions This Raises
+## New Questions This Raises
 
 - What would an assembled-harness capability gate cost to run, and is there a cheaper proxy that still catches accumulation across four mechanisms?
 - Would the 94% figure move if the mechanisms were enabled in a different order, or is the loss roughly additive regardless of composition order?

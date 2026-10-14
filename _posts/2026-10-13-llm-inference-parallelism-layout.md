@@ -13,7 +13,7 @@ image:
   alt: "A rank-topology diagram comparing vLLM tensor, pipeline, data, expert, and decode-context parallelism without treating every label as an extra GPU pool"
 ---
 
-## 🤔 Curiosity: Which GPUs did you just count?
+## Which GPUs did you just count?
 
 A serving configuration can contain labels such as tensor parallelism (TP), pipeline parallelism (PP), data parallelism (DP), expert parallelism (EP), and context parallelism (CP). It is tempting to multiply every number beside every label and call the result the GPU count. That shortcut can be wrong because the labels do not all describe independent pools of devices.
 
@@ -21,7 +21,7 @@ The useful question is not “How many parallelism strategies are enabled?” It
 
 This post is a source audit of framework documentation, not a performance report. The vLLM claims use the v0.25.0 documentation; the comparison uses Megatron Core 0.16 and SGLang’s long-context pipeline-parallel page pinned to commit e2728ac. Later framework releases may differ. The small but important conclusion: a strategy name is not automatically another GPU multiplier.
 
-## 📚 Retrieve: What the framework docs actually count
+## Technical Analysis: What the framework docs actually count
 
 Start with the pinned vLLM v0.25.0 documentation. Its single-node command combines TP=4 with PP=2 and labels the result “Eight GPUs total.” For a multi-node deployment, vLLM’s guidance maps TP to the number of GPUs per node and PP to the number of nodes. Those settings describe one model replica spread across pipeline stages, not two unrelated GPU fleets. See the [vLLM v0.25.0 scaling guide](https://docs.vllm.ai/en/v0.25.0/serving/parallelism_scaling/).
 
@@ -68,7 +68,7 @@ The Shift Parallelism paper is useful here as a research example: its v2 describ
   <figcaption>Source page: <a href="https://arxiv.org/html/2503.04398v5">https://arxiv.org/html/2503.04398v5</a>. Creator(s): Yan Li, Zhenyu Zhang, Zhengang Wang, Pengfei Chen, and Pengfei Zheng. Attribution: Figure 3 from Semantic Parallelism (arXiv:2503.04398v5). Unmodified source PNG; no eXIf, iTXt, or iDOT chunks were present. CC BY 4.0. License: <a href="https://creativecommons.org/licenses/by/4.0/legalcode.en">https://creativecommons.org/licenses/by/4.0/legalcode.en</a>.</figcaption>
 </figure>
 
-## 💡 Innovation: Decide by the bottleneck, then inspect the groups
+## Decide by the bottleneck, then inspect the groups
 
 A practical topology review starts with the thing that is actually constrained:
 
@@ -84,7 +84,7 @@ The two research papers make a related point without settling the production dec
 
 If your main question is how request shape changes latency and throughput, compare this topology map with the site’s earlier [LLM inference patterns note](/posts/llm-inference-patterns/). For the separate question of expert residency and host-memory serving, see the [FreeToken edge-native MoE serving audit](/posts/freetoken-edge-native-moe-serving/). Those topics meet in production, but they are not the same analysis.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - Count the ranks a framework actually creates, not the number of parallelism labels in a config.
 - In the cited vLLM v0.25.0 examples, TP=4 with PP=2 uses eight GPUs, and DP=4 with TP=2 also uses eight; MoE DP ranks coordinate while requests are in progress.
@@ -92,7 +92,7 @@ If your main question is how request shape changes latency and throughput, compa
 - Megatron Core 0.16’s CP formula belongs to its training-oriented implementation, not every inference engine.
 - Verify model, engine version, rank groups, and communication costs before treating any configuration formula as portable.
 
-## 🤔 New Questions
+## New Questions
 
 - Does the server’s startup log show the rank groups you expected, or only the sizes you entered?
 - Which bottleneck are you solving: weights, independent request capacity, MoE routing, KV-cache duplication, or long-prompt prefill?
@@ -101,8 +101,6 @@ If your main question is how request shape changes latency and throughput, compa
 - Are you optimizing p95 TTFT, inter-token latency, throughput, or cache capacity? Which one is the release gate?
 
 This source audit did not run an independent benchmark. It provides a way to make the next measurement more specific: pin the engine version, list the rank groups, and test one declared SLO rather than comparing strategy names in the abstract.
-
-> **Editorial method:** AI assisted the research and draft; the evidence-gated editorial harness owns editorial judgment, and no new benchmark was run.
 
 ## References
 

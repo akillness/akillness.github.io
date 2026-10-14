@@ -119,7 +119,7 @@ None of this appears in the README's v1.0.0 pitch. All of it is the difference b
 
 A `fact-check` skill merged on **August 28 (PR #1274)** — days before the trending spike. It does not audit every sentence. It shortlists high-signal risks (exact numbers, absolutes, attributed quotes, cross-page contradictions), reads user-supplied materials first, and carries one epistemically careful rule: user sources may support a claim, but **"the course being checked cannot prove itself."** A generated artifact is never evidence of its own correctness — the same rule any evidence-gated pipeline should enforce, including the one that produced this article.
 
-## Key Takeaways: What I would steal for game and agent pipelines
+## What I would steal for game and agent pipelines
 
 Reading this tree through a game-production lens, three patterns transfer directly:
 
@@ -131,7 +131,7 @@ The honest limitation of this audit: I read the code and did not run the classro
 
 If you want the mirror image of this design — the same SKILL.md surface engineered against a counterparty that might cheat rather than a lesson that might drift — read my [Archify distrust stack audit](/posts/archify-distrust-stack-audit/) next.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **"20 built-in skills" is really pedagogy-as-code**: 24 SKILL.md files under `skills/` at the pinned commit, the teaching styles carrying machine-checkable `outline-constraints.json` sidecars that state their own blind spots.
 - **Constraint violations are re-plan diagnostics, never auto-rewrites** — the runtime refuses to produce "a course that reads like it was assembled by a linter."
@@ -139,7 +139,7 @@ If you want the mirror image of this design — the same SKILL.md surface engine
 - **Classroom inputs are bounded like attack surface**: 8 MiB / 80 slides / 90 s worker-isolated pptx parsing, 100k-char session caps, and abort-fenced persistence.
 - v1.0.0's real story is not course generation; it is **the enforcement seam between what a prompt promises and what a runtime can verify**.
 
-## 🤔 New Questions
+## New Questions
 
 - How often does the outline model violate `typeMix` in production, and does the re-plan loop converge — or does it need the retry/cost bound the code currently leaves implicit?
 - Can the constraint-sidecar pattern express *sequencing* pedagogy (spaced repetition, spiral revisits across a series) or only per-lesson scene mixes?

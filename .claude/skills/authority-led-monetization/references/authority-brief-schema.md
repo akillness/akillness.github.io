@@ -42,7 +42,7 @@
 | `editorial_judgment_owner` | exactly `evidence-gated-editorial-harness` |
 | `human_review_status` | `standing-policy-approved` when `manifest.mode` is `publish-on-green`, otherwise `manual-review-pending` |
 | `first_hand_experience_claimed` | exactly `false` |
-| `disclosure` | one safe line, >=40 chars; the exact text must appear in a visible `> **Editorial method:** ...` blockquote, not a comment, code fence, or hidden container |
+| `disclosure` | one safe line, >=40 chars, recorded in the brief; published once, site-wide, at `/about/#editorial-method-and-ai-assistance` (the post layout links every current article to it). A per-post `> **Editorial method:** ...` blockquote in the body fails validation (policy 2026-10-14) |
 
 ## `next_action`
 
@@ -92,7 +92,7 @@ and record the rendered canonical separately from the source link.
 - `authority_fit: true` — the article demonstrates the declared authority basis
 - `reader_value: true` — the reader's job is actually served
 - `monetization_honesty: true` — no unverified outcome, price, or earnings claim
-- `ai_role_honesty: true` — the disclosure is present, accurate, and unembellished
+- `ai_role_honesty: true` — the disclosure recorded in the brief is accurate and unembellished, and the body carries no per-post disclaimer boilerplate
 - `next_action_verified: true` — the internal link exists, renders, and is genuinely related
 - `scaled_content_risk: false` — the article is not a template/volume/transcript artifact
 - `authority_rationale` — >=40 chars of concrete reviewer reasoning

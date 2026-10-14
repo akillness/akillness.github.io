@@ -73,3 +73,32 @@ standing_constraints:
   - no-scaled-content-automation
   - no-unverified-outcome-claims
   - no-publish-without-green-gates
+  - no-templated-heading-skeleton
+  - no-per-post-ai-disclaimer-boilerplate
+  - no-new-top-level-category-without-owner-decision
+# Low-value-content standard (AdSense policy alignment, 2026-10-14).
+# Scheduled runs happen on these days only, at most max_articles_per_run each.
+schedule_days:
+  - Tuesday
+  - Friday
+low_value_content_policy_version: 2026-10-14
+low_value_content_checks:
+  - reliable-high-quality-information-tools-or-services
+  - ongoing-content-curation-and-structural-maintenance
+  - genuine-user-interest
+heading_style: natural-finding-specific
+forbidden_heading_patterns:
+  - emoji-led-h2
+  - curiosity-retrieve-innovation-stage-labels
+  - duplicate-h2
+required_closing_sections:
+  - Key Takeaways
+  - New Questions
+  - References
+ai_disclosure_surface: site-level
+ai_disclosure_path: /about/#editorial-method-and-ai-assistance
+category_allowlist:
+  - "AI, Agents"
+  - "AI, Research"
+  - "AI, Tooling"
+restored_archive_policy: labeled-non-commercial-outside-editorial-cohort

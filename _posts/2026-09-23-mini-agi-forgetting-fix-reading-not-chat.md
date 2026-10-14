@@ -109,7 +109,7 @@ The README reports **2.450 bits per byte on the PG19 test split**, a fitted powe
   <figcaption>Data scaling with the fitted power law, as published. Source: <a href="https://github.com/volotat/mini-AGI/blob/efd4a16822d7e46008847186df750ea3ff9fa00b/README.md">https://github.com/volotat/mini-AGI/blob/efd4a16822d7e46008847186df750ea3ff9fa00b/README.md</a>. Publisher/creator: Alexey Borsky (volotat/mini-AGI). License: <a href="https://raw.githubusercontent.com/volotat/mini-AGI/efd4a16822d7e46008847186df750ea3ff9fa00b/LICENSE">https://raw.githubusercontent.com/volotat/mini-AGI/efd4a16822d7e46008847186df750ea3ff9fa00b/LICENSE</a>. Attribution: Alexey Borsky, mini-AGI data scaling chart, MIT License, pinned at commit efd4a168.</figcaption>
 </figure>
 
-## Key Takeaways: Treat each learning path as its own claim
+## Treat each learning path as its own claim
 
 The useful move is to stop reading "continual learning without forgetting" as one property of the model. In mini-AGI it is three paths with three evidence levels.
 
@@ -131,7 +131,7 @@ If I were wiring this into a personal assistant or a studio tool today, I would 
 
 None of this argues against the project. It argues for measuring the chat path with the same care the author gave the corpus path.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - mini-AGI's no-forgetting result is a corpus-reading probe: 524,000 characters of chess moved the seven unread subjects by **+0.0067 nats** with the trunk at 0.1x.
 - By the README's own 0.03 threshold, that probe also shows only a 0.013-nat gain on the subject being read, so how much the model learns during such a read is still open.
@@ -146,7 +146,7 @@ None of this argues against the project. It argues for measuring the chat path w
 - Applying the README's 0.03 rule to within-run probe deltas is my interpretation; a within-run comparison may have less noise than two separate runs.
 - The repository is days old and changing quickly, so these defaults may change after the pinned commit.
 
-## 🤔 New Questions
+## New Questions
 
 - What does an hour of chat do to held-out loss under the current streaming regime, compared with the +0.65 nats of the earlier variant?
 - Can the forgetting probe be rerun with the trunk at 0.2x or 0.3x to map how much learning the 0.1x setting gives up?

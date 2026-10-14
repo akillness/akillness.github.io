@@ -99,7 +99,7 @@ The enforcement that does exist at upload time is `SkillPackagePolicy`: 500 file
 | Super-admin publish | (not advertised) | `PUBLISHED` before the scan completes |
 | Upload gate | Extension allowlist | Magic bytes for images/PDF, UTF-8 for text, no check for office formats |
 
-## Key Takeaways: Grade the scanner by its consumers, not its engines
+## Grade the scanner by its consumers, not its engines
 
 To be fair to SkillHub: asynchronous, advisory scanning is a defensible design. Blocking uploads on a scanner adds a hard availability dependency — and SkillHub's own engineering shows they take that dependency seriously (idempotency locks, bounded retries, temp-file cleanup discipline in `ScanTaskConsumer`). Routing every public skill through human review is a real gate, and bounding pre-review downloads to draft managers is real too. The defect is narrower and more instructive: the product documents an enforcement behavior — "automatically blocked" — that terminates in a badge.
 
@@ -117,7 +117,7 @@ What I take away for evaluating any registry or governance product:
 
 For the harness-side view of the same question — where an allow list runs relative to your own deny rules inside one agent runtime — see my [OpenHarness permission-order audit](/posts/openharness-permission-order-audit/): it maps the enforcement-order problem this registry audit meets one layer up. The catalog-scale cost of skills inside a harness is in the [ECC context-tax audit](/posts/ecc-context-tax-audit/).
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **SkillHub's scan verdict gates nothing in shipped code.** The enum ends in `BLOCKED`; `processScanResult` advances versions by visibility alone, and no publish, review, promotion, or download path reads the verdict. It renders as a frontend badge.
 - **The only hard scan gate fires on failure, not on findings.** A scan that stays failed past its bounded recovery window puts the version in `SCAN_FAILED` until an explicit retry; a `DANGEROUS` verdict changes nothing about the version's path.
@@ -125,7 +125,7 @@ For the harness-side view of the same question — where an allow list runs rela
 - **Safety documentation drifted twice**: "automatic blocking" describes no shipped behavior, and the failure-analysis doc quotes a review-degradation code path that no longer exists.
 - The real enforcement layers are the upload allowlist (thin at office-format edges), mandatory human review for public skills, and namespace-scoped RBAC.
 
-## 🤔 New Questions
+## New Questions
 
 - The `fail-on-severity` key is forwarded to the Cisco scanner where it shapes `is_safe` — did an earlier SkillHub version consume the verdict, and if so, which commit disconnected it?
 - The scanner supports optional LLM analysis of untrusted skill content. When that judge is an LLM reading attacker-authored `SKILL.md` files, what does a prompt-injection-shaped skill package do to the verdict distribution?

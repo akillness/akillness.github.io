@@ -29,7 +29,7 @@ That distinction matters because the npm package is named `mex-agent`, but its p
 
 This audit follows the failure through three separate gates: executable identity, project-anchor loading, and a real graph query. It also keeps an important version boundary visible. The installed runtime measured below is `mex-agent` 0.7.1; npm release 0.8.2 was inspected on 2026-09-20 KST without upgrading the installed runtime.
 
-## a successful lookup was the first failure
+## A successful lookup was the first failure
 
 The collision looks trivial until its false conclusions are expressed explicitly:
 
@@ -74,7 +74,7 @@ The 0.8.2 setup inspected on 2026-09-20 KST has moved further than the installed
 
 jeo, gjc, and jeopi use a root `AGENTS.md` contract. For `--tool codex` or `multiple`, the published installer preserves an existing root `AGENTS.md`; otherwise it mirrors `CLAUDE.md`, or creates a bridge when `.mex/AGENTS.md` exists. The workstation anchors and `.mex/` state observed in this audit were untracked and are not part of the public implementation commit.
 
-## Key Takeaways: resolve capability, not command names
+## Resolve capability, not command names
 
 The published fix in [`akillness/jeo-skills`](https://github.com/akillness/jeo-skills/commit/a71ddf92a07fbb56ee16f17167db9b411d265315) uses a narrow resolution order:
 
@@ -142,7 +142,7 @@ The stronger completion test is therefore query plus freshness: compare at least
   <figcaption>A targeted repair preview shows proposed project-memory updates; the article separately distinguishes committed Markdown from local indexes. Source: <a href="https://github.com/mex-memory/mex/blob/2f074dc2c73c51679a1f9564ee4c36993f36edf4/screenshots/mex-sync.jpg">pinned screenshot</a> by mex-memory/mex contributors under the <a href="https://github.com/mex-memory/mex/blob/2f074dc2c73c51679a1f9564ee4c36993f36edf4/LICENSE">MIT License</a>. Privacy-safe crop of the pinned product screenshot; no content was added.</figcaption>
 </figure>
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 This incident produced a reusable sequence:
 
@@ -157,7 +157,7 @@ This incident produced a reusable sequence:
 
 The key shift is simple: installation is not a state. It is a chain of independently testable boundaries.
 
-## 🤔 New Questions
+## New Questions
 
 Two upstream boundaries matter before copying this integration elsewhere.
 

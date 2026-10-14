@@ -24,7 +24,7 @@ Editorial additions: AI-assisted Fodev JEO editorial article, 2026. Publisher: F
 
 Copyright in source material remains with the Krita Manual contributors. Copyright (c) 2026 Jang Young Jeong, original editorial additions. Article-specific distribution terms: Permission is granted to copy, distribute and/or modify this document under the GNU Free Documentation License, Version 1.3 or any later version published by the Free Software Foundation, with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. See the [complete license](/assets/img/posts/2026-10-07-krita-color-smudge-spacing-modes/licenses/GFDL-1.3.txt) and [rights notice](/assets/img/posts/2026-10-07-krita-color-smudge-spacing-modes/licenses/NOTICE-v3.md).
 
-## why does the same spacing change feel different?
+## Why does the same spacing change feel different?
 
 Should a game artist reduce brush spacing when a color transition looks rough? In Krita’s Color Smudge Brush, the useful answer starts one decision earlier: **which mode is doing the mixing?**
 
@@ -86,7 +86,7 @@ The manual warns that Smearing can pick up the hard lines of its rectangle examp
 
 For a painted game asset, that suggests a practical debugging question: did an unwanted edge come from the sampled image content, rather than from the chosen foreground color? That is an inference worth testing, not a diagnosis of an unseen painting. The right-hand example also changes size and rotation dynamics, so it must not be presented as a controlled measurement of Scatter alone.
 
-## Key Takeaways: hand off a mixing recipe, not a brush number
+## Hand off a mixing recipe, not a brush number
 
 My proposed handoff is small: record the **mode, brush tip, spacing, opacity, Color Rate, Smudge Length, applicable Smudge Radius, Smear Alpha, dynamics, and algorithm-toggle state**, together with the Krita version. Color Rate is the documented foreground-color contribution; it should not be silently equated with the amount of existing paint being moved. The manual describes version-dependent algorithm interactions, so the toggle state belongs in the record even though this article does not prescribe a checkbox position.
 

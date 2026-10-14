@@ -91,7 +91,7 @@ A Source Audit owes you the gaps too:
 - **Provenance is disclosed, not hidden.** `SKILL.md` metadata declares `based_on: Cocoon-AI/architecture-diagram-generator (MIT, v1.0)`, and the LICENSE file carries dual copyright lines (tt-a1i 2026, Cocoon AI 2025) over a clean 22-line MIT text with no appended restrictions. I read the full text — after [last week's MiniMax H3 audit](/posts/minimax-h3-lora-compatibility-audit/), where the "open" license excluded four jurisdictions, this is the check I no longer skip.
 - **The distribution story connects to a familiar harness.** Archify ships an isolated DeepSeek Harness bundle (`integrations/deepseek-harness`, published as `@tt-a1i/archify-dsh`) whose test suite asserts the host-loaded adapter "does not open a second execution, network, credential, or telemetry surface." That is the plugin-boundary discipline I examined in [the DeepSeek Harness audit](/posts/deepseek-harness-everything-is-a-plugin/) — applied from the plugin author's side this time.
 
-## Key Takeaways: What harness engineers should actually copy
+## What harness engineers should actually copy
 
 The trending story is "JSON in, pretty diagram out." The production story is a working answer to a question every agent team currently faces: **how do you let an unreliable optimizer operate a quality-gated tool without letting it negotiate the gate?**
 
@@ -104,7 +104,7 @@ Archify's answer decomposes cleanly:
 
 This is the same conclusion the [God's Eye View boundary audit](/posts/gods-eye-view-boundary-audit/) reached from a different direction: in viral agent-era repositories, the demo is rarely where the engineering lives. Here the diagrams are the demo. The distrust stack is the product.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **Archify's SKILL.md is an adversarial contract, not documentation** — it assumes the executing agent will misreport success and structurally prevents it (verified, pinned quotes).
 - **Its own benchmark says ordinary models fail the first pass 33% of the time** — never semantically, always on deterministic quality validation. The contract exists to close exactly that gap (verified, vendor-authored receipts).
@@ -112,7 +112,7 @@ This is the same conclusion the [God's Eye View boundary audit](/posts/gods-eye-
 - **"Self-contained" artifacts make one external request** — an async Google Fonts load with a documented offline fallback. Know this before using artifacts in air-gapped review (verified).
 - The star spike (~25.2K → 33.6K between Aug 29 and Aug 31 across two differently-sourced readings) rewards the diagrams; the reusable lesson for harness engineers is the trust architecture underneath them.
 
-## 🤔 New Questions This Raises
+## New Questions This Raises
 
 - The escape path is centralized, but is it complete? A fuzzing pass over all five renderers' authored-string sinks would either clear or break the injection story for agent-authored diagram content.
 - The benchmark froze three mid-tier models in July. Does the 66.7% first-pass floor rise materially with frontier models — and if it does, how much of the hard contract becomes redundant weight in the context window?

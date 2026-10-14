@@ -130,7 +130,7 @@ The Doc's appendix lists tools a TypeSafe-native harness could integrate: headro
   <figcaption>fff's published Opus 4.6 feature-completion chart (20-run average) with and without fff MCP; token and timing figures are the project's own, not independently remeasured here. Source: <a href="https://github.com/dmtrKovalenko/fff/tree/e3f694a2e4f82bb755418e8d305dcff779c59c27">https://github.com/dmtrKovalenko/fff/tree/e3f694a2e4f82bb755418e8d305dcff779c59c27</a>. Publisher/creator: Dmitriy Kovalenko (dmtrKovalenko/fff). License: <a href="https://raw.githubusercontent.com/dmtrKovalenko/fff/e3f694a2e4f82bb755418e8d305dcff779c59c27/LICENSE">https://raw.githubusercontent.com/dmtrKovalenko/fff/e3f694a2e4f82bb755418e8d305dcff779c59c27/LICENSE</a>. Attribution: fff chart.png, MIT License, Copyright (c) 2025 Dmitriy Kovalenko, pinned at commit e3f694a2.</figcaption>
 </figure>
 
-## Key Takeaways: What I would take into a harness
+## What I would take into a harness
 
 The Doc's real contribution is the framing: price routing **per context rebuild**, not per token. That survives the audit intact. What changes is that the routing decision should be computed, not assumed. The break-even is cheap enough to evaluate before every hand-off:
 
@@ -158,7 +158,7 @@ The second lesson is about evidence, and it applies to anyone building on this d
 
 If Jev is the first system-one model you have looked at, my earlier audit of [Jev's browser-agent decision loop](/posts/jev-shrinks-browser-agent-decision-loop/) covers what its speed claims do and do not show.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 | Insight | Implication | Next Steps |
 |---|---|---|
@@ -168,7 +168,7 @@ If Jev is the first system-one model you have looked at, my earlier audit of [Je
 | The PDF dropped the "chatgpt vibe" note and "SLOP" heading, and softened a vendor claim | A faithful-looking synthesis can still shift meaning | Quote the primary Doc, not the PDF, when attributing claims to Almeida |
 | Context assembly is what makes routing viable | Shrinking x is the lever, not cheaper tokens | Prototype chunk-level visibility decisions before adding more models |
 
-## 🤔 New Questions
+## New Questions
 
 - How much does the break-even move once cache reads on the large model's prefix are priced in over a multi-turn session?
 - What are real X, Y, Z shares for a coding agent on a game codebase, where build logs are long and edits are small?

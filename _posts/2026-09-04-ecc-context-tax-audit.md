@@ -12,7 +12,7 @@ image:
   alt: "Diagram contrasting ECC's MCP connector audit, which retired six default connectors and left one, with its default install surface of 286 skills, 68 agents, 94 commands, and 23 lifecycle hooks"
 ---
 
-## does the harness layer pay its own tax?
+## Does the harness layer pay its own tax?
 
 [ECC](https://github.com/affaan-m/ECC) is the kind of repository that bends the axes of a star-history chart. Created on 18 January 2026, it stood at 246,863 stars with 37,198 forks when I pulled the GitHub API on 4 September — and it was on the daily Trending list that morning, described the way it describes itself: "The agent harness performance optimization system."
 
@@ -94,7 +94,7 @@ The monetization is disclosed and conventional: "OSS stays free. This repo is MI
   <figcaption>Plan Canvas, from the design doc: plan review moves to the browser while the agent works in the terminal. Source: <a href="https://github.com/affaan-m/ECC/blob/22e8cf01d0b54719b3a49002fab2ccbda4ff5b9e/docs/design/plan-canvas.md">https://github.com/affaan-m/ECC/blob/22e8cf01d0b54719b3a49002fab2ccbda4ff5b9e/docs/design/plan-canvas.md</a> · License: <a href="https://github.com/affaan-m/ECC/blob/22e8cf01d0b54719b3a49002fab2ccbda4ff5b9e/LICENSE">https://github.com/affaan-m/ECC/blob/22e8cf01d0b54719b3a49002fab2ccbda4ff5b9e/LICENSE</a> · Affaan Mustafa (affaan-m/ECC), MIT, commit 22e8cf01</figcaption>
 </figure>
 
-## Key Takeaways: audit a harness by its own governance standard
+## Audit a harness by its own governance standard
 
 The generalizable move in this audit is symmetry. A harness layer that writes down what a default costs is rare enough that the document doubles as a ruler. ECC did — and the moment a project states a governance standard, that standard becomes the sharpest available audit instrument for the project itself, because nobody can argue with the ruler.
 
@@ -119,13 +119,13 @@ I audited what a skill installer writes to disk in [my Archify trust audit](/pos
 
 This audit reads the repository; it does not instrument a live session. The 21,500-token figure is arithmetic on measured bytes, not a serialized-prompt capture, and a selective install profile reduces it. The 86,219-byte figure depends on the documented extraction convention; reasonable alternative treatments of multi-line YAML scalars shift the description total by under one percent. Whether each `.*` hook early-exits cheaply inside its script does not change the process-spawn count but does change its wall-clock cost, which I did not measure. The star-growth caption is the project's own chart. PR #2942 bounds combined issue-and-PR volume, not merged work. And the generative origin of the security illustrations is an inference from visible artifacts — the impossible timestamps are a fact, the generator is not named in the tree.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 1. **ECC's inventory claims are accurate.** 68 agents, 286 skills, 94 commands — independently re-counted at commit 22e8cf01, every number matches the README.
 2. **Its MCP policy is the sharpest default-connector cost rule I found in the MCP landscape, and it cuts inward.** Six default connectors were retired — leaving exactly one — because schemas tax every session; the surviving default install advertises roughly 86 KB of skill metadata and 23 lifecycle hooks that the policy's standard is never formally applied to.
 3. **Polish and evidence diverge at the images.** A security guide teaching trace-reading illustrates itself with byte-identical duplicates and a dashboard whose logs contain a thirteenth month.
 
-## 🤔 New Questions This Raises
+## New Questions This Raises
 
 1. What does a serialized Claude Code system prompt actually measure with the full ECC catalog installed — and how far does the guided selective profile cut it?
 2. If ECC wrote a `SKILL-CATALOG-POLICY.md` with the same two-part test as its connector policy, how many of the 286 skills would survive as defaults?

@@ -12,7 +12,7 @@ image:
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
 ---
 
-## does the free course still teach the field?
+## Does the free course still teach the field?
 
 Search for an AI game development course and you land on the free track this page has recommended since 2024: Hugging Face's **ML for Games**. Two years later the honest question is not whether the course is good, but whether it still describes the field a game developer is about to enter.
 
@@ -98,7 +98,7 @@ Hugging Face now runs twelve learn tracks. The one that grew most is the agents 
 
 That is not a detour from game AI. An NPC that plans, remembers, uses tools and stays in character is an agent problem wearing a costume, and the constraint engineering I keep finding in agent harnesses, such as the machine-checked teaching contracts in the [OpenMAIC audit](/posts/openmaic-pedagogy-as-code-audit/), transfers more directly to shipping an NPC than another asset-generation tutorial does.
 
-## 🎮 The classical-AI counterweight
+## The classical-AI counterweight
 
 The course's most durable unit is the one with no LLMs in it. Before reaching for a model, it is worth watching how far hand-authored systems get, because a great deal of perceived game intelligence is choreography rather than cognition.
 
@@ -114,7 +114,7 @@ The Secret Reward Systems of Dark Souls II:
 
 {% include embed/youtube.html id='4ke8D_FgAj0' %}
 
-## Key Takeaways: how I would use this course in 2026
+## How I would use this course in 2026
 
 **Take it for the map, not the build steps.** Read Units 0 to 3 for the shape of the problem, then implement against current package names. Unit 1's idea survives; its `Sentis` references do not.
 
@@ -126,7 +126,7 @@ The Secret Reward Systems of Dark Souls II:
 
 **Do not chase the certificate.** There isn't one, and the demo-validation criteria are gone too. Build a small, reviewable artifact anyway, because the portfolio outcome now has to come from you.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - The course is **formally finished**: self-paced, no future units, no certificate, content frozen since **2024-11-20** behind a repository whose 2026 commits are chores.
 - **Unity-centric, not Unity-only.** Unit 1 is Unity Sentis, Unit 3 runs in Cubzh with Lua, and the classical-AI bonus covers Unreal as a co-equal path. The promised Godot content never shipped.
@@ -135,7 +135,7 @@ The Secret Reward Systems of Dark Souls II:
 - It teaches you to make an NPC talk, not to handle grounding, sarcasm, or context loss, which the survey names as the field's live failure modes.
 - Maintained attention has shifted to the agents track, roughly 32,000 stars against 114.
 
-## 🤔 New Questions
+## New Questions
 
 - Is any current free course covering the other seven roles, particularly Game Master and Analyst, or is that material only in papers?
 - Would porting Unit 1 to `com.unity.ai.inference` and to Godot be a better contribution than writing another new tutorial?

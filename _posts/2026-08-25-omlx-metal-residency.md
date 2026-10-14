@@ -113,7 +113,7 @@ The related setting that remains is more modest and more trustworthy. oMLX defau
 
 ---
 
-## Key Takeaways: Give Every Local Agent a Residency Class
+## Give Every Local Agent a Residency Class
 
 The useful output is a workload policy, not a leaderboard position. Before tuning a local inference server, classify what work needs responsiveness and what work only needs eventual completion.
 

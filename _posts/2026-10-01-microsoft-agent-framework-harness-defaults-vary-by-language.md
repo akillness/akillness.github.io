@@ -86,7 +86,7 @@ Current Learn guidance labels background agents, file access, and looping as exp
 
 The same docs currently say a packaged Go Harness is not available. Go users can compose the corresponding agent, context-provider, compaction, and middleware pieces directly, but that is a different starting point from the Python factory or .NET HarnessAgent.
 
-## Key Takeaways: make the default set an explicit test
+## Make the default set an explicit test
 
 If I were porting an agent between Python and .NET, I would make one small compatibility test before tuning prompts. Start each implementation in a clean temporary working directory, then assert the provider set, Skills discovery, memory path, file-access scope, web-search availability, and the documented release stage of optional features. The test should use the exact package versions the app will ship, because a live Learn page and a pinned source snapshot answer different questions.
 

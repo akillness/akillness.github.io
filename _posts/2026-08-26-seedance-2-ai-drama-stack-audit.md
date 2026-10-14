@@ -231,7 +231,7 @@ This does not replace a legal review or a security test. It does stop the most c
 
 ---
 
-## Key Takeaways: Choose a Production Contract, Not a Star Count
+## Choose a Production Contract, Not a Star Count
 
 ### My practical selection map
 

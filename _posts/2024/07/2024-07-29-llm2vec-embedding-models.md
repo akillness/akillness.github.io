@@ -11,7 +11,7 @@ image:
   alt: "Diagram showing the three qualifiers the LLM2Vec paper attached to its MTEB claim - unsupervised only, public-data-only models, as of 24 May 2024 - each crossed out above the unqualified claim this page published"
 ---
 
-## what happens to a benchmark claim with an expiry date on it?
+## What happens to a benchmark claim with an expiry date on it?
 
 LLM2Vec's authors did something unusual. They wrote their headline result with a date stamp inside the sentence: state of the art on MTEB among models trained only on publicly available data, **"as of May 24, 2024"**.
 
@@ -100,7 +100,7 @@ In March 2026 the same group published **LLM2Vec-Gen: Generative Embeddings from
 
 Appendix A lists three limitations, and the first one aged into the main practical objection: a 7B model emits **4096-dimensional** vectors against BERT's 768, which the authors note makes them "more memory and compute intensive for creating vector indexes for large document collections." They also flag possible pre-training contamination they could not rule out, and that everything was evaluated **in English only**.
 
-## Key Takeaways: what I take from this
+## What I take from this
 
 **Treat a dated claim as perishable food.** The authors wrote "as of May 24, 2024" because they knew. Any summary that removes that date is manufacturing a stronger claim than the source. When re-publishing a benchmark result, carry the qualifiers or do not carry the result.
 
@@ -112,7 +112,7 @@ Appendix A lists three limitations, and the first one aged into the main practic
 
 **Price the index, not the model.** 4096-dimensional vectors cost more than five times what 768-dimensional ones cost to store and search. The authors said so in 2024 and it is still the first thing that breaks a large deployment.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - The paper claimed **unsupervised** MTEB state of the art, and public-data-only state of the art **"as of May 24, 2024"**, while reporting itself **6th overall**. This page's old "New SOTA on MTEB" was never accurate.
 - Between the two peer encoders, the supervised variant pulls **96,837** downloads a month against **152** for the unsupervised one, roughly 637 to 1. The MNTP checkpoint is not a valid comparison point, since both encoders are adapters layered on it.
@@ -120,7 +120,7 @@ Appendix A lists three limitations, and the first one aged into the main practic
 - **The thesis was vindicated as a viable path**, not as a takeover: Qwen3-Embedding, EmbeddingGemma, gte-Qwen2 and NV-Embed are decoder-derived and heavily used, while encoder-lineage models such as all-MiniLM-L6-v2 still lead on raw download volume.
 - The authors' own first limitation, 4096-dimensional vectors, remains the practical cost ceiling.
 
-## 🤔 New Questions
+## New Questions
 
 - Would Bi plus MNTP plus SimCSE still add anything on top of a model like Qwen3-Embedding, or does direct embedding training absorb all of it?
 - Of the 126,189 MNTP downloads not explained by either encoder, how many are research reproduction versus shipped fine-tunes?

@@ -103,7 +103,7 @@ Two more committed files are worth naming, because they are the reason this audi
   <figcaption>The product itself: a ranked call graph over 120 of 607 symbols, with the legend naming the root, ranker and top-k that produced it and the rules file saved beside it &mdash; Image from redhat-et/ripwire (Apache-2.0), commit 1cf3086e. Source: <a href="https://github.com/redhat-et/ripwire/blob/1cf3086e8f7c1eb67368bca90a86e5438d911517/README.md">https://github.com/redhat-et/ripwire/blob/1cf3086e8f7c1eb67368bca90a86e5438d911517/README.md</a>. Publisher: redhat-et (redhat-et/ripwire). Licence: <a href="https://github.com/redhat-et/ripwire/blob/1cf3086e8f7c1eb67368bca90a86e5438d911517/LICENSE">Apache-2.0</a>.</figcaption>
 </figure>
 
-## Key Takeaways: A drift gate's blast radius is its file list, not its idea
+## A drift gate's blast radius is its file list, not its idea
 
 The useful lesson here is not "ripwire has a bug". Six is a small delta on a number no reader will act on, and the project caught this failure mode twice already without anyone outside noticing. The lesson is structural, and it generalises to any repository that publishes a derived figure.
 
@@ -122,7 +122,7 @@ For the mirror image of this problem — a headline number with no recountable a
   <figcaption>Two lenses over one graph; the quality lens is the surface whose findings the committed suppression ledger records &mdash; Image from redhat-et/ripwire (Apache-2.0), commit 1cf3086e. Source: <a href="https://github.com/redhat-et/ripwire/blob/1cf3086e8f7c1eb67368bca90a86e5438d911517/README.md">https://github.com/redhat-et/ripwire/blob/1cf3086e8f7c1eb67368bca90a86e5438d911517/README.md</a>. Publisher: redhat-et (redhat-et/ripwire). Licence: <a href="https://github.com/redhat-et/ripwire/blob/1cf3086e8f7c1eb67368bca90a86e5438d911517/LICENSE">Apache-2.0</a>.</figcaption>
 </figure>
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - At `1cf3086e`, the loop in `test/regression.sh:271` names **612** gate scripts; all eight marked sites across `README.md`, `docs/EVALS.md` and `present/deck5_ripwire_build.js` agree at 612, and the committed `ripwire-showcase.pdf` and `.pptx` both say **606**.
 - The artifacts were correct when exported: at `29cc420a` the loop named 606 too. The gap opened six hours and thirty-five minutes later, at `63f62630`, and the binaries are rebuilt by hand rather than by CI.
@@ -130,7 +130,7 @@ For the mirror image of this problem — a headline number with no recountable a
 - `test/deckcheck.sh` states the artifacts "cannot be" scanned "being binary", while `test/ripwirepubliccheck.sh:106–134` extracts and greps both of them — the capability exists, it is just pointed at leaked paths instead of stale counts.
 - If you publish a built artifact, treat it as a claim surface. Gate the file a reader opens, not only the file a generator reads.
 
-## 🤔 New Questions This Raises
+## New Questions This Raises
 
 - What is the right default for committed build artifacts in a claims-disciplined repository: regenerate them in CI, gate their extracted text, or stop committing them and attach them to releases instead?
 - `ripwirepubliccheck.sh` skips loudly when `pdftotext` is missing. Should a claim gate over binaries be allowed to skip at all, or should the extractor become a hard prerequisite of the suite?

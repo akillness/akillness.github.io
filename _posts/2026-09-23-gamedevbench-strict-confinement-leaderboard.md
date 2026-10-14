@@ -119,7 +119,7 @@ The paper's failure analysis is a good reminder of what the benchmark does catch
 
 That is the kind of error an engine-backed validator exists to catch, and it is why an engine-backed benchmark is worth protecting from measurement drift.
 
-## Key Takeaways: Read the board as two tables
+## Read the board as two tables
 
 The September changes make GameDevBench more trustworthy going forward. The problem is the table, not the box. Right now one list ranks runs from two isolation eras, and the leaderboard itself does not mark which era a row belongs to.
 
@@ -145,7 +145,7 @@ An internal agent benchmark for Unity or Godot can easily start where GameDevBen
 
 A regime change should start a new table, or at least add a column. The same discipline applies to any benchmark claim; I traced a similar provenance question in the [Moli benchmark provenance audit](/posts/moli-benchmark-provenance-audit/). If your benchmark runs agents in containers, the [AIO Sandbox confinement contract audit](/posts/aio-sandbox-confinement-contract-audit/) looks at what a sandbox README promises versus what it enforces.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - GameDevBench's new top row, **GPT 6 Astra (High) at 229/333 (68.8%)**, is the only leaderboard entry run under the strict bubblewrap confinement added on 2026-09-01.
 - **17 of 18 rows** were published before that box existed, when the runner used a filtered temp-directory copy and each agent CLI's own permission mode.
@@ -160,7 +160,7 @@ A regime change should start a new table, or at least add a column. The same dis
 - Only three runs have per-run folders in the repository, so most rows could not be checked against run artifacts.
 - The interval comparison is arithmetic on published intervals, not a paired significance test.
 
-## 🤔 New Questions
+## New Questions
 
 - Will the maintainers re-run the top pre-box rows under strict confinement, and how far would the scores move?
 - Should the leaderboard add a regime column, or split into dated tables?

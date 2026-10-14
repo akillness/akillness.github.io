@@ -154,7 +154,7 @@ Here is the part the list framing obscures. These two repositories are not compe
 
 Both were sizeable projects at retrieval — TradingAgents around 105,000 stars, LibreChat around 43,000 — and those retrieval-time counts say something about attention and nothing about whether either fits your job. Scoring them against each other is a category error. The only defensible comparison is each project against the specific job you are trying to stop paying for.
 
-## Key Takeaways: Open source moves the operator, not the bill
+## Open source moves the operator, not the bill
 
 The useful reframing is a single sentence: **open source changes who runs and maintains an AI workflow; it does not by itself remove the model, data or hosting cost, and it does not remove the operational responsibility.**
 
@@ -182,7 +182,7 @@ Before treating any repository as a replacement for something you pay for, answe
 
 Steps two and three are where the same running-cost question shows up one layer down: [ECC Retired Six MCP Servers Over a Tax Its Catalog Still Pays](/posts/ecc-context-tax-audit/) is an agent harness whose own connector policy argues that every default surface charges rent on each session. For the operational-responsibility half of the checklist, [CAO's Honest Trust Boundary and Its Phantom Auth Switch](/posts/cao-trust-boundary-audit/) shows what "self-hosted" hands back to the operator in a project that documents its boundary unusually well.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - TradingAgents at `be952b8e` states its own scope directly: a multi-agent framework "designed for research purposes" that "is not intended as financial, investment, or trading advice," with a Reproducibility section warning that runs vary and published backtest figures are not guaranteed to reproduce.
 - Its install path is a Python 3.12 source install or Docker, and its Required APIs section expects operator-supplied model keys plus a data-provider key such as `ALPHA_VANTAGE_API_KEY`. On a hosted provider those calls bill to your credential; the README also documents local servers that need no key and OpenAI-compatible endpoints that need one only if the endpoint requires it, where the cost becomes hardware you run. The bill's shape is a configuration choice — not an absence.
@@ -191,7 +191,7 @@ Steps two and three are where the same running-cost question shows up one layer 
 - Licences are source notes here: Apache-2.0 for TradingAgents, MIT for LibreChat. They govern use of the code, not model spend, data contracts, uptime or the duty to evaluate output.
 - The X post was discovery context only, and one URL served two revisions at once: the title metadata carried an older three-shortener revision whose third link resolved to the post's own status URL, while the rendered revision was an edited expansion with ten shorteners resolving to ten distinct repositories, HyperFrames among them. Reading a list post means recording which revision you read.
 
-## 🤔 New Questions This Raises
+## New Questions This Raises
 
 - If a project's own README carries a research-only disclaimer, what is the honest way to present it internally to a stakeholder who arrived via a "replace your subscription" list?
 - What is the smallest useful pilot that measures the running cost of a multi-agent workflow such as TradingAgents, without treating either the pilot or the framework as a strategy?

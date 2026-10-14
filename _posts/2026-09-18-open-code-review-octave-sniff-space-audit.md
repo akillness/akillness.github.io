@@ -9,7 +9,7 @@ image:
   alt: "Decision path for a .m file in open-code-review: the glob layer maps it to matlab.md, the sniffer reads the first non-blank line, and a prefix match rewrites the result to objc.md."
 ---
 
-## 🤔 Curiosity
+## What is a .m file before anyone reviews it?
 
 A file extension is a weak signal, and `.m` is the weakest of all. MATLAB, Octave, and Objective-C all use it. Any review tool that maps extensions to rule sets has to decide what a `.m` file is before it can say anything useful about it.
 
@@ -24,7 +24,7 @@ So the question is narrow and answerable from source: does the prefix list actua
   <figcaption>Feature highlights from the project README. Source: <a href="https://github.com/alibaba/open-code-review/blob/438a5c20f6d4d92b0dada45c9ea7f42d8354a18f/README.md">https://github.com/alibaba/open-code-review/blob/438a5c20f6d4d92b0dada45c9ea7f42d8354a18f/README.md</a> · License: <a href="https://github.com/alibaba/open-code-review/blob/438a5c20f6d4d92b0dada45c9ea7f42d8354a18f/LICENSE">https://github.com/alibaba/open-code-review/blob/438a5c20f6d4d92b0dada45c9ea7f42d8354a18f/LICENSE</a> · alibaba/open-code-review Contributors · Image from alibaba/open-code-review at 438a5c2, Apache-2.0.</figcaption>
 </figure>
 
-## 📚 Retrieve
+## Technical Analysis: Two layers decide the rule set
 
 Resolution happens in two layers, and reading them in order matters.
 
@@ -75,7 +75,7 @@ Five of the twelve signals are reachable from a plain comment. The guard holds f
   <figcaption>Product demo screenshot shipped in the repository's pages assets. Source: <a href="https://github.com/alibaba/open-code-review/blob/438a5c20f6d4d92b0dada45c9ea7f42d8354a18f/pages/public/images/blog/introducing-ocr-blog/demo.png">https://github.com/alibaba/open-code-review/blob/438a5c20f6d4d92b0dada45c9ea7f42d8354a18f/pages/public/images/blog/introducing-ocr-blog/demo.png</a> · License: <a href="https://github.com/alibaba/open-code-review/blob/438a5c20f6d4d92b0dada45c9ea7f42d8354a18f/LICENSE">https://github.com/alibaba/open-code-review/blob/438a5c20f6d4d92b0dada45c9ea7f42d8354a18f/LICENSE</a> · alibaba/open-code-review Contributors · Image from alibaba/open-code-review at 438a5c2, Apache-2.0.</figcaption>
 </figure>
 
-## 💡 Innovation
+## The two halves of one decorator fold in opposite directions
 
 The interesting part is not that a heuristic has an edge. It is that the two halves of the same decorator fold in opposite directions.
 
@@ -103,7 +103,7 @@ This is the same failure shape I wrote about in [the Orca telemetry audit](/post
   <figcaption>Benchmark chart published in the project README. Source: <a href="https://github.com/alibaba/open-code-review/blob/438a5c20f6d4d92b0dada45c9ea7f42d8354a18f/README.md">https://github.com/alibaba/open-code-review/blob/438a5c20f6d4d92b0dada45c9ea7f42d8354a18f/README.md</a> · License: <a href="https://github.com/alibaba/open-code-review/blob/438a5c20f6d4d92b0dada45c9ea7f42d8354a18f/LICENSE">https://github.com/alibaba/open-code-review/blob/438a5c20f6d4d92b0dada45c9ea7f42d8354a18f/LICENSE</a> · alibaba/open-code-review Contributors · Image from alibaba/open-code-review at 438a5c2, Apache-2.0.</figcaption>
 </figure>
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - At `438a5c2`, `**/*.m` resolves to `matlab.md` by default, and `sniffer.go` overrides that to `objc.md` when the first non-blank line matches one of twelve prefixes.
 - Five of those twelve prefixes start with `#`. The GNU Octave manual states that `#` opens a comment and that any following text is ignored, so ordinary Octave comments such as `#import raw counts` reach the Objective-C branch.
@@ -112,7 +112,7 @@ This is the same failure shape I wrote about in [the Orca telemetry audit](/post
 - The blast radius is total, not partial. `matlab.md` and `objc.md` share zero identical rule bullets across 95 and 109 lines.
 - Case sensitivity is not the problem. `resolveDetail` lowercases both sides before matching.
 
-## 🤔 New Questions
+## New Questions
 
 How often does the gap fire in practice? That needs a corpus of real Octave `.m` files, counted by whether their first non-blank line starts with `#` and no space. I did not measure it, so I will not guess at it.
 

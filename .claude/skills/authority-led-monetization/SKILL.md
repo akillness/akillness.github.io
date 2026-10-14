@@ -2,7 +2,7 @@
 name: authority-led-monetization
 description: >
   Apply the authority-led monetization contract to every Fodev JEO article: one expert
-  topic authority basis, one original contribution, an honest visible AI-role disclosure,
+  topic authority basis, one original contribution, an honest AI-role disclosure recorded in the brief and published site-wide,
   one internal related-article next action, and an unmeasured-baseline measurement plan.
   Use when the editorial-publishing-harness prepares, reviews, or validates an article
   package, or when a user asks how this blog earns, why an article is monetizable, or how
@@ -38,7 +38,7 @@ Before the writer starts, the editorial director serializes `_workspace/current/
 1. `run_id` and `selected_candidate_id` to the current run and the single selected candidate.
 2. `content_pillar` to a declared policy pillar (and the candidate's pillar when recorded).
 3. `authority_basis` (`primary-source-analysis`) and `original_contribution` (comparative-analysis, implementation-audit, operational-synthesis, or decision-framework) to verified or inferred evidence-pack claim ids — never `unverified` ones.
-4. `ai_role` with `research_assistance: true`, `draft_assistance: true`, judgment owned by `evidence-gated-editorial-harness`, `first_hand_experience_claimed: false`, and a >=40-character disclosure that must appear verbatim in the article body.
+4. `ai_role` with `research_assistance: true`, `draft_assistance: true`, judgment owned by `evidence-gated-editorial-harness`, `first_hand_experience_claimed: false`, and a >=40-character disclosure recorded in the brief. Since 2026-10-14 the disclosure is published once, site-wide, at `/about/#editorial-method-and-ai-assistance` (linked from every current article by the post layout); it must not be pasted into the article body as a per-post blockquote.
 5. `next_action` as one `related-article` path matching `/posts/<slug>/` that appears in the article body with a concrete reader value.
 6. `measurement` with `primary_kpi: work-with-me-pageviews`, `leading_signal: organic-search-clicks`, an `unmeasured` baseline, `null` numbers, `readout_after_days: 28`, and `result_status: not-measured`. Outcome numbers are written only by a later readout against real Search Console/Analytics data, never at publish time.
 

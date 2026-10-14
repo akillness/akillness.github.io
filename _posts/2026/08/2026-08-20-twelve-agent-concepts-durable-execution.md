@@ -269,7 +269,7 @@ graph TD
 
 ---
 
-## ⚖️ Where I Push Back
+## Where I Push Back
 
 Three honest criticisms, because a list this widely shared deserves scrutiny rather than applause.
 
@@ -288,7 +288,7 @@ _Seconds versus months. Read the diff versus no test for it. Just revert versus 
 
 ---
 
-## 🎯 What I Am Taking Into My Own Harness
+## What I Am Taking Into My Own Harness
 
 | Insight | Why it matters | What I am doing with it |
 | :--- | :--- | :--- |
@@ -316,7 +316,7 @@ Twelve links, six paywalls, one 200-line reimplementation later, that holds up. 
 
 ---
 
-## 📚 References
+## References
 
 **The Source Post**
 - [Neo Kim's LinkedIn post — 12 concepts for AI agents](https://www.linkedin.com/feed/update/urn:li:activity:7496731558175780864/) (384 reactions, 67 reposts at time of reading)

@@ -161,7 +161,7 @@ Metadata is not a legal judgment. A README may add terms that its front matter o
 
 That lesson matches my [Seedance 2.0 stack audit](/posts/seedance-2-ai-drama-stack-audit/): public source, local execution, and commercial permission are three independent axes. “Open weights” only answers one of them.
 
-## Key Takeaways: Replace the LoRA Folder with a Five-Gate Contract
+## Replace the LoRA Folder with a Five-Gate Contract
 
 The most reusable output of this audit is not a better top-19 ranking. It is a manifest I can review before any video-model artifact enters a production graph.
 
@@ -250,7 +250,7 @@ The baseline must use the same workflow without the adapter. That is the only wa
 
 Until that benchmark exists, I can say **what the artifacts are**, not which one is best.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **The supplied 19-item list contains 15 H3 diffusion adapters and four different artifact types.** Z-Image-native and 10Eros-Max are full checkpoints; Prompt Rewriter adapts Qwen3-VL; Latent Upscaler is a separate 3D-convolution model.
 - **An H3 LoRA name does not define compatibility.** FL2VA/Ref2VA, T2V/reference scope, runtime format, custom nodes, steps, sampler, shifts, and app version all matter.
@@ -260,7 +260,7 @@ Until that benchmark exists, I can say **what the artifacts are**, not which one
 - **Performance claims remain card claims here.** I did not generate outputs or reproduce the reported Turbo-SLA or RAVEN results.
 - **A manifest beats a folder.** Treat every derivative as a versioned contract that can fail closed when license, loader, base, or sampler data is missing.
 
-## 🤔 New Questions This Raises
+## New Questions This Raises
 
 1. Can the community publish a machine-readable derivative manifest that Hugging Face and ComfyUI validate before a workflow loads weights?
 2. Should a model hub inherit upstream territory and redistribution notices automatically instead of relying on each derivative author's metadata?

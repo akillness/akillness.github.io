@@ -95,7 +95,7 @@ One more boundary deserves its classification. Writes to the machine-wide shared
   <figcaption>Agent-to-agent messaging &mdash; the docs treat sibling metadata as "agent-authored, untrusted content", the same trust class as these messages &mdash; Multi-role messaging diagram from the awslabs/cli-agent-orchestrator repository, Apache-2.0 licensed, pinned at commit ce18db23. Source: <a href="https://github.com/awslabs/cli-agent-orchestrator/tree/ce18db239553407c01a817aba52129fc54657818">https://github.com/awslabs/cli-agent-orchestrator/tree/ce18db239553407c01a817aba52129fc54657818</a>. Publisher: Amazon Web Services Labs (awslabs/cli-agent-orchestrator contributors). Licence: <a href="https://github.com/awslabs/cli-agent-orchestrator/blob/ce18db239553407c01a817aba52129fc54657818/LICENSE">https://github.com/awslabs/cli-agent-orchestrator/blob/ce18db239553407c01a817aba52129fc54657818/LICENSE</a>.</figcaption>
 </figure>
 
-## Key Takeaways: What this classification is worth in production
+## What this classification is worth in production
 
 The audit yields a three-way classification that transfers to any orchestrator you evaluate:
 
@@ -120,14 +120,14 @@ Three decisions follow for anyone running CAO or a similar orchestrator:
 
 This is a static audit of one pinned commit plus its documentation; I did not run `cao-server` or verify route behavior dynamically, so behavioral statements above rest on the quoted code and docstrings rather than on observed traffic. The `CAO_AUTH_ENABLED` finding is scoped to environment-variable reads in the pinned tree `ce18db23`; the two `api/main.py` occurrences are internal docstrings where shorthand is more defensible than in the two operator-facing docs. The repository moves daily — the same-day HEAD was itself a security-docs clarification — so any coordinate here may have moved by the time you read it. Nothing in this audit is a vulnerability report: every posture described is documented by the project itself, and the phantom switch is documentation drift, not an exploitable flaw.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **CAO defends the network edge and says so**: loopback bind, TrustedHost, CWE-1385 Origin validation on the PTY WebSocket, and an RS256-only OAuth 2.1 layer with a fail-closed 24-hour JWKS staleness bound — when an IdP is configured.
 - **Inside the edge there is one trust domain**: auth is default-off with full scopes for every caller, `group` is "not a security boundary", scope pre-checks are self-described "UX gates", and each fleet node is "an unauthenticated command-execution surface" guarded by private networking.
 - **Four references teach a switch that does not exist**: `CAO_AUTH_ENABLED` appears in two operator docs and two docstrings, but no code in the pinned tree reads it — auth activates on `AUTH0_DOMAIN`/`CAO_AUTH_JWKS_URI` presence, and setting the phantom variable fails silently.
 - **Activation-by-presence breeds invented booleans**: when "security on" has no named flag, documentation converges on one anyway — grep your own docs for the switch your writers will invent.
 
-## 🤔 New Questions
+## New Questions
 
 - Would an explicit `CAO_AUTH_ENABLED` boolean (validated, erroring when set without an IdP) cost anything beyond one constant — and would upstream accept it as the cheaper fix over correcting four prose sites that drifted the same way?
 - What is the minimal per-agent privilege separation (OS users? rootless containers per provider CLI?) that preserves CAO's tmux ergonomics while making `group` labels coincide with an actual boundary?

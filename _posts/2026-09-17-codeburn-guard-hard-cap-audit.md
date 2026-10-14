@@ -92,7 +92,7 @@ Both behaviours are consequences of the fail-open rule the README states out lou
   <figcaption>The optimize report from the README flags projects and sessions where spend looked like waste; the guard's SessionStart opener reuses these flags &mdash; Image from getagentseal/codeburn (MIT LICENSE at 3684f1d), commit 3684f1d. Source: <a href="https://github.com/getagentseal/codeburn/blob/3684f1d5f0824cbf2cb6112d9c00b02eb5d4066d/README.md">https://github.com/getagentseal/codeburn/blob/3684f1d5f0824cbf2cb6112d9c00b02eb5d4066d/README.md</a>. Publisher: CodeBurn (getagentseal/codeburn). Licence: <a href="https://github.com/getagentseal/codeburn/blob/3684f1d5f0824cbf2cb6112d9c00b02eb5d4066d/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## Key Takeaways: Treat the guard as a signal, and put the control where tokens are billed
+## Treat the guard as a signal, and put the control where tokens are billed
 
 The useful reframing is that CodeBurn guard is a **signal** with one **tool-level brake**, not a **budget control**. Three consequences for anyone running it:
 
@@ -114,14 +114,14 @@ For readers who followed the [LLM Space API-key file-mode audit](/posts/llm-spac
 - Pricing coverage was read from the resolution code, not enumerated; I did not measure how many models in a real transcript set land in the fallback or at $0.
 - Everything above is pinned to 3684f1d. The guard module header says the hook protocol was checked on 2026-07-03; the hook documentation I quoted is the live page on 2026-09-17, so either side may move.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - At 3684f1d, the "hard cap" is one `permissionDecision: "deny"` per tool call after the cap is crossed, while the hook contract's `continue: false` would make Claude stop "processing entirely after the hook runs"; the guard never emits the `continue` field.
 - The guard is fail-open by design and says so; the undocumented cost of that design is a total that can freeze (unreadable transcript) or reset (shorter transcript) without a signal.
 - Unpriced models contribute $0 to the guarded total, and the only warning goes to hook stderr on an exit-0 path the contract does not surface.
 - Use the guard as a per-session signal and keep the real spend limit at the provider.
 
-## 🤔 New Questions
+## New Questions
 
 - Would emitting `continue: false` with a `stopReason` at the hard cap, instead of a per-tool deny, match the README's sentence without breaking the fail-open rule for guard errors?
 - Should `calculateCost` return an "unpriced" marker instead of 0, so the guard can deny on unknown spend rather than under-count it?

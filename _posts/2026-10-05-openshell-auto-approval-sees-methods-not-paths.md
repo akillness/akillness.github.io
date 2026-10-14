@@ -120,7 +120,7 @@ NVIDIA's own governance interceptor example goes further. It denies `SubmitPolic
 
 What I did not find in the README, the advisor, prover, and architecture docs, the governance example, or RFC 0002 is the specific consequence: the risk check is method-granular while REST rules are path-granular, so the docs' own advice to propose "the narrowest path" is advice the auto gate does not verify.
 
-## Key Takeaways: Treat auto mode as method-level trust
+## Treat auto mode as method-level trust
 
 The finding reduces to one sentence for operators: **with auto mode on, widening only the path of a credentialed method the agent already holds, on the same binary, host, and port, adds no prover finding. On an unflagged destination like `api.github.com:443` it then passes both risk gates, and approval rests on the remaining state, policy, and validated-merge conditions.** That is my reading of the code, not an observed run. How much that matters depends on what the credential itself is allowed to do upstream; the sandbox policy is only the inner fence.
 
@@ -147,7 +147,7 @@ This is the same lesson as other agent gates audited on this blog: the gate's un
 - My search for boundary-check callers covered four file types at one commit. A later commit, or an out-of-tree interceptor, could wire it in.
 - This is not a vulnerability report. Auto mode is opt-in, the advisor is off by default, the docs define `capability_expansion` exactly as a new HTTP method, and a person reviewing in manual mode sees the full rule.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 | Insight | Implication | Next step |
 |---|---|---|
@@ -156,7 +156,7 @@ This is the same lesson as other agent gates audited on this blog: the gate's un
 | The released boundary check rejected `PUT /repos/**` with counterexample `PUT /repos/a` | The project already has a path-aware check | Run it in CI and on live sandbox policy against an exact-path ceiling |
 | In a search of the pinned source, no gateway code calls the boundary check | The two provers answer different questions | Add a validate interceptor on `SubmitPolicyAnalysis` if you need auto mode |
 
-## 🤔 New Questions
+## New Questions
 
 - Should a credentialed capability key include a normalized path pattern, and how would that interact with the REST shapes the boundary check already returns `unsupported` for, such as `?` or bracket expressions?
 - Could the gateway accept an operator boundary file and run the boundary check before any automatic approval, as RFC 0002's "org ceiling" suggests?

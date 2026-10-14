@@ -99,7 +99,7 @@ The CI story completes the picture. The `harness sign` help text says the signin
   <figcaption>The Studio's Compose flow offers "Witness signing" as a selectable primitive alongside CLI, memory namespace, and release gates &mdash; Screenshot from ruvnet/metaharness (MIT License), commit d5833dc6. Source: <a href="https://github.com/ruvnet/metaharness/tree/d5833dc6512ac1adeeef91a331c29055cd8a4dbb/docs/web-ui">https://github.com/ruvnet/metaharness/tree/d5833dc6512ac1adeeef91a331c29055cd8a4dbb/docs/web-ui</a>. Publisher: RuvNet (ruvnet/metaharness). Licence: <a href="https://github.com/ruvnet/metaharness/blob/d5833dc6512ac1adeeef91a331c29055cd8a4dbb/LICENSE">MIT</a>.</figcaption>
 </figure>
 
-## Key Takeaways: Reachability is part of the feature
+## Reachability is part of the feature
 
 The interesting failure here is not "project overstates security" — that story is common. It is that every individual layer behaves defensibly, and the composition still ships a provenance feature whose median real-world outcome is a shape check:
 
@@ -121,7 +121,7 @@ This is the same failure family I found in [SkillHub's observer-mode scanner](/p
 
 For MetaHarness adopters today, the practical read: treat generated harnesses as unsigned artifacts, because that is what the shipped toolchain produces; rely on npm's own provenance attestations where you need build authenticity; and watch the bridge exports — wiring `witnessSign`/`witnessVerify` through `kernel-wasm` plus pinning a countersignature key would convert this from a labeled placeholder into the feature the README already describes.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **The witness signer exists but is unreachable from the shipped product**: the wasm bridge exports seven functions, none of them witness operations, and the napi and TypeScript kernel surfaces contain zero witness code at `d5833dc6`.
 - **Every fallback is individually honest and collectively misleading**: placeholder `'a'`/`'b'` signatures, `valid: true` + `unverified: true` degraded verification, validate exit 0 on a missing witness, and a publish gate that accepts witness-less harnesses.
@@ -129,7 +129,7 @@ For MetaHarness adopters today, the practical read: treat generated harnesses as
 - **ADR-011's trust-anchor design (countersignature, rotation, temporal history, RFC 8785) has zero implementation hits** in shipped sources, and the one properly pinned Ed25519 key in the tree protects the vendor's meta-proxy binary, not user harnesses.
 - **When auditing provenance features, inventory the bridge exports first** — implementation quality tells you nothing about whether any user invocation performs cryptography.
 
-## 🤔 New Questions This Raises
+## New Questions This Raises
 
 - When the bridge gap closes, will verification adopt ADR-011's countersignature, or ship self-anchored verification first — and will the README distinguish the two?
 - How many other agent-tooling projects advertise signing whose verification degrades to shape checks when an optional native component is absent?

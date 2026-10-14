@@ -121,7 +121,7 @@ Counting the sources restores a structure the README flattens. The crawl, agent-
 
 That third harness is, from a reader's point of view, the most trustworthy of the three, because it runs on the code under review rather than on a build from August. It is also the one whose numbers are not in the README.
 
-## Key Takeaways: Read a vendor benchmark section by restoring its provenance columns
+## Read a vendor benchmark section by restoring its provenance columns
 
 The practical output of this audit is a checklist, because the pattern is not specific to Moli. Any project that imports charts from a benchmark repository into a README will, over time, drift from the build that was measured and will be tempted to compose one figure from several runs. Before a chart from a README enters a comparison document, restore four columns the README usually drops.
 
@@ -145,7 +145,7 @@ For readers who followed the [CodeBurn hard-cap audit](/posts/codeburn-guard-har
 - The intersection argument in the resource section is labelled as inference; the card publishes the counts but not the difficulty distribution of the intersection.
 - The numbers attributed to the shipped chart image were read from the rendered labels of the raster at its full 3000×1720 resolution; the image carries no data table, so "770 MiB" is what the picture prints, not a value from a report.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - The README's efficiency map, as its alt text and prose describe it, combines pass rates from a 1,928-task, k=3 run with memory medians from a 557-task, k=5 run; the resource card that produced the memory numbers says functional scores and resource cost are never blended.
 - The chart image that actually ships at d56bbd7 shows different numbers from that caption (770, 71, 69 and 38 MiB; Obscura 57.8%, Lightpanda 44.5%), was replaced on 2026-09-13 without a README change, and traces to no report file the README links.
@@ -153,7 +153,7 @@ For readers who followed the [CodeBurn hard-cap audit](/posts/codeburn-guard-har
 - The crawl test's "meaningful content" is a 256-byte visible-text floor after marker checks, set in `top_sites.py`; the README does not state it, and the tree holds the target lists but not the run.
 - A third, per-pull-request harness (Spider Bench) exists and is the only one that measures the code under review; its numbers are not in the README.
 
-## 🤔 New Questions
+## New Questions
 
 - Would rerunning the four-engine Lexbench corpus at v1.1.7 move Moli's 80.71%, and in which subsets? The `l1.playwright` (96/142) and `l1.puppeteer` (96/143) rows are where the 0.1.1 build lost most ground.
 - How does the all-pass intersection's difficulty compare with the full 557-task corpus? Publishing per-task CPU and PSS for all attempts, not only the intersection, would answer it without a new run.

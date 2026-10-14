@@ -108,7 +108,7 @@ One more drift is worth knowing about. At the same tag, `wiki/index.md` still sh
   <figcaption>In this screenshot, savings are reported in tokens and dollars, and the Compression Quality card reports waste signals, not answers. Source: <a href="https://github.com/headroomlabs-ai/headroom/blob/d13e1966f820220b482a33c30bde1e926743939a/docs/screenshots/subscription_window_active.png">https://github.com/headroomlabs-ai/headroom/blob/d13e1966f820220b482a33c30bde1e926743939a/docs/screenshots/subscription_window_active.png</a>. Publisher/creator: headroomlabs-ai/headroom contributors. License: <a href="https://raw.githubusercontent.com/headroomlabs-ai/headroom/d13e1966f820220b482a33c30bde1e926743939a/LICENSE">https://raw.githubusercontent.com/headroomlabs-ai/headroom/d13e1966f820220b482a33c30bde1e926743939a/LICENSE</a>. Attribution: headroomlabs-ai/headroom contributors, docs/screenshots/subscription_window_active.png, Apache License 2.0, pinned at tag v0.39.1 (d13e1966).</figcaption>
 </figure>
 
-## Key Takeaways: How to read a compression benchmark
+## How to read a compression benchmark
 
 My inference from the three reruns is this: in the configuration I reproduced, the GSM8K and TruthfulQA rows compare two runs that send the model the same messages. Their deltas therefore measure the run-to-run variation of the upstream model, not the effect of compression on answers. That is consistent with the README's own reading of the TruthfulQA +0.030 as noise. It does not mean the published run was misreported. I do not know the model version, lm-eval version, proxy profile, or environment behind the published table, and a different setup could compress these prompts.
 
@@ -145,7 +145,7 @@ This is the same lesson I keep finding in agent benchmarks. In the [Moli audit](
 - I used the default proxy started the way the suite starts it. Other savings profiles or environment variables may behave differently, and I did not trace which internal gate declined these prompts.
 - The published table's environment is undocumented, so I cannot say the same thing happened in that run. The reruns were also taken on one machine, on one day.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 | Insight | Implication | Next step |
 |---|---|---|
@@ -154,7 +154,7 @@ This is the same lesson I keep finding in agent benchmarks. In the [Moli audit](
 | The suite records no compression ratio for lm-eval rows | "No Accuracy Loss" there is not evidence about compressed context | Ask for accuracy paired with compression ratio |
 | Headroom's CI already flags ~0% compression as meaningless for recall | The right rule exists in the repo | Apply the same guard to the README table |
 
-## 🤔 New Questions
+## New Questions
 
 - Which savings profile and proxy environment produced the published GSM8K and TruthfulQA numbers?
 - Would MMLU, ARC-Challenge, or HumanEval prompts trigger compression, given that they are also short and mostly prose?

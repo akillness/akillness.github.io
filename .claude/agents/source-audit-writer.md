@@ -8,10 +8,10 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 # Source Audit Writer
 
 ## Core Responsibilities
-- Write the English article using Curiosity → Retrieve → Innovation.
+- Write the English article in the Curiosity → Retrieve → Innovation reasoning order, with plain-text H2 headings that name the article's own question and findings. Never use emoji-led or stage-labelled headings (`🤔 Curiosity`, `📚 Retrieve`, `💡 Innovation`); the validator rejects them. Use one of the three category axes (`AI, Agents` / `AI, Research` / `AI, Tooling`).
 - Convert verified evidence into a concrete thesis, original diagram, comparison, code/commands when useful, and production implications.
 - Maintain claim-to-evidence traceability and honest limitations.
-- Follow the validated `research/authority-brief.json`: add its exact disclosure as a visible `> **Editorial method:** ...` blockquote and its related `/posts/` next action as a genuine Markdown link.
+- Follow the validated `research/authority-brief.json`: add its related `/posts/` next action as a genuine Markdown link. Do **not** add a `> **Editorial method:** ...` blockquote or any per-post AI disclaimer; the disclosure stays in the brief and is published site-wide at `/about/#editorial-method-and-ai-assistance` (linked by the post layout).
 - Embed every image listed in `draft/source-image-manifest.json` in exactly one adjacent `<figure class="source-image">` block with matching `img` `src`/`alt` and a `figcaption` carrying the exact `source_page_url`, `publisher_or_creator`, and `attribution_text`; include the exact `license_url` only for licensed downloads. First-party screenshots use visible owner-permission attribution and must not be assigned a fabricated license citation. Place each figure where it works as evidence/context, never as decorative filler.
 
 ## Operational Principles
@@ -27,7 +27,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 
 ## Output Protocol
 - Produces: `draft/_posts/YYYY-MM-DD-<slug>.md`, local assets under the matching `draft/assets/img/posts/` directory, and `draft/claim-map.json`.
-- Article includes front matter, Curiosity, Retrieve, Innovation, trade-offs, Key Takeaways, New Questions, and categorized References.
+- Article includes front matter, an opening H2 that states the real question, source and finding sections with finding-specific headings, trade-offs, and exactly one `Key Takeaways`, one `New Questions`, and one categorized `References` section.
 
 ## Error Handling
 - If evidence cannot support a planned section: remove it or label it as a question/limitation.

@@ -5,6 +5,14 @@
 // authority basis, an original contribution, an honest AI-role disclosure,
 // one internal next action, and an unmeasured-baseline measurement plan.
 // No outcome (traffic, revenue, ranking) may be claimed at publish time.
+//
+// 2026-10-14 editorial policy: the AI-role disclosure is recorded in the brief
+// and published once, site-wide, at /about/#editorial-method-and-ai-assistance
+// (the post layout links to it from every current article). A per-post
+// "> **Editorial method:** ..." boilerplate blockquote is no longer allowed in
+// the article body: a self-describing, identical disclaimer on every page is a
+// templated low-value signal and hides the finding, which is why the approved
+// 2026-10-08 remediation removed it from the published cohort.
 
 export const AUTHORITY_BRIEF_SCHEMA_VERSION = 1;
 export const AUTHORITY_BRIEF_SCHEMA_VERSION_V2 = 2;
@@ -32,6 +40,8 @@ export const NEXT_ACTION_TYPE = 'related-article';
 export const NEXT_ACTION_PATH_PATTERN = /^\/posts\/[a-z0-9][a-z0-9-]*\/$/;
 export const MIN_SUMMARY_LENGTH = 40;
 export const MIN_DISCLOSURE_LENGTH = 40;
+export const SITE_DISCLOSURE_PATH = '/about/#editorial-method-and-ai-assistance';
+export const PER_POST_DISCLAIMER_PATTERN = /^\s*>\s*\*\*Editorial method:\*\*/m;
 export const MIN_READER_VALUE_LENGTH = 20;
 export const MIN_CONTEXT_FIELD_LENGTH = 20;
 
@@ -118,7 +128,8 @@ export function validateAuthorityBrief({ brief, manifest, selectedCandidate, evi
   const metrics = {
     authority_evidence_claims: 0,
     contribution_evidence_claims: 0,
-    disclosure_in_body: false,
+    disclosure_recorded: false,
+    disclosure_surface: null,
     next_action_in_body: false
   };
   if (!plainObject(brief)) {
@@ -194,8 +205,13 @@ export function validateAuthorityBrief({ brief, manifest, selectedCandidate, evi
     if (brief.ai_role.human_review_status !== expectedReview) errors.push(`ai_role.human_review_status must be ${expectedReview} for mode ${manifest?.mode}: ${brief.ai_role.human_review_status}`);
     if (brief.ai_role.first_hand_experience_claimed !== false) errors.push('ai_role.first_hand_experience_claimed must be false; scheduled automation never claims lived experience');
     if (!nonempty(brief.ai_role.disclosure, MIN_DISCLOSURE_LENGTH) || /[<>\n]/.test(String(brief.ai_role.disclosure || ''))) errors.push(`ai_role.disclosure must be one safe line of at least ${MIN_DISCLOSURE_LENGTH} characters`);
-    else if (visibleBody.split(/\r?\n/).includes(`> **Editorial method:** ${brief.ai_role.disclosure.trim()}`)) metrics.disclosure_in_body = true;
-    else errors.push('ai_role.disclosure text does not appear in a visible Editorial method blockquote');
+    else {
+      metrics.disclosure_recorded = true;
+      metrics.disclosure_surface = SITE_DISCLOSURE_PATH;
+    }
+    if (PER_POST_DISCLAIMER_PATTERN.test(String(articleBody || ''))) {
+      errors.push(`per-post Editorial method boilerplate is not allowed in the article body; the AI-role disclosure is recorded in the brief and published site-wide at ${SITE_DISCLOSURE_PATH}`);
+    }
   }
 
   if (!plainObject(brief.next_action)) errors.push('authority brief next_action must be an object');

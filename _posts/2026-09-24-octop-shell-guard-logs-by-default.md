@@ -11,9 +11,7 @@ image:
   alt: "Original diagram of Octop tool guard modes: in the default warn mode HIGH and CRITICAL findings are logged and the command still runs"
 ---
 
-> **Editorial method:** This Source Audit was researched and drafted with AI assistance under a policy-bound evidence harness; I read the pinned code and ran the shipped guard engine, but I did not install or operate Octop itself.
-
-## 🤔 Curiosity: What stops an Octop agent from running a dangerous command?
+## What stops an Octop agent from running a dangerous command?
 
 [Octop](https://github.com/TencentCloud/Octop) is TencentCloud's MIT-licensed, self-hosted AI assistant for households and small teams. One process serves a web dashboard, a CLI, IM channels, cron jobs, a browser, a terminal, and a remote desktop. At retrieval it had 4,789 GitHub stars, and `main` had just merged `release/1.0.2b2` on September 23.
 
@@ -32,7 +30,7 @@ The pinned code says no. Approval is off by default. The command guard is on, bu
 
 Both settings are one switch away, and the dashboard names them honestly. The gap is between the README sentence and what a new install does.
 
-## 📚 Retrieve: What the pinned code shows
+## Technical Analysis: What the pinned code shows
 
 I pinned Octop at commit [`c04aacc6`](https://github.com/TencentCloud/Octop/tree/c04aacc604a23ac05c00538f1bd4bc586fee6bb6) and read the README, `SECURITY.md`, the security policy store, its unit test, the default-agent and invite code, the backend documentation, and the dashboard strings. The guard itself lives in a dependency: Octop's `uv.lock` resolves `orcakit-harness-agent` to **1.0.14**, the wheel published on PyPI on September 22, so I read that wheel too.
 
@@ -101,7 +99,7 @@ Octop is not a chat window with an occasional tool call. The user guide shows cr
 
 To be fair to Octop, the controls exist and are labelled clearly. The Security settings page offers **"Block (HIGH/CRITICAL)"**, **"Require approval (includes MEDIUM)"**, and **"Log warnings only"**, plus a separate **"Require human approval for tools"** switch. `SECURITY.md` also makes operators responsible for reviewing the guard rules under `~/.octop/security/tool_guard/`. An admin who opens that page sees the truth. The README sentence is what tells them they do not need to.
 
-## 💡 Innovation: Two settings before you invite anyone
+## Two settings before you invite anyone
 
 If you run Octop for more than yourself, change two settings on day one.
 
@@ -114,7 +112,7 @@ For the project, the smallest honest fix is a sentence: say in the README that a
 
 This is the same pattern I keep finding in agent tools, and it is why I read defaults before features. The [AIO Sandbox audit](/posts/aio-sandbox-confinement-contract-audit/) found a sandbox that asks Docker to relax confinement, and the [OpenConnector audit](/posts/open-connector-default-custody-audit/) found a tool that places its own defaults out of scope. The feature list describes what a tool can do. The defaults describe what it does.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - Octop's README says risky tools or shell commands require explicit approval, but **a fresh install ships tool approval off and the command guard in `warn` mode**.
 - In harness-agent 1.0.14, `warn` blocks nothing: **the shipped engine flagged `curl … | bash` as CRITICAL and returned `should_block = False`**, and the middleware logs it and runs the command.
@@ -129,7 +127,7 @@ This is the same pattern I keep finding in agent tools, and it is why I read def
 - Regex rules are only one layer. `block` and `require_approval` add friction, and neither catches a harmful command that no rule matches.
 - Octop is moving fast. These defaults may change after commit `c04aacc6`.
 
-## 🤔 New Questions
+## New Questions
 
 - Do the Linux-style deny paths such as `/home/*/.ssh/**` match anything on a macOS host, or inside `virtual_mode` paths?
 - Should a guard match in `warn` mode appear in the chat or audit log, where the person who sent the request can see it?

@@ -32,7 +32,7 @@ Lee's proposed boundary is human-centered. Tasks should carry intent and a verif
 
 Those are meaningful design details, and the qualitative result should be attributed accurately. The post does not give a baseline or a measured drift rate. It also does not report how many tasks were accepted, how many pull requests merged, first-pass CI results, escaped regressions, rollbacks, rework, or time spent waiting for human review. The public post therefore supports a workflow description and a self-reported commit rate, not an independently measured productivity conclusion.
 
-## Key Takeaways: Build an acceptance ledger, not a counter
+## Build an acceptance ledger, not a counter
 
 A factory needs a queue with explicit units, state changes, and evidence. A commit is a trace in that queue, not its finish line.
 

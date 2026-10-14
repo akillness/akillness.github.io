@@ -7,13 +7,13 @@ A run may advance only with evidence recorded in `run-summary.md`.
 | G1 Novelty | Distinct thesis and no near-duplicate published post | choose another candidate |
 | G2 Primary evidence | Direct official/paper/source-code read; code pinned when available | REJECT |
 | G3 Claim coverage | 100% of material claims verified or explicitly inferred | FIX, max 2 |
-| G4 Persona | English Curiosity → Retrieve → Innovation; honest first person | FIX |
+| G4 Persona | English, Curiosity → Retrieve → Innovation reasoning order with plain-text finding-specific H2 headings (no emoji/stage-label skeleton, no duplicate H2, no per-post disclaimer boilerplate); honest first person | FIX |
 | G5 Non-commodity value | Original source finding, experiment, benchmark, or production decision | REJECT/FIX |
-| G5b Authority-led monetization | Valid evidence-bound `research/authority-brief.json`; visible AI-method disclosure; genuine related-article next action; no scaled/transcript pattern or outcome claim; independent authority findings PASS | BLOCK |
+| G5b Authority-led monetization | Valid evidence-bound `research/authority-brief.json`; AI-role disclosure recorded in the brief and published site-wide on `/about/` (never as per-post boilerplate); genuine related-article next action; no scaled/transcript pattern or outcome claim; independent authority findings PASS | BLOCK |
 | G6 Assets | Every local path exists; asset original or licensed; no orphans | FIX |
 | G6b Source images | 4–12 distinct rights-clear source-derived raster images in `references/`, valid `source-image-manifest.json`, each credited in exactly one top-level, visibly rendered `<figure class="source-image">` | BLOCK |
 | G7 Date safety | Automated `+0900` timestamp is strictly past at build time | BLOCK |
-| G8 Taxonomy | Existing exact category; lowercase reusable tags | FIX |
+| G8 Taxonomy | One policy category axis (`AI, Agents` / `AI, Research` / `AI, Tooling`); lowercase reusable tags | FIX |
 | G9 Package/render | Front matter, fences, Mermaid, tables, internal links, secrets pass | FIX/BLOCK |
 | G10 Independent review | Evidence editor and publication validator both PASS | FIX/REJECT |
 | G11 Diff scope | Only one post plus matching assets | BLOCK |

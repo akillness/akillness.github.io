@@ -13,7 +13,7 @@ image:
 
 {% include embed/youtube.html id='NGRxAYbIkus' %}
 
-## which half of an avatar paper is doing the work?
+## Which half of an avatar paper is doing the work?
 
 Every Gaussian-avatar paper ships two things at once: a **driving signal**, the expression space that says what the face is doing, and a **renderer**, the primitives and tricks that make pixels sharp. My prior going in was that announcements mostly sell the renderer while production teams mostly pay for the driving signal. The paper's own numbers turned out to be less tidy than that.
 
@@ -93,7 +93,7 @@ The data path is gated as well. NeRSemble is public in the sense that anyone may
 
 Rights split by venue, and the split matters if you want to reuse anything. The ACM version carries `© rightsretained`, and the project page states no reuse terms for its figures or videos. The arXiv version, however, is published under **CC BY 4.0**, so its figures are reusable with attribution. This post still uses an original diagram, not because the source figures are off limits but because the decomposition it plots is one the paper never draws.
 
-## Key Takeaways: what I would take into a game pipeline
+## What I would take into a game pipeline
 
 **Budget the tracker and the consuming architecture together.** Neither lever dominates here: at fixed tracking the framework is worth 2.01 PSNR, and at fixed framework the tracking is worth 1.44. A pipeline stuck at "the face looks slightly wrong" can be failing on either side, so measure both before spending.
 
@@ -105,7 +105,7 @@ Rights split by venue, and the split matters if you want to reuse anything. The 
 
 **Read the ethics section as a requirements list.** The paper flags identity theft and deepfakes among its concerns. A studio adopting person-specific avatars inherits consent, retention, and revocation questions that no PSNR column measures.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - Two levers, both material: at identical BFM tracking the NPGA framework gains **2.01 PSNR** over GHA, and moving that framework to MonoNPHM tracking adds a further **1.44**. The in-model add-ons contribute **0.49** on a three-subject subset.
 - The same expression codes fed into the older GHA pipeline **reduced** quality, 26.60 against 26.81. Swapping codes alone was not enough; the paper hypothesizes that the missing NPHM motion prior makes the training signal harder. This is not an ablation of the distillation step alone.
@@ -114,7 +114,7 @@ Rights split by venue, and the split matters if you want to reuse anything. The 
 - Neck, torso, tongue and eyeball rotation sit outside the model, and the benchmark masks the first two away.
 - **No code, two years on.** Reproduction currently means reimplementation plus a gated dataset request.
 
-## 🤔 New Questions
+## New Questions
 
 - Does the 1.44 PSNR expression-space advantage hold on a dataset other than NeRSemble, or is part of it a tracking-quality artifact of the same capture rig?
 - What does the gap look like unmasked, with gaze and mouth interior scored?

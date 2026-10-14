@@ -9,7 +9,7 @@ robots: noindex, follow
 sitemap: false
 ads: false
 ---
-## 📝 구글 I/O 2024 요약 및 감상
+## 구글 I/O 2024 요약 및 감상
 
 #### 내용 정리
 - 모델 업데이트 내용

@@ -101,7 +101,7 @@ graph LR
     style D fill:#14532d,stroke:#22c55e,color:#fff
 ```
 
-## Key Takeaways: What I Am Taking Into My Own Agent and Game-Tool Work
+## What I Am Taking Into My Own Agent and Game-Tool Work
 
 I did not run the app for this audit — no Google Maps key was spent; this is a static read of the pinned tree plus repository metadata. That limitation matters, and it also sharpens the point: everything above was learnable from the source, which is exactly what the viral coverage skips.
 
@@ -113,7 +113,7 @@ I did not run the app for this audit — no Google Maps key was spent; this is a
 
 **Fourth: docs drift even in disciplined repos — audit the seam, not the summary.** The CCTV-flag discrepancy is tiny and safe-direction, but it proves the general rule: security documents describe intent at writing time. The `define` block is ground truth. I found the drift only because I diffed the claim against the code, which is the entire reason this audit format exists.
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
 - **God's Eye View's real architecture is a trust pipeline**: untrusted public feeds → hardened localhost key broker (7,383-line `vite.config.js`, 24 endpoints) → browser display → voice model contained by a closed 28-tool dispatcher.
 - **The browser never holds a long-lived secret.** Two deliberately public, provider-restricted keys ship in the bundle; everything else is brokered server-side with ephemeral tokens.
@@ -121,7 +121,7 @@ I did not run the app for this audit — no Google Maps key was spent; this is a
 - **Verification shipped with the vibe.** 154 test files and 39 Puppeteer QA scripts accompany the monolithic client — the harness is as much a part of the release as the globe.
 - **For agent builders**: enumerable tool dispatchers and honest rate-limit documentation are cheap, and this repo demonstrates both under real viral load.
 
-## 🤔 New Questions This Raises
+## New Questions This Raises
 
 1. The prompt-injection defense for feed text is currently *instruction plus closed dispatcher*. Could a hostile callsign or place name still socially engineer the agent into legitimate-but-harmful verb sequences — say, `annotate_map` spam or camera misdirection — and what would a rate limit on tool sequences look like?
 2. The key broker lives in a Vite **dev server**. What is the minimal hardened extraction — the same 24 middlewares as a standalone process behind real auth — and does the community produce it before someone deploys `HOST=0.0.0.0` on an untrusted network despite the warnings?

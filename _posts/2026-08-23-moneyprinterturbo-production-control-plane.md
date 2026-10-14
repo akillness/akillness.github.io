@@ -158,7 +158,7 @@ This is not a reason to dismiss the project. It is the reason to use it for the 
 
 ---
 
-## Key Takeaways: Treat Video Automation Like a Build System
+## Treat Video Automation Like a Build System
 
 The innovation I see here is not a new diffusion architecture. It is the decision to turn short-form video into a composable job with stable stages. That makes MoneyPrinterTurbo closer to a build system than a camera.
 
