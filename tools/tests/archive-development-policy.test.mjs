@@ -32,6 +32,9 @@ test('graduated entries need a dated rebuild and a survey note; valid ones are e
   const ledger = clone(liveLedger);
   const entry = ledger.posts[0];
   entry.status = 'graduated';
+  // The live entry may already be developed; construct missing-field cases explicitly.
+  entry.developed_at = null;
+  entry.survey_note = null;
   assert.ok(validateArchiveDevelopment(ledger, restoredSources).errors.some((e) => e.includes('developed_at')));
   entry.developed_at = '2026-10-14';
   assert.ok(validateArchiveDevelopment(ledger, restoredSources).errors.some((e) => e.includes('survey_note')));
