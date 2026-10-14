@@ -1,12 +1,10 @@
 ---
-title: 맥북 M1/M2/M3 VSCODE C++ 설정
-description: "1. VSCODE Download - If using mac OS with M1/M2/M3, download the Apple Silicon version."
-categories: [Development Tools/Productivity]
-tags: [Development Tools, Productivity, Tools]
-date: 2024-05-11 16:30:00 +0800
-# Retired 2026-09-19: setup notes copied from a third-party Tistory guide
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
 published: true
+title: 맥북 M1/M2/M3 VSCODE C++ 설정
+description: "Apple Silicon Mac에서 VS Code C++ 개발환경을 원본 문서 기준으로 바로잡기: Clang 확인, tasks.json·launch.json·c_cpp_properties.json 핵심값, x64 모드 오류, 그리고 원본 Tistory 가이드가 놓친 함정."
+categories: [Development Tools/Productivity]
+tags: [development tools, productivity, tools]
+date: 2024-05-11 16:30:00 +0800
 ads: false
 restored_archive: "2026-10-12"
 ---
@@ -183,9 +181,32 @@ C/C++:Edit Configurations (JSON) 으로 아래 코드를 복붙 해준다.
       "compilerPath": "/usr/bin/clang",
       "cStandard": "c11",
       "cppStandard": "c++17",
-      "intelliSenseMode": "clang-x64"
+        "intelliSenseMode": "macos-clang-arm64"
+      }
     }
   ],
   "version": 4
 }
 ~~~
+
+> **수정 기록 (2026-10-14):** 원본 가이드의 `"intelliSenseMode": "clang-x64"`는 Apple Silicon Mac에서 잘못된 값이다. VS Code 공식 문서(Using Clang in Visual Studio Code, 조회 2026-10-14) 기준 arm64 Mac의 IntelliSense 모드는 `macos-clang-arm64`이며, `compilerPath`는 `/usr/bin/clang`, `macFrameworkPath`는 `/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks`를 가리킨다. x64 모드를 쓰면 시스템 헤더 해석이 어긋나 자동완성·Go to Definition이 깨진다. (원본 파일의 마지막 코드펜스가 닫히지 않은 채 끝나 있던 것도 함께 봉합했다.)
+{: .prompt-warning }
+
+## 원본 가이드가 놓친 Apple Silicon 함정 3가지
+
+원본 절차(위 1–9단계, 출처: [polarcompass.tistory.com/12](https://polarcompass.tistory.com/12))는 따라 하면 동작하지만, 아래 세 함정을 설명하지 않는다. 전부 VS Code 공식 문서의 Troubleshooting·설정 절에 핀을 박았다.
+
+1. **Xcode를 깔았는데 `clang`이 없다는 오류.** App Store Xcode 설치와 Command Line Tools 설치는 별개다. `clang --version`으로 먼저 확인하고, 없으면 `xcode-select --install`을 실행한다. "보통은 Xcode를 설치하면 해결됨"이 아니라 CLT 경로(`/Library/Developer/CommandLineTools`)가 실체다.
+2. **빌드는 되는데 F5 디버그가 안 먹는 경우.** `tasks.json`의 `label`과 `launch.json`의 `preLaunchTask` 문자열이 정확히 일치해야 한다(원본 ※ 주의점 유지). 한글 label은 매칭 실수를 부르므로 영어로 통일한다. 공식 문서의 `launch.json` 예시는 `"type": "cppdbg"`, `"MIMode": "lldb"`, `"preLaunchTask": "C/C++: clang++ build active file"` 형태이며, CodeLLDB 확장(`"type": "lldb"`) 방식과 혼용하면 안 된다.
+3. **Catalina 이후 외부 콘솔 입력 불가 + C++98 기본값.** clang++ 기본 표준은 C++98이라 `vector<string> msg {...}` 초기화가 컴파일 에러를 낸다 — `--std=c++17` 플래그가 필수다. 외부 콘솔 입력 문제는 [vscode-cpptools#5079](https://github.com/microsoft/vscode-cpptools/issues/5079)로 추적 중인 기지 이슈이며, 공식 문서의 osascript 우회 task가 문서화되어 있다.
+
+## Limitations
+
+- 이 개정은 VS Code 공식 문서를 핀으로 삼은 정정이며, M1/M2/M3 실기에서의 재검증은 수행하지 않았다.
+- 문서·버전 drift 가능: `compilerPath` 탐색 순서(PATH → Xcode 하드코딩 경로)와 `c_cpp_properties.json` 스키마는 확장 업데이트에 따라 바뀐다.
+- 원본 Tistory 절차와의 차별점은 arm64 모드 정정과 함정 섹션뿐이다. 순수 복사물이 되지 않도록 출처를 명시한다.
+
+## References
+
+- Microsoft, Using Clang in Visual Studio Code — <https://code.visualstudio.com/docs/cpp/config-clang-mac>
+- 원본 절차: polarcompass.tistory.com/12 — <https://polarcompass.tistory.com/12>
