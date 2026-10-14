@@ -65,9 +65,9 @@
         "lang-ko",
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-14",
+      "survey_note": "Re-read arXiv 2406.04744v2 (Tables 3-7, metrics, appendix), facebookresearch/CRAG at ad151888 (README, docs/dataset.md schema, CC BY-NC 4.0 LICENSE, PR #9 is a one-line popularity definition edit), the db3 KDD Cup 2024 winning paper (28.4/42.7/47.8, 30 s budget), APEX paper, AIcrowd announcement, and CRAG-MM pages/repo. Finding: the 1/0/-1 truthfulness score shows straightforward RAG lowered truthfulness (20.0 to 13.4 for GPT-4 Turbo) while raising accuracy; the 63% industry figure is a perfect-answer rate with 50.6 truthfulness and 11.6 s latency. Old summary, invented diagram, lang: ko and translation block removed."
     },
     {
       "path": "_posts/2026/04/2026-04-02-qwen3-6-plus-practical-ai-agents.md",
