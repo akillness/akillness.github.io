@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { sourceFirstFallbackApproved, validateShippedImageFallback, collectReferenceFiles } from './lib/source-image-manifest.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { validateArchiveRestoration, APPROVED_RESTORATION_ID } from './lib/archive-restoration-policy.mjs';
@@ -189,7 +190,7 @@ check(adsense.includes('{% if adsense_allowed and ad_client_configured %}'), 'ad
 const scopeTool = read('tools/verify-publication-scope.mjs');
 check(scopeTool.includes("git', ['diff', '--cached'"), 'Publication scope tool does not verify staged paths');
 check(scopeTool.includes('Live article target already exists'), 'Publication scope tool does not block live article collisions');
-check(scopeTool.includes('referenceImages.length >= MINIMUM_REFERENCE_IMAGES && referenceImages.length <= MAXIMUM_REFERENCE_IMAGES'), 'Publication scope tool does not unconditionally enforce the 4–12 source-image count band');
+check(scopeTool.includes('validateImageFallback') && scopeTool.includes('referenceImages.length <= MAXIMUM_REFERENCE_IMAGES'), 'Publication scope tool must enforce audited fallback and source-image upper bound');
 
 const walkFiles = (dir) => {
   if (!fs.existsSync(dir)) return [];
@@ -257,7 +258,16 @@ for (const [stem, matches] of postsByStem) {
   if (!sourceImageContractAppliesToStem(stem)) continue;
   check(matches.length === 1, `${stem}: source-image contract requires exactly one post for each stem`);
   const referencesDir = path.join(root, 'assets', 'img', 'posts', stem, 'references');
-  check(fs.existsSync(referencesDir), `${stem}: posts dated ${SOURCE_IMAGE_CONTRACT_EFFECTIVE_DATE} or later must ship a references directory`);
+  const source = fs.readFileSync(matches[0], 'utf8');
+  const fields = parsePostFrontMatter(source).fields;
+  const fallback = fields.image_policy === 'source-first-fallback';
+  if (fallback) {
+    check(sourceFirstFallbackApproved(read('.claude/editorial-policy.yml')), stem + ': fallback is not approved');
+    const prefix = 'assets/img/posts/' + stem + '/';
+    const result = validateShippedImageFallback({ articleStem: stem, articleBody: source.replace(/^---\s*\n[\s\S]*?\n---\s*\n?/, ''), assetFiles: collectReferenceFiles(path.join(root, prefix), prefix) });
+    for (const failure of result.failures) check(false, stem + ': ' + failure);
+  } else check(fs.existsSync(referencesDir), `${stem}: posts dated ${SOURCE_IMAGE_CONTRACT_EFFECTIVE_DATE} or later must ship a references directory`);
+
 }
 const postAssetRoot = path.join(root, 'assets', 'img', 'posts');
 if (fs.existsSync(postAssetRoot)) {
@@ -271,7 +281,9 @@ if (fs.existsSync(postAssetRoot)) {
     const referencesDir = path.join(articleDir, 'references');
     if (!fs.existsSync(referencesDir)) continue;
     const referenceFiles = walkFiles(referencesDir);
-    check(referenceFiles.length >= MINIMUM_REFERENCE_IMAGES, `${entry.name}: published reference folder has ${referenceFiles.length} images; expected at least ${MINIMUM_REFERENCE_IMAGES}`);
+    const fallbackPost = (postsByStem.get(entry.name) || [])[0];
+    const fallbackMode = fallbackPost && parsePostFrontMatter(fs.readFileSync(fallbackPost, 'utf8')).fields.image_policy === 'source-first-fallback';
+    check(fallbackMode || referenceFiles.length >= MINIMUM_REFERENCE_IMAGES, `${entry.name}: published reference folder has ${referenceFiles.length} images; expected at least ${MINIMUM_REFERENCE_IMAGES}`);
     check(referenceFiles.length <= MAXIMUM_REFERENCE_IMAGES, `${entry.name}: published reference folder has ${referenceFiles.length} images; maximum is ${MAXIMUM_REFERENCE_IMAGES}`);
     let totalBytes = 0;
     const publicPaths = new Set();

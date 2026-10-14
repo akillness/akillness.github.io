@@ -272,3 +272,35 @@ test('review findings: compliant review passes, drifted review fails', () => {
   assert.ok(validateAuthorityReviewFindings({ ...goodReview, authority_rationale: 'short' }).errors.some((e) => e.includes('authority_rationale')));
   assert.ok(validateAuthorityReviewFindings(null).errors.length >= 1);
 });
+
+// Manual publication consent is not standing automation approval or human fact review.
+test('manual three-article publication records the explicit consent status', () => {
+  const fixture = makeFixture({
+    mutateBrief: (brief) => { brief.ai_role.human_review_status = 'manual-publication-approved'; },
+    mutateFixture: (value) => { value.manifest.approval_context = {
+      type: 'manual-three-article-publication',
+      owner_request: 'Publish the three reviewed issue-date articles in the Git blog format.',
+      standing_routine_not_used: true
+    }; }
+  });
+  assert.deepEqual(run(fixture).errors, []);
+});
+test('manual consent status without an explicit manual context fails', () => {
+  const fixture = makeFixture({ mutateBrief: (brief) => {
+    brief.ai_role.human_review_status = 'manual-publication-approved';
+  } });
+  assert.ok(run(fixture).errors.some((error) => error.includes('human_review_status')));
+});
+test('manual context cannot relabel draft mode as approved publication', () => {
+  const fixture = makeFixture({
+    mutateBrief: (brief) => { brief.ai_role.human_review_status = 'manual-publication-approved'; },
+    mutateFixture: (value) => {
+      value.manifest.mode = 'draft-only';
+      value.manifest.approval_context = {
+        type: 'manual-three-article-publication', owner_request: 'Publish the reviewed articles.',
+        standing_routine_not_used: true
+      };
+    }
+  });
+  assert.ok(run(fixture).errors.some((error) => error.includes('manual-review-pending')));
+});

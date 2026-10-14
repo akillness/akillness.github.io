@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { SOURCE_FIRST_FALLBACK, imageFallbackContextFromDisk, validateImageFallback } from './lib/source-image-manifest.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -62,11 +63,24 @@ function expectedPackagePaths({ checkCollisions = true } = {}) {
     paths.push(relative);
   }
 
-  // Source-image contract is unconditional for every new automated package.
+  // Source rights stay mandatory; only explicit audited fallback relaxes the legacy floor.
   // Derive the count from the walked references folder rather than trusting a
   // sidecar or a manually authored path list.
+  const sidecarPath = path.join(draftRoot, 'source-image-manifest.json');
+  const sidecar = fs.existsSync(sidecarPath) ? JSON.parse(fs.readFileSync(sidecarPath, 'utf8')) : null;
+  const fallback = sidecar?.image_policy === SOURCE_FIRST_FALLBACK;
+  const postText = fs.readFileSync(posts[0], 'utf8');
+  const postHeader = postText.match(/^---\s*\n([\s\S]*?)\n---/)?.[1] || '';
+  check((/^image_policy:\s*['"]?source-first-fallback['"]?\s*$/m.test(postHeader)) === fallback, 'Post and source-image sidecar fallback mode must match');
+  if (fallback) {
+    const evidence = JSON.parse(fs.readFileSync(path.join(current, 'evidence', 'evidence-pack.json'), 'utf8'));
+    const result = validateImageFallback({ manifest: sidecar, articleBody: fs.readFileSync(posts[0], 'utf8').replace(/^---\s*\n[\s\S]*?\n---\s*\n?/, ''), articleStem: stem,
+      evidenceSourceUrls: (Array.isArray(evidence) ? evidence : evidence.claims || []).map((claim) => claim.source_url),
+      ...imageFallbackContextFromDisk(current, stem, fs.readFileSync(path.join(repoRoot, '.claude', 'editorial-policy.yml'), 'utf8')) });
+    failures.push(...result.failures);
+  }
   check(
-    referenceImages.length >= MINIMUM_REFERENCE_IMAGES && referenceImages.length <= MAXIMUM_REFERENCE_IMAGES,
+    (fallback || referenceImages.length >= MINIMUM_REFERENCE_IMAGES) && referenceImages.length <= MAXIMUM_REFERENCE_IMAGES,
     `Package must ship ${MINIMUM_REFERENCE_IMAGES}–${MAXIMUM_REFERENCE_IMAGES} qualifying source-derived reference images under ${refPrefix}, found ${referenceImages.length}`
   );
 

@@ -86,7 +86,8 @@ if (exists('.claude/editorial-policy.yml')) {
   check(/^routine_name:\s+Daily Source Audit (?:Draft|Publish)$/m.test(policy), 'External routine name is missing');
   check(/^timezone:\s+Asia\/Seoul$/m.test(policy), 'Editorial timezone is not Asia/Seoul');
   check(/^max_revision_loops:\s+2$/m.test(policy), 'Revision loop limit must be 2');
-  check(/^minimum_reference_images:\s+4$/m.test(policy), 'Policy must require at least 4 source-derived reference images');
+  check(/^minimum_reference_images:\s+4(?: # legacy manifests only)?$/m.test(policy), 'Legacy image minimum must remain 4');
+  check(/^image_selection_policy:\s+source-first-fallback$/m.test(policy), 'Approved source-first fallback policy is missing');
   check(/^maximum_reference_images:\s+12$/m.test(policy), 'Policy source-image maximum count must remain 12');
   check(/^source_image_contract_effective_date:\s+"2026-09-01"$/m.test(policy), 'Source-image contract effective date drifted');
   check(/^reference_image_max_bytes:\s+5242880$/m.test(policy), 'Policy source-image maximum must stay at 5 MiB');

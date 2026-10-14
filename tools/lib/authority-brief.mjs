@@ -201,7 +201,13 @@ export function validateAuthorityBrief({ brief, manifest, selectedCandidate, evi
     if (brief.ai_role.research_assistance !== true) errors.push('ai_role.research_assistance must be true; hiding AI research assistance is dishonest');
     if (brief.ai_role.draft_assistance !== true) errors.push('ai_role.draft_assistance must be true; hiding AI draft assistance is dishonest');
     if (brief.ai_role.editorial_judgment_owner !== AUTHORITY_JUDGMENT_OWNER) errors.push(`ai_role.editorial_judgment_owner must be ${AUTHORITY_JUDGMENT_OWNER}`);
-    const expectedReview = manifest?.mode === 'publish-on-green' ? 'standing-policy-approved' : 'manual-review-pending';
+    // This records an external owner decision, not human factual review or a grant of authority.
+    const manualPublication = manifest?.approval_context?.type === 'manual-three-article-publication'
+      && manifest.approval_context.standing_routine_not_used === true
+      && nonempty(manifest.approval_context.owner_request);
+    const expectedReview = manifest?.mode === 'publish-on-green'
+      ? (manualPublication ? 'manual-publication-approved' : 'standing-policy-approved')
+      : 'manual-review-pending';
     if (brief.ai_role.human_review_status !== expectedReview) errors.push(`ai_role.human_review_status must be ${expectedReview} for mode ${manifest?.mode}: ${brief.ai_role.human_review_status}`);
     if (brief.ai_role.first_hand_experience_claimed !== false) errors.push('ai_role.first_hand_experience_claimed must be false; scheduled automation never claims lived experience');
     if (!nonempty(brief.ai_role.disclosure, MIN_DISCLOSURE_LENGTH) || /[<>\n]/.test(String(brief.ai_role.disclosure || ''))) errors.push(`ai_role.disclosure must be one safe line of at least ${MIN_DISCLOSURE_LENGTH} characters`);

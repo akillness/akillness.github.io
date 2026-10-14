@@ -14,13 +14,14 @@ _workspace/current/
     candidate-set.json
     existing-coverage.json
     authority-brief.json
+    image-source-audit.md  # required for source-first fallback
   evidence/
     evidence-pack.json
     source-map.md
   draft/
     _posts/YYYY-MM-DD-<slug>.md
     assets/img/posts/YYYY-MM-DD-<slug>/...
-    assets/img/posts/YYYY-MM-DD-<slug>/references/...
+    assets/img/posts/YYYY-MM-DD-<slug>/references/...  # when source images are used
     claim-map.json
     source-image-manifest.json
   review/
@@ -100,7 +101,7 @@ Final package validation refuses a missing/non-PASS review, coverage below 1.0, 
 
 ## Source-image manifest fields
 
-`draft/source-image-manifest.json` is an internal sidecar (never staged or published) written only by the editorial director. Top level: `schema_version` (1), `run_id` (must match `manifest.json`), and `images[]` with 4–12 entries. Every image records:
+`draft/source-image-manifest.json` is an internal sidecar (never staged or published) written only by the editorial director. Top level: `schema_version` (1), `run_id` (must match `manifest.json`), and `images[]` containing the actual source images. Legacy manifests require 4–12 entries; the approved explicit `source-first-fallback` mode permits 0–12, subject to the separate audit and explanatory-asset requirements below. Every source image records:
 
 - `local_path` — unique, under `assets/img/posts/<article-stem>/references/`, extension `.png`/`.jpg`/`.jpeg`/`.webp`; the file must exist, be >0 and <=5 MiB, and match its declared raster structure, have EXIF/XMP/text metadata stripped, have a short side >=32 px and at least 16,384 pixels; all reference images combined must be <=20 MiB
 - `source_page_url` — must be an evidence-pack `source_url`
@@ -112,11 +113,15 @@ Final package validation refuses a missing/non-PASS review, coverage below 1.0, 
 - `alt` and `attribution_text`
 - `commercial_use_allowed: true` and `redistribution_allowed: true` (strict booleans)
 
-Generated cover/hero art and editorial illustrations (produced with `god-tibo-imagen`) live in the article asset folder outside `references/`, never appear in this manifest, and never count toward the 4–12 requirement.
+Generated cover/hero art and editorial illustrations (produced with `god-tibo-imagen`) live in the article asset folder outside `references/`, never appear in source `images[]`, and never count as source/primary evidence. Fallback illustrations are instead recorded in the same sidecar’s separate `explanatory_images[]`.
+
+For approved source-first fallback, add `image_policy: source-first-fallback` to both post front matter and this sidecar. Add `source_first_audit` with `report_path: research/image-source-audit.md`, the actual report `sha256`, and nonempty `candidates[]` of `{source_page_url, decision, reason}`. The report lives at `_workspace/current/research/image-source-audit.md` (run-root-relative path, not under `draft/`), contains at least 80 bytes, and documents actual inspected imagery, relevance and rights. Candidate URLs must occur in the report and evidence-pack claim `source_url` values. Decisions are `used`, `rights-unclear`, `irrelevant`, or `no-usable-image`; reasons contain at least 20 characters of concrete findings. A `used` candidate requires a normal source `images[]` entry.
+
+Add nonempty `explanatory_images[]` of `{local_path, kind, creator, alt, attribution_text, sha256, bytes}`. `kind` is `original` or `generated`; hash and positive byte count must match a local metadata-free raster outside `references/` within the existing per-image limits. Each item appears exactly once in a top-level visible `<figure class="explanatory-image">` with matching `/local_path`, alt and exact attribution. The attribution includes `Original illustration by <creator>` or `AI-generated illustration by <creator>`, plus `not source evidence`. Identify the actual creator/tool honestly. See `image-selection.md` for the full selection procedure. The report and sidecar remain internal; shipped validation requires the explicit post mode and the visible credited local asset, not a self-declared no-image exemption.
 
 Licensed downloads additionally record a unique `download_url`, `license_url`, and verbatim `license_quote` (>=40 characters); duplicate crops/resizes of one download do not count. First-party screenshots instead record the exact `owner_reuse_scope`, `publisher_or_creator`, and `owner_reuse_attestation` values from `.claude/editorial-policy.yml`, plus a unique `capture_state`; both the `articleStem` and HTTPS evidence-pack `source_page_url` must match the explicit policy allowlists. `attribution_text` must visibly identify owner permission, and `download_url`, `license_url`, and `license_quote` must be omitted. Do not fabricate a license citation for an owner screenshot.
 
-Each item appears in exactly one adjacent `<figure class="source-image">` block in the article body with matching `img` `src`/`alt` and a `figcaption` containing the exact `source_page_url`, `publisher_or_creator`, and `attribution_text`; licensed downloads also require the exact `license_url`. Every file in `references/` has exactly one manifest entry and every manifest item is referenced. Validation lives in `tools/lib/source-image-manifest.mjs` and reports `reference_images` and `credited_reference_images` metrics.
+Each item appears in exactly one adjacent `<figure class="source-image">` block in the article body with matching `img` `src`/`alt` and a `figcaption` containing the exact `source_page_url`, `publisher_or_creator`, and `attribution_text`; licensed downloads also require the exact `license_url`. Every file in `references/` has exactly one source `images[]` entry and every source item is referenced. Validation lives in `tools/lib/source-image-manifest.mjs` and reports `reference_images` and `credited_reference_images` metrics.
 
 ## Draft package
 

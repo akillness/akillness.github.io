@@ -40,7 +40,7 @@
 | `research_assistance` | exactly `true` |
 | `draft_assistance` | exactly `true` |
 | `editorial_judgment_owner` | exactly `evidence-gated-editorial-harness` |
-| `human_review_status` | `standing-policy-approved` when `manifest.mode` is `publish-on-green`, otherwise `manual-review-pending` |
+| `human_review_status` | `manual-publication-approved` for a `publish-on-green` manifest with explicit `approval_context.type: manual-three-article-publication`, a recorded `owner_request`, and `standing_routine_not_used: true`; otherwise `standing-policy-approved` for standing `publish-on-green`, or `manual-review-pending` for draft mode. This records publication consent, not human factual review, and never grants external permission by itself. |
 | `first_hand_experience_claimed` | exactly `false` |
 | `disclosure` | one safe line, >=40 chars, recorded in the brief; published once, site-wide, at `/about/#editorial-method-and-ai-assistance` (the post layout links every current article to it). A per-post `> **Editorial method:** ...` blockquote in the body fails validation (policy 2026-10-14) |
 

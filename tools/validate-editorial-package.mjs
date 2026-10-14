@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { imageFallbackContextFromDisk } from './lib/source-image-manifest.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import {
@@ -320,6 +321,7 @@ pass(verifiedPrimary.length >= 1, 'No mapped draft claim uses verified primary o
 // Source-derived reference image contract (fails closed for every package).
 const sourceImageManifestFile = path.join(current, 'draft', 'source-image-manifest.json');
 const sourceImageManifest = fs.existsSync(sourceImageManifestFile) ? readJson(sourceImageManifestFile) : null;
+pass((stripQuotes(fmLine('image_policy')) === 'source-first-fallback') === (sourceImageManifest?.image_policy === 'source-first-fallback'), 'Post and source-image sidecar fallback mode must match');
 pass(fs.existsSync(sourceImageManifestFile), 'draft/source-image-manifest.json is missing; the source-image contract fails closed');
 const referenceDir = articleStem
   ? path.join(current, 'draft', 'assets', 'img', 'posts', articleStem, 'references')
@@ -327,6 +329,7 @@ const referenceDir = articleStem
 const referenceFiles = referenceDir ? collectReferenceFiles(referenceDir, referencesPrefix(articleStem)) : {};
 const sourceImageResult = validateSourceImageManifest({
   manifest: sourceImageManifest,
+  fallbackContext: imageFallbackContextFromDisk(current, articleStem, policyText),
   articleBody: body,
   articleStem,
   evidenceSourceUrls: claims.map((claim) => claim?.source_url).filter(Boolean),

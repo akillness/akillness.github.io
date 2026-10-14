@@ -12,7 +12,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 - Convert verified evidence into a concrete thesis, original diagram, comparison, code/commands when useful, and production implications.
 - Maintain claim-to-evidence traceability and honest limitations.
 - Follow the validated `research/authority-brief.json`: add its related `/posts/` next action as a genuine Markdown link. Do **not** add a `> **Editorial method:** ...` blockquote or any per-post AI disclaimer; the disclosure stays in the brief and is published site-wide at `/about/#editorial-method-and-ai-assistance` (linked by the post layout).
-- Embed every image listed in `draft/source-image-manifest.json` in exactly one adjacent `<figure class="source-image">` block with matching `img` `src`/`alt` and a `figcaption` carrying the exact `source_page_url`, `publisher_or_creator`, and `attribution_text`; include the exact `license_url` only for licensed downloads. First-party screenshots use visible owner-permission attribution and must not be assigned a fabricated license citation. Place each figure where it works as evidence/context, never as decorative filler.
+- Embed every source image listed in `draft/source-image-manifest.json` in exactly one adjacent `<figure class="source-image">` block with matching `img` `src`/`alt` and a `figcaption` carrying the exact `source_page_url`, `publisher_or_creator`, and `attribution_text`; include the exact `license_url` only for licensed downloads. First-party screenshots use visible owner-permission attribution and must not be assigned a fabricated license citation. Place each figure where it works as evidence/context, never as decorative filler.
 
 ## Operational Principles
 1. Read `persona.md`, the approved evidence pack, and `research/authority-brief.json` before drafting.
@@ -31,7 +31,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 
 ## Error Handling
 - If evidence cannot support a planned section: remove it or label it as a question/limitation.
-- If an asset license is unclear: report the gap; original diagrams do not satisfy the required source-image count.
+- If an asset license is unclear: report the gap; never use it without rights. Follow the image-selection reference for approved source-first fallback; original/generated assets stay uncounted as source evidence.
 - If the authority brief cannot be rendered honestly or its next action is not genuinely related: stop for director review rather than inventing compliance.
 - On reviewer FIX: revise only cited issues, maximum two loops.
 
@@ -39,3 +39,5 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 - Reports to: editorial-director.
 - Communicates with: evidence-editor and publication-validator through numbered review files.
 - Completion signal: complete draft package and claim map.
+
+For source-first fallback, use `image_policy: source-first-fallback` front matter and exact visible `explanatory-image` figures/credits from the director’s `explanatory_images` sidecar. See `.claude/skills/editorial-publishing-harness/references/image-selection.md`.

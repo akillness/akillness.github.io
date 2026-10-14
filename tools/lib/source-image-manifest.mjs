@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Pure validation core for the source-derived reference image contract.
-// The fail-closed rule: every new automated article package ships at least
+// Legacy packages retain the fail-closed count rule; approved source-first fallback
+// packages validate an audited, credited explanatory asset instead. Legacy packages ship at least
 // MINIMUM_REFERENCE_IMAGES distinct, rights-cleared raster references, either
 // downloaded from inspected reference materials or directly captured from an
 // owner-controlled public interface under explicit scoped permission. Each is
@@ -246,7 +247,14 @@ export function inspectRasterImage(filePath, data) {
 
 export const rasterSignatureMatches = (filePath, data) => inspectRasterImage(filePath, data).valid;
 
-export function extractSourceImageFigures(articleBody) {
+// The stricter fallback grammar is opt-in so legacy source-credit parsing stays unchanged.
+const validFallbackDimensions = (tag) => [...String(tag).matchAll(/\s(?:width|height)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi)]
+  .every((match) => {
+    const value = decodeHtmlEntities(match[1] ?? match[2] ?? match[3]);
+    return /^\d+$/.test(value) && Number(value) > 0;
+  });
+
+export function extractSourceImageFigures(articleBody, { strictFallback = false } = {}) {
   const figures = [];
   const body = renderedMarkdownSource(articleBody);
   for (const match of body.matchAll(/<figure\b([^>]*)>([\s\S]*?)<\/figure>/gi)) {
@@ -263,6 +271,13 @@ export function extractSourceImageFigures(articleBody) {
       imgCount: imgTags.length,
       captionCount: captions.length,
       hidden: classes.length !== 1
+        // Fallback credit must be a plain-text, attribute-free caption, directly
+        // beside its image. Nested markup/template/style cannot stand in for a
+        // visibly rendered origin disclosure. Inspect raw HTML before decoding.
+        || (strictFallback && (!/^\s*<img\b[^>]*>\s*<figcaption\s*>[^<>]*<\/figcaption\s*>\s*$/i.test(inner)
+          || /\{[{%]/.test(inner)
+          || !validFallbackDimensions(figureTag)
+          || imgTags.some((tag) => !validFallbackDimensions(tag))))
         || tagIsHidden(figureTag)
         || imgTags.some((tag) => tagIsHidden(tag) || attributeValue(tag, 'class') !== null)
         || sourceFigureHasAncestor(body, match.index)
@@ -318,7 +333,8 @@ export function validateSourceImageManifest({
   referenceFiles,
   expectedRunId,
   expectedRunStartedAt,
-  firstPartyScreenshotPolicy = null
+  firstPartyScreenshotPolicy = null,
+  fallbackContext = null
 }) {
   const failures = [];
   const fail = (message) => failures.push(`source-image: ${message}`);
@@ -351,7 +367,9 @@ export function validateSourceImageManifest({
   }
 
   const items = manifest.images;
-  if (items.length < MINIMUM_REFERENCE_IMAGES) {
+  const fallback = manifest.image_policy === SOURCE_FIRST_FALLBACK;
+  if (fallback) failures.push(...validateImageFallback({ manifest, articleBody, articleStem, evidenceSourceUrls, ...fallbackContext }).failures);
+  if (!fallback && items.length < MINIMUM_REFERENCE_IMAGES) {
     fail(`at least ${MINIMUM_REFERENCE_IMAGES} source-derived reference images are required, found ${items.length}; the run blocks`);
   }
   if (items.length > MAXIMUM_REFERENCE_IMAGES) {
@@ -557,6 +575,27 @@ export function validateSourceImageManifest({
   return { failures, metrics };
 }
 
+// Check ancestors in order, before any directory enumeration or byte read.
+// Callers using platform aliases (such as /tmp) must supply the canonical path.
+const pathHasNoSymlinks = (target) => {
+  const absolute = path.resolve(target);
+  let current = path.parse(absolute).root;
+  try {
+    if (fs.lstatSync(current).isSymbolicLink()) return false;
+    for (const part of path.relative(current, absolute).split(path.sep).filter(Boolean)) {
+      current = path.join(current, part);
+      if (fs.lstatSync(current).isSymbolicLink()) return false;
+    }
+    return true;
+  } catch { return false; }
+};
+
+const containedPathWithoutSymlinks = (root, target) => {
+  const relative = path.relative(path.resolve(root), path.resolve(target));
+  return relative !== ".." && !relative.startsWith(".." + path.sep)
+    && !path.isAbsolute(relative) && pathHasNoSymlinks(target);
+};
+
 /**
  * Filesystem adapter: observe every file below `referenceDir` and key it by
  * `prefix + relative path` so the result feeds validateSourceImageManifest.
@@ -574,6 +613,10 @@ export function collectReferenceFiles(referenceDir, prefix) {
       validRaster: false
     };
   };
+  if (!pathHasNoSymlinks(referenceDir)) {
+    recordInvalid(referenceDir, "symlink or inaccessible ancestor");
+    return files;
+  }
   const walk = (dir) => {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
       const full = path.join(dir, entry.name);
@@ -597,4 +640,70 @@ export function collectReferenceFiles(referenceDir, prefix) {
   };
   walk(referenceDir);
   return files;
+}
+
+// Explicit approved mode, not a no-image exemption. Legacy manifests are unchanged.
+export const SOURCE_FIRST_FALLBACK = 'source-first-fallback';
+export const sourceFirstFallbackApproved = (policyText) =>
+  /^image_selection_policy:\s*source-first-fallback$/m.test(policyText)
+  && /^image_selection_scope:\s*akillness-git-blog-only$/m.test(policyText);
+
+export function validateShippedImageFallback({ articleBody, articleStem, assetFiles = {} }) {
+  const failures = [];
+  const figures = extractSourceImageFigures(String(articleBody).replace(/class="explanatory-image"/g, 'class="source-image"'), { strictFallback: true })
+    .filter((figure) => !figure.src?.includes('/references/'));
+  if (!figures.length) failures.push('image-fallback: a visible credited original/generated local explanatory image is required');
+  for (const figure of figures) {
+    const local = String(figure.src || '').replace(/^\//, '');
+    const file = assetFiles[local];
+    if (!local.startsWith('assets/img/posts/' + articleStem + '/') || local.includes('..') || local.includes('/references/')) failures.push('image-fallback: asset must be local and outside references/');
+    if (figure.hidden || figure.imgCount !== 1 || figure.captionCount !== 1 || !nonempty(figure.alt)) failures.push('image-fallback: explanatory figure must be visible with one image, alt and caption');
+    const captionText = String(figure.caption || '');
+    if (!/Original illustration by .+|AI-generated illustration by .+/i.test(captionText) || !captionText.includes('not source evidence')) failures.push('image-fallback: caption must identify original/AI-generated illustration, creator/tool and not source evidence');
+    if (!file || file.regular !== true || !(file.size > 0) || file.size > MAX_REFERENCE_IMAGE_BYTES || file.validRaster !== true || file.metadataSegments > 0) failures.push('image-fallback: explanatory asset must have valid metadata-free raster bytes within size limits');
+  }
+  return { failures, figures };
+}
+
+export function imageFallbackContextFromDisk(packageRoot, articleStem, policyText) {
+  const draftRoot = path.join(packageRoot, 'draft');
+  const assetPrefix = 'assets/img/posts/' + articleStem + '/';
+  const assetDir = path.join(draftRoot, assetPrefix);
+  const assetFiles = containedPathWithoutSymlinks(draftRoot, assetDir)
+    ? collectReferenceFiles(assetDir, assetPrefix) : {};
+  const reportPath = path.join(packageRoot, 'research', 'image-source-audit.md');
+  const safeReport = containedPathWithoutSymlinks(packageRoot, reportPath) && fs.lstatSync(reportPath).isFile();
+  const reportBytes = safeReport ? fs.readFileSync(reportPath) : Buffer.alloc(0);
+  return { approved: sourceFirstFallbackApproved(policyText), assetFiles, auditReport: { path: 'research/image-source-audit.md', size: reportBytes.length, sha256: crypto.createHash('sha256').update(reportBytes).digest('hex'), text: reportBytes.toString('utf8') } };
+}
+
+export function validateImageFallback({ manifest, articleBody, articleStem, evidenceSourceUrls = [], approved = false, assetFiles = {}, auditReport = null }) {
+  const result = validateShippedImageFallback({ articleBody, articleStem, assetFiles });
+  const failures = result.failures;
+  if (!approved) failures.push('image-fallback: repo source-first policy approval is absent');
+  const audit = manifest?.source_first_audit;
+  if (audit?.report_path !== 'research/image-source-audit.md' || !/^[a-f0-9]{64}$/.test(audit?.sha256 || '') || audit?.sha256 !== auditReport?.sha256 || !(auditReport?.size >= 80)) failures.push('image-fallback: source-first audit must bind the nonempty internal report bytes');
+  const sources = new Set(evidenceSourceUrls);
+  if (!Array.isArray(audit?.candidates) || !audit.candidates.length) failures.push('image-fallback: inspected source candidates are required');
+  for (const candidate of audit?.candidates || []) {
+    if (!sources.has(candidate.source_page_url) || !isHttpUrl(candidate.source_page_url) || !auditReport?.text?.includes(candidate.source_page_url) || !nonempty(candidate.reason, 20)) failures.push('image-fallback: candidate must bind evidence URL, audit report and a concrete reason');
+    if (!['used', 'rights-unclear', 'irrelevant', 'no-usable-image'].includes(candidate.decision)) failures.push('image-fallback: invalid source candidate decision');
+    if (candidate.decision === 'used' && !manifest.images?.some((item) => item.source_page_url === candidate.source_page_url)) failures.push('image-fallback: usable source candidate must have a source manifest item');
+  }
+  const images = manifest?.explanatory_images;
+  if (!Array.isArray(images) || !images.length) failures.push('image-fallback: explanatory_images sidecar is required');
+  const paths = new Set();
+  for (const item of images || []) {
+    const observed = assetFiles[item.local_path];
+    const figures = result.figures.filter((figure) => figure.src === '/' + item.local_path);
+    if (paths.has(item.local_path)) failures.push('image-fallback: duplicate explanatory path');
+    paths.add(item.local_path);
+    if (!['original', 'generated'].includes(item.kind) || !nonempty(item.creator) || !nonempty(item.alt) || !nonempty(item.attribution_text)) failures.push('image-fallback: kind, creator, alt and attribution are required');
+    const label = item.kind === 'generated' ? 'AI-generated illustration by ' : 'Original illustration by ';
+    if (!String(item.attribution_text).includes(label + item.creator) || !String(item.attribution_text).includes('not source evidence')) failures.push('image-fallback: honest origin and non-evidence credit required');
+    if (!/^[a-f0-9]{64}$/.test(item.sha256 || '') || item.sha256 !== observed?.sha256 || !(item.bytes > 0) || item.bytes !== observed?.size) failures.push('image-fallback: explanatory image hash/bytes mismatch');
+    if (figures.length !== 1 || figures[0]?.alt !== item.alt || !figures[0]?.caption?.includes(item.attribution_text)) failures.push('image-fallback: explanatory sidecar must match one visible figure exactly');
+  }
+  for (const figure of result.figures) if (!paths.has(figure.src?.replace(/^\//, ''))) failures.push('image-fallback: unmanifested explanatory image');
+  return { failures };
 }

@@ -15,11 +15,13 @@ import {
   MAX_REFERENCE_IMAGE_BYTES,
   MAX_REFERENCE_IMAGE_TOTAL_BYTES,
   collectReferenceFiles,
+  imageFallbackContextFromDisk,
   hasValidSourceFigureRightsCaption,
   rasterSignatureMatches,
   referencesPrefix,
   sourceImageContractAppliesToStem,
-  validateSourceImageManifest
+  validateSourceImageManifest,
+  validateShippedImageFallback
 } from '../lib/source-image-manifest.mjs';
 
 const STEM = '2026-09-01-example-audit';
@@ -719,4 +721,170 @@ test('publication scope fails closed when the references directory is absent', (
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
+});
+
+function fallbackFixture(count = 0) {
+  const fixture = makeFixture({ count });
+  const url = 'https://example.com/source';
+  const local = 'assets/img/posts/' + STEM + '/explanation.png';
+  const credit = 'AI-generated illustration by test-tool; conceptual explanation, not source evidence.';
+  fixture.evidenceSourceUrls.push(url);
+  fixture.manifest.image_policy = 'source-first-fallback';
+  fixture.manifest.source_first_audit = { report_path: 'research/image-source-audit.md', sha256: fakeSha(99), candidates: [{ source_page_url: url, decision: 'rights-unclear', reason: 'Inspected source imagery lacks asset-specific commercial reuse rights.' }] };
+  fixture.manifest.explanatory_images = [{ local_path: local, kind: 'generated', creator: 'test-tool', alt: 'Conceptual explanation', attribution_text: credit, sha256: fakeSha(98), bytes: 1024 }];
+  fixture.articleBody += '\n<figure class="explanatory-image"><img src="/' + local + '" alt="Conceptual explanation"><figcaption>' + credit + '</figcaption></figure>';
+  fixture.fallbackContext = { approved: true, assetFiles: { [local]: { regular: true, size: 1024, sha256: fakeSha(98), validRaster: true, metadataSegments: 0 } }, auditReport: { size: 180, sha256: fakeSha(99), text: url + ' inspected: asset-specific commercial rights were not established.' } };
+  return fixture;
+}
+
+test('approved audited fallback accepts zero or fewer than four sources without counting generated imagery', () => {
+  for (const count of [0, 1, 3]) {
+    const result = validateSourceImageManifest(fallbackFixture(count));
+    assert.deepEqual(result.failures, []);
+    assert.equal(result.metrics.reference_images, count);
+  }
+});
+
+test('fallback rejects missing approval, audit, asset, credit, byte mismatch and hidden image', () => {
+  for (const mutate of [
+    f => { f.fallbackContext.approved = false; },
+    f => { f.fallbackContext.auditReport = null; },
+    f => { f.manifest.source_first_audit.sha256 = fakeSha(1); },
+    f => { f.manifest.source_first_audit.candidates = []; },
+    f => { f.fallbackContext.assetFiles = {}; },
+    f => { f.manifest.explanatory_images = []; },
+    f => { f.manifest.explanatory_images[0].bytes = 1; },
+    f => { f.articleBody = f.articleBody.replace('AI-generated illustration by', 'Source by'); },
+    f => { f.articleBody = f.articleBody.replace('class="explanatory-image"', 'class="explanatory-image" hidden'); },
+    f => { f.articleBody = '<!--' + f.articleBody + '-->'; },
+    f => { f.manifest.source_first_audit.candidates[0].decision = 'used'; }
+  ]) { const fixture = fallbackFixture(); mutate(fixture); assert.ok(validateSourceImageManifest(fixture).failures.length > 0); }
+});
+
+test('fallback preserves source license checks and legacy lower bound', () => {
+  const fixture = fallbackFixture(1);
+  fixture.manifest.images[0].license_basis = 'unknown';
+  assert.ok(validateSourceImageManifest(fixture).failures.some(f => f.includes('license_basis')));
+  assert.ok(validateSourceImageManifest(makeFixture({ count: 0 })).failures.some(f => f.includes('at least 4')));
+});
+
+
+const hiddenFallbackVariants = [
+  ["hidden caption", body => body.replace("<figcaption>", "<figcaption hidden>")],
+  ["aria-hidden caption", body => body.replace("<figcaption>", "<figcaption aria-hidden=\"true\">")],
+  ["caption display none", body => body.replace("<figcaption>", "<figcaption style=\"display:none\">")],
+  ["caption visibility hidden", body => body.replace("<figcaption>", "<figcaption style=\"visibility:hidden\">")],
+  ["caption opacity zero", body => body.replace("<figcaption>", "<figcaption style=\"opacity:0\">")],
+  ["caption zero font", body => body.replace("<figcaption>", "<figcaption style=\"font-size:0\">")],
+  ["caption hidden class", body => body.replace("<figcaption>", "<figcaption class=\"sr-only\">")],
+  ["hidden nested span", body => body.replace("<figcaption>", "<figcaption><span hidden>").replace("</figcaption>", "</span></figcaption>")],
+  ["nested style hiding", body => body.replace("<figcaption>", "<figcaption><span style=\"display:none\">").replace("</figcaption>", "</span></figcaption>")],
+  ["template credit", body => body.replace("<figcaption>", "<figcaption><template>").replace("</figcaption>", "</template></figcaption>")],
+  ["zero image dimensions", body => body.replace("<img ", "<img width=\"0\" height=\"0\" ")],
+  ["unquoted zero width", body => body.replace("<img ", "<img width=0 ")],
+  ["single quoted zero height", body => body.replace("<img ", "<img height='0' ")],
+  ["zero percent width", body => body.replace("<img ", "<img width=\"0%\" ")],
+  ["duplicate zero width", body => body.replace("<img ", "<img width=0 width=256 ")],
+  ["image zero-size style", body => body.replace("<img ", "<img style=\"width:0;height:0\" ")],
+  ["image hidden style", body => body.replace("<img ", "<img style=\"visibility:hidden\" ")],
+  ["figure zero-size style", body => body.replace("<figure ", "<figure style=\"width:0;height:0;overflow:hidden\" ")]
+];
+for (const [name, mutate] of hiddenFallbackVariants) {
+  test("fallback package rejects " + name, () => {
+    const fixture = fallbackFixture();
+    fixture.articleBody = mutate(fixture.articleBody);
+    assert.ok(validateSourceImageManifest(fixture).failures.length > 0);
+  });
+  test("fallback shipped tree rejects " + name, () => {
+    const fixture = fallbackFixture();
+    assert.ok(validateShippedImageFallback({ articleBody: mutate(fixture.articleBody), articleStem: STEM, assetFiles: fixture.fallbackContext.assetFiles }).failures.length > 0);
+  });
+}
+
+test("fallback package and shipped tree accept visible plain-text credit with positive dimensions", () => {
+  const fixture = fallbackFixture();
+  fixture.articleBody = fixture.articleBody.replace("<img ", "<img width=\"256\" height=256 ");
+  assert.deepEqual(validateSourceImageManifest(fixture).failures, []);
+  assert.deepEqual(validateShippedImageFallback({ articleBody: fixture.articleBody, articleStem: STEM, assetFiles: fixture.fallbackContext.assetFiles }).failures, []);
+});
+
+
+const fallbackPolicyText = "image_selection_policy: source-first-fallback\nimage_selection_scope: akillness-git-blog-only\n";
+function diskFallbackFixture(root) {
+  const fixture = fallbackFixture();
+  const item = fixture.manifest.explanatory_images[0];
+  const asset = path.join(root, "draft", item.local_path);
+  const report = path.join(root, "research", "image-source-audit.md");
+  fs.mkdirSync(path.dirname(asset), { recursive: true });
+  fs.mkdirSync(path.dirname(report), { recursive: true });
+  const bytes = fakePng();
+  const audit = "https://example.com/source inspected. Source imagery has no asset-specific commercial reuse permission; use an honestly credited original explanatory diagram instead.";
+  fs.writeFileSync(asset, bytes);
+  fs.writeFileSync(report, audit);
+  item.bytes = bytes.length;
+  item.sha256 = crypto.createHash("sha256").update(bytes).digest("hex");
+  fixture.manifest.source_first_audit.sha256 = crypto.createHash("sha256").update(audit).digest("hex");
+  return fixture;
+}
+
+for (const segment of ["article-root", "assets", "img", "posts", "draft-root"]) {
+  test("package fallback refuses symlink escape at " + segment + " before observing external bytes", () => {
+    const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), "fallback-path-package-"));
+    try {
+      const root = path.join(sandbox, "package");
+      const fixture = diskFallbackFixture(root);
+      const targets = { "article-root": path.join(root, "draft", "assets", "img", "posts", STEM), assets: path.join(root, "draft", "assets"), img: path.join(root, "draft", "assets", "img"), posts: path.join(root, "draft", "assets", "img", "posts"), "draft-root": path.join(root, "draft") };
+      const target = targets[segment];
+      const outside = path.join(sandbox, "outside");
+      fs.renameSync(target, outside);
+      fs.symlinkSync(outside, target);
+      fixture.fallbackContext = imageFallbackContextFromDisk(root, STEM, fallbackPolicyText);
+      assert.ok(!Object.values(fixture.fallbackContext.assetFiles).some(file => file.regular));
+      assert.ok(validateSourceImageManifest(fixture).failures.length > 0);
+    } finally { fs.rmSync(sandbox, { recursive: true, force: true }); }
+  });
+  test("shipped fallback refuses symlink escape at " + segment + " before observing external bytes", () => {
+    const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), "fallback-path-shipped-"));
+    try {
+      const root = path.join(sandbox, "package");
+      const fixture = diskFallbackFixture(root);
+      const shippedRoot = path.join(root, "draft");
+      const targets = { "article-root": path.join(shippedRoot, "assets", "img", "posts", STEM), assets: path.join(shippedRoot, "assets"), img: path.join(shippedRoot, "assets", "img"), posts: path.join(shippedRoot, "assets", "img", "posts"), "draft-root": shippedRoot };
+      const target = targets[segment];
+      const outside = path.join(sandbox, "outside");
+      fs.renameSync(target, outside);
+      fs.symlinkSync(outside, target);
+      const prefix = "assets/img/posts/" + STEM + "/";
+      const assetFiles = collectReferenceFiles(path.join(shippedRoot, prefix), prefix);
+      assert.ok(!Object.values(assetFiles).some(file => file.regular));
+      assert.ok(validateShippedImageFallback({ articleBody: fixture.articleBody, articleStem: STEM, assetFiles }).failures.length > 0);
+    } finally { fs.rmSync(sandbox, { recursive: true, force: true }); }
+  });
+}
+
+for (const segment of ["package-root", "research", "report"]) {
+  test("fallback audit refuses symlink escape at " + segment, () => {
+    const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), "fallback-path-audit-"));
+    try {
+      const root = path.join(sandbox, "package");
+      const fixture = diskFallbackFixture(root);
+      const target = segment === "package-root" ? root : segment === "research" ? path.join(root, "research") : path.join(root, "research", "image-source-audit.md");
+      const outside = path.join(sandbox, "outside");
+      fs.renameSync(target, outside);
+      fs.symlinkSync(outside, target);
+      fixture.fallbackContext = imageFallbackContextFromDisk(root, STEM, fallbackPolicyText);
+      assert.equal(fixture.fallbackContext.auditReport.size, 0);
+      assert.ok(validateSourceImageManifest(fixture).failures.length > 0);
+    } finally { fs.rmSync(sandbox, { recursive: true, force: true }); }
+  });
+}
+
+test("ordinary disk fallback still passes package and shipped validation", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "fallback-path-valid-"));
+  try {
+    const fixture = diskFallbackFixture(root);
+    fixture.fallbackContext = imageFallbackContextFromDisk(root, STEM, fallbackPolicyText);
+    assert.deepEqual(validateSourceImageManifest(fixture).failures, []);
+    assert.deepEqual(validateShippedImageFallback({ articleBody: fixture.articleBody, articleStem: STEM, assetFiles: fixture.fallbackContext.assetFiles }).failures, []);
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
 });
