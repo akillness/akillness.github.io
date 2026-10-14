@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="520" viewBox="0 0 1120 520" role="img" aria-labelledby="title desc">
+  <title id="title">Separate local cancellation, remote stopping and artifact delivery</title>
+  <desc id="desc">The top row summarizes inspected source boundaries, not a single executed trace. A proposed lower row records local state, reconciles the remote session and verifies delivered bytes. Graphiti memory admission is a separate caller-specific boundary, not execution permission.</desc>
+  <style>text{font-family:Arial,sans-serif}.heading{font-size:23px;font-weight:700;fill:#24344e}.label{font-size:20px;font-weight:700;fill:#24344e}.small{font-size:16px;fill:#52647c}.tag{font-size:13px;letter-spacing:1px;fill:#52647c}</style>
+  <text x="28" y="32" class="heading">A final state word is not every receipt</text>
+  <text x="28" y="62" class="tag">PINNED SOURCE BOUNDARIES · NOT ONE EXECUTED TRACE</text>
+  <rect x="28" y="82" width="334" height="124" rx="11" fill="#eef3fa" stroke="#8098bb"/>
+  <text x="50" y="119" class="label">Local driver result</text><text x="50" y="151" class="small">May emit cancelled</text><text x="50" y="181" class="small">with a remote-failure diagnostic</text>
+  <rect x="394" y="82" width="334" height="124" rx="11" fill="#fff5e8" stroke="#b5976d"/>
+  <text x="416" y="119" class="label">Remote cancellation</text><text x="416" y="151" class="small">Cancel request may fail</text><text x="416" y="181" class="small">Termination is then unknown</text>
+  <rect x="760" y="82" width="334" height="124" rx="11" fill="#edf5f1" stroke="#77968b"/>
+  <text x="782" y="119" class="label">Artifact delivery</text><text x="782" y="151" class="small">DeliverArtifacts is separate</text><text x="782" y="181" class="small">Scratch file is not a receipt</text>
+  <text x="28" y="242" class="tag">PROPOSED PRODUCT RECORD · NOT AN UPSTREAM SCHEMA</text>
+  <rect x="28" y="264" width="334" height="104" rx="11" fill="none" stroke="#8098bb" stroke-dasharray="7 5"/>
+  <text x="50" y="301" class="label">Retain local state</text><text x="50" y="336" class="small">and the diagnostic</text>
+  <rect x="394" y="264" width="334" height="104" rx="11" fill="none" stroke="#b5976d" stroke-dasharray="7 5"/>
+  <text x="416" y="301" class="label">Reconcile same session</text><text x="416" y="336" class="small">before re-execution</text>
+  <rect x="760" y="264" width="334" height="104" rx="11" fill="none" stroke="#77968b" stroke-dasharray="7 5"/>
+  <text x="782" y="301" class="label">Verify delivered bytes</text><text x="782" y="336" class="small">for the selected run</text>
+  <rect x="28" y="400" width="1066" height="88" rx="11" fill="#f4f0f8" stroke="#a497b7"/>
+  <text x="50" y="434" class="label">Separate memory boundary</text><text x="50" y="466" class="small">Graphiti type and time checks are caller-specific. Remembered content is not tool authorization.</text>
+</svg>
