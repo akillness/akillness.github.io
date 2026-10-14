@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="700" viewBox="0 0 1040 700" role="img" aria-labelledby="title desc">
+  <title id="title">Sentence Transformers input-order contract</title>
+  <desc id="desc">For a text-first multimodal query dictionary in the inspected structured-message CrossEncoder pair path, version 6.0.1 builds image then text content, while version 6.1.0 preserves text then image. A separate synthetic application check finds equal key-sorted hashes but different ordered-content hashes. No embedding or score delta is measured.</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#436276"/></marker></defs>
+  <g font-family="Arial, sans-serif" fill="#203d50">
+    <text x="48" y="48" font-size="18" font-weight="700" letter-spacing="1.6">SOURCE AUDIT / STRUCTURED-MESSAGE PAIR PATH</text>
+    <text x="48" y="94" font-size="34" font-weight="700">Same fields. Different content order.</text>
+    <text x="48" y="128" font-size="20">A stable API is not a stable representation contract.</text>
+    <rect x="48" y="158" width="944" height="108" rx="12" fill="#eef4f7" stroke="#acbecb"/>
+    <text x="72" y="188" font-size="17" font-weight="700">QUERY DICTIONARY: INSERTED TEXT FIRST</text>
+    <text x="72" y="224" font-size="25" font-family="monospace">{ text: "caption", image: frame }</text>
+    <text x="718" y="224" font-size="19">Same field values</text>
+    <path d="M300 266 V300" fill="none" stroke="#436276" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M740 266 V300" fill="none" stroke="#436276" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="48" y="310" width="448" height="190" rx="12" fill="#f3f5f7" stroke="#acbecb"/>
+    <rect x="544" y="310" width="448" height="190" rx="12" fill="#e8f5f1" stroke="#79b6a2"/>
+    <text x="72" y="348" font-size="24" font-weight="700">v6.0.1 / b0acd1a4</text>
+    <text x="568" y="348" font-size="24" font-weight="700">v6.1.0 / b0bf3996</text>
+    <text x="72" y="379" font-size="18">Sorted modality tuple</text>
+    <text x="568" y="379" font-size="18">Dictionary insertion order</text>
+    <rect x="72" y="403" width="150" height="48" rx="6" fill="#d8e5ed"/>
+    <rect x="316" y="403" width="150" height="48" rx="6" fill="#dfe5f3"/>
+    <rect x="568" y="403" width="150" height="48" rx="6" fill="#dfe5f3"/>
+    <rect x="812" y="403" width="150" height="48" rx="6" fill="#d8e5ed"/>
+    <text x="113" y="434" font-size="23" font-weight="700">IMAGE</text>
+    <text x="358" y="434" font-size="23" font-weight="700">TEXT</text>
+    <text x="610" y="434" font-size="23" font-weight="700">TEXT</text>
+    <text x="853" y="434" font-size="23" font-weight="700">IMAGE</text>
+    <path d="M235 427 H301" stroke="#436276" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M731 427 H797" stroke="#436276" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="72" y="479" font-size="17">Flat pair branches remain unchanged</text>
+    <text x="568" y="479" font-size="17">Output differences were not measured</text>
+    <rect x="48" y="532" width="944" height="106" rx="12" fill="#faf3e7" stroke="#ccb88e"/>
+    <text x="72" y="562" font-size="18" font-weight="700">SYNTHETIC CACHE-KEY CHECK / NOT LIBRARY INFERENCE</text>
+    <text x="72" y="597" font-size="21">Text-first vs. image-first: sorted hashes equal, ordered hashes differ.</text>
+    <text x="48" y="672" font-size="17">Original illustration by akillness. Explanatory synthesis, not source evidence.</text>
+  </g>
+</svg>

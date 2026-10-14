@@ -93,9 +93,9 @@
       "links_at_intake": 5,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-14",
+      "survey_note": "Surveyed Sentence Transformers v6.1.0 and August multi-vector update; pinned v6.0.1/v6.1 formatter and current Qwen configs. Original structured-message input-order/cache contract audit, four synthetic assertions only, conditional batch support and unchanged flat branches explicit. Independent Sol review all9 groups/pixels PASS; preserved original April11 URL/date."
     },
     {
       "path": "_posts/2025/11/2025-11-13-sima-2-gemini-powered-ai-agent-3d-worlds.md",
