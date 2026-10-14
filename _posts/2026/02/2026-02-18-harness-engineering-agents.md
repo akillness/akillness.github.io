@@ -1,179 +1,126 @@
 ---
 published: true
-title: "Harness Engineering: The Layer That Actually Makes Agents Work"
-description: "Why orchestration beats model upgrades in production—and how a better harness can flip benchmarks without changing the model."
-categories: [AI, Agent]
-tags: [agents, harness, Orchestration, evaluation, tooling]
+title: "Harness Engineering: What a Benchmark Score Actually Measures"
+description: "A source-bound look at how model identity, prompts, tools, middleware, task sets, sandboxes, and scoring rules shape reported agent results."
+categories: ["AI, Agents"]
+tags: [agents, harness-engineering, benchmarks, agent-evaluation, langchain, openai]
 date: 2026-02-18 17:30:00 +0900
-mermaid: true
-math: false
+last_modified_at: "2026-10-14 23:54:39 +0900"
+permalink: /posts/harness-engineering-agents/
+archive_developed: 2026-10-14
+archive_development_note: "Rebuilt from first-party LangChain, OpenAI, and Anthropic reports, current Deep Agents documentation, and a pinned source snapshot. Results are tied to their tested model, harness, task set, and environment; unsupported ranking and universal-production claims were removed. The diagram is explanatory, not benchmark evidence."
 image:
-  path: /assets/img/ai/harness-techtarget.jpg
-  alt: "Agent harness engineering cover"
-ads: false
-restored_archive: "2026-10-12"
+  path: /assets/img/posts/2026-02-18-harness-engineering-agents/harness-measurement-map.png
+  alt: "Diagram showing that model identity, harness configuration, and task environment jointly shape a reported agent score."
+image_policy: source-first-fallback
 ---
 
-## 🤔 Curiosity: The Question
+Updated October 14, 2026. This article retains its original February 18, 2026 publication date; its research and analysis were rebuilt on the update date.
 
-Sonnet 4.6, Codex sub‑agents, Grok 4.20, Gemini CLI… the release pace is breathless. Yet during the holiday sprint, the real performance swing **was not the model**. It was the harness—the orchestration layer around the model.
+A benchmark score is not a property of a model in isolation. It is the outcome of a model running through a particular harness, against a particular task set, inside a particular environment with particular verification rules and budgets. Change one of those and the number may change. That does not make the result useless. It means the comparison has to say what was held fixed.
 
-So I asked: **Can harness engineering beat model upgrades in real production?**
+This is a narrower claim than saying that harness engineering beats model upgrades, or that a harness is the layer that makes every agent work. The public evidence supports something more actionable: in some published evaluations, changing the harness bundle moved results while the named model stayed fixed. Those results still belong to the exact experiment that produced them.
 
-![Harness engineering overview](/assets/img/ai/harness-extra1.png){: .light .w-75 .shadow .rounded-10 }
+<figure class="explanatory-image">
+  <img src="/assets/img/posts/2026-02-18-harness-engineering-agents/harness-measurement-map.png" width="1180" height="1800" alt="Diagram showing that model identity, harness configuration, and task environment jointly shape a reported agent score." loading="lazy" decoding="async">
+  <figcaption>Original illustration by Aside. This conceptual diagram is not source evidence.</figcaption>
+</figure>
 
----
+[Editable SVG source](/assets/img/posts/2026-02-18-harness-engineering-agents/harness-measurement-map.svg) is available separately.
 
-## 📚 Retrieve: The Knowledge
+## Define the comparison before reading the result
 
-### What “Harness Engineering” Means (vs Prompt/Context)
+A coding-agent evaluation has at least three moving parts.
 
-- **Prompt engineering** optimizes a single call.  
-- **Context/RAG engineering** optimizes what the model sees.  
-- **Harness engineering** optimizes how the agent behaves **over time** across tools, state, and workflows.
+- The model includes the provider, exact model identifier or version, and any model-side reasoning or sampling settings.
+- The harness includes the system instructions, tools, middleware or hooks, subagent flow, memory, state handling, and verification loop.
+- The task and environment include the dataset, sandbox, available files and tools, evaluator, timeout, and token or cost budget.
 
-Think of it like the **engine bay + transmission + ECU** for a car: the harness is what turns raw power into controlled, reliable behavior.
+| Part of the setup | Record before comparing |
+|---|---|
+| Model | Provider, exact model or version, reasoning and sampling settings |
+| Harness | Prompts, tools, middleware, state, subagents, verification loop |
+| Task and environment | Task set, sandbox, evaluator, time and token budgets |
+| Report | Score, cost, latency, run count, and variation |
 
-### Core Responsibilities of a Harness Engineer
+The final score is evidence about that combination. It is not a clean estimate of the model's isolated ability if the harness, task scope, or environment changes at the same time. A leaderboard rank adds another moving part: it depends on the submissions and results available when the ranking is observed.
 
-1. **Tooling & integration surface**  
-   Typed tools, validation, SCM/CI/CD/observability integrations.
+## A fixed model identifier can still produce a different score
 
-2. **Context & memory across time**  
-   Task graphs, long‑horizon memory, retrieval strategies.
+LangChain reports a 52.8% baseline for GPT-5.2-Codex, 63.6% when using high reasoning only, 53.9% when using xhigh only, and 66.5% for an xhigh-high-xhigh reasoning sandwich on Terminal-Bench 2.0. It says it kept the model fixed while changing the harness, and describes the 13.7-point increase from baseline. Its own results show that reasoning-budget settings are part of the tested setup too.
 
-3. **Runtime safety & state management**  
-   Timeouts, retries, rollback boundaries, scoped permissions.
+Treat the 13.7-point delta as a vendor-reported sequence, not a transferable or harness-only effect size. The model identifier stayed fixed, but reasoning-budget settings changed; the result should not be attributed to prompts and middleware alone. An embedded leaderboard screenshot displays 66.5 ± 3.1, but the post does not define the ± statistic or give the number of trials behind the before-and-after values. It says trial results did not vary much across reasoning-budget splits, which is not a substitute for a stated trial count or uncertainty method.
 
-4. **Evaluation & feedback loops**  
-   Tests, verification gates, and “model + harness” evals.
+The benchmark itself matters too. LangChain describes Terminal-Bench 2.0 as 89 tasks and says it used Harbor to orchestrate runs in sandboxes, verify outputs, and score them. A task suite, sandbox, and scoring script are part of what the result means, not background details that can be dropped from the headline.
 
-5. **Workflow architecture**  
-   Explicit state machines and domain‑specific harnesses.
+## Model-specific profiles change more than wording
 
-### Why This Matters: Evidence from the Field
+A later LangChain profile experiment makes the setup dependence more explicit. On a curated, difficult subset of τ²-Bench, the company reports GPT-5.3-Codex moving from 33% with the base Deep Agents harness to 53% with a custom profile. It reports Claude Opus 4.7 moving from 43% to 53% on the same subset.
 
-**1) LangChain’s harness upgrades (deepagents)**  
-Their coding agent moved **Top 30 → Top 5** on Terminal Bench 2.0 without changing the model (GPT‑5.2‑Codex fixed). The improvements came from **prompt + tools + middleware**, plus a trace‑analysis loop that surfaced failure modes at scale.
+The profile changes were not identical. LangChain says its Codex changes included replacing the default file-edit tool with apply_patch, renaming the execution tool to shell_command, and adjusting prompt guidance. The Opus changes were mainly prompt-focused. Those are source-reported results for a selected subset, not a full τ²-Bench estimate or an independent replication. The post does not report a trial count or confidence interval for these numbers.
 
-- **Score:** 52.8 → 66.5 (+13.7)
-- **Levers:** system prompt, tools, middleware (not the model)
-- **Key harness moves:** self‑verification loop, trace‑driven debugging, environment context injection, time‑budget warnings
+The current Deep Agents documentation describes a profile as an overlay on harness behavior, including prompt text, tool descriptions and inclusion, middleware, and subagent configuration. It distinguishes that from a provider profile, which sets model-construction options. A pinned source snapshot makes the distinction concrete: the OpenAI Codex profile registers specific model keys and adds a prompt suffix plus TodoListMiddleware, while the Opus 4.7 profile adds its own prompt suffix. These files show configuration, not measured performance by themselves.
 
-**2) A formatting harness (hashline) exposed real capability**  
-Hashline tags each line with short hashes so the model edits by reference, not by exact string match.
+That difference is useful when reading claims such as "same model, better harness." Ask which profile changed, whether the model identifier stayed fixed, and which outcomes were measured. A profile name alone does not tell you whether its tools, middleware, or provider-side settings were held constant.
 
-- **Grok Code Fast:** 6.7% → **68.3%**
-- **Grok 4 Fast:** output tokens **‑61%**
-- **GPT‑4 Turbo:** 26% → 59% (Aider)
-- **Gemini 3 Flash:** +5pp best‑ever
+## The task environment is part of the measurement
 
-**3) No self‑verification = early failure**  
-Most agents stop after writing code—**no tests run**. A verification middleware that forces spec‑level checks dramatically lifts results.
+LangChain's benchmark-methodology article now describes three different Deep Agents suites: Harbor-Index for end-to-end work, a 30-task τ³-bench subset for multi-turn conversation, and a 30-task ContextBench set for retrieval. The article says each Harbor task includes an environment, instruction, and evaluation script. It also recommends running each task multiple times because agent results are nondeterministic, and keeping a fast capability suite beside end-to-end benchmarks.
 
-**4) Cheaper models are more sensitive to harness quality**  
-MiniMax, Kimi, Codex‑Spark show **2×+ swings** just by changing harness format.
+This is a better mental model than treating "agent benchmark" as one number. A retrieval score, a long coding task score, and a simulated customer-service outcome answer different questions. Even a fixed prompt and model can behave differently when the filesystem, available tools, scoring script, timeout, or task distribution changes.
 
----
+For a practical comparison, make the control surface explicit before running it:
 
-## 💡 Innovation: The Insight
+1. Pin the model identifier and model-side settings.
+2. Freeze the task set, sandbox image, tool availability, evaluator, timeout, and budget.
+3. Change one harness factor at a time, or label the result as a bundle when several change together.
+4. Repeat nondeterministic tasks and report the number of runs and variation, not only the best score.
+5. Track cost, latency, intervention rate, and failure categories beside pass rate.
 
-### The practical takeaway
+These are proposed evaluation steps, not experiments performed for this article. A compact two-model by two-harness comparison can also expose interaction: test each model with both harnesses on the same tasks and budgets. That design can reveal whether a profile helps one model more than another; it does not guarantee that the result generalizes beyond the tested tasks.
 
-**Before blaming the model, tear apart the harness.**  
-At least **half of benchmark rankings** are determined by harness quality, not raw model strength.
+## Production case reports answer a different question
 
-![Harness workflow](/assets/img/ai/harness-extra2.jpg){: .light .w-75 .shadow .rounded-10 }
+OpenAI's February 11, 2026 report describes one internal product built over five months with no manually written code, reaching about one million lines and roughly 1,500 pull requests. The company estimates the work took about one-tenth the time it would have taken to write manually. It describes a system of repository knowledge, tooling, tests, review loops, and operational feedback. That is a detailed case report about one team's process. The estimate is OpenAI's, not a controlled comparison of a harness against a model upgrade.
 
-### A minimal harness roadmap (for your stack)
+Anthropic's March 2026 article describes a planner, generator, and evaluator for multi-hour application builds. Its author also reports changing the design after Opus 4.6 improved: sprint decomposition was removed, and the evaluator was retained when tasks sat beyond what the model could handle reliably alone. In one retro-game example, Anthropic reports that the solo run took 20 minutes and cost $9, while the full-harness run took six hours and cost $200. The planner expanded the same one-sentence request into a 16-feature specification across ten sprints, far beyond what the solo run attempted. The example shows a large cost and scope difference, not a clean estimate of the harness's isolated effect.
 
-1) **Pick a high‑leverage workflow** with clear outcomes  
-   e.g., “Fix labeled GitHub bugs end‑to‑end.”
+Together, these reports suggest a useful engineering question: which component is load-bearing for this model and task today? They do not support a timeless ranking of harnesses or a claim that more agents, more middleware, or more verification is always better. The evaluation has to be repeated when the model, workload, or runtime changes.
 
-2) **Design a minimal tool surface**  
-   SCM + CI + observability + knowledge RAG.
+## What changed since February 2026
 
-3) **Build the runtime**  
-   Queues, state store, retries, safety boundaries.
+The original February note used benchmark swings and production stories to argue that harness quality mattered more than raw model strength. The sources published since then make the point more precise. LangChain's per-model profile results show that prompt and tool configuration can move scores on a selected task subset. Its later benchmark-methodology post explains why repeated runs, environments, and evaluators belong in the measurement. Anthropic's account shows that some scaffolding became less necessary after a model change, while other checks still helped on harder tasks.
 
-4) **Encode verification + taste**  
-   Tests, smoke checks, architectural rules.
+The shift is from a slogan to a testable question. A useful report should name the model, harness revision, task distribution, environment, budget, run count, and evaluator. If one of those is missing, state the boundary instead of filling it with an assumption. If several variables changed, report a bundle result rather than assigning the entire delta to one component.
 
-5) **Instrument and iterate**  
-   Treat the harness as the product, not the model.
+Related reading covers two different boundaries. [Microsoft Agent Framework Harness defaults vary by language](/posts/microsoft-agent-framework-harness-defaults-vary-by-language/) shows why a library's defaults should be checked in the actual runtime. [HarnessRouter's execution contract](/posts/harnessrouter-execution-contract/) separates a local cancellation result from proof that a remote worker stopped. Neither is a benchmark comparison, but both illustrate why an agent system's observable behavior depends on its concrete runtime contract.
 
-### Why this matters for AI × Games
+## Key Takeaways
 
-In games, agent failure is not theoretical—it breaks QA, build pipelines, and live‑ops. A good harness is the difference between **a toy agent** and **a shipping system**.
+- A reported agent score belongs to a model, harness, task set, environment, and evaluator together.
+- LangChain reports a fixed-model progression from 52.8% to 63.6% to 66.5%; its embedded leaderboard shows 66.5 ± 3.1, but the post does not define that statistic or state trial counts.
+- Model-specific profiles can alter prompts, tools, and middleware; configuration evidence is not itself performance evidence.
+- Production case reports can reveal useful architecture and tradeoffs, but they do not isolate a universal harness effect.
+- Repeat the comparison on the tasks and budgets that matter, and report variation as well as the score.
 
----
+## New Questions
 
-## 🔥 Update: Harness Engineering is now the headline, not a footnote
-
-“Harness? Garter belt? Tack?” — no.  
-Since late last year, **OpenAI and Anthropic have both been explicitly elevating the same keyword: *Harness Engineering*.**
-
-### What changed (and why it matters)
-
-- **OpenAI’s Codex team** shipped an internal product with **zero manually‑written lines**,  
-  scaled it to **~1M LOC**, and had agents open **~1,500 PRs** while humans focused on design + verification.  
-  → The point: *the harness mattered more than the model.*
-
-- **Anthropic** documented core failure patterns in long‑running agents and introduced a harness pattern with an  
-  **initializer agent + coding agent**, plus **feature lists + claude‑progress logs** to bridge context windows.  
-  → This makes multi‑window, long‑horizon execution practical.
-
-- **Philipp Schmid** argues that model gaps are shrinking, and real differentiation shows up in **durability and harness design**.
-
-- **Martin Fowler** asks whether harnesses become **service templates / golden paths**,  
-  and whether “AI‑friendly” architectures become the new standard.
-
-### What is Harness Engineering?
-
-It’s **the control layer that makes AI agents reliable in production**.
-
-> If the model is the CPU, the harness is the OS.
-
-Context management, tool mediation, enforced verification, and progress logging — **the environment that makes agents work**.
-
-### Failure patterns (what Anthropic + OpenAI saw repeatedly)
-
-- Trying to do too much at once → context exhaustion  
-- Declaring “done” after partial progress  
-- Shipping without verification  
-- Punting bugs to the next session  
-
-### What the harness fixes (practical design points)
-
-1) **Context Engineering** — provide a map, not a 1,000‑page manual  
-2) **Incremental Progress** — one feature at a time, clean commits every step  
-3) **Forced Verification** — intercept “done” and require e2e/QA tests  
-4) **Governance & Traceability** — who decided what, and why  
-5) **Durable State** — progress logs + feature lists to bridge sessions  
-
-> Humans steer. Agents execute.
-
-One more key point: **the trajectory data captured by the harness becomes a core training asset**.  
-The competitive edge is no longer the prompt — it’s **the data the harness collects**.
-
----
-
-## New Questions This Raises
-
-- Which harness patterns scale best across domains (coding vs ops vs content)?
-- How far can cheap models go with a world‑class harness?
-- What does a “game‑native harness” look like for live‑ops and economy systems?
-
----
+Which harness component remains load-bearing after a model upgrade, and what repeated, task-matched evidence would justify keeping it?
 
 ## References
 
-- https://openai.com/index/harness-engineering/
-- https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
-- https://www.philschmid.de/agent-harness-2026
-- https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html
-- https://docs.langchain.com/oss/python/deepagents/harness
-- https://medium.com/@bijit211987/agent-harness-b1f6d5a7a1d1
-- https://blog.langchain.com/improving-deep-agents-with-harness-engineering/
-- https://www.techtarget.com/searchitoperations/news/366631493/Harness-takes-aim-at-AI-bottleneck-with-DevSecOps-agents
-- https://devops.com/harness-extends-scope-and-reach-of-ai-platform-for-automating-devops-workflows/
+### First-party evaluations and methodology
+
+- [LangChain: Improving Deep Agents with harness engineering](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering) - GPT-5.2-Codex and Terminal-Bench 2.0 results.
+- [LangChain: Tuning Deep Agents to Work Well with Different Models](https://www.langchain.com/blog/tuning-deep-agents-different-models) - profile results on a τ²-Bench subset.
+- [LangChain: How We Benchmark Deep Agents](https://www.langchain.com/blog/how-we-benchmark-deep-agents) - benchmark suites, task structure, and repeated-run guidance.
+- [Deep Agents harness profiles documentation](https://docs.langchain.com/oss/python/deepagents/profiles) - current profile and provider-profile behavior, observed 2026-10-14.
+
+### Pinned implementation and case reports
+
+- [OpenAI Codex harness profile at pinned commit 2c42ddea9090e63a8ba745fb8eaf78144804d267](https://github.com/langchain-ai/deepagents/blob/2c42ddea9090e63a8ba745fb8eaf78144804d267/libs/deepagents/deepagents/profiles/harness/_openai_codex.py).
+- [Anthropic Opus 4.7 harness profile at the same pinned commit](https://github.com/langchain-ai/deepagents/blob/2c42ddea9090e63a8ba745fb8eaf78144804d267/libs/deepagents/deepagents/profiles/harness/_anthropic_opus_4_7.py).
+- [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/) - internal product case report, published 2026-02-11.
+- [Anthropic: Harness design for long-running apps](https://www.anthropic.com/engineering/harness-design-long-running-apps) - reported multi-agent architecture and task-specific examples, published 2026-03-24.
+
+Editorial method: claims in this article point to primary documentation, pinned source code, or dated reports, with AI-assisted research under the site's evidence-gated policy. [How this site verifies claims and discloses AI assistance](/about/#editorial-method-and-ai-assistance) · [Report a correction](/contact/).

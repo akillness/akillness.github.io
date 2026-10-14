@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1650" viewBox="0 0 1080 1650" role="img" aria-labelledby="title desc">
+  <title id="title">A reported agent score measures a complete setup</title>
+  <desc id="desc">Model, harness, and task environment jointly shape a reported agent score.</desc>
+  <rect width="1080" height="1650" fill="#f4f1ea"/>
+  <text x="72" y="92" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="3" fill="#4678b8">BENCHMARK READING GUIDE</text>
+  <text x="72" y="182" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700" fill="#162333">A reported score</text>
+  <text x="72" y="252" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700" fill="#162333">measures a whole setup</text>
+  <text x="72" y="318" font-family="Arial, Helvetica, sans-serif" font-size="36" fill="#516070">Keep these inputs with every benchmark claim.</text>
+
+  <rect x="72" y="370" width="936" height="240" rx="24" fill="#ffffff" stroke="#c9d3df" stroke-width="3"/>
+  <rect x="72" y="370" width="14" height="240" rx="7" fill="#4678b8"/>
+  <text x="120" y="418" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="2" fill="#4678b8">MODEL</text>
+  <text x="120" y="478" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="700" fill="#162333">Which model?</text>
+  <text x="120" y="530" font-family="Arial, Helvetica, sans-serif" font-size="38" fill="#425163">Provider, model ID, and version</text>
+  <text x="120" y="576" font-family="Arial, Helvetica, sans-serif" font-size="38" fill="#425163">Reasoning and sampling settings</text>
+
+  <circle cx="540" cy="632" r="24" fill="#e5e9ed"/>
+  <text x="540" y="644" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#526170">+</text>
+
+  <rect x="72" y="660" width="936" height="240" rx="24" fill="#ffffff" stroke="#e6c78c" stroke-width="3"/>
+  <rect x="72" y="660" width="14" height="240" rx="7" fill="#c7832d"/>
+  <text x="120" y="708" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="2" fill="#b36c16">HARNESS</text>
+  <text x="120" y="768" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="700" fill="#162333">How was it run?</text>
+  <text x="120" y="820" font-family="Arial, Helvetica, sans-serif" font-size="38" fill="#425163">Prompts, tools, middleware, and state</text>
+  <text x="120" y="866" font-family="Arial, Helvetica, sans-serif" font-size="38" fill="#425163">Subagents and verification</text>
+
+  <circle cx="540" cy="922" r="24" fill="#e5e9ed"/>
+  <text x="540" y="934" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#526170">+</text>
+
+  <rect x="72" y="950" width="936" height="240" rx="24" fill="#ffffff" stroke="#acd1c2" stroke-width="3"/>
+  <rect x="72" y="950" width="14" height="240" rx="7" fill="#34876b"/>
+  <text x="120" y="998" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="2" fill="#34876b">TASK + ENVIRONMENT</text>
+  <text x="120" y="1058" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="700" fill="#162333">What was tested?</text>
+  <text x="120" y="1110" font-family="Arial, Helvetica, sans-serif" font-size="38" fill="#425163">Task set, sandbox, and evaluator</text>
+  <text x="120" y="1156" font-family="Arial, Helvetica, sans-serif" font-size="38" fill="#425163">Timeout, token, and cost budget</text>
+
+  <path d="M540 1192 L540 1220" stroke="#647487" stroke-width="4"/>
+  <path d="M526 1208 L540 1222 L554 1208" fill="none" stroke="#647487" stroke-width="4"/>
+  <rect x="72" y="1240" width="936" height="270" rx="24" fill="#162333"/>
+  <text x="120" y="1300" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="2" fill="#9fbedc">REPORTED OUTCOME</text>
+  <text x="120" y="1370" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700" fill="#ffffff">A score for this exact setup</text>
+  <text x="120" y="1430" font-family="Arial, Helvetica, sans-serif" font-size="38" fill="#ffffff">Not a universal model or harness ranking</text>
+  <text x="72" y="1580" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#516070">Repeat nondeterministic tasks. Report run counts and variation.</text>
+</svg>
