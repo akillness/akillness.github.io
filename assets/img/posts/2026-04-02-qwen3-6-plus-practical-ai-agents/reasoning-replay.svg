@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="850" viewBox="0 0 800 850" role="img" aria-labelledby="title desc">
+<title id="title">A request flag cannot replay a dropped reasoning field</title>
+<desc id="desc">An assistant response reaches client history. A serializer either keeps or drops reasoning_content. With preserve_thinking true, the kept field is supplied to the request and the dropped field is absent. This conceptual request-contract diagram is not a provider runtime trace.</desc>
+<defs>
+  <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2 2 L10 6 L2 10" fill="none" stroke="#507b89" stroke-width="2"/></marker>
+</defs>
+<g font-family="Arial, Helvetica, sans-serif" fill="#163745">
+  <text x="400" y="60" text-anchor="middle" font-size="32" font-weight="700">Reasoning replay has a client boundary</text>
+  <text x="400" y="98" text-anchor="middle" font-size="23" fill="#507b89">Qwen3.6-Plus request contract, not a performance result</text>
+  <rect x="85" y="135" width="630" height="108" rx="18" fill="#eef8f7" stroke="#267c7b" stroke-width="2"/>
+  <text x="400" y="176" text-anchor="middle" font-size="29" font-weight="700">Assistant response</text>
+  <text x="400" y="215" text-anchor="middle" font-size="27">content + reasoning_content</text>
+  <path d="M400 246 V286" fill="none" stroke="#507b89" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="85" y="301" width="630" height="108" rx="18" fill="#eef8f7" stroke="#267c7b" stroke-width="2"/>
+  <text x="400" y="343" text-anchor="middle" font-size="29" font-weight="700">Client history and serializer</text>
+  <text x="400" y="383" text-anchor="middle" font-size="26">Which fields reach the next request?</text>
+  <path d="M400 412 V449 H206 V484" fill="none" stroke="#507b89" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M400 449 H594 V484" fill="none" stroke="#507b89" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="36" y="498" width="340" height="117" rx="18" fill="#eaf8ef" stroke="#297647" stroke-width="2"/>
+  <text x="206" y="541" text-anchor="middle" font-size="29" font-weight="700">Keep the field</text>
+  <text x="206" y="581" text-anchor="middle" font-size="25">Supplied to the request</text>
+  <rect x="424" y="498" width="340" height="117" rx="18" fill="#fff4e5" stroke="#96672c" stroke-width="2"/>
+  <text x="594" y="541" text-anchor="middle" font-size="29" font-weight="700">Drop the field</text>
+  <text x="594" y="581" text-anchor="middle" font-size="25">Absent from the request</text>
+  <path d="M206 618 V658" fill="none" stroke="#507b89" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M594 618 V658" fill="none" stroke="#507b89" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="36" y="673" width="728" height="105" rx="18" fill="#f2f5f7" stroke="#507b89" stroke-width="2"/>
+  <text x="400" y="715" text-anchor="middle" font-size="28" font-weight="700">Both requests can set preserve_thinking: true</text>
+  <text x="400" y="752" text-anchor="middle" font-size="25">The flag does not recreate an omitted field.</text>
+  <text x="400" y="823" text-anchor="middle" font-size="22" fill="#507b89">Original diagram by akillness, based on the documented request schema</text>
+</g>
+</svg>

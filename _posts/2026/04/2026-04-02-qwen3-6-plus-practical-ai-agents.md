@@ -1,282 +1,139 @@
 ---
 published: true
-title: "Qwen3.6-Plus Review: 1M Context, Agentic Coding, and Practical AI Agents"
-description: "A practical review of Qwen3.6-Plus covering its 1M-token context window, agentic coding strengths, multimodal reasoning, benchmark signals, and why it matters for real AI agent workflows."
-categories: [AI, Agents, Developer-Tools]
-tags: [qwen, qwen3.6-plus, ai-agents, agentic-coding, multimodal-ai, LLM, developer-tools]
+title: "Qwen3.6-Plus Preserves Only Reasoning the Client Replays"
+description: "Qwen3.6-Plus separates thinking from history replay. A pinned Qwen Code audit shows why preserve_thinking, idle cleanup and a 1M context window are different contracts."
+categories: [AI, Agents]
+tags: [qwen, ai-agents, agent-runtime, context-engineering, source-audit]
 date: 2026-04-02 09:00:00 +0900
+last_modified_at: 2026-10-14 14:00:00 +0900
+archive_developed: "2026-10-14"
+archive_development_note: "Rebuilt from the April launch note after re-reading Qwen and Alibaba Cloud API documentation, the April 8 Qwen Code retention change and the current model-series repository. The old launch-score summary and single-call example are replaced by a reasoning replay contract, a synthetic serializer check and a dated survey. No model benchmark or production deployment was run."
 mermaid: false
 math: false
+image_policy: source-first-fallback
 image:
-  path: "https://qianwen-res.oss-accelerate.aliyuncs.com/Qwen3.6/Figures/3.6_plus_banner.png"
-  alt: "Qwen3.6-Plus main banner"
-ads: false
-restored_archive: "2026-10-12"
+  path: /assets/img/posts/2026-04-02-qwen3-6-plus-practical-ai-agents/reasoning-replay.png
+  alt: "Original request-contract diagram showing a client serializer keeping or dropping reasoning_content while both requests set preserve_thinking to true."
 ---
 
-## 🤔 Curiosity: When does an AI model stop feeling like a chatbot and start feeling like a working agent?
+## Why can a thinking-enabled agent still lose its reasoning history?
 
-A lot of model launches still sound interchangeable.
+The first version of this April note treated a large context window and a reasoning-preservation flag as signs of a more capable agent. Those are useful features, but they leave a practical question unanswered: **what does the client actually send on the next turn?**
 
-Better reasoning. Better coding. Better multimodal understanding. Better everything.
+Qwen3.6-Plus exposes separate controls for generating reasoning and reading previous reasoning. Neither is a substitute for a history store. If an application reconstructs every assistant message as only `role` and `content`, it drops the separate `reasoning_content` field before the model receives the request. Setting `preserve_thinking: true` afterward cannot supply a field that is absent.
 
-That is not useless. It is just no longer enough.
+That is the implementation boundary worth checking before blaming a model for forgetting a plan. It is also why the old example was insufficient: it issued one completion and printed the answer. There was no second request demonstrating what survived a round trip.
 
-The more useful question is whether a model can stay competent inside a messy workflow where it has to read a large codebase, keep context alive, call tools, recover from failure, and still produce something a developer can actually ship.
+This rebuild combines current API documentation with one historical Qwen Code revision. I inspected the sources and ran a synthetic request-construction check, not a Qwen inference call. The findings below do not establish coding accuracy, cache savings, latency or production reliability.
 
-That is why **Qwen3.6-Plus** is worth paying attention to.
+## Thinking generation and thinking replay have different defaults
 
-Based on Qwen’s official announcement and the Korean technical summary article, this release is less about chat polish and more about moving toward a model that can participate in real execution. The headline features — a **1M-token context window**, stronger **agentic coding**, improved **tool use**, and better **multimodal reasoning** — all point in the same direction.
+Alibaba Cloud's [Deep Thinking guide](https://www.alibabacloud.com/help/en/model-studio/deep-thinking), read on October 14, classifies Qwen3.6-Plus as a hybrid-thinking model with thinking enabled by default. Qwen's [launch announcement](https://qwen.ai/blog?id=qwen3.6) separately says `preserve_thinking` is disabled by default. An agent can therefore generate reasoning without opting into reading reasoning from earlier assistant messages.
 
-> The interesting part of Qwen3.6-Plus is not that it wants to answer better. It wants to operate better.
+The API guide describes the replay contract explicitly: in a multi-turn conversation, `preserve_thinking` controls whether the model reads historical assistant `reasoning_content`. The client must provide that field on the historical assistant messages. “Preserve” here should not be interpreted as an automatic server-side session database.
 
----
+| Boundary | What the inspected material establishes | What it does not establish |
+|---|---|---|
+| Thinking generation | Qwen3.6-Plus can run with thinking enabled; the guide documents its default | That prior reasoning is present in a later request |
+| Thinking replay | Historical assistant `reasoning_content` is supplied by the client and read under `preserve_thinking` | That a serializer may omit the field without consequence |
+| Context capacity | The model page lists a 1,000,000-token context window | That every earlier fact will be retrieved accurately |
+| Function calling | The application receives a tool instruction, executes it and returns the result | That the model itself owns shell, account or deployment permissions |
 
-## 📚 Retrieve: What actually changed in Qwen3.6-Plus?
+The last row matters just as much as the history field. [Function Calling documentation](https://www.alibabacloud.com/help/en/model-studio/qwen-function-calling) supports the Qwen3.6-Plus series, but the application's execution step remains a separate responsibility. A model returning a tool call is not permission to run it, and a long reasoning trace is not evidence that the resulting action succeeded.
 
-### 1) The 1M-token context window is not just a spec-sheet flex
+<figure class="explanatory-image">
+  <img src="/assets/img/posts/2026-04-02-qwen3-6-plus-practical-ai-agents/reasoning-replay.png" alt="Original request-contract diagram showing a client serializer keeping or dropping reasoning_content while both requests set preserve_thinking to true." loading="lazy">
+  <figcaption>Original illustration by akillness, drawn as SVG and rendered to PNG. This is a request-contract diagram, not source evidence or a provider runtime trace.</figcaption>
+</figure>
 
-Qwen says Qwen3.6-Plus provides a **1M-token context window by default**.
+[Editable SVG source of the original diagram](/assets/img/posts/2026-04-02-qwen3-6-plus-practical-ai-agents/reasoning-replay.svg).
 
-That matters because real engineering tasks are rarely isolated prompts. They are sprawling working sets:
+## The 1M window is not a one-million-token input allowance
 
-- repository-wide code context
-- docs plus tickets plus logs
-- previous failed attempts
-- tool outputs and traces
-- screenshots, UI references, and multimodal inputs
+The launch describes a default 1M context window. The current [model-information page](https://www.alibabacloud.com/help/en/model-studio/qwen3-6-plus), updated September 28 and read October 14, gives a more useful planning boundary: **1,000,000 tokens of context**, **991,808 maximum input tokens**, and **983,616 maximum input tokens in thinking mode**. These are documented limits, not measurements from a local workload.
 
-A bigger context window becomes useful when the model is expected to behave like an agent instead of a one-shot assistant.
+For a coding agent, that distinction changes how to prepare a request. Repository files are only part of the input. Instructions, user turns, previous assistant messages, tool definitions and tool results also occupy the request. Replayed reasoning is another field the application must account for. Do not equate a marketing context-window number with a file-ingestion budget.
 
-#### Concrete example
-Imagine asking an agent to:
+There is a second, independent uncertainty: capacity is not retrieval quality. A window specification does not show that the agent can reliably find the relevant build error among unrelated logs, or preserve a project constraint through repeated compaction. Those require workload-specific evaluation.
 
-1. read an onboarding document,
-2. inspect a medium-sized repository,
-3. compare recent bug reports,
-4. patch a broken route,
-5. generate a regression checklist,
-6. and explain the risk of deployment.
+I removed the earlier article's launch-score comparison rather than use it as evidence of those properties. Vendor benchmark results can motivate a test, but they cannot answer whether this particular history serializer, tool loop and repository task work correctly together. This article reports no replacement model score.
 
-Smaller-context models often force that workflow into fragments. A 1M-token working window makes it more realistic to keep the system state coherent without constantly rebuilding context from scratch.
+## What changed since the April 2026 launch note?
 
-### 2) Agentic coding is the real center of the release
+There are now three timelines to keep separate: the hosted model, open-model releases and the coding client.
 
-The official post puts heavy emphasis on coding agents, not just code generation.
+**The hosted model has a snapshot identifier.** At the October 14 read, the model page describes `qwen3.6-plus` as functionally equivalent to `qwen3.6-plus-2026-04-02`. For a reproduction that must hold the April model snapshot constant, use the snapshot identifier rather than assume a moving alias will always mean the same thing. The documentation's read date remains part of that statement. This does not establish availability in every region or account.
 
-That distinction matters.
+**The open-model repository moved beyond Qwen3.6.** The former Qwen3.6 repository URL resolves to Qwen3.8 at the read time. Its [README at commit `2ea10dc7`](https://github.com/QwenLM/Qwen3.8/blob/2ea10dc725823bf7c3e21ce8557cbe15245132ae/README.md) lists Qwen3.6-35B-A3B on April 16, Qwen3.6-27B on April 22, and Qwen3.8 open-model releases in August. These are distinct model releases, not proof that an open checkpoint is the hosted Qwen3.6-Plus service. Do not transfer a hosted result or parameter assumption merely because names share a prefix.
 
-There is a huge difference between:
+**Qwen Code made retention an explicit client policy.** [PR 2897](https://github.com/QwenLM/qwen-code/pull/2897), merged into commit `3c23952e` on April 8, replaced unconditional thought stripping at the user-query/cron entry point with idle-triggered cleanup. In the inspected [client branch](https://github.com/QwenLM/qwen-code/blob/3c23952ef7bdae2dac1fe404b95e88c529bc82da/packages/core/src/core/client.ts), a gap exceeding the configured threshold sets a sticky cleanup latch. The settings schema defaults that threshold to **five minutes**.
 
-- writing a nice function in isolation
-- and completing a messy engineering task across files, tools, and retries
+After the latch is set, `stripThoughtsFromHistoryKeepRecent(1)` removes older thought parts. The [selection method](https://github.com/QwenLM/qwen-code/blob/3c23952ef7bdae2dac1fe404b95e88c529bc82da/packages/core/src/core/geminiChat.ts) counts model entries containing thought parts, not every model entry. It retains the most recent thought-containing entry at that cleanup step. Later entries without thoughts do not displace it from the selection.
 
-Qwen3.6-Plus is explicitly framed around tasks like:
+That is not “all reasoning is kept forever.” The latch stays on until chat reset; other history-management paths, including compaction, remain outside this narrow branch finding. The code comments explain a prompt-cache-prefix motivation, but I did not measure cache hits or reasoning coherence. This is an **April 8 implementation audit**, not a claim about the October client's current retention policy.
 
-- frontend web development
-- repository-level problem solving
-- terminal operations
-- automated task execution
-- multi-step planning with memory and execution
+## A request-construction check comes before a model benchmark
 
-That is much closer to how development actually feels in production.
+A small local fixture makes the serializer boundary visible without spending an API call. On October 14, I ran `node replay-fixture.mjs` against a synthetic assistant object. Its marker string was test data, not model reasoning. The fixture constructed two JSON requests with the same `preserve_thinking: true` flag: one dropped `reasoning_content`, and the other copied it.
 
-### 3) The benchmark pattern is more practical than flashy
+```javascript
+import assert from 'node:assert/strict';
 
-From the official table, Qwen3.6-Plus shows notable gains over Qwen3.5-397B-A17B in several execution-heavy areas:
+const prior = {
+  role: 'assistant',
+  content: 'A synthetic answer.',
+  reasoning_content: 'FIXTURE_ONLY_NOT_MODEL_REASONING'
+};
+const omitted = { role: prior.role, content: prior.content };
+const replayed = { ...prior };
+const request = (assistant) => ({
+  model: 'qwen3.6-plus-2026-04-02',
+  preserve_thinking: true,
+  messages: [assistant, { role: 'user', content: 'Continue.' }]
+});
 
-- **SWE-bench Verified**: 78.8 vs 76.2
-- **Terminal-Bench 2.0**: 61.6 vs 52.5
-- **Claw-Eval Avg**: 74.8 vs 70.7
-- **QwenClawBench**: 57.2 vs 51.8
-- **TAU3-Bench**: 70.7 vs 68.4
-
-Those numbers matter less as absolute bragging rights and more as a pattern.
-
-The pattern says Qwen is optimizing for a model that can survive long-horizon, tool-using, engineering-style work.
-
-### 4) Multimodal reasoning is becoming more operational
-
-Qwen also positions the model as better at perception and multimodal reasoning.
-
-That sounds generic until you think about the kind of work it enables:
-
-- reading documents that combine text and layout
-- interpreting screenshots and UI states
-- connecting OCR with reasoning
-- understanding charts, diagrams, and reference visuals
-- grounding actions in visual evidence
-
-That matters because real product work is not text-only.
-
-A support workflow may involve screenshots.
-A QA workflow may involve gameplay or app screens.
-A product analysis workflow may involve dashboards and visual reports.
-
-If a model can move between text, images, and action more reliably, it becomes much more useful as a practical system component.
-
----
-
-## 🖼️ Source Images Worth Including
-
-### Official Qwen banner
-![Qwen3.6-Plus banner](https://qianwen-res.oss-accelerate.aliyuncs.com/Qwen3.6/Figures/3.6_plus_banner.png)
-
-### Official benchmark chart
-![Qwen3.6-Plus benchmark chart](https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen3.6/Figures/qwen3.6_plus_score.png)
-
-### Visual reasoning example from Qwen
-![Qwen3.6 visual reasoning example](https://qianwen-res.oss-accelerate.aliyuncs.com/Qwen3.6/demo/Visual_Reasoning/det_result.png)
-
-These are useful because they make the article feel grounded in the actual release materials instead of reading like a paraphrased summary.
-
----
-
-## 💡 Innovation: Why this release matters in real workflows
-
-The strongest signal in Qwen3.6-Plus is not “higher scores.”
-
-It is the architectural direction.
-
-Qwen repeatedly describes the model as a system where **reasoning, memory, and execution** are deeply integrated. That is exactly the combination needed for modern AI agents.
-
-### Case 1: Repository-level bug fixing
-A useful coding agent should be able to:
-
-- inspect issue context,
-- search across a repo,
-- modify more than one file,
-- run terminal commands,
-- evaluate whether the patch actually worked,
-- and explain the outcome clearly.
-
-That is a very different standard from “write me a React component.”
-
-Qwen3.6-Plus appears designed to compete at that higher standard.
-
-### Case 2: Multimodal QA and failure analysis
-This is especially interesting from a product engineering perspective.
-
-If you are building QA workflows for games, apps, or visual products, a stronger multimodal model can do more than describe what it sees. It can connect visual evidence to an action loop:
-
-- detect an abnormal UI state,
-- interpret what probably happened,
-- compare it with expected behavior,
-- produce a report,
-- and hand the result back into a toolchain.
-
-That is the kind of workflow where multimodal capability becomes infrastructure, not a demo.
-
-### Case 3: Long-horizon agent pipelines
-In multi-step agents, one of the biggest hidden costs is context reconstruction.
-
-Every time the system forgets why it made a choice, re-runs the same reasoning, or loses track of intermediate outputs, reliability drops and token waste rises.
-
-That is why Qwen’s emphasis on long context and preserved reasoning state is strategically important. Even if the feature details evolve, the design intent is obvious: reduce agent drift over time.
-
----
-
-## A simple code pattern for trying Qwen3.6-Plus
-
-Below is a practical example of how a developer might wire Qwen3.6-Plus into an OpenAI-style client flow. This is not the full official sample copied line-for-line. It is a compact integration pattern for testing the model in an agent-oriented setup.
-
-```python
-from openai import OpenAI
-
-client = OpenAI(
-    api_key="YOUR_MODEL_STUDIO_API_KEY",
-    base_url="https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
-)
-
-messages = [
-    {
-        "role": "system",
-        "content": (
-            "You are a coding agent. Think step by step, keep plans concise, "
-            "and produce actions that can be verified."
-        ),
-    },
-    {
-        "role": "user",
-        "content": (
-            "Read the repository structure, identify why the build fails, "
-            "and propose a safe fix with a test plan."
-        ),
-    },
-]
-
-response = client.chat.completions.create(
-    model="qwen3.6-plus",
-    messages=messages,
-    stream=False,
-    extra_body={
-        "enable_thinking": True,
-        "preserve_thinking": True
-    }
-)
-
-print(response.choices[0].message.content)
+assert.equal(request(omitted).preserve_thinking, true);
+assert.equal(Object.hasOwn(request(omitted).messages[0],
+  'reasoning_content'), false);
+assert.equal(request(replayed).messages[0].reasoning_content,
+  prior.reasoning_content);
 ```
 
-### Why this code example matters
-This small snippet shows the bigger product shift.
+All three assertions passed in the recorded fixture. The serialized request without the field still had the flag enabled. That demonstrates an object-construction mistake is possible; it does **not** show that either request was accepted by a provider, or that replay improves answers. The excerpt above is the same check in abbreviated form; it is not a full API integration example.
 
-Developers are no longer only prompting for answers. They are building loops where the model becomes part of a structured workflow:
+For a real client, make this a round-trip test: ingest an actual response, persist it, reload it and inspect the resulting request in a controlled test environment. Verify the fields your provider documents, including tool-call identifiers when tools are involved. Do not put unrestricted reasoning or secrets in routine production logs just to debug retention.
 
-- system role defines operational behavior,
-- user prompt defines the task objective,
-- model output feeds into tools or downstream actions,
-- and reasoning continuity becomes part of reliability engineering.
+Then evaluate the model on the task that matters. For an illustrative game-build assistant, the acceptance criterion might be preserving a user-approved build target, linking a proposed fix to a real compiler error, and refusing deployment without approval. Those are suggested test cases, not workloads executed for this article.
 
-That is exactly where Qwen3.6-Plus is trying to become stronger.
+The next useful comparison is [HarnessRouter's execution contract](/posts/harnessrouter-execution-contract/), which separates local cancellation state from remote execution receipts. [Microsoft Agent Framework's language-specific defaults](/posts/microsoft-agent-framework-harness-defaults-vary-by-language/) offers a related check on how much behavior a factory call actually composes. Neither a request flag nor an agent wrapper should stand in for inspecting the boundary it promises to control.
 
----
+## Key Takeaways
 
-## A more realistic mental model for Qwen3.6-Plus
+- `enable_thinking` and `preserve_thinking` are separate controls. Cross-turn replay requires the client to supply historical assistant `reasoning_content`.
+- A 1M context window is a documented capacity limit, not proof of retrieval accuracy or an equal-sized input allowance.
+- The April 8 Qwen Code retention branch uses idle cleanup and keeps the latest thought-containing entry at that step. It is not permanent history, and it is not an audit of the current client.
+- The local fixture checked request construction only. Model quality, provider acceptance and production performance remain unmeasured here.
 
-Instead of thinking of this release as “another big model update,” it is more useful to think of it like this:
+## New Questions
 
-1. **Context layer** — can it hold enough working state to stay coherent?
-2. **Reasoning layer** — can it make good decisions inside that state?
-3. **Execution layer** — can it use tools, terminals, and structured actions?
-4. **Perception layer** — can it connect text and visual evidence?
-5. **Reliability layer** — can it do all of that repeatedly without collapsing?
+- Which fields survive the application's persistence and history-compaction paths before a second request?
+- What retention policy does the exact client revision deployed in your stack apply after an idle gap or chat reset?
+- Does reasoning replay improve your task's completion rate enough to justify its token and data-retention cost?
 
-Qwen3.6-Plus is interesting because it tries to improve all five at once.
+## References
 
-That does not automatically make it the best model for every stack. Real adoption will still come down to:
+### Hosted-model announcement and API contracts
 
-- reliability outside curated demos,
-- cost-performance tradeoffs,
-- integration quality,
-- tool compatibility,
-- and how stable the model feels under repeated use.
+Read on **2026-10-14**. These are vendor documentation and capability statements, not independent runtime measurements.
 
-But the direction is right.
+1. [Qwen3.6-Plus launch announcement](https://qwen.ai/blog?id=qwen3.6): default context-window claim and `preserve_thinking` default.
+2. [Alibaba Cloud Qwen3.6-Plus model information](https://www.alibabacloud.com/help/en/model-studio/qwen3-6-plus): page updated **2026-09-28**, context/input limits and `qwen3.6-plus-2026-04-02` snapshot relationship.
+3. [Deep Thinking guide](https://www.alibabacloud.com/help/en/model-studio/deep-thinking): thinking defaults and historical assistant `reasoning_content` replay.
+4. [Function Calling guide](https://www.alibabacloud.com/help/en/model-studio/qwen-function-calling): supported model series and the application-owned execution loop.
 
----
+### Source-pinned client and model-series survey
 
-## Final Thoughts
+Read on **2026-10-14**. Code findings are static and limited to the cited revision.
 
-Qwen3.6-Plus looks like a serious move toward practical AI agents.
-
-The most compelling part of the release is not the claim that the model is generally stronger. It is that the improvements seem aligned with actual work:
-
-- large-context engineering tasks,
-- agentic coding,
-- long-horizon planning,
-- multimodal grounding,
-- and developer-friendly integration.
-
-That combination is what makes a model feel useful in production.
-
-If earlier model releases were mostly about making AI more impressive, releases like Qwen3.6-Plus are about making AI more operational.
-
-That is the shift worth tracking.
-
----
-
-## Sources
-
-- Official Qwen release: <https://qwen.ai/blog?id=qwen3.6>
-- Korean technical summary: <https://digitalbourgeois.tistory.com/m/2947>
+5. [Qwen Code PR 2897](https://github.com/QwenLM/qwen-code/pull/2897), merged **2026-04-08**; [client](https://github.com/QwenLM/qwen-code/blob/3c23952ef7bdae2dac1fe404b95e88c529bc82da/packages/core/src/core/client.ts), [history-selection method](https://github.com/QwenLM/qwen-code/blob/3c23952ef7bdae2dac1fe404b95e88c529bc82da/packages/core/src/core/geminiChat.ts), and [settings schema](https://github.com/QwenLM/qwen-code/blob/3c23952ef7bdae2dac1fe404b95e88c529bc82da/packages/cli/src/config/settingsSchema.ts) at `3c23952ef7bdae2dac1fe404b95e88c529bc82da`.
+6. [Qwen3.8 README](https://github.com/QwenLM/Qwen3.8/blob/2ea10dc725823bf7c3e21ce8557cbe15245132ae/README.md) at `2ea10dc725823bf7c3e21ce8557cbe15245132ae`: dated open-model releases and the current repository's scope.

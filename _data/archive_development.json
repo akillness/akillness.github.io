@@ -79,9 +79,9 @@
       "links_at_intake": 6,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-14",
+      "survey_note": "Rebuilt the April launch note from current API documentation and Qwen Code commit 3c23952e: separated thinking generation, reasoning_content replay and historical idle cleanup; replaced launch-score paraphrase with a bounded synthetic serializer check and original diagram. No provider inference or production performance was measured."
     },
     {
       "path": "_posts/2026/04/2026-04-11-multimodal-sentence-transformers-practical-guide.md",
