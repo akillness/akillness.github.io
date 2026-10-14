@@ -123,9 +123,9 @@
       "links_at_intake": 19,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-14",
+      "survey_note": "Re-read OpenContext at commit 0649e7134346f6f5038a9b29cc5c824ae6a54f3f and captured the current official usage guide on 2026-10-14. Traced generated manifest/read instructions, the current-record resolver, search constructors, and the 300-second index-sync default. Finding: the guide and instructions help agents retrieve files but do not establish automatic loading; stable IDs resolve current rows, not historical snapshots. Dropped unsupported 95%/80% outcomes and added an original retrieval-boundary diagram. No installation, runtime search, or benchmark was run."
     },
     {
       "path": "_posts/2026/01/2026-01-18-glm-4-7-coding-agent-model.md",

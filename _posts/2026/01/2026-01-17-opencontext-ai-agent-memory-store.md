@@ -1,380 +1,105 @@
 ---
 published: true
-title: "OpenContext - Give Your AI Assistant a Persistent Memory for Multi-Agent Workflows"
-description: "A personal context store for AI agents: CLI + MCP + Desktop app to capture, search, and reuse project knowledge across agents and repos"
-categories: [Agent/Orchestration]
-tags: [Agent, Workflow, Orchestration]
-date: 2026-01-17 14:00:00 +0800
-mermaid: true
+title: "OpenContext: Stable IDs Point to Current Files, Not Snapshots"
+description: "A source audit separates OpenContext's Markdown store, agent guidance, manifest metadata, stable IDs and indexed search, without claiming automatic memory or benchmark gains."
+categories: ["AI, Agents"]
+tags: [opencontext, agent-memory, context-engineering, mcp, source-audit]
+date: 2026-01-17 15:00:00 +0900
+last_modified_at: "2026-10-14 19:12:22 +0900"
+archive_developed: 2026-10-14
+archive_development_note: "Rebuilt from the OpenContext source pinned at 0649e7134346f6f5038a9b29cc5c824ae6a54f3f and the official usage guide reviewed on 2026-10-14. Removed unsupported efficiency and automatic-loading claims; added an original implementation-boundary diagram."
 image:
-  path: /assets/img/ai/opencontext/demo.gif
-  alt: "OpenContext Demo - AI Agent Context Management"
-ads: false
-restored_archive: "2026-10-12"
+  path: /assets/img/posts/2026-01-17-opencontext-ai-agent-memory-store/opencontext-retrieval-boundaries.png
+  alt: "Diagram showing a manifest-to-file-read workflow, stable IDs for current records, and a separate indexed-search path where the Rust missing-index status is not confirmed as CLI output."
+image_policy: source-first-fallback
 ---
 
-## 🤔 Curiosity: How Can We Give AI Agents Persistent Memory?
+OpenContext describes itself as a [personal context and knowledge store for AI assistants](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/README.md#L50), with [“persistent memory” and less repeated explanation](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/README.md#L9-L10) as product framing. That shorthand can blur several different behaviors: saving a note, helping an agent find it, reading its contents, and searching an index. Those are separate steps in the implementation I inspected.
 
-When building AI-powered applications, one recurring frustration stands out: **context gets lost**. Every new chat, every session restart, every repo switch — the AI forgets everything. You end up re-explaining your project background, repeating architectural decisions, and sometimes the assistant makes wrong assumptions because it lacks historical context.
+I pinned the source review to [OpenContext commit `0649e713`](https://github.com/0xranx/OpenContext/tree/0649e7134346f6f5038a9b29cc5c824ae6a54f3f) and compared it with the [current usage guide](https://0xranx.github.io/OpenContext/en/usage/). This is a source audit, not a product installation or runtime test. The narrower conclusion is still useful: OpenContext provides persistent files and an agent-facing route for finding and reading them, but the inspected code does not establish that every relevant note is automatically loaded into every task.
 
-> **Curiosity:** What if AI agents could remember your project decisions, technical constraints, and domain knowledge across sessions, repos, and tools? How would that transform the multi-agent development workflow?
-> {: .prompt-tip}
+<figure class="explanatory-image">
+  <img src="/assets/img/posts/2026-01-17-opencontext-ai-agent-memory-store/opencontext-retrieval-boundaries.png" alt="Diagram showing a manifest-to-file-read workflow, stable IDs for current records, and a separate indexed-search path where the Rust missing-index status is not confirmed as CLI output." loading="lazy" decoding="async">
+  <figcaption>Original illustration by Aside. This source-boundary summary is not source evidence.</figcaption>
+</figure>
 
-**Core Question:** Can we create a unified context store that works across Cursor, Claude Code, Codex, and other AI coding assistants?
+The [editable SVG source](/assets/img/posts/2026-01-17-opencontext-ai-agent-memory-store/opencontext-retrieval-boundaries.svg) is available separately.
 
----
+## Does OpenContext automatically load the right memory?
 
-## 📚 Retrieve: Understanding OpenContext
+The current guide separates three paths: the Desktop app, the CLI with agent integrations, and the CLI by itself. For the CLI-plus-agent route, the guide describes `oc init` generating user-level commands or skills and MCP configuration, alongside project guidance. That is a meaningful bridge between a knowledge store and the coding tools a person already uses.
 
-### The Problem
+The implementation detail that matters is what the generated instructions ask the agent to do. In the pinned [`agents.js`](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/src/core/agents.js#L231-L240), the workflow is to request a context manifest, select relevant entries, then read their `abs_path` values. The instructions can make a deliberate context-first habit easier. But generated instructions are not the same thing as the product placing every note into every prompt. The agent still has to invoke the right command or tool, select the useful entries, and read them.
 
-| Before OpenContext | After OpenContext |
-|:------------------|:------------------|
-| 📂 Hard to share context across repos/sessions | ✅ Global context library works across all projects |
-| 🤷 Your ideas can't be quickly perceived by Agent | ✅ Agent loads your background & decisions automatically |
-| 🔒 Existing knowledge can't be operated by Coding Agent | ✅ Agent can directly read/write your knowledge base |
+That distinction changes the question I would ask before adopting it. Instead of “Does this give my agent memory?”, ask “Which integration runs before this task, what does it retrieve, and where can I inspect the instructions?” A user-level skill can be available without being used. A project instruction can request a retrieval step without proving that every agent follows it. The docs show the intended workflow; they do not measure how consistently a particular model or editor will follow it.
 
-### What is OpenContext?
+## A manifest is a list, not the note itself
 
-[OpenContext](https://github.com/0xranx/OpenContext) is a lightweight **personal context/knowledge store** for AI assistants and coding tools. It enables the paradigm:
+The manifest is a navigation layer. The inspected record includes metadata such as an identifier, name, path and description. The manifest-generation path returns those fields so an agent can decide which document to read. It does not include the Markdown body or a content hash in the representation I inspected. The record fields are in the pinned [core source](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/crates/opencontext-core/src/lib.rs#L83-L91), and the manifest [generation query](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/crates/opencontext-core/src/lib.rs#L932-L963) shows what the manifest response includes.
 
-> **"Load history first, then act; ship, then persist."**
+This is a simple but important boundary. A manifest tells an agent where a candidate note lives; the later file read supplies the note’s contents. If you see a document in the manifest, that is not evidence that the model has already read it. If a file changes after discovery, the manifest is not a frozen copy of the previous text. The source review did not test concurrent edits, so I would not make a stronger claim about what happens if the file changes between listing and reading.
 
-The tool provides:
+This file-first model is useful when a team wants inspectable Markdown and explicit selection. It also means the quality of retrieval depends on the instructions and selection step, not only on the fact that the files exist. A store can preserve a decision perfectly and still fail to surface it for a task that never asks for the right context.
 
-- **`oc` CLI** — manage a global `contexts/` library (folders/docs, manifests, search)
-- **MCP Server** — so Cursor/Claude Code/Codex/Agents can call OpenContext as tools
-- **Skills + Slash Commands** — user-level skills for Cursor/Claude Code/Codex
-- **Desktop App** — manage/search/edit contexts with a native UI
-- **Web UI** — browse/edit contexts locally (no install required)
+## Stable IDs follow a current record, not its history
 
-### Multi-Agent Integration Architecture
+OpenContext’s stable identifier is useful, but “stable” needs a precise meaning. In the inspected resolver, an ID looks up the current document record. The move and rename paths update that record while retaining the identifier; the delete path removes it. The resolver lookup is in the pinned [document resolver](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/crates/opencontext-core/src/lib.rs#L182-L196); the [move, rename and delete operations](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/crates/opencontext-core/src/lib.rs#L730-L846) show how the current row changes.
 
-```mermaid
-graph TB
-    subgraph OpenContext["OpenContext Multi-Agent System"]
-        A[User Context] --> B[OpenContext Store]
+That behavior makes an ID a practical way to keep referring to a document when its path changes. It does not, by itself, make the ID a versioned snapshot. A stable handle can resolve to the current row without preserving every earlier body. If your workflow needs audit history, immutable citations, or restore points, verify those capabilities separately rather than inferring them from the word “stable.” I inspected the relevant code paths but did not execute a rename, delete, restore or history workflow.
 
-        B --> C[Cursor Agent]
-        B --> D[Claude Code Agent]
-        B --> E[Codex Agent]
-        B --> F[Custom MCP Agents]
+The distinction is familiar from other systems: a database key identifies a record; it is not automatically a revision identifier. For OpenContext, the inspected code supports the record-identity interpretation. A team can still build useful habits around that identity, but it should decide separately where durable history and reviewable changes belong.
 
-        C --> C1[opencontext-context]
-        C --> C2[opencontext-search]
-        C --> C3[opencontext-create]
-        C --> C4[opencontext-iterate]
+## Search is separate from reading, and freshness is separate from an interval
 
-        D --> D1[Context Loading]
-        D --> D2[Knowledge Search]
-        D --> D3[Doc Creation]
-        D --> D4[Insight Persistence]
+The CLI’s search path and the manifest-based read path solve different problems. In the pinned Rust [`Searcher::search`](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/crates/opencontext-core/src/search/searcher.rs#L60-L63), the missing-index branch returns `SearchResults::index_not_built` after successful searcher initialization. The [CLI search command](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/bin/oc.js#L735-L773) calls the JavaScript searcher, and the [native adapter](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/src/core/search/native-adapter.js#L60-L62) normalizes `response.results`. I did not establish that the Rust status reaches CLI output. Separately, the [generated agent guidance](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/src/core/agents.js#L124) recommends a manifest plus scoped local keyword search when the index is missing; the specific [search instructions](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/src/core/agents.js#L256-L258) describe manifest-based triage after a failed search. That is manual agent guidance, not evidence of automatic CLI recovery.
 
-        E --> E1[Skill-based Access]
-        E --> E2[Tool Integration]
+There is also one code-and-documentation question worth checking on the exact release you plan to run. The JavaScript wrapper initializes a [native searcher](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/src/core/search/native-adapter.js#L25-L58) and passes the selected mode into it. In the pinned Rust [searcher constructor](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/crates/opencontext-core/src/search/searcher.rs#L36-L63), the searcher builds an [embedding client](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/crates/opencontext-core/src/search/embedding.rs#L59), whose constructor validates API-key configuration, while the [usage guide](https://0xranx.github.io/OpenContext/en/usage/) says keyword search does not require embeddings. Read together, these sources suggest the key check may happen before the keyword mode is dispatched. That is a static source inference, not a reproduced failure. I did not run a keyless keyword query, so treat it as a test question, not a product verdict.
 
-        F --> F1[MCP Protocol]
-        F --> F2[Custom Tools]
+The index-sync code also has a default 300-second interval ([pinned source](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/crates/opencontext-core/src/search/index_sync.rs#L41-L110)). That number describes an implementation setting; it is not a freshness service-level agreement. It does not prove that a newly edited note becomes searchable within five minutes. End-to-end freshness would need to be measured from a real file change through indexing to a successful query, on the version and configuration a team actually uses.
 
-        C1 --> G[Shared Knowledge Base]
-        C2 --> G
-        D1 --> G
-        D2 --> G
-        E1 --> G
-        F1 --> G
+| Path | What the pinned source shows | What it does not establish |
+|---|---|---|
+| Agent-guided file read | [Instructions](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/src/core/agents.js#L231-L240) ask for a manifest, selection and reads of chosen paths. | Automatic loading of every relevant note into every task. |
+| Indexed search | The Rust [search method](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/crates/opencontext-core/src/search/searcher.rs#L60-L63) has a missing-index response branch; whether it reaches [CLI output](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/bin/oc.js#L735-L773) is unverified. Generated [guidance](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/src/core/agents.js#L124) separately recommends a manifest plus scoped keyword search. | A CLI-visible status, automatic CLI fallback or a five-minute freshness promise. |
+| Stable record ID | [Move and rename paths](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/crates/opencontext-core/src/lib.rs#L730-L846) preserve the current row's ID; delete removes the row. | Immutable historical versions or restore points. |
+| Index-sync interval | A [300-second default](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/crates/opencontext-core/src/search/index_sync.rs#L41-L110) appears in the pinned code. | A freshness SLA or measured time-to-search. |
 
-        G --> H[Persistent AI Memory]
-    end
+## What changed in my reading since the January note
 
-    style B fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
-    style G fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-    style H fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
-```
+The software is not being presented here as newly changed. What changed is the evidence boundary in this rebuild. The old post grouped storage, MCP, generated skills, the desktop UI and agent behavior into one “persistent memory” story. The current usage guide distinguishes setup paths, and the pinned code makes the manifest-to-file-read step visible. That lets me say what the implementation supports without treating an intended workflow as a guarantee.
 
----
+I also removed the old 95% context re-explanation and 80% onboarding-time figures. The [archived pre-rebuild copy](https://github.com/akillness/akillness.github.io/blob/0b2f3a1ceaf05b668f2a8a223f66633b679f4aa1/_posts/2026/01/2026-01-17-opencontext-ai-agent-memory-store.md) did not establish a benchmark method or source for those numbers, so they are not results I can responsibly repeat. The same applies to claims that background is automatically loaded across every project or that accuracy improves significantly. Those may be hypotheses a team can test, but they are not measured findings in this source audit.
 
-## 💡 Innovation: Setting Up Multi-Agent Context Management
+For a broader framing of retrieval, memory, context assembly and reasoning, see [Context Engineering Is the Missing Layer Between Your Agent and Its Memory](/posts/context-engineering-agent-memory-design/). For a different product boundary, the [Omnigent and Hindsight bridge audit](/posts/omnigent-hindsight-universal-memory/) examines cross-tool memory integration. Those pieces are adjacent, not substitutes for the narrower OpenContext code trace here.
 
-### Quick Start (30 Seconds)
+## A practical adoption check
 
-```bash
-# 1. Install CLI
-npm install -g @aicontextlab/cli
+Before relying on OpenContext for a team workflow, I would verify five things on the exact release and tools in use. First, inspect the generated commands, skills and project guidance so everyone knows which retrieval step is available. Second, test whether the relevant integration actually runs at the start of the tasks where context matters. Third, inspect the manifest fields and confirm that the agent reads the selected file rather than assuming the list contains the content.
 
-# 2. Initialize (prompts for tool setup; defaults to all)
-cd your-project
-oc init
+Fourth, test what a stable ID does across a rename, deletion and any recovery process your team expects. The source shows how the current record is updated or removed, but the history and restore behavior need their own evidence. Fifth, test search with the index missing and with the intended API-key configuration. If keyword-only search matters, a keyless run on the exact packaged release would answer the code-and-documentation question that static inspection cannot settle.
 
-# 3. Use slash commands (Cursor + Claude Code)
-# /opencontext-context — load background before working
-# /opencontext-search — find relevant docs
-# /opencontext-create — create a new doc
-# /opencontext-iterate — persist what you learned
-```
+Measure the outcome you care about instead of borrowing a number from an unverified comparison. A team might track how often relevant decisions are found, how much manual retrieval work remains, or how often an agent uses stale context. Those are possible local measures, not results reported here. A small baseline and a repeatable task set would be more informative than assuming a persistent store has already solved retrieval.
 
-### Installed Components by `oc init`
+## Key Takeaways
 
-| Component | Location | Purpose |
-|:----------|:---------|:--------|
-| **Cursor Commands** | `~/.cursor/commands` | Slash commands for context operations |
-| **Claude Code Commands** | `~/.claude/commands` | Slash commands integration |
-| **Cursor Skills** | `~/.cursor/skills/opencontext-*/SKILL.md` | User-level skill definitions |
-| **Claude Code Skills** | `~/.claude/skills/opencontext-*/SKILL.md` | Skill-based context access |
-| **Codex Skills** | `~/.codex/skills/opencontext-*/SKILL.md` | Codex skill integration |
-| **MCP Config** | `~/.cursor/mcp.json`, `~/.claude/mcp.json` | MCP server configuration |
-
-### CLI Commands Reference
+- OpenContext stores inspectable context files and provides agent-facing instructions for finding and reading them.
+- The manifest is metadata for navigation, not the document body or a content-hashed snapshot.
+- In the inspected code, stable IDs resolve current records; they do not prove immutable version history.
+- Search-index behavior and manifest-based reading are distinct paths. A suggested fallback is not an automatic fallback.
+- The possible keyword-mode API-key mismatch is a static code inference that still needs a runtime check.
+- The old 95% and 80% figures are omitted because the archived copy did not establish how they were measured.
 
-| Command | What it does |
-|:--------|:-------------|
-| `oc init` | Initialize OpenContext + user-level tool integrations |
-| `oc folder ls` | List folders |
-| `oc folder create <path> -d "desc"` | Create a folder |
-| `oc doc create <folder> <name>.md -d "desc"` | Create a document |
-| `oc doc ls <folder>` | List documents |
-| `oc context manifest <folder>` | Generate file list for AI to read |
-| `oc search "query"` | Search documents |
-| `oc mcp` | Start MCP server for MCP clients |
-| `oc ui` | Start local Web UI |
+## New Questions
 
----
-
-## 🛠️ Integrating with Multi-Agent Workflows
-
-### Workflow Pattern: Context-First Development
-
-```mermaid
-flowchart LR
-    subgraph BeforeWork["Before Work"]
-        A1[opencontext-context]
-        A2[Load project background]
-    end
-
-    subgraph DuringWork["During Work"]
-        B1[opencontext-search]
-        B2[Search existing conclusions]
-    end
-
-    subgraph AfterWork["After Work"]
-        C1[opencontext-iterate]
-        C2[Record decisions]
-    end
-
-    A1 --> A2
-    A2 --> B1
-    B1 --> B2
-    B2 --> C1
-    C1 --> C2
-    C2 -.-> A1
-
-    style A1 fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
-    style B1 fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-    style C1 fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
-```
-
-### Slash Commands Deep Dive
-
-| Command | Description | Best For |
-|:--------|:------------|:---------|
-| `/opencontext-help` | Not sure which to use? Start here | New users |
-| `/opencontext-context` | **(Safe default)** Load background before working | Starting any task |
-| `/opencontext-search` | Discover existing docs (no auto index build) | Finding prior decisions |
-| `/opencontext-create` | Draft a new doc/idea | Capturing new knowledge |
-| `/opencontext-iterate` | Persist conclusions & citations | Ending sessions |
-
-> **Pro tip:** Persist "acceptance criteria / common pitfalls / API contracts / dependency versions" as docs — highest ROI.
-> {: .prompt-tip}
-
----
-
-## 📊 Desktop App Features
-
-For visual users who prefer a native UI:
-
-### Key Capabilities
-
-1. **Create folders and docs** — Organize by project or topic
-2. **Search with `Cmd/Ctrl + K`** — Searches titles, descriptions, and content
-3. **Semantic search** — Configure API Key in Settings → Embedding (auto-indexed)
-4. **Cite to agents** — Copy citations directly to Cursor/Claude/Agent
-
-### Citation Options
-
-| Action | Steps | Effect |
-|:-------|:------|:-------|
-| Cite text snippet | Select text → Right-click → "Copy Citation" | Agent reads snippet + source |
-| Cite document | Click citation icon next to doc title | Agent gets full doc + stable_id |
-| Cite folder | Right-click folder → "Copy Folder Citation" | Agent batch-reads all docs inside |
-
----
-
-## 🔧 Search Configuration
-
-### Search Modes
-
-| Mode | Flag | Requirements |
-|:-----|:-----|:-------------|
-| **Keyword** | `--mode keyword` | No embeddings needed |
-| **Vector** | `--mode vector` | Requires embeddings + index |
-| **Hybrid** | `--mode hybrid` | Requires embeddings + index (default) |
-
-### Enabling Semantic Search (CLI)
-
-```bash
-# 1. Set API Key
-oc config set EMBEDDING_API_KEY "<your_key>"
-
-# 2. (Optional) Set base URL
-oc config set EMBEDDING_API_BASE "https://api.openai.com/v1"
-
-# 3. (Optional) Set Model
-oc config set EMBEDDING_MODEL "text-embedding-3-small"
-
-# 4. Build Index
-oc index build
-```
-
-> **Warning:** The `oc index build` command may use paid APIs. AI assistants are NOT allowed to auto-run it by default.
-> {: .prompt-warning}
-
----
-
-## 🤖 MCP Server Integration
-
-OpenContext runs as a standard MCP (Model Context Protocol) server using stdio:
-
-```bash
-# Start manually
-oc mcp
-
-# User-level config locations:
-# - Cursor: ~/.cursor/mcp.json
-# - Claude Code: ~/.claude/mcp.json
-# - Codex: ~/.codex/mcp.json
-```
-
-### Example mcp.json Configuration
-
-```json
-{
-  "mcpServers": {
-    "opencontext": {
-      "command": "npx",
-      "args": ["@aicontextlab/cli", "mcp"]
-    }
-  }
-}
-```
-
----
-
-## 📈 Performance Comparison: With vs Without Context Store
-
-| Metric | Without OpenContext | With OpenContext | Improvement |
-|:-------|:------------------:|:----------------:|:-----------:|
-| **Context Re-explanation** | Every session | Once | ⬇️ 95% |
-| **Decision Consistency** | Variable | Tracked | ⬆️ High |
-| **Cross-repo Knowledge** | Manual | Automatic | ⬆️ Seamless |
-| **Onboarding Time** | Hours per project | Minutes | ⬇️ 80% |
-| **Agent Accuracy** | Context-limited | Context-enriched | ⬆️ Significant |
-
----
-
-## 🎯 Best Practices for Multi-Agent Context
-
-### What to Persist
-
-| Document Type | Example Content | ROI |
-|:-------------|:----------------|:---:|
-| **Acceptance Criteria** | Feature requirements, success metrics | ⭐⭐⭐ |
-| **Common Pitfalls** | Known bugs, edge cases, gotchas | ⭐⭐⭐ |
-| **API Contracts** | Endpoint specs, data formats | ⭐⭐ |
-| **Dependency Versions** | Lock file summaries, upgrade notes | ⭐⭐ |
-| **Architecture Decisions** | ADRs, design rationale | ⭐⭐ |
-| **Domain Knowledge** | Business logic, terminology | ⭐⭐⭐ |
-
-### Folder Organization Example
-
-```
-~/.opencontext/contexts/
-├── personal/
-│   ├── preferences.md
-│   └── coding-style.md
-├── project-frontend/
-│   ├── architecture.md
-│   ├── component-patterns.md
-│   └── known-issues.md
-├── project-backend/
-│   ├── api-design.md
-│   ├── database-schema.md
-│   └── deployment-notes.md
-└── shared/
-    ├── team-conventions.md
-    └── dependency-policies.md
-```
-
----
-
-## 🚀 Environment Configuration
-
-### Default Paths
-
-| Purpose | Default Location |
-|:--------|:-----------------|
-| **Contexts** | `~/.opencontext/contexts` |
-| **Database** | `~/.opencontext/opencontext.db` |
-
-### Override with Environment Variables
-
-```bash
-export OPENCONTEXT_CONTEXTS_ROOT="/path/to/contexts"
-export OPENCONTEXT_DB_PATH="/path/to/opencontext.db"
-```
-
----
-
-## 🤔 New Questions This Raises
-
-1. **Automatic Context Extraction:** Can agents automatically identify and persist important decisions from conversations?
-2. **Context Versioning:** How do we handle context evolution and maintain historical snapshots?
-3. **Team Collaboration:** Can multiple developers share and sync context across a team?
-4. **Domain-Specific Templates:** What context structures work best for different project types (web app, mobile, ML, etc.)?
-5. **Context Quality:** How do we measure and improve the quality of persisted context?
-
-**Next Experiment:** Building automated context extraction from conversation history using multi-agent orchestration.
-
----
+- On the exact release, does a keyword-only search succeed without embedding credentials?
+- Which agent integrations invoke the generated retrieval instructions automatically, and which require a human or model to call them?
+- What history or recovery behavior does a team need beyond a stable identifier for the current file?
+- How long does a real note change take to become searchable under the team's indexing configuration?
 
 ## References
 
-**Official Resources:**
-
-- [OpenContext GitHub Repository](https://github.com/0xranx/OpenContext)
-- [OpenContext Usage Guide](https://0xranx.github.io/OpenContext/en/usage/)
-- [OpenContext Website](https://0xranx.github.io/OpenContext/en/)
-- [NPM Package: @aicontextlab/cli](https://www.npmjs.com/package/@aicontextlab/cli)
-
-**Related Tools & Frameworks:**
-
-- [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
-- [Cursor IDE](https://cursor.sh/)
-- [Claude Code](https://claude.ai/code)
-- [OpenAI Codex](https://openai.com/codex)
-
-**Multi-Agent Systems:**
-
-- [LangGraph - Multi-Agent Workflows](https://langchain-ai.github.io/langgraph/)
-- [AutoGen - Multi-Agent Framework](https://github.com/microsoft/autogen)
-- [CrewAI - Multi-Agent Framework](https://github.com/joaomdmoura/crewAI)
-
-**Context Management Research:**
-
-- [RAG: Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
-- [Long-term Memory for LLMs](https://arxiv.org/abs/2306.07929)
-- [Building Effective AI Agents (Anthropic)](https://www.anthropic.com/research/building-effective-agents)
-
-**Production Resources:**
-
-- [LLM Engineering Best Practices](https://huyenchip.com/2023/04/11/llm-engineering.html)
-- [Prompt Engineering Guide](https://www.promptingguide.ai/)
-- [AI Agent Design Patterns](https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/)
+- [OpenContext usage guide](https://0xranx.github.io/OpenContext/en/usage/), inspected 2026-10-14.
+- [Pinned OpenContext README](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/README.md).
+- [Pinned agent integration instructions](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/src/core/agents.js).
+- [Pinned manifest, resolver and document mutation code](https://github.com/0xranx/OpenContext/blob/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/crates/opencontext-core/src/lib.rs).
+- [Pinned searcher and index synchronization source](https://github.com/0xranx/OpenContext/tree/0649e7134346f6f5038a9b29cc5c824ae6a54f3f/crates/opencontext-core/src/search).
