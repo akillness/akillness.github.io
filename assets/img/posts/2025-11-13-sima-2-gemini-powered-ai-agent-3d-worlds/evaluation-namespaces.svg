@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">SIMA 2: training roles are not evaluation verdicts</title>
+<desc id="desc">An original source-derived role schematic, not a deployment architecture. Gemini task setting, SIMA 2 acting, Gemini reward scoring and subsequent training are separated from main task judgments, fixed-task ASKA reward scores and manually guided tech-tree progression. Initial transfer is not later learning in that environment.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#447291"/></marker><style>text{font-family:Arial,Helvetica,sans-serif;fill:#17304e}.eyebrow{font-size:20px;letter-spacing:2px;fill:#517386}.title{font-size:43px;font-weight:700}.sub{font-size:23px;fill:#526878}.section{font-size:25px;font-weight:700}.label{font-size:26px;font-weight:700}.body{font-size:23px}.small{font-size:20px;fill:#526878}.num{font-size:24px;fill:#fff;font-weight:700}</style></defs>
+<text x="70" y="62" class="eyebrow">SIMA 2 / EVIDENCE PROVENANCE</text>
+<text x="70" y="122" class="title">Training roles are not evaluation verdicts</text>
+<text x="70" y="164" class="sub">Logical roles from report 2512.04797v1, not APIs, topology or new measurements</text>
+<text x="70" y="221" class="section">SELF-IMPROVEMENT ROLES</text>
+<text x="845" y="221" class="section">KEEP THESE PROTOCOLS SEPARATE</text>
+<rect x="70" y="246" width="620" height="101" rx="16" fill="#eef5f7" stroke="#bad1dc"/>
+<circle cx="108" cy="283" r="20" fill="#276481"/><text x="101" y="291" class="num">1</text>
+<text x="143" y="284" class="label">Gemini task setter</text><text x="143" y="321" class="body">State-conditioned, achievable tasks</text>
+<path d="M380 347V369" stroke="#447291" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
+<rect x="70" y="379" width="620" height="101" rx="16" fill="#eef5f7" stroke="#bad1dc"/>
+<circle cx="108" cy="417" r="20" fill="#276481"/><text x="101" y="425" class="num">2</text>
+<text x="143" y="417" class="label">SIMA 2 acts</text><text x="143" y="454" class="body">Collect self-generated experience</text>
+<path d="M380 480V502" stroke="#447291" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
+<rect x="70" y="512" width="620" height="101" rx="16" fill="#eef5f7" stroke="#bad1dc"/>
+<circle cx="108" cy="550" r="20" fill="#276481"/><text x="101" y="558" class="num">3</text>
+<text x="143" y="550" class="label">Gemini reward model</text><text x="143" y="587" class="body">0–100 rubric; ≥50 called success</text>
+<path d="M380 613V635" stroke="#447291" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
+<rect x="70" y="645" width="620" height="101" rx="16" fill="#e5f1f2" stroke="#9bc2c5"/>
+<circle cx="108" cy="683" r="20" fill="#276481"/><text x="101" y="691" class="num">4</text>
+<text x="143" y="683" class="label">Subsequent training iterations</text><text x="143" y="720" class="body">In-session weight updates not established</text>
+<path d="M690 697H751V430H701" stroke="#447291" stroke-width="3" stroke-dasharray="8 7" fill="none" marker-end="url(#arrow)"/>
+<text x="728" y="604" transform="rotate(-90 728 604)" class="small">next generation</text>
+<rect x="845" y="246" width="685" height="139" rx="16" fill="#f3f5f9" stroke="#c5cfdf"/>
+<text x="875" y="286" class="label">Main embodied-task evaluation</text><text x="875" y="326" class="body">Human and programmatic judgments</text><text x="875" y="361" class="small">Human videos: five independent ratings</text>
+<rect x="845" y="415" width="685" height="139" rx="16" fill="#f3f5f9" stroke="#c5cfdf"/>
+<text x="875" y="455" class="label">ASKA fixed-task improvement</text><text x="875" y="495" class="body">Gemini reward scores on a fixed task set</text><text x="875" y="530" class="small">A rubric threshold is not a QA certificate</text>
+<rect x="845" y="584" width="685" height="162" rx="16" fill="#f3f5f9" stroke="#c5cfdf"/>
+<text x="875" y="624" class="label">ASKA tech-tree progression</text><text x="875" y="664" class="body">Manually instructed milestones</text><text x="875" y="704" class="small">Progress against game time, a separate protocol</text>
+<path d="M70 781H1530" stroke="#c6d2db" stroke-width="2"/>
+<text x="70" y="821" class="section">Initial held-out transfer ≠ later improvement in that environment</text>
+<text x="70" y="862" class="small">Original illustration by akillness • Based on report §§3.4 / 4.5 • Not source evidence or measured results</text>
+</svg>

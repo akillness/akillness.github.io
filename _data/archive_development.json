@@ -109,9 +109,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-14",
+      "survey_note": "Re-read immutable SIMA 2 report 2512.04797v1 and live launch/version records; separate initial transfer, later ASKA learning, reward-model scores and manually guided progression. Independent eleven-claim, unmapped prose and pixel review passed; original date and route retained, no SIMA gameplay or QA benchmark run."
     },
     {
       "path": "_posts/2026/01/2026-01-17-opencontext-ai-agent-memory-store.md",

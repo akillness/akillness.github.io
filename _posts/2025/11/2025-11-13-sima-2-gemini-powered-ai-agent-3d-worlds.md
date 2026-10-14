@@ -1,586 +1,159 @@
 ---
-title: 'SIMA 2: When AI Agents Learn to Play, Reason, and Improve in Virtual Worlds'
-description: DeepMind's SIMA 2 integrates Gemini models to create AI agents that don't
-  just follow instructions—they reason, converse, and self-improve in 3D game environments.
-  A deep dive into the future of embodied AI and gaming companions.
-categories: [Agent/Orchestration]
-tags: [Agent, Workflow, Orchestration]
+title: "SIMA 2's Self-Improvement Score Is Not a Game-QA Verdict"
+description: "The SIMA 2 report separates held-out transfer, Gemini reward scores and manually guided progression. Those results answer different questions, not a game-QA verdict."
+categories: [AI, Agents]
+tags: [embodied-ai, game-qa, evaluation, self-improvement, gemini]
 date: 2025-11-13 03:00:00 +0800
-mermaid: true
-# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
+last_modified_at: 2026-10-14 16:39:00 +0900
+archive_developed: 2026-10-14
+archive_development_note: "Re-read SIMA 2 report 2512.04797v1 and the official launch page; separated later training from initial held-out transfer, distinguished evaluation protocols and removed unsupported integration examples."
 published: true
-ads: false
-restored_archive: "2026-10-12"
----
-## 🤔 Curiosity: Can AI Agents Become True Gaming Companions?
-
-What if playing a game with an AI wasn't about giving commands to a robot, but collaborating with a companion who understands context, reasons about goals, and learns from mistakes?
-
-![SIMA 2 - Gemini-Powered AI Agent](/assets/img/ai/sima2/sima2-hero.png){: .light .w-75 .shadow .rounded-10 w='1440' h='810' }
-
-> **Curiosity:** While most game AI systems follow pre-scripted behaviors or simple instruction-following, what would it take for an AI to truly understand game worlds, reason about complex goals, and improve itself over time?
-> {: .prompt-tip}
-
-Last year, DeepMind introduced **SIMA** (Scalable Instructable Multiworld Agent), a generalist AI that could follow basic instructions across diverse virtual environments. It was impressive—600+ language-following skills across commercial games—but it was still fundamentally a **command executor**, not a **thinking partner**.
-
-**SIMA 2 changes everything.** By integrating Google's **Gemini models** as the agent's core reasoning engine, SIMA 2 evolves from an instruction-follower into an interactive gaming companion that can:
-
-- **Reason** about complex goals and break them into steps
-- **Converse** with users, explaining its actions and answering questions
-- **Self-improve** by learning from its own failures without human intervention
-
-As someone who's built AI systems for games, this represents a fundamental shift. We're not just scaling up instruction-following—we're witnessing the emergence of **embodied AI agents** that think, learn, and collaborate.
-
-**The question:** How does integrating a world-class reasoning engine (Gemini) transform an AI agent's capabilities in 3D virtual worlds? And what does this mean for the future of game AI, robotics, and AGI?
-
+mermaid: false
+image_policy: source-first-fallback
+image:
+  path: /assets/img/posts/2025-11-13-sima-2-gemini-powered-ai-agent-3d-worlds/evaluation-namespaces.png
+  alt: "Original schematic separating SIMA 2's task-setting, action, reward and later-training roles from its distinct evaluation protocols."
+  credit: "Original illustration by akillness. A source-derived logical-role schematic, not source evidence or a measured result."
 ---
 
-## 📚 Retrieve: Understanding SIMA 2's Architecture
+## Can an improving game agent also judge its own test?
 
-### From SIMA 1 to SIMA 2: The Gemini Integration
+An agent that gets better at playing a game is an exciting testing candidate. It is not automatically a trustworthy judge of whether the game is correct.
 
-**SIMA 1's Limitations:**
+That distinction is where this SIMA 2 rebuild begins. The old note moved quickly from reasoning and self-improvement to production companions and procedural-level testing. Its conceptual Python wrapper even returned `'success': True` at the end of an action loop. Reaching the return statement did not establish that the requested task had been completed.
 
-SIMA 1 was trained on human demonstration videos with language labels, learning to map instructions like "turn left" or "climb the ladder" to actions. It operated like a person playing a game—looking at the screen and using virtual keyboard/mouse controls, without access to underlying game mechanics.
+I re-read Google DeepMind's announcement and the version-pinned technical report instead of keeping that implied integration story. The useful finding is that **initial transfer, later self-improvement, and different forms of evaluation must remain separate**. Collapsing them into one “the agent succeeded” field would discard the conditions that make the reported result meaningful.
 
-**The Problem:**
+This is a source audit and a proposed way to read evaluation records. I did not run SIMA 2, train a game agent or measure defect detection.
 
-- Could follow simple, direct instructions
-- Struggled with abstract or complex goals
-- No ability to reason about _why_ it was doing something
-- Limited generalization to unseen games
-- No conversational capability
+## What changed since the November 2025 launch note?
 
-**SIMA 2's Innovation:**
+There are three dates to keep straight:
 
-```mermaid
-graph TB
-    subgraph SIMA1["SIMA 1 Architecture"]
-        I1[Language Instruction] --> P1[Instruction Parser]
-        P1 --> A1[Action Executor]
-        A1 --> G1[Game Environment]
-        G1 --> O1[Observation]
-        O1 --> A1
-    end
+| Evidence | Recorded date | What that date establishes |
+| :--- | :--- | :--- |
+| [Google DeepMind announcement](https://deepmind.google/blog/sima-2-an-agent-that-plays-reasons-and-learns-with-you-in-virtual-3d-worlds/) | November 13, 2025 | The date on the official launch page |
+| [arXiv 2512.04797v1](https://arxiv.org/abs/2512.04797v1) | December 4, 2025 | The public v1 submission date |
+| [Linked technical-report PDF](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/sima-2-an-agent-that-plays-reasons-and-learns-with-you-in-virtual-3d-worlds/SIMA_Tech_Report_2025.pdf) | December 5, 2025 | The date printed on its cover |
 
-    subgraph SIMA2["SIMA 2 Architecture"]
-        I2[Language/Image/Emoji Input] --> G2[Gemini Reasoning Engine]
-        G2 --> R2[Goal Decomposition]
-        R2 --> P2[Action Planning]
-        P2 --> A2[Action Executor]
-        A2 --> G3[Game Environment]
-        G3 --> O2[Observation]
-        O2 --> G2
-        G2 --> C2[Conversation/Explanation]
-    end
+The arXiv record checked on **October 14, 2026** still lists v1 as its only version. I use that immutable version for the technical distinctions below. The announcement remains useful context, but its broad description is not a substitute for an experiment's protocol.
 
-    style G2 fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
-    style R2 fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-    style C2 fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
-```
+The report is later-dated evidence for this rebuild, not something I will label a November 13 paper. These public dates also do not tell me what material might have existed privately before submission. The original post date and route stay unchanged; the rebuild date identifies when this more precise account was added.
 
-**Key Architectural Changes:**
-
-1. **Gemini as Core Reasoning Engine:** Instead of direct instruction-to-action mapping, SIMA 2 uses Gemini to understand high-level goals, reason about the environment, and plan multi-step actions.
-
-2. **Multimodal Understanding:** Accepts text, images, sketches, and even emojis as input—understanding "🏠" means "go to the house" or interpreting a drawn arrow as a navigation command.
-
-3. **Conversational Interface:** Can explain its actions, answer questions, and discuss its reasoning process with users.
-
-4. **Self-Improvement Loop:** Uses Gemini to generate training data from its own failures, creating a self-reinforcing learning cycle.
-
-### The Power of Reasoning: Beyond Instruction-Following
-
-**SIMA 1 Example:**
-
-```
-User: "Find a campfire"
-SIMA 1: [Wanders randomly, doesn't understand context]
-Result: ❌ Failure
-```
-
-**SIMA 2 Example:**
-
-```
-User: "Find a campfire"
-SIMA 2: [Reasons: "Campfires are typically in outdoor areas,
-        often near settlements or survival locations. I should
-        look for smoke, light sources, or wooden structures."]
-        [Plans: "1. Scan environment for visual cues
-                2. Navigate toward likely locations
-                3. Verify it's a campfire"]
-Result: ✅ Success
-```
-
-**The Difference:** SIMA 2 doesn't just execute commands—it **understands intent**, **reasons about context**, and **plans multi-step solutions**.
-
-### Training Data: Human Demonstrations + Gemini-Generated Labels
-
-SIMA 2's training combines:
-
-| Data Source                   | Contribution                  | Example                                                    |
-| :---------------------------- | :---------------------------- | :--------------------------------------------------------- |
-| **Human Demonstrations**      | Ground-truth action sequences | Video of player completing "build a house"                 |
-| **Gemini-Generated Labels**   | Rich semantic understanding   | "The player is gathering resources to construct a shelter" |
-| **Self-Generated Experience** | Learning from failures        | SIMA 2's own failed attempts, labeled by Gemini            |
+## Human gameplay precedes the self-generated experience
 
-**Key Insight:** By using Gemini to generate labels, DeepMind can create richer training data that captures not just _what_ actions were taken, but _why_ they were taken and _how_ they relate to goals.
+The report's model account is more specific than “Gemini powers the agent.” In **§3.3**, SIMA 2 starts from a **pretrained Gemini Flash-Lite checkpoint** and is supervised-finetuned on a mixture of gameplay and Gemini pretraining data. The gameplay-data discussion describes human demonstrations as the bulk of training data by volume, supplemented by generated annotations and bridging data. See [v1, pp. 7–9](https://arxiv.org/html/2512.04797v1).
 
----
+That matters when reading the later self-improvement claim. An experiment that improves an existing agent without collecting additional human demonstrations has not shown that the agent never used human data.
 
-## 💡 Innovation: Three Breakthrough Capabilities
-
-### 1. Reasoning: From Commands to Goals
-
-**What Changed:**
-
-SIMA 2 can now handle abstract, high-level instructions that require reasoning:
+I would keep two provenance fields in a proposed experiment record: **how the starting agent was trained** and **what new experience produced this improvement**. Neither should overwrite the other. Otherwise, “self-generated improvement data” can quietly turn into the much stronger and unsupported claim “human-free training.”
 
-```python
-# Conceptual representation (not actual API)
-class SIMA2Agent:
-    """
-    Curiosity: Can an AI agent reason about abstract goals?
-    Retrieve: Gemini provides world-class reasoning capabilities
-    Innovation: Goal-oriented action planning in 3D environments
-    """
-
-    def __init__(self, gemini_model):
-        self.reasoning_engine = gemini_model
-        self.action_executor = ActionExecutor()
-        self.memory = WorkingMemory()
-
-    def execute_goal(self, user_instruction: str, game_state: GameState):
-        """
-        Execute a high-level goal by reasoning about steps
-
-        Args:
-            user_instruction: "Find a campfire and cook food"
-            game_state: Current game observation
-
-        Returns:
-            Action sequence with reasoning trace
-        """
-        # 1. Understand the goal
-        goal_understanding = self.reasoning_engine.understand(
-            instruction=user_instruction,
-            context=game_state
-        )
-        # Output: "User wants to locate a campfire, then use it to cook food"
-
-        # 2. Decompose into sub-goals
-        sub_goals = self.reasoning_engine.decompose(goal_understanding)
-        # Output: ["Find campfire", "Navigate to campfire",
-        #          "Interact with campfire", "Cook food"]
-
-        # 3. Plan actions for each sub-goal
-        action_plan = []
-        for sub_goal in sub_goals:
-            actions = self.reasoning_engine.plan(
-                goal=sub_goal,
-                current_state=game_state,
-                available_actions=self.action_executor.get_actions()
-            )
-            action_plan.extend(actions)
-
-        # 4. Execute with monitoring
-        for action in action_plan:
-            result = self.action_executor.execute(action, game_state)
-            game_state = result.new_state
-
-            # Check if sub-goal achieved
-            if self.reasoning_engine.check_goal_completion(
-                sub_goal, game_state
-            ):
-                continue  # Move to next sub-goal
-            else:
-                # Re-plan if goal not achieved
-                action_plan = self.reasoning_engine.replan(
-                    failed_goal=sub_goal,
-                    current_state=game_state
-                )
-
-        return {
-            'success': True,
-            'reasoning_trace': goal_understanding,
-            'action_sequence': action_plan
-        }
-```
+The same distinction applies to time. The report describes subsequent training iterations using collected experience. It does not establish an instant weight update during a player's current conversation, and I do not infer a deployment topology or a particular optimizer from that training narrative.
 
-**Real-World Impact:**
+## ASKA is held out first, then used for improvement
 
-In testing, SIMA 2 successfully handles instructions like:
+The report identifies **ASKA and a subset of MineDojo as initially held-out environments**. Its initial online reinforcement-learning phase is limited to training environments and explicitly excludes those held-out environments. Later, **§4.5.1** studies self-improvement in ASKA. Those are different stages, not contradictory uses of “held out.” See [v1, §3.1.1, p. 10 and pp. 23–25](https://arxiv.org/html/2512.04797v1).
 
-- **"Build a shelter before nightfall"** (requires time awareness, resource gathering, construction planning)
-- **"Find the highest point and survey the area"** (requires spatial reasoning, navigation, exploration)
-- **"Gather materials to craft a weapon"** (requires understanding crafting systems, resource locations, tool requirements)
+A first encounter can test transfer from earlier training. A later agent trained on its own experience in ASKA can test improvement in that environment. The latter should not be reported as if the agent still had no learning exposure to ASKA.
 
-### 2. Generalization: Zero-Shot Performance on New Games
+For a game-team experiment, my proposed labels would be `initial-held-out-transfer` and `post-improvement-in-environment`. They are editorial bookkeeping suggestions, not field names published by DeepMind. Their purpose is to make a comparison reject the wrong question before anyone draws a stronger conclusion from the score.
 
-**The Generalization Challenge:**
+<figure class="explanatory-image">
+  <img src="/assets/img/posts/2025-11-13-sima-2-gemini-powered-ai-agent-3d-worlds/evaluation-namespaces.png" alt="Original schematic separating SIMA 2 task setting, acting, reward grading and later training from main human/programmatic evaluation, fixed ASKA tasks and manually guided progression.">
+  <figcaption>Original illustration by akillness, authored as SVG and rendered to PNG. Logical roles and evaluation namespaces derived from the inspected report; not source evidence, deployment architecture, an API contract or measured results. Based on v1 §§3.4 and 4.5; the source chart is not reproduced.</figcaption>
+</figure>
 
-One of the hardest problems in game AI is **transfer learning**—can an agent trained on Game A perform well on Game B without retraining?
+[Open the original SVG](/assets/img/posts/2025-11-13-sima-2-gemini-powered-ai-agent-3d-worlds/evaluation-namespaces.svg).
 
-**SIMA 2's Results:**
+## Task setting and reward scoring are different jobs
 
-![SIMA 2 Performance Comparison](/assets/img/ai/sima2/sima2-performance.png){: .light .w-75 .shadow .rounded-10 w='1440' h='810' }
+The self-improvement section gives Gemini two distinct roles:
 
-| Metric                      |  SIMA 1  | SIMA 2 | Human Baseline | Gap Closed |
-| :-------------------------- | :------: | :----: | :------------: | :--------: |
-| **Training Games**          | Baseline |  +X%   |      100%      |    ~60%    |
-| **Unseen Games (ASKA)**     |   ~20%   |  ~65%  |      100%      |  **+45%**  |
-| **Unseen Games (MineDojo)** |   ~25%   |  ~70%  |      100%      |  **+45%**  |
-| **Complex Instructions**    |   ~30%   |  ~75%  |      100%      |  **+45%**  |
+- A **Gemini-based task setter** proposes achievable tasks conditioned on the current situation.
+- A separate **Gemini-based reward model** judges trajectory videos using a **0–100 rubric**.
 
-**Key Insight:** SIMA 2 closes **~60% of the gap to human performance** on training games and demonstrates strong zero-shot generalization to completely new games.
+For the purposes described in **§4.5**, a reward score of **50 or greater** is considered a success. The rubric was calibrated against a small dataset of human-preference pairs. Those details are reported in [v1, p. 23 and Figure 16](https://arxiv.org/html/2512.04797v1).
 
-![SIMA 2 Generalization to New Games](/assets/img/ai/sima2/sima2-generalization.png){: .light .w-75 .shadow .rounded-10 w='1440' h='810' }
+The word *calibrated* needs its object. Here, the report describes a rubric checked against human preferences. That is not a statement that a score of 50 means a 50% probability of task success. It is also not independent human or programmatic certification of every scored trajectory.
 
-**Why This Matters:**
+Keeping the task setter and judge separate clarifies their responsibilities, but separation of roles alone does not establish an independently validated game-QA oracle. A task can be useful for training while its reward still measures something different from the assertion a release test needs.
 
-The ability to transfer concepts across games (e.g., "mining" in one game → "harvesting" in another) is **foundational to human-like generalization**. SIMA 2 demonstrates that reasoning-based agents can achieve this transfer, not just pattern-matching systems.
+For example, “the agent appears to have built a shelter” and “the save/load path preserves the shelter's ownership and state” would be different proposed checks. The latter is my hypothetical QA example, not a SIMA 2 experiment in the report. A convincing gameplay video would not, by itself, supply that state-persistence evidence.
 
-### 3. Self-Improvement: Learning from Failure
+## Three evaluation namespaces, not one success column
 
-**The Self-Improvement Cycle:**
+A tempting shortcut is to describe every chart as another view of the same agent-success rate. The report supplies enough detail to avoid that shortcut.
 
-![SIMA 2 Self-Improvement Cycle](/assets/img/ai/sima2/sima2-self-improvement.png){: .light .w-75 .shadow .rounded-10 w='1440' h='810' }
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant SIMA2 as SIMA 2 Agent
-    participant Gemini
-    participant ExperienceBank as Experience Bank
-
-    User->>SIMA2: Give task instruction
-    SIMA2->>Gemini: Request initial plan + reward estimate
-    Gemini->>SIMA2: Plan + expected reward
-    SIMA2->>SIMA2: Execute actions
-    SIMA2->>SIMA2: Task fails
+| Reported protocol | What is evaluated | How the result is assessed | Keep out of its interpretation |
+| :--- | :--- | :--- | :--- |
+| Main embodied-task evaluation, **§3.4** | Task performance in the benchmark setting | Ground-truth/programmatic methods where applicable and human evaluation; human videos receive **five independent ratings** | Do not replace these methods with the self-improvement reward rubric |
+| ASKA self-improvement, **Figure 15** | Improvement on a **fixed task set**, separated from automatic task setting | Gemini reward-model scores; the section uses **≥50** as its success threshold | Not an independently certified defect-detection result or first-time transfer after later ASKA training |
+| ASKA tech-tree progression, **Figure 16** | Progress through milestones against game time | The improved agent is **manually instructed** to progress through the tech tree | Not the same protocol as the fixed-task score experiment, nor an unguided task-selection result |
 
-    Note over SIMA2: Self-Reflection Phase
-    SIMA2->>Gemini: Analyze failure, generate labels
-    Gemini->>SIMA2: Failure analysis + improved strategy
-    SIMA2->>ExperienceBank: Store self-generated experience
+Sources: [v1, pp. 10–11 and Figure 9](https://arxiv.org/html/2512.04797v1); [v1, §4.5.1 and Figures 15–16](https://arxiv.org/html/2512.04797v1). The table is my comparison of those protocols, not a new benchmark.
 
-    Note over ExperienceBank: Training Data Augmentation
-    ExperienceBank->>SIMA2: Use for next training iteration
-    SIMA2->>SIMA2: Improved performance on similar tasks
-```
+Even the comparison with a human reference in Figure 15 stays within its fixed-task reward-score setting. It should not become a claim about arbitrary human-level gameplay, release readiness or bug-finding coverage.
 
-**How It Works:**
+The correction cuts both ways. It would be equally inaccurate to say that *all* SIMA 2 evaluation is performed by a Gemini reward model. The main evaluation explicitly includes human and programmatic methods. A critique that erases those methods would make the source look weaker than the evidence supports.
 
-1. **Initial Attempt:** SIMA 2 receives a task and Gemini provides an initial plan with reward estimate
-2. **Failure Analysis:** If the task fails, Gemini analyzes what went wrong and generates improved strategies
-3. **Experience Storage:** The failure analysis becomes training data in the experience bank
-4. **Iterative Improvement:** Subsequent training iterations use this self-generated experience, improving performance on similar tasks
+## Genie 3 transfer has a defined split too
 
-**Key Innovation:** SIMA 2 can improve on previously failed tasks **entirely independently** of human-generated demonstrations. This creates a self-reinforcing learning loop.
+The Genie 3 self-improvement study makes another useful distinction: **urban environments are used for training**, while **natural environments and held-out tasks are used for testing**. The report discusses improvement in the training setting and transfer to that held-out test setting. See [v1, §4.5.2 and Figure 17, pp. 25–26](https://arxiv.org/html/2512.04797v1).
 
-**Production Implications:**
+That is a concrete experimental split, not a promise that arbitrary generated worlds will behave the same way. I did not identify an independent evaluation judge in the inspected account of this experiment, so I do not add one to the description. This is a limit of what this audit established, not a claim that no such judge could exist elsewhere.
 
-For game developers, this means:
+A proposed replication would need to preserve the world/task split and identify its judge separately. Reusing the broad phrase “generalizes to new worlds” without those two pieces would hide which form of novelty was actually tested.
 
-- **Reduced Training Data Needs:** Agents can generate their own training data
-- **Faster Iteration:** Agents improve without waiting for human demonstrations
-- **Better Generalization:** Self-generated failures cover edge cases humans might miss
+## What I would record before calling this a QA result
 
-### Multimodal Understanding: Beyond Text
+The old wrapper's terminal success literal is useful audit material precisely because it is not evidence about DeepMind's implementation. The archived example's helper names were conceptual integration scaffolding. Its normal return path supplied a success value regardless of whether the final requested goal had been independently established. I inspected that code statically; I did not execute it as a real SDK.
 
-SIMA 2 accepts diverse input modalities:
+Rather than replace it with another imaginary integration, I would start a game-testing design with this proposed record:
 
-| Input Type             | Example                  | Use Case              |
-| :--------------------- | :----------------------- | :-------------------- |
-| **Text**               | "Build a house"          | Standard instructions |
-| **Images**             | Screenshot of a location | "Go to this place"    |
-| **Sketches**           | Drawn arrow on screen    | Spatial navigation    |
-| **Emojis**             | 🏠 → "Go to house"       | Quick commands        |
-| **Multiple Languages** | "Construye una casa"     | International users   |
+| Field to preserve | Question it should answer |
+| :--- | :--- |
+| Starting checkpoint and training stage | Was this initial transfer, or had improvement already used this environment? |
+| World and task split | Which environment/task data was excluded, and until which stage? |
+| Task provenance | Was the goal fixed, generated by a task setter or manually instructed? |
+| Judge identity and evidence | Is this a programmatic assertion, a human rating or a model rubric? |
+| Score definition and threshold | What does the number mean in this particular protocol? |
+| Separate QA assertion | Which correctness property was actually checked, with what state or trace evidence? |
 
-**Why This Matters:**
+This is a **design proposal**, not an implemented harness or a measured improvement. It would make a training score easier to read without pretending to turn that score into a game-quality certificate.
 
-Multimodal understanding makes AI agents more accessible and intuitive. Players can communicate naturally, using whatever modality feels most appropriate for the situation.
+The [multimodal scoring-contract audit](/posts/multimodal-sentence-transformers-practical-guide/) makes a related distinction: a score's definition is not evidence that an application threshold is calibrated. The [RAG versus Jev article](/posts/rag-vs-jev-rag-why-ranking-is-not-answerability/) separates ranking from the different downstream question of answerability. In this setting, gameplay progress and a QA verdict likewise answer different questions.
 
----
+The official announcement's Responsible Development section and the report's conclusion describe a **limited research preview** for a small cohort of academics and game developers. That reported access description does not supply a public SDK or API contract. I did not verify a live account entitlement or a usable SIMA integration route in this audit.
 
-## 🎮 Production Applications: What This Means for Game Developers
+## Key Takeaways
 
-### 1. AI Companions in Games
+- SIMA 2's starting training includes human gameplay data; later improvement without additional human demonstrations is a narrower claim.
+- Initial held-out transfer and performance after improvement in ASKA must remain separate stages.
+- ASKA's **≥50 reward-rubric threshold** is not a probability statement or an independent game-QA verdict.
+- Main task evaluation, fixed-task reward scores and manually guided tech-tree progression have different judges or protocols. Do not collapse their results.
+- The useful game-testing takeaway is a proposed provenance record plus a separate correctness assertion, not an invented SDK or an unmeasured production benefit.
 
-**Traditional NPCs:**
+## New Questions
 
-- Pre-scripted dialogue trees
-- Limited interaction depth
-- No learning or adaptation
-
-**SIMA 2-Style Companions:**
-
-- Natural language conversations
-- Context-aware responses
-- Learning from player behavior
-- Dynamic goal planning
-
-**Example Use Case:**
-
-```python
-# Conceptual game integration
-class GameCompanion:
-    def __init__(self):
-        self.sima2_agent = SIMA2Agent(gemini_model)
-        self.player_context = PlayerContext()
-
-    def interact(self, player_message: str):
-        """
-        Player: "I need to find the ancient temple"
-        Companion: "I can help! Based on the map, the temple
-                   is likely in the northern mountains. Should
-                   I scout ahead while you gather supplies?"
-        """
-        # SIMA 2 reasons about player's goal
-        goal = self.sima2_agent.understand_goal(player_message)
-
-        # Plans collaborative actions
-        plan = self.sima2_agent.plan_collaboration(
-            player_goal=goal,
-            companion_capabilities=self.get_capabilities()
-        )
-
-        # Converses naturally
-        response = self.sima2_agent.generate_response(
-            plan=plan,
-            context=self.player_context
-        )
-
-        return response
-```
-
-### 2. Procedural Content Testing
-
-**The Problem:**
-
-- Procedurally generated levels need testing
-- Manual playtesting is expensive and slow
-- AI testers often miss edge cases
-
-**SIMA 2 Solution:**
-
-- Agents can test levels with human-like reasoning
-- Can identify issues humans might miss
-- Self-improving test coverage over time
-
-### 3. Adaptive Difficulty and Tutorials
-
-**Dynamic Tutorial System:**
-
-- SIMA 2 can observe player struggles
-- Generates contextual hints based on reasoning
-- Adapts tutorial pace to player skill
-
-### 4. Multi-Agent Gameplay
-
-**Collaborative AI Agents:**
-
-- Multiple SIMA 2 agents can collaborate
-- Each agent reasons about team goals
-- Emergent cooperative behaviors
-
-```mermaid
-graph TB
-    subgraph MultiAgent["Multi-Agent Collaboration"]
-        P[Player] --> A1[Agent 1: Scout]
-        P --> A2[Agent 2: Builder]
-        P --> A3[Agent 3: Gatherer]
-
-        A1 -->|"Found resources"| G[Shared Goal Planner]
-        A2 -->|"Needs materials"| G
-        A3 -->|"Gathered items"| G
-
-        G -->|"Coordinate actions"| A1
-        G -->|"Coordinate actions"| A2
-        G -->|"Coordinate actions"| A3
-    end
-
-    style G fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
-```
-
----
-
-## 📊 Technical Deep Dive: Architecture and Training
-
-### SIMA 2 Architecture Overview
-
-```mermaid
-graph TB
-    subgraph Input["Multimodal Input"]
-        I1[Text Instructions]
-        I2[Images/Sketches]
-        I3[Emojis]
-        I4[Game Observations]
-    end
-
-    subgraph Processing["Gemini Reasoning Engine"]
-        G1[Goal Understanding]
-        G2[Context Analysis]
-        G3[Action Planning]
-        G4[Failure Analysis]
-    end
-
-    subgraph Execution["Action Execution"]
-        E1[Action Selection]
-        E2[Game Interaction]
-        E3[Observation Processing]
-    end
-
-    subgraph Learning["Self-Improvement"]
-        L1[Experience Bank]
-        L2[Failure Analysis]
-        L3[Training Data Generation]
-    end
-
-    subgraph Output["Output"]
-        O1[Actions]
-        O2[Conversations]
-        O3[Explanations]
-    end
-
-    Input --> Processing
-    Processing --> Execution
-    Execution --> Processing
-    Execution --> Learning
-    Learning --> Processing
-    Processing --> Output
-
-    style Processing fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
-    style Learning fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-```
-
-### Training Pipeline
-
-**Phase 1: Human Demonstration Learning**
-
-- Collect human gameplay videos with language labels
-- Train initial action prediction model
-- Establish baseline performance
-
-**Phase 2: Gemini Integration**
-
-- Integrate Gemini for goal understanding
-- Fine-tune on human demonstrations + Gemini-generated labels
-- Enable reasoning capabilities
-
-**Phase 3: Self-Improvement**
-
-- Deploy agent in games
-- Collect failure cases
-- Use Gemini to analyze failures and generate training data
-- Iteratively improve
-
-**Key Technical Innovation:**
-
-The combination of **human demonstrations** (ground truth) and **Gemini-generated labels** (semantic understanding) creates richer training data than either alone.
-
----
-
-## 🎯 Key Takeaways
-
-| Insight                                             | Implication                                                         | Next Steps                                             |
-| :-------------------------------------------------- | :------------------------------------------------------------------ | :----------------------------------------------------- |
-| **Reasoning enables goal-oriented behavior**        | Agents can handle abstract, complex instructions                    | Explore reasoning-based game AI architectures          |
-| **Gemini integration closes human performance gap** | Foundation models can be powerful reasoning engines for embodied AI | Evaluate other foundation models for game AI           |
-| **Self-improvement reduces training data needs**    | Agents can generate their own training data                         | Implement self-improvement loops in production systems |
-| **Multimodal understanding improves accessibility** | Players can interact naturally with AI companions                   | Design multimodal interfaces for game AI               |
-| **Generalization enables zero-shot transfer**       | Agents trained on one game can perform in others                    | Build generalist game AI systems                       |
-
-### Why This Matters for Game Developers
-
-As someone who's shipped AI-powered games, here's what excites me:
-
-1. **Natural AI Companions:** Players can have meaningful conversations with AI characters, not just scripted dialogues
-2. **Reduced Development Costs:** Self-improving agents need less manual tuning and training data
-3. **Better Player Experience:** AI that understands context and reasons about goals feels more intelligent and helpful
-4. **New Gameplay Possibilities:** Multi-agent collaboration, dynamic tutorials, procedural content testing
-
-**The Catch:** SIMA 2 is still research—it's not a production-ready SDK. But the principles (reasoning-based agents, self-improvement, multimodal understanding) are applicable now.
-
-**What I'd Try First:**
-
-- Integrate a reasoning layer (like GPT-4 or Claude) into existing game AI systems
-- Experiment with self-improvement loops for NPC behavior
-- Build multimodal interfaces (text + image + emoji) for player-AI interaction
-
----
-
-## 🤔 New Questions This Raises
-
-1. **Scalability:** Can SIMA 2's architecture scale to real-time game environments with 60+ FPS requirements?
-
-2. **Cost:** Gemini API calls for every action decision—how do we optimize for production cost while maintaining reasoning quality?
-
-3. **Latency:** Reasoning takes time. How do we balance thoughtful planning with responsive gameplay?
-
-4. **Multi-Agent Coordination:** How do multiple SIMA 2 agents coordinate when they have conflicting goals or need to share resources?
-
-5. **Safety and Alignment:** How do we ensure reasoning-based agents don't exploit game mechanics or behave in unintended ways?
-
-6. **The Robotics Connection:** SIMA 2 is trained in virtual worlds—how well will these capabilities transfer to real robots?
-
-**Next Experiment:** Build a prototype game AI companion using GPT-4 as the reasoning engine, measuring player satisfaction and system performance compared to traditional scripted NPCs.
-
----
+- How closely would a reward rubric track independently specified correctness assertions on the same gameplay trajectories?
+- Which failure types would require hidden state, save/load inspection or engine instrumentation rather than video judgment?
+- How would a replication preserve the distinction between first-time transfer and subsequent environment-specific learning?
+- What independently documented access and integration contract would be needed before an actual game-team trial?
 
 ## References
 
-**Original Article:**
+### Research report and version history
 
-- [SIMA 2: An Agent that Plays, Reasons, and Learns With You in Virtual 3D Worlds - Google DeepMind](https://deepmind.google/blog/sima-2-an-agent-that-plays-reasons-and-learns-with-you-in-virtual-3d-worlds/)
+- SIMA Team, Google DeepMind, [SIMA 2 technical report, arXiv 2512.04797v1](https://arxiv.org/abs/2512.04797v1). Submitted December 4, 2025; current record inspected for version changes. Read on 2026-10-14.
+- [Version-pinned report HTML](https://arxiv.org/html/2512.04797v1): §§3.1.1, 3.3, 3.4 and 4.5; Figures 9 and 15–17. Read on 2026-10-14.
+- [Official linked technical-report PDF](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/sima-2-an-agent-that-plays-reasons-and-learns-with-you-in-virtual-3d-worlds/SIMA_Tech_Report_2025.pdf): cover dated December 5, 2025. Figure reuse was not cleared because the arXiv license indication and PDF rights notice were not resolved at asset scope. Read on 2026-10-14.
 
-**Video Demonstration:**
+### Official announcement and access context
 
-- [SIMA 2 YouTube Video](https://www.youtube.com/embed/Zphax4f6Rls)
+- Google DeepMind, [SIMA 2: An agent that plays, reasons, and learns with you in virtual 3D worlds](https://deepmind.google/blog/sima-2-an-agent-that-plays-reasons-and-learns-with-you-in-virtual-3d-worlds/), November 13, 2025. Responsible Development and launch framing. Read on 2026-10-14.
 
-**DeepMind Research:**
+### Audit trail and related analyses
 
-- [SIMA 1: Scalable Instructable Multiworld Agent](https://deepmind.google/discover/blog/sima-generalist-ai-agent-for-3d-virtual-environments/)
-- [Gemini Models](https://deepmind.google/technologies/gemini/)
-- [DeepMind Research Publications](https://deepmind.google/research/)
-
-**Embodied AI & Game AI:**
-
-- [Embodied AI: A Survey (2023)](https://arxiv.org/abs/2303.04919)
-- [Language Models as Zero-Shot Planners (2022)](https://arxiv.org/abs/2201.07207)
-- [Voyager: An Open-Ended Embodied Agent with Large Language Models (2023)](https://arxiv.org/abs/2305.16291)
-- [Game AI Pro Series](https://www.gameaipro.com/)
-
-**Multi-Agent Systems:**
-
-- [Multi-Agent Reinforcement Learning: A Selective Overview](https://arxiv.org/abs/1811.12560)
-- [Cooperative Multi-Agent Control Using Deep Reinforcement Learning](https://arxiv.org/abs/1702.03931)
-
-**Self-Improvement & Meta-Learning:**
-
-- [Learning to Learn: Meta-Learning in Deep Networks](https://arxiv.org/abs/1803.02999)
-- [Self-Improving AI: A Survey](https://arxiv.org/abs/2304.01828)
-
-**Foundation Models for Robotics:**
-
-- [RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control](https://arxiv.org/abs/2307.15818)
-- [PaLM-E: An Embodied Multimodal Language Model](https://arxiv.org/abs/2303.03378)
-
-**Game Development Integration:**
-
-- [Unity ML-Agents](https://github.com/Unity-Technologies/ml-agents)
-- [Unreal Engine AI Systems](https://docs.unrealengine.com/5.3/en-US/artificial-intelligence-in-unreal-engine/)
-- [OpenAI API for Game AI](https://platform.openai.com/docs/guides/gpt)
-
-**Related Projects:**
-
-- [Voyager: Minecraft AI Agent](https://github.com/MineDojo/Voyager)
-- [MineDojo: Minecraft Research Platform](https://minedojo.org/)
-- [AI2-THOR: Interactive Household Environments](https://ai2thor.allenai.org/)
-
-**Industry Analysis:**
-
-- [The Future of AI in Gaming - GDC Talks](https://gdconf.com/)
-- [Embodied AI Market Analysis](https://www.marketsandmarkets.com/Market-Reports/embodied-ai-market-123456789.html)
+- [The pre-rebuild archive at commit 28dcdccdd6e15362fa66e2518c399019c1120aa2](https://github.com/akillness/akillness.github.io/blob/28dcdccdd6e15362fa66e2518c399019c1120aa2/_posts/2025/11/2025-11-13-sima-2-gemini-powered-ai-agent-3d-worlds.md): the conceptual wrapper, not a DeepMind API implementation. Read on 2026-10-14.
+- [Multimodal Sentence Transformers scoring and input contracts](/posts/multimodal-sentence-transformers-practical-guide/). Related distinction between a score definition and calibration. Read on 2026-10-14.
+- [RAG versus Jev: ranking is not answerability](/posts/rag-vs-jev-rag-why-ranking-is-not-answerability/). Related distinction between intermediate evidence and a downstream decision. Read on 2026-10-14.
