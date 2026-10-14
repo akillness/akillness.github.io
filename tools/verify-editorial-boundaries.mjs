@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { validateArchiveRestoration, APPROVED_RESTORATION_ID } from './lib/archive-restoration-policy.mjs';
+import { validateArchiveDevelopment, graduatedFrontMatterErrors, retiredFrontMatterErrors } from './lib/archive-development-policy.mjs';
 import { parsePostFrontMatter } from './lib/public-post-cohort.mjs';
 import {
   MAX_REFERENCE_IMAGE_BYTES,
@@ -51,6 +52,15 @@ const restorationValidation = validateArchiveRestoration(JSON.parse(read('_data/
 failures.push(...restorationValidation.errors);
 const restoredSources = restorationValidation.restoredSources;
 for (const file of restoredSources) check(fs.existsSync(path.join(root, file)), `approved restored source is missing: ${file}`);
+// Archive development program (2026-10-14): a restored source that the ledger
+// marks graduated has left the archive exception and follows the editorial
+// cohort rules; a retired/merged one follows the noindex triple. Everything
+// else still carries the 2026-10-12 restoration flags.
+const developmentValidation = validateArchiveDevelopment(JSON.parse(read('_data/archive_development.json')), restoredSources);
+failures.push(...developmentValidation.errors);
+const graduatedSources = developmentValidation.graduatedSources;
+const retiredSources = new Set([...developmentValidation.retiredSources, ...developmentValidation.mergedSources.keys()]);
+for (const target of developmentValidation.mergedSources.values()) check(fs.existsSync(path.join(root, target)), `merged archive target is missing: ${target}`);
 const sourceWordCount = (body) => body
   .replace(/```[\s\S]*?```/g, ' ')
   .replace(/<[^>]+>/g, ' ')
@@ -212,7 +222,13 @@ for (const file of postFiles) {
   const noAds = /^ads:\s*false$/m.test(frontMatter);
   const relative = path.relative(root, file).split(path.sep).join('/');
   const fields = parsePostFrontMatter(source).fields;
-  if (restoredSources.has(relative)) {
+  if (restoredSources.has(relative) && graduatedSources.has(relative)) {
+    failures.push(...graduatedFrontMatterErrors(fields, developmentValidation.entriesByPath.get(relative), relative));
+    // A graduated post is an ordinary editorial-cohort post from here on: the
+    // word-count / noindex / sitemap / ads coupling below applies to it.
+  } else if (restoredSources.has(relative) && retiredSources.has(relative)) {
+    failures.push(...retiredFrontMatterErrors(fields, relative));
+  } else if (restoredSources.has(relative)) {
     check(published && noAds && fields.published === 'true' && fields.restored_archive === APPROVED_RESTORATION_ID && !/noindex/i.test(fields.robots || '') && fields.sitemap !== 'false' && fields.hidden !== 'true', `${relative}: approved restoration must be public and indexable with advertising explicitly disabled`);
     // Only the indexing coupling is excepted. The independent source-image,
     // privacy, template and advertising checks below still cover this source.

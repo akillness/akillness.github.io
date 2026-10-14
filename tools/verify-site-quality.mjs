@@ -7,6 +7,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validatePublicPostCohort, compareRouteSets, parsePostFrontMatter } from './lib/public-post-cohort.mjs';
 import { validateArchiveRestoration } from './lib/archive-restoration-policy.mjs';
+import { validateArchiveDevelopment, graduatedFrontMatterErrors, retiredFrontMatterErrors } from './lib/archive-development-policy.mjs';
 
 // Dependency-free reader for this repository's deliberately scalar ad settings.
 export function readAdConfig(file = new URL('../_config.yml', import.meta.url)) {
@@ -226,6 +227,9 @@ const restoration = JSON.parse(fs.readFileSync(path.join(repoRoot, '_data', 'arc
 const restorationValidation = validateArchiveRestoration(restoration);
 failures.push(...restorationValidation.errors);
 const restoredSources = restorationValidation.restoredSources;
+const development = validateArchiveDevelopment(JSON.parse(fs.readFileSync(path.join(repoRoot, '_data', 'archive_development.json'), 'utf8')), restoredSources);
+failures.push(...development.errors);
+const retiredSources = new Set([...development.retiredSources, ...development.mergedSources.keys()]);
 const restoredRoutes = new Set();
 for (const [route, source] of Object.entries(cohort.routeToSource || {})) {
   if (!restoredSources.has(source.path)) {
@@ -233,8 +237,16 @@ for (const [route, source] of Object.entries(cohort.routeToSource || {})) {
     continue;
   }
   const fields = parsePostFrontMatter(fs.readFileSync(path.join(repoRoot, source.path), 'utf8')).fields;
-  check(fields.published === 'true' && fields.ads === 'false' && fields.restored_archive === restoration.restoration_id, `restored source flags drifted: ${source.path}`);
-  check(!source.noindex && !source.hidden, `restored source is hidden or noindex: ${source.path}`);
+  if (development.graduatedSources.has(source.path)) {
+    // Developed out of the archive: editorial-cohort rules apply, no archive marker.
+    failures.push(...graduatedFrontMatterErrors(fields, development.entriesByPath.get(source.path), source.path));
+    check(!source.noindex && !source.hidden, `graduated source is hidden or noindex: ${source.path}`);
+  } else if (retiredSources.has(source.path)) {
+    failures.push(...retiredFrontMatterErrors(fields, source.path));
+  } else {
+    check(fields.published === 'true' && fields.ads === 'false' && fields.restored_archive === restoration.restoration_id, `restored source flags drifted: ${source.path}`);
+    check(!source.noindex && !source.hidden, `restored source is hidden or noindex: ${source.path}`);
+  }
   restoredRoutes.add(route);
 }
 check(restoredRoutes.size === restoredSources.size, `only ${restoredRoutes.size}/${restoredSources.size} approved restored sources were built`);

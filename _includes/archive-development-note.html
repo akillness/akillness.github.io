@@ -1,0 +1,6 @@
+{% if page.archive_developed and page.archive_developed != empty %}
+  <aside class="article-correction" aria-label="Rebuilt from an archived note" data-archive-developed="{{ page.archive_developed | escape }}">
+    <p><strong>Rebuilt on <time datetime="{{ page.archive_developed | escape }}">{{ page.archive_developed | date: '%B %e, %Y' | escape }}</time> from a {{ page.date | date: '%B %Y' | escape }} reference note.</strong> {{ page.archive_development_note | escape }}</p>
+    <p class="correction-scope">The original publication date is kept for the URL and history; the text, sources, and numbers above were re-researched on the rebuild date. <a href="{{ '/about/#editorial-method-and-ai-assistance' | relative_url }}">Editorial method</a>.</p>
+  </aside>
+{% endif %}

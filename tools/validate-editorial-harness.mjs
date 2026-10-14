@@ -43,7 +43,15 @@ const required = [
   'tools/lib/source-image-manifest.mjs',
   'tools/lib/authority-brief.mjs',
   'tools/tests/source-image-manifest.test.mjs',
-  'tools/tests/authority-brief.test.mjs'
+  'tools/tests/authority-brief.test.mjs',
+  '.claude/skills/archive-development/SKILL.md',
+  '.agents/skills/archive-development/SKILL.md',
+  'tools/lib/archive-development-policy.mjs',
+  'tools/validate-archive-development.mjs',
+  'tools/archive-development.mjs',
+  'tools/tests/archive-development-policy.test.mjs',
+  '_data/archive_development.json',
+  '_includes/archive-development-note.html'
 ];
 for (const file of required) check(exists(file), `Required harness file is missing: ${file}`);
 

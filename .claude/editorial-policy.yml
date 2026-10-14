@@ -102,3 +102,20 @@ category_allowlist:
   - "AI, Research"
   - "AI, Tooling"
 restored_archive_policy: labeled-non-commercial-outside-editorial-cohort
+# Archive development program (owner instruction 2026-10-14): rebuild each
+# restored archive note with a fresh survey and primary-source research, then
+# publish it and graduate it out of the archive exception. Ledger and contract:
+# _data/archive_development.json, tools/validate-archive-development.mjs,
+# .claude/skills/archive-development/SKILL.md
+archive_development_program_id: archive-development-2026-10-14
+archive_development_mode: publish-on-green
+archive_development_max_posts_per_run: 2
+archive_development_schedule_local: "03:30"
+archive_development_schedule_days:
+  - Monday
+  - Tuesday
+  - Wednesday
+  - Thursday
+  - Friday
+  - Saturday
+  - Sunday
