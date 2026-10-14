@@ -47,9 +47,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-14",
+      "survey_note": "Re-read arXiv 2312.16084v2, the LangSplat repo at d70edb86 (README pipeline, 24 GB VRAM requirement, Gaussian-Splatting License), LangSplatV2 arXiv 2507.07136v2 (8.2 FPS baseline timing, 384.6 FPS, training-cost table) and Occam's LGS arXiv 2412.01807v1. Finding: the 199x figure is per-query latency, the model was 8.2 FPS on A100, and the code is research/evaluation-only under the Inria/MPII license; V2 repo has no license file. Old LinkedIn-derived summary, invented diagrams, conceptual code sample and Korean translation block removed."
     },
     {
       "path": "_posts/2024/06/2024-06-22-crag-new-rag-benchmark-dataset.md",
