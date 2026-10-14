@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="510" viewBox="0 0 1120 510" role="img" aria-labelledby="title desc">
+  <title id="title">Keep the selected probability separate from policy permission</title>
+  <desc id="desc">An original conceptual diagram of a local synthetic projection test, not an observed Jev response or dispatched tool trace. The original selected choice retains its probability through map validation. Policy separately checks allowed actions and an evidence flag. Invalid input returns a handoff record; denied policy returns hold. A policy fallback must not relabel the original option's probability.</desc>
+  <style>text{font-family:Arial,sans-serif}.heading{font-size:23px;font-weight:700;fill:#24344e}.label{font-size:19px;font-weight:700;fill:#24344e}.small{font-size:16px;fill:#52647c}.tag{font-size:13px;letter-spacing:1px;fill:#52647c}.arrow{fill:none;stroke:#8194af;stroke-width:2}</style>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#8194af"/></marker></defs>
+  <text x="28" y="33" class="heading">A choice keeps its score. Policy chooses its permitted next step.</text>
+  <text x="28" y="66" class="tag">LOCAL SYNTHETIC PROJECTION · DECISION RECORDS ONLY · NO TOOL EXECUTOR</text>
+  <rect x="28" y="93" width="306" height="127" rx="11" fill="#eef3fa" stroke="#8098bb"/>
+  <text x="49" y="130" class="label">Input's selected choice</text><text x="49" y="165" class="small">choice = page_team</text><text x="49" y="196" class="small">P(page_team) = 0.60</text>
+  <path d="M337 156H380" class="arrow" marker-end="url(#arrow)"/>
+  <rect x="389" y="93" width="306" height="127" rx="11" fill="#edf5f1" stroke="#77968b"/>
+  <text x="410" y="130" class="label">Projection checks</text><text x="410" y="165" class="small">Exact keys, own selected key</text><text x="410" y="196" class="small">Numeric map + declared tolerance</text>
+  <path d="M698 156H741" class="arrow" marker-end="url(#arrow)"/>
+  <rect x="750" y="93" width="344" height="127" rx="11" fill="#fff5e8" stroke="#b5976d"/>
+  <text x="771" y="130" class="label">Toy policy gate</text><text x="771" y="165" class="small">allowedActions + freshEvidence</text><text x="771" y="196" class="small">Not full authentication / ownership</text>
+  <rect x="28" y="259" width="667" height="116" rx="11" fill="none" stroke="#8098bb" stroke-dasharray="7 5"/>
+  <text x="49" y="295" class="label">Policy fallback record</text><text x="49" y="327" class="small">action = inspect_read_only · selectedChoice = page_team</text><text x="49" y="357" class="small">selectedChoiceProbability = 0.60, not P(inspect_read_only)</text>
+  <rect x="750" y="259" width="344" height="116" rx="11" fill="#faf0f0" stroke="#b18b8b"/>
+  <text x="771" y="295" class="label">Refusal records</text><text x="771" y="327" class="small">Malformed map → handoff</text><text x="771" y="357" class="small">Denied policy → hold</text>
+  <text x="28" y="420" class="small">Missing P(page_team) must not borrow another option's 0.90.</text>
+  <text x="28" y="451" class="small">17 cases / 22 assertions: hand-authored inputs, not Jev calibration or production safety.</text>
+  <text x="28" y="482" class="small">Confidence and the full HTTP envelope are outside this projection test.</text>
+</svg>

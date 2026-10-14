@@ -1,0 +1,5 @@
+# Discovery context and bounded local evidence
+
+The October 14, 2026 Daily Dose of Data Science HANDS-ON email supplied discovery links. Its relevant canonical product destinations (links 4–8 in the sanitized intake) were https://www.coderabbit.ai/; they did not identify a case repository, revision or executable test trace in that inspected link set. This is not a statement that no demonstration exists elsewhere. Personal tracking parameters and recipient information are omitted. No restricted CodeRabbit extraction was repeated. Newsletter app outcomes and adoption metrics remain unverified.
+
+The public decision-gate.mjs download contains the same hand-constructed adapter/test logic as the archived review, with only the local command path replaced by a portable command. The original archived source hash was dc3bbd8897f54a46627de72971f34107bb9aebb9a73a55f14fe61e8f983d44c3. The public script is separately hashed and rerun before publication. It makes no network requests and dispatches no tools.

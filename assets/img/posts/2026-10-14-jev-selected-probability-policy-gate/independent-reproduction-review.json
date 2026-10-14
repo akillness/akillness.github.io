@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "verdict": "PASS",
+  "reviewer": "Independent publication reviewer",
+  "observed_at": "2026-10-14T03:11:40.037Z",
+  "source_file": "decision-gate.mjs",
+  "source_sha256": "2973979b18aeca62e08f72872dfcca9bd0ff84478e539e32ee97d9a280d946db",
+  "execution": "The reviewer copied the public script into a separate disposable directory and executed that copy.",
+  "command": "node --openssl-config=/dev/null decision-gate.mjs",
+  "runtime": "v26.5.0",
+  "exit_code": 0,
+  "cases_passed": 17,
+  "assertions_passed": 22,
+  "source_comparison": {
+    "decision_logic_unchanged": true,
+    "only_change": "The original report.command string is replaced by the portable string node decision-gate.mjs."
+  },
+  "counterexample": {
+    "selected_choice": "page_team",
+    "probabilities": { "inspect_read_only": 0.9, "stop": 0.1 },
+    "broken_gate_action": "page_team",
+    "checked_gate_action": "handoff"
+  },
+  "findings": [
+    "The public source produces the stated 17 case results and 22 successful assertions.",
+    "The checked adapter does not borrow another choice's probability when the selected key is missing.",
+    "The read-only policy fallback retains the original selectedChoice and selectedChoiceProbability metadata."
+  ],
+  "scope": "Local, synthetic three-field projection and illustrative policy checks only; the script returns records without dispatching tools.",
+  "limitations": [
+    "No TypeSafe provider call, cloud job, deployed incident application, CodeRabbit reproduction or remote execution occurred.",
+    "No model quality, calibration, safety threshold, latency, throughput or adoption metric was measured.",
+    "The test does not validate confidence or the full HTTP envelope, authenticate principals, verify object ownership or expiry, bind dynamic question state, or implement a real executor.",
+    "NaN and Infinity are in-memory defensive fixtures, not observed provider JSON."
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "observed_at": "2026-10-14T03:07:40.732Z",
+  "runtime": "v26.5.0",
+  "command": "node decision-gate.mjs",
+  "scope": "Hand-constructed inputs and local JavaScript adapter only. No TypeSafe call, deployed app, production incident, or CodeRabbit test.",
+  "thresholds": {
+    "low": 0.55,
+    "high": 0.8,
+    "status": "illustrative, not calibrated"
+  },
+  "statistic": "probabilities[originalAnswer.choice], never reassigned to the fallback action",
+  "wire_scope": "Projection containing type/choice/probabilities only; confidence and the full HTTP response envelope are not validated or consumed.",
+  "authorization_scope": "freshEvidence boolean and allowedActions only; no authenticated principal, ownership, expiry or real executor implemented.",
+  "numeric_tolerance": 0.000001,
+  "counterexample": {
+    "input": {
+      "type": "choice",
+      "choice": "page_team",
+      "probabilities": {
+        "inspect_read_only": 0.9,
+        "stop": 0.1
+      }
+    },
+    "brokenGateAction": "page_team",
+    "strictGateAction": "handoff"
+  },
+  "assertions_passed": 22,
+  "cases_passed": 17,
+  "results": [
+    {
+      "name": "high probability, authorized",
+      "expected": "page_team",
+      "actual": {
+        "action": "page_team",
+        "actionSource": "selected-choice",
+        "selectedChoice": "page_team",
+        "selectedChoiceProbability": 0.85
+      },
+      "passed": true
+    },
+    {
+      "name": "medium probability uses authorized read-only step",
+      "expected": "inspect_read_only",
+      "actual": {
+        "action": "inspect_read_only",
+        "actionSource": "policy-read-only-fallback",
+        "selectedChoice": "page_team",
+        "selectedChoiceProbability": 0.6
+      },
+      "passed": true
+    },
+    {
+      "name": "low probability abstains",
+      "expected": "handoff",
+      "actual": {
+        "action": "handoff",
+        "reason": "low_probability",
+        "selectedChoice": "page_team",
+        "selectedChoiceProbability": 0.4
+      },
+      "passed": true
+    },
+    {
+      "name": "exact high boundary",
+      "expected": "page_team",
+      "actual": {
+        "action": "page_team",
+        "actionSource": "selected-choice",
+        "selectedChoice": "page_team",
+        "selectedChoiceProbability": 0.8
+      },
+      "passed": true
+    },
+    {
+      "name": "missing selected probability",
+      "expected": "handoff",
+      "actual": {
+        "action": "handoff",
+        "reason": "invalid_response",
+        "detail": "Probability keys do not match requested criteria"
+      },
+      "passed": true
+    },
+    {
+      "name": "unknown action",
+      "expected": "handoff",
+      "actual": {
+        "action": "handoff",
+        "reason": "invalid_response",
+        "detail": "Unknown answer or action"
+      },
+      "passed": true
+    },
+    {
+      "name": "unknown probability key",
+      "expected": "handoff",
+      "actual": {
+        "action": "handoff",
+        "reason": "invalid_response",
+        "detail": "Probability keys do not match requested criteria"
+      },
+      "passed": true
+    },
+    {
+      "name": "NaN probability",
+      "expected": "handoff",
+      "actual": {
+        "action": "handoff",
+        "reason": "invalid_response",
+        "detail": "Invalid probability"
+      },
+      "passed": true
+    },
+    {
+      "name": "infinite probability",
+      "expected": "handoff",
+      "actual": {
+        "action": "handoff",
+        "reason": "invalid_response",
+        "detail": "Invalid probability"
+      },
+      "passed": true
+    },
+    {
+      "name": "negative probability",
+      "expected": "handoff",
+      "actual": {
+        "action": "handoff",
+        "reason": "invalid_response",
+        "detail": "Invalid probability"
+      },
+      "passed": true
+    },
+    {
+      "name": "numeric string rejected",
+      "expected": "handoff",
+      "actual": {
+        "action": "handoff",
+        "reason": "invalid_response",
+        "detail": "Invalid probability"
+      },
+      "passed": true
+    },
+    {
+      "name": "wrong normalization",
+      "expected": "handoff",
+      "actual": {
+        "action": "handoff",
+        "reason": "invalid_response",
+        "detail": "Distribution does not sum to one"
+      },
+      "passed": true
+    },
+    {
+      "name": "choice is not distribution maximum",
+      "expected": "handoff",
+      "actual": {
+        "action": "handoff",
+        "reason": "invalid_response",
+        "detail": "Selected action is not a maximum-probability option"
+      },
+      "passed": true
+    },
+    {
+      "name": "null answer",
+      "expected": "handoff",
+      "actual": {
+        "action": "handoff",
+        "reason": "invalid_response",
+        "detail": "Unknown answer or action"
+      },
+      "passed": true
+    },
+    {
+      "name": "high probability does not grant permission",
+      "expected": "hold",
+      "actual": {
+        "action": "hold",
+        "reason": "policy_or_evidence_denied",
+        "selectedChoice": "page_team",
+        "selectedChoiceProbability": 0.9
+      },
+      "passed": true
+    },
+    {
+      "name": "high probability does not refresh evidence",
+      "expected": "hold",
+      "actual": {
+        "action": "hold",
+        "reason": "policy_or_evidence_denied",
+        "selectedChoice": "page_team",
+        "selectedChoiceProbability": 0.9
+      },
+      "passed": true
+    },
+    {
+      "name": "medium probability cannot grant a read-only capability",
+      "expected": "hold",
+      "actual": {
+        "action": "hold",
+        "reason": "policy_or_evidence_denied",
+        "selectedChoice": "page_team",
+        "selectedChoiceProbability": 0.6
+      },
+      "passed": true
+    }
+  ]
+}
