@@ -231,6 +231,10 @@ const development = validateArchiveDevelopment(JSON.parse(fs.readFileSync(path.j
 failures.push(...development.errors);
 const retiredSources = new Set([...development.retiredSources, ...development.mergedSources.keys()]);
 const restoredRoutes = new Set();
+// Routes that still carry the 2026-10-12 archive exception (public, indexable,
+// non-monetized). Graduated routes are deliberately excluded: they follow the
+// ordinary word-count index/ad boundary like every editorial-cohort post.
+const archiveExceptionRoutes = new Set();
 for (const [route, source] of Object.entries(cohort.routeToSource || {})) {
   if (!restoredSources.has(source.path)) {
     check(!source.restored_archive, `unapproved source opts into archive indexing exception: ${source.path}`);
@@ -246,6 +250,7 @@ for (const [route, source] of Object.entries(cohort.routeToSource || {})) {
   } else {
     check(fields.published === 'true' && fields.ads === 'false' && fields.restored_archive === restoration.restoration_id, `restored source flags drifted: ${source.path}`);
     check(!source.noindex && !source.hidden, `restored source is hidden or noindex: ${source.path}`);
+    archiveExceptionRoutes.add(route);
   }
   restoredRoutes.add(route);
 }
@@ -394,7 +399,7 @@ for (const entry of postEntries) {
     ([tag]) => /adsbygoogle/i.test(tag) && /(display\s*:\s*none|visibility\s*:\s*hidden)/i.test(tag)
   );
   check(!hasHiddenAd, `hidden AdSense unit is present: ${route}`);
-  failures.push(...verifyIndexBoundary({ route, words, minimum: indexableWordFloor, noindex: isNoindex, eligibility, restored: restoredRoutes.has(route) }));
+  failures.push(...verifyIndexBoundary({ route, words, minimum: indexableWordFloor, noindex: isNoindex, eligibility, restored: archiveExceptionRoutes.has(route) }));
   if (isNoindex) {
     noindexPosts += 1;
     noindexRoutes.push(route);
