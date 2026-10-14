@@ -1,304 +1,113 @@
 ---
 published: true
-title: "GLM-4.7 - Your New Coding Partner with 358B Parameters"
-description: "Z.ai releases GLM-4.7, a 358B MoE model excelling in agentic coding, complex reasoning, and tool-use with interleaved thinking capabilities"
-categories: [Agent/Orchestration]
-tags: [Agent, Workflow, Orchestration]
+title: "GLM-4.7’s scorecard needs its test protocol beside it"
+description: "A source-bound reading of GLM-4.7’s reported scores, task-specific decoding settings, τ²-Bench changes, and what the results can establish."
+categories: ["AI, Research"]
+tags: [glm-4.7, benchmarks, model-evaluation, coding-agents]
 date: 2026-01-18 10:00:00 +0900
-mermaid: true
-math: true
+last_modified_at: "2026-10-14 21:14:33 +0900"
+permalink: /posts/glm-4-7-coding-agent-model/
+archive_developed: 2026-10-14
+archive_development_note: "Rebuilt from the GLM-4.7 model card pinned at 475d85cda16beac79cde7f4cf4cae8d1260566f5 and the official Z.ai guide observed on 2026-10-14. Preserved the original date and permalink; clarified that the NC SOFT/COM2US career framing is not a GLM-4.7 use claim; separated the Hugging Face 33.4 record from the pinned 41.0 table; narrowed unsupported framework, hardware-minimum, blanket-license, and universal-ranking claims. Added an original protocol diagram."
 image:
-  path: /assets/img/llm/glm47_bench.png
-  alt: "GLM-4.7 Benchmark Results comparing with GPT-5, Claude Sonnet 4.5, Gemini 3.0 Pro"
-ads: false
-restored_archive: "2026-10-12"
+  path: /assets/img/posts/2026-01-18-glm-4-7-coding-agent-model/glm47-protocol-scorecard.png
+  alt: "Diagram of GLM-4.7’s task-specific evaluation settings and four vendor-reported scores. It notes τ²-Bench top-p is not listed and Preserved Thinking is recommended for multi-turn τ²-Bench and Terminal Bench 2 tasks; scores were not independently rerun."
+image_policy: source-first-fallback
 ---
 
-## 🤔 Curiosity: What Makes a Great Coding Agent?
+GLM-4.7’s scorecard does not answer one question such as “Is this the best coding model?” It contains several narrower results. The pinned [Z.ai model card](https://huggingface.co/zai-org/GLM-4.7/blob/475d85cda16beac79cde7f4cf4cae8d1260566f5/README.md) lists one sampling recipe for most tasks, another for SWE-bench Verified and Terminal Bench 2.0, and a third for τ²-Bench. It also discloses task-specific changes to the τ²-Bench evaluation. A score without that setup is an incomplete comparison.
 
-Building AI-powered games at NC SOFT and COM2US, I've always wondered: **Can an AI model truly understand the context of a complex codebase and act autonomously to fix bugs, implement features, or refactor code?**
+This rebuild uses the model-card revision dated January 8, 2026, which predates the original January 18 post. The current [Z.ai API guide](https://docs.z.ai/guides/llm/glm-4.7) is used only to distinguish context length from output length. The values below are reported by Z.ai; no model call, benchmark rerun, installation, serving test, or framework integration was performed here.
 
-The answer is increasingly "yes" - and GLM-4.7 from Z.ai is the latest contender pushing the boundaries of what's possible with agentic coding.
+<figure class="explanatory-image">
+  <img src="/assets/img/posts/2026-01-18-glm-4-7-coding-agent-model/glm47-protocol-scorecard.png" alt="Diagram of GLM-4.7’s task-specific evaluation settings and four vendor-reported scores. It notes τ²-Bench top-p is not listed and Preserved Thinking is recommended for multi-turn τ²-Bench and Terminal Bench 2 tasks; scores were not independently rerun." loading="lazy" decoding="async">
+  <figcaption>Original illustration by Aside. This source-boundary summary is not source evidence.</figcaption>
+</figure>
 
-> **The question:** How does a 358B parameter MoE model achieve state-of-the-art performance on coding benchmarks while maintaining practical inference speeds?
-{: .prompt-tip}
+The [editable SVG source](/assets/img/posts/2026-01-18-glm-4-7-coding-agent-model/glm47-protocol-scorecard.svg) is available separately.
 
----
+## What does this scorecard actually compare?
 
-## 📚 Retrieve: Understanding GLM-4.7
+Here are four rows from the same first-party table. “Highest other value shown” means the largest non-GLM-4.7 number in that table row, not a result from an independent comparison.
 
-### What is GLM-4.7?
+| Benchmark | GLM-4.7 | Highest other value shown | What the row says |
+|---|---:|---:|---|
+| AIME 2025 | 95.7 | Gemini 3.0 Pro: 95.0 | GLM-4.7 is highest among the values shown for this row. |
+| SWE-bench Verified | 73.8 | Claude Sonnet 4.5: 77.2 | GLM-4.7 does not lead this coding row in the table. |
+| Terminal Bench 2.0 | 41.0 | Gemini 3.0 Pro: 54.2 | GLM-4.7 does not lead this coding and tool-use row in the table. |
+| τ²-Bench | 87.4 | Gemini 3.0 Pro: 90.7 | The score is close to Claude Sonnet 4.5’s 87.2, with evaluation changes disclosed below. |
 
-**GLM-4.7** is Z.ai's latest large language model, designed specifically for agentic coding tasks. It's a 358B parameter Mixture-of-Experts (MoE) model that supports:
+The table supports a task-specific reading: GLM-4.7 is highest among the listed values on AIME 2025, but not on these selected coding and agent rows. That is enough to retire a blanket “best at coding” summary. It is not enough to declare a universal winner or loser. The card does not give a per-competitor settings table, seeds, or full harness details that would let a reader independently reproduce every comparison from that page alone.
 
-- **Text Generation** with multilingual support (English, Chinese)
-- **Tool calling** via OpenAI-compatible APIs
-- **Interleaved thinking** for complex reasoning
+There is another source-surface difference worth keeping visible. The current [Hugging Face GLM-4.7 page](https://huggingface.co/zai-org/GLM-4.7) embeds a separate Terminal Bench 2.0 evaluation record at 33.4. Its metadata points to the external [Terminal-Bench Leaderboard](https://www.tbench.ai/leaderboard/terminal-bench/2.0), names dataset `harborframework/terminal-bench-2.0` and file `.eval_results/terminal_bench.yaml`, notes `agent: Terminus 2`, and marks the record `verified: false` with `pullRequest: 44`. Those fields provide provenance clues, but the page does not provide a complete protocol or explain how this record relates to the pinned Z.ai model-card result of 41.0. I keep them as separate reported records; I do not average or substitute them.
 
-![GLM-4.7 Benchmark Results](/assets/img/llm/glm47_bench.png){: .light .w-100 .shadow .rounded-10 }
-_GLM-4.7 benchmark comparisons across reasoning, coding, and agent tasks_
+For another example of why benchmark provenance matters, see [Moli’s efficiency-map source audit](/posts/moli-benchmark-provenance-audit/). For the serving-side consequences of parallelism settings, see [LLM inference parallelism as a rank-topology problem](/posts/llm-inference-parallelism-layout/). Those articles answer different questions; neither is a GLM-4.7 benchmark rerun.
 
-### Key Features
+## The evaluation recipe changes by task
 
-| Feature | Description | Impact |
-|:--------|:------------|:-------|
-| **Core Coding** | Multilingual agentic coding and terminal tasks | 73.8% on SWE-bench (+5.8% vs GLM-4.6) |
-| **Vibe Coding** | Improved UI quality for web/slide generation | Cleaner, modern designs |
-| **Tool Using** | Enhanced function calling and web browsing | 87.4% on τ²-Bench |
-| **Complex Reasoning** | Mathematical and logical reasoning | 42.8% on HLE (+12.4%) |
+The same model card lists these settings:
 
-### Benchmark Results
+| Task grouping | Temperature | Top-p | Max new tokens |
+|---|---:|---:|---:|
+| Most tasks | 1.0 | 0.95 | 131,072 |
+| SWE-bench Verified and Terminal Bench 2.0 | 0.7 | 1.0 | 16,384 |
+| τ²-Bench | 0 | Not listed | 16,384 |
 
-GLM-4.7 competes head-to-head with the latest models from OpenAI, Anthropic, Google, and others:
+This matters because a benchmark result is not a model-only property. The task version, decoding settings, prompt, agent harness, and budget all shape what is being measured. The model card recommends Preserved Thinking for multi-turn τ²-Bench and Terminal Bench 2 tasks. That is part of the reported setup, not proof that every coding-agent workflow should use the same configuration.
 
-| Benchmark | GLM-4.7 | GLM-4.6 | GPT-5-High | GPT-5.1-High | Claude Sonnet 4.5 | Gemini 3.0 Pro |
-|:----------|:-------:|:-------:|:----------:|:------------:|:-----------------:|:--------------:|
-| **MMLU-Pro** | 84.3 | 83.2 | 87.5 | 87.0 | 88.2 | **90.1** |
-| **GPQA-Diamond** | 85.7 | 81.0 | 85.7 | 88.1 | 83.4 | **91.9** |
-| **HLE (w/ Tools)** | 42.8 | 30.4 | 35.2 | 42.7 | 32.0 | **45.8** |
-| **AIME 2025** | **95.7** | 93.9 | 94.6 | 94.0 | 87.0 | 95.0 |
-| **HMMT Feb. 2025** | 97.1 | 89.2 | 88.3 | 96.3 | 79.2 | **97.5** |
-| **LiveCodeBench-v6** | 84.9 | 82.8 | 87.0 | 87.0 | 64.0 | **90.7** |
-| **SWE-bench Verified** | 73.8 | 68.0 | 74.9 | 76.3 | **77.2** | 76.2 |
-| **SWE-bench Multilingual** | 66.7 | 53.8 | 55.3 | - | 68.0 | - |
-| **Terminal Bench 2.0** | 41.0 | 24.5 | 35.2 | 47.6 | 42.8 | **54.2** |
-| **τ²-Bench** | 87.4 | 75.2 | 82.4 | 82.7 | 87.2 | **90.7** |
+Also keep context and output limits separate. The current Z.ai guide lists a 200K context window and 128K maximum output. The model card’s `131072` is listed as a `max_new_tokens` evaluation setting. It is an output cap, not a claim that the context window is 131,072 tokens.
 
-> **Key Insight:** GLM-4.7 excels in mathematical reasoning (AIME, HMMT) and agentic tasks (SWE-bench Multilingual), while Gemini 3.0 Pro leads in general knowledge benchmarks.
-{: .prompt-info}
+## τ²-Bench includes disclosed task-specific changes
 
-### Interleaved Thinking Architecture
+Z.ai says it added an extra prompt to the Retail and Telecom interactions to avoid failure modes caused by users ending the interaction incorrectly. For the Airline domain, the card says it applied domain fixes proposed in the [Claude Opus 4.5 system card](https://assets.anthropic.com/m/64823ba7485345a7/Claude-Opus-4-5-System-Card.pdf).
 
-What sets GLM-4.7 apart is its **thinking architecture**:
+That disclosure is useful, but it is not a complete reproduction recipe: the GLM-4.7 card does not reproduce the extra prompt or enumerate the Airline fixes. The careful conclusion is not that the score is invalid. It is that the reported 87.4 belongs to the documented evaluation variant, and the public card leaves details a reproducer would need to inspect. A comparison is easier to trust when the exact prompt and task adjustments travel with the number.
 
-![GLM-4.7 Thinking Mode](/assets/img/llm/glm47_thinking.png){: .light .w-100 .shadow .rounded-10 }
-_Interleaved, Preserved, and Turn-level Thinking modes_
+## What changed since the January note
 
-```mermaid
-flowchart TB
-    subgraph Input["User Request"]
-        A[Complex Coding Task]
-    end
+The original note was dated January 18, 2026. This October 14 source check adds current Z.ai documentation listing a 200K context window and 128K maximum output; it does not establish whether those values changed since January. The archived post’s `358B` label matches current Hugging Face metadata, while the pinned official GitHub README uses `355B-A32B`. The inspected sources do not reconcile these labels, so this rebuild attributes each to its source instead of using one unqualified parameter count.
 
-    subgraph Thinking["🧠 Thinking Modes"]
-        B["Interleaved Thinking<br/>Think before every action"]
-        C["Preserved Thinking<br/>Retain context across turns"]
-        D["Turn-level Thinking<br/>Enable/disable per turn"]
-    end
+The archived opening reads, “Building AI-powered games at NC SOFT and COM2US, I've always wondered: Can an AI model truly understand…” This is first-person career framing, not a claim that GLM-4.7 was used at either company. The post separately calls GLM-4.7 “state of the art” and says it “works excellently” with several coding-agent frameworks. This run did not independently test those integrations, so the rewrite does not present that claim as measured compatibility. The old “TP=4 minimum” statement is also removed: the [official repository README](https://github.com/zai-org/GLM-4.5/blob/290cb1d8b6e14e20919efc933413528a20dd53f8/README.md) shows example vLLM and SGLang commands with different tensor-parallel settings. An example command is not a tested minimum hardware requirement.
 
-    subgraph Output["Model Response"]
-        E[Action/Tool Call]
-        F[Code Generation]
-        G[Explanation]
-    end
+Finally, this rewrite does not call every part of GLM-4.7 “fully open for commercial use.” The current [Hugging Face page](https://huggingface.co/zai-org/GLM-4.7) exposes MIT license metadata; the pinned [GitHub repository root LICENSE](https://github.com/zai-org/GLM-4.5/blob/290cb1d8b6e14e20919efc933413528a20dd53f8/LICENSE) says Apache-2.0; and the pinned model-card revision’s separate [LICENSE path](https://huggingface.co/zai-org/GLM-4.7/blob/475d85cda16beac79cde7f4cf4cae8d1260566f5/LICENSE) returned 404 in this inspection. These are different surfaces; they do not establish one blanket license statement for model weights, code, hosted services, and image assets.
 
-    A --> B
-    B --> C
-    C --> D
-    D --> E
-    D --> F
-    D --> G
+## Use the score as a test plan
 
-    style B fill:#ff6b6b,stroke:#c92a2a,color:#fff
-    style C fill:#4ecdc4,stroke:#0a9396,color:#fff
-    style D fill:#ffe66d,stroke:#f4a261,color:#000
-```
+If you are choosing a model for a real coding workflow, use these rows to define questions for your own evaluation rather than as a procurement answer:
 
-**Three Thinking Modes:**
+1. Pin the benchmark and harness versions you actually plan to run.
+2. Record the decoding settings, thinking mode, prompt changes, and output budget beside each result.
+3. Test representative tasks from your repository, including tool failures and cases where the model should stop and ask for help.
+4. Report more than pass rate: include run-to-run variation, intervention rate, latency, and cost where you can measure them.
 
-1. **Interleaved Thinking**: The model thinks before every response and tool call, improving instruction following
-2. **Preserved Thinking**: Automatically retains thinking blocks across multi-turn conversations - critical for long-horizon tasks
-3. **Turn-level Thinking**: Per-turn control - disable for lightweight requests, enable for complex tasks
+That plan is a recommendation, not a result from this archive run. The scorecard gives a useful map of reported strengths and limits. Your own task distribution and a reproducible protocol decide whether those results transfer.
 
----
+## Key Takeaways
 
-## 💡 Innovation: Using GLM-4.7 in Production
+- GLM-4.7’s reported score changes meaning with the benchmark and its task-specific evaluation recipe.
+- The pinned Z.ai table shows mixed results: GLM-4.7 is highest among listed values on AIME 2025, but not on the selected coding and τ²-Bench rows.
+- Z.ai discloses τ²-Bench prompt and domain adjustments; treat the figures as vendor-reported results, not independent reproductions.
 
-### Getting Started with vLLM
+## New Questions
 
-```bash
-# Install vLLM nightly
-pip install -U vllm --pre --index-url https://pypi.org/simple \
-    --extra-index-url https://wheels.vllm.ai/nightly
-
-# Serve the model
-vllm serve zai-org/GLM-4.7-FP8 \
-    --tensor-parallel-size 4 \
-    --speculative-config.method mtp \
-    --speculative-config.num_speculative_tokens 1 \
-    --tool-call-parser glm47 \
-    --reasoning-parser glm45 \
-    --enable-auto-tool-choice \
-    --served-model-name glm-4.7-fp8
-```
-
-### Using with Transformers
-
-```python
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
-MODEL_PATH = "zai-org/GLM-4.7"
-
-# Initialize tokenizer and model
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-model = AutoModelForCausalLM.from_pretrained(
-    MODEL_PATH,
-    torch_dtype=torch.bfloat16,
-    device_map="auto",
-)
-
-# Create messages with thinking enabled
-messages = [{"role": "user", "content": "Implement a binary search tree in Python"}]
-
-# Tokenize with chat template
-inputs = tokenizer.apply_chat_template(
-    messages,
-    tokenize=True,
-    add_generation_prompt=True,
-    return_dict=True,
-    return_tensors="pt",
-).to(model.device)
-
-# Generate response
-generated_ids = model.generate(
-    **inputs,
-    max_new_tokens=8192,
-    do_sample=True,
-    temperature=1.0,
-    top_p=0.95,
-)
-
-output = tokenizer.decode(generated_ids[0][inputs.input_ids.shape[1]:])
-print(output)
-```
-
-### Preserved Thinking for Agent Tasks
-
-For agentic tasks, enable **Preserved Thinking** mode:
-
-```python
-# SGLang configuration for preserved thinking
-chat_template_kwargs = {
-    "enable_thinking": True,
-    "clear_thinking": False  # Keep thinking across turns
-}
-```
-
-### Integration with Coding Agents
-
-GLM-4.7 works excellently with popular coding agent frameworks:
-
-```mermaid
-graph LR
-    A[GLM-4.7] --> B[Claude Code]
-    A --> C[Kilo Code]
-    A --> D[Cline]
-    A --> E[Roo Code]
-
-    B --> F[Agentic<br/>Development]
-    C --> F
-    D --> F
-    E --> F
-
-    style A fill:#0077b6,stroke:#03045e,color:#fff
-    style F fill:#4ecdc4,stroke:#0a9396,color:#fff
-```
-
-### Evaluation Parameters
-
-**Default Settings (Most Tasks):**
-- `temperature`: 1.0
-- `top-p`: 0.95
-- `max_new_tokens`: 131072
-
-**Coding Tasks (SWE-bench, Terminal Bench):**
-- `temperature`: 0.7
-- `top-p`: 1.0
-- `max_new_tokens`: 16384
-
-**τ²-Bench (Agent Tasks):**
-- `temperature`: 0
-- `max_new_tokens`: 16384
-
----
-
-## 🎯 Key Takeaways
-
-| Insight | Implication | Production Consideration |
-|:--------|:------------|:-------------------------|
-| **MoE Architecture** | 358B params with efficient routing | Requires multi-GPU setup (TP=4 minimum) |
-| **Preserved Thinking** | Better context retention for agents | Enable for long-horizon tasks |
-| **Multilingual Coding** | 66.7% on SWE-bench Multilingual | Great for polyglot codebases |
-| **MIT License** | Fully open for commercial use | No licensing concerns |
-
-### What I'd Try First
-
-1. **Deploy with vLLM**: Use the FP8 quantized version for faster inference
-2. **Enable Preserved Thinking**: Essential for multi-turn agentic tasks
-3. **Integrate with existing agent frameworks**: Claude Code, Cline work well
-4. **Benchmark on your codebase**: Real-world performance may vary
-
-### When to Use GLM-4.7
-
-**Good fit:**
-- Complex debugging across multiple files
-- Code refactoring with context awareness
-- Multilingual codebase maintenance
-- Long-horizon agentic development tasks
-
-**Consider alternatives:**
-- Simple code completion (smaller models are faster)
-- Real-time IDE suggestions (latency-sensitive)
-- Tasks without tool use (simpler models suffice)
-
----
-
-## 🤔 New Questions This Raises
-
-1. **Fine-tuning potential**: Can we adapt GLM-4.7 for game-specific coding patterns?
-2. **Agent orchestration**: How does it compare to multi-agent setups like Claude Code + Sonnet?
-3. **Context window utilization**: With 131K tokens, how efficiently does it use long contexts?
-4. **Production costs**: What's the inference cost vs. API-based alternatives?
-
-**Next experiment:** Benchmark GLM-4.7 against Claude Opus 4.5 on game development tasks - shader code generation, gameplay balancing scripts, and procedural content generation.
-
----
+1. What were the exact extra Retail/Telecom prompt and Airline-domain changes used for the published τ²-Bench score?
+2. What protocol produced the separate 33.4 Terminal Bench 2.0 result shown in the current Hugging Face evaluation panel?
+3. How do these results change when a team freezes its own task set, agent harness, decode recipe, and reporting budget?
 
 ## References
 
-**Official Resources:**
-- [GLM-4.7 on Hugging Face](https://huggingface.co/zai-org/GLM-4.7)
-- [Z.ai Technical Blog](https://z.ai/blog/glm-4.7)
-- [GLM-4.7 API Platform](https://docs.z.ai/guides/llm/glm-4.7)
-- [GLM-4.7 Chat Interface](https://chat.z.ai)
-- [Z.ai Discord Community](https://discord.gg/QR7SARHRxK)
+### First-party model sources
 
-**Research Papers:**
-- [GLM-4.5: Agentic, Reasoning, and Coding (ARC) Foundation Models (arXiv:2508.06471)](https://arxiv.org/abs/2508.06471)
-- [Thinking Mode Documentation](https://docs.z.ai/guides/capabilities/thinking-mode)
-- [Claude Opus 4.5 System Card (τ²-Bench fixes)](https://assets.anthropic.com/m/64823ba7485345a7/Claude-Opus-4-5-System-Card.pdf)
+- [GLM-4.7 model card, pinned to the January 8, 2026 revision](https://huggingface.co/zai-org/GLM-4.7/blob/475d85cda16beac79cde7f4cf4cae8d1260566f5/README.md) — benchmark table and task-specific settings. Re-read on 2026-10-14.
+- [GLM-4.7 page on Hugging Face](https://huggingface.co/zai-org/GLM-4.7) — current evaluation panel, parameter metadata, and license metadata. Observed 2026-10-14.
+- [Official GLM-4.5/4.7 repository README at commit `290cb1d8b6e14e20919efc933413528a20dd53f8`](https://github.com/zai-org/GLM-4.5/blob/290cb1d8b6e14e20919efc933413528a20dd53f8/README.md) — model label and serving examples. Re-read on 2026-10-14.
+- [GitHub repository root LICENSE at the same pinned commit](https://github.com/zai-org/GLM-4.5/blob/290cb1d8b6e14e20919efc933413528a20dd53f8/LICENSE) and [the pinned Hugging Face model-card LICENSE path](https://huggingface.co/zai-org/GLM-4.7/blob/475d85cda16beac79cde7f4cf4cae8d1260566f5/LICENSE) — re-read on 2026-10-14.
 
-**Code & Implementation:**
-- [Official GitHub Repository](https://github.com/zai-org/GLM-4.5)
-- [vLLM Nightly Docker](https://hub.docker.com/r/vllm/vllm-openai)
-- [SGLang Docker Image](https://hub.docker.com/r/lmsysorg/sglang)
+### Current official documentation
 
-**Model Variants:**
-- [GLM-4.7-FP8 (Quantized)](https://huggingface.co/zai-org/GLM-4.7-FP8)
-- [GLM-4.7 Collection](https://huggingface.co/collections/zai-org/glm-47)
+- [Z.ai GLM-4.7 API guide](https://docs.z.ai/guides/llm/glm-4.7) — context and output limits. Re-read on 2026-10-14.
+- [Z.ai GLM-4.7 release page](https://z.ai/blog/glm-4.7) — first-party release context. Re-read on 2026-10-14.
 
-**Inference Providers:**
-- [Novita AI](https://novita.ai/)
-- [Cerebras](https://cerebras.ai/)
-- [Z.ai API](https://z.ai/)
+### Benchmark adjustment reference
 
-**Related Benchmarks:**
-- [SWE-bench](https://www.swebench.com/)
-- [GPQA Dataset](https://huggingface.co/datasets/Idavidrein/gpqa)
-- [MMLU-Pro Dataset](https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro)
-- [HLE Dataset](https://huggingface.co/datasets/cais/hle)
-
----
-
-*GLM-4.7 represents a significant step forward in open-source coding agents. With its MIT license and strong benchmark performance, it's a compelling option for production AI-assisted development workflows.*
+- [Claude Opus 4.5 system card](https://assets.anthropic.com/m/64823ba7485345a7/Claude-Opus-4-5-System-Card.pdf) — cited by Z.ai for the τ²-Bench Airline-domain fixes. Re-read on 2026-10-14.

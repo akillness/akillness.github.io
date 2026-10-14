@@ -137,9 +137,9 @@
       "links_at_intake": 22,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-14",
+      "survey_note": "Surveyed the pinned GLM-4.7 model card and current official guide; separated its 41.0 Terminal Bench table row from the live Hugging Face 33.4 record with partial provenance, aligned task decode settings and τ²-Bench disclosures, and removed unsupported first-hand, integration, hardware-minimum, and blanket-license claims."
     },
     {
       "path": "_posts/2026/02/2026-02-18-harness-engineering-agents.md",

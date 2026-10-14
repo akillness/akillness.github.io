@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="875" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">GLM-4.7: read the protocol beside the scorecard</title>
+  <desc id="desc">An original diagram pairing GLM-4.7's task-specific evaluation settings with four values reported in the Z.ai model card. It labels all results as vendor-reported and not independently rerun.</desc>
+  <defs>
+    <style>
+      .ink { fill: #18232d; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .muted { fill: #52616e; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .eyebrow { font-size: 18px; font-weight: 700; letter-spacing: 2.2px; }
+      .title { font-size: 48px; font-weight: 760; letter-spacing: -1.2px; }
+      .panel-title { font-size: 19px; font-weight: 750; letter-spacing: 1.7px; }
+      .task { font-size: 23px; font-weight: 720; }
+      .body { font-size: 19px; font-weight: 500; }
+      .small { font-size: 15px; font-weight: 500; }
+      .score { font-size: 24px; font-weight: 760; }
+      .axis { stroke: #d7dee3; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <text x="76" y="74" class="muted eyebrow">MODEL EVALUATION · FIELD NOTE</text>
+  <text x="76" y="137" class="ink title">Read the protocol beside the scorecard</text>
+  <text x="78" y="177" class="muted body">GLM-4.7 has different reported settings for different benchmark tasks.</text>
+
+  <rect x="76" y="218" width="658" height="664" rx="28" fill="#f1f5f7" stroke="#dde5e9" stroke-width="2"/>
+  <text x="112" y="265" class="muted panel-title">EVALUATION RECIPE · Z.AI MODEL CARD</text>
+
+  <rect x="108" y="293" width="594" height="144" rx="20" fill="#ffffff" stroke="#d9e2e7" stroke-width="2"/>
+  <circle cx="145" cy="335" r="9" fill="#2563eb"/>
+  <text x="168" y="342" class="ink task">Most tasks</text>
+  <text x="136" y="383" class="ink body">temperature 1.0 · top-p 0.95</text>
+  <text x="136" y="414" class="muted body">max new tokens 131,072</text>
+
+  <rect x="108" y="455" width="594" height="144" rx="20" fill="#ffffff" stroke="#d9e2e7" stroke-width="2"/>
+  <circle cx="145" cy="497" r="9" fill="#d97706"/>
+  <text x="168" y="504" class="ink task">SWE-bench + Terminal Bench 2.0</text>
+  <text x="136" y="545" class="ink body">temperature 0.7 · top-p 1.0</text>
+  <text x="136" y="576" class="muted body">max new tokens 16,384</text>
+
+  <rect x="108" y="617" width="594" height="208" rx="20" fill="#ffffff" stroke="#d9e2e7" stroke-width="2"/>
+  <circle cx="145" cy="659" r="9" fill="#7c3aed"/>
+  <text x="168" y="666" class="ink task">τ²-Bench</text>
+  <text x="136" y="707" class="ink body">temperature 0 · top-p not listed</text>
+  <text x="136" y="738" class="muted body">max new tokens 16,384</text>
+  <text x="136" y="773" class="muted small">Retail/Telecom prompt added · Airline domain fixes applied</text>
+  <text x="136" y="856" class="muted small" style="font-size:14px">Preserved Thinking: multi-turn τ²-Bench + Terminal Bench 2 tasks</text>
+
+  <rect x="766" y="218" width="758" height="642" rx="28" fill="#fbfaf7" stroke="#e6e1d8" stroke-width="2"/>
+  <text x="806" y="265" class="muted panel-title">SAMPLE RESULTS · VALUES REPORTED BY Z.AI</text>
+  <text x="806" y="304" class="muted small">Bars show the GLM-4.7 value as a score out of 100</text>
+
+  <text x="806" y="365" class="ink task">AIME 2025</text>
+  <text x="1455" y="365" text-anchor="end" class="ink score">95.7</text>
+  <text x="806" y="394" class="muted small">highest other shown: Gemini 3.0 Pro 95.0</text>
+  <rect x="806" y="410" width="620" height="10" rx="5" fill="#e6e9e8"/>
+  <rect x="806" y="410" width="593" height="10" rx="5" fill="#2563eb"/>
+
+  <text x="806" y="475" class="ink task">SWE-bench Verified</text>
+  <text x="1455" y="475" text-anchor="end" class="ink score">73.8</text>
+  <text x="806" y="504" class="muted small">highest other shown: Claude Sonnet 4.5 77.2</text>
+  <rect x="806" y="520" width="620" height="10" rx="5" fill="#e6e9e8"/>
+  <rect x="806" y="520" width="458" height="10" rx="5" fill="#2563eb"/>
+
+  <text x="806" y="585" class="ink task">Terminal Bench 2.0</text>
+  <text x="1455" y="585" text-anchor="end" class="ink score">41.0</text>
+  <text x="806" y="614" class="muted small">highest other shown: Gemini 3.0 Pro 54.2</text>
+  <rect x="806" y="630" width="620" height="10" rx="5" fill="#e6e9e8"/>
+  <rect x="806" y="630" width="254" height="10" rx="5" fill="#2563eb"/>
+
+  <text x="806" y="695" class="ink task">τ²-Bench</text>
+  <text x="1455" y="695" text-anchor="end" class="ink score">87.4</text>
+  <text x="806" y="724" class="muted small">highest other: Gemini 3.0 Pro 90.7 · task changes disclosed</text>
+  <rect x="806" y="740" width="620" height="10" rx="5" fill="#e6e9e8"/>
+  <rect x="806" y="740" width="542" height="10" rx="5" fill="#2563eb"/>
+
+  <rect x="76" y="892" width="1448" height="62" rx="18" fill="#18232d"/>
+  <text x="800" y="931" text-anchor="middle" fill="#ffffff" style="font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:19px;font-weight:650;letter-spacing:.15px">Vendor-reported figures · not independently rerun · task recipes are not interchangeable</text>
+</svg>
