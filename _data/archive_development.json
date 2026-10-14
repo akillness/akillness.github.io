@@ -151,9 +151,9 @@
       "links_at_intake": 9,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "in_progress",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-14",
+      "survey_note": "Rebuilt from first-party LangChain, OpenAI, and Anthropic reports, current Deep Agents documentation, and a pinned source snapshot. Results are tied to their tested model, harness, task set, and environment; unsupported ranking and universal-production claims were removed. The diagram is explanatory, not benchmark evidence. No benchmark rerun or production test was performed."
     },
     {
       "path": "_posts/2026/03/2026-03-18-nemoclaw-safe-agents-guide.md",

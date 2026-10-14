@@ -9,8 +9,6 @@ last_modified_at: "2026-10-14 23:54:39 +0900"
 permalink: /posts/harness-engineering-agents/
 archive_developed: 2026-10-14
 archive_development_note: "Rebuilt from first-party LangChain, OpenAI, and Anthropic reports, current Deep Agents documentation, and a pinned source snapshot. Results are tied to their tested model, harness, task set, and environment; unsupported ranking and universal-production claims were removed. The diagram is explanatory, not benchmark evidence."
-ads: false
-restored_archive: "2026-10-12"
 image:
   path: /assets/img/posts/2026-02-18-harness-engineering-agents/harness-measurement-map.png
   alt: "Diagram showing that model identity, harness configuration, and task environment jointly shape a reported agent score."
