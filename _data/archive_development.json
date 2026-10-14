@@ -2154,9 +2154,9 @@
       "flags": [
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "retired",
+      "developed_at": "2026-10-14",
+      "survey_note": "Shallow eight-category list expanded with one landmark finding per category pinned to nine arXiv records plus a use-case routing table; quarantined (retired, noindex, no sitemap, no ads) as a link-heavy curation page."
     },
     {
       "path": "_posts/2024/05/2024-05-14-deepdive-series-2.md",
@@ -2702,9 +2702,9 @@
       "flags": [
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "retired",
+      "developed_at": "2026-10-14",
+      "survey_note": "Vendor announcement copy expanded into a decision note: patched-decoder zero-shot claims pinned to arXiv:2310.10688v4, 1.0 univariate limits vs 3.0 multivariate, serving paths and non-commercial 3.0 license boundary; page quarantined (retired, noindex, no sitemap, no ads) pending domain verification."
     },
     {
       "path": "_posts/2024/05/2024-05-11-mac-vscode-cpp-setting.md",
@@ -3618,9 +3618,9 @@
         "korean-heavy",
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "retired",
+      "developed_at": "2026-10-14",
+      "survey_note": "Social-post copy expanded into a decision note: Transformers.js pipeline/ONNX/WASM-WebGPU/dtype evidence pinned to repo README, both original Gradio guide links recorded 404 on 2026-10-14, machine-translated duplicate block removed; page quarantined (retired, noindex, no sitemap, no ads)."
     },
     {
       "path": "_posts/2024/05/2024-05-14-deepdive-series-3.md",
