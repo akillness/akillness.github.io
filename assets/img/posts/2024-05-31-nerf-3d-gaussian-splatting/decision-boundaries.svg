@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="350" viewBox="0 0 960 350" role="img" aria-labelledby="title desc">
+  <title id="title">Three gates for deploying a captured scene</title>
+  <desc id="desc">Representation, runtime integration, and rights require separate evidence. Rendering a convincing image does not establish all three.</desc>
+  <style>text{font-family:system-ui,sans-serif;fill:#182d45}.heading{font-size:24px;font-weight:700}.body{font-size:19px}.small{font-size:17px}.box{fill:none;stroke:#516d88;stroke-width:2}</style>
+  <text x="34" y="45" class="heading">A captured scene has three separate deployment gates</text>
+  <rect x="34" y="80" width="280" height="198" rx="14" class="box"/>
+  <rect x="340" y="80" width="280" height="198" rx="14" class="box"/>
+  <rect x="646" y="80" width="280" height="198" rx="14" class="box"/>
+  <text x="54" y="118" class="heading">Representation</text>
+  <text x="54" y="159" class="body">Radiance and visibility</text>
+  <text x="54" y="193" class="body">Capture and cameras</text>
+  <text x="54" y="227" class="body">Model and export</text>
+  <text x="360" y="118" class="heading">Runtime</text>
+  <text x="360" y="159" class="body">Depth and transparency</text>
+  <text x="360" y="193" class="body">Lighting and overlap</text>
+  <text x="360" y="227" class="body">Target-scene tests</text>
+  <text x="666" y="118" class="heading">Rights</text>
+  <text x="666" y="159" class="body">Trainer license</text>
+  <text x="666" y="193" class="body">Renderer license</text>
+  <text x="666" y="227" class="body">Asset provenance</text>
+  <text x="34" y="320" class="small">Original source-derived decision framework. No performance ranking or license equivalence implied.</text>
+</svg>
