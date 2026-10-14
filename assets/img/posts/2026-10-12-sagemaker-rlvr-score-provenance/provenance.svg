@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="470" viewBox="0 0 1100 470" role="img" aria-labelledby="title desc">
+<title id="title">A tuned-only precomputed result and a proposed custom-reward evidence chain</title>
+<desc id="desc">The inspected Lab3b default points to tuned_benchmark_results.json under a lab3a prefix and displays no base result. A dashed row proposes custom-scorer-to-checkpoint paired evaluation. That row was not executed.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#52647c"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;fill:#24344e}.label{font-size:19px;font-weight:700}.small{font-size:16px}.box{fill:#f2f5fa;stroke:#bac7da;stroke-width:1.5}.route{fill:none;stroke:#52647c;stroke-width:2;marker-end:url(#arrow)}.proposal{stroke-dasharray:7 6}</style>
+<text x="38" y="38" class="label">Observed default, pinned source inspection</text>
+<rect x="38" y="65" width="300" height="108" rx="10" class="box"/>
+<text x="58" y="102" class="label">Lab3b evaluation</text><text x="58" y="137" class="small">RUN_EVALUATIONS = False</text>
+<path d="M338 118H389" class="route"/>
+<rect x="399" y="65" width="300" height="108" rx="10" class="box"/>
+<text x="419" y="102" class="label">Precomputed tuned result</text><text x="419" y="137" class="small">S3 prefix includes lab3a</text>
+<path d="M699 118H750" class="route"/>
+<rect x="760" y="65" width="300" height="108" rx="10" class="box"/>
+<text x="780" y="102" class="label">Tuned-only display</text><text x="780" y="137" class="small">base = None</text>
+<text x="38" y="235" class="label">Recommended evidence chain, not executed</text>
+<rect x="38" y="262" width="300" height="108" rx="10" class="box"/>
+<text x="58" y="300" class="label">Versioned custom scorer</text><text x="58" y="335" class="small">Tests + scorer hash</text>
+<path d="M338 316H389" class="route proposal"/>
+<rect x="399" y="262" width="300" height="108" rx="10" class="box"/>
+<text x="419" y="300" class="label">Identified training run</text><text x="419" y="335" class="small">Job + checkpoint revision</text>
+<path d="M699 316H750" class="route proposal"/>
+<rect x="760" y="262" width="300" height="108" rx="10" class="box"/>
+<text x="780" y="300" class="label">Paired evaluation</text><text x="780" y="335" class="small">Dataset + decode settings</text>
+<text x="38" y="430" class="small">Original explanatory diagram. Solid arrows: inspected default. Dashed arrows: proposed verification.</text>
+</svg>
