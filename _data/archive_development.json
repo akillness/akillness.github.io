@@ -179,9 +179,9 @@
       "links_at_intake": 7,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-15",
+      "survey_note": "Re-read current official checkpoint, permissions, skills, hooks, error-handling and SDK documentation plus a commit-pinned Claude Code changelog. Added a source-bound recovery matrix and original decision map distinguishing eligible session file edits from Bash, background work, authorization and remote effects. No runtime recovery experiment or reliability measurement was run. Preserved the original publication date and URL."
     },
     {
       "path": "_posts/2026/04/2026-04-02-engineering-discipline-ai-coding-agents.md",

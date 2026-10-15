@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Claude Code rewind eligibility map</title>
+  <desc id="desc">A decision map comparing change provenance with the conditions for session-level file recovery and the controls that remain separate.</desc>
+  <style>
+    .ink{fill:#1f2933;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .muted{fill:#52606d;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .label{font-size:16px;font-weight:700;letter-spacing:.04em}
+    .body{font-size:18px}
+    .small{font-size:14px}
+    .line{stroke:#8a9ba8;stroke-width:2}
+    .yes{fill:#e7f5ed;stroke:#6ea78a;stroke-width:2}
+    .maybe{fill:#fff5d6;stroke:#d6a84f;stroke-width:2}
+    .no{fill:#fbe9e7;stroke:#cc766e;stroke-width:2}
+    .separate{fill:#edf1f5;stroke:#8091a0;stroke-width:2}
+  </style>
+  <text x="48" y="54" class="ink" font-size="30" font-weight="750">Rewind eligibility follows provenance</text>
+  <text x="48" y="82" class="muted body">Session recovery is conditional; authorization and external rollback stay separate.</text>
+
+  <text x="60" y="132" class="muted label">CHANGE SURFACE</text>
+  <text x="500" y="132" class="muted label">DOCUMENTED RECOVERY READING</text>
+  <text x="930" y="132" class="muted label">NEXT CONTROL</text>
+  <line x1="48" y1="148" x2="1152" y2="148" class="line"/>
+
+  <rect x="48" y="170" width="400" height="70" rx="12" class="yes"/>
+  <text x="72" y="201" class="ink body" font-weight="700">Native edit in current session</text>
+  <text x="72" y="226" class="muted small">Eligible surface, still subject to path and snapshot checks</text>
+  <rect x="476" y="170" width="390" height="70" rx="12" class="maybe"/>
+  <text x="500" y="201" class="ink body" font-weight="700">Conditionally recoverable</text>
+  <text x="500" y="226" class="muted small">Verify the actual restore result</text>
+  <rect x="894" y="170" width="258" height="70" rx="12" class="separate"/>
+  <text x="918" y="201" class="ink body" font-weight="700">Git history</text>
+  <text x="918" y="226" class="muted small">Durable collaboration</text>
+
+  <rect x="48" y="260" width="400" height="70" rx="12" class="yes"/>
+  <text x="72" y="291" class="ink body" font-weight="700">Foreground context: fork skill</text>
+  <text x="72" y="316" class="muted small">The documented forked-skill exception</text>
+  <rect x="476" y="260" width="390" height="70" rx="12" class="maybe"/>
+  <text x="500" y="291" class="ink body" font-weight="700">Can join invoking turn</text>
+  <text x="500" y="316" class="muted small">Confirm execution mode and path safety</text>
+  <rect x="894" y="260" width="258" height="70" rx="12" class="separate"/>
+  <text x="918" y="291" class="ink body" font-weight="700">Review boundary</text>
+  <text x="918" y="316" class="muted small">Do not infer from “agent”</text>
+
+  <rect x="48" y="350" width="400" height="70" rx="12" class="no"/>
+  <text x="72" y="381" class="ink body" font-weight="700">Bash file mutation</text>
+  <text x="72" y="406" class="muted small">Diff visibility is not checkpoint recovery</text>
+  <rect x="476" y="350" width="390" height="70" rx="12" class="no"/>
+  <text x="500" y="381" class="ink body" font-weight="700">Outside tracking boundary</text>
+  <text x="500" y="406" class="muted small">No native file snapshot promise</text>
+  <rect x="894" y="350" width="258" height="70" rx="12" class="separate"/>
+  <text x="918" y="381" class="ink body" font-weight="700">Sandbox + review</text>
+  <text x="918" y="406" class="muted small">Prevent or compensate separately</text>
+
+  <rect x="48" y="440" width="400" height="70" rx="12" class="no"/>
+  <text x="72" y="471" class="ink body" font-weight="700">Database, API, deployment</text>
+  <text x="72" y="496" class="muted small">Remote-system effects</text>
+  <rect x="476" y="440" width="390" height="70" rx="12" class="no"/>
+  <text x="500" y="471" class="ink body" font-weight="700">Cannot be checkpointed</text>
+  <text x="500" y="496" class="muted small">No claim of atomic rollback</text>
+  <rect x="894" y="440" width="258" height="70" rx="12" class="separate"/>
+  <text x="918" y="471" class="ink body" font-weight="700">Compensation</text>
+  <text x="918" y="496" class="muted small">Application/provider rollback</text>
+
+  <rect x="48" y="530" width="400" height="70" rx="12" class="maybe"/>
+  <text x="72" y="561" class="ink body" font-weight="700">Concurrent same-file edit</text>
+  <text x="72" y="586" class="muted small">The docs include a same-file exception</text>
+  <rect x="476" y="530" width="390" height="70" rx="12" class="maybe"/>
+  <text x="500" y="561" class="ink body" font-weight="700">Not transaction isolation</text>
+  <text x="500" y="586" class="muted small">Interleaving was not exercised</text>
+  <rect x="894" y="530" width="258" height="70" rx="12" class="separate"/>
+  <text x="918" y="561" class="ink body" font-weight="700">Branch + review</text>
+  <text x="918" y="586" class="muted small">Resolve the resulting file</text>
+
+  <line x1="48" y1="630" x2="1152" y2="630" class="line"/>
+  <text x="48" y="663" class="muted label">ALWAYS CHECK</text>
+  <text x="190" y="663" class="ink body">turn boundary</text>
+  <text x="370" y="663" class="ink body">·</text>
+  <text x="400" y="663" class="ink body">path safety</text>
+  <text x="566" y="663" class="ink body">·</text>
+  <text x="596" y="663" class="ink body">surviving snapshot</text>
+  <text x="858" y="663" class="ink body">·</text>
+  <text x="888" y="663" class="ink body">authorization</text>
+  <text x="48" y="712" class="muted small">Original illustration by jeopi (AI-assisted SVG); not source evidence.</text>
+</svg>

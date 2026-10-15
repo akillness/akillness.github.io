@@ -1,399 +1,187 @@
 ---
 published: true
-title: "How Claude Code Actually Works: Agentic Loop, Tooling Model, and Operational Guardrails"
-description: "A practical breakdown of Claude Code’s agentic loop from official docs, including tools, permissions, checkpoints, session forking, and leak-risk lessons for real engineering teams."
-categories: [AI, Developer-Tools, Architecture]
-tags: [claude-code, agentic-loop, coding-agents, terminal, AI-workflows]
+title: "Claude Code rewind depends on who changed the file"
+description: "A source-based Claude Code /rewind recovery matrix covering tool provenance, execution context, turn boundaries, path safety, and surviving snapshots."
+categories: [AI, Agents]
+tags: [claude-code, agentic-loop, checkpoints, permissions, session-management, harness-engineering]
 date: 2026-03-31 10:00:00 +0900
+last_modified_at: 2026-10-15 16:26:07 +0900
+archive_developed: "2026-10-15"
+archive_development_note: "Source Audit revised from current official checkpoint, error, permissions, hooks, sandbox, sessions and SDK sources plus changelog 94506ff0d3bd9185f1752da36e968775021fb48f; no Claude Code rewind or reliability test was run."
+permalink: /posts/how-claude-code-works-agentic-loop/
 mermaid: false
 math: false
+image_policy: source-first-fallback
 image:
-  path: "https://repository-images.githubusercontent.com/1197057157/a4d7e718-9c4e-48a1-8465-cb9ecb9dbd9c"
-  alt: "Claude Code repository"
-ads: false
-restored_archive: "2026-10-12"
+  path: /assets/img/posts/2026-03-31-how-claude-code-works-agentic-loop/rewind-eligibility-map.png
+  width: 1600
+  height: 1014
+  alt: "Decision map showing which Claude Code changes are conditionally recoverable with rewind and which remain outside checkpoint restoration"
 ---
 
-## 🤔 Curiosity: Why does Claude Code feel different from chat-style coding?
+Claude Code's agentic loop is usually described as three moves: gather context, take action, and verify results. That description is useful, but it leaves out the question that matters when an agent is allowed to touch a real repository: what, exactly, can be undone when the action is wrong?
 
-Most AI coding tools start from suggestion-based chat.
-Claude Code is built around a different center of gravity: an **agentic execution loop in the terminal**.
+This **Source Audit** answers that question from the [current agent-loop documentation](https://code.claude.com/docs/en/how-claude-code-works), the [checkpointing reference](https://code.claude.com/docs/en/checkpointing), and the related official references read on 2026-10-15. It is a documentation-based operational synthesis, not a reproduced reliability result. No Claude Code process, interactive `/rewind` operation, SDK rewind call, retention sweep, or concurrent-writer scenario was run for this article.
 
-That changes the user experience from “ask-answer” into “plan-act-verify” collaboration.
-The key question is no longer “Can it write code?” but “Can it complete real engineering tasks with context and checks?”
+## Which Claude Code changes can `/rewind` actually restore?
 
----
+The answer is narrower than a transaction model. The CLI's `/rewind` can restore eligible session file edits and, optionally, conversation state. It cannot turn every visible change into an atomic rollback. Recoverability depends on the editing tool, the executor that made the edit, the turn boundary, path safety, and whether the snapshot files still exist. Authorization, shell containment, durable history, and compensation for an external side effect are separate responsibilities.
 
-## 📚 Retrieve: What the official docs reveal
+<figure class="explanatory-image">
+<img src="/assets/img/posts/2026-03-31-how-claude-code-works-agentic-loop/rewind-eligibility-map.png" alt="Decision map showing which Claude Code changes are conditionally recoverable with rewind and which remain outside checkpoint restoration">
+<figcaption>Original illustration by jeopi (AI-assisted SVG); not source evidence.</figcaption>
+</figure>
 
-From Anthropic’s “How Claude Code works” page, the system behavior is best understood as an iterative loop:
+[Open the original SVG diagram](/assets/img/posts/2026-03-31-how-claude-code-works-agentic-loop/rewind-eligibility-map.svg).
 
-1. Interpret intent from natural language
-2. Inspect codebase and runtime context
-3. Select and run tools/actions
-4. Observe outputs/errors
-5. Iterate until completion criteria are met
+## A checkpoint starts at the turn boundary
 
-Source:
-- Official docs: <https://code.claude.com/docs/en/how-claude-code-works>
+The [checkpointing documentation](https://code.claude.com/docs/en/checkpointing) says that every prompt that starts a turn creates a checkpoint. That is not the same as taking a snapshot before every message that appears while Claude is already working.
 
-### What the docs make unusually explicit
+This distinction matters for a long-running task. A message sent mid-turn can change the conversation, but it does not create an independent code restore point. The documentation says that edits made after that message still count toward the prompt that started the turn. In the rewind menu, that produces separate choices: restore both code and conversation, restore only the conversation while keeping current code, or restore code while keeping the conversation.
 
-One reason Claude Code feels different from browser chat is that Anthropic is unusually clear about the execution surface.
+Those choices are not cosmetic. Restoring the conversation is not evidence that a file, database, deployment, or API call went back. Restoring code is not a promise that every event in the conversation can be replayed safely. The practical rule is to label the turn-start checkpoint as the restore boundary, then treat mid-turn messages as context changes inside that boundary. The [agent-loop guide](https://code.claude.com/docs/en/how-claude-code-works) describes the gather, act, verify phases; the [checkpointing reference](https://code.claude.com/docs/en/checkpointing) defines the narrower restore surface.
 
-According to the docs, Claude Code can work with:
+## The editing tool is only the first question
 
-- your project files,
-- your terminal commands,
-- your git state,
-- your `CLAUDE.md` project instructions,
-- auto-saved memory from `MEMORY.md`,
-- and configured extensions like MCP servers, skills, subagents, and browser tooling.
+A file changed by Claude's native editing tool is not automatically equivalent to a file changed by a shell command. The [checkpointing reference](https://code.claude.com/docs/en/checkpointing) states directly that files modified by Bash commands are not tracked by checkpointing. A shell command can still leave a diff that Claude can inspect, but diff visibility and checkpoint recovery are different contracts.
 
-That list matters because it changes the trust model.
+The [hooks reference](https://code.claude.com/docs/en/hooks) describes a separate observability path: a PostToolUse hook can receive changed files in `tool_response.bashEditDiff` after a Bash call. The same passage says to use that list to find what to review, not to enforce a policy. This is an inferred distinction between observability and recovery, not a reproduced diff capture. The documented reporting support requires Claude Code v2.1.269 or later, is best effort, may include another process's changes, and excludes some files. It does not make Bash mutations checkpoint-reversible.
 
-Claude Code is not just a text generator with a coding style. It is a bounded operator with access to the same local engineering surfaces that a human developer uses to inspect, edit, verify, and recover.
+The same distinction appears in subagent execution. The [skills documentation](https://code.claude.com/docs/en/skills) makes execution mode conditional: a forked skill normally runs in the background, while `background: false` waits in the invoking turn; the page also lists other foreground exceptions. The [checkpointing reference](https://code.claude.com/docs/en/checkpointing) names one specific exception: a skill using `context: fork` that runs in the foreground edits the working tree during the invoking turn, so its edits can be restored in the usual way. Edits from any other subagent are not restored by rewind. The variable is not merely “was an agent involved?” It is which execution path produced the edit and which session owns the checkpoint.
 
-### Architecture-level implications
+That gives a useful contrast:
 
-#### 1) Terminal-native is a capability choice
-Terminal execution gives direct access to project state:
+| Change provenance | What the docs establish | What to add around it |
+| --- | --- | --- |
+| Native file edit in the current session | It is within the documented file-edit checkpoint surface, subject to path and snapshot limits. | Keep a durable version-control checkpoint for history. |
+| Foreground `context: fork` skill edit | The documented forked-skill exception can make the edit restorable in the invoking turn. | Confirm the actual execution mode instead of inferring it from the word “foreground.” |
+| Background or other subagent edit | Rewind does not restore it under the documented rule. | Give the subagent its own review and recovery boundary. |
+| Bash file mutation | Bash-modified files are outside checkpoint tracking. | Use shell containment, explicit review, and a separate rollback procedure. |
+| Database, API, or deployment action | Remote-system effects cannot be checkpointed. | Use an application-specific compensating action or provider rollback. |
 
-- repo structure,
-- build and test commands,
-- local environment,
-- git context.
+The table is a decision aid inferred from the cited documentation, not a vendor guarantee. It does not claim that a native edit is always recoverable or that a subagent edit is never visible. It says that the checkpoint contract follows provenance and execution context.
 
-This replaces brittle “paste snippets into chat” workflows with grounded actions.
+## A listed checkpoint can still lack a usable snapshot
 
-#### 2) Tool use is first-class
-Claude Code’s value is not just generation quality.
-It is action sequencing quality: inspect → edit → validate → refine.
+The [Claude Code directory reference](https://code.claude.com/docs/en/claude-directory) describes snapshots for the 100 most recent checkpoints and a cleanup sweep whose default is about 30 days after the session last saved a snapshot. That is approximately 30 days, not a guaranteed deletion deadline: the timing is configurable and the reference documents retention exceptions.
 
-#### 3) Loop quality determines production usefulness
-Real usefulness depends on:
+The [error reference](https://code.claude.com/docs/en/errors) adds a more uncomfortable case. After a session is resumed, `/rewind` can still list checkpoints even when the files needed to restore one have disappeared. In that state, the menu is evidence that a conversation checkpoint entry exists, not evidence that the corresponding code restore will succeed.
 
-- context selection discipline,
-- action correctness,
-- and validation depth before finalizing changes.
+Path safety can also turn a broad restore into a partial one. The error reference documents skipped paths when a path is or became a symlink, hard link, or other non-regular file, when its directory changed since the checkpoint, or when its backup cannot be safely read. A skipped path keeps its current contents. The link-safe skipping behavior is documented at Claude Code v2.1.216 and later; older behavior must not be described as equivalent. Code restoration is therefore not all-or-nothing, and an engineer should read the restore result rather than infer success from the existence of a rewind entry.
 
-### Built-in operating surfaces that matter in practice
+At commit [94506ff0d3bd9185f1752da36e968775021fb48f](https://github.com/anthropics/claude-code/blob/94506ff0d3bd9185f1752da36e968775021fb48f/CHANGELOG.md), the official changelog records this correction under v2.1.260: `/rewind` and `--rewind-files` no longer report success when checkpoint backup files are missing and nothing was actually restored. That is release-note evidence, not a defect reproduced in this run, and it does not establish universal correctness across versions.
 
-The official docs also expose several features that are easy to miss if you only think of Claude Code as “Claude in the terminal.”
+## Same-file concurrency is not transaction isolation
 
-#### 1) Permission modes are part of the architecture
+The [checkpointing documentation](https://code.claude.com/docs/en/checkpointing) says that edits from other concurrent sessions are normally not captured unless they happen to modify the same files as the current session. That same-file exception is easy to misread. It does not establish transaction isolation, and it does not promise that restoring one session will preserve another writer's interleaved changes.
 
-Claude Code supports different execution modes, including default confirmation, auto-accept edits, plan mode, and a more autonomous research-preview auto mode.
+The safe interpretation is deliberately modest: concurrent work is outside the normal capture path, with an explicit same-file caveat. If two agents or a human and an agent touch one file, `/rewind` should not be treated as a merge engine. Use small commits, isolated branches or worktrees where appropriate, and an explicit review of the resulting file. Those are engineering recommendations inferred from the documented limitation, not claims about an untested interleaving outcome.
 
-That is not a UX detail. It is a control boundary.
+## Permission and recovery solve different problems
 
-Teams should treat permission mode selection the same way they treat CI permissions or production credentials: as a policy decision tied to task risk.
+Permission rules answer whether Claude Code may attempt a tool call. They do not answer whether an already-completed action can be reversed. The [permissions reference](https://code.claude.com/docs/en/permissions) says that rules are enforced by Claude Code rather than by the model and evaluated in deny, ask, allow order. Its approval table is specifically scoped to Manual mode; other modes and explicit rules change prompt behavior.
 
-#### 2) Sessions and forks make experimentation safer
+The same permissions reference warns that a command-text Bash deny rule is not an OS boundary around every equivalent invocation of a program. Alternate invocations and the active permission mode still matter. That is a reason to treat command rules as authorization policy, not as durable containment.
 
-The docs expose session continuation and forking behavior through commands like:
+Hooks occupy another boundary. A `PreToolUse` hook runs before a tool call is processed and can deny that pending call; see the [hooks reference](https://code.claude.com/docs/en/hooks). If a handler fails, the default is not automatically fail-closed. For command or HTTP hooks, `onFailure: "block"` requires Claude Code v2.1.295 or later, while the documentation retains event/type exceptions, including background command hooks and the Stop, SubagentStop, TaskCompleted, and TeammateIdle cases. A hook can prevent an action that has not happened yet. It cannot rewind a remote write that already happened.
 
-```bash
-claude --continue
-claude --resume
-claude --continue --fork-session
-```
+The built-in Bash [sandbox](https://code.claude.com/docs/en/sandboxing) is different again. It covers shell commands only; file tools, MCP servers, and hooks run outside it. Sandboxing is preventive containment, not a restore mechanism.
 
-This is more important than it looks. Session forking means teams can preserve a useful context trail while branching execution paths instead of forcing one long conversation to carry every experiment.
+The resulting control map is:
 
-That is a practical way to reduce context pollution.
+- **Authorization:** permissions decide which tool calls may run under the active mode and rules.
+- **Pre-execution policy:** hooks can inspect or deny a pending call, with explicit failure behavior if fail-closed handling is required.
+- **Shell containment:** sandboxing limits the shell surface, not file tools, MCP servers, or hooks.
+- **Durable file history:** Git provides collaboration and permanent history beyond session retention.
+- **External compensation:** databases, APIs, and deployments need application- or provider-specific rollback actions.
+- **Session recovery:** `/rewind` restores only the subset of file and conversation state that meets its documented conditions.
 
-#### 3) Checkpoints are a real safety primitive
+That separation is this article's original decision framework. It is an inference from the combined docs, not an assertion that these mechanisms compose into one transaction.
 
-Anthropic explicitly documents checkpoints and undo flows, including the ability to back out changes from the session interface.
+## The SDK narrows the promise further
 
-That matters because agentic coding without a clean rollback mechanism is just fast damage.
+The official [Agent SDK file-checkpointing reference](https://code.claude.com/docs/en/agent-sdk/file-checkpointing) is explicit: file-only rewind restores files on disk to a previous state; it does not rewind the conversation itself. The pinned Python wrapper at [`query.py` commit c10b52c674e5c709c7263544b38e8a5dad10e01d](https://github.com/anthropics/claude-agent-sdk-python/blob/c10b52c674e5c709c7263544b38e8a5dad10e01d/src/claude_agent_sdk/_internal/query.py) forwards `Query.rewind_files` as a `rewind_files` control request, with the public client delegating to that query method. This is a source audit of the wrapper's forwarding and activation path only; it is not a source audit of the proprietary restore engine, and no SDK method was executed.
 
-#### 4) `CLAUDE.md` and memory are not decoration
+## A recovery-eligibility test for delegated work
 
-The docs make it clear that Claude Code loads project-specific instructions and memory at session start.
+Before delegating a change, ask these questions in order:
 
-That means teams can shape behavior structurally, not just prompt-by-prompt.
+1. **Which surface will write?** Native file edit, Bash, a skill, a subagent, an MCP server, or a remote API are different provenance classes.
+2. **Which executor owns the checkpoint?** A foreground `context: fork` skill has a documented exception; other subagent paths do not inherit that guarantee.
+3. **When is the restore point created?** A prompt that starts a turn creates the checkpoint. A mid-turn message does not create a new code restore point.
+4. **Can the path still be restored?** Check for links, changed directories, unreadable backups, and partial-restore messages.
+5. **Do the snapshots still survive?** A listed checkpoint can outlive the backup files needed to restore it.
+6. **Is the effect external?** If it changes a database, API, deployment, or other remote system, plan compensation before execution.
+7. **What prevents the call if it is not acceptable?** Choose permissions, a hook, shell containment, or a provider policy for prevention. Do not call that choice rollback.
 
-In practice, this is where high-performing teams encode:
+If the answer to the first five questions is uncertain, treat the action as non-rewindable for planning purposes. That is a conservative engineering inference, not a claim that the product will always fail to restore it.
 
-- repo conventions,
-- test commands,
-- architectural boundaries,
-- review expectations,
-- and dangerous directories or workflows the agent should avoid.
+The same caution applies to sessions. The [sessions documentation](https://code.claude.com/docs/en/sessions) distinguishes an in-process `/branch` from a separate-process `--fork-session`: session grants can carry over in one path and require re-approval in the other. Resume behavior also depends on how a session is resumed. Conversation continuity is therefore not identical to authority continuity, and a conversation branch is not a Git branch, a worktree, or a filesystem clone.
 
----
+For a companion example of preventive control rather than recovery, read the [CodeBurn hard-cap audit](/posts/codeburn-guard-hard-cap-audit/). For the broader harness perspective, continue to [Harness Engineering: What a Benchmark Score Actually Measures](/posts/harness-engineering-agents/), which separates model, tool, task, and environment contributions to reported results instead of claiming a universal production effect. Both are next actions, not substitutes for the checkpoint contract.
 
-## Repo lens: where this shows up in practice
+## What changed since the March 2026 note
 
-The original repo lens in `nirholas/claude-code` was useful because it framed Claude Code around:
+The March 31 note treated checkpoints as a broad safety primitive and discussed the agent loop, session forks, and repository-safety concerns at a higher level. This October 15 re-read changes the article's claim boundary; it does not claim that every limitation below first appeared after March, because no historical documentation comparison was available.
 
-- terminal-native operation,
-- codebase understanding,
-- routine task execution,
-- and git workflow support.
+- **From “checkpoint” to restore boundary:** the analysis now distinguishes a prompt that starts a turn from a message sent mid-turn, then separates code restoration from conversation restoration.
+- **From “agent edit” to provenance:** native edits, a foreground `context: fork` skill, other subagents, Bash mutations, and remote effects are separate classes. The same editing tool can have different checkpoint coverage depending on its executor.
+- **From menu presence to usable backup:** the survey now includes bounded retention, the approximately 30-day-after-last-snapshot default, resumed sessions whose backups are gone, path-skipping conditions, and the v2.1.260 changelog correction.
+- **From generic safety controls to distinct roles:** permissions authorize, hooks can deny pending calls, sandboxing contains shell commands, Git preserves durable file history, and external systems need compensation. None is interchangeable with session recovery.
+- **From a single rewind story to surface-specific APIs:** the public SDK page and pinned Python wrapper make file-only rewind and control-request forwarding explicit, without implying that the proprietary restore engine was inspected.
 
-Repository:
-- <https://github.com/nirholas/claude-code>
+The only explicitly versioned product correction used here is the changelog entry under v2.1.260 at the pinned commit above. The v2.1.216 and v2.1.295 boundaries are included with their documented scopes and exceptions, not as claims about when the behavior was introduced.
 
-But there is an important caveat now: that repository is currently unavailable behind a DMCA takedown notice.
+## What to promise a team
 
-That changes how much weight it should carry as a live reference.
+The useful promise is not “rewind makes agent work safe.” The useful promise is conditional: for an eligible session file edit with a surviving, readable snapshot, `/rewind` can provide fast session-level recovery; it can also restore conversation state separately. Everything else needs its own control surface.
 
-So the stronger foundation for understanding Claude Code today is the official docs themselves, with external analysis used only as supporting evidence. The repo still helps explain how the tool was being interpreted in practice, but it is no longer a stable primary source.
+That promise changes how a team writes task boundaries. Mark native file edits as candidates for session recovery, but still review the diff and keep durable history. Treat Bash mutations and non-foreground subagent edits as requiring explicit rollback planning. Treat remote actions as irreversible by default unless the application provides a tested compensating operation. Treat a green-looking rewind menu as a starting point for verification, not proof that every intended file returned to its prior state.
 
-That is actually a useful lesson in itself.
+Claude Code's loop remains gather, act, verify. The operational improvement is to make “verify” include recovery eligibility, not only the final diff. That is the boundary the original March note left implicit.
 
-When documenting fast-moving AI tooling, teams should separate:
+## Key Takeaways
 
-- primary source: vendor docs and directly testable behavior,
-- secondary source: community repos and wrappers,
-- tertiary source: reverse engineering and postmortem-style analysis.
+| Finding | Practical implication |
+| --- | --- |
+| Rewind is conditional session recovery, not a transaction. | Keep Git or another durable history mechanism for collaboration and permanent recovery. |
+| Provenance and executor context decide the checkpoint surface. | Confirm whether the write came from native tools, a foreground forked skill, another subagent, Bash, or a remote system. |
+| A listed checkpoint can outlive its usable backup. | Inspect restore results; do not treat a visible menu entry or a success message as proof that files returned. |
+| Permissions, hooks, sandboxing, and compensation solve different problems. | Design prevention and rollback separately, with version and event-scope limits written down. |
+| SDK file rewind is narrower than interactive conversation-and-code rewind. | Treat the public Python wrapper as a forwarding layer and verify the actual runtime contract independently. |
 
-Mixing those layers too casually is how architectural write-ups drift from evidence into folklore.
+## New Questions
 
----
+- Which restore-result details should an automated harness require before it accepts a rewind as complete?
+- How does same-file interleaving behave when two sessions write between checkpoints? The documentation preserves a same-file exception but does not specify an isolation guarantee, and this article did not run that scenario.
+- Which retention configuration is active in a given deployment, and how should teams surface the age of the last surviving snapshot?
+- Where should an SDK-based workflow record conversation state when file-only rewind is intentionally insufficient?
 
-## 💡 Innovation: How advanced teams should operate Claude Code
+## References
 
-Treat Claude Code as a **bounded software operator**, not an autocomplete model.
+### Claude Code documentation (read 2026-10-15)
 
-### Practical operating pattern
+- [How Claude Code works](https://code.claude.com/docs/en/how-claude-code-works) — agentic loop, sessions, and remote effects.
+- [Checkpointing](https://code.claude.com/docs/en/checkpointing) — turn boundaries, tracked tools, subagent and concurrent-session limits, and version-control scope.
+- [Claude Code directory](https://code.claude.com/docs/en/claude-directory) — snapshot retention and cleanup behavior.
+- [Errors](https://code.claude.com/docs/en/errors) — missing backups and skipped paths.
+- [Permissions](https://code.claude.com/docs/en/permissions) — rule precedence, Manual-mode approval scope, and Bash-rule limits.
+- [Hooks](https://code.claude.com/docs/en/hooks) — PreToolUse decisions, Bash diff reporting, and `onFailure` behavior.
+- [Sandboxing](https://code.claude.com/docs/en/sandboxing) — shell-only containment and tools that run outside it.
+- [Skills](https://code.claude.com/docs/en/skills) — foreground and background forked-skill execution.
+- [Sessions](https://code.claude.com/docs/en/sessions) — `/branch`, `--fork-session`, and permission behavior on resume.
 
-#### 1) Define bounded tasks
-Weak:
-- “Improve this project.”
+### Release history (read 2026-10-15)
 
-Strong:
-- “Refactor module X, keep API stable, run tests Y, and report diff rationale.”
+- [Claude Code `CHANGELOG.md` at commit 94506ff0d3bd9185f1752da36e968775021fb48f](https://github.com/anthropics/claude-code/blob/94506ff0d3bd9185f1752da36e968775021fb48f/CHANGELOG.md) — v2.1.260 correction for missing-backup success reporting.
 
-#### 2) Enforce validation gates
-Require execution checks before acceptance:
+### Agent SDK documentation and source (read 2026-10-15)
 
-- tests,
-- lint/type checks,
-- and explicit behavior verification.
+- [Agent SDK file checkpointing](https://code.claude.com/docs/en/agent-sdk/file-checkpointing) — file rewind does not rewind conversation state.
+- [Python SDK `query.py` at commit c10b52c674e5c709c7263544b38e8a5dad10e01d](https://github.com/anthropics/claude-agent-sdk-python/blob/c10b52c674e5c709c7263544b38e8a5dad10e01d/src/claude_agent_sdk/_internal/query.py) — `rewind_files` control-request forwarding.
 
-#### 3) Keep git as your control surface
-Use small, reviewable commits and isolated branches.
-Fast agent iteration is useful only when rollback/review is clean.
+### Related reading
 
-#### 4) Separate exploration vs delivery mode
-- Exploration: wider autonomy for discovery
-- Delivery: strict constraints, reproducibility, and verification
-
-#### 5) Optimize loop convergence, not prose quality
-The real KPI is fewer correction cycles per completed task.
-
-#### 6) Use docs-native control points deliberately
-
-Claude Code already exposes several operational controls in the official surface area:
-
-- `/model` for model selection,
-- `/context` and `/compact` for context management,
-- `/init` for project instruction bootstrapping,
-- `/agents` for custom subagent configuration,
-- and branch/session workflows for controlled divergence.
-
-Advanced teams should not treat these as convenience features. They are part of the harness.
-
----
-
-## Practical examples: from prompt to controlled execution
-
-### Example 1) Safe refactor task prompt
-
-```text
-Refactor src/parser.ts to reduce duplication.
-Constraints:
-- Keep public API unchanged.
-- Run `npm test` and `npm run lint` before final output.
-- Show changed files and explain behavior impact.
-- If tests fail, stop and report root cause first.
-```
-
-Why this works:
-- It bounds scope (`src/parser.ts`),
-- adds hard validation gates,
-- and requires evidence (test/lint + impact summary).
-
-### Example 2) Git-guarded execution script
-
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-branch="agent/refactor-parser"
-git checkout -b "$branch"
-
-# (Agent performs edits)
-
-npm test
-npm run lint
-
-git add -A
-git commit -m "refactor(parser): remove duplication with no API changes"
-```
-
-This pattern makes rollback trivial and review clear.
-
-### Example 3) Delivery-mode checklist (CI gate)
-
-```yaml
-# .github/workflows/agent-delivery-gate.yml
-name: agent-delivery-gate
-on: [pull_request]
-jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: npm ci
-      - run: npm test
-      - run: npm run lint
-      - run: npm run typecheck
-```
-
-The point is simple: if the loop cannot pass objective checks, it should not ship.
-
----
-
-## Leak section: why leakage evidence is critical
-
-You asked about the **Leak** part being important — and you are right.
-In agentic coding, leakage is one of the highest-impact failure classes.
-
-![Source-map leak analysis cover](https://bits-bytes-nn.github.io/assets/images/insights.png)
-
-### Source-map leak analysis (evidence-first, neutral framing)
-
-A detailed external analysis post argues that a production package may have exposed source maps and internal architectural details.  
-Reference: <https://bits-bytes-nn.github.io/insights/agentic-ai/2026/03/31/claude-code-source-map-leak-analysis.html>
-
-Important: treat secondary write-ups as **claims until independently verified**.
-
-What can be treated as high-confidence engineering lessons regardless of vendor specifics:
-
-- Source-map publication is a release-policy decision, not a default safe state.
-- If `sourcesContent` is embedded, disclosure risk is materially higher.
-- Build artifacts must be audited in CI/CD, not only application code.
-- Agent systems need explicit leakage controls across prompts, tools, logs, and package outputs.
-
-What remains claim-level unless you verify package artifacts directly:
-
-- exact internal file counts,
-- detailed internal module names,
-- roadmap/feature-flag interpretations.
-
-### What “leak” means in practice
-
-1. **Prompt/context leak**
-   - Internal instructions or private notes appear in user-visible output.
-2. **Credential leak**
-   - API keys, tokens, `.env` secrets, or private URLs appear in diffs/logs.
-3. **Data boundary leak**
-   - Work intended for one scope (branch/repo/customer) leaks into another.
-
-### Why this is evidence-grade important
-
-If leakage appears in run logs, commit diffs, or generated summaries, that is not a cosmetic bug.
-It is direct evidence that:
-- context boundaries are weak,
-- tool permissions are too broad,
-- or output redaction is missing.
-
-### Minimal leak-prevention controls
-
-```bash
-# pre-commit secret scan (example)
-PATTERN='(AKIA|BEGIN PRIVATE KEY|API_KEY=|SECRET=|TOKEN=)'
-if git diff --cached | grep -E "$PATTERN" >/dev/null; then
-  echo "Potential secret leak detected. Abort commit."
-  exit 1
-fi
-```
-
-```text
-Policy rule:
-- Never print raw secrets in chat output.
-- Never include `.env`, token values, or internal-only prompts in summaries.
-- If sensitive strings are detected, redact and stop for confirmation.
-```
-
-### Source-map evidence checks (release gate)
-
-```bash
-# 1) Find source maps in release artifacts
-find dist build public -type f -name "*.map" 2>/dev/null
-
-# 2) Check if original source payload is embedded
-# (sourcesContent=true usually increases disclosure risk)
-find dist build public -type f -name "*.map" -print0 \
-  | xargs -0 -I{} sh -c 'jq ".sourcesContent != null" "{}" 2>/dev/null | head -n 1'
-
-# 3) Grep for obvious sensitive patterns in shipped assets
-grep -R -nE "(API_KEY|SECRET|TOKEN|AKIA|BEGIN PRIVATE KEY|internal\\.|staging\\.)" dist build public 2>/dev/null
-```
-
-### Why the source-map case matters even if some details remain disputed
-
-The external write-up is valuable not because every claim should be accepted blindly, but because it spotlights a class of failure that AI teams consistently underestimate: artifact leakage.
-
-Even if you ignore the more speculative parts, the engineering lesson is strong:
-
-- release artifacts need security review,
-- not just runtime application code,
-- and agentic tools multiply the number of surfaces where sensitive internal structure can escape.
-
-That includes:
-
-- build outputs,
-- tool transcripts,
-- generated summaries,
-- commit messages,
-- source maps,
-- and cached session state.
-
-### Leak-focused review checklist
-
-- [ ] Does output include hidden/system instructions?
-- [ ] Do diffs contain secrets or internal endpoints?
-- [ ] Are logs safe to share externally?
-- [ ] Is branch/repo scope isolation enforced?
-- [ ] Is redaction applied before user-facing summary?
-- [ ] Are production `*.map` files publicly reachable?
-- [ ] Do source maps include `sourcesContent` for original code?
-- [ ] Is source-map policy (off/hidden/authenticated) documented per environment?
-
-If teams ignore leak evidence, they often overestimate agent quality while underestimating operational risk.
-
----
-
-## Final takeaway
-
-Claude Code’s differentiator is not “better chat answers.”
-It is **agentic execution over real project state**.
-
-Teams get the highest leverage when they combine:
-
-- precise task framing,
-- strict validation checkpoints,
-- disciplined git workflow boundaries,
-- and explicit leak-prevention controls.
-
-That is what turns an AI coding assistant into a dependable engineering copilot.
-
-The official docs reinforce a broader point that advanced teams should not ignore:
-
-The performance ceiling of a coding agent is not set only by the model.
-
-It is set by the loop around the model — permissions, checkpoints, context discipline, branch isolation, verification, and artifact hygiene.
-
----
-
-### References
-
-- How Claude Code works: <https://code.claude.com/docs/en/how-claude-code-works>
-- GitHub reference repo (currently DMCA-disabled): <https://github.com/nirholas/claude-code>
-- Source-map leak analysis (external): <https://bits-bytes-nn.github.io/insights/agentic-ai/2026/03/31/claude-code-source-map-leak-analysis.html>
+- [CodeBurn hard-cap audit](/posts/codeburn-guard-hard-cap-audit/) — prevention through per-tool denial rather than recovery.
+- [Harness Engineering: What a Benchmark Score Actually Measures](/posts/harness-engineering-agents/) — model, tool, task, and environment attribution.
