@@ -117,7 +117,7 @@ if (stagedMode) {
     : [];
   expected = expectedPackagePaths({ checkCollisions: false });
   check(JSON.stringify(recorded) === JSON.stringify(expected), `Recorded path scope is stale or edited. Derived ${JSON.stringify(expected)}, recorded ${JSON.stringify(recorded)}`);
-  const result = spawnSync('git', ['diff', '--cached', '--name-only'], {
+  const result = spawnSync('git', ['diff', '--cached', '--name-only', '--no-renames'], {
     cwd: repoRoot,
     encoding: 'utf8'
   });

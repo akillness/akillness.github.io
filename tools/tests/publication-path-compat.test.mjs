@@ -295,14 +295,20 @@ function git(root, args) {
   assert.equal(result.status, 0, `git ${args.join(' ')} failed: ${output(result)}`);
 }
 
-function stagedFixture(options) {
-  const root = makeFixture(options);
+function stagedFixture({ settledSelectedEntry = false, baselineExtraPath = null } = {}) {
+  const root = makeFixture({ settledSelectedEntry });
   fs.mkdirSync(path.join(root, 'tools'), { recursive: true });
   fs.writeFileSync(path.join(root, 'tools/existing.mjs'), 'export const existing = true;\n');
+  if (baselineExtraPath) {
+    const baselineExtra = path.join(root, baselineExtraPath);
+    fs.mkdirSync(path.dirname(baselineExtra), { recursive: true });
+    fs.copyFileSync(path.join(root, `_workspace/current/draft/${HERO}`), baselineExtra);
+  }
   git(root, ['init', '-q']);
   git(root, ['config', 'user.email', 'tests@example.invalid']);
   git(root, ['config', 'user.name', 'Publication path tests']);
-  git(root, ['add', '_data/archive_development.json', 'tools/existing.mjs']);
+  git(root, ['config', 'diff.renames', 'true']);
+  git(root, ['add', '_data/archive_development.json', 'tools/existing.mjs', ...(baselineExtraPath ? [baselineExtraPath] : [])]);
   git(root, ['commit', '-qm', 'baseline ledger and tool']);
   graduate(root);
   const livePost = path.join(root, '_posts', '2026', '03', BASENAME);
@@ -322,6 +328,28 @@ function stagedFixture(options) {
   git(root, ['add', NESTED_POST, `${ASSET_ROOT}/nemoclaw-egress-boundary.png`, `${ASSET_ROOT}/nemoclaw-egress-boundary.svg`, '_data/archive_development.json']);
   return root;
 }
+
+test('staged scope rejects a tracked rename into the selected asset', () => {
+  const root = stagedFixture({ baselineExtraPath: 'tools/preserved.png' });
+  try {
+    const preserved = path.join(root, 'tools/preserved.png');
+    fs.rmSync(preserved);
+    git(root, ['add', '-A', 'tools/preserved.png']);
+
+    const nameStatus = spawnSync('git', ['diff', '--cached', '--name-status'], { cwd: root, env, encoding: 'utf8' });
+    assert.equal(nameStatus.status, 0, output(nameStatus));
+    assert.ok(output(nameStatus).split('\n').includes(`R100\ttools/preserved.png\t${HERO}`));
+
+    const nameOnly = spawnSync('git', ['diff', '--cached', '--name-only'], { cwd: root, env, encoding: 'utf8' });
+    assert.equal(nameOnly.status, 0, output(nameOnly));
+    const stagedNames = nameOnly.stdout.split('\n').filter(Boolean);
+    assert.ok(stagedNames.includes(HERO));
+    assert.ok(!stagedNames.includes('tools/preserved.png'));
+
+    const result = run(SCOPE_TOOL, root, '--staged');
+    assert.notEqual(result.status, 0, output(result));
+  } finally { removeFixture(root); }
+});
 
 function removeFixture(root) {
   fs.rmSync(root, { recursive: true, force: true });
