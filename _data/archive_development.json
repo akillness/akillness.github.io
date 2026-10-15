@@ -277,9 +277,9 @@
       "links_at_intake": 15,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "retired",
+      "developed_at": "2026-10-16",
+      "survey_note": "Retired on October 16, 2026 after an independent review of Google's transition announcement and commit-pinned Antigravity CLI release notes. The proposed replacement restated those sources and existing coverage without demonstrating an independent diagnostic. This historical URL is retained, but this page is not a current migration, permission, or account-access guide."
     },
     {
       "path": "_posts/2026/06/2026-06-16-ontology-graphrag-agent-memory.md",
