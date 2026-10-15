@@ -1,332 +1,122 @@
 ---
-published: true
-title: "AutoBE vs. Claude Code: Verification Beats Raw Agent Flexibility on Big Backend Builds"
-description: "A practical engineering read on AutoBE vs. Claude Code: why the real divide is not model quality, but whether reliability comes from human review loops or compiler-backed verification."
-categories: [AI, Developer-Tools, Architecture]
-tags: [autobe, claude-code, coding-agents, function-calling, compilers, ai-agents]
+title: "AutoBE Release Diff: 133 of 134 Compiler Files Match"
+description: "Source-pinned audit of AutoBE releases, write-before-complete guards, and realization-test cleanup boundaries—not a reliability benchmark."
+categories: [AI, Tooling]
+tags: [autobe, agentic-coding, compiler, verification, harness-engineering]
 date: 2026-04-07 10:00:00 +0900
-mermaid: true
-math: false
+last_modified_at: 2026-10-15 19:15:00 +0900
+archive_developed: "2026-10-15"
+archive_development_note: "Rebuilt from the 2026-04-07 archive entry through a source-pinned AutoBE release and implementation audit, preserving the original date and permalink; the release comparison uses exact tarballs and reports no runtime execution or reliability benchmark."
+permalink: /posts/autobe-vs-claude-code-verification-vs-flexibility/
+image_policy: source-first-fallback
 image:
-  path: "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F33k8cy27q4y2s1uumiiw.png"
-  alt: "AutoBE vs. Claude Code article cover"
-pin: false
-ads: false
-restored_archive: "2026-10-12"
+  path: /assets/img/posts/2026-04-07-autobe-vs-claude-code-verification-vs-flexibility/compiler-release-gate-delta.svg
+  alt: "Diagram separating AutoBE release artifact identity, source-visible validation guards, and runtime reliability evidence"
 ---
 
-## 🤔 Curiosity: What actually separates the next generation of coding agents?
+## What changed in this AutoBE Source Audit?
 
-Most discussions about coding agents still orbit around the wrong variable.
-We compare model families, benchmark scores, and UI polish. But once you try to generate or maintain a real backend, the more important question becomes much less glamorous:
+The archived post asked readers to choose between two broad ideas: AutoBE's verification discipline and Claude Code's flexibility. That framing is memorable, but it quietly asks a source comparison to answer a measurement question. A package release, a validator branch, and a test harness can show how a system is built. They do not, on their own, show which system produces more reliable backends.
 
-Can the system guarantee consistency when the surface area becomes large?
+I revisited the question with a narrower rule: keep only what can be tied to a current primary artifact, a pinned source coordinate, or a deterministic comparison. The result is less dramatic and more useful. AutoBE's current artifacts expose meaningful ordering and execution boundaries. The release comparison also reveals a surprisingly small byte-level delta between compiler 0.30.5 and 0.31.1. Neither observation is a benchmark, a pass rate, or a winner declaration.
 
-That is why this AutoBE vs. Claude Code comparison is interesting. The original DEV post is not just another “tool A vs. tool B” roundup. It frames a deeper split in coding-agent design:
+That distinction matters whenever an agent framework's architecture is presented as evidence of production outcomes.
 
-- Claude Code as a flexible, general-purpose software operator
-- AutoBE as a schema-first backend generator with compiler-backed verification
+## What the current release artifacts actually establish
 
-I think that framing is directionally right.
-And it matters because “write some code” and “ship a 50-table, 400-API backend without structural drift” are not the same problem at all.
+The npm registry identifies `@autobe/compiler` 0.31.1 as the current release examined here. Its package metadata points to the `wrtnlabs/autobe` repository and declares AGPL-3.0. The registry time map places 0.30.5 at `2026-03-31T15:37:21.278Z` and 0.31.1 at `2026-04-10T07:52:25.891Z` (UTC), so the comparison crosses the archived post's April 7 date.
 
-> My read after going through the source article: this is less a battle of better prompts, and more a battle of where correctness lives.
-{: .prompt-tip}
+Those are release-identity facts. They are not evidence that the implementation became more reliable between the two versions. To separate release identity from implementation change, I compared the exact registry tarballs with a deterministic standard-library `tarfile`/`hashlib` pass:
 
----
+| Package | Members | Matching hashes | Changed members |
+| --- | ---: | ---: | --- |
+| `@autobe/compiler@0.30.5` | 134 | 133 | `package/package.json` |
+| `@autobe/compiler@0.31.1` | 134 | 133 | `package/package.json` |
 
-## 📚 Retrieve: What the source article actually argues
+The tarball SHA-256 values were `ce8fd853fba435ac1a4c9236af2df6fa39e6ef96a97cd82db4a4d4c4a7393364` for 0.30.5 and `6e9fd6b728a618007c3990f75a6c93512118d731381782b52e900b5d019e8a3c` for 0.31.1. Inside the only changed member, the package version and five dependency ranges changed. The source files in the compared package members were byte-identical.
+The five declared dependency ranges changed as follows: `embed-eslint` `^2.0.1` → `^3.1.0`; `embed-typescript` `^2.0.1` → `^3.1.0`; `@autobe/filesystem` `^0.30.5` → `^0.31.1`; `@autobe/utils` `^0.30.5` → `^0.31.1`; and `@autobe/interface` `^0.30.5` → `^0.31.1`. This is a declared-package comparison only: no resolved or transitive dependency comparison was performed.
 
-Source article:
-- <https://dev.to/samchon/autobe-vs-claude-code-3rd-gen-coding-agent-developers-review-of-the-leaked-source-code-313b>
+This is a useful release-engineering result precisely because it is modest: the published compiler artifact changed in metadata and dependency declarations, not in the 133 other retained members. It does not prove that a package install resolves the same graph, that transitive dependencies behave the same way, or that either release is reliable. Declared licensing also does not grant permission to reuse the archived DEV cover image; that image remains excluded from this draft.
 
-Related references mentioned in or useful alongside the article:
-- AutoBE repo: <https://github.com/wrtnlabs/autobe>
-- AutoBE examples: <https://github.com/wrtnlabs/autobe-examples>
-- Function Calling Harness follow-up: <https://dev.to/samchon/qwen-meetup-function-calling-harness-from-675-to-100-3830>
-- Claude Code docs: <https://code.claude.com/docs/en>
+## Where does AutoBE put a verification boundary?
 
-![Original article cover](https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F33k8cy27q4y2s1uumiiw.png){: .light .shadow .rounded-10 w='1212' h='668' }
+The current agent source contains a concrete ordering guard in `validatePreliminary.js`. When a caller asks the complete-case path to finish before submitting a write, the validator returns this description:
 
-### 1) Claude Code is presented as the peak of the “human-led” coding agent
+> No write has been submitted yet. Please call `process({ request: { type: "write", ... } })` with your content first, then call "complete" once you are satisfied with the result.
 
-The article describes Claude Code as a 2nd-generation system built around:
+That is stronger than a README promise because it is an observable branch in a version-pinned implementation. It proves that this validator path enforces a write-before-complete order. It does not prove that the submitted content is correct, that generated code compiles, or that a downstream service is production-ready.
 
-- a long-running agent loop,
-- broad tool autonomy,
-- post-hoc context compression,
-- and heavy safety engineering around shell/file execution.
+The distinction can be made explicit:
 
-That is a very recognizable philosophy: let the agent inspect, decide, act, recover, and keep moving.
+1. **Ordering proof:** a complete request without a prior write is rejected.
+2. **Compilation proof:** generated code may be sent through a build or test command.
+3. **Behavior proof:** a passing test would establish behavior only for its fixture and environment.
+4. **Production reliability:** requires a defined workload, independent repetitions, failure taxonomy, and comparable controls.
 
-For debugging, repo navigation, surgical edits, and open-ended engineering work, this is extremely strong. In practice, this is why Claude Code often feels less like autocomplete and more like a senior developer sitting beside you.
+The source record does not justify a comparative production-reliability conclusion: neither an ordering guard nor compiler/test architecture, on its own, establishes which system is more reliable than Claude Code.
 
-### 2) AutoBE is presented as the opposite bet: reduce freedom, increase guarantees
+## What does the realization helper do—and what does its code leave unresolved?
 
-The article’s strongest claim is that AutoBE is not trying to be a universal coding assistant.
-It is trying to make backend generation mechanically reliable by narrowing what the model is allowed to produce.
+The compiler's `testRealizeProject` helper makes its intended lifecycle readable. It constructs a temporary-workspace name, saves supplied files, runs `pnpm install`, `pnpm run build:prisma`, and `pnpm run build:test`, then connects a `tgrid` `WorkerConnector` to `bin/test/servant.js` and invokes the test service. A `finally` block calls `fs.promises.rm` with recursive and force options.
 
-The key design pattern is:
+That sequence explains how an integration-style check could be wired. It is not evidence that a generated project passed. The implementation also illustrates why code-level inspection must remain exact. `mkdtemp(cwd)` returns a suffixed temporary path, but the returned value is discarded; subsequent setup, worker connection, and cleanup continue to use the unsuffixed `cwd`. The worker connection is also performed before the `try/finally` that closes the worker. Those are source-visible lifecycle boundaries, not a tested claim that cleanup is exhaustive or that every failure mode is handled safely.
 
-- the model fills structured schemas rather than free-form code,
-- compilers validate each stage,
-- failed validation triggers self-correction loops,
-- and the final output is shaped by type systems plus compiler gates.
+This is the original finding I would preserve from the audit: AutoBE exposes a write-before-complete guard and a realization-test lifecycle, while its current compiler release diff is almost entirely package metadata. Together, those facts support a static audit of *where verification is placed*. They do not support a comparative reliability score.
 
-That tradeoff is important. AutoBE gives up some generality so it can attack the hardest part of backend generation: consistency across many connected artifacts.
+## A practical evidence ladder for agent-framework reviews
 
-![Four AutoBE benchmark runs across Todo, Reddit, Shopping, and ERP](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F61ndjizap8ycwp2f6lc0.png){: .light .shadow .rounded-10 w='1212' h='668' }
+When reviewing an agentic coding system, I now separate three questions that are often collapsed into one sentence:
 
-The first supporting figure in the original article makes that scope concrete. It shows four benchmark-style runs—Todo, Reddit, Shopping, and ERP—broken into Analyze, Database, Interface, Test, and Realize stages. The visual message is simple: once the project grows, runtime and token cost explode, and the expensive part is not a single file generation but the whole coordinated pipeline.
+| Question | Evidence that can answer it | Evidence that cannot answer it alone |
+| --- | --- | --- |
+| What shipped? | Registry metadata, version map, exact tarball hashes | A marketing headline or a package name |
+| What is guarded? | Pinned source branches, error messages, call placement | A diagram that omits control flow |
+| Did it work reliably? | Reproducible runs with a fixed task set, environment, repetitions, and scoring | A guard, a release number, or a single successful demo |
 
-![Backend coding agent architecture with compiler feedback](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fe3ocqrb2t5cr3aljh0qh.png){: .light .shadow .rounded-10 w='1212' h='668' }
+This ladder also gives a better review workflow. First pin the artifact. Then inspect the implementation path that claims to validate work. Only after that should a team design a measurement harness. The harness needs a task corpus, model and dependency versions, execution protocol, success rubric, and failure categories. Without those controls, “verification” remains an architectural property, not an outcome measurement.
 
-The next figure shows why the author keeps returning to compilers. AutoBE is framed as a layered system: a backend coding agent delegates to Analyze, Database, Interface, Test, and Realize stages, and each stage is tied to compiler feedback such as Prisma, OpenAPI, Test, or Hybrid compilation. That is a much more opinionated architecture than a general-purpose agent loop.
+For a related treatment of those controls, see [the harness-engineering measurement audit](/posts/harness-engineering-agents/).
+For a complementary discussion of specified validator handoffs versus enforcement, see [engineering discipline in AI coding agents](/posts/engineering-discipline-ai-coding-agents/).
 
-### 3) The article’s real thesis: 80→100 is an architecture problem
+## What I would change in the old conclusion
 
-This was the most useful part of the source piece.
-The author argues that many coding agents are excellent at getting from 0 to 80:
+I would not repeat “verification beats flexibility,” and I would not preserve the old 100%-reliability implication. The source record does not contain the controlled comparison required for either statement. A more defensible conclusion is narrower:
 
-- scaffolding,
-- writing isolated functions,
-- rough API layers,
-- initial file generation.
+> AutoBE's source exposes explicit checks around when work may be considered complete, and its realization helper shows how generated projects are prepared for build-and-test execution. A byte-level comparison of compiler 0.30.5 and 0.31.1 finds 133 identical regular members out of 134, with the only changed member being package metadata. These facts describe release identity and verification boundaries; they do not measure backend reliability or establish an AutoBE-versus-Claude Code winner.
 
-But 80 to 100 is different.
-That last mile means:
-
-- every type matches,
-- every relation is coherent,
-- every shared contract stays synchronized,
-- every generated unit still compiles after the whole system is assembled.
-
-That is not merely a “smarter model” problem.
-It is a systems design problem.
-
-### 4) Why the compound-effect argument matters
-
-One of the article’s recurring points is that local correctness does not scale linearly.
-If each individual generated artifact is “pretty good,” the total system can still collapse once dependencies stack up.
-
-That logic is easy to underestimate in agent demos.
-A coding agent can look amazing on:
-
-- one file,
-- one endpoint,
-- one bugfix,
-- one migration.
-
-A full backend is different because correctness compounds negatively when each module depends on the others.
-
-![Model leaderboard across Todo, Reddit, Shopping, and ERP benchmarks](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fxk2fro01vvvwm1ox4cb7.png){: .light .shadow .rounded-10 w='1212' h='668' }
-
-I also like that the article includes a leaderboard instead of pretending model choice does not matter. But the ranking itself reinforces the post’s main argument: even when strong models cluster near the top, the scores still vary by workload. In other words, raw model quality helps, but architecture decides whether those local wins survive system-wide integration.
-
-```mermaid
-flowchart LR
-    A[Prompt-driven generation] --> B[Many local outputs]
-    B --> C[Cross-module dependencies grow]
-    C --> D[Errors compound]
-    D --> E[Need deterministic verification]
-
-    style A fill:#ff6b6b20,stroke:#c92a2a,stroke-width:2px
-    style E fill:#4ecdc420,stroke:#0a9396,stroke-width:2px
-```
-
-### 5) The most practical contrast: flexibility vs verification location
-
-Here is the comparison I would keep, stripped down to what actually matters:
-
-| Dimension | Claude Code | AutoBE |
-|---|---|---|
-| Core role | General coding agent | Backend generation system |
-| Default strength | Flexible open-ended task execution | Structured output consistency |
-| Primary control surface | Tool loop + model judgment | Schema + compiler validation |
-| Best use case | Debugging, editing, maintenance | Greenfield backend generation |
-| Reliability source | Human review + agent iteration | Mechanical verification + correction |
-
-I like this framing because it avoids the childish “which one wins?” question.
-They are aiming at different failure modes.
-
-### 6) A practical engineering example
-
-Suppose you are building a commerce backend.
-
-Case A: greenfield generation
-- 50 tables
-- 400 APIs
-- lots of shared DTOs
-- foreign keys, auth boundaries, and test scenarios
-
-This is where a schema-first compiler pipeline has a real argument.
-You need consistency more than creativity.
-
-Case B: month 4 maintenance
-- add coupon rules,
-- modify payment retry logic,
-- patch one analytics endpoint,
-- fix an auth bug in two files.
-
-This is where Claude Code-style flexibility is usually more valuable.
-You need contextual adaptation more than rigid generation.
-
-That is why I find the article’s coexistence thesis more believable than its rivalry framing.
-
----
-
-## 💡 Innovation: The real lesson is to split “builder mode” from “maintainer mode”
-
-If I were designing a serious coding-agent stack after reading this piece, I would not try to crown one universal winner.
-I would separate the workflow into two operating modes.
-
-### 1) Builder mode: use the model inside a narrow, verifiable corridor
-
-When the task is large-scope generation, the agent should have fewer choices, not more.
-That means:
-
-- schema-first interfaces,
-- limited output vocabularies,
-- compiler gates,
-- typed feedback,
-- automatic correction loops.
-
-This is the smarter place to be rigid.
-
-### 2) Maintainer mode: use an agentic loop with rich tools and bounded scope
-
-When the system already exists, flexibility becomes an asset.
-Now you want:
-
-- repo inspection,
-- test execution,
-- localized edits,
-- context-aware debugging,
-- and human-readable reasoning about tradeoffs.
-
-This is where Claude Code-style tool orchestration shines.
-
-### 3) The better architecture is hybrid, not ideological
-
-The most practical outcome is:
-
-1. Use a constrained generator to create the system skeleton
-2. Verify it mechanically
-3. Hand the verified codebase to a flexible maintenance agent
-4. Keep CI and compiler gates as the long-term referee
-
-That pattern feels much more durable than betting everything on either unrestricted prompting or fully rigid generation.
-
-```mermaid
-flowchart LR
-    A[Requirements] --> B[Schema-first generation]
-    B --> C[Compiler validation]
-    C --> D[Initial backend]
-    D --> E[Agentic maintenance loop]
-    E --> F[Tests / CI / review]
-
-    style B fill:#4ecdc420,stroke:#0a9396,stroke-width:2px
-    style E fill:#ff6b6b20,stroke:#c92a2a,stroke-width:2px
-    style F fill:#ffe66d40,stroke:#f4a261,stroke-width:2px
-```
-
-### 4) A compact implementation sketch
-
-Below is not AutoBE source code. It is a simplified sketch of the design idea the article points toward: the model proposes structured output, and deterministic validators decide whether it survives.
-
-![Parse validate retry loop for structured LLM output](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fijaj31b1dpnfwjs83q85.png){: .light .shadow .rounded-10 w='1212' h='668' }
-
-This final diagram is the cleanest summary of the whole philosophy: LLM output should not be trusted directly. It should be parsed, validated, and if it fails, converted into targeted feedback and sent back into a repair loop.
-
-```python
-from dataclasses import dataclass
-from typing import Any
-
-@dataclass
-class ValidationResult:
-    ok: bool
-    feedback: str | None = None
-
-
-def llm_generate_schema(requirements: str) -> dict[str, Any]:
-    """Model returns structured backend spec, not raw code."""
-    return {
-        "tables": ["users", "orders"],
-        "apis": ["POST /orders", "GET /orders/:id"],
-        "auth": "jwt"
-    }
-
-
-def compile_and_validate(spec: dict[str, Any]) -> ValidationResult:
-    """Deterministic checks replace subjective prompt-only review."""
-    if "orders" not in spec.get("tables", []):
-        return ValidationResult(False, "Missing orders table")
-    if "POST /orders" not in spec.get("apis", []):
-        return ValidationResult(False, "Missing order creation endpoint")
-    return ValidationResult(True)
-
-
-def generate_with_repair(requirements: str, max_rounds: int = 4) -> dict[str, Any]:
-    spec = llm_generate_schema(requirements)
-    for _ in range(max_rounds):
-        result = compile_and_validate(spec)
-        if result.ok:
-            return spec
-        spec["repair_feedback"] = result.feedback
-        spec = llm_generate_schema(requirements + f"\nFix: {result.feedback}")
-    raise RuntimeError("Failed to converge to a valid backend spec")
-```
-
-The point is not the toy code itself.
-The point is the control loop:
-
-- generation is probabilistic,
-- validation is deterministic,
-- progress comes from routing uncertainty into a narrow repair cycle.
-
-That is a much stronger production story than “the model usually does fine.”
-
-### 5) What I would steal immediately from both sides
-
-From the AutoBE side:
-- constrain output through schemas, not negative prompting,
-- make validation first-class,
-- and optimize for system consistency rather than pretty single-file demos.
-
-From the Claude Code side:
-- rich tool use,
-- strong recovery loops,
-- practical repo awareness,
-- and a workflow that actually helps on messy real codebases.
-
-That combination is where the next serious developer stack will come from.
-
----
+That sentence is less likely to be quoted out of context because its limits are part of the claim. It also gives an engineer a next action: define the missing harness rather than infer an outcome from an implementation sketch.
+<figure class="explanatory-image">
+  <img src="/assets/img/posts/2026-04-07-autobe-vs-claude-code-verification-vs-flexibility/compiler-release-gate-delta.png" alt="Diagram separating AutoBE release artifact identity, source-visible validation guards, and runtime reliability evidence" />
+<figcaption>Original illustration by AutoBE Archive Source Audit Producer; not source evidence.</figcaption>
+</figure>
 
 ## Key Takeaways
+ 
+- The current compiler package comparison is a release-artifact observation: 133 of 134 regular members match between 0.30.5 and 0.31.1, with `package/package.json` as the changed member.
+- The preliminary validator exposes a write-before-complete ordering guard, while the realization helper exposes build, test, worker, and cleanup boundaries.
+- Neither source-traced guard nor the byte-level release result measures comparative reliability, correctness across workloads, or a winner against Claude Code.
 
-| Insight | Why It Matters | Practical Move |
-|---|---|---|
-| 0→80 and 80→100 are different problems | Generation quality alone does not guarantee system reliability | Add deterministic verification layers |
-| Claude Code optimizes for flexible maintenance | Most day-to-day engineering work is local and messy | Use it for debugging, edits, and repo tasks |
-| AutoBE optimizes for structured generation | Large backend builds fail through cross-module inconsistency | Use schema and compiler gates for initial generation |
-| The best stack is hybrid | One tool rarely dominates the full lifecycle | Split builder mode from maintainer mode |
+## New Questions
 
-### New Questions
-
-- Which domains beyond backend generation can adopt the same “LLM fills forms, verifier guarantees output” pattern?
-- How much agent autonomy should we allow before verification becomes too expensive to trust?
-- Can coding agents eventually expose this split directly as product modes: Generate System vs Maintain System?
-
----
+- Does the same generated project pass a fixed task corpus across both compiler releases when dependency resolution and environment are pinned?
+- Which failure categories should an independent harness score: ordering violations, compilation failures, behavior-test failures, dependency drift, and cleanup failures?
+- Can the realization helper's temporary-directory and worker-lifetime boundaries be exercised under controlled failure injection without conflating static code shape with runtime behavior?
 
 ## References
 
-- Source article: <https://dev.to/samchon/autobe-vs-claude-code-3rd-gen-coding-agent-developers-review-of-the-leaked-source-code-313b>
-- AutoBE: <https://github.com/wrtnlabs/autobe>
-- AutoBE examples: <https://github.com/wrtnlabs/autobe-examples>
-- Function Calling Harness article: <https://dev.to/samchon/qwen-meetup-function-calling-harness-from-675-to-100-3830>
-- Claude Code docs: <https://code.claude.com/docs/en>
+### Registry and release artifacts
 
-> Note: this post is grounded primarily in the linked DEV article and its published claims. I treat the architectural framing as useful and practical, while avoiding overclaiming unverified leak details beyond what the source explicitly presents.
-{: .prompt-warning}
+- [npm registry metadata for `@autobe/compiler`](https://registry.npmjs.org/@autobe/compiler), retrieved 2026-10-15 08:47:37 UTC. The comparison used the 0.30.5 and 0.31.1 tarballs listed by the registry.
+- [Exact compared tarball: `@autobe/compiler@0.30.5`](https://registry.npmjs.org/@autobe/compiler/-/compiler-0.30.5.tgz), and [exact compared tarball: `@autobe/compiler@0.31.1`](https://registry.npmjs.org/@autobe/compiler/-/compiler-0.31.1.tgz), retrieved 2026-10-15 08:47:37 UTC.
+
+### Pinned implementation
+
+- [`@autobe/compiler@0.31.1` realization helper](https://unpkg.com/@autobe/compiler@0.31.1/lib/realize/testRealizeProject.js), source coordinate lines 22–78, retrieved 2026-10-15 08:47:37 UTC.
+- [`@autobe/agent@0.31.1` preliminary validator](https://unpkg.com/@autobe/agent@0.31.1/lib/orchestrate/common/internal/validatePreliminary.js), source coordinate lines 39–153, retrieved 2026-10-15 08:47:37 UTC.
+
+### Legacy context
+
+- [Archived comparison](https://dev.to/samchon/autobe-vs-claude-code-3rd-gen-coding-agent-developers-review-of-the-leaked-source-code-313b), inspected 2026-10-15 08:39:00 UTC. Its comparative and percentage framing is retained here only as a suppression record; it is not used as evidence for a reliability claim.
+
+The release comparison was performed over package members with Python's standard-library archive and hashing modules. No package was installed or executed for this audit, so no runtime pass rate, production result, traffic outcome, or revenue outcome is claimed.
+

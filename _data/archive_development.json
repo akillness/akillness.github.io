@@ -221,9 +221,9 @@
       "links_at_intake": 15,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-15",
+      "survey_note": "Rebuilt from pinned npm compiler 0.30.5/0.31.1 metadata and inspected validation paths. The reproducible archive comparison found 133 of 134 matching regular-file hashes, with only package/package.json changed; this is not a reliability, performance, or production-success result."
     },
     {
       "path": "_posts/2026/04/2026-04-10-feynman-open-source-ai-research-agent.md",
