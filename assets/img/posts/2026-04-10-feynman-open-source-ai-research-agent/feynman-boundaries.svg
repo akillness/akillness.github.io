@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="840" viewBox="0 0 1280 840" role="img" aria-labelledby="title desc">
+  <title id="title">Feynman inspection boundaries</title>
+  <desc id="desc">Three separate inspected surfaces: local date prompt context, signed-in alpha tools with conditional recovery, and telemetry error text construction. The panels are intentionally not connected into a serial pipeline.</desc>
+  <defs>
+    <marker id="arrow-blue" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-amber" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#b45309"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#047857"/>
+    </marker>
+    <style>
+      .ink { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #172033; }
+      .title { font-size: 28px; font-weight: 700; }
+      .panel-title { font-size: 21px; font-weight: 700; }
+      .label { font-size: 16px; font-weight: 650; }
+      .body { font-size: 15px; }
+      .small { font-size: 13px; }
+      .panel { fill: #ffffff; fill-opacity: 0.78; stroke-width: 2; rx: 18; }
+      .box { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.5; rx: 10; }
+      .note { fill: #fff7ed; stroke: #f59e0b; stroke-width: 1.5; rx: 10; }
+      .limit { fill: #fef2f2; stroke: #ef4444; stroke-width: 1.5; rx: 10; }
+      .arrow { fill: none; stroke-width: 2.2; }
+    </style>
+  </defs>
+
+  <text x="56" y="48" class="ink title">Feynman v0.5.47: three boundaries, not one proven pipeline</text>
+  <text x="56" y="76" class="ink body">Original explanatory illustration from the 2026-10-15 source audit; separate panels show only inspected conditional paths.</text>
+
+  <rect x="40" y="106" width="370" height="650" class="panel" stroke="#2563eb"/>
+  <text x="64" y="144" class="ink panel-title">1 · Prompt context</text>
+  <text x="64" y="170" class="ink small">current-date.ts / before_agent_start</text>
+  <rect x="64" y="198" width="322" height="90" class="box"/>
+  <text x="84" y="228" class="ink label">Local Date object</text>
+  <text x="84" y="254" class="ink body">year · month · day</text>
+  <text x="84" y="276" class="ink body">calendar date string</text>
+  <path d="M225 288 L225 330" class="arrow" stroke="#2563eb" marker-end="url(#arrow-blue)"/>
+  <rect x="64" y="342" width="322" height="116" class="box"/>
+  <text x="84" y="372" class="ink label">sections.current_date</text>
+  <text x="84" y="398" class="ink body">“verify current sources”</text>
+  <text x="84" y="420" class="ink body">“do not reject later evidence”</text>
+  <rect x="64" y="492" width="322" height="144" class="limit"/>
+  <text x="84" y="522" class="ink label">Boundary</text>
+  <text x="84" y="550" class="ink body">Prompt construction ≠ observed</text>
+  <text x="84" y="572" class="ink body">freshness, citation correctness,</text>
+  <text x="84" y="594" class="ink body">or model compliance.</text>
+
+  <rect x="455" y="106" width="370" height="650" class="panel" stroke="#b45309"/>
+  <text x="479" y="144" class="ink panel-title">2 · Direct alpha tools</text>
+  <text x="479" y="170" class="ink small">research-tools.ts → alpha.ts</text>
+  <rect x="479" y="198" width="322" height="90" class="note"/>
+  <text x="499" y="228" class="ink label">registerAlphaTools(pi)</text>
+  <text x="499" y="254" class="ink body">caller is unconditional</text>
+  <text x="499" y="276" class="ink body">signedIn gate lives inside alpha.ts</text>
+  <path d="M640 288 L640 330" class="arrow" stroke="#b45309" marker-end="url(#arrow-amber)"/>
+  <rect x="479" y="342" width="322" height="112" class="box"/>
+  <text x="499" y="372" class="ink label">signedIn ? account tools : none</text>
+  <text x="499" y="398" class="ink body">search · get · ask · read_code</text>
+  <text x="499" y="420" class="ink body">annotations stay registered</text>
+  <path d="M560 454 L560 490" class="arrow" stroke="#b45309" marker-end="url(#arrow-amber)"/>
+  <path d="M720 454 L720 490" class="arrow" stroke="#b45309" marker-end="url(#arrow-amber)"/>
+  <rect x="479" y="502" width="150" height="126" class="box"/>
+  <text x="495" y="530" class="ink label">search failure</text>
+  <text x="495" y="556" class="ink small">OpenAlex option</text>
+  <text x="495" y="578" class="ink small">source label</text>
+  <text x="495" y="600" class="ink small">not guaranteed</text>
+  <rect x="651" y="502" width="150" height="126" class="box"/>
+  <text x="667" y="530" class="ink label">get / ask</text>
+  <text x="667" y="556" class="ink small">ARXIV_ID needed</text>
+  <text x="667" y="578" class="ink small">abstract / no answer</text>
+  <text x="667" y="600" class="ink small">original error retained</text>
+  <text x="479" y="682" class="ink small">science-database dispatcher is a distinct path</text>
+  <text x="479" y="704" class="ink small">and is not traversed by these wrappers.</text>
+
+  <rect x="870" y="106" width="370" height="650" class="panel" stroke="#047857"/>
+  <text x="894" y="144" class="ink panel-title">3 · Telemetry event fields</text>
+  <text x="894" y="170" class="ink small">telemetry.ts / event construction</text>
+  <rect x="894" y="198" width="322" height="90" class="box"/>
+  <text x="914" y="228" class="ink label">generation metadata</text>
+  <text x="914" y="254" class="ink body">model · provider · token counts</text>
+  <text x="914" y="276" class="ink body">no dedicated prompt/output fields</text>
+  <path d="M1055 288 L1055 330" class="arrow" stroke="#047857" marker-end="url(#arrow-green)"/>
+  <rect x="894" y="342" width="322" height="112" class="box"/>
+  <text x="914" y="372" class="ink label">conditional errorText(value)</text>
+  <text x="914" y="398" class="ink body">trim → home path becomes ~</text>
+  <text x="914" y="420" class="ink body">over 4,000 UTF-16 units: ... + tail</text>
+  <path d="M1055 454 L1055 490" class="arrow" stroke="#047857" marker-end="url(#arrow-green)"/>
+  <rect x="894" y="502" width="322" height="126" class="note"/>
+  <text x="914" y="530" class="ink label">up to 4,003 code units</text>
+  <text x="914" y="556" class="ink body">not bytes or Unicode characters</text>
+  <text x="914" y="578" class="ink body">no general redaction shown</text>
+  <text x="914" y="600" class="ink body">delivery / retention unobserved</text>
+  <text x="894" y="682" class="ink small">README discloses errors and stack traces;</text>
+  <text x="894" y="704" class="ink small">the event boundary does not prove transport behavior.</text>
+
+  <text x="56" y="806" class="ink small">The panels share an audit topic, not a claimed date → fallback → telemetry data flow.</text>
+</svg>

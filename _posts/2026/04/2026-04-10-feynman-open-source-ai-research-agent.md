@@ -1,315 +1,137 @@
 ---
 published: true
-title: "Feynman: An Open-Source AI Research Agent That Actually Thinks Beyond Search"
-description: "A practical review of Feynman covering its research-first CLI workflows, multi-agent research roles, paper-to-code audit flow, experiment execution stack, and why it matters beyond AI search."
-categories: [AI, Agents, Developer-Tools]
-tags: [feynman, research-agent, open-source, ai-agents, literature-review, reproducibility, developer-tools]
+title: "Feynman Research Recovery Is Not Evidence Assurance"
+description: "A pinned source audit of Feynman v0.5.47 separates signed-in alpha tools, abstract-only fallbacks, prompt context, and conditional telemetry error capture."
+categories: [AI, Agents]
+tags: [feynman, research-agents, provenance, source-audit, telemetry, recovery]
 date: 2026-04-10 18:30:00 +0900
-pin: false
-mermaid: false
-math: false
+last_modified_at: 2026-10-15 19:52:27 +0900
+archive_developed: 2026-10-15
+archive_development_note: "I re-read the pinned package, release notes, README, date-context hook, alpha registration and fallback code, telemetry construction, and adjacent recovery paths on 2026-10-15, then rebuilt the note around recovery-versus-evidence boundaries instead of the original product promises."
+image_policy: source-first-fallback
 image:
-  path: "https://github.com/getcompanion-ai/feynman/raw/main/assets/hero.png"
-  alt: "Feynman CLI hero image"
-ads: false
-restored_archive: "2026-10-12"
+  path: /assets/img/posts/2026-04-10-feynman-open-source-ai-research-agent/feynman-boundaries.png
+  alt: "Transparent original diagram separating Feynman's date prompt context, direct alpha recovery branches, and telemetry error-text construction"
 ---
 
-## 🤔 Curiosity: Why do most “research agents” still feel like glorified search boxes?
+## What does Feynman's current release actually establish?
 
-A lot of AI tools now claim to help with research.
+The useful question is not whether a research agent can call more paper sources. It is what an engineer can safely conclude when a call fails, a fallback returns, or a telemetry event is constructed. I re-read the pinned Feynman repository at commit `c8d84cd1939a018a930272f48d16f79da8ec249b` and found a narrower result than the restored April headline: recovery is visible at several tool boundaries, but recovery is not evidence assurance.
 
-They search the web, summarize papers, and generate drafts quickly. That sounds useful, but most of them still break at the exact moment real research work begins.
+The pinned `package.json` declares version `0.5.47` and `engines.node` as `>=22.22.0`. Those are package declarations, not an installation or runtime result; I did not install Feynman or run its providers. The release notes describe three nearby changes: v0.5.45 paper lookups recover instead of failing, v0.5.46 resolves recent arXiv papers by DOI, and v0.5.47 updates `pi-web-access`. The notes call the first two releases `2026-10-13`, while GitHub's release API reports publication on October 14 for v0.5.45 and v0.5.46, and October 15 for v0.5.47. Release-note headings and publication timestamps are different metadata surfaces.
 
-The problem is not finding one answer. The problem is managing a messy research workflow:
+That distinction sets the reading rule for the rest of this audit: a label, a fallback object, or a prompt requirement is evidence about that surface. It is not automatically evidence that a final research artifact is complete, compliant, or preserved.
 
-- searching papers and web sources together
-- comparing claims across sources
-- checking whether a paper’s public code actually matches the write-up
-- running experiments safely
-- keeping citations intact
-- turning notes into something a person can actually reuse
+| Inspected surface | What the pinned source supports | What it does not establish |
+| --- | --- | --- |
+| `package.json` | Declared `0.5.47` package version and Node `>=22.22.0` floor | Installed compatibility or successful runtime |
+| `current-date.ts` | A local date and freshness instruction are constructed before agent start | Fresh retrieval, correct citations, or model compliance |
+| `alpha.ts` | Account-gated direct tools and labeled fallback branches | Full text, an answered question, or guaranteed fallback success |
+| `telemetry.ts` | Conditional error fields and a bounded `errorText` transform | Network delivery, retention, general redaction, or downstream use |
 
-That is why **Feynman** caught my attention.
+<figure class="explanatory-image">
+  <img src="/assets/img/posts/2026-04-10-feynman-open-source-ai-research-agent/feynman-boundaries.png" alt="Transparent original diagram separating Feynman's date prompt context, direct alpha recovery branches, and telemetry error-text construction" loading="lazy" decoding="async">
+  <figcaption>Original illustration by akillness, authored as a transparent SVG and rasterized locally with rsvg-convert; it explains separate inspected boundaries and is not source evidence.</figcaption>
+</figure>
 
-According to the official GitHub repository and project website, Feynman is not positioning itself as a generic chat assistant. It is explicitly framed as **“the open source AI research agent”**, and that difference matters. The product pitch is not “ask me anything.” The pitch is closer to: give me a research workflow, and I will operate inside it.
+[Open the transparent SVG source of this original diagram.](/assets/img/posts/2026-04-10-feynman-open-source-ai-research-agent/feynman-boundaries.svg)
 
-That is a much more interesting direction.
+## Where does freshness enter—and what remains unobserved?
 
-If you care about practical AI systems, the real question is not whether an agent can summarize a paper. The real question is whether it can support a research loop that includes evidence gathering, review, verification, and even experiment execution.
+`current-date.ts` builds a string from a supplied `Date`: “The current date is YYYY-MM-DD,” followed by instructions to verify current sources and not reject evidence merely because it is later than the model's training data. `registerCurrentDateResearchContext` installs that text in `event.systemPromptOptions.sections.current_date` inside a `before_agent_start` handler.
 
-That is the standard Feynman is trying to meet.
+This is prompt construction. It is not an observation that a source was fetched recently, that a citation matches the source, or that a model followed the instruction. The local-calendar value can help a workflow frame a question, but it does not become a freshness receipt. A final report still needs its own source URLs, pins, dates, and claim checks.
 
----
+The README makes a related provenance promise: source-heavy workflows write provenance files, and prompts, model output, paper content, and tool arguments are excluded from the stated telemetry payload. The same README explicitly discloses errors and stack traces. The right reading is not “provenance is automatic” or “no research text can ever appear.” It is that a workflow requirement and a telemetry policy need to be checked against the actual output and event construction separately.
 
-## 📚 Retrieve: What Feynman actually ships
+## Which alpha tools need sign-in, and when is recovery only a smaller answer?
 
-From the official repository, Feynman currently presents itself as a **research-first CLI built on Pi and alphaXiv**, with version **0.2.17** released on **2026-04-10**.
+The registration boundary is easy to misstate. The `research-tools.ts` caller invokes `registerAlphaTools(pi)` unconditionally. Inside `alpha.ts`, `registerAlphaTools` computes `registerAccountTool` from `signedIn`; account-dependent direct wrappers are registered only when that condition is true. The guarded set includes `alpha_search`, `alpha_get_paper`, `alpha_ask_paper`, and `alpha_read_code`. The local annotation tools are registered outside that guard. This is a registration-time condition, not proof of fresh authorization on every invocation, successful sign-in, or provider availability.
 
-### 1) It is built around research workflows, not just one-off prompts
+The direct wrappers share a `withPaperFallback` helper. When an alphaXiv call throws, the helper can try an explicitly named fallback and returns a `fallbackNote` that says the result came from that other source. That label is useful provenance at the tool-return boundary. It is not a claim that the replacement has the same scope as the failed operation.
 
-The homepage and README make the workflow orientation very explicit.
+For `alpha_search`, the fallback option is OpenAlex semantic search. The source makes that option available after an alpha failure, but no live run here shows that it returned results, how complete those results were, or whether a model used them correctly.
 
-Examples from the official docs include:
+`alpha_get_paper` and `alpha_ask_paper` are narrower. Their fallback is offered only when `ARXIV_ID` can extract an identifier from the input. The get path asks arXiv for metadata and an abstract, explicitly “no full text or sections.” The ask path says the question was not answered and points the reader to the abstract or to reading the full text with `fetch_content`. If no ID is extractable, or if the fallback itself fails, `withPaperFallback` throws a new error that retains the original alphaXiv message and appends recovery guidance naming `feynman_science_database_search` or an arXiv fetch.
 
-```bash
-feynman "what do we know about scaling laws"
-feynman deepresearch "mechanistic interpretability"
-feynman lit "RLHF alternatives"
-feynman audit 2401.12345
-feynman replicate "chain-of-thought improves math"
-```
+That means a recovered object can be useful while still being materially smaller than the requested evidence. Metadata is not full text. An abstract is not a selected methodology or results section. A recovery hint is not a completed answer. The direct alpha wrappers also do not traverse the separate science-database dispatcher recovery path; that dispatcher is a distinct surface. This analysis must not be generalized to `alpha_read_code`, which has no equivalent fallback in the inspected wrapper.
 
-That is already a stronger product definition than most agent launches.
+## Why is a fallback result not the same as evidence assurance?
 
-Instead of pretending all knowledge work is one shape, Feynman separates several distinct jobs:
+The source gives an engineer a practical audit rule. Keep at least four columns in a research record: requested operation, returned source, returned scope, and final-artifact check. A successful fallback can fill the second and third columns without filling the fourth.
 
-- source-heavy deep research
-- literature review
-- simulated peer review
-- paper-versus-code auditing
-- replication planning and execution
-- source comparison
-- paper-style drafting
-- recurring research watch loops
+For example, a search result labeled “OpenAlex semantic search” tells us that the wrapper substituted a named source if the alpha call failed. It does not prove the list was complete. An arXiv metadata response can preserve an identifier and abstract while leaving the paper's methods, experiments, and limitations unread. A provenance-writing prompt can request a sidecar while leaving actual sidecar creation and contents uninspected. Those are not accusations about the project; they are the limits of the code and sources I inspected.
 
-That matters because “research” is not one thing. A literature review and a reproducibility audit are different tasks, and a decent agent should admit that.
+This is also why the original “thinks beyond search” superiority framing does not survive the rebuild. No controlled citation-accuracy or research-quality comparison was run, and no product execution was authorized. The defensible contribution is a decision boundary: do not promote a recovered tool call to sufficient evidence until the source scope and final artifact are checked directly.
 
-### 2) The agent roles are surprisingly practical
+For a measurement-oriented companion, read [Harness engineering for agents](/posts/harness-engineering-agents/). It helps define a controlled task environment, execution protocol, and scoring evidence before a result is treated as a comparison. For a complementary handoff perspective, [Engineering discipline for AI coding agents](/posts/engineering-discipline-ai-coding-agents/) distinguishes a declared worker-validator contract from proof that an enforced path actually ran. Neither related article is evidence about Feynman's runtime; each is a next method for making the missing checks explicit.
 
-The project bundles four research agents:
+## What does telemetry capture at the error boundary?
 
-- Researcher
-- Reviewer
-- Writer
-- Verifier
+The inspected `message_end` handler builds `$ai_generation` events with model, provider, token counts, cache counts, latency, HTTP status, stop reason, and a conditional `$ai_error`. It does not include dedicated `$ai_input` or `$ai_output_choices` fields. Separately, `tool_execution_end` adds `error_message` only when a tool result is marked as an error. These are client-side event-construction paths.
 
-This is one of the most important parts of the design.
+The `errorText` helper first accepts only a string, drops empty trimmed values, trims the rest, and replaces the configured home-directory spelling (including slash-normalized form) with `~`. When the resulting JavaScript string is longer than 4,000 UTF-16 code units, it returns three dots followed by the final 4,000 code units. The maximum is therefore 4,003 UTF-16 code units, not 4,000 bytes and not a guarantee about Unicode characters. The helper shows no general redaction pass.
 
-A lot of agent tools still act like one model should gather facts, interpret them, write the answer, and validate itself in the same pass. That tends to look efficient in a demo and sloppy in actual use.
+The README already tells users that errors and stack traces can be sent. The source audit does not show hidden undisclosed telemetry, guarantee that no content can occur inside an error string, or observe network delivery, server retention, provider processing, or downstream access. Missing dedicated prompt/output fields are therefore not a blanket privacy guarantee. They are an inspected schema boundary with a conditional error-text exception.
 
-Feynman’s split is much healthier:
+These observations are intentionally separate from date context and paper recovery. The inspected files do not establish a serial “date → fallback → telemetry” pipeline, and the article does not invent one.
 
-- the Researcher gathers evidence
-- the Reviewer critiques quality
-- the Writer structures output
-- the Verifier checks citations and URLs
+## What changed since the April note?
 
-Even if the implementation evolves, that orchestration philosophy is the right one. Research quality usually improves when evidence collection, writing, and verification are not collapsed into a single monologue.
+The April note presented Feynman as a v0.2.17 research-first CLI and carried broad claims about role separation, reproducibility, distribution, and future production value. This redevelopment does not treat those claims as current evidence. It preserves the original April 10 date and URL, but answers a different question from a pinned October 15 source inspection.
 
-### 3) It connects the paper layer to the execution layer
+The current package declares `0.5.47`, and the current release notes and API metadata provide a narrow release-window view: the .45 and .46 headings say October 13 while GitHub lists their publication on October 14; .47 is listed and published on October 15. That is a metadata chronology, not proof that every inspected mechanism was introduced after April. The current source also exposes the exact boundaries described above: local-calendar prompt context, signed-in registration inside `alpha.ts`, ID-conditioned direct-alpha fallbacks, and conditional error-text construction.
 
-This is where the project becomes more than a “smart search” wrapper.
+I am not claiming an installation requirement was validated, a fallback was executed, a provider was available, or an outcome improved. The change is methodological: replace a product-strength narrative with a source-bounded inspection rule that tells the reader what to verify next.
 
-The official materials describe integrations around:
+## How should an engineer evaluate a recovered result?
 
-- [alphaXiv](https://www.alphaxiv.org/) for paper search, Q&A, code reading, and annotation
-- web search for broader external retrieval
-- session search for recalling previous work
-- preview export for browser and PDF artifacts
-- [Docker](https://www.docker.com/) for isolated local experiment execution
-- [Modal](https://modal.com/) for burst GPU compute
-- [RunPod](https://www.runpod.io/) for longer-lived GPU workloads
+Use this checklist before calling a research-agent response evidence-ready:
 
-That stack reveals the real ambition.
+1. **Pin the implementation.** Record the repository commit, package declaration, source URL, coordinate, and read date. Treat `0.5.47` and Node `>=22.22.0` as declarations until installation and runtime are separately tested.
+2. **Identify the path.** Was the operation a direct alpha wrapper, an annotation tool, or the separate science-database dispatcher? Do not merge these routes because they share a topic.
+3. **Record scope.** Preserve whether the return is a source-labeled search list, arXiv metadata/abstract, an explicit no-answer note, or the original error plus recovery guidance.
+4. **Inspect the artifact.** Open the actual provenance file, extracted sections, citations, or code diff. A prompt asking for provenance is not the provenance artifact.
+5. **Audit telemetry separately.** Note whether an event is a tool error or a generation event, whether `errorText` was applied, and which privacy questions remain unobserved.
+6. **Keep inference labeled.** Recovery can improve inspectability at a tool boundary; it does not by itself establish reliability, citation accuracy, privacy, delivery, retention, or final-answer quality.
 
-Feynman is trying to connect three worlds that are usually fragmented:
+## Key Takeaways
 
-1. reading papers
-2. verifying claims against code and sources
-3. running experiments when needed
+| Finding | Safe interpretation | Do not infer |
+| --- | --- | --- |
+| `registerAlphaTools(pi)` is unconditional, but account wrappers use `signedIn` inside `alpha.ts` | Registration and authorization are separate boundaries | Fresh per-call authorization or successful sign-in |
+| `alpha_search` can name an OpenAlex fallback | A source substitution can be disclosed at return time | Guaranteed successful or complete search results |
+| `alpha_get_paper` / `alpha_ask_paper` require an extractable `ARXIV_ID` for fallback | Recovery may be metadata/abstract-only or explicitly unanswered | Equivalent full text, sections, or a completed answer |
+| `errorText` trims, substitutes home paths, and tails over 4,000 UTF-16 code units | Conditional client-side error construction with up to 4,003 code units | Byte limits, general redaction, no-content, delivery, or retention guarantees |
+| Date context, fallback labels, and workflow provenance prompts are separate surfaces | Each can be audited with its own source and artifact check | A proven serial pipeline or final-artifact provenance |
 
-That is the right stack for anyone who thinks research should be operational, not just descriptive.
+## New Questions
 
-### 4) The distribution model is builder-friendly
+- Which tests or runtime fixtures verify that each direct fallback returns the intended scope when alphaXiv fails?
+- How does the science-database dispatcher differ in its completed-answer and full-text behavior under the same paper input?
+- Which final provenance files are created for a recovered search, abstract-only get, or explicit no-answer ask, and can their contents be checked automatically?
+- What transport, retention, and downstream-access controls apply to the conditional error fields after the client event is constructed?
+- Does a future release add dedicated generation-content fields, or does the error-text boundary remain the only conditional text path?
 
-The 2026-04-10 release, **v0.2.17**, ships standalone native bundles for macOS, Linux, and Windows, and the installer pulls tagged releases instead of arbitrary `main` branch state.
+## References
 
-The README also highlights a **skills-only** installation mode.
+**Pinned package and release metadata (read 2026-10-15):**
 
-That detail is more important than it sounds.
+- [Feynman `package.json` at commit `c8d84cd1939a018a930272f48d16f79da8ec249b`](https://raw.githubusercontent.com/Companion-Inc/feynman/c8d84cd1939a018a930272f48d16f79da8ec249b/package.json) — declared version and Node engine.
+- [Feynman release notes at commit `c8d84cd1939a018a930272f48d16f79da8ec249b`](https://raw.githubusercontent.com/Companion-Inc/feynman/c8d84cd1939a018a930272f48d16f79da8ec249b/RELEASES.md) — release-note headings and stated changes.
+- [Feynman README at commit `c8d84cd1939a018a930272f48d16f79da8ec249b`](https://raw.githubusercontent.com/Companion-Inc/feynman/c8d84cd1939a018a930272f48d16f79da8ec249b/README.md) — workflow, provenance, and telemetry statements.
+- [v0.5.45 GitHub release API record](https://api.github.com/repos/Companion-Inc/feynman/releases/tags/v0.5.45), [v0.5.46 record](https://api.github.com/repos/Companion-Inc/feynman/releases/tags/v0.5.46), and [v0.5.47 record](https://api.github.com/repos/Companion-Inc/feynman/releases/tags/v0.5.47) — publication timestamps.
 
-A lot of developers do not want another full terminal application with another runtime and another state model. Sometimes they only want the reusable research workflows and prompts. Feynman’s skills-only path acknowledges that reality.
+**Pinned implementation surfaces (read 2026-10-15):**
 
-The project also documents a local-model path through a custom provider flow, including Ollama via an OpenAI-compatible endpoint at `http://localhost:11434/v1`.
+- [`current-date.ts` at commit `c8d84cd`](https://raw.githubusercontent.com/Companion-Inc/feynman/c8d84cd1939a018a930272f48d16f79da8ec249b/extensions/research-tools/current-date.ts) — local-calendar prompt context in `before_agent_start`.
+- [`research-tools.ts` at commit `c8d84cd`](https://raw.githubusercontent.com/Companion-Inc/feynman/c8d84cd1939a018a930272f48d16f79da8ec249b/extensions/research-tools.ts) — unconditional direct-alpha registration caller.
+- [`alpha.ts` at commit `c8d84cd`](https://raw.githubusercontent.com/Companion-Inc/feynman/c8d84cd1939a018a930272f48d16f79da8ec249b/extensions/research-tools/alpha.ts) — signed-in registration, fallback labels, ID-conditioned recovery, and original-error guidance.
+- [`science-databases.ts` at commit `c8d84cd`](https://raw.githubusercontent.com/Companion-Inc/feynman/c8d84cd1939a018a930272f48d16f79da8ec249b/extensions/research-tools/science-databases.ts) — distinct dispatcher surface.
+- [`science-database-arxiv.ts` at commit `c8d84cd`](https://raw.githubusercontent.com/Companion-Inc/feynman/c8d84cd1939a018a930272f48d16f79da8ec249b/extensions/research-tools/science-database-arxiv.ts) and [`science-database-openalex.ts` at commit `c8d84cd`](https://raw.githubusercontent.com/Companion-Inc/feynman/c8d84cd1939a018a930272f48d16f79da8ec249b/extensions/research-tools/science-database-openalex.ts) — fallback source implementations.
+- [`telemetry.ts` at commit `c8d84cd`](https://raw.githubusercontent.com/Companion-Inc/feynman/c8d84cd1939a018a930272f48d16f79da8ec249b/extensions/research-tools/telemetry.ts) — event fields and `errorText` transform.
 
-That lowers the barrier for people who want more control over cost, privacy, or model routing.
+**Related methods (read 2026-10-15):**
 
-### 5) The release cadence suggests active packaging and workflow work
-
-Recent commit activity around the 2026-04-10 release includes changes like:
-
-- `switch release workflow to binary only`
-- `verify rpc and website gates`
-- `remove stale web access override`
-- `document local model setup`
-- `harden installers rendering and dependency hygiene`
-- `fix startup packaging and content guardrails`
-
-That is not flashy benchmark theater. It is infrastructure work.
-
-And frankly, that is a good sign.
-
-A serious agent project is not only about adding new prompts. It is about making setup, packaging, runtime behavior, and operational safety less fragile.
-
----
-
-## 🖼️ Source Images Worth Including
-
-### Official hero image
-![Feynman CLI hero image](https://github.com/getcompanion-ai/feynman/raw/main/assets/hero.png)
-
-### GitHub preview image
-![Feynman GitHub preview](https://opengraph.githubassets.com/2df7e0995be2b6d55cff5adc55da8b2d41d020696b4bfdf0cc356bbe4985b5a8/getcompanion-ai/feynman)
-
-These are enough to ground the post visually without turning it into a screenshot dump.
-
----
-
-## Concrete example: Where Feynman could be genuinely useful
-
-Imagine you are investigating a new LLM paper that claims better coding reliability.
-
-A shallow workflow would look like this:
-
-- read the abstract
-- skim a few charts
-- ask a chatbot for a summary
-- tweet a conclusion too early
-
-A Feynman-style workflow is much more interesting:
-
-1. Run a literature review on the paper’s topic area.
-2. Use deep research to gather competing papers and external commentary.
-3. Audit the paper against the linked repository.
-4. Replicate one key experiment locally or on GPU infrastructure.
-5. Draft a paper-style output with citations.
-6. Re-run verification so the references are still valid.
-
-That is not just “content generation.”
-It is a lightweight research operations stack.
-
-For solo builders, independent researchers, or technical writers, that is arguably the right abstraction. The real bottleneck is rarely typing fast. It is preserving research discipline across multiple steps without dropping provenance.
-
----
-
-## A simplified mental model
-
-```python
-def run_research_question(topic):
-    evidence = researcher.collect(
-        papers=True,
-        web=True,
-        repos=True,
-        docs=True,
-        query=topic,
-    )
-
-    review = reviewer.critique(evidence)
-    draft = writer.compose(evidence, review)
-    verified = verifier.check_links_and_citations(draft)
-
-    return verified
-```
-
-That is not the literal implementation.
-It is the product idea in compact form.
-
-And it explains why Feynman feels more promising than a generic “AI for research” label.
-
----
-
-## 💡 Innovation: Feynman points toward research ops, not just AI search
-
-The most important thing about Feynman is not that it can search papers.
-A lot of tools can do that.
-
-The important thing is that it treats research as an operational workflow with distinct stages:
-
-- retrieve
-- compare
-- review
-- verify
-- replicate
-- publish
-
-That is a stronger product philosophy than most current “research agents.”
-
-I think this matters for three reasons.
-
-### 1) It pushes agents toward accountable outputs
-
-The project repeatedly emphasizes cited, source-grounded output and URL verification.
-
-That sounds basic, but it is still one of the biggest weaknesses in AI-assisted research. Many systems can sound informed while quietly decoupling their output from real evidence.
-
-Any agent that wants to be useful in research has to make provenance first-class.
-Feynman at least appears to understand that.
-
-### 2) It treats reproducibility as part of the interface
-
-The `/audit` and `/replicate` ideas are especially strong.
-
-Too many AI research tools stop at summarization. But the gap between a paper’s claim and the behavior of its public code is often where the real story lives.
-
-If Feynman keeps improving its audit and replication loops, it could become useful not only for researchers, but also for:
-
-- technical due diligence
-- model vendor evaluation
-- internal R&D reviews
-- ML engineering retrospectives
-- high-signal technical blogging
-
-That is much more valuable than another generic “AI researcher” chatbot.
-
-### 3) It suggests a future where research agents become infrastructure
-
-The long-term opportunity is not one magical agent that knows everything.
-The opportunity is a dependable workflow layer for evidence-driven work.
-
-In that future, a research agent is less like a search engine and more like a compact operating system for technical investigation.
-
-Feynman is not fully there yet, of course.
-The project is still early, and early agent products often look cleaner in the README than in repeated real-world use.
-
-But the direction is solid.
-
-If the team can keep improving:
-
-- source reliability
-- experiment reproducibility
-- model and provider flexibility
-- artifact export
-- failure recovery in long research loops
-
-then Feynman could become one of the more interesting open-source projects in the research-agent category.
-
----
-
-## Final Thoughts
-
-My main takeaway is simple.
-
-Feynman is interesting not because it promises “AI research,” but because it tries to formalize the parts that usually get hand-waved away:
-
-- evidence gathering
-- role separation
-- citation verification
-- code and paper comparison
-- experiment execution
-
-That makes it feel less like a search demo and more like the beginning of a research workflow system.
-
-And that is the right direction.
-
-The next generation of useful AI research tools will probably not win by sounding smarter in chat. They will win by making evidence-heavy work easier to run, easier to verify, and easier to repeat.
-
-Feynman looks much closer to that future than most.
-
-## Sources
-
-- GitHub repository: https://github.com/getcompanion-ai/feynman
-- Project site: https://feynman.is/
-- README: https://raw.githubusercontent.com/getcompanion-ai/feynman/main/README.md
-- Package metadata: https://raw.githubusercontent.com/getcompanion-ai/feynman/main/package.json
-- Releases: https://github.com/getcompanion-ai/feynman/releases
+- [Harness engineering for agents](/posts/harness-engineering-agents/) — controlled evidence design for model, task, tool, and environment comparisons.
+- [Engineering discipline for AI coding agents](/posts/engineering-discipline-ai-coding-agents/) — declared handoffs versus enforced proof.

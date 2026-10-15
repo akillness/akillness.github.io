@@ -235,9 +235,9 @@
       "links_at_intake": 12,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-15",
+      "survey_note": "Rebuilt as a source-pinned Feynman recovery-versus-evidence-assurance audit at c8d84cd1939a018a930272f48d16f79da8ec249b. Distinguishes registration-time account gates, bounded paper fallbacks, date context and conditional error-text capture; no runtime, freshness, privacy or research-quality guarantee is claimed."
     },
     {
       "path": "_posts/2026/04/2026-04-15-supergemma4-local-agent-workloads.md",
