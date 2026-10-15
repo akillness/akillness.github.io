@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { imageFallbackContextFromDisk } from './lib/source-image-manifest.mjs';
+import { publicationPathErrors, resolvePublicationPost } from './lib/archive-publication-path.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import {
@@ -56,10 +57,14 @@ const readJson = (file) => {
 };
 const walk = (dir, predicate) => {
   if (!fs.existsSync(dir)) return [];
+  const pathErrors = publicationPathErrors(dir);
+  failures.push(...pathErrors);
+  if (pathErrors.length) return [];
   const found = [];
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) found.push(...walk(full, predicate));
+    if (entry.isSymbolicLink()) failures.push(`Package contains a forbidden symlink: ${full}`);
+    else if (entry.isDirectory()) found.push(...walk(full, predicate));
     else if (predicate(full)) found.push(full);
   }
   return found;
@@ -143,8 +148,11 @@ let article = '';
 let frontMatter = '';
 let body = '';
 let draftPath = null;
+let publicationPost = null;
 if (drafts.length === 1) {
   draftPath = drafts[0];
+  publicationPost = resolvePublicationPost({ repoRoot, draftRoot: path.join(current, 'draft'), draftPath, manifest });
+  failures.push(...publicationPost.errors);
   article = fs.readFileSync(draftPath, 'utf8');
   const match = article.match(/^---\s*\n([\s\S]*?)\n---\s*\n/);
   pass(Boolean(match), 'Draft has no valid YAML front matter');
@@ -174,10 +182,12 @@ const articleStem = draftPath ? path.basename(draftPath, '.md') : '';
 const expectedAssetPrefix = articleStem ? `/assets/img/posts/${articleStem}/` : '';
 if (expectedAssetPrefix) {
   pass(imagePath.startsWith(expectedAssetPrefix), `Hero image must be inside ${expectedAssetPrefix}`);
-  const livePost = path.join(repoRoot, '_posts', path.basename(draftPath));
+  const livePost = path.join(repoRoot, publicationPost.postPath);
   const liveAssetDir = path.join(repoRoot, expectedAssetPrefix.replace(/^\//, ''));
-  pass(!fs.existsSync(livePost), `Live article target already exists: ${path.relative(repoRoot, livePost)}`);
-  pass(!fs.existsSync(liveAssetDir), `Live asset target already exists: ${path.relative(repoRoot, liveAssetDir)}`);
+  if (!publicationPost.archive) {
+    pass(!fs.existsSync(livePost), `Live article target already exists: ${path.relative(repoRoot, livePost)}`);
+    pass(!fs.existsSync(liveAssetDir), `Live asset target already exists: ${path.relative(repoRoot, liveAssetDir)}`);
+  }
 }
 
 const parsedDate = Date.parse(dateValue);
@@ -191,7 +201,6 @@ if (draftPath && manifest?.target_date) {
   const expectedSlug = path.basename(draftPath, '.md').replace(/^\d{4}-\d{2}-\d{2}-/, '');
   pass(draftBasename.startsWith(`${manifest.target_date}-`), 'Draft filename does not match manifest target_date');
   pass(manifest.slug === expectedSlug, `Manifest slug does not match draft filename: ${manifest.slug} vs ${expectedSlug}`);
-  pass(manifest.article_path === `_posts/${draftBasename}`, `Manifest article_path does not match draft: ${manifest.article_path}`);
   pass(manifest.asset_dir === `assets/img/posts/${articleStem}/`, `Manifest asset_dir does not match draft: ${manifest.asset_dir}`);
 }
 

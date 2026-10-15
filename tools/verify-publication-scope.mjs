@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { SOURCE_FIRST_FALLBACK, imageFallbackContextFromDisk, validateImageFallback } from './lib/source-image-manifest.mjs';
+import { ARCHIVE_LEDGER_PATH, publicationPathErrors, resolvePublicationPost, archiveGraduationErrors } from './lib/archive-publication-path.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -20,11 +21,15 @@ const current = path.join(repoRoot, '_workspace', 'current');
 const validationDir = path.join(current, 'validation');
 const scopeFile = path.join(validationDir, 'path-scope.txt');
 const failures = [];
+let selectedPost = null;
 const check = (condition, message) => {
   if (!condition) failures.push(message);
 };
 const walkFiles = (dir) => {
   if (!fs.existsSync(dir)) return [];
+  const pathErrors = publicationPathErrors(dir);
+  failures.push(...pathErrors);
+  if (pathErrors.length) return [];
   const found = [];
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
@@ -45,12 +50,23 @@ function expectedPackagePaths({ checkCollisions = true } = {}) {
   const basename = path.basename(posts[0]);
   const stem = path.basename(posts[0], '.md');
   check(/^\d{4}-\d{2}-\d{2}-[a-z0-9][a-z0-9-]*$/.test(stem), `Unsafe article filename: ${basename}`);
+  let manifest = null;
+  const manifestPath = path.join(current, 'manifest.json');
+  const manifestErrors = publicationPathErrors(manifestPath);
+  failures.push(...manifestErrors);
+  if (!manifestErrors.length) {
+    try { manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')); }
+    catch (error) { failures.push(`Cannot read publication manifest: ${error.message}`); }
+  }
+  selectedPost = resolvePublicationPost({ repoRoot, draftRoot, draftPath: posts[0], manifest });
+  failures.push(...selectedPost.errors);
 
   const packageAssetDir = path.join(draftRoot, 'assets', 'img', 'posts', stem);
   const assets = walkFiles(packageAssetDir);
   check(assets.length >= 1, `No packaged assets found for ${stem}`);
 
-  const paths = [`_posts/${basename}`];
+  const paths = [selectedPost.postPath];
+  if (selectedPost.archive) paths.push(ARCHIVE_LEDGER_PATH);
   const refPrefix = referencesPrefix(stem);
   const referenceImages = [];
   for (const asset of assets) {
@@ -84,10 +100,10 @@ function expectedPackagePaths({ checkCollisions = true } = {}) {
     `Package must ship ${MINIMUM_REFERENCE_IMAGES}–${MAXIMUM_REFERENCE_IMAGES} qualifying source-derived reference images under ${refPrefix}, found ${referenceImages.length}`
   );
 
-  if (checkCollisions) {
-    const livePost = path.join(repoRoot, '_posts', basename);
+  if (checkCollisions && !selectedPost.archive) {
+    const livePost = path.join(repoRoot, selectedPost.postPath);
     const liveAssets = path.join(repoRoot, 'assets', 'img', 'posts', stem);
-    check(!fs.existsSync(livePost), `Live article target already exists: _posts/${basename}`);
+    check(!fs.existsSync(livePost), `Live article target already exists: ${selectedPost.postPath}`);
     check(!fs.existsSync(liveAssets), `Live asset target already exists: assets/img/posts/${stem}/`);
   }
   return [...new Set(paths)].sort();
@@ -101,7 +117,7 @@ if (stagedMode) {
     : [];
   expected = expectedPackagePaths({ checkCollisions: false });
   check(JSON.stringify(recorded) === JSON.stringify(expected), `Recorded path scope is stale or edited. Derived ${JSON.stringify(expected)}, recorded ${JSON.stringify(recorded)}`);
-  const result = spawnSync('git', ['diff', '--cached', '--name-only', '--diff-filter=ACMRD'], {
+  const result = spawnSync('git', ['diff', '--cached', '--name-only'], {
     cwd: repoRoot,
     encoding: 'utf8'
   });
@@ -110,20 +126,35 @@ if (stagedMode) {
   check(staged.length > 0, 'No staged publication paths found');
   check(JSON.stringify(staged) === JSON.stringify(expected), `Staged paths do not exactly match validated scope. Expected ${JSON.stringify(expected)}, got ${JSON.stringify(staged)}`);
   for (const file of expected) {
-    const packaged = path.join(current, 'draft', file);
+    const packaged = file === ARCHIVE_LEDGER_PATH ? path.join(repoRoot, file) : path.join(current, 'draft', file);
     check(fs.existsSync(packaged), `Validated package file is missing: ${file}`);
+    failures.push(...publicationPathErrors(packaged));
+    const stagedEntry = spawnSync('git', ['ls-files', '--stage', '--', file], { cwd: repoRoot, encoding: 'utf8' });
+    check(stagedEntry.status === 0 && /^100644 [0-9a-f]{40,64} 0\t[^\n]+\n?$/.test(stagedEntry.stdout), `Staged publication file must be a regular, resolved, non-executable file: ${file}`);
     // Reference images routinely exceed Node's 1 MiB default stdout buffer, which would
     // otherwise fail with ENOBUFS and be misread as an unreadable staged file.
     const stagedBlob = spawnSync('git', ['show', `:${file}`], { cwd: repoRoot, maxBuffer: 64 * 1024 * 1024 });
     check(stagedBlob.status === 0, `Cannot read staged file content: ${file}`);
     if (fs.existsSync(packaged) && stagedBlob.status === 0) {
       check(stagedBlob.stdout.equals(fs.readFileSync(packaged)), `Staged file differs from validated package: ${file}`);
+      if (file === ARCHIVE_LEDGER_PATH && selectedPost?.archive) {
+        const baseline = spawnSync('git', ['show', `HEAD:${ARCHIVE_LEDGER_PATH}`], { cwd: repoRoot, encoding: 'utf8' });
+        check(baseline.status === 0, 'Cannot read the committed archive ledger baseline');
+        if (baseline.status === 0) {
+          try {
+            failures.push(...archiveGraduationErrors({ before: JSON.parse(baseline.stdout), after: JSON.parse(stagedBlob.stdout.toString('utf8')),
+              postPath: selectedPost.postPath, article: fs.readFileSync(path.join(current, 'draft', selectedPost.postPath), 'utf8'),
+              restoredSources: selectedPost.archive.restoredSources }));
+          } catch (error) { failures.push(`Cannot verify staged archive graduation: ${error.message}`); }
+        }
+      }
     }
   }
   for (const file of staged) {
-    const postMatch = file.match(/^_posts\/(\d{4}-\d{2}-\d{2}-[a-z0-9][a-z0-9-]*)\.md$/);
-    const assetMatch = file.match(/^assets\/img\/posts\/(\d{4}-\d{2}-\d{2}-[a-z0-9][a-z0-9-]*)\/.+/);
-    check(Boolean(postMatch || assetMatch), `Forbidden staged publication path: ${file}`);
+    const postMatch = file === selectedPost?.postPath;
+    const assetMatch = file.startsWith(`assets/img/posts/${selectedPost?.stem}/`);
+    const ledgerMatch = file === ARCHIVE_LEDGER_PATH && Boolean(selectedPost?.archive);
+    check(postMatch || assetMatch || ledgerMatch, `Forbidden staged publication path: ${file}`);
   }
 } else {
   expected = expectedPackagePaths();

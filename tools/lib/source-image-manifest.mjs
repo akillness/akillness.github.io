@@ -577,7 +577,7 @@ export function validateSourceImageManifest({
 
 // Check ancestors in order, before any directory enumeration or byte read.
 // Callers using platform aliases (such as /tmp) must supply the canonical path.
-const pathHasNoSymlinks = (target) => {
+export const pathHasNoSymlinks = (target) => {
   const absolute = path.resolve(target);
   let current = path.parse(absolute).root;
   try {
