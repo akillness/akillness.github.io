@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Claw Dev launcher control plane and separate client data paths</title>
+  <desc id="desc">The launcher configures and spawns the bundled terminal client and compatibility proxy in the control plane. In the data plane, the bundled client uses separate alternatives: Anthropic configuration bypasses this launcher's compatibility proxy, while compatibility configuration enters local Anthropic-shaped ingress and then provider-specific adapters. The Anthropic branch does not clear inherited ANTHROPIC_BASE_URL or ANTHROPIC_AUTH_TOKEN, so the distinction is configuration-level rather than an unconditional network-destination guarantee. Local authentication is conditional on a usable expected token. The Copilot menu label targets GitHub Models, retired 2026-07-30.</desc>
+  <defs>
+    <marker id="arrow-control" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#6b7280"/>
+    </marker>
+    <marker id="arrow-data" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0f766e"/>
+    </marker>
+    <style>
+      .heading { font: 700 27px system-ui, -apple-system, sans-serif; fill: #111827; }
+      .sub { font: 600 18px system-ui, -apple-system, sans-serif; fill: #374151; }
+      .label { font: 600 16px system-ui, -apple-system, sans-serif; fill: #111827; }
+      .body { font: 400 14px system-ui, -apple-system, sans-serif; fill: #374151; }
+      .small { font: 400 12px system-ui, -apple-system, sans-serif; fill: #4b5563; }
+      .box { fill: #f8fafc; stroke: #334155; stroke-width: 2; rx: 14; }
+      .proxy { fill: #ecfeff; stroke: #0f766e; stroke-width: 2; rx: 14; }
+      .provider { fill: #fefce8; stroke: #a16207; stroke-width: 2; rx: 12; }
+      .boundary { fill: none; stroke: #94a3b8; stroke-width: 2; stroke-dasharray: 8 7; rx: 18; }
+      .control { stroke: #6b7280; stroke-width: 2.5; fill: none; marker-end: url(#arrow-control); }
+      .data { stroke: #0f766e; stroke-width: 3; fill: none; marker-end: url(#arrow-data); }
+      .dash-data { stroke: #0f766e; stroke-width: 2.5; stroke-dasharray: 7 6; fill: none; marker-end: url(#arrow-data); }
+    </style>
+  </defs>
+
+  <text x="48" y="48" class="heading">Claw Dev: familiar ingress, non-equivalent provider contracts</text>
+  <text x="48" y="76" class="body">The launcher is the control plane; the bundled client owns the request data paths.</text>
+
+  <rect x="42" y="104" width="1116" height="144" class="boundary"/>
+  <text x="66" y="136" class="sub">Control plane: launcher-owned startup and configuration</text>
+  <rect x="70" y="162" width="220" height="64" class="box"/>
+  <text x="180" y="188" text-anchor="middle" class="label">claw-dev launcher</text>
+  <text x="180" y="210" text-anchor="middle" class="small">provider, port, environment</text>
+  <rect x="430" y="162" width="260" height="64" class="box"/>
+  <text x="560" y="188" text-anchor="middle" class="label">bundled terminal client</text>
+  <text x="560" y="210" text-anchor="middle" class="small">same client process</text>
+  <rect x="850" y="162" width="250" height="64" class="proxy"/>
+  <text x="975" y="188" text-anchor="middle" class="label">compatibility proxy</text>
+  <text x="975" y="210" text-anchor="middle" class="small">spawn or reuse; local health</text>
+  <path d="M290 194 L430 194" class="control"/>
+  <path d="M290 214 C470 260 760 260 850 208" class="control"/>
+  <text x="360" y="184" text-anchor="middle" class="small">configures / spawns</text>
+  <text x="600" y="268" text-anchor="middle" class="small">compat token is assigned after proxy startup in source order</text>
+
+  <rect x="42" y="292" width="1116" height="398" class="boundary"/>
+  <text x="66" y="324" class="sub">Data plane: bundled client origin and separate alternatives</text>
+
+  <rect x="70" y="420" width="240" height="104" class="box"/>
+  <text x="190" y="450" text-anchor="middle" class="label">bundled terminal client</text>
+  <text x="190" y="473" text-anchor="middle" class="body">request data origin</text>
+  <text x="190" y="497" text-anchor="middle" class="small">not a request hop through launcher</text>
+
+  <rect x="382" y="350" width="250" height="100" class="box"/>
+  <text x="507" y="380" text-anchor="middle" class="label">Anthropic configuration</text>
+  <text x="507" y="404" text-anchor="middle" class="body">ANTHROPIC_API_KEY</text>
+  <text x="507" y="426" text-anchor="middle" class="small">bypasses this launcher's compat proxy</text>
+
+  <rect x="382" y="520" width="250" height="100" class="box"/>
+  <text x="507" y="550" text-anchor="middle" class="label">compatibility configuration</text>
+  <text x="507" y="574" text-anchor="middle" class="body">loopback ANTHROPIC_BASE_URL</text>
+  <text x="507" y="596" text-anchor="middle" class="small">enters local ingress</text>
+
+  <rect x="704" y="482" width="242" height="138" class="proxy"/>
+  <text x="825" y="512" text-anchor="middle" class="label">Anthropic-shaped ingress</text>
+  <text x="825" y="536" text-anchor="middle" class="body">/v1/messages and bounded routes</text>
+  <text x="825" y="554" text-anchor="middle" class="small">auth guard only with a</text>
+  <text x="825" y="570" text-anchor="middle" class="small">usable expected token</text>
+  <text x="825" y="590" text-anchor="middle" class="small">model label may echo request</text>
+  <text x="825" y="608" text-anchor="middle" class="small">selected adapters compact requests</text>
+
+  <rect x="990" y="430" width="150" height="190" class="provider"/>
+  <text x="1065" y="458" text-anchor="middle" class="label">provider</text>
+  <text x="1065" y="480" text-anchor="middle" class="body">adapters</text>
+  <text x="1065" y="510" text-anchor="middle" class="small">OpenAI / Gemini</text>
+  <text x="1065" y="530" text-anchor="middle" class="small">Groq / OpenRouter</text>
+  <text x="1065" y="550" text-anchor="middle" class="small">Ollama / z.ai</text>
+  <text x="1065" y="574" text-anchor="middle" class="small">Copilot menu →</text>
+  <text x="1065" y="592" text-anchor="middle" class="small">GitHub Models</text>
+  <text x="1065" y="610" text-anchor="middle" class="small">retired 2026-07-30</text>
+
+  <path d="M310 452 C340 430 350 406 382 402" class="data"/>
+  <path d="M310 500 C340 530 350 560 382 570" class="data"/>
+  <path d="M632 570 L704 550" class="data"/>
+  <path d="M946 550 L990 550" class="data"/>
+
+  <rect x="704" y="350" width="436" height="82" class="provider"/>
+  <text x="922" y="378" text-anchor="middle" class="label">Anthropic destination (configured)</text>
+  <text x="922" y="397" text-anchor="middle" class="small">Configuration branch, not a network-destination guarantee.</text>
+  <text x="922" y="412" text-anchor="middle" class="small">Inherited base URL and auth token are not cleared.</text>
+  <text x="922" y="427" text-anchor="middle" class="small">ANTHROPIC_BASE_URL / ANTHROPIC_AUTH_TOKEN</text>
+  <path d="M632 400 L704 390" class="data"/>
+
+  <rect x="382" y="642" width="758" height="70" class="provider"/>
+  <text x="761" y="665" text-anchor="middle" class="small">Compat proxy reconstructs Anthropic-shaped blocks, synthesized SSE, and character-based usage estimates locally.</text>
+  <text x="761" y="685" text-anchor="middle" class="small">Compaction applies to OpenAI, Groq, OpenRouter, Copilot and z.ai; Gemini and Ollama bypass these compaction helpers.</text>
+  <path d="M825 620 L825 642" class="dash-data"/>
+
+  <text x="66" y="730" class="small">Source-derived architecture map; arrows distinguish control/data paths and are not a runtime trace.</text>
+</svg>

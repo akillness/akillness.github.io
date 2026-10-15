@@ -207,9 +207,9 @@
       "links_at_intake": 2,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-15",
+      "survey_note": "Rebuilt from claw-dev at 16e7958fe761ab2e12c9775a0b5921b8a2bedb28 and current GitHub documentation including its July 30, 2026 Models retirement notice. The source audit traces proxy startup before client session-token assignment, provider-specific request compaction, translated/buffered streaming and estimated usage. Original date and URL retained, source imagery rights audited and an original explanatory figure supplied. No provider call, authentication, performance or product-runtime experiment was performed."
     },
     {
       "path": "_posts/2026/04/2026-04-07-autobe-vs-claude-code-verification-vs-flexibility.md",

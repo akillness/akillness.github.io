@@ -1,435 +1,186 @@
 ---
 published: true
-title: "Claw Dev: One Terminal Coding Agent, Multiple Model Backends"
-description: "A practical breakdown of Claw Dev, a multi-provider coding assistant launcher that keeps a Claude Code–style terminal workflow while routing requests to Anthropic, OpenAI, Gemini, Groq, OpenRouter, Copilot, z.ai, or Ollama."
-categories: [AI, Developer-Tools, Agents]
-tags: [claw-dev, coding-agent, claude-code, openrouter, gemini, OpenAI, ollama, developer-tools, terminal-ai, ai-engineering]
+title: "Claw Dev sets its session token after starting the proxy"
+description: "Claw Dev starts or reuses its proxy before assigning the client token. A pinned audit traces authentication, buffered streams, and retired GitHub Models."
+categories: [AI, Tooling]
+tags: [claw-dev, coding-agent, provider-compatibility, claude-code, openrouter, ollama, terminal-ai, source-audit]
 date: 2026-04-03 10:00:00 +0900
+last_modified_at: 2026-10-15 16:01:38 +0900
+archive_developed: "2026-10-15"
+archive_development_note: "Rebuilt from claw-dev at 16e7958 and GitHub's July 30, 2026 retirement notice. This static audit traces session-token initialization and translated request/response boundaries; no provider call, authentication test or performance experiment was run."
+permalink: /posts/claw-dev-multi-provider-coding-agent/
 pin: false
 mermaid: false
 math: false
+image_policy: source-first-fallback
 image:
-  path: "https://opengraph.githubassets.com/4e683afe902ed8918d04394316b48753f5febbfc36101ad783fb21693a0a52f9/akillness/claw-dev"
-  alt: "Claw Dev GitHub preview"
-ads: false
-restored_archive: "2026-10-12"
+  path: /assets/img/posts/2026-04-03-claw-dev-multi-provider-coding-agent/launcher-proxy-contract-boundary.png
+  alt: "Original diagram separating Claw Dev launcher control flow from the Anthropic-shaped client endpoint and provider adapter data path"
+  credit: "Original illustration by jeopi (AI-assisted SVG); not source evidence."
 ---
 
-## 🤔 Curiosity: Why does every coding agent still want to lock you into one model stack?
+## What does Claw Dev preserve when the backend changes?
 
-Most coding agents are still designed as if model choice and workflow choice are the same thing.
+The April note about Claw Dev got one important thing right: a bundled terminal client can be pointed at more than one model backend. It also made the familiar leap from a provider menu to a portability story.
 
-Pick Claude, and you get one terminal experience.  
-Pick Gemini, and you usually need another wrapper or a different setup.  
-Pick Ollama, and now you are dealing with a completely different local path.  
-Pick OpenRouter, and flexibility goes up, but the interface often becomes more fragmented.
+A pinned Source Audit changes the size of that conclusion: I re-read the launcher, compatibility proxy, provider catalog, package metadata, and current GitHub service documentation at the dates listed in References.
 
-That is the problem **Claw Dev** is trying to solve.
+At commit `16e7958fe761ab2e12c9775a0b5921b8a2bedb28`, Claw Dev has one Anthropic configuration branch and seven compatibility-provider branches around the same bundled client. That is a real design boundary. It is not evidence that eight backends behave interchangeably, or that the workflow-preservation benefit has been measured.
 
-After scraping through the repository closely, what stands out is not just “another AI coding CLI.” It is a practical attempt to preserve one Claude Code–style terminal workflow while swapping the actual model backend underneath it.
+The more useful finding is lower-level: the launcher starts or accepts the proxy before it assigns the fresh client session token, while the proxy reads its expected token during module initialization. Around that ordering, the project also reconstructs streaming, estimates token usage locally, compacts requests with provider-dependent heuristics, and can return a model label that is not an upstream execution receipt. The interface looks familiar because the boundary is deliberately shaped like Anthropic's API. The contracts underneath it remain different.
 
-That is a more important problem than it first appears.
+<figure class="explanatory-image">
+  <img src="/assets/img/posts/2026-04-03-claw-dev-multi-provider-coding-agent/launcher-proxy-contract-boundary.png" alt="Original diagram with the bundled client as data-plane origin, separate Anthropic and compatibility paths, and provider adapters behind local ingress.">
+  <figcaption>Original illustration by jeopi (AI-assisted SVG); not source evidence. Compaction applies to OpenAI, Groq, OpenRouter, Copilot and z.ai; Gemini and Ollama bypass these compaction helpers.</figcaption>
+</figure>
 
-Because for many developers, the real bottleneck is no longer access to models. It is the friction of changing everything else when the model changes.
+[Open the original SVG diagram](/assets/img/posts/2026-04-03-claw-dev-multi-provider-coding-agent/launcher-proxy-contract-boundary.svg).
 
----
+## What the old note already got right—and what it could not show
 
-## 📚 Retrieve: What Claw Dev actually is
+The restored article already distinguishes direct Anthropic mode from proxy-backed modes and argues for a stable terminal workflow. That is not a new discovery in this rebuild. The repository README says the same thing in broad terms, and the old note explains the direct/proxy split under “What Claw Dev actually is” and “How the architecture works.”
 
-At a high level, Claw Dev is a local multi-provider launcher built around a bundled terminal client.
+What the old note did not provide was pinned control-flow evidence for the boundaries that matter when an agent session becomes a long sequence of tool-rich requests. It did not trace when the local session token exists relative to the proxy process, or separate local health from upstream readiness. It treated an Anthropic-shaped interface as a broad interoperability signal without showing the lossy and reconstructed parts of that interface.
 
-The repository describes the supported paths clearly:
+That distinction matters for adoption. A familiar route name can be useful compatibility engineering without being a complete Anthropic API implementation. A model picker can make switching convenient without proving that a provider accepts the selected identifier. A healthy loopback process can be ready to answer `/health` while its upstream account, model, or endpoint remains untested.
 
-- Anthropic direct mode with `ANTHROPIC_API_KEY`
-- OpenAI through a local Anthropic-compatible proxy
-- Gemini through a local Anthropic-compatible proxy
-- Groq through a local Anthropic-compatible proxy
-- OpenRouter through a local Anthropic-compatible proxy
-- Copilot through a GitHub Models path
-- z.ai through a local Anthropic-compatible proxy
-- Ollama through a local Anthropic-compatible proxy
+The repository tip returned by the inspected fork was still the April 1 commit, whose message is `Fix Copilot tool schema compatibility`. The dated change that is material to this rebuild is elsewhere: GitHub officially retired GitHub Models, including its inference API, on July 30, 2026. The branch labelled Copilot in this source targets that GitHub Models service, not a GitHub Copilot service API. The menu label therefore cannot be carried forward as current Copilot integration.
 
-That architecture matters.
+## The finding is in startup order, not menu size
 
-This is not just a model picker.  
-It is a compatibility strategy.
+The launcher has two high-level paths. In Anthropic mode, `configureAnthropic` prepares `ANTHROPIC_API_KEY` and launches the bundled client directly. In every other menu branch—OpenAI, Gemini, Groq, OpenRouter, Copilot, z.ai, and Ollama—the launcher configures a provider, calls `ensureCompatProxy`, points the client at a loopback `ANTHROPIC_BASE_URL`, assigns `ANTHROPIC_AUTH_TOKEN`, removes `ANTHROPIC_API_KEY`, primes model choices, and launches the same bundled client. The Anthropic branch does not clear inherited `ANTHROPIC_BASE_URL` or `ANTHROPIC_AUTH_TOKEN`, so this is a configuration distinction rather than an unconditional network-destination guarantee.
 
-Instead of rewriting the whole terminal UX for each provider, Claw Dev keeps the experience anchored around one bundled client and translates the backend calls as needed.
+The exact sequence is the important part. In `main()` the source performs:
 
-### The repo has two personalities
+```js
+await ensureCompatProxy(provider, env);
+env.ANTHROPIC_BASE_URL = `http://127.0.0.1:${env.ANTHROPIC_COMPAT_PORT}`;
+env.ANTHROPIC_AUTH_TOKEN = `claw-dev-proxy-${randomUUID()}`;
+delete env.ANTHROPIC_API_KEY;
+```
 
-One interesting thing about the repository is that it contains both:
+`ensureCompatProxy` passes its environment to the spawned `proxy:compat` process before returning. The proxy module then reads `process.env.ANTHROPIC_AUTH_TOKEN` into `LOCAL_PROXY_AUTH_TOKEN` while it initializes. The newly generated token is assigned in the parent launcher after that startup path.
 
-- a bundled terminal client inside `Leonxlnx-claude-code/`
-- and a smaller clean-room TypeScript layer in `src/`
+[INFERENCE] A newly spawned proxy reads its startup token state, not the UUID assigned later for the client: without a usable expected token its guard returns immediately; with a different expected token, the client's later token can be rejected. An accepted existing proxy retains its own initialized token state. No process, authentication failure, exploitability, or affected-user count was demonstrated for this audit.
 
-That smaller layer shows the core idea in a very readable form: there is a simple coding agent abstraction, tool definitions, provider adapters, and a compatibility proxy.
+The launcher does perform a health check, but the check is narrower than its name might suggest. `isHealthyProxy()` requests the local `/health` URL and checks that the response contains the configured provider and model strings. The proxy's health response is built from `PROVIDER` and `ACTIVE_MODEL`; it does not call the upstream service. The launcher retries this local identity check up to 50 times with a 250 ms delay between attempts. That is process/startup coordination, not upstream readiness, account authorization, or model availability.
 
-So the repo works on two levels:
+Ollama makes the same boundary visible in a different way. Its adapter defaults to `http://127.0.0.1:11434`, but `OLLAMA_BASE_URL` is configurable and can point at a remote server. The launcher prints a reminder to make sure Ollama is running and that the model is pulled; it does not verify either condition before starting the bundled client. “Local-only” and “zero cloud dependency” are therefore not unconditional properties of the implementation.
 
-1. as a usable launcher for the bundled client
-2. as a more inspectable example of how to build a provider-swappable coding agent loop
+## The proxy implements a bounded local surface
 
-That dual structure makes the project more useful than a normal wrapper repo.
+The compatibility proxy is not a drop-in implementation of every Anthropic endpoint. Its request handler explicitly covers:
 
----
-
-## How the architecture works
-
-The README reduces the system into two operating modes:
-
-- **Anthropic mode**
-  - the bundled client talks to Anthropic directly
-- **Compatibility mode**
-  - the bundled client talks to the local proxy
-  - the local proxy translates Anthropic-style `/v1/messages` requests into OpenAI, Gemini, Groq, OpenRouter, Ollama, Copilot, or z.ai API calls
-
-That is the central design move.
-
-Instead of adapting the UI to every provider, Claw Dev adapts providers to the UI.
-
-That is a strong decision because Claude Code–style terminal workflows are not just about model output. They are about the entire interaction shape:
-
-- slash commands
-- model switching
-- tool execution
-- session continuity
-- terminal-native coding flow
-
-Claw Dev tries to keep that stable.
-
-### A concrete example of the compatibility layer
-
-The proxy exposes endpoints like:
-
+- `GET /health` and `GET /`
 - `GET /v1/models`
 - `GET /v1/models/:id`
 - `POST /v1/messages/count_tokens`
 - `POST /v1/messages`
 
-That matters because it means Claw Dev is not pretending all providers are identical. It is building a local translation layer that makes the bundled client think it is still talking to an Anthropic-style backend.
+GET /health and GET / return before local authentication. For other requests, an absent configured local token bypasses the guard; when a token is configured, either a matching Bearer token or a matching `x-api-key` is sufficient. If neither matches, the handler returns HTTP 401 `authentication_error`. After that check succeeds, unsupported routes return HTTP 404 `not_found_error`.
 
-That is a much more pragmatic approach than trying to normalize every provider from scratch.
+There is a separate startup boundary for provider credentials. `assertProviderConfiguration()` runs before `createServer()`. Missing cloud credentials cause a `CompatProxyError` carrying `statusCode: 400` and `errorType: "authentication_error"` before the HTTP server exists. That is exception metadata, not an observed startup HTTP response. The launcher may prompt for a credential or fail before the proxy module is spawned.
 
----
+This is why “Anthropic-compatible” should be read as a local contract with a bounded surface, not as a guarantee of complete request-field or response-field semantics. A downstream client can see familiar paths and still encounter different authentication timing, unsupported routes, or locally reconstructed fields.
 
-## The launcher is doing more work than a normal wrapper
+## Familiar request shapes are translated, compacted, and rebuilt
 
-The launcher is one of the most interesting parts of the repo.
+The provider menu hides several request paths. OpenAI API-key mode constructs a Chat Completions request. OpenAI OAuth mode uses the ChatGPT Codex Responses endpoint and parses its SSE response. Gemini calls `GoogleGenAI.models.generateContent` with Gemini contents and function declarations. Groq, OpenRouter, Copilot, and z.ai use OpenAI-style chat-completions helpers with provider-specific URLs or headers. Ollama calls a configurable server's `/api/chat` endpoint. These are branches behind one ingress, not one upstream protocol.
 
-It does not just ask “which provider do you want?”  
-It also handles session startup in a way that is clearly informed by actual user pain.
+The shared OpenAI-compatible helper also compacts requests before sending them. Its local budgets are provider-dependent: 6,000 for Copilot, 12,000 for OpenAI, 18,000 for OpenRouter, and 20,000 for other providers. When a serialized request is too large, the code can slice message history and reduce the tool list. Copilot can keep only the latest four messages and replace tool parameters with an open object shape in minimal mode. The implementation's commit history even records a specific Copilot schema-normalization fix that recursively handles object properties, array items, and `anyOf`, `oneOf`, and `allOf` variants.
 
-The provider menu is opinionated:
+Those thresholds are local heuristics, not provider context limits or account quotas. The source supports the narrower statement that the proxy may change what it sends. It does not support a claim about how much quality, latency, or reliability that change causes on a real task. The practical check is straightforward: if tool-heavy history matters, inspect the transformed request or run an authorized task against the selected provider. This audit did neither.
 
-- Anthropic: best overall Claude-style compatibility
-- OpenAI: strong general cloud option with custom model ids
-- Gemini: good balance of cost, speed, and long context
-- Groq: very fast hosted inference
-- OpenRouter: largest model catalog and easiest model switching
-- Copilot: GitHub Models path with a smaller request budget
-- z.ai: GLM-family models through an OpenAI-style API
-- Ollama: local models with zero cloud dependency
+The stream boundary is similarly easy to misread. The `/v1/messages` handler awaits `handleMessages(body)` first. If `stream` is true, `sendMessageStream` then emits an Anthropic-shaped SSE sequence from the completed local message. Text is sent as a `text_delta` containing the assembled block text, and tool input is sent as a serialized `input_json_delta`. OpenAI OAuth mode likewise awaits the provider response text before parsing it. The source therefore shows synthesized client-facing SSE, not a measured time-to-first-token path or transparent provider streaming.
 
-That is not neutral documentation.  
-It is product thinking.
+Usage fields are local estimates too. `estimateInputTokens` serializes messages, adds the normalized system prompt, divides character length by four, and clamps to at least one. `estimateOutputTokens` applies the same style of estimate to returned content. Top-level tool definitions are not included in the input estimator. The endpoint named `count_tokens` calls this helper. These values are not provider billing records, tokenizer measurements, or reliable context-budget guarantees.
 
-The repo is trying to shorten the gap between “I have a model” and “I know which path is likely to feel good in an agentic coding loop.”
+## A model label is not an execution receipt
 
-### Better onboarding is one of the real product features
+The model picker combines an active environment model, comma-separated custom models, and static defaults. The helper does not query provider availability. Request resolution then checks catalog membership, attempts Claude-style slot mapping for `opus`, `haiku`, `sonnet`, or `claude-` names, permits custom IDs for several providers, and otherwise falls back to `ACTIVE_MODEL`. Copilot's unknown non-slot IDs fall back to its active model; it is inaccurate both to say that every custom ID passes through unchanged and to say that Copilot rejects every arbitrary ID.
 
-The README makes this explicit:
+There is another subtle boundary in `handleMessages`:
 
-- placeholder secrets from `.env.example` are treated as unset
-- the provider menu explains what each backend is good at
-- the model prompt accepts any model id, not just suggested defaults
-- the proxy tries to return actionable errors for auth failures, missing models, quota errors, context overflow, and local connectivity issues
-
-That is more valuable than it sounds.
-
-A lot of model tooling still fails at the exact moment where users need the most help: startup, auth, model naming, and first-run errors.
-
-Claw Dev is clearly trying to fix that layer, not just the inference layer.
-
----
-
-## Why model control is the real feature
-
-One of the strongest ideas in Claw Dev is that model control should happen at startup, not as an afterthought.
-
-The launcher:
-
-- prompts for provider
-- prompts for the exact model
-- warns if user input looks like a menu number instead of a model id
-- primes the bundled model picker
-- updates available models and model overrides for the session
-
-That last part is especially important.
-
-Claw Dev is not satisfied with “you can technically override the model.” It also tries to make the in-app model selection feel aligned with the actual backend chosen for the session.
-
-That is a subtle but meaningful product detail.
-
-Because if the runtime backend and the UI model picker disagree, users stop trusting the tool.
-
-Claw Dev is trying to keep them synchronized.
-
-### Concrete example from the repo’s recommendations
-
-The project gives practical starting points rather than generic marketing advice:
-
-- Anthropic
-  - `claude-sonnet-4-20250514`
-- Gemini
-  - `gemini-2.5-flash`
-  - `gemini-2.5-pro`
-- OpenAI
-  - `gpt-5-mini`
-  - `gpt-5.2`
-  - `gpt-5.2-codex`
-- OpenRouter
-  - `anthropic/claude-sonnet-4`
-  - `google/gemini-2.5-pro`
-  - `openrouter/free`
-- Groq
-  - `openai/gpt-oss-20b`
-  - `openai/gpt-oss-120b`
-- Ollama
-  - `qwen3`
-  - `qwen2.5-coder:7b`
-  - `qwen2.5-coder:14b`
-
-That makes the repo feel less like a toy and more like an actual operating manual.
-
----
-
-## The proxy is where the project becomes interesting
-
-The compatibility proxy is not just a convenience adapter.
-
-It reveals what a provider-agnostic coding agent stack actually needs to handle:
-
-- provider resolution
-- model defaults
-- auth validation
-- model catalog exposure
-- token counting
-- stream vs non-stream message handling
-- secure local proxy auth
-- and provider-specific failure messaging
-
-The local auth piece is especially worth noticing.
-
-The launcher injects a per-session local token and points `ANTHROPIC_BASE_URL` to the proxy, while removing `ANTHROPIC_API_KEY` in compatibility mode.
-
-That is a good design instinct. It means the local bridge is not just open by default to anything on the machine without at least some boundary.
-
-### Why this matters conceptually
-
-A lot of people think provider swapping is just:
-
-“change the base URL and API key.”
-
-It is not.
-
-Once you care about real coding-agent behavior, you also need to think about:
-
-- model naming mismatches
-- context budget differences
-- tool-calling behavior differences
-- auth modes
-- error quality
-- and whether the UI still makes sense after the swap
-
-Claw Dev is interesting because it is trying to solve those operational mismatches, not just the API mismatch.
-
----
-
-## A smaller clean-room agent is hidden inside the repo
-
-The `src/providers.ts` and `src/tools.ts` files are worth reading because they show the core loop in a much simpler way than the bundled client.
-
-There is a shared system prompt that tells the agent to:
-
-- inspect files before editing
-- use tools when needed
-- keep tool inputs minimal
-- stay inside workspace boundaries
-
-And there is a small tool surface:
-
-- `list_files`
-- `read_file`
-- `write_file`
-- `search_text`
-- `run_shell`
-
-That is a good reminder that most coding agents do not need magic to become useful. They need:
-
-- a loop
-- a small tool set
-- bounded file access
-- and a model that can reason across steps
-
-Here is the practical shape of that loop:
-
-```python
-def run_agent_turn(user_prompt):
-    add_user_message(user_prompt)
-
-    for _ in range(8):
-        response = model.generate(
-            system_prompt=SYSTEM_PROMPT,
-            messages=history,
-            tools=tool_definitions,
-        )
-
-        add_assistant_message(response)
-
-        if not response.tool_calls:
-            return response.text
-
-        tool_results = []
-        for call in response.tool_calls:
-            result = execute_tool(call)
-            tool_results.append(result)
-
-        add_user_tool_results(tool_results)
-
-    return "Stopped after reaching the tool iteration limit."
+```js
+const providerModel = resolveRequestModel(body);
+const responseModel = body.model?.trim() || providerModel;
 ```
 
-This is not the literal source code.  
-But it is the core behavior the repo implements.
+Provider functions receive `providerModel`, but the returned Anthropic-shaped message uses `responseModel`. That means the local response can echo the requested model name after slot mapping or fallback. [INFERENCE] A caller cannot use that response field alone as proof of which upstream model was selected. No misrouted live response was observed.
 
-And that is part of why the project is useful to inspect: it shows both the product wrapper and the minimal underlying pattern.
+The adoption rule is simple: treat a picker entry and response label as inputs and annotations, not as an upstream execution receipt. Confirm the effective provider-side model through a provider-owned trace or an authorized test that records the request path. Neither was available to this audit.
 
----
+## What changed since April: GitHub Models retired
 
-## The project is opinionated about provider fit
+The implementation's `runCopilot` branch sends a bearer token to `https://models.github.ai/inference/chat/completions` with the GitHub API version header. The pinned README describes that credential as a GitHub Models-compatible bearer token. That is what the code shows; it is not a GitHub Copilot subscription integration.
 
-One of the strongest sections in the README is the provider guidance.
+GitHub's official changelog states that GitHub Models was retired on July 30, 2026, including the playground, catalog, inference API, and BYOK for existing customers. GitHub's current documentation separately says GitHub Models was unrelated to GitHub Copilot services. This article therefore labels the branch precisely: **Copilot menu label → retired GitHub Models inference service**. It does not claim a current HTTP status from the hard-coded endpoint, and it does not imply that a Copilot subscription restores the path.
 
-It says something many tools avoid saying clearly: not every backend feels equally good in an agent-style coding loop.
+This is the clearest what-changed-since-April correction. The source fork still exposes the menu and adapter, but the named upstream service has a dated retirement notice. A provider list copied from the old note is stale even before a developer asks whether tool calls work.
 
-Examples:
+## An adoption checklist that tests the real boundaries
 
-- Anthropic is positioned as best overall compatibility
-- Gemini is described as the strongest non-Anthropic option
-- OpenRouter is framed as the best maximum-control path
-- Copilot is acknowledged as workable, but with a smaller practical request budget
-- Ollama is praised for local-only use, while also warning that hardware matters heavily
+For an engineer evaluating one provider, the source audit suggests checks rather than promises:
 
-That honesty is good.
+1. **Trace startup order.** Confirm which process receives `ANTHROPIC_AUTH_TOKEN`, when the proxy snapshots it, and whether the client token matches the proxy's expected value. The source ordering is documented; this lane did not execute it.
+2. **Separate local health from upstream readiness.** A matching provider/model string on `/health` proves local identity only. Test credentials, model availability, and the actual upstream request separately.
+3. **Capture the effective model.** Compare the request identifier after catalog and slot resolution with the provider-side trace. Do not rely on the local response `model` field.
+4. **Measure transformed history and tools.** If the session is large, inspect whether compaction removed messages or tool schemas before judging agent behavior.
+5. **Measure stream semantics independently.** A client-facing SSE sequence can be reconstructed after a completed provider call. Record first-token and completion timing if streaming matters.
+6. **Keep accounting separate.** Compare local estimates with provider-owned usage data before using them for budgets or billing.
+7. **Check current service status.** For the menu branch named Copilot, start with the official GitHub retirement notice; do not assume a subscription or token type provides a replacement.
 
-The repo is not pretending all models behave equally well under the same tool-heavy session structure. It is recognizing that coding-agent UX depends not only on intelligence, but also on practical request budget, context handling, and startup friction.
+These are proposed acceptance checks, not completed experiments. No provider inference request, authentication attempt, model availability probe, tool-execution loop, build, install, or automated test was run for this rebuild. Latency, cost, quota, rate-limit behavior, model quality, workflow-switching effort, and reliability remain unmeasured.
 
----
+## What the source establishes—and what it leaves unmeasured
 
-## Troubleshooting is part of the architecture
+The pinned implementation at [commit `16e7958fe761ab2e12c9775a0b5921b8a2bedb28`](https://github.com/akillness/claw-dev/tree/16e7958fe761ab2e12c9775a0b5921b8a2bedb28) supports the bounded claims below. `[INFERENCE]` marks a cross-file inference; unmeasured items remain test questions.
 
-The troubleshooting section is more important than it looks.
+| Surface inspected | What the pinned source establishes | What remains unmeasured |
+|---|---|---|
+| Startup ordering and local health (E3, E5, E6) | The launcher awaits `ensureCompatProxy`, then assigns the loopback URL and fresh client token; local `/health` reports configured provider/model identity without an upstream call. `[INFERENCE]` A newly spawned proxy can read earlier expected-token state, while a reused proxy retains initialized state. | No process startup, authentication failure, exploitability, or upstream-readiness result was demonstrated. |
+| Bounded routing and authentication (E4, E7, E8) | `/health` and `/` precede auth; absent configured token bypasses the guard; either matching Bearer or `x-api-key` suffices; neither match returns 401 `authentication_error`; unsupported routes return 404 `not_found_error` only after that check. Missing provider credentials fail before the server exists. | No live request-response behavior or complete Anthropic API semantics were exercised. |
+| Provider-dependent compaction (E22) | The shared OpenAI-compatible helpers use local budgets of 6,000 for Copilot, 12,000 for OpenAI, 18,000 for OpenRouter, and 20,000 for other covered adapters; OpenAI, Groq, OpenRouter, Copilot and z.ai may trim requests, while Gemini and Ollama bypass these helpers. | These are not provider limits or quotas; task quality, latency, and reliability effects remain unmeasured. |
+| Stream reconstruction (E23) | `/v1/messages` awaits the completed local result before emitting Anthropic-shaped SSE; the OpenAI OAuth path likewise awaits response text before parsing it. | No time-to-first-token, latency, or transparent incremental-streaming measurement was made. |
+| Local usage estimates (E24) | Input estimates serialize messages and normalized system text, divide character length by four, round up, and clamp to one; top-level tools are omitted. | The values are not provider billing records, tokenizer measurements, or reliable context-budget guarantees. |
 
-It covers failure modes like:
+## What this means for the terminal workflow
 
-- placeholder env values being treated as unset
-- invalid token or wrong token type
-- wrong provider-specific model ids
-- request-size overflow
-- Ollama not running
-- Ollama running too slowly because it is CPU-bound
-- local context settings being too large for the machine
+Claw Dev's useful abstraction is narrower and more honest than “one agent, eight interchangeable backends.” It is a launcher around a bundled client plus a bounded translation layer. That can still be valuable if the engineering problem is reducing configuration churn while keeping the client surface familiar. [INFERENCE] Whether it actually reduces a team's workflow-switching effort depends on the provider, request shape, credential state, and the compaction/streaming semantics above; the source does not demonstrate that outcome.
 
-That matters because a tool like this does not succeed only when the happy path works. It succeeds when users can understand why the unhappy path failed.
+The bundled client metadata identifies `@anthropic-ai/claude-code` version `2.1.87`, with a package README license pointer. The entire embedded CLI, its integrity, current upstream parity, permission behavior, telemetry, and redistribution authorization were not audited here. The repository declares Node.js 22 or newer and exposes `proxy:compat` and `start` scripts, but metadata is not a build or runtime result.
 
-Claw Dev seems very aware of that.
+The original article's workflow-stability thesis is therefore a useful question, not a conclusion. The source-backed conclusion is more specific: when a terminal client speaks through a familiar Anthropic-shaped boundary, inspect the initialization order, local health semantics, request transformations, model resolution, output reconstruction, usage estimates, and current provider status before treating the interface as portable.
 
-### Concrete example: local inference realism
+For the next model-focused reading, see [the GLM-4.7 scorecard audit](/posts/glm-4-7-coding-agent-model/), which asks why model comparisons also need task-specific evaluation protocols rather than labels or reported scores alone. For a related control-plane audit, read [the CodeBurn guard hard-cap audit](/posts/codeburn-guard-hard-cap-audit/).
 
-The Ollama guidance is especially practical.
+## Key Takeaways
 
-It does not oversell local models. It says directly:
+- The launcher starts or accepts the compatibility proxy before assigning the fresh client token; the source establishes ordering, not a demonstrated runtime failure.
+- The bundled client has separate configuration alternatives: Anthropic mode bypasses this launcher's compatibility proxy, while compatibility mode enters local ingress and provider adapters. The Anthropic branch still inherits any pre-existing `ANTHROPIC_BASE_URL` or `ANTHROPIC_AUTH_TOKEN` values.
+- The proxy's familiar surface is bounded and reconstructive: conditional local authentication, provider-dependent compaction, synthesized streaming, and character-based usage estimates are local behaviors rather than provider receipts.
+- The menu label `Copilot` points to GitHub Models inference in the inspected code, and GitHub retired that service on July 30, 2026. No current Copilot integration is established here.
 
-- start with smaller models
-- keep `OLLAMA_NUM_CTX` conservative
-- keep `OLLAMA_NUM_PREDICT` low for short answers
-- leave `OLLAMA_KEEP_ALIVE=30m` or longer to keep the model warm
-- inspect `ollama ps`
-- if the processor shows `100% CPU`, slow generation is expected
+## New Questions
 
-That is the kind of operational honesty local-AI tooling needs more often.
+- In a newly spawned process, what startup environment should provide a usable expected token, and how should a reused proxy's initialized token be coordinated with a later client token?
+- Which provider-owned trace can confirm the effective model after catalog lookup, slot mapping, or fallback instead of relying on the local response label?
+- How much tool history and schema survives each provider's compaction path on a real task, and what does that change for agent behavior? This remains an unmeasured test question.
 
----
+## References
 
-## 🖼️ Source image
+### Pinned implementation and metadata (read 2026-10-15)
 
-![Claw Dev GitHub preview](https://opengraph.githubassets.com/4e683afe902ed8918d04394316b48753f5febbfc36101ad783fb21693a0a52f9/akillness/claw-dev)
+- [Queried fork-tip API](https://api.github.com/repos/akillness/claw-dev/commits?per_page=1) (read 2026-10-15).
+- [Claw Dev repository at commit `16e7958fe761ab2e12c9775a0b5921b8a2bedb28`](https://github.com/akillness/claw-dev/tree/16e7958fe761ab2e12c9775a0b5921b8a2bedb28) (read 2026-10-15).
+- [Pinned README](https://raw.githubusercontent.com/akillness/claw-dev/16e7958fe761ab2e12c9775a0b5921b8a2bedb28/README.md) (read 2026-10-15).
+- [Pinned launcher](https://raw.githubusercontent.com/akillness/claw-dev/16e7958fe761ab2e12c9775a0b5921b8a2bedb28/Leonxlnx-claude-code/claw-dev-launcher.js) (read 2026-10-15).
+- [Pinned compatibility proxy](https://raw.githubusercontent.com/akillness/claw-dev/16e7958fe761ab2e12c9775a0b5921b8a2bedb28/src/anthropicCompatProxy.ts) (read 2026-10-15).
+- [Pinned provider catalog](https://raw.githubusercontent.com/akillness/claw-dev/16e7958fe761ab2e12c9775a0b5921b8a2bedb28/shared/providerModels.js) (read 2026-10-15).
+- [Pinned root package metadata](https://raw.githubusercontent.com/akillness/claw-dev/16e7958fe761ab2e12c9775a0b5921b8a2bedb28/package.json) (read 2026-10-15).
+- [Pinned embedded client package metadata](https://raw.githubusercontent.com/akillness/claw-dev/16e7958fe761ab2e12c9775a0b5921b8a2bedb28/Leonxlnx-claude-code/package/package.json) (read 2026-10-15).
 
----
+### Current official service status (read 2026-10-15)
 
-## 💡 Innovation: Claw Dev is really a bet on interface stability over provider loyalty
-
-The deeper idea behind Claw Dev is not “support more APIs.”
-
-It is this:
-
-If the coding interface is good enough, model backends should be replaceable.
-
-That is a bigger statement than it sounds.
-
-Today, many AI tools are vertically bundled:
-
-- one UI
-- one workflow
-- one provider
-- one set of assumptions
-
-Claw Dev pushes in the other direction.
-
-It says:
-keep the workflow stable,  
-keep the terminal experience stable,  
-keep the model-control surface visible,  
-and make the backend negotiable.
-
-That is a healthier way to think about coding agents.
-
-Because model quality changes fast.  
-Provider pricing changes fast.  
-Access rules change fast.  
-But workflow trust is much harder to rebuild once lost.
-
-### Why this repo is worth watching
-
-Claw Dev is interesting for at least three reasons:
-
-1. It treats startup UX and auth clarity as real product problems.
-2. It uses a local Anthropic-compatible proxy as an architectural bridge rather than forcing a full rewrite for each backend.
-3. It understands that a coding agent is not just a model call — it is a tool loop, a model selector, a runtime environment, and a trust boundary.
-
-That combination makes it more than a wrapper.
-
-It is closer to a small interoperability layer for terminal-native coding agents.
-
----
-
-## Final Thoughts
-
-After reading the repo closely, the best way to understand Claw Dev is this:
-
-It is not trying to invent a brand-new coding agent paradigm. It is trying to make an existing terminal-native coding paradigm less dependent on one vendor.
-
-That is a practical goal, and probably the right one.
-
-The most useful AI developer tools in the next phase will not just be the ones with the best model attached. They will be the ones that let users preserve workflow continuity while changing cost, speed, privacy, or backend tradeoffs underneath.
-
-Claw Dev is a concrete example of that direction.
-
-And that is why it is worth paying attention to.
-
----
-
-## Sources
-
-- Repository: <https://github.com/akillness/claw-dev>
+- [GitHub Changelog: GitHub Models is now retired](https://github.blog/changelog/2026-07-30-github-models-is-now-retired/) (read 2026-10-15).
+- [GitHub Models documentation](https://docs.github.com/en/github-models) (read 2026-10-15).
