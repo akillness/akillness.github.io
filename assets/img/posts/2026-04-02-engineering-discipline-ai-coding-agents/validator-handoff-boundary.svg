@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">Validator handoff boundary</title>
+  <desc id="desc">The plan contains four fields. A solid route gives task instructions to the worker. A separate dashed route carries exactly four copied fields—goal, acceptance criteria, file list, and test commands—to the task validator, whose fixed prompt excludes worker narration. A distinct review route reads the plan path and any amendment log. The red box is a documentation contradiction annotation: plan-crafting offers inline execution while run-plan forbids inline worker and validator roles.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#20435c"/>
+    </marker>
+    <style>
+      .ink { font-family: Arial, Helvetica, sans-serif; fill: #173042; }
+      .eyebrow { font-size: 20px; font-weight: 700; letter-spacing: 2px; fill: #507189; }
+      .heading { font-size: 34px; font-weight: 700; }
+      .label { font-size: 24px; font-weight: 700; }
+      .body { font-size: 21px; }
+      .small { font-size: 18px; }
+      .box { fill: #ffffff; fill-opacity: 0.9; stroke: #20435c; stroke-width: 3; rx: 18; }
+      .soft { fill: #edf4f7; fill-opacity: 0.92; stroke: #507189; stroke-width: 2.5; rx: 14; }
+      .warn { fill: #fff1ec; fill-opacity: 0.96; stroke: #9b3d28; stroke-width: 3; rx: 14; }
+      .line { fill: none; stroke: #20435c; stroke-width: 4; marker-end: url(#arrow); }
+      .validator-line { fill: none; stroke: #507189; stroke-width: 3; stroke-dasharray: 10 9; marker-end: url(#arrow); }
+      .review-line { fill: none; stroke: #507189; stroke-width: 3; stroke-dasharray: 4 8; marker-end: url(#arrow); }
+      .warnrule { fill: none; stroke: #9b3d28; stroke-width: 3; stroke-dasharray: 12 9; }
+      .warntext { font-family: Arial, Helvetica, sans-serif; fill: #9b3d28; }
+    </style>
+  </defs>
+
+  <text x="70" y="64" class="ink eyebrow">SOURCE AUDIT · PINNED 137DEAD9</text>
+  <text x="70" y="112" class="ink heading">The handoff is specified. The enforcement path is not uniform.</text>
+
+  <rect x="70" y="170" width="330" height="245" class="box"/>
+  <text x="100" y="218" class="ink label">PLAN</text>
+  <text x="100" y="262" class="ink body">Validator fields in plan:</text>
+  <text x="120" y="300" class="ink body">1 · task goal</text>
+  <text x="120" y="334" class="ink body">2 · acceptance criteria</text>
+  <text x="120" y="368" class="ink body">3 · file list</text>
+  <text x="120" y="402" class="ink body">4 · test commands</text>
+
+  <path d="M400 255 H510" class="line"/>
+  <text x="455" y="220" text-anchor="middle" class="ink small">task</text>
+  <text x="455" y="244" text-anchor="middle" class="ink small">instructions</text>
+
+  <rect x="510" y="170" width="330" height="245" class="soft"/>
+  <text x="540" y="218" class="ink label">WORKER</text>
+  <text x="540" y="264" class="ink body">Implements the task</text>
+  <text x="540" y="304" class="ink body">against the plan.</text>
+  <text x="540" y="360" class="ink small">Worker narration, diff, logs</text>
+  <text x="540" y="388" class="ink small">stay out of validator prompt.</text>
+
+  <path d="M400 370 V470 H890 V320 H930" class="validator-line"/>
+  <text x="520" y="455" class="ink small">validator prompt: four copied fields</text>
+
+  <rect x="930" y="170" width="390" height="245" class="box"/>
+  <text x="960" y="218" class="ink label">TASK VALIDATOR</text>
+  <text x="960" y="264" class="ink body">Checks this task's contract:</text>
+  <text x="980" y="304" class="ink body">criteria ∧ listed tests</text>
+  <text x="960" y="352" class="ink small">No worker diff, logs, output,</text>
+  <text x="960" y="380" class="ink small">return message, or paraphrase</text>
+  <text x="960" y="408" class="ink small">in the prescribed prompt.</text>
+
+  <rect x="70" y="535" width="500" height="190" class="soft"/>
+  <text x="100" y="583" class="ink label">WHOLE-PLAN REVIEW</text>
+  <text x="100" y="627" class="ink body">Reads the plan path and codebase.</text>
+  <text x="100" y="665" class="ink small">An amendment log may be part of the plan.</text>
+  <text x="100" y="695" class="ink small">This is not the four-field task prompt.</text>
+  <path d="M270 415 V535" class="review-line"/>
+
+  <text x="640" y="500" class="warntext small">ANNOTATION · cross-file wording conflict</text>
+  <path d="M640 510 H1050" class="warnrule"/>
+  <rect x="610" y="535" width="710" height="190" class="warn"/>
+  <text x="640" y="583" class="warntext label">DOCUMENTATION CONTRADICTION</text>
+  <text x="640" y="627" class="ink body">plan-crafting offers “inline execution”</text>
+  <text x="640" y="661" class="ink body">while run-plan forbids inline worker/validator roles.</text>
+  <text x="640" y="703" class="ink small">A documented route is not the same as a runtime access control.</text>
+
+  <rect x="70" y="785" width="1250" height="62" class="box"/>
+  <text x="100" y="825" class="ink body">Evidence boundary: prompt contract ≠ orchestration compliance ≠ executable gate ≠ measured causal benefit.</text>
+</svg>

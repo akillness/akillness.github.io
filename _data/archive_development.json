@@ -193,9 +193,9 @@
       "links_at_intake": 3,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-15",
+      "survey_note": "Rebuilt from the current commit-pinned Engineering Discipline default branch and a separately pinned realworld benchmark revision. Original analysis distinguishes the four-field worker/validator handoff, the separate whole-plan review and contradictory inline-execution documentation from runtime access controls or causal model-quality gains. Source image rights were inspected and an original explanatory figure supplied. No workflow dispatch, model benchmark or runtime enforcement experiment was performed. Original date and URL retained."
     },
     {
       "path": "_posts/2026/04/2026-04-03-claw-dev-multi-provider-coding-agent.md",

@@ -1,317 +1,156 @@
 ---
 published: true
-title: "Why AI Coding Agents Fail — and Why the Harness Matters More Than the Model"
-description: "Engineering Discipline is an open-source harness for AI coding agents that adds clarification, complexity routing, worker-validator separation, checkpoint recovery, implementation guardrails, and AI code cleanup."
-categories: [AI, Agents, Developer-Tools]
-tags: [AIEngineering, CodingAgent, OpenSource, ClaudeCode, DeveloperTools, SoftwareEngineering, AIHarness, Codex, Cursor, GeminiCLI]
+title: "Engineering Discipline's handoff contradicts its gate"
+description: "A commit-pinned Source Audit of Engineering Discipline's worker–validator handoff, the inline-execution contradiction, and what its published benchmark can and cannot establish."
+categories: ["AI, Agents"]
+tags: [ai-engineering, coding-agents, harness-engineering, source-audit, validation, software-engineering]
 date: 2026-04-02 10:00:00 +0900
+last_modified_at: 2026-10-15 16:26:37 +0900
+archive_developed: "2026-10-15"
+archive_development_note: "Rebuilt from the current default-branch commit 137dead9, dated 2026-07-03, and a separately pinned realworld-benchmark commit dated 2026-04-04. The audit distinguishes contradictory validator handoffs, prompt contracts and author-reported results from runtime enforcement or causal benefit; it does not claim the benchmark used the July revision or reproduce runtime behavior."
+permalink: /posts/engineering-discipline-ai-coding-agents/
 pin: false
 mermaid: false
 math: false
 image:
-  path: "https://opengraph.githubassets.com/06b3d92437a4a53267c8c28d9741fd0021b2a33d7f9e84c55747d685ced1f7db/tmdgusya/engineering-discipline"
-  alt: "Engineering Discipline GitHub preview"
-ads: false
-restored_archive: "2026-10-12"
+  path: "/assets/img/posts/2026-04-02-engineering-discipline-ai-coding-agents/validator-handoff-boundary.png"
+  alt: "A plan-derived worker task route, a separate four-field validator route, and a whole-plan review path"
+image_policy: source-first-fallback
 ---
 
-## 🤔 Curiosity: Why do we still route everything through one LLM?
+## Does this harness enforce its validator boundary?
 
-AI coding agents usually fail for a simple reason.
+The useful question is not whether a coding-agent harness sounds disciplined. It is whether the boundaries in its contracts survive contact with the interfaces that are supposed to enforce them.
 
-They start writing code before they actually understand what they are supposed to build.
+I audited `tmdgusya/engineering-discipline` at commit [`137dead9137f39aa54b9ed87803a7f26324eedaf`](https://github.com/tmdgusya/engineering-discipline/commit/137dead9137f39aa54b9ed87803a7f26324eedaf), the current default-branch revision returned by the official API during this audit. The commit metadata dates that revision **2026-07-03**, and I read the pinned tree on **2026-10-15**. The repository describes a workflow in which a worker implements a task and a separate validator checks it without receiving the worker's narration. That is a precise and worthwhile design question.
 
-Give an agent a vague prompt like “build this,” and it often follows the same pattern. It starts coding immediately, fills the missing requirements with guesses, and then keeps patching those guesses when reality pushes back.
+[INFERENCE] The inspected repository does not itself establish a runtime information barrier. Its tree supplies Markdown contracts and helpers, but no worker–validator dispatcher or access-control implementation is identified in the pinned inventory. That is not proof that an external host cannot provide one. The narrower finding is that the source specifies a boundary without demonstrating its enforcement.
 
-If the guess is wrong, it rolls back.
-Then it guesses again.
-Then it breaks something else.
-Then it spends more context trying to explain its own confusion.
+The source audit also found a cross-file contradiction: `plan-crafting` offers an inline-execution route while `run-plan` forbids inline worker and validator roles. The separately pinned benchmark record reports one author-run example, not a controlled comparison of models or validator arrangements.
 
-That loop is what kills long-running agent sessions.
+<figure class="explanatory-image">
+  <img src="/assets/img/posts/2026-04-02-engineering-discipline-ai-coding-agents/validator-handoff-boundary.png" alt="Diagram of the four-field worker-validator prompt, the separate whole-plan review path, and the conflicting inline execution route">
+  <figcaption>Original illustration by jeopi (AI-assisted SVG); not source evidence.</figcaption>
+</figure>
 
-The real problem is not just weak code generation. It is premature execution under ambiguity.
+[Open the original SVG diagram](/assets/img/posts/2026-04-02-engineering-discipline-ai-coding-agents/validator-handoff-boundary.svg).
 
-That is exactly the problem I built `engineering-discipline` to solve: an open-source skill set for making AI coding agents behave less like overeager autocomplete systems and more like disciplined engineers.
+## The strongest boundary is a four-field handoff
 
-A second problem hides underneath the first one.
+The most concrete part of the design is in [`skills/run-plan/SKILL.md`](https://raw.githubusercontent.com/tmdgusya/engineering-discipline/137dead9137f39aa54b9ed87803a7f26324eedaf/skills/run-plan/SKILL.md) at the pinned commit. Its hard gate says the worker and validator must be separate subagents and that the main agent must not perform either role inline. The worker receives task instructions from the plan; separately, the fixed validator prompt is built by copying exactly four fields:
 
-We still route too much work through one model, one pass, and one execution stream. But real software delivery is not one thing. It is clarification, planning, implementation, review, recovery, and cleanup. Treating all of that as a single uninterrupted LLM monologue is exactly how you get fragile output and collapsing context.
+1. the task goal;
+2. the acceptance criteria;
+3. the affected file list; and
+4. the listed test commands.
 
----
+The same template prohibits worker diff, logs, output, return message, implementation approach, and main-agent paraphrase from that validator prompt. That is more specific than the usual advice to “have another agent review the code.” It gives an operator something inspectable: compare the validator prompt with the plan and ask whether those four fields were copied as required. The SVG makes this distinction explicit: the plan-to-worker route is separate from the dashed four-field route that enters `TASK VALIDATOR`.
 
-## 📚 Retrieve: What engineering-discipline actually does
+The contract also defines the scope of the verdict. The validator returns the logical AND of the acceptance criteria and listed tests for that task. It does not run the full test suite; cross-task regression is reserved for a later end-to-end gate. A task-level pass therefore cannot establish that the plan was complete, that the acceptance criteria captured the important behavior, or that integration is correct.
 
-`engineering-discipline` is built around one core idea:
+The source explains that the main agent may unconsciously frame the validator's work around what the worker did. [INFERENCE] Withholding worker narration may reduce one channel of anchoring, but that is a hypothesis here—not a measured reduction in bias, a reliability result, or a guarantee that execution-derived information cannot reach the validator through another channel.
 
-Do not let the agent improvise its way into a broken implementation loop.
+## A plan reviewer is not the task validator
 
-Instead, force structure into the workflow before, during, and after code generation.
+The repository has another boundary that is easy to collapse into the first one. [`skills/review-work/SKILL.md`](https://raw.githubusercontent.com/tmdgusya/engineering-discipline/137dead9137f39aa54b9ed87803a7f26324eedaf/skills/review-work/SKILL.md) accepts a plan file path as its only input and reviews the plan against the codebase. If `run-plan` appends a `Plan Amendment Log`, the reviewer judges the amended plan because that log is part of the plan.
 
-### 1) Clarification before code
+That is a whole-work review path, not the four-field task-validator prompt. The two roles ask different questions:
 
-Before the agent writes a single line of code, it goes through a clarification phase.
+- **Task validation:** Did this task meet the copied goal, criteria, files, and commands?
+- **Whole-plan review:** Does the plan, including any amendment log, match the resulting codebase?
 
-This is not a one-shot prompt rewrite. It is an iterative Q&A loop that removes ambiguity while also exploring the codebase in parallel.
+This distinction matters because “information isolated” is not one universal property here. The task validator is instructed not to receive worker narration. The whole-plan reviewer receives a plan path and may read amendments created during execution. A reviewer can be independent of the worker's prose while still judging a specification that changed during the run.
 
-That parallel codebase exploration matters. Requirement clarification without understanding the repository is incomplete, because what the user wants and what the codebase can support are often not the same thing.
+That is not automatically wrong. Mutable plans can be useful when reality invalidates an assumption. But the mutation should be visible, and the reader should not mistake the two review surfaces for an immutable, uniformly enforced isolation mechanism.
 
-#### Concrete example
+## The planning handoff contradicts the execution gate
 
-A user says:
+The cross-file problem is more direct. [`skills/plan-crafting/SKILL.md`](https://raw.githubusercontent.com/tmdgusya/engineering-discipline/137dead9137f39aa54b9ed87803a7f26324eedaf/skills/plan-crafting/SKILL.md) presents an execution handoff with an “Inline execution” option: execute tasks in the current session through `run-plan`, with checkpoints. The pinned `run-plan` contract says the main agent must not perform worker or validator roles inline and that each role must be dispatched as an independent subagent.
 
-> Add authentication.
+Both statements can be read charitably. “Inline execution” might mean that the current session orchestrates the run while still dispatching the roles. But the wording does not say that. A reader following the handoff literally can choose a route that the hard gate forbids. That is a documentation/interface contradiction, not proof that every host runs inline or that a particular benchmark violated the gate.
 
-A weak agent immediately starts inventing answers to questions nobody settled:
+This is the boundary I would fix before debating model quality. A harness cannot be evaluated by its strongest paragraph alone; its routing surfaces must agree. The minimum repair is to make the handoff name the required worker-validator dispatch explicitly, then add a check that fails when the main agent is asked to implement or validate inline. A prompt saying “do not do X” is a convention unless the surrounding runtime makes the prohibited path unavailable or observable as a violation.
 
-- JWT or session?
-- login only or signup too?
-- role support?
-- refresh tokens?
-- route-level protection?
-- database migration needed?
+## Recovery is specified, not exercised
 
-A disciplined system slows down and resolves:
+[`skills/long-run/SKILL.md`](https://raw.githubusercontent.com/tmdgusya/engineering-discipline/137dead9137f39aa54b9ed87803a7f26324eedaf/skills/long-run/SKILL.md) extends the same idea to multi-day work. It prescribes state updates before and after every milestone, resuming from the first unchecked task, and retaining attempt counters instead of resetting them after a crash. Parallel milestones are directed to isolated worktrees.
 
-- which auth model is actually required,
-- what patterns already exist in the codebase,
-- which routes are in scope,
-- whether backward compatibility matters,
-- and what must not be touched.
+Those are useful recovery requirements. They are not a crash test. The audit did not install the plugin, dispatch a worker, interrupt a milestone, inspect a merge, or verify that state writes are atomic and idempotent. The file also contains a checkpoint-order ambiguity: one step says to mark a milestone completed and write its checkpoint after review, while a following step places integration verification before checkpoint writing. That is a static source finding. It does not establish that state was lost or that a real recovery replayed work.
 
-That difference alone eliminates a huge amount of wasted execution.
+The right adoption question is therefore operational: which state transition is the source of truth, and what command or fixture proves that an interrupted run resumes without silently redoing completed work? Until that scenario is exercised, “fail-safe recovery” is a prescribed behavior, not an observed property.
 
-### 2) Automatic complexity routing
+## The published benchmark answers a narrower question
 
-Once the task becomes clear, the system automatically evaluates complexity and routes the job differently depending on what kind of work it is.
+The source ecosystem contains a separately pinned [`realworld-benchmark` report](https://raw.githubusercontent.com/tmdgusya/realworld-benchmark/c67eb2c3d51bfd0539909819ecabef9f74656e98/README.md) and a pinned [`transcript`](https://raw.githubusercontent.com/tmdgusya/realworld-benchmark/c67eb2c3d51bfd0539909819ecabef9f74656e98/transcript.txt). The report's commit is dated **2026-04-04**. It attributes a single-shot run to a worker-validator execution path and publishes an author-reported result of 13 Hurl test files, 149 requests, 100% pass, and 7 minutes 32 seconds wall time. A separate displayed duration is 1213 ms. Those figures have different scopes, and this audit did not reproduce either result.
 
-Simple tasks go through:
+The transcript visibly records one displayed model, exploration agents, inline route-file writing, compilation, server startup, and a full Hurl test suite. It does not visibly record a separate implementation-validator dispatch or verdict in the published 546-line record. That absence is not proof that an unseen validator never ran, and it does not prove the benchmark used the July repository revision audited here.
 
-`plan → execute → review`
+What can this example establish? It shows that the author published a concrete run record and associated measurements. What can it not establish? [INFERENCE] It does not isolate a no-harness baseline, compare a worker-validator run with an inline run, compare models, establish client parity, or measure a causal benefit from information separation. The source-appropriate conclusion is not “the harness beats the model.” It is that the benchmark leaves the causal question open.
 
-Complex tasks go through:
+For a useful comparison, hold the task corpus, model, client, tool permissions, timeout, test suite, and scoring rules constant. Change one boundary at a time: inline implementation, separated task validator, and whole-plan review. Record failures and recoveries as well as passes. Without that design, a successful single run remains an example, not an ablation.
 
-`milestone planning → DAG decomposition → long-run execution`
+## What is actually executable in the repository?
 
-This matters because one of the biggest mistakes in agent design is treating all tasks the same way.
+The complete pinned tree has no dedicated `tests/` directory, but that does not mean it contains no executable material. It includes [`scripts/verify-theme.sh`](https://raw.githubusercontent.com/tmdgusya/engineering-discipline/137dead9137f39aa54b9ed87803a7f26324eedaf/scripts/verify-theme.sh), a shell verification script for the Chalkboard theme migration, and [`skills/systematic-debugging/find-polluter.sh`](https://raw.githubusercontent.com/tmdgusya/engineering-discipline/137dead9137f39aa54b9ed87803a7f26324eedaf/skills/systematic-debugging/find-polluter.sh), a diagnostic helper. The theme script checks textual HTML/CSS conditions, theme tokens, font usage, and reduced-motion text. It does not check worker-validator independence, checkpoint ordering, or model performance. The audit read it but did not run it.
 
-A small bug fix and a multi-phase architectural change should not use the same orchestration logic.
+The pinned Pages workflow is also configuration, not a correctness gate. [`deploy.yml`](https://raw.githubusercontent.com/tmdgusya/engineering-discipline/137dead9137f39aa54b9ed87803a7f26324eedaf/.github/workflows/deploy.yml) checks out the repository, configures Pages, uploads the repository as an artifact, and deploys it. It has no `run` step invoking the theme script and no validator-isolation check. External services or maintainer processes may exist outside that file; this audit did not inspect them.
 
-In `engineering-discipline`, if a task is simple, it stays lightweight. If it is complex, it gets broken into milestone dependencies and executed as a longer-running structured workflow.
+That inventory suggests a simple vocabulary for harness reviews:
 
-That is not process theater. That is matching workflow shape to problem shape.
+- **Executable gate:** a command or runtime check that can fail on a concrete condition.
+- **Orchestration contract:** a documented sequence that a client is expected to follow.
+- **Prompt convention:** a rule about what an agent should or should not receive.
 
-### 3) Worker-validator separation
+The four-field validator template is a strong prompt convention. The worker/validator dispatch requirement is an orchestration contract. The theme script is an executable gate, but for another concern. Calling all three “enforcement” hides the engineering work still required to connect them.
 
-This is one of the most important parts of the whole design.
+## What changed since the April 2026 note?
 
-The agent that writes the code and the agent that validates the result are separated.
+The original April note carried a borrowed “I built engineering-discipline” framing and treated harness-over-model superiority, savings, and reliability as if they were established outcomes. This rebuild removes that autobiography and those unsupported claims. It replaces them with a source-pinned cross-file audit of the four-field handoff, whole-plan review boundary, inline-execution contradiction, checkpoint ordering, and benchmark/transcript scope.
 
-And the validator does not get the worker’s execution history.
+The separately pinned benchmark record was committed on **2026-04-04**, two days after the preserved original article date. The engineering-discipline revision inspected here was the current default-branch commit dated **2026-07-03**, and the source audit was read on **2026-10-15**. These are separate dated records: the benchmark report does not pin which engineering-discipline revision its session loaded, so this chronology does not imply that the April benchmark used the July revision. Nothing in this rewrite demonstrates a historical runtime change, a reliability improvement, a cost reduction, or a model-superiority result.
 
-It only sees:
+The practical update is a change in what a reader can responsibly decide. The source supports inspecting prompt boundaries and contradictory handoffs; it does not support adopting a guarantee until dispatch, access, recovery, and controlled comparison are exercised.
 
-- the plan,
-- and the codebase itself.
+## Key Takeaways
 
-That information isolation matters for the same reason human code review matters.
+| Finding | What it supports | What remains unproven |
+|---|---|---|
+| `run-plan` specifies four copied validator fields and excludes worker narration from that prompt. | A concrete prompt contract that can be inspected against a plan. | That another channel cannot expose execution artifacts, or that the contract improves outcomes. |
+| The repository inventory exposes contracts and helpers, not a supplied worker–validator access-control dispatcher. | [INFERENCE] Treat runtime enforcement as an external integration question. | Host-level compliance, client parity, and actual dispatch. |
+| `plan-crafting` offers inline execution while `run-plan` forbids inline worker and validator roles. | A documentation/interface contradiction worth repairing. | That a particular host or benchmark actually violated the gate. |
+| The 2026-04-04 benchmark reports one author-run result with separate timing scopes. | A record to reproduce and compare. | Causal benefit, cross-model superiority, savings, reliability, or validator-separation effect. |
 
-A reviewer who watched every implementation decision is more likely to sympathize with the author’s reasoning. A reviewer who comes in cold is much more likely to evaluate the result on its actual merits.
+## New Questions
 
-That is the structure `engineering-discipline` tries to create.
+1. Which component makes inline worker and validator roles impossible, or at least records a violation?
+2. Can worker narration, diffs, logs, or return messages reach the validator through the client or filesystem despite the prompt template?
+3. What is the immutable or amended specification when a plan changes during execution?
+4. Which fixture proves crash recovery without silently redoing completed work, and are state writes atomic and idempotent?
+5. Can the benchmark be rerun with the harness revision, model, client, permissions, corpus, timeout, tests, and scoring rules pinned separately?
+6. Which comparison isolates the effect of inline execution, task validation, and whole-plan review one boundary at a time?
 
-The validator is not asked:
+For the measurement design behind those questions, read the existing [harness engineering agents audit](/posts/harness-engineering-agents/), which identifies the variables a controlled comparison must hold constant. The adjacent [agent-team coordination note](/posts/claude-opus-46-agent-teams/) is useful as a contrast about task ownership and locks, but its restored performance language is not evidence for this audit. The model context is separately discussed in [GLM-4.7 coding-agent model](/posts/glm-4-7-coding-agent-model/); nothing in this source review establishes cross-model superiority.
 
-> Did the worker’s process make sense?
+## References
 
-It is asked:
+### Repository and pinned contracts (Read 2026-10-15)
 
-> Does this code actually satisfy the plan and hold up under inspection?
+- [`engineering-discipline` commit 137dead9](https://github.com/tmdgusya/engineering-discipline/commit/137dead9137f39aa54b9ed87803a7f26324eedaf) — current default-branch revision returned during the audit, dated 2026-07-03.
+- [`run-plan/SKILL.md`](https://raw.githubusercontent.com/tmdgusya/engineering-discipline/137dead9137f39aa54b9ed87803a7f26324eedaf/skills/run-plan/SKILL.md) — worker-validator gate and four-field prompt.
+- [`plan-crafting/SKILL.md`](https://raw.githubusercontent.com/tmdgusya/engineering-discipline/137dead9137f39aa54b9ed87803a7f26324eedaf/skills/plan-crafting/SKILL.md) — binary criteria and inline handoff.
+- [`review-work/SKILL.md`](https://raw.githubusercontent.com/tmdgusya/engineering-discipline/137dead9137f39aa54b9ed87803a7f26324eedaf/skills/review-work/SKILL.md) — whole-plan review boundary.
+- [`long-run/SKILL.md`](https://raw.githubusercontent.com/tmdgusya/engineering-discipline/137dead9137f39aa54b9ed87803a7f26324eedaf/skills/long-run/SKILL.md) — prescribed checkpoints and recovery.
+- [`verify-theme.sh`](https://raw.githubusercontent.com/tmdgusya/engineering-discipline/137dead9137f39aa54b9ed87803a7f26324eedaf/scripts/verify-theme.sh), [`find-polluter.sh`](https://raw.githubusercontent.com/tmdgusya/engineering-discipline/137dead9137f39aa54b9ed87803a7f26324eedaf/skills/systematic-debugging/find-polluter.sh), and [`deploy.yml`](https://raw.githubusercontent.com/tmdgusya/engineering-discipline/137dead9137f39aa54b9ed87803a7f26324eedaf/.github/workflows/deploy.yml) — executable/configuration surfaces inspected but not executed.
 
-That is a much healthier review boundary.
+### Benchmark record (Read 2026-10-15; repository commit dated 2026-04-04)
 
-### 4) Checkpoint-based recovery
+- [`realworld-benchmark` README](https://raw.githubusercontent.com/tmdgusya/realworld-benchmark/c67eb2c3d51bfd0539909819ecabef9f74656e98/README.md) — author-published example and reported measurements, not reproduced here.
+- [`realworld-benchmark` transcript](https://raw.githubusercontent.com/tmdgusya/realworld-benchmark/c67eb2c3d51bfd0539909819ecabef9f74656e98/transcript.txt) — published execution record, not independently authenticated telemetry.
 
-Long-running agent workflows often fail in the most wasteful way possible: one problem late in the run causes the whole thing to restart from the beginning.
+### Related reading (Read 2026-10-15)
 
-That is expensive, fragile, and unnecessary.
+- [Harness engineering agents](/posts/harness-engineering-agents/) — controlled-comparison variables for agent harness measurements.
+- [Agent-team coordination note](/posts/claude-opus-46-agent-teams/) — adjacent task-ownership and lock questions, not evidence for this audit.
+- [GLM-4.7 coding-agent model](/posts/glm-4-7-coding-agent-model/) — model context without a cross-model claim here.
 
-`engineering-discipline` adds checkpoints at the milestone level. If execution fails, the system restarts from the relevant checkpoint instead of replaying the entire task.
-
-#### Concrete example
-
-Imagine a feature broken into four milestones:
-
-- define schema changes,
-- implement backend endpoints,
-- wire frontend integration,
-- validate end-to-end behavior
-
-If the last phase fails because one UI assumption was wrong, there is no reason to regenerate the earlier milestones from scratch.
-
-Checkpointed recovery protects both context and cost. More importantly, it makes long-horizon execution feel like engineering instead of roulette.
-
-### 5) Implementation discipline
-
-Another common failure mode in AI coding agents is not lack of capability. It is lack of restraint.
-
-The agent notices something nearby and thinks:
-
-> While I’m here, I should clean this up too.
-
-That instinct destroys long-running work.
-
-`engineering-discipline` uses a Karpathy-style guardrail layer that forces the agent to:
-
-- read the existing code before modifying it,
-- stay within the requested scope,
-- avoid speculative cleanup,
-- and resist touching unrelated code just because it looks suboptimal.
-
-That sounds simple, but it matters a lot.
-
-A huge amount of agent failure comes from unearned expansion: not solving the requested problem, but wandering into adjacent problems.
-
-Humans do this too. Good engineers learn not to.
-
-Agents need the same discipline.
-
-### 6) AI code smell cleanup without behavioral drift
-
-The final layer is `Clean AI Slop`.
-
-This targets the recognizable smell of AI-generated code:
-
-- excessive comments,
-- unnecessary abstractions,
-- paranoid error handling for impossible states,
-- filler structure,
-- verbose naming,
-- and defensive scaffolding that exists mostly because the model wanted to sound careful.
-
-The important part is how cleanup happens.
-
-Not through one giant rewrite, but through category-specific passes, with tests run after each pass so behavior does not change.
-
-That is the right way to clean AI-generated code.
-
-One smell at a time.
-One pass at a time.
-One verification loop at a time.
-
-It is slower than “rewrite everything,” but much safer. And safety is the point.
-
----
-
-## 🖼️ Source Image
-
-![Engineering Discipline GitHub preview](https://opengraph.githubassets.com/06b3d92437a4a53267c8c28d9741fd0021b2a33d7f9e84c55747d685ced1f7db/tmdgusya/engineering-discipline)
-
----
-
-## 💡 Innovation: The harness matters more than the model
-
-The most interesting thing about `engineering-discipline` is not just that it creates more process.
-
-It is that stronger process seems to improve performance across models.
-
-The harness was originally tuned for Minimax, but it ended up working even better when paired with Codex or Opus.
-
-That is the real signal.
-
-If a model swap improves outcomes because the discipline layer is strong, then the model is not the full story.
-The harness is.
-
-That cuts against how a lot of people still think about AI engineering.
-
-Many teams are still treating model choice as the main lever:
-
-- upgrade the API,
-- switch providers,
-- pick the current leaderboard winner,
-- and hope reliability improves automatically.
-
-Sometimes it does.
-Often it doesn’t.
-
-Because a weak harness wastes a strong model.
-
-A strong harness, on the other hand, can make multiple models perform better by reducing the failure modes that matter most:
-
-- ambiguity,
-- scope drift,
-- self-validating execution,
-- full-restart recovery,
-- and AI-generated code bloat.
-
-That is why I think the bigger lesson here is not “use this exact stack.”
-
-It is this:
-
-> The future of coding agents is not “let the AI figure it out.” It is “make the AI work under engineering discipline.”
-
-That is a much better direction.
-
-### A simplified mental model
-
-```python
-def run_task(request, codebase):
-    brief = clarify(request, codebase)
-    route = assess_complexity(brief)
-
-    if route == "simple":
-        plan = craft_plan(brief)
-        result = execute_with_worker(plan, codebase)
-        review = validate_independently(plan, codebase)
-        cleaned = clean_ai_slop(result)
-        return finalize(cleaned, review)
-
-    if route == "complex":
-        dag = build_milestone_dag(brief)
-        state = load_or_create_checkpoint_state(dag)
-
-        for milestone in next_ready_milestones(state):
-            plan = craft_plan(milestone)
-            result = execute_with_worker(plan, codebase)
-            review = validate_independently(plan, codebase)
-            cleaned = clean_ai_slop(result)
-            save_checkpoint(milestone, cleaned, review)
-
-        return assemble_final_result(state)
-```
-
-This is not the literal implementation. It is the operational idea.
-
-And that idea is the real product.
-
----
-
-## Final Thoughts
-
-AI coding agents do not fail only because they hallucinate.
-
-They fail because we let them execute before understanding, modify code without enough context, validate their own work with too much self-knowledge, and restart entire workflows when only one phase failed.
-
-`engineering-discipline` treats those as workflow failures, not just model failures.
-
-And that is the right diagnosis.
-
-If this pattern spreads, the best coding agents will not be the ones that generate the flashiest first draft. They will be the ones that:
-
-- clarify before acting,
-- route tasks by complexity,
-- separate execution from validation,
-- recover from checkpoints,
-- enforce scope discipline,
-- and clean generated code without changing behavior.
-
-That is not magic.
-It is engineering.
-And that is exactly why it works.
-
----
-
-## Sources
-
-- Project link: <https://lnkd.in/gESjBvj3>
-- GitHub: <https://github.com/tmdgusya/engineering-discipline>
+The original post date remains **2026-04-02 10:00:00 +0900**. This rebuild is a later Source Audit of the pinned materials, not a claim of first-hand product use, benchmark reproduction, reliability improvement, cost reduction, traffic, revenue, or AdSense outcome.
