@@ -305,9 +305,9 @@
       "links_at_intake": 13,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "retired",
+      "developed_at": "2026-10-16",
+      "survey_note": "Retired on October 16, 2026 after a source audit of the preserved note and commit-pinned Diffusers scheduler implementations. The audit supported a narrow scheduler/output-contract comparison, but did not establish a replacement article within this site's declared engineering pillars. The historical URL is retained; the old walkthrough, game-production guidance, and reused figures are no longer presented as current guidance."
     },
     {
       "path": "_posts/2026/06/2026-06-24-agentic-coding-convergence.md",
