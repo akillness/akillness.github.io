@@ -165,9 +165,9 @@
       "links_at_intake": 11,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-15",
+      "survey_note": "Rebuilt from current NVIDIA NemoClaw security, overview, inference-routing, platform-support, prerequisite, and quickstart documentation. The Personal-tier egress scope is L4 TCP on destination ports 80 and 443 for any sandbox binary, subject to documented range exclusions and other active controls. Archived branded images were not reused; the conceptual diagram is not source evidence. This is a documentation audit, not a live installation test."
     },
     {
       "path": "_posts/2026/03/2026-03-31-how-claude-code-works-agentic-loop.md",
