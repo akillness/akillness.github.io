@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "run_id": "20261015-1050-approval-freshness",
+  "executed_at": "2026-10-15T11:42:03+09:00",
+  "runtime": "Python 3.13.12",
+  "revision": "f42b8aa7a0f2020a54475fe37af5540086f0a314",
+  "command": "python3 -B _workspace/current/draft/assets/img/posts/2026-10-15-langgraph-approval-freshness/approval-freshness-contract.py",
+  "script_sha256": "5faa3e6a970b29b294676a021e62f18661b3cc9569a2db7ba4065564490b091e",
+  "exit_code": 0,
+  "synthetic_cases_passed": 11,
+  "synthetic_cases_total": 11,
+  "scope": "Pure standard-library predicate with separately supplied authoritative context; the tests do not implement the context resolver. No LangGraph, LangSmith, Postgres, provider, or course ZIP was imported or executed."
+}
