@@ -304,3 +304,64 @@ test('manual context cannot relabel draft mode as approved publication', () => {
   });
   assert.ok(run(fixture).errors.some((error) => error.includes('manual-review-pending')));
 });
+
+
+test('manual single-article publication records a separate one-run consent status', () => {
+  const articlePath = '_posts/2026-10-15-example-audit.md';
+  const fixture = makeFixture({
+    mutateBrief: (brief) => { brief.ai_role.human_review_status = 'manual-single-article-approved'; },
+    mutateFixture: (value) => {
+      value.manifest.article_path = articlePath;
+      value.manifest.approval_context = {
+        type: 'manual-single-article-publication',
+        owner_request: '승인, 추가 후 푸시',
+        standing_routine_not_used: true,
+        approval_record_path: 'messages/manual-single-article-approval.json',
+        approved_article_path: articlePath,
+        approved_scope_paths: [articlePath, 'assets/img/posts/2026-10-15-example-audit/example-cover.png']
+      };
+    }
+  });
+  assert.deepEqual(run(fixture).errors, []);
+});
+
+
+test('manual single-article status cannot authorize draft-only mode', () => {
+  const articlePath = '_posts/2026-10-15-example-audit.md';
+  const fixture = makeFixture({
+    mutateBrief: (brief) => { brief.ai_role.human_review_status = 'manual-single-article-approved'; },
+    mutateFixture: (value) => {
+      value.manifest.mode = 'draft-only';
+      value.manifest.article_path = articlePath;
+      value.manifest.approval_context = {
+        type: 'manual-single-article-publication',
+        owner_request: '승인, 추가 후 푸시',
+        standing_routine_not_used: true,
+        approval_record_path: 'messages/manual-single-article-approval.json',
+        approved_article_path: articlePath,
+        approved_scope_paths: [articlePath, 'assets/img/posts/2026-10-15-example-audit/example-cover.png']
+      };
+    }
+  });
+  assert.ok(run(fixture).errors.some((error) => error.includes('manual-review-pending')));
+});
+
+
+test('manual single-article approval also supports an article with no local assets', () => {
+  const articlePath = '_posts/2026-10-15-example-audit.md';
+  const fixture = makeFixture({
+    mutateBrief: (brief) => { brief.ai_role.human_review_status = 'manual-single-article-approved'; },
+    mutateFixture: (value) => {
+      value.manifest.article_path = articlePath;
+      value.manifest.approval_context = {
+        type: 'manual-single-article-publication',
+        owner_request: '승인, 추가 후 푸시',
+        standing_routine_not_used: true,
+        approval_record_path: 'messages/manual-single-article-approval.json',
+        approved_article_path: articlePath,
+        approved_scope_paths: [articlePath]
+      };
+    }
+  });
+  assert.deepEqual(run(fixture).errors, []);
+});

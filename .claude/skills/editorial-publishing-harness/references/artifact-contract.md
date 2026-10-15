@@ -46,7 +46,12 @@ _workspace/current/
 - `article_path`, `asset_dir`
 - `revision_loops`
 - `publication_requires_confirmation`
+- `approval_context` when a manual one-off path is used
 - `gates`
+
+## Manual single-article approval record
+
+A one-off manual publication requires a current explicit owner request and a run-scoped record at `messages/manual-single-article-approval.json`. The manifest's `approval_context` must contain `type: manual-single-article-publication`, the exact `owner_request`, `standing_routine_not_used: true`, the fixed `approval_record_path`, `approved_article_path`, and the exact `approved_scope_paths`. The JSON record binds the same `run_id`, request, article, and sorted scope list; it records the user-request text and `recorded_at_kst`. The timestamp must be after `manifest.started_at_kst`, not in the future, and no older than the policy's 24-hour freshness limit at validation time. The lists in the record and manifest must exactly equal the derived `validation/path-scope.txt`, which must contain exactly one `_posts/YYYY-MM-DD-<slug>.md` and only assets under `assets/img/posts/<same-stem>/`. Policy capability is not consent, and the record is never reusable. This JSON is an audit record of a direct owner message, not a cryptographic signature; the validator checks run, freshness, and scope, but cannot independently authenticate the speaker. This path is distinct from `manual-three-article-publication`.
 
 ## Candidate fields
 

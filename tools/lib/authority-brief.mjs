@@ -14,6 +14,12 @@
 // templated low-value signal and hides the finding, which is why the approved
 // 2026-10-08 remediation removed it from the published cohort.
 
+import {
+  MANUAL_SINGLE_ARTICLE_APPROVAL_RECORD_PATH,
+  MANUAL_SINGLE_ARTICLE_APPROVAL_STATUS,
+  MANUAL_SINGLE_ARTICLE_APPROVAL_TYPE
+} from './manual-publication-approval.mjs';
+
 export const AUTHORITY_BRIEF_SCHEMA_VERSION = 1;
 export const AUTHORITY_BRIEF_SCHEMA_VERSION_V2 = 2;
 export const AUTHORITY_BRIEF_SCHEMA_VERSIONS = [
@@ -205,8 +211,18 @@ export function validateAuthorityBrief({ brief, manifest, selectedCandidate, evi
     const manualPublication = manifest?.approval_context?.type === 'manual-three-article-publication'
       && manifest.approval_context.standing_routine_not_used === true
       && nonempty(manifest.approval_context.owner_request);
+    const singleArticlePublication = manifest?.approval_context?.type === MANUAL_SINGLE_ARTICLE_APPROVAL_TYPE
+      && manifest.approval_context.standing_routine_not_used === true
+      && nonempty(manifest.approval_context.owner_request)
+      && manifest.approval_context.approval_record_path === MANUAL_SINGLE_ARTICLE_APPROVAL_RECORD_PATH
+      && manifest.approval_context.approved_article_path === manifest.article_path
+      && Array.isArray(manifest.approval_context.approved_scope_paths)
+      && manifest.approval_context.approved_scope_paths.length >= 1;
+    if (manifest?.approval_context?.type === MANUAL_SINGLE_ARTICLE_APPROVAL_TYPE && !singleArticlePublication) {
+      errors.push('manual single-article approval context is incomplete or does not match the manifest article');
+    }
     const expectedReview = manifest?.mode === 'publish-on-green'
-      ? (manualPublication ? 'manual-publication-approved' : 'standing-policy-approved')
+      ? (manualPublication ? 'manual-publication-approved' : singleArticlePublication ? MANUAL_SINGLE_ARTICLE_APPROVAL_STATUS : 'standing-policy-approved')
       : 'manual-review-pending';
     if (brief.ai_role.human_review_status !== expectedReview) errors.push(`ai_role.human_review_status must be ${expectedReview} for mode ${manifest?.mode}: ${brief.ai_role.human_review_status}`);
     if (brief.ai_role.first_hand_experience_claimed !== false) errors.push('ai_role.first_hand_experience_claimed must be false; scheduled automation never claims lived experience');

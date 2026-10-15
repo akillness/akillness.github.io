@@ -166,8 +166,9 @@ A package may be `ready_for_review` only when:
 The machine-readable mode is in `.claude/editorial-policy.yml`.
 
 - `draft-only` is the safe baseline. It produces a validated package and stops for review.
-- `publish-on-green` is a standing external-publication permission and requires both `publication_mode: publish-on-green` and `standing_publish_approval: true`, set only after explicit user approval. That standing approval was granted on 2026-08-30 for the daily routine.
-- Never infer publication approval from a topic, URL, schedule, or a prior approval for another article.
+- `publish-on-green` is the standing external-publication mode and requires both `publication_mode: publish-on-green` and `standing_publish_approval: true`, set only after explicit user approval. That standing approval was granted on 2026-08-30 for the daily routine.
+- A separate one-off path is allowed only for one article after a current, explicit owner request. The policy capability flag does not itself authorize publication. Require `approval_context.type: manual-single-article-publication`, `manual-single-article-approved` authority status, `standing_routine_not_used: true`, the fixed JSON approval record under `messages/`, and article/scope paths that exactly match the manifest and derived `validation/path-scope.txt`. The scope must contain exactly one post and assets from only that post's matching directory. The record timestamp must follow `manifest.started_at_kst`, not be in the future, and be no more than 24 hours old when validated. Never reuse the record or treat it as standing approval; this is distinct from the three-article manual path. The JSON is an audit record of a direct owner message, not a cryptographic signature, and the validator cannot independently authenticate its speaker.
+- Never infer publication approval from a topic, URL, schedule, a prior approval for another article, or the policy capability flag.
 - Stage only the exact post and its referenced assets. Never use `git add -A`.
 - One run means one commit and one push. Consecutive pushes can cancel the previous Pages build.
 - A push is not publication. Completion requires remote SHA, successful Pages workflow, anonymous permalink HTTP 200, correct title/body, and every local image HTTP 200.

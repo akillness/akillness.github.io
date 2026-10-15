@@ -16,6 +16,11 @@ import {
   validateAuthorityBrief,
   validateAuthorityReviewFindings
 } from './lib/authority-brief.mjs';
+import {
+  MANUAL_SINGLE_ARTICLE_APPROVAL_RECORD_PATH,
+  MANUAL_SINGLE_ARTICLE_APPROVAL_TYPE,
+  validateManualSingleArticleApproval
+} from './lib/manual-publication-approval.mjs';
 
 const argv = process.argv.slice(2);
 let repoRootValue = process.cwd();
@@ -107,7 +112,12 @@ if (manifest) {
   pass(/^\d{4}-\d{2}-\d{2}$/.test(manifest.target_date), `Invalid target_date: ${manifest.target_date}`);
   pass(['draft-only', 'publish-on-green'].includes(manifest.mode), `Invalid manifest mode: ${manifest.mode}`);
   if (manifest.mode === 'draft-only') pass(manifest.publication_requires_confirmation === true, 'draft-only manifest must require publication confirmation');
-  if (manifest.mode === 'publish-on-green') pass(manifest.publication_requires_confirmation === false, 'approved publish-on-green manifest has inconsistent confirmation state');
+  if (manifest.mode === 'publish-on-green') {
+    pass(manifest.publication_requires_confirmation === false, 'approved publish-on-green manifest has inconsistent confirmation state');
+    const standingPolicyEnabled = policyScalar('publication_mode') === 'publish-on-green' && policyScalar('standing_publish_approval') === 'true';
+    const hasManualPublicationContext = ['manual-three-article-publication', MANUAL_SINGLE_ARTICLE_APPROVAL_TYPE].includes(manifest.approval_context?.type);
+    pass(standingPolicyEnabled || hasManualPublicationContext, 'publish-on-green requires standing policy approval or an explicit manual publication context');
+  }
   pass(typeof manifest.gates === 'object' && !Array.isArray(manifest.gates), 'Manifest gates must be an object');
   pass(typeof manifest.topic === 'string' && manifest.topic.trim().length >= 5, 'Manifest topic is missing or too short');
   pass(typeof manifest.thesis === 'string' && manifest.thesis.trim().length >= 20, 'Manifest thesis is missing or too short');
@@ -425,6 +435,31 @@ const authorityResult = validateAuthorityBrief({
   contentPillars
 });
 for (const failure of authorityResult.errors) failures.push(failure);
+
+if (manifest?.approval_context?.type === MANUAL_SINGLE_ARTICLE_APPROVAL_TYPE) {
+  const configuredRecordPath = policyScalar('manual_single_article_approval_record_path');
+  const approvalRecordFile = path.join(current, MANUAL_SINGLE_ARTICLE_APPROVAL_RECORD_PATH);
+  const recordPathErrors = publicationPathErrors(approvalRecordFile);
+  failures.push(...recordPathErrors);
+  pass(configuredRecordPath === MANUAL_SINGLE_ARTICLE_APPROVAL_RECORD_PATH, `Policy manual approval record path must be ${MANUAL_SINGLE_ARTICLE_APPROVAL_RECORD_PATH}`);
+  pass(fs.existsSync(approvalRecordFile), `messages/${path.basename(MANUAL_SINGLE_ARTICLE_APPROVAL_RECORD_PATH)} is missing`);
+  const approvalRecord = fs.existsSync(approvalRecordFile) && recordPathErrors.length === 0 ? readJson(approvalRecordFile) : null;
+  const packageScopeFile = path.join(current, 'validation', 'path-scope.txt');
+  const packagePaths = fs.existsSync(packageScopeFile)
+    ? fs.readFileSync(packageScopeFile, 'utf8').split(/\r?\n/).map((item) => item.trim()).filter(Boolean)
+    : [];
+  const manualApprovalResult = validateManualSingleArticleApproval({
+    manifest,
+    approvalRecord,
+    packagePaths,
+    policyEnabled: policyScalar('manual_single_article_publication_enabled') === 'true',
+    policyMaxArticles: Number(policyScalar('manual_single_article_publication_max_articles')),
+    policyMaxAgeHours: Number(policyScalar('manual_single_article_approval_max_age_hours')),
+    policyRecordPath: configuredRecordPath,
+    now: Date.now()
+  });
+  for (const failure of manualApprovalResult.errors) failures.push(failure);
+}
 
 const summaryFile = path.join(current, 'run-summary.md');
 const summary = fs.existsSync(summaryFile) ? fs.readFileSync(summaryFile, 'utf8') : '';

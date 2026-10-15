@@ -185,7 +185,7 @@ Never copy into live `_posts`, commit, push, submit a form, or publish. Leave th
 
 ### publish-on-green
 
-This mode is valid only when policy contains both `publication_mode: publish-on-green` and `standing_publish_approval: true` after explicit standing approval. Before publishing:
+The standing route requires both `publication_mode: publish-on-green` and `standing_publish_approval: true` after explicit standing approval. A separate one-off route is permitted only when policy enables `manual_single_article_publication_enabled`, caps it at one article, and the current owner explicitly approves the exact article and scope. The one-off route must use `approval_context.type: manual-single-article-publication`, `human_review_status: manual-single-article-approved`, `standing_routine_not_used: true`, and `messages/manual-single-article-approval.json`. That record, manifest, and derived `validation/path-scope.txt` must agree exactly; the scope is one post plus assets in only its matching directory. The record timestamp must be after `manifest.started_at_kst`, not in the future, and no older than the policy's 24-hour freshness limit at validation time. The capability flag is not publication approval, and the record cannot be reused. This JSON is an audit record of a direct owner message, not a cryptographic signature; the validator checks freshness, run, and scope, but cannot independently authenticate the speaker. The three-article manual path remains separate. Before publishing:
 
 1. Re-run all gates.
 2. Run `node tools/verify-publication-scope.mjs`; use its exact `validation/path-scope.txt` as the only copy/stage allowlist.

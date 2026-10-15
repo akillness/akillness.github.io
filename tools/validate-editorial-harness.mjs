@@ -42,8 +42,10 @@ const required = [
   'tools/verify-publication-scope.mjs',
   'tools/lib/source-image-manifest.mjs',
   'tools/lib/authority-brief.mjs',
+  'tools/lib/manual-publication-approval.mjs',
   'tools/tests/source-image-manifest.test.mjs',
   'tools/tests/authority-brief.test.mjs',
+  'tools/tests/manual-publication-approval.test.mjs',
   '.claude/skills/archive-development/SKILL.md',
   '.agents/skills/archive-development/SKILL.md',
   'tools/lib/archive-development-policy.mjs',
@@ -63,7 +65,7 @@ if (exists('AGENTS.md')) {
 
 if (exists('CLAUDE.md')) {
   const contract = read('CLAUDE.md');
-  for (const phrase of ['_workspace/current/', '_workspace/archive/<run-id>/', 'Source Audit', 'draft-only', 'publish-on-green', '+0900', 'git add -A', 'source-image-manifest.json']) {
+  for (const phrase of ['_workspace/current/', '_workspace/archive/<run-id>/', 'Source Audit', 'draft-only', 'publish-on-green', 'manual-single-article-publication', '+0900', 'git add -A', 'source-image-manifest.json']) {
     check(contract.includes(phrase), `CLAUDE.md is missing contract phrase: ${phrase}`);
   }
 }
@@ -147,8 +149,21 @@ if (exists('.claude/editorial-policy.yml')) {
   exactPolicyValue('authority_revenue_model', 'ads-and-paid-technical-review', 'Authority revenue model drifted');
   exactPolicyValue('authority_readout_after_days', '28', 'Authority readout window drifted');
   exactPolicyValue('authority_result_status_at_publish', 'not-measured', 'Authority publish-time result status drifted');
+  exactPolicyValue('manual_single_article_publication_enabled', 'true', 'Manual single-article publication capability must remain explicitly enabled');
+  exactPolicyValue('manual_single_article_publication_max_articles', '1', 'Manual single-article publication must remain limited to one article');
+  exactPolicyValue('manual_single_article_approval_max_age_hours', '24', 'Manual single-article approval freshness window drifted');
+  exactPolicyValue('manual_single_article_approval_record_path', 'messages/manual-single-article-approval.json', 'Manual single-article approval record path drifted');
   for (const constraint of ['no-transcript-rewrite-articles', 'no-scaled-content-automation', 'no-unverified-outcome-claims']) {
     check(new RegExp(`^\\s+-\\s*${constraint}$`, 'm').test(policy), `Policy standing constraint is missing: ${constraint}`);
+  }
+  if (exists('tools/lib/manual-publication-approval.mjs')) {
+    const manualApprovalHelper = read('tools/lib/manual-publication-approval.mjs');
+    const manualApprovalConst = (name) => manualApprovalHelper.match(new RegExp(`^export const ${name} = (.+);$`, 'm'))?.[1];
+    check(manualApprovalConst('MANUAL_SINGLE_ARTICLE_APPROVAL_TYPE') === "'manual-single-article-publication'", 'Manual single-article approval type drifted');
+    check(manualApprovalConst('MANUAL_SINGLE_ARTICLE_APPROVAL_STATUS') === "'manual-single-article-approved'", 'Manual single-article approval status drifted');
+    check(manualApprovalConst('MANUAL_SINGLE_ARTICLE_APPROVAL_RECORD_PATH') === "'messages/manual-single-article-approval.json'", 'Manual single-article approval record path drifted');
+    check(manualApprovalConst('MANUAL_SINGLE_ARTICLE_APPROVAL_MAX_AGE_HOURS') === '24', 'Manual single-article approval freshness window drifted from policy');
+    check(manualApprovalHelper.includes('validateManualSingleArticleApproval'), 'Manual single-article approval validator is missing');
   }
   if (exists('tools/lib/authority-brief.mjs')) {
     const authorityHelper = read('tools/lib/authority-brief.mjs');
@@ -168,6 +183,9 @@ if (exists('.claude/editorial-policy.yml')) {
     check(packageValidator.includes("from './lib/authority-brief.mjs'"), 'Package validator does not import the authority-brief helper');
     check(packageValidator.includes('validateAuthorityBrief({'), 'Package validator does not call validateAuthorityBrief');
     check(packageValidator.includes('validateAuthorityReviewFindings(review)'), 'Package validator does not enforce authority review findings');
+    check(packageValidator.includes('validateManualSingleArticleApproval({'), 'Package validator does not enforce the run-scoped single-article approval');
+    check(packageValidator.includes("['manual-three-article-publication', MANUAL_SINGLE_ARTICLE_APPROVAL_TYPE].includes(manifest.approval_context?.type)"), 'Package validator no longer preserves the existing three-article manual publication path');
+    check(packageValidator.includes("policyMaxAgeHours: Number(policyScalar('manual_single_article_approval_max_age_hours'))"), 'Package validator does not pass the configured approval freshness window');
     check(packageValidator.includes("research/authority-brief.json is missing"), 'Package validator does not fail closed on a missing authority brief');
   }
 }

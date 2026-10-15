@@ -7,6 +7,11 @@ language: en
 publication_mode: publish-on-green
 standing_publish_approval: true
 max_articles_per_run: 1
+# Capability only: require a fresh, exact run-scoped record of the direct owner request; the record is an audit trail, not a cryptographic signature.
+manual_single_article_publication_enabled: true
+manual_single_article_publication_max_articles: 1
+manual_single_article_approval_max_age_hours: 24
+manual_single_article_approval_record_path: messages/manual-single-article-approval.json
 max_revision_loops: 2
 minimum_primary_sources: 1
 minimum_material_claim_coverage: 1.0
