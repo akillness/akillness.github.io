@@ -333,9 +333,9 @@
       "links_at_intake": 19,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "retired",
+      "developed_at": "2026-10-16",
+      "survey_note": "This historical note is retired rather than developed because the inspected LangGraph interrupt/resume boundary did not yield a distinct article beyond the official guide and the site's existing approval-freshness coverage."
     },
     {
       "path": "_posts/2026/06/2026-06-25-obsidian-second-brain-self-rewriting-vault.md",
