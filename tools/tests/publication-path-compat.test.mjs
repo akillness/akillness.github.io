@@ -17,7 +17,8 @@ const FLAT_POST = `_posts/${BASENAME}`;
 const ASSET_ROOT = `assets/img/posts/${STEM}`;
 const HERO = `${ASSET_ROOT}/nemoclaw-egress-boundary.png`;
 const SOURCE_URL = 'https://docs.nvidia.com/nemoclaw/latest/user-guide/openclaw/security/best-practices';
-const RUN_ID = '20261015-0042-archive-nemoclaw-manual';
+const RUN_ID = 'normal-archive-test-run';
+const EXCEPTION_RUN_ID = '20261015-0042-archive-nemoclaw-manual';
 const SOURCE_REVISION = '635addccb53a4a08274d5225759377956dcea653';
 const TMP_ROOT = fs.realpathSync(process.env.RUNNER_TEMP || os.tmpdir());
 
@@ -363,6 +364,39 @@ function removeFixture(root) {
     const scopeResult = run(SCOPE_TOOL, root);
     assert.equal(scopeResult.status, 0, output(scopeResult));
     assert.deepEqual(fs.readFileSync(path.join(root, '_workspace/current/validation/path-scope.txt'), 'utf8').trim().split('\n'), expectedPackageScope());
+  } finally { removeFixture(root); }
+});
+
+test('rejects an ordinary future revision 3 without the owner exception', () => {
+  const root = makeFixture();
+  try {
+    updateManifest(root, { revision_loops: 3 });
+    const result = run(PACKAGE_TOOL, root, '--stage', 'draft');
+    assert.notEqual(result.status, 0, output(result));
+    assert.match(output(result), /revision budget/);
+  } finally { removeFixture(root); }
+});
+
+test('rejects the exact owner run/post/proof when required evidence is missing', () => {
+  const root = makeFixture();
+  try {
+    updateManifest(root, { run_id: EXCEPTION_RUN_ID, revision_loops: 3, owner_revision_exception_proof: 'review/owner-b1-revision-proof.json' });
+    const result = run(PACKAGE_TOOL, root, '--stage', 'draft');
+    assert.notEqual(result.status, 0, output(result));
+    assert.match(output(result), /Cannot verify the scoped owner revision exception|revision budget/);
+  } finally { removeFixture(root); }
+});
+
+test('rejects a symlinked fixed history artifact before reading it', () => {
+  const root = makeFixture();
+  try {
+    updateManifest(root, { run_id: EXCEPTION_RUN_ID, revision_loops: 3, owner_revision_exception_proof: 'review/owner-b1-revision-proof.json' });
+    const history = path.join(root, '_workspace/current/review/history/before-owner-approved-b1-revision');
+    fs.mkdirSync(history, { recursive: true });
+    fs.symlinkSync(path.join(root, '_workspace/current/manifest.json'), path.join(history, 'manifest.json'));
+    const result = run(PACKAGE_TOOL, root, '--stage', 'draft');
+    assert.notEqual(result.status, 0, output(result));
+    assert.match(output(result), /Forbidden symlink or inaccessible publication path/);
   } finally { removeFixture(root); }
 });
 

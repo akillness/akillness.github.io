@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 
 import { imageFallbackContextFromDisk } from './lib/source-image-manifest.mjs';
-import { publicationPathErrors, resolvePublicationPost } from './lib/archive-publication-path.mjs';
+import { ARCHIVE_LEDGER_PATH, archiveGraduationErrors, publicationPathErrors, resolvePublicationPost } from './lib/archive-publication-path.mjs';
+import { B1_REVISION_EXCEPTION, ownerRevisionExceptionErrors } from './lib/archive-development-policy.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
 import {
   collectReferenceFiles,
   referencesPrefix,
@@ -105,7 +108,6 @@ if (manifest) {
   pass(['draft-only', 'publish-on-green'].includes(manifest.mode), `Invalid manifest mode: ${manifest.mode}`);
   if (manifest.mode === 'draft-only') pass(manifest.publication_requires_confirmation === true, 'draft-only manifest must require publication confirmation');
   if (manifest.mode === 'publish-on-green') pass(manifest.publication_requires_confirmation === false, 'approved publish-on-green manifest has inconsistent confirmation state');
-  pass(Number.isInteger(manifest.revision_loops) && manifest.revision_loops <= 2, `Invalid revision loop count: ${manifest.revision_loops}`);
   pass(typeof manifest.gates === 'object' && !Array.isArray(manifest.gates), 'Manifest gates must be an object');
   pass(typeof manifest.topic === 'string' && manifest.topic.trim().length >= 5, 'Manifest topic is missing or too short');
   pass(typeof manifest.thesis === 'string' && manifest.thesis.trim().length >= 20, 'Manifest thesis is missing or too short');
@@ -161,6 +163,62 @@ if (drafts.length === 1) {
     body = article.slice(match[0].length);
   }
 }
+
+let ownerRevisionProof = null;
+let ownerRevisionObserved = null;
+if (manifest?.revision_loops === 3 && manifest.run_id === B1_REVISION_EXCEPTION.run && manifest.article_path === B1_REVISION_EXCEPTION.post && manifest.owner_revision_exception_proof === B1_REVISION_EXCEPTION.proof) {
+  try {
+    const load = (file) => {
+      const errors = publicationPathErrors(file);
+      if (errors.length) throw new Error(errors.join('; '));
+      const stat = fs.statSync(file);
+      if (!stat.isFile() || stat.size > 8 * 1024 * 1024) throw new Error(`Invalid owner proof artifact: ${path.relative(repoRoot, file)}`);
+      return fs.readFileSync(file);
+    };
+    const digest = (bytes) => createHash('sha256').update(bytes).digest('hex');
+    const historyRoot = path.join(current, 'review/history/before-owner-approved-b1-revision');
+    const history = Object.fromEntries(['manifest.json', 'editorial-review.json', 'article.md', 'run-summary.md'].map((name) => [name, load(path.join(historyRoot, name))]));
+    ownerRevisionProof = JSON.parse(load(path.join(current, B1_REVISION_EXCEPTION.proof)).toString('utf8'));
+    const oldReview = JSON.parse(history['editorial-review.json'].toString('utf8'));
+    const before = history['article.md'].toString('utf8');
+    const b1 = oldReview.unmapped_statement_review?.findings?.find((finding) => finding.finding_id === 'B1')?.observed_text;
+    const lines = before.split('\n');
+    const deletionIndexes = lines.flatMap((line, index) => line === b1 ? [index] : []);
+    const deletionIndex = deletionIndexes[0];
+    const b1Exact = typeof b1 === 'string' && b1.startsWith('Editorial method: claims in this article point to current first-party documentation') && deletionIndexes.length === 1 && lines.slice(deletionIndex + 1).every((line) => !line.trim());
+    const corrected = lines.filter((_, index) => index !== deletionIndex).join('\n');
+    const headerEnd = corrected.indexOf('\n---\n', 4);
+    const headerLines = corrected.slice(0, headerEnd + 1).split('\n');
+    const markers = ['restored_archive: "2026-10-12"', 'ads: false'];
+    const markerExact = headerEnd > 3 && markers.every((marker) => headerLines.filter((line) => line === marker).length === 1) && headerLines.filter((line) => /^(?:restored_archive|ads):/.test(line)).length === 2;
+    const finalArticle = headerLines.filter((line) => !markers.includes(line)).join('\n') + corrected.slice(headerEnd + 1);
+    const reviewBytes = load(path.join(current, 'review/editorial-review.json'));
+    const protectedHashes = Object.fromEntries([...B1_REVISION_EXCEPTION.protected].sort().map((file) => [file, digest(load(path.join(current, file)))]));
+    ownerRevisionObserved = {
+      approval_sha256: digest(load(path.join(current, 'review/owner-extra-revision-approval.json'))),
+      history_sha256: Object.fromEntries(Object.entries(history).map(([name, bytes]) => [name, digest(bytes)])),
+      historical_manifest: JSON.parse(history['manifest.json'].toString('utf8')),
+      derived_corrected_sha256: digest(corrected),
+      derived_final_sha256: digest(finalArticle),
+      b1_deletion_exact: b1Exact,
+      marker_transition_exact: markerExact,
+      current_draft_sha256: digest(article),
+      review_sha256: digest(reviewBytes),
+      protected_artifact_manifest_sha256: digest(JSON.stringify(protectedHashes)),
+      review: JSON.parse(reviewBytes.toString('utf8')),
+      selected_ledger_status: publicationPost?.archive?.entry?.status
+    };
+    if (stage === 'final') {
+      const baseline = spawnSync('git', ['show', `HEAD:${ARCHIVE_LEDGER_PATH}`], { cwd: repoRoot, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+      if (baseline.status !== 0) throw new Error('Cannot read committed pre-graduation ledger for owner exception');
+      ownerRevisionObserved.ledger_transition_errors = archiveGraduationErrors({ before: JSON.parse(baseline.stdout), after: publicationPost?.archive?.ledger, postPath: manifest.article_path, article, restoredSources: publicationPost?.archive?.restoredSources });
+      ownerRevisionObserved.current_source_sha256 = digest(load(path.join(repoRoot, manifest.article_path)));
+    }
+  } catch (error) {
+    failures.push(`Cannot verify the scoped owner revision exception: ${error.message}`);
+  }
+}
+failures.push(...ownerRevisionExceptionErrors({ manifest, stage, proof: ownerRevisionProof, observed: ownerRevisionObserved }));
 
 const fmLine = (key) => frontMatter.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'))?.[1]?.trim() || '';
 const stripQuotes = (value) => value.replace(/^['"]|['"]$/g, '').trim();
