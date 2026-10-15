@@ -126,7 +126,7 @@ function makeBrief() {
 }
 
 
-function makeFixture() {
+function makeFixture({ settledSelectedEntry = false } = {}) {
   const root = fs.mkdtempSync(path.join(TMP_ROOT, 'publication-path-compat-'));
   fs.mkdirSync(path.join(root, '_workspace', 'current', 'draft', '_posts', '2026', '03'), { recursive: true });
   fs.mkdirSync(path.join(root, '_workspace', 'current', 'draft', 'assets', 'img', 'posts', STEM), { recursive: true });
@@ -144,6 +144,19 @@ function makeFixture() {
   for (const file of ['archive_development.json', 'archive_restoration.json']) {
     fs.copyFileSync(path.join(REPO_ROOT, '_data', file), path.join(root, '_data', file));
   }
+  const developmentLedger = json(root, '_data/archive_development.json');
+  const selectedEntry = developmentLedger.posts.find((entry) => entry.path === NESTED_POST);
+  if (settledSelectedEntry) Object.assign(selectedEntry, {
+    status: 'graduated',
+    developed_at: '2026-10-14',
+    survey_note: 'Settled source seed used to prove fixture normalization remains independent of the live ledger status.',
+    merged_into: '_posts/2026/03/2026-03-19-nemoclaw-followup.md'
+  });
+  selectedEntry.status = 'pending';
+  selectedEntry.developed_at = null;
+  selectedEntry.survey_note = null;
+  delete selectedEntry.merged_into;
+  writeJson(root, '_data/archive_development.json', developmentLedger);
   fs.writeFileSync(path.join(root, '_posts', '2025-01-01-existing.md'), '---\ncategories: ["AI, Agents"]\n---\nExisting.\n');
 
   const hero = fakePng();
@@ -282,8 +295,8 @@ function git(root, args) {
   assert.equal(result.status, 0, `git ${args.join(' ')} failed: ${output(result)}`);
 }
 
-function stagedFixture() {
-  const root = makeFixture();
+function stagedFixture(options) {
+  const root = makeFixture(options);
   fs.mkdirSync(path.join(root, 'tools'), { recursive: true });
   fs.writeFileSync(path.join(root, 'tools/existing.mjs'), 'export const existing = true;\n');
   git(root, ['init', '-q']);
@@ -429,6 +442,16 @@ test('staged scope accepts only the selected nested post, matching assets, and o
   try {
     const result = run(SCOPE_TOOL, root, '--staged');
     assert.equal(result.status, 0, output(result));
+  } finally { removeFixture(root); }
+});
+
+test('staged scope re-seeds a settled selected entry before graduation', () => {
+  const root = stagedFixture({ settledSelectedEntry: true });
+  try {
+    const result = run(SCOPE_TOOL, root, '--staged');
+    assert.equal(result.status, 0, output(result));
+    const selectedEntry = json(root, '_data/archive_development.json').posts.find((entry) => entry.path === NESTED_POST);
+    assert.equal(selectedEntry.merged_into, undefined);
   } finally { removeFixture(root); }
 });
 
