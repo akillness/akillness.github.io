@@ -1,154 +1,118 @@
 ---
+title: "Choose the MCP protocol era before dropping sessions"
+description: "A Source Audit separates modern MCP metadata, legacy initialization and optional dual-era behavior before applying the roadmap's stateless-server advice."
+date: 2026-08-21 11:00:00 +0900
+last_modified_at: 2026-10-16 19:54:06 +0900
 published: true
-title: "The New MCP Roadmap - Reading the Protocol's Five Bets on Agentic Infrastructure"
-description: "MCP just published an updated roadmap: sessions are gone, transports are unifying on HTTP, and agent identity is now a first-class priority. Here's what each of the five areas means if you're shipping agent-powered tools."
 categories: [AI, Agents]
-tags: [mcp, model-context-protocol, roadmap, agent-identity, protocol-design, agentic-workflows, production-ml]
-date: 2026-08-21 10:00:00 +0800
-mermaid: true
+tags: [mcp, model-context-protocol, protocol-design, agentic-workflows]
+archive_developed: 2026-10-16
+archive_development_note: "Re-read the MCP roadmap and modern, legacy and dual-era protocol documents; replaced a universal sessionless-server recommendation with an era-specific compatibility decision."
 image:
-  path: /assets/img/posts/2026-08-21-mcp-roadmap/priority-areas.svg
-  alt: "MCP Roadmap: five priority areas — agentic messaging primitives, HTTP-native transport unification and hardening, agent identity and enterprise-ready security, improved primitives, and improved SDK developer experience"
-ads: false
-restored_archive: "2026-10-12"
+  path: /assets/img/posts/2026-08-21-mcp-roadmap-agentic-infrastructure/protocol-era.png
+  alt: "Original document comparison of legacy initialization, modern per-request metadata and optional dual-era MCP operation"
+image_policy: source-first-fallback
+mermaid: false
+pin: false
 ---
 
-## 🤔 Curiosity: What Does a Protocol Prioritize When Agents Stop Being Chatbots?
+## Can you remove MCP sessions without breaking older clients?
 
-Every game studio I've worked at eventually learns the same lesson about infrastructure: **the protocol you standardize on decides what you can build two years later**. Pick a netcode model that assumes short sessions, and long-running co-op raids become a rewrite. Pick an asset pipeline that assumes humans click buttons, and automation becomes a hack.
+The documents do not support a universal yes. The captured MCP contract distinguishes modern requests carrying per-request metadata from legacy requests that establish a session through `initialize`. An implementation may support both. Removing the modern protocol's session machinery therefore does not answer what an integration must retain for its legacy path.
 
-That's why I read protocol roadmaps the way other people read patch notes. The Model Context Protocol (MCP) team — David Soria Parra and Den Delimarsky, the lead maintainers — just published [an updated roadmap](https://blog.modelcontextprotocol.io/posts/mcp-roadmap/) covering the next specification release and beyond, developed together with the Core Maintainers and community Working Groups.
+**Integration inference:** identify the protocol era before applying the archived article's stateless-server recommendation. Treat that as a compatibility decision, not as a result from a tested client/server pair. This Source Audit compares official documents read on 2026-10-16; it does not claim that any particular MCP implementation interoperated, scaled or deployed successfully.
 
-MCP has quietly become the seam layer for agent tooling — including the Unity CLI agents and telemetry pipelines I've been experimenting with on this blog. So the question I brought to this roadmap:
+That distinction repairs a specific overreach in the historical note. Its description said that sessions were gone, while its production advice generalized that direction into a server-design recommendation. The modern change is real in the inspected specification. Its scope, rather than its existence, is the issue.
 
-**Which assumptions about "agents" is the protocol betting on — and do those bets match what production agentic workloads actually look like?**
+## Modern metadata and legacy initialization are different contracts
 
-![MCP Roadmap priority areas overview](/assets/img/posts/2026-08-21-mcp-roadmap/priority-areas.svg){: .w-75 .shadow .rounded-10 }
-_The five priority areas of the new MCP roadmap. Source: [blog.modelcontextprotocol.io](https://blog.modelcontextprotocol.io/posts/mcp-roadmap/)_
+The captured [Versioning and Compatibility page](https://modelcontextprotocol.io/specification/latest/basic/lifecycle) defines modern revisions as `2026-07-28` and later, with version, identity and capabilities carried as per-request metadata. It defines legacy revisions as `2025-11-25` and earlier, using an `initialize` handshake. Dual-era means an implementation supports both families.
 
----
+Those are protocol-era definitions, not alternate names for HTTP and stdio. The same lifecycle document describes a dual-era server answering modern requests statelessly while an `initialize` request selects negotiated legacy semantics on an HTTP session or a stdio process. An explanation that reduces the change to HTTP session headers alone misses this cross-transport initialization distinction.
 
-## 📚 Retrieve: What Shipped, and What's Next
+| Contract case | What the captured lifecycle document says | Decision inference for an integration |
+|---|---|---|
+| Modern request | Per-request metadata rather than an initialization handshake | Scope the sessionless claim to the modern contract |
+| Legacy request | Initialization establishes negotiated legacy semantics | Do not erase the legacy requirements by citing a modern roadmap |
+| Optional dual-era implementation | Modern and legacy requests select their respective semantics | Identify both supported paths before deciding which state can disappear |
 
-### Looking back: the 2026-07-28 release did surgery, not patches
+The optional case matters. Dual-era support is a way to serve both families, not a requirement that every modern implementation retain every older mechanism. Conversely, the existence of modern semantics does not turn an explicitly supported legacy path into modern traffic. The compatibility question needs the implementation's declared era support, not just the date of the newest document.
 
-The [previous roadmap](https://blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/) (March) named four priorities: transport evolution and scalability, agent communication, governance maturation, and enterprise readiness. Five months later, the bulk of the work landed in the [2026-07-28 specification release](https://blog.modelcontextprotocol.io/posts/2026-07-28/), and some of it is genuinely structural:
+<figure class="explanatory-image">
+  <img src="/assets/img/posts/2026-08-21-mcp-roadmap-agentic-infrastructure/protocol-era.png" alt="Original document comparison of legacy initialization, modern per-request metadata and optional dual-era MCP operation" width="1600" height="900">
+  <figcaption>Original illustration by Fodev JEO editorial harness (SVG diagram, local rsvg-convert export); not source evidence.</figcaption>
+</figure>
 
-| Change | SEP | Why It Matters |
-|:-------|:----|:---------------|
-| **Protocol-level sessions and init handshake removed** | [SEP-2575](https://modelcontextprotocol.io/seps/2575-stateless-mcp), [SEP-2567](https://modelcontextprotocol.io/seps/2567-sessionless-mcp) | Servers scale horizontally without holding state — MCP servers become boring, load-balanceable HTTP workloads |
-| **`server/discover` endpoint** | — | Clients learn supported versions/capabilities *before* connecting |
-| **Cacheable list results (TTL)** | [SEP-2549](https://modelcontextprotocol.io/seps/2549-TTL-for-list-results) | Stop re-fetching tool catalogs on every connection |
-| **Tasks moved to an official extension** | [SEP-2663](https://modelcontextprotocol.io/seps/2663-tasks-extension) | Long-running work reworked from early-adopter feedback |
-| **Multi Round-Trip Requests (MRTR)** | [SEP-2322](https://modelcontextprotocol.io/seps/2322-MRTR) | Replaces server-initiated requests, so elicitation works on *stateless* servers |
-| **Enterprise-Managed Authorization now stable** | [extension](https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization) | Issuer validation, issuer-bound client credentials, CIMD as preferred client registration |
+[Editable SVG diagram](/assets/img/posts/2026-08-21-mcp-roadmap-agentic-infrastructure/protocol-era.svg)
 
-Governance matured too: a formal [Contributor Ladder](https://modelcontextprotocol.io/community/contributor-ladder), Working Groups triaging SEPs in their own areas, and a proper [feature lifecycle and deprecation policy](https://modelcontextprotocol.io/community/feature-lifecycle). The [Server Card Working Group](https://modelcontextprotocol.io/community/working-groups/server-card) is defining `.well-known` metadata so servers can be discovered and reasoned about *without connecting to them*.
+## HTTP session headers are a narrower question
 
-> **Retrieve:** Killing protocol sessions is the same architectural move game backends made a decade ago — push state out of the connection layer so any node can serve any request. MCP just crossed that line.
-{: .prompt-info}
+The [2026-07-28 Streamable HTTP specification](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http) supplies the transport-specific detail. It describes one POST MCP endpoint and a server running as an independent process that can handle multiple client connections. Those statements describe the contract; they are not a load-test result.
 
-### The five new priority areas
+Its backward-compatibility section explicitly contrasts earlier Streamable HTTP revisions, `2025-03-26` through `2025-11-25`, with modern semantics. The older revisions allowed session-ID assignment, standalone GET SSE streams, server-initiated JSON-RPC requests on SSE and `Last-Event-ID` resumption. Those mechanisms are absent from modern semantics. The older [2025-11-25 transport document](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports) supplies the corresponding historical context.
 
-The new roadmap organizes work into five areas, each owned by named Core Maintainers and one or more Working Groups:
+For older-client traffic, the captured modern-only transport guidance says the server SHOULD ignore `Mcp-Session-Id` and `Last-Event-ID`; it should not mint or echo session IDs. A dual-era server's legacy path is a different case. Flattening both cases into “the server must never have a session” would turn a scoped compatibility rule into a universal design claim.
 
-```mermaid
-graph TB
-    R[MCP Roadmap 2026H2] --> A[1. Agentic Messaging<br/>Primitives]
-    R --> B[2. HTTP-Native Transport<br/>Unification & Hardening]
-    R --> C[3. Agent Identity &<br/>Enterprise Security]
-    R --> D[4. Improved Primitives]
-    R --> E[5. SDK Developer<br/>Experience]
+**Integration inference:** keep the protocol-era decision separate from the HTTP-mechanism decision. First establish whether the path is modern, legacy or part of an optional dual-era implementation. Then read the matching transport rules. In particular, “the standalone GET stream is absent” is narrower than an unqualified claim that all streaming has disappeared.
 
-    A --> A1[Server-initiated events:<br/>webhooks & channels]
-    A --> A2[Tasks extension → spec]
-    B --> B1[Streamable HTTP<br/>over stdio]
-    C --> C1[DPoP finalization]
-    C --> C2[Workload Identity<br/>Federation + ID-JAG]
-    D --> D1[One tool-result contract]
-    D --> D2[Progressive discovery]
-    E --> E1[Spec conformance testing]
+## Choose an era before choosing a server design
 
-    style A fill:#ff6b6b,stroke:#c92a2a,color:#fff
-    style C fill:#4ecdc4,stroke:#0a9396,color:#fff
-    style D fill:#ffe66d,stroke:#f4a261,color:#000
-```
+The useful output of this audit is an ordered decision, not a new architecture diagram. Start with which client eras the intended integration must support. If only modern traffic is in scope, the modern contract is the relevant boundary. If a legacy path remains in scope, inspect its initialization and session requirements rather than importing the modern-only answer into it.
 
-**1. Agentic messaging primitives.** Modern agentic workloads have outgrown the standard [request-and-response pattern](https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns): loops run longer, servers stream results, and work needs steering mid-flight. MCP already grew [Tasks](https://modelcontextprotocol.io/extensions/tasks/overview), [subscriptions/listen](https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/subscriptions), and [progress notifications](https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/progress) — this area makes sure they compose. The concrete work: server-initiated events (webhooks and channels, so clients stop polling), a composition review across the [Agents](https://modelcontextprotocol.io/community/working-groups/agents) and [Triggers & Events](https://modelcontextprotocol.io/community/working-groups/triggers-events) Working Groups, and maturing Tasks into the core spec.
+For a dual-era implementation, write the two cases separately. “Modern requests use per-request metadata” and “initialization selects legacy semantics” can both be true. A design description that keeps only the first sentence has not described the supported compatibility surface completely.
 
-**2. HTTP-native transport unification and hardening.** Since 2026-07-28, a remote MCP server is "no different from any other HTTP workload." The plan now stretches that to *local* servers too — speaking Streamable HTTP over stdio — so there's one transport story instead of two.
+| Before changing the server | What to establish from the documents | What remains unverified here |
+|---|---|---|
+| Remove initialization handling | Which protocol era the intended path speaks | Whether a particular implementation handles that path correctly |
+| Remove HTTP session and resume behavior | Whether the path follows modern-only or negotiated legacy semantics | Behavior of the actual client/server combination |
+| Make a stateless-server recommendation | Whether the recommendation is explicitly modern-scoped or must account for legacy support | Deployment, scaling and application-state consequences |
 
-**3. Agent identity and enterprise-ready security.** This is the area I'd watch most closely. Today [MCP authorization](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization) assumes a person approving access in a browser. But callers increasingly are agents running as cloud workloads with their own identity, acting for an absent user, or delegating narrower authority to sub-agents. The roadmap commits to: finalizing [DPoP (RFC 9449)](https://www.rfc-editor.org/rfc/rfc9449) adoption, an opinionated path through Workload Identity Federation and the ID-JAG grant behind [Enterprise-Managed Authorization](https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization), and deeper engagement with the IETF OAuth and [WIMSE](https://datatracker.ietf.org/wg/wimse/about/) working groups — explicitly "built on existing standards rather than pasted API keys and long-lived tokens."
+These are **integration inferences**, not a claim that the specification has proved the resulting design safe. A single POST endpoint does not supply the missing execution evidence. Nor does a document-defined dual-era path demonstrate that a particular library implements it. Keep the contract selection and the interoperability result as separate records.
 
-**4. Improved primitives.** Two honest admissions here. First, a [`tools/call` response](https://modelcontextprotocol.io/specification/2026-07-28/server/tools#tool-result) can carry the same output in multiple forms, and servers can't know which form a client will show the model — so they're standardizing one clear contract. Second, **scale**: connecting to a server with a hundred tools means the model pays for that whole surface before the user asks anything, and tool selection degrades as the list grows. The answer is *progressive discovery* — a small entry point that reveals more of the catalog as the conversation narrows.
+For another version-source boundary, [the Unity MCP release-note drift audit](/posts/unity-mcp-release-notes-drift-audit/) examines why released artifacts and documentation version strings need separate checking. For a different MCP boundary, [the Cloudflare OS approval audit](/posts/cloudflare-os-mcp-approvals-still-wait/) separates an approval simulation from the authority to execute an MCP write. Neither comparison supplies a transport compatibility test for this article.
 
-**5. Improved SDK developer experience.** Ergonomics, [conformance testing](https://modelcontextprotocol.io/community/sdk-tiers#conformance-testing), and documentation quality — with a telling justification: many developers now build MCP clients and servers *by pointing an agent at the libraries*, so clear APIs and accurate docs decide whether generated code works.
+## What changed since the August roadmap note
 
-### How proposals get prioritized
+The roadmap is still context, but it is no longer the article's organizing argument. The captured [roadmap post](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/2026-08-22-mcp-roadmap.md) and [maintained roadmap](https://modelcontextprotocol.io/development/roadmap) describe direction for the next specification release and beyond. They identify agentic messaging primitives, HTTP-native transport unification and hardening, agent identity and enterprise-ready security, improved primitives, and SDK developer experience. Priorities may shift or be deferred.
 
-[SEPs](https://modelcontextprotocol.io/community/sep-guidelines) inside these five areas get expedited review. Proposals outside them aren't auto-rejected, but scarce maintainer time goes to priority areas first. The recommended path: identify your area, raise it with the relevant [Working Group](https://modelcontextprotocol.io/community/working-interest-groups), and reach the responsible maintainers on [Discord](https://modelcontextprotocol.io/community/communication#discord). [SEP-2133](https://modelcontextprotocol.io/seps/2133-extensions) even lets any WG/IG prototype in an `experimental-ext-` repository *before* filing a formal SEP.
+A list of those areas cannot establish that every proposal shipped, or that one server design fits every supported protocol era. The revised article therefore uses the roadmap to identify the question, then uses the captured transport and lifecycle contracts to constrain the answer. The contribution is the compatibility decision missing from the old universal recommendation, not the discovery that MCP has a roadmap.
 
----
+There is also a chronology limit. This historical URL retains its original 2026-08-21 publication date, while the captured roadmap blog item is dated 2026-08-22. The October re-read does not establish contemporaneous access or explain that discrepancy. The rebuild note records the current analysis without inventing a story about what was available when the old note was written.
 
-## 💡 Innovation: What These Bets Mean If You Ship Agent Tooling
+## What the documents do not establish
 
-### The pattern: MCP is converging on boring infrastructure
+The evidence here is normative documentation, not observed implementation. No MCP client/server pair, conformance suite, provider call, deployment, scaling exercise or security test was run. The decision framework is useful for narrowing what must be checked; it is not evidence that the resulting integration already passed those checks.
 
-Read the five areas together and one theme emerges: **every bet moves MCP toward existing, proven infrastructure** — stateless HTTP, OAuth-family identity standards, webhooks. That's the opposite of protocol NIH syndrome, and it's exactly what made HTTP itself win.
+The source set also has boundaries. The `latest` lifecycle and changelog captures identify the `2026-07-28` revision at retrieval. They should not be read as a promise that a moving `latest` URL will always resolve to the same text. Draft pages and accepted proposal histories provide context, not independent proof of a released implementation. Two failed source captures were excluded rather than treated as supporting documents.
 
-| Roadmap Bet | Game/Production Analogy | What I'd Do About It |
-|:------------|:------------------------|:---------------------|
-| Stateless servers + HTTP everywhere | Dedicated game servers → autoscaling stateless services | Stop designing MCP servers around session state *now* |
-| Server-initiated events | Push notifications vs. client polling in live ops | Design tool APIs assuming a webhook/channel path is coming |
-| Agent identity (DPoP, WIF) | Per-service credentials replacing shared server keys | Audit any "one API key for the whole agent fleet" setup |
-| Progressive tool discovery | Streaming open worlds vs. loading everything upfront | Restructure large tool catalogs into narrow entry points |
-| Agent-readable SDK docs | — this one is genuinely new | Treat your own tool docs as *model-facing* UX |
+The next engineering question is consequently concrete: which era does the actual client/server path implement, and what evidence supports that behavior? Until that evidence exists, “modern protocol sessions are absent” and “this deployment is ready to remove compatibility state” remain different statements.
 
-### Progressive discovery is the sleeper
+## Key Takeaways
 
-For my own experiments — a Unity build agent exposing dozens of editor operations — the hundred-tools problem is real: context cost grows linearly with catalog size while selection accuracy *drops*. Progressive discovery is the protocol admitting that **tool catalogs need level-of-detail**, the same way open-world games never load the whole map. If you maintain a large MCP server, restructuring around a small entry surface is the highest-leverage prep work you can do today.
+- The captured lifecycle contract distinguishes modern per-request metadata, legacy initialization and optional dual-era support; that distinction is not merely HTTP versus stdio.
+- HTTP session IDs, standalone GET streams and resume headers need their own version-scoped reading. Modern-only guidance is not a universal description of a dual-era legacy path.
+- The original contribution is an era-first compatibility decision. It does not claim tested interoperability, stateless application behavior or a deployment result.
 
-### The identity gap is where enterprises actually stall
+## New Questions
 
-In my experience, agent pilots don't die on capability — they die in security review. "The agent uses a long-lived API key that can do everything" is an instant red flag. A standardized agent-identity story (workload identity, delegation with *narrower* authority for sub-agents, proof-of-possession tokens) is what turns demos into deployments. MCP putting this on the roadmap with named standards bodies attached is the strongest signal in the whole document.
-
-### New Questions This Raises
-
-- When Tasks graduate into the core spec, what does *cancellation semantics* look like for a half-finished agent job with side effects?
-- Can progressive discovery be driven by the model's own uncertainty — retrieve tools the way RAG retrieves documents?
-- If sub-agents get delegated, narrower authority, who audits the *delegation chain* when something goes wrong?
-- Does Streamable-HTTP-over-stdio finally make local and remote MCP servers behaviorally identical enough to test with one harness?
-
----
+- Which protocol eras must the intended integration actually support?
+- If it is dual-era, what evidence covers the modern path and the negotiated legacy path separately?
+- What client/server execution would establish the compatibility result that these documents alone cannot supply?
 
 ## References
 
-**Primary Source:**
-- [The New MCP Roadmap (blog post)](https://blog.modelcontextprotocol.io/posts/mcp-roadmap/) — David Soria Parra & Den Delimarsky
-- [Live Roadmap Page](https://modelcontextprotocol.io/development/roadmap)
-- [Previous Roadmap (March 2026)](https://blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/)
-- [2026-07-28 Specification Release Notes](https://blog.modelcontextprotocol.io/posts/2026-07-28/)
+All sources below were read on 2026-10-16. Versioned transport links identify the inspected protocol revision. The roadmap repository link was captured from `main` at retrieval, not pinned to an immutable commit; `latest` and roadmap URLs are moving documents, not frozen implementation evidence.
 
-**Specification Enhancement Proposals (SEPs):**
-- [SEP-2575 — Stateless MCP](https://modelcontextprotocol.io/seps/2575-stateless-mcp)
-- [SEP-2567 — Sessionless MCP](https://modelcontextprotocol.io/seps/2567-sessionless-mcp)
-- [SEP-2549 — TTL for List Results](https://modelcontextprotocol.io/seps/2549-TTL-for-list-results)
-- [SEP-2663 — Tasks Extension](https://modelcontextprotocol.io/seps/2663-tasks-extension)
-- [SEP-2322 — Multi Round-Trip Requests](https://modelcontextprotocol.io/seps/2322-MRTR)
-- [SEP-2133 — Extensions Mechanism](https://modelcontextprotocol.io/seps/2133-extensions)
+### Version and transport contracts
 
-**Specification & Extensions:**
-- [Request/Response Patterns](https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns) · [Subscriptions](https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/subscriptions) · [Progress Notifications](https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/progress)
-- [Tasks Extension Overview](https://modelcontextprotocol.io/extensions/tasks/overview)
-- [Authorization Spec](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization) · [Enterprise-Managed Authorization](https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization) ([stability announcement](https://blog.modelcontextprotocol.io/posts/enterprise-managed-auth/))
-- [Tool Result Contract](https://modelcontextprotocol.io/specification/2026-07-28/server/tools#tool-result)
+- [Versioning and Compatibility, latest capture identifying 2026-07-28](https://modelcontextprotocol.io/specification/latest/basic/lifecycle)
+- [Streamable HTTP, version 2026-07-28](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http)
+- [Earlier transport contract, version 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports)
+- [Changelog, latest capture identifying 2026-07-28](https://modelcontextprotocol.io/specification/latest/changelog)
 
-**Standards Bodies:**
-- [RFC 9449 — OAuth 2.0 Demonstrating Proof of Possession (DPoP)](https://www.rfc-editor.org/rfc/rfc9449)
-- [IETF WIMSE Working Group](https://datatracker.ietf.org/wg/wimse/about/)
+### Roadmap and proposal context
 
-**Community & Governance:**
-- [Working & Interest Groups](https://modelcontextprotocol.io/community/working-interest-groups) — incl. [Agents](https://modelcontextprotocol.io/community/working-groups/agents), [Triggers & Events](https://modelcontextprotocol.io/community/working-groups/triggers-events), [Server Card](https://modelcontextprotocol.io/community/working-groups/server-card)
-- [SEP Guidelines](https://modelcontextprotocol.io/community/sep-guidelines) · [Contributor Ladder](https://modelcontextprotocol.io/community/contributor-ladder) · [Feature Lifecycle](https://modelcontextprotocol.io/community/feature-lifecycle)
-- [Contributing Guide](https://modelcontextprotocol.io/community/contributing) · [Communication Channels](https://modelcontextprotocol.io/community/communication) · [SDK Conformance Tiers](https://modelcontextprotocol.io/community/sdk-tiers#conformance-testing)
-- [MCP on GitHub](https://github.com/modelcontextprotocol)
+- [Roadmap blog source, dated 2026-08-22](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/2026-08-22-mcp-roadmap.md)
+- [Maintained MCP roadmap](https://modelcontextprotocol.io/development/roadmap)
+- [SEP-2575, stateless MCP proposal history](https://modelcontextprotocol.io/seps/2575-stateless-mcp)
+- [SEP-2567, sessionless MCP proposal history](https://modelcontextprotocol.io/seps/2567-sessionless-mcp)

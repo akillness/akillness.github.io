@@ -431,9 +431,9 @@
       "links_at_intake": 60,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-16",
+      "survey_note": "Re-read the official MCP roadmap and 2026-07-28, 2025-11-25 and captured lifecycle compatibility documents on 2026-10-16. Rebuilt the archived universal sessionless-server advice as an era-specific decision framework distinguishing modern per-request metadata, negotiated legacy semantics and optional dual-era operation. Normative document analysis only; no client/server interoperability, conformance, deployment, scaling or security experiment was performed."
     },
     {
       "path": "_posts/2026/09/2026-09-22-context-engineering-agent-memory-design.md",

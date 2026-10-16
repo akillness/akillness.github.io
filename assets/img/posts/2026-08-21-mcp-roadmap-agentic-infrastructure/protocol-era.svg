@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Choose the MCP protocol era before dropping sessions</title>
+  <desc id="desc">Original document-reading comparison of legacy, modern and optional dual-era MCP operation. Initialization and protocol sessions belong to legacy semantics; modern requests carry metadata independently. HTTP session headers are a transport-specific question. This is not an interoperability test.</desc>
+  <style>text{font-family:Arial,sans-serif;fill:#203548}.eyebrow{font-size:22px;font-weight:700;letter-spacing:2px}.title{font-size:44px;font-weight:700}.subtitle{font-size:25px;fill:#52677b}.head{font-size:31px;font-weight:700}.label{font-size:22px;fill:#52677b}.line{font-size:26px}.small{font-size:22px}.foot{font-size:25px;font-weight:700}</style>
+  <text class="eyebrow" x="64" y="64">SOURCE AUDIT · MCP COMPATIBILITY</text>
+  <text class="title" x="64" y="124">Choose the era before removing state</text>
+  <text class="subtitle" x="64" y="170">Three contract cases, not a mandatory upgrade sequence</text>
+  <rect x="64" y="218" width="464" height="448" rx="18" fill="#edf3f9" stroke="#91afc8" stroke-width="2"/>
+  <text class="head" x="92" y="268">Legacy</text>
+  <text class="label" x="92" y="310">2025-11-25 and earlier</text>
+  <text class="line" x="92" y="370">initialize handshake</text>
+  <text class="line" x="92" y="413">Negotiated session semantics</text>
+  <line x1="92" y1="450" x2="500" y2="450" stroke="#bbcddd"/>
+  <text class="small" x="92" y="493">Earlier Streamable HTTP may use:</text>
+  <text class="small" x="92" y="534">session IDs · standalone GET SSE</text>
+  <text class="small" x="92" y="575">server requests on SSE · resumption</text>
+  <text class="label" x="92" y="629">Read the matching older contract</text>
+  <rect x="568" y="218" width="464" height="448" rx="18" fill="#f0f7f4" stroke="#8bb6a6" stroke-width="2"/>
+  <text class="head" x="596" y="268">Modern</text>
+  <text class="label" x="596" y="310">2026-07-28 contract</text>
+  <text class="line" x="596" y="370">Per-request metadata</text>
+  <text class="line" x="596" y="413">No initialize handshake</text>
+  <line x1="596" y1="450" x2="1004" y2="450" stroke="#b8d5c8"/>
+  <text class="small" x="596" y="493">Streamable HTTP:</text>
+  <text class="small" x="596" y="534">one POST endpoint</text>
+  <text class="small" x="596" y="575">no protocol session / standalone GET</text>
+  <text class="label" x="596" y="629">Not a proof of stateless application code</text>
+  <rect x="1072" y="218" width="464" height="448" rx="18" fill="#fbf6ed" stroke="#bc9d6f" stroke-width="2" stroke-dasharray="9 6"/>
+  <text class="head" x="1100" y="268">Dual-era · optional</text>
+  <text class="label" x="1100" y="310">Supports both contract families</text>
+  <text class="line" x="1100" y="370">Modern request → modern</text>
+  <text class="line" x="1100" y="413">initialize → legacy</text>
+  <line x1="1100" y1="450" x2="1508" y2="450" stroke="#dfcdb3"/>
+  <text class="small" x="1100" y="493">Era selection applies to:</text>
+  <text class="small" x="1100" y="534">HTTP sessions</text>
+  <text class="small" x="1100" y="575">stdio processes</text>
+  <text class="label" x="1100" y="629">Legacy semantics do not vanish</text>
+  <text class="foot" x="64" y="748">Decision inference: identify supported client eras before deleting compatibility state.</text>
+  <text class="subtitle" x="64" y="797">HTTP headers are narrower than the cross-transport initialization distinction.</text>
+  <text class="small" x="64" y="852">Official documents read 2026-10-16 · Original explanatory diagram · Not source evidence or tested interoperability</text>
+</svg>
