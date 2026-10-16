@@ -6,6 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
+import { resolvePublicationPost } from '../lib/archive-publication-path.mjs';
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const PACKAGE_TOOL = path.join(REPO_ROOT, 'tools', 'validate-editorial-package.mjs');
@@ -14,6 +15,10 @@ const STEM = '2026-03-18-nemoclaw-safe-agents-guide';
 const BASENAME = `${STEM}.md`;
 const NESTED_POST = `_posts/2026/03/${BASENAME}`;
 const FLAT_POST = `_posts/${BASENAME}`;
+const FLAT_ARCHIVE_POST = '_posts/2026-08-16-unity-cli-atomic-agent.md';
+const FLAT_ARCHIVE_STEM = path.basename(FLAT_ARCHIVE_POST, '.md');
+const FLAT_ARCHIVE_ASSET_ROOT = `assets/img/posts/${FLAT_ARCHIVE_STEM}`;
+const FLAT_ARCHIVE_HERO = `${FLAT_ARCHIVE_ASSET_ROOT}/nemoclaw-egress-boundary.png`;
 const ASSET_ROOT = `assets/img/posts/${STEM}`;
 const HERO = `${ASSET_ROOT}/nemoclaw-egress-boundary.png`;
 const SOURCE_URL = 'https://docs.nvidia.com/nemoclaw/latest/user-guide/openclaw/security/best-practices';
@@ -266,6 +271,11 @@ function updateLedger(root, mutate) {
   mutate(ledger.posts.find((entry) => entry.path === NESTED_POST), ledger);
   writeJson(root, '_data/archive_development.json', ledger);
 }
+function updateFlatLedger(root, mutate) {
+  const ledger = json(root, '_data/archive_development.json');
+  mutate(ledger.posts.find((entry) => entry.path === FLAT_ARCHIVE_POST), ledger);
+  writeJson(root, '_data/archive_development.json', ledger);
+}
 
 function flatDraft(root) {
   const nested = path.join(root, '_workspace/current/draft', NESTED_POST);
@@ -273,6 +283,61 @@ function flatDraft(root) {
   fs.mkdirSync(path.dirname(flat), { recursive: true });
   fs.renameSync(nested, flat);
   updateManifest(root, { article_path: FLAT_POST, asset_dir: `${ASSET_ROOT}/` });
+}
+function flatArchiveFixture() {
+  const root = makeFixture();
+  const nestedDraft = path.join(root, '_workspace/current/draft', NESTED_POST);
+  const flatDraftPath = path.join(root, '_workspace/current/draft', FLAT_ARCHIVE_POST);
+  fs.mkdirSync(path.dirname(flatDraftPath), { recursive: true });
+  fs.renameSync(nestedDraft, flatDraftPath);
+  fs.renameSync(
+    path.join(root, '_workspace/current/draft', ASSET_ROOT),
+    path.join(root, '_workspace/current/draft', FLAT_ARCHIVE_ASSET_ROOT)
+  );
+
+  const article = fs.readFileSync(flatDraftPath, 'utf8')
+    .split(STEM).join(FLAT_ARCHIVE_STEM)
+    .replace('date: 2026-03-18 10:00:00 +0900', 'date: 2026-08-16 10:00:00 +0900');
+  fs.writeFileSync(flatDraftPath, article);
+  const manifest = json(root, '_workspace/current/manifest.json');
+  Object.assign(manifest, {
+    target_date: '2026-08-16',
+    slug: FLAT_ARCHIVE_STEM.replace(/^\d{4}-\d{2}-\d{2}-/, ''),
+    article_path: FLAT_ARCHIVE_POST,
+    asset_dir: `${FLAT_ARCHIVE_ASSET_ROOT}/`
+  });
+  writeJson(root, '_workspace/current/manifest.json', manifest);
+  const imageManifest = json(root, '_workspace/current/draft/source-image-manifest.json');
+  imageManifest.explanatory_images[0].local_path = FLAT_ARCHIVE_HERO;
+  writeJson(root, '_workspace/current/draft/source-image-manifest.json', imageManifest);
+  updateFlatLedger(root, (entry) => {
+    entry.status = 'pending';
+    entry.developed_at = null;
+    entry.survey_note = null;
+    delete entry.merged_into;
+  });
+  return root;
+}
+
+function installLiveFlatArchiveTargets(root) {
+  const draftRoot = path.join(root, '_workspace/current/draft');
+  const livePost = path.join(root, FLAT_ARCHIVE_POST);
+  const liveAssets = path.join(root, FLAT_ARCHIVE_ASSET_ROOT);
+  fs.mkdirSync(path.dirname(livePost), { recursive: true });
+  fs.mkdirSync(liveAssets, { recursive: true });
+  fs.copyFileSync(path.join(draftRoot, FLAT_ARCHIVE_POST), livePost);
+  for (const file of ['nemoclaw-egress-boundary.png', 'nemoclaw-egress-boundary.svg']) {
+    fs.copyFileSync(path.join(draftRoot, FLAT_ARCHIVE_ASSET_ROOT, file), path.join(liveAssets, file));
+  }
+}
+
+function expectedFlatPackageScope() {
+  return [
+    FLAT_ARCHIVE_POST,
+    `${FLAT_ARCHIVE_ASSET_ROOT}/nemoclaw-egress-boundary.png`,
+    `${FLAT_ARCHIVE_ASSET_ROOT}/nemoclaw-egress-boundary.svg`,
+    '_data/archive_development.json'
+  ].sort();
 }
 
 function expectedPackageScope() {
@@ -409,6 +474,63 @@ test('derives nested package scope instead of flattening the selected post', () 
     assert.deepEqual(fs.readFileSync(path.join(root, '_workspace/current/validation/path-scope.txt'), 'utf8').trim().split('\n'), expectedPackageScope());
   } finally { removeFixture(root); }
 });
+test('binds an eligible restored flat ledger post as archive', () => {
+  const root = flatArchiveFixture();
+  try {
+    const draftRoot = path.join(root, '_workspace/current/draft');
+    const resolved = resolvePublicationPost({
+      repoRoot: root,
+      draftRoot,
+      draftPath: path.join(draftRoot, FLAT_ARCHIVE_POST),
+      manifest: json(root, '_workspace/current/manifest.json')
+    });
+    assert.deepEqual(resolved.errors, []);
+    assert.ok(resolved.archive, 'eligible restored flat post must bind to archive metadata');
+    assert.equal(resolved.archive.entry.path, FLAT_ARCHIVE_POST);
+    assert.equal(resolved.archive.entry.original_date, '2026-08-16');
+  } finally { removeFixture(root); }
+});
+
+test('both publication CLI gates accept existing live targets for a bound flat archive post', () => {
+  const root = flatArchiveFixture();
+  try {
+    installLiveFlatArchiveTargets(root);
+    const packageResult = run(PACKAGE_TOOL, root, '--stage', 'draft');
+    assert.equal(packageResult.status, 0, output(packageResult));
+    const scopeResult = run(SCOPE_TOOL, root);
+    assert.equal(scopeResult.status, 0, output(scopeResult));
+    assert.deepEqual(
+      fs.readFileSync(path.join(root, '_workspace/current/validation/path-scope.txt'), 'utf8').trim().split('\n'),
+      expectedFlatPackageScope()
+    );
+  } finally { removeFixture(root); }
+});
+for (const [label, mutate, expectedMessage] of [
+  ['restoration identity drift', (root) => updateFlatLedger(root, (_entry, ledger) => { ledger.source_restoration_id = 'other-restoration'; }), /approved restoration/],
+  ['ineligible ledger entry', (root) => updateFlatLedger(root, (entry) => {
+    entry.status = 'retired';
+    entry.developed_at = '2026-10-15';
+    entry.survey_note = 'This entry is intentionally ineligible for the publication graduation path in this regression control.';
+  }), /not eligible for graduation/],
+  ['ledger date drift', (root) => updateFlatLedger(root, (entry) => { entry.original_date = '2026-08-17'; }), /original date does not match/]
+]) {
+  test(`rejects flat archive ${label}`, () => {
+    const root = flatArchiveFixture();
+    try {
+      mutate(root);
+      const draftRoot = path.join(root, '_workspace/current/draft');
+      const resolved = resolvePublicationPost({
+        repoRoot: root,
+        draftRoot,
+        draftPath: path.join(draftRoot, FLAT_ARCHIVE_POST),
+        manifest: json(root, '_workspace/current/manifest.json')
+      });
+      assert.notEqual(resolved.errors.length, 0);
+      assert.equal(resolved.archive, null);
+      assert.match(resolved.errors.join('\n'), expectedMessage);
+    } finally { removeFixture(root); }
+  });
+}
 test('keeps ordinary flat-post acceptance and rejects its existing live collision', () => {
   const root = makeFixture();
   try {
@@ -424,6 +546,7 @@ test('keeps ordinary flat-post acceptance and rejects its existing live collisio
     assert.match(output(collision), /Live article target already exists/);
   } finally { removeFixture(root); }
 });
+
 
 for (const [label, articlePath] of [
   ['dot-segment', `_posts/2026/03/./${BASENAME}`],
