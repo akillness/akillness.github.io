@@ -38,26 +38,36 @@ export function resolvePublicationPost({ repoRoot, draftRoot, draftPath, manifes
   errors.push(...publicationPathErrors(draftPath));
   errors.push(...publicationPathErrors(path.join(repoRoot, postPath), { allowMissing: true }));
   errors.push(...publicationPathErrors(path.join(repoRoot, 'assets/img/posts', stem), { allowMissing: true }));
-  if (errors.length || postPath === `_posts/${basename}`) return result;
+  if (errors.length) return result;
 
   const restorationPath = path.join(repoRoot, '_data/archive_restoration.json');
   const ledgerPath = path.join(repoRoot, ARCHIVE_LEDGER_PATH);
+  let ledger;
+  if (postPath === `_posts/${basename}`) {
+    errors.push(...publicationPathErrors(ledgerPath, { allowMissing: true }));
+    if (errors.length) return result;
+    // This is routing only; the authoritative archive binding below still applies.
+    // An absent/malformed ambient ledger leaves ordinary flat-post behavior intact.
+    try { ledger = JSON.parse(fs.readFileSync(ledgerPath, 'utf8')); }
+    catch { return result; }
+    if (!Array.isArray(ledger?.posts) || !ledger.posts.some((entry) => entry?.path === postPath)) return result;
+  }
   errors.push(...publicationPathErrors(restorationPath), ...publicationPathErrors(ledgerPath));
   if (errors.length) return result;
   try {
     const restoration = validateArchiveRestoration(JSON.parse(fs.readFileSync(restorationPath, 'utf8')));
     errors.push(...restoration.errors);
-    const ledger = JSON.parse(fs.readFileSync(ledgerPath, 'utf8'));
+    ledger ??= JSON.parse(fs.readFileSync(ledgerPath, 'utf8'));
     if (ledger.source_restoration_id !== APPROVED_RESTORATION_ID) errors.push('Archive ledger source_restoration_id does not match the approved restoration');
     const development = validateArchiveDevelopment(ledger, restoration.restoredSources);
     errors.push(...development.errors);
     const entry = development.entriesByPath.get(postPath);
-    if (!entry || !restoration.restoredSources.has(postPath)) errors.push(`Nested publication path is not an approved archive ledger entry: ${postPath}`);
+    if (!entry || !restoration.restoredSources.has(postPath)) errors.push(`Publication path is not an approved archive ledger entry: ${postPath}`);
     if (entry && !['pending', 'in_progress', 'graduated'].includes(entry.status)) errors.push(`Archive entry is not eligible for graduation: ${postPath}`);
     if (entry && (entry.original_date !== manifest?.target_date || entry.original_date !== basename.slice(0, 10))) errors.push(`Archive original date does not match the selected package: ${postPath}`);
     if (!errors.length) result.archive = { ledger, entry, restoredSources: restoration.restoredSources };
   } catch (error) {
-    errors.push(`Cannot bind nested publication to the archive ledger: ${error.message}`);
+    errors.push(`Cannot bind publication to the archive ledger: ${error.message}`);
   }
   return result;
 }
