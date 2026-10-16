@@ -330,6 +330,45 @@ function installLiveFlatArchiveTargets(root) {
     fs.copyFileSync(path.join(draftRoot, FLAT_ARCHIVE_ASSET_ROOT, file), path.join(liveAssets, file));
   }
 }
+function graduateFlat(root) {
+  const post = path.join(root, '_workspace/current/draft', FLAT_ARCHIVE_POST);
+  const rewritten = fs.readFileSync(post, 'utf8')
+    .replace('restored_archive: "2026-10-12"\n', 'archive_developed: 2026-10-15\nlast_modified_at: "2026-10-15 02:00:00 +0900"\n')
+    .replace('ads: false\n', '');
+  fs.writeFileSync(post, rewritten);
+  updateFlatLedger(root, (entry) => {
+    entry.status = 'graduated';
+    entry.developed_at = '2026-10-15';
+    entry.survey_note = 'Re-read the current Unity CLI and Atomic Agent documentation; rebuilt this source audit around the exact automation boundary and its remaining editor limits.';
+  });
+}
+
+function stagedFlatFixture() {
+  const root = flatArchiveFixture();
+  fs.mkdirSync(path.join(root, 'tools'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'tools/existing.mjs'), 'export const existing = true;\n');
+  git(root, ['init', '-q']);
+  git(root, ['config', 'user.email', 'tests@example.invalid']);
+  git(root, ['config', 'user.name', 'Publication path tests']);
+  git(root, ['config', 'diff.renames', 'true']);
+  git(root, ['add', '_data/archive_development.json', 'tools/existing.mjs']);
+  git(root, ['commit', '-qm', 'baseline flat archive ledger and tool']);
+  graduateFlat(root);
+  installLiveFlatArchiveTargets(root);
+  fs.writeFileSync(path.join(root, '_workspace/current/validation/path-scope.txt'), `${expectedFlatPackageScope().join('\n')}\n`);
+  git(root, ['add', FLAT_ARCHIVE_POST, `${FLAT_ARCHIVE_ASSET_ROOT}/nemoclaw-egress-boundary.png`, `${FLAT_ARCHIVE_ASSET_ROOT}/nemoclaw-egress-boundary.svg`, '_data/archive_development.json']);
+  return root;
+}
+
+function resolveFlat(root) {
+  const draftRoot = path.join(root, '_workspace/current/draft');
+  return resolvePublicationPost({
+    repoRoot: root,
+    draftRoot,
+    draftPath: path.join(draftRoot, FLAT_ARCHIVE_POST),
+    manifest: json(root, '_workspace/current/manifest.json')
+  });
+}
 
 function expectedFlatPackageScope() {
   return [
@@ -503,6 +542,102 @@ test('both publication CLI gates accept existing live targets for a bound flat a
       fs.readFileSync(path.join(root, '_workspace/current/validation/path-scope.txt'), 'utf8').trim().split('\n'),
       expectedFlatPackageScope()
     );
+  } finally { removeFixture(root); }
+});
+for (const [label, mutate] of [
+  ['missing ledger', (root) => fs.rmSync(path.join(root, '_data/archive_development.json'))],
+  ['invalid JSON ledger', (root) => fs.writeFileSync(path.join(root, '_data/archive_development.json'), '{not-json\n')],
+  ['ledger without posts', (root) => {
+    const ledger = json(root, '_data/archive_development.json');
+    delete ledger.posts;
+    writeJson(root, '_data/archive_development.json', ledger);
+  }],
+  ['ledger with non-array posts', (root) => {
+    const ledger = json(root, '_data/archive_development.json');
+    ledger.posts = {};
+    writeJson(root, '_data/archive_development.json', ledger);
+  }]
+]) {
+  test(`keeps an ordinary flat draft neutral with ${label}`, () => {
+    const root = makeFixture();
+    try {
+      flatDraft(root);
+      mutate(root);
+      const resolved = resolvePublicationPost({
+        repoRoot: root,
+        draftRoot: path.join(root, '_workspace/current/draft'),
+        draftPath: path.join(root, '_workspace/current/draft', FLAT_POST),
+        manifest: json(root, '_workspace/current/manifest.json')
+      });
+      assert.deepEqual(resolved.errors, []);
+      assert.equal(resolved.archive, null);
+      const packageResult = run(PACKAGE_TOOL, root, '--stage', 'draft');
+      assert.equal(packageResult.status, 0, output(packageResult));
+      fs.writeFileSync(path.join(root, '_posts', BASENAME), '---\ntitle: existing\n---\n');
+      const collision = run(PACKAGE_TOOL, root, '--stage', 'draft');
+      assert.notEqual(collision.status, 0, output(collision));
+      assert.match(output(collision), /Live article target already exists/);
+    } finally { removeFixture(root); }
+  });
+}
+
+test('rejects a symlinked ambient ledger before flat archive neutral fallback', () => {
+  const root = makeFixture();
+  try {
+    flatDraft(root);
+    const ledger = path.join(root, '_data/archive_development.json');
+    fs.renameSync(ledger, `${ledger}.real`);
+    fs.symlinkSync(`${ledger}.real`, ledger);
+    const resolved = resolvePublicationPost({
+      repoRoot: root,
+      draftRoot: path.join(root, '_workspace/current/draft'),
+      draftPath: path.join(root, '_workspace/current/draft', FLAT_POST),
+      manifest: json(root, '_workspace/current/manifest.json')
+    });
+    assert.equal(resolved.archive, null);
+    assert.deepEqual(resolved.errors, [`Forbidden symlink or inaccessible publication path: ${ledger}`]);
+  } finally { removeFixture(root); }
+});
+
+test('fails closed when an eligible flat ledger entry is duplicated', () => {
+  const root = flatArchiveFixture();
+  try {
+    updateFlatLedger(root, (entry, ledger) => { ledger.posts.push({ ...entry }); });
+    const resolved = resolveFlat(root);
+    assert.equal(resolved.archive, null);
+    assert.match(resolved.errors.join('\n'), /duplicate ledger entry/);
+  } finally { removeFixture(root); }
+});
+
+test('fails closed when a matching flat ledger has malformed restoration data', () => {
+  const root = flatArchiveFixture();
+  try {
+    fs.writeFileSync(path.join(root, '_data/archive_restoration.json'), '{not-json\n');
+    const resolved = resolveFlat(root);
+    assert.equal(resolved.archive, null);
+    assert.match(resolved.errors.join('\n'), /Cannot bind publication to the archive ledger/);
+  } finally { removeFixture(root); }
+});
+
+test('staged scope accepts a graduated flat archive entry and matching live targets', () => {
+  const root = stagedFlatFixture();
+  try {
+    const result = run(SCOPE_TOOL, root, '--staged');
+    assert.equal(result.status, 0, output(result));
+  } finally { removeFixture(root); }
+});
+
+test('staged scope rejects an unrelated change beside a flat archive graduation', () => {
+  const root = stagedFlatFixture();
+  try {
+    const ledger = json(root, '_data/archive_development.json');
+    const other = ledger.posts.find((entry) => entry.path !== FLAT_ARCHIVE_POST);
+    other.title = `${other.title} tampered`;
+    writeJson(root, '_data/archive_development.json', ledger);
+    git(root, ['add', '_data/archive_development.json']);
+    const result = run(SCOPE_TOOL, root, '--staged');
+    assert.notEqual(result.status, 0, output(result));
+    assert.match(output(result), /unrelated entry or program metadata/);
   } finally { removeFixture(root); }
 });
 for (const [label, mutate, expectedMessage] of [
