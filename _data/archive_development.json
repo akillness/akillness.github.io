@@ -417,9 +417,9 @@
       "links_at_intake": 22,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-16",
+      "survey_note": "Re-read Superlog worker contracts at 2fdc51da33a9f488a5cb3739bd6b499e6057d08f on 2026-10-16; rebuilt the archived overview around external-content boundaries, findings prerequisites, payload validation and conditional continuation, separating declared server effects from uncaptured incident-resolution evidence. Static source audit only; no runtime or integration test was performed."
     },
     {
       "path": "_posts/2026-08-21-mcp-roadmap-agentic-infrastructure.md",

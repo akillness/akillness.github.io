@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="diagram-title diagram-desc">
+  <title id="diagram-title">Superlog findings are not a resolution receipt</title>
+  <desc id="diagram-desc">An original source-reading diagram separates the external-data wrapper, four findings-gated outcome tools and an uncaptured server executor. The arrow to server effects is a declared contract, not a measured execution result.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M 1 1 L 11 6 L 1 11 Z" fill="#356087"/></marker>
+  </defs>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#192b3e">
+    <text x="60" y="72" font-size="23" font-weight="700" letter-spacing="2">SOURCE AUDIT · SUPERLOG</text>
+    <text x="60" y="128" font-size="45" font-weight="700">Findings are not a resolution receipt</text>
+    <text x="60" y="171" font-size="23" fill="#465d73">Three distinct boundaries in the inspected worker contracts</text>
+    <rect x="60" y="225" width="440" height="490" rx="18" fill="#edf4fa" stroke="#91adc6" stroke-width="2"/>
+    <rect x="560" y="225" width="440" height="490" rx="18" fill="#f5f7fa" stroke="#91adc6" stroke-width="2"/>
+    <rect x="1060" y="225" width="480" height="490" rx="18" fill="#fff8ed" stroke="#9b7540" stroke-width="2" stroke-dasharray="10 7"/>
+    <text x="88" y="273" font-size="25" font-weight="700">1 · Model context</text>
+    <text x="88" y="310" font-size="21">Caller identifies external data</text>
+    <rect x="88" y="344" width="384" height="160" rx="10" fill="#ffffff" stroke="#b7c9d9"/>
+    <text x="111" y="383" font-size="22">Telemetry</text>
+    <text x="111" y="425" font-size="22">Repository text</text>
+    <text x="111" y="467" font-size="22">Human messages</text>
+    <text x="88" y="548" font-size="20" font-family="Menlo, Consolas, monospace">&lt;untrusted_content&gt;</text>
+    <text x="88" y="589" font-size="21">Escaped wrapper syntax</text>
+    <text x="88" y="628" font-size="21">Data, not permission</text>
+    <text x="88" y="674" font-size="19" fill="#465d73">No injection-resistance test was run</text>
+    <text x="588" y="273" font-size="25" font-weight="700">2 · Outcome validation</text>
+    <text x="588" y="310" font-size="21">Findings required for four tools</text>
+    <g font-family="Menlo, Consolas, monospace" font-size="19">
+      <text x="588" y="369">propose_pr</text>
+      <text x="588" y="408">resolve_incident</text>
+      <text x="588" y="447">complete_investigation</text>
+      <text x="588" y="486">report_external_cause</text>
+    </g>
+    <path d="M 588 519 H 972" stroke="#b7c9d9"/>
+    <text x="588" y="557" font-size="21">ask_human is outside that gate</text>
+    <text x="588" y="601" font-size="21">Visible resolve checks:</text>
+    <text x="588" y="636" font-size="20">entry shape + duplicate issue IDs</text>
+    <text x="588" y="674" font-size="19" fill="#465d73">Not a complete linked-Issue inventory</text>
+    <text x="1088" y="273" font-size="25" font-weight="700">3 · Server effect</text>
+    <text x="1088" y="310" font-size="21">Declared callback before success ack</text>
+    <text x="1088" y="380" font-size="24" font-weight="700">Executor not captured</text>
+    <text x="1088" y="431" font-size="22">Pull-request creation</text>
+    <text x="1088" y="478" font-size="22">Linked-Issue outcome application</text>
+    <text x="1088" y="525" font-size="22">Atomic transaction result</text>
+    <path d="M 1088 560 H 1512" stroke="#d4c1a5"/>
+    <text x="1088" y="603" font-size="21">None was observed in this audit</text>
+    <text x="1088" y="645" font-size="20">No provider, database or worker run</text>
+    <path d="M 505 445 H 548" stroke="#356087" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M 1005 445 H 1048" stroke="#356087" stroke-width="3" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+    <text x="60" y="780" font-size="24" font-weight="700">Read the validation result and the operation receipt separately.</text>
+    <text x="60" y="825" font-size="20" fill="#465d73">Static source at 2fdc51d · Original explanatory diagram · Not source evidence</text>
+  </g>
+</svg>

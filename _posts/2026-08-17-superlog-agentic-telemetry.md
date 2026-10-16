@@ -1,184 +1,113 @@
 ---
+title: "Superlog's findings gate stops short of resolution proof"
+description: "A source audit of Superlog's findings gate, outcome validation and declared server dispatch separates payload acceptance from incident-resolution proof."
+date: 2026-08-17 10:00:00 +0900
+last_modified_at: 2026-10-16 15:56:53 +0900
 published: true
-title: "Superlog: When Your Telemetry Stack Starts Investigating Incidents For You"
-description: "Superlog is an open-source agentic telemetry system built on OpenTelemetry — it ingests traces, logs, and metrics, groups noisy signals into incidents, and hands them to an agent runner. Here is what that architecture means for game backends."
-categories: [AI, DevOps, Observability]
-tags: [superlog, opentelemetry, agentic-ai, observability, incident-response, game-backend]
-date: 2026-08-17 09:00:00 +0800
-mermaid: true
+categories: [AI, Agents]
+tags: [superlog, agentic-ai, incident-response, observability]
+archive_developed: 2026-10-16
+archive_development_note: "Rebuilt the historical article around commit-pinned findings validation, declared server effects and the execution evidence still needed for backend integration."
 image:
   path: /assets/img/posts/2026-08-17-superlog-agentic-telemetry/superlog-hero.png
-  lqip: data:image/webp;base64,UklGRiYAAABXRUJQVlA4IBIAAAAwAQCdASoBAAEAAQAcJZACdLoAA3AA
-  alt: "Superlog — open-source agentic telemetry system"
-ads: false
-restored_archive: "2026-10-12"
+  alt: "Original source-reading diagram separating external model data, findings-gated validation and an uncaptured server-effects boundary"
+image_policy: source-first-fallback
+mermaid: false
+pin: false
 ---
 
-## 🤔 Curiosity: Why Do We Still Read Logs By Hand?
+## Does an accepted outcome prove that an incident is resolved?
 
-I have shipped AI into games for eight years. We let neural networks pick matchmaking brackets, tune difficulty curves, and drive digital humans — and then, when the live service falls over at 2 AM, a human being opens a dashboard and scrolls.
+Not from the inspected Superlog source alone. Four named tools require findings in the visible validation contract, and the resolution validator checks important payload details. But those checks are not evidence that the payload covers every linked Issue or that an atomic server-side resolution transaction completed. The inspected declarations ask for those stronger effects; the implementation evidence captured here stops before proving them.
 
-That asymmetry never sat right with me. During a live-ops incident on a mobile title, the actual bottleneck was never the fix. It was the twenty minutes spent asking: *which of these 40,000 error lines are the same error?*
+That distinction matters when replacing the model backend: the integration question is not merely whether a model can produce the right tool arguments. **Integration inference:** it is whether the replacement preserves the worker's boundaries and whether separate evidence supports the server effects its output requests. A syntactically acceptable result should not become a resolution receipt by implication.
 
-So the question I kept circling: **what if grouping and first-pass investigation were part of the telemetry system itself, not a human ritual bolted on top?**
+The pinned README describes Superlog as an agentic telemetry system with a community runner and pluggable runner interfaces. That is repository positioning, not a deployment observed for this article. The useful audit target is the contract between external evidence, model context, outcome validation and declared dispatch.
 
-That is exactly the bet [Superlog](https://superlog.sh) is making.
+## What the findings gate actually checks
 
----
+In the inspected [outcome-tool implementation](https://raw.githubusercontent.com/superloglabs/superlog/2fdc51da33a9f488a5cb3739bd6b499e6057d08f/apps/worker/src/agent-outcome-tools.ts), `FINDINGS_REQUIRED` contains `propose_pr`, `resolve_incident`, `complete_investigation` and `report_external_cause`. Terminal `ask_human` is outside that set. Calling the rule a universal terminal-tool gate would therefore overstate it: the distinction is tool-specific, not simply terminal versus nonterminal.
 
-## 📚 Retrieve: What Superlog Actually Is
+For `resolve_incident`, the visible validator checks required strings, the shape of each entry and duplicate issue IDs. The declaration also asks for one outcome per linked Issue and atomic application. Those are different obligations. Checking the entries supplied in an argument is not, by itself, a comparison against the complete linked-Issue inventory.
 
-[Superlog](https://github.com/superloglabs/superlog) describes itself as an **open-source agentic telemetry system**. Per the repository: it ingests traces, logs, and metrics, groups noisy signals into incidents, and watches your infrastructure while you sleep. It is an open-core observability workspace for OpenTelemetry data, licensed [Apache 2.0](https://github.com/superloglabs/superlog/blob/main/LICENSE.md), currently in the Y Combinator P26 batch.
+The backend type comments declare a server dispatch callback before success acknowledgement. That strengthens the stated integration contract, but the captured evidence does not include the server executor, the linked-Issue inventory or the transaction implementation. It therefore cannot establish whether completeness is enforced there or whether atomic application succeeds. It also does not establish that either protection is absent.
 
-The free community edition in the public repo ships:
+The following comparison separates what was read from what would need additional evidence. The final column is an integration inference and recommendation, not observed behavior.
 
-| Component | Role |
-|---|---|
-| Web app and API | The product surface for debugging production systems |
-| OTLP ingest proxy | Standard OpenTelemetry intake — no proprietary agent |
-| Worker processes | Incident grouping and background jobs |
-| Postgres + ClickHouse | Relational schema plus columnar telemetry queries |
-| Agent runner interface | **Pluggable** investigation runtimes |
-| `community` agent runner | Default runner that records a local incident summary |
+| Boundary | Captured source finding | Inferred integration check |
+| --- | --- | --- |
+| Findings prerequisite | Four named tools require findings; `ask_human` does not | Preserve the tool-specific distinction rather than inventing a universal terminal gate |
+| Resolution payload | Required strings, per-entry shape and duplicate issue IDs are checked | Inspect how the authoritative linked-Issue set is compared with the submitted set |
+| Server effect | Declarations request atomic application and pre-ack dispatch | Obtain executor and transaction evidence before treating acknowledgement as a durable result |
+| External model input | Shared wrapping escapes boundary syntax and supplies instructions | Verify replacement-backend routing through that boundary |
+| Follow-up | Surviving-session continuation differs from successor follow-up | Represent which path occurred instead of promising session survival |
 
-A hosted **Superlog Cloud** edition exists with a free tier, pay-as-you-go, and monthly credit packs — the classic open-core split.
+<figure class="explanatory-image">
+  <img src="/assets/img/posts/2026-08-17-superlog-agentic-telemetry/superlog-hero.png" alt="Original source-reading diagram separating external model data, findings-gated validation and an uncaptured server-effects boundary" width="1600" height="900">
+  <figcaption>Original illustration by Fodev JEO editorial harness (SVG diagram, local rsvg-convert export); not source evidence.</figcaption>
+</figure>
 
-### The Repository Layout Tells the Story
+[Editable SVG diagram](/assets/img/posts/2026-08-17-superlog-agentic-telemetry/authority-boundary.svg)
 
-The [layout](https://github.com/superloglabs/superlog) is refreshingly legible:
+## External evidence has its own boundary
 
-```text
-apps/web              # Vite/React frontend
-apps/api              # HTTP API
-apps/proxy            # OTLP intake proxy
-apps/worker           # background workers + agent orchestration
-packages/db           # Drizzle schema and migrations
-packages/fingerprint  # telemetry fingerprinting helpers
-```
+The [shared content-boundary implementation](https://raw.githubusercontent.com/superloglabs/superlog/2fdc51da33a9f488a5cb3739bd6b499e6057d08f/apps/worker/src/agent-content-boundary.ts) makes the caller identify external content, escapes boundary syntax and wraps that content with instructions not to obey attempts to change permissions, tool policy, workflow or higher-priority instructions. This is a concrete source-level handling mechanism, not evidence that a model will always follow the wrapper.
 
-`packages/fingerprint` is the part I care about most. **Fingerprinting is the deduplication primitive** — the thing that decides two stack traces from two regions at two timestamps are one incident. Everything agentic downstream is only as good as that grouping, because an agent handed 40,000 ungrouped lines burns tokens rediscovering what a hash could have told it.
+The model-backed runner type requires `contentBoundaryVersion`. Its documentation says human messages, repository text, telemetry and other externally supplied fields must pass through the shared boundary before entering model context. Types and comments establish the expected integration behavior; they do not demonstrate that every backend implementation routes every field correctly.
 
-### The Pipeline
+The captured boundary test file contains assertions concerning close-tag injection, forged wrappers, ordinary evidence characters, trusted assignment wording and structured JSON wrapping. These are assertions read, not tests passed: no tests were executed for this audit. Their presence supports a description of the intended cases, not a runtime security guarantee.
 
-```mermaid
-graph LR
-    A[Services<br/>OTel SDK] -->|OTLP| B[apps/proxy<br/>Ingest]
-    B --> C[(ClickHouse<br/>traces/logs/metrics)]
-    B --> D[packages/fingerprint]
-    D --> E[apps/worker<br/>Incident Grouping]
-    E --> F[(Postgres<br/>incidents)]
-    F --> G[Agent Runner<br/>pluggable]
-    G --> H[apps/web<br/>Incident + Summary]
+**Integration inference and recommendation:** review context routing separately from outcome validation. Keeping the findings prerequisite while bypassing external-data handling would preserve only part of the declared contract. Conversely, preserving the wrapper would not prove linked-Issue completeness or transaction success. These boundaries answer different questions and should not substitute for one another in an integration review.
 
-    style D fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-    style G fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
-    style H fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
-```
+## Continuation is conditional, not one immortal session
 
-The critical design decision is the boundary at `G`. Superlog does not hardcode "an LLM investigates." It defines an **agent runner interface** and ships a default `community` runner that writes a local incident summary. That means the investigation brain is swappable — your own model, your own policy, your own on-prem inference. For a game studio with data-residency constraints, this is the difference between adoptable and unadoptable.
+The captured lifecycle source names active, terminal and dormant states and guards transitions. The inspected run code distinguishes continuation of a surviving provider session from a successor follow-up after termination. This is a static lifecycle distinction, not a demonstrated live resumption result.
 
-### Standing Up the Local Stack
+**Integration inference and recommendation:** do not turn “follow-up supported” into “the same provider session survives.” A replacement backend should preserve the distinction between continuation and successor work in its integration contract. For a related examination of provenance and surviving state, see [Claude Code rewind depends on who changed the file](/posts/how-claude-code-works-agentic-loop/).
 
-Prerequisites are Node.js 20+, pnpm 9+, and Docker.
+## What changed since the archived overview
 
-```bash
-pnpm install
+This rebuild preserves the historical URL and publication date but changes the editorial question. Rather than treating a telemetry overview as enough to explain operational trust, it asks what evidence connects findings, accepted payloads and declared server effects. This is a change in the article's analysis, not a claim about when Superlog changed or a reconstructed product-history diff.
 
-docker compose up -d
-pnpm --filter @superlog/db db:migrate
-pnpm dev
-```
+The source reading now distinguishes three levels that an overview can easily compress: a findings prerequisite, visible argument validation and declared server-side application. The first two have captured worker-side evidence. The third has a declared contract but lacks the captured executor, authoritative linked-Issue comparison and transaction implementation needed to assess its realization.
 
-Default local services:
+**Integration inference:** the practical consequence is a narrower acceptance criterion for a backend replacement. Matching a tool schema is not enough evidence to call the whole integration equivalent. The review should also account for external-content routing, the four-tool findings rule, conditional session continuity and the unverified server-effect boundary. This is a proposed review standard, not a report of an integration that passed or failed.
 
-- Web — `http://localhost:5173`
-- API — `http://localhost:4100`
-- **OTLP intake — `http://localhost:4101`**
+## Limits and the next integration decision
 
-That third port is the whole integration story. Because intake is OTLP, any OpenTelemetry-instrumented service points at it with one environment variable:
+This article is a static implementation and type-contract audit. No Superlog product, provider, database, worker, test, security or compatibility execution was performed. Nothing here establishes a proven vulnerability or a failed server operation. In particular, an uncaptured completeness check must not be described as a nonexistent completeness check.
 
-```bash
-# Your existing OTel-instrumented game backend, unchanged
-export OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4101
-export OTEL_SERVICE_NAME=match-service
-```
+**Integration inference and recommendation:** before accepting findings as an incident-resolution receipt, request evidence for the remaining transition: which linked-Issue set is authoritative, where it is compared with the submitted outcomes, how atomic application is implemented and what acknowledgement actually confirms. Keep those questions separate from whether the worker accepted well-formed arguments.
 
-There is no vendor SDK to adopt and no rewrite of instrumentation. If you already emit OTel — and by 2026 most backends do — the switching cost is a URL.
+The useful next comparison is [Engineering Discipline's handoff contradicts its gate](/posts/engineering-discipline-ai-coding-agents/), another source audit focused on a worker-to-validator handoff. Read it to compare declared gates with evidence of completed operation, rather than to assume that naming a validator establishes the outcome.
 
-### The Agent-Native Install Path
+## Key Takeaways
 
-The install instruction in the README is itself a signal about where tooling is heading:
+- The visible findings prerequisite applies to four named tools, not terminal `ask_human`.
+- Resolution validation checks payload details; the stronger linked-Issue and atomic-application obligations remain declarations within this captured scope.
+- Boundary tests were read, not run, and lifecycle source distinguishes surviving-session continuation from successor follow-up.
+- **Integration inference:** preserve each contract separately and obtain execution evidence before treating an accepted outcome as resolution proof.
 
-```text
-Run npx skills add superloglabs/skills --all and use the skills to install Superlog in this project
-```
+## New Questions
 
-The primary documented onboarding is **a coding agent reading a skill definition**, published as a separate [superloglabs/skills](https://github.com/superloglabs/skills) repository. There is also [superloglabs/otel-helpers](https://github.com/superloglabs/otel-helpers) for instrumentation glue, and a [Discord](https://discord.gg/wJ56aRh8hx) for the community.
-
-Read that carefully: the docs are written for the machine that will do the integration. That is the same shift I wrote about with [Unity CLI automation](/posts/unity-cli-atomic-agent/) — the human is moving from operator to reviewer.
-
----
-
-## 💡 Innovation: What This Changes for Game Backends
-
-### The Signal-to-Incident Ratio Is the Real Metric
-
-Game live-ops telemetry has a pathological shape. A single bad patch does not produce one error — it produces one error per player session, which at scale means millions of near-identical events in minutes. Traditional dashboards degrade exactly when you need them most.
-
-Fingerprint-first architecture inverts the priority: **collapse first, then look.** The agent never sees the flood; it sees the incident.
-
-### Where I'd Actually Deploy It
-
-| Use case | Why Superlog fits | Caveat |
-|---|---|---|
-| Matchmaking service incidents | Trace-level grouping across regions | Needs disciplined span naming |
-| Build/CI pipeline failures | OTLP intake from CI runners | CI traces are bursty, not steady |
-| Live-ops overnight watch | Agent runner drafts the summary before standup | Community runner is a summary, not a diagnosis |
-| Self-hosted / data-residency | Apache 2.0, fully local stack | Open-core: advanced features live in Cloud |
-
-### Honest Tradeoffs
-
-I want to be precise about what the community edition promises. The default `community` agent runner **records a local incident summary** — that is documented scope. It is not a root-cause oracle. The value proposition of the OSS edition is the *architecture*: OTLP intake, fingerprinting, incident grouping, and a clean seam where an investigation runtime plugs in.
-
-Also worth naming: ClickHouse plus Postgres plus a worker fleet plus a proxy is genuinely more moving parts than shipping logs to a managed vendor. You are trading operational surface for control and cost. For a small indie team that trade is probably bad. For a studio already running its own backend fleet under residency rules, it is obviously good.
-
-### Key Takeaways
-
-| Insight | Implication | Next Step |
-|---|---|---|
-| Grouping belongs *below* the agent | Deduplicate before inference, not after | Audit your fingerprint keys before adding AI |
-| OTLP intake means zero lock-in | Migration cost is one env var | Point a staging service at `:4101` |
-| Agent runner is an interface | Investigation logic is swappable and self-hostable | Prototype a runner against your own model |
-| Docs target coding agents | Onboarding is becoming machine-first | Treat skill files as first-class documentation |
-
-### New Questions This Raises
-
-1. **What is the right fingerprint for a game session?** Web services fingerprint on stack trace and endpoint. A game incident might need player cohort, region, build number, and device tier in the key. Does over-keying re-fragment the incident you were trying to merge?
-2. **Can an agent runner be evaluated?** If investigation output is a summary, we need ground truth. Could we replay historical postmortems as a benchmark set?
-3. **Does agentic telemetry create its own telemetry problem?** The runner is a production system. Who watches the watcher, and does it emit OTel too?
-
-I am going to answer the first one with real data. That is the next post.
-
----
+**Integration follow-up questions, not findings:** Where does the server compare the submitted outcomes with the authoritative linked-Issue set? What establishes atomic application and the meaning of success acknowledgement? How does a replacement backend demonstrate external-content routing and distinguish a surviving session from successor work? Those answers would extend this audit; the captured source does not supply them.
 
 ## References
 
-**Code & Implementation:**
-- [Superlog — Official GitHub Repository](https://github.com/superloglabs/superlog)
-- [superloglabs/skills — Agent skills for installation](https://github.com/superloglabs/skills)
-- [superloglabs/otel-helpers — Instrumentation helpers](https://github.com/superloglabs/otel-helpers)
-- [Apache 2.0 License](https://github.com/superloglabs/superlog/blob/main/LICENSE.md)
+All primary sources below are pinned to the same commit and were read on 2026-10-16.
 
-**Documentation & Community:**
-- [Superlog Website](https://superlog.sh)
-- [Superlog Discord](https://discord.gg/wJ56aRh8hx)
-- [MCP Toplist listing](https://mcptoplist.com/server/sh.superlog%2Fsuperlog)
-- [@superlogYC on X](https://twitter.com/intent/follow?screen_name=superlogYC)
+### Outcome and backend contracts
 
-**Related Standards:**
-- [OpenTelemetry Documentation](https://opentelemetry.io/docs/)
-- [OTLP Specification](https://opentelemetry.io/docs/specs/otlp/)
-- [ClickHouse for Observability](https://clickhouse.com/docs/en/use-cases/observability)
+- [Outcome tools and validation](https://raw.githubusercontent.com/superloglabs/superlog/2fdc51da33a9f488a5cb3739bd6b499e6057d08f/apps/worker/src/agent-outcome-tools.ts)
+- [Runner backend types and dispatch contract](https://raw.githubusercontent.com/superloglabs/superlog/2fdc51da33a9f488a5cb3739bd6b499e6057d08f/apps/worker/src/agent-runner-backend.ts)
 
-**Related Posts:**
-- [Atomic Agent + Unity CLI: Automating Game Builds Without Touching the Editor](/posts/unity-cli-atomic-agent/)
+### Input handling and assertions
+
+- [Shared content boundary](https://raw.githubusercontent.com/superloglabs/superlog/2fdc51da33a9f488a5cb3739bd6b499e6057d08f/apps/worker/src/agent-content-boundary.ts)
+- [Boundary test assertions, not executed](https://raw.githubusercontent.com/superloglabs/superlog/2fdc51da33a9f488a5cb3739bd6b499e6057d08f/apps/worker/src/agent-content-boundary.test.ts)
+
+### Lifecycle and repository context
+
+- [Lifecycle domain](https://raw.githubusercontent.com/superloglabs/superlog/2fdc51da33a9f488a5cb3739bd6b499e6057d08f/apps/worker/src/agent-runs/domain.ts)
+- [Run orchestration](https://raw.githubusercontent.com/superloglabs/superlog/2fdc51da33a9f488a5cb3739bd6b499e6057d08f/apps/worker/src/agent-run.ts)
+- [Repository README](https://raw.githubusercontent.com/superloglabs/superlog/2fdc51da33a9f488a5cb3739bd6b499e6057d08f/README.md)
