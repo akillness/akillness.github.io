@@ -389,9 +389,9 @@
       "links_at_intake": 18,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "retired",
+      "developed_at": "2026-10-16",
+      "survey_note": "This historical note is retired rather than developed because neither inspected Docbank identity or retention candidate established a distinct finding beyond the pinned upstream guides and the original note's existing coverage."
     },
     {
       "path": "_posts/2026-08-16-unity-cli-atomic-agent.md",
