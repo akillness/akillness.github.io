@@ -750,9 +750,9 @@
       "links_at_intake": 22,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Source audit on LangChain Deep Agents CLI evaluation on Terminal Bench 2.0 via Harbor, replacing uncredited paraphrase with architectural analysis of harness engineering and 2026 benchmarks."
     },
     {
       "path": "_posts/2025/12/2025-12-10-all-agentic-architectures-comprehensive-guide.md",
