@@ -862,9 +862,9 @@
       "links_at_intake": 2,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Source audit of Cursor's self-driving codebase research, analyzing recursive planner-worker topologies, lock contention collapse, and controlled error-rate throughput."
     },
     {
       "path": "_posts/2026/02/2026-02-07-four-skills-that-survived.md",
