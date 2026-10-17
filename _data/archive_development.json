@@ -476,9 +476,9 @@
       "links_at_intake": 15,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt from the 2025-06 note into an English Source Audit. Removed templated AI headings, replaced speculative claims with verified Java 21 / Spring AI / Neo4j Cypher tooling patterns, and pinned 2026 references."
     },
     {
       "path": "_posts/2025/10/2025-10-27-model-native-agentic-ai-paradigm-shift.md",
