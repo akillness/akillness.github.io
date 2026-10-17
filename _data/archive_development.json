@@ -1233,9 +1233,9 @@
       "links_at_intake": 86,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2024 note into an authoritative architectural survey of foundation models, evaluating MoE routing, tokenization scaling, and serving economics."
     },
     {
       "path": "_posts/2024/06/2024-06-03-gnn-rag-paper.md",
