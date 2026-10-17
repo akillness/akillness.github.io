@@ -1156,9 +1156,9 @@
       "links_at_intake": 28,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2026-05 note into an authoritative source audit of Supertone AI's Supertonic 3, evaluating 99M-parameter ONNX Runtime architecture, multi-runtime parity, and edge audio synthesis."
     },
     {
       "path": "_posts/2024/05/2024-05-12-rag-guid.md",
