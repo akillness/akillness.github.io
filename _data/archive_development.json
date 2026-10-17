@@ -1279,9 +1279,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2024 note into an authoritative engineering delivery roadmap for production RAG systems, evaluating ingestion topologies, hybrid retrieval, and automated evaluation harnesses."
     },
     {
       "path": "_posts/2024/07/2024-07-11-choice-vector-database-for-llm.md",
