@@ -1072,9 +1072,9 @@
       "links_at_intake": 7,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2026-03 note into an authoritative source audit of Automaton, Steve Yegge's Gas Town/Wasteland, and OpenAI Symphony, examining agent economics and operational federations."
     },
     {
       "path": "_posts/2026/03/2026-03-11-pi-extensions-as-core.md",
