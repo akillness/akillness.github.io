@@ -904,9 +904,9 @@
       "links_at_intake": 7,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Source audit of Philipp Schmid's self-learning-skill architecture and Gemini 3 SDK integration, analyzing autonomous web-grounded skill synthesis and verification."
     },
     {
       "path": "_posts/2026/02/2026-02-08-easy-dataset.md",

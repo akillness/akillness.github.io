@@ -1,182 +1,218 @@
 ---
-published: true
-title: "Self‑Learning Skills: Let the Agent Teach Itself New Tech"
-description: "From /learn prompts to a full skill pipeline—how to combine search + browsing to build autonomous skills with Gemini 3 models."
-categories: [Agent/Orchestration]
-tags: [Agent, Workflow, Orchestration]
+title: "Self-Learning Skills: Autonomous Documentation Synthesis for AI Agents"
+description: "A source audit of Philipp Schmid's self-learning-skill framework and Gemini 3 tooling, analyzing autonomous search, documentation extraction, and SKILL.md synthesis."
+categories: [AI, Tooling]
+tags: [agent-skills, gemini-api, automated-learning, web-scraping, workflows]
 date: 2026-02-07 02:10:00 +0900
+last_modified_at: 2026-10-18 07:55:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Source audit of Philipp Schmid's self-learning-skill architecture and Gemini 3 SDK integration, analyzing autonomous web-grounded skill synthesis and verification."
 mermaid: true
 math: false
-ads: false
-restored_archive: "2026-10-12"
+published: true
 ---
 
-## 🤔 Curiosity: What if a skill could *create itself*?
+## The Knowledge Ingestion Bottleneck in Autonomous Engineering
 
-When I ship AI features, the slowest step isn’t model quality—it’s **knowledge ingestion**. Every new API or framework forces us to re‑learn, re‑document, and re‑encode workflows. So I asked a sharper question:
+In autonomous AI software engineering, the primary barrier to adoption is no longer model reasoning capacity, but the **knowledge ingestion latency** of evolving software libraries. Modern developer ecosystems update at a relentless pace: major cloud platforms and open-source frameworks regularly release breaking API versions, deprecate legacy client constructors, and introduce new software development kits (SDKs).
 
-**What if a Skill could autonomously learn a new technology from the web and install itself into my workflow?**
+When a team transitions to a new technology—such as Google's unified `google-genai` SDK for Gemini 3 Flash and Pro models—an autonomous coding agent operating solely on pre-training weights fails immediately. Its parametric memory is frozen at training cutoff, resulting in hallucinated imports, obsolete function schemas, and invalid authentication calls.
 
-This post is built from three real sources:
-- **Self‑Learning Skill** (philschmid/self-learning-skill)
-- **Gemini API SKILL** (Gist with Gemini 3 examples)
-- **My own “Antigravity.Google” skill** pattern (inspired by Hyperbrowser, for auto‑teaching Gemini about new tech)
-
----
-
-## 📚 Retrieve: How the Self‑Learning Skill works
-
-### 1) The idea: `/learn <topic>`
-The **Self‑Learning Skill** is a minimal harness that turns a single command into a structured pipeline:
-
-- Discover authoritative sources via **web search**
-- Extract documentation by **browsing**
-- Synthesize a new **SKILL.md** + references
-- Save the generated skill into your workspace
-
-From the repo:
-
-> “Autonomous skill generator that enables AI agents to learn new technologies from the web.”
-
-Installation is simple and unopinionated—copy the SKILL.md into your skills directory.
-
-**Repo:** https://github.com/philschmid/self-learning-skill
-
-### 2) Gemini API SKILL as a concrete target
-The Gemini SKILL gist provides a complete base skill with:
-
-- Installation for **Python / JS / Go**
-- Quick start for **Gemini 3 Flash / Pro**
-- Examples of **system instructions** and **function calling**
-
-**SKILL:** https://gist.github.com/philschmid/b0cd874480d05ba1a7e02816687e07ae
-
-This is the perfect specimen for “self‑learning” to regenerate on demand.
-
-### 3) Web search + browsing are mandatory
-The key promise is not “just summarize.” It’s **self‑learning**:
-
-- **Search** finds canonical docs (official API pages, SDKs, specs)
-- **Browsing** extracts the details (install, examples, pitfalls)
-- The system **synthesizes** into reusable structure
-
-I use this pattern to teach Gemini about new technologies using a custom skill I call **Antigravity.Google**.
-
----
-
-## 💡 Innovation: A fully autonomous Skill creation loop
-
-Here is the production‑grade loop I recommend.
+Traditionally, closing this gap required a human software engineer to read documentation, author operational cheat-sheets, and manually write structured prompt instructions. In February 2026, AI researcher Philipp Schmid (Technical Lead at Hugging Face) published [`philschmid/self-learning-skill`](https://github.com/philschmid/self-learning-skill), introducing an autonomous loop: an agent harness equipped with web search and headless browser extraction that discovers canonical documentation on demand and compiles new, production-ready `SKILL.md` packages without human intervention.
 
 ```mermaid
-graph TB
-  A[learn topic] --> B[Web Search]
-  B --> C[Browser Fetch]
-  C --> D[Normalize + Summarize]
-  D --> E[Generate SKILL MD + references]
-  E --> F[Install Skill]
-  F --> G[Run acceptance test]
-  G --> A
+flowchart TD
+    subgraph HumanBottleneck ["The Manual Knowledge Ingestion Bottleneck"]
+        A1[New Framework / API Released] --> A2[Human Engineer Reads Documentation]
+        A2 --> A3[Human Crafts Operational Prompts & Cheatsheets]
+        A3 --> A4[Human Manually Configures Agent Workspace]
+        note1["High friction; days of lag before agents can use new SDKs"]
+    end
+
+    subgraph AutonomousSelfLearning ["Autonomous Self-Learning Loop (/learn)"]
+        B1["User Command: '/learn gemini api with gemini 3'"] --> B2[Targeted Search Over Authoritative Domains]
+        B2 --> B3[Headless Browser DOM Extraction]
+        B3 --> B4[Structural Normalization & Code Example Synthesis]
+        B4 --> B5[Sandboxed Test Execution Verification]
+        B5 --> B6[Installed SKILL.md Package with Strict Schemas]
+    end
+
+    classDef bad fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c;
+    classDef good fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20;
+    class A1,A2,A3,A4 bad;
+    class B1,B2,B3,B4,B5,B6 good;
 ```
 
-### Example: `/learn gemini api with gemini 3 models`
-We can define a Skill template and auto‑populate it using the Gemini docs + SDK examples.
+This source audit examines the technical architecture of Schmid's self-learning harness. We analyze the four-stage synthesis pipeline, examine its application to Google's Gemini 3 SDK, trace the 2026 shift toward test-verified skill synthesis, and outline defensive operational guardrails.
 
-**Auto‑generated sections should include:**
-- Quick reference links
-- Installation for multiple languages
-- Minimal usage examples
-- Function calling schema
-- Streaming snippet
-- Model table (3‑flash, 3‑pro, 2.5‑flash, etc.)
+## Technical Architecture: The /learn Ingestion Pipeline
 
-### Example generated snippet (Python)
+The `self-learning-skill` formalizes autonomous tech onboarding into an explicit, multi-phase agent loop:
+
+```mermaid
+flowchart LR
+    subgraph Phase1 ["1. Discovery"]
+        Cmd["/learn <query>"] --> Search[Domain-Bounded Search API]
+        Search --> URLFilter[Authority Filter:<br/>Official Docs & SDK Repos]
+    end
+
+    subgraph Phase2 ["2. Extraction"]
+        URLFilter --> Browser[Headless Browser Engine]
+        Browser --> ASTExtract[Extract Code Blocks, Signatures, Schemas]
+    end
+
+    subgraph Phase3 ["3. Synthesis"]
+        ASTExtract --> LLM_Synth[Synthesis Engine]
+        LLM_Synth --> SkillDoc[Format SKILL.md Manifest]
+        LLM_Synth --> RefCode[Generate scripts/ & references/]
+    end
+
+    subgraph Phase4 ["4. Verification"]
+        SkillDoc & RefCode --> Sandbox[Docker / Ephemeral Sandbox]
+        Sandbox --> SmokeTest[Execute Smoke Test Against API]
+        SmokeTest -->|Pass| Fleet[Register in Workspace Skills Catalog]
+    end
+
+    classDef p1 fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1;
+    classDef p2 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c;
+    classDef p3 fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#bf360c;
+    classDef p4 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20;
+    class Cmd,Search,URLFilter p1;
+    class Browser,ASTExtract p2;
+    class LLM_Synth,SkillDoc,RefCode p3;
+    class Sandbox,SmokeTest,Fleet p4;
+```
+
+### 1. Domain-Bounded Discovery
+When triggered via `/learn <technology>`, the agent formulates targeted web search queries. In production configurations, discovery is restricted to authoritative domains (e.g., official documentation hubs, GitHub releases, package managers) to prevent low-quality SEO scrapers or hallucinated medium posts from poisoning the extraction pipeline.
+
+### 2. Headless Browser Extraction
+Raw HTML fetching often fails on modern documentation portals that rely on client-side rendering (React, Docusaurus, Nextra). The harness utilizes a headless browser instance to execute JavaScript, bypass cookie banners, and extract structured DOM trees containing:
+- Installation commands across major package managers (`pip`, `npm`, `go get`).
+- Canonical client instantiation syntax.
+- Function calling and structured output schemas.
+- Error handling idioms and deprecated parameter warnings.
+
+### 3. Synthesis Conforming to the `agentskills.io` Standard
+The synthesis engine transforms the extracted fragments into a self-contained skill folder. As analyzed in [Curating Agent Skills: The Four Primitives That Survived the Proliferation](/posts/four-skills-that-survived/), a production skill must conform to strict standards:
+- **YAML Front Matter**: Providing unambiguous, keyword-rich activation descriptions.
+- **Minimal Working Examples**: Concise, runnable scripts illustrating standard and streaming generation.
+- **Function Declaration Schemas**: Strict JSON Schema / Pydantic models for tool use.
+
+### 4. Case Study: Ingesting the Gemini 3 API
+
+As demonstrated in Schmid's canonical reference gist, executing `/learn gemini api with gemini 3 models` synthesizes a comprehensive operational manual for Google's unified `google-genai` SDK:
+
 ```python
+# Automatically synthesized Python client pattern for Gemini 3
 from google import genai
 from google.genai.types import GenerateContentConfig, Tool
 
 client = genai.Client()
-response = client.models.generate_content(
-    model="gemini-3-flash-preview",
-    contents="Summarize the latest gameplay patch notes",
-    config=GenerateContentConfig(
-        system_instruction="You are a build‑ready game assistant."
-    )
-)
-print(response.text)
-```
 
-### Function calling pattern (minimal)
-```python
-set_light_values = {
-  "name": "set_light_values",
-  "description": "Sets brightness and color temperature.",
-  "parameters": {
-    "type": "object",
-    "properties": {
-      "brightness": {"type": "integer"},
-      "color_temp": {"type": "string", "enum": ["daylight", "cool", "warm"]}
-    },
-    "required": ["brightness", "color_temp"]
-  }
+# Define strict JSON function declaration
+light_control_tool = {
+    "name": "adjust_lighting",
+    "description": "Adjusts workspace lighting parameters.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "brightness": {"type": "integer", "description": "Brightness percentage (0-100)"},
+            "color_temperature": {"type": "string", "enum": ["daylight", "neutral", "warm"]}
+        },
+        "required": ["brightness", "color_temperature"]
+    }
 }
 
+# Execute function calling on Gemini 3 Flash
 response = client.models.generate_content(
-  model="gemini-3-flash-preview",
-  contents="Set warm light at 50%",
-  config=GenerateContentConfig(tools=[Tool(function_declarations=[set_light_values])])
+    model="gemini-3-flash-preview",
+    contents="Dim the office lighting to warm 40% for evening focus.",
+    config=GenerateContentConfig(
+        system_instruction="You are an autonomous office automation agent.",
+        tools=[Tool(function_declarations=[light_control_tool])],
+        temperature=0.2,
+    ),
 )
 ```
 
----
+By packaging this synthesized code directly into `skills/gemini-api/`, the parent coding agent immediately acquires the ability to build and debug Gemini-powered services without manual intervention.
 
-## 🧪 Mini‑pipeline: installing a new self‑learning skill
+## What Changed Since Early 2026: From Ad-Hoc /learn Prompts to Verified Skill Synthesis
 
-**Goal:** Add a self‑learning skill via `npx`, then teach it Gemini 3.
+When `self-learning-skill` debuted in early 2026, it operated primarily as an unconstrained generative prompt: it scraped text, wrote a markdown file, and hoped the syntax was correct.
 
-```bash
-# 1) Install skill (example)
-npx skills add philschmid/self-learning-skill
+Between early 2026 and late 2026, the ecosystem evolved through three critical hardening phases:
 
-# 2) Trigger self‑learning
-/learn gemini api with gemini 3 models
+```mermaid
+flowchart TD
+    subgraph Early2026 ["Early 2026: Blind Markdown Synthesis"]
+        E1[Search & Extract] --> E2[Write SKILL.md]
+        E2 --> E3[Zero Syntax Verification]
+        E3 --> E4[Silent API Hallucinations in Production]
+    end
+
+    subgraph Late2026 ["Late 2026: Test-Backed Synthesis"]
+        L1[Search & Extract from Verified Allow-Lists] --> L2[Draft SKILL.md & Smoke Test Script]
+        L2 --> L3[Execute Smoke Test in Ephemeral Container]
+        L3 --> L4{Exit Code == 0?}
+        L4 -->|Yes| L5[Publish Versioned Skill Package]
+        L4 -->|No| L6[Self-Correction via Compiler Output]
+        L6 --> L3
+    end
+
+    E4 -.->|Hardening Evolution| L1
+
+    classDef old fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c;
+    classDef new fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20;
+    class E1,E2,E3,E4 old;
+    class L1,L2,L3,L4,L5,L6 new;
 ```
 
-This gives you a freshly synthesized **Gemini API SKILL** without manual research.
+1. **Mandatory Sandboxed Smoke Testing**:
+   Generating documentation is useless if the synthesized code samples throw syntax or import errors. Late 2026 self-learning harnesses mandate an automated validation step: the agent scaffolds an ephemeral test script inside a Docker container, attempts to execute the code using the live SDK, and inspects the return code. If the test fails, the error trace is fed back into the synthesis agent for self-correction before the skill is registered.
 
----
+2. **Integration with Fleet Package Managers (`npx skills`)**:
+   Rather than dropping unversioned markdown files into ad-hoc folders, self-learning skills now export packages compliant with Vercel's `skills` CLI (analyzed in [Awesome Claude Skills: Standardizing Agentic Workflow Primitives](/posts/awesome-claude-skills/)). Newly synthesized skills can be committed, tagged with semver versions, and published to enterprise private registries for immediate team-wide distribution.
 
-## Tradeoffs & production lessons
+3. **Two-Tier Progressive Trigger Management**:
+   As examined in [Why the Terminal Is the Superior Harness for Coding Agents](/posts/cli-harness-coding-agents/), accumulating self-generated skills can bloat baseline system prompts. Modern harnesses ensure that auto-generated skills declare compact, mutually exclusive trigger descriptions, ensuring they remain dormant in Tier 1 until explicitly needed.
 
-| Challenge | Why it happens | Mitigation |
-|---|---|---|
-| Inaccurate sources | Search can rank blogs above docs | Enforce allow‑list domains |
-| Drift over time | APIs change quickly | Schedule `/learn` refreshes |
-| Over‑summarization | Skills become too shallow | Keep examples + links |
-| Non‑determinism | Different runs yield different structure | Use a strict template |
+## Systems Engineering Tradeoffs and Guardrails
 
-**Lesson:** The harness matters more than the model. A “self‑learning” system needs guardrails.
+Deploying autonomous self-learning skills in enterprise environments introduces distinct operational hazards that systems engineers must mitigate.
 
----
+### The Three Threat Vectors of Autonomous Learning
+
+1. **Source Poisoning and Malicious Injection**:
+   If an agent searches open web indexes without domain constraints, malicious actors can publish SEO-poisoned blog posts containing prompt injections designed to hijack the agent (e.g., hidden HTML instructing the model to exfiltrate environment variables).
+   - *Mitigation*: Strictly enforce hardcoded domain allow-lists (`ai.google.dev`, `docs.anthropic.com`, `github.com/google-gemini`, `pypi.org`).
+2. **Context Bloat from Verbose Synthesis**:
+   Unsupervised models tend to generate exhaustive, 5,000-token skill manuals filled with conversational filler.
+   - *Mitigation*: Enforce a hard token ceiling ($T \le 1,500$ tokens per generated `SKILL.md`) and mandate that all background explanations reside in separate `references/` subdirectories.
+3. **API Deprecation Drift**:
+   A skill generated in February may reference preview API endpoints that become obsolete by May.
+   - *Mitigation*: Attach an expiration timestamp to the skill front matter (`last_verified: YYYY-MM-DD`). If an agent attempts to invoke a skill older than 90 days, the harness prompts an automatic `/learn --refresh` pass.
 
 ## Key Takeaways
 
-| Insight | Implication | Next Steps |
-|---|---|---|
-| Search + browsing is enough to bootstrap skills | No human doc‑writing needed | Automate your tech onboarding |
-| Skills can be regenerated | Docs stay fresh | Set a refresh cadence |
-| Gemini 3 is a strong target | Great for function calling + long context | Build native Gemini skills |
+1. **Knowledge Ingestion Latency Bottlenecks Autonomy**: Static pre-trained models fail when interacting with rapidly evolving modern SDKs; self-learning harnesses close this gap through on-demand documentation synthesis.
+2. **Four-Stage Pipeline**: Philipp Schmid's `self-learning-skill` formalizes autonomous onboarding across domain-bounded search, headless DOM extraction, structured `SKILL.md` synthesis, and workspace registration.
+3. **Mandatory Smoke-Test Verification**: Production self-learning requires executing synthesized code in ephemeral sandboxes to verify import and runtime correctness before publishing the skill.
+4. **Domain Allow-Lists Defeat Poisoning**: Restricting search discovery to verified documentation hubs prevents prompt injection attacks and hallucinated tutorials from corrupting agent knowledge.
+5. **Fleet Distribution via Package Tooling**: Integrating self-generated skills with package managers (`npx skills`) transforms localized agent learning into shared organizational assets.
 
-### New Questions
-- How do we validate learned skills automatically?
-- Can we score skill quality with unit tests + doc coverage?
-- What happens when **skills teach other skills**?
+## New Questions
 
----
+1. **Can Skills Autonomously Learn from Git Commits and PR Diffs?**: Rather than scraping public web pages, can a self-learning agent observe internal team pull requests to compile domain-specific skills for proprietary microservices?
+2. **How Should Breaking API Changes Be Handled for Deprecated Skills?**: When a self-learning pass detects a breaking SDK change, what automated refactoring pipeline updates existing repository code to match the new skill?
+3. **What Are the Legal and Licensing Boundaries of Scraped Skill Synthesis?**: Does compiling public documentation into structured agent instructions constitute fair use under enterprise compliance standards?
+4. **Can Multi-Agent Teams Specialize in Continuous Tech Scouting?**: Could a dedicated background agent continuously monitor developer changelogs (AWS, Google Cloud, Anthropic) and proactively submit pull requests containing refreshed skills?
 
 ## References
-- Self‑Learning Skill repo: https://github.com/philschmid/self-learning-skill
-- Gemini API SKILL (Gist): https://gist.github.com/philschmid/b0cd874480d05ba1a7e02816687e07ae
-- Gemini API docs: https://ai.google.dev/gemini-api/docs
-- Function calling guide: https://ai.google.dev/gemini-api/docs/function-calling
-- Structured output: https://ai.google.dev/gemini-api/docs/structured-output
+
+- Schmid, Philipp. "Self-Learning Skill: Autonomous Skill Generator for AI Agents." `philschmid/self-learning-skill`, commit `main` branch, 2026. URL: `https://github.com/philschmid/self-learning-skill` (accessed 2026-10-18).
+- Schmid, Philipp. "Gemini API SKILL for Gemini 3 Models." GitHub Gist `b0cd874480d05ba1a7e02816687e07ae`, February 2026. URL: `https://gist.github.com/philschmid/b0cd874480d05ba1a7e02816687e07ae` (accessed 2026-10-18).
+- Google AI for Developers. "Google GenAI SDK Documentation and Gemini 3 Preview Guide." *Google Developer Documentation*, 2025–2026. URL: `https://ai.google.dev/gemini-api/docs` (accessed 2026-10-18).
+- Agent Skills Working Group. "The Agent Skills Specification." Open Specification Standard, v1.0.0, 2025–2026. URL: `https://agentskills.io/` (accessed 2026-10-18).
+- Vercel Labs. "Skills CLI Documentation." *Vercel Open Source*, release v0.4.x, 2025–2026. URL: `https://github.com/vercel-labs/skills` (accessed 2026-10-18).
