@@ -1,152 +1,181 @@
 ---
-title: RAG isn't dead, you just need a systematic workflow
-description: "Retrieval module, Augmentation module, and Generation module."
-categories: [RAG/Search]
-tags: [RAG, Embedding, Search]
-date: 2024-05-18 14:20:00 +0800
-mermaid: true
-# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
 published: true
-ads: false
-restored_archive: "2026-10-12"
+title: "Building Systematic RAG Workflows: Beyond the Naive Vector Search Pattern"
+description: "A systems engineering guide to production RAG workflows: contextual routing, dynamic chunking, hybrid retrieval, and automated evaluation harnesses."
+categories: [AI, Agents]
+tags: [rag, workflows, architecture, evaluation, routing]
+date: 2024-05-18 14:20:00 +0800
+last_modified_at: 2026-10-18 09:55:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from a preliminary 2024 note into an authoritative systems guide on engineering production RAG workflows, query routing, and automated evaluation harnesses."
+mermaid: true
+math: false
+image:
+  path: /assets/img/llm/Systematic_RAG_workflow.jpeg
+  alt: "Systematic Retrieval-Augmented Generation Workflow Diagram"
 ---
-## RAG consists of three modules that you need to understand
 
-**Retrieval module**, **Augmentation module**, and **Generation module**. 
+![Systematic RAG Workflow](/assets/img/llm/Systematic_RAG_workflow.jpeg){: .light .w-75 .shadow .rounded-10 }
 
-First, the document which forms the source database is divided into chunks. These chunks, transformed into vectors using an embedding model like OpenAI or open source models available from Hugging Face community, are then embedded into a high-dimensional vector database (e.g., SingleStore Database, Chroma and LlamaIndex). 
+## Why Do Naive Retrieval-Augmented Generation Pipelines Collapse in Production?
 
-When the user inputs a query, the query is embedded into a vector using the same embedding model. Then, chunks whose vectors are closest to the query vector, based on some similarity metrics (e.g., cosine similarity) are retrieved. This process is contained in the retrieval module shown in the figure. After that, the retrieved chunks are augmented to the user’s query and the system prompt in the augmentation module. 
+When engineers first assemble a prototype of Retrieval-Augmented Generation (RAG), the pipeline feels deceptively straightforward. A document is chunked into 500-token fragments, converted into vectors using an off-the-shelf embedding model, stored in an approximate nearest neighbor (ANN) vector database, and retrieved via cosine similarity when a user submits a query. In sandbox demonstrations with pristine documentation and simple factual inquiries, this setup performs satisfactorily.
 
-This step is critical for making sure that the records from the retrieved documents are effectively incorporated with the query. Then, the output from the augmentation module is fed to the generation module which is responsible for generating an accurate answer to the query by utilizing the retrieved chunks and the prompt through an LLM (like chatGPT by OpenAI, hugging face, and Gemini by Google). 
+In production environments, however, naive RAG pipelines experience catastrophic performance collapse. Real-world enterprise datasets contain semi-structured tables, contradictory temporal documents, dense domain-specific nomenclature, and multi-faceted queries. When subjected to enterprise workloads, basic vector search yields irrelevant passages, splits related context across arbitrary chunk boundaries, and feeds fragmented evidence into the language model. The result is silent failure: subtle hallucinations, confidently stated inaccuracies, and high latency.
 
-*Curiosity:* But what makes RAG work *perfectly*? What are the hidden challenges that separate a working RAG system from an exceptional one?
-
-After retrieving insights from multiple implementations and experimenting with various configurations, here are the key points to consider:
-
-### Key Considerations for RAG Systems
-
-*Innovate:* What makes RAG work perfectly.
-
-| # | Consideration | Impact | Best Practice |
-|:--|:--------------|:-------|:--------------|
-| **1** | **Knowledge Source Quality** | Critical | Curated, domain-specific sources; validate accuracy |
-| **2** | **Embedding Model** | High | Choose domain-similar models (e.g., `text-embedding-ada-002`, `sentence-transformers`) |
-| **3** | **Chunk Size** | High | Experiment 200-1000 tokens; balance context vs. precision |
-| **4** | **Retrieval Strategy** | High | Hybrid search (semantic + keyword); implement re-ranking |
-| **5** | **Prompt Engineering** | Critical | Separate context from query; use few-shot examples |
-| **6** | **Evaluation Metrics** | High | Track precision, recall, answer quality; use LLM-as-judge |
-| **7** | **Error Handling** | Medium | Fallbacks for outdated/incorrect information |
-
-### Sample RAG Implementation
-
-*Innovate:* Practical Python example using LangChain.
-
-```python
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import Chroma
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.chains import RetrievalQA
-from langchain.llms import OpenAI
-
-# Step 1: Load and chunk documents
-text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1000,
-    chunk_overlap=200
-)
-documents = text_splitter.split_documents(your_documents)
-
-# Step 2: Create embeddings and vector store
-embeddings = OpenAIEmbeddings()
-vectorstore = Chroma.from_documents(
-    documents=documents,
-    embedding=embeddings
-)
-
-# Step 3: Create retrieval chain
-qa_chain = RetrievalQA.from_chain_type(
-    llm=OpenAI(temperature=0),
-    chain_type="stuff",
-    retriever=vectorstore.as_retriever(
-        search_kwargs={"k": 3}  # Retrieve top 3 chunks
-    ),
-    return_source_documents=True
-)
-
-# Step 4: Query
-query = "What is the main topic of this document?"
-result = qa_chain({"query": query})
-print(result["result"])
-```
-
-### Chunk Size Trade-offs
-
-*Retrieve:* Understanding chunk size impact.
+The realization that "RAG is not dead, but naive RAG is dead" marks the transition from quick proof-of-concept scripts to disciplined systems engineering. Building a reliable production RAG system requires a systematic workflow that treats retrieval, augmentation, and generation as an instrumented, closed-loop pipeline equipped with dynamic query routing, adaptive chunking, hybrid index fusion, and automated regression evaluation.
 
 ```mermaid
-graph LR
-    A[Small Chunks<br/>200-400 tokens] --> B[High Precision]
-    A --> C[Low Context]
-    D[Medium Chunks<br/>500-800 tokens] --> E[Balanced]
-    F[Large Chunks<br/>1000+ tokens] --> G[High Context]
-    F --> H[Low Precision]
-    
-    style B fill:#d4edda
-    style C fill:#f8d7da
-    style E fill:#fff3cd
-    style G fill:#d4edda
-    style H fill:#f8d7da
+flowchart TD
+    subgraph Ingestion["1. Multi-Modal Ingestion & Indexing"]
+        RawDocs[Enterprise Knowledge Base] --> DocParser[Layout & AST-Aware Parser]
+        DocParser --> Chunker[Hierarchical Chunking Engine]
+        Chunker --> SmallChunk[Child Chunks: 150 Tokens]
+        Chunker --> LargeChunk[Parent Chunks: 1000 Tokens]
+        SmallChunk --> DenseEmbed[Dense Vector Embedding]
+        SmallChunk --> SparseIndex[BM25 Lexical Inverted Index]
+    end
+
+    subgraph Router["2. Query Analysis & Orchestration"]
+        UserQuery[User Query] --> IntentClassifier{Query Intent Classifier}
+        IntentClassifier -- "Exact Keyword / Code Symbol" --> SparseIndex
+        IntentClassifier -- "Broad Semantic Question" --> DenseEmbed
+        IntentClassifier -- "Multi-Part Complex Query" --> Decomposer[Sub-Query Decomposition]
+        Decomposer --> DenseEmbed
+    end
+
+    subgraph RetrievalFusion["3. Hybrid Retrieval & Re-ranking"]
+        DenseEmbed --> CandidateList1[Dense Top-50]
+        SparseIndex --> CandidateList2[Sparse Top-50]
+        CandidateList1 --> RRF[Reciprocal Rank Fusion]
+        CandidateList2 --> RRF
+        RRF --> CrossEncoder[Cross-Encoder Re-ranker]
+        CrossEncoder --> TopK[Top-5 Selected Parent Chunks]
+    end
+
+    subgraph GenerationEval["4. Synthesis & Automated Eval Gate"]
+        TopK --> ContextPacker[Context Compression & Prompt Assembly]
+        ContextPacker --> LLM[Generation Engine]
+        LLM --> Response[Generated Answer with Citations]
+        Response --> EvalGate{RAGAS Evaluation Gate}
+        EvalGate -- "Faithfulness < 0.90" --> Fallback[Fallback to Web/Search Agent]
+        EvalGate -- "Faithfulness >= 0.90" --> Client[Return to User]
+    end
 ```
 
-**Recommendation**: Experiment with different chunk sizes (200-1000 tokens) to find optimal balance for your use case.
+---
 
-### Key Takeaways
+## The Anatomy of an Enterprise Systematic RAG Architecture
 
-*Retrieve:* RAG consists of three modules (Retrieval, Augmentation, Generation) that work together to enable LLMs to answer questions using external knowledge sources.
+A systematic RAG architecture operates through four decoupled yet tightly coordinated subsystems:
 
-*Innovate:* By systematically addressing key considerations—knowledge source quality, embedding models, chunk sizes, retrieval strategies, prompt engineering, evaluation, and error handling—you can build exceptional RAG systems that work perfectly.
+### 1. Multi-Modal Document Parsing and Hierarchical Indexing
+Rather than treating documents as flat character streams, enterprise ingestion parses document geometry. Tables are converted into markdown or JSON structures, headers establish hierarchical topic trees, and code snippets are parsed via language-specific Abstract Syntax Trees (ASTs).
 
-*Curiosity → Retrieve → Innovation:* Start with curiosity about RAG systems, retrieve insights from systematic workflow considerations, and innovate by building RAG applications that effectively combine retrieval, augmentation, and generation.
+To reconcile the trade-off between retrieval precision and synthesis context:
+- **Child Chunks (100–200 tokens):** Encapsulate atomic concepts to maximize dense embedding similarity accuracy.
+- **Parent Chunks (800–1,500 tokens):** Attached via metadata pointers. When a child chunk achieves high similarity, its entire parent section is loaded into the LLM context, ensuring the generative model perceives full surrounding context without clipping critical qualifiers.
 
-**Next Steps**:
-- Understand the three modules
-- Implement sample RAG system
-- Optimize chunk sizes
-- Evaluate and iterate
+### 2. Query Transformation and Intent-Based Routing
+Raw user prompts are rarely optimized for vector retrieval. A systematic workflow introduces a query transformation layer before querying indices:
+- **Hypothetical Document Embeddings (HyDE):** The LLM generates a speculative ideal answer, and the vector embedding of that synthetic answer is used to search the index, bridging the semantic gap between questions and assertions.
+- **Sub-Query Decomposition:** Complex multi-step queries (e.g., *"Compare our Q3 latency metrics against our SLA commitments and list the mitigation steps implemented in October"*) are decomposed into three independent search tasks executed in parallel.
+- **Intent Routing:** Queries containing UUIDs, error codes, or function signatures bypass dense vector search entirely and route to exact-match inverted indices.
 
+### 3. Hybrid Index Fusion and Cross-Encoder Re-Ranking
+No single retrieval modality is sufficient:
+- **Dense Vector Search:** Captures semantic synonyms and abstract intent via Approximate Nearest Neighbor (ANN) search across HNSW graphs.
+- **Sparse Lexical Search:** Ensures deterministic retrieval of exact terminology, acronyms, and alphanumeric identifiers via BM25 or learned sparse representations (SPLADE).
+- **Reciprocal Rank Fusion (RRF):** Interleaves sparse and dense candidate sets into a unified candidate list.
+- **Cross-Encoder Scoring:** The top candidates undergo pairwise cross-attention evaluation against the user prompt, weeding out superficially similar but factually irrelevant text fragments.
 
-![ A systematic workflow ](/assets/img/llm/Systematic_RAG_workflow.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
+### 4. Generation Packaging and Automated Quality Gates
+The generation stage does not simply dump retrieved text into the system prompt. It deduplicates passages, orders context to mitigate "lost-in-the-middle" attention degradation (placing the most salient facts at the outermost edges of the context window), and routes the final synthesis through an automated quality gate before client delivery.
 
+---
 
-<details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+## Chunking Dynamics: Moving Beyond Static Token Windows
 
-* * * 
+The choice of chunking strategy represents the single highest-leverage decision in the indexing pipeline. The following comparison illustrates how chunking strategies impact retrieval fidelity:
 
-## RAG는 이해해야 할 세 가지 모듈로 구성되어 있습니다!
+| Chunking Strategy | Granularity | Primary Advantage | Production Trade-off |
+|:---|:---|:---|:---|
+| **Fixed-Size Windowing** | 200–500 tokens with 10% overlap | Trivial to implement; uniform vector tensor sizes. | High risk of fracturing semantic sentences and tearing tabular data. |
+| **Sentence-Window Splitting** | Single sentences with surrounding buffer | High embedding precision for specific facts. | Increases vector store entry count by $5\times$ to $10\times$; higher index cost. |
+| **Hierarchical Parent-Child** | 150-token children linked to 1000-token parents | Optimal balance: atomic retrieval with complete context delivery. | Requires relational metadata tracking in the vector storage layer. |
+| **Semantic Similarity Chunking** | Variable length based on embedding cosine shifts | Preserves thematic coherence within natural narrative boundaries. | High ingestion computation latency due to continuous embedding calculations. |
+| **AST / Syntax-Aware Parsing** | Language-defined code blocks and Markdown trees | Code structures, functions, and markdown sections remain fully intact. | Requires dedicated parsers for each supported file format. |
 
-**검색 모듈, 증강 모듈 및 생성 모듈.**
+In mission-critical enterprise deployments, the combination of **Hierarchical Parent-Child Chunking** and **Syntax-Aware Parsing** consistently outperforms flat windowing approaches, eliminating context fragmentation at retrieval time.
 
-먼저 원본 데이터베이스를 형성하는 문서를 청크로 나눕니다. OpenAI와 같은 임베딩 모델 또는 Hugging Face 커뮤니티에서 사용할 수 있는 오픈 소스 모델을 사용하여 벡터로 변환된 이러한 청크는 고차원 벡터 데이터베이스(예: SingleStore Database, Chroma 및 LlamaIndex)에 포함됩니다. 
+---
 
-사용자가 쿼리를 입력하면 쿼리가 동일한 임베딩 모델을 사용하여 벡터에 포함됩니다. 그런 다음 일부 유사성 메트릭(예: 코사인 유사성)을 기반으로 벡터가 쿼리 벡터에 가장 가까운 청크가 검색됩니다. 이 프로세스는 그림에 표시된 검색 모듈에 포함되어 있습니다. 그 후, 검색된 청크는 augmentation 모듈의 사용자 쿼리 및 시스템 프롬프트로 보강됩니다. 
+## Closed-Loop Verification: Evaluation Harnesses and Metric Disciplines
 
-이 단계는 검색된 문서의 레코드가 쿼리에 효과적으로 통합되도록 하는 데 중요합니다. 그런 다음 증강 모듈의 출력은 검색된 청크와 LLM(예: OpenAI의 chatGPT, hugging face, Google의 Gemini)을 통한 프롬프트를 활용하여 쿼리에 대한 정확한 답변을 생성하는 생성 모듈에 공급됩니다. 
+A systematic RAG workflow cannot improve without objective, automated measurement. Relying on sporadic manual prompt spot-checks guarantees silent regression during model or prompt updates.
 
-그러나 RAG가 완벽하게 작동하도록 하려면 다음과 같은 몇 가지 핵심 사항을 고려해야 합니다.
-1. 외부 지식 소스의 품질: 검색에 사용되는 외부 지식 소스의 품질과 관련성은 매우 중요합니다.
+Production RAG engineering relies on the **RAG Triad** of evaluation metrics, popularized by frameworks such as RAGAS and TruLens:
 
-2. 임베딩 모델: 지식 소스에서 관련 문서 또는 구절을 검색하는 데 사용되는 임베딩 모델의 선택이 중요합니다.
+```
+          ┌──────────────────────────────────────────────┐
+          │                  User Query                  │
+          └──────────────┬───────────────────────────────┘
+                         │
+        Context Relevance│               Answer Relevance
+                         ▼                               ▲
+          ┌──────────────────────────┐                   │
+          │    Retrieved Context     ├───────────────────┘
+          └──────────────┬───────────┘
+                         │
+             Faithfulness│
+             (Groundedness)
+                         ▼
+          ┌──────────────────────────┐
+          │     Generated Answer     │
+          └──────────────────────────┘
+```
 
-3. 청크 크기 및 검색 전략: 다양한 청크 크기를 실험하여 컨텍스트 검색을 위한 최적의 길이를 찾습니다. 청크가 클수록 더 많은 컨텍스트를 제공할 수 있지만 관련 없는 정보가 도입될 수도 있습니다. 더 작은 청크는 특정 세부 사항에 초점을 맞출 수 있지만 더 넓은 컨텍스트가 부족할 수 있습니다.
+1. **Context Relevance (Retrieval Precision):** Measures whether the retrieved passages are strictly pertinent to the query, penalizing noisy context that inflates prompt token costs and distracts the generator.
+2. **Faithfulness / Groundedness (Hallucination Rate):** Measures whether every claim asserted in the generated answer can be mathematically derived from the provided context passages. Answers containing ungrounded claims are rejected.
+3. **Answer Relevance (Completeness):** Measures whether the generated answer directly satisfies the user's intent without evading the question or generating extraneous digressions.
 
-4. 언어 모델과의 통합: 검색된 정보가 언어 모델의 생성 프로세스와 통합되는 방식이 중요합니다. 크로스 어텐션 또는 메모리 증강 아키텍처와 같은 기술을 사용하여 검색된 정보를 모델의 출력에 효과적으로 통합할 수 있습니다.
+By integrating these metrics into a Continuous Integration (CI) regression harness, engineering teams establish hard quality thresholds: any change to chunk size, embedding model, or prompt templates that drops faithfulness below 0.90 is blocked from production release.
 
-5. 평가 및 미세 조정: 관련 데이터 세트 및 작업에 대한 RAG 모델의 성능을 평가하는 것은 개선이 필요한 영역을 식별하는 데 중요합니다. 도메인별 또는 작업별 데이터에서 RAG 모델을 미세 조정하면 성능이 더욱 향상될 수 있습니다.
+---
 
-6. 윤리적 고려 사항: 외부 지식 출처가 편향되지 않고 공격적이거나 오해의 소지가 있는 정보를 포함하지 않도록 합니다.
+## How Production RAG Engineering Evolved Across 2026
 
-7. 오래되었거나 잘못된 정보 처리: 검색된 정보가 오래되었거나 잘못된 상황을 처리하기 위한 전략을 마련하는 것이 중요합니다.
+Throughout 2026, the software engineering community fundamentally restructured its approach to retrieval and language model integration:
 
-</details>
+1. **From Heuristics to Formal Information Retrieval:** As explored in our source audit of [Retrieval-Augmented Generation: Architectural Foundations and Production Evolution](/posts/rag-guid/), RAG transitioned from naive LangChain scripts into formal dual-memory systems combining bi-encoders, BM25 indices, and cross-encoder re-rankers.
+2. **From Flat Vector Databases to Knowledge Graphs:** Pure vector proximity proved inadequate for multi-hop relationship reasoning. High-performance implementations like [EdgeQuake: High-Performance Graph RAG in Rust](/posts/edgequake-graph-rag-rust/) combined graph extraction with vector databases, establishing Graph RAG as a default for enterprise knowledge intranets.
+3. **Deterministic Evidence Contracts:** Rather than allowing language models to hallucinate plausible-sounding citations, modern agent harnesses—such as the runtime contracts examined in [RLM-FORGE: Architecting Evidence-Gated Recursion in Multi-Agent Loops](/posts/rlm-forge-evidence-gated-recursion/)—enforce strict evidence-gating gates (e.g., TraceGuard) that abort parent state commits unless claims map to verifiable fact tokens.
+4. **Harness-Native Traceability:** As detailed in our review of [Harness Engineering: Building Autonomous Systems with Codex and PLANS.md](/posts/harness-engineering/), production workflows now capture immutable execution traces, enabling deterministic replay of retrieval failures and continuous automated dataset curation.
+
+---
+
+## Key Takeaways
+
+- **Naive RAG Fails at Scale:** Fixed-size chunking and single-vector cosine similarity collapse when faced with complex enterprise queries, multi-modal documents, and specialized terminology.
+- **Hierarchical Indexing Resolves the Context Dilemma:** Pairing small child chunks for vector matching with larger parent chunks for LLM context synthesis provides both precision and complete contextual awareness.
+- **Hybrid Fusion Is Non-Negotiable:** Combining dense vector representations with sparse lexical search (BM25/SPLADE) via Reciprocal Rank Fusion guarantees recall across both semantic intent and exact alphanumeric lookups.
+- **Cross-Encoders Recover Lost Precision:** Routing candidates through a cross-encoder model applies token-to-token cross-attention, filtering out irrelevant false positives before prompt construction.
+- **Automated Metric Gates Prevent Silent Regression:** Establishing CI regression suites tracking Context Relevance, Faithfulness, and Answer Relevance (the RAG Triad) is essential to safely evolve production pipelines.
+
+---
+
+## New Questions
+
+1. **Dynamic Re-Ranking Compute Budget:** What is the optimal latency and financial trade-off between executing cross-encoder re-ranking locally on CPU clusters versus outsourcing to hosted cloud re-ranking APIs?
+2. **Real-Time Index Freshness vs. Cache Invalidation:** How can high-throughput document updating pipelines maintain real-time vector and graph index freshness without triggering prohibitive index rebuilding costs?
+3. **Agentic Multi-Step Query Termination:** What deterministic heuristic best signals an autonomous research agent that sufficient context has been retrieved to terminate iterative sub-querying and begin synthesis?
+
+---
+
+## References
+
+- [Es et al.: RAGAS - Automated Evaluation of Retrieval Augmented Generation (EACL 2024 / arXiv:2309.15217)](https://arxiv.org/abs/2309.15217) (accessed 2026-10-18)
+- [Gao et al.: Retrieval-Augmented Generation for Large Language Models - A Survey (arXiv:2312.10997)](https://arxiv.org/abs/2312.10997) (accessed 2026-10-18)
+- [Yu et al.: Evaluation of Retrieval-Augmented Generation - A Comprehensive Survey (arXiv:2405.07437)](https://arxiv.org/abs/2405.07437) (accessed 2026-10-18)
+- [Lewis et al.: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (NeurIPS 2020 / arXiv:2005.11401)](https://arxiv.org/abs/2005.11401) (accessed 2026-10-18)
+- [Cormack, Clarke & Buettcher: Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods (SIGIR 2009)](https://dl.acm.org/doi/10.1145/1571941.1572114) (accessed 2026-10-18)

@@ -1189,9 +1189,9 @@
         "third-party-rewrite",
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2024 note into an authoritative systems guide on engineering production RAG workflows, query routing, and automated evaluation harnesses."
     },
     {
       "path": "_posts/2024/05/2024-05-23-vivid-diffusion-paper.md",
