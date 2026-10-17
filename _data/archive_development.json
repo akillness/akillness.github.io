@@ -489,9 +489,9 @@
       "links_at_intake": 36,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "retired",
+      "developed_at": "2026-10-17",
+      "survey_note": "Retired on October 17, 2026 after a source audit of arXiv:2510.16720v2 and the commit-pinned survey bibliography. Independent review supported the curated source facts but did not establish a distinct contribution in either proposed replacement. This historical URL is retained; the former summary and unverified first-person claims are not current technical guidance."
     },
     {
       "path": "_posts/2025/11/2025-11-09-mlops-monitoring-observability-part-a.md",
