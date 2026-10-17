@@ -792,9 +792,9 @@
       "links_at_intake": 16,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Source audit comparing 8 terminal agent harnesses against IDE extensions, surveying 2026 MCP/ACP standardization, diff safety, and Unix composability."
     },
     {
       "path": "_posts/2026/02/2026-02-04-awesome-claude-skills.md",
