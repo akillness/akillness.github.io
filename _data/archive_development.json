@@ -249,9 +249,9 @@
       "links_at_intake": 4,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Re-read the pinned community card and 20-response benchmark; separated reported comparisons from inspectable outputs; reproduced a syntax failure in a response scored 10/10."
     },
     {
       "path": "_posts/2026/04/2026-04-30-15-repos-for-faster-llm-serving.md",

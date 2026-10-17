@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 390" role="img" aria-labelledby="title desc">
+  <title id="title">A perfect quick-bench code score fails a syntax check</title>
+  <desc id="desc">The pinned result contains 20 prompts. The code_01_algorithm response scores 10 out of 10, but Python's syntax parser reports an error at line 92.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 10 5 0 10z" fill="#9bd8ff"/>
+    </marker>
+  </defs>
+  <g font-family="system-ui, -apple-system, Segoe UI, sans-serif" text-anchor="middle">
+    <text x="600" y="48" fill="#102a43" font-size="27" font-weight="700">A score is only as strong as its check</text>
+    <rect x="45" y="100" width="240" height="170" rx="18" fill="#17324d"/>
+    <text x="165" y="150" fill="#9bd8ff" font-size="18" font-weight="700">PINNED BENCH</text>
+    <text x="165" y="198" fill="#ffffff" font-size="36" font-weight="700">20 prompts</text>
+    <text x="165" y="235" fill="#d8e7f3" font-size="17">one candidate response set</text>
+
+    <path d="M292 185h62" stroke="#4b6f8e" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="365" y="100" width="240" height="170" rx="18" fill="#17324d"/>
+    <text x="485" y="150" fill="#9bd8ff" font-size="18" font-weight="700">CODE_01_ALGORITHM</text>
+    <text x="485" y="201" fill="#ffffff" font-size="42" font-weight="700">10 / 10</text>
+    <text x="485" y="238" fill="#d8e7f3" font-size="17">length · keywords · rubric</text>
+
+    <path d="M612 185h62" stroke="#4b6f8e" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="685" y="100" width="220" height="170" rx="18" fill="#7a2e2e"/>
+    <text x="795" y="150" fill="#ffcfbf" font-size="18" font-weight="700">PYTHON 3 AST.PARSE</text>
+    <text x="795" y="201" fill="#ffffff" font-size="35" font-weight="700">SyntaxError</text>
+    <text x="795" y="238" fill="#ffe6de" font-size="17">generated-code line 92</text>
+
+    <path d="M912 185h62" stroke="#4b6f8e" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="985" y="100" width="170" height="170" rx="18" fill="#17324d"/>
+    <text x="1070" y="153" fill="#9bd8ff" font-size="18" font-weight="700">WHAT IT MEANS</text>
+    <text x="1070" y="198" fill="#ffffff" font-size="23" font-weight="700">score ≠</text>
+    <text x="1070" y="230" fill="#ffffff" font-size="23" font-weight="700">runnable code</text>
+
+    <text x="600" y="330" fill="#334e68" font-size="18">One answer disproves a syntax-quality inference; it does not rank the model.</text>
+  </g>
+</svg>

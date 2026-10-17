@@ -1,240 +1,82 @@
 ---
 published: true
-title: "SuperGemma4: A Faster, Sharper Gemma 4 for Local Agent Workloads"
-description: "A practical review of SuperGemma4, the Apple Silicon MLX-tuned Gemma 4 26B variant that improves coding, logic, browser tasks, Korean prompts, and local agent responsiveness."
-categories: [AI, Local-LLM, Developer-Tools]
-tags: [supergemma4, gemma4, mlx, apple-silicon, Local-LLM, agents, korean, coding, hugging-face]
+title: "SuperGemma4's Perfect Code Score Misses a Syntax Error"
+description: "A pinned audit of SuperGemma4's 20-prompt quick bench finds one 10/10 code answer Python cannot parse, while baseline gains remain unreproducible."
+categories: [AI, Agents]
+tags: [supergemma4, gemma-4, local-llm, mlx, benchmark-audit, code-evaluation, apple-silicon]
 date: 2026-04-15 09:00:00 +0900
-pin: false
-mermaid: false
-math: false
+last_modified_at: "2026-10-17 22:30:48 +0900"
+archive_developed: 2026-10-17
+archive_development_note: "I re-read the pinned community model card and 20-response quick bench, separated reported comparisons from inspectable outputs, and reproduced a syntax failure in a response scored 10/10."
 image:
-  path: "https://cdn-thumbnails.huggingface.co/social-thumbnails/models/Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2.png"
-  alt: "SuperGemma4 model card social preview"
-ads: false
-restored_archive: "2026-10-12"
+  path: /assets/img/posts/2026-04-15-supergemma4-local-agent-workloads/supergemma4-benchmark-audit.svg
+  alt: "A 10 out of 10 code response from a 20-prompt benchmark fails Python syntax parsing."
 ---
 
-## 🤔 Curiosity: What if the best local Gemma 4 experience is not the official one, but the one tuned for actual agent work?
+## What does a 95.8 quick-bench score establish?
 
-A lot of open-weight model releases still hide the real trade-off.
+The April note treated SuperGemma4's published score and throughput as evidence of a sharper, faster local model for agent work. I re-read the model card and pinned its benchmark files to repository revision `1ecb7582718b813fc4c7b5c3131b2b7053787f00`. The public files support a narrower conclusion: the publisher reports a small quick-bench result, but the visible artifacts do not reproduce the comparison with the stated Gemma 4 baseline. One answer scored 10/10 even though Python cannot parse its code.
 
-You get the official checkpoint, the benchmark slide, the multimodal headline, and the usual language about capability. Then you actually try to use it locally and discover the more important questions:
+This is an answer-level audit finding. A syntax check cannot measure reasoning, and one broken answer cannot predict every response. The score should be read alongside the checks that produced it.
 
-- Does it feel fast enough to stay in the loop?
-- Does it survive code generation and tool-style prompting?
-- Does it hold up in Korean, not just English?
-- Does it stay useful when you push it through browser tasks, planning, and agent workflows?
+## What changed since the April note?
 
-That is why SuperGemma4 is more interesting than a normal fine-tune announcement.
+SuperGemma4 is Jiunsong's community checkpoint, not a model published by Google. Its model card declares Google's `gemma-4-26B-A4B-it` as the base and describes an MLX 4-bit, text-only line. The pinned repository config has `vision_config: null`, and its weight index maps tensors under `language_model`. Those files describe the checkpoint's published configuration; they do not establish how it was trained or what an unlisted runtime might support.
 
-This release is based on Google’s Gemma 4 26B IT, but the pitch is much more practical than abstract. The author is not claiming a brand-new foundation model. The claim is simpler and, honestly, more valuable for builders: this version is faster on the same Apple Silicon machine, stronger on real local tasks, and still stable while preserving its uncensored identity.
+Google's Gemma 4 documentation lists the 26B A4B model as an official variant and describes image input for the family. The derivative's narrower configuration is therefore relevant when choosing it for local work, but it is not evidence that Google released or evaluated SuperGemma4. The community repository's visible files do not include a training recipe, dataset, or training script, so the adaptation method remains unknown.
 
-That matters because local model users do not need another generic “open model is amazing” headline. They need a model that can actually sit inside their workflow and not become the bottleneck.
+The Hugging Face API response retrieved on October 17 returned revision `1ecb7582718b813fc4c7b5c3131b2b7053787f00`. Its `createdAt` field reports that the repository was created on April 10; `lastModified` reports April 12. These are repository metadata fields, not dates for creating the pinned revision. This is a point-in-time observation and may change later.
 
----
+## What the public quick bench records
 
-## 📚 Retrieve: What SuperGemma4 is actually shipping
+The model card reports an overall quick-bench score of 95.8 versus 91.4 for its stated Gemma 4 baseline, and average generation speed of 46.2 versus 42.5 tokens per second. The pinned result file contains one `supergemma-fast` run with 20 SuperGemma4 responses: six Code, four Browser, three Logic, four System Design, and three Korean.
 
-According to the Hugging Face model card, `Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2` is:
+| Published claim | What the pinned files contain | What remains unverified |
+| --- | --- | --- |
+| Overall score: 95.8 vs. 91.4 | One 20-prompt SuperGemma4 result at 95.8 | No paired baseline responses or run record to reproduce 91.4 |
+| Speed: 46.2 vs. 42.5 tokens/sec | A candidate average of 46.2 tokens/sec | Hardware, MLX version, generation settings, warm-up, repeats, and baseline measurement |
+| Code: 98.6 vs. 92.3 | Six code prompts and recorded rubric fields | No visible scoring script or evidence that generated code was executed |
+| Browser: 89.6 vs. 87.5 | Four text responses to browser-task prompts | The public files show no browser execution, page actions, or success trace |
 
-- based on `google/gemma-4-26B-A4B-it`
-- released in MLX 4-bit format
-- sized for roughly 13 GB locally
-- tuned for Apple Silicon workloads
-- positioned as a fast text-only flagship rather than a multimodal model
+The JSONL makes one scoring boundary visible. For `code_01_algorithm`, it records `score=10.0` and marks length, keyword, completeness, code-presence, and code-quality checks as passed. It does not show an interpreter or test suite running the answer. “Browser” describes the prompts in this artifact; the public files do not show whether a browser was operated outside the recorded run.
 
-The model card’s framing is direct: this is the version to run if you want the fast line instead of the multimodal line.
+## A perfect code score misses a Python syntax error
 
-### Headline numbers
+I extracted the first Python code block from the pinned `code_01_algorithm` response and passed it to Python 3's `ast.parse`. Parsing fails with `SyntaxError: invalid syntax` at generated-code line 92, which contains `assert trie ever_exists := trie.search("app") is False`. The same response is scored 10/10 and receives 3/3 for `code_quality` in the JSONL.
 
-The strongest part of the release is that the gains are not limited to one cherry-picked metric.
+This is a counterexample to reading that rubric as proof of runnable Python. It does not show that every answer fails or that the model is worse than its base. The pinned files define no refusal-evaluation protocol or separate refusal score. The 20-response set cannot independently establish the model card's “uncensored” label. The checks here establish only what they directly test: the reported fields and the syntax of this one answer.
 
-- Quick bench overall: `91.4 → 95.8` (`+4.4`)
-- Average generation speed: `42.5 tok/s → 46.2 tok/s` (`+8.7%`)
+![The pinned response scores 10 out of 10, but Python's syntax parser rejects its first code block.](/assets/img/posts/2026-04-15-supergemma4-local-agent-workloads/supergemma4-benchmark-audit.svg){: .w-100 .shadow .rounded-10 }
 
-And the category gains line up with the tasks that usually determine whether a local assistant is actually usable:
+_Figure 1. The response artifact reports a perfect rubric score; Python rejects the code at line 92. This is one answer-level check, not a model ranking._
 
-- Code: `92.3 → 98.6` (`+6.3`)
-- Browser: `87.5 → 89.6` (`+2.1`)
-- Logic: `86.9 → 95.2` (`+8.3`)
-- System Design: `97.8 → 98.9` (`+1.1`)
-- Korean: `90.7 → 95.0` (`+4.3`)
+## What a reproducible local comparison would need
 
-That distribution is what makes the release notable.
+A useful A/B test would pin both the Gemma 4 baseline and SuperGemma4 revisions, record the Mac model and memory, macOS and MLX versions, and hold the chat template, prompt set, sampling settings, and token limit constant. It would publish raw outputs for both models and the scoring script. Code prompts should run syntax checks and task tests. Browser prompts should record actual browser actions and their outcomes. Throughput should be repeated after warm-up with prompt and generated-token counts reported.
 
-This is not just a claim that the model became “better” in some vague leaderboard sense. It claims improvements exactly where local agent systems tend to get exposed:
+Those controls would help separate a fast local serving setup from a model improvement, and a plausible answer from one that survives execution. For the serving-side trade-off, see [how oMLX schedules model residency and interactive latency](/posts/omlx-metal-residency/). For a broader map of local inference components, see [the audit of 15 repositories for faster LLM serving](/posts/15-repos-for-faster-llm-serving/).
 
-- writing and refactoring code,
-- following multi-step instructions,
-- handling browser/tool-oriented prompts,
-- producing coherent Korean outputs,
-- and staying responsive enough to keep humans in the loop.
+## Key Takeaways
 
-### Why the “fast” identity matters
+| Finding | Practical reading |
+| --- | --- |
+| SuperGemma4 is Jiunsong's text-only MLX adaptation of Google's Gemma 4 26B A4B IT | Treat the publisher and base model as separate identities |
+| The public quick bench contains 20 candidate responses, not paired baseline artifacts | Its stated score and speed deltas remain publisher-reported |
+| One response scored 10/10 but fails Python syntax parsing | The visible rubric does not establish runnable-code reliability |
+| Browser tasks are text outputs in the inspected files | Do not read the category score as an observed browser-success rate |
 
-The model card explicitly says this is the fast text-only line.
+## New Questions
 
-That is a smart product decision.
+Will a future revision publish paired baseline outputs, a pinned evaluation script, machine details, and executable task checks? Until then, the careful conclusion is that SuperGemma4 has an interesting publisher-reported quick bench; the public evidence does not establish that it is faster or more reliable for local agents.
 
-For many local workflows, especially on Apple Silicon, lower latency is not just a nice optimization. It changes whether the model feels deployable. A model that answers well but takes too long gets removed from the loop. A model that responds faster, even with only a modest speed gain on paper, often feels dramatically better in daily use.
+## References
 
-### Recommended serving path
+### Primary sources
 
-The model card recommends a very simple launch path:
-
-```bash
-mlx_lm.server \
-  --model Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2 \
-  --port 8080
-```
-
-The important operational note is that `mlx_lm.server` should auto-detect the bundled chat template. The author explicitly warns against passing a literal `--chat-template` path in the wrong launch flow, because that can corrupt responses.
-
-That detail is more important than it looks.
-
-A lot of local-model complaints get blamed on weights when the actual issue is serving configuration. Here, the model card is unusually explicit about the difference.
-
-### Quick local test
-
-The model card also provides a simple generation example:
-
-```bash
-mlx_lm.generate \
-  --model Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2 \
-  --prompt "Write a Python function that returns prime numbers up to n." \
-  --max-tokens 512
-```
-
-If you want to treat it like a local OpenAI-compatible model inside a tool loop, the client shape is straightforward:
-
-```python
-from openai import OpenAI
-
-client = OpenAI(base_url="http://127.0.0.1:8080/v1", api_key="not-needed")
-
-resp = client.chat.completions.create(
-    model="Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2",
-    messages=[
-        {"role": "system", "content": "You are a concise coding and automation assistant."},
-        {"role": "user", "content": "Write a Python function that returns prime numbers up to n."}
-    ],
-    temperature=0.2,
-)
-
-print(resp.choices[0].message.content)
-```
-
-That matters because a local model becomes much more useful once it can drop into an existing OpenAI-style app stack without custom glue everywhere.
-
----
-
-## 🖼️ Source Images
-
-### Hugging Face social preview
-
-![SuperGemma4 social preview](https://cdn-thumbnails.huggingface.co/social-thumbnails/models/Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2.png)
-
-This image is not just decorative. It points to the actual release artifact and keeps the post anchored to the official source rather than only to a secondary summary.
-
----
-
-## 💡 Innovation: Why SuperGemma4 matters for local AI builders
-
-What makes SuperGemma4 interesting is not just that it is uncensored.
-
-Plenty of “uncensored” models exist. Many of them are unstable, noisy, or only good at generating the kind of outputs that make for viral screenshots but not reliable workflows.
-
-The stronger claim here is different:
-
-> preserve uncensored behavior without sacrificing coding, tool use, logic, browser prompts, or Korean stability.
-
-If that holds up in broader usage, that is a better direction for local open models.
-
-### 1) This is a model shaped around real local agent workloads
-
-Imagine a small assistant running on a Mac mini or MacBook that needs to:
-
-1. read a bug report,
-2. propose a fix plan,
-3. generate a patch,
-4. write a browser automation step,
-5. summarize results for the user in Korean.
-
-That workflow does not primarily reward flashy multimodal branding. It rewards:
-
-- responsiveness,
-- clean structured outputs,
-- strong coding behavior,
-- stable multi-step reasoning,
-- and good multilingual prompt handling.
-
-SuperGemma4’s published gains line up almost perfectly with that workload profile.
-
-### 2) The Korean improvement is more important than it looks
-
-A lot of open models technically support Korean. Fewer feel natural under real prompting pressure.
-
-What users actually notice is not whether a model can answer one Korean question. They notice whether it:
-
-- keeps the structure clean,
-- avoids weird mixed-language drift,
-- follows detailed instructions,
-- and stays coherent across longer turns.
-
-A move from `90.7` to `95.0` in the Korean category may not sound dramatic to casual readers, but for bilingual users it can be the difference between “interesting local demo” and “daily driver candidate.”
-
-### 3) The speed gain changes orchestration behavior
-
-The raw throughput change from `42.5 tok/s` to `46.2 tok/s` is not a miracle jump. But in agent loops, even moderate speed improvements compound quickly.
-
-If you have a workflow that performs repeated:
-
-- planning,
-- code generation,
-- tool correction,
-- browser-step reasoning,
-- and summarization,
-
-then a modest speed increase across every turn reduces waiting, iteration drag, and the temptation to switch back to a remote API.
-
-In other words, speed is not just a benchmark number. It changes product ergonomics.
-
-### 4) The best local models may become narrower and better
-
-One of the strongest implications of releases like this is that not every local model needs to be “everything.”
-
-A text-first, latency-aware, Apple-Silicon-tuned model with better code, logic, browser, and Korean performance may be more valuable than a heavier model that does more things less reliably.
-
-That is especially true for:
-
-- local coding assistants,
-- browser automation agents,
-- private enterprise copilots,
-- bilingual tooling,
-- and always-on desktop agents.
-
-That is why I think SuperGemma4 is not just another model upload. It represents a healthier optimization target for local AI: less benchmark theater, more practical capability per machine.
-
----
-
-## Final Thoughts
-
-If I were choosing a local model for an Apple Silicon agent stack today, I would care less about whether it can do everything and more about whether it can do recurring work well:
-
-- answer quickly,
-- write code reliably,
-- survive tool-style prompting,
-- reason through steps,
-- and handle Korean without falling apart.
-
-SuperGemma4 looks like a model built around exactly that priority.
-
-That makes it more interesting than a generic release note, and more useful than a lot of louder model launches.
-
----
-
-## Sources
-
-- GeekNews summary: https://news.hada.io/topic?id=28584
-- Official Hugging Face model card: https://huggingface.co/Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2
+- [The pinned repository file tree](https://huggingface.co/Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2/tree/1ecb7582718b813fc4c7b5c3131b2b7053787f00), inspected for the published files and training-material limits (read 2026-10-17).
+- [Jiunsong's SuperGemma4 model card and serving instructions](https://huggingface.co/Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2/blob/1ecb7582718b813fc4c7b5c3131b2b7053787f00/README.md), revision `1ecb7582718b813fc4c7b5c3131b2b7053787f00` (read 2026-10-17).
+- [The 20-prompt quick-bench result](https://huggingface.co/Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2/blob/1ecb7582718b813fc4c7b5c3131b2b7053787f00/benchmark_quick_bench_20260412.json), same revision (read 2026-10-17).
+- [Raw quick-bench responses](https://huggingface.co/Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2/blob/1ecb7582718b813fc4c7b5c3131b2b7053787f00/benchmark_quick_bench_20260412_responses.jsonl), same revision (read 2026-10-17).
+- [The derivative's pinned config.json](https://huggingface.co/Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2/blob/1ecb7582718b813fc4c7b5c3131b2b7053787f00/config.json) and [model.safetensors.index.json](https://huggingface.co/Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2/blob/1ecb7582718b813fc4c7b5c3131b2b7053787f00/model.safetensors.index.json), same revision (read 2026-10-17).
+- [Hugging Face model metadata](https://huggingface.co/api/models/Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2), retrieved 2026-10-17; `createdAt` is repository creation time.
+- [Google's Gemma 4 model card](https://ai.google.dev/gemma/docs/core/model_card_4) and [release history](https://ai.google.dev/gemma/docs/releases), read 2026-10-17.
