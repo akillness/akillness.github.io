@@ -348,9 +348,9 @@
       "links_at_intake": 21,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Re-read Oct 17 upstream ingest, reconcile, and MCP implementation; a temporary vault with rewrite_policy=confirm still accepted replace_text, so this article replaces the unsupported self-rewriting overview with a path-specific approval audit."
     },
     {
       "path": "_posts/2026/07/2026-07-09-fable-5-self-improving-agent-system.md",
