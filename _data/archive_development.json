@@ -404,9 +404,9 @@
       "links_at_intake": 18,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt from the August 2026 note into an original Source Audit on local-first AI operators, headless Unity build pipelines, artifact verification, and store delivery."
     },
     {
       "path": "_posts/2026-08-17-superlog-agentic-telemetry.md",
