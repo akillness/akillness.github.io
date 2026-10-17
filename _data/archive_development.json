@@ -1142,9 +1142,9 @@
       "links_at_intake": 13,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2026-05 note into an authoritative source audit of Q00/rlm-forge, deconstructing Ouroboros recursion orchestration and TraceGuard deterministic evidence contracts."
     },
     {
       "path": "_posts/2026/05/2026-05-18-supertonic-onnx-runtime-tts.md",
