@@ -876,9 +876,9 @@
       "links_at_intake": 10,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Source audit examining open-source agent skill survival criteria, deconstructing Superpowers, Humanizer, UI-UX Pro Max, and Vercel Skills CLI against 2026 standards."
     },
     {
       "path": "_posts/2026/02/2026-02-07-lightrag.md",
