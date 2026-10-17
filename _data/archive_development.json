@@ -554,9 +554,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt from the 2025-11 note into an empirical Source Audit. Replaced generic shallow-vs-deep marketing terminology with formal state machine transitions, bounded delegation boundaries, and pinned 2026 research citations."
     },
     {
       "path": "_posts/2025/11/2025-11-16-stormparse-vs-googleapi.md",
