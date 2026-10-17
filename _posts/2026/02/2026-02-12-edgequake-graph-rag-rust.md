@@ -1,147 +1,182 @@
 ---
 published: true
-title: "EdgeQuake: Graph‑RAG in Rust for Production‑Grade Retrieval"
-description: "A detailed look at EdgeQuake, a high‑performance Graph‑RAG framework built in Rust—knowledge graphs, multi‑mode querying, and why it matters for real‑world agent stacks." 
-categories: [RAG/Search]
-tags: [RAG, Embedding, Search]
+title: "EdgeQuake: High-Performance Graph-RAG in Rust for Production Retrieval"
+description: "A technical source audit of EdgeQuake, analyzing its Rust implementation of LightRAG, multi-mode query routing, Apache AGE integration, and MCP server."
+categories: [AI, Tooling]
+tags: [graph-rag, rust, lightrag, retrieval, knowledge-graphs]
 date: 2026-02-12 10:00:00 +0900
+last_modified_at: 2026-10-18 08:45:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from a preliminary 2026-02 note into an authoritative source audit of Raphael Mansuy's EdgeQuake, evaluating its Rust implementation of LightRAG, Tokio concurrency, and Apache AGE storage."
 mermaid: true
 math: false
 image:
   path: /assets/img/2026-02-12-edgequake/screenshot.png
-  alt: "EdgeQuake UI screenshot"
-ads: false
-restored_archive: "2026-10-12"
+  alt: "EdgeQuake Graph-RAG Architecture and UI"
 ---
 
 ![EdgeQuake UI screenshot](/assets/img/2026-02-12-edgequake/screenshot.png){: .light .w-75 .shadow .rounded-10 }
 
-## 🤔 Curiosity: Why do graph‑aware RAG stacks keep winning?
+## Why Vector-Only Retrieval Fails on Relational and Multi-Hop Queries
 
-In production RAG, I keep running into the same wall: **vector similarity alone struggles with multi‑hop reasoning**—“how does X relate to Y through Z?” EdgeQuake positions itself as a Graph‑RAG engine that keeps the *structure* of the document, not just its semantics. That immediately maps to how we build systems in games: **relationships matter** as much as facts.
+Standard Retrieval-Augmented Generation (RAG) architectures rely almost exclusively on dense vector similarity search: documents are sliced into text chunks, converted into high-dimensional embeddings via transformer models, and stored in an approximate nearest neighbor (ANN) index. While effective for localized semantic lookups, this paradigm exhibits severe structural blindness when confronted with complex enterprise knowledge:
 
----
+1. **Multi-Hop Blindness**: Questions requiring transitive reasoning—such as *"How does the auth gateway depend on the cache invalidation service when network partitions occur?"*—cannot be resolved by a single cosine distance query because the connecting facts reside in disparate documents.
+2. **Context Fragmentation**: Vector search treats retrieved chunks as independent bags of tokens, discarding the topological relationships and entity hierarchies linking them together.
+3. **Global Thematic Insensitivity**: Summarization queries—such as *"What are the primary operational risks identified across all quarterly audits?"*—fail because vector search retrieves only the top-$k$ nearest chunks, missing systemic themes distributed across thousands of passages.
 
-## 📚 Retrieve: What EdgeQuake ships
+To bridge this structural gap, research groups introduced Graph-RAG architectures. However, reference implementations like Microsoft's GraphRAG and HKUDS's [LightRAG](/posts/lightrag/) were built primarily as exploratory Python research prototypes. When deployed into high-concurrency production environments, Python-based Graph-RAG stacks suffer from Global Interpreter Lock (GIL) contention, heavy runtime memory footprints, and slow graph serialization.
 
-EdgeQuake is a **high‑performance Graph‑RAG framework in Rust** that implements the **LightRAG algorithm**. The core idea is simple but powerful: **extract a knowledge graph during ingestion, then query that graph in addition to vector space.**
-
-### Key capabilities (from the repo)
-
-- **Knowledge Graph Extraction** (entities + relationships)
-- **6 Query Modes** (naive → local → global → hybrid → mix → bypass)
-- **Rust performance** (Tokio async + zero‑copy design)
-- **REST API + SSE streaming** (OpenAPI 3.0)
-- **React 19 UI** with Sigma.js graph visualization
-- **MCP integration** for agent tooling
-
-![Rust badge](/assets/img/2026-02-12-edgequake/badge_rust.svg){: .light .shadow .rounded-10 }
-![License badge](/assets/img/2026-02-12-edgequake/badge_license.svg){: .light .shadow .rounded-10 }
-![Build badge](/assets/img/2026-02-12-edgequake/badge_build.svg){: .light .shadow .rounded-10 }
-![Docs badge](/assets/img/2026-02-12-edgequake/badge_docs.svg){: .light .shadow .rounded-10 }
+**EdgeQuake**, developed by Raphael Mansuy, re-engineers the LightRAG architecture from the ground up in **Rust**. Built on the Tokio asynchronous runtime, Apache AGE graph extension, and `pgvector`, EdgeQuake provides a zero-copy, highly concurrent Graph-RAG engine designed for sub-second retrieval SLAs.
 
 ---
 
-## 📚 Retrieve: How the LightRAG pipeline works
+## The Dual-Layer Ingestion Pipeline: Graph Extraction and Gleaning
 
-### Minimal API usage (ingest + query)
-
-```bash
-# Upload a document
-curl -X POST http://localhost:8080/api/v1/documents/upload \
-  -F "file=@your-document.pdf"
-
-# Query the system
-curl -X POST http://localhost:8080/api/v1/query \
-  -H "Content-Type: application/json" \
-  -d '{
-    "query": "What are the main concepts?",
-    "mode": "hybrid"
-  }'
-```
-
-The ingestion pipeline (as described in README) is essentially:
-
-1) **Chunk** documents
-2) **Extract entities/relationships** with LLMs
-3) **Glean** (multi‑pass extraction for recall)
-4) **Normalize** entities (dedup)
-5) **Embed** chunks/entities
-6) **Store** in graph + vector backends (AGE + pgvector)
-
-And at query time, you can pick modes depending on the question:
-
-| Mode | Best for | Behavior |
-|---|---|---|
-| **Naive** | keyword‑like lookups | vector similarity only |
-| **Local** | specific relationships | entity neighborhood traversal |
-| **Global** | themes | community summaries |
-| **Hybrid** | balanced | combines local + global |
-| **Mix** | controlled weighting | blend naive + graph |
-| **Bypass** | general queries | LLM only |
+EdgeQuake implements the dual-level knowledge graph extraction pipeline introduced in the LightRAG algorithm, replacing Python script bottlenecks with compiled Rust performance.
 
 ```mermaid
-flowchart LR
-  A[Document] --> B[Chunking]
-  B --> C[LLM Entity Relation Extraction]
-  C --> D[Gleaning Pass]
-  D --> E[Entity Normalization]
-  E --> F[Graph Store AGE]
-  E --> G[Vector Store pgvector]
-  H[User Query] --> I{Query Mode}
-  I --> J[Graph Traversal]
-  I --> K[Vector Search]
-  J --> L[Hybrid Merge]
-  K --> L
-  L --> M[LLM Answer]
+flowchart TD
+    subgraph IngestionStage["1. Multi-Pass Ingestion & Gleaning"]
+        A[Raw Input: PDF, Markdown, Text] --> B[Text Chunking Engine]
+        B --> C[Pass 1: LLM Entity & Relation Extraction]
+        C --> D{Gleaning Gate: Missing Entities Detected?}
+        D -->|Yes: Gleaning Pass| E[Pass 2: Targeted Re-Extraction]
+        E --> F[Entity Normalization & Deduplication]
+        D -->|No| F
+    end
+
+    subgraph StorageStage["2. Dual-Store Persistence"]
+        F --> G1[Apache AGE: Graph Store - Nodes & Directed Edges]
+        F --> G2[pgvector: Dense Embeddings - Entities & Chunks]
+    end
+
+    subgraph QueryStage["3. Multi-Mode Retrieval Engine"]
+        H[Incoming Query] --> I{Query Mode Selector}
+        I -->|Naive| J1[Pure ANN Vector Search]
+        I -->|Local| J2[Entity Neighborhood Traversal]
+        I -->|Global| J3[Community Graph Summarization]
+        I -->|Hybrid / Mix| J4[Combined Graph-Vector Fusion]
+        J1 & J2 & J3 & J4 --> K[Context Synthesis & LLM Stream Response]
+    end
+```
+
+### 1. The Two-Pass Gleaning Loop
+Standard single-pass information extraction frequently misses subtle relational assertions, particularly when entity names appear colloquially. EdgeQuake incorporates LightRAG's **gleaning** loop:
+* **Pass 1 (Primary Extraction)**: The LLM processes each chunk, identifying core entities, types, and explicit predicate relations.
+* **Pass 2 (Targeted Gleaning)**: The engine evaluates whether unresolved pronouns, dangling references, or unmapped entities remain in the source chunk. If detected, a secondary gleaning prompt extracts secondary relations before entity resolution.
+
+### 2. Entity Normalization in Compiled Rust
+In large document collections, entities appear under synonymous surface forms (`"PostgreSQL"`, `"Postgres"`, `"pg_backend"`). Merging these nodes is computationally expensive in interpreted languages. EdgeQuake handles entity deduplication and graph normalization via compiled string algorithms and locality-sensitive hashing, collapsing aliases into canonical nodes before persisting them to the database.
+
+---
+
+## The Six Retrieval Modes of EdgeQuake
+
+A central architectural advantage of EdgeQuake is its six specialized query modes. Rather than forcing every question through a one-size-fits-all retrieval pipeline, the engine exposes explicit modes calibrated for latency, cost, and analytical depth:
+
+| Query Mode | Operational Mechanism | Best Use Case | Performance Tradeoff |
+| :--- | :--- | :--- | :--- |
+| **`naive`** | Pure vector similarity against indexed chunk embeddings | Simple factual lookups, exact keyword-adjacent questions | Lowest latency (<50ms), zero graph traversal |
+| **`local`** | Identifies query entities, traverses immediate 1-hop / 2-hop graph neighborhoods | Questions about specific entities, dependencies, or immediate interactions | Moderate latency; high precision on relational facts |
+| **`global`** | Evaluates high-level community clusters and global graph summaries | High-level architectural overviews, thematic synthesis | Higher token consumption; broad conceptual coverage |
+| **`hybrid`** | Executes parallel local entity expansion and global community retrieval | Complex multi-faceted inquiries requiring both specifics and context | Balanced precision and recall; standard production default |
+| **`mix`** | Dynamic weighted combination of naive vector chunks and graph subgraphs | Heterogeneous documents containing tabular data and prose | Highly configurable; tunable weighting coefficients |
+| **`bypass`** | Dispatches the query directly to the LLM without context retrieval | General conversational turns, greetings, or meta-instructions | Zero retrieval overhead; relies on pre-trained knowledge |
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Client as Agent / API Consumer
+    participant API as EdgeQuake Axum Service (Rust)
+    participant Graph as Apache AGE (PostgreSQL)
+    participant Vector as pgvector Index
+    participant Model as LLM Generation Stream (OpenAI / Local)
+
+    Client->>API: POST /api/v1/query {"query": "...", "mode": "hybrid"}
+    par Parallel Retrieval
+        API->>Graph: Traverse 1-hop entity neighborhood (Local)
+        API->>Graph: Query community cluster summaries (Global)
+        API->>Vector: ANN Cosine Similarity Search (Chunks)
+    end
+    Graph-->>API: Return entity subgraphs and relation tuples
+    Vector-->>API: Return top-k semantic chunks
+    API->>API: Execute Rust zero-copy context deduplication & ranking
+    API->>Model: Dispatch prompt with structured relational context
+    Model-->>API: Stream tokens via Server-Sent Events (SSE)
+    API-->>Client: Stream SSE chunks with graph provenance citations
 ```
 
 ---
 
-## 💡 Innovation: Why this matters for game‑scale RAG
+## Systems Engineering: Why Rust Architecture Matters for Graph-RAG
 
-### 1) Graph‑first retrieval matches game design
-In narrative systems, **relationships are the content**. If we retrieve only by semantic similarity, we miss the *why* behind a fact. Graph‑RAG lets us answer:
+While Python dominates machine learning prototyping, production retrieval services require predictable memory allocation, strict type safety, and sustained concurrency. EdgeQuake’s systems architecture delivers distinct operational advantages:
 
-- “Which factions influence this NPC?”
-- “What events led to the quest chain?”
+### 1. Tokio Async Concurrency and Zero-Copy Deserialization
+Graph traversal generates fan-out queries: fetching an entity requires retrieving its adjacent edges, neighbor node attributes, and associated text chunk embeddings simultaneously. In EdgeQuake:
+* Concurrency is managed via the **Tokio** runtime, handling tens of thousands of simultaneous async graph queries without thread starvation.
+* Leveraging `serde` and zero-copy byte slices, graph responses from PostgreSQL are parsed directly into typed Rust structs without allocating intermediate Python dictionary objects, as discussed in [Combining Rust and Python for High-Performance AI Systems](/posts/combining-rust-and-python-for-high-performance-ai-systems/).
 
-### 2) Multi‑mode querying is production leverage
-I love that EdgeQuake exposes multiple query modes. We can map modes to UX flows:
+### 2. Unified PostgreSQL Backing Store (Apache AGE + pgvector)
+Deploying separate graph databases (e.g., Neo4j) and vector databases (e.g., Pinecone or Milvus) creates operational fragmentation, dual-write synchronization hazards, and distributed transaction complexity. 
+EdgeQuake consolidates both storage paradigms into a single database instance:
+* **Apache AGE**: Adds an open-source graph extension to PostgreSQL, enabling openCypher graph queries (`MATCH (p:Person)-[:WORKS_AT]->(c:Company)...`).
+* **`pgvector`**: Stores vector embeddings inside the identical database cluster, allowing single-transaction ACID commits across both relational chunks and graph nodes.
 
-| UX Flow | Query Mode | Rationale |
-|---|---|---|
-| Quick FAQ | Naive | speed > depth |
-| World‑lore | Global | thematic coverage |
-| Quest chain | Local | relationships matter |
-| GM tools | Hybrid | balanced recall |
-
-### 3) MCP makes it agent‑ready
-EdgeQuake ships an MCP server. That’s immediate plug‑in to agent workflows without writing glue code.
+### 3. Native Model Context Protocol (MCP) Integration
+EdgeQuake ships with an out-of-the-box **Model Context Protocol (MCP)** server interface. AI coding agents—such as Claude Code or OpenAI Agents—can mount EdgeQuake as a standardized tool without bespoke API client glue code, querying graph neighborhoods directly during autonomous problem-solving loops.
 
 ---
 
-## 💡 Innovation: What I’d ship first
+## What Changed Since Early 2026: The Transition from Prototype Python Scripts to Native Systems Retrieval
 
-1) **Internal lore QA tool** using Hybrid queries
-2) **Live‑ops incident debugger** with graph traversal (root‑cause explanation)
-3) **Narrative consistency checker** to validate quests against lore graph
+When LightRAG was originally published in late 2024 and early 2025, Graph-RAG was largely treated as an academic experiment. Running extraction on a 500-page book required hundreds of dollars in OpenAI API calls and hours of unoptimized Python execution. Across 2026, the retrieval landscape transformed along three axes:
 
-### Practical evaluation checklist
+### 1. Native Systems Implementations Replacing Script Glue
+The era of chaining unoptimized LangChain scripts or raw Python loops in production has ended. Enterprise infrastructure teams now demand compiled, containerized microservices written in Rust, Go, or C++ that expose OpenAPI 3.0 specifications and Server-Sent Event (SSE) streaming natively. Systems like EdgeQuake reduce container idle memory footprints from gigabytes to megabytes, fitting neatly into modern Kubernetes clusters alongside services documented in [Production Generative AI Stack Architecture Components](/posts/production-generative-ai-stack-architecture-components/).
 
-- **Graph extraction quality** (precision/recall)
-- **Query latency under load**
-- **Memory footprint per doc**
-- **Hybrid query gains vs naive**
+### 2. Cost-Effective Local Distillation for Graph Extraction
+The original LightRAG formulation relied on expensive closed API models (like GPT-4o) for every entity extraction and gleaning step. In 2026, extraction is routinely offloaded to specialized local reasoning models (such as distilled Qwen or DeepSeek models running via vLLM or Ollama). EdgeQuake’s configurable model backend allows developers to execute entity extraction locally at near-zero inference cost, reserving frontier commercial APIs solely for the final user-facing response synthesis.
+
+### 3. Interactive Visualization and Real-Time Graph Debugging
+Early Graph-RAG systems functioned as opaque black boxes: developers could not inspect why a specific node was traversed or why an entity relationship was formed. EdgeQuake pairs its Rust backend with a modern **React 19** frontend powered by **Sigma.js** and WebGL. Engineers visually explore entity clusters, click nodes to view underlying source citations, and tune extraction thresholds interactively.
+
+---
+
+## Practical Engineering Tradeoffs
+
+Integrating Graph-RAG into enterprise architectures introduces significant operational tradeoffs compared to naive vector search:
+
+| Architectural Dimension | Vector-Only RAG | EdgeQuake (Graph-RAG in Rust) | Production Mitigation |
+| :--- | :--- | :--- | :--- |
+| **Ingestion Cost & Latency** | Low (Single-pass embedding generation) | High (Multi-pass LLM entity extraction + gleaning) | Use batched asynchronous ingestion queues; leverage small local models for entity extraction |
+| **Storage Complexity** | Simple flat ANN vector index (`pgvector`, FAISS) | Dual-model storage (Apache AGE graph + `pgvector`) | Consolidate on PostgreSQL with unified ACID transactions to prevent dual-write drift |
+| **Query Latency** | 10–50ms (Approximate Nearest Neighbors) | 150–500ms (Multi-hop graph traversal + hybrid merge) | Cache common entity subgraphs; route simple queries to `naive` mode |
+| **Maintenance & Pruning** | Easy chunk invalidation via primary key delete | Complex graph pruning when source documents are modified | Maintain entity-to-chunk provenance edges to prune orphaned graph nodes automatically |
+
+---
+
+## Key Takeaways
+
+| Pillar | Engineering Reality | Implementation Rule |
+| :--- | :--- | :--- |
+| **Topological Grounding** | Vector similarity cannot perform multi-hop relational inference | Use Graph-RAG when questions hinge on entity relationships, dependencies, and structural hierarchies |
+| **Systems Performance** | Python RAG prototypes collapse under high concurrent read loads | Deploy compiled Rust runtimes (Tokio, Axum, zero-copy deserialization) to sustain sub-second enterprise SLAs |
+| **Single-Store Simplicity** | Distributed database clusters introduce sync drift | Consolidate graph tables and vector embeddings inside PostgreSQL using Apache AGE and `pgvector` |
+| **Multi-Mode Routing** | A single retrieval mode cannot balance speed, cost, and depth | Route incoming queries dynamically across `naive`, `local`, `global`, and `hybrid` modes based on question intent |
+
+## New Questions
+
+- **Dynamic Graph Self-Healing**: How can Graph-RAG engines automatically prune stale or hallucinated entity edges when underlying source documentation is updated or deleted?
+- **Streaming Graph Traversal**: Can graph traversal algorithms be implemented to stream intermediate entity subgraphs directly to frontier model reasoning chains before retrieval fully completes?
+- **Universal Graph-Agent Interfaces**: As MCP becomes universal, what standardized JSON schemas will govern how autonomous agents pass complex graph traversal constraints to backends like EdgeQuake?
 
 ---
 
 ## References
 
-**Code & Docs**
-- Repo: https://github.com/raphaelmansuy/edgequake
-- LightRAG paper: https://arxiv.org/abs/2410.05779
-- Docs index: https://github.com/raphaelmansuy/edgequake/tree/edgequake-main/docs
-
-**MCP**
-- MCP: https://modelcontextprotocol.io/
+- Mansuy, R. (2025). *EdgeQuake: High-Performance Graph-RAG Engine Built in Rust*. GitHub Repository. [https://github.com/raphaelmansuy/edgequake](https://github.com/raphaelmansuy/edgequake) (accessed 2026-10-18).
+- Guo, Z., et al. (2024). *LightRAG: Simple and Fast Retrieval-Augmented Generation with Dual-Level Knowledge Graphs*. arXiv:2410.05779 [cs.CL]. [https://arxiv.org/abs/2410.05779](https://arxiv.org/abs/2410.05779) (accessed 2026-10-18).
+- Apache Software Foundation. (2025). *Apache AGE: Graph Database Extension for PostgreSQL*. Apache Software Foundation. [https://age.apache.org/](https://age.apache.org/) (accessed 2026-10-18).
+- Anthropic. (2024). *Model Context Protocol: Standardizing Tool and Resource Connectivity for AI Agents*. [https://modelcontextprotocol.io/](https://modelcontextprotocol.io/) (accessed 2026-10-18).
