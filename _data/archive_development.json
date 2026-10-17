@@ -505,9 +505,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "retired",
+      "developed_at": "2026-10-17",
+      "survey_note": "Retired on October 17, 2026 after an independent audit of saved anonymous course-page responses and citation metadata. A specific author/link mismatch was confirmed, but neither that short correction nor the bounded attribution review established a distinct technical contribution. This historical URL is retained; the former walkthrough and unverified examples are not current guidance."
     },
     {
       "path": "_posts/2025/11/2025-11-16-ai-agents-memory-optimization.md",
