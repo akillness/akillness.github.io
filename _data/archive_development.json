@@ -638,9 +638,9 @@
       "links_at_intake": 20,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt from the 2025-11 note into a rigorous Source Audit on schema constraints, constrained decoding, and inter-agent interface contracts."
     },
     {
       "path": "_posts/2025/11/2025-11-22-llm-council-complete-architecture-analysis.md",
