@@ -764,9 +764,9 @@
       "links_at_intake": 24,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Source audit of Fareed Khan's all-agentic-architectures catalog, surveying 17 LangGraph patterns against 2026 production tradeoffs and harness engineering."
     },
     {
       "path": "_posts/2026/01/2026-01-20-prompt-repetition-improves-llm-performance.md",

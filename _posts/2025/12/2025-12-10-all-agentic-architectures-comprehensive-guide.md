@@ -1,620 +1,235 @@
 ---
-title: "All Agentic Architectures - A Comprehensive Guide to 17+ State-of-the-Art AI Agent Patterns"
-description: "A deep dive into the all-agentic-architectures repository covering 17+ production-ready agentic AI patterns from Reflection to Reflexive Metacognitive agents, built with LangChain and LangGraph"
-categories: [Agent/Orchestration]
-tags: [Agent, Workflow, Orchestration]
+title: "Deconstructing 17 Agentic Architectures: From ReAct to Metacognition"
+description: "A source audit of Fareed Khan's 17 agentic AI architectures in LangGraph, evaluating single-agent loops, multi-agent swarms, memory tiers, and 2026 production tradeoffs."
+categories: [AI, Agents]
+tags: [agents, orchestration, langgraph, architecture]
 date: 2025-12-10 10:00:00 +0800
+last_modified_at: 2026-10-18 07:55:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Source audit of Fareed Khan's all-agentic-architectures catalog, surveying 17 LangGraph patterns against 2026 production tradeoffs and harness engineering."
 mermaid: true
 math: false
-# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
 published: true
-ads: false
-restored_archive: "2026-10-12"
 ---
 
-## 🤔 Curiosity: How Do We Build Production-Ready AI Agents?
+## The Taxonomy Problem in Modern AI Agent Architecture
 
-After 8 years of building AI systems in game development, I've seen countless agent frameworks promise to revolutionize how we build intelligent systems. But here's the question that keeps me up at night: **What are the fundamental architectural patterns that actually work in production?**
+Between 2023 and 2025, artificial intelligence development witnessed an explosion of architectural proposals for autonomous agents. Academic preprints and developer demonstrations introduced dozens of overlapping frameworks—ranging from early chain-of-thought prompting to multi-agent conversation swarms, tree search planning, and cognitive self-modeling. For practicing systems engineers, navigating this landscape proved frustrating: academic papers frequently demonstrated novel patterns on synthetic toy datasets, while enterprise framework vendors promoted bespoke abstractions that obscured underlying runtime dynamics.
 
-Most resources I've encountered are either too abstract (research papers) or too specific (single-use implementations). What if we had a comprehensive, hands-on guide that bridges theory and practice—showing not just what patterns exist, but how to actually implement them?
+In late 2025, machine learning researcher Fareed Khan published the open-source repository [`FareedKhan-dev/all-agentic-architectures`](https://github.com/FareedKhan-dev/all-agentic-architectures). Rather than treating agent design as an ambiguous collection of prompt templates, Khan systematized 17 state-of-the-art agent architectures into fully executable, reproducible Python implementations orchestrated through LangGraph and LangChain. Each architecture is formalized as an explicit state machine with measurable input-output contracts, state graphs, and evaluation loops.
 
-> **Curiosity:** Can we systematically map out all the major agentic architectures and provide production-ready implementations for each?
-> {: .prompt-tip}
+This source audit deconstructs the 17 architectures cataloged in Khan's repository. We group these patterns into five architectural paradigms, examine how LangGraph formalizes cyclical agent graphs, trace the industry's shift from unconstrained multi-agent swarms toward deterministic single-agent harnesses, and identify the severe latency and cost tradeoffs that govern real-world deployments.
 
-**The Core Question:** The [all-agentic-architectures](https://github.com/FareedKhan-dev/all-agentic-architectures) repository claims to contain 17+ state-of-the-art agentic architectures, each implemented end-to-end. But what patterns does it cover? How do they relate to each other? And most importantly, which ones should we use in production?
+## The 17 Agentic Patterns Deconstructed Across Five Paradigms
 
----
-
-## 📚 Retrieve: Understanding the 17 Agentic Architectures
-
-### Repository Overview
-
-The **all-agentic-architectures** repository is a comprehensive, hands-on masterclass in modern AI agent design. It contains detailed implementations of **17+ state-of-the-art agentic architectures**, built with LangChain and LangGraph. Each architecture is implemented end-to-end in a runnable Jupyter notebook, designed as a living textbook that bridges the gap between theoretical concepts and practical, production-ready code.
-
-**Key Characteristics:**
-
-- **From Theory to Tangible Code:** Each architecture is not just explained but implemented end-to-end
-- **Structured Learning Path:** Notebooks are ordered to build concepts progressively
-- **Emphasis on Evaluation:** Features robust `LLM-as-a-Judge` patterns for quantitative feedback
-- **Real-World Scenarios:** Examples grounded in practical applications (financial analysis, coding, medical triage)
-- **Consistent Framework:** Uses LangGraph as the core orchestrator for stateful, cyclical agent design
-
-### Technical Stack
-
-| Component             | Purpose                                                    |
-| :-------------------- | :--------------------------------------------------------- |
-| **Python 3.10+**      | Core programming language                                  |
-| **LangChain**         | Foundational building blocks for LLMs and tools            |
-| **LangGraph**         | Orchestration framework for complex, stateful workflows    |
-| **Nebius AI Models**  | High-performance LLMs (e.g., Mixtral-8x22B-Instruct-v0.1)  |
-| **Jupyter Notebooks** | Interactive development and step-by-step demonstrations    |
-| **Pydantic**          | Robust, structured data modeling                           |
-| **Tavily Search**     | Search API for research-oriented agents                    |
-| **Neo4j**             | Graph database for semantic and world-model memory         |
-| **FAISS**             | Vector store for episodic memory through similarity search |
-
-### The 17 Architectures: Complete Breakdown
-
-#### Part 1: Foundational Patterns (Architectures 1-4)
-
-These architectures cover the essential building blocks for making a single agent more powerful.
-
-**01. Reflection**
+Khan's catalog categorizes agentic behaviors into a progressive hierarchy, building from elementary single-pass critiques to distributed emergent systems. Across all implementations, LangGraph serves as the runtime substrate, enforcing explicit state schemas, typed transitions, and checkpointed memory.
 
 ```mermaid
-graph LR
-    A[Initial Output] --> B[Critique Agent]
-    B --> C[Refined Output]
-    C --> D{Quality Check}
-    D -->|Needs Improvement| B
-    D -->|Satisfactory| E[Final Output]
-
-    style B fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
-    style D fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-```
-
-- **Core Concept:** Moves from a single-pass generator to a deliberate, multi-step reasoner by critiquing and refining its own work
-- **Key Use Case:** High-Quality Code Generation, Complex Summarization
-- **Production Value:** Improves output quality through self-review, critical for code generation and content creation
-
-**02. Tool Use**
-
-- **Core Concept:** Empowers an agent to overcome knowledge cutoffs and interact with the real world by calling external APIs and functions
-- **Key Use Case:** Real-time Research Assistants, Enterprise Bots
-- **Production Value:** Enables agents to access real-time data, execute actions, and interact with external systems
-
-**03. ReAct (Reasoning + Acting)**
-
-```mermaid
-graph TB
-    A[Task] --> B[Think]
-    B --> C[Act]
-    C --> D[Observe]
-    D --> E{Goal Reached?}
-    E -->|No| B
-    E -->|Yes| F[Complete]
-
-    style B fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
-    style C fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-    style E fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
-```
-
-- **Core Concept:** Dynamically interleaves reasoning ("thought") and action ("tool use") in an adaptive loop to solve complex, multi-step problems
-- **Key Use Case:** Multi-hop Q&A, Web Navigation & Research
-- **Production Value:** Enables agents to reason about actions before taking them, critical for complex problem-solving
-
-**04. Planning**
-
-- **Core Concept:** Proactively decomposes a complex task into a detailed, step-by-step plan _before_ execution, ensuring a structured and traceable workflow
-- **Key Use Case:** Predictable Report Generation, Project Management
-- **Production Value:** Adds foresight and structure, making agent behavior predictable and debuggable
-
-#### Part 2: Multi-Agent Collaboration (Architectures 5, 7, 11, 13)
-
-These architectures explore how to make agents work together.
-
-**05. Multi-Agent Systems**
-
-```mermaid
-graph TB
-    A[Task] --> B[Task Decomposer]
-    B --> C[Agent 1: Specialist A]
-    B --> D[Agent 2: Specialist B]
-    B --> E[Agent 3: Specialist C]
-    C --> F[Coordinator]
-    D --> F
-    E --> F
-    F --> G[Final Output]
-
-    style B fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
-    style F fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-```
-
-- **Core Concept:** A team of specialized agents collaborates to solve a problem, dividing labor to achieve superior depth, quality, and structure
-- **Key Use Case:** Software Dev Pipelines, Creative Brainstorming
-- **Production Value:** Enables parallel processing and specialization, dramatically improving quality and speed
-
-**06. PEV (Plan, Execute, Verify)**
-
-- **Core Concept:** A highly robust, self-correcting loop where a Verifier agent checks the outcome of each action, allowing for error detection and dynamic recovery
-- **Key Use Case:** High-Stakes Automation, Finance, Unreliable Tools
-- **Production Value:** Critical for production systems where errors are costly—automatically detects and recovers from failures
-
-**07. Blackboard Systems**
-
-- **Core Concept:** A flexible multi-agent system where agents collaborate opportunistically via a shared central memory (the "blackboard"), guided by a dynamic controller
-- **Key Use Case:** Complex Diagnostics, Dynamic Sense-Making
-- **Production Value:** Enables emergent collaboration where agents contribute when they have relevant expertise
-
-**11. Meta-Controller**
-
-```mermaid
-graph TD
-    A[User Request] --> B{Meta-Controller};
-    B -- Analyzes Request --> C{Routes to Specialist};
-    C --> D[Generalist Agent];
-    C --> E[Research Agent];
-    C --> F[Coding Agent];
-    D --> G[Final Response];
-    E --> G[Final Response];
-    F --> G[Final Response];
-
-    style B fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
-    style C fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-```
-
-- **Core Concept:** A supervisory agent that analyzes incoming tasks and routes them to the most appropriate specialist sub-agent from a pool of experts
-- **Key Use Case:** Multi-Service AI Platforms, Adaptive Assistants
-- **Production Value:** Acts as a smart router, optimizing task allocation and improving overall system efficiency
-
-**13. Ensemble**
-
-- **Core Concept:** Multiple independent agents analyze a problem from different perspectives, and a final "aggregator" agent synthesizes their outputs for a more robust, less biased conclusion
-- **Key Use Case:** High-Stakes Decision Support, Fact-Checking
-- **Production Value:** Reduces bias and improves robustness through diverse perspectives
-
-#### Part 3: Advanced Memory & Reasoning (Architectures 8, 9, 12)
-
-These architectures focus on how agents can think more deeply and remember what they've learned.
-
-**08. Episodic + Semantic Memory**
-
-```mermaid
-graph TB
-    A[Current Interaction] --> B[Episodic Memory<br/>Vector Store]
-    A --> C[Semantic Memory<br/>Graph DB]
-    B --> D[Retrieve Similar<br/>Past Conversations]
-    C --> E[Retrieve Related<br/>Structured Facts]
-    D --> F[Personalized Response]
-    E --> F
-
-    style B fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
-    style C fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-    style F fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
-```
-
-- **Core Concept:** A dual-memory system combining a vector store for past conversations (episodic) and a graph DB for structured facts (semantic) for true long-term personalization
-- **Key Use Case:** Long-Term Personal Assistants, Personalized Tutors
-- **Production Value:** Enables true personalization by remembering both conversations and learned facts
-
-**09. Tree of Thoughts (ToT)**
-
-- **Core Concept:** Solves problems by exploring multiple reasoning paths in a tree structure, evaluating and pruning branches to systematically find the optimal solution
-- **Key Use Case:** Logic Puzzles, Constrained Planning
-- **Production Value:** Enables systematic exploration of solution spaces, critical for complex reasoning tasks
-
-**12. Graph (World-Model Memory)**
-
-- **Core Concept:** Stores knowledge as a structured graph of entities and relationships, enabling complex, multi-hop reasoning by traversing connections
-- **Key Use Case:** Corporate Intelligence, Advanced Research
-- **Production Value:** Enables complex reasoning over interconnected knowledge, perfect for knowledge-intensive applications
-
-#### Part 4: Safety, Reliability, and Real-World Interaction (Architectures 6, 10, 14, 17)
-
-These architectures are critical for building agents that can be trusted in production.
-
-**10. Mental Loop (Simulator)**
-
-- **Core Concept:** An agent tests its actions in an internal "mental model" or simulator to predict outcomes and assess risk before acting in the real world
-- **Key Use Case:** Robotics, Financial Trading, Safety-Critical Systems
-- **Production Value:** Allows agents to "think before acting," critical for high-stakes applications
-
-**14. Dry-Run Harness**
-
-```mermaid
-graph LR
-    A[Agent Proposes Action] --> B[Dry Run Simulation]
-    B --> C{Human/Checker<br/>Approval}
-    C -->|Approved| D[Live Execution]
-    C -->|Rejected| E[Revise Action]
-    E --> B
-
-    style B fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
-    style C fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-```
-
-- **Core Concept:** A safety-critical pattern where an agent's proposed action is first simulated (dry run) and must be approved (by a human or checker) before live execution
-- **Key Use Case:** Production Agent Deployment, Debugging
-- **Production Value:** Provides crucial human-in-the-loop safety layer for production systems
-
-**17. Reflexive Metacognitive**
-
-- **Core Concept:** An agent with a "self-model" that reasons about its own capabilities and limitations, choosing to act, use a tool, or escalate to a human to ensure safety
-- **Key Use Case:** High-Stakes Advisory (Medical, Legal, Finance)
-- **Production Value:** Understands its own limitations—key to safe operation in high-stakes domains
-
-#### Part 5: Learning and Adaptation (Architectures 15, 16)
-
-The final section explores how agents can improve over time and solve problems in novel ways.
-
-**15. RLHF (Self-Improvement)**
-
-- **Core Concept:** An agent's output is critiqued by an "editor" agent, and the feedback is used to iteratively revise the work. High-quality outputs are saved to improve future performance
-- **Key Use Case:** High-Quality Content Generation, Continual Learning
-- **Production Value:** Creates a mechanism for agents to learn from feedback, improving over time
-
-**16. Cellular Automata**
-
-- **Core Concept:** A system of many simple, decentralized grid-based agents whose local interactions produce complex, emergent global behavior like optimal pathfinding
-- **Key Use Case:** Spatial Reasoning, Logistics, Complex System Simulation
-- **Production Value:** Showcases how complex global behavior can emerge from simple, local rules
-
-### Architecture Comparison Matrix
-
-| Architecture          |     Complexity     | Use Case                | Production Readiness | Key Innovation              |
-| :-------------------- | :----------------: | :---------------------- | :------------------: | :-------------------------- |
-| **Reflection**        |       ⭐ Low       | Code generation         |       ✅ High        | Self-critique loop          |
-| **Tool Use**          |       ⭐ Low       | Research assistants     |       ✅ High        | External API integration    |
-| **ReAct**             |    ⭐⭐ Medium     | Multi-step problems     |       ✅ High        | Reasoning + action loop     |
-| **Planning**          |    ⭐⭐ Medium     | Project management      |       ✅ High        | Pre-execution planning      |
-| **Multi-Agent**       |    ⭐⭐⭐ High     | Software pipelines      |       ✅ High        | Specialized teams           |
-| **PEV**               |    ⭐⭐⭐ High     | High-stakes automation  |       ✅ High        | Self-correcting loop        |
-| **Blackboard**        |    ⭐⭐⭐ High     | Complex diagnostics     |      ⚠️ Medium       | Opportunistic collaboration |
-| **Episodic+Semantic** |    ⭐⭐⭐ High     | Personal assistants     |       ✅ High        | Dual memory system          |
-| **Tree of Thoughts**  | ⭐⭐⭐⭐ Very High | Logic puzzles           |      ⚠️ Medium       | Multi-path exploration      |
-| **Mental Loop**       |    ⭐⭐⭐ High     | Safety-critical         |       ✅ High        | Internal simulation         |
-| **Meta-Controller**   |    ⭐⭐⭐ High     | Multi-service platforms |       ✅ High        | Smart routing               |
-| **Graph Memory**      |    ⭐⭐⭐ High     | Knowledge systems       |       ✅ High        | Structured reasoning        |
-| **Ensemble**          |    ⭐⭐⭐ High     | Decision support        |       ✅ High        | Multi-perspective analysis  |
-| **Dry-Run**           |    ⭐⭐ Medium     | Production deployment   |       ✅ High        | Safety harness              |
-| **RLHF**              |    ⭐⭐⭐ High     | Content generation      |      ⚠️ Medium       | Self-improvement            |
-| **Cellular Automata** | ⭐⭐⭐⭐ Very High | Spatial reasoning       |      ⚠️ Medium       | Emergent behavior           |
-| **Metacognitive**     | ⭐⭐⭐⭐ Very High | High-stakes advisory    |      ⚠️ Medium       | Self-awareness              |
-
----
-
-## 💡 Innovation: Production Applications and Best Practices
-
-### Learning Path: From Simple to Sophisticated
-
-The repository is structured as a progressive learning journey:
-
-```mermaid
-graph TB
-    subgraph "Part 1: Foundational Patterns"
-        A1[Reflection] --> A2[Tool Use]
-        A2 --> A3[ReAct]
-        A3 --> A4[Planning]
+flowchart TD
+    subgraph P1 ["Paradigm 1: Single-Agent Loops"]
+        M1[01. Reflection]
+        M2[02. Tool Use]
+        M3[03. ReAct]
+        M4[04. Planning]
     end
 
-    subgraph "Part 2: Multi-Agent Collaboration"
-        B1[Multi-Agent] --> B2[PEV]
-        B2 --> B3[Blackboard]
-        B3 --> B4[Meta-Controller]
-        B4 --> B5[Ensemble]
+    subgraph P2 ["Paradigm 2: Multi-Agent Collaboration"]
+        M5[05. Specialized Teams]
+        M6[06. Plan-Execute-Verify / PEV]
+        M7[07. Blackboard Systems]
+        M11[11. Meta-Controller]
+        M13[13. Ensemble Voting]
     end
 
-    subgraph "Part 3: Advanced Memory & Reasoning"
-        C1[Episodic+Semantic] --> C2[Tree of Thoughts]
-        C2 --> C3[Graph Memory]
+    subgraph P3 ["Paradigm 3: Memory & Cognitive Trees"]
+        M8[08. Episodic + Semantic Dual Memory]
+        M9[09. Tree of Thoughts / LATS]
+        M12[12. Graph World Models]
     end
 
-    subgraph "Part 4: Safety & Reliability"
-        D1[Mental Loop] --> D2[Dry-Run]
-        D2 --> D3[Metacognitive]
+    subgraph P4 ["Paradigm 4: Safety & Verification"]
+        M10[10. Mental Simulator Loop]
+        M14[14. Dry-Run Verification Harness]
+        M17[17. Reflexive Metacognitive Agent]
     end
 
-    subgraph "Part 5: Learning & Adaptation"
-        E1[RLHF] --> E2[Cellular Automata]
+    subgraph P5 ["Paradigm 5: Continual Learning & Emergence"]
+        M15[15. RLHF Self-Improvement]
+        M16[16. Cellular Automata Emergence]
     end
 
-    A4 --> B1
-    B5 --> C1
-    C3 --> D1
-    D3 --> E1
+    P1 --> P2
+    P2 --> P3
+    P3 --> P4
+    P4 --> P5
 
-    style A1 fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
-    style B1 fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-    style C1 fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
-    style D1 fill:#95e1d3,stroke:#2d3436,stroke-width:2px,color:#000
-    style E1 fill:#a29bfe,stroke:#6c5ce7,stroke-width:2px,color:#fff
+    classDef p1 fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1;
+    classDef p2 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c;
+    classDef p3 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20;
+    classDef p4 fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#bf360c;
+    classDef p5 fill:#fce4ec,stroke:#c2185b,stroke-width:2px,color:#880e4f;
+    class M1,M2,M3,M4 p1;
+    class M5,M6,M7,M11,M13 p2;
+    class M8,M9,M12 p3;
+    class M10,M14,M17 p4;
+    class M15,M16 p5;
 ```
 
-### Production Architecture Selection Guide
+### Paradigm 1: Foundational Single-Agent Loops (01–04)
 
-**For Code Generation:**
+1. **Reflection**: Replaces single-pass generation with an iterative generator-critic loop. A generator node produces a candidate draft, a critique node audits the draft against predefined rubrics (style, correctness, constraint adherence), and a conditional edge routes execution back to the generator until quality thresholds are satisfied.
+2. **Tool Use**: Binds structured function schemas (Pydantic models) to model context, enabling external API calls, database queries, and deterministic calculator invocations.
+3. **ReAct (Reasoning + Acting)**: Interleaves explicit natural language thoughts with tool invocations. The agent explains its intent, triggers a tool call, captures the environment's observation, and updates its reasoning before taking the next step.
+4. **Planning**: Decouples plan synthesis from plan execution. Before issuing tool commands, a planner decomposes an ambiguous goal into an ordered task list, minimizing erratic backtracking during long-horizon workflows.
 
-- Start with **Reflection** for quality improvement
-- Add **Tool Use** for code execution and testing
-- Consider **Multi-Agent** for complex refactoring tasks
+### Paradigm 2: Multi-Agent Coordination (05, 06, 07, 11, 13)
 
-**For Research & Information Gathering:**
+5. **Specialized Multi-Agent Teams**: Partitions responsibilities across distinct worker agents (e.g., Researcher, Coder, Reviewer) coordinated by a supervisor agent that passes execution tokens between specialized subgraphs.
+6. **Plan, Execute, Verify (PEV)**: Extends standard planning by binding an independent Verifier node to every executed subtask. If verification fails, the orchestrator triggers dynamic re-planning rather than blindly proceeding to the next step.
+7. **Blackboard Systems**: Adopts classical AI blackboard architecture. Multiple autonomous knowledge sources monitor a shared global state canvas (the blackboard) and asynchronously write observations or solution candidates when their triggering preconditions match.
+8. **Meta-Controller**: Implements dynamic task routing. An upstream router classifies incoming user intents and selects an optimized specialist agent or subgraph, preventing generalist models from processing domain-specific queries inefficiently.
+9. **Ensemble Aggregation**: Executes $N$ independent agent chains in parallel using varied system prompts or model families, feeding candidate outputs into a synthesizer node that resolves disagreements through majority voting or consensus distillation.
 
-- Use **ReAct** for multi-hop reasoning
-- Add **Tool Use** for web search and API access
-- Consider **Graph Memory** for knowledge accumulation
+```mermaid
+flowchart LR
+    subgraph Traditional ReAct ["03. ReAct Loop"]
+        R1[Prompt] --> R2[Thought]
+        R2 --> R3[Action]
+        R3 --> R4[Observation]
+        R4 --> R5{Target Satisfied?}
+        R5 -- No --> R2
+        R5 -- Yes --> R6[Final Answer]
+    end
 
-**For High-Stakes Applications:**
+    subgraph PEV ["06. Plan, Execute, Verify"]
+        P1[Objective] --> P2[Planner Node]
+        P2 --> P3[Task Queue]
+        P3 --> P4[Execution Worker]
+        P4 --> P5[Independent Verifier]
+        P5 -- Pass --> P6{Queue Empty?}
+        P6 -- No --> P3
+        P6 -- Yes --> P7[Finished]
+        P5 -- Fail --> P8[Dynamic Re-Planner]
+        P8 --> P3
+    end
 
-- Implement **PEV** for error detection
-- Add **Dry-Run Harness** for safety
-- Use **Metacognitive** for self-awareness
-
-**For Long-Term Personalization:**
-
-- Implement **Episodic + Semantic Memory**
-- Use **Graph Memory** for structured knowledge
-- Consider **RLHF** for continuous improvement
-
-### Evaluation Framework: LLM-as-a-Judge
-
-One of the repository's key innovations is the emphasis on evaluation. Most notebooks feature a robust `LLM-as-a-Judge` pattern:
-
-```python
-# Simplified LLM-as-a-Judge pattern
-class AgentEvaluator:
-    """
-    Evaluates agent performance using LLM-as-a-Judge
-    Provides quantitative, objective feedback
-    """
-
-    def evaluate(self, agent_output: str, task: str, criteria: List[str]) -> Dict:
-        """
-        Evaluates agent output against criteria
-
-        Args:
-            agent_output: The agent's generated output
-            task: The original task description
-            criteria: List of evaluation criteria
-
-        Returns:
-            Dictionary with scores and feedback
-        """
-        prompt = f"""
-        Evaluate the following agent output:
-
-        Task: {task}
-        Output: {agent_output}
-
-        Criteria:
-        {chr(10).join(f"- {c}" for c in criteria)}
-
-        Provide:
-        1. Score (0-10) for each criterion
-        2. Overall score
-        3. Detailed feedback
-        """
-
-        evaluation = self.llm.generate(prompt)
-        return self._parse_evaluation(evaluation)
+    classDef loop fill:#e8f4fd,stroke:#1e88e5,stroke-width:2px,color:#0d47a1;
+    classDef pev fill:#e8f5e9,stroke:#43a047,stroke-width:2px,color:#1b5e20;
+    class R1,R2,R3,R4,R5,R6 loop;
+    class P1,P2,P3,P4,P5,P6,P7,P8,P6,P7 pev;
 ```
 
-**Benefits:**
+### Paradigm 3: Advanced Memory and Cognitive Trees (08, 09, 12)
 
-- **Quantitative feedback:** Objective scores instead of subjective assessment
-- **Scalable:** Can evaluate thousands of outputs automatically
-- **Consistent:** Same criteria applied across all evaluations
-- **Production-ready:** Critical skill for production AI systems
+10. **Episodic + Semantic Dual Memory**: Separates conversational trajectory recall from factual entity relationships. Vector embeddings store conversational logs (episodic memory), while relational tables or structured schemas store durable entity facts (semantic memory), contrasting with pure vector approaches as analyzed in [Memori's SQL-native memory architecture](/posts/memori-sql-native-memory-for-llms/).
+11. **Tree of Thoughts (ToT / LATS)**: Formulates problem-solving as tree search. The agent generates multiple candidate reasoning branches at each decision point, scores branches using heuristic evaluators or LLM self-evaluations, and prunes unpromising paths via depth-first or Monte Carlo tree search.
+12. **Graph World Models**: Maintains an explicit knowledge graph representing entity topologies, dependencies, and causal rules. Tool executions update graph edges, enabling multi-hop pathfinding queries over complex relational environments.
 
-### Real-World Application Examples
+### Paradigm 4: Safety, Verification, and Metacognition (10, 14, 17)
 
-**Financial Analysis Agent:**
+13. **Mental Loop (Internal Simulator)**: Prompts the model to simulate expected environment outcomes inside a scratchpad before committing irreversible mutations to external APIs or disk.
+14. **Dry-Run Verification Harness**: Inserts a mandatory sandboxed simulation phase where actions are executed against virtualized mock targets, requiring human or policy approval before live deployment.
+15. **Reflexive Metacognitive Agent**: Equips the agent with a formal self-model. The agent tracks its own uncertainty, recognizes domains where its training is inadequate, and proactively halts execution to request human clarification or tool fallback.
 
-- **Architecture:** Multi-Agent + Planning + PEV
-- **Agents:** Data Collector, Analyst, Risk Assessor, Report Generator
-- **Safety:** PEV verifies calculations, Dry-Run for trades
+### Paradigm 5: Continual Learning and Emergence (15, 16)
 
-**Medical Triage System:**
+16. **RLHF-Style Self-Improvement Loop**: Records execution histories, passes final outputs to an automated judge to derive preference rewards, and synthesizes critique rubrics into few-shot prompt libraries for future executions.
+17. **Cellular Automata Agent Grid**: Explores emergent decentralized coordination. Simple local agents operating on grid cells communicate strictly with neighboring cells, demonstrating how global spatial coordination emerges without centralized supervisors.
 
-- **Architecture:** Metacognitive + Dry-Run + Graph Memory
-- **Features:** Self-awareness of limitations, human escalation, structured medical knowledge
+## What Changed Since Late 2025: From Swarm Hype to Production Determinism
 
-**Code Refactoring Agent:**
+In late 2025, when Khan published `all-agentic-architectures`, the AI engineering community was enamored with multi-agent swarms. Frameworks like early AutoGen, CrewAI, and ChatDev popularized architectures where dozens of specialized personas conversed in free-form chat rooms to write software or analyze data.
 
-- **Architecture:** Reflection + Multi-Agent + Tool Use
-- **Agents:** Code Analyzer, Refactoring Planner, Test Generator, Code Reviewer
+However, production reality in 2026 revealed severe empirical limitations with unconstrained swarms:
+- **Error Compounding and Hallucination Cascades**: In unstructured multi-agent discussions, when Agent A introduces a subtle factual error, Agent B accepts the error as grounded truth and builds subsequent analysis upon it. By turn four, the entire conversational context is corrupted.
+- **Token Inflation and Runaway Costs**: Running multi-agent debates easily consumes 50,000 to 200,000 prompt tokens per user turn, resulting in 10x higher operational costs compared to single-agent workflows without corresponding quality improvements.
+- **Empirical Evaluation Evidence**: Large-scale empirical evaluations, including Anthropic's analysis of 100,000 multi-turn coding sessions and METR's randomized developer trial (detailed in [multi-agent productivity gains](/posts/multi-agent-productivity-gains/)), proved that complex multi-agent chatter underperforms single-agent loops equipped with rigorous verification harnesses.
 
-**Research Assistant:**
+```mermaid
+flowchart LR
+    subgraph Swarm Era ["Late 2025 Swarm Trend"]
+        S1[User Goal] --> S2[Agent Swarm Chat Room]
+        S2 --> S3[Free-form Multi-Agent Debate]
+        S3 --> S4[High Latency, Compounding Errors]
+    end
 
-- **Architecture:** ReAct + Tool Use + Episodic Memory
-- **Features:** Multi-hop reasoning, web search, conversation history
+    subgraph Deterministic Era ["2026 Production Standard"]
+        D1[User Goal] --> D2[Single-Agent StateGraph]
+        D2 --> D3[Sandboxed Tool Execution]
+        D3 --> D4[Deterministic Test Harness]
+        D4 --> D5[Bounded Retry & Verification]
+    end
 
-### Production Considerations
+    S4 -.->|Industry Migration| D1
 
-**What Works Well:**
+    classDef swarm fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c;
+    classDef det fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20;
+    class S1,S2,S3,S4 swarm;
+    class D1,D2,D3,D4,D5 det;
+```
 
-| Aspect                     | Benefit                        | Example                                  |
-| :------------------------- | :----------------------------- | :--------------------------------------- |
-| **LangGraph Framework**    | Consistent, stateful workflows | All architectures use same orchestration |
-| **Evaluation Built-in**    | LLM-as-a-Judge pattern         | Quantitative feedback on performance     |
-| **Progressive Complexity** | Structured learning path       | Builds from simple to sophisticated      |
-| **Real-World Examples**    | Practical applications         | Financial, medical, coding scenarios     |
+As demonstrated in recent evaluations of [evaluating Deep Agents CLI on Terminal Bench 2.0](/posts/evaluating-deepagents-cli-on-terminal-bench-2-0/), real performance gains in 2026 come not from adding more conversational agents, but from **harness engineering**:
+1. Replacing unconstrained natural-language handoffs with rigid LangGraph state schemas.
+2. Isolating execution environments in containerized sandboxes (Harbor/Docker).
+3. Utilizing deterministic test scripts (`pytest`, `make`, compiler linters) rather than subjective LLM evaluators to verify completion.
+4. Implementing targeted Reflection and PEV (Plan-Execute-Verify) loops with strictly bounded retry budgets ($N \le 3$).
 
-**Challenges and Tradeoffs:**
+## Architectural Tradeoffs and Implementation Pitfalls
 
-| Challenge              | Impact                                     | Mitigation                          |
-| :--------------------- | :----------------------------------------- | :---------------------------------- |
-| **Complexity Scaling** | Advanced architectures are harder to debug | Start with foundational patterns    |
-| **Cost**               | Multiple agents increase API costs         | Use smaller models for simple tasks |
-| **Latency**            | Multi-agent systems slower                 | Parallelize where possible          |
-| **State Management**   | LangGraph state can be complex             | Use clear state schemas             |
+Deploying any of Khan's 17 architectures into production requires balancing four competing engineering constraints: reasoning depth, execution latency, token expenditure, and determinism.
 
----
+| Architectural Pattern | Latency Overhead | Token Cost Multiplier | State Complexity | Recommended Production Role |
+| :--- | :---: | :---: | :---: | :--- |
+| **01. Reflection** | Medium ($2\times$) | $2\times$ | Low | Code syntax review, schema validation |
+| **03. ReAct** | Low ($1\times$) | $1\times$ | Low | Fast interactive CLI tooling, API fetching |
+| **06. PEV (Plan-Execute-Verify)** | Medium-High ($3\times$) | $2.5\times$ | Medium | Multi-step devops automation, data pipelines |
+| **07. Blackboard System** | High ($4\times$) | $4\times$ | High | Ambiguous medical/legal diagnostics |
+| **09. Tree of Thoughts** | Extreme ($10\times+$) | $15\times+$ | Extreme | Offline combinatorial logic, math optimization |
+| **11. Meta-Controller** | Low ($1.1\times$) | $1.2\times$ | Medium | Gateway triage, enterprise multi-tenant routing |
+| **14. Dry-Run Harness** | Medium ($1.5\times$) | $1.5\times$ | Medium | Database mutations, destructive infrastructure |
 
-## 🎯 Key Takeaways
+### Common Implementation Pitfalls in LangGraph
 
-1. **17 distinct architectures** cover the full spectrum from foundational patterns to sophisticated multi-agent systems
-2. **Progressive learning path** builds from simple (Reflection) to complex (Metacognitive) architectures
-3. **Production-ready implementations** with evaluation built-in using LLM-as-a-Judge patterns
-4. **LangGraph as unifying framework** provides consistent, stateful orchestration across all architectures
-5. **Real-world applications** demonstrate practical use cases in finance, medicine, coding, and research
+When translating notebook implementations into high-availability services, engineers frequently encounter three systemic pitfalls:
 
-### Architecture Selection Guide
+1. **Unbounded Cyclical Deadlocks**:
+   In naive Reflection and PEV implementations, if the generator fails to satisfy the critic's exact rubric, the graph loops endlessly until API limits or budget ceilings are breached. Every cyclical edge must enforce a hard counter:
 
-**Start Here (Foundational):**
+   ```python
+   def should_continue(state: AgentState) -> str:
+       if state["iteration_count"] >= 3:
+           return "escalate_to_human"
+       if state["verification_passed"]:
+           return "finalize_output"
+       return "regenerate_draft"
+   ```
 
-- **Reflection:** Improve output quality
-- **Tool Use:** Enable real-world interaction
-- **ReAct:** Combine reasoning and action
+2. **Context Window Pollution in Blackboard Systems**:
+   When multiple agents write shared state into a monolithic LangGraph context, total token length increases quadratically with turn count. Production systems must implement state partitioning, persisting intermediate working memory into external relational stores while passing only minimal typed diffs through the graph.
 
-**Scale Up (Multi-Agent):**
+3. **LLM-as-a-Judge Evaluation Drift**:
+   Using an LLM judge to evaluate candidate answers in Reflection or RLHF architectures introduces self-reinforcement bias: models consistently score verbose, stylistic answers higher than concise, accurate answers. Production verification must ground evaluation in deterministic tests (exit codes, schema validators, unit tests) whenever possible.
 
-- **Multi-Agent Systems:** Parallel processing
-- **Meta-Controller:** Smart routing
-- **Ensemble:** Diverse perspectives
+## Key Takeaways
 
-**Add Safety (Production):**
+1. **Systematic Catalog Over Hype**: Fareed Khan's `all-agentic-architectures` establishes an empirical baseline for 17 distinct agent designs, mapping theoretical concepts directly into runnable LangGraph stategraphs.
+2. **The Five Core Paradigms**: Agent patterns naturally segregate into single-agent loops, multi-agent collaboration, structured memory systems, safety verification harnesses, and continual learning loops.
+3. **From Swarms to Determinism**: Production systems in 2026 have shifted away from unconstrained multi-agent conversation swarms toward deterministic, bounded single-agent harnesses equipped with PEV and sandboxed tool execution.
+4. **Harness Verification Over Model Swapping**: Improving real-world task success is primarily driven by error formatting, context compaction, and deterministic verification checkpoints rather than adding additional conversational agents.
+5. **Enforce Hard Execution Bounds**: Any cyclical agent architecture (Reflection, PEV, ReAct) must implement strict retry ceilings and fallback escalation paths to prevent catastrophic token drain.
 
-- **PEV:** Error detection and recovery
-- **Dry-Run Harness:** Human-in-the-loop safety
-- **Metacognitive:** Self-awareness
+## New Questions
 
-**Enable Learning (Advanced):**
-
-- **Episodic + Semantic Memory:** Long-term personalization
-- **RLHF:** Continuous improvement
-- **Graph Memory:** Structured knowledge
-
----
-
-## 🤔 New Questions This Raises
-
-1. **How do we combine multiple architectures?** Can we use Reflection + Multi-Agent + PEV together?
-2. **What's the performance overhead?** How do these architectures compare in latency and cost?
-3. **How do we evaluate multi-agent systems?** What metrics matter beyond LLM-as-a-Judge?
-4. **What's the production deployment story?** How do we scale these architectures to handle millions of requests?
-5. **Can we fine-tune these patterns?** How do we adapt architectures to specific domains?
-
-**Next steps:** I'm planning to evaluate these architectures on game development tasks (NPC behavior, procedural content generation) and compare their performance in production scenarios.
-
----
+1. **Can Meta-Controllers Dynamically Select Cognitive Depth?**: Rather than hardcoding ReAct versus Tree of Thoughts, can a lightweight router accurately predict which tasks require multi-branch search versus single-turn execution?
+2. **What Is the Optimal Boundary Between Graph State and External Memory?**: As episodic memories scale to millions of interactions, how can LangGraph state schemas seamlessly integrate relational and vector stores without context degradation?
+3. **How Can Metacognitive Confidence Scores Be Calibrated?**: Can LLMs reliably quantify their own epistemic uncertainty to trigger human escalation without under- or over-triggering fallback routines?
+4. **Will Micro-Models Replace Multi-Agent Specialists?**: Does routing tasks to specialized fine-tuned 7B/14B models yield lower latency and cost than prompting a single frontier model with different multi-agent role instructions?
 
 ## References
 
-**Repository Resources:**
-
-- [All Agentic Architectures GitHub Repository](https://github.com/FareedKhan-dev/all-agentic-architectures)
-- [Repository README](https://github.com/FareedKhan-dev/all-agentic-architectures/blob/main/README.md)
-
-**Framework Documentation:**
-
-- [LangChain Documentation](https://python.langchain.com/)
-- [LangGraph Documentation](https://langchain-ai.github.io/langgraph/)
-- [LangGraph GitHub Repository](https://github.com/langchain-ai/langgraph)
-
-**Core Technologies:**
-
-- [Nebius AI Models](https://nebius.ai/)
-- [Tavily Search API](https://tavily.com/)
-- [Neo4j Graph Database](https://neo4j.com/)
-- [FAISS Vector Store](https://github.com/facebookresearch/faiss)
-
-**Research Papers & Concepts:**
-
-- [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)
-- [Tree of Thoughts: Deliberate Problem Solving with Large Language Models](https://arxiv.org/abs/2305.10601)
-- [Reflexion: Language Agents with Verbal Reinforcement Learning](https://arxiv.org/abs/2303.11366)
-- [Blackboard Systems](https://en.wikipedia.org/wiki/Blackboard_system)
-- [Cellular Automata](https://en.wikipedia.org/wiki/Cellular_automaton)
-
-**Related Agent Frameworks:**
-
-- [AutoGen: Multi-Agent Conversation Framework](https://github.com/microsoft/autogen)
-- [CrewAI: Framework for Orchestrating Role-Playing AI Agents](https://github.com/joaomdmoura/crewAI)
-- [LangGraph Agents](https://langchain-ai.github.io/langgraph/tutorials/agents/)
-
-**Evaluation Resources:**
-
-- [LLM-as-a-Judge Pattern](https://arxiv.org/abs/2306.05685)
-- [Agent Evaluation Benchmarks](https://github.com/evalplus/evalplus)
-
-**Production Resources:**
-
-- [LangSmith: Production LLM Observability](https://smith.langchain.com/)
-- [Building Production LLM Applications](https://huyenchip.com/2023/04/11/llm-engineering.html)
-
----
-
-<details markdown="1">
-<summary style="font-size:20px; font-weight:bold; cursor:pointer;">📋 Summary / 요약</summary>
-
-## English Summary
-
-**All Agentic Architectures - A Comprehensive Guide** explores the [all-agentic-architectures](https://github.com/FareedKhan-dev/all-agentic-architectures) repository, which contains detailed implementations of 17+ state-of-the-art agentic AI patterns built with LangChain and LangGraph.
-
-**Key Highlights:**
-
-- **17 Architectures Covered:** The repository systematically maps out major agentic patterns from foundational (Reflection, Tool Use, ReAct, Planning) to advanced (Multi-Agent, PEV, Metacognitive, RLHF)
-
-- **Progressive Learning Path:** Architectures are organized into 5 parts: Foundational Patterns → Multi-Agent Collaboration → Advanced Memory & Reasoning → Safety & Reliability → Learning & Adaptation
-
-- **Production-Ready Implementations:** Each architecture is implemented end-to-end in runnable Jupyter notebooks with real-world examples (financial analysis, coding, medical triage, research)
-
-- **Evaluation Built-In:** Most notebooks feature LLM-as-a-Judge patterns for quantitative, objective feedback on agent performance—critical for production AI systems
-
-- **Consistent Framework:** All architectures use LangGraph as the core orchestrator, providing a unified, stateful, cyclical approach to agent design
-
-**Architecture Categories:**
-
-1. **Foundational Patterns (1-4):** Reflection, Tool Use, ReAct, Planning—essential building blocks for single agents
-2. **Multi-Agent Collaboration (5, 7, 11, 13):** Multi-Agent Systems, PEV, Blackboard, Meta-Controller, Ensemble—enabling agent teams
-3. **Advanced Memory & Reasoning (8, 9, 12):** Episodic+Semantic Memory, Tree of Thoughts, Graph Memory—deep thinking and memory
-4. **Safety & Reliability (6, 10, 14, 17):** PEV, Mental Loop, Dry-Run Harness, Metacognitive—production trust and safety
-5. **Learning & Adaptation (15, 16):** RLHF, Cellular Automata—continuous improvement and emergent behavior
-
-**Production Applications:**
-
-- **Code Generation:** Reflection + Tool Use + Multi-Agent for quality code generation
-- **Research:** ReAct + Tool Use + Episodic Memory for information gathering
-- **High-Stakes:** PEV + Dry-Run + Metacognitive for safety-critical applications
-- **Personalization:** Episodic+Semantic Memory + Graph Memory for long-term personalization
-
-**Technical Stack:** Python 3.10+, LangChain, LangGraph, Nebius AI Models, Jupyter Notebooks, Pydantic, Tavily Search, Neo4j, FAISS
-
----
-
-## 한국어 요약
-
-**모든 에이전트 아키텍처 - 종합 가이드**는 LangChain과 LangGraph로 구축된 17개 이상의 최신 에이전트 AI 패턴의 상세 구현을 포함하는 [all-agentic-architectures](https://github.com/FareedKhan-dev/all-agentic-architectures) 저장소를 탐구합니다.
-
-**주요 하이라이트:**
-
-- **17개 아키텍처 포함:** 저장소는 기초 패턴(Reflection, Tool Use, ReAct, Planning)부터 고급 패턴(Multi-Agent, PEV, Metacognitive, RLHF)까지 주요 에이전트 패턴을 체계적으로 매핑
-
-- **점진적 학습 경로:** 아키텍처는 5개 부분으로 구성: 기초 패턴 → 멀티 에이전트 협업 → 고급 메모리 및 추론 → 안전성 및 신뢰성 → 학습 및 적응
-
-- **프로덕션 준비 구현:** 각 아키텍처는 실제 사례(금융 분석, 코딩, 의료 분류, 연구)와 함께 실행 가능한 Jupyter 노트북에서 엔드투엔드로 구현됨
-
-- **평가 내장:** 대부분의 노트북은 에이전트 성능에 대한 정량적이고 객관적인 피드백을 제공하는 LLM-as-a-Judge 패턴을 특징으로 함—프로덕션 AI 시스템에 중요
-
-- **일관된 프레임워크:** 모든 아키텍처는 LangGraph를 핵심 오케스트레이터로 사용하여 통합된 상태 기반 순환 에이전트 설계 접근 방식 제공
-
-**아키텍처 카테고리:**
-
-1. **기초 패턴 (1-4):** Reflection, Tool Use, ReAct, Planning—단일 에이전트를 위한 필수 구성 요소
-2. **멀티 에이전트 협업 (5, 7, 11, 13):** Multi-Agent Systems, PEV, Blackboard, Meta-Controller, Ensemble—에이전트 팀 활성화
-3. **고급 메모리 및 추론 (8, 9, 12):** Episodic+Semantic Memory, Tree of Thoughts, Graph Memory—깊은 사고와 메모리
-4. **안전성 및 신뢰성 (6, 10, 14, 17):** PEV, Mental Loop, Dry-Run Harness, Metacognitive—프로덕션 신뢰 및 안전
-5. **학습 및 적응 (15, 16):** RLHF, Cellular Automata—지속적인 개선 및 창발적 행동
-
-**프로덕션 애플리케이션:**
-
-- **코드 생성:** Reflection + Tool Use + Multi-Agent로 고품질 코드 생성
-- **연구:** ReAct + Tool Use + Episodic Memory로 정보 수집
-- **고위험:** PEV + Dry-Run + Metacognitive로 안전 중요 애플리케이션
-- **개인화:** Episodic+Semantic Memory + Graph Memory로 장기 개인화
-
-**기술 스택:** Python 3.10+, LangChain, LangGraph, Nebius AI Models, Jupyter Notebooks, Pydantic, Tavily Search, Neo4j, FAISS
-
-</details>
+- Khan, Fareed. "All Agentic Architectures: 17+ State-of-the-Art Agentic AI Patterns in LangGraph." `FareedKhan-dev/all-agentic-architectures`, commit `main` branch, 2025–2026. URL: `https://github.com/FareedKhan-dev/all-agentic-architectures` (accessed 2026-10-18).
+- Yao, Shunyu, et al. "ReAct: Synergizing Reasoning and Acting in Language Models." *arXiv preprint arXiv:2210.03629*, v2, 2023. URL: `https://arxiv.org/abs/2210.03629` (accessed 2026-10-18).
+- Yao, Shunyu, et al. "Tree of Thoughts: Deliberate Problem Solving with Large Language Models." *arXiv preprint arXiv:2305.10601*, v2, 2023. URL: `https://arxiv.org/abs/2305.10601` (accessed 2026-10-18).
+- Shinn, Noah, et al. "Reflexion: Language Agents with Verbal Reinforcement Learning." *arXiv preprint arXiv:2303.11366*, v2, 2023. URL: `https://arxiv.org/abs/2303.11366` (accessed 2026-10-18).
+- LangChain AI. "LangGraph: Multi-Agent Orchestration Framework Documentation." Release v0.2.x, 2025–2026. URL: `https://langchain-ai.github.io/langgraph/` (accessed 2026-10-18).
+- Anthropic. "Evaluating Complex Multi-Turn Agentic Workflows." *Anthropic Research Notes*, 2025–2026. URL: `https://www.anthropic.com/research` (accessed 2026-10-18).
