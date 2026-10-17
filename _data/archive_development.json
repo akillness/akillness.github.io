@@ -624,9 +624,9 @@
       "links_at_intake": 23,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt from the 2025-11 note into a rigorous Source Audit. Replaced first-person game development anecdotes with an architectural evaluation of Cognee ECL pipelines, GraphRAG multi-hop retrieval benchmarks, and hybrid property graph topologies."
     },
     {
       "path": "_posts/2025/11/2025-11-21-multi-agent-prompt-engineering-gemini-en.md",
