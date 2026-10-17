@@ -461,9 +461,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt from the preserved archive, the training notebook pinned at 20d7fe8532ebce1f44e023700021c3f705b6d710, MiniLM and BGE model cards pinned at 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 and a5beb1e3e68b9ab74eb54cfd186867f64f240e1a respectively, and loss/test source pinned at 0237a556667a46ccdb36072a7866c5d9be9dc518, reviewed on 2026-10-16. Replaced generic variable-size embedding claims with the omitted-wrapper and 384-versus-768-dimensional sentence-output-contract audit. No training run, benchmark reproduction or quality failure is claimed."
     },
     {
       "path": "_posts/2025/06/2025-06-30-agentic-ai-java-neo4j.md",
