@@ -1307,9 +1307,9 @@
       "links_at_intake": 8,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2024 note into an authoritative source audit of ColPali (arXiv:2407.01449), analyzing OCR-free VLM document ingestion and late-interaction MaxSim retrieval."
     },
     {
       "path": "_posts/2024/07/2024-07-29-introducing-llama-3-1.md",
