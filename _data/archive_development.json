@@ -974,9 +974,9 @@
       "links_at_intake": 8,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2026-02 note into an authoritative comparative audit of major Agent SDKs (OpenAI, Google ADK, Claude, Copilot, Strands), examining runtime primitives and coordination models."
     },
     {
       "path": "_posts/2026/02/2026-02-12-deepcode-nanobot.md",
