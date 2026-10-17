@@ -932,9 +932,9 @@
       "links_at_intake": 3,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2026-02 note into an authoritative source audit of Claude Code runtime mechanics, analyzing ReAct scheduling, tool dispatch, and checkpoint security."
     },
     {
       "path": "_posts/2026/02/2026-02-10-stop-generating-start-thinking.md",
