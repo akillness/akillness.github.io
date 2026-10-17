@@ -376,9 +376,9 @@
       "links_at_intake": 8,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt from the 2026-07 note into an original Source Audit evaluating the Unity CLI binary, Unity Pipeline package contracts, headless CI runners, and agent-driven game verification."
     },
     {
       "path": "_posts/2026-08-15-docbank-self-sovereign-documents.md",
