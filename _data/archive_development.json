@@ -1249,9 +1249,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2024 note into an authoritative source audit of GNN-RAG (arXiv:2405.20139), analyzing graph neural network retrieval and multi-hop reasoning path verbalization."
     },
     {
       "path": "_posts/2024/06/2024-06-10-explained-fintune-llm.md",
