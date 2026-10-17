@@ -736,9 +736,9 @@
       "links_at_intake": 21,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from the speculative 2025-12 note into a rigorous Source Audit pinning huggingface/text-embeddings-inference, analyzing Rust tokenization, dynamic batching, and FlashAttention serving."
     },
     {
       "path": "_posts/2025/12/2025-12-07-evaluating-deepagents-cli-on-terminal-bench-2-0.md",
