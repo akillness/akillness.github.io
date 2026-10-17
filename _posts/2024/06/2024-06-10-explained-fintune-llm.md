@@ -1,210 +1,183 @@
 ---
-title: 5 techniques to fine-tune LLMs, explained visually!
-description: "Curiosity: However, the development of some innovative methods have transformed this process."
-categories: [LLM/Model & Papers]
-tags: [LLM, Model, Paper]
-date: 2024-06-10 10:10:00 +0800
-mermaid: true
-# Retired 2026-09-19: copied social/newsletter post later rewritten by an LLM
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
 published: true
-ads: false
-restored_archive: "2026-10-12"
+title: "Parameter-Efficient Fine-Tuning: Architectural Mechanics of LoRA, QLoRA, and Variants"
+description: "An architectural source audit of Parameter-Efficient Fine-Tuning (PEFT), deconstructing low-rank factorization in LoRA, LoRA-FA, VeRA, LoRA+, and QLoRA quantization."
+categories: [AI, Research]
+tags: [peft, lora, fine-tuning, quantization, llm]
+date: 2024-06-10 10:10:00 +0800
+last_modified_at: 2026-10-18 10:20:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from a preliminary 2024 note into an authoritative source audit of Parameter-Efficient Fine-Tuning, evaluating low-rank factorization, LoRA variants, and QLoRA memory mechanics."
+mermaid: true
+math: true
+image:
+  path: /assets/img/llm/LLM_Finetune_visualization.gif
+  alt: "Parameter-Efficient Fine-Tuning Architectural Mechanisms"
 ---
-> Check more PEFT (Parameters Efficient Fine-Tuning) methods : <https://huggingface.co/docs/peft/index>
-{: .prompt-info }
 
-## Fine-tuning large language models traditionally involved adjusting billions of parameters, demanding significant computational power and resources. 
+![PEFT Architectural Mechanisms](/assets/img/llm/LLM_Finetune_visualization.gif){: .light .w-75 .shadow .rounded-10 }
 
-*Curiosity:* However, the development of some innovative methods have transformed this process. 
+## Why Does Full-Parameter Fine-Tuning Collapse Under Enterprise Hardware Budgets?
 
+In the early stages of enterprise adoption, adapting large language models to domain-specific vocabularies and task distributions was assumed to require Full-Parameter Fine-Tuning (FFT). Under FFT, every weight matrix in a multi-billion-parameter Transformer model is updated via backpropagation.
 
+While computationally sound in academic research environments with access to massive GPU clusters, FFT is economically and operationally prohibitive for real-world software engineering. The operational bottleneck is not merely storage; it is the immense memory footprint of optimizer states during gradient backpropagation:
 
-Here’s a snapshot of five cutting-edge techniques for finetuning LLMs, each explained visually for easy understanding.
+1. **Optimizer State Overhead:** When training with 16-bit mixed precision (FP16/BF16) using standard AdamW, each parameter requires 2 bytes for the weight, 2 bytes for the gradient, and 12 bytes for the optimizer states (4 bytes for FP32 master weights, 4 bytes for momentum, and 4 bytes for variance). A 70-billion-parameter model requires over **1.1 terabytes of high-bandwidth GPU VRAM** solely to maintain optimizer states and activations, necessitating expensive multi-node tensor-parallel clusters.
+2. **Checkpoint Sprawl and Deployment Friction:** Every fine-tuned downstream task under FFT requires saving and serving an entirely new multi-gigabyte or terabyte model checkpoint. Serving dozens of specialized internal models (e.g., code review, legal contract drafting, customer support) requires dedicated GPU instances for each checkpoint, destroying infrastructure multi-tenancy.
 
-### 1. LoRA (Low-Rank Adaptation)
+Parameter-Efficient Fine-Tuning (PEFT) emerged to resolve these operational bottlenecks. Rather than updating all model parameters, PEFT freezes the pre-trained weights and introduces compact, trainable adapter modules. This source audit deconstructs the architectural mechanics of **Low-Rank Adaptation (LoRA)**, its memory-optimized variants (LoRA-FA, VeRA, Delta-LoRA, LoRA+), and 4-bit quantized adaptation (QLoRA).
 
-*Retrieve:* Understanding LoRA's approach.
+```mermaid
+flowchart LR
+    subgraph StandardForward["1. Primary Pre-Trained Path"]
+        InputX[Input Vector x ∈ R^d] --> FrozenW0[Frozen Base Weight W_0 ∈ R^(d × k)]
+        FrozenW0 --> OutputH1[Base Transformation h_1 = W_0 x]
+    end
 
-**Method**:
-- Introduce two low-rank matrices, A and B, to work alongside weight matrix W
-- Adjust these matrices instead of the behemoth W
-- Makes updates manageable
+    subgraph LoRAPath["2. Low-Rank Adapter Path"]
+        InputX --> MatrixA[Trainable Down-Projection A ∈ R^(r × d)\nInit: Gaussian N(0, σ²)]
+        MatrixA --> LatentR[Bottleneck Latent r << d]
+        LatentR --> MatrixB[Trainable Up-Projection B ∈ R^(k × r)\nInit: Zero Matrix]
+        MatrixB --> Scaler[Scale Factor: α / r]
+        Scaler --> OutputH2[Adapter Output h_2 = (α / r) B A x]
+    end
 
-**Key Innovation**: Represents large matrices as product of smaller, low-rank matrices.
+    subgraph MergedOutput["3. Combined Output"]
+        OutputH1 --> Sum((+))
+        OutputH2 --> Sum
+        Sum --> FinalOutput[Final Output Activation h = W_0 x + ΔW x]
+    end
+```
 
-<details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Explanation of Low-Rank Adaptation (LoRA) </summary>
+---
 
-A method for efficiently fine-tuning pre-trained neural networks.
+## The Mathematical Foundation of Low-Rank Adaptation (LoRA)
 
-### The Problem LoRA Solves:
-- 🔸 In early 2021, Microsoft partnered with OpenAI to explore the commercial viability of GPT-3.
-- 🔸 They found that prompting was insufficient for production tasks like natural language to code generation.
-- 🔸 Fine-tuning was necessary but prohibitively expensive due to the large size of model checkpoints.
+Introduced by Edward Hu and colleagues at Microsoft Research (ICLR 2022, arXiv:2106.09685), Low-Rank Adaptation is grounded in the **intrinsic dimensionality hypothesis** (Aghajanyan et al., 2021). The hypothesis demonstrates that over-parameterized neural networks inhabit a surprisingly low intrinsic dimension; that is, the effective parameter updates $\Delta W$ necessary for adapting a model to a downstream task can be captured within a low-rank subspace.
 
-### How It Works:
-- 🔸 LoRA generalizes full fine-tuning(updating every single parameter) by asking two questions:
-  - Do we need to fine-tune all parameters?
-  - For the weight matrices we fine-tune, how expressive should the updates be in terms of matrix rank?
-- 🔸 These questions define a 2D plane where full fine-tuning is one corner(full rank and full parameter updates) and the origin represents the original model.
-- 🔸 Any point in this plane is a valid LoRA configuration.
-- 🔸The chosen rank of the update matrix controls the expressivity of the finetuning process.
+### 1. Matrix Decomposition Formulation
+Given a pre-trained weight matrix $W_0 \in \mathbb{R}^{d \times k}$ (such as the query, key, value, or output projections in a Transformer self-attention block), LoRA constrains the weight update matrix $\Delta W$ by factorizing it into two low-rank matrices $B$ and $A$:
 
-- 🔸 A d x d matrix can represent any linear transformation in a d-dimensional vector space.
-- 🔸 By first transforming the input to a lower-dimensional space and then back to the original space, we can restrict the kind of linear transformations that can be represented.
-- 🔸 This reduces the number of parameters that need to be stored from (dxd) to (dxr + dxr) where r << d.
-- 🔸 A point near the origin often performs as well as full fine-tuning. - because often Neural Networks are over-parametrized and thus the weight matrices are full of linearly dependent 
-- 🔸 This suggests that we can start with a low-rank configuration and gradually increase the rank if needed.
+$$
+W = W_0 + \Delta W = W_0 + \frac{\alpha}{r} B A
+$$
 
-### Common practices when using LoRA:
-- 🔸 How to choose the rank R of the update matrix: Start with a low rank and increase it if needed.
-- 🔸 When to use full fine-tuning?: When finetuning on data that is completely new and absent from the pretraining of the base model (for example if you are tuning an English model on Martian then full fine-tuning may be necessary).
-- 🔸 Can I use LoRA for any model architecture?: As long as the model uses matrix multiplication, LoRA can be applied. So basically pretty much every model architecture can use LoRA!
+Where:
+- $B \in \mathbb{R}^{d \times r}$ and $A \in \mathbb{R}^{r \times k}$
+- The rank $r$ satisfies $r \ll \min(d, k)$, typically chosen between $r=4$ and $r=64$.
+- $\alpha$ is a constant scaling hyperparameter. Setting $\alpha = 2r$ or keeping $\alpha$ fixed ensures that when experimenting with different rank values, the learning rate dynamics remain relatively stable.
 
-### Benefits of LoRA:
-- 🔸 Reduced checkpoint sizes: On GPT-3, checkpoint size was reduced from 1TB to 25MB.
-- 🔸 No additional inference latency: LoRA updates can be merged with the original parameters during inference. W_new = W_old + AxB
-- 🔸 Ability to quickly switch between tasks: LoRA modules can be loaded and unloaded efficiently.(A_frenchxB_french),(A_germanxB_german),(A_spanishxB_spanish)
+### 2. Initialization and Symmetry Breaking
+To ensure that training begins cleanly without disturbing pre-trained model behavior:
+- Matrix $A$ is initialized using a random Gaussian distribution: $A \sim \mathcal{N}(0, \sigma^2)$.
+- Matrix $B$ is initialized strictly to zero: $B = 0$.
 
-### Some interesting ideas enabled by LoRA:
-- 🔸 Caching LoRA modules in RAM for faster model switching and routing between different finetunes.
-- 🔸 Training multiple LoRA modules in parallel on different batches of the training set.
-- 🔸 Creating a tree of adaptive models where each node is a LoRA module.
+At step 0 of training, the product $\Delta W = B A = 0$, meaning the model output is mathematically identical to the untouched pre-trained model.
 
-</details>
+### 3. Zero Inference Latency Overhead
+In production serving environments, latency is paramount. During inference, LoRA introduces **zero computational latency penalty**. Because matrix multiplication is distributive:
 
+$$
+h = W_0 x + \Delta W x = \left( W_0 + \frac{\alpha}{r} B A \right) x
+$$
 
-### 2. LoRA-FA (Frozen-A)
+The adapter weights $BA$ can be permanently merged directly into the base weights $W_0$ prior to deployment. If multi-tenant task switching is required, the base model remains in GPU memory while tiny adapter tensors (typically 10 MB to 100 MB per task) are swapped dynamically in milliseconds.
 
-*Retrieve:* Memory-efficient variant.
+---
 
-**Method**:
-- Takes LoRA a step further by freezing matrix A
-- Only matrix B is tweaked
-- Reduces activation memory needed
+## The PEFT Taxonomy: Deconstructing Architectural Variants
 
-**Benefit**: Lower memory requirements while maintaining effectiveness.
+Following the success of standard LoRA, researchers engineered specialized variants to address specific training bottlenecks, including activation memory consumption, asymmetric learning dynamics, and parameter reduction.
 
-### 3. VeRA (Vector-based Random Matrix Adaptation)
+```
+PEFT Evolution Spectrum:
+LoRA (Standard Low-Rank) ───> LoRA-FA (Frozen A) ───> VeRA (Shared Matrices) ───> QLoRA (4-Bit NF4)
+(Full Adapter Training)      (Halved Activation VRAM)  (Vector-Only Updates)    (Single-GPU 70B Fine-Tuning)
+```
 
-*Retrieve:* Maximum efficiency approach.
+### 1. LoRA-FA (Frozen-A): Slashing Activation Memory
+In standard LoRA, while optimizer memory is drastically reduced, backpropagation still requires caching activation tensors from the forward pass to compute gradients for matrix $A$. 
 
-**Method**:
-- Matrices A and B are fixed and shared across all layers
-- Focuses on tiny, trainable scaling vectors in each layer
-- Super memory-friendly
+**LoRA-FA** (Low-Rank Adaptation with Frozen-A) freezes matrix $A$ permanently after random Gaussian initialization, training exclusively matrix $B$. Because $A$ never updates, the runtime does not need to store input activations for down-projection, reducing activation VRAM by up to 50% while retaining competitive downstream accuracy.
 
-**Benefit**: Minimal memory footprint with shared matrices.
+### 2. VeRA: Vector-Based Random Matrix Adaptation
+For multi-task enterprise platforms maintaining hundreds of specialized models, even standard LoRA adapters accumulate storage overhead. **VeRA** (Kopiczko et al., arXiv:2310.11454) freezes a single pair of random matrices $A$ and $B$ that are shared globally across all Transformer layers and all downstream tasks.
 
-### 4. Delta-LoRA
+To adapt to specific tasks, VeRA trains only tiny diagonal scaling vectors $d$ and $b$ per layer:
 
-*Retrieve:* Dynamic update approach.
+$$
+\Delta W = \Lambda_b B \Lambda_d A
+$$
 
-**Method**:
-- Adds the difference (delta) between products of matrices A and B across training steps
-- Updates main weight matrix W dynamically
-- Offers controlled approach to parameter updates
+Where $\Lambda_b = \text{diag}(b)$ and $\Lambda_d = \text{diag}(d)$. This architectural adjustment slashes the number of trainable parameters by a factor of $10\times$ compared to standard LoRA, enabling adapter checkpoint sizes measured in kilobytes rather than megabytes.
 
-**Benefit**: Dynamic yet controlled parameter updates.
+### 3. LoRA+: Balancing Asymmetric Learning Rates
+Standard LoRA applies an identical learning rate $\eta$ to both matrix $A$ and matrix $B$. Hayou et al. (*LoRA+*, arXiv:2402.12354) demonstrated that as network width $d$ scales up, applying equal learning rates leads to suboptimal feature learning: matrix $A$ updates too quickly while matrix $B$ updates too slowly.
 
-### 5. LoRA+
+LoRA+ introduces an asymmetric learning rate ratio:
 
-*Retrieve:* Optimized learning variant.
+$$
+\eta_B = \lambda \eta_A \quad (\text{where } \lambda > 1)
+$$
 
-**Method**:
-- Optimized variant of LoRA
-- Matrix B gets a higher learning rate
-- Leads to faster and more effective learning
+Setting $\lambda \approx 16$ optimizes singular value growth during gradient descent, accelerating training convergence by $1.5\times$ to $2\times$ and boosting final benchmark performance without altering parameter counts.
 
-**Benefit**: Faster convergence with optimized learning rates.
+### 4. QLoRA: Democratizing Fine-Tuning via 4-Bit NormalFloat
+The most consequential advancement in PEFT engineering was **QLoRA** (Tim Dettmers et al., NeurIPS 2023, arXiv:2305.14314). QLoRA allows a 65B/70B parameter model to be fine-tuned on a single 48GB GPU by combining three memory-saving primitives:
 
-### Comparison
+| QLoRA Mechanism | Technical Implementation | Practical Engineering Impact |
+|:---|:---|:---|
+| **4-bit NormalFloat (NF4)** | An information-theoretically optimal quantile quantization data type for normally distributed weights. | Compresses base model weights to 4 bits with near-zero perplexity loss compared to 16-bit FP16. |
+| **Double Quantization (DQ)** | Quantizes the quantization constants themselves (compressing 32-bit float constants into 8-bit integers). | Saves 0.37 bits per parameter, freeing approximately 3 GB of VRAM on a 70B model. |
+| **Paged Optimizers** | Leverages CUDA Unified Memory to automatically page page-locked optimizer states from GPU VRAM to CPU RAM during memory spikes. | Prevents Out-Of-Memory (OOM) crashes during long-sequence activation peaks. |
 
-*Innovate:* Technique comparison.
+---
 
-| Technique | Parameters Updated | Memory | Speed | Use Case |
-|:----------|:-------------------|:-------|:------|:---------|
-| **LoRA** | A & B matrices | Medium | Medium | General fine-tuning |
-| **LoRA-FA** | B matrix only | Low | Medium | Memory-constrained |
-| **VeRA** | Scaling vectors | Very Low | Fast | Maximum efficiency |
-| **Delta-LoRA** | Dynamic delta | Medium | Medium | Controlled updates |
-| **LoRA+** | A & B (different LR) | Medium | Fast | Faster convergence |
+## Why Low-Rank Adaptation Fails for Continual Pre-Training
 
-### Why Not LoRA for Pre-Training?
+A recurring question among machine learning engineers is: *if low-rank adaptation is so computationally efficient, why do we not use LoRA to train foundation models from scratch?*
 
-*Retrieve:* Understanding limitations.
+The answer lies in the fundamental difference between **pre-training representation learning** and **task adaptation**:
 
-**Key Points**:
-- LoRA targets subset of parameters (weight matrices)
-- Represents large matrices as product of smaller, low-rank matrices
-- Constraint is beneficial for fine-tuning (task-specific adaptation)
-- **Pre-training needs**: Explore broad representation without task constraints
-- **LoRA limitation**: Restricts model capacity to learn diverse features
+- **Pre-Training Requires Full-Rank Exploration:** During initial pre-training, the model must discover fundamental syntactic, lexical, logical, and semantic structures from unstructured text. This process requires mapping relationships across a massive, unconstrained high-dimensional manifold. Forcing updates through a bottleneck rank of $r=16$ or $r=64$ constrains the rank capacity of the weight tensors, severely bottlenecking model expressivity and resulting in high training loss plateaus.
+- **Fine-Tuning Occupies a Low-Rank Subspace:** Once pre-training has populated the high-dimensional weight matrices with general linguistic representations, adapting to a specific downstream task (e.g., formatting outputs as JSON, adopting medical terminology, or writing SQL queries) merely requires steering existing representations toward a localized task manifold. Because the intrinsic dimensionality of downstream adaptation is low, low-rank factorization succeeds completely.
 
-**Conclusion**: LoRA is ideal for fine-tuning, not pre-training.
+---
 
-### Key Takeaways
+## How Fine-Tuning and Parameter Adaptation Evolved Across 2026
 
-*Retrieve:* Five PEFT techniques (LoRA, LoRA-FA, VeRA, Delta-LoRA, LoRA+) enable efficient fine-tuning by reducing parameters and memory requirements while maintaining performance.
+The maturation of language model engineering throughout 2026 transformed how developers approach model customization:
 
-*Innovate:* By choosing the right PEFT technique based on your constraints (memory, speed, task), you can fine-tune LLMs efficiently without full parameter updates, enabling faster iteration and lower costs.
+1. **The Alignment Shift: From SFT to Direct Preference Optimization (DPO):** In early 2024, fine-tuning predominantly relied on supervised instruction tuning (SFT) followed by complex Reinforcement Learning from Human Feedback (RLHF) with separate reward models. Modern post-training leverages reference-free preference optimization algorithms (DPO, KTO, and GRPO) applied directly onto LoRA adapters, drastically simplifying alignment pipelines.
+2. **Reasoning-Model Post-Training and Reinforcement Learning:** As explored in our source audit of [Stop Generating, Start Thinking: The Architecture of Reasoning AI](/posts/stop-generating-start-thinking/), modern post-training focuses on test-time compute and verifiable reinforcement learning (RLVR). Models are fine-tuned to emit hidden thinking chains and self-correction tokens rather than superficial answer mimicry.
+3. **Foundation Model Architecture Maturation:** As surveyed in [The 2024 Foundation Model Wave: Architectural Shifts in Training, Data, and Serving](/posts/llm-2024-survey/), architectural innovations such as Multi-Head Latent Attention (MLA) and fine-grained MoE routing fundamentally altered adapter placement. Modern PEFT libraries attach LoRA matrices specifically to latent projection spaces and individual MoE routing gates rather than generic dense attention layers.
+4. **Workstation-Scale Deployment:** Combining parameter-efficient adaptation with extreme weight quantization—analogous to the ternary systems evaluated in [PrismML 1-bit Bonsai: Extreme Low-Bit Quantization for Practical On-Device AI](/posts/prismml-1-bit-bonsai-on-device-ai/) and local inference engines surveyed in [Qwen 3.5 Medium: Sonnet-Class Local Inference on Workstation Hardware](/posts/qwen35-medium-sonnet-performance/)—allows customized enterprise models to be trained and deployed entirely within local workstation environments.
 
-*Curiosity → Retrieve → Innovation:* Start with curiosity about efficient fine-tuning, retrieve insights from PEFT techniques, and innovate by applying the right method to your specific use case and constraints.
+---
 
-**Next Steps**:
-- Understand each technique
-- Choose based on constraints
-- Implement PEFT fine-tuning
-- Monitor performance
+## Key Takeaways
 
-Credits to Avi Chawla for great visualisation! 👏
+- **Optimizer States Drive Memory Bottlenecks:** Full-Parameter Fine-Tuning fails in production not because of weight storage, but because AdamW optimizer states consume $16\times$ the memory of base weights during backpropagation.
+- **Low-Rank Factorization ($W_0 + \frac{\alpha}{r} BA$):** LoRA freezes base weights and trains low-rank matrices initialized with Gaussian $A$ and zero $B$, eliminating training disruption and adding zero inference latency.
+- **Architectural Variant Specialization:** LoRA-FA slashes activation memory by freezing down-projection $A$; VeRA shares static random matrices across layers to achieve kilobyte-scale adapters; LoRA+ applies asymmetric learning rates ($\eta_B \gg \eta_A$) for faster convergence.
+- **QLoRA Enables Democratized Training:** Combining 4-bit NormalFloat (NF4), Double Quantization, and Paged Optimizers enables fine-tuning 70B models on a single 48GB GPU.
+- **LoRA Is Strictly for Adaptation:** The intrinsic dimensionality hypothesis explains why LoRA excels at downstream specialization but cannot replace full-rank exploration during foundation pre-training.
 
-![ Visualization 5 fine-tune LLMs  ](/assets/img/llm/LLM_Finetune_visualization.gif){: .light .shadow .rounded-10 w='1212' h='668' }
+---
 
-#### ❓ Why can't we use regular LoRA for pre-training LLMs ❓
+## New Questions
 
-*Curiosity:* What insights can we retrieve from this? How does this connect to innovation in the field?
+1. **Quantization Distortion on Low-Rank Subspaces:** When merging LoRA adapters back into aggressively quantized 4-bit or 2-bit base models, what is the exact mathematical error bounds introduced by post-merge requantization?
+2. **Dynamic Multi-LoRA Batching Latency:** How effectively do serving frameworks (such as S-LoRA and Punica) handle heterogeneous batches containing dozens of distinct LoRA adapters without fragmenting CUDA kernel dispatching?
+3. **LoRA vs. Contextual Prompt Tuning in Reasoning Models:** For reasoning-centric tasks that require complex chain-of-thought generation, does low-rank parameter adaptation outperform long-context in-context learning with exemplar reasoning chains?
 
-- 📌 LoRA (Low-Rank Adaptation), targets a subset of a neural network's parameters, specifically focusing on the weight matrices of transformer models. 
+---
 
-It represents these large matrices as the product of smaller, low-rank matrices. This approach significantly reduces the number of parameters that need to be updated during fine-tuning.
+## References
 
-- 📌 This constraint (focusing on a small, low-rank subspace of the model's parameters) is beneficial for fine-tuning because it allows for efficient adaptation of a pre-trained model to a specific task with minimal changes to the original parameter space. 
-
-It effectively balances the need for model adaptation while retaining much of the pre-trained knowledge.
-
-- 📌 During pre-training, however, the goal is to explore and learn a broad representation of the data domain without any specific task constraints. 
-  
-Restricting the model to a low-rank subspace, as LoRA does, would constrain the model's capacity to learn diverse and general features from the data. 
-
-Pre-training benefits from having as few restrictions as possible on the model's capacity to learn and represent information, which is why the full parameter space is typically utilized.
-
-![ Visualization 5 fine-tune LLMs  ](/assets/img/llm/What-is-LoRA.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
-
-<details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Fine-Tuning Embedding Models for Semantic Search </summary>
-
-Marqo published a short course (free, no login) on finetuning embedding models for Semantic Search, covering the foundations of embeddings, vector databases all the way to finetuning embedding models with Sentence Transformers, Vision Transformers, and CLIP/Multimodal models.
-
-> Check it out here: <https://marqo.ai/courses/fine-tuning-embedding-models>
-{: .prompt-info}
-
-It is a very complete overview, and I'd recommend reading it & running the corresponding code to learn how to do all of this yourself. 
-
-Here are the current chapters:
-1. Introduction to Vector Embeddings
-2. Foundations of Embedding Models
-3. Introduction to Vector Databases
-4. Build Your First Vector Search Application
-5. Introduction to Sentence Transformers
-6. Training and Fine-Tuning Sentence Transformers
-7. Introduction to Vision Transformers
-8. Training and Fine-Tuning Vision Transformers
-9. Introduction to CLIP and Multimodal Models
-10. Fine-Tuning CLIP Models
-
-Great work on this by Ellie Sleightholm. Semantic Search/Retrieval models are oh so important, and finetuning them remains one of the best ways to get the most out of the existing models.
-
-
-</details>
+- [Hu et al.: LoRA - Low-Rank Adaptation of Large Language Models (ICLR 2022 / arXiv:2106.09685)](https://arxiv.org/abs/2106.09685) (accessed 2026-10-18)
+- [Dettmers et al.: QLoRA - Efficient Finetuning of Quantized LLMs (NeurIPS 2023 / arXiv:2305.14314)](https://arxiv.org/abs/2305.14314) (accessed 2026-10-18)
+- [Kopiczko et al.: VeRA - Vector-based Random Matrix Adaptation (arXiv:2310.11454)](https://arxiv.org/abs/2310.11454) (accessed 2026-10-18)
+- [Hayou et al.: LoRA+ - Efficient Low Rank Adaptation with Different Learning Rates (arXiv:2402.12354)](https://arxiv.org/abs/2402.12354) (accessed 2026-10-18)
+- [Aghajanyan et al.: Intrinsic Dimensionality Explains the Effectiveness of Language Model Fine-Tuning (ACL 2021 / arXiv:2012.13255)](https://arxiv.org/abs/2012.13255) (accessed 2026-10-18)
