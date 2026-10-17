@@ -652,9 +652,9 @@
       "links_at_intake": 20,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "in_progress",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt from the speculative 2025-11 note into a rigorous Source Audit pinning commit 92e1fccb, analyzing backend/council.py orchestration, anonymized ranking parsing, and voting-theoretic limits."
     },
     {
       "path": "_posts/2025/11/2025-11-24-microsoft-fara-7b-efficient-agentic-computer-use.md",
