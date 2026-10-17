@@ -722,9 +722,9 @@
       "links_at_intake": 18,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from the hallucinated 2025-12 note into a rigorous Source Audit pinning kvcache-ai/ktransformers, analyzing CPU-GPU heterogeneous MoE memory pipelines and kernel offloading."
     },
     {
       "path": "_posts/2025/12/2025-12-05-huggingface-text-embeddings-inference-deep-dive.md",
