@@ -263,9 +263,9 @@
       "links_at_intake": 50,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt as a 1,623-word source audit; 21 claims map to 19 pinned references; no comparative benchmark is asserted."
     },
     {
       "path": "_posts/2026/05/2026-05-18-antigravity-cli-migration-agy.md",
