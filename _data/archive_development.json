@@ -568,9 +568,9 @@
       "links_at_intake": 21,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt from the 2025-11 note into a rigorous Source Audit. Replaced first-person marketing claims with an empirical architectural evaluation of VLM document ingestion versus managed retrieval APIs, with verified 2026 research benchmarks and schema contracts."
     },
     {
       "path": "_posts/2025/11/2025-11-18-gemini-3-multi-agent-comprehensive-guide.md",
