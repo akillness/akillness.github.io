@@ -1086,9 +1086,9 @@
       "links_at_intake": 8,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2026-03 note into an authoritative source audit of Mario Zechner's pi and Armin Ronacher's architectural analysis, examining minimal micro-kernel harnesses and hot-reloadable extensions."
     },
     {
       "path": "_posts/2026/03/2026-03-16-opendev-compound-agents.md",
