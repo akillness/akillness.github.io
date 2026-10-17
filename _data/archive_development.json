@@ -694,9 +694,9 @@
       "links_at_intake": 17,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from the speculative 2025-11 note into a rigorous Source Audit pinning Hugo-Dz/spritefusion-pixel-snapper, dismantling fictional multi-agent claims and analyzing Rust Wasm grid quantization."
     },
     {
       "path": "_posts/2025/11/2025-11-26-memori-sql-native-memory-for-llms.md",
