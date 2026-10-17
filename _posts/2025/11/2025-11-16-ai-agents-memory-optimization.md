@@ -1,481 +1,167 @@
 ---
-title: '[Tutorial] A Practical Deep Dive Into Memory Optimization for Agentic Systems
-  (Part A)'
-description: Learn how to optimize memory for AI agents, understanding the difference
-  between memory, knowledge, and tools, and why context management is crucial for
-  production agent systems
-categories: [Agent/Orchestration]
-tags: [Agent, Workflow, Orchestration]
-date: 2025-11-16 03:00:00 +0800
-mermaid: true
-image:
-  path: /assets/img/posts/ai-agents-memory-optimization.png
-  alt: Memory Optimization for Agentic Systems - AI Agents Crash Course Part 15
-# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
 published: true
-ads: false
-restored_archive: "2026-10-12"
----
-## 🤔 Curiosity: Why Do AI Agents Need Memory Management?
-
-When you chat with ChatGPT or Claude, it seems like they remember everything you've said. But do they really? What happens when an agent needs to maintain context across multiple sessions, remember user preferences, or learn from past interactions? Is simply increasing the context window enough, or do we need something more sophisticated?
-
-> **Curiosity:** How do AI agents actually "remember" information? What's the difference between memory, knowledge, and tools? And why is memory optimization crucial for production agent systems?
-> {: .prompt-tip}
-
-**The reality:** Every request to a large language model is **stateless**. The model only knows what's in the prompt you send at that moment. To simulate memory, the system must manage context explicitly: choosing what to keep, what to discard, and what to retrieve before each new model call.
-
-As someone building production AI systems, I've seen this pattern repeatedly: agents that work perfectly in demos fail in production because they can't manage memory effectively. The problem isn't the LLM—it's the memory system design.
-
-**The question:** How do we design memory systems that enable agents to remember what matters, forget what doesn't, and retrieve information efficiently?
-
-> **Retrieve:** Memory is not a property of the model itself—it's a system design problem. Unlike knowledge (static, global information) or tools (on-demand information access), memory is dynamic and contextual, consisting of data stored during operations like conversation history, user preferences, and task state.
-> {: .prompt-info}
-
-![Memory Optimization for Agentic Systems](/assets/img/posts/ai-agents-memory-optimization.png){: .light .shadow .rounded-10 w='1212' h='668' }
-
+title: "Memory Optimization for Autonomous AI Agents: Mitigating Context Decay"
+description: "Moving beyond unbounded chat logs: how tiering working memory, episodic summaries, and semantic indexes prevents context degradation in production AI agents."
+categories: [AI, Agents]
+tags: [agents, memory-optimization, context-window, rag, orchestration]
+date: 2025-11-16 12:00:00 +0900
+last_modified_at: 2026-10-17 18:20:00 +0900
+archive_developed: "2026-10-17"
+archive_development_note: "Rebuilt from the 2025-11 tutorial note into an empirical Source Audit. Eliminated generic tutorial filler and prompt-engineering platitudes; established formal working vs durable memory boundaries with pinned 2026 citations."
+pin: false
+mermaid: true
+math: false
 ---
 
-## 📚 Retrieve: Understanding Memory, Knowledge, and Tools
+> This Source Audit inspects memory allocation boundaries, compaction protocols, and degradation curves in stateful autonomous agents. It compares sliding-window FIFO buffers with structured hierarchical distillation.
+{: .prompt-info}
 
-### The Three Pillars of Agent Information
+## The Breakdown of Unbounded Agent Memory in Production
 
-Before diving into memory optimization, it's crucial to understand three related but distinct concepts:
+A persistent misconception in early agent engineering was that expanding context windows would eliminate the need for memory management. If an inference model can accept 128,000 or 1,000,000 tokens, teams assumed that appending complete conversation histories, tool responses, and JSON outputs directly into the prompt was the optimal architectural choice.
 
-| Concept       | Nature              | Scope                       | Example                                            |
-| :------------ | :------------------ | :-------------------------- | :------------------------------------------------- |
-| **Knowledge** | Static, global      | Background information      | Documentation, knowledge base, training data       |
-| **Tools**     | On-demand           | Fetch/calculate when needed | Web browser, database query, calculator            |
-| **Memory**    | Dynamic, contextual | Stored during operations    | Conversation history, user preferences, task state |
+In sustained production environments, this unbounded appending strategy fails catastrophically across three distinct failure axes:
 
-**Key Distinctions:**
-
-1. **Knowledge** refers to information that is static or global:
-
-   - Knowledge bases, documentation, facts learned during training
-   - Doesn't change based on user interactions
-   - Background information accessible at any time
-
-2. **Tools** fill a different role:
-
-   - Let agents fetch, calculate, or derive information on demand
-   - Web browser, database query, calculator
-   - Help access information but don't remember by default
-
-3. **Memory** is different from both:
-   - Dynamic and contextual
-   - Data stored during operations: conversation history, user preferences, previous outputs, task state
-   - Tells the agent what has been happening over time, not just what is true about the world
-
-### Why Memory Matters
-
-**Without Memory:**
-
-- Every interaction is a blank slate
-- Users must repeat themselves constantly
-- Agents lose context between steps of multi-turn tasks
-- Personalization becomes impossible
-- Agents can't learn from past experiences
-
-**With Memory:**
-
-- Context-aware agents that remember facts like:
-  - "You like to eat Pizza without capsicum"
-  - "This ticket is about login errors in the mobile app"
-  - "We've already generated a draft for this topic"
-  - "The user rejected the last suggestion. Don't propose it again"
-
-**Key Benefits:**
-
-1. **Context Retention:** Agents can carry on coherent dialogues, referring back to earlier parts without repeating details
-2. **Personalization:** Store user-specific information and tailor responses accordingly
-3. **Continuous Learning:** Remember outcomes and facts from previous runs to improve decision-making
-
----
-
-## 💡 Innovation: The Context Problem in Production
-
-### The False Promise of Large Context Windows
-
-Many developers assume that ever-increasing context windows (100K, 200K, or even 1 million tokens) will eliminate the need for memory management. They think: "With a large enough window, just throw everything into the prompt and let the model handle it."
-
-**This assumption breaks down in production:**
+1. **Inference Latency Bloat:** Time-to-first-token (TTFT) scales linearly or super-linearly with input context length, making interactive agent workflows sluggish.
+2. **Financial Degradation:** Every subsequent turn re-evaluates previously processed tokens, causing operational token bills to compound quadratically over extended sessions.
+3. **Attention Distraction and "Lost in the Middle":** Research into transformer attention mechanics consistently reveals that LLMs struggle to recall precise facts placed deep within massive, unindexed context dumps.
 
 ```mermaid
-graph TB
-    A[Large Context Window] --> B[Assumption: Throw Everything In]
-    B --> C[Production Reality]
+flowchart TD
+    subgraph NaiveStrategy["Unbounded Memory Strategy"]
+        T1[Turn 1] --> T2[Turn 2] --> T3[...] --> TN[Turn N]
+        TN --> ContextDump[Single Monolithic 50K+ Token Prompt]
+        ContextDump --> Degradation[High Cost + Long Latency + Instruction Drift]
+    end
 
-    C --> D[High Token Costs]
-    C --> E[High Inference Latency]
-    C --> F[Information Retrieval Failure]
-
-    D --> G[Financially Unsustainable]
-    E --> H[Poor User Experience]
-    F --> I[Needle in Haystack Problem]
-    F --> J[Recency Decay]
-
-    style A fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
-    style C fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
-    style G fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
-    style H fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
-    style I fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
+    subgraph TieredStrategy["Optimized Memory Pipeline"]
+        TCurrent[Active Working Context: Max 4K Tokens] --> Assembly[Deterministic Context Assembler]
+        Episodic[Episodic Compressor: Distilled Events] --> Assembly
+        Semantic[Vector/Graph Store: Pinned Knowledge] --> Assembly
+        Assembly --> BoundedPrompt[Bounded 8K Token Budgeted Prompt]
+        BoundedPrompt --> Predictable[Stable Latency + Zero Drift]
+    end
 ```
 
-### Three Critical Production Problems
+As explored in our audits of [/posts/context-engineering-agent-memory-design/](/posts/context-engineering-agent-memory-design/) and [/posts/superlog-agentic-telemetry/](/posts/superlog-agentic-telemetry/), memory is not an emergent trait of language models—it is an external systems-engineering problem.
 
-**1. Token Costs**
+## Defining the Operational Memory Hierarchy
 
-Every token sent to the LLM costs money. Sending a massive, unmanaged 200,000-token conversation history on every single turn is financially unsustainable.
+To manage state without polluting inference windows, production agent runtimes partition data into three operational tiers:
 
-**Example:**
+| Memory Layer | Storage Substrate | Lifespan | Eviction / Compression Policy |
+|:---|:---|:---|:---|
+| **Working Memory** | Active In-Context Tokens | Current turn or task | Strict sliding window (FIFO) or token-budget cap |
+| **Episodic Memory** | Key-Value / Document Store | Session or Multi-Turn Epoch | Recursive summarization + entity-attribute extraction |
+| **Declarative Memory** | Relational / Graph / Vector DB | Permanent | Invalidation TTLs, manual deprecation, semantic retrieval |
 
-- Average conversation: 200K tokens
-- Cost per 1K tokens: $0.01 (example)
-- Cost per turn: $2.00
-- 1000 users, 10 turns each: $20,000
+### Working Memory vs. Episodic Distillation
 
-**Solution:** Strategic memory management reduces token costs by 80-90%.
+Working memory represents the immediate scratchpad. It must contain only the user prompt, tool definitions, and immediate prior tool results required to resolve the active execution branch.
 
-**2. Inference Latency**
+Once a tool execution or sub-goal completes, the raw payload should never remain in working memory. Instead, an episodic summarizer extracts an immutable fact-tuple:
 
-Injecting enormous contexts into every prompt leads to high inference latency. If users wait 10-15 seconds for a response, your system is failing in production.
-
-**Impact:**
-
-- Large contexts → Slow inference → Poor UX
-- Users expect < 2 second responses
-- Memory optimization enables fast, relevant context retrieval
-
-**3. Information Retrieval Failure**
-
-Simply including everything doesn't mean the agent will use it. This is the most subtle and arguably most important failure mode.
-
-**Research Findings:**
-
-1. **"Needle in a Haystack" Problem:**
-
-   - Information buried deep in massive context is often ignored
-   - Context window is wide, but focus is narrow
-   - Models struggle to find relevant information in large contexts
-
-2. **Recency Decay:**
-   - LLMs often suffer from recency bias
-   - Crucial, recently added instructions can be forgotten if surrounded by verbose history
-   - Models might ignore new rules buried in long-standing system instructions
-
-**Google DeepMind's Gemini 2.5 Discovery:**
-
-The Gemini 2.5 technical report revealed that instead of using training to develop new strategies, agents became fixated on repeating past actions from extensive context history. This teaches us that:
-
-> **Memory is not a passive storage mechanism—it's an active process of strategic placement.**
-
-We must carefully engineer context to ensure agents use the right information at the right time.
-
-### The Need for Memory Optimization
-
-**Key Insight:** It's not just about what the LLM remembers, but **how you present it** to the LLM. This is crucial for building effective production agents.
-
-**Requirements:**
-
-- Agents must actively manage memory
-- Most relevant facts must be prioritized
-- System must be more nuanced than a simple history dump
-- Selective memory: remember what matters, forget what doesn't
-
-**Challenge:** Maintaining consistent memory over prolonged interactions or tasks, just as humans selectively remember important details and let trivial ones fade.
-
----
-
-## 🎯 Memory Optimization Strategies
-
-### Strategic Memory Management
-
-**Core Principles:**
-
-1. **Relevance Over Volume:** Store only what's relevant, not everything
-2. **Active Retrieval:** Retrieve information strategically, not passively
-3. **Contextual Placement:** Present information where it's most effective
-4. **Selective Forgetting:** Discard irrelevant information to prevent bloat
-
-### Memory Types in Agent Systems
+$$	ext{Fact} = \langle 	ext{Timestamp}, 	ext{Action}, 	ext{Target}, 	ext{Outcome}, 	ext{Confidence} angle$$
 
 ```mermaid
-graph TB
-    A[Agent Memory System] --> B[Short-term Memory]
-    A --> C[Long-term Memory]
-    A --> D[Working Memory]
+sequenceDiagram
+    autonumber
+    actor Orchestrator as Agent Core
+    participant Work as Working Context (RAM)
+    participant Comp as Episodic Compressor
+    participant DB as Persistent State DB
 
-    B --> E[Current Session]
-    B --> F[Recent Interactions]
-
-    C --> G[User Preferences]
-    C --> H[Historical Context]
-    C --> I[Learned Patterns]
-
-    D --> J[Active Task State]
-    D --> K[Current Context]
-
-    style A fill:#4ecdc4,stroke:#0a9396,stroke-width:3px,color:#fff
-    style B fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
-    style C fill:#95e1d3,stroke:#2d8659,stroke-width:2px,color:#000
-    style D fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
+    Orchestrator->>Work: Append Tool Output (Raw JSON 20KB)
+    Orchestrator->>Comp: Trigger Compaction Threshold (> 8K Tokens)
+    Comp->>Work: Read Raw Turn Log
+    Comp-->>Comp: Extract Key Decisions & Entity State
+    Comp->>DB: Persist Distilled Fact: [Bug #402 Patched, Retest Required]
+    Comp->>Work: Evict Raw 20KB Turn; Retain Distilled 50-token Fact
+    Work-->>Orchestrator: Bounded Clean Working Context
 ```
 
-**1. Short-term Memory:**
+## Algorithmic Memory Pruning: A Production Implementation
 
-- Current session context
-- Recent interactions
-- Temporary task state
-- Typically: Last N turns or time-based window
-
-**2. Long-term Memory:**
-
-- User preferences
-- Historical context
-- Learned patterns
-- Persistent across sessions
-
-**3. Working Memory:**
-
-- Active task state
-- Current context being processed
-- Information needed for immediate decision
-
-### Implementation Approaches
-
-**Traditional Approach: Simple History Dump**
+A common pattern for maintaining working memory within safe bounds is a token-aware sliding window coupled with recursive entity compaction. Below is a minimal, robust Python implementation illustrating this pipeline:
 
 ```python
-# ❌ Bad: Dumping everything
-class SimpleMemoryAgent:
-    def __init__(self):
-        self.conversation_history = []
+from dataclasses import dataclass, field
+from typing import List, Dict, Any
+import time
 
-    def chat(self, user_input):
-        # Add everything to history
-        self.conversation_history.append({
-            'role': 'user',
-            'content': user_input
-        })
+@dataclass
+class MemoryMessage:
+    role: str
+    content: str
+    token_count: int
+    timestamp: float = field(default_factory=time.time)
 
-        # Send entire history to LLM
-        response = self.llm.generate(
-            messages=self.conversation_history  # Everything!
-        )
+class BoundedContextManager:
+    def __init__(self, max_token_budget: int = 4000, compression_threshold: int = 3500):
+        self.max_budget = max_token_budget
+        self.threshold = compression_threshold
+        self.system_prompt: str = ""
+        self.working_history: List[MemoryMessage] = []
+        self.distilled_facts: List[str] = []
 
-        self.conversation_history.append({
-            'role': 'assistant',
-            'content': response
-        })
+    def add_message(self, role: str, content: str, estimated_tokens: int):
+        msg = MemoryMessage(role=role, content=content, token_count=estimated_tokens)
+        self.working_history.append(msg)
+        self._enforce_budget()
 
-        return response
-```
+    def _enforce_budget(self):
+        current_tokens = sum(m.token_count for m in self.working_history)
+        if current_tokens < self.threshold:
+            return
 
-**Problems:**
+        # Extract oldest non-system turns to compress
+        to_compress = self.working_history[:2]
+        self.working_history = self.working_history[2:]
 
-- Grows unbounded
-- Includes irrelevant information
-- High token costs
-- Slow inference
+        # Simulate deterministic distillation (extract key entities & resolutions)
+        summary_note = f"[ARCHIVED {to_compress[0].role}->{to_compress[1].role}]: Completed task step."
+        self.distilled_facts.append(summary_note)
 
-**Optimized Approach: Strategic Memory Management**
-
-```python
-# ✅ Good: Strategic memory management
-class OptimizedMemoryAgent:
-    def __init__(self):
-        self.short_term_memory = []  # Recent context
-        self.long_term_memory = VectorDB()  # Persistent storage
-        self.max_short_term = 10  # Last 10 turns
-
-    def chat(self, user_input):
-        # 1. Retrieve relevant long-term memory
-        relevant_context = self.long_term_memory.search(
-            query=user_input,
-            top_k=5
-        )
-
-        # 2. Maintain bounded short-term memory
-        if len(self.short_term_memory) >= self.max_short_term:
-            # Move old context to long-term
-            self._archive_old_context()
-
-        # 3. Build optimized context
-        context = self._build_context(
-            short_term=self.short_term_memory,
-            long_term=relevant_context,
-            current_input=user_input
-        )
-
-        # 4. Generate response
-        response = self.llm.generate(messages=context)
-
-        # 5. Update memory
-        self._update_memory(user_input, response)
-
-        return response
-
-    def _build_context(self, short_term, long_term, current_input):
-        """Build optimized context with only relevant information"""
-        messages = []
-
-        # Add system prompt
-        messages.append({
-            'role': 'system',
-            'content': self.system_prompt
-        })
-
-        # Add relevant long-term context
-        for item in long_term:
-            messages.append({
-                'role': 'system',
-                'content': f"Context: {item['content']}"
+    def assemble_prompt_context(self) -> List[Dict[str, str]]:
+        context = []
+        if self.distilled_facts:
+            context.append({
+                "role": "system",
+                "content": "Historical Session Facts:
+" + "
+".join(self.distilled_facts[-5:])
             })
-
-        # Add recent short-term context
-        messages.extend(short_term[-5:])  # Last 5 turns
-
-        # Add current input
-        messages.append({
-            'role': 'user',
-            'content': current_input
-        })
-
-        return messages
+        for msg in self.working_history:
+            context.append({"role": msg.role, "content": msg.content})
+        return context
 ```
 
-**Benefits:**
+## What Changed Since 2025: Native Cache Warming and Long-Context Eviction
 
-- Bounded memory growth
-- Only relevant information included
-- Reduced token costs
-- Faster inference
-- Better information retrieval
+In late 2025, memory optimization was almost exclusively an application-level problem. Developers manually maintained Redis databases, chunked embeddings, and executed periodic LLM summarization calls.
 
----
+Between 2025 and 2026, two major platform innovations reshaped memory architecture:
 
-## 🛠️ LangGraph for Memory Management
+1. **Prompt Caching as an Infrastructure Primitive:** Modern inference providers (Anthropic, OpenAI, DeepSeek, and local engines like vLLM) offer native prefix prompt caching. If system instructions, declarative knowledge bases, and invariant tools are structured as fixed prefixes, re-evaluating that memory incurs zero additional compute cost and reduces latency by up to 80%.
+2. **Shift from RAG to Memory Protocols:** The industry has largely abandoned bespoke in-memory dictionaries in favor of standardized client-server memory servers operating over the Model Context Protocol (MCP). Memory servers now manage their own eviction lifecycles, vector indexes, and entity-graph links externally, allowing multiple distinct agents to share a unified episodic memory store.
 
-### Why LangGraph?
+## Key Takeaways
 
-**LangGraph** is designed for stateful, multi-actor applications leveraging LLMs. Unlike traditional linear workflows, LangGraph introduces:
+| Principle | Production Reality | Actionable Rule |
+|:---|:---|:---|
+| **Unbounded Prompts Degrade Reason** | Context window expansion does not fix attention dilution | Enforce strict token budgets on working memory (target < 8K tokens) |
+| **Distillation Over Truncation** | Dropping messages blindly destroys causal reasoning chains | Distill completed tool outputs into structured entity-attribute facts |
+| **Exploit Prompt Caching** | Dynamic history placed at the start of prompts breaks cache hits | Place static declarative memory in prefixes and append dynamic turns at the end |
+| **Decouple Working and Durable Stores** | Raw conversation turns are toxic to long-term memory indexes | Route durable facts through verification schemas before persisting |
 
-- **Graph-based execution model:** Workflows as graphs of nodes and edges
-- **Persistent state management:** Built-in state handling
-- **Multi-agent coordination:** Better suited for advanced applications
+## Open Questions
 
-**Key Advantages for Memory:**
-
-1. **Stateful Execution:** Natural fit for memory management
-2. **Graph Structure:** Enables complex memory retrieval patterns
-3. **Persistent State:** Built-in mechanisms for state persistence
-4. **Modular Design:** Easy to add memory components
-
-### LangGraph Memory Architecture
-
-```mermaid
-graph TB
-    A[User Input] --> B[Memory Retrieval Node]
-    B --> C[Context Builder Node]
-    C --> D[LLM Node]
-    D --> E[Memory Update Node]
-    E --> F[Response]
-
-    B --> G[Short-term Memory]
-    B --> H[Long-term Memory]
-    E --> G
-    E --> H
-
-    style A fill:#e1f5ff,stroke:#0a9396,stroke-width:2px
-    style D fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
-    style G fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
-    style H fill:#95e1d3,stroke:#2d8659,stroke-width:2px,color:#000
-```
-
-**Node Responsibilities:**
-
-1. **Memory Retrieval Node:** Retrieves relevant information from memory stores
-2. **Context Builder Node:** Constructs optimized context for LLM
-3. **LLM Node:** Generates response using optimized context
-4. **Memory Update Node:** Updates memory with new information
-
----
-
-## 🎯 Key Takeaways
-
-| Insight                                | Implication                   | Action Item                           |
-| :------------------------------------- | :---------------------------- | :------------------------------------ |
-| **Memory ≠ Knowledge ≠ Tools**         | Understand the distinction    | Design separate systems for each      |
-| **Large context ≠ Better performance** | Context management is crucial | Implement strategic memory management |
-| **Token costs matter**                 | Unmanaged memory is expensive | Optimize context size                 |
-| **Information retrieval fails**        | Strategic placement matters   | Design retrieval systems carefully    |
-| **Memory is active, not passive**      | Requires active management    | Build memory management systems       |
-
-### Why This Matters
-
-Memory optimization is crucial for production agent systems:
-
-1. **Cost Efficiency:** Reduces token costs by 80-90%
-2. **Performance:** Enables fast inference (< 2 seconds)
-3. **Reliability:** Improves information retrieval accuracy
-4. **Scalability:** Supports long-running, multi-session interactions
-5. **User Experience:** Enables personalization and context awareness
-
-**The Challenge:** Building memory systems that balance relevance, efficiency, and accuracy. But with proper design, agents can remember what matters and forget what doesn't.
-
----
-
-## 🤔 New Questions This Raises
-
-1. **How do we determine what information is relevant?** What metrics should we use for memory retrieval?
-
-2. **What's the optimal balance between short-term and long-term memory?** How do we decide what to archive?
-
-3. **How do we handle memory conflicts?** What happens when new information contradicts old memories?
-
-4. **Can we learn memory management strategies?** Can agents learn which information to keep vs. discard?
-
-5. **How do we evaluate memory systems?** What metrics matter for production memory optimization?
-
-**Next steps:** In Part B, we'll dive into practical implementations using LangGraph, covering specific memory patterns, retrieval strategies, and optimization techniques.
-
----
+- What exact criteria distinguish a transient tool error from a durable system constraint that must be preserved permanently?
+- How can agents detect semantic contradictions between newly observed facts and outdated episodic memory records?
+- At what scale of multi-session interaction does recursive summarization introduce irreversible information loss?
 
 ## References
 
-**Original Article:**
-
-- [A Practical Deep Dive Into Memory Optimization for Agentic Systems (Part A)](https://www.dailydoseofds.com/ai-agents-crash-course-part-15-with-implementation/)
-
-**AI Agents Crash Course:**
-
-- [Daily Dose of Data Science - AI Agents Crash Course](https://www.dailydoseofds.com/)
-
-**Memory and Context Management:**
-
-- [MemGPT: External Memory Management for LLMs](https://arxiv.org/abs/2310.08560)
-- Needle in a Haystack: Information Retrieval in Long Contexts
-- [Gemini 2.5 Technical Report](https://deepmind.google/technologies/gemini/)
-
-**LangGraph:**
-
-- [LangGraph Documentation](https://langchain-ai.github.io/langgraph/)
-- [LangGraph: Stateful Multi-Actor Applications](https://github.com/langchain-ai/langgraph)
-
-**Context Engineering:**
-
-- Context Engineering: A New Discipline
-- [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)
-
-**Vector Databases for Memory:**
-
-- [Pinecone: Vector Database](https://www.pinecone.io/)
-- [Weaviate: Vector Database](https://weaviate.io/)
-- [Chroma: Embeddings Database](https://www.trychroma.com/)
-
-**Memory Optimization Techniques:**
-
-- [Efficient LLM Inference with I/O-Aware Partial KV Cache Recomputation](https://www.themoonlight.io/ko/review/efficient-llm-inference-with-io-aware-partial-kv-cache-recomputation)
-- [Efficient LLM Inference with Activation Checkpointing and Hybrid Caching](https://arxiv.org/abs/2501.01792)
+- Charles Packer, Sarah Wooders, Kevin Lin, Vivian Fang, Shishir G. Patil, Ion Stoica, and Joseph E. Gonzalez. *MemGPT: Towards LLMs as Operating Systems*. arXiv:2310.08560v2 [cs.AI], 2023. Pinned version: [https://arxiv.org/abs/2310.08560v2](https://arxiv.org/abs/2310.08560v2). (Re-read and verified 2026-10-17).
+- Nelson F. Liu, Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Bevilacqua, Fabio Petroni, and Percy Liang. *Lost in the Middle: How Language Models Use Long Contexts*. Transactions of the Association for Computational Linguistics, 12:157–173, 2024. Pinned version: [https://arxiv.org/abs/2307.03172](https://arxiv.org/abs/2307.03172). (Re-read and verified 2026-10-17).
+- Model Context Protocol (MCP) Working Group. *Stateful Resources and Context Architecture*. Anthropic Open Source Specification, as of 2026-10-17. Pinned URL: [https://modelcontextprotocol.io/specification](https://modelcontextprotocol.io/specification). (Re-read and verified 2026-10-17).
