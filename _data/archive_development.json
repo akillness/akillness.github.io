@@ -610,9 +610,9 @@
       "links_at_intake": 17,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt from the 2025-11 note into a rigorous Source Audit. Replaced speculative career advice listicles with a technical analysis of agent harness engineering, contract-driven interface design, and property-based verification pipelines."
     },
     {
       "path": "_posts/2025/11/2025-11-20-cognee-multi-agent-memory-system.md",
