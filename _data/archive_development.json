@@ -1172,9 +1172,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2024 note into an authoritative source audit of Retrieval-Augmented Generation, tracing architectural foundations from Lewis et al. to 2026 production systems."
     },
     {
       "path": "_posts/2024/05/2024-05-18-rag-systematic-workflow.md",
