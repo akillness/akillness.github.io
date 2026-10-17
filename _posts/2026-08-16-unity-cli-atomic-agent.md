@@ -103,6 +103,7 @@ The fundamental command-line flags required for dependable CI operations include
 
 To decouple build logic from editor UI menus, projects implement static methods exposed to `-executeMethod`. The method configures player settings, resolves active scenes, executes `BuildPipeline.BuildPlayer`, and serializes a structured JSON receipt for external consumers.
 
+{% raw %}
 ```csharp
 // Assets/Editor/StudioBuildAutomation.cs
 using System;
@@ -149,6 +150,7 @@ public static class StudioBuildAutomation
     }
 }
 ```
+{% endraw %}
 
 By generating `build_receipt.json`, the build task produces verifiable evidence that external Python agents can inspect without parsing thousands of unstructured log lines.
 

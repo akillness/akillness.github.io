@@ -86,6 +86,7 @@ Once the host environment is provisioned, orchestrating an open Editor instance 
 
 Instead of granting external scripts arbitrary code execution, production architectures register typed, discoverable commands using the `[CliCommand]` attribute. This encapsulates internal engine mutations within controlled boundaries.
 
+{% raw %}
 ```csharp
 // Assets/Editor/BuildPipelineCommands.cs
 using System;
@@ -120,6 +121,7 @@ public static class BuildPipelineCommands
     }
 }
 ```
+{% endraw %}
 
 Once recompiled, external harnesses discover and trigger this operation directly:
 
