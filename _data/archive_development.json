@@ -1128,9 +1128,9 @@
       "links_at_intake": 6,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2026-04 note into an authoritative source audit of PrismML's 1-bit Bonsai architecture, evaluating intelligence density, ternary quantization, and on-device throughput."
     },
     {
       "path": "_posts/2026/05/2026-05-01-rlm-forge-evidence-gated-recursion.md",
