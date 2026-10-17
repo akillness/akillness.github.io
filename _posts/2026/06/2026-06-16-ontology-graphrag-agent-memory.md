@@ -1,225 +1,113 @@
 ---
 published: true
-title: "From RAG to Context Layer: What Genie Ontology, LLM Wiki Memory, and HyGRAG Tell Us About the Next Stack"
-description: "Three signals on the same day point at one trajectory — RAG → GraphRAG → Agent Memory → Enterprise Ontology — and game studios should read it as a context-layer problem, not a chatbot problem."
+title: "GraphRAG, Agent Memory, and Business Ontology Do Different Jobs"
+description: "HyGRAG retrieves evidence, an LLM Wiki preserves synthesized knowledge, and Genie Ontology supplies governed business semantics; their update and trust boundaries differ."
 categories: [AI, Agents]
-tags: [Ontology, GraphRAG, AgentMemory, ContextLayer, LLMWiki, GenieOntology, RAG]
+tags: [graphrag, agent-memory, genie-ontology, context-engineering]
 date: 2026-06-16 10:00:00 +0900
-pin: false
-mermaid: true
-math: false
+last_modified_at: 2026-10-17 21:57:12 +0900
+archive_developed: 2026-10-17
+archive_development_note: "Re-read the June claims against dated AAIF and Databricks announcements, arXiv v1, and current Genie documentation. Corrected the date premise and separated retrieval, durable knowledge, and governed business semantics."
 image:
-  path: /assets/img/2026-06-16-ontology-graphrag-agent-memory/databricks-genie-img-1.png
-  alt: "Genie Ontology living context graph announced by Databricks"
-ads: false
-restored_archive: "2026-10-12"
+  path: /assets/img/posts/2026-06-16-ontology-graphrag-agent-memory/context-layers.png
+  alt: "Three distinct context jobs shown as evidence retrieval, persistent knowledge, and governed business semantics."
+image_policy: source-first-fallback
+mermaid: false
+math: false
 ---
+## What changes when a graph retrieves evidence, stores memory, or governs business terms?
 
-## 🤔 Curiosity: Why Did Three Different Teams Ship the Same Idea on the Same Day?
+HyGRAG, an LLM Wiki, and Databricks Genie Ontology can all be described as ways to give a model more context. That label hides the operational difference. HyGRAG builds a hierarchical index for finding evidence, as its [paper](https://arxiv.org/abs/2606.18075v1) describes. An LLM Wiki keeps synthesized knowledge available across sessions, a framing explored by the [Agentic AI Foundation](https://aaif.io/blog/karpathys-llm-wiki-as-agent-memory/). Genie Ontology combines inferred context with governed business definitions and permissions, according to [Databricks' current documentation](https://docs.databricks.com/aws/en/genie/genie-ontology). These are separate jobs with different update and trust boundaries, not three steps in one stack.
 
-After 8 years shipping AI-powered games at NC SOFT and COM2US, I've developed a reflex: when an enterprise vendor, a foundation blog, and an academic paper all push in the same direction within 24 hours, that's not coincidence — that's a phase change.
+A team can compose them, but buying or building one does not automatically provide the other two. The useful design question is: **what artifact must stay authoritative after the model answers?** The answer points toward retrieval, persistent knowledge, governed semantics, or a separate action system.
 
-On June 16, 2026, three things landed in my feed:
+<figure class="explanatory-image" width="1200" height="675">
+<img src="/assets/img/posts/2026-06-16-ontology-graphrag-agent-memory/context-layers.png" alt="Three distinct context jobs shown as evidence retrieval, persistent knowledge, and governed business semantics." width="1200" height="675" loading="lazy" decoding="async">
+<figcaption>Original illustration by Codex; not source evidence.</figcaption>
+</figure>
 
-1. **Databricks announced Genie Ontology** — a "living context graph" that ties an enterprise's tables, dashboards, documents, apps, people, and metrics together so AI agents answer and *act* accurately.
-2. **The Agentic AI Foundation reframed Karpathy's LLM Wiki as agent memory** — `raw sources → wiki → schema` as a practical long-term, entity, and procedural memory layer.
-3. **A new GraphRAG paper (HyGRAG)** proposed context-aware *and* relation-aware retrieval that finds relationship paths instead of just nearest-neighbor chunks.
+[Editable SVG source](/assets/img/posts/2026-06-16-ontology-graphrag-agent-memory/context-layers.svg).
 
-The question that hit me: **are these three separate trends, or three layers of the same emerging stack?** And if I'm building a game-facing agent — a quest director, a live-ops copilot, a player-support bot — which of these do I actually need?
+## What changed since the June 16 note
 
-> **Curiosity:** Is the industry quietly moving from "retrieve the right text" to "model the right *world*"?
-{: .prompt-tip}
+The restored note framed the three projects as evidence that separate teams had shipped the same idea on June 16. The source dates do not support that story. The [Agentic AI Foundation article](https://aaif.io/blog/karpathys-llm-wiki-as-agent-memory/) is dated June 8, 2026. [Databricks' announcement](https://www.databricks.com/blog/introducing-genie-one-genie-ontology-and-genie-agents) is dated June 16. HyGRAG's [arXiv v1 record](https://arxiv.org/abs/2606.18075v1) was submitted on June 16, but the paper is part of the [WWW '26 proceedings](https://doi.org/10.1145/3774904.3792720), whose conference dates were April 13–17.
 
----
+Two June 16 timestamps are not evidence of coordination or a phase change. More importantly, the sources describe different problems. The LLM Wiki article is an interpretation of a persistent knowledge practice; HyGRAG is a retrieval method; Genie Ontology is a product context and semantics layer. Their dates do not turn those differences into a progression.
 
-## 📚 Retrieve: The Three Signals, Decoded
+## How HyGRAG separates retrieval from index updates
 
-### Signal 1 — Genie Ontology: the enterprise "living context graph"
+HyGRAG organizes chunks and entity representations into a hierarchy. At query time, its context-aware and relation-aware retrieval assembles evidence for multi-hop questions. The paper describes a separate dynamic-update procedure that uses attachment-based local re-summarization to update affected index areas. The [v1 paper](https://arxiv.org/abs/2606.18075v1) and [pinned repository commit](https://github.com/zjunet/HyGRAG/tree/fa1a57e0e22e22e0dfd8da0676d36be4bbc52497) document these distinct retrieval and update paths. Retrieved evidence answers the current query; it is not a maintained record that an agent automatically remembers after the query ends.
 
-Databricks' core argument is honest about *why* enterprise AI underperforms: the business context needed to use data is scattered across dashboards, queries, pipelines, wikis, tickets, documents, and chat threads. When the model can't find that context, it fills the gap with inference — and you get answers that are "generic at best and wrong at worst."
+The paper reports a 9.7% average gain on its multi-hop question-answering evaluation and a 12.2% gain on HotpotQA. These are author-reported results on public QA datasets, not measurements on game-support tickets or live-operations data. In a separate small check, the authors found hallucinated facts in 17 of 100 sampled MuSiQue summaries; with GPT-4o-mini re-summarization, that count fell to 7. This does not estimate an error rate on game content.
 
-Their solution has three pieces, but the one that matters architecturally is **Genie Ontology**: an automatic context layer that extracts knowledge from tables, queries, dashboards, pipelines, and connected apps, then organizes it into a graph of *how the company works and what the data actually means* — metric definitions, business terms, unique calculations, and the relationships between concepts, metrics, tables, and teams.
+The [pinned repository README](https://github.com/zjunet/HyGRAG/tree/fa1a57e0e22e22e0dfd8da0676d36be4bbc52497) shows an incremental evaluation with a controlled 0.2 corpus-expansion ratio. That experiment helps inspect update behavior, but it does not establish readiness for ingesting weekly game patches.
 
-The clever part is how it decides what to trust. Genie Ontology determines authority with a **PageRank-like approach**: it weighs where a definition came from, the authority of that source's author, how often people rely on it, how closely it ties to certified assets, and how fresh it is. It also enforces source-native permissions so you only see what you're authorized to.
+## What an LLM Wiki preserves across sessions
 
-![Genie Ontology living context graph](/assets/img/2026-06-16-ontology-graphrag-agent-memory/databricks-genie-img-1.png){: .shadow .rounded-10 w='1212' h='623' }
-_Databricks' Genie Ontology positions the ontology as the context layer powering Genie One and Genie Agents._
+Karpathy's [versioned gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f/ac46de1ad27f92b28ac95459c782c07f6b8c964a) describes a small knowledge-compilation loop: keep source material, update a wiki from it, and maintain a schema for the resulting pages. The [AAIF article](https://aaif.io/blog/karpathys-llm-wiki-as-agent-memory/) published June 8 interprets that pattern as persistent agent memory and discusses indexes and logs as navigation and maintenance aids.
 
-This is the same family as Palantir Ontology: model the *objects, relationships, permissions, and actions* of the business, not just the documents. Databricks' internal benchmark (a 28-question real-world data-analysis suite, June 2026) reports Genie answering **84.5%** correctly on the first attempt versus **52.4%** for the strongest general-purpose coding agent — at roughly **2× lower latency**. Treat vendor benchmarks with the usual skepticism, but the *direction* is the signal: structured context beats raw retrieval on enterprise tasks.
+The artifact that persists is synthesized knowledge with links back to source material. That can help an agent or teammate avoid rebuilding the same context on every session. It is not the same as a query-time retrieval index, and it does not by itself establish that a remembered statement is current, authorized, or correct. Those properties depend on source tracking, review, and the rules for updating the wiki.
 
-![Genie governed and secure context architecture](/assets/img/2026-06-16-ontology-graphrag-agent-memory/databricks-genie-img-7.png){: .shadow .rounded-10 w='1212' h='515' }
-_Permissions are enforced on every answer through source-native ACLs or Unity Catalog._
+The existing [LLM Wiki review](/posts/llm-wiki-persistent-knowledge-base/) covers the maintenance workflow in more depth. Here, the narrower point is that persistent knowledge answers a different question from graph retrieval: what should remain available after this task ends?
 
-### Signal 2 — LLM Wiki as agent memory
+## Genie Ontology adds business semantics, not agent actions
 
-Angie Jones (VP of Developer Experience, Agentic AI Foundation) makes a deceptively simple observation: Karpathy's **LLM Wiki** — a collection of interlinked markdown files an LLM maintains — maps almost perfectly onto the taxonomy of agent memory.
+Databricks [Genie Ontology documentation](https://docs.databricks.com/aws/en/genie/genie-ontology) describes a context layer that combines inferred snippets with governed semantics from Unity Catalog; the feature is marked Public Preview. Its [Pages documentation](https://docs.databricks.com/aws/en/uc-semantics/pages) describes human-modeled Pages with definitions and links to related assets that Genie Ontology can use. Automatic context assembly therefore does not mean the semantic layer exists without curation.
 
-The architecture is three layers:
+That distinction matters for trust. Databricks documentation describes inferred snippets, authority scores, and access controls. Pages contribute human-modeled definitions and links to related assets, while Unity Catalog governs access to data. Databricks [Genie Agents documentation](https://docs.databricks.com/aws/en/genie-agents/) describes curated datasets, SQL examples, and instructions, with external tools connected separately. Its [Genie MCP documentation](https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp) says Unity Catalog permissions are enforced for the conversational tool. These related product surfaces do not make Genie Ontology a transaction system or an authorization boundary for arbitrary game actions.
 
+Databricks [Genie One launch blog](https://www.databricks.com/blog/introducing-genie-one-genie-ontology-and-genie-agents) reports 84.5% first-attempt accuracy versus 52.4% for the strongest anonymized general-purpose coding agent, and 2× faster responses than that agent, on its internal 28-question suite. The questions, anonymized comparator, and evaluation setup are not public enough to reproduce this as an independent raw-RAG benchmark. Treat the figures as vendor-reported context for the announcement, not proof that Genie Ontology will improve a different workload by the same amount.
 
-```text
-raw sources → wiki → schema (AGENTS.md)
-```
+## Choose the layer by the artifact that must stay correct
 
+The following map turns the source differences into a design choice. It is a selection aid, not a benchmark or a claim that one product can replace another.
 
-- **Raw sources** — immutable input (documents, articles, notes). The agent reads and cites them but never edits them. This is the *evidence* layer.
-- **Wiki** — the structured markdown knowledge base the LLM maintains, plus two special files: `index.md` for navigation and `log.md` for a chronological activity record.
-- **Schema (`AGENTS.md`)** — the instruction layer telling the agent how to maintain the wiki: conventions, workflows, structure.
+| If the system must… | Start with… | The artifact to verify | Boundary to keep explicit |
+|---|---|---|---|
+| Find connected evidence across source documents | Graph retrieval such as HyGRAG | Retrieved passages, entity links, and index refresh results | Retrieval quality does not make the result durable memory |
+| Carry accepted knowledge across sessions | A source-backed wiki or memory store | The maintained page, its source links, and its update history | Persistence does not guarantee freshness or permission |
+| Interpret business data using stable terms and access rules | A governed semantic layer such as Genie Ontology | Curated definitions, governed data references, and permission checks | Semantics do not grant an agent permission to perform a separate action |
+| Change player or account state | A separately governed action service or tool | Authorization decision, validated command, and audit record | A context source is not a write-control boundary |
 
-What makes this click is the mapping to memory *types*:
+For a game-studio support assistant, these layers could be composed: retrieve evidence from patch notes and resolved tickets, preserve reviewed operational knowledge in a wiki, and read authoritative player or season data through a governed semantic layer. If the assistant can grant currency, change entitlements, or ban an account, that write path still needs an explicit action service and audit boundary. Those are design proposals derived from the documented interfaces; they are not results from a deployed game system.
 
-| Memory type | Where it lives in the wiki | What it stores |
-|:--|:--|:--|
-| **Semantic** | `topics/`, `trends/` | Durable facts and synthesized meaning across many sources |
-| **Entity** | `speakers/`, `sessions/`, `events/` | Facts about specific named things and their relationships |
-| **Episodic** | `log.md`, dated refresh pages | What happened, when, what changed |
-| **Summary** | source/session/speaker pages | Compressed representations of larger evidence sets |
-| **Procedural** | `AGENTS.md` | How to merge, update, decay, and de-duplicate knowledge |
-![LLM Wiki as agent memory: raw sources to wiki to schema](/assets/img/2026-06-16-ontology-graphrag-agent-memory/llm-wiki-agent-memory.png){: .shadow .rounded-10 w='1212' h='665' }
-_The `raw sources → wiki → AGENTS.md schema` layering maps cleanly onto semantic, entity, episodic, summary, and procedural memory._
+A practical pilot can start with three tests: does retrieval find the right evidence, does the maintained knowledge stay current after a source changes, and do permissions block a query that should not see a record? Measure those separately. A single answer-accuracy score can hide whether failure came from stale memory, weak retrieval, or access policy.
 
-The honest caveat she raises: the wiki pattern has *not* replaced **conversational** or **working** memory for her — those stay short-lived and in-session. The wiki shines for *persistent* memory. That tradeoff matters.
+The earlier [GraphRAG overview](/posts/graphrag-opensource/) explains the graph-retrieval family. Read it alongside this comparison when the hard part is finding connected evidence; use the LLM Wiki review when the hard part is maintaining knowledge across sessions.
 
-### Signal 3 — HyGRAG: context-aware *and* relation-aware GraphRAG
+## Key Takeaways
 
-The arXiv paper ([2606.18075](https://arxiv.org/abs/2606.18075), accepted at WWW '26) names the exact limitation I keep hitting with naive GraphRAG. Existing graph methods split into two camps:
+- HyGRAG is a query-time retrieval method; its benchmark results do not predict performance on a game corpus.
+- An LLM Wiki preserves synthesized knowledge, with freshness and correctness depending on its source and update process.
+- Genie Ontology supplies business context and governed semantics; Databricks documents agent tools and actions as separate surfaces.
+- A graph-shaped representation does not establish one architecture, shared release, or common permission model.
+- Keep retrieval, persistence, semantic authority, and write permissions as separate testable decisions.
 
-- **Entity-centric** approaches connect logically related content but retrieve through similarity search.
-- **Chunk-centric** approaches preserve context but also retrieve separately.
+## New Questions
 
-Both "operate on representations anchored to original text without true knowledge fusion" — they miss the *emergent* understanding that comes from synthesizing context and relations together.
-
-**HyGRAG** (hierarchical graph RAG) addresses three challenges:
-
-1. Build summaries that genuinely integrate contextual *and* relational information.
-2. Use those synthesized representations to access emergent knowledge at retrieval time.
-3. Update hierarchical structures efficiently for dynamic corpora — via attachment-based algorithms with only *local* re-summarization.
-
-Mechanically: hierarchical index structures over hybrid graphs with both chunk and entity nodes, iteratively clustered with LLM-generated summaries, then context- and relation-aware retrieval that searches across all abstraction levels while expanding through community membership. Reported result: **+9.7% average accuracy on multi-hop reasoning** at reasonable efficiency.
-
-![HyGRAG hierarchical hybrid-graph retrieval](/assets/img/2026-06-16-ontology-graphrag-agent-memory/hygrag-graphrag.png){: .shadow .rounded-10 w='1212' h='808' }
-_HyGRAG fuses chunk and entity nodes into a hierarchy of community summaries, traversing relation paths instead of isolated nearest neighbors._
-
-### The pattern underneath
-
-Put the three side by side and the trajectory is unmistakable:
-
-```mermaid
-flowchart LR
-    A["RAG<br/>vector search<br/>over chunks"] --> B["GraphRAG<br/>relation-aware<br/>retrieval (HyGRAG)"]
-    B --> C["Agent Memory<br/>persistent wiki<br/>(raw→wiki→schema)"]
-    C --> D["Enterprise Ontology /<br/>Context Layer<br/>(Genie Ontology)"]
-
-    style A fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-    style B fill:#0077b6,stroke:#03045e,stroke-width:2px,color:#fff
-    style C fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
-    style D fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
-```
-
-Each step adds something the previous one lacked: GraphRAG adds **relations**, agent memory adds **persistence and procedure**, and the ontology adds **objects, permissions, actions, and audit**. We're moving from "retrieve the right text" to "model the right world."
-
----
-
-## 💡 Innovation: What This Means for Games (and Any Real Product)
-
-Here's where my production lens kicks in. In live games, the "context problem" is *brutal*: player state, inventory, guild relationships, season metadata, balance patches, support tickets, and design docs all live in different systems. A support or live-ops agent that only does vector search over a help-center will hallucinate the moment a question crosses two systems — exactly the Databricks failure mode.
-
-### A concrete mapping for a game live-ops agent
-
-| Layer | Generic stack | Game live-ops equivalent |
-|:--|:--|:--|
-| **Evidence (raw)** | docs, tickets | patch notes, design docs, telemetry exports, support transcripts |
-| **GraphRAG** | chunk+entity graph | items ↔ skills ↔ encounters ↔ economy nodes with relation edges |
-| **Agent memory** | LLM wiki | maintained pages per season, per feature, per cohort + `log.md` of balance changes |
-| **Ontology** | business objects | Player, Guild, Item, Match, Ticket objects with permissions + *actions* (refund, grant, ban) + audit log |
-
-The jump from a chatbot to this stack is the jump from "answers about the game" to "**operations on the game**, governed and audited." That last clause — permissions, actions, audit log — is what separates a demo from something you'd actually let touch a live economy.
-
-### What I'd build first (and the honest tradeoffs)
-
-I wouldn't start by buying an enterprise ontology. I'd start small and let the structure earn its complexity:
-
-```python
-# Curiosity: can a markdown wiki + a relation index beat a vector-only bot
-#            for cross-system game questions, before we commit to an ontology?
-from pathlib import Path
-from dataclasses import dataclass, field
-
-@dataclass
-class GameAgentMemory:
-    """
-    Retrieve: raw sources -> maintained wiki -> schema, with a thin relation
-              index so multi-hop questions ('which items broke after patch X?')
-              traverse edges instead of guessing from nearest-neighbor chunks.
-    Innovation: persistent, auditable memory before paying for a full ontology.
-    """
-    root: Path
-    # entity_id -> set of related entity_ids (the cheap 'graph' layer)
-    relations: dict[str, set[str]] = field(default_factory=dict)
-
-    def ingest(self, source_path: Path) -> Path:
-        """Raw sources are immutable; we only ever derive from them."""
-        assert source_path.is_relative_to(self.root / "raw"), "raw is read-only truth"
-        wiki_page = self._summarize_to_wiki(source_path)   # summary memory
-        self._append_log(f"ingested {source_path.name} -> {wiki_page.name}")  # episodic
-        return wiki_page
-
-    def link(self, a: str, b: str) -> None:
-        """Entity memory: relationships are first-class, both directions."""
-        self.relations.setdefault(a, set()).add(b)
-        self.relations.setdefault(b, set()).add(a)
-
-    def multi_hop(self, start: str, hops: int = 2) -> set[str]:
-        """Relation-aware retrieval, HyGRAG-lite: expand along edges."""
-        frontier, seen = {start}, {start}
-        for _ in range(hops):
-            nxt = {n for e in frontier for n in self.relations.get(e, set())}
-            frontier = nxt - seen
-            seen |= nxt
-        return seen - {start}
-
-    def _summarize_to_wiki(self, src: Path) -> Path: ...   # LLM summarization
-    def _append_log(self, msg: str) -> None: ...           # to wiki/log.md
-```
-
-**The tradeoffs I'd be honest about:**
-
-- A markdown wiki + relation index is *cheap and inspectable*, but it won't auto-resolve authority like Genie Ontology's PageRank-style weighting. You'll hand-curate trust early.
-- GraphRAG's multi-hop accuracy gain (~+9.7% in HyGRAG) is real but comes with **index maintenance cost** — the paper's whole third contribution is making updates *local*, because naive re-summarization of a dynamic corpus is a killer for live games that patch weekly.
-- Permissions and audit are not a "phase 2" nice-to-have. The moment an agent can take an *action* (refund, grant, ban), source-native ACLs and an audit trail become the feature, not the chrome.
-
-### Key takeaways
-
-| Insight | Implication | Next step |
-|:--|:--|:--|
-| RAG → GraphRAG → Memory → Ontology is one trajectory, not four trends | Don't over-invest in vector-only retrieval for cross-system questions | Add a thin relation index before scaling embeddings |
-| The LLM Wiki *is* agent memory | You can get persistent, entity, and procedural memory from markdown + a schema | Adopt `raw → wiki → schema`; keep `log.md` for episodic/audit |
-| Ontologies model objects, permissions, *and actions* | Chatbots answer; ontologies operate | Define your Player/Item/Match objects and their allowed actions early |
-| Authority is a retrieval problem | Freshness + source weight beats "most similar chunk" | Borrow PageRank-style trust scoring for your own sources |
-
-> **Innovation:** The cheapest version of this stack — immutable raw sources, an LLM-maintained markdown wiki, a thin relation index, and explicit object/action/permission definitions — gets you 80% of the architectural value before you ever buy an enterprise ontology.
-{: .prompt-warning}
-
-### New Questions This Raises
-
-- **Can HyGRAG's local re-summarization keep up with a weekly game patch cadence**, where balance changes ripple across hundreds of related entities?
-- **Where's the line between agent memory and ontology?** If my LLM Wiki gains a permission model and action handlers, did it just *become* a lightweight ontology?
-- **How do you evaluate a context layer?** Databricks reports first-attempt accuracy, but for games I care about *action safety* — how do we benchmark "did the agent take the right governed action," not just "did it answer right"?
-
----
+- Which source remains authoritative when a wiki summary conflicts with a live game database?
+- How will a retrieval index expose stale or superseded patch notes?
+- Which service owns authorization and audit for an agent's write action?
+- Can the pilot report retrieval quality, knowledge freshness, and permission failures separately?
 
 ## References
 
-**Primary Sources:**
-- [Introducing Genie One, Genie Agents, and Genie Ontology — Databricks Blog](https://www.databricks.com/blog/introducing-genie-one-genie-ontology-and-genie-agents)
-- [Karpathy's LLM Wiki as Agent Memory — Agentic AI Foundation (Angie Jones)](https://aaif.io/blog/karpathys-llm-wiki-as-agent-memory/)
-- [A Unified Framework for Context-Aware and Relation-Aware Graph Retrieval-Augmented Generation (HyGRAG) — arXiv:2606.18075](https://arxiv.org/abs/2606.18075)
+### Papers and original technical artifacts
 
-**Related Work:**
-- [Palantir Ontology](https://www.palantir.com/platforms/foundry/ontology/) — the enterprise-ontology lineage Genie Ontology echoes
-- [Microsoft GraphRAG](https://github.com/microsoft/graphrag) — community-summary GraphRAG that HyGRAG builds beyond
-- [AGENTS.md](https://agents.md/) — the schema/instruction-layer convention used by the LLM Wiki pattern
+- HyGRAG, “A Unified Framework for Context-Aware and Relation-Aware Graph Retrieval-Augmented Generation,” arXiv v1, submitted June 16, 2026; WWW '26 proceedings. [arXiv v1](https://arxiv.org/abs/2606.18075v1); [ACM DOI](https://doi.org/10.1145/3774904.3792720). Retrieved 2026-10-17.
+- HyGRAG repository, README and incremental-evaluation instructions at commit fa1a57e0e22e22e0dfd8da0676d36be4bbc52497. [Pinned commit](https://github.com/zjunet/HyGRAG/tree/fa1a57e0e22e22e0dfd8da0676d36be4bbc52497). Retrieved 2026-10-17.
+- Andrej Karpathy, [LLM Wiki gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f/ac46de1ad27f92b28ac95459c782c07f6b8c964a), revision ac46de1ad27f92b28ac95459c782c07f6b8c964a. Retrieved 2026-10-17.
 
-**Standards & Tooling:**
-- [Unity Catalog](https://www.databricks.com/product/unity-catalog) — governance/ACL layer cited for Genie permissions
-- [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) — the integration surface Genie Agents use for actions
+### Official product sources
+
+- Agentic AI Foundation, [Karpathy's LLM Wiki as Agent Memory](https://aaif.io/blog/karpathys-llm-wiki-as-agent-memory/), June 8, 2026. Retrieved 2026-10-17.
+- Databricks, [Genie One announcement](https://www.databricks.com/blog/introducing-genie-one-genie-ontology-and-genie-agents), June 16, 2026. Internal 28-question evaluation and vendor-reported results. Retrieved 2026-10-17.
+- Databricks, [Genie Ontology documentation](https://docs.databricks.com/aws/en/genie/genie-ontology), last updated September 11, 2026; Public Preview. Retrieved 2026-10-17.
+- Databricks, [Pages documentation](https://docs.databricks.com/aws/en/uc-semantics/pages), last updated October 13, 2026. Retrieved 2026-10-17.
+- Databricks, [Genie Agents documentation](https://docs.databricks.com/aws/en/genie-agents/), last updated October 7, 2026. Retrieved 2026-10-17.
+- Databricks, [Genie One MCP documentation](https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp), last updated October 16, 2026. Retrieved 2026-10-17.
+
+### Related coverage
+
+- [LLM Wiki: persistent knowledge and maintenance](/posts/llm-wiki-persistent-knowledge-base/), published 2026-04-05.
+- [Open-source GraphRAG overview](/posts/graphrag-opensource/), published 2024-07-05.

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Three different jobs for model context</title>
+  <desc id="desc">Evidence retrieval, persistent knowledge, and governed business semantics are separate layers with different artifacts.</desc>
+  <rect width="1200" height="675" rx="32" fill="#0b1324"/>
+  <text x="72" y="88" fill="#f8fafc" font-family="Arial, sans-serif" font-size="38" font-weight="700">Three different jobs for model context</text>
+  <text x="72" y="132" fill="#aab7cc" font-family="Arial, sans-serif" font-size="22">Choose the layer by what must stay correct after an answer.</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="72" y="196" width="328" height="356" rx="24" fill="#17263b" stroke="#53d6c8" stroke-width="3"/>
+    <circle cx="120" cy="249" r="22" fill="#53d6c8"/>
+    <text x="112" y="257" fill="#0b1324" font-size="23" font-weight="700">1</text>
+    <text x="108" y="312" fill="#f8fafc" font-size="28" font-weight="700">Retrieve evidence</text>
+    <text x="108" y="365" fill="#aab7cc" font-size="21">Graph retrieval</text>
+    <path d="M108 395h246" stroke="#38516c" stroke-width="2"/>
+    <text x="108" y="441" fill="#dce7f5" font-size="20">Find passages and links</text>
+    <text x="108" y="474" fill="#dce7f5" font-size="20">for the current question.</text>
+    <text x="108" y="526" fill="#53d6c8" font-size="18" font-weight="700">QUERY-TIME EVIDENCE</text>
+    <rect x="436" y="196" width="328" height="356" rx="24" fill="#17263b" stroke="#a78bfa" stroke-width="3"/>
+    <circle cx="484" cy="249" r="22" fill="#a78bfa"/>
+    <text x="476" y="257" fill="#0b1324" font-size="23" font-weight="700">2</text>
+    <text x="472" y="312" fill="#f8fafc" font-size="28" font-weight="700">Keep knowledge</text>
+    <text x="472" y="365" fill="#aab7cc" font-size="21">LLM Wiki</text>
+    <path d="M472 395h246" stroke="#38516c" stroke-width="2"/>
+    <text x="472" y="441" fill="#dce7f5" font-size="20">Preserve reviewed synthesis</text>
+    <text x="472" y="474" fill="#dce7f5" font-size="20">across separate sessions.</text>
+    <text x="472" y="526" fill="#a78bfa" font-size="18" font-weight="700">PERSISTENT KNOWLEDGE</text>
+    <rect x="800" y="196" width="328" height="356" rx="24" fill="#17263b" stroke="#f4b860" stroke-width="3"/>
+    <circle cx="848" cy="249" r="22" fill="#f4b860"/>
+    <text x="840" y="257" fill="#0b1324" font-size="23" font-weight="700">3</text>
+    <text x="836" y="312" fill="#f8fafc" font-size="28" font-weight="700">Govern meaning</text>
+    <text x="836" y="365" fill="#aab7cc" font-size="21">Business ontology</text>
+    <path d="M836 395h246" stroke="#38516c" stroke-width="2"/>
+    <text x="836" y="441" fill="#dce7f5" font-size="20">Define data terms and</text>
+    <text x="836" y="474" fill="#dce7f5" font-size="20">permission boundaries.</text>
+    <text x="836" y="526" fill="#f4b860" font-size="18" font-weight="700">GOVERNED SEMANTICS</text>
+  </g>
+  <text x="72" y="618" fill="#8da0ba" font-family="Arial, sans-serif" font-size="18">Retrieval is not memory; memory is not authorization.</text>
+</svg>

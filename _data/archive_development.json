@@ -291,9 +291,9 @@
       "links_at_intake": 9,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Re-read June sources and corrected the false same-day premise; separated graph retrieval, durable wiki knowledge, and governed business semantics with distinct update and authorization boundaries."
     },
     {
       "path": "_posts/2026/06/2026-06-22-diffusion-model-visual-breakdown.md",
