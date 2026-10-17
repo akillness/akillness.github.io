@@ -1044,9 +1044,9 @@
       "links_at_intake": 20,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2026-02 note into an authoritative architectural survey of 10 open-source repositories spanning foundational ML, agent workflows, and production systems design."
     },
     {
       "path": "_posts/2026/03/2026-03-01-qwen35-medium-sonnet-performance.md",
