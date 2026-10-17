@@ -1203,9 +1203,9 @@
       "links_at_intake": 4,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2024 note into an authoritative source audit of ViViD (arXiv:2405.11794), analyzing video virtual try-on diffusion architectures and temporal attention mechanisms."
     },
     {
       "path": "_posts/2024/05/2024-05-29-learn-to-develop-game.md",
