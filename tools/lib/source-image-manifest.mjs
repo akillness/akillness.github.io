@@ -112,17 +112,36 @@ const renderedMarkdownSource = (value) => stripFencedCode(String(value || '')
   .replace(/(`{1,2})[^`\n]*\1/g, '')
   .replace(/^(?: {4}|\t).*$/gm, '');
 
+const tagAttributes = (tag) => String(tag || '').matchAll(
+  /[ \t\n\f\r]([^ \t\n\f\r"'<>/=]+)(?:[ \t\n\f\r]*=[ \t\n\f\r]*(?:"([^"]*)"|'([^']*)'|([^ \t\n\f\r"'=<>`/]+)))?/g
+);
+
+const hasClassAttribute = (tag) => {
+  for (const match of tagAttributes(tag)) {
+    if (match[1].toLowerCase() === 'class') return true;
+  }
+  return false;
+};
+
 const attributeValue = (tag, name) => {
-  const match = String(tag || '').match(new RegExp(`\\s${name}\\s*=\\s*(["'])([\\s\\S]*?)\\1`, 'i'));
-  return match ? decodeHtmlEntities(match[2]) : null;
+  for (const match of tagAttributes(tag)) {
+    if (match[1].toLowerCase() !== name.toLowerCase()) continue;
+    return match[2] !== undefined || match[3] !== undefined
+      ? decodeHtmlEntities(match[2] ?? match[3])
+      : null;
+  }
+  return null;
 };
 
 const tagIsHidden = (tag) => {
-  const classes = (attributeValue(tag, 'class') || '').split(/\s+/);
-  return /\shidden(?:\s|=|>|\/)/i.test(String(tag || ''))
-    || /\saria-hidden\s*=\s*(?:"true"|'true'|true)(?:\s|>|\/)/i.test(String(tag || ''))
-    || /\sstyle\s*=/i.test(String(tag || ''))
-    || classes.some((name) => ['hidden', 'sr-only', 'visually-hidden'].includes(name));
+  for (const match of tagAttributes(tag)) {
+    const name = match[1].toLowerCase();
+    const value = decodeHtmlEntities(match[2] ?? match[3] ?? match[4] ?? '');
+    if (name === 'hidden' || name === 'style'
+      || (name === 'aria-hidden' && value.toLowerCase() === 'true')
+      || (name === 'class' && value.split(/\s+/).some((item) => ['hidden', 'sr-only', 'visually-hidden'].includes(item)))) return true;
+  }
+  return false;
 };
 
 const sourceFigureHasAncestor = (source, figureIndex) => {
@@ -279,7 +298,7 @@ export function extractSourceImageFigures(articleBody, { strictFallback = false 
           || !validFallbackDimensions(figureTag)
           || imgTags.some((tag) => !validFallbackDimensions(tag))))
         || tagIsHidden(figureTag)
-        || imgTags.some((tag) => tagIsHidden(tag) || attributeValue(tag, 'class') !== null)
+        || imgTags.some((tag) => tagIsHidden(tag) || hasClassAttribute(tag))
         || sourceFigureHasAncestor(body, match.index)
     });
   }

@@ -736,6 +736,168 @@ function fallbackFixture(count = 0) {
   fixture.fallbackContext = { approved: true, assetFiles: { [local]: { regular: true, size: 1024, sha256: fakeSha(98), validRaster: true, metadataSegments: 0 } }, auditReport: { size: 180, sha256: fakeSha(99), text: url + ' inspected: asset-specific commercial rights were not established.' } };
   return fixture;
 }
+function rewriteFallbackFigure(fixture, { alt, quote = '"', figureOpen = '<figure class="explanatory-image">' }) {
+  const item = fixture.manifest.explanatory_images[0];
+  const original = `<figure class="explanatory-image"><img src="/${item.local_path}" alt="Conceptual explanation">`;
+  fixture.manifest.explanatory_images[0].alt = alt;
+  fixture.articleBody = fixture.articleBody.replace(original, `${figureOpen}<img src="/${item.local_path}" alt=${quote}${alt}${quote}>`);
+}
+
+const visibleQuotedFallbackCases = [
+  ['double-quoted alt contains hidden width', { alt: 'Conceptual explanation: hidden width is quoted prose.' }],
+  ['single-quoted alt contains hidden width', { alt: 'Conceptual explanation: hidden width is quoted prose.', quote: "'" }],
+  ['double-quoted alt contains aria-hidden=true', { alt: 'Conceptual explanation: aria-hidden=true is quoted prose.' }],
+  ['single-quoted alt contains aria-hidden=true', { alt: 'Conceptual explanation: aria-hidden=true is quoted prose.', quote: "'" }],
+  ['double-quoted alt contains style=', { alt: 'Conceptual explanation: style=display:none is quoted prose.' }],
+  ['single-quoted alt contains style=', { alt: 'Conceptual explanation: style=display:none is quoted prose.', quote: "'" }],
+  ['double-quoted alt contains a quoted hidden class example', { alt: `Conceptual explanation: class='hidden' is quoted prose.` }],
+  ['single-quoted alt contains a quoted sr-only class example', { alt: 'Conceptual explanation: class="sr-only" is quoted prose.', quote: "'" }],
+  ['visible figure class follows misleading quoted attribute text', {
+    alt: 'Conceptual explanation',
+    figureOpen: `<figure data-note='example class="hidden "' class="explanatory-image">`
+  }],
+  ['visible figure class precedes misleading quoted attribute text', {
+    alt: 'Conceptual explanation',
+    figureOpen: `<figure class="explanatory-image" data-note='example class="hidden "'>`
+  }]
+];
+
+for (const [name, options] of visibleQuotedFallbackCases) {
+  test(`fallback accepts visible figure when ${name}`, () => {
+    const fixture = fallbackFixture();
+    rewriteFallbackFigure(fixture, options);
+    assert.deepEqual(validateSourceImageManifest(fixture).failures, []);
+    assert.deepEqual(validateShippedImageFallback({
+      articleBody: fixture.articleBody,
+      articleStem: STEM,
+      assetFiles: fixture.fallbackContext.assetFiles
+    }).failures, []);
+  });
+}
+
+test('fallback rejects genuine hidden, aria-hidden, style and hidden-class guards on figure and img', () => {
+  const hiddenCases = [
+    ['figure hidden (bare)', body => body.replace('<figure class="explanatory-image">', '<figure class="explanatory-image" hidden>')],
+    ['figure hidden (assigned)', body => body.replace('<figure class="explanatory-image">', '<figure class="explanatory-image" hidden="hidden">')],
+    ['figure aria-hidden=true', body => body.replace('<figure class="explanatory-image">', '<figure class="explanatory-image" aria-hidden="true">')],
+    ['figure style attribute', body => body.replace('<figure class="explanatory-image">', '<figure class="explanatory-image" style="display:none">')],
+    ['figure hidden class', body => body.replace('class="explanatory-image"', 'class="explanatory-image hidden"')],
+    ['figure sr-only class', body => body.replace('class="explanatory-image"', 'class="explanatory-image sr-only"')],
+    ['figure visually-hidden class', body => body.replace('class="explanatory-image"', 'class="explanatory-image visually-hidden"')],
+    ['img hidden (bare)', body => body.replace('<img src=', '<img hidden src=')],
+    ['img hidden (assigned)', body => body.replace('<img src=', '<img hidden="hidden" src=')],
+    ['img aria-hidden=true', body => body.replace('<img src=', '<img aria-hidden="true" src=')],
+    ['img style attribute', body => body.replace('<img src=', '<img style="display:none" src=')],
+    ['img hidden class', body => body.replace('<img src=', '<img class="hidden" src=')],
+    ['img sr-only class', body => body.replace('<img src=', '<img class="sr-only" src=')],
+    ['img visually-hidden class', body => body.replace('<img src=', '<img class="visually-hidden" src=')]
+  ];
+
+  for (const [name, mutate] of hiddenCases) {
+    const fixture = fallbackFixture();
+    fixture.articleBody = mutate(fixture.articleBody);
+    const packageFailures = validateSourceImageManifest(fixture).failures;
+    assert.ok(packageFailures.some(failure => failure.includes('visible')), `${name}: package validator must reject the hidden figure`);
+    const shippedFailures = validateShippedImageFallback({
+      articleBody: fixture.articleBody,
+      articleStem: STEM,
+      assetFiles: fixture.fallbackContext.assetFiles
+    }).failures;
+    assert.ok(shippedFailures.some(failure => failure.includes('visible')), `${name}: shipped validator must reject the hidden figure`);
+  }
+});
+
+test('fallback rejects a genuinely hidden figure after an NBSP-separated attribute value', () => {
+  const fixture = fallbackFixture();
+  const nbsp = '\u00a0';
+  fixture.articleBody = fixture.articleBody.replace(
+    '<figure class="explanatory-image">',
+    `<figure class="explanatory-image" data-note=${nbsp}" hidden ">`
+  );
+  const packageFailures = validateSourceImageManifest(fixture).failures;
+  const shippedFailures = validateShippedImageFallback({
+    articleBody: fixture.articleBody,
+    articleStem: STEM,
+    assetFiles: fixture.fallbackContext.assetFiles
+  }).failures;
+  assert.deepEqual({
+    package: packageFailures.some(failure => failure.includes('visible')),
+    shipped: shippedFailures.some(failure => failure.includes('visible'))
+  }, { package: true, shipped: true });
+
+});
+test('fallback rejects a genuinely hidden img after an NBSP-separated attribute value', () => {
+  const fixture = fallbackFixture();
+  const nbsp = '\u00a0';
+  const local = fixture.manifest.explanatory_images[0].local_path;
+  fixture.articleBody = fixture.articleBody.replace(
+    `<img src="/${local}" alt="Conceptual explanation">`,
+    `<img src="/${local}" alt="Conceptual explanation" data-note=${nbsp}" hidden ">`
+  );
+  const packageFailures = validateSourceImageManifest(fixture).failures;
+  const shippedFailures = validateShippedImageFallback({
+    articleBody: fixture.articleBody,
+    articleStem: STEM,
+    assetFiles: fixture.fallbackContext.assetFiles
+  }).failures;
+  assert.deepEqual({
+    package: packageFailures.some(failure => failure.includes('visible')),
+    shipped: shippedFailures.some(failure => failure.includes('visible'))
+  }, { package: true, shipped: true });
+});
+
+test('fallback accepts quoted prose after HTML ASCII whitespace before the opening quote', () => {
+  const controls = [
+    ['TAB', '\t'],
+    ['LF', '\n'],
+    ['FF', '\f'],
+    ['CR', '\r'],
+    ['SPACE', ' ']
+  ];
+  for (const [label, whitespace] of controls) {
+    for (const target of ['figure', 'img']) {
+      const fixture = fallbackFixture();
+      const local = fixture.manifest.explanatory_images[0].local_path;
+      if (target === 'figure') {
+        fixture.articleBody = fixture.articleBody.replace(
+          '<figure class="explanatory-image">',
+          `<figure class="explanatory-image" data-note=${whitespace}" hidden ">`
+        );
+      } else {
+        fixture.articleBody = fixture.articleBody.replace(
+          `<img src="/${local}" alt="Conceptual explanation">`,
+          `<img src="/${local}" alt="Conceptual explanation" data-note=${whitespace}" hidden ">`
+        );
+      }
+      const packageFailures = validateSourceImageManifest(fixture).failures;
+      const shippedFailures = validateShippedImageFallback({
+        articleBody: fixture.articleBody,
+        articleStem: STEM,
+        assetFiles: fixture.fallbackContext.assetFiles
+      }).failures;
+      assert.deepEqual({ package: packageFailures, shipped: shippedFailures }, { package: [], shipped: [] }, `${target} ${label}`);
+    }
+  }
+});
+
+test('fallback rejects an img with an unquoted class before a quoted duplicate class', () => {
+  const fixture = fallbackFixture();
+  const local = fixture.manifest.explanatory_images[0].local_path;
+  fixture.articleBody = fixture.articleBody.replace(
+    `<img src="/${local}" alt="Conceptual explanation">`,
+    `<img class=custom-visibility class="" src="/${local}" alt="Conceptual explanation">`
+  );
+  const packageFailures = validateSourceImageManifest(fixture).failures;
+  const shippedFailures = validateShippedImageFallback({
+    articleBody: fixture.articleBody,
+    articleStem: STEM,
+    assetFiles: fixture.fallbackContext.assetFiles
+  }).failures;
+  assert.deepEqual({
+    package: packageFailures.some(failure => failure.includes('visible')),
+    shipped: shippedFailures.some(failure => failure.includes('visible'))
+  }, { package: true, shipped: true });
+});
 
 test('approved audited fallback accepts zero or fewer than four sources without counting generated imagery', () => {
   for (const count of [0, 1, 3]) {
