@@ -680,9 +680,9 @@
       "links_at_intake": 25,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from the speculative 2025-11 note into a rigorous Source Audit comparing Anthropic's self-estimated 100k conversation dataset with METR's randomized trials and 2026 multi-agent compute benchmarks."
     },
     {
       "path": "_posts/2025/11/2025-11-25-spritefusion-pixel-snapper-ai-pixel-art-fix.md",
