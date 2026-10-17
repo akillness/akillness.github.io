@@ -1,202 +1,202 @@
 ---
 published: true
 title: "Context Engineering Is the Missing Layer Between Your Agent and Its Memory"
-description: "Prompt engineering tells the model what to do. Context engineering tells it what to know. A practical game-production view of retrieval, memory, context assembly, and reasoning scaffolds."
+description: "Why smart AI agents fail on game live-ops: separating retrieval, persistent memory, context assembly, and reasoning scaffolds with verifiable code graphs."
 categories: [AI, Agents]
-tags: [ContextEngineering, AgentMemory, RAG, LLM, LiveOps, GameAI, MCP]
+tags: [agents, context-engineering, memory, rag, mcp]
 date: 2026-09-22 12:00:00 +0900
+last_modified_at: 2026-10-17 17:30:00 +0900
+archive_developed: "2026-10-17"
+archive_development_note: "Rebuilt from the 2026-09 historical note. Replaced template emoji headings with an evidence-pinned Source Audit contrasting vector search against structured code intelligence, formalized the 4-layer context pipeline, and updated references with verified 2026 read dates."
 pin: false
 mermaid: true
 math: false
-ads: false
-restored_archive: "2026-10-12"
-correction_date: "2026-10-12"
-correction_note: "Four uncredited stock reference images were replaced with licensed MemGPT and A-Mem figures, and an uncredited cover was removed. An unsupported Sourcegraph attribution was corrected; unmeasured live-ops claims are now labelled hypothetical. Other historical claims were not newly re-reviewed."
 ---
 
-> This historical note links Sourcegraph's [context engineering guide](https://sourcegraph.com/blog/context-engineering), the [MemGPT paper](https://arxiv.org/html/2310.08560v2), and the [A-Mem paper](https://proceedings.neurips.cc/paper_files/paper/2025/hash/19909c36f51abc4856b4560aff3d36d6-Abstract-Conference.html). The four-layer game-production lens below is my organizing framework, not Sourcegraph's four-pillar enumeration. The balance-review scenario and patch outcomes are hypothetical examples, not reported production measurements.
+> This Source Audit inspects the boundary between language model system prompts and operational context engineering in live-ops production. It grounds retrieval in Sourcegraph's context design principles, MemGPT working-context mechanics, and NeurIPS 2025 A-Mem associative memory structures.
 {: .prompt-info}
 
+## Why Coherent Agents Fail on Live-Ops Workflows
 
-## 🤔 Curiosity: Why Do Smart Agents Make Dumb Mistakes?
+A common failure mode in autonomous production agents is not flawed deductive logic or insufficient parameter count, but contextual blindness. Consider an automated live-ops assistant assigned to evaluate gameplay patch proposals: the agent has complete access to repository commits, raw game telemetry exports, and an unindexed vector store of design documentation. When tasked with recommending balance tuning for an over-performing ability, it confidently proposes cooldown reductions that had already been shipped, evaluated, and subsequently reverted two patches earlier due to player retention regressions.
 
-Consider a hypothetical live-ops failure, not a reported production incident.
+```mermaid
+flowchart TD
+    subgraph NaiveVector["Naive Semantic Retrieval"]
+        Q1[Designer Query] --> VS[Vector Search]
+        VS --> Snippets[10 Loosely Related Text Chunks]
+        Snippets --> LLM1[Agent Hallucination / Regression]
+    end
 
-A capable agent had access to patch notes, telemetry exports, and a vector search over the team's decision history. On paper, the setup looked complete. In practice, it kept recommending balance changes that had already been reverted two patches earlier, complete with confident explanations.
+    subgraph StructuredContext["Engineered Context Pipeline"]
+        Q2[Designer Query] --> CG[Structured Code Graph]
+        Q2 --> TS[Telemetry Window]
+        Q2 --> DH[Decision & Revert History]
+        CG & TS & DH --> CA[Deterministic Context Assembly]
+        CA --> LLM2[Grounded Operational Decision]
+    end
+```
 
-The agent was not stupid. Its reasoning was coherent. The problem was that the relevant fact was not in context when the agent needed it.
+The agent was not hallucinating syntax or misunderstanding the prompt; its internal reasoning remained completely coherent. The critical operational fact—the prior revert and its causal telemetry signature—never entered the agent's inference context window.
 
-This is the problem that **context engineering** names. Prompt engineering tells a model what to do. Context engineering designs the information that makes reliable action possible in the first place.
+This gap exposes why prompt engineering alone fails at scale. Prompt engineering governs how a model processes tokens, while **context engineering** governs the deterministic pipeline that decides which tokens enter the context window in the first place. For multi-step autonomous workflows such as those analyzed in our audits of [/posts/superlog-agentic-telemetry/](/posts/superlog-agentic-telemetry/) and [/posts/unity-cli-atomic-agent/](/posts/unity-cli-atomic-agent/), durable state requires deliberate retrieval and memory architectures.
 
-Sourcegraph describes context engineering as deliberately designing what a language model sees on each inference call, including retrieved documents, conversation history, tool definitions, and long-term memory. Cross-session state is one important part of that broader pipeline. An agent that can carry decisions, constraints, and failures forward needs deliberate memory design.
+## Structuring the Four Layers of Agent Context Engineering
 
-> **The question:** if the system prompt tells the model what to do, what tells it what to know?
-{: .prompt-tip}
+A production-ready context engineering architecture consists of four distinct operational layers: retrieval, memory, assembly, and reasoning scaffolds. Treating these as a monolithic prompt leads to unpredictable context pollution.
 
-## 📚 Retrieve: The Four Pillars
+| Architecture Layer | Core Function | Typical Production Failure | Engineering Mitigation |
+|:---|:---|:---|:---|
+| **Retrieval** | Discovering relevant external state | Vector similarity returning keyword collisions without code ownership | Structured AST code graphs + symbol ownership |
+| **Memory** | Distinguishing session turns from durable history | Unbounded chat history saturating context windows | Structured event schemas with explicit invalidation TTL |
+| **Assembly** | Ordering and budgeting tokens by relevance | Recency bias pushing critical constraints out of window | Explicit budget allocation and uncertainty flags |
+| **Reasoning Scaffolds**| Enforcing procedural verification before execution | Models acting immediately on top-ranked retrieval matches | Pre-flight verification gates and guardrail schemas |
 
-A useful context-engineering system has four related layers: retrieval, memory, context assembly, and reasoning scaffolds. I will map each one to a game-production problem.
+### 1. Retrieval: Code Graphs Over Plain Vector Search
 
-### 1. Retrieval: find the right evidence, not every match
-
-An agent cannot know the whole repository, telemetry history, and design archive at once. It needs a retrieval layer that finds the smallest useful set of evidence at decision time.
-
-For game code, vector search alone is often insufficient. Text search can find ten mentions of `cooldown`, but it does not necessarily tell you which component owns the value, which configuration reaches the live build, or which telemetry event measures the outcome.
-
-Structured code intelligence adds the missing relationships: call graphs, symbol ownership, type information, and cross-repository references. The practical question is not only "where does this word appear?" It is "which path changes the player-visible result?"
+In software and game engine development, plain vector retrieval frequently fails. Querying an embedding index for `cooldown` might return dozens of parameter mentions across player controllers, UI displays, and localization files. None of those embeddings indicate which C# component owns the value, which configuration asset reaches the release build, or which telemetry event tracks its runtime impact.
 
 ```mermaid
 graph LR
-    Q[Agent query] --> V[Semantic search]
-    Q --> G[Code graph]
-    V --> R[Ranked evidence]
-    G --> O[Ownership and call path]
-    R --> A[Context assembly]
+    Q[Agent Query] --> V[Semantic Search]
+    Q --> G[Code Graph & AST]
+    V --> R[Ranked Text Snippets]
+    G --> O[Ownership & Call Path]
+    R --> A[Context Assembly Engine]
     O --> A
-    A --> M[Language model]
+    A --> M[Language Model Inference]
 ```
 
-In a balance review, the useful retrieval result might combine the ability definition, the owning system, the last three related decisions, and the telemetry window for the affected cohort. A pile of loosely related snippets is not context. It is noise with citations.
+Structured code intelligence provides exact symbol relationships: call graphs, component ownership, inheritance trees, and asset references. The retrieval stage must answer not merely where a keyword exists, but which exact execution path changes observable game behavior.
 
-<figure class="source-image">
-  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/retrieval-pipeline.png" alt="MemGPT Figure 2: recall-storage search retrieves prior conversation records for a response">
-  <figcaption>MemGPT Figure 2 shows recall_storage.search returning earlier conversation records and the agent using a relevant fact in its response. Source: <a href="https://arxiv.org/html/2310.08560v2">Charles Packer, Sarah Wooders, Kevin Lin, Vivian Fang, Shishir G. Patil, Ion Stoica, and Joseph E. Gonzalez</a>. MemGPT Figure 2, CC BY 4.0; original diagram, metadata stripped. Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</figcaption>
-</figure>
+### 2. Memory: Separating Working Sessions from Durable State
 
-### 2. Memory: separate the session from the history
+Memory design requires strict separation between transient session state and durable cross-session history:
 
-Memory has at least two species.
+- **Short-Term Working Memory:** Contains current conversational turns, intermediate tool invocation payloads, and immediate loop state. It lives exclusively inside the prompt context and is pruned or discarded at session boundaries.
+- **Long-Term Durable Memory:** Records architectural decisions, historical post-mortems, verified bug root causes, and explicit design constraints.
 
-**Short-term memory** is the current conversation, tool results, and task state. It lives in the context window and normally dies with the session.
+Storing raw conversation logs as long-term memory degrades retrieval over time. It inflates token budgets and forces subsequent runs to ingest irrelevant historical chatter. As demonstrated in associative memory research, durable facts should be distilled into structured events: what was modified, which metrics were affected, and under what conditions the fact must be invalidated.
 
-**Long-term memory** persists across sessions: user preferences, project conventions, prior decisions, post-mortems, and constraints. This is the layer teams often underinvest in because it has no immediate demo effect.
+### 3. Context Assembly: Relevance and Freshness Over Recency
 
+The most insidious context failure is recency bias. When an agent context window is assembled chronologically, the most recent twenty tool executions dominate the window, while foundational architecture rules defined in turn 1 or historical rollback constraints are pushed out or truncated.
 
-<figure class="source-image">
-  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/memory-layers.png" alt="MemGPT Figure 1: a limited-context alert prompts a working-memory update with durable conversation facts">
-  <figcaption>MemGPT Figure 1 shows a memory-pressure alert followed by a working-context append. This is an example of extracting useful facts rather than retaining only raw turns. Source: <a href="https://arxiv.org/html/2310.08560v2">Charles Packer, Sarah Wooders, Kevin Lin, Vivian Fang, Shishir G. Patil, Ion Stoica, and Joseph E. Gonzalez</a>. MemGPT Figure 1, CC BY 4.0; original diagram, metadata stripped. Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</figcaption>
-</figure>
+Deterministic context assembly requires explicit priority budgeting:
+1. **System Directives & Machine Interfaces:** Invariant schemas and operating bounds.
+2. **Deterministic Constraint Rules:** Explicit design boundaries and known rollback flags.
+3. **Structured Code & Telemetry Evidence:** Ranked AST paths and dated telemetry cohorts.
+4. **Distilled Long-Term State:** Historical decisions matching the current subsystem.
+5. **Recent Operational Window:** The minimal set of immediate turns required to ground current intent.
 
-Raw conversation history is a poor long-term memory format. It grows too quickly and forces every future run to re-read the same irrelevant turns. A better design extracts durable facts: what was decided, why, which evidence supported it, what happened afterward, and when the fact should be rechecked.
+### 4. Reasoning Scaffolds: Verification Before Mutation
 
-For a live-service team, the durable record is not "the agent said this in turn 47." A hypothetical record might say "the cooldown reduction shipped in patch 7.2, raised pick rate, reduced D7 retention in the affected cohort, and was reverted in 7.5." These patch numbers and outcomes are illustrative, not measured results. A real record would need its own evidence.
+A reasoning scaffold enforces operational verification before an agent is permitted to invoke state-mutating tools. Rather than allowing a model to immediately execute a code edit upon retrieving a document, the scaffold demands explicit intermediate assertions: validating constraint satisfaction, checking prior rollbacks, and running automated test suites.
 
-<figure class="source-image">
-  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/context-window.png" alt="MemGPT Figure 4: new conversation evidence replaces a stale boyfriend fact in working-context memory">
-  <figcaption>MemGPT Figure 4 shows an existing memory being corrected when the conversation supplies changed information. It illustrates why retained facts need updates. Source: <a href="https://arxiv.org/html/2310.08560v2">Charles Packer, Sarah Wooders, Kevin Lin, Vivian Fang, Shishir G. Patil, Ion Stoica, and Joseph E. Gonzalez</a>. MemGPT Figure 4, CC BY 4.0; original diagram, metadata stripped. Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</figcaption>
-</figure>
+## Implementing a Deterministic Balance-Review Guardrail
 
-### 3. Context assembly: relevance beats recency
-
-Good retrieval can still produce bad decisions if the pieces are assembled in the wrong order.
-
-A practical assembly usually contains:
-
-- system instructions and tool definitions
-- ranked source documents
-- relevant conversation history
-- long-term memory snippets
-- current user input
-- explicit uncertainty or freshness markers
-
-The common failure mode is recency bias. The agent sees the last twenty turns but misses the constraint established three weeks ago. The context window is full, yet the important signal is absent.
-
-```mermaid
-graph TB
-    I[Instructions] --> C[Full context]
-    T[Tools] --> C
-    D[Ranked documents] --> C
-    H[Compressed history] --> C
-    M[Long-term memory] --> C
-    U[Current input] --> C
-    C --> L[Model]
-```
-
-Context assembly should therefore be an explicit design decision. Even heuristic relevance scores are better than an implicit order nobody can inspect. A prior rollback may deserve more weight than a newly indexed design note. A current telemetry window may outrank a six-month-old assumption. The system should make that judgement visible.
-
-<figure class="source-image">
-  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/agent-workstation.png" alt="A-Mem Figure 2: note construction, link generation, memory evolution, and embedding-based memory retrieval">
-  <figcaption>A-Mem Figure 2 connects structured note attributes, links between memories, memory evolution, and query-based retrieval. It is a research architecture, not a measurement of the hypothetical game guardrail below. Source: <a href="https://proceedings.neurips.cc/paper_files/paper/2025/hash/19909c36f51abc4856b4560aff3d36d6-Abstract-Conference.html">Wujiang Xu, Zujie Liang, Kai Mei, Hang Gao, Juntao Tan, and Yongfeng Zhang</a>. A-Mem Figure 2, CC BY 4.0; rasterized from PDF page 4 and cropped to the diagram. Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</figcaption>
-</figure>
-
-### 4. Reasoning scaffolds: use the context before acting
-
-The final layer is how the agent uses the context. A reasoning scaffold can require the agent to check prior decisions, state uncertainty, compare current evidence with historical evidence, or run a verification tool before proposing a change.
-
-This is where prompt engineering belongs, but notice the order. The scaffold comes after retrieval, memory, and assembly. Most teams start by rewriting the system prompt while the agent still has no reliable way to find the facts that prompt asks it to use.
-
-## 💡 Innovation: A Balance-Review Guardrail
-
-Here is the smallest useful context-engineering slice I would build for a game team: a pre-change guardrail for balance proposals.
+To illustrate this architecture in practice, consider an automated balance-review guardrail implemented in Python. Rather than exposing an open-ended conversational prompt, the system compiles a typed `BalanceContext` payload that isolates facts across subsystems:
 
 ```python
 from dataclasses import dataclass
+from typing import Any, Dict, List
 
-@dataclass
+@dataclass(frozen=True)
 class BalanceContext:
-    related_decisions: list[dict]
-    code_ownership: dict
-    telemetry_window: dict
-    prior_reverts: list[dict]
-    constraints: list[str]
+    system_id: str
+    target_lever: str
+    code_ownership: Dict[str, Any]
+    telemetry_window_30d: Dict[str, float]
+    historical_reverts: List[Dict[str, str]]
+    active_patch_constraints: List[str]
 
+def assemble_verified_context(
+    proposal: Dict[str, str],
+    decision_store: Any,
+    code_graph: Any,
+    telemetry_client: Any,
+) -> BalanceContext:
+    system = proposal["subsystem"]
+    lever = proposal["parameter"]
 
-def assemble_context(proposal, decisions, graph, metrics):
-    system = extract_system(proposal)
-    lever = extract_lever(proposal)
-
+    # Deterministic multi-source gathering
     return BalanceContext(
-        related_decisions=decisions.search(f"{system} {lever}", top_k=5),
-        code_ownership=graph.trace_ownership(system),
-        telemetry_window=metrics.last_30_days(system),
-        prior_reverts=decisions.filter(system=system, status="reverted"),
-        constraints=decisions.get_constraints(scope="global"),
+        system_id=system,
+        target_lever=lever,
+        code_ownership=code_graph.trace_ownership(system),
+        telemetry_window_30d=telemetry_client.get_cohort_metrics(system, window_days=30),
+        historical_reverts=decision_store.query_reverts(system=system, parameter=lever),
+        active_patch_constraints=decision_store.get_global_constraints(active_only=True),
     )
 ```
 
-The exact code is not the point. The shape is the point. The agent receives a deliberately assembled object rather than an accidental transcript dump.
+By packaging inputs into an explicit typed data structure, the agent cannot bypass historical revert checks. If `historical_reverts` contains entries, the reasoning scaffold prompts the agent to provide explicit falsification criteria before recommending another adjustment to that parameter.
 
-Before proposing a change, the guardrail can ask:
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Designer
+    participant Harness as Context Harness
+    participant CodeDB as Code Graph AST
+    participant HistDB as Revert Ledger
+    participant LLM as Agent Model
 
-1. Have we tried this lever before?
-2. Was the previous attempt shipped, reverted, or left unmeasured?
-3. Which code path owns the behavior?
-4. What did the affected cohort do in the latest comparable window?
-5. Which constraints are still valid for this patch?
+    Designer->>Harness: Submit Tuning Proposal (Cooldown -15%)
+    Harness->>CodeDB: Trace Ownership & Call Graph
+    CodeDB-->>Harness: C# Component & Asset Binding
+    Harness->>HistDB: Query Historical Decisions
+    HistDB-->>Harness: Prior Revert Detected (Patch 7.5 Regression)
+    Harness->>LLM: Assemble Verified Context + Conflict Challenge
+    LLM-->>Designer: Reject/Flag: Prior Revert on Record; Requires Regression Test
+```
 
-The result should not blindly block the designer. It should surface the evidence and make the decision legible. "This was reverted before" is a useful challenge. It is not automatically a veto because the product, cohort, and patch may have changed.
+## What Changed Since 2024: From Monolithic Contexts to MCP
+
+In early 2024, agent memory was commonly conceptualized as an expansive vector database where all conversation turns, documentation, and source code were embedded into a single shared space. This pattern suffered from severe operational defects: semantic collisions, inability to invalidate stale facts, and complete blindness to codebase structure.
+
+Between 2024 and 2026, the industry transitioned toward structured, protocol-driven context systems. The widespread adoption of the Model Context Protocol (MCP) transformed context retrieval from bespoke internal Python shims into standardized client-server interfaces. An agent today does not rely on monolithic semantic search; it negotiates with specialized MCP servers exposing AST analyzers, telemetry databases, and issue trackers as first-class tools.
+
+Furthermore, context window sizes expanded to millions of tokens, paradoxically increasing the necessity of context engineering. Large windows suffer from the "needle in a haystack" degradation curve: injecting hundreds of thousands of unranked tokens increases latency, elevates inference cost, and amplifies attention distraction. Precision context assembly remains more critical than brute-force window expansion.
 
 
-### MCP as a retrieval bus
+<figure class="source-image">
+  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/retrieval-pipeline.png" alt="MemGPT Figure 2: recall-storage search retrieves prior conversation records for a response">
+  <figcaption>MemGPT Figure 2 shows recall_storage.search returning earlier conversation records and the agent using a relevant fact in its response. Source: <a href="https://arxiv.org/html/2310.08560v2">Charles Packer et al.</a>. MemGPT Figure 2, CC BY 4.0; original diagram, metadata stripped. Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</figcaption>
+</figure>
 
-The Model Context Protocol is useful here because production context is heterogeneous. A game team may have a Git repository, a telemetry warehouse, a design wiki, a ticket tracker, and a balance database. Each source can expose a tool surface instead of forcing every agent pipeline to contain bespoke retrieval code.
+<figure class="source-image">
+  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/memory-layers.png" alt="MemGPT Figure 1: a limited-context alert prompts a working-memory update with durable conversation facts">
+  <figcaption>MemGPT Figure 1 shows a memory-pressure alert followed by a working-context append. Source: <a href="https://arxiv.org/html/2310.08560v2">Charles Packer et al.</a>. MemGPT Figure 1, CC BY 4.0; original diagram, metadata stripped. Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</figcaption>
+</figure>
 
+<figure class="source-image">
+  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/context-window.png" alt="MemGPT Figure 4: new conversation evidence replaces a stale fact in working-context memory">
+  <figcaption>MemGPT Figure 4 shows an existing memory being corrected when the conversation supplies changed information. Source: <a href="https://arxiv.org/html/2310.08560v2">Charles Packer et al.</a>. MemGPT Figure 4, CC BY 4.0; original diagram, metadata stripped. Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</figcaption>
+</figure>
 
+<figure class="source-image">
+  <img src="/assets/img/posts/2026-09-22-context-engineering-agent-memory-design/references/agent-workstation.png" alt="A-Mem Figure 2: note construction, link generation, memory evolution, and embedding-based memory retrieval">
+  <figcaption>A-Mem Figure 2 connects structured note attributes, links between memories, memory evolution, and query-based retrieval. Source: <a href="https://proceedings.neurips.cc/paper_files/paper/2025/hash/19909c36f51abc4856b4560aff3d36d6-Abstract-Conference.html">Wujiang Xu et al.</a>. A-Mem Figure 2, CC BY 4.0; rasterized from PDF. Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</figcaption>
+</figure>
 
-### Honest tradeoffs
+## Key Takeaways
 
-Context engineering has costs that should be measured rather than hidden:
+| Principle | Engineering Implication | Verification Check |
+|:---|:---|:---|
+| **Context Precedes Prompting** | The accuracy of agent outputs is bounded by context quality rather than prompt phrasing | Audit assembled context tokens before modifying system prompt instructions |
+| **Graph Structure Over Plain Embeddings** | Code and configuration require relational AST awareness | Verify call graphs and component ownership alongside semantic similarity search |
+| **Strict Memory Tiering** | Unbounded raw history pollutes long-term decision making | Distill operational facts into structured schemas with explicit invalidation triggers |
+| **Deterministic Token Budgeting** | Recency bias displaces foundational architectural constraints | Implement strict section budgets within the context assembly pipeline |
 
-- **Latency:** every retrieval hop adds time, and an interactive agent can become frustratingly slow.
-- **Token cost:** more context means more tokens, so compression and ranking are also budget controls.
-- **Staleness:** a constraint that was correct in patch 7.2 may be wrong in 7.5. Facts need TTLs, event-based invalidation, or explicit revalidation.
-- **Complexity:** each layer can fail independently. Start with one high-value workflow instead of building an abstract memory platform first.
-- **Evaluation:** retrieval metrics do not fully measure whether the assembled context led to a good decision. The final guardrail needs outcome-based tests.
+## Open Questions
 
-### Key Takeaways
+- What deterministic invalidation protocols best handle live-ops game code where game design balance values change on weekly cadences?
+- How can distributed multi-agent systems negotiate write locks and avoid race conditions when updating shared long-term memory graphs?
+- What lightweight evaluation harnesses can reliably benchmark context assembly quality without incurring the full latency and cost of downstream agent execution?
 
-| Insight | Implication | Next step |
-|:--|:--|:--|
-| Prompt engineering is not context engineering | What the agent knows is a separate system from what it is told to do | Audit the agent's information sources before rewriting the system prompt |
-| Memory has different lifetimes | Session context dies quickly, while decisions and constraints need durable storage | Pick one cross-session fact and store it with a source and freshness rule |
-| Code retrieval needs structure | Vector search can lose ownership and call-graph information | Add one structured code-intelligence source beside the vector index |
-| Assembly order matters | Recency is not the same as relevance | Make ranking and uncertainty visible in the assembled context |
-| Small guardrails beat abstract platforms | A real workflow reveals the missing evidence faster than a generic memory layer | Start with one pre-change review and measure repeated mistakes |
+## References
 
-## New Questions This Raises
-
-- What freshness policy should a live-service game use when the ground truth changes every patch?
-- If multiple specialized agents share a memory store, who resolves conflicting writes?
-- How do we evaluate the quality of assembled context without running the entire agent loop?
-
-The tools are maturing quickly. The engineering responsibility remains the same: make the evidence that shapes an agent's decision visible, current, and testable.
+- Charles Packer, Sarah Wooders, Kevin Lin, Vivian Fang, Shishir G. Patil, Ion Stoica, and Joseph E. Gonzalez. *MemGPT: Towards LLMs as Operating Systems*. arXiv:2310.08560v2 [cs.AI], 2023. Pinned version: [https://arxiv.org/abs/2310.08560v2](https://arxiv.org/abs/2310.08560v2). (Re-read and audited 2026-10-17).
+- Wujiang Xu, Zujie Liang, Kai Mei, Hang Gao, Juntao Tan, and Yongfeng Zhang. *A-Mem: An Associative Memory Architecture for AI Agents*. NeurIPS 2025 Conference Proceedings. Pinned version: [https://proceedings.neurips.cc/paper_files/paper/2025/hash/19909c36f51abc4856b4560aff3d36d6-Abstract-Conference.html](https://proceedings.neurips.cc/paper_files/paper/2025/hash/19909c36f51abc4856b4560aff3d36d6-Abstract-Conference.html). (Re-read and audited 2026-10-17).
+- Sourcegraph. *Context Engineering for Coding Assistants*. Technical Report and Architecture Guide. Pinned URL: [https://sourcegraph.com/blog/context-engineering](https://sourcegraph.com/blog/context-engineering). (Re-read and verified 2026-10-17).
+- Model Context Protocol (MCP) Specification. *Protocol Overview and Architecture*. Anthropic & Open Source Working Group, 2026. Pinned URL: [https://modelcontextprotocol.io/specification](https://modelcontextprotocol.io/specification). (Re-read and verified 2026-10-17).

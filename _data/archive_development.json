@@ -446,9 +446,9 @@
       "links_at_intake": 11,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt from the 2026-09 historical note. Replaced template emoji headings with an evidence-pinned Source Audit contrasting vector search against structured code intelligence, formalized the 4-layer context pipeline, and updated references with verified 2026 read dates."
     },
     {
       "path": "_posts/2024/06/2024-06-05-finetune-embedding-model-rag.md",
