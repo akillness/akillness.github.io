@@ -319,9 +319,10 @@
       "links_at_intake": 2,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "merged",
+      "developed_at": "2026-10-17",
+      "survey_note": "Merged on October 17, 2026 after a primary-document survey of Codex instructions, Claude AGENTS.md and hook boundaries, MCP tool approval language, and Antigravity permission rules. The defensible instructions-versus-enforcement point is already covered by HarnessRouter's pinned adapter audit; the old product-convergence, adoption, benchmark, pricing, and Grok claims lacked primary support. The original URL is retained as a noindex notice.",
+      "merged_into": "_posts/2026-10-13-harnessrouter-execution-contract.md"
     },
     {
       "path": "_posts/2026/06/2026-06-24-loop-engineering-what-ai-engineers-need-to-know.md",
