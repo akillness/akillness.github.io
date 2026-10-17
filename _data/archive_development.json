@@ -778,9 +778,9 @@
       "links_at_intake": 21,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Source audit on Google Research's prompt repetition study (arXiv:2512.14982), analyzing causal attention mechanics, pre-fill tradeoffs, and 2026 serving implications."
     },
     {
       "path": "_posts/2026/02/2026-02-03-cli-harness-coding-agents.md",

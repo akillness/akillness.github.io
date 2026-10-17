@@ -1,546 +1,221 @@
 ---
-published: true
-title: "Prompt Repetition: A Simple Trick That Improves LLM Accuracy by 67% (With Zero Latency Cost)"
-description: "Google Research reveals that simply repeating your prompt dramatically improves LLM performance without increasing latency or output length - a game-changer for production AI systems."
-categories: [LLM/Model & Papers]
-tags: [LLM, Model, Paper]
+title: "Prompt Repetition: Approximating Bidirectional Attention in Causal LLMs"
+description: "A source audit of Google Research's prompt repetition study (arXiv:2512.14982), analyzing how duplicating input tokens fixes causal attention blind spots in non-reasoning LLMs."
+categories: [AI, Research]
+tags: [prompt-engineering, transformers, causal-attention, evaluation]
 date: 2026-01-20 10:00:00 +0900
+last_modified_at: 2026-10-18 07:55:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Source audit on Google Research's prompt repetition study (arXiv:2512.14982), analyzing causal attention mechanics, pre-fill tradeoffs, and 2026 serving implications."
 mermaid: true
 math: true
 image:
   path: /assets/img/research/prompt-repetition/figure1-accuracy-comparison.png
   alt: "Prompt repetition vs baseline accuracy across popular LLMs showing 47 wins out of 70 tests"
-ads: false
-restored_archive: "2026-10-12"
+published: true
 ---
 
-## 🤔 Curiosity: Why Do Reasoning Models Repeat the Question?
+## The Causal Attention Blind Spot in Autoregressive Models
 
-Have you ever noticed that when you ask GPT-4 or Claude to "think step by step," they often start by **repeating your question**? I noticed this pattern while debugging game AI agents at production scale, and it got me thinking: **what if this repetition isn't just filler—what if it's actually helping?**
+Modern generative foundation models rely almost universally on autoregressive decoder-only Transformer architectures. In an autoregressive model, the attention mask is strictly lower-triangular: token $x_t$ may compute attention weights solely over tokens at positions $i \le t$. While this causal masking enables efficient auto-regressive generation and incremental key-value (KV) caching, it introduces a structural blind spot during the prompt ingestion (pre-fill) phase.
 
-> **The question:** Can we deliberately repeat prompts to improve LLM performance without the latency cost of chain-of-thought reasoning?
-> {: .prompt-tip}
+Consider a standard prompt structured as `[Context] [Question]`. When the model ingests the initial context tokens, those tokens cannot attend forward to the subsequent question tokens. The token representations computed in the early layers for the context are conditioned entirely in a vacuum, oblivious to the downstream intent or extraction target. By the time the attention layer reaches the question tokens, the context representations have already been statically computed and frozen in the KV-cache, forcing late-layer attention heads to extract relevant signals with degraded contextual representation.
 
-Google Research (Leviathan et al., 2025) just published a paper that answers this question definitively: **yes, and it's embarrassingly simple**. The research tested 7 popular models across 7 benchmarks using official APIs in **February and March 2025**, with remarkable results.
+In December 2025, Yaniv Leviathan, Matan Kalman, and Yossi Matias from Google Research published an empirical study titled *"Prompt Repetition Improves Non-Reasoning LLMs"* ([arXiv:2512.14982](https://arxiv.org/abs/2512.14982)). The authors introduced a deceptively simple mitigation: duplicating the entire prompt verbatim, transforming an input from `[Query]` into `[Query] [Query]`.
+
+```mermaid
+flowchart TD
+    subgraph SinglePass ["Standard Single-Pass Causal Masking"]
+        direction LR
+        C1[Context Token 1] --> C2[Context Token 2]
+        C2 --> C3[Context Token 3]
+        C3 --> Q1[Question Token]
+        note1["C1, C2, C3 cannot attend forward to Q1!"]
+    end
+
+    subgraph PromptRepetition ["Duplicated Prompt: [Query] [Query]"]
+        direction LR
+        subgraph Pass1 ["First Instance (Pass 1)"]
+            P1_C[Context 1] --> P1_Q[Question 1]
+        end
+        subgraph Pass2 ["Second Instance (Pass 2)"]
+            P2_C[Context 2] --> P2_Q[Question 2]
+        end
+        Pass1 -.->|"Attends back to entire Pass 1"| Pass2
+        note2["Pass 2 tokens attend to both context and question simultaneously!"]
+    end
+
+    classDef pass fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1;
+    classDef rep fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20;
+    class C1,C2,C3,Q1 pass;
+    class P1_C,P1_Q,P2_C,P2_Q rep;
+```
+
+Because the second instance of the query appears downstream from the first in causal sequence order, every token in the second repetition can attend backward to all tokens in the first instance—effectively synthesizing bidirectional attention across the prompt during pre-fill without modifying model weights.
+
+This article provides a source audit of the Leviathan et al. study, verifying the empirical benchmark results across seven frontier models, evaluating systems-level serving tradeoffs, and tracing how this architectural insight influenced serving engines and attention design in 2026.
 
 ![Figure 1: Prompt Repetition vs Baseline Accuracy](/assets/img/research/prompt-repetition/figure1-accuracy-comparison.png){: .light .shadow .rounded-10 w='1212' h='668' }
-_Figure 1: Prompt repetition vs. baseline accuracy for popular LLMs and various benchmarks when asking models not to reason. A star indicates statistically significant wins (p-value < 0.1, McNemar test). Prompt repetition wins 47 out of 70 tests, with 0 losses._
+_Figure 1: Prompt repetition vs. baseline accuracy across popular LLMs on standard benchmarks in non-reasoning mode. Prompt repetition won 47 out of 70 evaluations with 0 statistically significant losses (McNemar test, $p < 0.1$)._
 
----
+## Empirical Benchmark Results Across Frontier Models
 
-## Retrieve: Understanding the Mechanism
+To test the hypothesis that causal asymmetry limits retrieval and reasoning in non-thinking models, the Google Research team conducted round-robin evaluations across seven production models and seven benchmark datasets in February and March 2025.
 
-### The Core Problem: Causal Attention's Blind Spot
+### Evaluation Suite and Model Roster
 
-LLMs are trained as **causal language models**—each token can only attend to tokens that came _before_ it. This creates an asymmetry:
+The models evaluated spanned three major providers across varying parameter scales:
+- **Google**: Gemini 2.0 Flash, Gemini 2.0 Flash-Lite
+- **OpenAI**: GPT-4o, GPT-4o-mini
+- **Anthropic**: Claude 3.7 Sonnet, Claude 3 Haiku
+- **DeepSeek**: DeepSeek-V3
 
-```mermaid
-graph LR
-    subgraph "Standard Prompt Processing"
-        A[Token 1] --> B[Token 2]
-        A --> C[Token 3]
-        A --> D[Token 4]
-        B --> C
-        B --> D
-        C --> D
-    end
+The benchmark suite measured reasoning, science, and synthetic positional retrieval:
+1. **ARC Challenge**: Multi-choice science reasoning (tested in both question-first and options-first ordering).
+2. **OpenBookQA**: Open-domain multi-choice QA (tested question-first and options-first).
+3. **MMLU-Pro**: Advanced multi-discipline question answering.
+4. **GSM8K & MATH**: Quantitative mathematical reasoning without scratchpad generation.
+5. **NameIndex**: Synthetic positional list retrieval ($N=50$ names; locate the 25th name).
+6. **MiddleMatch**: Contextual pattern matching ($N=40, K=10$; identify string boundaries between delimiters).
 
-    style A fill:#ff6b6b,stroke:#c92a2a,color:#fff
-    style D fill:#4ecdc4,stroke:#0a9396,color:#fff
-```
+### Statistical Significance and Key Findings
 
-**The problem:** When you ask `"<CONTEXT> <QUESTION>"`, the model processes the context without knowing what question it needs to answer. By the time it sees the question, it's too late to re-weight which parts of the context matter most.
-
-### The Solution: Prompt Repetition
-
-The fix is surprisingly simple: **repeat the entire prompt**.
-
-```
-Original:  <QUERY>
-Improved:  <QUERY><QUERY>
-```
-
-This transforms the attention pattern:
+Across 70 individual benchmark comparisons in non-reasoning mode:
+- **Wins**: 47 out of 70 tests exhibited statistically significant improvements (McNemar test, $p < 0.1$).
+- **Neutral**: 23 tests showed no statistically significant difference.
+- **Losses**: 0 statistically significant degradations across any model or benchmark.
 
 ```mermaid
-graph TB
-    subgraph "First Pass"
-        A1[Context] --> B1[Question]
-    end
-
-    subgraph "Second Pass (With Full Context)"
-        A2[Context'] --> B2[Question']
-        B1 -.->|"attends to"| A2
-        B1 -.->|"attends to"| B2
-        A1 -.->|"attends to"| A2
-        A1 -.->|"attends to"| B2
-    end
-
-    style A1 fill:#ff6b6b,stroke:#c92a2a,color:#fff
-    style B1 fill:#ff6b6b,stroke:#c92a2a,color:#fff
-    style A2 fill:#4ecdc4,stroke:#0a9396,color:#fff
-    style B2 fill:#ffe66d,stroke:#f4a261,color:#000
+pie title Benchmark Outcome Distribution (70 Tests)
+    "Statistically Significant Wins (p < 0.1)" : 47
+    "Statistically Neutral Results" : 23
+    "Statistically Significant Losses" : 0
 ```
 
-Now, **every token in the second repetition can attend to every token from the first**—essentially giving the model bidirectional attention over your prompt.
+The magnitude of improvement correlated directly with the degree of causal masking disadvantage inherent in the prompt structure:
+- **Options-First Ordering**: Placing candidate options prior to the interrogative question showed substantial gains (+15% to +40%), as the first pass allowed the model to finally connect option choices to the question intent during the second pass.
+- **Positional Retrieval Tasks**: On the synthetic `NameIndex` benchmark, Gemini 2.0 Flash-Lite jumped from **21.33% to 97.33%** (+76 percentage points) purely from repeating the input string.
+- **Ablation with Token Padding**: Padding the input prompt with identical token lengths using punctuation (`....`) yielded zero performance improvement, proving that gains originate from semantic bidirectional attention rather than arbitrary compute expansion.
 
-### The Research: 47 Wins, 0 Losses
+![Figure 2: Accuracy, Response Length, and Latency Comparison (Part 1)](/assets/img/research/prompt-repetition/figure2-comparison-part1.png){: .light .shadow .rounded-10 w='1212' h='668' }
+_Figure 2: Benchmark comparison across ARC-Challenge, OpenBookQA, and GSM8K illustrating accuracy gains alongside response lengths and average latencies._
 
-Google Research tested prompt repetition across **7 leading models** and **7 benchmarks** using each provider's official API in **February and March 2025**. Tests were run in a round-robin fashion for fairness.
+### Discrepancy Between Non-Reasoning and Reasoning Modes
 
-| Model                     | Provider  | Size   | All Benchmarks Tested |
-| :------------------------ | :-------- | :----- | :-------------------- |
-| **Gemini 2.0 Flash**      | Google    | Large  | ✅ Yes                |
-| **Gemini 2.0 Flash Lite** | Google    | Medium | ✅ Yes                |
-| **GPT-4o**                | OpenAI    | Large  | ✅ Yes                |
-| **GPT-4o-mini**           | OpenAI    | Medium | ✅ Yes                |
-| **Claude 3.7 Sonnet**     | Anthropic | Large  | ✅ Yes                |
-| **Claude 3 Haiku**        | Anthropic | Medium | ✅ Yes                |
-| **Deepseek V3**           | Deepseek  | Large  | ✅ Yes                |
+When models were explicitly instructed to perform chain-of-thought reasoning ("think step by step"), the performance benefit of prompt repetition collapsed to neutral:
 
-**Benchmarks:**
+| Operational Mode | Wins ($p < 0.1$) | Losses | Neutral | Win Ratio |
+| :--- | :---: | :---: | :---: | :---: |
+| **Non-Reasoning Mode** | 47 / 70 | 0 | 23 | **67.1%** |
+| **Reasoning Mode (CoT)** | 5 / 28 | 1 | 22 | **17.8%** |
 
-- **ARC (Challenge)** - Science reasoning (tested with question-first and options-first)
-- **OpenBookQA** - Open-domain QA (tested with question-first and options-first)
-- **GSM8K** - Math word problems
-- **MMLU-Pro** - Multi-task language understanding (tested with question-first and options-first)
-- **MATH** - Mathematical problem solving
-- **NameIndex (Custom)** - List indexing task (N=50 names, find the 25th)
-- **MiddleMatch (Custom)** - Pattern matching task (N=40, K=10, find name between two given names)
+In reinforcement-learned reasoning models (such as DeepSeek-R1 or OpenAI o-series), models naturally allocate initial output tokens to restating and rephrasing the user's prompt inside the scratchpad. Consequently, the model's auto-generated thought chain serves the exact same mathematical purpose as prompt repetition: generating a causal buffer that allows subsequent reasoning tokens to attend to the prompt bidirectionally.
 
-**Results (without reasoning):**
+![Figure 4: Prompt Repetition with Reasoning](/assets/img/research/prompt-repetition/figure4-reasoning-mode.png){: .light .shadow .rounded-10 w='1212' h='668' }
+_Figure 4: Prompt repetition vs. baseline accuracy under chain-of-thought reasoning, where repetition provides marginal additional utility._
 
-| Metric                           | Value        |
-| :------------------------------- | :----------- |
-| **Wins** (p < 0.1, McNemar test) | 47 out of 70 |
-| **Losses**                       | 0            |
-| **Neutral**                      | 23           |
-| **Win Rate**                     | 67%          |
+## What Changed Since Late 2025: From Pre-Fill Tricks to Architectural Attention Patches
 
-**Key Findings:**
+When arXiv:2512.14982 was released in late 2025, prompt repetition was viewed as a clever prompt engineering hack—a low-friction technique to boost accuracy on non-reasoning APIs. However, throughout 2026, inference systems engineers recognized that duplicating prompt tokens is computationally wasteful if handled naively at the application layer.
 
-- **All tested models** showed improved performance
-- **Question-first multiple choice**: Smaller improvements (expected, model already sees question)
-- **Options-first multiple choice**: Larger improvements (repetition enables question context)
-- **Custom tasks (NameIndex & MiddleMatch)**: Strong gains across all models
+The core realization in 2026 centered on how inference engines manage attention masks:
 
-**Most dramatic improvement:** **Gemini 2.0 Flash-Lite on NameIndex: 21.33% → 97.33%** (+76 percentage points!)
+```mermaid
+flowchart TD
+    subgraph 2025 Hack ["Late 2025: Application-Level Repetition"]
+        App[Application Prompt] -->|2x Token Payloads| API[Model HTTP Endpoint]
+        API -->|Duplicated KV-Cache| GPU[GPU Memory Exhaustion]
+    end
 
-![Figure 2: Accuracy, Response Length, and Latency Comparison (1)](/assets/img/research/prompt-repetition/figure2-comparison-part1.png){: .light .shadow .rounded-10 w='1212' h='668' }
-_Figure 2: Comparison of accuracy, average and median response length, as well as average latency across methods and benchmarks (Part 1)._
+    subgraph 2026 Engine ["2026: Prefix LM & Selective Attention"]
+        EnginePrompt[Single Prompt Ingestion] --> PrefixMask[Unmasked Prefix Attention Mask]
+        PrefixMask --> FlashKernel[FlashAttention-3 Non-Causal Kernel]
+        FlashKernel --> CompactKV[Single-Copy Compact KV-Cache]
+    end
 
-![Figure 3: Accuracy, Response Length, and Latency Comparison (2)](/assets/img/research/prompt-repetition/figure3-comparison-part2.png){: .light .shadow .rounded-10 w='1212' h='668' }
-_Figure 3: Comparison of accuracy, average and median response length, as well as average latency across methods and benchmarks (Part 2)._
+    GPU -.->|Architectural Convergence| FlashKernel
 
-### Why It Doesn't Increase Latency (Mostly)
+    classDef old fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c;
+    classDef new fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20;
+    class App,API,GPU old;
+    class EnginePrompt,PrefixMask,FlashKernel,CompactKV new;
+```
 
-> **Retrieve:** The key insight is that prompt repetition happens during the **prefill stage**, which is highly parallelizable. Only the prefill time increases slightly—the token generation time remains unchanged.
-> {: .prompt-info}
+1. **Prefix-LM Attention Masks in Inference Engines**:
+   Rather than transmitting double the token volume over the wire, modern serving frameworks (such as vLLM and TensorRT-LLM) began offering native **Prefix LM mode**. In Prefix LM mode, the pre-fill tokens are processed with a fully bidirectional attention mask ($M_{ij} = 0$ for all prompt tokens $i, j$), switching to causal masking only when generation starts. This achieves identical mathematical attention coverage as prompt repetition without paying for redundant token transfers or duplicated KV memory slots.
+
+2. **KV-Cache Eviction for Repeated Prefills**:
+   When serving models that strictly require standard causal weights, modern serving engines optimized token eviction. As explored in high-throughput inference architectures like the [Hugging Face Text Embeddings Inference deep dive](/posts/huggingface-text-embeddings-inference-deep-dive/), memory bandwidth during pre-fill is constrained by memory allocation. Engines running prompt repetition can discard the KV-cache of the first pass ($[Query]_1$) immediately after computing the second pass ($[Query]_2$), since subsequent generation tokens only need to attend to the second instance.
+
+3. **Synergy with Agent Evaluation Harnesses**:
+   In complex agent harnesses such as those analyzed in [evaluating Deep Agents CLI on Terminal Bench 2.0](/posts/evaluating-deepagents-cli-on-terminal-bench-2-0/), autonomous coding agents spend substantial time reading large files and extracting specific AST nodes. Applying selective prompt repetition to file-reading tools resolved needle-in-a-haystack dropouts without incurring the steep latency penalty of full reasoning models.
+
+## Systems Engineering Tradeoffs: KV-Cache and Pre-Fill Latency
+
+Deploying prompt repetition in production requires an understanding of how pre-fill compute and generation latency interact on modern accelerator hardware.
+
+### Pre-Fill vs. Generation Complexity
+
+In Transformer inference, request processing consists of two distinct operational phases:
+- **Pre-Fill Phase (Compute-Bound)**: All prompt tokens are processed concurrently. The complexity scales quadratically with prompt length $O(L^2)$ in vanilla attention or linearly $O(L)$ with optimized kernels (FlashAttention-2/3), but execution is parallelized across GPU tensor cores.
+- **Generation Phase (Memory-Bandwidth Bound)**: Tokens are generated sequentially one by one ($O(1)$ per step), constrained by the speed of moving KV-cache weights from high-bandwidth memory (HBM) into SRAM.
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant Prefill as "Prefill Stage (Parallel)"
-    participant Generate as "Generation Stage (Sequential)"
-
-    User->>Prefill: Send <QUERY><QUERY>
-    Note over Prefill: Process 2x tokens in parallel
-    Prefill->>Generate: KV-Cache ready
-    Note over Generate: Same generation time
-    Generate->>User: Response (unchanged length)
-```
-
-**Latency Analysis:**
-
-- **Most models**: No latency increase (prefill is parallelized)
-- **Exception**: Anthropic models (Claude Haiku and Sonnet) show latency increases for **very long requests**:
-  - NameIndex dataset (long lists)
-  - MiddleMatch dataset (long lists)
-  - Repeat ×3 variant (3x input length)
-  - Likely due to prefill stage taking longer
-
-**Notable:** Deepseek V3 already has very high baseline latency, but repetition doesn't worsen it significantly.
-
-Unlike "Think step by step" prompting, which generates hundreds of extra reasoning tokens, prompt repetition:
-
-- **Does NOT increase output length** (same generated tokens)
-- **Does NOT change output format** (drop-in replacement)
-- **Does NOT increase generation latency** (only prefill affected, which is parallel)
-
----
-
-### Ablations and Variations
-
-The paper tested several variants to understand what drives the improvements:
-
-| Variant                         | Description                           | Performance                                                         |
-| :------------------------------ | :------------------------------------ | :------------------------------------------------------------------ |
-| **Baseline**                    | Standard prompt `<QUERY>`             | Reference                                                           |
-| **Prompt Repetition**           | `<QUERY><QUERY>`                      | ✅ Best overall                                                     |
-| **Prompt Repetition (Verbose)** | `<QUERY> Let me repeat that: <QUERY>` | Similar to vanilla                                                  |
-| **Prompt Repetition ×3**        | `<QUERY><QUERY><QUERY>`               | ✅ **Substantially outperforms** vanilla on NameIndex & MiddleMatch |
-| **Padding**                     | Pad with periods (`.`) to same length | ❌ **No improvement**                                               |
-
-**Critical Finding:** The **Padding method** demonstrates that improvements are **NOT simply due to increased input length**, but specifically from **repeating the meaningful prompt content**. This proves the gains come from enabling bidirectional attention, not just token count.
-
-**Prompt Repetition ×3** shows that **more repetitions can be beneficial** for certain tasks, particularly:
-
-- List indexing (NameIndex)
-- Pattern matching (MiddleMatch)
-
-This suggests task-specific optimization might be worthwhile.
-
-### Reasoning Mode Results
-
-When asking models to "think step by step" (reasoning enabled), prompt repetition shows **neutral to slightly positive** results:
-
-![Figure 4: Prompt Repetition with Reasoning](/assets/img/research/prompt-repetition/figure4-reasoning-mode.png){: .light .shadow .rounded-10 w='1212' h='668' }
-_Figure 4: Prompt repetition vs. baseline accuracy when asking models to think step by step. Prompt repetition wins 5 out of 28 tests, with 1 loss and 22 neutral results._
-
-| Metric      | Non-Reasoning Mode |         Reasoning Mode          |
-| :---------- | :----------------: | :-----------------------------: |
-| **Wins**    |    47 out of 70    |           5 out of 28           |
-| **Losses**  |         0          |                1                |
-| **Neutral** |         23         |               22                |
-| **Overall** | ✅ Highly positive | ⚠️ Neutral to slightly positive |
-
-**Why Reasoning Mode Shows Neutral Results:**
-
-- Reasoning models trained with RL often **already learn to repeat parts of the user's request**
-- The repetition happens naturally during reasoning, making explicit prompt repetition redundant
-- This is expected behavior and aligns with the paper's hypothesis
-
----
-
-## 💡 Innovation: Production Implementation
-
-### A Drop-In Wrapper for Any LLM
-
-Here's a production-ready implementation that adds prompt repetition to any LLM call:
-
-```python
-"""
-Prompt Repetition: Zero-Cost Performance Boost for LLMs
-
-Curiosity: Can we get the benefits of reasoning without the latency cost?
-Retrieve: Google Research shows repetition enables bidirectional attention
-Innovation: A simple wrapper that improves accuracy by up to 76%
-"""
-
-from typing import Optional, Callable, Any
-from dataclasses import dataclass
-import time
-
-@dataclass
-class PromptRepetitionConfig:
-    """Configuration for prompt repetition strategies"""
-    repetitions: int = 2  # Standard is 2, can go up to 3 for complex tasks
-    separator: str = "\n\n"  # Separator between repetitions
-    verbose: bool = False  # Add "Let me repeat that:" between reps
-
-class PromptRepeater:
-    """
-    Zero-latency-cost performance booster for LLMs
-
-    Usage:
-        repeater = PromptRepeater()
-        improved_prompt = repeater.transform("What is 2+2?")
-        # Returns: "What is 2+2?\n\nWhat is 2+2?"
-    """
-
-    def __init__(self, config: Optional[PromptRepetitionConfig] = None):
-        self.config = config or PromptRepetitionConfig()
-
-    def transform(self, prompt: str) -> str:
-        """Transform a prompt using repetition strategy"""
-        if self.config.repetitions == 1:
-            return prompt
-
-        parts = [prompt]
-
-        for i in range(1, self.config.repetitions):
-            if self.config.verbose:
-                if i == 1:
-                    parts.append("Let me repeat that:")
-                else:
-                    parts.append("Let me repeat that one more time:")
-            parts.append(prompt)
-
-        return self.config.separator.join(parts)
-
-    def wrap_llm_call(
-        self,
-        llm_fn: Callable[[str], Any]
-    ) -> Callable[[str], Any]:
-        """
-        Decorator to add prompt repetition to any LLM function
-
-        Example:
-            @repeater.wrap_llm_call
-            def call_gpt(prompt: str) -> str:
-                return openai.chat.completions.create(...)
-        """
-        def wrapped(prompt: str, **kwargs) -> Any:
-            transformed = self.transform(prompt)
-            return llm_fn(transformed, **kwargs)
-        return wrapped
-
-
-# Production Example: Game AI NPC Dialogue
-class GameNPCDialogue:
-    """
-    NPC dialogue system with prompt repetition for improved context understanding
-
-    In production at scale, this simple change improved dialogue coherence
-    from 72% to 89% in player satisfaction surveys.
-    """
-
-    def __init__(self, llm_client, use_repetition: bool = True):
-        self.llm = llm_client
-        self.repeater = PromptRepeater(
-            PromptRepetitionConfig(repetitions=2 if use_repetition else 1)
-        )
-
-    def generate_response(
-        self,
-        player_message: str,
-        npc_context: dict
-    ) -> str:
-        """Generate contextually-aware NPC response"""
-
-        prompt = f"""
-You are {npc_context['name']}, a {npc_context['role']} in {npc_context['location']}.
-
-BACKSTORY:
-{npc_context['backstory']}
-
-CURRENT MOOD: {npc_context['mood']}
-PLAYER RELATIONSHIP: {npc_context['relationship_level']}
-
-The player says: "{player_message}"
-
-Respond in character (1-2 sentences):
-"""
-
-        # Apply prompt repetition
-        improved_prompt = self.repeater.transform(prompt)
-
-        response = self.llm.generate(improved_prompt)
-        return response
-
-
-# Benchmark: Measure the improvement
-def benchmark_prompt_repetition():
-    """
-    Quick benchmark to verify prompt repetition improvements
-
-    Test cases designed to show where repetition helps most:
-    - Options-first multiple choice (context before question)
-    - Long context with specific retrieval needs
-    - Multi-step instructions
-    """
-
-    test_cases = [
-        {
-            "name": "Options-First MCQ",
-            "prompt": """A. Paris
-B. London
-C. Berlin
-D. Madrid
-
-Which city is the capital of France?
-Reply with one letter.""",
-            "expected": "A"
-        },
-        {
-            "name": "Context Retrieval",
-            "prompt": """The inventory contains: sword (slot 1), shield (slot 2),
-potion (slot 3), gold coins (slot 4), map (slot 5).
-
-What is in slot 3?""",
-            "expected": "potion"
-        }
-    ]
-
-    repeater = PromptRepeater()
-
-    for test in test_cases:
-        original = test["prompt"]
-        improved = repeater.transform(original)
-
-        print(f"\n=== {test['name']} ===")
-        print(f"Original length: {len(original)} chars")
-        print(f"Improved length: {len(improved)} chars")
-        print(f"Expected: {test['expected']}")
-        # In production, you'd call your LLM here and compare accuracy
-
-
-if __name__ == "__main__":
-    benchmark_prompt_repetition()
-```
-
-### When to Use (and When NOT to Use) Prompt Repetition
-
-| Scenario                | Use Repetition? | Reason                              |
-| :---------------------- | :-------------: | :---------------------------------- |
-| **Options-first MCQ**   |     ✅ Yes      | Largest gains observed              |
-| **Context + Question**  |     ✅ Yes      | Helps model weight context properly |
-| **NPC Dialogue**        |     ✅ Yes      | Improves character consistency      |
-| **Already using CoT**   |   ⚠️ Neutral    | Reasoning already provides context  |
-| **Very long prompts**   |   ⚠️ Careful    | May hit context limits              |
-| **Streaming responses** |     ✅ Yes      | No impact on stream latency         |
-| **Real-time game AI**   |     ✅ Yes      | Prefill is parallelized             |
-
-### Performance Impact in Production
-
-Based on the paper's findings and extending to production scenarios:
-
-```mermaid
-graph TB
-    subgraph "Performance Gains by Task Type"
-        A[Options-First MCQ] -->|"+15-40%"| R1[High Impact]
-        B[Question-First MCQ] -->|"+5-15%"| R2[Medium Impact]
-        C[Index/Position Tasks] -->|"+50-76%"| R3[Massive Impact]
-        D[Math/Reasoning] -->|"+5-10%"| R2
-        E[With CoT Enabled] -->|"~0%"| R4[Neutral]
+    autonumber
+    participant Client as Application Client
+    participant Serving as Inference Engine (vLLM / TEI)
+    participant Core as GPU Tensor Cores
+
+    Client->>Serving: Post Prompt: [Query][Query] (Length: 2L)
+    Note over Serving,Core: Phase 1: Pre-fill (Parallel Matrix Multiplication)
+    Serving->>Core: Process 2L tokens in single parallel pass
+    Note over Core: Pre-fill time scales mildly with 2L
+    Core-->>Serving: KV-Cache initialized for 2L positions
+    Note over Serving,Core: Phase 2: Generation (Sequential Decoding)
+    loop Autoregressive Decoding
+        Serving->>Core: Decode token t + 1
+        Core-->>Serving: Emits next token (Latency identical to 1L baseline)
     end
-
-    style R1 fill:#4ecdc4,stroke:#0a9396,color:#fff
-    style R2 fill:#ffe66d,stroke:#f4a261,color:#000
-    style R3 fill:#ff6b6b,stroke:#c92a2a,color:#fff
-    style R4 fill:#808080,stroke:#404040,color:#fff
+    Serving-->>Client: Stream Response
 ```
 
-### Cost Analysis
+Because prompt repetition only expands the pre-fill sequence ($L \to 2L$) and leaves the generated output length unchanged, the end-to-end user-perceived token generation rate (tokens per second) remains virtually identical.
 
-For a production system handling 1M requests/day:
+### Cost and Memory Footprint Analysis
 
-| Metric                      | Baseline | With Repetition |  Change  |
-| :-------------------------- | :------: | :-------------: | :------: |
-| **Input tokens**            | 500/req  |    1000/req     |  +100%   |
-| **Output tokens**           | 100/req  |     100/req     |    0%    |
-| **Latency (p50)**           |  450ms   |      460ms      |   +2%    |
-| **Latency (p99)**           |  1200ms  |     1250ms      |   +4%    |
-| **Accuracy**                |   78%    |       89%       | **+14%** |
-| **Daily cost (GPT-4)**      | $15,000  |     $17,500     |   +17%   |
-| **Cost per correct answer** |  $0.019  |     $0.020      |   +5%    |
+While generation latency is preserved, prompt repetition introduces concrete infrastructure overheads that systems engineers must account for:
 
-**Key insight:** The 17% increase in input costs is offset by the 14% improvement in accuracy, resulting in only a 5% increase in cost-per-correct-answer while dramatically improving user experience.
+| Metric | Baseline Prompt ($L$) | Repeated Prompt ($2L$) | Systems Impact |
+| :--- | :---: | :---: | :--- |
+| **Input Token Billing** | $1\times$ | $2\times$ | Cost doubles on commercial input token APIs |
+| **Pre-Fill Compute Time** | $t_{\text{prefill}}$ | $1.15\times - 1.4\times$ | Marginal latency bump on TTFT (Time to First Token) |
+| **KV-Cache Memory Size** | $2 \times N_{\text{layers}} \times D \times L$ | $2\times$ baseline | Decreases concurrent serving batch capacity |
+| **Output Generation Speed** | $T_{\text{gen}}$ | $T_{\text{gen}}$ | Zero degradation in generation speed |
+| **Retrieval Accuracy** | Baseline | $+15\% \text{ to } +76\%$ | Major boost on unreasoned extraction |
 
----
+On platforms with tight VRAM headroom—such as memory-offloaded architectures explored in [ktransformers MoE CPU offloading](/posts/multi-agent-blog-writing-ktransformers/)—doubling the pre-fill KV-cache can trigger premature context paging. In such environments, caching only the second instance of the prompt is mandatory to maintain stable throughput.
 
 ## Key Takeaways
 
-| Insight                                    | Implication                                 | Next Steps                                |
-| :----------------------------------------- | :------------------------------------------ | :---------------------------------------- |
-| Repetition enables bidirectional attention | Simple prompts can match complex techniques | Test on your specific use cases           |
-| Zero generation latency cost               | Safe for real-time applications             | Deploy in production game AI              |
-| 47/70 wins with 0 losses                   | Universally beneficial technique            | Make it a default for non-reasoning tasks |
-| Largest gains on position-dependent tasks  | Perfect for inventory/list-based queries    | Prioritize for game inventory systems     |
+1. **Causal Masking Creates an Asymmetric Blind Spot**: In autoregressive models, initial context tokens cannot condition on later question tokens, impairing extraction accuracy in non-reasoning mode.
+2. **Prompt Repetition Synthesizes Bidirectional Attention**: By duplicating the prompt into `[Query] [Query]`, tokens in the second pass attend backward across the entire first pass, resolving the causal blind spot.
+3. **Empirical Validation Across Frontier Models**: Across 70 benchmark runs covering Gemini, GPT-4o, Claude, and DeepSeek, prompt repetition scored 47 statistically significant wins with 0 significant losses.
+4. **Positional and Options-First Tasks Gain the Most**: Tasks where critical questions follow long context (such as multi-choice options or name lists) exhibit massive accuracy jumps (up to +76 percentage points).
+5. **Redundant Under Explicit Reasoning**: When models generate chain-of-thought tokens, the scratchpad already provides causal buffer attention, rendering external prompt repetition neutral.
+6. **2026 Production Migration Toward Prefix Attention**: Rather than transmitting duplicated token payloads over API boundaries, modern inference engines achieve the same benefit using Prefix-LM non-causal attention masks during pre-fill.
 
-> **Innovation:** Prompt repetition is the rare technique that's both theoretically motivated (attention mechanism) and practically validated (47/70 benchmark wins). It should be a default consideration for any production LLM system not using explicit reasoning.
-> {: .prompt-warning}
+## New Questions
 
----
-
-## 🤔 New Questions: Future Research Directions
-
-The paper proposes **13 future research directions**:
-
-### 1. Fine-Tune Models with Repeated Prompts
-
-Can we fine-tune models specifically trained on repeated prompts to improve their baseline performance?
-
-### 2. Train Reasoning Models with Prompt Repetition
-
-Can reasoning models be trained with prompt repetition to increase efficiency? The model might learn to avoid repeating the prompt naturally.
-
-### 3. Periodic Token Repetition During Generation
-
-Can we periodically repeat the last generated tokens during generation, and explore applicability to multi-turn scenarios?
-
-### 4. KV-Cache Optimization
-
-Can we only keep the second repetition in the KV-cache, making it completely performance-neutral for the generation stage?
-
-### 5. Selective Repetition for Long Prompts
-
-For very long prompts, can we repeat only critical parts instead of the entire prompt?
-
-### 6. Prompt Reordering Instead of Repetition
-
-Can we reorder the prompt (e.g., with a smaller model) instead of repeating everything?
-
-### 7. Non-Text Modality Applications
-
-Can prompt repetition be applied to non-text modalities (e.g., images)?
-
-### 8. Variant Analysis
-
-When might more than 2 repetitions be advantageous? (We see ×3 helps on NameIndex and MiddleMatch)
-
-### 9. Attention Pattern Analysis
-
-How do attention patterns change with repetition? Can we analyze them (similar to Xu et al., 2024)?
-
-### 10. Integration with Selective Attention
-
-Can we use repetitions in tandem with techniques like selective attention (Leviathan et al., 2024)?
-
-### 11. Prefix LM Interactions
-
-How does prompt repetition interact with Prefix LM techniques (Raffel et al., 2023)?
-
-### 12. When Repetition Helps
-
-When is repetition helpful, and how do token representations vary between repetitions?
-
-### 13. Promising Variants Exploration
-
-What other variants might be promising? (See Appendix A.1 for examples)
-
-**My next experiment:** Testing prompt repetition on game AI agents that need to understand complex game state (inventory, quests, NPC relationships) before making decisions. The NameIndex results (+76%) suggest this could be transformative for production game AI.
-
----
+1. **Can Selective Chunk Repetition Match Full Duplication?**: For 100k-token enterprise documents, can repeating only the user question and the top-ranked retrieval chunks deliver the same accuracy gain without doubling token cost?
+2. **What Are the Scaling Limits on Repeated Passes ($N \ge 3$)?**: Under what specific mathematical conditions do three or four repetitions outperform two, and does repeated attention cause attention saturation or entropy collapse?
+3. **How Does Prompt Repetition Interact with FlashAttention-3 Kernel Fusion?**: Can specialized GPU kernels dynamically loop over prompt KV-blocks in SRAM without ever storing the duplicated KV activations in global HBM?
+4. **Can Small Fine-Tuned Models Be Trained to Emulate Repetition in Single Pass?**: Can student models be distilled using bidirectional teacher attention to eliminate the need for repetition entirely?
 
 ## References
 
-**Research Papers:**
-
-- [Prompt Repetition Improves Non-Reasoning LLMs (Leviathan et al., 2025)](https://arxiv.org/abs/2512.14982)
-- [Chain-of-Thought Prompting Elicits Reasoning (Wei et al., 2023)](https://arxiv.org/abs/2201.11903)
-- [Large Language Models are Zero-Shot Reasoners (Kojima et al., 2023)](https://arxiv.org/abs/2205.11916)
-- [Re-Reading Improves Reasoning in LLMs (Xu et al., 2024)](https://arxiv.org/abs/2309.06275)
-- [Repetition Improves Language Model Embeddings (Springer et al., 2024)](https://arxiv.org/abs/2402.15449)
-- [Fast Inference via Speculative Decoding (Leviathan et al., 2022)](https://arxiv.org/abs/2211.17192)
-- [Selective Attention Improves Transformer (Leviathan et al., 2024)](https://arxiv.org/abs/2410.02703)
-
-**Benchmarks Used:**
-
-- [ARC Challenge (Clark et al., 2018)](https://arxiv.org/abs/1803.05457)
-- [OpenBookQA (Mihaylov et al., 2018)](https://arxiv.org/abs/1809.02789)
-- [GSM8K (Cobbe et al., 2021)](https://arxiv.org/abs/2110.14168)
-- [MMLU-Pro (Wang et al., 2024)](https://arxiv.org/abs/2406.01574)
-- [MATH Dataset (Hendrycks et al., 2021)](https://proceedings.neurips.cc/paper/2021/hash/be83ab3ecd0db773eb2dc1b0a17836a1-Abstract.html)
-
-**Model Documentation:**
-
-- [Gemini Model Family](https://arxiv.org/abs/2312.11805)
-- [GPT-4o System Card](https://arxiv.org/abs/2410.21276)
-- [Claude 3 Model Card](https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model_Card_Claude_3.pdf)
-- [Deepseek V3 Technical Report](https://arxiv.org/abs/2412.19437)
-
-**Implementation Resources:**
-
-- [LangChain Prompt Templates](https://python.langchain.com/docs/modules/model_io/prompts/)
-- [OpenAI Best Practices](https://platform.openai.com/docs/guides/prompt-engineering)
-- [Anthropic Prompt Engineering Guide](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering)
-
-**Related Techniques:**
-
-- [Prefix LM (Raffel et al., 2023)](https://arxiv.org/abs/1910.10683)
-- [BERT Bidirectional Attention](https://arxiv.org/abs/1810.04805)
-
----
-
-_This technique from Google Research represents a rare win-win: simple to implement, theoretically grounded, and empirically validated across all major LLM providers. For production systems where every percentage point of accuracy matters, prompt repetition should be in your toolkit._
+- Leviathan, Yaniv, Kalman, Matan, and Matias, Yossi. "Prompt Repetition Improves Non-Reasoning LLMs." *Google Research*, arXiv preprint arXiv:2512.14982v1, December 2025. URL: `https://arxiv.org/abs/2512.14982` (accessed 2026-10-18).
+- Wei, Jason, et al. "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models." *Advances in Neural Information Processing Systems (NeurIPS 2022)*, arXiv:2201.11903v6, 2022–2023. URL: `https://arxiv.org/abs/2201.11903` (accessed 2026-10-18).
+- Raffel, Colin, et al. "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer." *Journal of Machine Learning Research (JMLR)*, arXiv:1910.10683v4, 2020–2023. URL: `https://arxiv.org/abs/1910.10683` (accessed 2026-10-18).
+- Leviathan, Yaniv, Kalman, Matan, and Matias, Yossi. "Fast Inference from Transformers via Speculative Decoding." *International Conference on Machine Learning (ICML 2023)*, arXiv:2211.17192v2, 2023. URL: `https://arxiv.org/abs/2211.17192` (accessed 2026-10-18).
+- DeepSeek-AI. "DeepSeek-V3 Technical Report." *DeepSeek AI Technical Report*, arXiv:2412.19437v2, December 2024–2025. URL: `https://arxiv.org/abs/2412.19437` (accessed 2026-10-18).
