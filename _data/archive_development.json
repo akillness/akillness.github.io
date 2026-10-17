@@ -538,9 +538,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt from the 2025-11 marketing overview note into an engineering Source Audit. Audited Google Workspace REST APIs and Gemini function-calling boundaries, contrasting deterministic trigger scripts against autonomous agentic execution."
     },
     {
       "path": "_posts/2025/11/2025-11-16-multi-agent-systems.md",
