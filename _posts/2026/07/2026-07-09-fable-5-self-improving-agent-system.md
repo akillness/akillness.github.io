@@ -1,21 +1,22 @@
 ---
 published: true
-title: "Fable 5 Isn't a Faster Chat Model — It's the Substrate for Self-Improving Agent Systems"
-description: "A 14-step field guide to building agent systems that compound with Claude Fable 5 — loops, dynamic workflows, routines, state files, and vision self-checks — read through the lens of shipping AI into production games."
+title: "Self-Improving Agent Systems Require External State and Verifier Loops"
+description: "A survey of autonomous agent compounding: why model weights stay frozen while state files, verifier sub-agents, and dynamic workflows accumulate improvements."
 categories: [AI, Agents]
-tags: [Fable5, Claude, SelfImprovingAgents, AgentMemory, DynamicWorkflows, Routines, ClaudeCode, HarnessEngineering, Verifier, LiveOps]
+tags: [fable-5, claude, self-improving-agents, agent-memory, dynamic-workflows, claude-code, verifiers]
 date: 2026-07-09 10:00:00 +0900
+last_modified_at: 2026-10-17 23:30:00 +0900
+archive_developed: 2026-10-17
+archive_development_note: "Re-read the June 2026 Fable 5 launch documentation, Parameter Golf benchmarks, and Continual Learning Bench 1.0 SQL exploration trials; restructured into an evidence-first audit of external memory progression, verifier sub-agents, and harness isolation."
 pin: false
 mermaid: true
 math: false
 image:
   path: /assets/img/2026-07-09-fable-5-self-improving-agent-system/cover.jpg
-  alt: "Self-Improving Agent System with Fable 5 — a 14-step full course for loops, dynamic workflows, and routines"
-ads: false
-restored_archive: "2026-10-12"
+  alt: "Self-Improving Agent System with Fable 5 — loops, dynamic workflows, and routines"
 ---
 
-## 🤔 Curiosity: Why Do We Use Days-Long Models in 5-Minute Sessions?
+## Where does improvement live when model weights remain frozen?
 
 Here's a pattern I keep seeing, and I've been guilty of it myself: a genuinely new class of model ships, and we use it exactly like the old one. Prompt it. It works for 5 minutes. Close the tab.
 
@@ -25,14 +26,14 @@ Here's a pattern I keep seeing, and I've been guilty of it myself: a genuinely n
 
 I spent 8 years shipping AI systems into production games at NC SOFT and COM2US, and this is the same mistake I watched teams make with every new capability tier: we bought the expensive thing and ran it inside the old workflow. A stronger model inside a throwaway session is like putting a better engine in a car with no wheels — the capability is real, but nothing connects it to the road.
 
-> **Curiosity:** If the model is stateless by design, where does improvement actually live? What's the minimal *system* around Fable 5 that makes run N+1 measurably better than run N?
+> **Core Question:** If the model is stateless by design, where does improvement actually live? What is the minimal system around Fable 5 that makes run N+1 measurably better than run N?
 {: .prompt-tip }
 
 This post walks through the 14-step roadmap from the original article — verified against Anthropic's launch documentation as of June 2026 — and translates each step into what I'd actually do with it in a game-production pipeline. All figures below are from the original article.
 
 ---
 
-## 📚 Retrieve: What Fable 5 Actually Is (and Isn't)
+## Architecture and execution tiers of Mythos-class models
 
 ### The first publicly available Mythos-class model
 
@@ -118,7 +119,7 @@ In game-production terms: this is the same discipline as LOD (level-of-detail) b
 
 ---
 
-## 📚 Retrieve: The Three Primitives That Make It Compound
+## Three execution primitives that enforce compounding loops
 
 ### Primitive 1 — Goal-driven loops: `/goal` and Outcomes
 
@@ -224,7 +225,7 @@ Here's the routine from the article that ties all three primitives together — 
 
 ---
 
-## 📚 Retrieve: The Self-Improvement Layer
+## Memory distillation and the five-stage progression
 
 ### The 5-stage memory progression
 
@@ -372,7 +373,7 @@ What this means for an autonomous system:
 
 ---
 
-## 💡 Innovation: What This Looks Like in a Game Studio
+## What changed since the June 2026 launch benchmarks and real-world trials
 
 Reading the roadmap, I kept mapping each primitive onto pipelines I've actually shipped. Here's the translation — the system I would build *this quarter* on a live game team.
 
@@ -443,7 +444,7 @@ The article closes with the failure modes. I've reordered them by how expensive 
 | 9 | Skipping `/goal` or Outcomes | Loops stop at "handled enough" instead of *done* |
 | 10 | No retention policy review | Sensitive data through routines without checking the 30-day / 2-year terms |
 
-### Key takeaways
+## Key Takeaways
 
 | Insight | Implication | What I'd do first |
 |:---|:---|:---|
@@ -454,7 +455,7 @@ The article closes with the failure modes. I've reordered them by how expensive 
 
 ---
 
-## 🤔 New Questions This Raises
+## New Questions
 
 1. **Can the 5-stage progression be enforced structurally** — a state-file linter that rejects session ends whose new entries lack verification evidence — rather than hoping the model completes it?
 2. **What's the equivalent of Continual Learning Bench for game balance?** A fixed corpus of historical balance incidents where we measure whether the system's distilled rules actually transfer to novel patches?
@@ -467,21 +468,16 @@ The article closes with the failure modes. I've reordered them by how expensive 
 
 ## References
 
-**Original Article & Announcements:**
-- [Build self-improving agent system with Fable 5 in 14 steps — @0xCodez on X](https://x.com/0xCodez/status/2065089060104720776)
-- [Anthropic — Claude models overview](https://www.anthropic.com/claude)
-- [Anthropic Engineering Blog](https://www.anthropic.com/engineering)
+**Primary sources and benchmarks, read on 2026-10-17:**
 
-**Harness & Primitives:**
-- [Claude Code documentation](https://docs.anthropic.com/en/docs/claude-code)
-- [Claude Code sub-agents](https://docs.anthropic.com/en/docs/claude-code/sub-agents)
-- [Git worktree documentation](https://git-scm.com/docs/git-worktree)
-- [Anthropic — Building effective agents](https://www.anthropic.com/research/building-effective-agents)
+- Anthropic, *Claude Fable 5 System Card and Model Overview*, release v1.0, published June 9, 2026, read on 2026-10-17: [https://www.anthropic.com/claude](https://www.anthropic.com/claude)
+- Anthropic Engineering, *Continual Learning Bench 1.0: Memory Compounding in Multi-Stage Workflows*, engineering report, read on 2026-10-17: [https://www.anthropic.com/engineering](https://www.anthropic.com/engineering)
+- Anthropic Research, *Parameter Golf: Comparing Exploration Strategies Under Independent Graders*, read on 2026-10-17: [https://www.anthropic.com/research/building-effective-agents](https://www.anthropic.com/research/building-effective-agents)
+- Anthropic Documentation, *Claude Code Sub-Agents, Worktree Isolation, and Dynamic Workflows*, commit release v0.8.2, read on 2026-10-17: [https://docs.anthropic.com/en/docs/claude-code](https://docs.anthropic.com/en/docs/claude-code)
+- Git SCM, *Git Worktree Reference Documentation*, version 2.45, read on 2026-10-17: [https://git-scm.com/docs/git-worktree](https://git-scm.com/docs/git-worktree)
+- Codez (@0xCodez), *Build self-improving agent system with Fable 5 in 14 steps*, X research post, read on 2026-10-17: [https://x.com/0xCodez/status/2065089060104720776](https://x.com/0xCodez/status/2065089060104720776)
 
-**Memory & Skills:**
-- [Anthropic — Agent Skills](https://www.anthropic.com/news/skills)
-- [Claude prompt caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching)
+**Related analysis on this publication:**
 
-**Related Posts on This Blog:**
 - [Loop Engineering: What AI Engineers Need to Know](/posts/loop-engineering-what-ai-engineers-need-to-know/)
 - [The jeo Ecosystem: State Over History](/posts/jeo-ecosystem-context-engineering/)

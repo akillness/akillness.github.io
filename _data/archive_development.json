@@ -362,9 +362,9 @@
       "links_at_intake": 10,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Re-read the June 2026 Fable 5 launch docs, Parameter Golf benchmarks, and Continual Learning Bench 1.0 SQL exploration trials; restructured into an evidence-first audit of external memory progression, verifier sub-agents, and harness isolation."
     },
     {
       "path": "_posts/2026/07/2026-07-21-unity-cli-production-workflows.md",
