@@ -848,9 +848,9 @@
       "links_at_intake": 6,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Source audit on FSoft-AI4Code's CodeWiki framework (arXiv:2510.24428), analyzing hierarchical module decomposition, CodeWikiBench rubrics, and living wiki anchors."
     },
     {
       "path": "_posts/2026/02/2026-02-06-self-driving-codebases.md",
