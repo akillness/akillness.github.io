@@ -596,9 +596,9 @@
       "links_at_intake": 15,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt from the 2025-11 note into a rigorous Source Audit. Replaced first-person game development anecdotes with an empirical evaluation of multi-layered guardrail architectures, NeMo Guardrails programmable rails, and tool-sandbox isolation contracts."
     },
     {
       "path": "_posts/2025/11/2025-11-20-5-engineering-skills-ai-driven-era-multi-agent.md",
