@@ -652,7 +652,7 @@
       "links_at_intake": 20,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
+      "status": "in_progress",
       "developed_at": null,
       "survey_note": null
     },
@@ -666,9 +666,9 @@
       "links_at_intake": 21,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-17",
+      "survey_note": "Rebuilt from the speculative 2025-11 note into a rigorous Source Audit pinning arXiv:2511.19663, the FaraGen synthetic trajectory generator, and the 2026 Fara1.5 successor family."
     },
     {
       "path": "_posts/2025/11/2025-11-25-multi-agent-productivity-gains.md",
