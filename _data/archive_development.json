@@ -3067,9 +3067,9 @@
       "links_at_intake": 4,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from brief preliminary overview into authoritative source audit analyzing State Space Duality (SSD), semiseparable matrix transformations, and Mamba-2 kernel throughput"
     },
     {
       "path": "_posts/2024/06/2024-06-09-llm-agents-eval.md",
