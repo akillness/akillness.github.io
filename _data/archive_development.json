@@ -2056,9 +2056,9 @@
       "links_at_intake": 8,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on Unsloth Studio local API server, GGUF dual-protocol proxying (Anthropic Messages and OpenAI Chat), and agent tool calling harnesses"
     },
     {
       "path": "_posts/2024/03/2024-03-11-web-gl.md",
