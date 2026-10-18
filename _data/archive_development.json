@@ -3710,9 +3710,9 @@
         "third-party-rewrite",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial 2024 trend roundup into rigorous technical source audit on post-Chinchilla compute scaling, test-time search, state-space duality, and extreme quantization"
     },
     {
       "path": "_posts/2024/06/2024-06-01-genwarp-paper.md",
