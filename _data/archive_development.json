@@ -3778,9 +3778,9 @@
       "flags": [
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial promotional tool listicle into rigorous technical source audit on developer toolchains, context harvesting, MCP integration, and agentic execution harnesses"
     },
     {
       "path": "_posts/2024/07/2024-07-04-data-analystics-with-python.md",
