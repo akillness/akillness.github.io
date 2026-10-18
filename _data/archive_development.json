@@ -4218,9 +4218,9 @@
         "no-sources",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial 7-bullet list into exhaustive systems audit on database scaling: indexing mechanics, WAL streaming replication, consistent hashing sharding, and Universal Scalability Law"
     },
     {
       "path": "_posts/2024/05/2024-05-11-generativeai-nutshell.md",
