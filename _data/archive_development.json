@@ -3118,9 +3118,9 @@
       "flags": [
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from generic portfolio advice into authoritative source audit on resilient 3-tier AWS architectures with strict VPC isolation, security group chaining, and 2026 serverless patterns"
     },
     {
       "path": "_posts/2024/06/2024-06-28-study-transformer.md",
