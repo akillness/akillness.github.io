@@ -3232,9 +3232,9 @@
         "third-party-rewrite",
         "lang-ko"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from Korean translation summary into authoritative source audit evaluating NVIDIA RankRAG's dual-purpose instruction tuning, ranking logits, Dragon retriever integration, and 2026 agentic retrieval paradigms"
     },
     {
       "path": "_posts/2024/07/2024-07-15-key-data-term-quick-guid.md",
