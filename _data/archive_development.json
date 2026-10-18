@@ -3339,9 +3339,9 @@
       "flags": [
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from generic awesome-list roundup into authoritative systems engineering source audit detailing the 7-layer production LLM stack across serving engines (vLLM/SGLang), evaluation harnesses (Ragas/Opik), and layered NeMo guardrails"
     },
     {
       "path": "_posts/2024/08/2024-08-03-the-gpt-4-struggle.md",
