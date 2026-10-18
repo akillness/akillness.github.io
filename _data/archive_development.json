@@ -3948,9 +3948,9 @@
         "third-party-rewrite",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial news summary into comprehensive technical source audit on Salesforce's Online Iterative DPO framework, proxy reward modeling, and distribution shift mitigation"
     },
     {
       "path": "_posts/2024/05/2024-05-21-generativeai-term.md",
