@@ -3323,9 +3323,9 @@
       "links_at_intake": 1,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial newsletter snippet into comprehensive systems and mathematical source audit analyzing Graph-Structured Speculative Decoding, tree attention masks, speculative acceptance criteria, and 2026 EAGLE-2/Medusa inference architectures"
     },
     {
       "path": "_posts/2024/08/2024-08-03-awesome-production-llm.md",
