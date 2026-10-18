@@ -1,74 +1,196 @@
 ---
-title: You need more than just LLMs to create these AI agents
-description: "Today, autonomous #AIAgents are all the buzz and you need more than just LLMs to create these AI agents."
-categories: [Agent/Orchestration]
-tags: [Agent, Workflow, Orchestration]
+title: "Beyond the Foundation Model: Agentic Runtimes, Memory, and Tool Orchestration"
+description: "A source audit analyzing autonomous agent frameworks, evaluating state machines, tiered memory stores, deterministic tool calling, and execution boundaries."
+categories: [AI, Agents]
+tags: [ai-agents, agent-orchestration, langgraph, llamaindex, agentic-workflows, tool-calling]
 date: 2024-05-30 03:00:00 +0800
-# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: true
-ads: false
-restored_archive: "2026-10-12"
+last_modified_at: 2026-10-18 14:00:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from unoriginal high-level framework list into authoritative source audit on agentic runtime architecture, cyclic state machines, tiered memory, and deterministic tool dispatch"
+mermaid: true
+image:
+  path: /assets/img/llm/llm-ai-agents.jpeg
+  alt: "Autonomous AI agent runtime architecture featuring cyclic state machine, memory, and tool integration"
 ---
-Today, autonomous #AIAgents are all the buzz and you need more than just LLMs to create these AI agents. 
 
-You basically need a sophisticated toolkit that can ease and automate your LLM-powered applications or agents. 
+## Why Do Foundation Models Alone Fail to Form Autonomous Agents Without Runtime Harnesses?
 
-We have the popular AI frameworks such as LangChain, LlamaIndex and Haystack, etc. But, the question always is, how to choose one over the other. 
+A prevailing misconception during the early wave of generative AI was that scaling foundation model parameters would automatically yield autonomous problem-solving agents. In practice, deploying an unconstrained large language model (LLM) into open-ended operational workflows exposed severe systemic failures:
+1. **Statelessness and Context Oblivion**: Raw autoregressive decoders possess no durable memory beyond their immediate context window. Once a session terminates or the context token limit is reached, all procedural experience evaporates.
+2. **Infinite Action Loops and Hallucinated APIs**: When a model attempts multi-step problem solving without an execution harness, minor tool call failures trigger compounding errors, causing the model to repeatedly execute identical broken actions.
+3. **Absence of Environmental Grounding**: Without deterministic sandbox verification, foundation models cannot verify whether an executed SQL mutation, shell script, or external API update succeeded or caused irreversible data corruption.
 
-## Let's understand each one-by-one. 
+An autonomous AI agent is not simply an LLM; it is a **cybernetic feedback loop** where the foundation model functions as a central cognitive planner embedded within a structured execution harness. By late May 2024, the artificial intelligence industry experienced a paradigm shift: moving away from rigid, linear prompt chains toward **dynamic, cyclic agent runtimes** governed by state graphs, tiered memory hierarchies, and formal tool protocols.
 
-#### ➤ LangChain: 
-Ideal for general-purpose applications requiring flexibility and extensibility. It excels in scenarios where you need to load, process, and index data, and interact with Large Language Models (LLMs). Choose LangChain if your application demands a broad range of functionalities and you need to customize or extend its capabilities.
+```mermaid
+flowchart TD
+    subgraph Environment["External Environment & Sensors"]
+        UserEvent["User Objective / Webhook / File Event"] --> Ingestion["Event Ingestion & Input Sanitization"]
+    end
 
-#### ➤ LlamaIndex: 
-Best suited for search and retrieval applications, especially when dealing with large volumes of data. Its efficiency and simple interface make it the go-to choice for applications focused on quick querying and document retrieval. Opt for LlamaIndex if your primary requirement is a streamlined, efficient search and retrieval process.
+    subgraph AgentCore["Agentic Runtime Harness (The Control Plane)"]
+        Ingestion --> StateMachine["Cyclic State Graph (e.g., LangGraph State Machine)"]
+        
+        StateMachine --> Deliberation["Cognitive Reasoner: LLM Reflection & Planning (ReAct)"]
+        
+        Deliberation <--> WorkingMem["Working Memory: In-Context Ephemeral State"]
+        Deliberation <--> RecallMem["Recall Memory: Checkpointed Thread State Store"]
+        Deliberation <--> ArchivalMem["Archival Memory: Vector & Knowledge Graph RAG"]
+        
+        Deliberation --> ActionDecide{"Action Decision"}
+        ActionDecide -- Tool Call Required --> ToolRouter["Deterministic Tool Router"]
+        ActionDecide -- Task Completed --> FinalResponse["Emit Final Verified Output"]
+    end
 
-#### ➤ Haystack: 
-If your application involves advanced text analysis and requires robust data pipeline integration, Haystack is a strong candidate. It's particularly useful for projects where complex NLP tasks, like information extraction or question answering, are central.
+    subgraph ExecutionPlane["Deterministic Sandbox Plane"]
+        ToolRouter --> SecurityGate["Human-In-The-Loop / Policy Circuit Breaker"]
+        SecurityGate --> ExecSandbox["Sandboxed Execution: Code / SQL / API / Shell"]
+        ExecSandbox --> Observation["Structured Execution Observation / Error Trace"]
+        Observation --> StateMachine
+    end
+```
 
-#### ➤ Hugging Face: 
-A great choice if you need access to a wide variety of pre-trained machine learning models, particularly in the domain of NLP and computer vision. Hugging Face is not just a model repository; it also fosters community collaboration and provides tools for model training and deployment. Select Hugging Face if your application relies heavily on the latest ML models and benefits from a collaborative development environment.
+By constraining model actions within an explicit control plane, agent harnesses transform probabilistic text predictors into reliable software systems.
 
-> In summary, your choice should be guided by the specific needs of your application – whether it's the versatility of LangChain, the efficiency of LlamaIndex, the NLP focus of Haystack, or the rich model repository and community of Hugging Face. 
-{: .prompt-tip }
+---
 
-You can also mix and use these frameworks according to your usecase. 
+## Deconstructing the Agentic Architecture Stack
 
-But, no matter what AI framework you consider, I always suggest you to choose SingleStore database for all your GenAI applications.
+A production-grade agent runtime requires four tightly integrated subsystems, moving far beyond simple chat completions:
 
+```
+Core Agent Subsystem Matrix:
+-------------------------------------------------------------------------------------------------
+Subsystem             Primary Operational Function         Key Technical Implementations
+-------------------------------------------------------------------------------------------------
+Cognitive Core        Reasoning, decomposition, synthesis  Frontier LLMs (GPT-4o, Claude 3.5 Sonnet)
+Control Plane         State transitions, loops, branching  LangGraph, AutoGen, CrewAI, Semantic Kernel
+Memory Architecture   Temporal state, retrieval, recall    Mem0, Zep, Hybrid Dense/Graph Vector Stores
+Action Engine         Deterministic tool dispatch, sandboxes Model Context Protocol (MCP), Docker, WASM
+-------------------------------------------------------------------------------------------------
+```
 
-![ LLM AI Agents ](/assets/img/llm/llm-ai-agents.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
+### 1. The Control Plane: Linear Chains vs Cyclic State Graphs
 
+Early agent frameworks (such as legacy LangChain chains or AutoGPT) relied on naive `while` loops running unconstrained prompt completions. In production, these loops suffered from unpredictable termination criteria and untraceable states.
 
-<details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+The industry transitioned to **Cyclic State Graphs** (popularized by **LangGraph** in 2024). In a state graph:
+- **State is explicit and immutable**: Every state transition emits a new versioned state dictionary.
+- **Nodes represent computational steps**: Executing an LLM call, a tool execution, or a human approval gate.
+- **Edges define conditional routing**: Dynamically directing control flow based on validation outcomes.
+- **Checkpointers enable persistence**: Saving the entire execution graph to disk at every superstep, allowing sessions to pause, resume, travel backward in time, or solicit human input.
 
-오늘날 자율 해시태그#AIAgents 가 화두가 되고 있으며, 이러한 AI 에이전트를 생성하려면 LLM 이상의 것이 필요합니다. 
+```python
+# Simplified representation of a Cyclic State Graph in LangGraph
+from typing import TypedDict, Annotated, List
+import operator
+from langgraph.graph import StateGraph, END
 
-기본적으로 LLM 기반 애플리케이션 또는 에이전트를 쉽고 자동화할 수 있는 정교한 툴킷이 필요합니다. 
+class AgentState(TypedDict):
+    messages: Annotated[List[dict], operator.add]
+    loop_count: int
+    is_verified: bool
 
-LangChain, LlamaIndex 및 Haystack 등과 같은 인기 있는 AI 프레임워크가 있습니다. 그러나 문제는 항상 하나를 선택하는 방법입니다. 
+def reason_node(state: AgentState):
+    # LLM deliberates on current context and decides next action
+    response = llm.invoke(state["messages"])
+    return {"messages": [response], "loop_count": state["loop_count"] + 1}
 
-## 하나씩 이해합시다. 
+def tool_node(state: AgentState):
+    # Execute deterministic tool in sandbox
+    obs = execute_tool(state["messages"][-1].tool_calls)
+    return {"messages": [obs]}
 
-#### ➤ 랭체인: 
-유연성과 확장성이 필요한 범용 응용 프로그램에 적합합니다. 데이터를 로드, 처리 및 인덱싱하고 대규모 언어 모델(LLM)과 상호 작용해야 하는 시나리오에서 탁월합니다. 애플리케이션에 광범위한 기능이 필요하고 해당 기능을 사용자 지정하거나 확장해야 하는 경우 LangChain을 선택합니다.
+def should_continue(state: AgentState):
+    if state["is_verified"] or state["loop_count"] >= 5:
+        return END
+    return "tools" if state["messages"][-1].tool_calls else "reason"
 
-#### ➤ 라마인덱스: 
-검색 및 검색 응용 프로그램, 특히 대량의 데이터를 처리할 때 가장 적합합니다. 효율성과 간단한 인터페이스로 인해 빠른 쿼리 및 문서 검색에 중점을 둔 응용 프로그램에 적합합니다. 주요 요구 사항이 간소화되고 효율적인 검색 및 검색 프로세스인 경우 LlamaIndex를 선택하십시오.
+# Build execution graph
+workflow = StateGraph(AgentState)
+workflow.add_node("reason", reason_node)
+workflow.add_node("tools", tool_node)
+workflow.set_entry_point("reason")
+workflow.add_conditional_edges("reason", should_continue)
+workflow.add_edge("tools", "reason")
+app = workflow.compile()
+```
 
-#### ➤ Haystack: 
-애플리케이션에 고급 텍스트 분석이 포함되고 강력한 데이터 파이프라인 통합이 필요한 경우 Haystack이 강력한 후보입니다. 정보 추출이나 질문 답변과 같은 복잡한 NLP 작업이 중심이 되는 프로젝트에 특히 유용합니다.
+### 2. Tiered Memory Architectures: Beyond Flat Context Windows
 
-#### ➤ 허깅페이스: 
-특히 NLP 및 컴퓨터 비전 영역에서 사전 학습된 다양한 기계 학습 모델에 액세스해야 하는 경우 탁월한 선택입니다. Hugging Face는 단순한 모델 저장소가 아닙니다. 또한 커뮤니티 협업을 촉진하고 모델 학습 및 배포를 위한 도구를 제공합니다. 애플리케이션이 최신 ML 모델에 크게 의존하고 협업 개발 환경의 이점을 활용하는 경우 Hugging Face를 선택합니다.
+Modern agent engineering categorizes memory into three temporal tiers, preventing context window saturation:
+1. **Working Memory**: The immediate in-context scratchpad, containing actively manipulated variables and current turn observations.
+2. **Recall / Episodic Memory**: Thread-level histories storing past conversational episodes and user corrections, indexed by session ID.
+3. **Archival / Semantic Memory**: Global, cross-session knowledge indexed in hybrid vector databases and entity knowledge graphs, retrieved via semantic similarity queries.
 
-> 요약하자면, LangChain의 다재다능함, LlamaIndex의 효율성, Haystack의 NLP 초점, Hugging Face의 풍부한 모델 저장소 및 커뮤니티 등 애플리케이션의 특정 요구 사항에 따라 선택해야 합니다. 
-{: .prompt-tip }
+As analyzed in our technical study on [Agentic Application Design Patterns](/posts/agentic-application-design-patterns/), structured memory compaction ensures that agents do not re-ingest thousands of historical tokens on every sub-task iteration.
 
-사용 사례에 따라 이러한 프레임워크를 혼합하여 사용할 수도 있습니다. 
+---
 
-그러나 어떤 AI 프레임워크를 고려하든 항상 모든 GenAI 애플리케이션에 대해 SingleStore 데이터베이스를 선택하는 것이 좋습니다.
+## Evaluating the 2024 Framework Landscape
 
-</details>
+Choosing the appropriate orchestration framework depends on the underlying system complexity and integration surface:
+
+| Framework | Core Philosophy | Best Suited For | Trade-Off Limitation |
+| :--- | :--- | :--- | :--- |
+| **LangGraph** | Cyclic state machines with checkpointers | Multi-agent coordination, human-in-the-loop | Steep learning curve, boilerplate code |
+| **LlamaIndex** | Data-centric indexing and retrieval | RAG-heavy agents, structured document parsing | Less granular control over arbitrary state loops |
+| **AutoGen** | Conversational multi-agent consensus | Simulation, collaborative brainstorming | High token cost, susceptibility to chatter loops |
+| **Haystack** | Component-based linear pipelines | Enterprise document QA, production search | Rigid graph structures, less dynamic agent loops |
+
+Connecting to our earlier source audits on [Multi-Agent LLM Systems](/posts/llm-build-multi-agent/) and [LLM Agent Principles](/posts/llm-agents/), modern enterprise deployments rarely rely on single monolithic frameworks; they combine specialized indexing (LlamaIndex) with robust state machine orchestration (LangGraph).
+
+---
+
+## How Autonomous Agent Architectures Evolved Across 2026
+
+Between 2024 and 2026, the agentic systems landscape matured from experimental code scripts into standardized enterprise infrastructure:
+
+### 1. Standardization via the Model Context Protocol (MCP)
+In early 2024, every agent framework wrote custom proprietary wrappers for file access, GitHub APIs, and database connections. In 2026, Anthropic's open **Model Context Protocol (MCP)** emerged as the universal standard. Tools and resources expose standard JSON-RPC endpoints, allowing any agent runtime to discover, authenticate, and execute enterprise tools seamlessly.
+
+### 2. Hardened Sandboxes and Sovereignty Boundaries
+Running unconstrained code generated by foundation models directly on host machines posed catastrophic security vulnerabilities. In 2026, production agents operate within isolated, micro-containerized sandboxes (e.g., lightweight Docker containers or WASM runtimes). File writes and shell commands are cryptographically bounded, and explicit SLA circuit breakers (`MAX_TOKENS`, `MAX_COST`, `MAX_LOOPS`) terminate runaways automatically.
+
+```mermaid
+graph TD
+    subgraph Modern_Agent_Grid["2026 Autonomous Agent Fabric"]
+        AgentCore["Reasoning Agent Core"] --> MCPRouter["Model Context Protocol (MCP) Client"]
+        MCPRouter --> DevServer["Local Dev MCP Server (File / Git / Terminal)"]
+        MCPRouter --> CloudDB["Enterprise Database MCP (PostgreSQL / Snowflake)"]
+        MCPRouter --> BrowserCDP["Browserbase Headless Chrome MCP"]
+        
+        DevServer --> DockerIsolation["Ephemeral Micro-Docker Container Sandbox"]
+        DockerIsolation --> Verifier["Automated Unit Test & Compiler Verifier"]
+    end
+```
+
+### 3. Test-Time Search and Rule-Based Verifiers
+In 2026, autonomous coding agents (such as Codex, Claude Code, and Antigravity) no longer rely on single-pass greedy generations. Agents execute deep test-time tree search (Monte Carlo Tree Search paired with Process Reward Models), executing code in local sandboxes, inspecting stack traces, and self-correcting errors before presenting solutions to human developers.
+
+---
+
+## Key Takeaways
+
+- **Foundation models are engines, not complete agents**: Autonomous agency requires a surrounding harness providing state graphs, memory persistence, and sandbox grounding.
+- **Cyclic state graphs replaced fragile while-loops**: Explicit state dictionaries, conditional branching, and checkpointing provide deterministic execution boundaries.
+- **Tiered memory prevents context window overflow**: Splitting memory into working, recall, and archival stores ensures long-term persistence without token bloat.
+- **Model Context Protocol (MCP) standardized tool integration**: Universal client-server protocols eliminated fragmented, proprietary tool wrappers across the industry.
+- **2026 systems mandate isolated sandboxes and verifiers**: Modern production agents execute within ephemeral containers and utilize automated test verifiers to achieve high task completion rates.
+
+---
+
+## New Questions
+
+1. How do multi-agent consensus protocols (e.g., debate versus hierarchical manager-worker) perform on economic token efficiency when executing complex refactors across multi-million-line codebases?
+2. What are the security threat vectors of prompt injection when autonomous agents ingest untrusted third-party web content via MCP tools?
+3. To what extent does test-time verification using automated compilers eliminate the need for human-in-the-loop approval gates in safety-critical infrastructure deployments?
+
+---
+
+## References
+
+- Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y. (2023). *ReAct: Synergizing Reasoning and Acting in Language Models*. In International Conference on Learning Representations (ICLR). Available at: <https://arxiv.org/abs/2210.03629> (accessed 2026-10-18).
+- Park, J. S., O'Brien, J. C., Cai, C. J., Morris, M. R., Liang, P., & Bernstein, M. S. (2023). *Generative Agents: Interactive Simulacra of Human Behavior*. In Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology (UIST '23), 1-22. Available at: <https://arxiv.org/abs/2304.03442> (accessed 2026-10-18).
+- LangChain Team. (2024). *LangGraph: Building Language Agents as Graphs*. Official LangChain Architecture Documentation. Available at: <https://github.com/langchain-ai/langgraph> (accessed 2026-10-18).
+- Anthropic. (2024). *Building Effective Agents: A Practical Guide to Designing Agentic Systems*. Anthropic Research Publication. Available at: <https://www.anthropic.com/research/building-effective-agents> (accessed 2026-10-18).

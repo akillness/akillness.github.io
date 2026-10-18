@@ -3053,9 +3053,9 @@
         "korean-heavy",
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal high-level framework list into authoritative source audit on agentic runtime architecture, cyclic state machines, tiered memory, and deterministic tool dispatch"
     },
     {
       "path": "_posts/2024/06/2024-06-03-ssm-transformer.md",
