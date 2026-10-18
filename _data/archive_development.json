@@ -3019,9 +3019,9 @@
         "korean-heavy",
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal high-level checklist into authoritative source audit analyzing roofline models, prefill vs decode dynamics, continuous batching, and speculative decoding"
     },
     {
       "path": "_posts/2024/05/2024-05-27-llm-based-scraping.md",

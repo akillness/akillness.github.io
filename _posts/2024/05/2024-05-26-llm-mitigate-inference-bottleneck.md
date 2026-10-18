@@ -1,88 +1,201 @@
 ---
-title: How can we further mitigate inference bottlenecks in large LLMs
-description: Mitigate inference bottleneck
-categories: [LLM/Model & Papers]
-tags: [LLM, Model, Paper]
+title: "Mitigating LLM Inference Bottlenecks: Prefill Compute vs Memory-Bound Decode Mechanics"
+description: "A source audit analyzing LLM inference bottlenecks, contrasting compute-bound prefill and memory-bound decode, continuous batching, and speculative decoding."
+categories: [AI, Tooling]
+tags: [inference-optimization, memory-bandwidth, continuous-batching, speculative-decoding, paged-attention, vllm]
 date: 2024-05-26 12:10:00 +0800
-published: true
-ads: false
-restored_archive: "2026-10-12"
+last_modified_at: 2026-10-18 14:00:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from unoriginal high-level checklist into authoritative source audit analyzing roofline models, prefill vs decode dynamics, continuous batching, and speculative decoding"
+mermaid: true
+image:
+  path: /assets/img/llm/LLM_mitigate_inference_bottleneck.jpeg
+  alt: "Roofline analysis of compute-bound prefill versus memory-bandwidth-bound decode in autoregressive transformers"
 ---
-How can we further mitigate inference bottlenecks in large #LLMs like Llama3 to enable real-time applications with minimal latency and performance degradation?
 
-### Let's Explore the solution:
+## Why Do Prefill and Decode Phases Exhibit Radically Opposing Hardware Bottlenecks?
 
-#### 1. Model Selection and Optimization: 🧩
+When software engineers first benchmark large language model (LLM) serving systems, they frequently encounter an unintuitive paradox: modern tensor accelerators (such as the Nvidia H100 or AMD MI300X) capable of executing hundreds of teraflops per second sit at less than 5% compute utilization during interactive generation. Despite having immense parallel compute pipelines, production endpoints struggle to meet sub-30ms per-token latency service-level agreements (SLAs).
 
-- ★ Model Selection: Carefully consider the trade-off between model complexity and desired performance. Explore smaller, more efficient versions of Llama3 or similar models if real-time response is paramount. ⚡
-- ★ Pruning: Remove redundant or unimportant weights and connections within the LLM to reduce its overall size and computational footprint. This can be achieved through techniques like magnitude pruning or channel pruning. 🔥
-- ★ Quantization: Reduce the precision of the model's weights and activations from 32-bit floats to lower precision formats (e.g., 16-bit floats or even 8-bit integers) without significant accuracy loss. This can significantly improve inference speed on compatible hardware. 🏎💨
-- ★ Knowledge Distillation: Train a smaller, faster student model to mimic the behavior of the larger, more complex teacher model (Llama3). The student model can then be used for real-time applications while retaining the benefits of the larger model. 🧠⏩
+The root cause of this operational friction lies in the dual-phase execution lifecycle of autoregressive transformers: **the prefill phase** and **the decode phase**. These two stages occupy polar opposite ends of the **roofline performance model**:
 
-#### 2. Hardware Acceleration: 🚀
+1. **The Prefill Phase (Compute-Bound)**: When an inference server receives a prompt (e.g., a 2,048-token context), the entire sequence is ingested concurrently. The attention matrices and feed-forward layers execute massive general matrix-matrix multiplications (GEMMs). Because data reuse across the input tokens is high, arithmetic intensity routinely exceeds $100\text{ FLOPs per byte transferred}$, fully saturating GPU Tensor Cores.
+2. **The Decode Phase (Memory-Bandwidth-Bound)**: Once prefill completes, the model generates output tokens autoregressively—one single token per forward pass. For every newly emitted token, the full multi-gigabyte parameter matrix of the model and the cached Key-Value (KV) tensors must be streamed from high-bandwidth device memory (HBM) into processing registers. The underlying operation degrades from a dense GEMM to a memory-bound general matrix-vector multiplication (GEMV). The arithmetic intensity collapses to approximately $1\text{ to }2\text{ FLOPs per byte}$.
 
-- ★ GPUs: Leverage powerful Graphics Processing Units (GPUs) specifically designed for parallel processing tasks like LLM inference. Utilize frameworks like TensorFlow or PyTorch that offer optimized GPU kernels for efficient LLM execution. 💻📈
-- ★ TPUs: Consider Tensor Processing Units (TPUs) designed by companies like Google specifically for machine learning workloads. TPUs offer even higher performance gains for specific inference tasks compared to traditional GPUs. 🔥💻
-- ★ Specialized Hardware: Explore emerging hardware solutions like AI accelerators or custom chips specifically designed for efficient LLM inference. These can offer significant performance improvements over traditional CPUs and GPUs. 🤖⚡
+```mermaid
+flowchart TD
+    subgraph RequestLifecycle["Autoregressive Transformer Serving Dual-Phase"]
+        PromptIn["Input Prompt Tokens (e.g., 2048 Tokens)"] --> Prefill["Prefill Phase (GEMM)"]
+        Prefill --> ComputeBound["High Arithmetic Intensity (>100 FLOP/Byte)<br/>GPU Tensor Cores Fully Saturated"]
+        
+        ComputeBound --> InitialKV["Populate Key-Value (KV) Cache"]
+        InitialKV --> DecodeLoop["Decode Phase: Token-by-Token Loop (GEMV)"]
+        
+        DecodeLoop --> MemoryBound["Low Arithmetic Intensity (~1-2 FLOP/Byte)<br/>HBM Memory-Bandwidth Saturated (Compute Idle)"]
+        MemoryBound --> NextToken["Emit Token + Append to KV Cache"]
+        NextToken --> Condition{"EOS or Max Tokens?"}
+        Condition -- No --> DecodeLoop
+        Condition -- Yes --> ResponseOut["Stream Complete Response"]
+    end
+```
 
-#### 3. Caching and Preprocessing: ⏳
+Because modern GPUs are starved of data during the decode loop, mitigating inference bottlenecks requires architectural systems that maximize memory bandwidth utilization and convert serialized GEMV operations into parallel GEMMs.
 
-- ★ Caching: Implement caching mechanisms to store frequently used model outputs or intermediate results. This can significantly reduce inference time for repetitive queries. 💾🔄
-- ★ Preprocessing: Preprocess user inputs before feeding them to the LLM. This can involve tasks like tokenization, normalization, and dimensionality reduction, all of which can be done offline and improve overall inference speed. ⚒👷
+---
 
-#### 4. Model Parallelism and Batching: 🔥🔥
+## Systems Innovations for High-Throughput Serving
 
-- ★ Model Parallelism: Distribute the LLM across multiple processing units (GPUs or TPUs) to parallelize inference tasks. This can significantly reduce inference time for large models. 💻💻💻
-- ★ Batching: Process multiple user inputs simultaneously in batches instead of individually. This leverages the inherent parallelism of hardware and improves overall throughput. ⚡🔥
+To resolve memory fragmentation and hardware stalling during the decode phase, the systems research community introduced three foundational serving primitives between 2022 and 2024:
 
-#### 5. Efficient Software Design: 💻👨‍💻
+```
+Inference Optimization Primitives:
+-------------------------------------------------------------------------------------------------
+Technique               Primary Bottleneck Addressed      Algorithmic Mechanism
+-------------------------------------------------------------------------------------------------
+PagedAttention (vLLM)   Virtual Memory Fragmentation      Allocates KV-cache in non-contiguous physical pages
+Continuous Batching     Static Batch Stragglers / Bubbles Schedules iteration-level tokens rather than request-level
+Speculative Decoding    Memory-Bound GEMV Stalls          Draft model emits K tokens; Target verifies in 1 GEMM
+Chunked Prefill         Prefill Head-of-Line Blocking     Splits long prefills into chunks to interleave with decode
+-------------------------------------------------------------------------------------------------
+```
 
-- ★ Code Optimization: Profile and optimize the code used for LLM inference to identify and eliminate performance bottlenecks within the software itself. 🔍🔧
-- ★ Model Serving Frameworks: Utilize efficient model serving frameworks like TensorFlow Serving, PyTorch Serving, or Triton Inference Server to manage LLM deployment and optimize resource utilization. 🛰️🚀
+### 1. PagedAttention: Eliminating KV Cache Memory Waste
 
-P.S. More in the comment.
+In naive transformer serving, memory for the KV cache must be pre-allocated contiguously based on the maximum possible sequence length (e.g., 4,096 tokens). Kwon et al. (2023) demonstrated that in standard production workloads, up to **60% to 80% of GPU memory was wasted** due to internal and external fragmentation:
+- **Internal fragmentation**: Reserving memory slots for future tokens that the model never ended up generating.
+- **Reservation fragmentation**: Over-allocating memory across speculative concurrent requests.
 
+Inspired by virtual memory paging in operating systems, **PagedAttention** partitions the KV cache into fixed-size physical blocks (typically holding 16 or 32 tokens). As explored in our source audit of [AWS Inferentia2 and Optimum Serving](/posts/huggingface-aws/), physical blocks do not need to reside contiguously in memory. A logical-to-physical block table translates attention addresses on-the-fly, allowing serving engines like **vLLM** to run with near-zero memory waste ($<4\%$), quadrupling server concurrency capacity.
 
-![ LLM Research Trends ](/assets/img/llm/LLM_mitigate_inference_bottleneck.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
+```mermaid
+graph TD
+    subgraph LogicalView["Logical KV Cache (Continuous Sequence)"]
+        T0["Tokens 0-15 (Logical Block 0)"]
+        T1["Tokens 16-31 (Logical Block 1)"]
+        T2["Tokens 32-47 (Logical Block 2)"]
+    end
 
-<details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+    subgraph BlockTable["vLLM Page Table Translation"]
+        T0 --> P7["Physical Page #7 (VRAM)"]
+        T1 --> P1["Physical Page #1 (VRAM)"]
+        T2 --> P12["Physical Page #12 (VRAM)"]
+    end
 
-* * * 
+    subgraph PhysicalVRAM["Scattered Physical VRAM Allocations"]
+        P1
+        P7
+        P12
+    end
+```
 
+### 2. Continuous Batching (Iteration-Level Scheduling)
 
-Llama3와 같은 대규모 LLMs 에서 추론 병목 현상을 더욱 완화하여 지연 시간과 성능 저하를 최소화하면서 실시간 애플리케이션을 구현하려면 어떻게 해야 할까요?
+Classical batching mechanisms (such as those in standard TensorFlow Serving or Triton Inference Server) processed requests synchronously: a batch waited until the slowest sequence completed generation before retiring the batch. This created massive "prefill bubbles" and wasted compute on finished slots.
 
-### 솔루션을 살펴 보겠습니다.
+Orca (Yu et al., 2022) introduced **continuous batching** (also known as iteration-level scheduling). Instead of batching at the request level, the engine batches at the iteration level. When an individual sequence emits an End-Of-Sequence (`<eos>`) token, its VRAM pages are immediately reclaimed, and a newly arrived request's prefill or another request's decode iteration is dynamically inserted into the running batch without pausing other concurrent streams.
 
-#### 1. 모델 선택 및 최적화: 🧩
+---
 
-- ★ 모델 선택: 모델 복잡성과 원하는 성능 간의 균형을 신중하게 고려합니다. 실시간 응답이 가장 중요한 경우 더 작고 효율적인 Llama3 또는 유사한 모델을 살펴보십시오. ⚡
-- ★ 정리(Pruning): LLM 내에서 중복되거나 중요하지 않은 가중치와 연결을 제거하여 전체 크기와 연산 공간을 줄입니다. 이는 크기 가지치기 또는 채널 가지치기와 같은 기술을 통해 달성할 수 있습니다. 🔥
-- ★ 양자화: 큰 정확도 손실 없이 32비트 부동 소수점에서 더 낮은 정밀도 형식(예: 16비트 부동 소수점 또는 8비트 정수)으로 모델 가중치 및 활성화의 정밀도를 줄입니다. 이렇게 하면 호환되는 하드웨어에서 추론 속도가 크게 향상될 수 있습니다. 🏎💨
-- ★ 지식 증류: 더 작고 더 빠른 학생 모델을 학습시켜 더 크고 복잡한 교사 모델(Llama3)의 동작을 모방합니다. 그런 다음 학생 모델을 실시간 애플리케이션에 사용하면서 더 큰 모델의 이점을 유지할 수 있습니다. 🧠⏩
+## Speculative Decoding: Turning GEMV into Parallel GEMM
 
-#### 2. 하드웨어 가속: 🚀
+Even with continuous batching and PagedAttention, single-token decode steps remain memory-bound. As dissected in our mathematical study of [Bare-Metal NumPy Transformer Inference](/posts/llama-pure-numpy/), loading an unquantized 70B parameter model requires transferring ~140 GB across the memory bus just to predict one token.
 
-- ★ GPU: LLM 추론과 같은 병렬 처리 작업을 위해 특별히 설계된 강력한 그래픽 처리 장치(GPU)를 활용합니다. 효율적인 LLM 실행을 위해 최적화된 GPU 커널을 제공하는 TensorFlow 또는 PyTorch와 같은 프레임워크를 활용합니다. 💻📈
-- ★ TPU: Google과 같은 회사에서 머신러닝 워크로드를 위해 특별히 설계한 TPU(Tensor Processing Unit)를 고려합니다. TPU는 기존 GPU에 비해 특정 추론 작업에 대해 훨씬 더 높은 성능 향상을 제공합니다. 🔥💻
-- ★ 특수 하드웨어: 효율적인 LLM 추론을 위해 특별히 설계된 AI 가속기 또는 맞춤형 칩과 같은 새로운 하드웨어 솔루션을 살펴보세요. 이는 기존 CPU 및 GPU에 비해 상당한 성능 향상을 제공할 수 있습니다. 🤖⚡
+Leviathan et al. (2023) and Chen et al. (2023) introduced **Speculative Decoding**. A lightweight draft model (e.g., a 1B or 7B model) rapidly autoregressively generates $K$ candidate tokens. Because the draft model is tiny, its memory access overhead is minimal.
 
-#### 3. 캐싱 및 전처리: ⏳
+Once $K$ draft tokens $[\hat{y}_1, \hat{y}_2, \dots, \hat{y}_K]$ are produced, the large target model runs a **single parallel forward pass** evaluating all $K$ tokens simultaneously using causal tree masks. This single forward pass is compute-bound (GEMM), streaming the 70B parameter weights across the memory bus once while validating multiple tokens:
 
-- ★ 캐싱: 자주 사용되는 모델 출력 또는 중간 결과를 저장하는 캐싱 메커니즘을 구현합니다. 이렇게 하면 반복적인 쿼리에 대한 추론 시간을 크게 줄일 수 있습니다. 💾🔄
-- ★ 전처리(Preprocessing): 사용자 입력을 LLM에 공급하기 전에 전처리합니다. 여기에는 토큰화, 정규화 및 차원 축소와 같은 작업이 포함될 수 있으며, 이 모든 작업을 오프라인에서 수행하고 전반적인 추론 속도를 향상시킬 수 있습니다. ⚒👷
+```python
+# Conceptual verification step in Speculative Decoding
+def verify_speculative_tokens(target_model, prefix, draft_tokens, temperature=1.0):
+    """
+    Evaluates draft tokens in parallel within a single forward pass.
+    """
+    # Combine prefix and draft tokens into a single sequence
+    full_seq = prefix + draft_tokens
+    # Forward pass executes as a parallel GEMM across all K tokens
+    logits = target_model(full_seq)
+    
+    accepted_tokens = []
+    for i, token in enumerate(draft_tokens):
+        # Sample probability distributions and apply rejection sampling criterion
+        target_prob = softmax(logits[len(prefix) - 1 + i] / temperature)[token]
+        draft_prob = draft_tokens_probs[i]
+        
+        # Modified rejection sampling ensures mathematical alignment with target model
+        r = uniform_random(0, 1)
+        if r < min(1.0, target_prob / draft_prob):
+            accepted_tokens.append(token)
+        else:
+            # Rejection: Resample from target distribution and terminate speculative window
+            resampled_token = sample_residual(logits[len(prefix) - 1 + i], draft_prob)
+            accepted_tokens.append(resampled_token)
+            break
+            
+    return accepted_tokens
+```
 
-#### 4. 모델 병렬 처리 및 일괄 처리: 🔥🔥
+Because verification is mathematically identical to sampling directly from the target model's distribution, speculative decoding achieves a $2\times$ to $3\times$ speedup with **zero degradation in output accuracy or perplexity**.
 
-- ★ 모델 병렬 처리: LLM을 여러 처리 장치(GPU 또는 TPU)에 분산하여 추론 작업을 병렬화합니다. 이렇게 하면 대규모 모델의 추론 시간을 크게 줄일 수 있습니다. 💻💻💻
-- ★ 일괄 처리: 여러 사용자 입력을 개별적으로 처리하지 않고 일괄 처리하여 동시에 처리합니다. 이렇게 하면 하드웨어의 고유한 병렬 처리를 활용하고 전체 처리량이 향상됩니다. ⚡🔥
+---
 
-#### 5. 효율적인 소프트웨어 설계: 💻👨‍💻 ‍
+## Systemic Integration: Retrieval-Augmented Generation Interplay
 
-- ★ 코드 최적화: LLM 추론에 사용되는 코드를 프로파일링하고 최적화하여 소프트웨어 자체 내의 성능 저하 요인(bottleneck)을 식별하고 제거합니다. 프로파일링은 프로그램 실행 중 각 부분이 소요되는 시간을 측정하는 과정입니다. 🔍🔧
-- ★  모델 서빙 프레임워크: TensorFlow Serving, PyTorch Serving, Triton Inference Server와 같은 효율적인 모델 서빙 프레임워크를 활용하여 LLM 배포를 관리하고 리소스 활용도를 최적화합니다. 이러한 프레임워크는 LLM 모델을 로딩, 실행, 관리하는 과정을 간소화하여 효율적인 추론을 지원합니다. 🛰️🚀
+Inference bottlenecks compound dramatically when LLMs are integrated with external knowledge retrieval. In our empirical guide on [Optimal RAG Configuration Strategies](/posts/the-most-optimal-rag-configuration/), retrieving 10 retrieved chunks of 500 tokens each expands the prefill length to over 5,000 tokens.
 
-추신 : 댓글에 더 많은 것이 있습니다.
+When an incoming 5,000-token RAG query enters a busy serving node, standard serving engines freeze all ongoing decode iterations to execute the massive prefill forward pass. This causes catastrophic jitter (spikes in Time-To-Next-Token, or TTNT).
 
-</details>
+To eliminate TTNT spikes, modern serving systems employ **Chunked Prefill** (Sarathi, Agrawal et al., 2024). The 5,000-token prefill is sliced into chunks of 512 tokens. Each chunk is co-batched alongside running decode iterations, maintaining consistent GPU compute saturation while guaranteeing smooth, jitter-free token streaming for active users.
+
+---
+
+## How Disaggregated Prefill-Decode and Micro-Architectures Evolved Across 2026
+
+Between 2024 and 2026, the physical co-location of prefill and decode tasks on identical hardware reached architectural exhaustion:
+
+### 1. Disaggregated Prefill-Decode Serving (Split-Architecture Clusters)
+In 2026, leading production serving platforms (such as Mooncake and DistServe) physically decouple prefill nodes from decode nodes:
+- **Prefill Clusters**: Equipped with compute-dense accelerators (e.g., Nvidia B200 / TPU v6) optimized for high FP8/FP4 GEMM throughput, handling massive prompt ingestion and document chunking.
+- **Decode Clusters**: Equipped with memory-bandwidth-optimized hardware (e.g., AMD MI300X with 192GB HBM3 or Groq LPUs) optimized purely for streaming single-token generation.
+- **Ultra-Fast KV-Transfer Fabrics**: High-speed PCIe Gen 5 and RDMA RoCE networks transfer the generated KV-cache state from the prefill node to the decode node in single-digit milliseconds.
+
+```mermaid
+graph LR
+    subgraph Disaggregated_2026["2026 Disaggregated Serving Architecture"]
+        ClientReq["Client Query"] --> PrefillCluster["Prefill Pool (Compute-Heavy GPUs)"]
+        PrefillCluster --> |RDMA Zero-Copy KV Transfer| DecodeCluster["Decode Pool (Memory-Bandwidth Optimized)"]
+        DecodeCluster --> StreamResponse["Low-Latency User Streaming Output"]
+    end
+```
+
+### 2. Static SRAM-Based Processing (LPUs)
+Architectures like Groq Language Processing Units (LPUs) abandoned external DRAM and HBM entirely. By storing foundation model weights directly within massive pools of distributed on-chip SRAM across interconnected chips, LPUs achieve memory bandwidths exceeding 80 TB/s, generating tokens at over 500 to 800 tokens per second for real-time conversational agents.
+
+### 3. Native Test-Time Reasoning Compression
+Modern reasoning models generate extensive intermediate thought tokens. Inference engines in 2026 deploy dynamic KV-cache pruning and cross-layer sharing, discarding intermediate scratchpad activations once a reasoning step completes, preventing context window memory exhaustion.
+
+---
+
+## Key Takeaways
+
+- **Prefill and decode present opposite performance bottlenecks**: Prefill is compute-bound (GEMM), while decode is memory-bandwidth-bound (GEMV).
+- **PagedAttention resolved the memory fragmentation crisis**: Partitioning KV caches into non-contiguous physical pages eliminated up to 80% memory waste in foundation model serving.
+- **Continuous batching eliminates static scheduler bubbles**: Scheduling at the token-iteration boundary allows immediate resource recycling upon token completion.
+- **Speculative decoding converts GEMV into parallel GEMM**: Small draft models propose candidate tokens that the large target model verifies in a single parallel pass without accuracy loss.
+- **Disaggregated serving represents the 2026 production standard**: Physically separating compute-dense prefill nodes from memory-bandwidth-dense decode nodes optimizes hardware economics and eliminates latency jitter.
+
+---
+
+## New Questions
+
+1. How do RDMA network serialization latencies impact Time-To-First-Token (TTFT) when offloading multi-gigabyte KV-cache states in disaggregated prefill-decode clusters?
+2. What are the acceptance rate degradation boundaries of speculative decoding when the target model utilizes test-time search (e.g., Monte Carlo Tree Search) versus standard sampling?
+3. Can sub-4-bit weight-only quantization (e.g., FP4 and INT2) fully overcome the memory-bandwidth wall on commodity client silicon without causing reasoning divergence?
+
+---
+
+## References
+
+- Kwon, W., Li, Z., Zhuang, S., Sheng, Y., Zheng, L., Yu, C. H., Gonzalez, J. E., Zhang, H., & Stoica, I. (2023). *Efficient Memory Management for Large Language Model Serving with PagedAttention*. In Proceedings of the 29th ACM Symposium on Operating Systems Principles (SOSP '23), 611-626. Available at: <https://arxiv.org/abs/2309.06180> (accessed 2026-10-18).
+- Yu, G. I., Jeong, J. S., Kim, G. W., Kim, S., & Chun, B. G. (2022). *Orca: A Distributed Serving System for Transformer-Based Generative Models*. In 16th USENIX Symposium on Operating Systems Design and Implementation (OSDI '22), 521-538. Available at: <https://www.usenix.org/conference/osdi22/presentation/yu> (accessed 2026-10-18).
+- Leviathan, Y., Kalman, M., & Matias, Y. (2023). *Fast Inference from Transformers via Speculative Decoding*. In International Conference on Machine Learning (ICML), 19274-19286. Available at: <https://arxiv.org/abs/2211.17192> (accessed 2026-10-18).
+- Agrawal, A., Kedia, N., Panwar, A., Mohan, J., Kwatra, N., Gulavani, B. S., Tumanov, A., & Ramjee, R. (2024). *Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve*. In 18th USENIX Symposium on Operating Systems Design and Implementation (OSDI '24). Available at: <https://arxiv.org/abs/2403.02310> (accessed 2026-10-18).
