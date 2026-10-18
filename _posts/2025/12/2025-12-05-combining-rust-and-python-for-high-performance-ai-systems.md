@@ -10,8 +10,8 @@ archive_development_note: "Upgraded from 2025 Rust-Python note into an authorita
 mermaid: true
 math: true
 image:
-  path: /assets/img/posts/rust-python-ai-hero.png
-  alt: "Rust and Python hybrid architecture for high-performance AI systems"
+  path: /assets/img/posts/rust-python-ai-hero.svg
+  alt: "Conceptual flow from Python orchestration through PyO3 and Maturin to Rust-native compute kernels"
 ---
 
 ## Why Did the Hybrid Rust-Python Architecture Become the Standard for Production AI Systems?
