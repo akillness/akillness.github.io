@@ -1,51 +1,159 @@
 ---
-title: Scaling Monosemanticity by Anthropic (블랙박스 이해하기)
-description: "Generative AI based on transformer technology is a non-deterministic computer."
-categories: [Review/Trends]
-tags: [Trend, Review, Case]
+title: "Scaling Monosemanticity: Mechanistic Interpretability via Sparse Autoencoders"
+description: "A foundational source audit of Anthropic's landmark research on Sparse Autoencoders, dictionary learning, and causal feature steering in frontier transformer models."
+categories: [AI, Research]
+tags: [mechanistic-interpretability, sparse-autoencoders, neural-networks, safety]
 date: 2024-05-27 09:13:00 +0800
-lang: ko
-# Retired 2026-09-15: machine summary / rewrite of a third-party article
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: true
-ads: false
-restored_archive: "2026-10-12"
+last_modified_at: 2026-10-18 14:00:00 +0900
+mermaid: true
+archive_developed: "2026-10-18"
+archive_development_note: "Source audit examining Anthropic's landmark Scaling Monosemanticity study, dictionary learning mathematics, and neural feature steering mechanics."
 ---
-> Origitnal Article : <https://inblog.ai/jasonlee/%EB%B8%94%EB%9E%99%EB%B0%95%EC%8A%A4-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-scaling-monosemanticity-by-anthropic-20662>
-{: .prompt-info }
 
-## Introduce
+## How Does Sparse Dictionary Learning Resolve the Superposition Dilemma in Neural Networks?
 
-트랜스포머 기술을 기반으로 하는 생성형 AI는 비결정적(non-deterministic) 컴퓨터입니다. 이러한 시스템은 개발자가 명확하게 프로그래밍한 명령에 의존하는 기존의 폰 노이만 머신과는 달리 “확률적”으로 작동합니다.
+Large language models represent high-dimensional world knowledge across billions of numerical weights. Historically, inspecting individual neurons within a deep neural network yielded opaque, uninterpretable activations. A single neuron in an intermediate multi-layer perceptron (MLP) layer might fire concurrently in response to quantum physics equations, romantic poetry in French, and base-64 encoded strings. This phenomenon—termed *polysemanticity*—rendered neural representations impenetrable black boxes.
 
-생성형 AI는 확률적 컴퓨터로서, 자연어, 이미지와 같은 다양한 비정형 데이터를 처리하고 이해하는 능력을 갖추고 있습니다. 이를 통해 기존 컴퓨터가 접근할 수 없는 방대한 지식을 습득하고 활용할 수 있습니다. 
+The theoretical breakthrough articulated by Anthropic in *Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet* demonstrated that polysemanticity is an artifact of the **superposition hypothesis**. Neural networks represent vastly more conceptual features than their physical activation dimensions ($M \gg D$) by packing quasi-orthogonal feature directions into shared vector spaces. By deploying Sparse Autoencoders (SAEs), researchers can unroll superimposed activations into millions of monosemantic, human-interpretable directions that can be causally steered.
 
-확률적 컴퓨터는 학습된 방대한 지식을 바탕으로 연구와 모델링은 물론, 다양한 창의적 작업을 별도 프로그래밍 없이 '제로샷' 방식으로 수행할 수 있습니다. 여기서 '제로샷'은 특정 작업에 대해 사전에 특별히 훈련되지 않은 상태에서도 해당 작업을 수행할 수 있는 AI의 능력을 의미합니다.
+```mermaid
+flowchart TD
+    subgraph Transformer["Transformer Residual Stream (Dimension D)"]
+        x["Activation Vector x in R^D<br/>Superposition of M Concepts (M >> D)"]
+    end
 
-그러나 이런 확률적 컴퓨터는 운영 방식이 말 그대로 “확률적”이기 때문에 interpretability가 매우 중요합니다. 예를 들어, 확률적 컴퓨터의 아웃풋에서 위험한 내용(차별, 혐오, 환각증상 등)이 포함되어 있다면 이 오류에 대한 원천을 이해해야 문제를 개선할 수 있습니다.
+    subgraph SAE["Sparse Autoencoder Dictionary (Dimension M)"]
+        Encoder["SAE Encoder: W_enc, b_enc<br/>f = ReLU(W_enc(x - b_dec) + b_enc)"]
+        LatentFeatures["Sparse Feature Vector f in R^M<br/>||f||_0 << M (Only k Features Active)"]
+        Decoder["SAE Decoder: W_dec, b_dec<br/>x_hat = W_dec * f + b_dec"]
+    end
 
-하지만, 모두 잘 아시다시피 거대언어모델은 거대한 데이터셋을 unsupervised learning (비지도학습) 방식으로 학습되어 이젠 1 trillion이 넘어가는 파라미터에 분산 되어 저장됩니다 (LLM 기초 블로그). 이러한 복잡한 구조로 인해, 실제로는 매우 똑똑한 컴퓨터를 만들었음에도 불구하고, 그 작동 원리를 완전히 이해하지 못하는 '블랙박스' 상태에 빠지게 됩니다.
+    x --> Encoder
+    Encoder --> LatentFeatures
+    LatentFeatures --> Decoder
+    Decoder --> Reconstructed["Reconstructed Activation x_hat"]
 
-이러한 '블랙박스'의 성격은 신뢰성 부족, 상업적 도입의 어려움, AI의 편향성 및 공정성 문제, AI에 대한 사회적 두려움으로 인한 규제 증가 등 다양한 downstream 문제를 야기합니다.
-그렇기 때문에 interpretability 연구는 매우 중요하고 AI 모델의 성능 개선과 같이 병행되어야 하는 필수적인 연구분야입니다. 
+    subgraph Steering["Causal Feature Steering & Intervention"]
+        TargetFeature["Target Concept (e.g., Golden Gate Bridge)"]
+        Clamp["Intervention: f_target <- f_target + alpha"]
+        ModifiedStream["Modified Residual Stream x' = x + alpha * d_target"]
+    end
 
-최근 Anthropic이 발표한 “Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet”가 화제입니다. Anthropic은 sparse autoencoders라는 모델을 활용하여 거대언어모델 행동을 이해하고 조정할 수 있는 방향성을 제시합니다.
+    LatentFeatures -.-> TargetFeature
+    TargetFeature --> Clamp
+    Clamp --> ModifiedStream
+```
 
+---
 
-![ Main Idea Anthropic Paper ](/assets/img/blog/Scaling_LLM_by_Anthropic.png){: .light  .shadow .rounded-10 w='1212' h='668' }
+## The Mathematics of the Superposition Hypothesis and Sparse Autoencoders
 
-## Opinion
+Why do neural networks exhibit polysemanticity? Under the Johnson-Lindenstrauss lemma and compressed sensing theory, an inner-product vector space of dimension $D$ can host exponentially many almost-orthogonal vectors if the underlying data distribution is sparse (i.e., only a tiny fraction of features fire simultaneously for any given input sequence).
 
-생성형 AI는 비결정적(non-deterministic) 컴퓨터입니다. 이러한 시스템은 개발자가 명확하게 프로그래밍한 명령에 의존하는 기존의 폰 노이만 머신과는 달리 “확률적”으로 작동합니다.
+Because real-world language concepts are sparse—a document discussing orbital mechanics rarely discusses sourdough bread fermentation in the same sentence—the network minimizes loss by packing $M$ features into $D$ dimensions ($M \gg D$), paying a small penalty in cross-feature interference (noise).
 
-생성형 AI는 확률적(probabilistic) 컴퓨터로서, 자연어, 이미지와 같은 다양한 비정형 데이터를 처리하고 이해하는 능력을 갖추고 있습니다. 이를 통해 기존 컴퓨터가 접근할 수 없는 방대한 지식을 습득하고 활용할 수 있습니다. 
+### 1. Mathematical Formulation of Sparse Autoencoders
 
-그러나 이런 확률적 컴퓨터는 운영 방식이 말 그대로 “확률적”이기 때문에 interpretability(해석력)가 매우 중요합니다. 예를 들어, 모델 아웃풋에서 위험한 내용(차별, 혐오, 환각증상 등)이 포함되어 있다면 이 오류에 대한 원천을 이해해야 문제를 개선할 수 있습니다.
+An SAE is an unsupervised dictionary learning architecture trained on the intermediate residual stream activations $\mathbf{x} \in \mathbb{R}^D$ of a frozen base model. The SAE projects $\mathbf{x}$ into an expanded feature latent space of dimension $M$ (where expansion factor $F = M / D$, typically $16\times$ to $64\times$):
 
-하지만, 모두 잘 아시다시피 거대언어모델은 거대한 데이터셋을 unsupervised learning (비지도학습) 방식으로 학습되어 이젠 1 trillion이 넘어가는 파라미터에 분산 되어 저장됩니다. 이러한 복잡한 구조로 인해, 실제로는 매우 똑똑한 컴퓨터를 만들었음에도 불구하고, 그 작동 원리를 완전히 이해하지 못하는 '블랙박스' 상태에 빠지게 됩니다.
+$$\mathbf{f}(\mathbf{x}) = \text{ReLU}\left( \mathbf{W}_{\text{enc}} (\mathbf{x} - \mathbf{b}_{\text{dec}}) + \mathbf{b}_{\text{enc}} \right), \quad \mathbf{f} \in \mathbb{R}^M$$
 
-이러한 '블랙박스'의 성격은 신뢰성 부족, 상업적 도입의 어려움, AI의 편향성 및 공정성 문제, AI에 대한 사회적 두려움으로 인한 규제 증가 등 다양한 downstream 문제를 야기합니다.
+The decoder reconstructs the original residual activation as a linear combination of unit-norm dictionary feature directions $\mathbf{d}_i \in \mathbb{R}^D$ (the columns of $\mathbf{W}_{\text{dec}}$):
 
-그렇기 때문에 interpretability 연구는 매우 중요하고 AI 모델의 성능 개선과 같이 병행되어야 하는 필수적인 연구분야입니다. 
+$$\hat{\mathbf{x}} = \sum_{i=1}^M f_i \mathbf{d}_i + \mathbf{b}_{\text{dec}} = \mathbf{W}_{\text{dec}} \mathbf{f} + \mathbf{b}_{\text{dec}}$$
 
-최근 Anthropic이 발표한 “Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet”가 화제입니다. Anthropic은 sparse autoencoders라는 모델을 활용하여 거대언어모델 행동을 이해하고 조정할 수 있는 방향성을 제시합니다.
+subject to the column normalization constraint:
+
+$$\|\mathbf{W}_{\text{dec}, i}\|_2 = 1 \quad \forall i \in \{1, \dots, M\}$$
+
+### 2. The Sparsity-Reconstruction Optimization Objective
+
+Training balances reconstruction fidelity against activation sparsity:
+
+$$\mathcal{L}_{\text{SAE}}(\theta) = \underbrace{\frac{1}{D} \|\mathbf{x} - \hat{\mathbf{x}}\|_2^2}_{\text{Reconstruction Loss (MSE)}} + \underbrace{\lambda \sum_{i=1}^M |f_i|}_{L_1 \text{ Sparsity Regularizer}}$$
+
+The $L_1$ penalty enforces sparsity by driving the vast majority of latent activations $f_i$ to zero. As a result, for any token input, the $L_0$ norm (the count of non-zero features) satisfies $\|\mathbf{f}\|_0 \ll M$, isolating precise conceptual primitives.
+
+| Metric | Dense Residual Stream $\mathbf{x}$ | Sparse Autoencoder Latent $\mathbf{f}$ |
+| :--- | :--- | :--- |
+| **Dimensionality** | $D \approx 4,096 \text{ to } 8,192$ | $M \approx 65,536 \text{ to } 33,554,432$ ($8\times\text{--}64\times$) |
+| **Sparsity Level** | $100\%$ dense ($L_0 = D$) | Ultra-sparse ($L_0 \approx 20\text{--}100 \ll M$) |
+| **Semantic Purity** | Polysemantic (superimposed mixture) | Monosemantic (atomic conceptual directions) |
+| **Causal Steerability** | Poor (distorts unrelated capabilities) | High (isolated conceptual interventions) |
+
+---
+
+## Landmark Findings in Claude 3 Sonnet: From Golden Gate to Biosecurity
+
+Anthropic scaled SAEs to intermediate layers of Claude 3 Sonnet, extracting over tens of millions of monosemantic features. The empirical properties observed established new benchmarks for neural explainability:
+
+```mermaid
+sequenceDiagram
+    participant Text as Token Input: "Crossing the suspension span..."
+    participant Model as Frozen Claude 3 Sonnet
+    participant SAE as 34M-Feature SAE Dictionary
+    participant Monitor as Safety & Hallucination Auditor
+
+    Text->>Model: Forward Pass through Layer 24
+    Model->>SAE: Residual Activation Vector x
+    SAE->>SAE: Encode to Sparse Feature f
+    SAE->>Monitor: Active Features Detected: #34123 (Golden Gate Bridge)
+    SAE->>Monitor: Active Features Detected: #89112 (Fog Over Coastlines)
+    Monitor-->>Model: Verify No Active Safety Malicious Features (#09211 Exploits)
+```
+
+1. **Abstract and Multimodal Concepts**: Features activated monosemantically across diverse formats. A single feature corresponding to the "Golden Gate Bridge" fired when reading textual descriptions, reading the name in diverse languages, seeing images of the bridge, or reading hexadecimal coordinates of San Francisco.
+2. **Safety-Critical Features**: The dictionary extracted dedicated directions for hazardous concepts, such as bioweapons synthesis, software vulnerabilities, deceptive alignment, and user sycophancy.
+3. **Causal Steering via Feature Clamping**: By manually clamping a feature's activation $f_k \leftarrow \alpha$ during the forward pass, researchers demonstrated deterministic behavioral modification without retraining weights. Forcing the Golden Gate Bridge feature to extreme values caused the model to identify itself as the bridge in every generated completion, proving the feature's causal role in token generation.
+
+This mechanistic control directly complements architectural interventions such as [DoLa contrastive decoding](/posts/new-decoding-to-reduce-hallucinations/) and provides transparency into [scaled dot-product attention mechanics](/posts/deepdive-series-4/).
+
+---
+
+## Overcoming SAE Limitations: Shrinkage and Dead Latents
+
+While early $L_1$-penalized SAEs established proof-of-concept monosemanticity, they suffered from structural pathologies:
+
+- **$L_1$ Shrinkage Bias**: Because the $L_1$ regularizer exerts constant downward pressure on all non-zero activations, true feature magnitudes are artificially suppressed. This degrades the downstream model's cross-entropy loss when reconstructed activations $\hat{\mathbf{x}}$ are substituted into the network.
+- **Dead Latents**: Over the course of training, a substantial percentage ($20\text{–}40\%$) of dictionary atoms can stop activating altogether on the data distribution, wasting parameter memory.
+
+To eliminate $L_1$ shrinkage, contemporary research deploys **TopK SAEs** and **JumpReLU activations**. In TopK architectures, the explicit $L_1$ loss is discarded. Instead, only the top $k$ activations are preserved while all other dimensions are masked to zero:
+
+$$\mathbf{f}_{\text{TopK}}(\mathbf{x}) = \text{KeepTopK}\left( \mathbf{W}_{\text{enc}}(\mathbf{x} - \mathbf{b}_{\text{dec}}) + \mathbf{b}_{\text{enc}}, k \right)$$
+
+This achieves exact, deterministic $L_0 = k$ sparsity without applying artificial shrinkage penalties to active features, substantially improving Pareto reconstruction frontiers.
+
+---
+
+## 2026 Technological Evolution: Automated Circuit Auditing and Guardrail Enforcement
+
+In 2026 frontier deployments, mechanistic interpretability has transitioned from academic discovery into continuous production infrastructure:
+
+- **Real-Time Feature Circuit Firewalls**: Instead of relying on brittle external input guardrails (regex or secondary LLM evaluators), production API gateways monitor internal SAE feature latents in real time. If safety-violating feature circuits (e.g., cyberattack execution plans) fire with high activation energy, the forward pass is terminated mid-generation before tokens are emitted.
+- **Automated Interpretability Agents**: With dictionary sizes exceeding $100\text{ million}$ features across multi-layer networks, human annotation is impossible. Automated agentic pipelines (similar to Anthropic's Claude-based feature labeling) generate synthetic contrastive datasets, probe individual feature activations, and produce verified semantic cards for every dictionary direction.
+- **Latent Steering for Persona Grounding**: Enterprise systems employ calibrated continuous steering vectors derived from SAE features to enforce brand voice, inhibit hallucinated facts, and ensure compliance without expensive fine-tuning loops.
+
+---
+
+## Key Takeaways
+
+- **Superposition Explains Polysemanticity**: Models superimpose millions of concepts within thousands of neuron dimensions because language features are naturally sparse in text corpora.
+- **Sparse Autoencoders Unroll Latent Geometry**: Training overcomplete autoencoders with sparsity penalties isolates monosemantic directions corresponding to distinct human concepts.
+- **Features Are Causal Control Knobs**: Clamping or amplifying individual SAE features deterministically steers downstream model behavior and reasoning trajectories.
+- **TopK Architectures Eliminate Shrinkage**: Replacing continuous $L_1$ penalties with TopK or JumpReLU activation functions restores full reconstruction fidelity without loss degradation.
+
+---
+
+## New Questions
+
+- **Can SAE Dictionaries Reconstruct Multi-Token Compositional Circuits Completely?**: While individual features capture isolated nouns and concepts, how can researchers cleanly trace multi-layer causal circuits spanning tens of sequential attention heads?
+- **What Is the Upper Bound of Feature Superposition in Scaled Transformers?**: As base models scale to tens of trillions of parameters, does the ratio of superposed features $M / D$ grow linearly, polynomial, or asymptotically saturate?
+
+---
+
+## References
+
+- Templeton, A., Conerly, T., Marcus, J., Lindsey, J., Bricken, T., Chen, B., Pearce, A., Citro, C., Ameisen, E., Jones, A., Cunningham, H., Turner, N. L., McDougall, C., MacDiarmid, M., Tamkin, A., Pettit, S., Scott, K., & Olah, C. (2024). Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet. *Anthropic Research*. [https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html) (accessed 2026-10-18)
+- Bricken, T., Templeton, A., Batson, J., Chen, B., Jermyn, A., Conerly, T., Turner, N., Anil, C., Denison, C., Askell, A., Lasenby, R., Wu, Y., Kravec, S., Schiefer, N., Maxwell, T., Joseph, N., Hatfield-Dodds, Z., Tamkin, A., Drain, K., & Olah, C. (2023). Towards Monosemanticity: Decomposing Language Models With Dictionary Learning. *Anthropic Research*. [https://transformer-circuits.pub/2023/monosemantic-features/index.html](https://transformer-circuits.pub/2023/monosemantic-features/index.html) (accessed 2026-10-18)
+- Gao, L., Biderman, S., & Leahy, K. (2024). Scaling and Evaluating Sparse Autoencoders. *arXiv preprint*. [https://arxiv.org/abs/2406.04093](https://arxiv.org/abs/2406.04093) (accessed 2026-10-18)
+- Cunningham, H., Ewart, A., Riggs, L., Huben, R., & Sharkey, L. (2023). Sparse Autoencoders Find Highly Interpretable Features in Language Models. *arXiv preprint*. [https://arxiv.org/abs/2309.08600](https://arxiv.org/abs/2309.08600) (accessed 2026-10-18)

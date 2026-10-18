@@ -4297,9 +4297,9 @@
         "thin",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Source audit examining Anthropic's landmark Scaling Monosemanticity study, dictionary learning mathematics, and neural feature steering mechanics."
     },
     {
       "path": "_posts/2024/06/2024-06-04-use-dev-tools.md",
