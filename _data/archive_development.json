@@ -2458,9 +2458,9 @@
       "links_at_intake": 1,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from brief LinkedIn note into authoritative source audit on non-uniform negative subsampling, rare-event logistic regression, and probability calibration"
     },
     {
       "path": "_posts/2024/07/2024-07-19-github-for-data-science.md",
