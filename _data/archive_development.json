@@ -1522,9 +1522,9 @@
       "links_at_intake": 13,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary news summary into an authoritative source audit of Google DeepMind's native multimodal image synthesis and typographic rendering architectures."
     },
     {
       "path": "_posts/2025/12/2025-12-04-nvidia-cuda-tile-focus-on-algorithm.md",
