@@ -2000,9 +2000,9 @@
       "links_at_intake": 4,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on OpenAI Codex plugin architecture, runtime capability bundling, manifest contracts, and MCP tool execution"
     },
     {
       "path": "_posts/2026/03/2026-03-29-harness-reliable-agent-systems.md",
