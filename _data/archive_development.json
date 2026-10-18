@@ -2174,9 +2174,9 @@
         "lang-ko",
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from Korean machine summary into authoritative source audit on Diffusion Transformers (DiT), spacetime latent patchification, and generative video scaling laws"
     },
     {
       "path": "_posts/2024/05/2024-05-16-lora-better-gpt4.md",
