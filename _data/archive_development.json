@@ -2502,9 +2502,9 @@
       "flags": [
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from brief 278-word note into authoritative source audit on autonomous agent architecture, profiling, memory hierarchies, planning algorithms, and action spaces"
     },
     {
       "path": "_posts/2024/08/2024-08-03-power-of-rlhf-in-llms.md",
