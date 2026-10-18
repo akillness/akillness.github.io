@@ -3693,9 +3693,9 @@
         "lang-ko",
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from Korean repository summary into comprehensive technical source audit on Korean language model evaluation frameworks, tokenizer compression, and cultural grounding"
     },
     {
       "path": "_posts/2024/05/2024-05-26-llm-research-trend.md",
