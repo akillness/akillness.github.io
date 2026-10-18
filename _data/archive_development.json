@@ -1413,9 +1413,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a third-party review note into an authoritative source audit of LLM-as-a-Judge evaluation mechanics and Spring AI recursive advisor architectures."
     },
     {
       "path": "_posts/2025/11/2025-11-13-depth-anything-3.md",
