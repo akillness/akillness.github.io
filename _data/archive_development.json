@@ -4335,9 +4335,9 @@
         "no-sources",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Source audit synthesizing the mathematical taxonomy of classical machine learning algorithms, bias-variance tradeoffs, and modern tabular foundation models."
     },
     {
       "path": "_posts/2024/06/2024-06-29-you-must-know-12-data-structures.md",
