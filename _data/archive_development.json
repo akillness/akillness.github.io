@@ -2590,9 +2590,9 @@
       "links_at_intake": 3,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal third-party overview into authoritative source audit on Hugging Face Agents 2.0, CodeAgent abstractions, AgentGen planning synthesis, and GAIA benchmarks"
     },
     {
       "path": "_posts/2026/03/2026-03-16-nanoclaw-docker-sandboxes-guide.md",
