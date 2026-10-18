@@ -243,3 +243,111 @@ test('fresh independent rereview is bound to the corrected run and must be a lat
     assertRejected({ proof, observed }, label);
   }
 });
+
+
+const JEV_RUN_ID = '20261017-2108-jev-open-harness-update';
+const JEV_POST = '_posts/2026-10-17-jev-pipeline-37-of-40-cost-estimate.md';
+const JEV_PROOF_PATH = 'review/owner-jev-trueforge-revision-proof.json';
+const JEV_PRIOR_APPROVAL_SHA = '0cfe718700fb661d2ce7c510bc3bf8b1302ee58469a86f781bdd0dfaee8b65f2';
+const JEV_IMPLEMENTATION_APPROVAL_SHA = '7f33b161949b9c0b2575e42ae1b86f5970a0d7f616de995b782766fa44e8860f';
+const JEV_PRE_MAP_SHA = '54117cbddebb490635c7a1e19a8eb5b96719a854a36715064d838cc9dea92fb1';
+const JEV_POST_MAP_SHA = 'f04cc7be0e560bd3b5d328162b2994405c2b5f36ec5bce0126bd29973ffcd82e';
+const JEV_ARTICLE_SHA = 'e64de966c29936b33c69493555cc95f9cd7bd014516b7c04294621e4903ec0b4';
+const JEV_PROTECTED_SHA = '8962eca5991f8ce5627925633a053cfa2c8ccb05b7b0f0881306c0a1c8bbda57';
+const JEV_REVIEW_SHA = '53ef1f5b94010971231bd854752a1d456199ab4d7051e69e9ea2ce3b0a07cb4b';
+const JEV_HISTORY_SHA = {
+  'manifest.json': 'a9b63cec6118e49e7323bc500c1afd734f7cb4fb8d85e6ab6dc3cdef773ac11c',
+  'claim-map.json': JEV_PRE_MAP_SHA,
+  'article.md': JEV_ARTICLE_SHA,
+  'run-summary.md': '02ddb26434cc106cd19a25d7d60693e1252703107558344fea4a9d8cd546bd30',
+  'final-review.md': '935a7c7da9c32817a83d7c874cbe244de193a83165bc18aeb0e44f6bbcdc22b5'
+};
+const JEV_CLAIM_MAP_APPEND = ' Relative to the $0.0015 Jev figure, the earlier range implies about 3.3–10× and the later range about 147–253×; both are conditional arithmetic only and do not resolve which Opus cost describes the run.';
+
+const validJevProof = () => ({
+  schema_version: 1,
+  run_id: JEV_RUN_ID,
+  post: JEV_POST,
+  prior_regular_revision_loops: 2,
+  additional_owner_approved_revision: 1,
+  additional_owner_approved_revision_applied: 1,
+  total_content_revisions_after_correction: 3,
+  total_content_revisions: 3,
+  prior_revision_approval_sha256: JEV_PRIOR_APPROVAL_SHA,
+  implementation_authorization_sha256: JEV_IMPLEMENTATION_APPROVAL_SHA,
+  history_sha256: clone(JEV_HISTORY_SHA),
+  pre_third_revision_claim_map_sha256: JEV_PRE_MAP_SHA,
+  post_third_revision_claim_map_sha256: JEV_POST_MAP_SHA,
+  changed_claim_id: 'reported_cost_inputs',
+  exact_appended_statement: JEV_CLAIM_MAP_APPEND,
+  article_before_sha256: JEV_ARTICLE_SHA,
+  article_after_sha256: JEV_ARTICLE_SHA,
+  protected_artifact_manifest_sha256: JEV_PROTECTED_SHA,
+  editorial_review_sha256: JEV_REVIEW_SHA,
+  exact_claim_map_only_change: true,
+  protected_artifacts_unchanged: true,
+  other_gates_waived: false,
+  global_policy_changed: false,
+  publication_authorized_by_this_record: false
+});
+const validJevObserved = (overrides = {}) => ({
+  prior_revision_approval_sha256: JEV_PRIOR_APPROVAL_SHA,
+  implementation_authorization_sha256: JEV_IMPLEMENTATION_APPROVAL_SHA,
+  history_sha256: clone(JEV_HISTORY_SHA),
+  historical_manifest: { run_id: JEV_RUN_ID, article_path: JEV_POST, revision_loops: 2 },
+  pre_third_revision_claim_map_sha256: JEV_PRE_MAP_SHA,
+  current_claim_map_sha256: JEV_POST_MAP_SHA,
+  claim_map_change_exact: true,
+  article_before_sha256: JEV_ARTICLE_SHA,
+  current_draft_sha256: JEV_ARTICLE_SHA,
+  protected_artifact_manifest_sha256: JEV_PROTECTED_SHA,
+  review_sha256: JEV_REVIEW_SHA,
+  review: { run_id: JEV_RUN_ID, verdict: 'PASS', claim_coverage: 1, claims: Array.from({ length: 26 }, (_, index) => ({ claim_id: `claim-${index}`, supported: true })) },
+  ...overrides
+});
+const validJevManifest = (overrides = {}) => ({
+  run_id: JEV_RUN_ID,
+  article_path: JEV_POST,
+  revision_loops: 3,
+  owner_revision_exception_proof: JEV_PROOF_PATH,
+  ...overrides
+});
+
+test('the Jev run-scoped third revision passes only with the exact one-claim append and both approvals', () => {
+  for (const stage of ['draft', 'final']) {
+    const errors = ownerRevisionExceptionErrors({
+      manifest: validJevManifest(), stage, proof: validJevProof(), observed: validJevObserved()
+    });
+    assert.deepEqual(errors, []);
+  }
+});
+
+test('the Jev run-scoped exception rejects unrelated runs, posts, proof paths, and a fourth revision', () => {
+  for (const [label, manifest] of [
+    ['alternate run', validJevManifest({ run_id: 'other-run' })],
+    ['alternate post', validJevManifest({ article_path: '_posts/2026-10-17-other.md' })],
+    ['alternate proof', validJevManifest({ owner_revision_exception_proof: 'review/other.json' })],
+    ['fourth revision', validJevManifest({ revision_loops: 4 })]
+  ]) {
+    assert.ok(ownerRevisionExceptionErrors({ manifest, stage: 'draft', proof: validJevProof(), observed: validJevObserved() }).length > 0, label);
+  }
+});
+
+test('the Jev run-scoped exception rejects baseline drift, asset changes, stale review, or publication claims', () => {
+  for (const [label, mutate] of [
+    ['owner proof schema drift', (proof) => { proof.schema_version = 2; }],
+    ['pre-revision map drift', (proof, observed) => { proof.pre_third_revision_claim_map_sha256 = 'a'.repeat(64); }],
+    ['post-revision map drift', (proof, observed) => { observed.current_claim_map_sha256 = 'a'.repeat(64); }],
+    ['non-exact claim-map change', (_proof, observed) => { observed.claim_map_change_exact = false; }],
+    ['article drift', (_proof, observed) => { observed.current_draft_sha256 = 'a'.repeat(64); }],
+    ['protected asset drift', (_proof, observed) => { observed.protected_artifact_manifest_sha256 = 'a'.repeat(64); }],
+    ['stale review', (_proof, observed) => { observed.review = { run_id: JEV_RUN_ID, verdict: 'FIX', claim_coverage: 1, claim_count: 26 }; }],
+    ['publication claim', (proof) => { proof.publication_authorized_by_this_record = true; }],
+    ['global limit changed', (proof) => { proof.global_policy_changed = true; }]
+  ]) {
+    const proof = validJevProof();
+    const observed = validJevObserved();
+    mutate(proof, observed);
+    assert.ok(ownerRevisionExceptionErrors({ manifest: validJevManifest(), stage: 'draft', proof, observed }).length > 0, label);
+  }
+});

@@ -2,10 +2,12 @@
 
 import { imageFallbackContextFromDisk } from './lib/source-image-manifest.mjs';
 import { ARCHIVE_LEDGER_PATH, archiveGraduationErrors, publicationPathErrors, resolvePublicationPost } from './lib/archive-publication-path.mjs';
-import { B1_REVISION_EXCEPTION, ownerRevisionExceptionErrors } from './lib/archive-development-policy.mjs';
+import { B1_REVISION_EXCEPTION, JEV_TRUEFORGE_REVISION_EXCEPTION, ownerRevisionExceptionErrors } from './lib/archive-development-policy.mjs';
+import { validateInPlaceUpdate } from './lib/in-place-update-policy.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
+import { isDeepStrictEqual } from 'node:util';
 import { spawnSync } from 'node:child_process';
 import {
   collectReferenceFiles,
@@ -227,6 +229,60 @@ if (manifest?.revision_loops === 3 && manifest.run_id === B1_REVISION_EXCEPTION.
   } catch (error) {
     failures.push(`Cannot verify the scoped owner revision exception: ${error.message}`);
   }
+} else if (manifest?.run_id === JEV_TRUEFORGE_REVISION_EXCEPTION.run || manifest?.owner_revision_exception_proof === JEV_TRUEFORGE_REVISION_EXCEPTION.proof) {
+  try {
+    const pinned = JEV_TRUEFORGE_REVISION_EXCEPTION;
+    const load = (file) => {
+      const errors = publicationPathErrors(file);
+      if (errors.length) throw new Error(errors.join('; '));
+      const stat = fs.statSync(file);
+      if (!stat.isFile() || stat.size > 8 * 1024 * 1024) throw new Error(`Invalid run-exception artifact: ${path.relative(repoRoot, file)}`);
+      return fs.readFileSync(file);
+    };
+    const digest = (bytes) => createHash('sha256').update(bytes).digest('hex');
+    const historyRoot = path.join(current, 'review/history/before-owner-approved-jev-trueforge-revision');
+    const historyFiles = {
+      'manifest.json': 'manifest.json',
+      'claim-map.json': 'draft/claim-map.json',
+      'article.md': `draft/${pinned.post}`,
+      'run-summary.md': 'run-summary.md',
+      'final-review.md': 'review/final-review.md'
+    };
+    const history = Object.fromEntries(Object.entries(historyFiles).map(([name, relative]) => [name, load(path.join(historyRoot, relative))]));
+    ownerRevisionProof = JSON.parse(load(path.join(current, pinned.proof)).toString('utf8'));
+    const priorMapBytes = history['claim-map.json'];
+    const currentMapBytes = load(path.join(current, 'draft/claim-map.json'));
+    const priorMap = JSON.parse(priorMapBytes.toString('utf8'));
+    const currentMap = JSON.parse(currentMapBytes.toString('utf8'));
+    const expectedMap = JSON.parse(JSON.stringify(priorMap));
+    const priorClaims = Array.isArray(priorMap?.claims) ? priorMap.claims : [];
+    const targetClaims = priorClaims.filter((claim) => claim?.claim_id === pinned.changedClaim);
+    let claimMapChangeExact = targetClaims.length === 1 && Array.isArray(currentMap?.claims) && currentMap.claims.length === priorClaims.length;
+    if (claimMapChangeExact) {
+      const target = expectedMap.claims.find((claim) => claim?.claim_id === pinned.changedClaim);
+      if (typeof target?.mapped_statement !== 'string') claimMapChangeExact = false;
+      else target.mapped_statement += pinned.appendedStatement;
+    }
+    if (claimMapChangeExact) claimMapChangeExact = isDeepStrictEqual(expectedMap, currentMap);
+    const reviewBytes = load(path.join(current, 'review/editorial-review.json'));
+    const protectedHashes = Object.fromEntries([...pinned.protected].sort().map((file) => [file, digest(load(path.join(current, file)))]));
+    ownerRevisionObserved = {
+      prior_revision_approval_sha256: digest(load(path.join(current, 'review/revision-3-authorization.md'))),
+      implementation_authorization_sha256: digest(load(path.join(current, 'review/revision-exception-implementation-authorization.md'))),
+      history_sha256: Object.fromEntries(Object.entries(history).map(([name, bytes]) => [name, digest(bytes)])),
+      historical_manifest: JSON.parse(history['manifest.json'].toString('utf8')),
+      pre_third_revision_claim_map_sha256: digest(priorMapBytes),
+      current_claim_map_sha256: digest(currentMapBytes),
+      claim_map_change_exact: claimMapChangeExact,
+      article_before_sha256: digest(history['article.md']),
+      current_draft_sha256: digest(load(draftPath)),
+      protected_artifact_manifest_sha256: digest(JSON.stringify(protectedHashes)),
+      review_sha256: digest(reviewBytes),
+      review: JSON.parse(reviewBytes.toString('utf8'))
+    };
+  } catch (error) {
+    failures.push(`Cannot verify the scoped owner revision exception: ${error.message}`);
+  }
 }
 failures.push(...ownerRevisionExceptionErrors({ manifest, stage, proof: ownerRevisionProof, observed: ownerRevisionObserved }));
 
@@ -253,8 +309,19 @@ if (expectedAssetPrefix) {
   const livePost = path.join(repoRoot, publicationPost.postPath);
   const liveAssetDir = path.join(repoRoot, expectedAssetPrefix.replace(/^\//, ''));
   if (!publicationPost.archive) {
-    pass(!fs.existsSync(livePost), `Live article target already exists: ${path.relative(repoRoot, livePost)}`);
-    pass(!fs.existsSync(liveAssetDir), `Live asset target already exists: ${path.relative(repoRoot, liveAssetDir)}`);
+    const update = validateInPlaceUpdate({
+      repoRoot,
+      current,
+      manifest,
+      draftPath,
+      packageAssetPaths: walk(path.join(current, 'draft', 'assets', 'img', 'posts', articleStem), () => true),
+      baselineSource: fs.existsSync(path.join(repoRoot, '.git')) ? 'git-head' : 'filesystem'
+    });
+    failures.push(...update.errors);
+    if (!update.matched || !update.valid) {
+      pass(!fs.existsSync(livePost), `Live article target already exists: ${path.relative(repoRoot, livePost)}`);
+      pass(!fs.existsSync(liveAssetDir), `Live asset target already exists: ${path.relative(repoRoot, liveAssetDir)}`);
+    }
   }
 }
 

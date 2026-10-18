@@ -122,7 +122,85 @@ export const B1_REVISION_EXCEPTION = Object.freeze({
   })
 });
 
+// One extra claim-map-only revision for one approved manual run; the global cap remains two.
+export const JEV_TRUEFORGE_REVISION_EXCEPTION = Object.freeze({
+  run: '20261017-2108-jev-open-harness-update',
+  post: '_posts/2026-10-17-jev-pipeline-37-of-40-cost-estimate.md',
+  proof: 'review/owner-jev-trueforge-revision-proof.json',
+  priorApproval: '0cfe718700fb661d2ce7c510bc3bf8b1302ee58469a86f781bdd0dfaee8b65f2',
+  implementationApproval: '7f33b161949b9c0b2575e42ae1b86f5970a0d7f616de995b782766fa44e8860f',
+  preClaimMap: '54117cbddebb490635c7a1e19a8eb5b96719a854a36715064d838cc9dea92fb1',
+  postClaimMap: 'f04cc7be0e560bd3b5d328162b2994405c2b5f36ec5bce0126bd29973ffcd82e',
+  article: 'e64de966c29936b33c69493555cc95f9cd7bd014516b7c04294621e4903ec0b4',
+  protectedManifest: '8962eca5991f8ce5627925633a053cfa2c8ccb05b7b0f0881306c0a1c8bbda57',
+  editorialReview: '53ef1f5b94010971231bd854752a1d456199ab4d7051e69e9ea2ce3b0a07cb4b',
+  changedClaim: 'reported_cost_inputs',
+  appendedStatement: ' Relative to the $0.0015 Jev figure, the earlier range implies about 3.3–10× and the later range about 147–253×; both are conditional arithmetic only and do not resolve which Opus cost describes the run.',
+  protected: Object.freeze([
+    'draft/_posts/2026-10-17-jev-pipeline-37-of-40-cost-estimate.md',
+    'draft/assets/img/posts/2026-10-17-jev-pipeline-37-of-40-cost-estimate/pipeline-comparison.png',
+    'draft/source-image-manifest.json',
+    'evidence/evidence-pack.json',
+    'evidence/source-map.md',
+    'research/authority-brief.json',
+    'research/candidate-set.json',
+    'research/existing-coverage.json',
+    'research/image-source-audit.md',
+    'research/newsletter-benchmark-update.json',
+    'review/final-review.md',
+    'review/revision-3-authorization.md'
+  ]),
+  history: Object.freeze({
+    'manifest.json': 'a9b63cec6118e49e7323bc500c1afd734f7cb4fb8d85e6ab6dc3cdef773ac11c',
+    'claim-map.json': '54117cbddebb490635c7a1e19a8eb5b96719a854a36715064d838cc9dea92fb1',
+    'article.md': 'e64de966c29936b33c69493555cc95f9cd7bd014516b7c04294621e4903ec0b4',
+    'run-summary.md': '02ddb26434cc106cd19a25d7d60693e1252703107558344fea4a9d8cd546bd30',
+    'final-review.md': '935a7c7da9c32817a83d7c874cbe244de193a83165bc18aeb0e44f6bbcdc22b5'
+  })
+});
+
+function jevRevisionExceptionErrors({ manifest, stage, proof, observed } = {}) {
+  const errors = [];
+  const require = (condition, message) => { if (!condition) errors.push(`revision budget: ${message}`); };
+  const pinned = JEV_TRUEFORGE_REVISION_EXCEPTION;
+  if (Number.isInteger(manifest?.revision_loops) && manifest.revision_loops <= 2) {
+    require(manifest.owner_revision_exception_proof === undefined, 'an owner exception requires the truthful total of three');
+    require(manifest.run_id !== pinned.run || manifest.article_path !== pinned.post, 'the approved run must preserve the truthful total of three');
+    return errors;
+  }
+  require(manifest?.revision_loops === 3, `invalid revision loop count: ${manifest?.revision_loops}`);
+  require(manifest?.run_id === pinned.run && manifest?.article_path === pinned.post, 'no extra revision is approved for this run or post');
+  require(manifest?.owner_revision_exception_proof === pinned.proof, 'missing or unapproved owner proof path');
+  require(proof && typeof proof === 'object' && !Array.isArray(proof), 'owner proof is missing or invalid');
+  require(observed && typeof observed === 'object' && !Array.isArray(observed), 'recomputed owner proof observations are missing');
+  if (errors.length) return errors;
+  require(['draft', 'final'].includes(stage), 'invalid validation stage');
+  require(proof.run_id === pinned.run && proof.post === pinned.post, 'proof scope does not match the approved run and post');
+  require(proof.prior_regular_revision_loops === 2 && proof.additional_owner_approved_revision === 1 && proof.additional_owner_approved_revision_applied === 1 && proof.total_content_revisions_after_correction === 3 && proof.total_content_revisions === 3, 'revision history must preserve two plus exactly one, total three');
+  require(proof.prior_revision_approval_sha256 === pinned.priorApproval && observed.prior_revision_approval_sha256 === pinned.priorApproval, 'third-revision owner approval digest does not match');
+  require(proof.schema_version === 1, 'unsupported owner-proof schema version');
+  require(proof.implementation_authorization_sha256 === pinned.implementationApproval && observed.implementation_authorization_sha256 === pinned.implementationApproval, 'gate-change authorization digest does not match');
+  for (const [file, sha256] of Object.entries(pinned.history)) {
+    require(proof.history_sha256?.[file] === sha256 && observed.history_sha256?.[file] === sha256, `historical ${file} digest changed`);
+  }
+  require(observed.historical_manifest?.run_id === pinned.run && observed.historical_manifest?.article_path === pinned.post && observed.historical_manifest?.revision_loops === 2, 'historical manifest no longer records the original two revisions');
+  require(proof.pre_third_revision_claim_map_sha256 === pinned.preClaimMap && observed.pre_third_revision_claim_map_sha256 === pinned.preClaimMap, 'pre-revision claim-map digest changed');
+  require(proof.post_third_revision_claim_map_sha256 === pinned.postClaimMap && observed.current_claim_map_sha256 === pinned.postClaimMap, 'post-revision claim-map digest changed');
+  require(proof.changed_claim_id === pinned.changedClaim, 'the approved revision must be limited to the one pinned claim');
+  require(proof.exact_appended_statement === pinned.appendedStatement && observed.claim_map_change_exact === true, 'claim-map change is not the exact approved append');
+  require(proof.article_before_sha256 === pinned.article && proof.article_after_sha256 === pinned.article && observed.article_before_sha256 === pinned.article && observed.current_draft_sha256 === pinned.article, 'article bytes must remain unchanged by the third revision');
+  require(proof.protected_artifact_manifest_sha256 === pinned.protectedManifest && observed.protected_artifact_manifest_sha256 === pinned.protectedManifest, 'protected evidence, research, authority, review or asset inputs changed');
+  require(proof.editorial_review_sha256 === pinned.editorialReview && observed.review_sha256 === pinned.editorialReview, 'independent review bytes do not match the pinned PASS');
+  require(observed.review?.run_id === pinned.run && observed.review?.verdict === 'PASS' && observed.review?.claim_coverage === 1 && Array.isArray(observed.review?.claims) && observed.review.claims.length === 26 && observed.review.claims.every((claim) => claim?.supported === true), 'a fresh independent PASS covering all 26 claims is required');
+  for (const key of ['exact_claim_map_only_change', 'protected_artifacts_unchanged']) require(proof[key] === true, `${key} must be true`);
+  for (const key of ['other_gates_waived', 'global_policy_changed', 'publication_authorized_by_this_record']) require(proof[key] === false, `${key} must be false`);
+  return errors;
+}
+
 export function ownerRevisionExceptionErrors({ manifest, stage, proof, observed } = {}) {
+  if (manifest?.run_id === JEV_TRUEFORGE_REVISION_EXCEPTION.run || manifest?.owner_revision_exception_proof === JEV_TRUEFORGE_REVISION_EXCEPTION.proof) {
+    return jevRevisionExceptionErrors({ manifest, stage, proof, observed });
+  }
   const errors = [];
   const require = (condition, message) => { if (!condition) errors.push(`revision budget: ${message}`); };
   const pinned = B1_REVISION_EXCEPTION;

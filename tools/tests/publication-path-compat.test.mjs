@@ -7,6 +7,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { resolvePublicationPost } from '../lib/archive-publication-path.mjs';
+import { validateInPlaceUpdate } from '../lib/in-place-update-policy.mjs';
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const PACKAGE_TOOL = path.join(REPO_ROOT, 'tools', 'validate-editorial-package.mjs');
@@ -826,3 +827,146 @@ for (const [label, relative] of [
     } finally { removeFixture(root); }
   });
 }
+
+
+const JEV_RUN_ID = '20261017-2108-jev-open-harness-update';
+const JEV_POST = '_posts/2026-10-17-jev-pipeline-37-of-40-cost-estimate.md';
+const JEV_STEM = '2026-10-17-jev-pipeline-37-of-40-cost-estimate';
+const JEV_ASSET_DIR = `assets/img/posts/${JEV_STEM}`;
+const JEV_ASSET = `${JEV_ASSET_DIR}/pipeline-comparison.png`;
+const JEV_BASELINE_PATH = 'review/in-place-update-baseline.json';
+const JEV_PROOF_PATH = 'review/owner-jev-trueforge-revision-proof.json';
+
+const JEV_UPDATE_BASELINE = {
+  schema_version: 1,
+  run_id: JEV_RUN_ID,
+  article_path: JEV_POST,
+  live_article_sha256: 'b418027730daff8fbfd00f303299dc2f0d94c7fbfca909e1045178b6f646f69a',
+  draft_article_sha256: 'e64de966c29936b33c69493555cc95f9cd7bd014516b7c04294621e4903ec0b4',
+  live_asset_dir: JEV_ASSET_DIR,
+  package_asset_dir: `assets/img/posts/${JEV_STEM}`,
+  live_assets: [{ path: JEV_ASSET, sha256: '1bc5508f7a9a3bff66f521d577bf3f33b371a90d02e1dd1fa9092dde98617e2d', bytes: 289181 }],
+  package_assets: [{ path: JEV_ASSET, sha256: '1bc5508f7a9a3bff66f521d577bf3f33b371a90d02e1dd1fa9092dde98617e2d', bytes: 289181 }],
+  asset_bytes_unchanged: true,
+  allow_asset_changes: false,
+  publication_authorized: false
+};
+
+const JEV_RUN_PROOF = {
+  schema_version: 1,
+  run_id: JEV_RUN_ID,
+  post: JEV_POST,
+  prior_regular_revision_loops: 2,
+  additional_owner_approved_revision: 1,
+  additional_owner_approved_revision_applied: 1,
+  total_content_revisions_after_correction: 3,
+  total_content_revisions: 3,
+  prior_revision_approval_sha256: '0cfe718700fb661d2ce7c510bc3bf8b1302ee58469a86f781bdd0dfaee8b65f2',
+  implementation_authorization_sha256: '7f33b161949b9c0b2575e42ae1b86f5970a0d7f616de995b782766fa44e8860f',
+  history_sha256: {
+    'manifest.json': 'a9b63cec6118e49e7323bc500c1afd734f7cb4fb8d85e6ab6dc3cdef773ac11c',
+    'claim-map.json': '54117cbddebb490635c7a1e19a8eb5b96719a854a36715064d838cc9dea92fb1',
+    'article.md': 'e64de966c29936b33c69493555cc95f9cd7bd014516b7c04294621e4903ec0b4',
+    'run-summary.md': '02ddb26434cc106cd19a25d7d60693e1252703107558344fea4a9d8cd546bd30',
+    'final-review.md': '935a7c7da9c32817a83d7c874cbe244de193a83165bc18aeb0e44f6bbcdc22b5'
+  },
+  pre_third_revision_claim_map_sha256: '54117cbddebb490635c7a1e19a8eb5b96719a854a36715064d838cc9dea92fb1',
+  post_third_revision_claim_map_sha256: 'f04cc7be0e560bd3b5d328162b2994405c2b5f36ec5bce0126bd29973ffcd82e',
+  changed_claim_id: 'reported_cost_inputs',
+  exact_appended_statement: ' Relative to the $0.0015 Jev figure, the earlier range implies about 3.3–10× and the later range about 147–253×; both are conditional arithmetic only and do not resolve which Opus cost describes the run.',
+  article_before_sha256: 'e64de966c29936b33c69493555cc95f9cd7bd014516b7c04294621e4903ec0b4',
+  article_after_sha256: 'e64de966c29936b33c69493555cc95f9cd7bd014516b7c04294621e4903ec0b4',
+  protected_artifact_manifest_sha256: '8962eca5991f8ce5627925633a053cfa2c8ccb05b7b0f0881306c0a1c8bbda57',
+  editorial_review_sha256: '53ef1f5b94010971231bd854752a1d456199ab4d7051e69e9ea2ce3b0a07cb4b',
+  exact_claim_map_only_change: true,
+  protected_artifacts_unchanged: true,
+  other_gates_waived: false,
+  global_policy_changed: false,
+  publication_authorized_by_this_record: false
+};
+
+function makeJevUpdateFixture() {
+  const root = fs.mkdtempSync(path.join(TMP_ROOT, 'jev-in-place-update-'));
+  fs.mkdirSync(path.join(root, '_workspace'), { recursive: true });
+  fs.cpSync(path.join(REPO_ROOT, '_workspace/current'), path.join(root, '_workspace/current'), { recursive: true });
+  fs.mkdirSync(path.join(root, '.claude'), { recursive: true });
+  fs.copyFileSync(path.join(REPO_ROOT, '.claude/editorial-policy.yml'), path.join(root, '.claude/editorial-policy.yml'));
+  fs.mkdirSync(path.join(root, '_data'), { recursive: true });
+  for (const file of ['archive_development.json', 'archive_restoration.json']) fs.copyFileSync(path.join(REPO_ROOT, '_data', file), path.join(root, '_data', file));
+  const livePost = path.join(root, JEV_POST);
+  fs.mkdirSync(path.dirname(livePost), { recursive: true });
+  fs.copyFileSync(path.join(REPO_ROOT, JEV_POST), livePost);
+  fs.cpSync(path.join(REPO_ROOT, JEV_ASSET_DIR), path.join(root, JEV_ASSET_DIR), { recursive: true });
+  const manifest = json(root, '_workspace/current/manifest.json');
+  Object.assign(manifest, {
+    status: 'reviewing',
+    owner_revision_exception_proof: JEV_PROOF_PATH,
+    in_place_update_baseline: JEV_BASELINE_PATH
+  });
+  writeJson(root, '_workspace/current/manifest.json', manifest);
+  writeJson(root, `_workspace/current/${JEV_PROOF_PATH}`, JEV_RUN_PROOF);
+  writeJson(root, `_workspace/current/${JEV_BASELINE_PATH}`, JEV_UPDATE_BASELINE);
+  return root;
+}
+
+test('the exact Jev run validates a hash-matched in-place update as article-only scope', () => {
+  const root = makeJevUpdateFixture();
+  try {
+    const packageResult = run(PACKAGE_TOOL, root, '--stage', 'draft');
+    assert.equal(packageResult.status, 0, output(packageResult));
+    const scopeResult = run(SCOPE_TOOL, root);
+    assert.equal(scopeResult.status, 0, output(scopeResult));
+    assert.deepEqual(fs.readFileSync(path.join(root, '_workspace/current/validation/path-scope.txt'), 'utf8').trim().split('\n'), [JEV_POST]);
+    const manifest = json(root, '_workspace/current/manifest.json');
+    manifest.gates.draft_package = { verdict: 'PASS', evidence: 'isolated draft-stage validator passed' };
+    manifest.gates.package_scope = { verdict: 'PASS', evidence: 'isolated path scope contains the existing article only' };
+    manifest.gates.in_place_update_scope = { verdict: 'PASS', evidence: 'pinned article baseline and unchanged asset bytes verified' };
+    writeJson(root, '_workspace/current/manifest.json', manifest);
+    const finalResult = run(PACKAGE_TOOL, root, '--stage', 'final');
+    assert.notEqual(finalResult.status, 0, output(finalResult));
+    assert.match(output(finalResult), /non-PASS manifest gate/i);
+    assert.doesNotMatch(output(finalResult), /revision budget|in-place update|Live article target already exists/i);
+  } finally { removeFixture(root); }
+});
+
+for (const [label, mutate] of [
+  ['live article baseline drift', (root) => fs.appendFileSync(path.join(root, JEV_POST), '\nexternal drift\n')],
+  ['live asset baseline drift', (root) => fs.appendFileSync(path.join(root, JEV_ASSET), Buffer.from([0x00]))],
+  ['packaged asset drift', (root) => fs.appendFileSync(path.join(root, `_workspace/current/draft/${JEV_ASSET}`), Buffer.from([0x00]))],
+  ['extra packaged asset', (root) => fs.writeFileSync(path.join(root, '_workspace/current/draft', JEV_ASSET_DIR, 'unexpected.bin'), Buffer.from('unexpected'))],
+  ['extra live asset', (root) => fs.writeFileSync(path.join(root, JEV_ASSET_DIR, 'unexpected.bin'), Buffer.from('unexpected'))],
+  ['alternate run id', (root) => updateManifest(root, { run_id: 'other-run' })],
+  ['baseline record drift', (root) => {
+    const baseline = json(root, `_workspace/current/${JEV_BASELINE_PATH}`);
+    baseline.live_article_sha256 = 'a'.repeat(64);
+    writeJson(root, `_workspace/current/${JEV_BASELINE_PATH}`, baseline);
+  }]
+]) {
+  test(`blocks Jev in-place update on ${label}`, () => {
+    const root = makeJevUpdateFixture();
+    try {
+      mutate(root);
+      const result = run(PACKAGE_TOOL, root, '--stage', 'draft');
+      assert.notEqual(result.status, 0, output(result));
+      assert.match(output(result), /in-place update|revision budget|Live article target already exists/i);
+      const scopeResult = run(SCOPE_TOOL, root);
+      assert.notEqual(scopeResult.status, 0, output(scopeResult));
+      assert.match(output(scopeResult), /in-place update|Live article target already exists/i);
+    } finally { removeFixture(root); }
+  });
+}
+
+
+test('git-head baseline validation reads the prior live target without staging anything', () => {
+  const current = path.join(REPO_ROOT, '_workspace/current');
+  const result = validateInPlaceUpdate({
+    repoRoot: REPO_ROOT,
+    current,
+    manifest: json(REPO_ROOT, '_workspace/current/manifest.json'),
+    draftPath: path.join(current, 'draft', JEV_POST),
+    packageAssetPaths: [path.join(current, 'draft', JEV_ASSET)],
+    baselineSource: 'git-head'
+  });
+  assert.equal(result.valid, true, result.errors.join('\n'));
+  assert.deepEqual(result.scopePaths, [JEV_POST]);
+});

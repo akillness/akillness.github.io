@@ -2,6 +2,7 @@
 
 import { SOURCE_FIRST_FALLBACK, imageFallbackContextFromDisk, validateImageFallback } from './lib/source-image-manifest.mjs';
 import { ARCHIVE_LEDGER_PATH, publicationPathErrors, resolvePublicationPost, archiveGraduationErrors } from './lib/archive-publication-path.mjs';
+import { validateInPlaceUpdate } from './lib/in-place-update-policy.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -64,6 +65,15 @@ function expectedPackagePaths({ checkCollisions = true } = {}) {
   const packageAssetDir = path.join(draftRoot, 'assets', 'img', 'posts', stem);
   const assets = walkFiles(packageAssetDir);
   check(assets.length >= 1, `No packaged assets found for ${stem}`);
+  const update = validateInPlaceUpdate({
+    repoRoot,
+    current,
+    manifest,
+    draftPath: posts[0],
+    packageAssetPaths: assets,
+    baselineSource: stagedMode ? 'git-head' : 'filesystem'
+  });
+  failures.push(...update.errors);
 
   const paths = [selectedPost.postPath];
   if (selectedPost.archive) paths.push(ARCHIVE_LEDGER_PATH);
@@ -76,7 +86,7 @@ function expectedPackagePaths({ checkCollisions = true } = {}) {
       check(hasValidImageExtension(relative), `Reference image has a forbidden extension: ${relative}`);
       referenceImages.push(relative);
     }
-    paths.push(relative);
+    if (!update.matched || !update.valid) paths.push(relative);
   }
 
   // Source rights stay mandatory; only explicit audited fallback relaxes the legacy floor.
@@ -100,7 +110,7 @@ function expectedPackagePaths({ checkCollisions = true } = {}) {
     `Package must ship ${MINIMUM_REFERENCE_IMAGES}–${MAXIMUM_REFERENCE_IMAGES} qualifying source-derived reference images under ${refPrefix}, found ${referenceImages.length}`
   );
 
-  if (checkCollisions && !selectedPost.archive) {
+  if (checkCollisions && !selectedPost.archive && (!update.matched || !update.valid)) {
     const livePost = path.join(repoRoot, selectedPost.postPath);
     const liveAssets = path.join(repoRoot, 'assets', 'img', 'posts', stem);
     check(!fs.existsSync(livePost), `Live article target already exists: ${selectedPost.postPath}`);
