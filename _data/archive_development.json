@@ -4032,9 +4032,9 @@
         "lang-ko",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial news summary into exhaustive technical source audit on Meta CoPE: contextual position gating, fractional interpolation, subword invariant addressing, and long-context scaling"
     },
     {
       "path": "_posts/2024/06/2024-06-09-web-application-10-essential.md",
