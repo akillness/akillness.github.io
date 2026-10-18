@@ -1916,9 +1916,9 @@
       "links_at_intake": 2,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on Simon Willison's agentic engineering patterns, red-green TDD guardrails, linear walkthroughs, and prompt hoarding"
     },
     {
       "path": "_posts/2026/03/2026-03-06-localcowork-lfm2-24b-a2b.md",
