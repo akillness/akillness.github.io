@@ -2122,9 +2122,9 @@
       "links_at_intake": 1,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on LangChain LCEL/LangGraph versus LlamaIndex data framework architecture, RAG pipelines, and cyclical agent workflows"
     },
     {
       "path": "_posts/2024/05/2024-05-12-llm-course-trying.md",
