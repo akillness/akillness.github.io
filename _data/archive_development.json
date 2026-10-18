@@ -1930,9 +1930,9 @@
       "links_at_intake": 4,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on LocalCowork on-device agent architecture, Liquid AI LFM2-24B-A2B mixture-of-experts, and sub-second MCP tool routing"
     },
     {
       "path": "_posts/2026/03/2026-03-06-rewrite-cli-for-agents.md",
