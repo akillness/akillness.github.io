@@ -3249,9 +3249,9 @@
         "thin",
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial 16-bullet glossary into authoritative architectural source audit deconstructing the four paradigms of data platforms: Warehouses, Lakes, Lakehouses (Iceberg/Delta), and decentralized Data Meshes"
     },
     {
       "path": "_posts/2024/07/2024-07-16-improving-the-performance-llm.md",
