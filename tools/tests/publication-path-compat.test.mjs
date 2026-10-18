@@ -27,6 +27,11 @@ const RUN_ID = 'normal-archive-test-run';
 const EXCEPTION_RUN_ID = '20261015-0042-archive-nemoclaw-manual';
 const SOURCE_REVISION = '635addccb53a4a08274d5225759377956dcea653';
 const TMP_ROOT = fs.realpathSync(process.env.RUNNER_TEMP || os.tmpdir());
+const LOCAL_JEV_CURRENT = path.join(REPO_ROOT, '_workspace/current');
+const hasLocalJevWorkspace = fs.existsSync(path.join(LOCAL_JEV_CURRENT, 'manifest.json'));
+const localJevTest = (name, fn) => test(name, {
+  skip: hasLocalJevWorkspace ? false : 'requires the untracked local Jev run workspace'
+}, fn);
 
 const env = { ...process.env, TMPDIR: '/private/tmp', TEST_NODE_MODULES: '/private/tmp/ak-archive-tests-20261014/node_modules' };
 const run = (tool, root, ...args) => spawnSync(process.execPath, [tool, '--root', root, ...args], {
@@ -909,7 +914,31 @@ function makeJevUpdateFixture() {
   return root;
 }
 
-test('the exact Jev run validates a hash-matched in-place update as article-only scope', () => {
+test('missing local Jev evidence fails closed in a clean checkout', () => {
+  const root = fs.mkdtempSync(path.join(TMP_ROOT, 'jev-missing-evidence-'));
+  try {
+    const current = path.join(root, '_workspace/current');
+    const result = validateInPlaceUpdate({
+      repoRoot: REPO_ROOT,
+      current,
+      manifest: {
+        run_id: JEV_RUN_ID,
+        article_path: JEV_POST,
+        in_place_update_baseline: JEV_BASELINE_PATH,
+        mode: 'draft-only',
+        publication_requires_confirmation: true
+      },
+      draftPath: path.join(current, 'draft', JEV_POST),
+      baselineSource: 'git-head'
+    });
+    assert.equal(result.matched, true);
+    assert.equal(result.valid, false);
+    assert.equal(result.scopePaths, null);
+    assert.ok(result.errors.some((error) => /baseline/i.test(error)));
+  } finally { removeFixture(root); }
+});
+
+localJevTest('the exact Jev run validates a hash-matched in-place update as article-only scope', () => {
   const root = makeJevUpdateFixture();
   try {
     const packageResult = run(PACKAGE_TOOL, root, '--stage', 'draft');
@@ -942,7 +971,7 @@ for (const [label, mutate] of [
     writeJson(root, `_workspace/current/${JEV_BASELINE_PATH}`, baseline);
   }]
 ]) {
-  test(`blocks Jev in-place update on ${label}`, () => {
+  localJevTest(`blocks Jev in-place update on ${label}`, () => {
     const root = makeJevUpdateFixture();
     try {
       mutate(root);
@@ -957,7 +986,7 @@ for (const [label, mutate] of [
 }
 
 
-test('git-head baseline validation reads the prior live target without staging anything', () => {
+localJevTest('git-head baseline validation reads the prior live target without staging anything', () => {
   const current = path.join(REPO_ROOT, '_workspace/current');
   const result = validateInPlaceUpdate({
     repoRoot: REPO_ROOT,
