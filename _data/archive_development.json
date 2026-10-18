@@ -4085,9 +4085,9 @@
         "no-sources",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial 5-challenge note into exhaustive architectural audit on enterprise generative AI stacks: vLLM serving, gateway routing, hybrid RAG, and agent safety harnesses"
     },
     {
       "path": "_posts/2024/07/2024-07-16-new-decoding-to-reduce-hallucinations.md",
