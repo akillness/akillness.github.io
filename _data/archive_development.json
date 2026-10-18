@@ -3168,9 +3168,9 @@
         "korean-heavy",
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal generic summary and translation block into authoritative source audit detailing trunk-based development, hermetic build graphs, automated canary gates, and 2026 agentic CI validation"
     },
     {
       "path": "_posts/2024/06/2024-06-30-llm101n-lets-build-a-storyteller.md",
