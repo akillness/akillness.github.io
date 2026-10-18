@@ -3966,9 +3966,9 @@
         "no-sources",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial buzzword cheat sheet into rigorous technical source audit on the mathematical taxonomy of generative models: autoregression, diffusion SDEs, flow matching, and VAEs"
     },
     {
       "path": "_posts/2024/05/2024-05-31-foundation-pose-nvidia-paper.md",
