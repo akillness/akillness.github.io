@@ -2731,9 +2731,9 @@
       "links_at_intake": 2,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from brief LinkedIn summary into authoritative source audit on Consistency Large Language Models (CLLMs), Jacobi parallel decoding, and inference architectures"
     },
     {
       "path": "_posts/2024/05/2024-05-14-boids-flocking-behaviour.md",
