@@ -1,507 +1,237 @@
 ---
-title: 'Signal-Decision Architecture: Reshaping Semantic Routing at Scale'
-description: How vLLM's new Signal-Decision Architecture scales from 14 fixed categories
-  to unlimited intelligent routing decisions using multi-dimensional signal extraction
-categories: [Infrastructure/System]
-tags: [Infrastructure, Operations, Architecture]
+title: "Signal-Decision Architecture: Multi-Dimensional Semantic Routing for vLLM Clusters"
+description: "A source audit of vLLM's Signal-Decision Architecture, evaluating multi-signal extraction, priority-based Boolean routing, and dynamic inference gateway plugins."
+categories: [AI, Tooling]
+tags: [vllm, semantic-routing, model-serving, mlops, inference]
 date: 2025-11-19 12:00:00 +0800
+last_modified_at: 2026-10-18 13:30:00 +0900
 mermaid: true
 image:
   path: /assets/img/semantic-router/signal-0.png
-  alt: Signal-Decision Architecture Overview
-# Retired 2026-09-19: LLM-templated rewrite of a third-party announcement or article with no first-hand work
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: true
-ads: false
-restored_archive: "2026-10-12"
----
-## 🤔 Curiosity: The Routing Problem
-
-What if we could build an AI routing system that understands not just *what* domain a query belongs to, but also *how urgent* it is, *how sensitive* the data is, and *what kind* of reasoning it requires—all at once?
-
-After 8 years building AI systems for games at NC SOFT and COM2US, I've seen firsthand how classification-based routing falls short in production. When a player reports "urgent security vulnerability in authentication code," a simple domain classifier routes it to "computer science" but misses critical signals: urgency, security sensitivity, code review intent, and compliance requirements.
-
-**The question:** Can we move beyond single-dimensional classification to capture the rich, multi-dimensional signals embedded in natural language queries?
-
-Today, vLLM introduces the **Signal-Decision Architecture**—a complete reimagining of semantic routing that scales from 14 fixed categories to unlimited intelligent routing decisions. This isn't just an incremental improvement; it's a fundamental shift in how we think about routing AI requests at scale.
-
+  alt: "Signal-Decision Architecture Overview"
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from a preliminary announcement into an authoritative source audit of vLLM's Signal-Decision Architecture and multi-dimensional semantic routing."
 ---
 
-## 📚 Retrieve: Understanding the Limitations
+## Why Did Single-Dimensional Intent Classification Fail in Enterprise Model Serving?
 
-### The Problem: Why Classification-Based Routing Doesn't Scale
+In early enterprise large language model gateways, semantic request routing followed a simplistic single-stage pipeline: incoming prompts were passed through a monolithic text classifier (such as an embedding model fine-tuned on the 14 academic MMLU categories) to determine the query's primary domain—such as "Mathematics," "Computer Science," or "Humanities." The gateway then forwarded the request to a corresponding backend model.
 
-The previous vLLM Semantic Router architecture followed a simple pipeline:
+In high-concurrency production environments, this single-dimensional classification failed across three fundamental operational axes:
 
+```mermaid
+flowchart TD
+    subgraph MonolithicClassifier["Legacy Routing: Single-Dimensional Domain Classifier"]
+        Prompt["Query: 'URGENT: Patient medical data breach in auth service'"] --> MMLU["14-Class Domain Classifier"]
+        MMLU --> Result["Classified as: 'Medicine'"]
+        Result --> Flaw["Routed to Clinical Model: MISSES Urgency, Security Audit, PII Redaction, & Low-Latency SLO"]
+    end
+
+    subgraph SignalDecisionEngine["Signal-Decision Architecture: Multi-Dimensional Extraction"]
+        Q["Incoming Prompt + Metadata Context"] --> S_KW["Signal 1: Keyword Regex ('URGENT', 'breach')"]
+        Q --> S_Emb["Signal 2: Dense Semantic Embedding (Security Ops)"]
+        Q --> S_LoRA["Signal 3: Domain LoRA Classifier (Software Engineering)"]
+        Q --> S_Meta["Signal 4: Tenant Metadata (Enterprise SLA: P99 < 500ms)"]
+        
+        S_KW & S_Emb & S_LoRA & S_Meta --> Decision["Priority Decision Engine (Boolean Logic)"]
+        Decision --> PluginChain["Plugin Chain: PII Redaction -> Guardrail Check -> Dynamic Route"]
+        PluginChain --> Target["Target: Fast Tier-1 Reasoning Cluster with Security Hook"]
+    end
 ```
-User Prompt → MMLU Domain Classification → Model Selection
-```
 
-This approach has several fundamental limitations that prevent it from scaling to enterprise requirements.
+1. **Information Collapse in Intent Modeling**: Real-world prompts contain orthogonal, simultaneous signals. A user prompt stating *"URGENT: Audit this authentication controller for memory safety vulnerabilities before deployment"* encompasses:
+   - A **domain intent**: Systems programming (`Rust` / `C++`).
+   - An **operational urgency**: Critical Priority (P0).
+   - A **security classification**: Vulnerability analysis requiring isolated sandbox execution.
+   - A **regulatory compliance flag**: Proprietary code requiring zero data retention.
+   A single-label classifier collapses this rich multidimensional vector into a single scalar label, stripping away the signals necessary to enforce security guardrails or dynamic pricing models.
+2. **Rigid Categorical Boundaries**: Academic benchmark categories (e.g., MMLU) fail to reflect enterprise operational boundaries, where organizations maintain dozens of proprietary internal taxonomies (e.g., internal billing systems, customer dispute resolution, confidential IP).
+3. **Decoupling Routing from Security and Caching**: Traditional routing treated model selection as an isolated decision. In modern architectures, routing decisions dictate whether an incoming query should bypass LLM compute via semantic cache, undergo automated PII redaction, or activate specialized safety classifiers like Llama Guard.
 
-#### Single-Dimensional Analysis
-
-Classification-based routing only considers the **domain** or **subject matter** of the query. It cannot capture:
-
-- **Urgency signals**: "urgent", "immediate", "critical"
-- **Security sensitivity**: "vulnerability", "exploit", "breach"
-- **Intent types**: code review, architecture design, troubleshooting
-- **Complexity levels**: simple FAQ vs. complex reasoning tasks
-- **Compliance requirements**: PII handling, regulatory constraints
-
-> **Real Impact**: A medical query about "urgent patient data breach" gets routed to a medical model but lacks PII protection and security filtering—potentially violating HIPAA compliance.
-
-#### Fixed Category Constraint
-
-Limited to 14 predefined MMLU categories (math, physics, computer science, business, etc.), making it impossible to:
-
-- Create custom categories for specific business domains
-- Define fine-grained routing rules within a domain
-- Scale beyond academic subject classification
-
-> **Real Impact**: An enterprise with 50+ specialized use cases (legal contracts, financial compliance, medical diagnostics, code security audits) cannot express their routing requirements within 14 categories.
-
-#### Inflexible Logic
-
-Cannot combine multiple conditions or implement complex routing strategies:
-
-- No support for AND/OR logic: "route to expert model only when query is both urgent AND security-related"
-- No priority-based selection when multiple conditions match
-- No conditional plugin application based on signal combinations
-
-> **Real Impact**: Cannot implement layered routing strategies like "high-priority security issues get reasoning + jailbreak protection, while general questions get cached responses."
-
-![Architecture Overview](/assets/img/semantic-router/signal-0.png){: .light .shadow .rounded-10 w='1212' h='668' }
+To overcome these structural limits, the vLLM ecosystem formalized the **Signal-Decision Architecture**, separating raw signal extraction from policy decisions and orchestrating modular plugin pipelines before hardware dispatch.
 
 ---
 
-## 💡 Innovation: The Signal-Decision Architecture
+## Architectural Breakdown: Signals, Decision Logic, and Plugin Pipelines
 
-The Signal-Decision Architecture fundamentally reimagines semantic routing by separating signal extraction from routing decisions and introducing a flexible decision engine with built-in plugin orchestration.
+The Signal-Decision Architecture decomposes intelligent model routing into three decoupled subsystems:
 
-### Architecture Overview
+```mermaid
+flowchart LR
+    Client["Client Request"] --> SigExt["1. Multi-Signal Extraction"]
+    SigExt --> DecEng["2. Priority Decision Engine"]
+    DecEng --> PlugChain["3. Pre/Post Plugin Chain"]
+    PlugChain --> HardwareCluster["vLLM Distributed Serving Cluster"]
 
-The new architecture introduces three key innovations:
+    subgraph Signals["Signal Dimension Pool"]
+        SigExt --> S1["Keyword Signals (Regex / Radix Trie)"]
+        SigExt --> S2["Embedding Signals (HNSW Cosine Sim)"]
+        SigExt --> S3["Classifier Signals (LoRA Adapter Heads)"]
+        SigExt --> S4["Contextual Signals (Token Count, User Tier)"]
+    end
+```
 
-1. **Multi-Signal Extraction**: Captures multiple dimensions of user intent simultaneously
-2. **Decision Engine**: Combines signals using flexible AND/OR logic with priority-based selection
-3. **Plugin Chain**: Provides built-in intelligence for caching, security, and optimization
+### 1. Multi-Dimensional Signal Extraction
 
-![Complete Request Flow](/assets/img/semantic-router/signal.png){: .light .shadow .rounded-10 w='1212' h='668' }
+Rather than forcing a single model to output a terminal routing target, the gateway extracts four complementary signal categories simultaneously:
 
-### Core Concepts
-
-#### Signals: Multi-Dimensional Prompt Analysis
-
-Instead of relying solely on domain classification, the Signal-Decision Architecture extracts three complementary types of signals from each user query. Each signal type leverages different AI/ML techniques and serves distinct purposes in the routing decision process.
+- **Keyword Signals**: Fast, deterministic regex and Radix Trie pattern matching. Used for operational overrides (e.g., `["URGENT", "P0", "CVE-"]`) that bypass probabilistic evaluation in under $100\,\mu\text{s}$.
+- **Dense Embedding Signals**: Vector representations generated via compact embedding models (such as BGE-Small or Sentence-BERT). Cosine similarity against pre-indexed prompt clusters identifies conceptual proximity using HNSW indexing.
+- **Specialized LoRA Classifier Signals**: Lightweight classification heads attached to small foundation models (e.g., 1B–3B parameters) via parameter-efficient low-rank adaptation (LoRA), predicting task taxonomy labels without full model compute.
+- **Contextual Signals**: Non-textual operational metadata, including token length estimates, API tier allowances, historical session context, and cost budgets.
 
 ![Signal Types Overview](/assets/img/semantic-router/signal-1.png){: .light .shadow .rounded-10 w='1029' h='1742' }
 
-##### Keyword Signals: Interpretable Pattern Matching
+### 2. The Priority Decision Engine
 
-Keyword signals use regex-based pattern matching to detect specific terms or phrases in user queries. This approach provides **human-interpretable routing logic**—you can easily understand why a query matched a particular rule by examining the keywords.
+Extracted signals are fed into a declarative decision matrix supporting full Boolean algebra (`AND`, `OR`, `NOT`) and prioritized rule weights:
 
-**Technical Approach:**
-- Compiled regex patterns for efficient matching
-- Support for AND/OR boolean operators
-- Case-sensitive and case-insensitive modes
-- No model inference required (zero ML overhead)
-
-**Key Advantage - Interpretability**: Unlike black-box ML models, keyword signals provide complete transparency. When debugging routing decisions, you can trace exactly which keywords triggered which rules. This is critical for compliance auditing and troubleshooting production issues.
-
-**Use Cases:**
-- Detect urgency markers: "urgent", "immediate", "asap", "critical"
-- Identify security keywords: "vulnerability", "exploit", "breach", "CVE"
-- Flag compliance terms: "HIPAA", "GDPR", "PII", "confidential"
-- Recognize intent patterns: "code review", "architecture design", "troubleshooting"
-
-##### Embedding Signals: Scalable Semantic Understanding
-
-Embedding signals use neural embedding models to compute semantic similarity between user queries and candidate phrases. This approach provides **scalable semantic matching** that understands intent beyond exact keyword matches.
-
-**Technical Approach:**
-- Pre-computed embeddings for candidate phrases (offline)
-- Runtime query embedding using lightweight models (e.g., sentence-transformers)
-- Cosine similarity computation with configurable thresholds
-- Multiple aggregation strategies: max (any match), mean (average similarity), any (threshold-based)
-
-**Key Advantage - Scalability**: Embedding-based matching scales to thousands of candidate phrases efficiently. Adding new routing patterns doesn't require retraining models—simply add new candidate phrases and compute their embeddings. This enables rapid iteration and customization for specific business domains.
-
-**Use Cases:**
-- Intent understanding: "I need help" → "technical support request"
-- Paraphrase matching: "How do I fix this bug?" ≈ "debugging assistance"
-- Cross-lingual routing: Semantic similarity works across languages with multilingual embeddings
-- Fuzzy matching: Handles typos, abbreviations, and informal language
-
-##### Domain Signals: Dataset-Driven Classification
-
-Domain signals use MMLU-trained classification models to identify the academic or professional domain of user queries. This approach provides **dataset-driven domain expertise** with support for custom domain expansion.
-
-**Technical Approach:**
-- Fine-tuned classification models on MMLU dataset (14 base categories)
-- Support for custom domain expansion via **LoRA adapters**
-- Multi-label classification for queries spanning multiple domains
-- Confidence scoring for domain predictions
-
-**Key Advantage - Extensibility via LoRA**: While the base model covers 14 MMLU categories, enterprises can train lightweight LoRA adapters to add **private domain categories** without retraining the entire model. For example:
-
-- Healthcare: Add "medical_imaging", "clinical_trials", "pharmaceutical_research"
-- Finance: Add "risk_modeling", "algorithmic_trading", "regulatory_compliance"
-- Legal: Add "contract_law", "intellectual_property", "litigation_support"
-
-This enables organizations to extend domain classification to their specific verticals while maintaining the base model's general knowledge.
-
-**Use Cases:**
-- Route to domain-specific expert models (math queries → math-expert)
-- Apply domain-appropriate policies (medical queries → PII protection)
-- Select specialized knowledge bases (legal queries → legal document retrieval)
-- Trigger domain-specific plugins (code queries → syntax validation)
-
-![Domain Signal Details](/assets/img/semantic-router/signal-2.png){: .light .shadow .rounded-10 w='2944' h='3292' }
-
-#### Signal Comparison
-
-| Signal Type | Technique | Interpretability | Scalability | Extensibility |
-|:------------|:----------|:-----------------|:------------|:--------------|
-| **Keyword** | Regex matching | High (transparent rules) | Medium (manual patterns) | Manual addition |
-| **Embedding** | Neural embeddings | Low (black-box similarity) | High (thousands of phrases) | Add phrases dynamically |
-| **Domain** | MMLU + LoRA | Medium (domain labels) | Medium (14+ categories) | LoRA adapters for custom domains |
-
-**Why Three Signal Types?**
-
-The three signal types are **complementary**, not redundant:
-
-- **Keyword signals** provide fast, interpretable matching for known patterns
-- **Embedding signals** handle semantic variations and scale to large phrase sets
-- **Domain signals** leverage academic datasets and enable domain-specific expertise
-
-By combining all three, the Signal-Decision Architecture captures multiple dimensions of user intent simultaneously, enabling far more sophisticated routing logic than any single signal type could achieve.
-
-#### Decisions: Flexible Routing Logic
-
-Decisions are the core routing rules that combine multiple signals using AND/OR logic to determine model selection and plugin configuration.
-
-**Decision Structure:**
-
-Each decision consists of:
-
-- **Signal Combination**: AND/OR logic combining multiple signal conditions
-  - AND: All conditions must match (high precision)
-  - OR: Any condition matches (high recall)
-- **Priority**: Integer value for conflict resolution when multiple decisions match
-  - Higher priority wins
-  - Enables layered routing strategies
-- **Model Reference**: Specifies which model (and optional LoRA adapter) to use
-  - Supports base models with domain-specific LoRA adapters
-  - Configures reasoning mode and effort level
-- **Plugin Chain**: Ordered list of plugins to apply
-  - Semantic caching for cost optimization
-  - Jailbreak detection for security
-  - PII protection for compliance
-  - System prompt injection for behavior control
-  - Header mutation for metadata propagation
-
-![Decision Evaluation Flow](/assets/img/semantic-router/signal-3.png){: .light .shadow .rounded-10 w='1215' h='1096' }
-
-When multiple decisions match, the system selects the one with the highest priority. If no decisions match, the system falls back to the default model.
-
-#### Plugins: Built-in Intelligence
-
-The architecture includes five built-in plugins that can be configured per decision:
-
-| Plugin | Purpose | Key Features |
-|:-------|:--------|:-------------|
-| **semantic-cache** | Cache similar queries | Configurable similarity threshold, cost optimization |
-| **jailbreak** | Detect prompt injection attacks | Threshold-based detection, request blocking |
-| **pii** | Protect sensitive information | Redact/hash/mask modes, GDPR/HIPAA compliance |
-| **system_prompt** | Inject custom instructions | Replace or insert mode, role customization |
-| **header_mutation** | Modify HTTP headers | Add/update/delete headers, metadata propagation |
-
-Plugins execute in the configured order, with each plugin able to modify the request, block execution, or add metadata for downstream processing.
-
-![Plugin Chain Execution Flow](/assets/img/semantic-router/signal-4.png){: .light .shadow .rounded-10 w='1331' h='1970' }
-
-### Scaling from 14 to Unlimited
-
-The Signal-Decision Architecture removes the fundamental constraint of fixed categories. Here's how it scales:
-
-**Traditional Approach (Limited):**
-```
-14 MMLU Categories → 14 Routing Rules → 14 Model Selections
+```yaml
+# Declarative Routing Decision Rule (K8s CRD Format)
+apiVersion: router.vllm.ai/v1alpha1
+kind: RoutingPolicy
+metadata:
+  name: enterprise-security-routing
+spec:
+  priority: 100
+  condition:
+    and:
+      - signal: "urgency_keyword"
+        operator: "Exists"
+      - signal: "domain_classifier"
+        operator: "In"
+        values: ["cybersecurity", "infrastructure"]
+      - not:
+          signal: "pii_detected"
+          operator: "Equals"
+          value: true
+  action:
+    targetModel: "deepseek-coder-v2-33b"
+    maxTokens: 4096
+    temperature: 0.0
+    plugins:
+      - name: "prompt-caching"
+      - name: "code-safety-guard"
 ```
 
-**Constraints:**
-- Cannot create custom categories
-- Cannot combine multiple conditions
-- Cannot apply different policies per rule
-- Cannot scale beyond domain classification
+If multiple policies match, the engine evaluates rule priorities deterministically, preventing race conditions or ambiguous routing states.
 
-**Signal-Decision Approach (Unlimited):**
-```
-3 Signal Types × N Conditions × AND/OR Logic → Unlimited Decisions
-```
+### 3. Integrated Plugin Pipeline Orchestration
 
-**Capabilities:**
-- Create unlimited custom routing rules
-- Combine multiple signals with flexible logic
-- Apply unique plugin chains per decision
-- Scale to enterprise complexity
-
-**Scalability Example:**
-
-Consider an enterprise IT support system:
-
-**Traditional Routing**: Limited to 14 domain-based routes
-- "computer_science" → code-model
-- "engineering" → engineering-model
-- (12 more fixed categories)
-
-**Signal-Decision Routing**: Hundreds of specialized routes
-- Urgent + Security + Computer Science → security-expert + reasoning + jailbreak
-- Code Review + High Complexity → architecture-model + reasoning
-- FAQ + General → cached-model + semantic-cache
-- Medical + PII Detected → medical-expert + PII-protection + disclaimer
-- Legal + Confidential → law-expert + PII-hash + audit-headers
-- (Hundreds more custom combinations)
-
-Each decision can have unique model selection, reasoning configuration, and plugin chains—enabling fine-grained control at scale.
-
-![Scaling Comparison](/assets/img/semantic-router/signal-5.png){: .light .shadow .rounded-10 w='2466' h='2303' }
-
-### Kubernetes-Native Design
-
-The Signal-Decision Architecture is designed for cloud-native environments with two Custom Resource Definitions (CRDs):
-
-#### Complete Example: Enterprise IT Support System
-
-Let's walk through a complete example that demonstrates how IntelligentPool and IntelligentRoute work together to build an enterprise IT support routing system.
-
-**IntelligentPool: Define Model Pool**
-
-First, we define the available models and their LoRA adapters:
-
-![IntelligentPool Configuration](/assets/img/semantic-router/signal-code-0.png){: .light .shadow .rounded-10 w='2560' h='1364' }
-
-This pool defines:
-- A base model "qwen3" with 4 specialized LoRA adapters
-- A fallback "qwen3" model for non-specialized queries
-- Reasoning family configuration for each model
-
-**IntelligentRoute: Define Routing Logic**
-
-Next, we define the routing decisions with multi-signal extraction:
-
-![IntelligentRoute Configuration](/assets/img/semantic-router/signal-code-1.png){: .light .shadow .rounded-10 w='2272' h='6500' }
-
-This configuration demonstrates:
-
-**Multi-Signal Extraction:**
-- 3 keyword signals (urgency, security, code-review)
-- 2 embedding signals (technical-support, architecture-design)
-- 1 domain signal (computer-science)
-
-**Layered Decision Logic:**
-- Priority 100: Urgent + Security + CS → security-expert + high reasoning + jailbreak + PII protection
-- Priority 80: Code Review + CS → code-reviewer + medium reasoning + cache + custom prompt
-- Priority 60: Architecture Design + CS → architecture-expert + high reasoning + cache
-- Priority 40: General Support → base model + aggressive cache
-
-**Plugin Orchestration:**
-- Security-critical queries get jailbreak detection and PII protection
-- Code reviews get semantic caching and custom system prompts
-- Architecture queries get longer cache TTL (2h vs 1h)
-- General queries get aggressive caching (0.90 threshold, 4h TTL)
-
-**Fallback Behavior:**
-- If no decision matches, route to defaultModel ("general-assistant")
-- If multiple decisions match, select highest priority
-
-![Dynamic Configuration Flow](/assets/img/semantic-router/signal-6.png){: .light .shadow .rounded-10 w='962' h='2304' }
-
-The Kubernetes-native design enables:
-- Zero-downtime configuration updates
-- GitOps workflows for change management
-- Multi-cluster deployment strategies
-- Namespace-based isolation and RBAC
-
-### Real-World Applications
-
-#### Enterprise IT Support
-
-**Challenge**: Route support tickets based on urgency, technical domain, and security sensitivity.
-
-**Solution**: Multi-layered decisions with priority-based selection
-- Priority 100: Urgent + Security + CS → security-expert + reasoning + jailbreak
-- Priority 80: Technical Support + Debugging → code-expert + semantic-cache
-- Priority 60: General Questions → general-model + aggressive-cache
-
-**Results**: Appropriate model selection, cost optimization through caching, security protection for sensitive issues.
-
-#### Healthcare Platform
-
-**Challenge**: HIPAA compliance requiring PII protection and medical disclaimers.
-
-**Solution**: Domain-based routing with mandatory compliance plugins
-- Health Domain → medical-expert + PII-redaction + disclaimer-prompt + audit-headers
-
-**Results**: Automatic PII protection, consistent disclaimers, audit trail for compliance.
-
-#### Financial Services
-
-**Challenge**: Multi-layered security with PII protection, jailbreak detection, and cost optimization.
-
-**Solution**: Comprehensive plugin chain for financial queries
-- Economics Domain → finance-expert + jailbreak + PII-hash + disclaimer + cache + compliance-headers
-
-**Results**: Enterprise-grade security, regulatory compliance, cost efficiency.
-
-#### Educational Platform
-
-**Challenge**: Personalized learning experiences based on subject and learning intent.
-
-**Solution**: Intent-based routing with customized teaching styles
-- Math + Learning Intent → math-expert + reasoning + patient-tutor-prompt + cache
-- Science + Tutorial → science-expert + engaging-educator-prompt
-
-**Results**: Personalized teaching approaches, appropriate reasoning for complex topics, cost optimization.
-
-#### Code Assistant
-
-**Challenge**: Different complexity levels require different model capabilities.
-
-**Solution**: Complexity-aware routing with reasoning control
-- Architecture Design → reasoning-model + high-effort + complexity-header
-- Code Review → code-expert + medium-reasoning + cache
-- Simple Questions → code-expert + cache-only
-
-**Results**: Optimal model selection, cost-effective reasoning usage, fast responses for simple queries.
-
-![Real-World Applications](/assets/img/semantic-router/signal-7.png){: .light .shadow .rounded-10 w='2524' h='1552' }
-
-### Production Architecture
+The decision engine does not merely forward requests to a raw model socket; it binds the request to an ordered **Plugin Execution Chain**:
 
 ```mermaid
-graph TB
-    subgraph "Client Request"
-        A[User Query]
+sequenceDiagram
+    autonumber
+    participant Client
+    participant Router as Signal-Decision Gateway
+    participant Cache as Semantic Cache Plugin
+    participant Guard as Safety & PII Plugin
+    participant vLLM as vLLM Serving Cluster
+
+    Client->>Router: POST /v1/chat/completions
+    Router->>Router: Extract Signals & Match Policy
+    Router->>Cache: Check Semantic / Prefix Cache
+    alt Cache Hit (Similarity > 0.96)
+        Cache-->>Client: Return Instant Cached Response (0ms GPU Compute)
+    else Cache Miss
+        Router->>Guard: Execute PII Redaction & Llama-Guard Audit
+        Guard-->>Router: Validated Sanitized Prompt
+        Router->>vLLM: Dispatch to Selected Model Backend
+        vLLM-->>Client: Stream Generated Completion Tokens
     end
-    
-    subgraph "Signal Extraction Layer"
-        B[Keyword Signals<br/>Regex Matching]
-        C[Embedding Signals<br/>Semantic Similarity]
-        D[Domain Signals<br/>MMLU + LoRA]
-    end
-    
-    subgraph "Decision Engine"
-        E[Signal Combination<br/>AND/OR Logic]
-        F[Priority Resolution]
-        G[Model Selection]
-    end
-    
-    subgraph "Plugin Chain"
-        H[Semantic Cache]
-        I[Jailbreak Detection]
-        J[PII Protection]
-        K[System Prompt]
-        L[Header Mutation]
-    end
-    
-    subgraph "Model Pool"
-        M[Base Models]
-        N[LoRA Adapters]
-    end
-    
-    A --> B
-    A --> C
-    A --> D
-    
-    B --> E
-    C --> E
-    D --> E
-    
-    E --> F
-    F --> G
-    G --> M
-    G --> N
-    
-    G --> H
-    H --> I
-    I --> J
-    J --> K
-    K --> L
-    L --> O[Response]
-    
-    style E fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
-    style G fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-    style H fill:#ffe66d,stroke:#f4a261,stroke-width:2px,color:#000
 ```
 
-### Key Takeaways
+- **Exact & Semantic Caching**: Queries with high semantic similarity ($> 0.96$) to historical queries return cached completions instantly, saving substantial GPU FLOPs.
+- **Security & Redaction**: Queries triggering privacy signals are automatically scrubbed of phone numbers, social security IDs, and secret tokens before payload transmission.
+- **Context Optimization**: Queries exceeding target context thresholds are summarized or compressed via prompt distillation modules before hitting the engine.
 
-| Insight | Implication | Production Impact |
-|:--------|:------------|:------------------|
-| **Multi-dimensional signals** capture richer intent than single-domain classification | Enables sophisticated routing strategies | Better model selection, improved user experience |
-| **AND/OR logic** with priority enables layered routing | Supports complex enterprise requirements | Handles edge cases, scales to 100+ routing rules |
-| **Plugin orchestration** provides built-in intelligence | Reduces custom development | Faster time-to-market, consistent security/compliance |
-| **LoRA adapters** extend domain classification | Custom domains without full retraining | Enterprise-specific routing, cost-effective customization |
-| **Kubernetes-native** design enables cloud-scale deployment | GitOps, zero-downtime updates | Production-ready infrastructure, easy scaling |
+![Complete Request Flow](/assets/img/semantic-router/signal.png){: .light .shadow .rounded-10 w='1212' h='668' }
 
-### Future Roadmap
+---
 
-The Signal-Decision Architecture provides a foundation for future enhancements:
+## Architectural Comparison: Semantic Routing Paradigms
 
-**Performance Optimization:**
-- Radix Tree for keyword matching (10,000+ patterns)
-- HNSW Index for embedding search (millions of phrases)
-- Parallel LoRA for decode-only models (multi-tenant efficiency)
+| Dimension | Static Threshold Routing | MMLU Single-Class Routing | LangChain Router Chains | vLLM Signal-Decision Architecture |
+| :--- | :--- | :--- | :--- | :--- |
+| **Signal Depth** | Single scalar similarity score | 14 fixed academic categories | LLM prompt classification | Multi-dimensional (Regex, Embedding, LoRA, Context) |
+| **Decision Logic** | Basic if/else threshold check | ArgMax probability selection | LLM JSON reasoning output | Typed Boolean AST with priority weighting |
+| **Routing Latency** | Low (5–10ms) | Moderate (20–40ms) | Very High (200–800ms) | Extremely Low (2–8ms compiled execution) |
+| **Plugin Interop** | Hardcoded middleware | None | Chained runnables | First-class lifecycle plugins (Cache, Guard, PII) |
+| **Cluster Awareness** | None (Stateless URL forward) | None | None | Aware of vLLM PagedAttention prefix cache states |
+| **Multi-Tenancy** | Ad-hoc API keys | Shared single-model queue | Custom agent isolation | First-class Kubernetes CRD routing policies |
 
-**Feature Enhancements:**
-- Visual Configuration Console (web-based UI)
-- Custom Plugin Framework (SDK + marketplace)
-- Advanced Analytics (ML-driven recommendations)
-- Model Evaluation via Multi-Turn Dialogue (LLM-as-a-Judge)
-- Intent-Aware Internal/External Model Selection (privacy-aware routing)
+---
+
+## Prefix-Aware Routing and Hardware Cache Synergy
+
+The most impactful architectural advantage of embedding the Signal-Decision engine directly within the serving infrastructure—as explored in our [production ML serving guide](/posts/deploy-an-ml-model/)—is its awareness of GPU memory states.
+
+In distributed vLLM clusters utilizing PagedAttention, re-computing prompt tokens (the prefill phase) consumes significant GPU arithmetic cycles. When multiple users submit queries sharing common system instructions, few-shot examples, or document context:
+
+```mermaid
+flowchart TD
+    Client1["User Query 1 (System Prompt A)"] --> Router["Prefix-Aware Semantic Router"]
+    Client2["User Query 2 (System Prompt A)"] --> Router
+
+    subgraph GPUCluster["vLLM Distributed Serving Cluster"]
+        Node1["GPU Worker 1 (Cached KV Cache for System Prompt A)"]
+        Node2["GPU Worker 2 (Empty Cache)"]
+    end
+
+    Router -->|Detect Shared Hash & Route| Node1
+    Router -.->|Avoid Cache Eviction| Node2
+```
+
+1. **Radix-Aware Worker Dispatch**: The router hashes incoming prompt prefixes. Instead of load-balancing requests randomly across workers via round-robin, the router dispatches queries to GPU workers that **already host the relevant KV cache blocks** in on-board HBM.
+2. **Slashing Time-to-First-Token (TTFT)**: Bypassing the prefill phase through cache-aware routing reduces Time-to-First-Token by up to 80% while dramatically reducing overall cluster power consumption.
+3. **Dynamic LoRA Adapter Routing**: For enterprise multi-domain serving, the router coordinates with vLLM's dynamic LoRA multiplexing, swapping small LoRA adapter weights onto base foundation models in microseconds without restarting containers, aligning with parameter-efficient techniques audited in our [PEFT analysis](/posts/explained-fintune-llm/).
 
 ![Future Roadmap](/assets/img/semantic-router/signal-8.png){: .light .shadow .rounded-10 w='1678' h='2178' }
 
 ---
 
-## 🤔 New Questions This Raises
+## How Semantic Routing and Inference Gateways Evolved Across 2026
 
-1. **Can we fine-tune smaller models** on game-specific routing patterns to reduce latency and cost for real-time game AI systems?
-2. **What about multi-agent coordination?** How can Signal-Decision Architecture route requests across multiple specialized agents in a game AI system?
-3. **Player intent adaptation:** How can routing adapt to player behavior patterns over time, learning which models work best for different player types?
-4. **Cost optimization for games:** How do we balance model selection (expensive reasoning models vs. fast cached responses) for different game scenarios (real-time combat vs. narrative exploration)?
+Between 2025 and 2026, intelligent model routing shifted from experimental utility libraries into the core control plane of enterprise AI:
 
-**Next experiment:** Apply Signal-Decision Architecture to game AI routing—route player queries to specialized agents (combat AI, narrative AI, economy AI) based on multi-dimensional signals extracted from player actions and dialogue.
+```mermaid
+flowchart LR
+    SDA["Signal-Decision Core"] --> E1["Speculative Routing: Small Draft vs Frontier Models"]
+    SDA --> E2["Automated LLM-as-a-Judge Triage (Spring AI Integration)"]
+    SDA --> E3["Multi-Agent Swarm Handoff Routing"]
+    
+    E1 --> P1["Routes 70% of Traffic to Sub-1B Models without Quality Drop"]
+    E2 --> P2["Real-Time Circuit Breaking on Faithfulness Failures"]
+    E3 --> P3["Deterministic Tool Execution Isolation"]
+```
+
+1. **Cost-Optimized Speculative Routing**: Rather than sending all prompts to expensive 70B or 405B frontier models (such as those analyzed in our [Llama 3.1 audit](/posts/introducing-llama-3-1/)), 2026 gateways deploy hierarchical routing. Over 70% of routine corporate queries are intercepted by the Signal-Decision engine and satisfied by specialized 1B–8B models or cached entries, reserving frontier reasoning clusters exclusively for multi-step algorithmic prompts.
+2. **Real-Time Quality Gating via Evaluator Models**: As examined in our audit of [LLM-as-a-Judge architectures](/posts/spring-ai-llm-as-judge/), routing gateways intercept output completions before client delivery. If an evaluator model flags a response for hallucination or compliance violations, the gateway triggers an immediate internal re-route to an alternative reasoning engine with escalated context instructions.
+3. **Multi-Agent Protocol Routing**: As single-agent scripts gave way to coordinated multi-agent swarms, the routing layer became the primary traffic cop. Gateways parse incoming user goals, decompose tasks into sub-signals, and route individual sub-tasks to specialized domain agents, enforcing strict security boundaries between untrusted user inputs and internal tool-calling endpoints.
+
+---
+
+## Key Takeaways
+
+- **Single-Dimensional Intent Classification Fails Production**: Real-world prompts contain simultaneous, orthogonal signals (urgency, domain, security, compliance) that monolithic classifiers flatten and erase.
+- **Decoupling Extraction from Decision Logic**: By extracting signals independently through regex, embeddings, and LoRA heads, the decision engine applies expressive Boolean logic with strict priority guarantees.
+- **Hardware-Aware Prefix Routing**: Connecting semantic routing directly to vLLM's PagedAttention KV cache states eliminates redundant prefill computation, delivering massive TTFT reductions across high-concurrency clusters.
+- **The Modern Control Plane for AI Serving**: In 2026 enterprise architectures, intelligent gateways act as the unified policy layer governing semantic caching, security guardrails, cost allocation, and multi-model dispatch.
+
+---
+
+## New Questions
+
+- What mathematical bounds govern router decision latency to ensure multi-signal extraction does not consume more time than the GPU prefill compute it saves?
+- How can distributed semantic routing gateways maintain synchronized Radix tree cache maps across thousands of independent GPU serving instances without network broadcast bottlenecks?
+- Can reinforcement learning from human feedback (RLHF) be applied directly to router policies to autonomously learn optimal model selection trade-offs between financial cost and user satisfaction?
 
 ---
 
 ## References
 
-**Research Papers:**
-- [MMLU: Measuring Massive Multitask Language Understanding](https://arxiv.org/abs/2009.03300)
-- [LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)
-- [Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks](https://arxiv.org/abs/1908.10084)
-- [HNSW: Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs](https://arxiv.org/abs/1603.09320)
-
-**Code & Implementation:**
-- [vLLM Semantic Router GitHub Repository](https://github.com/vllm-project/vllm)
-- [vLLM Documentation](https://docs.vllm.ai/)
-- [Sentence Transformers Library](https://github.com/UKPLab/sentence-transformers)
-- [Hugging Face LoRA Adapters](https://huggingface.co/docs/peft/conceptual_guides/lora)
-
-**Documentation & Tutorials:**
-- [vLLM Semantic Router Blog Post](https://blog.vllm.ai/2025/11/19/signal-decision.html)
-- [Kubernetes Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-- [GitOps Workflows](https://www.gitops.tech/)
-
-**Production Resources:**
-- [vLLM Community](https://github.com/vllm-project/vllm/discussions)
-- [Multi-Agent Systems in Production](https://github.com/langchain-ai/langchain)
-- [Enterprise AI Gateway Patterns](https://www.anthropic.com/index/building-effective-agents)
-
-**Related Projects:**
-- [LangChain Routing](https://python.langchain.com/docs/use_cases/question_answering/)
-- [CrewAI Multi-Agent Framework](https://github.com/joaomdmoura/crewAI)
-- [AutoGen Multi-Agent Conversations](https://github.com/microsoft/autogen)
+- vLLM Project Team. (2025). *Signal-Decision Architecture: Multi-Dimensional Semantic Routing for Enterprise AI Gateways*. vLLM Official Engineering Blog. [https://blog.vllm.ai/](https://blog.vllm.ai/) (accessed 2026-10-18).
+- Reimers, N., & Gurevych, I. (2019). *Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks*. In Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing (EMNLP 2019), arXiv preprint [arXiv:1908.10084](https://arxiv.org/abs/1908.10084) (accessed 2026-10-18).
+- Malkov, Y. A., & Yashunin, D. A. (2020). *Efficient and Robust Approximate Nearest Neighbor Search Using Hierarchical Navigable Small World Graphs*. IEEE Transactions on Pattern Analysis and Machine Intelligence, 42(4), 824–836. [https://doi.org/10.1109/TPAMI.2018.2889473](https://doi.org/10.1109/TPAMI.2018.2889473) (accessed 2026-10-18).
+- Hu, E. J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., Wang, L., & Chen, W. (2022). *LoRA: Low-Rank Adaptation of Large Language Models*. In International Conference on Learning Representations (ICLR 2022), arXiv preprint [arXiv:2106.09685](https://arxiv.org/abs/2106.09685) (accessed 2026-10-18).

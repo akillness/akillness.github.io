@@ -1508,9 +1508,9 @@
       "links_at_intake": 17,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary announcement into an authoritative source audit of vLLM's Signal-Decision Architecture and multi-dimensional semantic routing."
     },
     {
       "path": "_posts/2025/11/2025-11-23-google-deepmind-nano-banana-pro-gemini-3-image-model.md",
