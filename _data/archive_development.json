@@ -4168,9 +4168,9 @@
         "no-sources",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial 10-step list into exhaustive systems audit on ML data quality: data contracts, streaming Flink schema validation, PSI distribution drift, and train-serve feature store governance"
     },
     {
       "path": "_posts/2024/08/2024-08-03-apple-intelligence-paper.md",
