@@ -3584,9 +3584,9 @@
       "flags": [
         "created-by-attribution"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from Korean glossary note into comprehensive source audit on foundation model architectures, multi-token prediction, and alignment terminology"
     },
     {
       "path": "_posts/2024/05/2024-05-11-algorithm-st-1.md",
