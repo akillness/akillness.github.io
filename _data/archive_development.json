@@ -1774,9 +1774,9 @@
       "links_at_intake": 2,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on ClawHost, automated VPS infrastructure provisioning, dedicated hardware isolation, and multi-channel agent gateways"
     },
     {
       "path": "_posts/2026/02/2026-02-18-microgpt-learning-guide.md",
