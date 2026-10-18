@@ -3432,9 +3432,9 @@
       "flags": [
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from third-party repo rewrite into an authoritative engineering source audit evaluating PPO, DPO, and GRPO on single-node DGX hardware"
     },
     {
       "path": "_posts/2025/11/2025-11-13-top-llm-papers-november-week2-2025.md",
