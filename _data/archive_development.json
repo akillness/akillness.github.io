@@ -3745,9 +3745,9 @@
         "korean-heavy",
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial library listicle into comprehensive technical source audit on the CASH problem, Bayesian optimization, multi-layer stacking, and agentic ML engineering"
     },
     {
       "path": "_posts/2024/06/2024-06-30-reinforcement-learning-top-40-libraries.md",

@@ -1,288 +1,171 @@
 ---
-title: AutoML Applications, Advantages and Top 30 Libraries 📚
-description: "AutoML transforms ML workflows, boosting efficiency and innovation."
-categories: [Data Science/Algorithms]
-tags: [Data Science, Algorithm, Analysis]
+title: "AutoML Architecture and the CASH Problem: From Bayesian Search to LLM Agents"
+description: "A source audit analyzing Automated Machine Learning frameworks, the CASH problem, Bayesian optimization, neural architecture search, and modern agentic ML."
+categories: [AI, Tooling]
+tags: [automl, bayesian-optimization, cash-problem, neural-architecture-search, mlops]
 date: 2024-06-02 23:00:00 +0800
-image:
-  path: /assets/img/news/AutoML_Top_30_Libraries.jpeg
-  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt:
-  - AutoML Advantages and Top 30 Libraries
-# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: true
-ads: false
-restored_archive: "2026-10-12"
+last_modified_at: 2026-10-18 14:00:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from superficial library listicle into comprehensive technical source audit on the CASH problem, Bayesian optimization, multi-layer stacking, and agentic ML engineering"
 ---
-AutoML transforms ML workflows, boosting efficiency and innovation. 
 
-* * *
+![AutoML Architecture and Top Frameworks](/assets/img/news/AutoML_Top_30_Libraries.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
-## Application in Data Science
+## How Does Automated Machine Learning Solve the Combined CASH Problem?
 
-#### 1. Exploratory Data Analysis (EDA)
-- ⭒ Initial Model Benchmarking
-- ⭒ Feature Importance
+Building competitive machine learning pipelines traditionally demanded extensive trial-and-error by human practitioners. Selecting appropriate imputation strategies, encoding categorical features, picking classification or regression algorithms, tuning continuous hyperparameters, and assembling multi-model blends required weeks of empirical experimentation. 
 
-#### 2. Model Development
-- ⭒ Rapid Prototyping
-- ⭒ Hyperparameter Tuning
+Automated Machine Learning (AutoML) arose to formalize this workflow into a mathematically rigorous optimization problem. Rather than treating pipeline configuration as an artisanal craft, AutoML frames end-to-end model creation as a search problem over high-dimensional, mixed-type, conditional search spaces. 
 
-#### 3. Model Selection
-- ⭒ Comparison of Algorithms
+Early discourse often reduced AutoML to superficial library catalogs. In enterprise production, however, engineering teams must evaluate the underlying algorithmic trade-offs: how search algorithms navigate non-convex loss landscapes, how multi-fidelity schedulers prune unpromising candidates, and how modern agentic workflows synthesize bespoke code rather than searching fixed parameter grids.
 
-#### 4. Deployment and Production
-- ⭒ Automated Pipeline Creation
-- ⭒ Continuous Model Improvement
+```mermaid
+flowchart TD
+    subgraph DataIngest["Input & Preprocessing"]
+        RawData["Raw Tabular / Multimodal Dataset"]
+        AutoPrep["Automated Feature Processing<br/>Imputation, Target Encoding, Scaling, Embeddings"]
+    end
 
-* * *
+    subgraph CASHOpt["The CASH Optimization Engine"]
+        SearchSpace["Conditional Algorithm Space: {GBDT, RF, MLP, SVM, TabNet}"]
+        BayesOpt["SMBO / TPE Optimization<br/>Probabilistic surrogate modeling of validation loss"]
+        Bandits["Multi-Fidelity Pruning<br/>Hyperband & Successive Halving"]
+    end
 
-### Key Advantages
+    subgraph Assembly["Ensembling & Artifact Packaging"]
+        Stacking["Multi-Layer Stacking<br/>Out-of-fold feature concatenation (AutoGluon)"]
+        Caruana["Caruana Ensemble Selection<br/>Greedy selection with replacement"]
+        Deploy["Optimized Inference Artifact<br/>ONNX / TensorRT / Compiled Binary"]
+    end
 
-- ✺ Rapid Development: Accelerates the creation and deployment of models.
+    RawData --> AutoPrep
+    AutoPrep --> SearchSpace
+    SearchSpace <--> BayesOpt
+    BayesOpt <--> Bandits
+    Bandits --> Stacking
+    Bandits --> Caruana
+    Stacking --> Deploy
+    Caruana --> Deploy
+```
 
-- ✺ Accessibility: Makes machine learning approachable for non-experts.
+---
 
-- ✺ Optimized Performance: Enhances model efficacy.
+## Formulating the Combined Algorithm Selection and Hyperparameter Problem
 
-- ✺ Error Reduction: Decreases manual errors in model selection and tuning.
+At the theoretical core of AutoML lies the **Combined Algorithm Selection and Hyperparameter optimization (CASH)** problem, formalized by Thornton et al. (2013). 
 
-- ✺ Scalability & Resource Efficiency: Manages large datasets and optimizes computational resources.
+Given a set of learning algorithms $\mathcal{A} = \{A^{(1)}, A^{(2)}, \dots, A^{(R)}\}$, where each algorithm $A^{(j)}$ possesses a hyperparameter space $\Lambda^{(j)}$, the combined search space is represented as:
 
-- ✺ Innovation: Explores more configurations and algorithms.
+$$\mathbf{\Lambda} = \bigcup_{j=1}^R \left( \{A^{(j)}\} \times \Lambda^{(j)} \right)$$
 
-- ✺ Adaptability: Quickly adjusts to new data, ensuring sustained model performance.
+Given a dataset $D$ partitioned into $K$ cross-validation folds $D_{\text{train}}^{(k)}$ and $D_{\text{val}}^{(k)}$, the CASH objective seeks an optimal algorithm-hyperparameter configuration $A^* \in \mathcal{A}$ and $\lambda^* \in \Lambda^*$ that minimizes the mean generalization loss $\mathcal{L}$:
 
-* * *
+$$A^*, \lambda^* = \arg\min_{A^{(j)} \in \mathcal{A}, \lambda \in \Lambda^{(j)}} \frac{1}{K} \sum_{k=1}^K \mathcal{L}\left(A_{\lambda}^{(j)}, D_{\text{train}}^{(k)}, D_{\text{val}}^{(k)}\right)$$
 
-### Python Libraries
+The mathematical challenge stems from three properties:
+1. **Hierarchical / Conditional Dependencies**: Hyperparameters of a decision tree (e.g., `max_depth`, `min_samples_leaf`) have zero effect if the outer algorithm selector chooses a Support Vector Machine.
+2. **Expensive Black-Box Evaluations**: Evaluating $\mathcal{L}(A_{\lambda}^{(j)})$ requires full model training and validation, which may consume hours on modern datasets.
+3. **Non-Differentiability**: The algorithm index $j$ is categorical and discrete, rendering direct gradient descent inapplicable.
 
-#### 📚Auto-Sklearn 
-> Automates scikit-learn model selection and training.
+---
 
-#### 📚TPOT
-> Uses genetic algorithms to optimize machine learning pipelines.
+## Mathematical Optimization Paradigms in AutoML
 
-#### 📚H2O AutoML
-> Automates all steps of the machine learning process.
+AutoML systems deploy distinct algorithmic strategies to navigate the CASH landscape efficiently:
 
-#### 📚AutoKeras
-> Simplifies the use of deep learning models.
+### 1. Sequential Model-Based Optimization (SMBO) and TPE
 
-#### 📚MLBox
-> Fast data reading and distributed preprocessing.
+SMBO approximates the true expensive black-box function $\mathcal{L}(\lambda)$ with an inexpensive probabilistic surrogate model $\hat{f}(\lambda)$. Popularized in Auto-Sklearn (Feurer et al.), Bayesian optimization iteratively updates the surrogate and selects the next point via an **Acquisition Function**, typically Expected Improvement (EI):
 
-#### 📚Auto-ViML
-> Minimal coding for high-performance models.
+$$\text{EI}(\lambda) = \mathbb{E}\left[ \max(0, f_{\min} - f(\lambda)) \right]$$
 
-#### 📚TransmogrifAI
-> Automates workflows on Apache Spark.
+Rather than modeling the posterior $p(y \mid \lambda)$ using computationally intensive Gaussian Processes (which scale cubically as $\mathcal{O}(N^3)$ with evaluated configurations), Tree-structured Parzen Estimators (TPE, Bergstra et al.) invert the conditioning via Bayes' rule:
 
-#### 📚FLAML
-> Finds accurate models with minimal computational cost.
+$$p(\lambda \mid y) = \begin{cases} \ell(\lambda) & \text{if } y < y^* \\ g(\lambda) & \text{if } y \ge y^* \end{cases}$$
 
-#### 📚Ludwig
-> Builds models using configuration files, no coding required.
+Where $y^*$ is a quantile threshold of historical validation losses. TPE maximizes the ratio $\ell(\lambda) / g(\lambda)$, focusing evaluations on regions with high probability of outperforming the best current validation score while exploring under-sampled domains. As explored in our survey of [foundational algorithms](/posts/10-core-algorithms/), efficient parameter space partitioning is essential for scaling search in high-dimensional domains.
 
-#### 📚GAMA
-> Flexible AutoML pipeline support.
+---
 
-#### 📚HyperoptSklearn
-> Hyperparameter tuning for sklearn pipelines.
+### 2. Multi-Fidelity Optimization: Successive Halving and Hyperband
 
-#### 📚AutoGluon
-> Simplifies deep learning tasks.
+Bayesian optimization spends considerable compute running unpromising configurations to completion. Multi-fidelity algorithms (Li et al., 2017) introduce early-stopping schedulers based on resource allocations (subsets of training data, epoch counts, or tree iterations):
 
-#### 📚NNI
-> Comprehensive feature engineering and model tuning tools.
+```
+Round 0: 81 configurations evaluated on 1 epoch   ────► [Prune bottom 66%]
+Round 1: 27 configurations evaluated on 3 epochs  ────► [Prune bottom 66%]
+Round 2:  9 configurations evaluated on 9 epochs  ────► [Prune bottom 66%]
+Round 3:  3 configurations evaluated on 27 epochs ────► [Prune bottom 66%]
+Round 4:  1 winning configuration evaluated on 81 epochs
+```
 
-#### 📚PyCaret
-> Low-code library that automates the ML workflow.
+By allocating small resource slices to many candidates and geometrically scaling budgets only for top performers, Hyperband achieves up to an order-of-magnitude speedup over pure random search or Gaussian Process optimization.
 
-#### 📚Merlion
-> Focuses on time series machine learning.
+---
 
-#### 📚ZenML
-> Builds production-ready MLOps pipelines.
+### 3. Multi-Layer Stacking Without Search: The AutoGluon Paradigm
 
-#### 📚Auto-PyTorch
-> Automated architecture and hyperparameter optimization for PyTorch.
+In contrast to iterative search systems, AutoGluon (Erickson et al., 2020) shifts the design philosophy from hyperparameter search toward **multi-layer stacking with out-of-fold representations**.
 
-#### 📚Statsforecast
-> Fast forecasting for statistical models.
+Rather than searching for a single best hyperparameter configuration, AutoGluon trains a diverse suite of un-tuned or lightly tuned baseline models (LightGBM, CatBoost, XGBoost, TabNet, Random Forests) across cross-validation folds. The out-of-fold validation predictions serve as auxiliary input features for stacked downstream layers:
 
-#### 📚Adanet
-> Automates learning of neural networks.
+$$\mathbf{x}_{\text{layer } l+1} = \left[ \mathbf{x}_{\text{raw}} \,\|\, \hat{\mathbf{y}}_1^{(l)} \,\|\, \hat{\mathbf{y}}_2^{(l)} \,\|\, \dots \,\|\, \hat{\mathbf{y}}_M^{(l)} \right]$$
 
-#### 📚Igel
-> Enables model operations without coding.
+By concatenating raw features with intermediate model probability distributions across multiple layers and finishing with an ensemble selection step, AutoGluon consistently wins competitive tabular benchmarks without getting trapped in expensive hyperparameter optimization loops. This paradigm closely aligns with modern data warehousing and feature extraction standards analyzed in our [data engineering stack architecture review](/posts/explore-the-landscape-of-open-source-data-engineering/).
 
-#### 📚MLJAR Supervised
-> Automates ML tasks on tabular data.
+---
 
-#### 📚Keras Tuner
-> Hyperparameter tuning for Keras.
+## Architectural Comparison of Production AutoML Frameworks
 
-#### 📚Lazy Predict
-> Quickly builds and compares basic models.
+| Framework | Core Optimization Paradigm | Tabular Strength | Deep Learning / Multimodal | Ensembling Mechanism | Primary Bottleneck |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **AutoGluon** | Multi-layer stacking + Caruana post-fit | **State-of-the-art** | High (Text/Image/Tabular) | Multi-layer out-of-fold stacking | High RAM footprint during multi-model fitting |
+| **Auto-Sklearn 2.0** | SMAC / Bayesian SMBO + Meta-learning | Strong | Limited (Sklearn wrapper) | Greedy ensemble selection | Slow on large datasets (> 1M rows) |
+| **FLAML (Microsoft)** | Cost-FOCUSED economic search (CFO) | High (Fast GBDTs) | Moderate (HuggingFace tuning) | Blended search + weighted average | Limited native deep architecture search |
+| **H2O AutoML** | Random search + Stacked Ensembles | Strong | Moderate (Deep Water) | Super Learner stacking | JVM dependency, memory overhead |
+| **TPOT** | Genetic programming (NSGA-II) | Moderate | None (Sklearn pipelines) | Pareto-optimal pipeline export | Computationally expensive evolution cycles |
 
-#### 📚SparseML
-> Creates smaller, faster neural networks.
+---
 
-#### 📚PySR
-> Python and Julia-based symbolic regression.
+## Production Deployment and MLOps Considerations
 
-#### 📚Metarank
-> Personalizes rankings with machine learning.
+Deploying automated pipelines into production environments introduces challenges not present in manual model development:
 
-#### 📚AutoML-Zero
-> Evolves ML algorithms from scratch.
+1. **Pipeline Serialization Fragility**: AutoML frameworks construct complex directed acyclic graphs (DAGs) containing multi-stage imputers, encoders, and nested models. Exporting these artifacts into standard formats (ONNX, PMML) often fails due to custom Python lambda transforms.
+2. **Inference Latency Bloat**: Ensembles containing 20 distinct Gradient Boosted Decision Trees and multi-layer perceptrons produce high accuracy but unacceptable latency (> 100 ms) for real-time recommendation engines. Productionization requires knowledge distillation—compressing the AutoML ensemble into a single fast student model, a dynamic examined in our [machine learning engineering concepts audit](/posts/machine-learning-interview-questions/).
+3. **Data Drift and Retraining Instability**: Because AutoML engines pick algorithm classes dynamically, retraining an AutoML pipeline on drifted production data may unexpectedly swap an interpretable Linear Model for an opaque GBDT, introducing compliance and monitoring challenges.
 
-#### 📚AutoML for Images
-> Specializes in automating image data workflows.
+---
 
-#### 📚NNI
-> Integrates with ML frameworks for comprehensive automation.
+## How AutoML Evolved Across 2026
 
-#### 📚AutoGL
-> Tackles graph-based problems with automation.
+By 2026, the classical definition of AutoML expanded beyond mathematical parameter search into autonomous LLM-driven software engineering:
 
+1. **LLM-Driven Code Synthesizers (Agentic AutoML)**: Autonomous coding agents (such as SWE-bench and AutoKaggle frameworks) iteratively write, execute, inspect, and debug end-to-end Python ML scripts. Rather than picking from hardcoded libraries, agents invent bespoke domain-specific feature transforms, verify syntax against execution errors, and inspect diagnostic residual plots.
+2. **Foundation Model Tabular Zero-Shot Transfer**: Transformers pre-trained across thousands of diverse tabular datasets (e.g., TabPFN and successor tabular foundation models) predict class distributions via in-context learning in a single forward pass (< 1 second), completely eliminating both training loops and hyperparameter tuning for datasets under 50,000 samples.
+3. **Automated Multimodal Fusion**: Modern AutoML engines automatically identify image columns, audio streams, unstructured text, and numerical tables within single relational databases, routing each modality to pre-trained frozen backbones before performing cross-attention fusion.
 
-<details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+---
 
-AutoML은 ML 워크플로를 혁신하여 효율성과 혁신을 촉진합니다. 
+## Key Takeaways
 
-* * *
+- **The Power of Stacking Over Tuning**: Multi-layer model stacking with cross-validated out-of-fold predictions (as demonstrated by AutoGluon) consistently outperforms exhaustive hyperparameter tuning of single algorithms.
+- **Multi-Fidelity Resource Allocation Is Mandatory**: Modern datasets cannot afford exhaustive black-box evaluations; successive halving and Hyperband are essential to prune unpromising candidates early.
+- **The Shift to Agentic ML Engineering**: The future of AutoML belongs not to rigid hyperparameter grids, but to autonomous code-generating agents capable of formulating hypotheses, testing feature transformations, and refactoring ML pipelines programmatically.
 
-## 데이터 과학의 응용
+---
 
-#### 1. 탐색적 데이터 분석(EDA)
-- ⭒ 초기 모델 벤치마킹
-- ⭒ 기능 중요도
+## New Questions
 
-#### 2. 모델 개발
-- ⭒ 신속한 프로토 타이핑
-- ⭒ 하이퍼파라미터 튜닝
+- At what dataset scale do tabular foundation models (in-context TabPFN architectures) surpass the empirical accuracy of multi-layer GBDT stacking ensembles?
+- How can organizations ensure regulatory explainability (e.g., EU AI Act compliance) when autonomous agentic AutoML pipelines invent complex synthetic features dynamically?
 
-#### 3. 모델 선택
-- ⭒ 알고리즘 비교
+---
 
-#### 4. 배포 및 생산
-- ⭒ 자동화된 파이프라인 생성
-- ⭒ 지속적인 모델 개선
+## References
 
-* * *
-
-#### 핵심 장점
-
-- ✺ 신속한 개발: 모델의 생성 및 배포를 가속화합니다.
-
-- ✺ 접근성: 비전문가도 기계 학습에 쉽게 접근할 수 있습니다.
-
-- ✺ 최적화된 성능: 모델 효율성을 향상시킵니다.
-
-- ✺ 오류 감소: 모델 선택 및 튜닝에서 수동 오류를 줄입니다.
-
-- ✺ 확장성 및 리소스 효율성: 대규모 데이터 세트를 관리하고 컴퓨팅 리소스를 최적화합니다.
-
-- ✺ 혁신: 더 많은 구성과 알고리즘을 탐색합니다.
-
-- ✺ 적응성: 새로운 데이터에 빠르게 적응하여 지속적인 모델 성능을 보장합니다.
-
-* * *
-
-### Python 라이브러리
-
-#### 📚Auto-Sklearn
-> scikit-learn 모델 선택 및 학습을 자동화합니다.
-
-#### 📚TPOT
-> 유전 알고리즘을 사용하여 기계 학습 파이프라인을 최적화합니다.
-
-#### 📚H2O AutoML
-> 기계 학습 프로세스의 모든 단계를 자동화합니다.
-
-#### 📚AutoKeras
-> 딥 러닝 모델의 사용을 단순화합니다.
-
-#### 📚MLBox 
-> 빠른 데이터 읽기 및 분산 전처리.
-
-#### 📚Auto-ViML
-> 고성능 모델을 위한 최소한의 코딩.
-
-#### 📚TransmogrifAI
-> Apache Spark에서 워크플로를 자동화합니다.
-
-#### 📚FLAML
-> 최소한의 계산 비용으로 정확한 모델을 찾습니다.
-
-#### 📚Ludwig
-> 코딩이 필요 없는 구성 파일을 사용하여 모델을 빌드합니다.
-
-#### 📚GAMA
-> 유연한 AutoML 파이프라인 지원.
-
-#### 📚HyperoptSklearn
-> sklearn 파이프라인에 대한 하이퍼 매개 변수 튜닝.
-
-#### 📚AutoGluon
-> 딥러닝 작업을 단순화합니다.
-
-#### 📚MNI
-> 포괄적인 기능 엔지니어링 및 모델 튜닝 도구.
-
-#### 📚PyCaret
-> ML 워크플로를 자동화하는 로우 코드 라이브러리입니다.
-
-#### 📚Merlion
-> 시계열 기계 학습에 중점을 둡니다.
-
-#### 📚ZenML
-> 프로덕션에 바로 사용할 수 있는 MLOps 파이프라인을 빌드합니다.
-
-#### 📚Auto-PyTorch
-> PyTorch를 위한 자동화된 아키텍처 및 하이퍼파라미터 최적화.
-
-#### 📚Statsforecase
-> 통계 모델에 대한 빠른 예측.
-
-#### 📚Adanet
-> 신경망 학습을 자동화합니다.
-
-#### 📚Igel
-> 코딩 없이 모델 작업을 수행할 수 있습니다.
-
-#### 📚MLJAR Supervised
-> 테이블 형식 데이터에 대한 ML 작업을 자동화합니다.
-
-#### 📚Keras Tuner
-> Keras에 대한 하이퍼 매개 변수 튜닝.
-
-#### 📚Lazy Predict
-> 기본 모델을 빠르게 빌드하고 비교할 수 있습니다.
-
-#### 📚SparseML
-> 더 작고 빠른 신경망을 만듭니다.
-
-#### 📚PySR
-> Python 및 Julia 기반 기호 회귀.
-
-#### 📚Metarank
-> 기계 학습으로 순위를 개인화합니다.
-
-#### 📚AutoML-제로
-> ML 알고리즘을 처음부터 발전시킵니다.
-
-#### 📚이미지용 AutoML
-> 이미지 데이터 워크플로우 자동화를 전문으로 합니다.
-
-#### 📚MNI
-> 포괄적인 자동화를 위해 ML 프레임워크와 통합됩니다.
-
-#### 📚AutoGL
-> 자동화를 통해 그래프 기반 문제를 해결합니다
-
-</details>
+- Thornton, C., Hutter, F., Hoos, H. H., & Leyton-Brown, K. (2013). *Auto-WEKA: Combined Selection and Hyperparameter Optimization of Classification Algorithms*. ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. [https://doi.org/10.1145/2487575.2487629](https://doi.org/10.1145/2487575.2487629) (accessed 2026-10-18).
+- Feurer, M., Klein, A., Eggensperger, K., Springenberg, J., Blum, M., & Hutter, F. (2015). *Efficient and Robust Automated Machine Learning*. Advances in Neural Information Processing Systems, 28. [https://papers.nips.cc/paper/2015/hash/11d0e62e3f23f11e98112f531394e3b9-Abstract.html](https://papers.nips.cc/paper/2015/hash/11d0e62e3f23f11e98112f531394e3b9-Abstract.html) (accessed 2026-10-18).
+- Li, L., Jamieson, K., DeSalvo, G., Rostamizadeh, A., & Talwalkar, A. (2017). *Hyperband: A Novel Bandit-Based Approach to Hyperparameter Optimization*. Journal of Machine Learning Research, 18(1), 6765–6816. [https://jmlr.org/papers/v18/16-558.html](https://jmlr.org/papers/v18/16-558.html) (accessed 2026-10-18).
+- Erickson, N., Mueller, J., Shirkov, A., Zhang, H., Larroy, P., Li, M., & Smola, A. (2020). *AutoGluon-Tabular: Robust and Accurate AutoML for Structured Data*. arXiv preprint arXiv:2003.06505. [https://arxiv.org/abs/2003.06505](https://arxiv.org/abs/2003.06505) (accessed 2026-10-18).
+- Wang, C., Wu, Q., Weimer, M., & Zhu, E. (2021). *FLAML: A Fast and Lightweight AutoML Library*. Proceedings of Machine Learning and Systems, 3, 434–447. [https://proceedings.mlsys.org/paper_files/paper/2021/hash/92cc227532d17e56e07902b254dfad10-Abstract.html](https://proceedings.mlsys.org/paper_files/paper/2021/hash/92cc227532d17e56e07902b254dfad10-Abstract.html) (accessed 2026-10-18).
