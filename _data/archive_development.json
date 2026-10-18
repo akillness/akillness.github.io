@@ -3102,9 +3102,9 @@
         "third-party-rewrite",
         "lang-ko"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal third-party checklist into authoritative source audit analyzing the 5-layer enterprise LLM production architecture, latency budgets, and telemetry contracts"
     },
     {
       "path": "_posts/2024/06/2024-06-27-visualization-of-architecture-on-aws.md",

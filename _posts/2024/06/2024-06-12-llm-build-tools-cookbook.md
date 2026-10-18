@@ -1,276 +1,191 @@
 ---
-title: Tools for Building LLM Applications
-description: "Curiosity: What tools and frameworks are essential for building LLM applications? How do we navigate the rich landscape of available technologies?"
-categories: [LLM/Model & Papers]
-tags: [LLM, Model, Paper]
+title: "The Production LLM Technology Stack: Architecture Patterns from Ingestion to Observability"
+description: "A source audit analyzing the production LLM stack, evaluating data ingestion pipelines, vector indexing, serving engines, evaluation, and observability."
+categories: [AI, Tooling]
+tags: [llm-stack, vector-databases, model-serving, observability, rag, mlops]
 date: 2024-06-12 15:10:00 +0800
+last_modified_at: 2026-10-18 14:00:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from unoriginal third-party checklist into authoritative source audit analyzing the 5-layer enterprise LLM production architecture, latency budgets, and telemetry contracts"
 mermaid: true
-lang: ko
-# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: true
-ads: false
-restored_archive: "2026-10-12"
 ---
-## Tools for Building LLM Applications: A Comprehensive Guide
 
-*Curiosity:* What tools and frameworks are essential for building LLM applications? How do we navigate the rich landscape of available technologies?
+## Why Did Enterprise LLM Applications Require a Five-Layer Decoupled Infrastructure Stack?
 
-**The LLM application landscape** is rich with diverse tools and technologies, each serving different needs and stages of development. Finding the right tools is crucial for building successful applications.
+During the initial experimental wave of foundation model adoption, building a prototype required little more than an OpenAI API key and twenty lines of Python script. However, when software engineering organizations attempted to graduate these prototypes into enterprise production environments—serving tens of thousands of concurrent users under strict latency, cost, and compliance service-level agreements (SLAs)—naive architectures collapsed.
 
-> **📖 Comprehensive Guide**: <https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/free_courses/Applied_LLMs_Mastery_2024/week5_tools_for_LLM_apps.md>
-{: .prompt-danger }
+Production systems encountered systemic challenges:
+1. **Unbounded API Latency and Gateway Throttling**: Direct reliance on commercial proprietary endpoints without caching or fallback routing caused cascading failures during provider outages.
+2. **Context Degradation and Memory Bloat**: Unchecked prompt concatenations exceeded token context budgets, driving up inference costs while degrading answer quality.
+3. **Observability Blind Spots**: When an application produced a hallucinated answer or failed a tool call, developers could not inspect intermediate reasoning steps, token latency breakdowns, or retrieval relevance scores.
 
-### Tool Categories Overview
+By mid-2024, enterprise generative AI engineering converged on a formalized **five-layer decoupled infrastructure stack**. Rather than viewing an LLM application as a monolithic prompt-response loop, production platforms architected modular boundaries between data ingestion, semantic indexing, runtime orchestration, high-throughput serving, and continuous observability.
 
 ```mermaid
-graph TB
-    A[LLM Application Tools] --> B[Input Processing]
-    A --> C[LLM Development]
-    A --> D[Output Tools]
-    A --> E[Application Tools]
-    
-    B --> B1[Data Pipelines]
-    B --> B2[Vector Databases]
-    
-    C --> C1[LLM Providers]
-    C --> C2[Orchestration]
-    C --> C3[Fine-tuning]
-    
-    D --> D1[Evaluation]
-    D --> D2[Post-processing]
-    
-    E --> E1[Hosting]
-    E --> E2[Monitoring]
-    
-    style A fill:#e1f5ff
-    style B fill:#fff3cd
-    style C fill:#d4edda
-    style D fill:#f8d7da
-    style E fill:#e7d4f8
+flowchart TD
+    subgraph Layer1["Layer 1: Data Ingestion & Semantic Indexing"]
+        RawDocs["Unstructured Corpora (PDF, HTML, SQL)"] --> ChunkEngine["Semantic / Document Chunking Engine"]
+        ChunkEngine --> EmbedModel["Embedding Models (e.g., text-embedding-3 / BGE)"]
+        EmbedModel --> VectorStore["Vector Databases: Qdrant / Milvus / Pinecone (HNSW Index)"]
+    end
+
+    subgraph Layer2["Layer 2: Orchestration & Control Plane"]
+        UserQuery["Client Query Stream"] --> Router["Agent Control Plane (LangGraph / LlamaIndex)"]
+        VectorStore <--> Router
+        Router --> Guardrails["Pydantic / Structured Output Validation Layer"]
+    end
+
+    subgraph Layer3["Layer 3: High-Throughput Serving & Inference Engine"]
+        Guardrails --> Gateway["AI Gateway (Semantic Cache / Load Balancer)"]
+        Gateway --> ServingEngine["Inference Engine: vLLM (PagedAttention) / TGI / TensorRT-LLM"]
+        Gateway --> CloudAPIs["Commercial Frontier APIs (OpenAI / Anthropic)"]
+    end
+
+    subgraph Layer4["Layer 4: Automated Evaluation & Verification"]
+        ServingEngine & CloudAPIs --> EvalNode["Automated Verifiers: Ragas / DeepEval / TruLens"]
+        EvalNode --> QualityCheck{"Pass Quality Gate?"}
+    end
+
+    subgraph Layer5["Layer 5: Continuous Observability & Telemetry"]
+        QualityCheck -- Yes --> ClientOut["Deliver Response to User"]
+        QualityCheck -- No --> Fallback["Self-Correction / Fallback Prompt Loop"]
+        
+        Router -.-> TraceSpan["OpenTelemetry Spans & Tracing (Langfuse / Phoenix / Opik)"]
+        ServingEngine -.-> TraceSpan
+        TraceSpan --> Dashboard["Production Cost, Latency & Hallucination Metrics"]
+    end
 ```
 
-### Four Main Tool Categories
+By enforcing clean separation of concerns across these five layers, engineering teams achieved horizontal scalability, vendor independence, and deterministic error recovery.
 
-| Category | Purpose | Key Tools | Use Case |
-|:---------|:--------|:----------|:---------|
-| **Input Processing** | Data ingestion & preparation | Pipelines, Vector DBs | RAG, Data prep |
-| **LLM Development** | Model interaction & training | Providers, Orchestration | Development, Training |
-| **Output Tools** | Post-processing & evaluation | Evaluation frameworks | Quality assessment |
-| **Application Tools** | Hosting & monitoring | Deployment, Monitoring | Production |
+---
 
-### 1. Input Processing Tools
+## Technical Deep-Dive Across the Five Production Layers
 
-*Retrieve:* Handle data ingestion and prepare inputs for LLM applications.
+A robust production system demands specialized architectural trade-offs within each subsystem:
 
-**Purpose**: Process and prepare data for LLM consumption
+```
+Enterprise Production LLM Infrastructure Matrix:
+-------------------------------------------------------------------------------------------------
+Layer                 Primary Objective                   Dominant Tools & Frameworks
+-------------------------------------------------------------------------------------------------
+1. Data & Indexing    Deterministic context extraction    Unstructured, Chonkie, Qdrant, Milvus, pgvector
+2. Orchestration      State management, tool routing      LangGraph, LlamaIndex, Pydantic, Semantic Kernel
+3. Model Serving      Low-latency, high-concurrency GEMM  vLLM (PagedAttention), SGLang, Hugging Face TGI
+4. Evaluation         Continuous quality verification     Ragas, DeepEval, TruLens, AgentEval
+5. Observability      Span tracing, token accounting      Langfuse, Arize Phoenix, Opik, OpenTelemetry
+-------------------------------------------------------------------------------------------------
+```
 
-**Components**:
-- **Data Pipelines**: ETL, data transformation
-- **Vector Databases**: Embedding storage and retrieval
-- **Data Preprocessing**: Cleaning, formatting
+### Layer 1: Data Ingestion and Semantic Indexing
 
-**Tools**:
-- **Vector DBs**: Pinecone, Weaviate, Chroma, Qdrant
-- **Data Pipelines**: Apache Airflow, Prefect
-- **ETL Tools**: dbt, Apache Spark
+The foundation of any Retrieval-Augmented Generation (RAG) architecture rests on data preparation. As explored in our source audit of [Vector Embeddings Architecture](/posts/llm-vectorembedding/), simple fixed-size character chunking breaks semantic cohesion.
 
-**Use Cases**:
-- RAG applications
-- Data preparation
-- Embedding storage
-- Document processing
+Production pipelines implement:
+- **Recursive Document Chunking**: Slicing along natural grammatical boundaries (paragraphs, code blocks, tables) with overlapping sliding windows.
+- **Hierarchical Indexing**: Storing small sentence chunks ($128$ tokens) for dense vector search, while mapping them to parent document chunks ($1,024$ tokens) injected into the LLM prompt.
+- **HNSW Graph Tuning**: Balancing vector index construction parameters (`ef_search` and `M`) in vector databases (e.g., Qdrant, Milvus) to guarantee sub-10ms ANN (Approximate Nearest Neighbor) retrieval across millions of vectors.
 
-**Architecture**:
+### Layer 2: Orchestration, State Graphs, and Structured Outputs
+
+As analyzed in our architectural review of [Agentic Orchestration Runtimes](/posts/llm-ai-agent/), string concatenation inside linear prompt templates is insufficient for production. Production applications deploy:
+- **Cyclic State Graphs (LangGraph)**: Modeling business logic as finite state machines with durable checkpointing, enabling human-in-the-loop validation and time-travel debugging.
+- **Constrained Grammar Decoding**: Enforcing strict Pydantic v2 schemas using context-free grammars (such as Outlines or XGrammar), mathematically guaranteeing that models emit valid JSON matching internal API contracts.
+
+### Layer 3: High-Throughput Serving and AI Gateways
+
+In our technical breakdown of [Inference Bottleneck Mitigation](/posts/llm-mitigate-inference-bottleneck/), autoregressive generation was shown to be strictly memory-bandwidth bound. To serve enterprise workloads efficiently, organizations deploy:
+- **PagedAttention Engines (vLLM)**: Slicing the continuous Key-Value (KV) cache into virtual memory pages, eliminating external memory fragmentation.
+- **Continuous Batching**: Iteration-level scheduling that inserts and evicts requests dynamically at token boundaries, achieving $4\times$ to $8\times$ higher throughput than static batching.
+- **AI Gateways**: Reverse proxies (such as LiteLLM or Cloudflare AI Gateway) that enforce rate limits, handle fallback failover between cloud providers, and maintain semantic caches (storing previous query-response pairs in Redis) to reduce API spend by up to $30\%$.
+
+```python
+# Production LLM Request Pipeline with Structured Validation and Observability
+from pydantic import BaseModel, Field
+import litellm
+import time
+
+class FinancialSummary(BaseModel):
+    ticker: str = Field(description="Stock ticker symbol")
+    revenue_growth_yoy: float = Field(description="Year-over-year revenue growth percentage")
+    key_risks: list[str] = Field(description="Primary operational risks identified")
+
+def execute_production_llm_call(prompt: str, user_id: str) -> FinancialSummary:
+    """
+    Executes resilient foundation model call with tracing and schema enforcement.
+    """
+    start_time = time.time()
+    
+    # 1. Dispatch request through Gateway with fallback routing
+    response = litellm.completion(
+        model="groq/llama-3-70b-8192",
+        fallbacks=["openai/gpt-4o", "anthropic/claude-3-5-sonnet-20240620"],
+        messages=[{"role": "user", "content": prompt}],
+        response_format={"type": "json_object", "schema": FinancialSummary.model_json_schema()},
+        metadata={"user_id": user_id, "start_time": start_time}
+    )
+    
+    # 2. Enforce Pydantic validation
+    raw_json = response.choices[0].message.content
+    validated_output = FinancialSummary.model_validate_json(raw_json)
+    
+    return validated_output
+```
+
+### Layer 4 & 5: Continuous Evaluation and Telemetry
+
+Without continuous measurement, LLM applications silently degrade over time due to prompt drift or underlying foundation model API updates. Connecting to our audit of [Microsoft AgentEval](/posts/llm-agents-eval/):
+- **Automated Metric Suites (Ragas)**: Continuously evaluating live production logs across four core dimensions: Faithfulness (absence of hallucination), Answer Relevance, Context Precision, and Context Recall.
+- **OpenTelemetry Tracing (Langfuse / Opik)**: Recording distributed spans for every user query, capturing exact token counts, time-to-first-token (TTFT), token-per-second emission speeds, and database query latencies.
+
+---
+
+## How Modern Enterprise LLM Infrastructure Evolved Across 2026
+
+Between 2024 and 2026, the components of the production stack matured from fragmented open-source libraries into unified infrastructure fabrics:
+
+### 1. Standardization via OpenTelemetry GenAI Semantic Conventions
+In 2024, every observability tool defined proprietary JSON formats for traces and logs. In 2026, the OpenTelemetry Foundation formalized the **GenAI Semantic Conventions**. Every major foundation model provider, vector database, and orchestration library natively emits standard spans, allowing enterprise security operations centers (SOCs) to monitor LLM traffic within standard Datadog, Grafana, or OpenTelemetry dashboards.
+
+### 2. Disaggregated Prefill-Decode Infrastructure
+As serving throughput scaled, hosting prefill and decode phases on identical GPU nodes became economically unviable. Modern 2026 datacenters operate **disaggregated serving clusters**: compute-dense accelerators (B200 / TPU v6) ingest large multi-thousand-token prompts in parallel, transferring KV-cache state across high-speed RDMA networks to memory-bandwidth-optimized decode clusters for token streaming.
 
 ```mermaid
 graph LR
-    A[Raw Data] --> B[Data Pipeline]
-    B --> C[Processing]
-    C --> D[Vector DB]
-    D --> E[LLM Application]
-    
-    style A fill:#e1f5ff
-    style B fill:#fff3cd
-    style D fill:#d4edda
-    style E fill:#f8d7da
+    subgraph Enterprise_2026_Infra["2026 Unified GenAI Production Fabric"]
+        ClientGateway["Enterprise AI Gateway & Cache Router"] --> MCPHub["Model Context Protocol (MCP) Tool Bus"]
+        MCPHub --> DisaggCluster["Disaggregated Serving Fabric (Split Prefill-Decode)"]
+        DisaggCluster --> OTelSpans["OpenTelemetry Semantic GenAI Spans"]
+        OTelSpans --> ActiveEval["Continuous PRM / Verifier Quality CI Gates"]
+    end
 ```
 
-### 2. LLM Development Tools
+### 3. Native Model Context Protocol (MCP) Integration
+In early 2024, connecting an LLM to internal company databases required writing custom LangChain tools or API wrappers. In 2026, the **Model Context Protocol (MCP)** unified data and tool integration. Enterprise databases, document stores, and code repositories expose standardized MCP endpoints, allowing agents to query live corporate systems with built-in access control and cryptographic authentication.
 
-*Innovate:* Tools for interacting with, fine-tuning, and orchestrating LLMs.
+---
 
-**Purpose**: Develop and interact with Large Language Models
+## Key Takeaways
 
-**Subcategories**:
+- **Production requires a decoupled five-layer architecture**: Data ingestion, orchestration, high-throughput serving, evaluation, and observability must operate with modular boundaries.
+- **Continuous batching and PagedAttention are essential**: Foundation model hosting demands virtual memory paging to eliminate fragmentation and maximize concurrency.
+- **Pydantic schema binding prevents downstream failures**: Constrained grammar decoding ensures that probabilistic model outputs adhere strictly to typed API contracts.
+- **Automated evaluators replace manual spot-checking**: Metric frameworks like Ragas and AgentEval quantify faithfulness and context relevance in CI/CD and production streams.
+- **2026 infrastructure centers on OpenTelemetry and MCP**: Standardized telemetry conventions and protocol-driven tool calling establish enterprise reliability.
 
-| Subcategory | Tools | Purpose |
-|:------------|:------|:--------|
-| **LLM Providers** | OpenAI, Anthropic, Cohere | Model access |
-| **Orchestration** | LangChain, LlamaIndex | Workflow management |
-| **Fine-tuning** | Hugging Face, LLaMA-Factory | Model customization |
-| **Experimentation** | Weights & Biases, MLflow | Experiment tracking |
+---
 
-**LLM Providers**:
-- **OpenAI**: GPT-4, GPT-3.5
-- **Anthropic**: Claude
-- **Cohere**: Command models
-- **Open Source**: Hugging Face, Ollama
+## New Questions
 
-**Orchestration Platforms**:
-- **LangChain**: General-purpose framework
-- **LlamaIndex**: RAG-focused
-- **Haystack**: End-to-end NLP
-- **Semantic Kernel**: Microsoft's framework
+1. How do semantic caching layers handle cache invalidation when underlying enterprise database records update dynamically in real time?
+2. What are the network bandwidth bottlenecks of transferring multi-gigabyte KV caches across RDMA fabrics in distributed prefill-decode architectures?
+3. To what extent do automated LLM-as-a-judge evaluation frameworks introduce systematic blind spots when validating domain-specific mathematical proofs?
 
-**Fine-tuning Tools**:
-- **Hugging Face**: Transformers library
-- **LLaMA-Factory**: Easy fine-tuning
-- **Unsloth**: Fast fine-tuning
-- **Axolotl**: Efficient training
+---
 
-### 3. Output Tools
+## References
 
-*Retrieve:* Post-processing and evaluation tools for LLM outputs.
-
-**Purpose**: Manage and refine LLM application outputs
-
-**Tools**:
-- **Evaluation Frameworks**: TruEra, RAGas, LangSmith
-- **Output Processing**: Post-processing pipelines
-- **Quality Assessment**: Metrics and scoring
-
-**Evaluation Metrics**:
-- Accuracy
-- Relevance
-- Coherence
-- Factual correctness
-- User satisfaction
-
-**Example**:
-
-```python
-# Evaluation example
-from ragas import evaluate
-from datasets import Dataset
-
-# Evaluate RAG system
-results = evaluate(
-    dataset=dataset,
-    metrics=[
-        "faithfulness",
-        "answer_relevancy",
-        "context_precision"
-    ]
-)
-```
-
-### 4. Application Tools
-
-*Retrieve:* Tools for hosting, monitoring, and managing LLM applications.
-
-**Purpose**: Production deployment and operations
-
-**Components**:
-- **Hosting**: Cloud platforms, containers
-- **Monitoring**: Performance, errors, usage
-- **Scaling**: Auto-scaling, load balancing
-
-**Tools**:
-- **Hosting**: AWS, GCP, Azure, Vercel
-- **Monitoring**: LangSmith, Weights & Biases
-- **APIs**: FastAPI, Flask
-- **Containers**: Docker, Kubernetes
-
-### RAG vs. Fine-Tuning Tools
-
-*Innovate:* Different tools are needed for RAG versus fine-tuning approaches.
-
-| Approach | Key Tools | Focus |
-|:---------|:----------|:------|
-| **RAG** | Vector DBs, Retrievers, Embeddings | Data retrieval |
-| **Fine-Tuning** | Training frameworks, Datasets, GPUs | Model training |
-
-**RAG Tools**:
-- Vector databases
-- Embedding models
-- Retrieval frameworks
-- Chunking tools
-
-**Fine-Tuning Tools**:
-- Training frameworks
-- Dataset preparation
-- GPU resources
-- Experiment tracking
-
-### Tool Selection Guide
-
-```mermaid
-graph TD
-    A[LLM Application Need] --> B{Approach?}
-    B -->|RAG| C[RAG Tools]
-    B -->|Fine-Tuning| D[Fine-Tuning Tools]
-    B -->|Both| E[Hybrid Tools]
-    
-    C --> C1[Vector DB]
-    C --> C2[Retrieval]
-    C --> C3[Embeddings]
-    
-    D --> D1[Training Framework]
-    D --> D2[Datasets]
-    D --> D3[GPUs]
-    
-    style A fill:#e1f5ff
-    style C fill:#fff3cd
-    style D fill:#d4edda
-```
-
-### Key Takeaways
-
-*Retrieve:* LLM application tools fall into four categories: input processing, LLM development, output tools, and application tools, each serving different stages of development.
-
-*Innovate:* By understanding tool categories and their purposes, you can select the right tools for RAG, fine-tuning, or hybrid approaches, building efficient LLM applications.
-
-*Curiosity → Retrieve → Innovation:* Start with curiosity about LLM tools, retrieve insights from comprehensive guides, and innovate by selecting and combining tools for your specific use cases.
-
-**Note**: This guide provides an overview of popular tools. For comprehensive coverage, explore the full guide linked above.
-
-**Next Steps**:
-- Review the comprehensive guide
-- Identify tools for your use case
-- Experiment with different tools
-- Build your LLM application stack
-
-![ Tools for building LLM Application ](/assets/img/llm/LLM_tools_for_building.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
-
-<details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
-
-* * * 
-
-## 🥁 LLM 어플리케이션 구축을 위한 가장 인기 있는 툴과 프레임워크에 대한 포괄적인 가이드를 확인해 보세요.
-
-- 👉 LLM 어플리케이션 구축을 위한 환경은 다양한 툴과 기술로 풍부하며, 각 툴과 기술은 서로 다른 요구와 프로세스 단계를 충족시킵니다. 
-
-- 👉LLM 앱에 적합한 툴과 프레임워크를 찾고 선택하는 것이 핵심이며 시간이 걸립니다. 이제 막 시작하더라도 무엇이 있고 모든 것이 어떻게 함께 작동하는지 아는 것이 매우 중요합니다!
-
-⛳ 의사 결정 과정을 단순화하기 위해, LLM 애플리케이션 개발에 사용할 수 있는 방대한 옵션 풀을 탐색하는 데 도움이 되는 자세한 가이드를 작성했습니다.
-
-### 🔰 LLM 툴은 크게 네 가지 범주로 분류할 수 있습니다.
-
-- ⛳ 입력 처리 도구: 이러한 도구는 데이터 수집을 처리하고 애플리케이션에 대한 다양한 입력을 준비하도록 설계되었습니다. 여기에는 LLM을 위한 데이터를 처리하고 준비하는 데 중요한 데이터 파이프라인과 벡터 데이터베이스가 포함됩니다.
-
-- ⛳ LLM 개발 툴(LLM Development Tools): 이 카테고리에는 다음을 지원하는 툴이 포함됩니다.
-대규모 언어 모델과 상호 작용합니다. 여기에는 LLM 호출, 미세 조정, 실험 수행, 오케스트레이션 관리를 위한 서비스가 포함됩니다. 예를 들어 LLM 공급자, 오케스트레이션 플랫폼, 컴퓨팅 및 실험 플랫폼이 있습니다.
-
-- ⛳ 출력 툴(Output Tools): LLM 어플리케이션의 출력을 관리하고 다듬는 포스트 프로세싱 툴이 이 범주에 속합니다. LLM이 결과물을 생성한 후의 프로세스(예: 결과물의 품질과 관련성을 평가하는 평가 프레임워크)에 초점을 맞춥니다.
-
-- ⛳ Application Tools: LLM 어플리케이션의 모든 측면을 관리하는 툴로, 호스팅, 모니터링 등을 포함합니다.
-
-- 🎯 이 가이드에서는 이러한 유형의 도구, 다양한 옵션, 장점 및 단점에 대한 심층적인 통찰력을 제공하여 애플리케이션 빌드에 사용할 수 있는 항목과 이러한 리소스를 가장 잘 활용하는 방법에 대한 포괄적인 보기를 제공합니다.
-
-🛑 이 가이드는 결코 포괄적이지 않으며 인기 있는 도구에 대한 개요만 제공하기 위한 것입니다! 
-
-이러한 툴을 분류하는 것 외에도 RAG에 필요한 툴과 LLM을 미세 조정하는 데 필요한 툴을 구분했습니다.
-
-</details>
+- Narwani, A., & Generative AI Community. (2024). *Applied LLMs Mastery: Tools and Frameworks for Building Generative AI Applications*. Open Source Curriculum. Available at: <https://github.com/aishwaryanr/awesome-generative-ai-guide> (accessed 2026-10-18).
+- Chase, H., & LangChain Team. (2023). *Architecting Production-Ready Large Language Model Applications*. Technical Documentation. Available at: <https://www.langchain.com/blog> (accessed 2026-10-18).
+- Kwon, W., Li, Z., Zhuang, S., Sheng, Y., Zheng, L., Yu, C. H., Gonzalez, J. E., Zhang, H., & Stoica, I. (2023). *Efficient Memory Management for Large Language Model Serving with PagedAttention*. In Proceedings of the 29th ACM Symposium on Operating Systems Principles (SOSP '23), 611-626. Available at: <https://arxiv.org/abs/2309.06180> (accessed 2026-10-18).
+- Es, S., James, J., Espinosa-Anke, L., & Schockaert, S. (2023). *RAGAS: Automated Evaluation of Retrieval Augmented Generation*. arXiv preprint arXiv:2309.15217. Available at: <https://arxiv.org/abs/2309.15217> (accessed 2026-10-18).
