@@ -2416,9 +2416,9 @@
         "thin",
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal third-party cheat sheet note into authoritative source audit on Git internal architecture, content-addressable storage, and DAG mechanics"
     },
     {
       "path": "_posts/2024/07/2024-07-05-graphrag-opensource.md",
