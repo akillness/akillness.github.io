@@ -3265,9 +3265,9 @@
       "flags": [
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial 3-item overview into rigorous architectural decision matrix evaluating prompt engineering, RAG, and PEFT (LoRA/QLoRA) across cost, latency, data freshness, and 2026 test-time compute scaling"
     },
     {
       "path": "_posts/2024/07/2024-07-20-llm-engineer-handbook.md",
