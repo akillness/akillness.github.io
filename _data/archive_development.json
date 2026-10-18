@@ -4185,9 +4185,9 @@
         "thin",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial 46-line note into exhaustive technical source audit on Apple Intelligence: AFM on-device Palettization, dynamic LoRA adapters, MDLOO leave-one-out RLHF, and Private Cloud Compute"
     },
     {
       "path": "_posts/2024/08/2024-08-05-federated-learning-bringing-the-data.md",
