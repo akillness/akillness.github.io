@@ -3386,9 +3386,9 @@
       "flags": [
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from generic statistical listicle into technical source audit on statistical inference, bootstrap validation, and Simpson's paradox in LLM evaluation"
     },
     {
       "path": "_posts/2024/08/2024-08-12-explore-the-landscape-of-open-source-data-engineering.md",
