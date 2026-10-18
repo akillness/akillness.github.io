@@ -2879,9 +2879,9 @@
         "third-party-rewrite",
         "korean-heavy"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal introductory overview into authoritative source audit on dense vector embedding architectures, contrastive losses, and MTEB standards"
     },
     {
       "path": "_posts/2024/05/2024-05-19-googleio-chatgpt4o.md",
