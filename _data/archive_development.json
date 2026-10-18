@@ -3602,9 +3602,9 @@
         "lang-ko",
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from Korean course syllabus note into rigorous computer science source audit on randomized algorithms, asymptotic complexity, and cache-conscious sorting"
     },
     {
       "path": "_posts/2024/05/2024-05-13-gradio-transformerjs.md",
