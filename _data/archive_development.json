@@ -1462,9 +1462,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a third-party review note into an authoritative source audit of WorldLabs Marble, spatial intelligence foundations, and persistent 3D world models."
     },
     {
       "path": "_posts/2025/11/2025-11-16-flexattention-flash-attention-cute-dsl-guide.md",
