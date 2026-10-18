@@ -3085,9 +3085,9 @@
         "thin",
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal brief note into authoritative source audit on Microsoft AgentEval framework, multi-agent evaluation dynamics, and rubrics verification"
     },
     {
       "path": "_posts/2024/06/2024-06-12-llm-build-tools-cookbook.md",
