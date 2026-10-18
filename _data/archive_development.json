@@ -4277,9 +4277,9 @@
         "thin",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Source audit providing an end-to-end mathematical hand calculation of scaled dot-product attention, variance preservation proofs, and FlashAttention-3 evolution."
     },
     {
       "path": "_posts/2024/05/2024-05-27-scaling-monosemanticity.md",
