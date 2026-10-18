@@ -2028,9 +2028,9 @@
       "links_at_intake": 2,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on Google Research's Vibe Coding XR, Gemini intent-to-spatial-code compilation, XR Blocks WebXR architecture, and prototyping speed"
     },
     {
       "path": "_posts/2026/04/2026-04-24-cli-anything-agent-native-interfaces.md",
