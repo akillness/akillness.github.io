@@ -2606,9 +2606,9 @@
       "flags": [
         "created-by-attribution"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal third-party overview into authoritative source audit on NanoClaw Docker Sandboxes, micro-VM boundaries, and agent runtime isolation"
     },
     {
       "path": "_posts/2026/04/2026-04-05-llm-wiki-persistent-knowledge-base.md",
