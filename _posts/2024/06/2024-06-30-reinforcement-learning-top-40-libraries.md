@@ -1,238 +1,198 @@
 ---
-title: Reinforcing Reinforcement Learning Terms, Policies, Models and Top 40 Libraries
-  📚
-description: "Curiosity: What is reinforcement learning? How do agents learn to make better decisions through interaction with environments?"
-categories: [LLM/Model & Papers]
-tags: [LLM, Model, Paper]
+title: "Reinforcement Learning Foundations: From Bellman Optimality to PPO and DPO"
+description: "A source audit analyzing the mathematical mechanics of Reinforcement Learning: Bellman equations, policy gradients, PPO, DPO, and distributed RL for LLMs."
+categories: [AI, Research]
+tags: [reinforcement-learning, markov-decision-process, ppo, dpo, policy-gradients]
 date: 2024-06-30 20:10:00 +0800
-mermaid: true
-# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: true
-ads: false
-restored_archive: "2026-10-12"
+last_modified_at: 2026-10-18 14:00:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from superficial library listicle into comprehensive technical source audit on Bellman optimality, policy gradients, PPO clipping, DPO derivation, and distributed RL systems"
 ---
-## Reinforcement Learning: Terms, Policies, Models, and Top 40 Libraries
 
-*Curiosity:* What is reinforcement learning? How do agents learn to make better decisions through interaction with environments?
+![Reinforcement Learning Foundations](/assets/img/blog/ReinforcementLearning_Library.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
-**Reinforcement Learning (RL)** is a type of machine learning where an agent interacts with an environment, receives feedback, and makes better decisions over time through trial and error.
+## How Does Reinforcement Learning Bridge Optimal Control and Frontier AI?
 
-### RL Overview
+Reinforcement Learning (RL) occupies a distinctive position in machine learning. Unlike supervised learning, which minimizes empirical loss over static labeled datasets, or unsupervised learning, which uncovers latent geometric structure in unannotated data, reinforcement learning solves the optimal sequential decision problem. An autonomous agent navigates an unfamiliar stochastic environment by taking actions, observing state transitions, and optimizing long-term cumulative reward signals through active trial and error.
 
-*Retrieve:* Understanding reinforcement learning fundamentals.
+While RL was historically associated with robotics and arcade gaming, the modern explosion of generative AI transformed reinforcement learning into the definitive post-training technology. Frontier foundation models rely on reinforcement learning to align linguistic fluency with human preferences, eliminate dangerous failure modes, and expand multi-step deductive reasoning capabilities.
+
+Understanding reinforcement learning requires examining its mathematical foundations—from Markov Decision Processes and Bellman dynamic programming to modern policy gradient methods, Proximal Policy Optimization (PPO), and Direct Preference Optimization (DPO).
 
 ```mermaid
-graph LR
-    A[Agent] --> B[Action]
-    B --> C[Environment]
-    C --> D[State]
-    C --> E[Reward]
-    D --> A
-    E --> A
-    A --> F[Policy Update]
-    F --> A
-    
-    style A fill:#e1f5ff
-    style C fill:#fff3cd
-    style E fill:#d4edda
+flowchart TD
+    subgraph CoreTheory["Foundational Formalism"]
+        MDP["Markov Decision Process (S, A, P, R, γ)"]
+        Bellman["Bellman Optimality Equations<br/>Dynamic Programming & Value Iteration"]
+    end
+
+    subgraph ClassicalRL["Model-Free Policy Paradigms"]
+        ValMethod["Value-Based Methods<br/>Q-Learning, DQN, Double-DQN"]
+        PolicyGrad["Policy Gradient Methods<br/>REINFORCE, Policy Gradient Theorem"]
+        ActorCritic["Actor-Critic Architectures<br/>A2C, SAC, PPO (Clipped Surrogate)"]
+    end
+
+    subgraph LLMAlignment["Modern Frontier Alignment"]
+        RLHF["PPO-based RLHF<br/>Actor, Critic, Reference Model, Reward Model"]
+        DPO["Direct Preference Optimization<br/>Closed-form implicit reward reparameterization"]
+        RLVR["Reinforcement Learning with Verifiable Rewards<br/>Deductive search, Math & Code verification"]
+    end
+
+    MDP --> Bellman
+    Bellman --> ValMethod
+    Bellman --> PolicyGrad
+    ValMethod --> ActorCritic
+    PolicyGrad --> ActorCritic
+    ActorCritic --> RLHF
+    RLHF --> DPO
+    RLHF --> RLVR
 ```
 
-### Key Terms in RL
+---
 
-*Retrieve:* Essential RL terminology.
+## 1. The Markov Decision Process and Bellman Optimality
 
-| Term | Symbol | Description | Purpose |
-|:-----|:-------|:------------|:--------|
-| **Environment** | - | System the agent interacts with | ⬆️ Learning context |
-| **Agent** | - | Autonomous entity | ⬆️ Decision maker |
-| **Feedback** | - | Rewards or penalties | ⬆️ Learning signal |
-| **State** | S | Current situation | ⬆️ Context |
-| **Policy** | π | Strategy for actions | ⬆️ Decision rule |
-| **Value** | V | Expected long-term return | ⬆️ State evaluation |
-| **Q-Value** | Q | Long-term return of action | ⬆️ Action evaluation |
-| **Model** | - | Environment simulation | ⬆️ Planning | 
+Reinforcement learning formalizes sequential decision making through the **Markov Decision Process (MDP)**, defined by the 5-tuple:
 
-—————————
+$$\mathcal{M} = \langle \mathcal{S}, \mathcal{A}, \mathcal{P}, \mathcal{R}, \gamma \rangle$$
 
-### Model/Policy Classifications
+Where:
+- $\mathcal{S}$ is the state space.
+- $\mathcal{A}$ is the action space.
+- $\mathcal{P}(s' \mid s, a) = \mathbb{P}(S_{t+1} = s' \mid S_t = s, A_t = a)$ represents state transition probability satisfying the Markov property (the future is conditionally independent of the past given the present state).
+- $\mathcal{R}(s, a) = \mathbb{E}[R_{t+1} \mid S_t = s, A_t = a]$ is the scalar reward function.
+- $\gamma \in [0, 1)$ is the discount factor ensuring finite convergence over infinite horizons.
 
-*Retrieve:* Different approaches to RL.
+The agent interacts with the environment through a policy $\pi(a \mid s) = \mathbb{P}(A_t = a \mid S_t = s)$. The objective is to maximize the expected discounted return:
 
-**Model-Free vs Model-Based**:
+$$J(\pi) = \mathbb{E}_{\tau \sim \pi} \left[ \sum_{t=0}^\infty \gamma^t R(S_t, A_t) \right]$$
 
-| Type | Description | Use Case |
-|:-----|:------------|:---------|
-| **Model-Based** | Uses environment model | ⬆️ When model available |
-| **Model-Free** | Trial-and-error learning | ⬆️ When model unknown |
+### The Bellman Equations
+Richard Bellman established that value functions can be decomposed recursively into an immediate reward plus the discounted value of successor states:
 
-**On-Policy vs Off-Policy**:
+$$V^\pi(s) = \sum_{a \in \mathcal{A}} \pi(a \mid s) \left[ \mathcal{R}(s, a) + \gamma \sum_{s' \in \mathcal{S}} \mathcal{P}(s' \mid s, a) V^\pi(s') \right]$$
 
-| Type | Description | Learning Source |
-|:-----|:------------|:----------------|
-| **On-Policy** | Learns from current policy | ⬆️ Current actions |
-| **Off-Policy** | Learns from different policy | ⬆️ Other policy data |
+$$Q^\pi(s, a) = \mathcal{R}(s, a) + \gamma \sum_{s' \in \mathcal{S}} \mathcal{P}(s' \mid s, a) \sum_{a' \in \mathcal{A}} \pi(a' \mid s') Q^\pi(s', a')$$
 
-—————————
+The unique optimal value functions $V^*$ and $Q^*$ satisfy the non-linear **Bellman Optimality Equations**:
 
-### Well-Known RL Models
+$$Q^*(s, a) = \mathcal{R}(s, a) + \gamma \sum_{s' \in \mathcal{S}} \mathcal{P}(s' \mid s, a) \max_{a' \in \mathcal{A}} Q^*(s', a')$$
 
-*Retrieve:* Popular RL algorithms and their characteristics.
+In discrete tabular settings with known dynamics, dynamic programming (Value Iteration, Policy Iteration) solves for $Q^*$ in polynomial time, as examined in our analysis of [foundational algorithms](/posts/10-core-algorithms/). In continuous or high-dimensional environments, however, tabular solutions collapse, necessitating deep function approximation.
 
-| Model | Type | Description | Advantage |
-|:------|:-----|:------------|:----------|
-| **Q-Learning** | Model-free | Q-table for best actions | ⬆️ Simple, effective |
-| **SARSA** | Model-based | Updates based on next state-action | ⬆️ On-policy learning |
-| **DQN** | Model-free | Deep networks for Q-function | ⬆️ Handles large states |
-| **DDPG** | Model-free | Deep deterministic policy | ⬆️ Continuous actions |
+---
 
-**DDPG Advantage**: Handles complex environments and large state spaces better than traditional RL algorithms. 
+## 2. Policy Gradients and Proximal Policy Optimization (PPO)
 
-—————————
+Rather than estimating action-values and choosing greedy actions ($\arg\max_a Q(s, a)$), policy gradient methods directly parameterize the policy $\pi_\theta(a \mid s)$ with neural network weights $\theta$.
 
-### RL Applications
+The **Policy Gradient Theorem** (Sutton et al., 1999) enables computing the gradient of expected return without requiring an explicit model of transition dynamics $\mathcal{P}$:
 
-*Innovate:* Diverse applications of reinforcement learning.
+$$\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta} \left[ \sum_{t=0}^T \nabla_\theta \log \pi_\theta(a_t \mid s_t) A^{\pi_\theta}(s_t, a_t) \right]$$
 
-| Category | Applications | Impact |
-|:---------|:-------------|:-------|
-| **Robotics** | Robot control, manipulation | ⬆️ Automation |
-| **Transportation** | Autonomous vehicles, traffic control | ⬆️ Safety, efficiency |
-| **Healthcare** | Treatment optimization | ⬆️ Patient outcomes |
-| **Finance** | Trading, portfolio management | ⬆️ Returns |
-| **Gaming** | Game AI, strategy | ⬆️ Entertainment |
-| **Energy** | Smart grids, management | ⬆️ Efficiency |
-| **Business** | Marketing, recommendations | ⬆️ Revenue |
-| **Technology** | NLP, cybersecurity | ⬆️ Capabilities |
-| **Industry** | Manufacturing, automation | ⬆️ Productivity |
-| **Research** | Space exploration, agriculture | ⬆️ Innovation |
+Where $A^\pi(s, a) = Q^\pi(s, a) - V^\pi(s)$ represents the **Advantage function**, measuring how much better action $a$ performs compared to the policy's average expected performance at state $s$.
 
-—————————
+```
+State (s) ────► [ Actor Network pi_theta ] ────► Action Probabilities (pi(a|s))
+      │
+      └───────► [ Critic Network V_phi ]   ────► State Baseline (V(s))
+                                                        │
+                      Reward (R) ───────────────────────┴──► Advantage (A = Q - V)
+```
 
-### Top 40 Python RL Libraries
+### The PPO Clipped Surrogate Objective
+Naive policy gradient updates suffer from severe variance and instability: a single unconstrained gradient step can displace policy weights into catastrophic performance collapses. 
 
-*Retrieve:* Comprehensive list of reinforcement learning libraries.
+To prevent destructive updates, Schulman et al. (2017) introduced **Proximal Policy Optimization (PPO)**. PPO tracks the probability ratio between the current policy and the previous policy:
 
-| Library | Framework | Focus | Use Case |
-|:--------|:----------|:------|:---------|
-| **Gym** | OpenAI | Environments | ⬆️ Standard environments |
-| **Stable-Baselines** | TensorFlow/PyTorch | Algorithms | ⬆️ Easy implementation |
-| **Ray RLlib** | Ray | Distributed RL | ⬆️ Scalability |
-| **TF-Agents** | TensorFlow | Agents | ⬆️ TensorFlow integration |
-| **Acme** | JAX | Research | ⬆️ Advanced research |
-| **Tianshou** | PyTorch | Algorithms | ⬆️ PyTorch ecosystem |
-| **CleanRL** | PyTorch | Clean code | ⬆️ Learning |
-| **PettingZoo** | Multi-agent | Multi-agent RL | ⬆️ Multi-agent |
-| **Dopamine** | TensorFlow | Research | ⬆️ Google research |
-| **MushroomRL** | Python | Algorithms | ⬆️ Research |
+$$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$
 
-**Complete List** (40 libraries):
-Gym, Baselines, Dopamine, TensorLayer, FinRL, Stable-Baselines, ReAgent, Acme, PARL, TF-Agents, TensorFlow, PyTorchRL, Keras-RL, Garage, TensorForce, RLax, Coach, RFRL, Rliable, ViZDoom, Ray RLlib, ReAgent (Horizon), ChainerRL, MushroomRL, TRFL, CleanRL, Tianshou, MAgent, rl-baselines3-zoo, PettingZoo, RLlib, RoboRL, H-baselines, DI-engine, and more.
+And maximizes the clipped surrogate objective:
 
-### Key Takeaways
+$$L^{\text{CLIP}}(\theta) = \hat{\mathbb{E}}_t \left[ \min\left( r_t(\theta) \hat{A}_t, \, \text{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) \hat{A}_t \right) \right]$$
 
-*Retrieve:* Reinforcement learning enables agents to learn through environment interaction, with various algorithms (Q-Learning, DQN, DDPG) and applications across robotics, gaming, finance, and more.
+By clipping $r_t(\theta)$ within $[1-\epsilon, 1+\epsilon]$ (typically $\epsilon = 0.2$), PPO penalizes excessively large policy updates, providing stable convergence across both continuous robotic simulation and large-scale language model alignment.
 
-*Innovate:* By leveraging Python RL libraries like Gym, Stable-Baselines, and Ray RLlib, you can build RL systems for diverse applications, from game AI to autonomous vehicles, using proven algorithms and frameworks.
+---
 
-*Curiosity → Retrieve → Innovation:* Start with curiosity about reinforcement learning, retrieve insights from RL terms, models, and libraries, and innovate by building RL applications that solve real-world problems.
+## 3. The Paradigm Shift to Direct Preference Optimization (DPO)
 
-**Next Steps**:
-- Choose an RL library
-- Start with simple environments
-- Implement basic algorithms
-- Build your RL application
+For several years, aligning large language models with human values required a four-network PPO loop:
+1. **Actor Model** $\pi_\theta$: The generator generating tokens.
+2. **Reference Model** $\pi_{\text{ref}}$: Frozen initial policy preventing catastrophic forgetting via KL penalty.
+3. **Reward Model** $r_\phi$: Pre-trained scoring network evaluating completions.
+4. **Critic Model** $V_\psi$: Value network estimating token-level return baselines.
 
-———————————————
+As documented in our case study on [single-machine RLHF training](/posts/rlhf-summary-from-human-feedback-single-dgx-spark/), running four multi-billion-parameter models concurrently exhausts GPU high-bandwidth memory and introduces severe training instability (critic divergence, reward hacking).
 
-⭆ 𝐑𝐞𝐠𝐢𝐬𝐭𝐞𝐫 𝐟𝐨𝐫 𝐅𝐫𝐞𝐞 𝐎𝐧𝐥𝐢𝐧𝐞 𝐇𝐚𝐧𝐝𝐬-𝐨𝐧 𝐃𝐚𝐭𝐚 𝐒𝐜𝐢𝐞𝐧𝐜𝐞 𝐓𝐮𝐭𝐨𝐫𝐢𝐚𝐥 (𝐄𝐧𝐝 𝐭𝐨 𝐄𝐧𝐝 𝐏𝐫𝐨𝐣𝐞𝐜𝐭): <https://www.maryammiradi.com/sonar>
+Rafailov et al. (2023) bypassed this infrastructure bottleneck with **Direct Preference Optimization (DPO)**. By establishing that the ground-truth reward function can be analytically reparameterized in terms of the optimal policy and reference policy:
 
-![ Reinforcement Learning Python Libraries ](/assets/img/blog/ReinforcementLearning_Library.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
+$$r(x, y) = \beta \log \frac{\pi^*(y \mid x)}{\pi_{\text{ref}}(y \mid x)} + \beta \log Z(x)$$
 
-<details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+DPO substitutes this formulation directly into the Bradley-Terry preference likelihood, deriving an exact closed-form loss over paired preferences $(x, y_w, y_l)$:
 
-* * * 
+$$\mathcal{L}_{\text{DPO}}(\pi_\theta; \pi_{\text{ref}}) = -\mathbb{E}_{(x, y_w, y_l)} \left[ \log \sigma \left( \beta \log \frac{\pi_\theta(y_w \mid x)}{\pi_{\text{ref}}(y_w \mid x)} - \beta \log \frac{\pi_\theta(y_l \mid x)}{\pi_{\text{ref}}(y_l \mid x)} \right) \right]$$
 
-RL은 에이전트가 환경과 상호 작용하고, 피드백을 받고, 시간이 지남에 따라 더 나은 결정을 내릴 수 있도록 하는 기계 학습의 한 유형입니다.
+```
+Prompt (x) 
+    ├── Winner (y_w) ──► log [ pi_theta(y_w|x) / pi_ref(y_w|x) ] ──┐
+    │                                                               ├──► Difference ──► [ -log sigma ] ──► Loss
+    └── Loser (y_l)  ──► log [ pi_theta(y_l|x) / pi_ref(y_l|x) ] ──┘
+```
 
-—————————
+DPO eliminates both the Critic and Reward networks from the active training loop, reducing memory consumption by over 50% while delivering stable, deterministic gradient updates across binary preference datasets.
 
-## 📝 RL에서 사용되는 용어:
+---
 
-- ⌘ 환경: 에이전트가 상호 작용하는 시스템 또는 상황입니다. 
+## Algorithmic Comparison: From Classical RL to Frontier Post-Training
 
-- ⌘ 에이전트(Agent): 환경과 상호 작용하는 자율적인 개체를 의미합니다.
+| Algorithm | Paradigm | Action Space | Primary Advantage | Primary Constraint | Primary Application in 2026 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Deep Q-Network (DQN)** | Value-based, Off-policy | Discrete | Sample efficient via replay buffer | Struggles with continuous actions | Discrete game control, network packet scheduling |
+| **Soft Actor-Critic (SAC)** | Actor-Critic, Off-policy | Continuous | Maximum entropy exploration | Sensitive to hyperparameter tuning | Autonomous vehicle control, robotic manipulation |
+| **Proximal Policy Opt (PPO)** | Actor-Critic, On-policy | Discrete / Continuous | Exceptionally stable updates | Computationally intensive | Online game AI, complex interactive RL environments |
+| **Direct Preference Opt (DPO)** | Closed-form offline alignment | Discrete (Token sequences) | No reward/critic model required | Susceptible to distribution shift outside reference data | Foundation model instruction alignment |
+| **Reinforcement Learning w/ Verifiable Rewards (RLVR)** | On-policy search & rollout | Discrete (Token sequences) | Immune to reward hacking via deterministic ground-truth | Requires programmatic verifiers (code/math) | Test-time reasoning scaling (o1/o3 architectures) |
 
-- ⌘ 피드백: 에이전트가 조치(보상 또는 페널티)를 취한 후 환경에서 에이전트에게 제공하는 정보를 나타냅니다.
+---
 
-- ⌘ 상태(S): 환경에서 반환되는 현재 상황입니다.
+## Distributed RL Systems and Tooling
 
-- ⌘ 정책(π): 에이전트가 다음 행동을 결정하기 위해 사용하는 전략입니다.
+Scaling modern reinforcement learning requires sophisticated distributed coordination:
+- **CleanRL**: High-quality, single-file implementations designed for algorithmic clarity and reproducibility in academic research.
+- **Ray RLlib**: Industry-standard distributed framework decoupling environment rollout workers from centralized gradient optimizers across heterogeneous GPU clusters.
+- **TRL (Transformer Reinforcement Learning)**: Hugging Face’s dedicated post-training ecosystem integrating DeepSpeed ZeRO and vLLM to co-locate rollout generation and backpropagation across unified tensor-parallel pools.
 
-- ⌘ 가치 (V) : 예상되는 장기 수익 
+---
 
-- ⌘ Q-Value (Q): 주어진 현재 행동의 장기 수익 
+## How Reinforcement Learning Evolved Across 2026
 
-- ⌘ 모델: 환경 시뮬레이션을 의미합니다. 
+Throughout 2026, the reinforcement learning landscape underwent two structural transformations:
 
-—————————
+1. **The Ascendance of Verifiable Search (RLVR)**: Subjective human feedback (RLHF) has largely plateaued for advanced technical tasks. Frontier laboratories increasingly train models using automated test harnesses—compilers, theorem provers (Lean 4), formal logic solvers, and synthetic multi-agent game equilibria. Models explore thousands of candidate reasoning paths, receiving binary ground-truth rewards upon verified execution, a paradigm examined in our audit of [frontier LLM research trends](/posts/llm-research-trend/).
+2. **Online Iterative DPO / KTO / ORPO**: Pure offline DPO suffered when models generated responses diverging from the pre-collected preference dataset. Modern 2026 pipelines employ **iterative online DPO**, where the target policy periodically samples fresh outputs, an automated LLM judge or programmatic oracle scores them, and preference pairs are dynamically refreshed every epoch.
 
-## 📖 RL의 모델/정책:
+---
 
-모델 프리(Model-Free) vs 모델 기반(Model-Based):
+## Key Takeaways
 
-- ๏ 상태 공간과 액션 공간이 커지는 모델 기반 작품
-- ๏ Model-free 알고리즘은 지식을 업데이트하기 위해 시행착오에 의존합니다.
+- **The Markov Foundation Holds**: Despite shifting from grid worlds to billion-parameter neural networks, the core mathematical structure of states, actions, transition distributions, and Bellman optimality remains the foundation of RL.
+- **PPO Solved Stability; DPO Solved Overhead**: PPO introduced safe clipped updates for on-policy learning, while DPO eliminated critic and reward network memory footprints for sequence alignment.
+- **Deductive Verification Surpasses Preference**: The frontier of reinforcement learning has progressed from matching human stylistic preferences toward autonomous deductive discovery via verifiable reward environments.
 
-온-폴리시(On-Policy) vs 오프-폴리시(Off-Policy):
+---
 
-- ๏ On-policy 에이전트는 현재 정책에서 파생된 현재 작업을 기반으로 학습합니다. 
-- ๏ Off-policy 카운터 파트는 다른 정책을 기반으로 학습합니다.
+## New Questions
 
-—————————
+- How will multi-agent self-play reinforcement learning navigate non-stationary equilibria when hundreds of autonomous agents interact in financial markets or software systems?
+- Can reinforcement learning with verifiable rewards generalize beyond formal domains (mathematics, software engineering) into subjective human disciplines like legal argumentation and diplomatic strategy?
 
-## 🤖 잘 알려진 RL 모델:
+---
 
-- ➊ Q-러닝:
+## References
 
-Q-테이블을 사용하여 상태에 대한 최상의 작업을 저장하는 모델 없는 알고리즘입니다.
-
-- ➋ 국가-행동-보상-국가-행동(SARSA):
-
-보상 및 다음 상태-행동을 기반으로 상태-행동 값을 업데이트하는 모델 기반 알고리즘입니다.
-
-- ➌ 딥 Q 네트워크(DQN):
-
-심층 신경망을 사용하여 Q-function을 근사화하는 모델 없는 알고리즘입니다.
-
-- ➍ 심층 결정론적 정책 그래디언트(DDPG):
-
-DDPG는 심층 신경망을 사용하여 기존 RL 알고리즘보다 더 복잡한 환경과 대규모 상태 공간을 처리합니다. 
-
-—————————
-
-## 🛠️ 다음은 강화 학습(RL)의 몇 가지 응용 분야입니다.
-
-- » 로보틱스
-- » 자율 주행 차량
-- » 헬스케어
-- » 금융
-- » 노름
-- » 에너지 관리
-- » 마케팅 및 광고
-- » 자연어 처리
-- » 제조업
-- » 스마트 그리드
-- » 공급망 최적화
-- » 추천 시스템
-- » 개인화 시스템
-- » 교통 신호 제어
-- » 교육 및 훈련
-- » 농업
-- » 산업 자동화
-- » 우주 탐사
-- » 사이버 보안
-- » 가상 비서
-
-</details>
+- Bellman, R. (1957). *Dynamic Programming*. Princeton University Press. [https://press.princeton.edu/books/hardcover/9780691146683/dynamic-programming](https://press.princeton.edu/books/hardcover/9780691146683/dynamic-programming) (accessed 2026-10-18).
+- Sutton, R. S., McAllester, D., Singh, S., & Mansour, Y. (1999). *Policy Gradient Methods for Reinforcement Learning with Function Approximation*. Advances in Neural Information Processing Systems, 12. [https://proceedings.neurips.cc/paper/1999/file/464d828b85b0bed98e80ade0a5c43b0f-Paper.pdf](https://proceedings.neurips.cc/paper/1999/file/464d828b85b0bed98e80ade0a5c43b0f-Paper.pdf) (accessed 2026-10-18).
+- Mnih, V., Kavukcuoglu, K., Silver, D., Rusu, A. A., Veness, J., Bellemare, M. G., ... & Hassabis, D. (2015). *Human-level Control Through Deep Reinforcement Learning*. Nature, 518(7540), 529–533. [https://doi.org/10.1038/nature14236](https://doi.org/10.1038/nature14236) (accessed 2026-10-18).
+- Schulman, J., Wolski, F., Dhariwal, P., Radford, A., & Klimov, O. (2017). *Proximal Policy Optimization Algorithms*. arXiv preprint arXiv:1707.06347. [https://arxiv.org/abs/1707.06347](https://arxiv.org/abs/1707.06347) (accessed 2026-10-18).
+- Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C. D., & Finn, C. (2023). *Direct Preference Optimization: Your Language Model is Secretly a Reward Model*. Advances in Neural Information Processing Systems, 36. [https://arxiv.org/abs/2305.18290](https://arxiv.org/abs/2305.18290) (accessed 2026-10-18).

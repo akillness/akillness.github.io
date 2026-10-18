@@ -3762,9 +3762,9 @@
         "third-party-rewrite",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial library listicle into comprehensive technical source audit on Bellman optimality, policy gradients, PPO clipping, DPO derivation, and distributed RL systems"
     },
     {
       "path": "_posts/2024/07/2024-07-01-21-top-ai-tools.md",
