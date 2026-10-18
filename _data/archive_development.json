@@ -4201,9 +4201,9 @@
       "flags": [
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial news summary into exhaustive technical source audit on Federated Learning: FedAvg mathematical mechanics, non-IID FedProx regularization, SecAgg cryptography, and Federated LoRA (FLoRA)"
     },
     {
       "path": "_posts/2024/08/2024-08-12-strategies-to-scale-database.md",
