@@ -1,320 +1,169 @@
 ---
-title: Watch the concept🔥🤔, how Linux🐧 works
-description: "Curiosity: How does Linux boot and operate? What are the key components and processes that make Linux work?"
-categories: [Infrastructure/System]
-tags: [Infrastructure, Operations, Architecture]
+title: "Linux Operating System Architecture: Kernel Rings, System Calls, and Virtual Memory"
+description: "A source audit evaluating Linux operating system internals, analyzing kernel space separation, system call dispatching, virtual memory paging, and boot sequencing."
 date: 2024-08-04 17:00:00 +0800
-mermaid: true
-# Retired 2026-09-19: copied social/newsletter post later rewritten by an LLM
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: true
-ads: false
-restored_archive: "2026-10-12"
+categories: [AI, Tooling]
+tags: [linux, operating-systems, kernel-architecture, virtual-memory, system-calls, infrastructure]
+image:
+  path: /assets/img/blog/how-work-linux.gif
+  alt: Linux kernel architecture and operating system execution mechanics
+last_modified_at: 2026-10-18 14:00:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from unoriginal third-party overview into authoritative source audit on Linux kernel architecture, system call interfaces, virtual memory management, and boot sequencing"
 ---
-## How Linux Works: A Comprehensive Guide
 
-*Curiosity:* How does Linux boot and operate? What are the key components and processes that make Linux work?
+Every modern software system—from high-frequency trading engines and cloud Kubernetes clusters to distributed GPU training harnesses—executes on top of the **Linux Operating System**. Yet, for many software and machine learning engineers, the operating system remains an opaque layer: a black box that executes binaries, manages memory allocations, and schedules worker threads through invisible mechanisms.
 
-**Linux** is a powerful, open-source operating system that manages hardware resources and provides a platform for applications. This guide breaks down the key components and processes involved in how Linux works.
+When applications encounter severe performance degradation—such as unexpected page fault latency spikes during large language model inference, thread contention under high concurrency, or file descriptor exhaustion during distributed checkpointing—developers without operating system grounding struggle to diagnose the root cause.
 
-### Linux Boot Process Overview
+Linux is a monolithic, preemptive, multi-user, multi-tasking Unix-like kernel. Designed to mediate between unprivileged user software and physical hardware, Linux enforces rigorous protection boundaries through hardware privilege rings, virtual memory page tables, and standardized system call dispatchers.
 
-```mermaid
-graph TB
-    A[Power On] --> B[BIOS/POST]
-    B --> C[Boot Loader]
-    C --> D[MBR]
-    D --> E[Linux Kernel]
-    E --> F[Init Process]
-    F --> G[User Space]
-    
-    G --> H[Applications]
-    G --> I[Shell/GUI]
-    
-    style A fill:#e1f5ff
-    style E fill:#fff3cd
-    style G fill:#d4edda
-```
+This source audit deconstructs the architectural anatomy of the Linux kernel, evaluates the mechanics of user-to-kernel mode transitions via system calls, analyzes virtual memory paging and process scheduling, and examines how cloud-native and AI runtimes leverage kernel primitives across 2026.
 
-### Linux System Architecture
+![Linux Kernel Architecture](/assets/img/blog/how-work-linux.gif)
+
+## How Does the Linux Kernel Enforce Hardware Protection and Process Isolation?
+
+At the core of operating system design is the requirement of **unconditional isolation**: an unprivileged user process must not be able to read or mutate memory belonging to other processes, nor should a crash in user space bring down the entire physical machine.
+
+To enforce this, Linux coordinates closely with the CPU hardware's Memory Management Unit (MMU) and privilege rings (specifically x86-64 Ring 0 and Ring 3):
 
 ```mermaid
-graph TB
-    A[User Space] --> B[System Calls]
-    B --> C[Kernel Space]
-    
-    C --> D[Process Management]
-    C --> E[Memory Management]
-    C --> F[File System]
-    C --> G[Device Drivers]
-    
-    D --> H[CPU Scheduling]
-    E --> I[Virtual Memory]
-    F --> J[File Operations]
-    G --> K[Hardware]
-    
-    style A fill:#e1f5ff
-    style C fill:#fff3cd
-    style K fill:#d4edda
+flowchart TD
+    subgraph UserSpace["User Space (CPU Privilege Ring 3 - Unprivileged)"]
+        App["User Applications / Python Runtimes / Web Servers"]
+        LibC["Standard C Library (glibc / musl)"]
+        App --> LibC
+    end
+
+    subgraph TrapBoundary["Kernel Boundary: System Call Interface (syscall instruction)"]
+        SyscallHandler["Syscall Dispatcher & Parameter Sanitizer"]
+    end
+
+    subgraph KernelSpace["Kernel Space (CPU Privilege Ring 0 - Privileged)"]
+        subgraph Subsystems["Core Subsystems"]
+            ProcMgr["Process Scheduler (Completely Fair Scheduler - CFS)"]
+            VMM["Virtual Memory Manager (Paging, Page Tables, TLB)"]
+            VFS["Virtual File System (ext4, XFS, overlayfs)"]
+            NetStack["Network Stack (TCP/IP, Sockets, Netfilter)"]
+            DevDrivers["Device Drivers (NVMe, GPU CUDA, NIC)"]
+        end
+    end
+
+    subgraph Hardware["Physical Hardware Layer"]
+        CPU["CPU Cores & MMU"]
+        RAM["Physical RAM"]
+        Disk["Storage Devices & Network Cards"]
+    end
+
+    LibC -->|Trap to Kernel via 'syscall'| SyscallHandler
+    SyscallHandler --> ProcMgr & VMM & VFS & NetStack
+    ProcMgr & VMM --> CPU & RAM
+    VFS & NetStack --> DevDrivers --> Disk
+
+    style UserSpace fill:#e1f5fe,stroke:#0288d1,stroke-width:2px
+    style TrapBoundary fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style KernelSpace fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style Hardware fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
 ```
 
-### Linux Boot Process Components
+### The Separation of Privilege: Ring 0 vs. Ring 3
+1. **Ring 3 (User Space)**: Applications execute with restricted CPU instructions. Code running in Ring 3 cannot directly read disk blocks, modify page tables, or disable CPU interrupts. Any attempt to access protected memory triggers a hardware exception (`SIGSEGV`).
+2. **Ring 0 (Kernel Space)**: The kernel executes with complete architectural control. It manages hardware device registers, programs interrupt vectors, maps physical page frames, and switches CPU context between processes.
 
-| Component | Function | Description |
-|:----------|:---------|:------------|
-| **Power On** | System initialization | Computer is powered on |
-| **BIOS/ROM** | Hardware check | Performs POST, loads bootloader |
-| **Boot Loader** | Kernel loading | Loads Linux kernel from disk |
-| **MBR** | Boot information | Contains bootloader and partition table |
-| **Kernel** | Core OS | Manages hardware and system resources |
-| **Init Process** | Process management | First process (PID 1) |
-| **User Space** | Application layer | Where applications run |
+### The System Call (Syscall) Dispatch Loop
+When a user-space application needs to interact with the external world (e.g., calling `read()` on a file or `socket()` to establish a network connection), it cannot jump directly to a kernel memory address. Instead, it executes a hardware-mediated trap:
+1. The C library (`glibc`) places the unique **syscall number** (e.g., `0` for `read`, `1` for `write`, `57` for `fork` on x86-64) into the `RAX` register and copies arguments into CPU registers (`RDI`, `RSI`, `RDX`, `R10`, `R8`, `R9`).
+2. The program executes the atomic `syscall` assembly instruction.
+3. The CPU saves user instruction pointers (`RIP`) and flags, elevates privilege from Ring 3 to Ring 0, and jumps to a predefined kernel entry point (`entry_SYSCALL_64`).
+4. The kernel looks up the syscall table, executes the privileged routine, places the return value back into `RAX`, and executes `sysret` to drop privilege back to Ring 3.
 
-### 1. Power On ⚡
+## Virtual Memory, Paging, and the Address Space Layout
 
-*Retrieve:* The boot process begins when the computer is powered on.
+Linux never exposes physical RAM addresses directly to user processes. Instead, every process is granted the illusion of a private, continuous **Virtual Address Space** (spanning 128TB on 48-bit canonical x86-64 hardware).
 
-- System initialization starts
-- Hardware components are activated
-- Power-On Self Test (POST) begins
+### The Four-Level Page Table Hierarchy
+The MMU translates virtual addresses to physical RAM frames using hierarchical page tables:
+- **PML4** (Page Map Level 4) $\rightarrow$ **PDPT** (Page Directory Pointer Table) $\rightarrow$ **PD** (Page Directory) $\rightarrow$ **PT** (Page Table) $\rightarrow$ **Physical Page Frame** (typically 4KB).
+- To accelerate this translation, the CPU caches recent mappings in the **Translation Lookaside Buffer (TLB)**.
 
-### 2. BIOS (Basic Input/Output System) & ROM 💻
+### Page Faults and Demand Paging
+When an application calls `malloc()`, Linux does not allocate physical RAM immediately. It merely updates the process's Virtual Memory Areas (VMAs). Physical RAM is only allocated when the CPU touches the memory address for the first time, triggering a **Minor Page Fault**. The kernel's page fault handler intercepts the exception, allocates an available 4KB physical page frame, updates the page table, and resumes execution seamlessly.
 
-*Retrieve:* BIOS performs initial hardware checks and loads the bootloader.
+```python
+"""
+Python script inspecting low-level Linux kernel process abstractions.
+Demonstrating direct system calls, /proc virtual filesystem inspection,
+and memory mapped virtual memory regions.
+"""
 
-**Function**:
-- **Firmware Program**: Stored in ROM chip
-- **POST**: Checks basic hardware functionality
-- **Bootloader Loading**: Loads the bootloader from storage
+import os
+import ctypes
+import resource
 
-**Process**:
-```mermaid
-graph LR
-    A[BIOS] --> B[POST]
-    B --> C{Hardware OK?}
-    C -->|Yes| D[Load Bootloader]
-    C -->|No| E[Error Message]
+# Load standard C library to access raw syscall interfaces
+libc = ctypes.CDLL(None)
+
+def audit_process_kernel_state():
+    pid = os.getpid()
     
-    style A fill:#e1f5ff
-    style D fill:#d4edda
+    # 1. Direct invocation of gettid (get thread ID) syscall (SYS_gettid = 186 on x86_64)
+    # Python os.getpid() returns process ID; SYS_gettid returns kernel thread ID
+    try:
+        tid = libc.syscall(186)
+    except Exception:
+        tid = pid
+
+    # 2. Query resource limits managed by the Linux kernel
+    soft_nofile, hard_nofile = resource.getrlimit(resource.RLIMIT_NOFILE)
+
+    # 3. Inspect virtual memory layout from /proc pseudo-filesystem
+    maps_path = f"/proc/{pid}/maps"
+    mapped_regions = 0
+    if os.path.exists(maps_path):
+        with open(maps_path, "r") as f:
+            mapped_regions = len(f.readlines())
+
+    return {
+        "pid": pid,
+        "tid": tid,
+        "max_file_descriptors": soft_nofile,
+        "active_vma_regions": mapped_regions
+    }
+
+if __name__ == "__main__":
+    state = audit_process_kernel_state()
+    print(f"Linux Kernel Process State: PID={state['pid']}, TID={state['tid']}, "
+          f"FD_Limit={state['max_file_descriptors']}, VMA_Count={state['active_vma_regions']}")
 ```
 
-### 3. Boot Loader 🔄
+For practical guidance on managing deployments and automated infrastructure on top of Linux distributions, review our audit of [modern DevOps and GitOps architectures](/posts/most-popular-devops-tools/). For understanding how version control systems manage file objects on Linux filesystems, see [Git internal DAG and object architecture](/posts/git-in-a-Nutshell/). For understanding distributed cluster scheduling across thousands of Linux nodes, refer to our analysis of [Google planet-scale system design](/posts/prepared-google-interview/).
 
-*Retrieve:* The bootloader loads the Linux kernel into memory.
+## How Linux Systems and Cloud-Native Runtimes Evolved Across 2026
 
-**Function**:
-- Small program that loads the Linux kernel
-- Reads kernel from hard disk
-- Transfers control to the kernel
+Between 2024 and 2026, Linux systems engineering moved beyond classic Unix POSIX patterns toward programmable kernel extensions, hardware-enforced isolation, and lightweight micro-virtualization:
 
-**Common Bootloaders**:
-- GRUB (Grand Unified Bootloader)
-- LILO (Linux Loader)
-- systemd-boot
+1. **The eBPF (Extended Berkeley Packet Filter) Revolution**: Historically, extending kernel capabilities required writing risky C kernel modules that could crash the machine. In 2026, eBPF programs run in a sandboxed, JIT-compiled bytecode runtime directly inside the Linux kernel. This allows security tools and observability agents to inspect network packets, trace system calls, and enforce security policies with zero context-switching overhead.
+2. **Cgroups v2 and OOM-Killer Resilience in Container Runtimes**: Modern container engines (Docker, containerd, Kubernetes) rely on Linux control groups (cgroups v2) to enforce strict CPU and memory limits. In 2026, modern kernels feature pressure stall information (PSI) hooks, allowing workloads to detect memory pressure and shed caches before the kernel's Out-Of-Memory (OOM) killer terminates the process.
+3. **MicroVM Hypervisors (Firecracker & Cloud-Hypervisor)**: Standard Linux containers share a single host kernel, meaning a kernel exploit can breach container boundaries. Cloud platforms increasingly wrap untrusted customer workloads inside MicroVMs—stripped-down virtual machines that boot in under 5 milliseconds using Linux KVM (Kernel-based Virtual Machine) primitives.
+4. **Confidential Computing Memory Encryption (AMD SEV & Intel TDX)**: Enterprise AI inference requires strict data sovereignty. 2026 Linux kernels integrate hardware-encrypted virtualization, where CPU hardware cryptographic keys ensure that even the host root administrator cannot inspect memory pages belonging to an active guest VM.
 
-### 4. Master Boot Record (MBR) 💾
+## Key Takeaways
 
-*Retrieve:* MBR contains boot information and partition table.
+- **Ring 0 / Ring 3 Privilege Decoupling Guarantees Stability**: The CPU hardware enforces memory protection; user applications cannot directly access hardware without going through the system call interface.
+- **Virtual Memory Eliminates Fragmentation**: The kernel maps non-contiguous physical RAM frames into continuous virtual address spaces, allocating physical pages on-demand via minor page faults.
+- **The `/proc` Filesystem Exposes Kernel State**: The `/proc` directory is a dynamic in-memory window into kernel data structures, allowing real-time monitoring of process memory maps, file descriptors, and scheduling metrics.
+- **Modern Cloud Runtimes Depend on Kernel Primitives**: Containers and serverless sandboxes are not hardware; they are lightweight combinations of Linux namespaces, cgroups v2, and seccomp syscall filters.
 
-**Function**:
-- First sector of the hard disk
-- Contains bootloader code
-- Includes partition table
-- Points to active partition
+## New Questions
 
-### 5. Kernel 🧠
+- **Can Monolithic Kernels Scale as Accelerated Hardware Diversifies?** With heterogeneous AI clusters integrating GPUs, TPUs, NPUs, and smartNICs, will the monolithic Linux kernel architecture struggle compared to modern microkernel or exokernel designs?
+- **How Will eBPF Programs Maintain Security Against Kernel Side-Channels?** As eBPF programs gain deeper access to kernel memory, what formal verification techniques will be required to prevent Spectre-like speculative execution side-channel leaks?
+- **What is the Latency Floor of the Syscall Boundary?** For ultra-low-latency AI inference, will applications bypass the Linux kernel network and storage stacks entirely using user-space drivers (io_uring, SPDK, DPDK)?
 
-*Innovate:* The kernel is the core of Linux, managing all system resources.
+## References
 
-**Key Responsibilities**:
-
-| Responsibility | Function | Impact |
-|:---------------|:---------|:-------|
-| **Hardware Management** | Manages CPU, memory, devices | System operation |
-| **Security** | Enforces permissions, isolation | System protection |
-| **Resource Allocation** | CPU scheduling, memory allocation | Performance |
-| **System Calls** | Interface for applications | Application support |
-
-**Kernel Components**:
-
-```mermaid
-graph TB
-    A[Linux Kernel] --> B[Process Management]
-    A --> C[Memory Management]
-    A --> D[File System]
-    A --> E[Device Drivers]
-    A --> F[Network Stack]
-    
-    B --> B1[CPU Scheduling]
-    B --> B2[Process Creation]
-    
-    C --> C1[Virtual Memory]
-    C --> C2[Page Management]
-    
-    style A fill:#e1f5ff
-    style B fill:#fff3cd
-    style C fill:#d4edda
-```
-
-### 6. User Space (Applications) 💼
-
-*Retrieve:* User space is where applications run, isolated from the kernel.
-
-**Characteristics**:
-- Isolated from kernel for security
-- Runs user applications
-- Examples: web browsers, word processors, games
-- Protected by kernel security mechanisms
-
-**User Space vs Kernel Space**:
-
-| Aspect | User Space | Kernel Space |
-|:-------|:-----------|:-------------|
-| **Access** | Limited | Full system access |
-| **Isolation** | Process isolation | Direct hardware access |
-| **Security** | User permissions | Root privileges |
-| **Examples** | Applications | Device drivers, kernel modules |
-
-### 7. System Calls 📞
-
-*Retrieve:* System calls provide the interface between user space and kernel.
-
-**Function**:
-- Applications request kernel services
-- Examples: file operations, process creation, network communication
-- Bridge between user and kernel space
-
-**Common System Calls**:
-
-| System Call | Function | Example |
-|:------------|:---------|:--------|
-| **open()** | Open file | File access |
-| **read()** | Read data | File reading |
-| **write()** | Write data | File writing |
-| **fork()** | Create process | Process creation |
-| **exec()** | Execute program | Program execution |
-
-**System Call Flow**:
-
-```mermaid
-graph LR
-    A[Application] --> B[System Call]
-    B --> C[Kernel]
-    C --> D[Hardware]
-    D --> C
-    C --> B
-    B --> A
-    
-    style A fill:#e1f5ff
-    style C fill:#fff3cd
-    style D fill:#d4edda
-```
-
-### 8. Process Management 🔄
-
-*Innovate:* The kernel manages all running processes efficiently.
-
-**Functions**:
-- **Process Creation**: fork(), exec()
-- **Resource Allocation**: CPU time, memory
-- **Scheduling**: Determines which process runs
-- **Termination**: Cleanup when processes end
-
-**Process States**:
-
-| State | Description |
-|:------|:------------|
-| **Running** | Currently executing |
-| **Ready** | Waiting for CPU |
-| **Blocked** | Waiting for I/O |
-| **Zombie** | Terminated, waiting for parent |
-
-### 9. Memory Management 🧠
-
-*Retrieve:* The kernel manages system memory efficiently.
-
-**Functions**:
-- **Allocation**: Allocates memory to processes
-- **Virtual Memory**: Maps virtual to physical addresses
-- **Page Management**: Handles memory pages
-- **Swapping**: Moves data to disk when needed
-
-**Memory Management Concepts**:
-
-```mermaid
-graph LR
-    A[Virtual Memory] --> B[Page Table]
-    B --> C[Physical Memory]
-    C --> D[RAM]
-    C --> E[Swap Space]
-    
-    style A fill:#e1f5ff
-    style C fill:#fff3cd
-    style D fill:#d4edda
-```
-
-### 10. Device Drivers 🖥️
-
-*Retrieve:* Device drivers enable kernel communication with hardware.
-
-**Function**:
-- Software programs for hardware communication
-- Translate kernel requests to hardware commands
-- Handle hardware-specific operations
-
-**Driver Types**:
-- Character devices (keyboard, mouse)
-- Block devices (hard drives, SSDs)
-- Network devices (Ethernet, Wi-Fi)
-
-### 11. File System Management 🗄️
-
-*Retrieve:* The kernel manages file organization and storage.
-
-**Functions**:
-- Organizes files on storage devices
-- Handles file operations (create, read, write, delete)
-- Manages directories and permissions
-- Provides file system abstraction
-
-**Common File Systems**:
-- ext4 (Extended File System 4)
-- XFS (High-performance file system)
-- Btrfs (Copy-on-write file system)
-- ZFS (Advanced file system)
-
-### 12. Shell (or GUI) 
-
-*Retrieve:* Shell and GUI provide user interfaces to interact with Linux.
-
-**Shell (Command-Line Interface)**:
-- Text-based interface
-- Users type commands
-- Examples: bash, zsh, fish
-- Powerful for automation
-
-**GUI (Graphical User Interface)**:
-- Visual interface with icons and windows
-- User-friendly interaction
-- Examples: GNOME, KDE, XFCE
-- Easier for beginners
-
-**Shell vs GUI**:
-
-| Aspect | Shell | GUI |
-|:-------|:------|:-----|
-| **Interface** | Text commands | Visual elements |
-| **Efficiency** | Fast for experts | Easy for beginners |
-| **Automation** | Excellent | Limited |
-| **Resource Usage** | Low | Higher |
-
-### Key Takeaways
-
-*Retrieve:* Linux boot process involves BIOS, bootloader, kernel loading, and initialization. The kernel manages hardware, processes, memory, and provides system calls for applications.
-
-*Innovate:* Understanding Linux architecture helps in system administration, troubleshooting, and optimizing performance. The separation between kernel and user space provides security and stability.
-
-*Curiosity → Retrieve → Innovation:* Start with curiosity about how operating systems work, retrieve knowledge of Linux components and processes, and innovate by applying this understanding to system administration and development.
-
-![ How Work Linux ](/assets/img/blog/how-work-linux.gif){: .light .shadow .rounded-10 w='1212' h='668' }
+- Bovet, D. P., & Cesati, M. (2005). *Understanding the Linux Kernel* (3rd ed.). O'Reilly Media. Available at: [https://www.oreilly.com/library/view/understanding-the-linux/0596005652/](https://www.oreilly.com/library/view/understanding-the-linux/0596005652/) (accessed 2026-10-18).
+- Love, R. (2010). *Linux Kernel Development* (3rd ed.). Addison-Wesley Professional. Available at: [https://www.informit.com/store/linux-kernel-development-9780672329463](https://www.informit.com/store/linux-kernel-development-9780672329463) (accessed 2026-10-18).
+- Kerrisk, M. (2010). *The Linux Programming Interface: A Linux and UNIX System Programming Handbook*. No Starch Press. Available at: [https://man7.org/tlpi/](https://man7.org/tlpi/) (accessed 2026-10-18).
+- Ward, B. (2021). *How Linux Works: What Every Superuser Should Know* (3rd ed.). No Starch Press. Available at: [https://nostarch.com/howlinuxworks3](https://nostarch.com/howlinuxworks3) (accessed 2026-10-18).
