@@ -1478,9 +1478,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a third-party review note into an authoritative source audit of FlexAttention, FlashAttention-3, and CUTLASS CuTe DSL kernel compilation."
     },
     {
       "path": "_posts/2025/11/2025-11-17-sqlite-graph-cypher-query-support-analysis.md",
