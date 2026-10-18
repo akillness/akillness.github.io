@@ -3150,9 +3150,9 @@
       "flags": [
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from basic CLI steps into authoritative source audit detailing the Jupyter messaging protocol, ZeroMQ IPC boundaries, kernelspec lifecycle, and modern uv toolchain workflows"
     },
     {
       "path": "_posts/2024/06/2024-06-30-ci-cd-the-software-development-process.md",
