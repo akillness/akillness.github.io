@@ -2139,9 +2139,9 @@
         "korean-heavy",
         "lang-ko"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from Korean machine summary into authoritative source audit on the 7-tier LLM systems hierarchy, prompt engineering, RAG, tool calling, and fine-tuning"
     },
     {
       "path": "_posts/2024/05/2024-05-12-rag-new-addition.md",
