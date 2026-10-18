@@ -3482,9 +3482,9 @@
       "flags": [
         "created-by-attribution"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from third-party PR summary into technical source audit evaluating full self-attention vs sliding-window attention, YaRN rotary scaling, and pre-training data density in open models"
     },
     {
       "path": "_posts/2026/02/2026-02-20-build-your-own-ai-assistant-minimal-openclaw.md",
