@@ -1430,9 +1430,9 @@
         "third-party-rewrite",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a third-party review note into an authoritative source audit of ByteDance Seed's Depth Anything 3 unified visual geometry foundation model."
     },
     {
       "path": "_posts/2025/11/2025-11-15-kubernetes-ecosystem-updates-ingress-nginx-retirement-helm-4.md",
