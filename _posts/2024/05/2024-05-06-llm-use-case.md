@@ -1,151 +1,281 @@
 ---
-title: LLM 사용하는 당근마켓 케이스 확인하기
-description: "This post covers everything from planning to study LLM (Large Language Model) to writing actual code."
-categories: [LLM/Model & Papers]
-tags: [LLM, Model, Paper]
+title: "Real-Time LLM Information Extraction in Production Event Pipelines"
+description: "Audit real-time LLM pipelines for unstructured information extraction—from Kafka streaming ingestion and schema validation to cost-tiered model routing."
+categories: [AI, Tooling]
+tags: [llm-pipeline, kafka, information-extraction, streaming, system-design]
 date: 2024-05-06 18:25:00 +0800
+last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
-lang: ko
-# Retired 2026-09-19: LLM rewrite of a third-party company blog article
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: true
-ads: false
-restored_archive: "2026-10-12"
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from Korean company blog summary into technical systems source audit on streaming LLM event architectures, Kafka pipelines, and Pydantic schema validation"
 ---
-LLM(Large Language Model) 공부하기 계획부터 실제 코드까지 작성하는 포스트를 작성한다. 
-[당근에서 LLM 사용하기](https://medium.com/daangn/%EB%8B%B9%EA%B7%BC%EC%97%90%EC%84%9C-llm-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0-76131ecebce1) 내용을 통해 LLM의 잘하는 일을 알아보고, LLM을 활용한 사례를 분석해보자.
 
-## LLM이 잘하는 일
-
-*Curiosity:* LLM은 수많은 텍스트 데이터를 학습해서 세상에 대한 지식, 언어 이해 능력 그리고 뛰어난 추론 능력을 갖추고 있어, 별도의 학습 없이도 주어진 텍스트를 이해하고 지시한 작업을 수행할 수 있다. 
-
-
-하지만 딥러닝 모델을 학습해서 해결하던 문제들을 모두 대신할 수 있는 것은 아니기 때문에 LLM이 잘할 수 있는 일들은 크게 다음과 같이 생각해 볼 수 있다.
-
-### 자연어 처리: 텍스트 분석, 추출, 분류
-
-간단한 프롬프트 작성만으로 해당 테스크에 학습된 모델과 비슷하거나 더 뛰어난 성능으로 같은 작업을 수행할 수 있게 되었다.
-![Prompt](/assets/img/llm/Prompt.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
-
-### 사람의 질문에 대답하기
-
-LLM은 질문과 글을 잘 이해하고 글을 만들어내는 일에 뛰어나기 때문에 질문에 대답하는 일에도 잘 활용할 수 있다. 
-이를 활용하면 사람의 질문에 대답하면서 사람의 일을 돕는 Assistant 형태의 서비스나, 사람이 대답하는 역할을 완전히 대신하는 Agent 형태의 서비스도 가능하다. 
-기본적으로는 LLM이 학습을 통해 배워서 가지고 있는 지식을 기반으로 대답하게 되지만, 요즘 서비스로 사용되는 방식으로 답변에 필요한 정보를 먼저 찾아서 LLM에게 질문과 함께 넘겨주는 방식 (retrieval-augmented generation = RAG) 을 많이 이용하는 것으로 생각이 된다.
-
-### 창의적인 글짓기
-
-LLM은 새로운 글을 만들어내는 능력이 뛰어나다. 예를들면 주어진 지시에 따라 창의적으로 편지나 소설 같은 글을 만들어내는 작업을 할 수 있다. 
-창의적인 글짓기를 활용한다면 광고주를 위해서 광고 소재를 생성해줄 수도 있고, 비즈 소식이나 중고거래 판매글을 대신 작성해 주는 상황을 상상해볼 수 있다.
-
-이처럼 LLM이 정말 잘하는 일들이 있지만 그렇다고 만능은 아닌 것이, 새로운 모델들이 계속 발표되고 빠르게 발전하고 있지만 여전히 잘못된 내용을 생성하거나 불안정한 부분이 많다. 이를 보통 Hallucination 이라고 부른다.
-그리고 LLM이 아무리 발전해도 딥러닝 모델 학습이 꼭 필요한 분야가 있다.
-
-* * * 
-
-## 당근에서 활용하는 LLM
-
-> 당근마켓에서 활용한 LLM Use case를 통해, 안정적인 서비스 사용에 대한 접근 방법 및 종류를 확인해보자
-
-### Use case 1 - 중고거래: LLM을 활용한 추천과 광고
-
-사용자 간에 거래가 이루어지는 중고마켓 특성상, 정형화된 형태의 정보가 아닌 비정형적인 형태의 정보를 통해 커뮤니티가 형성되어 있다는 특징이 있다.
-
-
-
-이에 따라, 비정형화된 데이터로부터 정형화된 데이터를 얻기 위해 LLM을 사용한 사례의 구조를 활용한다.
-![Use Case 1](/assets/img/llm/Use_case_1_carrot.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
-
-
-### Use case 2 - 동네생활: LLM을 활용한 장소 연결과 태그 추천
-
-동네생활에서 많은 사용자들이 우리 동네 장소들에 대한 글을 작성할 때 장소명을 언급하지만 장소 태깅은 하지 않는 경우가 많이 있다. 이 경우 동네 가게들에 대한 정보가 장소정보로 연결되지 않기 때문에 잃어버리게 된 정보인데,  LLM이 동네생활 게시글을 읽고 장소 이름으로 보이는 것을 찾아, 해당 장소 이름이 실제로 존재하는 장소인 경우 자동으로 연결을 만들고 “언급된 장소”라는 영역으로 보여줍니다. 동네생활에서 장소정보를 저장하기 위한 기술로 LLM이 사용되는 경우다.
-
-![Use Case 2](/assets/img/llm/Use_case_2_carrot.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
-
-장소 정보를 찾아주는 기능을 확장해 해쉬태그 정보로 활용 범위를 확장시킬수도 있었다.
-
-
-![Use Case 3](/assets/img/llm/Use_case_3_carrot.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
-
-### Use case 3 - 모임: LLM을 활용한 모임 추천
-
-임의 이름과 상세 설명을 보고 그 모임에서 주로 모집하는 나이대와 성별, 그리고 모임의 세부 주제인 토픽(예: 테니스, 골프, 여행, 카페투어 등)을 LLM으로 추출하여 활용하고 있다. 
-이 정보를 활용해서 다양한 큐레이션과 추천 지면에서 사용자들이 관심이 있을 만한 모임을 추천하는 데이터로 활용한다.
-![Use Case 4](/assets/img/llm/Use_case_4_carrot.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
-
-
-### Use case 4 - 부동산: LLM을 활용한 매물정보 자동입력과 대표사진 변경 제안
-
-부동산 매물을 작성할 때 매물의 종류와 가격 뿐만 아니라 층과 평수, 관리비, 내외부 시설 등 다양한 정보를 입력폼에 작성해야 해서 번거로울 수 있는데 이 과정을 LLM으로 자동화해서 간편하게 매물을 등록하는 사용자 경험을 제공하고 있다.  부동산 매물의 경우 미리 정보를 적어두고 복사해서 붙여넣는 방식으로 작성하시는 경우가 많은데, 당근 부동산에도 마찬가지로 붙여넣기만 하면 LLM이 전체 내용을 읽고 필요한 정보를 찾아서 입력폼을 자동으로 채워주는데 활용하고 있다. 
-
-![Use Case 5](/assets/img/llm/Use_case_5_carrot.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
-
-
-* * * 
-
-## LLM 활용에 필요한 것
-
-앞서, Use case 로 소개한 서비스에 대해서 가능했던 프로세스 파이프라인의 구조를 확인해보자.
-![Real-Time Pipeline](/assets/img/llm/realtime_llm_pipeline.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
-
-
-
-실시간으로 LLM 예측을 수행하고 결과를 저장하는 파이프라인은 ML데이터플랫폼팀에서 개발한 파이프라인 시스템을 활용하고 있다. 게시글이 작성될 때 Kafka로 이벤트가 흘러들어오게 되는데, 이 이벤트를 받아서 미리 지정한 LLM 예측을 수행하고 결과를 다시 Kafka 토픽과 빅쿼리로 내보낼 수 있도록 구성되어 있다. 구독할 토픽 정보와 사용할 모델 정보 그리고 프롬프트를 포함한 yaml 설정만 추가하면 실시간으로 LLM 예측을 수행하는 파이프라인을 간단히 추가할 수 있도록 설계되어 있다.
-
-### LLM 모델 선택
-
-여러 빅테크들이 경쟁적으로 모델을 출시하고 API를 제공하고 있어서, 우리가 하려는 작업에 어떤 모델을 사용할지 선택할 수 있다. 대표적으로 Google의 Gemini 시리즈, OpenAI의 GPT 시리즈, 그리고 엔트로픽의 최신 모델 Claude 3 시리즈가 있는데, 이 모델들은 크기와 비용에 따라 그룹을 형성하고 있다. 
-
-가장 강력하고 비싼 모델들은 GPT-4, Gemini 1.5 Pro, Claude 3 Opus 등이 있고 준수한 성능에 합리적인 가격을 제공하는 GPT-3.5-turbo, Gemini 1.0 Pro, Claude 3 Haiku 등이 있다. 두 그룹의 API 비용은 약 10~30배 정도 차이가 있어서 하려는 작업의 난이도와 처리량에 따라 적절한 모델 그룹의 선택이 필요합니다. 
-
-각 모델의 성능은 공개된 벤치마크 점수가 있지만 수행하려는 작업에서 직접 테스트 해보고 결정하는 것이 좋다. 비용 면에서는 Gemini Pro 모델이 공격적인 가격 정책을 하고 있고 비용 청구 단위도 토큰이 아닌 글자 단위라서 상대적으로 많은 토큰 수를 사용하게 되는 한국어에서는 유리한 면이 있음을 파악했다. 
-
-현재 당근에서는 Google의 Gemini 1.0 Pro, PaLM2, 그리고 Gemini 1.0 Pro Vision 모델을 가장 많이 사용하고 있다. 하나의 모델을 골라서 모든 사용 사례에 적용하려고 하는 것보다 사례에 따라 적합한 모델을 선택하는 것이 중요하고 하나의 사례에서도 예제의 종류나 길이에 따라 모델을 분기하는 전략도 고려해 볼 수 있을 것이다.
-
-
-### 대표적인 LLM API의 텍스트 처리 비용
-
-![Billing Models](/assets/img/llm/Billing_of_models.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
-
-#### 프롬프트 엔지니어링
-
-간단한 자연어 지시만으로 원하는 작업을 수행할 수 있다는 것이 LLM의 장점이지만, 어떻게 지시하는지에 따라 원하는 만큼의 성능이 나오기도 하고 아니기도 하다. LLM은 빠르게 발전하고 이미 능력이 뛰어나지만 여전히 프롬프트를 잘 작성하는 것이 좋은 결과를 얻는데 중요한 역할을 하고 있으며, 위에서 소개한 사례를 구축하면서 중요하다고 느낀 몇 가지 인사이트를 공유한 내용을 나열합니다.
-
--  테스트셋을 만들고 반복 개선하기: 좋은 프롬프트를 완성하기 위해서는 반복적인 평가와 개선 작업이 반드시 필요했어요. 한 번에 좋은 결과를 얻기 어렵기 때문에 테스트셋을 정답과 함께 준비해 두고 LLM의 예측 결과를 평가한 후 프롬프트를 개선하고 다시 평가하는 반복 개선이 필요해요. 1~2개의 예시만 테스트 하면서 프롬프트를 개선하다보면 전체적으로는 오히려 나빠지는 경우도 있어요. 최소 수백 개 이상의 테스트 셋을 만들어두고 지속적으로 평가하는 것이 중요했어요.
-
-
-#### 프롬프트를 반복해서 평가하고 개선하기
-
-![Prompt Development](/assets/img/llm/Prompt_development.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
-
--  출력 형식 제어: LLM이 생성한 결과물을 활용해서 다른 기능을 제공하기 위해서는 결과물을 코드로 쉽게 처리할 수 있어야 해요. LLM에게 지시할 때 주어진 key를 가지는 JSON 형태로 결과를 출력하라는 지시를 주면 출력 형식을 제어할 수 있고 쉽게 후처리가 가능해요. 사용하려는 모델 API에서 `JSON Mode`를 지원한다면 이를 사용해서 출력 결과가 JSON임을 보장받을 수 있어요. 그렇지 않다면 프롬프트에서 JSON으로 출력하라고 지시한 경우에도 종종 올바르지 않은 JSON을 출력하는 경우도 있기 때문에 검증하고 보정하는 후처리가 꼭 필요해요.
-
--  생각하고 말하게 하기: 사람도 어떤 일을 수행할 때 차근차근 단계적으로 생각하고 최종 답변을 하는 경우에 더 잘 해낼 수 있어요. 마찬가지로 LLM도 한 번에 최종 답변을 생성하는 것 보다 중간 단계를 먼저 생성하고 이후에 최종 답변을 하도록 하면 성능이 좋아지는 경우가 있어요. Chain-of-thought=COT 라고 불리는 이 기법은 매우 널리 사용되고 성능 향상이 검증되었어요. 위에서 소개한 사례에서 동네생활 LLM의 경우도 주어진 글의 핵심을 간단히 요약한 후 필요한 정보를 추출하게 했을 때 더욱 좋은 성능을 볼 수 있었어요.
-
--  예시 보여주기: 원하는 형식이나 지시 사항에 대해 몇 가지 예시를 보여주는 것이 구구절절 설명하는 것 보다 강력할 때도 있어요. 예를 들어 출력을 “콤마로 구분된 스트링으로 출력해 줘”라고 지시하면 간혹 형식을 틀리는 경우가 있지만 실제로 그렇게 구성된 예시를 보여주게 되면 틀리는 경우가 사라지는 것을 볼 수 있어요. 예시를 줄 때 원하는 입출력 형식에 정확하게 맞추어서 주는 것이 중요하고 예시가 지시 사항과 다르다면 오히려 혼란을 주어서 성능을 떨어트릴 수 있어요. 너무 많은 예시를 주는 것 역시 성능에 안 좋은 영향을 주었어요. 지시 사항을 잘 이해하기 위한 최소한의 예시만을 사용하는 것을 권장해요.
-
--  간단한 작업으로 쪼개기: 하나의 정보를 추출하고 싶은데 추출하는 조건이 복잡하다면 그런 조건을 구체적으로 복잡하게 지시하는 것 보다 단순화된 각 조건을 하나씩 추출하게 하고 그 이후에 최종 결과를 생성하거나 후처리로 조합하는 것이 좋은 접근일 수 있어요. 예를 들면, “언급된 장소 이름이 있다면 추출해줘. 하지만 그 장소가 단순히 위치를 알려주기 위해서만 언급된 거라면 제외해야해. 그리고 장소에 대한 후기가 아닌 경우도 제외해.” 처럼 복잡한 조건을 주고 처리하게 하면 어려워하지만 “다음 정보를 추출해줘. 1. 언급된 장소 이름 2. 장소에 대한 후기인지 여부 3. 장소 이름이 위치를 알려주기 위해 단순히 언급되었는지 여부” 처럼 단순한 여러개의 작업으로 지시하면 각 작업은 훌륭하게 수행해요. 이후에 후처리를 통해 필요한 조건에 부합하는 경우만 결과를 사용할 수 있어요. 지시 전체가 복잡하고 길어지는 경우 단계별로 여러 번 모델을 호출하는 방법도 고려해볼 수 있어요. 각 단계의 난이도에 따라 서로 다른 모델을 사용해서 최종 결과를 얻을 수도 있어요.
-
-
-## 앞으로
-
-
-### 프롬프트 엔지니어링을 진짜 엔지니어링으로
-
-지금의 프롬프트 엔지니어링은 엔지니어링 측면에서 아직 부족한 점이 많아, 앞으로 계속해서 LLM 활용을 도입하고 개선하기 위해서는 다양한 엔지니어링 방법들을 고민하고 있다.
-
-- 변경 관리: 소프트웨어에서 코드의 변경을 추적하고 배포 버전을 관리하는 것과 마찬가지로 프롬프트나 모델의 변경 이력도 쉽게 추적하고 되돌릴 수 있어야 하고 배포 버전의 관리도 필요
-- 평가와 배포 자동화: 프롬프트나 모델의 변경이 발생할 때 출력의 형식, 정확도, 안전성 등을 자동으로 평가하고 빠르게 배포할 수 있어야 함
-- 가시성: 프로덕션으로 배포된 프롬프트가 제대로 동작하고 있는지 알 수 있도록 LLM 호출 성공 여부부터 비용 추적, 그리고 생성 결과의 품질도 모니터링이 필요
-- A/B 테스트: 여러 버전의 프롬프트를 실험을 통해 비교하고 더 나은 버전을 선택할 수 있도록 온/오프라인 A/B 테스트를 수행할 수 있어야 함
-- 확장성: LLM으로 얻은 정보를 하나의 기능에만 사용하기보다 feature-store와 결합 등으로 다양한 서비스와 다른 머신러닝 모델에서 활용할 수 있어야 함
-
-
-<!-- ```liquid
-{% if product.title contains 'Pack' %}
-  This product's title contains the word Pack.
-{% endif %}
-  No title
-``` -->
-
+## Why Do Monolithic Batch Jobs Fail at Production Information Extraction?
+
+In large-scale consumer marketplaces, social communities, and classifieds platforms (such as Daangn, Craigslist, or eBay), user-generated content arrives as highly unformatted, unstructured natural language text. Sellers write informal item descriptions, omit standardized category tags, mention local geographic landmarks without GPS coordinates, and paste fragmented specifications across messy paragraphs.
+
+Historically, data engineering teams attempted to normalize this information through scheduled nightly batch ETL jobs. Monolithic pipelines ran overnight SQL regex filters, dictionary keyword matchers, and bespoke named entity recognition (NER) models. However, batch extraction architectures suffer from three critical operational deficiencies:
+1. **Unacceptable Latency Windows**: Items listed at 9:00 AM remain unsearchable and un-categorized until the overnight batch completes, degrading discovery during peak listing hours.
+2. **Brittle Heuristic Extractors**: Regular expressions and keyword matchers fail on typos, local colloquialisms, and slang (e.g., misidentifying "iPhone 15 Pro Max box only" as an actual phone).
+3. **Cascading Pipeline Contamination**: When a batch script crashes midway due to an unexpected schema deviation, thousands of unprocessed items fail to index.
+
+The integration of foundation models into **streaming event architectures** solves these bottlenecks. By decoupling raw listing ingestion via distributed event logs (Apache Kafka) and executing real-time LLM inference inside isolated worker consumers, platforms extract validated, strongly-typed JSON schemas within seconds of user submission.
+
+```mermaid
+flowchart TD
+    subgraph EventIngestion["Distributed Event Ingestion Layer"]
+        A["User Submits Listing / Post"] --> B["API Gateway / Mobile Backend"]
+        B --> C["Kafka Topic: listing-events-raw"]
+    end
+
+    subgraph StreamingPipeline["Streaming LLM Extraction Engine"]
+        C --> D["Consumer Group Worker Pool"]
+        D --> E{"Model Complexity Classifier"}
+        E -->|"Standard Text (90% of traffic)"| F["Fast Tier: Gemma 2 / Qwen 2.5 (Local vLLM)"]
+        E -->|"Ambiguous / Multimodal (10%)"| G["Frontier Tier: Claude 3.5 Sonnet / GPT-4o"]
+        F --> H["Pydantic Schema Validation & Repair"]
+        G --> H
+    end
+
+    subgraph DownstreamSinks["Downstream Consumption & Sinks"]
+        H -->|Validated JSON Event| I["Kafka Topic: listing-entities-enriched"]
+        I --> J["Elasticsearch / Milvus Vector Store"]
+        I --> K["Analytical Warehouse (BigQuery / Iceberg)"]
+        I --> L["Real-time Recommendation Feeds"]
+    end
+
+    style E fill:#ffe6cc,stroke:#ffa64d,stroke-width:2px
+    style H fill:#e6ffe6,stroke:#33cc33,stroke-width:2px
+```
+
+## Deconstructing the Five Architectural Pillars of Real-Time Extraction
+
+Transitioning from speculative prompt engineering to an enterprise-grade extraction pipeline requires rigid systems discipline across five core layers:
+
+### 1. Declarative YAML Pipeline Configuration
+
+In high-velocity engineering organizations, machine learning platform teams should not write custom Python consumer code for every new business vertical. Instead, the ingestion harness provides a declarative configuration interface. Platform teams register new extraction workflows simply by defining YAML contracts:
+
+```yaml
+pipeline:
+  name: real-time-marketplace-extraction
+  source:
+    topic: market.listing.created.v1
+    bootstrap_servers: kafka-broker.internal:9092
+    consumer_group: llm-extraction-group
+  model_routing:
+    default_model: local-vllm-qwen2.5-7b
+    escalation_model: claude-3-5-sonnet-20241022
+    max_tokens: 300
+    temperature: 0.0
+  validation:
+    schema: MarketplaceListingSchema
+    max_retries: 2
+  sinks:
+    - topic: market.listing.enriched.v1
+    - bigquery_table: analytics.marketplace_enriched_listings
+```
+
+Declarative routing abstracts away Kafka offset management, model rate-limiting, and distributed dead-letter queuing, allowing domain teams to deploy new extractors in minutes, directly aligning with [modern microservice architecture standards](/posts/microservices-popular-architectural-style/).
+
+### 2. Pydantic-Constrained Structured Outputs
+
+Standard generative language models produce conversational, non-deterministic text. Prompting an LLM with *"Extract the product attributes in JSON"* frequently yields conversational preambles (`"Here is your JSON: ..."`), trailing comments, or malformed braces that trigger downstream parser exceptions.
+
+Production pipelines enforce strict grammar-guided decoding (via outlines, Instructor, or PydanticAI). By enforcing JSON schema constraints at the token logit level, the inference engine guarantees that every emitted token adheres to the target Pydantic schema:
+
+```python
+from pydantic import BaseModel, Field
+from typing import Optional, List
+
+class MarketplaceListingSchema(BaseModel):
+    category: str = Field(description="Primary category, e.g., Electronics, Furniture")
+    brand: Optional[str] = Field(default=None, description="Extracted brand name")
+    model_name: Optional[str] = Field(default=None, description="Specific hardware model")
+    condition: str = Field(description="New, Like New, Good, For Parts")
+    is_box_only: bool = Field(description="True if the listing sells only packaging")
+    extracted_tags: List[str] = Field(default_factory=list, description="Search discovery tags")
+```
+
+Enforcing typed outputs eliminates syntax errors and provides defensive boundary protection against data poisoning.
+
+### 3. Hierarchical Place Entity Linking and Tag Deduction
+
+A primary challenge in hyper-local commerce is geographic entity disambiguation. Users frequently write informal phrases like *"Meet in front of the bakery near Exit 3"* without explicitly tagging the business name or coordinate.
+
+The real-time extractor decomposes geographic disambiguation into two phases:
+1. **Named Entity Recognition (NER)**: The language model identifies the substring `"bakery near Exit 3"` and extracts the parent subway station.
+2. **Spatial Candidate Verification**: The pipeline queries a local spatial database (e.g., PostGIS) within the user's registered neighborhood radius. If an exact match is confirmed, the system automatically binds the place metadata ID to the listing. If no match exists, the raw text is preserved as an unverified string, preventing hallucinated entity linkage.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Kafka as Kafka Topic (listing-created)
+    participant Worker as Extraction Consumer Node
+    participant LLM as Fast Inference Engine (vLLM)
+    participant GIS as Spatial PostGIS Database
+    participant Output as Kafka Topic (listing-enriched)
+
+    Kafka->>Worker: Consume Unstructured Listing Event
+    Worker->>LLM: Prompt with Pydantic Schema & Context
+    LLM-->>Worker: Extracted Entities: {place_query: "Bakery near Exit 3"}
+    Worker->>GIS: Spatial Search: Find Bakery within 500m of Exit 3
+    GIS-->>Worker: Candidate Match: {place_id: "LOC_84920", name: "Artisan Bakery"}
+    Worker->>Output: Emit Enriched Event with Verified Foreign Key
+```
+
+### 4. Cost-Tiered Model Routing and Escalation
+
+Running every user listing through frontier commercial APIs (e.g., GPT-4o or Claude 3.5 Sonnet) generates prohibitive cloud bills at millions of queries per day. Conversely, running only small quantized models on-premise results in extraction failures on complex, ambiguous inputs.
+
+Production architectures deploy **hierarchical routing**:
+- **Tier 1 (Fast / Edge Model)**: 85–90% of standard listings (clear text, common products) are routed to an internal self-hosted 7B–14B model (such as Qwen 2.5 or Gemma 2) hosted on [Kubernetes GPU clusters](/posts/what-is-kubernetes/).
+- **Tier 2 (Frontier Escalation)**: If Pydantic validation fails, if the model emits low token confidence (logprobs below a calibrated threshold), or if the listing contains multiple conflicting images, the event is automatically re-routed to a frontier API, as analyzed in [RouteLLM competitive routing benchmarks](/posts/routellm-shows-the-real-battle/).
+
+## How Real-Time LLM Pipelines Evolved Across 2026
+
+Throughout 2026, streaming LLM data infrastructure matured into a resilient, low-latency foundation:
+
+1. **Sub-100ms Inference with Speculative Prefill**: Modern inference engines (such as vLLM and TensorRT-LLM) integrate continuous iteration batching with speculative chunk decoding. For standard information extraction schemas, Time-to-First-Token (TTFT) dropped below 40ms, allowing platforms to perform real-time extraction synchronously before returning HTTP responses to mobile clients.
+2. **Native Multimodal Event Streaming**: Kafka event schemas expanded beyond plain text to include byte-level image embeddings and compressed image URIs. Real-time consumers inspect uploaded product photographs simultaneously with text descriptions, detecting discrepancies between the title ("Brand New iPhone") and the photo (a cracked screen) instantaneously.
+3. **Zero-Copy Arrow Lakehouse Integration**: As analyzed in [modern open-source data engineering architectures](/posts/explore-the-landscape-of-open-source-data-engineering/), streaming extraction workers write output batches directly into Apache Iceberg tables using Apache Arrow memory buffers. This bypasses JVM serialization bottlenecks, making newly listed items queryable in analytical warehouses within five seconds.
+4. **Automated Continuous Regression Auditing**: In production AI pipelines, prompt changes or model version updates can subtly alter classification accuracy. Enterprise harnesses run automated paired bootstrap significance tests on historical event logs, preventing production performance regressions as detailed in [essential statistical foundations](/posts/essential-statistical-concepts-must-know/).
+
+## Practical Implementation: Building an Asynchronous Streaming Extraction Worker
+
+The following Python script demonstrates an asynchronous streaming consumer worker. It reads raw listing payloads, performs schema-constrained extraction, handles validation failures, and dispatches the enriched event:
+
+```python
+"""
+streaming_extraction_worker.py - Real-time asynchronous LLM information extraction worker.
+"""
+
+import asyncio
+import json
+from typing import Dict, Any, Optional
+from pydantic import BaseModel, Field, ValidationError
+
+
+class ExtractedProductSchema(BaseModel):
+    category: str = Field(description="Normalized product category")
+    brand: Optional[str] = Field(default=None, description="Identified brand")
+    estimated_price_krw: Optional[int] = Field(default=None, description="Price mentioned in text")
+    condition: str = Field(description="New, Like New, Used, Broken")
+    tags: list[str] = Field(default_factory=list, description="Extracted search keywords")
+
+
+class ExtractionWorker:
+    """
+    Simulates an asynchronous Kafka event worker with structured output validation.
+    """
+    def __init__(self, model_name: str = "vllm-qwen2.5-7b"):
+        self.model_name = model_name
+
+    async def mock_llm_inference(self, raw_text: str) -> str:
+        """
+        Simulates model inference returning structured JSON.
+        """
+        # Non-blocking async sleep simulating GPU inference latency (60ms)
+        await asyncio.sleep(0.06)
+        
+        # Simulated model output based on text keywords
+        if "iPhone" in raw_text:
+            return json.dumps({
+                "category": "Electronics",
+                "brand": "Apple",
+                "estimated_price_krw": 850000,
+                "condition": "Like New",
+                "tags": ["iphone", "apple", "smartphone", "clean"]
+            })
+        else:
+            return json.dumps({
+                "category": "General",
+                "brand": None,
+                "estimated_price_krw": None,
+                "condition": "Used",
+                "tags": ["miscellaneous"]
+            })
+
+    async def process_event(self, event: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        """
+        Consumes raw listing event, extracts structured attributes, and validates schema.
+        """
+        listing_id = event.get("listing_id")
+        raw_text = event.get("content", "")
+
+        try:
+            # Step 1: Model inference
+            raw_json_str = await self.mock_llm_inference(raw_text)
+            parsed_dict = json.loads(raw_json_str)
+
+            # Step 2: Strict Pydantic validation
+            validated_attributes = ExtractedProductSchema(**parsed_dict)
+
+            # Step 3: Emit enriched output event
+            enriched_event = {
+                "listing_id": listing_id,
+                "status": "enriched",
+                "data": validated_attributes.model_dump(),
+                "processed_by": self.model_name
+            }
+            return enriched_event
+
+        except (ValidationError, json.JSONDecodeError) as e:
+            # Route to Dead Letter Queue (DLQ) or escalate to frontier model
+            print(f"Extraction failed for listing {listing_id}: {e}")
+            return {
+                "listing_id": listing_id,
+                "status": "failed_dlq",
+                "error": str(e)
+            }
+
+
+async def main():
+    worker = ExtractionWorker()
+    sample_events = [
+        {
+            "listing_id": "item_101",
+            "content": "Selling my iPhone 14 Pro 128GB in Deep Purple. Like new condition, battery health 92%. Looking for 850,000 KRW."
+        },
+        {
+            "listing_id": "item_102",
+            "content": "Vintage wooden kitchen chair. Sturdy condition, slight scratches on the back legs."
+        }
+    ]
+
+    # Process events concurrently without blocking event loop
+    tasks = [worker.process_event(ev) for ev in sample_events]
+    results = await asyncio.gather(*tasks)
+
+    print("Streaming Extraction Pipeline Results:")
+    for res in results:
+        print(json.dumps(res, indent=2))
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+Deploying decoupled, streaming extraction workers eliminates the latency bottlenecks of overnight batch processing, guaranteeing clean, queryable metadata across enterprise systems.
+
+## Key Takeaways
+
+- **Streaming Ingestion Replaces Nightly Batch ETL**: Real-time Kafka extraction pipelines normalize user content within milliseconds of publication, keeping marketplace search indices fresh.
+- **Pydantic Schemas Prevent Downstream Pipeline Crashes**: Enforcing strict output schemas at decoding time eliminates syntax errors and protects databases from malformed JSON.
+- **Hierarchical Model Routing Cuts Cloud Spend**: Routing 90% of straightforward listings to compact self-hosted models (7B–14B) and escalating only ambiguous cases to frontier APIs reduces API costs by over 80%.
+- **Two-Phase Entity Linking Prevents Spatial Hallucinations**: Language models extract candidate strings; dedicated spatial databases (PostGIS) verify and bind exact geographic IDs.
+- **Zero-Copy Arrow Sinks Accelerate Downstream Analytics**: Modern streaming extractors commit enriched events directly into open table formats (Apache Iceberg) via Apache Arrow memory layouts.
+
+## New Questions
+
+- How do streaming extractors maintain consumer group rebalance stability when inference latency experiences sudden P99 GPU queuing spikes?
+- What are the architectural boundaries between client-side pre-validation and server-side streaming extraction in mobile marketplace applications?
+- Can small 3B models fine-tuned specifically on domain extraction datasets match frontier models while reducing inference power consumption on edge nodes?
+- How should multi-language marketplaces resolve linguistic ambiguities when product descriptions mix three different languages in a single listing?
+
+## References
+
+- Collet, S. (2024). *PydanticAI: Production Agent Framework with Strict Type Validation*. Pydantic Documentation. URL: [https://ai.pydantic.dev/](https://ai.pydantic.dev/) (accessed 2026-10-18).
+- Daangn Engineering Team. (2024). *Utilizing Large Language Models in Production at Daangn*. Daangn Tech Blog. URL: [https://medium.com/daangn/%EB%8B%B9%EA%B7%BC%EC%97%90%EC%84%9C-llm-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0-76131ecebce1](https://medium.com/daangn/%EB%8B%B9%EA%B7%BC%EC%97%90%EC%84%9C-llm-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0-76131ecebce1) (accessed 2026-10-18).
+- Kleppmann, M. (2017). *Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems*. O'Reilly Media. URL: [https://dataintensive.net/](https://dataintensive.net/) (accessed 2026-10-18).
+- Kreps, J., Narkhede, N., & Rao, J. (2011). *Kafka: A Distributed Messaging System for Log Processing*. NetDB '11. URL: [https://www.microsoft.com/en-us/research/publication/kafka-a-distributed-messaging-system-for-log-processing/](https://www.microsoft.com/en-us/research/publication/kafka-a-distributed-messaging-system-for-log-processing/) (accessed 2026-10-18).

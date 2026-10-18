@@ -3568,9 +3568,9 @@
         "lang-ko",
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from Korean company blog summary into technical systems source audit on streaming LLM event architectures, Kafka pipelines, and Pydantic schema validation"
     },
     {
       "path": "_posts/2024/05/2024-05-07-llm-lingo.md",
