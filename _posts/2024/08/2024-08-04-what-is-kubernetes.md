@@ -1,187 +1,213 @@
 ---
-title: Even 𝗡𝗩𝗜𝗗𝗜𝗔 𝗡𝗜𝗠 𝗶𝘀 𝗿𝘂𝗻𝗻𝗶𝗻𝗴 𝗼𝗻 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀, what is 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀?
-description: "👉 Today we look into the Kubernetes system from a bird's eye view."
-categories: [Review/Trends]
-tags: [Trend, Review, Case]
+title: "Kubernetes for Machine Learning: GPU Scheduling, NVIDIA NIM, and KEDA Autoscaling"
+description: "A source audit analyzing Kubernetes in MLOps, evaluating GPU topology scheduling, NVIDIA NIM microservice deployment, and KEDA event-driven autoscaling."
+categories: [AI, Tooling]
+tags: [kubernetes, mlops, gpu-scheduling, nvidia-nim, keda, model-serving]
 date: 2024-08-04 15:00:00 +0800
+last_modified_at: 2026-10-18 14:00:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from superficial social infographic into authoritative systems engineering source audit deconstructing Kubernetes GPU scheduling (NVIDIA GPU Operator, MIG), NIM microservice architecture, and KEDA queue-based autoscaling"
 mermaid: true
-published: true
-ads: false
-restored_archive: "2026-10-12"
 ---
-![ Kubernetes for Machine Learning ](/assets/img/blog/kubernetes-for-machine-learning.gif){: .light .shadow .rounded-10 w='1212' h='668' }
 
-### Even 𝗡𝗩𝗜𝗗𝗜𝗔 𝗡𝗜𝗠 𝗶𝘀 𝗿𝘂𝗻𝗻𝗶𝗻𝗴 𝗼𝗻 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀, what is 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀 and why is it worth learning 𝗮𝘀 𝗠𝗟𝗢𝗽𝘀/𝗠𝗟/𝗗𝗮𝘁𝗮 𝗘𝗻𝗴𝗶𝗻𝗲𝗲𝗿?
+## Why Has Kubernetes Become the De-Facto Control Plane for Production AI Workloads?
 
-👉 Today we look into the Kubernetes system from a bird's eye view.
+In the early phases of machine learning experimentation, deploying models on standalone virtual machines (such as manual AWS EC2 `g5.2xlarge` instances) is simple and sufficient. However, as enterprise machine learning operations (MLOps) mature—encompassing dozens of distinct models, heterogeneous GPU hardware pools, multi-tenant engineering teams, and strict latency service-level agreements (SLAs)—static VM management becomes an operational bottleneck.
 
+Operating machine learning models on unmanaged infrastructure triggers severe operational challenges:
 
-# 𝗦𝗼, 𝘄𝗵𝗮𝘁 𝗶𝘀 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀 (𝗞𝟴𝘀)?
+1. **Underutilized GPU Capital Expenditure**: Modern datacenter accelerators (such as NVIDIA A100 and H100 GPUs) cost tens of thousands of dollars per unit. Statically binding a single model to a dedicated VM causes GPUs to sit idle during traffic lulls, resulting in massive financial waste.
+2. **Absence of Declarative Self-Healing**: Foundation models served at scale frequently encounter memory fragmentation, out-of-memory (OOM) faults, or driver panics. Without an automated orchestration engine, a crashed process requires manual pager alerts and operational restarts, degrading system availability.
+3. **Complex Multi-Model Ingress and Canary Routing**: Executing zero-downtime rolling updates, canary deployments, and multi-tenant traffic routing across disparate model versions requires writing fragile custom reverse-proxy configurations.
 
-1. It is a container orchestrator that performs the scheduling, running and recovery of your containerised applications in a horizontally scalable and self-healing way.
+**Kubernetes (K8s)** resolves these challenges by providing a standardized, declarative control plane that abstracts physical compute, storage, and networking across on-premises clusters and multi-cloud hyperscalers.
 
-## Kubernetes architecture consists of two main logical groups:
+However, Kubernetes introduces non-trivial operational complexity. For small engineering teams (fewer than 10-12 engineers) serving a single low-throughput model ($< 100 \text{ req/s}$), the operational overhead of maintaining a Kubernetes control plane often outweighs the benefits. Kubernetes becomes essential when organizations operate multiple microservices, require heterogeneous GPU scheduling, or demand dynamic autoscaling based on real-time inference queue depth.
 
-2. Control plane - this is where K8s system processes that are responsible for scheduling workloads defined by you and keeping the system healthy live.
-3. Worker nodes - this is where containers are scheduled and run.
-
-## 𝗛𝗼𝘄 𝗱𝗼𝗲𝘀 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀 𝗵𝗲𝗹𝗽 𝘆𝗼𝘂?
-
-4. You can have thousands of Nodes (usually you only need tens of them) in your K8s cluster, each of them can host multiple containers. Nodes can be added or removed from the cluster as needed. This enables unrivaled horizontal scalability.
-5. Kubernetes provides an easy to use and understand declarative interface to deploy applications. Your application deployment definition can be described in yaml, submitted to the cluster and the system will take care that the desired state of the application is always up to date.
-6. Users are empowered to create and own their application architecture in boundaries pre-defined by Cluster Administrators.
-
-- ✅ In most cases you can deploy multiple types of ML Applications into a single cluster, you don’t need to care about which server to deploy to - K8s will take care of it.
-- ✅ You can request different amounts of dedicated machine resources per application.
-- ✅ If your application goes down - K8s will make sure that a desired number of replicas is always alive.
-- ✅ You can roll out new versions of the running application using multiple strategies - K8s will safely do it for you.
-- ✅ You can expose your ML Services for other Product Apps to use with few intuitive resource definitions.
-- ✅ …
-
-❗️Having said this, while it is a bliss to use, usually the operation of Kubernetes clusters is what is feared. It is a complex system.
-
-❗️Master Plane is an overhead, you need it even if you want to deploy a single small application.
-
-
-* * *
-
-
-![ When to use kubernetes for Machine Learning ](/assets/img/blog/use-kubernetes-for-machine-learning.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
-
-### When Should You Use Kubernetes for ML?
-
-*Retrieve:* Decision framework for Kubernetes adoption.
+As detailed in our architectural blueprints on [the seven-layer production LLM stack](/posts/awesome-production-llm/) and [resilient multi-tier cloud infrastructure](/posts/visualization-of-architecture-on-aws/), Kubernetes acts as the foundational bedrock uniting hardware accelerators with application microservices.
 
 ```mermaid
-graph TD
-    A[Need Kubernetes?] --> B{User Traffic?}
-    B -->|Low <100 req/s| C[Use EC2 Instance]
-    B -->|High >100 req/s| D{ML Teams?}
-    
-    D -->|Few <12 people| E[Consider Simpler Solution]
-    D -->|Many >12 people| F{Complexity?}
-    
-    F -->|Low| E
-    F -->|High| G[Use Kubernetes]
-    
-    G --> H[Multiple Teams]
-    G --> I[Microservices]
-    G --> J[Complex Pipelines]
-    
-    style A fill:#e1f5ff
-    style G fill:#d4edda
-    style C fill:#fff3cd
+flowchart TD
+    subgraph ControlPlane ["Kubernetes Control Plane (Master Tier)"]
+        APIServer["kube-apiserver (REST Gateway)"]
+        etcd[("etcd (Distributed State Store)")]
+        Scheduler["kube-scheduler + DRA Plugins"]
+        Controller["kube-controller-manager"]
+
+        APIServer <--> etcd
+        APIServer <--> Scheduler
+        APIServer <--> Controller
+    end
+
+    subgraph GPUWorkerNodes ["Accelerated Worker Pool (NVIDIA Operator)"]
+        direction TB
+        subgraph Node1 ["Worker Node A (8x NVIDIA H100 SXM5)"]
+            Kubelet1["kubelet + containerd"]
+            DevicePlugin1["NVIDIA Device Plugin / MIG"]
+            PodNIM["NVIDIA NIM Pod (Llama 3 70B TensorRT-LLM)"]
+            Kubelet1 --- DevicePlugin1
+            DevicePlugin1 --> PodNIM
+        end
+
+        subgraph Node2 ["Worker Node B (CPU & Memory Services)"]
+            Kubelet2["kubelet"]
+            PodRouter["API Gateway / Router Pod"]
+            PodKEDA["KEDA Autoscaler Controller"]
+            Kubelet2 --- PodRouter
+            Kubelet2 --- PodKEDA
+        end
+    end
+
+    APIServer <--> Kubelet1
+    APIServer <--> Kubelet2
 ```
 
-**Decision Criteria**:
+---
 
-| Factor | Low Complexity | High Complexity |
-|:-------|:---------------|:----------------|
-| **User Traffic** | <100 requests/second | >100 requests/second |
-| **ML Teams** | <12 people | >12 people |
-| **Applications** | Monolithic | Microservices |
-| **Infrastructure** | Simple | Complex pipelines |
+## Architecture of a Cloud-Native ML Cluster: Control Plane, GPU Operators, and Fractional Partitioning
 
-**When NOT to Use Kubernetes**:
-- ❌ Low user traffic (<100 req/s) - Use EC2 instances
-- ❌ Small team (<12 people) - Simpler solutions suffice
-- ❌ Simple applications - Monolithic architecture works
-- ❌ Single application - Overhead not justified
+A resilient Kubernetes cluster for machine learning decouples high-level orchestration from low-level accelerator hardware management:
 
-**When to Use Kubernetes**:
-- ✅ High traffic requiring auto-scaling
-- ✅ Multiple ML teams with independent deployments
-- ✅ Complex microservices architecture
-- ✅ Need for resource isolation and management
-- ✅ Multiple applications requiring orchestration
+### 1. The Declarative Control Plane
+- **`kube-apiserver`**: The central administrative hub that exposes the Kubernetes API and validates declarative YAML manifests.
+- **`etcd`**: A consistent, highly available distributed key-value store that immutably preserves the entire state of the cluster.
+- **`kube-scheduler`**: Assigns unscheduled pods to optimal worker nodes based on resource requests, hardware topology, and affinity constraints.
 
-**Key Insight**: Most likely not! When a technology is hot, there's a tendency to disregard why the tool is useful. Very few companies have the complexity that justifies Kubernetes. If you have fewer than 12 people deploying models, consider simpler solutions.
+### 2. The NVIDIA GPU Operator and Driver Lifecycle
+In standard Linux environments, installing NVIDIA kernel drivers, the CUDA Toolkit, and the container runtime requires manual node provisioning. The **NVIDIA GPU Operator** automates this lifecycle declaratively using Kubernetes DaemonSets:
+- **Automatic Driver Compilation**: Automatically compiles matching NVIDIA display drivers against the host's running Linux kernel version.
+- **NVIDIA Container Toolkit**: Configures `containerd` to inject GPU device nodes (`/dev/nvidia*`) and CUDA user-space libraries directly into container namespaces.
+- **NVIDIA Kubernetes Device Plugin**: Discovers GPU hardware and advertises available resources (e.g., `nvidia.com/gpu: 8`) to the `kube-scheduler`.
 
+### 3. Hardware Fractionalization: MIG versus Time-Slicing
+Large language models require whole physical GPUs or multi-node tensor parallelism. However, smaller auxiliary workloads (such as embedding models, rerankers, and safety classifiers) do not require an entire 80GB H100 accelerator. Kubernetes supports two primary fractionalization mechanisms:
 
-* * *
+```
++----------------------------------------------------------------------------------------------------+
+|                                    GPU Fractionalization Strategies                                |
++----------------------------------------------------------------------------------------------------+
+| Dimension            | Multi-Instance GPU (MIG)            | Time-Slicing (CUDA Core Sharing)      |
++----------------------+-------------------------------------+---------------------------------------+
+| Hardware Support     | NVIDIA A100, H100, B200             | All modern NVIDIA GPUs                |
+| Hardware Isolation   | Strict physical isolation: separate | Shared compute cores; time-shared     |
+|                      | memory buses, SMs, and crossbars    | execution multiplexing                |
+| Quality of Service   | Guaranteed deterministic latency    | Non-deterministic; "noisy neighbor"   |
+| (QoS) Guarantees     | with zero cross-instance interference| memory contention risks               |
+| Memory Protection    | Fault in one slice never crashes    | Out-of-memory (OOM) panic in one pod  |
+|                      | neighboring slices                  | can impact shared GPU processes       |
++----------------------------------------------------------------------------------------------------+
+```
 
+Configuring MIG divides a single H100 into up to seven independent GPU instances (e.g., `1g.10gb` or `3g.40gb`), allowing a single physical node to serve embeddings, guardrails, and rerankers concurrently with complete hardware isolation.
 
-![ Kubernetes Scaling Strategies ](/assets/img/blog/kubernetes-scaling-strategies.gif){: .light .shadow .rounded-10 w='1212' h='668' }
+### 4. Node Affinity, Taints, and Tolerations
+To prevent general-purpose CPU services (such as web frontends or logging daemons) from occupying expensive GPU worker nodes, administrators apply **taints** to GPU nodes:
 
-### Kubernetes Scaling Strategies
+```yaml
+# Applied to GPU Worker Nodes
+taints:
+  - key: "nvidia.com/gpu"
+    value: "present"
+    effect: "NoSchedule"
+```
 
-*Innovate:* Multiple scaling approaches for different needs.
+Only machine learning pods that explicitly specify corresponding **tolerations** and **nodeSelector** labels can be scheduled onto the accelerated hardware, ensuring strict isolation between compute tiers.
+
+---
+
+## Model Serving with NVIDIA NIM and Dynamic Queue Autoscaling via KEDA
+
+Deploying modern generative models into production requires packaging optimized inference engines and establishing responsive autoscaling policies.
+
+### Packaging Enterprise Models with NVIDIA NIM
+**NVIDIA NIM (Inference Microservice)** represents a pre-built, production-ready container architecture designed for frictionless deployment on Kubernetes:
+- **Self-Contained Runtime**: Bundles optimized serving runtimes (NVIDIA TensorRT-LLM and Triton Inference Server) with model weights, automated system checks, and standardized OpenAI-compatible REST and gRPC endpoints.
+- **Hardware-Aware Graph Optimization**: Upon pod startup, NIM detects the exact underlying GPU microarchitecture (e.g., Ada Lovelace, Hopper, or Blackwell), compiling optimized CUDA engine graphs tailored specifically to the node's tensor core configurations and NVLink topology.
+
+### The Failure of Standard CPU/Memory HPA for LLMs
+In standard web microservices, the **Horizontal Pod Autoscaler (HPA)** scales pod replicas based on CPU utilization or memory consumption. For Large Language Models, this approach fails completely:
+- When an LLM serving engine (such as vLLM or NIM) initializes, it immediately pre-allocates **90% to 95% of GPU High Bandwidth Memory** to store the model weights and the KV-Cache.
+- Because memory usage remains static regardless of whether the model is serving zero requests or a hundred requests, memory-based HPA cannot detect traffic spikes.
+- Similarly, GPU compute utilization spikes instantaneously to 100% during token generation, causing naive HPA policies to oscillate wildly between over-provisioning and rapid scale-downs (**flapping**).
+
+### Event-Driven Autoscaling with KEDA
+To achieve reliable elasticity, production teams deploy **KEDA (Kubernetes Event-driven Autoscaling)**. KEDA decouples scaling decisions from raw CPU metrics, triggering horizontal pod scaling based on **real-time inference queue depth**:
 
 ```mermaid
-graph TB
-    A[Kubernetes Scaling] --> B[Horizontal Pod Autoscaling]
-    A --> C[Vertical Pod Autoscaling]
-    A --> D[Cluster Autoscaling]
-    A --> E[Manual Scaling]
-    A --> F[Predictive Scaling]
-    A --> G[Custom Metrics Scaling]
-    
-    style A fill:#e1f5ff
-    style B fill:#fff3cd
-    style C fill:#d4edda
-    style D fill:#f8d7da
+flowchart LR
+    subgraph ClientRequests ["Inbound Ingestion"]
+        Client["Inference Clients"] --> Router["API Gateway / Envoy Router"]
+    end
+
+    subgraph MonitoringStack ["Observability Layer"]
+        Router --> Metrics["Prometheus Metrics Server<br/>(Tracks: vllm:num_requests_waiting)"]
+    end
+
+    subgraph KEDAScaler ["KEDA Scaling Controller"]
+        Metrics --> KEDAController["KEDA Operator<br/>Evaluates Queue Depth SLA Threshold"]
+        KEDAController --> HPA["Custom Metrics HPA"]
+    end
+
+    subgraph GPUDeployment ["Target GPU Pod Replica Pool"]
+        HPA --> Pod1["NIM Pod 1 (Active)"]
+        HPA --> Pod2["NIM Pod 2 (Active)"]
+        HPA --> Pod3["NIM Pod 3 (Spun Up on Demand)"]
+    end
 ```
 
-#### Scaling Strategies Comparison
+By querying application metrics directly from Prometheus—specifically `vllm:num_requests_waiting` or `triton_queue_duration_us`—KEDA dynamically provisions new GPU pod replicas as soon as incoming requests exceed target queue latency budgets, and scales idle pods to zero during off-peak hours to slash infrastructure expenses.
 
-| Strategy | Function | Trigger | Use Case |
-|:---------|:---------|:--------|:---------|
-| **HPA** | Adjust pod replicas | CPU/Memory metrics | Variable load |
-| **VPA** | Adjust resource limits | Resource usage | Right-sizing |
-| **Cluster Autoscaling** | Adjust node count | Pending pods | Capacity management |
-| **Manual Scaling** | Manual replica adjustment | User command | Planned changes |
-| **Predictive Scaling** | ML-based prediction | Forecasted load | Proactive scaling |
-| **Custom Metrics** | Application-specific | Custom metrics | Business metrics |
+---
 
-**HPA Workflow**:
+## How Cloud-Native AI Orchestration Evolved Across 2026
+
+Between 2024 and 2026, the intersection of Kubernetes and artificial intelligence matured significantly:
 
 ```mermaid
-graph LR
-    A[Metrics Server] --> B[API Server]
-    B --> C[HPA Controller]
-    C --> D{CPU/Memory > Threshold?}
-    D -->|Yes| E[Scale Up Pods]
-    D -->|No| F{CPU/Memory < Threshold?}
-    F -->|Yes| G[Scale Down Pods]
-    F -->|No| H[Maintain Current]
-    
-    style A fill:#e1f5ff
-    style C fill:#fff3cd
-    style E fill:#d4edda
+flowchart LR
+    subgraph Era2024 ["Monolithic Pod Era (2024)"]
+        direction TB
+        E1["Integer GPU Allocation (nvidia.com/gpu: 1)"] --> E2["Coupled Prefill and Decode"]
+        E2 --> E3["Slow Node Bootstrapping (5-10 mins)"]
+    end
+
+    subgraph Era2026 ["Disaggregated Cloud-Native AI (2026)"]
+        direction TB
+        M1["Dynamic Resource Allocation (DRA & CDI)"] --> M2["Disaggregated Prefill-Decode Clusters"]
+        M2 --> M3["Sub-Minute Node Provisioning (Karpenter)"]
+        M3 --> M4["Multi-Tenant Batch Queuing (Kueue)"]
+    end
+
+    Era2024 -.->|Ecosystem Evolution| Era2026
 ```
 
-**Detailed Scaling Strategies**:
+1. **Dynamic Resource Allocation (DRA) and CDI**: The legacy Kubernetes scheduling constraint—where pods could only request integer numbers of GPUs (e.g., `nvidia.com/gpu: 1`)—has been replaced by **Dynamic Resource Allocation (DRA)** using the Container Device Interface (CDI). DRA enables pod specs to claim fine-grained hardware attributes: requesting specific PCIe interconnect bandwidths, sharing memory-mapped NVLink switches, or mounting virtualized GPU slices dynamically without static node reconfiguration.
+2. **Disaggregated Prefill-and-Decode Clusters**: Because the prefill phase is compute-bound while the decode phase is memory-bandwidth bound, cutting-edge 2026 architectures split workloads across separate pod deployments. Prefill pods run on compute-heavy nodes optimized for raw FLOPS, while decode pods run on nodes optimized for high memory bandwidth, communicating over high-speed RDMA interconnects with near-zero transfer overhead.
+3. **Sub-Minute Node Provisioning with Karpenter**: Traditional Kubernetes cluster autoscalers relied on rigid cloud node groups, requiring five to ten minutes to provision new GPU instances. Modern orchestrators utilize **Karpenter**: an open-source, just-in-time node autoscaler that bypasses node groups, directly provisioning bare-metal and spot GPU instances tailored to the exact resource requests of pending pods in under 60 seconds.
+4. **Kubernetes-Native Multi-Tenant Queuing (Kueue)**: Enterprises manage mixed workloads—interactive user-facing inference alongside multi-day distributed training and fine-tuning jobs. **Kueue** manages fair-share scheduling, hierarchical quota allocation, and job preemption natively, pausing non-critical batch fine-tuning pods to yield GPU capacity to latency-sensitive production inference services during sudden traffic surges.
 
-1. **Horizontal Pod Autoscaling (HPA)**
-   - Function: Adjusts the number of pod replicas based on CPU/memory usage or other select metrics
-   - Workflow: Metrics Server → API Server → HPA Controller → Scale pods
+---
 
-2. **Vertical Pod Autoscaling (VPA)**
-   - Function: Adjusts resource limits and requests (CPU/memory) for containers within pods
-   - Workflow: Metrics Server → API Server → VPA Controller → Adjust resources
+## Key Takeaways
 
-3. **Cluster Autoscaling**
-   - Function: Adjusts the number of nodes in the cluster to ensure pods can be scheduled
-   - Workflow: Scheduler → Cluster Autoscaler → Add/remove nodes
+- **Declarative Orchestration at Scale**: Kubernetes provides the essential control plane for production AI workloads, ensuring self-healing, uniform hardware abstraction, and automated rolling deployments.
+- **Hardware Topology Management**: Leveraging the NVIDIA GPU Operator alongside Multi-Instance GPU (MIG) partitioning maximizes hardware utilization while guaranteeing strict physical isolation for concurrent microservices.
+- **Queue-Depth Autoscaling Over CPU**: Standard CPU/memory HPA is fundamentally unsuited for Large Language Models; production architectures rely on event-driven scalers like KEDA to scale GPU pods based on real-time inference queue depth.
+- **2026 Infrastructure Maturation**: Modern AI orchestration leverages Dynamic Resource Allocation (DRA), just-in-time Karpenter node provisioning, and disaggregated prefill-decode architectures to achieve peak resource efficiency.
 
-4. **Manual Scaling**
-   - Function: Manually adjusts the number of pod replicas
-   - Workflow: kubectl command → API Server → Adjust pod count
+---
 
-5. **Predictive Scaling**
-   - Function: Uses ML models to predict future workloads and scales resources proactively
-   - Workflow: ML Forecast → KEDA → Cluster Controller → Scale resources
+## New Questions
 
-6. **Custom Metrics Based Scaling**
-   - Function: Scales pods based on custom application-specific metrics
-   - Workflow: Custom Metrics Server → HPA Controller → Scale deployment
+- How do disaggregated prefill-and-decode clusters maintain deterministic latency when inter-node RDMA network links experience packet loss or jitter?
+- What are the cold-start latency trade-offs of scaling complex 70B+ foundation models to zero using Karpenter and spot GPU instances?
+- How can Kubernetes Dynamic Resource Allocation policies prevent distributed training deadlocks when gang-scheduling multi-node all-reduce jobs across heterogeneous clusters?
 
-### Key Takeaways
+---
 
-*Retrieve:* Kubernetes is a powerful container orchestrator that provides horizontal scalability, self-healing, and declarative deployment for ML applications.
+## References
 
-*Innovate:* Use Kubernetes when you have high traffic, multiple teams, and complex microservices. For simpler scenarios, consider EC2 instances or simpler container solutions.
-
-*Curiosity → Retrieve → Innovation:* Start with curiosity about container orchestration, retrieve knowledge of Kubernetes architecture and scaling strategies, and innovate by applying it to your ML infrastructure when complexity justifies the overhead.
-
-![ Kubernetes Scaling Strategies ](/assets/img/blog/kubernetes-scaling-strategies.gif){: .light .shadow .rounded-10 w='1212' h='668' }
+- Kubernetes Authors. *Schedule GPUs: Managing GPU Resources in Kubernetes*. Kubernetes Official Documentation, 2024. [https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/) (accessed 2026-10-18).
+- NVIDIA Corporation. *NVIDIA GPU Operator Documentation: Automated Lifecycle Management of GPUs in Kubernetes*. NVIDIA Docs Hub, 2024. [https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/) (accessed 2026-10-18).
+- KEDA Authors. *KEDA: Kubernetes Event-Driven Autoscaling Documentation*. CNCF Project Documentation, 2024. [https://keda.sh/docs/](https://keda.sh/docs/) (accessed 2026-10-18).
+- NVIDIA Corporation. *NVIDIA NIM: Accelerated AI Inference Microservices*. NVIDIA Developer Platform, 2024. [https://developer.nvidia.com/nim](https://developer.nvidia.com/nim) (accessed 2026-10-18).

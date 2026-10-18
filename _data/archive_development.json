@@ -3370,9 +3370,9 @@
         "no-sources",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial social infographic into authoritative systems engineering source audit deconstructing Kubernetes GPU scheduling (NVIDIA GPU Operator, MIG), NIM microservice architecture, and KEDA queue-based autoscaling"
     },
     {
       "path": "_posts/2024/08/2024-08-12-essential-statistical-concepts-must-know.md",
