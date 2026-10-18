@@ -2430,9 +2430,9 @@
       "links_at_intake": 3,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from brief open-source announcement note into authoritative source audit on GraphRAG architecture, Leiden community detection, and global summarization mechanics"
     },
     {
       "path": "_posts/2024/07/2024-07-14-prepared-google-interview.md",
