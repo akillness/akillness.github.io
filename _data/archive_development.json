@@ -3449,9 +3449,9 @@
         "third-party-rewrite",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial paper roundup into deep systems source audit analyzing agent memory error propagation, embedding-space semantic caching, and multilingual token fertility"
     },
     {
       "path": "_posts/2025/11/2025-11-17-async-code-performance-issues-solutions.md",
