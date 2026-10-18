@@ -1662,9 +1662,9 @@
       "links_at_intake": 3,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on BMAD Method, phase-gated agile development, TEA execution cycles, and role-based agent verification"
     },
     {
       "path": "_posts/2026/02/2026-02-11-developer-knowledge-api-mcp.md",
