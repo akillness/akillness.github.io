@@ -2308,9 +2308,9 @@
         "third-party-rewrite",
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal third-party rewrite into authoritative source audit on technical interview evolution, SWE-bench style practical evaluation, system design, and AI-assisted workflows"
     },
     {
       "path": "_posts/2024/05/2024-05-27-hybrid-mlops-using-mlflow.md",
