@@ -3309,9 +3309,9 @@
       "links_at_intake": 1,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial paper flyer into comprehensive academic source audit deconstructing Sahoo et al.'s prompt engineering taxonomy, mathematical formulations of CoT/ToT/Self-Consistency, and 2026 automated prompt compilation via DSPy"
     },
     {
       "path": "_posts/2024/08/2024-08-03-accelerating-llms-by-graph-structure.md",
