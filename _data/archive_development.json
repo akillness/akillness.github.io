@@ -3657,9 +3657,9 @@
         "lang-ko",
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from third-party machine summary into technical source audit on the duality of Transformer blocks: cross-token attention routing vs associative FFN memory"
     },
     {
       "path": "_posts/2024/05/2024-05-19-10-core-algorithms.md",
