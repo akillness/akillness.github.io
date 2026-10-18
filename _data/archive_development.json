@@ -3353,9 +3353,9 @@
       "links_at_intake": 1,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from sensationalized headline and superficial summary into authoritative empirical source audit deconstructing Shanghai AI Lab's NeedleBench evaluation harness, multi-needle retrieval limits, Ancestral Trace Challenge (ATC), and 2026 long-context attention mechanisms"
     },
     {
       "path": "_posts/2024/08/2024-08-04-what-is-kubernetes.md",
