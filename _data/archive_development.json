@@ -2108,9 +2108,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal third-party rewrite into authoritative source audit on LLaMA-Factory unified post-training architecture, PEFT engines, and alignment methods"
     },
     {
       "path": "_posts/2024/05/2024-05-12-langchain-llama.md",
