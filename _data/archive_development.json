@@ -4050,9 +4050,9 @@
         "no-sources",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial 10-point list into exhaustive systems audit on production web application architecture: L4/L7 ingress, caching topologies, event streaming, and SRE observability"
     },
     {
       "path": "_posts/2024/07/2024-07-14-software-development-cycle.md",
