@@ -3416,9 +3416,9 @@
       "links_at_intake": 5,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial repo listicle into technical source audit on ML and LLM systems design interview frameworks (3D parallelism, vLLM PagedAttention, KV cache sizing, and RAG architectures)"
     },
     {
       "path": "_posts/2025/11/2025-11-03-rlhf-summary-from-human-feedback-single-dgx-spark.md",
