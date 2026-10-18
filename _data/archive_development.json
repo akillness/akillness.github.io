@@ -3134,9 +3134,9 @@
       "flags": [
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from sparse practice notes into comprehensive mathematical and architectural source audit comparing recurrent bottlenecked networks with multi-head self-attention and 2026 hybrid architectures"
     },
     {
       "path": "_posts/2024/06/2024-06-29-venv-python-jupyter.md",
