@@ -1804,9 +1804,9 @@
       "flags": [
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on Oh-My-Codex (OMX) multi-agent orchestration, tmux session multiplexing, and MCP state integration"
     },
     {
       "path": "_posts/2026/02/2026-02-18-rowboat-local-first-coworker.md",
