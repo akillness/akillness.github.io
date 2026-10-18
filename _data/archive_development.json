@@ -4101,9 +4101,9 @@
       "flags": [
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial news snippet into exhaustive technical source audit on DoLa: layer-contrastive decoding, Jensen-Shannon premature layer selection, logit lens mechanics, and truthfulness benchmarks"
     },
     {
       "path": "_posts/2024/07/2024-07-20-routellm-chatbot-great-evaluation.md",
