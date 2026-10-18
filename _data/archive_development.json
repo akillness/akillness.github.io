@@ -2382,9 +2382,9 @@
       "links_at_intake": 2,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from brief COMPUTEX announcement note into authoritative source audit on NVIDIA NIM, TensorRT-LLM compilation, Hugging Face Inference Endpoints, and continuous batching"
     },
     {
       "path": "_posts/2024/07/2024-07-01-most-popular-devops-tools.md",
