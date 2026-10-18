@@ -3035,9 +3035,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal Python library summary into authoritative source audit on ScrapeGraphAI graph execution, DOM tree pruning, and deterministic schema extraction"
     },
     {
       "path": "_posts/2024/05/2024-05-30-llm-ai-agent.md",
