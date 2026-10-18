@@ -4354,9 +4354,9 @@
         "no-sources",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Source audit examining twelve fundamental data structures across contiguous memory buffers, hash tables, B+ trees, and CPU cache line locality."
     },
     {
       "path": "_posts/2024/07/2024-07-01-work-in-cloud-native-ecosystem.md",
