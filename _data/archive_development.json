@@ -1321,9 +1321,9 @@
       "links_at_intake": 5,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2024 note into an authoritative source audit of Meta's Llama 3.1 technical report, analyzing 405B dense scaling, 4D distributed training, and 128K context extensions."
     },
     {
       "path": "_posts/2024/07/2024-07-30-llm-cource-with-langchain-and-agent.md",

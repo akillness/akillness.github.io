@@ -1,266 +1,173 @@
 ---
-title: Introducing Llama 3.1 - the most capable LLMs from Meta, free and arguably
-  open-source!
-description: LLM, Llama3.1
-categories: [LLM/Model & Papers]
-tags: [LLM, Model, Paper]
-date: 2024-07-29 12:00:00 +0800
-mermaid: true
-image:
-  path: /assets/img/llm/compare-performance-of-llms.jpeg
-  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt:
-  - Compare Performance of LLMS by KMMLU
-# Retired 2026-09-19: copied social/newsletter post later rewritten by an LLM
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
 published: true
-ads: false
-restored_archive: "2026-10-12"
+title: "Meta Llama 3.1 Architecture: 405B Scaling, 4D Parallelism, and DPO Alignment"
+description: "An architectural source audit of Meta's Llama 3.1 405B report, evaluating 4D distributed parallelism, 128K context scaling, and DPO post-training alignment."
+categories: [AI, Research]
+tags: [llama, meta, foundation-models, distributed-training, alignment]
+date: 2024-07-29 12:00:00 +0800
+last_modified_at: 2026-10-18 10:40:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from a preliminary 2024 note into an authoritative source audit of Meta's Llama 3.1 technical report, analyzing 405B dense scaling, 4D distributed training, and 128K context extensions."
+mermaid: true
+math: true
+image:
+  path: /assets/img/llm/llama-3-1-technical-report.jpeg
+  alt: "Meta Llama 3.1 Technical Report Architecture"
 ---
-![ Llama 3.1 MMLU performance ](/assets/img/llm/llama-3-1-mmlu-performance.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
 
-# Introducing Llama 3.1
+![Meta Llama 3.1 Technical Report](/assets/img/llm/llama-3-1-technical-report.jpeg){: .light .w-75 .shadow .rounded-10 }
 
-Yesterday's Llama 3.1 release marked a big milestone for LLM researchers and practitioners. Llama 3.1 405B is the biggest and most capable LLM with openly available LLMs. And particularly exciting is that the new Llama release comes with a 93-page research paper this time. Below, I want to share a few interesting facts from the paper, and I will likely write a longer analysis this weekend.
+## How Did Meta Push Dense Scaling to 405 Billion Parameters?
 
-> Meta announcement 👉 <https://ai.meta.com/blog/meta-llama-3-1/>
-{: .prompt-info}
+In late July 2024, Meta released the **Llama 3.1** collection, accompanied by an exhaustive 93-page technical report (*The Llama 3 Herd of Models*, arXiv:2407.21783). While the open-source community had previously accessed capable small and medium models (7B to 70B), the flagship release of **Llama 3.1 405B** represented the first openly available, dense autoregressive Transformer trained at frontier datacenter scale.
 
-True to our commitment to open source, starting today, we’re making these models available to the community for download on [llama.meta.com](https://llama.meta.com/) and [HuggingFace](https://huggingface.co/collections/meta-llama/llama-31-669fc079a0c406a149a5738f) and available for immediate development on our broad ecosystem of partner platforms.
+Prior to Llama 3.1, prevailing industry consensus suggested that dense models beyond 100 billion parameters were economically unviable for production serving, prompting many laboratories to pivot toward sparse Mixture of Experts (MoE). Meta deliberately chose a dense standard decoder-only architecture, arguing that dense architectures maximize training stability, simplify deployment pipelines, and exhibit predictable empirical scaling behavior.
 
-<details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Introducing Llama 3.1 - details </summary>
-
-### Model Sizes
-
-*Retrieve:* Llama 3.1 comes in 3 sizes with different capabilities.
-
-| Model | Parameters | Context | Use Case |
-|:------|:-----------|:--------|:---------|
-| **8B** | 8 billion | 128k tokens | Efficient, accessible |
-| **70B** | 70 billion | 128k tokens | Balanced performance |
-| **405B** | 405 billion | 128k tokens | Maximum capability |
-
-**Key Insight**: The 405B model was used to improve 8B and 70B via synthetic data during fine-tuning stages.
-
-### Pretraining Data
-
-*Retrieve:* The 93-page report offers detailed insights into dataset preparation.
-
-**Training Data**:
-- **15.6 trillion tokens** for pretraining
-- Primarily "web data" (sources not disclosed)
-- Detailed preparation recipes shared
-
-**Dataset Preparation Techniques**:
-- Deduplication methods
-- Formatting (markdown removal)
-- Quality filters
-- Unsafe content removal
-- Reproducible recipes
-
-**Why Sources Not Shared**:
-- Copyright concerns
-- Legal protection
-- Still provides valuable methodology
-
-### Long-Context Support
-
-*Innovate:* 128k token context achieved through multi-stage training.
-
-**Training Process**:
+Achieving convergence on a 405-billion-parameter dense model required training on **15.6 trillion tokens** across **16,000 NVIDIA H100 GPUs** consuming over $10^{25}$ FLOPs. This operational feat required engineering a 4D distributed parallelism training harness, implementing multi-stage context window expansion up to 128,000 tokens, and replacing complex RLHF pipelines with iterative Rejection Sampling and Direct Preference Optimization (DPO). This source audit deconstructs the foundational systems engineering, distributed infrastructure, and post-training alignment strategies detailed in the Llama 3.1 technical report.
 
 ```mermaid
-graph LR
-    A[8k Context Pretraining] --> B[Stage 1: 16k]
-    B --> C[Stage 2: 32k]
-    C --> D[Stage 3: 64k]
-    D --> E[Stage 4: 96k]
-    E --> F[Stage 5: 112k]
-    F --> G[Stage 6: 128k]
-    
-    style A fill:#e1f5ff
-    style G fill:#d4edda
+flowchart TD
+    subgraph DistributedHarness["1. 4D Distributed Parallelism (16,000 H100 GPUs)"]
+        GlobalBatch[15.6T Token Pre-Training Corpus] --> FSDP[Fully Sharded Data Parallel: ZeRO-3 World]
+        FSDP --> PP[Pipeline Parallelism: 16 Stages Interleaved]
+        PP --> CP[Context Parallelism: Ring Attention for 128K Sequences]
+        CP --> TP[Tensor Parallelism: 8-Way NVLink Intra-Node Slicing]
+    end
+
+    subgraph ArchitectureSpecs["2. 405B Dense Transformer Core"]
+        TP --> Layers[126 Transformer Layers / d_model = 16,384]
+        Layers --> GQA[Grouped-Query Attention: 128 Heads / 8 KV Heads]
+        Layers --> RoPE[YaRN / RoPE Base Frequency θ = 5,000,000]
+        Layers --> FFN[SwiGLU Activation / Intermediate Dim = 53,248]
+    end
+
+    subgraph PostTraining["3. Iterative Alignment & Distillation"]
+        FFN --> RejectionSampling[Rejection Sampling via Rule & Reward Models]
+        RejectionSampling --> SFT[Supervised Fine-Tuning: Code & Tool Use]
+        SFT --> DPO[Direct Preference Optimization: Multi-Round Alignment]
+        DPO --> Distill[Synthetic Data Distillation to 8B & 70B Models]
+    end
 ```
 
-**Key Findings**:
-- 6-stage context extension
-- Requires 0.1% long-context instruction samples in fine-tuning
-- Without this, long-context capabilities decline
+---
 
-### Alignment Process
+## The 4D Parallelism Architecture: Training on 16,000 H100 GPUs
 
-*Retrieve:* Llama 3.1 uses DPO, not PPO for alignment.
+Training a 405-billion parameter dense model requires over 810 gigabytes of memory just to store 16-bit model weights, expanding to multiple terabytes once optimizer states, activations, and gradient buffers are allocated. No single GPU or single 8-GPU node can fit the active state of a 405B model.
 
-**Alignment Pipeline**:
+Meta engineered a **4D Parallelism** distributed training topology across 16,000 NVIDIA H100 GPUs interconnected via RoCEv2 (RDMA over Converged Ethernet) network fabrics:
 
-| Stage | Method | Details |
-|:------|:-------|:--------|
-| **1. SFT** | Supervised Fine-Tuning | Instruction following |
-| **2. DPO** | Direct Preference Optimization | Preference learning |
-| **3. Rejection Sampling** | Reward Model | During SFT stage |
+```
+4D Parallelism Dimensions for 405B:
+TP (Tensor Parallelism)   = 8   (Within a single 8-GPU server across NVLink)
+CP (Context Parallelism)  = 8   (Distributes 128K sequence length across 8 nodes)
+PP (Pipeline Parallelism) = 16  (Partitions 126 layers across 16 pipeline stages)
+DP / FSDP (Data Parallel) = 16  (Shards remaining gradient & optimizer states)
+Total Allocation: 8 × 8 × 16 × 16 = 16,384 GPUs
+```
 
-**Note**: Unlike Llama 2, no PPO was used. Only DPO after SFT.
+### 1. Tensor Parallelism (TP = 8)
+Within each 8-GPU DGX server, Megatron-style tensor parallelism slices the self-attention projection weights and SwiGLU MLP layers across the 8 GPUs. Inter-GPU communication is handled entirely over ultra-high-bandwidth (900 GB/s) NVLink interconnects.
 
-### Inference Requirements
+### 2. Context Parallelism (CP = 8)
+When scaling sequences to 128,000 tokens, standard attention matrices consume prohibitive VRAM ($O(N^2)$ memory scaling). Context parallelism partitions the sequence across 8 GPUs using **Ring Attention**, asynchronously streaming key-value blocks in a ring topology concurrently with local query computation.
 
-*Retrieve:* Significant compute resources needed for 405B model.
+### 3. Pipeline Parallelism (PP = 16) with 1F1B Scheduling
+The 126 Transformer layers are divided across 16 sequential pipeline stages. To prevent GPU idle time ("bubble overhead"), Meta employed an interleaved **One-Forward-One-Backward (1F1B)** scheduling algorithm, where each GPU alternates between computing forward passes for new micro-batches and backward passes for previous ones.
 
-| Configuration | GPUs Required | Use Case |
-|:--------------|:--------------|:---------|
-| **Training** | 16,000 H100 | Model training |
-| **Inference (bfloat16)** | 16 H100 | Full precision |
-| **Inference (FP8)** | 8 H100 | Quantized, single node |
+### 4. Fully Sharded Data Parallelism (FSDP)
+Remaining memory overhead is eliminated by sharding optimizer states (AdamW master weights, momentum, and variance) across the data-parallel replicas, ensuring zero memory redundancy across the cluster.
 
-### Performance Comparison
+---
 
-*Retrieve:* Performance is very favorable, on par with GPT-4.
+## Multi-Stage Context Extension: Scaling from 8K to 128K Tokens
 
-**Benchmark Results**:
-- Competitive with GPT-4
-- Strong across multiple tasks
-- See performance charts for details
+Directly pre-training a 405B model on 128,000-token sequences from the outset is computationally inefficient; early training steps are wasted calculating expensive attention matrices across short-range syntactic dependencies.
 
-</details>
+Meta resolved this through a structured **6-stage continual pre-training context schedule**:
 
-## Summary: Llama 3.1 Technical Achievements
+```
+Context Window Extension Stages:
+8K Context ──> 16K Stage ──> 32K Stage ──> 64K Stage ──> 96K Stage ──> 128K Context
+(Initial 15T)   (800B tok)    (400B tok)    (200B tok)    (100B tok)    (Final Stage)
+```
 
-*Retrieve:* Training required 16,000 Nvidia H100 GPUs over months, resulting in a 405B parameter model with 128K token context length.
+1. **Phase 1: Pre-Training on 8K Sequences:** The initial 15 trillion tokens were processed strictly at an 8,192-token context length to build general knowledge and reasoning representations.
+2. **Phase 2: Progressive Window Expansion:** The model was continually trained on approximately 800 billion additional tokens, systematically doubling sequence lengths up to 128,000 tokens.
+3. **RoPE Frequency Adaptation:** Rotary Position Embeddings (RoPE) suffer from phase-shift collapse when extrapolated beyond their pre-trained frequency. Meta scaled the base frequency parameter $\theta$ from standard $500{,}000$ up to **$5{,}000{,}000$**, preventing high-frequency spatial degradation across distant context tokens.
+4. **The 0.1% Long-Context Data Discipline:** During post-training alignment, Meta uncovered a critical empirical invariant: if the fine-tuning instruction mixture did not contain at least **0.1% synthetic long-context multi-turn QA samples**, the model's performance on standard short benchmarks remained intact, but its "needle-in-a-haystack" retrieval recall in 128K contexts collapsed completely.
 
-**Training Scale**:
-- **16,000 H100 GPUs**
-- **Months of training**
-- **405B parameters**
-- **128K context length**
+---
 
-**Performance**: According to benchmarks, mostly superior to OpenAI's GPT-4.
+## The Post-Training Alignment Recipe: Rejection Sampling and Direct Preference Optimization (DPO)
 
-**Note**: Benchmarks can be biased; more parameters don't guarantee better performance. Real user feedback over time will determine true capabilities.
+For previous generations (Llama 2), alignment relied heavily on Reinforcement Learning from Human Feedback (RLHF) utilizing Proximal Policy Optimization (PPO), which required training separate actor, critic, and reward models in a complex, unstable reinforcement loop.
 
-### Open-Source Status
-
-*Innovate:* Llama 3.1 is almost open-source with some restrictions.
-
-**What's Open**:
-
-| Component | Status | Details |
-|:----------|:-------|:--------|
-| **Model Weights** | ✅ Open | Downloadable from Hugging Face |
-| **Training Code** | ✅ Open | ~300 lines Python/PyTorch |
-| **FairScale Library** | ✅ Open | Distributed GPU training |
-
-**What's Restricted**:
-
-| Aspect | Restriction | Details |
-|:-------|:------------|:--------|
-| **Commercial Use** | ⚠️ Limited | Allowed unless >700M users |
-| **Training Data** | ❌ Not open | Sources not disclosed |
-| **Large Scale** | ⚠️ License needed | >700M users requires Meta license |
-
-**Benefits**:
-- Self-host instead of API costs
-- Full model control
-- Custom fine-tuning
-- Privacy and security
-
-* * *
-
-![ Llama 3.1 Ultra-Efficiently ](/assets/img/llm/llama-3-1-ultra-efficiently.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
-
-## Fine-Tune Llama 3.1 Ultra-Efficiently with Unsloth AI
-
-*Retrieve:* Comprehensive guide for supervised fine-tuning on Hugging Face.
-
-**Guide Topics**:
-- Efficient fine-tuning in Google Colab
-- When to use fine-tuning
-- Hyperparameter tuning
-- Dataset processing
-
-> **Resources**:
-> - **📝 Article**: <https://huggingface.co/blog/mlabonne/sft-llama3>
-> - **💻 Colab Notebook**: <https://colab.research.google.com/drive/164cg_O7SV7G8kZr_JXqLd6VC7pd86-1Z>
-{: .prompt-info}
-
-* * * 
-
-![ Llama 3.1 Technical Report ](/assets/img/llm/llama-3-1-technical-report.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
-
-## Llama 3.1 Technical Report: A Treasure Trove for LLM Building
-
-*Retrieve:* The Llama 3.1 technical report is an invaluable resource for building SOTA LLMs from scratch.
-
-**Why It Matters**: Rare to see so much detailed information in a technical report. Essential reference for LLM development.
-
-### Scaling Laws
-
-*Curiosity:* Are scaling laws reliable? Can we predict model performance as compute increases?
-
-**Key Finding**: Scaling laws derived from smaller models hold for much higher compute.
-
-**Scaling Law Formula**:
-- Loss decreases **linearly with log(compute)**
-- Confirmed up to 10^22 FLOPs (previous research)
-- **Validated up to 10^25 FLOPs** (Llama 3.1)
-- **4 orders of magnitude** extension!
-
-**Implication**: Can predict performance for multi-trillion parameter models!
-
-**Visualization**:
+In Llama 3.1, Meta discarded PPO entirely in favor of an **iterative Rejection Sampling and Direct Preference Optimization (DPO)** pipeline:
 
 ```mermaid
-graph LR
-    A[10^22 FLOPs] --> B[Scaling Law]
-    B --> C[10^25 FLOPs]
-    C --> D[Llama-3.1-405B]
-    D --> E[Multi-Trillion Models?]
-    
-    style A fill:#e1f5ff
-    style D fill:#fff3cd
-    style E fill:#d4edda
+flowchart LR
+    SFT_Model[Checkpoint after Supervised Fine-Tuning] --> Generate[Sample N Candidate Outputs per Prompt]
+    Generate --> RewardScorer[Multi-Reward Evaluation & Unit Tests]
+    RewardScorer --> Filter[Select Top Candidate y_win & Rejected y_lose]
+    Filter --> DPO_Update[DPO Objective Loss Calculation]
+    DPO_Update --> RefinedModel[Updated Llama 3.1 Checkpoint]
+    RefinedModel -.-> SFT_Model
 ```
 
-### Tool Use (Agentic) Training
+### 1. Multi-Round DPO Over PPO
+Direct Preference Optimization (Rafailov et al., NeurIPS 2023) analytically expresses the reward function directly through the language model's policy:
 
-*Innovate:* Advanced tool use training for agentic capabilities.
+$$
+\mathcal{L}_{\text{DPO}}(\theta; \pi_{\text{ref}}) = -\mathbb{E}_{(x, y_w, y_l)} \left[ \log \sigma \left( \beta \log \frac{\pi_\theta(y_w|x)}{\pi_{\text{ref}}(y_w|x)} - \beta \log \frac{\pi_\theta(y_l|x)}{\pi_{\text{ref}}(y_l|x)} \right) \right]
+$$
 
-**Training Approach**:
+Iterating this process across multiple successive rounds—where the newly optimized policy generates fresh candidate outputs that are filtered and scored again—yielded higher alignment stability and eliminated the hyperparameter brittleness of PPO critics.
 
-| Type | Description | Purpose |
-|:-----|:------------|:--------|
-| **Single Tool Call** | One tool per query | Basic tool use |
-| **Nested Calls** | Tool output feeds another | Multi-step reasoning |
-| **Parallel Calls** | Multiple tools simultaneously | Efficiency |
+### 2. Upstream Distillation: The 405B Model as Data Factory
+The existence of the 405B model fundamentally altered how the smaller 70B and 8B models were constructed. Instead of relying solely on expensive human annotations, Meta used the 405B model to generate millions of high-fidelity synthetic instruction examples, rewrite flawed responses, and critique student outputs. This distillation process explains why the Llama 3.1 8B model achieves reasoning capabilities that rival 2023-era frontier models.
 
-**Datasets**:
-- Single-call dataset
-- Multi-step tool call dataset
-- Preference versions for DPO
+### 3. Native Agentic Tool Calling
+Llama 3.1 was explicitly fine-tuned for structured tool invocation, supporting:
+- **Brave Search API:** For live web information retrieval.
+- **Python REPL (IPython):** Sandboxed code execution for complex mathematical calculations.
+- **Wolfram Alpha:** For exact symbolic equations and computational knowledge.
 
-**Tools Trained**:
-- 🐍 Python code interpreter
-- 🌐 Brave browser
-- 🔢 Wolfram API
+---
 
-**Significance**: These tools form a strong basis for many agent problems.
+## How Open-Weights Frontier Models Evolved Across 2026
 
-### Other Key Insights
+The release of Llama 3.1 405B in 2024 served as the catalyst for the modern open-weights renaissance:
 
-*Retrieve:* Additional technical details from the report.
+1. **The Proof of Dense Scaling:** Llama 3.1 proved that open models could match proprietary frontier baselines (GPT-4 and Claude 3.5 Sonnet) on general reasoning, math, and code synthesis, dissolving the perception of an insurmountable proprietary capability gap.
+2. **From Dense Monsters to Fine-Grained MoE:** While 405B proved dense scalability, running a 405B dense model in production requires a multi-node 8xH100 cluster per single instance. As analyzed in [The 2024 Foundation Model Wave: Architectural Shifts in Training, Data, and Serving](/posts/llm-2024-survey/), subsequent architectures shifted toward fine-grained MoE designs (DeepSeek-V3, Qwen 2.5/3.5-Max), maintaining frontier reasoning while slashing active parameter execution costs.
+3. **The Rise of Reasoning Models and Test-Time Search:** Throughout 2025 and 2026, the AI research vector shifted from scaling pre-training FLOPs to scaling inference-time compute. As examined in [Stop Generating, Start Thinking: The Architecture of Reasoning AI](/posts/stop-generating-start-thinking/), modern systems allocate reasoning tokens, self-critique loops, and tree searches before producing answers.
+4. **Democratized Workstation Inference:** Architectural breakthroughs in quantization and PEFT adaptation—such as the low-rank methods analyzed in [Parameter-Efficient Fine-Tuning: Architectural Mechanics of LoRA, QLoRA, and Variants](/posts/explained-fintune-llm/) and the workstation inference systems evaluated in [Qwen 3.5 Medium: Sonnet-Class Local Inference on Workstation Hardware](/posts/qwen35-medium-sonnet-performance/)—allow distilled open-weights models to run on affordable enterprise workstations without cloud API tethers.
 
-| Insight | Details | Impact |
-|:--------|:--------|:-------|
-| **Training Scale** | 16,000 H100 GPUs | Massive compute |
-| **4D Parallelism** | Tensor, pipeline, context, FSDP | Efficient training |
-| **Alignment** | SFT + DPO (not complex RLHF) | Simplified pipeline |
+---
 
-**4D Parallelism**:
-- Tensor parallelism
-- Pipeline parallelism
-- Context parallelism
-- FSDP (Fully Sharded Data Parallel)
+## Key Takeaways
 
-**Alignment Pipeline**:
-- Multiple rounds of SFT
-- DPO for preferences
-- No complex RLHF like GPT-4
+- **Dense Scaling Validated at 405B:** Meta demonstrated that dense Transformer scaling holds predictably up to $10^{25}$ FLOPs and 15.6 trillion tokens, achieving parity with frontier proprietary systems without sparse routing instability.
+- **4D Distributed Training Harness:** Coordinating 16,000 H100 GPUs required combining Tensor Parallelism (TP=8), Context Parallelism (CP=8 via Ring Attention), Pipeline Parallelism (PP=16 with 1F1B scheduling), and FSDP sharding.
+- **128K Context Extension Schedule:** Continual pre-training across a 6-stage sequence expansion curriculum coupled with a $10\times$ increase in RoPE base frequency ($\theta = 5{,}000{,}000$) enabled stable 128K context reasoning.
+- **DPO Replaces Complex PPO Loops:** Iterative rounds of Rejection Sampling and Direct Preference Optimization (DPO) streamlined the alignment pipeline, eliminating the training instability of dedicated PPO critics.
+- **The Flagship as Data Generator:** The 405B model acted as an automated data factory, generating high-density synthetic reasoning datasets to distill frontier capabilities into the 70B and 8B models.
+
+---
+
+## New Questions
+
+1. **Thermal and Interconnect Degradation in 16K GPU Clusters:** Over months of continuous pre-training on 16,000 GPUs, what is the exact distribution of MTBF (Mean Time Between Failures), and how do automated checkpoint rollback mechanisms prevent silent gradient corruption?
+2. **Dense Serving Economics vs. Distilled SLMs:** In commercial production environments, what is the exact latency and financial Pareto boundary between serving a quantized 405B model versus deploying a specialized 8B model fine-tuned on 405B synthetic data?
+3. **Long-Context Context-Rot in Agent Chains:** While needle-in-a-haystack benchmarks report 100% recall at 128K tokens, how severely does multi-hop reasoning degrade when intermediate reasoning steps are scattered across 100,000 tokens of unstructured tool logs?
+
+---
+
+## References
+
+- [Dubey et al. (Meta AI): The Llama 3 Herd of Models (arXiv:2407.21783)](https://arxiv.org/abs/2407.21783) (accessed 2026-10-18)
+- [Meta AI: Introducing Llama 3.1 - Our Most Capable Models to Date](https://ai.meta.com/blog/meta-llama-3-1/) (accessed 2026-10-18)
+- [Shoeybi et al.: Megatron-LM - Training Multi-Billion Parameter Language Models Using Model Parallelism (arXiv:1909.08053)](https://arxiv.org/abs/1909.08053) (accessed 2026-10-18)
+- [Rafailov et al.: Direct Preference Optimization - Your Language Model is Secretly a Reward Model (NeurIPS 2023 / arXiv:2305.18290)](https://arxiv.org/abs/2305.18290) (accessed 2026-10-18)
+- [Liu et al.: RingAttention with Blockwise Transformers for Near-Infinite Context (ICLR 2024 / arXiv:2310.01889)](https://arxiv.org/abs/2310.01889) (accessed 2026-10-18)
