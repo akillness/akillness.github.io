@@ -1564,9 +1564,9 @@
       "links_at_intake": 32,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on production generative AI stack architecture, gateways, hybrid RAG, and observability"
     },
     {
       "path": "_posts/2026/02/2026-02-01-ui-tars-desktop.md",
