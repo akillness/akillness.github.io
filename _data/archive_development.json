@@ -3402,9 +3402,9 @@
       "flags": [
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial category listicle into deep source audit on modern open-source AI data engineering (Iceberg, Arrow DataFusion, Vector ETL, and Dagster asset-based orchestration)"
     },
     {
       "path": "_posts/2024/08/2024-08-14-machine-learning-interview-questions.md",
