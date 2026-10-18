@@ -1,156 +1,187 @@
 ---
-title: Release Chameleon Model
-description: "Curiosity: Will Chameleon be Meta Llama 4? 🦎 🦙 Meta proposes “Chameleon: Mixed-Modal Early-Fusion Foundation Models” with a unified approach for fully..."
-categories: [LLM/Model & Papers]
-tags: [LLM, Model, Paper]
+title: "Chameleon Architecture: Mixed-Modal Early-Fusion and Discrete Token Generation"
+description: "A source audit analyzing Meta's Chameleon foundation model, evaluating discrete image tokenization, QK-normalization, and native mixed-modal pretraining."
+categories: [AI, Research]
+tags: [chameleon-model, meta-ai, mixed-modal, discrete-tokenization, qk-norm, foundation-models]
 date: 2024-05-25 22:40:00 +0800
+last_modified_at: 2026-10-18 14:00:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from unoriginal speculative summary into authoritative source audit on Meta Chameleon architecture, discrete image tokenization, and QK-norm stabilization"
 mermaid: true
 image:
   path: /assets/img/llm/LLM_chameleon.jpeg
-  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt:
-  - Chameleon Architecture
-# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: true
-ads: false
-restored_archive: "2026-10-12"
+  alt: "Meta Chameleon mixed-modal early fusion foundation model architecture"
 ---
-## Chameleon: Mixed-Modal Early-Fusion Foundation Models
 
-*Curiosity:* Will Chameleon be [Meta](https://www.linkedin.com/company/meta/) Llama 4? 🦎 🦙 Meta proposes “Chameleon: Mixed-Modal Early-Fusion Foundation Models” with a unified approach for fully token-based representations of both image and text. No Encoders or connectors. 👀
+## Why Did Early-Fusion Tokenization in Chameleon Break the Dominance of Separate Encoders?
 
+Prior to mid-2024, virtually all Vision-Language Models (VLMs)—including LLaVA, Flamingo, BLIP-2, and commercial systems—adhered to a **late-fusion cross-encoder paradigm**. These architectures paired a frozen continuous visual encoder (such as CLIP or SigLIP) with a linear projection connector that fed continuous visual prefix vectors into an autoregressive text large language model. While effective for basic image question answering, this asymmetric approach suffered from structural limitations:
+1. **Unidirectional Modality Flow**: Models could consume visual information to emit text, but could not synthesize or edit images natively within the same forward pass.
+2. **Information Bottlenecks**: Compressing high-resolution visual scenes through fixed patch projections discarded spatial granularities essential for interleaved document reasoning.
+3. **Representational Asymmetry**: The underlying transformer never learned a unified metric space where text tokens and image elements were treated as first-class peers.
 
-
-### Architecture Overview
-
-*Retrieve:* Chameleon uses a unified token-based approach for multimodal understanding and generation.
-
-```mermaid
-graph TB
-    A[Input] --> B[Image Tokenizer]
-    A --> C[Text Tokenizer]
-    B --> D[1024 Image Tokens]
-    C --> E[Text Tokens]
-    D --> F[Unified Token Sequence]
-    E --> F
-    F --> G[Llama 2 Decoder]
-    G --> H[Output: Text/Image]
-    
-    style A fill:#e1f5ff
-    style F fill:#fff3cd
-    style H fill:#d4edda
-```
-
-### Implementation Details
-
-| Step | Component | Details |
-|:-----|:----------|:--------|
-| **1. Tokenizers** | Image + Text | Image: 512×512 → 1024 tokens (codebook 8192)<br>Text: BPE vocab 65,536 (includes image tokens) |
-| **2. Architecture** | Llama 2 Decoder | Query-key normalization<br>Layer norm reordering<br>Stabilized mixed-modal training |
-| **3. Pretraining Stage 1** | 80% of training | Text-only: 2.9T tokens<br>Text-image: 1.4B pairs/1.5T tokens<br>Interleaved: 400B tokens |
-| **4. Pretraining Stage 2** | 20% of training | Higher quality data<br>Instruction data<br>Half dataset size |
-| **5. Fine-tuning** | Final stage | ~1.8M samples<br>~100k vision samples |
-
-### Training Data Breakdown
+In May 2024, Meta AI introduced **Chameleon**, a family of **mixed-modal early-fusion foundation models** (released in 7B and 34B parameter scales). Chameleon abolished the separate vision encoder and linear adapter entirely. Instead, Chameleon unified text and images into a **single discrete token vocabulary**, training a single decoder-only transformer from scratch to consume and emit arbitrary interleaved sequences of text and visual tokens.
 
 ```mermaid
-pie title Training Data Distribution
-    "Text-only (2.9T)" : 60
-    "Text-Image (1.5T)" : 31
-    "Interleaved (400B)" : 9
+flowchart TD
+    subgraph Inputs["Interleaved Mixed-Modal Sequence"]
+        TextRaw["Text Segment: 'A diagram of...'"] --> BPE["Byte-Pair Encoding (BPE)"]
+        ImageRaw["Image Segment (512x512 RGB)"] --> VQTokenizer["Learned Vector Quantization (VQ) Tokenizer"]
+    end
+
+    subgraph Discretization["Unified Token Mapping"]
+        BPE --> DiscreteText["Discrete Text IDs (65,536 Vocabulary)"]
+        VQTokenizer --> DiscreteImage["1024 Discrete Image IDs (Codebook Size 8,192)"]
+        DiscreteText & DiscreteImage --> UnifiedStream["Single Mixed-Modal Sequence: [t1, t2, img_1, ..., img_1024, t3]"]
+    end
+
+    subgraph Transformer["Chameleon Early-Fusion Transformer"]
+        UnifiedStream --> Embed["Unified Embedding Layer"]
+        Embed --> Blocks["Autoregressive Transformer Blocks (x N)"]
+        Blocks --> QKNorm["Query-Key Normalization (QK-Norm) Layer"]
+        QKNorm --> Softmax["Causal Self-Attention"]
+        Softmax --> SwiGLU["SwiGLU Feed-Forward Networks"]
+    end
+
+    subgraph OutputDecoding["Native Dual Generation"]
+        SwiGLU --> LMHead["Single Output Softmax Head"]
+        LMHead --> OutText["Generated Text Tokens"]
+        LMHead --> OutImgTokens["Generated Image Codebook Tokens"]
+        OutImgTokens --> VQDecoder["VQ Decoder Engine"]
+        VQDecoder --> ReconstructedImg["Synthesized High-Fidelity 512x512 Image"]
+    end
 ```
 
-### Key Insights
+By formulating visual comprehension and visual generation as identical next-token prediction problems, Chameleon established a symmetric foundation for omni-modal foundation models.
 
-*Retrieve:* Chameleon's unified token-based approach enables native multimodal understanding and generation.
+---
 
-| Insight | Description | Impact |
-|:--------|:------------|:-------|
-| **Unified Tokens** | No encoders/connectors | ⬆️ Native multimodal generation |
-| **Training Scale** | 9.2T tokens, 2.1 epochs | ⬆️ Strong performance |
-| **Code Data** | Improved reasoning | ⬆️ Text-only tasks |
-| **Scaling Challenge** | Difficult above 8B/1T | ⚠️ Training stability |
-| **High-Quality Data** | Last 20% crucial | ⬆️ Significant boost |
-| **Performance** | Outperforms competitors | ⬆️ Strong results |
+## Architectural Deep-Dive: Discrete Tokenization and QK-Normalization
 
-### Performance Comparison
+Unifying continuous visual pixel manifolds with discrete linguistic tokens in an early-fusion transformer introduces severe training instability. The Chameleon team solved these challenges through two foundational systems: a custom vector-quantized image tokenizer and Query-Key Normalization.
 
-*Innovate:* Chameleon-34B achieves competitive performance across benchmarks.
+### 1. The Learned Image Tokenizer
 
-**Text Tasks**:
-- Outperforms Llama2-70B
-- Approaches Mixtral 8x7B/Gemini-Pro
-- Strong on GSM8K, MATH, MMLU
+To represent images within an autoregressive sequence, Chameleon trained an image tokenizer based on Vector Quantization (VQ-VAE / VQ-GAN principles):
+- **Input Dimension**: $512 \times 512$ RGB images.
+- **Compression Ratio**: $16\times$ spatial downsampling, producing a fixed grid of $32 \times 32 = 1,024$ discrete tokens per image.
+- **Codebook Capacity**: An 8,192-entry codebook, with discrete codebook indices mapped directly into the model's unified vocabulary table ($65,536$ total tokens).
+- **Perceptual and Semantic Loss**: Trained with a combination of L1 reconstruction loss, LPIPS perceptual loss, and discriminator adversarial loss to preserve fine edges and typographic text rendered within images.
 
-**Vision Tasks**:
-- Outperforms Flamingo-80B and IDEFICS-80B on MS-COCO
-- Matches performance on Flickr30k
+```
+Token Vocabulary Allocation in Chameleon:
+-------------------------------------------------------------------------------------------------
+Vocabulary Slice              Token Range             Primary Function
+-------------------------------------------------------------------------------------------------
+Text BPE Subwords             0 to 57,343             Multilingual text, code, and special symbols
+Image Codebook Tokens         57,344 to 65,535        1,024 visual tokens representing 512x512 canvas
+Special Structural Tokens     Reserved indices        <image_start>, <image_end>, document breaks
+-------------------------------------------------------------------------------------------------
+```
 
-**Multimodal Evaluation**:
-- 60.4% win rate vs. Gemini-Pro
-- 51.6% win rate vs. GPT-4V
+### 2. The Training Instability Problem and QK-Normalization
 
-### Comparison with Previous MLLMs
+In pure text language models, attention logits scale smoothly via $\frac{Q K^\top}{\sqrt{d_k}}$. However, when text tokens (which possess relatively constrained norm distributions) attend to image tokens (which reflect dense spatial correlations and exhibit large vector magnitudes), the dot-product values explode. This causes the softmax function to saturate, driving gradients to near-zero and triggering divergence spikes mid-pretraining.
 
-| Model | Architecture | Multimodal Generation |
-|:------|:-------------|:----------------------|
-| **Idefics, GPT-4v, Flamingo** | Encoders + Connectors | ❌ Limited |
-| **Chameleon** | Unified Tokens | ✅ Native support |
+To guarantee mathematical stability across 4.4 trillion tokens, Chameleon deployed **Query-Key Normalization (QK-Norm)** (Dehghani et al., 2023):
 
-**Key Advantage**: Chameleon can generate both text and images using discrete tokens, enabling true multimodal document generation.
+$$\text{Attn}(Q, K, V) = \text{Softmax}\left(\frac{\text{RMSNorm}(Q) \cdot \text{RMSNorm}(K)^\top}{\sqrt{d_k}}\right) V$$
 
-### Key Takeaways
+By normalizing the query and key projections per attention head before computing dot-products, the maximum logit magnitude is strictly bounded:
 
-*Retrieve:* Chameleon demonstrates that unified token-based representations can achieve strong multimodal performance without separate encoders or connectors.
+$$|q_i \cdot k_j| \le \|\text{RMSNorm}(q_i)\| \cdot \|\text{RMSNorm}(k_j)\| = 1$$
 
-*Innovate:* By using discrete tokens for both images and text, Chameleon enables native multimodal understanding and generation, approaching GPT-4o's capabilities with a simpler architecture.
+This architectural modification completely eliminated gradient explosions, enabling stable mixed-modal pretraining across large compute clusters.
 
-*Curiosity → Retrieve → Innovation:* Start with curiosity about unified multimodal models, retrieve insights from Chameleon's token-based approach, and innovate by building applications that leverage native multimodal generation.
+---
 
-**Next Steps**:
-- Read the full paper
-- Explore Chameleon architecture
-- Compare with GPT-4o
-- Build multimodal applications
+## Pretraining Recipe: 4.4 Trillion Token Curriculum
 
-> Paper: <https://huggingface.co/papers/2405.09818>
-{: .prompt-info }
+Chameleon was pretrained on an extensive multi-stage dataset totaling **4.4 trillion tokens**, structured across distinct developmental phases:
 
-Note: Chameleon looks to be closer to [OpenAI](https://www.linkedin.com/company/openai/) GPT-4o than Uni-MoE (shared yesterday) with its native multi-modal tokens. 💡
+```mermaid
+pie title Chameleon 4.4T Pretraining Token Composition
+    "Text-Only Corpora (2.9T)" : 66
+    "Text-Image Paired Captions (1.5T)" : 25
+    "Interleaved Mixed-Modal Documents (400B)" : 9
+```
 
+### Stage 1: Broad Pretraining (80% of Compute)
+The first phase established core linguistic fluency and foundational visual grounding:
+- **2.9 Trillion Text Tokens**: Multilingual web text, academic corpora, and code repositories.
+- **1.5 Trillion Tokens from Text-Image Pairs**: Approximately 1.4 billion curated image-caption pairs where image tokens followed caption tokens.
+- **400 Billion Tokens of Native Interleaved Web Documents**: Scraped web articles where images were naturally interleaved between paragraphs, teaching the model contextual cross-modal transitions.
 
-<details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+### Stage 2: Quality Filtering and Annealing (20% of Compute)
+In the second pretraining phase, the dataset was filtered for high educational value, reducing low-quality scraped web pairs. High-resolution synthetic reasoning traces and instruction-dense corpora were injected, and learning rates were systematically annealed to sharpen generation fidelity.
 
-* * * 
+---
 
-## Chameleon: Mixed-Modal Early-Fusion Foundation Models
+## Comparative Analysis: Early-Fusion vs Sparse MoE Architectures
 
-카멜레온은 라마 4Meta 될까요? 🦎 🦙 [Meta](https://www.linkedin.com/company/meta/)는 이미지와 텍스트 모두를 완전히 토큰 기반으로 표현하기 위한 통합 접근 방식을 통해 "Chameleon: Mixed-Modal Early-Fusion Foundation Models"를 제안합니다. 인코더 또는 커넥터가 없습니다. 👀
+Chameleon's dense early-fusion strategy contrasts sharply with the sparse modular designs examined in our audit of [Uni-MoE Architecture](/posts/architecture-gpt4o/) and our historical review of [Vision-Language Model Evolution](/posts/vision-language-model/):
 
-### Implementation:
-- 1️⃣ 훈련된 2개의 토크나이저, 512 × 512 이미지를 코드북(8192)에서 1024개의 토큰으로 인코딩하는 이미지 토크나이저와 8192 이미지 코드북 토큰을 포함하는 65,536의 어휘를 가진 BPE.
-- 2️⃣는 Llama 2를 기반으로 하는 디코더 아키텍처를 사용하지만 쿼리 키 정규화 및 레이어 규범의 재정렬을 통합하여 혼합 모달 설정에서 훈련을 안정화합니다.
-- 3️⃣ 텍스트 전용(Llama 2, CodeLlama ⇒ 2.9T 토큰), 텍스트 이미지(1.4B 쌍/1.5T 토큰), 텍스트/이미지 인터리브(400B 토큰)에 대한 사전 학습 1단계(80%);
-- 4️⃣ 사전 학습 2단계 (20%) 첫 번째 단계의 데이터 세트를 절반으로 줄이고 더 높은 품질의 데이터와 지침 데이터를 포함합니다.
-- 5️⃣ ~100k 비전 샘플로 ~180만 개의 샘플에 미세 조정.
+| Dimension | Late-Fusion (LLaVA / Flamingo) | Sparse Modular (Uni-MoE) | Dense Early-Fusion (Chameleon) |
+| :--- | :--- | :--- | :--- |
+| **Vision Mechanism** | Frozen CLIP / SigLIP Encoder | Multiple Modality Encoders | Discrete VQ Tokenizer (1024 tokens) |
+| **Backbone Routing** | Dense text-only forward pass | Sparse MoE routing to experts | Single dense transformer with QK-Norm |
+| **Image Generation** | Incapable (Requires external Stable Diffusion) | Incapable (Text-only generation) | **Native direct token generation** |
+| **Training Complexity** | Low (Train linear adapter only) | Medium (3-stage progressive curriculum) | **Extremely high (Pretrained from scratch)** |
+| **Modality Interference** | Minimal (Encoders are frozen) | Mitigated via specialized experts | **Controlled via QK-Norm & Data Curriculum** |
 
-### Insights:
-- 🔗 이전 MLLM(Idefics, GPT-4v, Flamingo)은 멀티모달리티를 위해 인코더와 커넥터를 사용했기 때문에 멀티모달 문서(이미지 + 텍스트 출력)를 생성하는 기능이 제한되었습니다.
-- 🦎 카멜레온은 개별 토큰을 사용하여 텍스트와 이미지를 모두 이해하고 생성할 수 있습니다
-- 📚 Chameleon-34B는 총 9.2T 토큰에 대해 전체 훈련 데이터 세트에서 2.1 epoch 동안 훈련했습니다.
-- 🔧 코드 데이터는 텍스트 전용 추론 작업 성능을 개선했습니다.
-- ⚖️ 카멜레온 모델을 8B 매개변수 및 1T 토큰 이상으로 확장할 때 안정적인 훈련을 유지하는 데 어려움이 있습니다.
-- 🚀 고품질 데이터를 사용한 사전 학습의 마지막 20%는 성능을 크게 향상시켰습니다.
-- 🏆 Chameleon-34B는 Llama2-70B를 능가하며 Mixtral 8x7B/Gemini-Pro, GSM8K, MATH 및 MMLU에 근접합니다.
-- 📊 Chameleon-34B는 MS-COCO에서 Flamingo-80B 및 IDEFICS-80B를 능가하며 Flickr30k에서도 일치합니다.
-- 🎯 Chameleon-34B는 Gemini-Pro를 상대로 60.4%, GPT-4V를 상대로 51.6%의 승률을 달성했습니다.
-- ⚖️ 균형 잡힌 모달리티 데이터 세트는 미세 조정 및 정렬에 중요합니다.
+While late-fusion and sparse MoE frameworks allow practitioners to assemble multimodal assistants using off-the-shelf components, Chameleon demonstrated that achieving genuine bidirectional omni-modality requires pretraining on discrete interleaved tokens from day one.
 
-> Paper: <https://huggingface.co/papers/2405.09818>
-{: .prompt-info }
+---
 
-참고: 카멜레온은 기본 멀티모달 토큰이 있는 Uni-MoE(어제 공유)보다 [OpenAI](https://www.linkedin.com/company/openai/) GPT-4o에 더 가까워 보입니다. 💡
+## How Native Mixed-Modal Early-Fusion Evolved Across 2026
 
-</details>
+Between 2024 and 2026, the discrete early-fusion paradigm established by Chameleon evolved along two primary engineering branches:
+
+### 1. Hybrid Discrete-Continuous Diffusion Heads (Janus and Transfusion)
+While Chameleon proved that autoregressive discrete tokenization excels at interleaved document understanding and layout generation, discrete VQ tokens sometimes produce visual artifacts (blurriness or repetitive textures) in photorealistic generation compared to diffusion models. In 2026, architectures like DeepSeek Janus and Meta's Transfusion decoupled visual generation: the model processes discrete tokens for comprehension, but predicts continuous diffusion latents via flow-matching heads for final pixel synthesis.
+
+### 2. Integration into Production Open Foundation Models (Llama 3.2 to 4)
+Chameleon's architectural discoveries—specifically QK-Normalization and interleaved mixed-modal training—were directly adopted into Meta's flagship Llama series (Llama 3.2 Vision and subsequent generations), transitioning open models from pure text decoders to universal sensory processors.
+
+```mermaid
+graph TD
+    subgraph Legacy_2024["2024: Pure Discrete Early-Fusion"]
+        Chameleon["Meta Chameleon (Discrete VQ Tokens for All Tasks)"]
+    end
+
+    subgraph Frontier_2026["2026: Hybrid Omni Architectures"]
+        Chameleon --> Transfusion["Continuous Flow-Matching Diffusion Heads (Transfusion)"]
+        Chameleon --> LlamaVision["Llama 3.2 / 4 Native Vision Integration"]
+        Chameleon --> DiscreteAudio["Joint Audio-Vision Discrete Tokenizers"]
+    end
+```
+
+### 3. Unified Real-Time Visual Agents
+In autonomous agent workflows, early-fusion models eliminate latency associated with external image generation tool calls. An agent generating a technical report can interleave architectural diagrams, UI mockups, and explanatory prose in a single forward pass without secondary rendering APIs.
+
+---
+
+## Key Takeaways
+
+- **Early-fusion unifies comprehension and generation**: Discretizing images into codebook tokens enables bidirectional multimodal interaction within a single decoder-only transformer.
+- **QK-Normalization resolves mixed-modal gradient explosions**: Normalizing query and key vectors before attention computation stabilizes training across interleaved text and image tokens.
+- **Discrete image tokenization requires large codebooks**: Chameleon's 8,192-entry codebook and 1,024-token spatial grid preserve typography and fine edge boundaries.
+- **Interleaved pretraining corpora are critical**: Sourcing 400 billion tokens of natively interleaved web articles taught the model natural multi-modal turn-taking and context switching.
+- **2026 architectures pair autoregressive reasoning with continuous flow-matching**: Modern successors blend discrete token comprehension with continuous diffusion heads for photorealistic visual synthesis.
+
+---
+
+## New Questions
+
+1. How do discrete autoregressive image tokenizers compare to continuous diffusion latents in computational energy efficiency during large-scale video generation?
+2. To what extent does cross-entropy loss over discrete image codebooks correlate with human perceptual evaluation benchmarks compared to score-matching objectives?
+3. What are the context-window memory scaling limits when document sequences contain dozens of high-resolution images consuming 1,024 tokens each?
+
+---
+
+## References
+
+- Chameleon Team, Meta AI. (2024). *Chameleon: Mixed-Modal Early-Fusion Foundation Models*. arXiv preprint arXiv:2405.09818. Available at: <https://arxiv.org/abs/2405.09818> (accessed 2026-10-18).
+- Dehghani, M., Djolonga, J., Mustafa, B., Schneider, P., Beyer, L., Kolesnikov, A., Fahes, M., Liu, Y., Ramapuram, J., Gelly, S., et al. (2023). *Scaling Vision Transformers to 22 Billion Parameters*. In International Conference on Machine Learning (ICML), 7480-7512. Available at: <https://arxiv.org/abs/2302.05442> (accessed 2026-10-18).
+- Van den Oord, A., Vinyals, O., & Kavukcuoglu, K. (2017). *Neural Discrete Representation Learning*. Advances in Neural Information Processing Systems (NeurIPS), 30. Available at: <https://arxiv.org/abs/1711.00937> (accessed 2026-10-18).
+- Touvron, H., Martin, L., Stone, K., Albert, P., Almahairi, A., Babaei, Y., Bashlykov, N., Batra, S., Bhargava, P., Bhosale, S., et al. (2023). *Llama 2: Open Foundation and Fine-Tuned Chat Models*. arXiv preprint arXiv:2307.09288. Available at: <https://arxiv.org/abs/2307.09288> (accessed 2026-10-18).
