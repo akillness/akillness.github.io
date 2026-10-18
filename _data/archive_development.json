@@ -2562,9 +2562,9 @@
       "links_at_intake": 1,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal third-party overview into authoritative source audit on LazyLLM architecture, low-code multi-agent orchestration, and dataflow pipelines"
     },
     {
       "path": "_posts/2024/08/2024-08-05-agentic-application-design-patterns.md",
