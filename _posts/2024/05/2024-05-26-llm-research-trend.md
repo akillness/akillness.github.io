@@ -1,5 +1,5 @@
 ---
-title: Frontier LLM Research Trends: Test-Time Compute, State-Space Models, and MoE
+title: "Frontier LLM Research Trends: Test-Time Compute, State-Space Models, and MoE"
 description: "A technical source audit analyzing post-training compute scaling, state-space architectures, mixture-of-agents, and quantization frontiers across modern LLMs."
 categories: [AI, Research]
 tags: [llm-research, test-time-compute, state-space-models, mixture-of-experts, post-training]

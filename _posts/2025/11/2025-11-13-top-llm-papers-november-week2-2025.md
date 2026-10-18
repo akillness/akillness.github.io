@@ -1,5 +1,5 @@
 ---
-title: Frontier LLM Systems: Agent Memory, Semantic Caching, and Tokenization
+title: "Frontier LLM Systems: Agent Memory, Semantic Caching, and Tokenization"
 description: Audit frontier LLM architectures—from agent memory hallucination benchmarks to semantic RAG caching and morphology-aware multilingual tokenization.
 categories: [AI, Research]
 tags: [agent-memory, rag, tokenization, semantic-cache, llm-systems]

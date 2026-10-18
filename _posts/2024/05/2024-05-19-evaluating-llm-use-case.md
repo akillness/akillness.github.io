@@ -1,5 +1,5 @@
 ---
-title: Benchmarking Korean Language Models: CLIcK, KMMLU, and Cultural Nuance
+title: "Benchmarking Korean Language Models: CLIcK, KMMLU, and Cultural Nuance"
 description: "A source audit evaluating Korean LLM benchmark frameworks including CLIcK, KMMLU, and HAERAE, assessing cultural nuance, linguistic grounding, and reasoning."
 categories: [AI, Research]
 tags: [llm-evaluation, korean-nlp, benchmarks, kmmlu, click-benchmark]
