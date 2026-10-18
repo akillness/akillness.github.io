@@ -1381,9 +1381,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a third-party review note into an authoritative source audit of Meta AI and Oxford's VGGT feed-forward 3D reconstruction transformer."
     },
     {
       "path": "_posts/2025/05/2025-05-18-building-llama-4-from-scratch-mixture-of-experts.md",
