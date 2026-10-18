@@ -3899,9 +3899,9 @@
         "thin",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial promotional course announcement into comprehensive technical source audit on end-to-end LLMOps pipelines, QLoRA mechanics, streaming vector ETL, and multi-LoRA serving"
     },
     {
       "path": "_posts/2026/02/2026-02-02-nanobot-ultralight-agent.md",
