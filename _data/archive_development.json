@@ -3675,9 +3675,9 @@
         "korean-heavy",
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial 2024 listicle into technical source audit examining the computational, numerical, and architectural evolution of foundational algorithms in distributed computing and AI"
     },
     {
       "path": "_posts/2024/05/2024-05-19-evaluating-llm-use-case.md",
