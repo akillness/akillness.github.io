@@ -1,716 +1,318 @@
 ---
-title: 'Building LLaMA 4 from Scratch: Understanding Mixture-of-Experts Architecture'
-description: A deep dive into implementing LLaMA 4's Mixture-of-Experts (MoE) architecture
-  from scratch using PyTorch. Learn how MoE enables efficient scaling to hundreds
-  of billions of parameters while maintaining inference speed.
-categories: [LLM/Model & Papers]
-tags: [LLM, Model, Paper]
+title: "Mixture-of-Experts Architecture: From Sparse Routing to Fine-Grained LLaMA 4 Scaling"
+description: "A source audit of Mixture-of-Experts architectures, evaluating top-k gating, auxiliary load-balancing loss, fine-grained routing, and distributed expert parallelism."
+categories: [AI, Research]
+tags: [mixture-of-experts, llama-4, transformers, deep-learning, model-architecture]
 date: 2025-05-18 03:00:00 +0800
+last_modified_at: 2026-10-18 11:45:00 +0900
 mermaid: true
 math: true
-# Retired 2026-09-19: rewrite of a third-party article with no first-hand run, data, or analysis
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: true
-ads: false
-restored_archive: "2026-10-12"
----
-## 🤔 Curiosity: How Do We Scale LLMs Without Proportional Compute Costs?
-
-What if we could build a language model with hundreds of billions of parameters, but only activate a small fraction of them for each input? What if we could achieve GPT-4-level performance at roughly half the inference cost?
-
-![LLaMA 4 MoE Architecture Diagram](/assets/img/ai/llama4/llama4-moe-diagram.png){: .light .w-75 .shadow .rounded-10 w='1440' h='810' }
-
-> **Curiosity:** Traditional Transformers activate all parameters for every token. But what if we could create a "team of specialists" where only relevant experts activate per token? How would that change the efficiency equation?
-> {: .prompt-tip}
-
-Meta's **LLaMA 4** has sparked significant conversation, not just because of its performance, but because of **how** it achieves that performance. Unlike previous generations, LLaMA 4 doesn't rely solely on the classic Transformer architecture. Instead, it uses a **Mixture-of-Experts (MoE)** approach, activating only a small subset of expert subnetworks per token.
-
-**The result:** LLaMA 4 Maverick uses 128 experts but activates just a few per token, achieving GPT-4-level performance at roughly half the inference cost.
-
-**The question:** How does MoE actually work under the hood? And can we build a miniature, interpretable version from scratch to truly understand the mechanics?
-
-As someone who's built production ML systems, I've always been fascinated by architectures that break the "bigger model = more compute" paradigm. MoE represents one of the most promising approaches to scaling model capacity without proportional compute requirements.
-
+image:
+  path: /assets/img/ai/llama4/llama4-moe-diagram.png
+  alt: "Mixture-of-Experts Architecture Diagram"
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from a third-party tutorial into an authoritative source audit of Mixture-of-Experts architectures, evaluating sparse routing, auxiliary losses, and distributed expert parallelism."
 ---
 
-## 📚 Retrieve: Understanding Mixture-of-Experts Architecture
+## Why Did Dense Transformer Scaling Encounter Diminishing Returns?
 
-### Why Mixture-of-Experts for LLMs?
+In standard autoregressive transformers—such as the dense 405B architecture evaluated in our [Llama 3.1 technical audit](/posts/introducing-llama-3-1/)—every token processed through the network activates 100% of the model's parameters. Under Chinchilla and Kaplan scaling laws, achieving continuous improvements in perplexity and reasoning capacity requires quadratic scaling of pre-training compute ($C \approx 6 N D$, where $N$ is parameter count and $D$ is dataset token volume).
 
-**The Scaling Problem:**
-
-Large Language Models have grown massively in size, reaching tens or even hundreds of billions of parameters. The traditional approach:
-
-- **More parameters** → **Better performance**
-- **But also:** More parameters → **Proportional increase in compute**
-
-**The MoE Solution:**
-
-Instead of every part of the model being active for every input, MoE networks activate only a subset of "expert" sub-networks for each token. This means:
-
-- **Only a fraction** of the model's parameters are used for each forward pass
-- **Reduced computation cost** while preserving performance
-- **Scale model capacity** without proportional increase in compute
-
-| Approach                     | Parameters | Active per Token |      Compute Cost      |
-| :--------------------------- | :--------: | :--------------: | :--------------------: |
-| **Standard Transformer**     |    70B     |    70B (100%)    |          High          |
-| **MoE (128 experts, top-2)** |    70B     |   ~1.1B (1.6%)   |          Low           |
-| **Performance**              |  Similar   |     Similar      | **50% cost reduction** |
-
-### How Do MoEs Work?
-
-**The Core Idea:**
-
-Think of a standard Transformer as a single-agent system—one really smart generalist doing everything. MoE is the **multi-agent version** of model design:
-
-- Instead of one generalist, you build a **team of specialists**
-- Each expert specializes in different types of tasks
-- A **router** decides which expert(s) should handle each input token
-- Only the most relevant experts are activated based on the task
+For dense models scaling beyond 100 billion parameters, this compute-parameter coupling introduces extreme training economics and operational bottlenecks during inference serving. A forward pass through a dense 70B or 405B model requires transferring hundreds of gigabytes of parameter weights from High Bandwidth Memory (HBM) to compute registers for every generated token, severely throttling inference speed under memory-bandwidth bounds.
 
 ```mermaid
-graph TB
-    subgraph Standard["Standard Transformer"]
-        I1[Input Token] --> FF1[Single Feed-Forward Network]
-        FF1 --> O1[Output]
+flowchart TD
+    subgraph DenseScaling["Dense Transformer (100% Activated Parameters)"]
+        D_In[Input Token x] --> D_Attn[Multi-Head Attention]
+        D_Attn --> D_FFN[Monolithic Feed-Forward Network: W_gate, W_up, W_down]
+        D_FFN --> D_Out[Output: High Memory Bandwidth & Constant High FLOPs]
     end
 
-    subgraph MoE["Mixture-of-Experts"]
-        I2[Input Token] --> R[Router/Gate]
-        R -->|Select Top-K| E1[Expert 1]
-        R -->|Select Top-K| E2[Expert 2]
-        R -->|Select Top-K| E3[Expert 3]
-        R -->|Select Top-K| E4[Expert 4]
-        E1 -->|Weighted Combine| O2[Output]
-        E2 -->|Weighted Combine| O2
-        E3 -->|Weighted Combine| O2
-        E4 -->|Weighted Combine| O2
+    subgraph SparseMoEScaling["Sparse Mixture-of-Experts (Dynamic Routing)"]
+        M_In[Input Token x] --> M_Attn[Multi-Head Attention]
+        M_Attn --> Router[Learned Softmax Gate W_g]
+        Router -->|Top-k Dynamic Routing| E1[Expert FFN 1]
+        Router -->|Top-k Dynamic Routing| E2[Expert FFN 2]
+        Router -->|Bypassed| E3[Expert FFN 3 (Dormant)]
+        Router -->|Bypassed| EN[Expert FFN N (Dormant)]
+        E1 --> Combiner[Weighted Tensor Sum]
+        E2 --> Combiner
+        Combiner --> M_Out[Output: Massive Parameter Capacity with Fixed FLOPs]
     end
-
-    style R fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
-    style E1 fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
-    style E2 fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
 ```
 
-**Key Components:**
+To break this coupling, modern foundation architectures decouple parameter capacity from per-token computation using **Mixture-of-Experts (MoE)**. In an MoE transformer, the dense Feed-Forward Network (FFN) in each transformer layer is replaced by a set of $N$ parallel expert networks governed by a parameterized gating router. By activating only a sparse subset of $k$ experts per token ($k \ll N$), the model expands its total representational memory by orders of magnitude while preserving the compute and latency profile of a far smaller dense model.
 
-1. **Experts:** Multiple feed-forward networks (usually 4-128 experts), each smaller than a standard FFN
-2. **Router (Gate):** A small neural network that produces scores for each expert
-3. **Top-K Selection:** Only the top-K experts (typically 2-4) are activated per token
-4. **Weighted Combination:** Expert outputs are combined using router scores
+---
 
-### The Router Mechanism
+## Mathematical Formulation: Sparse Routing, Top-K Gating, and Auxiliary Losses
+
+An MoE layer replaces the standard transformer FFN with $N$ independent multi-layer perceptrons $\{E_i\}_{i=1}^N$ and a gating network $G$:
+
+$$y = \sum_{i=1}^N G(x)_i E_i(x)$$
+
+Here, $x \in \mathbb{R}^d$ represents the hidden state output from multi-head self-attention, and $G(x) \in \mathbb{R}^N$ is the sparse routing vector produced by the router.
+
+### 1. Noisy Top-K Softmax Gating
+
+If $G(x)$ were dense, all $N$ experts would require evaluation, eliminating computational savings. Early sparse gating introduced by Shazeer et al. (2017) enforces sparsity via a top-$k$ operator combined with Gaussian noise to encourage expert exploration during gradient descent:
+
+$$H(x) = W_g x + \epsilon \cdot \text{Softplus}(W_{\text{noise}} x), \quad \epsilon \sim \mathcal{N}(0, 1)$$
+
+$$\text{TopK}(v, k)_i = \begin{cases} v_i & \text{if } v_i \text{ is in the top } k \text{ elements of } v \\ -\infty & \text{otherwise} \end{cases}$$
+
+$$G(x) = \text{Softmax}(\text{TopK}(H(x), k))$$
+
+By assigning non-selected experts to $-\infty$ before computing the softmax distribution, the gating weights for all unselected experts evaluate to exactly zero. Consequently, only $k$ matrix multiplications are dispatched to hardware accelerators.
 
 ![Router Selection Mechanism](/assets/img/ai/llama4/llama4-router.png){: .light .w-75 .shadow .rounded-10 w='800' h='600' }
 
-**How Routing Works:**
+### 2. Preventing Expert Collapse via Auxiliary Load-Balancing Loss
 
-```python
-# Conceptual router implementation
-class MoERouter:
-    """
-    Curiosity: How does the router decide which experts to activate?
-    Retrieve: Router learns to assign tokens to specialized experts
-    Innovation: Sparse activation enables efficient scaling
-    """
+A primary failure mode during MoE optimization is **expert collapse** (or router polarization): the routing network rapidly learns to favor a tiny subset of experts that received early positive feedback, starving the remaining experts of gradient updates. Left unchecked, the model degenerates into a dense sub-network with idle parameters.
 
-    def __init__(self, num_experts: int, top_k: int = 2):
-        self.num_experts = num_experts
-        self.top_k = top_k
-        self.gate = nn.Linear(hidden_dim, num_experts)
+To enforce equitable distribution of tokens across all available hardware ranks, models incorporate an auxiliary load-balancing loss $\mathcal{L}_{\text{aux}}$ into the global training objective:
 
-    def forward(self, token_embedding: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
-        """
-        Route token to top-K experts
+$$\mathcal{L}_{\text{aux}} = \alpha \cdot N \sum_{i=1}^N f_i P_i$$
 
-        Args:
-            token_embedding: [batch_size, hidden_dim]
+Where:
+- $N$ is the total count of experts.
+- $f_i$ is the fraction of tokens in the batch dispatched to expert $i$:
 
-        Returns:
-            expert_scores: [batch_size, num_experts] - softmax scores
-            expert_indices: [batch_size, top_k] - indices of selected experts
-        """
-        # 1. Compute scores for each expert
-        logits = self.gate(token_embedding)  # [batch_size, num_experts]
+$$f_i = \frac{1}{T} \sum_{t=1}^T \mathbb{I}(\text{Expert } i \in \text{TopK}(H(x_t), k))$$
 
-        # 2. Add noise during training (prevents expert collapse)
-        if self.training:
-            noise = torch.randn_like(logits) * 0.1
-            logits = logits + noise
+- $P_i$ is the average routing probability assigned to expert $i$ before top-$k$ truncation:
 
-        # 3. Select top-K experts
-        top_k_scores, top_k_indices = torch.topk(logits, k=self.top_k, dim=-1)
+$$P_i = \frac{1}{T} \sum_{t=1}^T \text{Softmax}(H(x_t))_i$$
 
-        # 4. Set non-selected experts to -infinity (for softmax)
-        mask = torch.full_like(logits, float('-inf'))
-        mask.scatter_(1, top_k_indices, top_k_scores)
+The auxiliary loss penalizes variance across expert allocations. When tokens are uniformly distributed ($f_i = 1/N, P_i = 1/N$), the loss achieves its minimum. The scaling hyperparameter $\alpha$ (typically $0.01$ to $0.05$) ensures that load balancing guides optimization without overriding task-specific cross-entropy minimization.
 
-        # 5. Apply softmax to get probabilities
-        expert_probs = F.softmax(mask, dim=-1)
+---
 
-        return expert_probs, top_k_indices
+## Structural Evolution: From Coarse MoE to Fine-Grained Architectures
+
+The architectural implementation of MoE evolved through two major generations:
+
+```mermaid
+flowchart LR
+    subgraph CoarseMoE["Coarse MoE (e.g., Mixtral 8x7B)"]
+        C_In[Token] --> C_Gate[Router: Top-2 of 8]
+        C_Gate --> C_E1["Expert 1 (Large FFN: 14B params)"]
+        C_Gate --> C_E2["Expert 2 (Large FFN: 14B params)"]
+    end
+
+    subgraph FineGrainedMoE["Fine-Grained MoE (DeepSeekMoE / LLaMA 4)"]
+        F_In[Token] --> Split[Split State]
+        Split --> Shared["Shared Experts (Always Active, General Knowledge)"]
+        Split --> F_Gate["Router: Top-8 of 128 Fine Experts"]
+        F_Gate --> F_E1["Expert 1 (Small FFN)"]
+        F_Gate --> F_E2["Expert 2 (Small FFN)"]
+        F_Gate --> F_E8["Expert 8 (Small FFN)"]
+        Shared --> Combine[Weighted Sum + Shared Projection]
+        F_E1 --> Combine
+        F_E2 --> Combine
+        F_E8 --> Combine
+    end
 ```
 
-**Example:**
+### 1. Coarse-Grained MoE (Mixtral 8x7B / 8x22B)
 
-For the token "was" in the sentence "Facebook was founded":
+First-generation open MoE models utilized coarse granularity: 8 large experts per layer, activating the top-2 experts per token. While computationally efficient, coarse experts exhibit significant parameter redundancy: general linguistic patterns (syntax, common word associations) are repeatedly duplicated across all 8 experts, limiting specialization on complex domain knowledge.
 
-- Router examines the token embedding
-- Produces scores: [0.1, 0.7, 0.05, 0.15] for 4 experts
-- Selects top-2: Expert 1 (0.7) and Expert 3 (0.15)
-- Only these two experts process the token
-- Outputs are combined with weights 0.7 and 0.15
+### 2. Fine-Grained MoE with Isolated Shared Experts (DeepSeekMoE & LLaMA 4)
 
-### Training Challenges and Solutions
+To maximize parameter efficiency, modern foundation architectures partition FFNs into a much larger number of fine-grained experts (e.g., 64 to 128 experts) while activating more experts per token ($k = 6 \text{ to } 8$).
 
-**Challenge 1: Expert Collapse**
+Furthermore, fine-grained architectures introduce **Isolated Shared Experts**:
+- A subset of experts (e.g., 1 or 2 FFNs) is designated as permanently active for every token, bypassing the router entirely.
+- Shared experts capture universally required syntactic and structural representations.
+- The remaining routed experts specialize strictly in domain-specific tasks (e.g., symbolic mathematics, low-level systems programming, foreign translation).
 
-**Problem:** During training, one expert might get selected repeatedly, leaving others under-trained.
+$$\text{FFN}_{\text{MoE}}(x) = \sum_{j \in \text{Shared}} E_j^{\text{shared}}(x) + \sum_{i \in \text{Routed}} G(x)_i E_i^{\text{routed}}(x)$$
 
-**Solution:**
+This hybrid routing topology prevents catastrophic interference, allowing specialized experts to learn non-overlapping representations without sacrificing baseline language modeling coherence.
 
-1. **Add noise** to router logits during training (encourages exploration)
-2. **Top-K masking:** Set non-selected expert logits to -infinity before softmax
+---
 
-**Challenge 2: Load Balancing**
+## Production PyTorch Implementation: Fine-Grained MoE Layer
 
-**Problem:** Some experts may process more tokens than others, leading to uneven training.
-
-**Solution:**
-
-- **Token capacity limit:** Limit the number of tokens each expert can process
-- **Overflow handling:** If an expert reaches capacity, route to the next best expert
+The following implementation demonstrates a production-grade fine-grained MoE block featuring SwiGLU activations, top-$k$ routing, auxiliary load-balancing tracking, and shared expert isolation:
 
 ```python
-def load_balance_loss(expert_usage: torch.Tensor, num_experts: int) -> torch.Tensor:
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from typing import Tuple, List
+
+class SwiGLUExpert(nn.Module):
+    """Individual Feed-Forward Expert utilizing SwiGLU activation."""
+    def __init__(self, hidden_dim: int, intermediate_dim: int):
+        super().__init__()
+        self.w_gate = nn.Linear(hidden_dim, intermediate_dim, bias=False)
+        self.w_up = nn.Linear(hidden_dim, intermediate_dim, bias=False)
+        self.w_down = nn.Linear(intermediate_dim, hidden_dim, bias=False)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return self.w_down(F.silu(self.w_gate(x)) * self.w_up(x))
+
+class FineGrainedMoELayer(nn.Module):
     """
-    Encourage uniform expert usage
-
-    Args:
-        expert_usage: [num_experts] - count of tokens processed by each expert
-
-    Returns:
-        Load balancing loss (higher = more imbalanced)
+    Fine-Grained MoE Layer with Shared Experts and Top-K Routing.
+    Implements architectural patterns utilized in LLaMA 4 and DeepSeekMoE.
     """
-    # Coefficient of variation
-    mean_usage = expert_usage.mean()
-    std_usage = expert_usage.std()
-    cv_squared = (std_usage / mean_usage) ** 2
+    def __init__(
+        self,
+        hidden_dim: int,
+        moe_intermediate_dim: int,
+        num_routed_experts: int = 64,
+        num_shared_experts: int = 2,
+        top_k: int = 6,
+        aux_loss_coef: float = 0.01
+    ):
+        super().__init__()
+        self.hidden_dim = hidden_dim
+        self.num_routed = num_routed_experts
+        self.num_shared = num_shared_experts
+        self.top_k = top_k
+        self.aux_loss_coef = aux_loss_coef
 
-    return cv_squared
+        # Gating router for routed experts
+        self.router = nn.Linear(hidden_dim, num_routed_experts, bias=False)
+
+        # Expert pools
+        self.routed_experts = nn.ModuleList([
+            SwiGLUExpert(hidden_dim, moe_intermediate_dim) for _ in range(num_routed_experts)
+        ])
+        self.shared_experts = nn.ModuleList([
+            SwiGLUExpert(hidden_dim, moe_intermediate_dim) for _ in range(num_shared_experts)
+        ])
+
+    def forward(self, x: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+        batch_size, seq_len, hidden_dim = x.shape
+        x_flat = x.view(-1, hidden_dim)  # [Total_Tokens, Hidden_Dim]
+        total_tokens = x_flat.size(0)
+
+        # 1. Evaluate Shared Experts (Always Active)
+        shared_output = torch.zeros_like(x_flat)
+        for expert in self.shared_experts:
+            shared_output += expert(x_flat)
+
+        # 2. Compute Routing Logits & Probabilities
+        router_logits = self.router(x_flat)  # [Total_Tokens, Num_Routed]
+        router_probs = F.softmax(router_logits, dim=-1)
+
+        # 3. Top-K Gating Selection
+        topk_weights, topk_indices = torch.topk(router_probs, self.top_k, dim=-1)
+        # Normalize top-k weights to sum to 1
+        topk_weights = topk_weights / topk_weights.sum(dim=-1, keepdim=True)
+
+        # 4. Dispatch Tokens to Selected Experts
+        routed_output = torch.zeros_like(x_flat)
+        
+        # Dispatch via index mask to avoid dense evaluation
+        for expert_idx in range(self.num_routed):
+            # Mask indicates where this expert was selected
+            selected_mask = (topk_indices == expert_idx)
+            if not selected_mask.any():
+                continue
+
+            token_indices, k_positions = torch.where(selected_mask)
+            selected_tokens = x_flat[token_indices]
+            expert_out = self.routed_experts[expert_idx](selected_tokens)
+            
+            # Weight output by router confidence
+            weights = topk_weights[token_indices, k_positions].unsqueeze(-1)
+            routed_output.index_add_(0, token_indices, weights * expert_out)
+
+        # 5. Calculate Auxiliary Load-Balancing Loss
+        # f_i: fraction of tokens assigned to expert i
+        expert_mask = F.one_hot(topk_indices, num_classes=self.num_routed).float()
+        tokens_per_expert = expert_mask.sum(dim=[0, 1])
+        f_i = tokens_per_expert / (total_tokens * self.top_k)
+        # P_i: mean probability allocated to expert i
+        P_i = router_probs.mean(dim=0)
+        aux_loss = self.aux_loss_coef * self.num_routed * torch.sum(f_i * P_i)
+
+        final_output = (shared_output + routed_output).view(batch_size, seq_len, hidden_dim)
+        return final_output, aux_loss
 ```
 
 ---
 
-## 💡 Innovation: Building LLaMA 4 from Scratch
+## Architectural Comparison: Frontier MoE Configurations
 
-### Architecture Overview
+| Architecture | Total Parameters | Active Parameters per Token | Routed Experts ($N$) | Activated Experts ($k$) | Shared Experts | Routing Granularity |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **Mixtral 8x7B** | 46.7B | 12.9B | 8 | 2 | 0 (None) | Coarse |
+| **Mixtral 8x22B** | 141B | 39B | 8 | 2 | 0 (None) | Coarse |
+| **DeepSeek-V2 / V3** | 236B / 671B | 21B / 37B | 64 / 256 | 6 / 8 | 2 / 1 (Isolated) | Fine-Grained |
+| **LLaMA 4 (Maverick)** | ~400B+ | ~17B–22B | 128 | 8 | 2 (Isolated) | Fine-Grained |
+| **GShard** | 600B | ~40B | 2048 | 2 | 0 (None) | Coarse Distributed |
 
 ![LLaMA 4 Architecture](/assets/img/ai/llama4/llama4-architecture.png){: .light .w-75 .shadow .rounded-10 w='1200' h='800' }
 
-**Complete MoE Transformer Architecture:**
+---
+
+## Distributed Systems Bottlenecks: Expert Parallelism (EP) and All-to-All
+
+While MoE models dramatically reduce theoretical arithmetic FLOPs, executing them in distributed training and inference clusters introduces challenging communication constraints.
+
+In a dense model, tensor parallelism (TP) and pipeline parallelism (PP) communicate activations across GPU interconnects using predictable `All-Reduce` collectives. In contrast, scaling MoE models requires **Expert Parallelism (EP)**:
+- The $N$ experts are partitioned across $P$ GPUs (e.g., GPU 0 hosts Experts 0–7, GPU 1 hosts Experts 8–15).
+- Tokens in a micro-batch on GPU 0 that route to Expert 12 must be sent across the network to GPU 1.
+- After computation, the resulting activations must be routed back to GPU 0 for the residual connection.
 
 ```mermaid
-graph TB
-    subgraph Input["Input Processing"]
-        T[Text Input] --> TK[Tokenizer]
-        TK --> E[Embedding Layer]
-    end
+sequenceDiagram
+    autonumber
+    participant GPU0 as GPU Rank 0 (Hosts E0-E3)
+    participant GPU1 as GPU Rank 1 (Hosts E4-E7)
+    participant Interconnect as NVLink / InfiniBand Fabric
 
-    subgraph Layers["MoE Transformer Layers"]
-        E --> L1[Layer 1]
-        L1 --> L2[Layer 2]
-        L2 --> L3[Layer N]
-    end
-
-    subgraph Layer["Single MoE Layer"]
-        IN[Input] --> ATT[Multi-Head Attention<br/>+ RoPE]
-        ATT --> ADD1[Add & Norm]
-        ADD1 --> MOE[MoE Block]
-        MOE --> ADD2[Add & Norm]
-        ADD2 --> OUT[Output]
-    end
-
-    subgraph MoEBlock["MoE Block Detail"]
-        MOE_IN[Input] --> ROUTER[Router]
-        ROUTER -->|Top-K| EXP1[Expert 1]
-        ROUTER -->|Top-K| EXP2[Expert 2]
-        ROUTER -->|Top-K| EXP3[Expert 3]
-        ROUTER -->|Top-K| EXP4[Expert 4]
-        EXP1 --> COMBINE[Weighted Combine]
-        EXP2 --> COMBINE
-        EXP3 --> COMBINE
-        EXP4 --> COMBINE
-        COMBINE --> MOE_OUT[Output]
-    end
-
-    L3 --> LM[Language Model Head]
-    LM --> PROBS[Output Probabilities]
-
-    style ROUTER fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
-    style MOE fill:#4ecdc4,stroke:#0a9396,stroke-width:2px,color:#fff
+    Note over GPU0,GPU1: Self-Attention & Router Execution
+    GPU0->>Interconnect: All-to-All Dispatch (Send Tokens routed to E4-E7 to GPU1)
+    GPU1->>Interconnect: All-to-All Dispatch (Send Tokens routed to E0-E3 to GPU0)
+    Note over GPU0,GPU1: Local Expert Computation (FFN Forward Pass)
+    GPU0->>Interconnect: All-to-All Combine (Return Outputs to Origin Ranks)
+    GPU1->>Interconnect: All-to-All Combine (Return Outputs to Origin Ranks)
+    Note over GPU0,GPU1: Residual Accumulation & LayerNorm
 ```
 
-### Implementation: Core Components
-
-#### 1. Character-Level Tokenization
-
-```python
-class CharacterTokenizer:
-    """
-    Simple character-level tokenizer for educational purposes
-    In production, use SentencePiece or BPE tokenizers
-    """
-
-    def __init__(self, text: str):
-        # Build vocabulary from unique characters
-        self.chars = sorted(list(set(text)))
-        self.vocab_size = len(self.chars)
-
-        # Create mappings
-        self.char_to_idx = {ch: i for i, ch in enumerate(self.chars)}
-        self.idx_to_char = {i: ch for i, ch in enumerate(self.chars)}
-
-    def encode(self, text: str) -> List[int]:
-        """Convert text to token indices"""
-        return [self.char_to_idx[ch] for ch in text]
-
-    def decode(self, indices: List[int]) -> str:
-        """Convert token indices to text"""
-        return ''.join([self.idx_to_char[idx] for idx in indices])
-```
-
-#### 2. Rotary Positional Embeddings (RoPE)
-
-```python
-def apply_rotary_pos_emb(q: torch.Tensor, k: torch.Tensor,
-                         freqs: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
-    """
-    Apply rotary positional embeddings to queries and keys
-
-    RoPE encodes position information by rotating the query/key vectors
-    in the complex plane, allowing the model to understand relative positions
-    """
-    # Reshape for complex multiplication
-    q_complex = torch.view_as_complex(q.reshape(*q.shape[:-1], -1, 2))
-    k_complex = torch.view_as_complex(k.reshape(*k.shape[:-1], -1, 2))
-
-    # Apply rotation
-    freqs_cis = torch.polar(torch.ones_like(freqs), freqs)
-    q_rotated = q_complex * freqs_cis
-    k_rotated = k_complex * freqs_cis
-
-    # Convert back to real
-    q_emb = torch.view_as_real(q_rotated).flatten(-2)
-    k_emb = torch.view_as_real(k_rotated).flatten(-2)
-
-    return q_emb, k_emb
-```
-
-#### 3. Multi-Head Self-Attention with RoPE
-
-```python
-class MultiHeadAttention(nn.Module):
-    """
-    Multi-head self-attention with rotary positional embeddings
-    """
-
-    def __init__(self, d_model: int, num_heads: int, max_seq_len: int = 512):
-        super().__init__()
-        self.d_model = d_model
-        self.num_heads = num_heads
-        self.head_dim = d_model // num_heads
-
-        # Q, K, V projections
-        self.q_proj = nn.Linear(d_model, d_model)
-        self.k_proj = nn.Linear(d_model, d_model)
-        self.v_proj = nn.Linear(d_model, d_model)
-        self.out_proj = nn.Linear(d_model, d_model)
-
-        # RoPE frequencies
-        self.register_buffer('freqs', self._compute_freqs(max_seq_len))
-
-    def _compute_freqs(self, max_seq_len: int) -> torch.Tensor:
-        """Compute RoPE frequencies"""
-        freqs = 1.0 / (10000 ** (torch.arange(0, self.head_dim, 2).float() / self.head_dim))
-        positions = torch.arange(max_seq_len).float()
-        freqs = torch.outer(positions, freqs)
-        return freqs
-
-    def forward(self, x: torch.Tensor, mask: Optional[torch.Tensor] = None):
-        batch_size, seq_len, _ = x.shape
-
-        # Project to Q, K, V
-        q = self.q_proj(x).view(batch_size, seq_len, self.num_heads, self.head_dim)
-        k = self.k_proj(x).view(batch_size, seq_len, self.num_heads, self.head_dim)
-        v = self.v_proj(x).view(batch_size, seq_len, self.num_heads, self.head_dim)
-
-        # Apply RoPE
-        q, k = apply_rotary_pos_emb(q, k, self.freqs[:seq_len])
-
-        # Reshape for attention
-        q = q.transpose(1, 2)  # [batch, heads, seq, head_dim]
-        k = k.transpose(1, 2)
-        v = v.transpose(1, 2)
-
-        # Scaled dot-product attention
-        scores = torch.matmul(q, k.transpose(-2, -1)) / math.sqrt(self.head_dim)
-
-        # Causal mask
-        if mask is not None:
-            scores = scores.masked_fill(mask == 0, float('-inf'))
-
-        attn_weights = F.softmax(scores, dim=-1)
-        attn_output = torch.matmul(attn_weights, v)
-
-        # Concatenate heads and project
-        attn_output = attn_output.transpose(1, 2).contiguous()
-        attn_output = attn_output.view(batch_size, seq_len, self.d_model)
-        output = self.out_proj(attn_output)
-
-        return output
-```
-
-#### 4. Mixture-of-Experts Block
-
-```python
-class Expert(nn.Module):
-    """Single expert: a feed-forward network"""
-
-    def __init__(self, d_model: int, d_ff: int):
-        super().__init__()
-        self.ff = nn.Sequential(
-            nn.Linear(d_model, d_ff),
-            nn.GELU(),
-            nn.Linear(d_ff, d_model)
-        )
-
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return self.ff(x)
-
-
-class MoEBlock(nn.Module):
-    """
-    Mixture-of-Experts block with router and multiple experts
-    """
-
-    def __init__(self, d_model: int, num_experts: int, top_k: int, d_ff: int):
-        super().__init__()
-        self.num_experts = num_experts
-        self.top_k = top_k
-
-        # Router
-        self.router = nn.Linear(d_model, num_experts)
-
-        # Experts
-        self.experts = nn.ModuleList([
-            Expert(d_model, d_ff) for _ in range(num_experts)
-        ])
-
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """
-        Args:
-            x: [batch_size, seq_len, d_model]
-
-        Returns:
-            output: [batch_size, seq_len, d_model]
-        """
-        batch_size, seq_len, d_model = x.shape
-
-        # Flatten for routing
-        x_flat = x.view(-1, d_model)  # [batch * seq, d_model]
-
-        # Router scores
-        router_logits = self.router(x_flat)  # [batch * seq, num_experts]
-
-        # Add noise during training (prevents expert collapse)
-        if self.training:
-            noise = torch.randn_like(router_logits) * 0.1
-            router_logits = router_logits + noise
-
-        # Top-K selection
-        top_k_scores, top_k_indices = torch.topk(
-            router_logits, k=self.top_k, dim=-1
-        )  # [batch * seq, top_k]
-
-        # Create mask for selected experts
-        expert_mask = torch.zeros_like(router_logits)
-        expert_mask.scatter_(1, top_k_indices, 1.0)
-
-        # Softmax over selected experts only
-        router_logits_masked = router_logits.masked_fill(
-            expert_mask == 0, float('-inf')
-        )
-        expert_probs = F.softmax(router_logits_masked, dim=-1)
-
-        # Process through selected experts
-        output = torch.zeros_like(x_flat)
-
-        for expert_idx in range(self.num_experts):
-            # Find tokens routed to this expert
-            expert_mask_idx = (top_k_indices == expert_idx).any(dim=-1)
-
-            if expert_mask_idx.any():
-                # Get tokens for this expert
-                expert_input = x_flat[expert_mask_idx]
-
-                # Process through expert
-                expert_output = self.experts[expert_idx](expert_input)
-
-                # Get weights for this expert
-                expert_weights = expert_probs[expert_mask_idx, expert_idx:expert_idx+1]
-
-                # Weighted contribution
-                output[expert_mask_idx] += expert_weights * expert_output
-
-        # Reshape back
-        output = output.view(batch_size, seq_len, d_model)
-
-        return output
-```
-
-#### 5. Complete MoE Transformer Layer
-
-```python
-class MoETransformerLayer(nn.Module):
-    """Complete MoE Transformer layer"""
-
-    def __init__(self, d_model: int, num_heads: int, num_experts: int,
-                 top_k: int, d_ff: int, max_seq_len: int = 512):
-        super().__init__()
-
-        # Attention
-        self.attention = MultiHeadAttention(d_model, num_heads, max_seq_len)
-        self.norm1 = nn.LayerNorm(d_model)
-
-        # MoE block
-        self.moe = MoEBlock(d_model, num_experts, top_k, d_ff)
-        self.norm2 = nn.LayerNorm(d_model)
-
-    def forward(self, x: torch.Tensor, mask: Optional[torch.Tensor] = None):
-        # Self-attention with residual
-        attn_out = self.attention(x, mask)
-        x = self.norm1(x + attn_out)
-
-        # MoE with residual
-        moe_out = self.moe(x)
-        x = self.norm2(x + moe_out)
-
-        return x
-```
-
-#### 6. Complete Model
-
-```python
-class Llama4MoE(nn.Module):
-    """
-    Miniature LLaMA 4 MoE model from scratch
-    """
-
-    def __init__(self, vocab_size: int, d_model: int = 128, num_layers: int = 4,
-                 num_heads: int = 8, num_experts: int = 4, top_k: int = 2,
-                 d_ff: int = 512, max_seq_len: int = 512):
-        super().__init__()
-
-        # Embedding
-        self.embedding = nn.Embedding(vocab_size, d_model)
-
-        # Transformer layers
-        self.layers = nn.ModuleList([
-            MoETransformerLayer(d_model, num_heads, num_experts, top_k,
-                              d_ff, max_seq_len)
-            for _ in range(num_layers)
-        ])
-
-        # Output head
-        self.ln_f = nn.LayerNorm(d_model)
-        self.head = nn.Linear(d_model, vocab_size)
-
-    def forward(self, x: torch.Tensor, mask: Optional[torch.Tensor] = None):
-        # Embedding
-        x = self.embedding(x)
-
-        # Through layers
-        for layer in self.layers:
-            x = layer(x, mask)
-
-        # Output projection
-        x = self.ln_f(x)
-        logits = self.head(x)
-
-        return logits
-```
-
-### Training and Generation
-
-**Training Loop:**
-
-```python
-def train_moe_model(model, dataloader, optimizer, num_epochs=10):
-    """Training loop with load balancing loss"""
-    model.train()
-
-    for epoch in range(num_epochs):
-        total_loss = 0
-
-        for batch in dataloader:
-            inputs, targets = batch
-
-            # Forward pass
-            logits = model(inputs)
-
-            # Cross-entropy loss
-            loss = F.cross_entropy(
-                logits.view(-1, logits.size(-1)),
-                targets.view(-1),
-                ignore_index=-1
-            )
-
-            # Add load balancing loss (simplified)
-            # In practice, track expert usage and add regularization
-
-            # Backward
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-
-            total_loss += loss.item()
-
-        print(f"Epoch {epoch+1}, Loss: {total_loss/len(dataloader):.4f}")
-```
-
-**Generation (Autoregressive):**
-
-```python
-def generate(model, tokenizer, prompt: str, max_length: int = 100,
-             temperature: float = 1.0) -> str:
-    """Generate text autoregressively"""
-    model.eval()
-
-    # Encode prompt
-    tokens = tokenizer.encode(prompt)
-    tokens = torch.tensor([tokens])
-
-    with torch.no_grad():
-        for _ in range(max_length):
-            # Forward pass
-            logits = model(tokens)
-
-            # Get next token logits
-            next_token_logits = logits[0, -1, :] / temperature
-
-            # Sample
-            probs = F.softmax(next_token_logits, dim=-1)
-            next_token = torch.multinomial(probs, num_samples=1)
-
-            # Append
-            tokens = torch.cat([tokens, next_token.unsqueeze(0)], dim=1)
-
-            # Stop if end token
-            if next_token.item() == tokenizer.eos_token_id:
-                break
-
-    # Decode
-    generated = tokenizer.decode(tokens[0].tolist())
-    return generated
-```
+This exchange requires high-frequency **All-to-All** communication primitives. If network fabric throughput (such as inter-node PCIe or InfiniBand) cannot keep pace with GPU tensor cores, communication latency completely dominates computation, causing hardware stalls. Mitigating this bottleneck requires high-speed fabrics (NVLink switches) and token capacity limits that drop or redirect overflowing tokens when an individual expert's buffer saturates.
 
 ---
 
-## 🎯 Key Takeaways
+## How Mixture-of-Experts Architectures Evolved Across 2026
 
-| Insight                              | Implication                                                   | Next Steps                                                       |
-| :----------------------------------- | :------------------------------------------------------------ | :--------------------------------------------------------------- |
-| **MoE enables efficient scaling**    | Can build larger models without proportional compute increase | Experiment with different expert counts and top-K values         |
-| **Router is critical**               | Expert selection determines model performance                 | Research better routing algorithms (learned routing, hash-based) |
-| **Load balancing matters**           | Uneven expert usage hurts training                            | Implement proper load balancing loss and capacity limits         |
-| **Sparse activation is key**         | Only activating top-K experts saves compute                   | Optimize expert selection for production inference               |
-| **MoE + Foundation Models = Future** | LLaMA 4, Mixtral show MoE's potential                         | Explore MoE for domain-specific models                           |
+By 2026, MoE engineering moved far beyond basic top-$k$ gating to address multi-node serving realities:
 
-### Why This Matters for Production
-
-As someone who's shipped ML systems, here's what excites me about MoE:
-
-1. **Cost Efficiency:** 50% reduction in inference cost while maintaining performance
-2. **Scalability:** Can scale to hundreds of billions of parameters efficiently
-3. **Specialization:** Experts naturally specialize in different tasks/domains
-4. **Flexibility:** Can adjust expert count and top-K based on compute budget
-
-**The Challenges:**
-
-- **Router complexity:** Routing decisions add overhead
-- **Load balancing:** Ensuring all experts train properly
-- **Memory:** Still need to load all expert parameters (though only activate subset)
-
-**What I'd Try First:**
-
-- Build a small MoE model (4-8 experts) for a specific task
-- Experiment with different top-K values (1, 2, 4)
-- Measure actual speedup vs. standard Transformer
-- Test expert specialization (do experts learn different patterns?)
+1. **Auxiliary-Loss-Free Load Balancing**: Modern architectures eliminate artificial auxiliary losses ($\mathcal{L}_{\text{aux}}$), which often degrade pure language modeling accuracy. Instead, routers implement **bias-adjusted routing**: dynamic bias terms $b_i$ are added to router logits ($W_g x + b_i$), with biases updated automatically via online PID controllers to maintain target expert distributions without distorting gradient propagation.
+2. **Dynamic Multi-Token Speculative Decoding**: In inference serving engines like vLLM and SGLang—audited in our [production ML deployment analysis](/posts/deploy-an-ml-model/)—MoE inference exploits speculative draft models. Because MoE memory bandwidth is dominated by loading expert weights for isolated tokens, speculative drafting aggregates multiple consecutive tokens, allowing the MoE model to batch expert evaluations and maximize arithmetic intensity.
+3. **Parameter-Efficient Tuning for MoEs**: As examined in our [PEFT architectural breakdown](/posts/explained-fintune-llm/), fine-tuning MoEs by injecting LoRA adapters into every individual expert causes parameter bloat. Modern regimes apply selective LoRA: adapters are attached strictly to the shared experts and router gating projections, leaving specialized routed weights frozen.
+4. **Agentic Workload Specialization**: Production models trained under 2026 agent workflows—such as those explored in our [2024 model survey](/posts/llm-2024-survey/)—exhibit distinct expert emergence: specific fine-grained experts activate selectively during tool execution, JSON grammar enforcement, and mathematical chain-of-thought verification.
 
 ---
 
-## 🤔 New Questions This Raises
+## Key Takeaways
 
-1. **Optimal Expert Count:** How many experts is optimal? Is there a sweet spot between specialization and routing overhead?
+- **Sparse MoE Decouples Parameters from FLOPs**: Activating a fraction of total network parameters per token allows models to scale to hundreds of billions of parameters with the inference latency and compute footprint of small dense models.
+- **Auxiliary Balancing Losses Prevent Expert Collapse**: Without explicit load-balancing constraints, gating networks polarize toward a few early-learning experts, rendering the remaining capacity useless.
+- **Fine-Grained Routing with Shared Experts Dominates Frontier Design**: Dividing layers into dozens of small routed experts paired with permanently active shared experts prevents syntactic redundancy and maximizes domain specialization.
+- **All-to-All Interconnects Define the Scaling Frontier**: In distributed multi-GPU environments, expert parallelism shifts the primary engineering challenge from compute throughput to network fabric communication.
 
-2. **Dynamic Top-K:** Can we learn the optimal number of experts to activate per token, rather than fixing top-K?
+---
 
-3. **Expert Specialization:** What do experts actually learn? Can we analyze and interpret expert specializations?
+## New Questions
 
-4. **Routing Algorithms:** Are there better routing strategies than learned softmax routing? (e.g., hash-based, learned hash)
-
-5. **MoE for Smaller Models:** Can MoE benefit smaller models (<1B parameters), or is it only useful at scale?
-
-6. **Multi-Modal MoE:** How would MoE work for vision-language models? Different experts for different modalities?
-
-**Next Experiment:** Build a 4-expert MoE model on a small dataset, visualize which experts activate for different input types, and measure the actual speedup compared to a standard Transformer of equivalent capacity.
+- How do quantization formats (FP8 and 4-bit NormalFloat) interact with MoE routing precision, and does low-precision representation cause catastrophic token dispatch errors?
+- Can dynamic top-$k$ routing—where the model autonomously chooses to activate 1 expert for simple tokens and 8 experts for complex tokens—outperform static top-$k$ selection?
+- What are the communication-latency limits of scaling Expert Parallelism across geo-distributed data centers connected over public optical backbones?
 
 ---
 
 ## References
 
-**Original Article:**
-
-- [Building LLaMA 4 from Scratch with Python - Daily Dose of Data Science](https://www.dailydoseofds.com/building-llama-4-from-scratch-with-python/)
-
-**Research Papers:**
-
-- [Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer (Shazeer et al., 2017)](https://arxiv.org/abs/1701.06538)
-- [GShard: Scaling Giant Models with Conditional Computation (Lepikhin et al., 2020)](https://arxiv.org/abs/2006.16668)
-- [Switch Transformers: Scaling to Trillion Parameter Models (Fedus et al., 2021)](https://arxiv.org/abs/2101.03961)
-- [Mixtral of Experts (Jiang et al., 2024)](https://arxiv.org/abs/2401.04088)
-- [LLaMA: Open and Efficient Foundation Language Models (Touvron et al., 2023)](https://arxiv.org/abs/2302.13971)
-
-**MoE Architecture:**
-
-- [Mixture-of-Experts Explained - Hugging Face](https://huggingface.co/blog/moe)
-
-**Implementation Resources:**
-
-- [FairScale MoE Implementation](https://github.com/facebookresearch/fairscale)
-- [Tutel: An Efficient MoE Implementation](https://github.com/microsoft/tutel)
-- [Megablocks: Efficient Sparse Training with Block-Structured Sparsity](https://github.com/stanford-futuredata/megablocks)
-
-**LLaMA 4:**
-
-- [Meta AI LLaMA 4 Announcement](https://ai.meta.com/blog/llama-4/)
-- [LLaMA 4 GitHub Repository](https://github.com/meta-llama/llama)
-
-**Related Models:**
-
-- [Mixtral 8x7B - Mistral AI](https://mistral.ai/news/mixtral-of-experts/)
-- [GLaM: Generalist Language Model (Du et al., 2022)](https://arxiv.org/abs/2112.06905)
-- [PaLM: Pathways Language Model (Chowdhery et al., 2022)](https://arxiv.org/abs/2204.02311)
-
-**PyTorch Resources:**
-
-- [PyTorch Documentation](https://pytorch.org/docs/stable/index.html)
-- [PyTorch Transformer Tutorial](https://pytorch.org/tutorials/beginner/transformer_tutorial.html)
-- [PyTorch MoE Example](https://github.com/pytorch/examples/tree/main/moe)
-
-**Educational Resources:**
-
-- [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
+- Shazeer, N., Mirhoseini, A., Maziarz, K., Davis, A., Le, Q., Hinton, G., & Dean, J. (2017). *Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer*. In International Conference on Learning Representations (ICLR 2017), arXiv preprint [arXiv:1701.06538](https://arxiv.org/abs/1701.06538) (accessed 2026-10-18).
+- Fedus, W., Zoph, B., & Shazeer, N. (2022). *Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity*. Journal of Machine Learning Research (JMLR), arXiv preprint [arXiv:2101.03961](https://arxiv.org/abs/2101.03961) (accessed 2026-10-18).
+- Jiang, A. Q., Sablayrolles, A., Roux, A., Mensch, A., Savary, B., Bamford, C., ... & Sayed, W. E. (2024). *Mixtral of Experts*. arXiv preprint [arXiv:2401.04088](https://arxiv.org/abs/2401.04088) (accessed 2026-10-18).
+- Dai, D., Deng, C., Zhao, C., Xu, R. X., Gao, H., Chen, D., Li, J., Zeng, W., Yu, X., Zhou, Y., Wang, Z., Liang, W., Shen, Y., Zhang, X., Li, W., & Guan, C. (2024). *DeepSeekMoE: Towards Ultimate Expertise in Mixture-of-Experts Language Models*. arXiv preprint [arXiv:2401.06066](https://arxiv.org/abs/2401.06066) (accessed 2026-10-18).

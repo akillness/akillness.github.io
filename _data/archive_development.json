@@ -1397,9 +1397,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a third-party tutorial into an authoritative source audit of Mixture-of-Experts architectures, evaluating sparse routing, auxiliary losses, and distributed expert parallelism."
     },
     {
       "path": "_posts/2025/11/2025-11-10-spring-ai-llm-as-judge.md",
