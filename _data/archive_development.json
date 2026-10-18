@@ -3466,9 +3466,9 @@
         "third-party-rewrite",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from third-party blog rewrite into deep systems engineering source audit on Python event loop bottlenecks, GIL contention, and structured concurrency"
     },
     {
       "path": "_posts/2025/12/2025-12-11-rnj-1-motif-2-12-7b-open-source-llm-analysis.md",
