@@ -2832,9 +2832,9 @@
         "no-sources",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal third-party overview into authoritative source audit on Elasticsearch distributed architecture, Lucene inverted indices, and hybrid vector search"
     },
     {
       "path": "_posts/2024/05/2024-05-18-evaluating-llm.md",
