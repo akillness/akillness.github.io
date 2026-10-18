@@ -1746,9 +1746,9 @@
       "links_at_intake": 2,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on OpenVSCode Server architecture, remote extension host RPC, token authentication, and cloud development environments"
     },
     {
       "path": "_posts/2026/02/2026-02-18-clawd-control-agent-ops.md",
