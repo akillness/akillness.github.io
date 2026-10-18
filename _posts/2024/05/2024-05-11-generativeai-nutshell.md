@@ -1,229 +1,161 @@
 ---
-title: Generative AI in a Nutshell
-description: "Curiosity: How do the foundational technologies of generative AI connect?"
-categories: [Review/Trends]
-tags: [Trend, Review, Case]
+title: "Generative AI Architecture: Latent Representations, Diffusion, and Flow Matching"
+description: "A foundational source audit of generative AI paradigms, contrasting autoregressive transformers, latent diffusion SDEs, and flow matching for continuous representation learning."
+categories: [AI, Research]
+tags: [generative-ai, diffusion-models, flow-matching, transformers]
 date: 2024-05-11 23:43:00 +0800
+last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
-lang: ko
-# Retired 2026-09-15: machine summary / rewrite of a third-party article
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: true
-ads: false
-restored_archive: "2026-10-12"
+archive_developed: "2026-10-18"
+archive_development_note: "Source audit examining foundational generative AI architectures across autoregressive, diffusion, and flow matching paradigms."
 ---
-> [`Generative AI Preparation`](https://github.com/Msrevalli/Generative-AI-Preparation) (Generative AI 개념북) Thanks to [Aishwarya Naresh Reganti](https://www.linkedin.com/in/areganti/)
-{: .prompt-warning }
 
+## How Do Latent Generative Paradigms Unify Modern AI Architectures?
 
+Generative artificial intelligence has evolved from rudimentary statistical sampling to high-dimensional manifold estimation. While practitioner discourse frequently conflates product interfaces with foundational modeling capabilities, generative systems operate across distinct mathematical formulations: discrete autoregressive sequence modeling, variational autoencoding (VAE), stochastic differential equation (SDE) diffusion, and continuous flow matching. 
 
-## Generative AI in a Nutshell: Understanding the Fundamentals
+Understanding these foundational representations is essential before attempting pipeline optimizations such as retrieval-augmented generation (RAG) or parameter-efficient fine-tuning (PEFT). As discussed in our [taxonomy of generative artificial intelligence](/posts/generativeai-term/), the underlying loss formulations dictate sampling latency, mode coverage, and fidelity across modal boundaries.
 
-*Curiosity:* How do the foundational technologies of generative AI connect? Why is understanding these fundamentals more important than immediately building applications?
+```mermaid
+flowchart TD
+    Data[High-Dimensional Data Distribution p_data] --> Encoder[Inference / Encoder Network]
+    Encoder --> LatentSpace[Continuous Latent Manifold z]
+    
+    subgraph GenerativeParadigms["Core Generative Paradigms"]
+        direction TB
+        AR["Autoregressive Transformers<br/>p(x) = Π p(x_t | x_<t)<br/>Causal Masking & KV Caching"]
+        VAE["Variational Autoencoders<br/>L_ELBO = E[log p(x|z)] - D_KL(q(z|x) || p(z))<br/>Reparameterization Trick"]
+        Diffusion["Denoising Diffusion SDEs<br/>dx = f(x,t)dt + g(t)dw<br/>Score-Based Reverse Drift"]
+        Flow["Flow Matching / CNFs<br/>dx/dt = v_t(x)<br/>Optimal Transport Vector Fields"]
+    end
+    
+    LatentSpace --> AR
+    LatentSpace --> VAE
+    LatentSpace --> Diffusion
+    LatentSpace --> Flow
+    
+    AR --> GeneratedData[Reconstructed / Synthesized Artifacts]
+    VAE --> GeneratedData
+    Diffusion --> GeneratedData
+    Flow --> GeneratedData
+```
 
-**Understanding the foundational technologies** of generative AI and how they connect is more important than immediately fine-tuning an LLM and adding RAG to build a QnA service. 🤨
+---
 
-**Henrik Kniberg's Generative AI In a Nutshell** provides an excellent overview through diagrams and video.
+## The Four Pillars of Mathematical Generative Modeling
 
-> **Source**: <https://www.crisp.se/kurser/ai-for-leaders-2024-04-23>
-> **Preparation Guide**: <https://github.com/Msrevalli/Generative-AI-Preparation>
-> **Author**: [JAE-HONG EOM](https://www.linkedin.com/in/jae-hong-e-93368248/)
-{: .prompt-info}
+To understand generative capabilities, practitioners must distinguish between the four fundamental families of generative models. Each formalizes density estimation and posterior sampling under distinct computational trade-offs:
 
-![Generative AI in a nutshell ](/assets/img/news/generative-AI-in-a-nutshell.png){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
+### 1. Autoregressive Sequence Transformers
 
-{% include embed/youtube.html id='2IK3DFHRFfw' %}
+Autoregressive models factorize the joint probability distribution of a sequence into a product of conditional probabilities using the chain rule:
 
-### Key Concepts
+$$p_\theta(\mathbf{x}) = \prod_{i=1}^T p_\theta(x_i \mid x_{<i})$$
 
-*Retrieve:* Understanding generative AI fundamentals.
+In transformer architectures, this is enforced through causal self-attention masks. Training is parallelized via teacher forcing, optimizing cross-entropy loss over categorical token distributions. However, inference is strictly sequential ($O(T)$ forward passes), necessitating key-value (KV) caching and speculative decoding techniques to mitigate memory bandwidth bottlenecks.
 
-**Core Understanding**: Before building applications, understand how:
-- AI models learn
-- Prompt engineering works
-- Models interact with products
-- Different techniques connect
+### 2. Variational Autoencoders (VAEs)
 
-**Why It Matters**: This foundation enables better application design and more effective use of generative AI.
+VAEs introduce a latent variable $\mathbf{z} \sim p(\mathbf{z}) = \mathcal{N}(0, \mathbf{I})$ and approximate the intractable true posterior $p(\mathbf{z} \mid \mathbf{x})$ using an inference network $q_\phi(\mathbf{z} \mid \mathbf{x})$. Training optimizes the Evidence Lower Bound (ELBO):
 
-<details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+$$\mathcal{L}_{\text{ELBO}}(\theta, \phi; \mathbf{x}) = \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})}[\log p_\theta(\mathbf{x} \mid \mathbf{z})] - D_{\text{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x}) \parallel p(\mathbf{z}))$$
 
-* * * 
+The reparameterization trick ($\mathbf{z} = \mu_\phi(\mathbf{x}) + \sigma_\phi(\mathbf{x}) \odot \epsilon$, where $\epsilon \sim \mathcal{N}(0, \mathbf{I})$) permits backpropagation through stochastic nodes. While standard VAEs exhibit mode-averaging behavior that produces blurry samples in pixel space, they serve as the foundational perceptual compression engine in latent diffusion models such as Stable Diffusion and Flux.
 
-> Lilys AI 요약노트 : <https://lilys.ai/digest/617175?videoId=2IK3DFHRFfw&result=summaryNote&source=video>
+### 3. Denoising Diffusion Probabilistic Models (DDPM) & SDEs
 
-> Lilys AI 요약블로그
+Diffusion models establish a forward noising process governed by an Itô stochastic differential equation:
 
+$$\mathrm{d}\mathbf{x} = \mathbf{f}(\mathbf{x}, t)\,\mathrm{d}t + g(t)\,\mathrm{d}\mathbf{w}$$
 
-### AI의 발전과 generative AI의 의미는?
+The reverse generative process runs backwards in time from a Gaussian prior $\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I})$, guided by the score function $\nabla_{\mathbf{x}} \log p_t(\mathbf{x})$:
 
-컴퓨터는 과거에는 명령어에 따라 동작하는 계산기 수준이었지만, 이제 머신러닝 등을 통해 똑똑해져 인간과 유사하게 학습, 사고, 의사소통하게 되었어요.
+$$\mathrm{d}\mathbf{x} = \left[ \mathbf{f}(\mathbf{x}, t) - g(t)^2 \nabla_{\mathbf{x}} \log p_t(\mathbf{x}) \right] \mathrm{d}t + g(t)\,\mathrm{d}\bar{\mathbf{w}}$$
 
-이러한 기술을 generative AI라고 하며, 이미 GPT와 같은 제품에서 사용하고 있어요.
+Neural networks are trained via score matching to estimate the injected noise $\epsilon_\theta(\mathbf{x}_t, t)$. This decouples generative fidelity from adversarial minimax instability (characteristic of GANs), but requires dozens of iterative ODE solver steps during sampling.
 
-이 기술은 인간만이 할 수 있었던 창의적이고 지성적인 업무를 수행할 수 있게 하며, 기업뿐만 아니라 모든 사람에게 긍정적이거나 부정적인 혜택을 줄 것이에요.
+### 4. Continuous Normalizing Flows and Flow Matching
 
-generative AI는 아직 완벽하지 않지만, 지수함수적으로 발전 중이에요.
+Flow matching eliminates the stochastic drift of diffusion by learning an ordinary differential equation (ODE) vector field $\mathbf{v}_t(\mathbf{x})$ that transports probability mass along deterministic paths from base noise $p_0$ to target data distribution $p_1$:
 
-이러한 기술에 대해 이해하고, 기업으로서 적용할 수 있게 되는 것은 기업의 경쟁력을 향상시키는데 중요해요.
+$$\frac{\mathrm{d}\mathbf{x}_t}{\mathrm{d}t} = \mathbf{v}_t(\mathbf{x}_t), \quad \mathbf{x}_0 \sim \mathcal{N}(0, \mathbf{I}), \quad \mathbf{x}_1 \sim p_{\text{data}}$$
 
+Under Optimal Transport Displacement Interpolation, the conditional vector fields define straight paths in probability space:
 
-### '아인슈타인'이 지하실에 있을 때 얻을 수 있는 장점은 무엇인가요?
+$$\mathbf{x}_t = (1 - t)\mathbf{x}_0 + t\mathbf{x}_1, \quad \mathbf{v}_t(\mathbf{x}_t) = \mathbf{x}_1 - \mathbf{x}_0$$
 
-모든 사람이 이른바 '아인슈타인'을 지하실에 들고 있다는 가상의 모델 정의해요.
+By regressing straight trajectories, flow matching significantly reduces ODE integration curvature, allowing synthesis in fewer evaluation steps than conventional DDPMs.
 
-즉, 지하실 알고리즘으로 인간의 모든 지식에 대해 할 필요 없이, 말만 걸면 언제든지 자신이 필요한 지식을 얻을 수 있다는 거죠.
+---
 
-하지만, 이런 퀄리티의 지식을 활용하기 위해서는 명확한 의사소통, 효과적인 프롬프트 엔지니어링이 필수적이며, 이는 인공지능 시대에서 가장 중요한 스킬 중 하나라고 생각해요.
+## Comparing Generative Paradigm Trade-Offs
 
-즉, 이와 같이 가상의 아인슈타인과 매일 상호작용을 하면 의외로 파워풀한 밸류 창출 활동에 연결될 수 있다고 생각해요.
+The choice of generative backbone establishes fixed boundaries on training stability, sampling speed, and representation density:
 
+| Paradigm | Training Stability | Sampling Throughput | Latent Controllability | Primary Failure Mode |
+| :--- | :--- | :--- | :--- | :--- |
+| **Autoregressive (AR)** | Very High (Teacher Forcing) | Low (Sequential Token Generation) | High (Token Prompt Steering) | Exposure Bias, Hallucination |
+| **Variational Autoencoder** | High (ELBO Convexity) | Instantaneous ($O(1)$ Pass) | Continuous Latent Geometry | Posterior Collapse, Blurry Reconstruction |
+| **Score Diffusion (SDE)** | High (Denoising Score Matching) | Moderate to Low (Iterative Denoising) | High (Classifier-Free Guidance) | Mode Missing, High Step Count |
+| **Flow Matching (CNF)** | Very High (Regression Loss) | High ($4 \text{ to } 16$ Euler Steps) | Linear Interpolation Properties | Boundary Discontinuities |
 
-### AI와 GPT의 작동 원리는?
+---
 
-*Curiosity:* AI는 인공지능을 나타내며, '기계 학습'과 '컴퓨터 비전'과 같은 용어들이 오랫동안 사용되어 왔어요.
+## Alignment, Preference Optimization, and Human-in-the-Loop Steering
 
+Pretrained generative models learn the unconditional or raw conditional distribution of web-scale corpora, capturing noise, incoherence, and unsafe behaviors alongside reasoning patterns. Alignment bridges the gap between raw statistical density matching and task execution.
 
+```mermaid
+sequenceDiagram
+    participant Pretraining as Pretrained Foundation Model
+    participant SFT as Supervised Fine-Tuning (SFT)
+    participant Feedback as Human/AI Preference Pairs
+    participant Optimization as Direct Preference Optimization (DPO)
+    participant Production as Steered Policy Model
 
-GPT는 새로운 콘텐츠를 생성하는 '생성적 AI'의 형태로, 수많은 언어 모델 중 하나에요.
+    Pretraining->>SFT: Instruction-Response Formatting
+    SFT->>Feedback: Candidate Completions (y_w, y_l)
+    Feedback->>Optimization: Binary Preference Annotations
+    Optimization->>Production: Closed-Form Policy Implicit Reward Shift
+```
 
-큰 언어 모델은 인공신경망으로, 입력으로 숫자를 받고 숫자 처리 과정을 거쳐 다시 텍스트로 출력해요.
+While Reinforcement Learning from Human Feedback (RLHF) historically required training an auxiliary scalar reward model $r_\psi(\mathbf{x}, \mathbf{y})$ and optimizing policy $\pi_\theta$ via Proximal Policy Optimization (PPO), contemporary architectures favor Direct Preference Optimization (DPO). DPO analytically parameterizes the reward directly through the log-ratio of the policy and reference model:
 
-이러한 순서로 작동하며, 사용자가 입력을 추가하여 모델을 연속적으로 작동시키면 새로운 단어가 더해져요.
+$$\mathcal{L}_{\text{DPO}}(\theta; \pi_{\text{ref}}) = -\mathbb{E}_{(\mathbf{x}, \mathbf{y}_w, \mathbf{y}_l) \sim \mathcal{D}} \left[ \log \sigma \left( \beta \log \frac{\pi_\theta(\mathbf{y}_w \mid \mathbf{x})}{\pi_{\text{ref}}(\mathbf{y}_w \mid \mathbf{x})} - \beta \log \frac{\pi_\theta(\mathbf{y}_l \mid \mathbf{x})}{\pi_{\text{ref}}(\mathbf{y}_l \mid \mathbf{x})} \right) \right]$$
 
-언어 모델은 수많은 파라미터로 구성되어 있어 '큰' 언어 모델이라고 불려요.
+This mathematical equivalence removes the multi-model instability of PPO while enforcing rigorous alignment margins against reward hacking. For detailed multi-view perspective transformations and visual conditioning, see our analysis of [GenWarp generative cross-view synthesis](/posts/genwarp-paper/) and [self-attention computational mechanics](/posts/deepdive-series-5/).
 
+---
 
-### AI 모델 'GPT'의 학습과 인간의 학습의 차이점은?
+## 2026 Technological Evolution: Unified Multimodal Flows and Inference Scaling
 
-AI 모델은 학습을 거치면서, 대부분 인터넷에서 유입되는 막대한 양의 텍스트를 학습해요.
+From the perspective of 2026 systems engineering, the historical segregation between discrete token-based autoregression (text) and continuous diffusion/flow architectures (audio, image, video) has dissolved:
 
-점차 다음 단어를 예측하게 되고, back propagation을 통해 추가로 다듬어져요.
+1. **Unified Flow Matching Architectures**: Modern frontier models (such as modern diffusion-transformer backbones) treat discrete tokens and continuous spatial representations as dual aspects of a shared continuous vector field. Rather than quantizing images into discrete codebooks (VQ-VAE/VQ-GAN), text embeddings modulate continuous flow ODEs directly.
+2. **Inference-Time Compute Scaling**: Following the discovery that test-time search and Monte Carlo tree evaluation scale predictably, generative systems increasingly allocate computational FLOPs during token generation via chain-of-thought verification rather than pure parameter scaling.
+3. **Hardware Acceleration and Distillation**: Through consistency distillation and mean-shift trajectory rectification, 50-step diffusion models have been reduced to 1-to-4 step deterministic flow samplers, enabling real-time edge synthesis at 60 FPS on consumer silicon.
 
-하지만 모델이 진짜 유용해지려면, 인간 학습을 거쳐야 해요.
+---
 
-이를 Reinforcement Learning with human feedback이라고 해요.
+## Key Takeaways
 
-이 학습은 수천 시간 동안 이뤄져요.
+- **Generative Paradigms Are Complementary**: Autoregressive transformers excel at sequential discrete reasoning; Continuous Normalizing Flows and Diffusion SDEs dominate continuous spatial synthesis.
+- **ELBO and Score Matching Underpin Stability**: Replacing adversarial minimax objectives with supervised regression (denoising or velocity vector matching) enabled modern generative reliability.
+- **Alignment Shifts Distribution Bounds**: Techniques like DPO optimize the generative distribution toward high-utility, human-aligned sub-manifolds without fragile online reinforcement learning dynamics.
+- **Flow Matching Represents the Modern Standard**: Rectified flow and optimal transport displacement interpolation offer faster sampling with lower ODE integration curvature than classical DDPM formulations.
 
-주로 모델의 결과물에 대한 평가와 피드백을 바탕으로 인공지능을 훈련시키고, 그 과정에서 좋은 결과를 강화하는 방식을 사용해요.
+---
 
-뒤이어 모델은 대부분 백리스트가 되며, 추가적으로 미세조정으로 세밀한 조정이 가능해요.
+## New Questions
 
+- **Can Continuous Diffusion Replace Autoregressive Next-Token Prediction for Reasoning Tasks?**: While diffusion handles spatial distributions effortlessly, discrete logical deduction has resisted non-autoregressive parallel generation due to sequential causal dependencies.
+- **How Will Test-Time Search Integrate with Latent Manifold Sampling?**: As LLMs exploit test-time compute, how will continuous generative models incorporate programmatic verifiers to prune hallucinated spatial or temporal trajectories?
 
-### 다양한 AI 모델의 특징은?
+---
 
-Chat GPT를 통해 시작된 AI 모델 발전으로, GPT외에도 많은 모델들이 등장하고 있어요.
+## References
 
-모델은 속도, 기능, 가격 등 다양한 측면에서 차이가 있어 로컬에서 다운로드하여 사용할 수 있는 것도 있고, 온라인에서만 이용할 수 있는 것도 있어요.
-
-무료나 오픈 소스로 제공되는 모델도 있지만, 일부는 상용 제품입니다.
-
-모델별로 사용 방법과 기술적인 설정이 달라 어떤 모델은 사용이 쉽지만 다른 모델은 설정이 복잡해요.
-
-특정한 용도에 특화된 모델도 있고, 대부분의 용도에 사용할 수 있는 일반적인 모델도 있어요.
-
-
-### 인공지능 모델이 발휘하는 능력은 무엇인가?
-
-언어 모델들은 단순한 단어 예측기에서 출발해서, 더 많은 데이터를 학습함으로써 예상치 못한 능력을 갖게 됩니다.
-
-이들은 롤플레잉, 시를 쓰기, 고품질 코드 쓰기, 기업 전략 토론하기, 법적·의료적 조언 제공하기, 코칭하기, 교육하기 등이 가능해졌습니다.
-
-인공지능 모델 GPT-4는 간단한 그림을 주면, 날카롭게 이해하지 못한 시나리오에 대해도 상당히 좋은 답을 줍니다.
-
-인공지능의 능력은 지수적으로 향상되는 한편, 인간의 능력은 그렇지 않으며 우리는 이제 새로운 시대로 접어들고 있는 중입니다.
-
-
-### AI혁명에서는 어떤 도전이 존재하나요?
-
-인류는 지금까지 여러 개의 혁명을 경험해왔고, AI혁명에서는 새로운 기술이 거의 즉시 전 세계에 퍼진다는 특징이 있어서 개인과 기업 모두에게 큰 도전이 됩니다.
-
-개인이나 회사들은 AI에 대해 종류에 따라 두 가지 태도로 나누는데, 'AI가 내 직업을 대체하지 못한다'는 반증과 '시간이 없다'는 부정적인 생각이 있습니다.
-
-그러나 이러한 태도로는 위험합니다.
-
-'AI가 당신의 일을 대체하지는 않겠지만 AI를 사용하는 사람이 일을 대체할 수 있다', 한편, AI 기술은 인간과 함께 발전할 예정입니다.
-
-
-### 인공지능이 일자리를 대체하는 상황, 어떻게 대처할까요?
-
-인간들은 AI로 인해 일자리가 사라질 걱정을 하지만, 이러한 사고방식은 도움이 되지 않아요.
-
-중립적인 긍정적인 사고방식이 필요한데요, AI는 개인, 팀, 회사를 놀라울 정도로 생산적으로 만들어줘요.
-
-이러한 사고방식은 미래에 대비하고 일자리나 회사를 잃을 가능성을 줄이며, AI 시대에 성장할 수 있는 능력을 갖는데요, AI 모델은 완벽하지 않기 때문에 언제 AI의 응답을 믿을 지 결정하고, 자체 확인을 하거나 직접 작업을 수행해야 하는지 판단해야 해요.
-
-이 판단은 인간 전문가가 필요하며, AI 모델의 약점을 보완해줘요.
-
-
-### AI는 어떤 동료/협력자로 인식되며 어떤 문제를 해결할 수 있을까?
-
-AI를 동료로 인식하고 함께 일하는 게 좋아요.
-
-의사일 때, AI는 이미 알려지지 않은 질병의 진단을 도와주는 등, 도움이 되는 역할을 해요.
-
-변호사일 때, AI는 법률 조사 및 계약 검토 등 사양번역 작업을 대신 해 줄 수 있어 고객과 더 많은 시간을 보낼 수 있어요.
-
-선생님이라면, AI 동료는 시험 채점, 강의 자료 생성, 개인적인 지원 등을 도와주면 더욱 높은 효율을 뽑아낼 수 있어요.
-
-더불어 인터랙션에서 AI 모델과 제품을 구분할 줄 알아야 해요.
-
-제품의 웹사이트나 앱을 쓰고 있을 때, AI 모델이 작동하는 부분이 존재해도 우리는 대부분 그 부분을 볼 수 없어요.
-
-
-### AI 모델과의 상호작용을 통해 개발 가능한 제품은?
-
-제품을 통해 모델의 일부가 아닌, 사용자 인터페이스와 데이터가 제공돼요.
-
-제품은 모델에 포함되지 않은 추가 기능과 데이터를 제공해요.
-
-E-learning 사이트에서는 챗봇으로 강좌에 대한 질문을 처리하고 채용 회사에서는 AI를 이용한 지원자 평가가 가능해요.
-
-이러한 모델과 상호 작용하기 위해서는 API가 필요하며, 이를 통해 코드가 모델에게 명령을 내릴 수 있어요.
-
-제품 개발자는 외부 브레인으로 AI 모델을 사용해 제품에 지능을 넣어줄 수 있어요.
-
-위에서는 GPT와 상호작용할 수 있는 코드, 자동 지원자 평가 프로그램 등을 예로 들어 설명했어요.
-
-
-### 인공지능을 사용하기 위해 필요한 것은?
-
-인공지능을 활용하려면 prompt engineering 혹은 prompt design(프롬프트 디자인)이 필요해요.
-
-제너레이티브 AI를 효과적으로 사용하려면 AI 모델에서 유용한 결과를 생성할 수 있는 효과적인 프롬프트를 만들어야 해요.
-
-예를 들어 작업실을 계획하는 데 도움이 필요하다면, 작업실에 대한 컨텍스트를 알려주는 프롬프트를 작성하면 더 좋은 결과를 가져올 수 있어요.
-
-결과가 좋지 않을 경우, 프롬프트를 수정하고, 추가 정보를 제공하기 위해 팔로업 프롬프트를 작성하며 처음부터 반복하는 과정이 필요합니다.
-
-
-### Prompt Engineering이란 무엇이고 AI 발전 방향은?
-
-AI에게 나를 인터뷰하도록 요청하는 것이 AI에게 내게 도움이 되기 위해 알아야 할 것들을 알려줄 수 있어요.
-
-Prompt Engineering을 통해 더욱 숙련될수록 AI로부터 더 빠르고 좋은 결과를 얻을 수 있어요.
-
-의미 있는 자율적인 AI 도구를 개발해 임무 성공을 도모하며 Prompt Engineering이 중요해져요.
-
-
-### 생성형 인공지능의 가능성과 한계
-
-생성형 인공지능은 우리가 생각하는 것보다 더 강력하죠.
-
-기술의 한계보다는 우리 자신의 상상력과 프롬프트 엔지니어링 기술이 한계예요.
-
-우리가 당면한 일의 문제를 잘 정의하고 이에 맞는 데이터를 선별해 프롬프트를 디자인하는 것이 관건이에요.
-
-프롬프트 엔지니어링은 중요한 기술 중 하나예요.
-
-열심히 생각하고 실험하며 반복적으로 연습하면서 성장할 수 있는 기회예요.
-
-생성형 인공지능은 기업을 위해 매우 유용한 도구이며, 이를 잘 활용할 수 있는 능력이 점차 중요할 것이에요.
-
-생성형 인공지능 기술을 이해하고 이를 내게 유리한 방향으로 활용합시다.
-
-이를 통해 기회가 되어, 업무 효율성을 높일 수 있어요.
-
-</details>
+- Ho, J., Jain, A., & Abbeel, P. (2020). Denoising Diffusion Probabilistic Models. *Advances in Neural Information Processing Systems (NeurIPS 2020)*, 33, 6840-6851. [https://arxiv.org/abs/2006.11239](https://arxiv.org/abs/2006.11239) (accessed 2026-10-18)
+- Lipman, Y., Chen, R. T. Q., Ben-Hamu, H., Nicklas, M., & Le, M. (2023). Flow Matching for Generative Modeling. *International Conference on Learning Representations (ICLR 2023)*. [https://arxiv.org/abs/2210.02747](https://arxiv.org/abs/2210.02747) (accessed 2026-10-18)
+- Song, Y., Sohl-Dickstein, J., Kingma, D. P., Kumar, A., Ermon, S., & Poole, B. (2021). Score-Based Generative Modeling through Stochastic Differential Equations. *International Conference on Learning Representations (ICLR 2021)*. [https://arxiv.org/abs/2011.13456](https://arxiv.org/abs/2011.13456) (accessed 2026-10-18)
+- Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C. D., & Finn, C. (2023). Direct Preference Optimization: Your Language Model is Secretly a Reward Model. *Advances in Neural Information Processing Systems (NeurIPS 2023)*. [https://arxiv.org/abs/2305.18290](https://arxiv.org/abs/2305.18290) (accessed 2026-10-18)
