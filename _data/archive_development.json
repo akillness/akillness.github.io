@@ -1818,9 +1818,9 @@
       "links_at_intake": 2,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on Rowboat local-first knowledge graph architecture, Markdown memory persistence, and background coworker workflows"
     },
     {
       "path": "_posts/2026/02/2026-02-25-gitnexus-zero-server-code-intel.md",
