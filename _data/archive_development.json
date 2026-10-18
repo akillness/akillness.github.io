@@ -3830,9 +3830,9 @@
         "third-party-rewrite",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial cookbook note into comprehensive technical source audit on Agentic RAG, Corrective RAG (CRAG), Self-RAG reflection tokens, and multi-hop graph retrieval"
     },
     {
       "path": "_posts/2024/07/2024-07-13-anything-as-a-service.md",
