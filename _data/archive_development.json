@@ -1704,9 +1704,9 @@
       "links_at_intake": 3,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on Pi minimal agent runtime, 4-tool primitive kernel, tree-shaped session branching, and dynamic self-extension"
     },
     {
       "path": "_posts/2026/02/2026-02-13-plano-onnx-moment-for-agents.md",
