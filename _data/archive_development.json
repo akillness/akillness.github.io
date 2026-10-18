@@ -4151,9 +4151,9 @@
         "no-sources",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial 4-bullet note into exhaustive networking systems audit on UDP: RFC 768 packet structure, QUIC HTTP/3 multiplexing, financial multicast, and RoCEv2 GPU clusters"
     },
     {
       "path": "_posts/2024/07/2024-07-31-ensuring-data-quality-in-machine-learning.md",
