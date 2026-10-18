@@ -1335,9 +1335,9 @@
       "links_at_intake": 17,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2024 note into an authoritative source audit of agent orchestration, evaluating LangChain LCEL pipelines and LangGraph cyclical state machines."
     },
     {
       "path": "_posts/2024/08/2024-08-05-deploy-an-ml-model.md",

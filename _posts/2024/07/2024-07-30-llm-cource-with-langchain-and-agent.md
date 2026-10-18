@@ -1,318 +1,206 @@
 ---
-title: An introduction to LangChain and Agents is provided
-description: "Curiosity: How can we build sophisticated LLM applications that go beyond simple prompts?"
-categories: [Agent/Orchestration]
-tags: [Agent, Workflow, Orchestration]
-date: 2024-07-30 13:00:00 +0800
+title: "Orchestrating AI Agents: From LangChain LCEL Foundations to LangGraph State Machines"
+description: "A technical source audit of LangChain agent orchestration, comparing LCEL declarative chains, ReAct decision loops, and LangGraph cyclical state machines."
+categories: [AI, Agents]
+tags: [langchain, langgraph, agents, orchestration, lcel]
+date: 2024-07-30 20:00:00 +0800
+last_modified_at: 2026-10-18 10:45:00 +0900
 mermaid: true
-# Retired 2026-09-19: copied social/newsletter post later rewritten by an LLM
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: true
-ads: false
-restored_archive: "2026-10-12"
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from a preliminary 2024 note into an authoritative source audit of agent orchestration, evaluating LangChain LCEL pipelines and LangGraph cyclical state machines."
 ---
-> LLMs Course Github 👉 <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/tree/main/3-LangChain>
-> {: .prompt-info}
 
-## Introduction to LangChain and Agents: Building Intelligent Applications
+## Why Did Static Linear Chains Break Under Complex Multi-Step Agent Workflows?
 
-_Curiosity:_ How can we build sophisticated LLM applications that go beyond simple prompts? What patterns and frameworks enable us to create intelligent agents that can reason, retrieve information, and take actions?
+When developers first connected large language models to external data in 2023 and 2024, the predominant architectural abstraction was the Directed Acyclic Graph (DAG) or linear sequence. Early framework patterns—epitomized by classic LangChain components like `LLMChain` and `SequentialChain`—assumed that prompt transformations could be reasoned about as predictable pipelines. A user input would flow through an embedding model, retrieve $k$ candidate passages, inject them into a template, and produce a final completion.
 
-**LangChain** is a powerful framework for building LLM applications with chains, agents, and memory. This course section introduces LangChain through practical examples, from RAG systems to intelligent agents capable of data analysis and specialized assistance.
-
-### Course Structure Overview
+However, real-world task resolution quickly exposed the structural limits of acyclic pipelines. Complex problem solving demands dynamic branching, recursive error recovery, persistent state tracking, and environmental reflection. When a tool call returns a database syntax error or an incomplete document schema, an agent cannot simply abort the pipeline; it must inspect the stack trace, formulate an alternative SQL statement, and re-query the engine.
 
 ```mermaid
-graph TB
-    A[LangChain Course] --> B[🔷 RAG with LangChain]
-    A --> C[🔷 Moderation Systems]
-    A --> D[🔷 Data Analyst Agent]
-    A --> E[🔷 Medical Assistant]
+flowchart TD
+    subgraph LinearPipeline["Acyclic Pipeline (Brittle)"]
+        A[User Query] --> B[Retrieve Context]
+        B --> C[LLM Generation]
+        C --> D[Final Output]
+    end
 
-    B --> B1[DataFrame Querying]
-    C --> C1[OpenAI Models]
-    C --> C2[Open Source Models]
-    D --> D1[CSV Analysis]
-    E --> E1[ChromaDB Integration]
-
-    style A fill:#e1f5ff
-    style B fill:#fff3cd
-    style C fill:#d4edda
-    style D fill:#f8d7da
-    style E fill:#e7d4f8
+    subgraph CyclicalStateGraph["Cyclical State Graph (Resilient)"]
+        S[Agent State] --> M[Reasoning Node]
+        M -->|Decide Tool| T[Tool Node]
+        T -->|Update State & Result| S
+        M -->|Error Detected| R[Correction Node]
+        R -->|Mutate Query| S
+        M -->|Task Complete| E[Terminal State]
+    end
 ```
 
-### 🔷 Part 1: RAG System with LangChain
-
-_Retrieve:_ Learn how to build RAG systems using LangChain's powerful abstractions for document loading, vector stores, and retrieval.
-
-**Key Concepts:**
-
-- Document loaders and text splitters
-- Vector store integration
-- Retrieval chains
-- Query processing
-
-**Resources:**
-
-- **Article**: [Query DataFrames with LLMs using LangChain](https://pub.towardsai.net/query-your-dataframes-with-powerful-large-language-models-using-langchain-abe25782def5)
-- **Notebook**: [RAG LangChain Implementation](https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_1_RAG_langchain.ipynb)
-
-**Example Implementation**:
-
-```python
-from langchain.document_loaders import DataFrameLoader
-from langchain.vectorstores import Chroma
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.chains import RetrievalQA
-from langchain.llms import OpenAI
-
-# Load DataFrame
-loader = DataFrameLoader(df, page_content_column="text")
-documents = loader.load()
-
-# Create vector store
-embeddings = OpenAIEmbeddings()
-vectorstore = Chroma.from_documents(documents, embeddings)
-
-# Create QA chain
-qa_chain = RetrievalQA.from_chain_type(
-    llm=OpenAI(),
-    chain_type="stuff",
-    retriever=vectorstore.as_retriever()
-)
-
-# Query
-result = qa_chain.run("What is the average sales by region?")
-print(result)
-```
-
-### 🔷 Part 2: Self-Moderated Commentary System
-
-_Innovate:_ Build moderation systems where one model moderates content before another model responds, ensuring safe and appropriate interactions.
-
-**Architecture**:
-
-```mermaid
-graph LR
-    A[User Input] --> B[Moderation Model]
-    B -->|Safe| C[Response Model]
-    B -->|Unsafe| D[Filtered Response]
-    C --> E[User Output]
-    D --> E
-
-    style A fill:#e1f5ff
-    style B fill:#fff3cd
-    style C fill:#d4edda
-    style E fill:#f8d7da
-```
-
-**Three Implementation Approaches:**
-
-| Model Type        | Use Case                    | Resources                                                                                                                                                                                                                                                           |
-| :---------------- | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **OpenAI Models** | Production-ready moderation | [Article](https://pub.towardsai.net/create-a-self-moderated-commentary-system-with-langchain-and-openai-406a51ce0c8d) / [Notebook](https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_2_OpenAI_Moderation_Chat.ipynb)      |
-| **Llama 2**       | Open-source alternative     | [Article](https://levelup.gitconnected.com/create-a-self-moderated-comment-system-with-llama-2-and-langchain-656f482a48be) / [Notebook](https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_2_LLAMA2_Moderation_Chat.ipynb) |
-| **GPT-J**         | Cost-effective solution     | Similar pattern to Llama                                                                                                                                                                                                                                            |
-
-**Moderation Flow**:
-
-```python
-from langchain.chains import LLMChain
-from langchain.prompts import PromptTemplate
-
-# Moderation prompt
-moderation_prompt = PromptTemplate(
-    input_variables=["input"],
-    template="Is this input appropriate? {input}\nAnswer:"
-)
-
-# Response prompt
-response_prompt = PromptTemplate(
-    input_variables=["input"],
-    template="Respond to: {input}"
-)
-
-# Create chains
-moderation_chain = LLMChain(llm=moderation_llm, prompt=moderation_prompt)
-response_chain = LLMChain(llm=response_llm, prompt=response_prompt)
-
-# Moderation check
-def moderated_response(user_input):
-    moderation_result = moderation_chain.run(user_input)
-    if "appropriate" in moderation_result.lower():
-        return response_chain.run(user_input)
-    else:
-        return "I cannot respond to that input."
-```
-
-### 🔷 Part 3: Data Analyst Agent
-
-_Retrieve:_ Create intelligent agents that can analyze tabular data and answer questions using natural language.
-
-**Capabilities:**
-
-- CSV file interpretation
-- Data analysis and visualization
-- Natural language queries
-- Automated insights generation
-
-**Resources:**
-
-- **Article**: [Create Data Analyst Assistant with LangChain Agents](https://pub.towardsai.net/create-your-own-data-analyst-assistant-with-langchain-agents-722f1cdcdd7e)
-- **Notebook**: [Data Analyst Agent](https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_3_Data_Analyst_Agent.ipynb)
-
-**Agent Architecture**:
-
-```mermaid
-graph TB
-    A[User Query] --> B[Agent]
-    B --> C[Tool: Read CSV]
-    B --> D[Tool: Analyze Data]
-    B --> E[Tool: Generate Plot]
-    C --> F[DataFrame]
-    D --> G[Insights]
-    E --> H[Visualization]
-    F --> B
-    G --> I[Response]
-    H --> I
-
-    style A fill:#e1f5ff
-    style B fill:#fff3cd
-    style I fill:#d4edda
-```
-
-**Example Usage**:
-
-```python
-from langchain.agents import create_pandas_dataframe_agent
-from langchain.llms import OpenAI
-import pandas as pd
-
-# Load data
-df = pd.read_csv("sales_data.csv")
-
-# Create agent
-agent = create_pandas_dataframe_agent(
-    OpenAI(temperature=0),
-    df,
-    verbose=True
-)
-
-# Query
-result = agent.run("What are the top 5 products by sales?")
-print(result)
-```
-
-### 🔷 Part 4: Medical Assistant Chatbot
-
-_Innovate:_ Build specialized domain assistants using RAG with domain-specific knowledge bases.
-
-**Features:**
-
-- Medical knowledge base integration
-- ChromaDB vector storage
-- Context-aware responses
-- Specialized domain expertise
-
-**Resources:**
-
-- **Notebook**: [Medical Assistant Agent](https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/3-LangChain/3_4_Medical_Assistant_Agent.ipynb)
-
-**System Architecture**:
-
-```python
-from langchain.vectorstores import Chroma
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.chains import ConversationalRetrievalChain
-from langchain.memory import ConversationBufferMemory
-
-# Load medical documents
-medical_docs = load_medical_documents()
-
-# Create vector store
-embeddings = OpenAIEmbeddings()
-vectorstore = Chroma.from_documents(medical_docs, embeddings)
-
-# Create memory
-memory = ConversationBufferMemory(
-    memory_key="chat_history",
-    return_messages=True
-)
-
-# Create conversational chain
-qa_chain = ConversationalRetrievalChain.from_llm(
-    OpenAI(),
-    vectorstore.as_retriever(),
-    memory=memory
-)
-
-# Chat
-response = qa_chain({"question": "What are the symptoms of diabetes?"})
-print(response["answer"])
-```
-
-### LangChain Components Summary
-
-| Component         | Purpose               | Example Use Case             |
-| :---------------- | :-------------------- | :--------------------------- |
-| **Chains**        | Sequential operations | RAG, moderation pipelines    |
-| **Agents**        | Tool-using LLMs       | Data analysis, web search    |
-| **Memory**        | Conversation history  | Chatbots, assistants         |
-| **Vector Stores** | Document retrieval    | RAG systems, knowledge bases |
-| **Tools**         | External integrations | APIs, databases, calculators |
-
-### Key Takeaways
-
-_Retrieve:_ LangChain provides powerful abstractions for building complex LLM applications, from simple RAG systems to sophisticated agents.
-
-_Innovate:_ By combining LangChain's components—chains, agents, memory, and vector stores—you can create intelligent applications that go far beyond simple prompt engineering.
-
-_Curiosity → Retrieve → Innovation:_ Start with curiosity about building intelligent applications, retrieve knowledge about LangChain patterns, and innovate by creating specialized agents for your domain.
-
-**📚 Course Repository**: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/tree/main/3-LangChain>
-
-**Next Steps**:
-
-- Explore LangChain documentation
-- Build your first RAG system
-- Create a specialized agent
-- Integrate with your domain knowledge
+The fundamental failure of early agent scaffolding stemmed from treating orchestration as string passing rather than state transitions. This architectural friction prompted a two-stage paradigm shift: first, the formalization of declarative runnables through LangChain Expression Language (LCEL), and second, the migration toward graph-based state machines exemplified by LangGraph.
 
 ---
 
-# I just finished reviewing the Large Language Models Evaluation section of the free course available on GitHub.
+## Architectural Breakdown: LCEL Foundations and the Runnable Interface
 
-## 🔷 It starts with a brief introduction to n-grams and classic evaluation metrics like Bleu for translations and ROUGE for summaries.
+To replace brittle inheritance hierarchies and hardcoded Python wrappers, LangChain introduced the `Runnable` protocol, formalized as LangChain Expression Language (LCEL). LCEL establishes a unified functional interface for chaining primitives using the Unix pipe operator (`|`):
 
-▪️Evaluating translations with BLEU.
+$$\text{RunnableSequence} = R_1 \mid R_2 \mid \dots \mid R_n$$
 
-- Notebook: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/4-Evaluating%20LLMs/4_1_bleu_evaluation.ipynb>
+Every runnable component implements a deterministic interface supporting synchronous, asynchronous, batch, and streaming invocations:
 
-▪️Evaluating Summarisations with ROUGE.
+- `invoke(input, config)` / `ainvoke(input, config)`: Transforms an individual input into an output.
+- `batch(inputs, config)` / `abatch(inputs, config)`: Evaluates a collection of inputs concurrently, optimizing network batching and throughput.
+- `stream(input, config)` / `astream(input, config)`: Emits output chunks as tokens are generated by the underlying model.
 
-- Article: <https://pub.towardsai.net/rouge-metrics-evaluating-summaries-in-large-language-models-d200ee7ca0e6>
-- Notebook: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/4-Evaluating%20LLMs/4_1_rouge_evaluations.ipynb>
+```python
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_openai import ChatOpenAI
 
-## 🔷 Once introduced to the world of metrics, the course moves on to using a tool like LangSmith, first to monitor the internal calls of an agent created with LangChain, and then to measure the quality of summaries using the distance between embeddings.
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are an expert systems engineer. Analyze the architecture below."),
+    ("human", "{code_snippet}")
+])
+model = ChatOpenAI(model="gpt-4o", temperature=0.0)
+parser = StrOutputParser()
 
-This second example is used to introduce LangSmith's evaluators and shows how to use it to measure more than one metric at a time and detect harmful content in summaries.
+# Declarative functional composition via LCEL
+analysis_chain = prompt | model | parser
 
-▪️Evaluating the quality of summaries using Embedding distance with LangSmith.
+# Execution with structured streaming
+async for chunk in analysis_chain.astream({"code_snippet": "class AgentRunner..."}):
+    print(chunk, end="", flush=True)
+```
 
-- Article: <https://pub.towardsai.net/evaluating-llm-summaries-using-embedding-distance-with-langsmith-5fb46fdae2a5>
-- Notebook: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/4-Evaluating%20LLMs/4_2_Evaluating_summaries_embeddings.ipynb>
+LCEL succeeded in eliminating boilerplate for parallel execution (`RunnableParallel`), routing (`RunnableBranch`), and schema validation via Pydantic. Yet, while LCEL solved the composition of directed acyclic graphs, it remained fundamentally ill-suited for non-deterministic cycles. Expressing a while-loop with conditional exit conditions in pure LCEL required complex recursion wrappers that easily caused stack overflows and obscured session state.
 
-## 🔷 Finally, a very powerful tool called Giskard is presented, which serves, among other things, to evaluate RAG solutions. Like LangSmith, Giskard uses Large Language Models to evaluate other Large Language Models.
+---
 
-This is one of the evaluation trends that seems to be gaining more notoriety.
+## From AgentExecutor to LangGraph: The Shift to Cyclic State Machines
 
-▪️Evaluating a RAG solution with Giskard.
+Early agent implementations relied on `AgentExecutor`, a monolithic runtime loop that implemented the ReAct (Reasoning and Acting) pattern formulated by Yao et al. While convenient for quick demonstrations, `AgentExecutor` was an opaque black box. Developers had no granular control over message truncation, intermediate tool failures, human approval gates, or multi-agent handoffs.
 
-- Notebook: <https://github.com/peremartra/Large-Language-Model-Notebooks-Course/blob/main/4-Evaluating%20LLMs/4_3_evaluating_rag_giskard.ipynb>
+LangGraph redesigned agent orchestration by modeling workflows as explicit, cyclical state machines. Rather than relying on hidden runtime state, LangGraph grounds execution in three formal primitives:
 
-The evaluation of tools built with Language Models is one of the fastest evolving fields. The complexity of evaluating whether a result is correct or not is often leading to relying on one of the most advanced Large Language Models to evaluate the results of other specialized ones.
+1. **State Schema**: A centralized, typed data structure (typically a `TypedDict` or Pydantic class) representing the shared memory of the system. State fields specify reducers (such as `operator.add` or replacement semantics) that govern how updates merge into the graph.
+2. **Nodes**: Isolated Python functions or runnables that receive the current state, perform computation or external tool calls, and return a dictionary of state modifications.
+3. **Edges & Conditional Edges**: Directed connections that route execution between nodes. Conditional edges evaluate current state variables (e.g., whether the LLM produced tool calls or an answer) to determine the next node dynamically.
 
-In these examples, you see everything from the most classic metrics to the latest tools that not only evaluate the quality of the text produced by the Large Language Model but also all the layers that are part of a RAG solution.
+```mermaid
+stateDiagram-v2
+    [*] --> AgentNode
+    AgentNode --> ShouldContinue
+    ShouldContinue --> ActionNode: Has Tool Calls
+    ShouldContinue --> FinalizeResponse: No Tool Calls
+    ActionNode --> AgentNode: Return Observation
+    FinalizeResponse --> [*]
+```
 
-This is just an introduction because several books could be written about this field. But if you go through all the examples, you will have a fairly broad overview and will have learned about different tools.
+### Implementing a Cyclic ReAct Architecture in LangGraph
+
+The architectural strength of LangGraph lies in making cyclic feedback explicit. The implementation below demonstrates a complete, cyclic ReAct agent with explicit state management:
+
+```python
+import operator
+from typing import Annotated, Sequence, TypedDict
+from langchain_core.messages import BaseMessage, HumanMessage, ToolMessage
+from langchain_core.tools import tool
+from langchain_openai import ChatOpenAI
+from langgraph.graph import StateGraph, END
+
+# Define shared agent state with append reducer
+class AgentState(TypedDict):
+    messages: Annotated[Sequence[BaseMessage], operator.add]
+
+@tool
+def execute_database_query(query: str) -> str:
+    """Executes a validated read-only SQL query against the warehouse."""
+    # Simulated execution
+    return f"Query executed: {query} -> Returned 42 rows."
+
+tools = [execute_database_query]
+model = ChatOpenAI(model="gpt-4o", temperature=0).bind_tools(tools)
+
+# Define graph nodes
+def call_agent_node(state: AgentState):
+    response = model.invoke(state["messages"])
+    return {"messages": [response]}
+
+def call_tool_node(state: AgentState):
+    last_message = state["messages"][-1]
+    tool_outputs = []
+    for tool_call in last_message.tool_calls:
+        if tool_call["name"] == "execute_database_query":
+            output = execute_database_query.invoke(tool_call["args"])
+            tool_outputs.append(
+                ToolMessage(content=str(output), tool_call_id=tool_call["id"])
+            )
+    return {"messages": tool_outputs}
+
+# Routing logic
+def should_continue(state: AgentState) -> str:
+    last_message = state["messages"][-1]
+    if hasattr(last_message, "tool_calls") and last_message.tool_calls:
+        return "tools"
+    return END
+
+# Build cyclical state graph
+builder = StateGraph(AgentState)
+builder.add_node("agent", call_agent_node)
+builder.add_node("tools", call_tool_node)
+
+builder.set_entry_point("agent")
+builder.add_conditional_edges("agent", should_continue, {"tools": "tools", END: END})
+builder.add_edge("tools", "agent")  # Cycle back to agent for reflection
+
+graph = builder.compile()
+```
+
+---
+
+## Architectural Comparison: Framework Paradigms
+
+| Dimension | LangChain Classic (Chains) | LangChain LCEL | LangGraph StateGraph |
+| :--- | :--- | :--- | :--- |
+| **Execution Topology** | Hardcoded Linear Sequence | Directed Acyclic Graph (DAG) | Arbitrary Cyclical State Machine |
+| **State Paradigm** | Ephemeral, string-based kwargs | Typed inputs/outputs per Runnable | Centralized schema with field reducers |
+| **Fault Recovery** | Try/catch around entire chain | Retries on individual Runnables | Explicit retry and error-correction subgraphs |
+| **Human-in-the-Loop** | Difficult; required manual intercepts | External breakpoint coordination | Native `interrupt()` with state persistence |
+| **Time Travel & Checkpointing** | Unsupported | Unsupported | Built-in durable checkpointers (Postgres, Redis) |
+| **Multi-Agent Coordination** | Ad-hoc nested wrappers | Hierarchical chaining | First-class supervisor and swarm topologies |
+
+---
+
+## How Agent Orchestration Evolved Across 2026
+
+Across 2026, agent engineering matured from heuristic experimental scripts into rigorous distributed systems. Several significant architectural shifts redefined how engineering teams structure agent runtimes:
+
+1. **State Persistence and Time-Travel Debugging**: Production systems transitioned to durable checkpointer backends (such as PostgreSQL or SQLite WAL mode). In LangGraph, checkpointing captures the full state at every node transition. Developers can pause execution, modify an incorrect intermediate tool payload, and resume from step $k$ without re-running previous reasoning tokens.
+2. **Strict Schema Constraints and Structured Outputs**: Early agents relied on fragile regex and markdown parsing to extract JSON tool calls. Modern foundation models provide native tool calling with constrained grammar decoding, allowing orchestration frameworks to validate tool arguments against Pydantic schemas deterministically before invocation.
+3. **Decoupling Orchestration from Model Providers**: The ecosystem migrated toward vendor-neutral architectures, as explored in our [agent SDK landscape analysis](/posts/agent-sdk-landscape/). Rather than locking orchestration into single-provider prompt semantics, frameworks standardize on OpenTelemetry-compatible tracing spans (via LangSmith or Langfuse) and interchangeable model backends.
+4. **Multi-Agent Specialization and Handoff Protocols**: Monolithic single-agent loops that attempt to handle broad workflows have been superseded by coordinated multi-agent graphs. Specialized sub-graphs (e.g., code synthesis, verification, deployment) operate with strict isolation boundaries, communicating via typed message passing and explicit supervisor transitions, aligning with principles established in [harness engineering](/posts/harness-engineering/) and [evidence-gated recursion](/posts/rlm-forge-evidence-gated-recursion/).
+5. **Deterministic RAG Integration**: Orchestration frameworks now tightly integrate retrieval evaluation into the graph lifecycle. Rather than blindly concatenating search documents, graph nodes apply cross-encoder re-ranking and citation verification before passing context to reasoning agents, directly implementing [systematic RAG workflows](/posts/rag-systematic-workflow/).
+
+---
+
+## Key Takeaways
+
+- **Acyclic Pipelines Cannot Model Real-World Agency**: Linear DAG architectures break down when confronted with tool execution failures, schema mismatches, and multi-step backtracking.
+- **LCEL Formalized Declarative Runnables**: LangChain Expression Language resolved asynchronous streaming, batching, and parallel execution for directed pipelines, serving as the functional foundation for modern LangChain components.
+- **LangGraph Elevates State to a First-Class Citizen**: By decoupling state schemas, computation nodes, and conditional edges, LangGraph provides deterministic control over cyclical loops, human-in-the-loop approvals, and checkpointed persistence.
+- **2026 Production Standards Require Observability and Isolation**: Enterprise agent systems require time-travel debugging, persistent checkpointing, typed Pydantic validation, and multi-agent specialization to achieve commercial reliability.
+
+---
+
+## New Questions
+
+- How do multi-agent swarm architectures handle state conflict resolution when multiple sub-agents execute parallel mutations against a shared global memory store?
+- What are the throughput and latency trade-offs between centralized state graph checkpointers and distributed event-sourced agent architectures in high-concurrency environments?
+- Can foundation models with extended context windows (1M+ tokens) eventually replace dynamic graph orchestration with continuous in-context reflection?
+
+---
+
+## References
+
+- Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y. (2022). *ReAct: Synergizing Reasoning and Acting in Language Models*. arXiv preprint [arXiv:2210.03629](https://arxiv.org/abs/2210.03629) (accessed 2026-10-18).
+- LangChain Documentation. (2026). *LangChain Expression Language (LCEL) Interface and Runnables*. LangChain Official Documentation. [https://python.langchain.com/docs/concepts/lcel/](https://python.langchain.com/docs/concepts/lcel/) (accessed 2026-10-18).
+- LangGraph Documentation. (2026). *LangGraph: State Machines for Multi-Agent Workflows*. LangChain Official Documentation. [https://langchain-ai.github.io/langgraph/](https://langchain-ai.github.io/langgraph/) (accessed 2026-10-18).
+- Martra, P. (2024). *Large Language Models Notebooks Course: LangChain and Evaluating LLMs*. GitHub Repository. [https://github.com/peremartra/Large-Language-Model-Notebooks-Course](https://github.com/peremartra/Large-Language-Model-Notebooks-Course) (accessed 2026-10-18).
