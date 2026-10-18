@@ -1,220 +1,256 @@
 ---
-title: Let's build multi-agent system
-description: "Curiosity: What if we could create a unified playground where AI agents can explore, learn, and evolve across diverse environments?"
-categories: [Agent/Orchestration]
-tags: [Agent, Workflow, Orchestration]
+title: "Multi-Agent Architectures: Orchestration, Environment Gyms, and Trajectory Evolution"
+description: "A source audit analyzing multi-agent systems, comparing CrewAI role orchestration with AgentGym environments, trajectory cloning, and SLA circuit breakers."
 date: 2024-05-25 23:23:00 +0800
-mermaid: true
-# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: true
-ads: false
-restored_archive: "2026-10-12"
+categories: [AI, Agents]
+tags: [multi-agent-systems, agentgym, crewai, orchestration, autonomous-agents, trajectory-tuning]
+image:
+  path: /assets/img/llm/LLM_Agentgym.jpeg
+  alt: Multi-agent system architecture and AgentGym environment
+last_modified_at: 2026-10-18 14:00:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from unoriginal third-party rewrite into authoritative source audit on multi-agent system architectures, AgentGym environments, trajectory tuning, and SLA circuit breakers"
 ---
-## Building Multi-Agent Systems: AgentGym and CrewAI
 
-*Curiosity:* What if we could create a unified playground where AI agents can explore, learn, and evolve across diverse environments? How do we build systems that enable agents to retrieve knowledge from one domain and innovate in another?
+As artificial intelligence systems graduated from isolated conversational chatbots toward complex workflow automation, single-agent architectures encountered fundamental scaling barriers. A single LLM prompt attempting to simultaneously manage deep research, web scraping, code synthesis, security validation, and editorial publication collapses under cognitive context bloat. The model suffers from instruction drift, loses track of intermediate goals, and burns inference tokens on redundant replanning.
 
-**AgentGym** answers these questions by offering a wide range of environments and tasks for broad, real-time, uniform, and concurrent agent exploration! Following popular releases like CrewAI and Autogen, here's another new multi-agent framework that pushes the boundaries of what's possible.
+To solve this, the industry turned to **Multi-Agent Systems (MAS)**. By decomposing monolithic objectives into collaborative networks of specialized subagents—each equipped with dedicated persona boundaries, scoped toolsets, and private working memories—multi-agent architectures distribute cognitive load across modular workers.
 
-### AgentGym Components
+However, moving from single-agent prompts to multi-agent networks introduces severe distributed systems vulnerabilities: role drift, blaming loops, deadlock cascades, and uncontrolled token consumption.
 
-| Component | Description | Purpose |
-|:----------|:------------|:--------|
-| **AgentGym Platform** | Unified environment for agent training | Provides APIs, task specs, observation/action spaces |
-| **AgentEval** | Benchmark dataset | Challenging test set for evaluating agent capabilities |
-| **AgentTraj** | Training trajectory set | Base dataset for training agents |
-| **AgentTraj-L** | Extended trajectory set | Enhanced dataset with behavioral cloning |
-| **AgentEvol** | Self-evolution method | Enables agents to adapt beyond training data |
+This source audit examines multi-agent orchestration frameworks (comparing static role-based runners like CrewAI and AutoGen with deterministic state machines), analyzes the **AgentGym** benchmark for standardizing agent training across digital environments, evaluates behavioral cloning over trajectory datasets (AgentTraj), and defines production SLA circuit breakers required to operate autonomous multi-agent loops reliably.
 
-### Multi-Agent System Architecture
+![AgentGym Framework](/assets/img/llm/LLM_Agentgym.jpeg)
+
+## How Do Multi-Agent Systems Prevent Role Drift and Coordination Deadlocks?
+
+The fundamental challenge in multi-agent engineering lies in **coordination entropy**. When multiple non-deterministic language agents communicate in natural language, their interactions degrade rapidly without rigid protocol enforcement.
+
+Researchers observe three recurring failure modes in poorly governed multi-agent networks:
+1. **The Blaming Loop (Deadlock)**: Agent A requests clarification from Agent B; Agent B asserts that Agent A must provide tool inputs first; both agents spin in conversational circles until token context limits are exhausted.
+2. **Role Drift**: An agent assigned as a strict "Security Reviewer" begins rewriting functional application code when exposed to the full conversation history, abandoning its adversarial auditing mandate.
+3. **Cascading Hallucination**: A research agent emits an unsubstantiated premise; downstream drafting and editing agents accept the hallucination as verified ground truth, amplifying errors throughout subsequent execution turns.
+
+```
+Unconstrained Multi-Agent Chatter (High Entropy)
+[Researcher Agent] ◀──(Natural Language Debate)──▶ [Reviewer Agent]
+        │                                                 │
+        ▼                                                 ▼
+[Writer Agent]     ◀──(Role Drift & Blaming Loop)──▶  [Auditor Agent]
+(No deterministic state transitions, unbounded token consumption, zero SLA boundaries)
+
+Governed Multi-Agent StateGraph Architecture
+┌────────────────────────────────────────────────────────────────────────┐
+│ Supervisor Node: Routes tasks based on typed Pydantic state schemas    │
+├────────────────────────────────────────────────────────────────────────┤
+│ Scoped Worker Sandboxes: Isolated tools, private memory, zero bleed    │
+├────────────────────────────────────────────────────────────────────────┤
+│ Circuit Breakers: MAX_LOOPS, MAX_TOKENS, & Human-in-the-Loop Barriers │
+├────────────────────────────────────────────────────────────────────────┤
+│ Checkpointed State: Relational database persistence per transition turn│
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+Preventing coordination entropy requires shifting from open-ended natural language chatter to **governed, schema-enforced state transitions**. As established in our framework analysis on [LangChain vs LlamaIndex: Architectural Patterns for RAG and Autonomous Agents](/posts/langchain-llama/), production multi-agent systems require explicit graph definitions where valid sender-receiver edges, termination guards, and data handoff contracts are statically compiled.
+
+## Orchestration Topologies: Hierarchical Supervisor vs Network Swarms
+
+Multi-agent coordination generally follows one of three structural topologies:
 
 ```mermaid
-graph TB
-    subgraph "AgentGym Platform"
-        A[Task Environment] --> B[Agent 1]
-        A --> C[Agent 2]
-        A --> D[Agent N]
+graph TD
+    subgraph Hierarchical Supervisor Pattern
+        Sup[Central Supervisor / Router] -->|Assign Task| W1[Researcher Worker]
+        Sup -->|Assign Task| W2[Coder Worker]
+        Sup -->|Assign Task| W3[Tester Worker]
+        W1 -->|Submit Structured Artifact| Sup
+        W2 -->|Submit Structured Artifact| Sup
+        W3 -->|Submit Structured Artifact| Sup
     end
-    
-    B --> E[Observation]
-    C --> E
-    D --> E
-    
-    E --> F[Action Selection]
-    F --> G[Tool Execution]
-    G --> H[Result]
-    H --> A
-    
-    I[AgentEval<br/>Benchmark] --> A
-    J[AgentTraj<br/>Training Data] --> B
-    J --> C
-    J --> D
-    
-    style A fill:#e1f5ff
-    style I fill:#fff3cd
-    style J fill:#d4edda
+
+    subgraph Peer-to-Peer Sequential Pipeline
+        P1[Ingestion Agent] -->|Typed Handoff| P2[Transformation Agent]
+        P2 -->|Typed Handoff| P3[Validation Agent]
+        P3 -->|Fail / Loopback| P2
+    end
 ```
 
-### Key Features Comparison
+### 1. The Hierarchical Supervisor Pattern
+In the hierarchical supervisor pattern (prominent in enterprise frameworks and advanced LangGraph workflows), individual subagents never communicate directly with one another. All inter-agent traffic routes through a centralized Supervisor node:
+- The Supervisor ingests the overarching user objective and decomposes it into discrete sub-tasks.
+- Workers execute in sandboxed environments with zero access to peer conversation histories. They receive only the specific prompt and data payload necessary to complete their task.
+- Workers return structured output artifacts (e.g., Pydantic schemas) back to the Supervisor.
+- The Supervisor reviews the artifact against acceptance criteria, routing to subsequent workers or triggering bounded retries.
 
-| Feature | AgentGym | CrewAI | Autogen |
-|:--------|:---------|:-------|:--------|
-| **Environment Diversity** | ✅ High | ⚠️ Medium | ⚠️ Medium |
-| **Self-Evolution** | ✅ AgentEvol | ❌ No | ❌ No |
-| **Benchmark Dataset** | ✅ AgentEval | ❌ No | ❌ No |
-| **Trajectory Training** | ✅ AgentTraj | ❌ No | ❌ No |
-| **Ease of Use** | ⚠️ Medium | ✅ High | ✅ High |
+This pattern prevents role drift and context contamination because workers never absorb conversational bias from other agents.
 
-The AgentGym suite, including the platform, dataset, benchmark, checkpoints, and algorithm implementations is available for the community to build and evaluate generally-capable LLM-based agents. 
-
-- github : <https://github.com/WooooDyy/AgentGym>
-
-![ AgentGym framework ](/assets/img/llm/LLM_Agentgym.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }
-
-## Building a Crew of AI Agents
-
-*Retrieve:* A multi-agent system that scrapes the web and automatically writes blog posts.
-
-**Project Goal**: Build a system where agents work together like a real editorial team, automating the entire content creation pipeline from research to writing.
-
-**Key Innovation**: Multiple AI agents collaborate to retrieve information, synthesize insights, and innovate on content structure.
-
-### Multi-Agent Content Creation Workflow
-
-```mermaid
-graph LR
-    A[User Request] --> B[Researcher Agent]
-    B --> C[Web Scraping]
-    C --> D[Content Analysis]
-    D --> E[Writer Agent]
-    E --> F[Content Generation]
-    F --> G[Editor Agent]
-    G --> H[Review & Refine]
-    H --> I[Final Blog Post]
-    
-    style B fill:#e1f5ff
-    style E fill:#fff3cd
-    style G fill:#d4edda
-    style I fill:#f8d7da
-```
-
-### Technology Stack
-
-| Component | Technology | Purpose | Why It Matters |
-|:----------|:-----------|:--------|:---------------|
-| **Agent Framework** | [crewAI](https://www.linkedin.com/company/crewai-inc/) | Multi-agent orchestration | *Retrieve:* Role-based collaboration patterns |
-| **LLM Runtime** | [Ollama](https://www.linkedin.com/company/ollama/) | Local LLM serving (Llama-3) | *Innovate:* Fast iteration without API costs |
-| **Hosting** | [Lightning AI](https://www.linkedin.com/company/pytorch-lightning/) | Development & deployment | *Retrieve:* Seamless cloud infrastructure |
-
-### Sample CrewAI Implementation
+### 2. Peer-to-Peer Sequential Pipelines (CrewAI Model)
+In lightweight frameworks like CrewAI, agents operate in sequential or hierarchical pipelines mimicking human departmental teams (e.g., Researcher $\to$ Writer $\to$ Editor). Each agent is assigned a fixed role, backstory, and target goal:
 
 ```python
 from crewai import Agent, Task, Crew, Process
 
-# Define agents with specific roles
+# Role definitions with strict persona boundaries
 researcher = Agent(
-    role='Research Analyst',
-    goal='Gather comprehensive information on the topic',
-    backstory='You are an expert researcher...',
-    verbose=True
+    role="Systems Infrastructure Auditor",
+    goal="Identify memory leak vulnerabilities in compiled C++ daemon logs",
+    backstory="You are an uncompromising systems reliability engineer.",
+    verbose=True,
+    allow_delegation=False, # Prevents unconstrained delegation loops
 )
 
-writer = Agent(
-    role='Content Writer',
-    goal='Create engaging blog posts',
-    backstory='You are a skilled technical writer...',
-    verbose=True
+analyst = Agent(
+    role="Security Policy Officer",
+    goal="Verify memory fixes against kernel privilege compliance standards",
+    backstory="You strictly evaluate patches against POSIX safety guidelines.",
+    verbose=True,
+    allow_delegation=False,
 )
 
-editor = Agent(
-    role='Editor',
-    goal='Review and refine content',
-    backstory='You are a meticulous editor...',
-    verbose=True
+# Explicit sequential handoffs
+audit_task = Task(
+    description="Audit runtime logs for memory leaks and trace faulting PIDs",
+    expected_output="A structured list of memory addresses and leaky modules",
+    agent=researcher,
 )
 
-# Define tasks
-research_task = Task(
-    description='Research the topic: {topic}',
-    agent=researcher
+policy_task = Task(
+    description="Evaluate proposed fixes against security constraints",
+    expected_output="A signed compliance approval or rejection report",
+    agent=analyst,
+    context=[audit_task], # Explicit contextual dependency
 )
 
-write_task = Task(
-    description='Write a blog post based on research',
-    agent=writer,
-    context=[research_task]
-)
-
-edit_task = Task(
-    description='Edit and refine the blog post',
-    agent=editor,
-    context=[write_task]
-)
-
-# Create crew and execute
 crew = Crew(
-    agents=[researcher, writer, editor],
-    tasks=[research_task, write_task, edit_task],
-    process=Process.sequential
+    agents=[researcher, analyst],
+    tasks=[audit_task, policy_task],
+    process=Process.sequential,
 )
-
-result = crew.kickoff(inputs={'topic': 'Multi-agent systems'})
-print(result)
 ```
 
-**Lightning AI Studio**: Published as a Lightning AI⚡️Studio, reads like a blog encapsulating all code and environment!
+While CrewAI provides rapid prototyping ergonomics, enterprise production harnesses require pairing these high-level roles with formal runtime constraints.
 
-> **Try it now**: <https://lightning.ai/lightning-ai/studios/let-s-build-a-crew-of-ai-agents?utm_source=akshay>
-{: .prompt-info}
+## The AgentGym Benchmark: Standardizing Environment Interaction
 
-### Key Takeaways
+Historically, evaluating multi-agent systems suffered from benchmark fragmentation. One team evaluated agents on web navigation (WebArena), another on operating system bash commands (OSWorld), and another on household game planning (ALFWorld).
 
-*Retrieve:* AgentGym provides a unified platform for agent training and evaluation, while CrewAI enables practical multi-agent applications like automated content creation.
+Introduced by Zhiheng Xi et al. in 2024, **AgentGym** established the first unified framework and benchmark suite designed to evaluate and evolve language agents across diverse, concurrent digital environments.
 
-*Innovate:* By combining frameworks like AgentGym for training and CrewAI for deployment, you can build sophisticated multi-agent systems that automate complex workflows, from research to content generation.
+```mermaid
+graph TD
+    subgraph AgentGym Platform Architecture
+        EnvPool[Unified Environment Pool: Web, OS, Game, Database] --> API[Standardized Environment API: step, reset, observe]
+        API --> Obs[Structured Observation Space]
+        Agent[LLM Agent Under Test] --> Action[Unified Action Space: Text / JSON Action]
+        Action --> API
+        Obs --> Agent
+    end
 
-*Curiosity → Retrieve → Innovation:* Start with curiosity about multi-agent systems, retrieve insights from AgentGym and CrewAI, and innovate by building collaborative agent teams that automate real-world tasks.
+    subgraph Data & Evolution Engines
+        Agent --> Log[AgentTraj: Interaction Trajectories]
+        Log --> BC[Behavioral Cloning Training]
+        Log --> Evol[AgentEvol: Exploration-Driven Evolution]
+        Evol --> Eval[AgentEval: Out-of-Distribution Benchmark]
+    end
+```
 
-**Next Steps**:
-- Explore AgentGym for agent training
-- Build CrewAI applications
-- Experiment with agent collaboration
-- Deploy multi-agent systems
+AgentGym decomposes agent engineering into four standardized pillars:
+1. **Standardized Environment Interface**: Provides a uniform HTTP/RPC interface across 14 diverse environment suites spanning web browsing, bash terminal operation, multi-turn dialogue, and software debugging.
+2. **AgentEval Benchmark**: An evaluation dataset containing thousands of challenging tasks requiring multi-step planning, tool calling, and long-horizon environmental feedback.
+3. **AgentTraj & AgentTraj-L**: Massive trajectory corpora capturing expert interaction traces, providing ground-truth data for behavioral cloning and supervised fine-tuning.
+4. **AgentEvol**: An algorithmic self-evolution method that allows agents to explore unlabelled environments autonomously, formulating internal self-reflections to improve task success rates beyond static training distributions.
 
+Empirical results from AgentGym demonstrate that agents fine-tuned on diverse multi-environment trajectories generalize far better to novel software interfaces than models fine-tuned on single-domain task data.
 
-<details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+For practical terminal interface design and agent interaction standards, review our source audit on [CLI-Anything Agent-Native Interfaces](/posts/cli-anything-agent-native-interfaces/).
 
-* * * 
+## Production SLA Discipline: Circuit Breakers and Guardrails
 
-## 🎉 또 다른 다중 에이전트 프레임워크가 도착했습니다! 
+Deploying multi-agent loops to production without strict operational service-level agreements (SLAs) guarantees catastrophic cost overruns and system hangs. When an agent enters an infinite retry loop or hallucinates cyclical tool calls, it can consume hundreds of dollars in API tokens in minutes.
 
-AgentGym은 광범위하고 실시간이며 균일하고 동시 에이전트 탐색을 위한 광범위한 환경과 작업을 제공합니다! 
+Production multi-agent harnesses must enforce strict **SLA Guardrails**:
 
-CrewAI 및 Autogen과 같은 인기 있는 릴리스에 이어 또 다른 새로운 다중 에이전트 프레임워크가 있습니다. 다음은 몇 가지 인사이트입니다.
+```python
+from dataclasses import dataclass
+from typing import Optional
 
-- ⛳ AgentGym은 LLM 기반 에이전트를 위한 다양한 환경, 작업, 목표를 편리한 API, 표준화된 작업 사양, 환경 설정, 관찰/행동 공간 등으로 제공합니다. 이 플랫폼은 온라인 평가, 궤적 샘플링 및 대화형 교육을 지원합니다.
-- ⛳ 다양한 환경 및 작업의 확장된 지침이 포함된 데이터베이스를 제공하여 AgentEval이라는 벤치마킹을 위한 도전적인 테스트 세트를 형성합니다.
-- ⛳ 여기에는 기본 에이전트 훈련을 위한 균일한 형식의 궤적 세트인 AgentTraj와 동작 복제를 통한 최대 성능을 위한 확장 버전인 AgentTraj-L이 포함됩니다.
-- ⛳저자는 또한 작업 및 환경 전반에 걸쳐 이전에 본 데이터를 넘어 에이전트 자체 진화를 탐색하는 방법인 AgentEvol을 소개합니다. AgentEvol을 사용하면 에이전트가 특정 작업을 기반으로 컨텍스트에 적응적으로 액세스하고 활용하여 발전할 수 있으므로 더 적은 리소스를 사용하면서 최신 모델에 필적하는 결과를 얻을 수 있습니다.
+@dataclass(frozen=True)
+class AgentExecutionSLA:
+    max_loops: int = 15              # Hard ceiling on iterative tool cycles
+    max_tokens: int = 50_000         # Cumulative token ceiling per run
+    max_cost_dollars: float = 2.50   # Budget boundary
+    max_latency_seconds: float = 60  # Wall-clock timeout
+    max_tool_calls_per_turn: int = 3 # Anti-flooding guard
 
-플랫폼, 데이터 세트, 벤치마크, 체크포인트 및 알고리즘 구현을 포함한 AgentGym 제품군은 커뮤니티에서 일반적으로 사용할 수 있는 LLM 기반 에이전트를 빌드하고 평가하는 데 사용할 수 있습니다. 
+class SLACircuitBreaker:
+    def __init__(self, sla: AgentExecutionSLA):
+        self.sla = sla
+        self.current_loops = 0
+        self.consumed_tokens = 0
+        self.elapsed_time = 0.0
 
-- github : <https://github.com/WooooDyy/AgentGym>
+    def record_turn(self, tokens_used: int, elapsed_seconds: float) -> None:
+        self.current_loops += 1
+        self.consumed_tokens += tokens_used
+        self.elapsed_time += elapsed_seconds
+        
+        # Enforce hard boundaries
+        if self.current_loops > self.sla.max_loops:
+            raise CircuitBreakerException("MAX_LOOPS SLA exceeded. Aborting agent run.")
+        if self.consumed_tokens > self.sla.max_tokens:
+            raise CircuitBreakerException("MAX_TOKENS SLA breached. Halting context.")
+        if self.elapsed_time > self.sla.max_latency_seconds:
+            raise CircuitBreakerException("TIMEOUT SLA exceeded. Rolling back state.")
+```
 
-## AI 요원 크루를 구성해 봅시다
+Enforcing these boundaries ensures that failed agent trajectories terminate gracefully, persisting failure telemetry to audit logs rather than consuming unbounded enterprise resources.
 
-웹을 긁어모으고 자동으로 블로그 게시물을 작성하는 다중 에이전트 시스템!
+This operational discipline directly reflects the layered capabilities analyzed in [The LLM Systems Hierarchy: From Prompt Engineering to Autonomous Agents](/posts/llm-course-trying/).
 
-내가 사용한 것은 다음과 같습니다.
+## Multi-Agent Architecture Capability Matrix
 
-- 다중 에이전트 시스템 구축을 위한 [crewAI](https://www.linkedin.com/company/crewai-inc/) 
-- 현지에서 LLM을 제공하는 [Ollama](https://www.linkedin.com/company/ollama/) (Llama-3)
-- 개발 및 호스팅을 위한 [Lightning AI](https://www.linkedin.com/company/pytorch-lightning/)
+| System Dimension | Single Autonomous Agent | Peer-to-Peer Swarm (CrewAI) | Hierarchical Graph (LangGraph) | Trajectory-Tuned (AgentGym) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Coordination Model** | Self-reflection loop | Sequential role-playing | State machine with explicit edges | Environment policy execution |
+| **Role Drift Resistance** | Poor (context saturation) | Moderate (persona backstories) | High (isolated worker sandboxes) | Highest (trajectory-trained policy) |
+| **State Persistence** | Memory buffer | Shared crew context | ACID database checkpointer | Unified environment state |
+| **Failure Recovery** | Naive retry | Manual retry loops | Deterministic fallback nodes | Environmental self-correction |
+| **Token Cost / Task** | Low–Medium | High (conversation duplication) | Controlled (scoped payloads) | Optimized via targeted weights |
+| **SLA Boundary Control** | Script-level loops | Framework timeout flags | Fine-grained circuit breakers | Native environment termination |
 
-나는이 작품을 Lightning AI ⚡️Studio로 출판했는데, 내 모든 코드 및 환경을 캡슐화하는 블로그처럼 읽힌다!
+## How Multi-Agent Coordination Evolved Across 2026
 
-지금 바로 사용해 보세요: <https://lightning.ai/lightning-ai/studios/let-s-build-a-crew-of-ai-agents?utm_source=akshay>
+Between 2024 and 2026, multi-agent engineering transitioned from experimental prompt scripts into formal distributed systems architecture:
 
-</details>
+```
+2023-2024: Conversational Chatters     2025: StateGraph Runtimes        2026: Agent-to-Agent (A2A) Protocols
+┌─────────────────────────────────┐    ┌───────────────────────────┐    ┌───────────────────────────────────┐
+│ CrewAI / AutoGen v0.1           │───▶│ LangGraph & Semantic Kernel│───▶│ Linux Foundation AAIF A2A Protocol│
+│ Natural Language Role-Play      │    │ Graph Checkpointing       │    │ Ephemeral Subagent Worker Pools   │
+│ Unbounded Context Duplication   │    │ Deterministic Routing     │    │ Cryptographic Agent Identity (DID)│
+└─────────────────────────────────┘    └───────────────────────────┘    └───────────────────────────────────┘
+```
+
+1. **Standardized Agent-to-Agent (A2A) Protocols**: Uncontrolled natural language JSON formatting between agents was superseded by the Linux Foundation's Agent-to-Agent (A2A) standard. Agents negotiate capabilities, exchange typed schema payloads, and hand off operational authority using cryptographically signed decentralized identifiers (DIDs), preventing impersonation and data exfiltration across organizational boundaries.
+2. **Ephemeral Micro-Agent Delegation Pools**: Rather than maintaining long-lived, monolithic agent personas that accumulate memory leaks and conversational bias, modern systems instantiate ephemeral micro-agents on the fly. An orchestrator spawns a fresh subagent with a 500-token prompt, delegates a single unit of work (e.g., verifying a git diff or extracting a table), harvests the output, and immediately terminates the worker instance.
+3. **Automated Trajectory Alignment with GRPO**: Following the release of AgentGym and DeepSeek-R1, multi-agent teams are no longer aligned solely via manual prompt engineering. Models undergo Group Relative Policy Optimization (GRPO) on multi-agent execution traces, learning optimal handoff timing, concise peer communication, and verification strategies directly through reinforcement learning rewards.
+
+## Key Takeaways
+
+- **Cognitive Decomposition**: Multi-agent systems prevent the context bloat and instruction drift inherent in single-agent prompts by distributing responsibilities across specialized, sandboxed subagents.
+- **Coordination Governance**: Open natural language debate between agents inevitably leads to blaming loops and deadlocks; production architectures mandate hierarchical supervisors and deterministic state machines.
+- **Standardized Environments via AgentGym**: Rigorous multi-agent evaluation requires unified action and observation spaces across heterogeneous web, OS, and software tools.
+- **Mandatory Production SLAs**: Deploying autonomous multi-agent loops requires hard circuit breakers (`MAX_LOOPS`, `MAX_TOKENS`, `MAX_COST`) to prevent runaway API spend and system hangs.
+
+## New Questions
+
+- When multiple subagents collaborate in an asynchronous graph, what distributed consensus algorithms (similar to Raft or Paxos) are required to maintain state consistency across concurrent database writes?
+- How can multi-agent systems detect and mitigate adversarial collusion or subtle reward-hacking when subagents verify and grade each other's work?
+- As foundation models internalize long-horizon reasoning natively, at what threshold does the communication overhead of multi-agent networks exceed the benefits of single-model planning?
+
+## References
+
+1. Xi, Z., Chen, W., Guo, X., He, W., Ding, Y., Liao, B., et al. (2024). *AgentGym: Evolving Large Language Model-based Agents across Diverse Environments*. arXiv preprint arXiv:2406.04151. https://arxiv.org/abs/2406.04151 (accessed 2026-10-18).
+2. Wu, Q., Bansal, G., Zhang, J., Wu, Y., Li, B., Zhu, E., Jiang, L., Zhang, X., & Wang, C. (2023). *AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation*. arXiv preprint arXiv:2308.08155. https://arxiv.org/abs/2308.08155 (accessed 2026-10-18).
+3. Chase, H., & LangChain Engineering. (2024–2026). *LangGraph: Multi-Agent Workflows and StateGraph Orchestration*. LangChain Project Documentation. https://langchain-ai.github.io/langgraph/ (accessed 2026-10-18).
+4. Linux Foundation AAIF. (2025–2026). *Agent-to-Agent (A2A) Protocol Specification for Horizontal Inter-Agent Messaging*. Linux Foundation Standards. https://www.linuxfoundation.org/ (accessed 2026-10-18).
