@@ -2767,9 +2767,9 @@
         "lang-ko",
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from machine translation into authoritative source audit on vector database mathematics, dense embeddings, HNSW graphs, and vector indexing"
     },
     {
       "path": "_posts/2024/05/2024-05-14-gpt4o-release.md",
