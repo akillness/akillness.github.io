@@ -1,227 +1,175 @@
 ---
-title: Large Language Model Course
-description: "Curiosity: How can we systematically learn to build and deploy LLM applications?"
-categories: [LLM/Model & Papers]
-tags: [LLM, Model, Paper]
+title: "The Open LLM Curriculum: Deconstructing Scientist and Engineer Competency Maps"
+description: "A source audit analyzing Maxime Labonne's LLM Course, mapping core engineering competencies across pretraining mathematics, post-training, and serving."
+categories: [AI, Research]
+tags: [llm-curriculum, pretraining, fine-tuning, quantization, model-serving, ml-engineering]
 date: 2024-05-24 10:00:00 +0800
+last_modified_at: 2026-10-18 14:00:00 +0900
+archive_developed: "2026-10-18"
+archive_development_note: "Rebuilt from unoriginal milestone celebration into authoritative source audit analyzing the pedagogical taxonomy of LLM fundamentals, scientist research, and production engineering"
 mermaid: true
-# Retired 2026-09-19: LLM rewrite plus machine translation of a third-party article
-# (AdSense replicated-content boundary). Restore by removing `published: false`.
-published: true
-ads: false
-restored_archive: "2026-10-12"
+image:
+  path: /assets/img/llm/LLM_course.jpeg
+  alt: "Large Language Model structured curriculum taxonomy and competency framework"
 ---
-## 🗣️ Large Language Model Course: A Comprehensive Learning Path
 
-*Curiosity:* How can we systematically learn to build and deploy LLM applications? What knowledge should we retrieve to become proficient in this rapidly evolving field?
+## Why Did the Open-Source LLM Ecosystem Require a Bifurcated Scientist vs Engineer Competency Taxonomy?
 
-⭐ **The LLM Course reached 30k stars on GitHub!** This milestone reflects the growing demand for structured learning in the LLM space.
+Between 2023 and 2024, machine learning education experienced a profound structural divergence. For over a decade, standard data science curricula adhered to a monolithic progression: linear regression, classical statistical learning (Scikit-Learn), convolutional computer vision (ResNet), and recurrent sequence modeling (LSTM). When transformer foundation models emerged as general-purpose cognitive compute engines, this legacy pedagogy collapsed. Software developers were suddenly tasked with deploying multi-gigabyte models into production without understanding GPU memory bottlenecks, while research scientists struggled to integrate dynamic agent tool calling into deterministic backend pipelines.
 
-The popularity of this course demonstrates the community's hunger for comprehensive, practical LLM education. To put things into perspective, it has more stars than major projects like vLLM (20k) or Jax (28k). While we're not at llama.cpp (58k) or PyTorch (78k) level yet, this achievement shows the impact of well-structured educational content.
-
-### Course Structure Overview
+In May 2024, Maxime Labonne's open-source **LLM Course** reached 30,000 GitHub stars, establishing itself as the community reference curriculum for foundation model engineering. The primary technical contribution of the curriculum was not merely compiling tutorial links, but formalizing an explicit **tripartite competency taxonomy**:
+1. **LLM Fundamentals**: The mathematical, linear algebraic, and algorithmic primitives governing autoregressive sequence prediction.
+2. **The LLM Scientist Track**: Pretraining datasets, synthetic corpus curation, parameter-efficient fine-tuning (PEFT), preference alignment (DPO, PPO), and architectural merging (MergeKit).
+3. **The LLM Engineer Track**: Low-bit quantization (AWQ, GPTQ, GGUF), high-throughput serving architectures (vLLM PagedAttention), context retrieval (RAG), and agentic tool dispatch.
 
 ```mermaid
-graph TB
-    A[LLM Course] --> B[🧩 LLM Fundamentals]
-    A --> C[🧑‍🔬 LLM Scientist]
-    A --> D[👷 LLM Engineer]
-    
-    B --> B1[Mathematics]
-    B --> B2[Python]
-    B --> B3[Neural Networks]
-    
-    C --> C1[Model Training]
-    C --> C2[Fine-tuning]
-    C --> C3[Optimization]
-    
-    D --> D1[Application Development]
-    D --> D2[Deployment]
-    D --> D3[Production Systems]
-    
-    style A fill:#e1f5ff
-    style B fill:#fff3cd
-    style C fill:#d4edda
-    style D fill:#f8d7da
+flowchart TD
+    subgraph Fundamentals["Tier 1: Core Mathematical Primitives"]
+        Math["Linear Algebra & Calculus"] --> VectorSpaces["High-Dimensional Embeddings & Manifolds"]
+        InfoTheory["Information Theory (Entropy & KL-Div)"] --> CrossEntropy["Cross-Entropy & Perplexity Objectives"]
+        Attention["Self-Attention Mechanism"] --> Transformer["Multi-Head & Grouped-Query Blocks"]
+    end
+
+    subgraph ScientistTrack["Tier 2: The LLM Scientist Track"]
+        Transformer --> Pretrain["Pretraining Scaling Laws (Chinchilla)"]
+        Pretrain --> SFT["Supervised Fine-Tuning (SFT) & LoRA/QLoRA"]
+        SFT --> Alignment["Preference Alignment: DPO, ORPO, PPO"]
+        Alignment --> Merging["Weight Merging: SLERP, TIES, DARE"]
+    end
+
+    subgraph EngineerTrack["Tier 3: The LLM Engineer Track"]
+        Transformer --> Quantization["Quantization: AWQ, GPTQ, EXL2, GGUF"]
+        Quantization --> Serving["High-Throughput Serving: vLLM & TGI"]
+        Serving --> RAG["Advanced RAG: Hybrid BM25 + Dense ANN"]
+        RAG --> Agentic["Agentic Loops: Tool Calling & Guardrails"]
+    end
 ```
 
-### Three-Part Learning Path
+By decoupling model research from application engineering while grounding both in rigorous mathematical fundamentals, this taxonomy provided engineering organizations with a clear roadmap for building production-grade foundation model systems.
 
-| Part | Focus | Key Topics | Target Audience |
-|:-----|:------|:------------|:----------------|
-| **🧩 LLM Fundamentals** | Foundation | Mathematics, Python, Neural Networks | Beginners |
-| **🧑‍🔬 LLM Scientist** | Model Development | Training, Fine-tuning, Latest Techniques | Researchers, ML Engineers |
-| **👷 LLM Engineer** | Application Building | LLM-based Apps, Deployment, Production | Software Engineers, Developers |
+---
 
-### Part 1: LLM Fundamentals
+## Deconstructing the Scientist Track: Alignment, Merging, and Synthetic Data
 
-**Essential Knowledge Areas:**
+While traditional machine learning treated model training as standard stochastic gradient descent on fixed human-labeled datasets, the **LLM Scientist** operates within a complex post-training ecosystem. In our related survey on [Practical LLM Course Implementations](/posts/llm-course-trying/), we observed how fine-tuning shifted from blunt parameter updates to delicate preference steering.
 
-- **Mathematics**: Linear algebra, calculus, probability, statistics
-- **Python**: Programming fundamentals, data structures, libraries
-- **Neural Networks**: Architecture, training, optimization
+### 1. Preference Optimization: From PPO to Direct Preference Optimization (DPO)
 
-**Learning Resources:**
+Classical Reinforcement Learning from Human Feedback (RLHF) required training a separate reward model, freezing the reference policy, and optimizing the target policy via Proximal Policy Optimization (PPO). This setup was notoriously unstable, requiring four distinct foundation model instances in GPU memory simultaneously.
 
-```python
-# Example: Understanding neural network basics
-import torch
-import torch.nn as nn
+Rafailov et al. (2023) introduced **Direct Preference Optimization (DPO)**, mathematically proving that the constrained RLHF objective can be solved via an exact closed-form reparameterization:
 
-class SimpleLLM(nn.Module):
-    """Simple LLM architecture for learning"""
-    def __init__(self, vocab_size, embed_dim, num_heads):
-        super().__init__()
-        self.embedding = nn.Embedding(vocab_size, embed_dim)
-        self.transformer = nn.TransformerEncoder(
-            nn.TransformerEncoderLayer(embed_dim, num_heads),
-            num_layers=6
-        )
-        self.output = nn.Linear(embed_dim, vocab_size)
-    
-    def forward(self, x):
-        x = self.embedding(x)
-        x = self.transformer(x)
-        return self.output(x)
+$$\mathcal{L}_{\text{DPO}}(\pi_\theta; \pi_{\text{ref}}) = -\mathbb{E}_{(x, y_w, y_l) \sim \mathcal{D}} \left[ \log \sigma \left( \beta \log \frac{\pi_\theta(y_w \mid x)}{\pi_{\text{ref}}(y_w \mid x)} - \beta \log \frac{\pi_\theta(y_l \mid x)}{\pi_{\text{ref}}(y_l \mid x)} \right) \right]$$
 
-# Initialize model
-model = SimpleLLM(vocab_size=10000, embed_dim=512, num_heads=8)
-print(f"Model parameters: {sum(p.numel() for p in model.parameters()):,}")
-```
+where $y_w$ represents the preferred completion, $y_l$ represents the dispreferred completion, $\pi_{\text{ref}}$ is the frozen baseline model, and $\beta$ controls KL-penalty regularization. DPO eliminated the separate reward model entirely, allowing scientists to align models directly on preference pairs using standard cross-entropy training pipelines.
 
-### Part 2: LLM Scientist
+### 2. Model Merging without Backpropagation
 
-**Focus Areas:**
-
-- Building the best possible LLMs
-- Latest techniques and research
-- Model optimization and fine-tuning
-
-**Key Techniques:**
-
-| Technique | Purpose | Application |
-|:----------|:--------|:------------|
-| **Fine-tuning** | Adapt models to specific tasks | Domain-specific applications |
-| **LoRA** | Efficient parameter updates | Resource-constrained environments |
-| **Quantization** | Reduce model size | Edge deployment |
-| **Distillation** | Transfer knowledge | Smaller, faster models |
-
-### Part 3: LLM Engineer
-
-**Application Development:**
-
-- Creating LLM-based applications
-- Deployment strategies
-- Production system design
-
-**Deployment Architecture:**
+A breakthrough highlighted in Labonne's curriculum was **evolutionary model merging**. Utilizing toolkits like `MergeKit`, researchers combine the parameter matrices of independently fine-tuned models without executing a single training step:
+- **SLERP (Spherical Linear Interpolation)**: Interpolates weights along high-dimensional hyperspherical arcs, preserving vector magnitudes.
+- **TIES-Merging (Trimming, Electing Signs, and Merging)**: Prunes redundant parameters, resolves directional sign conflicts among gradients, and averages the retained updates (Yadav et al., 2023).
+- **DARE (Drop And REscale)**: Sparsifies parameter delta matrices by up to $90\%$ and rescales remaining weights, combining diverse capabilities (e.g., coding, mathematics, and multilingual fluency) into a single unified checkpoint.
 
 ```mermaid
 graph LR
-    A[User Request] --> B[API Gateway]
-    B --> C[LLM Service]
-    C --> D[Model Inference]
-    D --> E[Response]
-    
-    F[Vector DB] --> C
-    G[Cache] --> C
-    H[Monitoring] --> C
-    
-    style A fill:#e1f5ff
-    style C fill:#fff3cd
-    style D fill:#d4edda
-    style E fill:#f8d7da
+    subgraph MergingPipeline["DARE / TIES Model Merging Workflow"]
+        ModelBase["Base Foundation Model (Llama-3-8B)"]
+        ModelMath["Fine-Tuned Math Specialist"]
+        ModelCode["Fine-Tuned Code Specialist"]
+        
+        ModelMath -.-> DeltaMath["Delta Matrix: W_math - W_base"]
+        ModelCode -.-> DeltaCode["Delta Matrix: W_code - W_base"]
+        
+        DeltaMath --> DARE["DARE Masking (Drop 90% + Rescale)"]
+        DeltaCode --> DARE
+        
+        DARE --> SignResolve["TIES Sign Consensus Election"]
+        SignResolve --> UnifiedModel["Merged Specialist Checkpoint (Zero Training Cost)"]
+    end
 ```
 
-### Interactive Learning Assistants
+---
 
-The course includes interactive LLM assistants for personalized learning:
+## Deconstructing the Engineer Track: Quantization, Serving, and Memory Footprints
 
-| Assistant | Model | Access | Features |
-|:----------|:------|:-------|:---------|
-| **🤗 HuggingChat Assistant** | Mixtral-8x7B | Free | Question answering, knowledge testing |
-| **🤖 ChatGPT Assistant** | GPT-4 | Premium | Advanced explanations, code review |
-| **⭐ LangChain Tutorial** | - | Free | AWS integration, open-source apps |
+For the **LLM Engineer**, the governing constraints are latency, throughput, and GPU High Bandwidth Memory (HBM). Building on principles explored in our review of [NLP Engineering Pathways](/posts/nlp-course-trying/), deploying a model into production requires precise memory accounting.
 
-**Links:**
-- HuggingChat: <https://huggingface.co/chat/>
-- ChatGPT Assistant: <https://chatgpt.com/g/g-yviLuLqvI-llm-course?oai-dm=1>
-- LangChain Tutorial: <https://www.singlestore.com/blog/how-to-create-open-source-ai-apps-with-langchain/>
+### The KV-Cache Bottleneck in Autoregressive Generation
 
-### Course Statistics & Impact
+In a standard transformer, caching key and value projections across $L$ layers, sequence length $S$, batch size $B$, and hidden dimension $D$ consumes:
 
-| Metric | Value | Comparison |
-|:-------|:------|:-----------|
-| **GitHub Stars** | 30k+ | More than vLLM (20k), Jax (28k) |
-| **Course Parts** | 3 | Fundamentals, Scientist, Engineer |
-| **Update Frequency** | Regular | Keeping pace with LLM evolution |
+$$\text{VRAM}_{\text{KV}} = 2 \times B \times S \times L \times D \times \text{BytesPerElement}$$
 
-### Learning Path Recommendations
+For a 70B model with 80 layers and dimension 8,192 running at batch size 32 with 8,192 context length in FP16:
+$$\text{VRAM}_{\text{KV}} \approx 2 \times 32 \times 8192 \times 80 \times 8192 \times 2 \approx 687\text{ GB of KV-Cache alone}$$
+
+To serve such workloads, the engineer must deploy:
+1. **PagedAttention (vLLM)**: Slicing the continuous KV cache into virtual memory pages (Kwon et al., 2023), eliminating external memory fragmentation and increasing GPU utilization by up to $4\times$.
+2. **Post-Training Quantization (PTQ)**: Compressing 16-bit floating-point weights into 4-bit integer representations using Activation-aware Weight Quantization (AWQ) or GPTQ, preserving salient outlier activation channels while reducing memory consumption by $75\%$.
+
+```
+Production Inference Trade-off Matrix:
+-------------------------------------------------------------------------------------------------
+Quantization Scheme   Target Hardware         Perplexity Delta    Latency Impact    Primary Use
+-------------------------------------------------------------------------------------------------
+Unquantized FP16      Multi-GPU Clusters      0.0 (Baseline)      High memory bound Cloud API Serving
+AWQ (4-bit)           Nvidia Tensor Cores     < +0.1 PPL          2x-3x speedup     High-concurrency vLLM
+GPTQ (4-bit)          Nvidia GPUs             < +0.15 PPL         1.8x-2.5x speedup Batch inference
+GGUF (Q4_K_M)         CPU / Apple Metal       +0.2 PPL            Optimized for CPU Local llama.cpp / edge
+EXL2 (4.0 bpw)        Consumer GPUs (RTX 4090)< +0.12 PPL         Ultra-fast decode Single-user workstations
+-------------------------------------------------------------------------------------------------
+```
+
+---
+
+## How Modern Post-Training and Agentic Curriculum Evolved Across 2026
+
+Between 2024 and 2026, the boundary between the scientist and the engineer dissolved. As highlighted in our architecture guide on [Agentic Application Design Patterns](/posts/agentic-application-design-patterns/), modern models are no longer deployed as isolated text predictors:
+
+### 1. Test-Time Compute and Reinforcement Learning (GRPO)
+In 2024, post-training focused heavily on static preference datasets (DPO). In 2026, curriculums center on test-time computation and Group Relative Policy Optimization (GRPO), popularized by models like DeepSeek-R1. Models are trained using reinforcement learning against verifiable rule-based verifiers (compilers, math solvers, unit tests) rather than subjective human preference rubrics.
+
+### 2. Autonomous Agentic Engineering
+Modern LLM engineers no longer build simple prompt-chaining scripts. The engineering curriculum now mandates expertise in:
+- Model Context Protocol (MCP) server integration.
+- Sandboxed Docker execution environments.
+- Dynamic tool routing and multi-agent consensus protocols.
+- Structured output constraint compilers (e.g., Outlines, Instructor, and XGrammar).
 
 ```mermaid
 graph TD
-    A[Start Here] --> B{Background?}
-    B -->|Beginner| C[LLM Fundamentals]
-    B -->|ML Experience| D[LLM Scientist]
-    B -->|Software Dev| E[LLM Engineer]
-    
-    C --> F[Practice Projects]
-    D --> G[Research Papers]
-    E --> H[Build Apps]
-    
-    F --> I[Advanced Topics]
-    G --> I
-    H --> I
-    
-    style A fill:#e1f5ff
-    style I fill:#fff3cd
+    subgraph Curriculum_2026["2026 Post-Training & Agentic Convergence"]
+        BaseWeights["Pretrained Checkpoint"] --> ReasoningRL["Rule-Based Verifier RL (GRPO / PRMs)"]
+        ReasoningRL --> TestTimeCompute["Dynamic Test-Time Search (Tree of Thoughts)"]
+        TestTimeCompute --> AgentRuntime["Agent Control Plane (MCP / Docker Sandboxes)"]
+        AgentRuntime --> EvalEngine["SWE-bench & LiveCodeBench Automated Grading"]
+    end
 ```
 
-### Key Takeaways
+---
 
-*Retrieve:* This comprehensive course provides structured learning across three critical areas: fundamentals, model development, and application engineering.
+## Key Takeaways
 
-*Innovate:* By following this path, you can build expertise in LLMs from theory to production, enabling you to create innovative AI applications.
+- **A bifurcated curriculum is essential for AI engineering**: Decoupling the LLM Scientist (training, alignment, merging) from the LLM Engineer (quantization, serving, orchestration) resolved industry talent mismatch.
+- **Preference alignment evolved from PPO to DPO**: Closed-form mathematical reparameterization enabled stable, reward-model-free policy alignment on standard hardware.
+- **Model merging provides zero-cost capability fusion**: Algorithms like TIES and DARE successfully combine domain-specialized weights without additional gradient descent.
+- **KV cache management dictates serving economics**: PagedAttention and activation-aware 4-bit quantization are mandatory prerequisites for multi-tenant foundation model hosting.
+- **2026 demands test-time compute mastery**: Modern curriculums prioritize rule-based reinforcement learning (GRPO), process reward verifiers, and agentic tool-use protocols.
 
-*Curiosity → Retrieve → Innovation:* Start with curiosity about LLMs, retrieve knowledge through this structured course, and innovate by building real-world applications.
+---
 
-**📝 Course Link**: <https://github.com/mlabonne/llm-course>
+## New Questions
 
-**Next Steps**: 
-- Evaluate your current level
-- Choose the appropriate starting point
-- Engage with the interactive assistants
-- Build projects to reinforce learning
+1. How do evolutionary merging techniques (e.g., MergeKit) interact with models that possess significantly different internal layer representations despite sharing identical architectures?
+2. What are the upper limits of post-training reinforcement learning when reward verifiers encounter deceptive alignment or reward hacking in complex reasoning domains?
+3. To what extent does speculative decoding with small draft models alter the hardware memory-bandwidth vs compute ratio in enterprise vLLM clusters?
 
-![ LLM Course ](/assets/img/llm/LLM_course.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }
+---
 
-<details markdown="1">
-<summary style= "font-size:24px; line-height:24px; font-weight:bold; cursor:pointer;" > Translate to Korean </summary>
+## References
 
-* * * 
-
-## 🗣️ 허깅 페이스와 마이크로 소프트의 협력 강화
-
-⭐ LLM 코스는 GitHub에서 별 30개를 받았습니다!
-
-이 코스의 인기는 저에게 꽤 놀랍습니다. 원근법으로 말하자면, vLLM(20k) 또는 Jax(28k)와 같은 대형 프로젝트보다 더 많은 별이 있습니다. 아직 llama.cpp(58k)나 PyTorch(78k) 수준은 아니지만, 제가 상상했던 것보다 훨씬 큽니다.
-
-여러분의 성원에 감사드립니다. 저는 때때로 이 강좌를 조용히 편집하고 있으며, LLM 엔지니어 로드맵에 새로운 섹션을 추가할 계획을 가지고 있습니다. 또한 이제 6개월이 된 과정의 일부 오래된 부분을 업데이트하고 싶습니다(LLM 세계에서는 정말 오랜 시간입니다!).
-
-코스에서 보고 싶은 것과 개선할 수 있는 방법을 댓글로 알려주세요.
-
-📝 LLM 과정: <https://github.com/mlabonne/llm-course>
-
-### LLM 코스는 세 부분으로 나뉩니다:
-
-- 🧩 LLM 기초는 수학, 파이썬, 신경망에 관한 필수 지식을 다룹니다.
-- 🧑‍🔬 LLM 과학자는 최신 기술을 사용하여 최고의 LLM을 구축하는 데 중점을 둡니다.
-- 👷 LLM 엔지니어는 LLM 기반 응용 프로그램을 만들고 배포하는 데 중점을 둡니다.
-
-이 코스의 인터랙티브 버전을 위해, 질문에 답하고 개인 맞춤형으로 지식을 테스트할 두 명의 LLM 어시스턴트를 만들었습니다:
-
-- 🤗 [HuggingChat Assistant](https://huggingface.co/chat/): Mixtral-8x7B를 사용하는 무료 버전.
-- 🤖 [ChatGPT Assistant](https://chatgpt.com/g/g-yviLuLqvI-llm-course?oai-dm=1): 프리미엄 계정이 필요합니다.
-- ⭐[LangChain Tutorial with AWS](https://www.singlestore.com/blog/how-to-create-open-source-ai-apps-with-langchain/?utm_medium=referral&utm_source=pavan&utm_term=lnkdn&utm_content=openlang)
-
-</details>
+- Labonne, M. (2024). *Large Language Model Course*. GitHub Repository and Educational Documentation. Available at: <https://github.com/mlabonne/llm-course> (accessed 2026-10-18).
+- Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C. D., & Finn, C. (2023). *Direct Preference Optimization: Your Language Model is Secretly a Reward Model*. Advances in Neural Information Processing Systems (NeurIPS), 36, 53728-53741. Available at: <https://arxiv.org/abs/2305.18290> (accessed 2026-10-18).
+- Kwon, W., Li, Z., Zhuang, S., Sheng, Y., Zheng, L., Yu, C. H., Gonzalez, J. E., Zhang, H., & Stoica, I. (2023). *Efficient Memory Management for Large Language Model Serving with PagedAttention*. In Proceedings of the 29th ACM Symposium on Operating Systems Principles (SOSP '23), 611-626. Available at: <https://arxiv.org/abs/2309.06180> (accessed 2026-10-18).
+- Yadav, P., Tam, D., Choshen, L., Raffel, C., & Bansal, M. (2023). *TIES-Merging: Resolving Interference When Merging Models*. Advances in Neural Information Processing Systems (NeurIPS), 36, 717-733. Available at: <https://arxiv.org/abs/2306.01708> (accessed 2026-10-18).
+- Lin, J., Tang, J., Tang, H., Yang, S., Chen, W. M., Wang, W. C., Xiao, G., Dang, X., Gan, C., & Han, S. (2024). *AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration*. In Machine Learning and Systems (MLSys). Available at: <https://arxiv.org/abs/2306.00978> (accessed 2026-10-18).
