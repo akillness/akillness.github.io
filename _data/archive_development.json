@@ -3915,9 +3915,9 @@
       "flags": [
         "personal"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from informal project thoughts into comprehensive technical source audit on HKUDS/nanobot's 4,000-line codebase, single-loop execution, and local-first vLLM integration"
     },
     {
       "path": "_posts/2026/02/2026-02-19-clawrouter-local-routing.md",
