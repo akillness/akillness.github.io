@@ -3215,9 +3215,9 @@
       "links_at_intake": 4,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from brief announcement note and translation block into rigorous empirical source audit analyzing RouteLLM's routing architectures (Matrix Factorization, BERT, Causal LLMs), preference calibration, and 2026 multi-tier gateway evolution"
     },
     {
       "path": "_posts/2024/07/2024-07-13-rankrag-nvidia-introduce.md",
