@@ -4133,9 +4133,9 @@
       "flags": [
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial announcement note into exhaustive technical source audit on Meta Llama 3.1: dense 405B scaling, 128K context RoPE extension, FP8 single-node inference, and iterative DPO post-training"
     },
     {
       "path": "_posts/2024/07/2024-07-27-the-most-popular-use-cases-for-udp.md",
