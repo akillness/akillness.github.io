@@ -3184,9 +3184,9 @@
       "flags": [
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from Korean syllabus outline into comprehensive pedagogical and architectural source audit evaluating first-principles LLM implementation across C/CUDA kernels, tokenization, distributed scaling, and 2026 synthetic-data pipelines"
     },
     {
       "path": "_posts/2024/07/2024-07-01-60-most-useful-ai-tools.md",
