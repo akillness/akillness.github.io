@@ -1846,9 +1846,9 @@
       "links_at_intake": 5,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on the four LLM inference patterns (SISO, LISO, SILO, LILO), prefill-decode disaggregation, and KV cache serving economics"
     },
     {
       "path": "_posts/2026/03/2026-03-01-agentic-engineering-9-skills.md",
