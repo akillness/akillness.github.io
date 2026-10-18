@@ -2472,9 +2472,9 @@
       "links_at_intake": 31,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal third-party repository list into authoritative source audit on open-source data science curricula, reproducible notebooks, and computational foundations"
     },
     {
       "path": "_posts/2024/07/2024-07-22-visualize-rag-data.md",
