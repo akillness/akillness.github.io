@@ -3998,9 +3998,9 @@
       "flags": [
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial promotional summary into exhaustive technical source audit on FaceLift: semi-supervised 3D landmark lifting, 3D-aware GAN priors, silhouette ambiguity, and volumetric ViTs"
     },
     {
       "path": "_posts/2024/06/2024-06-04-multiply-paper.md",
