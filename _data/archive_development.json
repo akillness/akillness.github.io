@@ -1832,9 +1832,9 @@
       "links_at_intake": 4,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on GitNexus zero-server code intelligence, in-browser knowledge graph engine, Cypher querying, and MCP blast radius tools"
     },
     {
       "path": "_posts/2026/02/2026-02-28-llm-inference-patterns.md",
