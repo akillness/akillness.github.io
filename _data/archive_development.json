@@ -3848,9 +3848,9 @@
         "no-sources",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial cloud listicle into comprehensive technical source audit on the XaaS abstraction gradient, shared responsibility boundaries, serverless micro-VMs, and GPUaaS"
     },
     {
       "path": "_posts/2024/07/2024-07-20-modern-software-architecture.md",
