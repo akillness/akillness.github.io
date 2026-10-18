@@ -2207,9 +2207,9 @@
         "third-party-rewrite",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal third-party paper list into authoritative source audit mapping canonical AI architectures, foundational mathematical papers, and 2026 systems convergence"
     },
     {
       "path": "_posts/2024/05/2024-05-18-vision-language-model.md",
