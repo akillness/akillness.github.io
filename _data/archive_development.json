@@ -2444,9 +2444,9 @@
       "links_at_intake": 15,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal third-party preparation note into authoritative source audit on Google technical interviews, distributed systems design, and algorithmic rubrics"
     },
     {
       "path": "_posts/2024/07/2024-07-19-deal-with-imbalanced-data.md",
