@@ -4315,9 +4315,9 @@
         "no-sources",
         "personal"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Source audit examining developer productivity architecture across the Language Server Protocol, tree-sitter AST parsing, and agentic MCP tool execution."
     },
     {
       "path": "_posts/2024/06/2024-06-27-best-ml-algorithms.md",
