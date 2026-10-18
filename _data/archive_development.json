@@ -2368,9 +2368,9 @@
       "flags": [
         "third-party-rewrite"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from brief course syllabus note into authoritative source audit on Anthropic tool use, JSON schema contracts, agentic loop design, and error recovery"
     },
     {
       "path": "_posts/2024/06/2024-06-04-nvidia-hugginface-endpoint-release.md",
