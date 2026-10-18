@@ -4373,9 +4373,9 @@
         "no-sources",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Source audit examining cloud-native systems architecture across declarative Kubernetes control loops, Linux kernel cgroups, and eBPF observability."
     }
   ]
 }
