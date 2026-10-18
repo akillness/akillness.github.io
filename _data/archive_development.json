@@ -1676,9 +1676,9 @@
       "links_at_intake": 5,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on Google Developer Knowledge API, MCP documentation infrastructure, token-budgeted markdown retrieval, and 24h freshness"
     },
     {
       "path": "_posts/2026/02/2026-02-12-autorag-research.md",
