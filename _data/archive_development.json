@@ -3533,9 +3533,9 @@
       "flags": [
         "lang-ko"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from Korean beginner code snippet into authoritative foundational source audit on non-linear separability, Minsky's XOR critique, and PyTorch dynamic autograd mechanics"
     },
     {
       "path": "_posts/2024/05/2024-05-05-llm-types.md",
