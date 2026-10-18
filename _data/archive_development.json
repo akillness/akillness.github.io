@@ -3982,9 +3982,9 @@
       "flags": [
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial news summary into exhaustive technical source audit on FoundationPose: unified zero-shot 6D pose estimation, iterative SE(3) Lie-algebra refinement, synthetic data scaling, and robotics tracking loops"
     },
     {
       "path": "_posts/2024/06/2024-06-02-facelift-paper.md",
