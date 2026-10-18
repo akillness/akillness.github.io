@@ -4014,9 +4014,9 @@
       "flags": [
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial news summary into exhaustive technical source audit on MultiPly: monocular multi-human 3D reconstruction, SMPL parameterization, collision SDF penalties, and camera-ground registration"
     },
     {
       "path": "_posts/2024/06/2024-06-05-llm-update-rag-paper.md",
