@@ -1351,9 +1351,9 @@
       "flags": [
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from a preliminary 2024 deployment overview into an authoritative source audit of production ML model serving, evaluating batch pipelines, Triton, and distributed vLLM inference."
     },
     {
       "path": "_posts/2024/08/2024-08-05-rag-workflow-with-llamaindex.md",
