@@ -3796,9 +3796,9 @@
         "korean-heavy",
         "no-sources"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial Python library listicle into comprehensive technical source audit on columnar memory layouts, Apache Arrow zero-copy IPC, Polars lazy execution, and DuckDB"
     },
     {
       "path": "_posts/2024/07/2024-07-12-llm-fun-audio-alibaba.md",
