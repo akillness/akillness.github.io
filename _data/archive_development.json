@@ -1986,9 +1986,9 @@
       "links_at_intake": 9,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on nine essential GitHub repositories for Claude Code in 2026, memory layers, n8n automation, LightRAG, and orchestration"
     },
     {
       "path": "_posts/2026/03/2026-03-28-codex-plugin-runtime-bundle.md",
