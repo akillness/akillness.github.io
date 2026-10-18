@@ -2092,9 +2092,9 @@
         "korean-heavy",
         "lang-ko"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from early Korean study notes into authoritative source audit on Flutter Impeller architecture, Dart concurrency event loop, and cross-platform runtime trade-offs"
     },
     {
       "path": "_posts/2024/05/2024-05-01-llama-factory.md",
