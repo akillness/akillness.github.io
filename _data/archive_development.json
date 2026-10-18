@@ -2042,9 +2042,9 @@
       "links_at_intake": 4,
       "search_impressions_3mo": null,
       "flags": [],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt into authoritative source audit on HKUDS CLI-Anything, agent-native interface design, CLI-Hub distribution, and deterministic execution harnesses"
     },
     {
       "path": "_posts/2026/05/2026-05-05-unsloth-local-api-guide.md",
