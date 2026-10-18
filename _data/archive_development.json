@@ -3882,9 +3882,9 @@
         "thin",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial notebook demo note into comprehensive technical source audit on CodeAct execution loops, Python interpreter sandboxes, and automated exploratory data analysis"
     },
     {
       "path": "_posts/2024/07/2024-07-30-llm-systems-using-llmops.md",
