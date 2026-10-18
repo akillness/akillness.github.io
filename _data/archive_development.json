@@ -2970,9 +2970,9 @@
         "third-party-rewrite",
         "korean-heavy"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from unoriginal promotional tutorial into authoritative source audit on AWS Inferentia2 architecture, NeuronCore-v2 compilation graphs, and TGI serving"
     },
     {
       "path": "_posts/2024/05/2024-05-25-llm-chameleon-release.md",
