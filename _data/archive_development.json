@@ -2532,9 +2532,9 @@
       "flags": [
         "thin"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from brief 296-word note into authoritative source audit on automated RAG hyperparameter tuning, RAGBuilder optimization, and Ragas evaluation metrics"
     },
     {
       "path": "_posts/2024/08/2024-08-04-concept-how-work-linux.md",
