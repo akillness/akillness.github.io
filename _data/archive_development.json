@@ -3727,9 +3727,9 @@
         "third-party-rewrite",
         "news-roundup"
       ],
-      "status": "pending",
-      "developed_at": null,
-      "survey_note": null
+      "status": "graduated",
+      "developed_at": "2026-10-18",
+      "survey_note": "Rebuilt from superficial 2024 paper summary into comprehensive technical source audit on GenWarp's cross-view attention, geometric warping, and diffusion inpainting mechanics"
     },
     {
       "path": "_posts/2024/06/2024-06-02-automl-app-top-30-libraries.md",
