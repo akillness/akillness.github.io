@@ -107,7 +107,7 @@ A few conventions worth knowing before you read:
 
 ## Publishing cadence
 
-Active since 2024, publishing in research and project bursts. Cadence varies with a full-time engineering job and a PhD: bursts when a topic opens up, quieter when a project is consuming the week.
+Active since 2024, publishing in research and project bursts. Cadence varies with PhD research and independent projects: bursts when a topic opens up, quieter when a project is consuming the week.
 
 - [Full archive by date](/archives/)
 - [All categories](/categories/)

@@ -17,7 +17,7 @@ Real inbox, read by a person. Corrections are especially welcome — several pos
 | **LinkedIn** | [linkedin.com/in/akillness38](https://www.linkedin.com/in/akillness38) |
 | **GitHub** | [github.com/akillness](https://github.com/akillness) |
 
-Email is the reliable channel. Expect a reply within a few days; I write this blog around a full-time engineering job and a PhD.
+Email is the reliable channel. Expect a reply within a few days; I write this blog alongside my PhD research and independent projects.
 
 ## Who you are reaching
 
