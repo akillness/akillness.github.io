@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="760" viewBox="0 0 1320 760" role="img" aria-labelledby="title desc">
+  <title id="title">Goalflow screens CodeNode code, but does not confine it</title>
+  <desc id="desc">The security document says the parser guard is disabled, while current source runs a parse-time AST check and a second runtime AST check before exec. The code comments say this is not an OS-level sandbox and has no CPU, memory, or time limits.</desc>
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#147D86"/>
+      <stop offset="1" stop-color="#2462A5"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#183047" flood-opacity="0.10"/>
+    </filter>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .eyebrow { font-size: 16px; font-weight: 700; letter-spacing: 2.5px; fill: #147D86; }
+      .title { font-size: 43px; font-weight: 760; letter-spacing: -1.4px; fill: #142536; }
+      .subtitle { font-size: 20px; fill: #516578; }
+      .card { fill: #FFFFFF; stroke: #D8E2EA; stroke-width: 2; }
+      .num { font-size: 15px; font-weight: 700; letter-spacing: 1.6px; fill: #607488; }
+      .cardTitle { font-size: 24px; font-weight: 720; fill: #142536; }
+      .code { font-family: "SFMono-Regular", Consolas, monospace; font-size: 16px; font-weight: 650; fill: #184F62; }
+      .body { font-size: 17px; fill: #43576A; }
+      .small { font-size: 15px; fill: #63778A; }
+      .tag { font-size: 14px; font-weight: 750; letter-spacing: 1px; }
+      .bottomTitle { font-size: 22px; font-weight: 740; fill: #F8FBFD; }
+      .bottomBody { font-size: 17px; fill: #D9E7EF; }
+    </style>
+  </defs>
+
+  <text x="72" y="68" class="eyebrow">SOURCE AUDIT · GOALFLOW AT 258A3B1</text>
+  <text x="72" y="127" class="title">CodeNode is screened, not sandboxed</text>
+  <text x="72" y="166" class="subtitle">The checklist is stale. The runtime still names the boundary it does not provide.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="72" y="216" width="350" height="330" rx="18" class="card"/>
+    <rect x="72" y="216" width="350" height="8" rx="4" fill="#C7792B"/>
+    <rect x="456" y="216" width="350" height="330" rx="18" class="card"/>
+    <rect x="456" y="216" width="350" height="8" rx="4" fill="#147D86"/>
+    <rect x="840" y="216" width="408" height="330" rx="18" class="card"/>
+    <rect x="840" y="216" width="408" height="8" rx="4" fill="#2462A5"/>
+  </g>
+
+  <text x="102" y="270" class="num">01 · DOCUMENTATION</text>
+  <text x="102" y="316" class="cardTitle">Security checklist</text>
+  <rect x="102" y="340" width="288" height="38" rx="9" fill="#FFF4E8"/>
+  <text x="118" y="365" class="tag" fill="#9A5418">DISABLED / TODO</text>
+  <text x="102" y="418" class="body">The guide says safe_check()</text>
+  <text x="102" y="445" class="body">is not enabled. That statement</text>
+  <text x="102" y="472" class="body">does not match the pinned code.</text>
+  <text x="102" y="516" class="small">A documentation-maintenance gap</text>
+
+  <text x="486" y="270" class="num">02 · PARSE TIME</text>
+  <text x="486" y="316" class="cardTitle">Dify parser</text>
+  <rect x="486" y="340" width="288" height="38" rx="9" fill="#E9F5F4"/>
+  <text x="502" y="365" class="code">safe_check(data.code)</text>
+  <text x="486" y="418" class="body">AST screen rejects selected calls,</text>
+  <text x="486" y="445" class="body">dunder attributes and imports</text>
+  <text x="486" y="472" class="body">outside a compute-only list.</text>
+  <text x="486" y="516" class="small">The parser calls this before execution</text>
+
+  <text x="870" y="270" class="num">03 · EXECUTION TIME</text>
+  <text x="870" y="316" class="cardTitle">CodeNode runtime</text>
+  <rect x="870" y="340" width="346" height="38" rx="9" fill="#EDF2FA"/>
+  <text x="886" y="365" class="code">_validate_code_ast() → exec()</text>
+  <text x="870" y="418" class="body">A second AST check and trimmed</text>
+  <text x="870" y="445" class="body">builtins add defense in depth.</text>
+  <text x="870" y="472" class="body">The code still runs in Python.</text>
+  <text x="870" y="516" class="small">Not OS-level isolation or resource control</text>
+
+  <path d="M 425 381 H 448" stroke="url(#accent)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 440 373 L 449 381 L 440 389" fill="none" stroke="#2462A5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 809 381 H 832" stroke="url(#accent)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 824 373 L 833 381 L 824 389" fill="none" stroke="#2462A5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="72" y="584" width="1176" height="116" rx="18" fill="#142C3E"/>
+  <circle cx="111" cy="642" r="17" fill="#E49A4D"/>
+  <path d="M 103 642 L 109 648 L 120 635" fill="none" stroke="#142C3E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="148" y="628" class="bottomTitle">The source's own limit</text>
+  <text x="148" y="661" class="bottomBody">No OS sandbox. No CPU, memory or time limits. Hostile input needs OS-level isolation.</text>
+  <text x="148" y="685" class="small" fill="#9EB4C4">An AST filter can reduce trivial escapes; it is not proof of containment.</text>
+</svg>
