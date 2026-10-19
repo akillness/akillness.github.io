@@ -30,6 +30,42 @@
     <a href="{{ '/contact/' | relative_url }}">Contact</a>
     <span aria-hidden="true">·</span>
     <a href="{{ '/privacy/' | relative_url }}">Privacy</a>
+    {% if jekyll.environment == 'production' and site.google_ad_client != empty and site.google_ad_client %}
+      <!-- Google automatically adds a revocation link to approved sites displaying these messages; keep this manual control until that is verified. -->
+      <span id="google-consent-revocation-control" hidden>
+        <span aria-hidden="true">·</span>
+        <a id="google-consent-revocation-link" href="{{ '/privacy/' | relative_url }}">Privacy and cookie settings</a>
+      </span>
+      <script>
+        (function () {
+          const control = document.getElementById('google-consent-revocation-control');
+          const revocationLink = document.getElementById('google-consent-revocation-link');
+          if (!control || !revocationLink) return;
+
+          window.googlefc = window.googlefc || {};
+          window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+
+          revocationLink.addEventListener('click', function (event) {
+            if (typeof window.googlefc.showRevocationMessage !== 'function') return;
+            event.preventDefault();
+            window.googlefc.callbackQueue.push(window.googlefc.showRevocationMessage);
+          });
+
+          window.googlefc.callbackQueue.push({
+            CONSENT_API_READY: function () {
+              if (typeof window.__tcfapi !== 'function') return;
+              window.__tcfapi('addEventListener', 0, function (tcData, success) {
+                control.hidden =
+                  !success ||
+                  !tcData ||
+                  tcData.gdprApplies !== true ||
+                  typeof window.googlefc.showRevocationMessage !== 'function';
+              });
+            }
+          });
+        })();
+      </script>
+    {% endif %}
     <span aria-hidden="true">·</span>
     <a href="{{ '/terms/' | relative_url }}">Terms</a>
     <span aria-hidden="true">·</span>
