@@ -116,4 +116,4 @@ Active since 2024, publishing in research and project bursts. Cadence varies wit
 
 ## Who writes this
 
-**Jang Young Jeong** — AI Product Engineer at Supercent, Ph.D. candidate in Game Engineering at Hongik University, 8 years of shipped AI at NCSOFT and Com2uS. Full background on [About](/about/); reach me via [Contact](/contact/).
+**Jang Young Jeong** is an AI Product Engineer and Ph.D. candidate in Game Engineering at Hongik University, with 8 years of shipped AI work at NCSOFT and Com2uS. He previously worked as an AI Product Developer at Supercent (Dec 2025 - Sep 2026). Full background on [About](/about/); reach me via [Contact](/contact/).

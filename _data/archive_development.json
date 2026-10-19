@@ -2672,8 +2672,8 @@
         "korean-heavy"
       ],
       "status": "graduated",
-      "developed_at": "2026-10-18",
-      "survey_note": "Rebuilt from third-party translation into authoritative source audit on LLM agent foundations, cognitive architectures, planning modules, and 2026 systems"
+      "developed_at": "2026-10-19",
+      "survey_note": "Rewrote the 2024 post as a source-bounded comparison of ReAct v3, Generative Agents v2, and the LLM-agent survey v7; removed the unsupported cross-paper score chart and replaced the reused figure with an original evidence-scope diagram."
     },
     {
       "path": "_posts/2024/05/2024-05-08-phi3-webgpu.md",

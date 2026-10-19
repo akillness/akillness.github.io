@@ -10,7 +10,7 @@ mermaid: false
 I am **Jang Young Jeong** (Fodev JEO), the author of this blog, based in Hwaseong, Gyeonggi-do, South Korea. Reach me through [Contact](/contact/).
 
 ```text
-AI Product Developer @ Supercent
+Former AI Product Developer, Supercent (Dec 2025 - Sep 2026)
 Ph.D. Candidate in Game Engineering @ Hongik University
 8 years across NCSOFT + Com2uS
 ```
@@ -20,7 +20,7 @@ Ph.D. Candidate in Game Engineering @ Hongik University
 
 ---
 
-### Curiosity -> Retrieve -> Innovation
+### How I connect research to product work
 
 I started in games because games force systems to be interactive, measurable, and brutally honest. If the AI is weak, players feel it. If the pipeline is slow, the team feels it. That environment shaped how I still build today.
 
@@ -38,7 +38,7 @@ I still like the same loop:
 
 I am currently focused on AI products that need more than a good demo. I care about systems that can use tools, work with multimodal inputs, stay inspectable under failure, and improve through evaluation rather than intuition alone.
 
-At Supercent I design and ship end-to-end AI products on top of multimodal-embedding RAG and agentic workflows. Two recent examples are internal Firebase/Genkit SaaS platforms I built in a matter of weeks:
+In my Supercent role (Dec 2025 - Sep 2026), I designed and shipped end-to-end AI products on top of multimodal-embedding RAG and agentic workflows. Two examples are internal Firebase/Genkit SaaS platforms I built in weeks:
 
 - **SAGA** — a game-studio "AI brain": a RAG search engine over game design docs using RAG-Fusion, CRAG, hybrid search, Cross-Encoder reranking, and a Grounding-Guardian generation pattern, indexing 594 documents / 1,563 vectors across 15 games.
 - **Millie** — a per-user RAG assistant plus a Slack-bot-driven, local-LLM "ClawTeam" autonomous-agent system, with an admin control hub for knowledge sources (Notion/Drive/Calendar), credentials, agent assignment, and LLM call-quality monitoring.
@@ -65,7 +65,7 @@ The common thread is simple: build systems that can perceive context, make usefu
 
 ### Current Direction
 
-At Supercent, I am continuing that shift from specialized game AI into broader AI product development — owning internal AI products from concept to operation, improving reliability and discoverability, and establishing the AI-native collaboration standards used by product teams. Publicly visible work and activity around my profile also reflect where I am spending time now: context engineering, harness engineering, MCP-connected tools, local and open-model experiments, and practical multi-agent orchestration.
+My current focus builds on that shift from specialized game AI into broader AI product development. In my recent Supercent role (Dec 2025 - Sep 2026), I owned internal AI products from concept to operation, improved reliability and discoverability, and helped establish AI-native collaboration standards used by product teams. My current interests include context engineering, harness engineering, MCP-connected tools, local and open-model experiments, and practical multi-agent orchestration.
 
 I am especially interested in the part of the ecosystem that is becoming more real and less theoretical:
 
@@ -92,7 +92,7 @@ I build and maintain a small family of agent-tooling projects in public:
 
 ### Selected Work
 
-**AI Product Developer, Supercent (Dec 2025 - Present)**  
+**Former AI Product Developer, Supercent (Dec 2025 - Sep 2026)**<br />
 Shipped SAGA and Millie — two Firebase/Genkit internal SaaS platforms — built on multimodal-embedding RAG and agentic AI workflows, plus on-premise AI product operation and team-wide AI-native collaboration standards.
 
 **AI Manager, SmartHome Tech, SK Intelix (Jul 2025 - Dec 2025)**  

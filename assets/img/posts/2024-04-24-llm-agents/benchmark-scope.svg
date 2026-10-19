@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">A benchmark score belongs to its setup</title>
+  <desc id="desc">A diagram linking an agent benchmark result to its task and environment, model and tools, baseline, metric, and protocol. Below, ReAct, Generative Agents, and a survey are shown as different kinds of evidence that should not be collapsed into one score.</desc>
+  <defs>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+      .ink { fill: #182235; }
+      .muted { fill: #5b6474; }
+      .card { fill: #ffffff; stroke: #d9dfeb; stroke-width: 2; }
+      .label { font-size: 18px; font-weight: 700; }
+      .small { font-size: 16px; }
+      .paper-title { font-size: 20px; font-weight: 750; }
+      .paper-copy { font-size: 16px; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8a95a8"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="630" fill="#f5f7fb"/>
+  <text x="64" y="64" class="ink" font-size="34" font-weight="800">A benchmark score belongs to its setup</text>
+  <text x="64" y="98" class="muted" font-size="18">Keep the conditions attached to the result.</text>
+
+  <g>
+    <rect x="64" y="136" width="190" height="84" rx="16" class="card"/>
+    <rect x="64" y="136" width="8" height="84" rx="4" fill="#4472ca"/>
+    <text x="88" y="174" class="ink label">Task</text>
+    <text x="88" y="200" class="muted small">+ environment</text>
+
+    <path d="M 260 178 H 282" fill="none" stroke="#8a95a8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="292" y="136" width="190" height="84" rx="16" class="card"/>
+    <rect x="292" y="136" width="8" height="84" rx="4" fill="#4e9a87"/>
+    <text x="316" y="174" class="ink label">Model</text>
+    <text x="316" y="200" class="muted small">+ tools</text>
+
+    <path d="M 488 178 H 510" fill="none" stroke="#8a95a8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="520" y="136" width="190" height="84" rx="16" class="card"/>
+    <rect x="520" y="136" width="8" height="84" rx="4" fill="#e49d45"/>
+    <text x="544" y="186" class="ink label">Baseline</text>
+
+    <path d="M 716 178 H 738" fill="none" stroke="#8a95a8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="748" y="136" width="170" height="84" rx="16" class="card"/>
+    <rect x="748" y="136" width="8" height="84" rx="4" fill="#8b70c8"/>
+    <text x="772" y="186" class="ink label">Metric</text>
+
+    <path d="M 924 178 H 946" fill="none" stroke="#8a95a8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="956" y="136" width="180" height="84" rx="16" class="card"/>
+    <rect x="956" y="136" width="8" height="84" rx="4" fill="#d87071"/>
+    <text x="980" y="174" class="ink label">Protocol</text>
+    <text x="980" y="200" class="muted small">+ uncertainty</text>
+  </g>
+
+  <text x="64" y="282" class="ink" font-size="22" font-weight="750">Different sources answer different questions</text>
+
+  <g>
+    <rect x="64" y="308" width="336" height="188" rx="18" fill="#ffffff" stroke="#b9c9ea" stroke-width="2"/>
+    <rect x="64" y="308" width="336" height="10" rx="5" fill="#4472ca"/>
+    <text x="88" y="356" class="ink paper-title">ReAct</text>
+    <text x="88" y="389" class="muted paper-copy">ALFWorld and WebShop</text>
+    <text x="88" y="420" class="ink paper-copy">Task-specific success-rate gains</text>
+    <text x="88" y="462" fill="#375ba6" font-size="15" font-weight="700">INTERACTIVE TASKS</text>
+
+    <rect x="432" y="308" width="336" height="188" rx="18" fill="#ffffff" stroke="#b5d9cf" stroke-width="2"/>
+    <rect x="432" y="308" width="336" height="10" rx="5" fill="#4e9a87"/>
+    <text x="456" y="356" class="ink paper-title">Generative Agents</text>
+    <text x="456" y="389" class="muted paper-copy">A simulated small town</text>
+    <text x="456" y="420" class="ink paper-copy">Believability and social behavior</text>
+    <text x="456" y="462" fill="#367565" font-size="15" font-weight="700">SIMULATION</text>
+
+    <rect x="800" y="308" width="336" height="188" rx="18" fill="#ffffff" stroke="#d1c8e8" stroke-width="2"/>
+    <rect x="800" y="308" width="336" height="10" rx="5" fill="#8b70c8"/>
+    <text x="824" y="356" class="ink paper-title">LLM-agent survey</text>
+    <text x="824" y="389" class="muted paper-copy">A synthesis of prior work</text>
+    <text x="824" y="420" class="ink paper-copy">Evaluation strategies and taxonomy</text>
+    <text x="824" y="462" fill="#7056ae" font-size="15" font-weight="700">FIELD REVIEW</text>
+  </g>
+
+  <rect x="64" y="535" width="1072" height="58" rx="18" fill="#182235"/>
+  <text x="600" y="572" fill="#ffffff" font-size="20" font-weight="750" text-anchor="middle">Do not collapse distinct outcomes into one leaderboard.</text>
+</svg>

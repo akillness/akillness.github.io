@@ -1,195 +1,90 @@
 ---
-title: "Foundations of LLM Agents: Core Architecture, Planning, Memory, and Tool Integration"
-description: "A source audit analyzing the foundations of LLM agents, evaluating agent cores, episodic memory, hierarchical planning, tool sandboxes, and 2026 architectures."
+title: "Why LLM Agent Results Do Not Combine into One Score"
+description: "An evidence audit of ReAct, Generative Agents, and a 2025 LLM-agent survey, showing why their task-specific results cannot be combined into one universal success score."
 date: 2024-04-24 19:57:00 +0800
-last_modified_at: 2026-10-18 14:00:00 +0900
+last_modified_at: 2026-10-19 20:11:00 +0900
 categories: [AI, Agents]
-tags: [llm-agents, agent-core, planning, episodic-memory, tool-use, multi-agent-systems]
-mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from third-party translation into authoritative source audit on LLM agent foundations, cognitive architectures, planning modules, and 2026 systems"
+tags: [llm-agents, agent-evaluation, benchmark, tool-use, multi-agent-systems]
+mermaid: false
+archive_developed: "2026-10-19"
+archive_development_note: "Re-read ReAct v3, Generative Agents v2, and the LLM-agent survey v7; removed the unsupported cross-paper percentage chart and blanket 2026 sandbox/PRM claims; replaced the figure with an original benchmark-scope diagram."
+correction_date: "2026-10-19"
+correction_note: "Removed the unsupported 32/54/71/79/88% progression and causal claims; replaced the figure credited to arXiv:2309.07864v3 because no reuse permission was documented."
 image:
-  path: /assets/img/news/llm-agents.jpeg
-  alt: Foundations of LLM agent architecture and components
+  path: /assets/img/posts/2024-04-24-llm-agents/benchmark-scope.svg
+  alt: "Diagram of the evidence fields needed to interpret an agent benchmark: task and environment, model and tools, baseline, metric, and protocol, alongside examples of distinct research outcomes."
 ---
 
-## What Architectural Primitives Transform Passive Language Models into Autonomous Agents?
+## Can five agent percentages describe one improvement curve?
 
-In standard autoregressive language modeling, systems operate as passive text generators: an external client supplies a static prompt, and the model predicts a probability distribution over vocabulary tokens until encountering a stop delimiter. While foundation models exhibit remarkable few-shot general intelligence, pure conversational models remain bounded by two structural handicaps: they cannot directly sense or mutate the external digital world, and their reasoning is constrained to single-pass feed-forward token emission.
+An earlier version of this post showed a chart rising from 32% for direct prompting to 88% for a multi-agent system. It also mentioned AgentBench and ToolBench, but never connected any bar to a dataset, model, baseline, trial protocol, or source. The post's own references did not trace the values to a reproducible experiment, so I removed the chart instead of trying to reverse-engineer it.
 
-```mermaid
-graph TD
-    subgraph PassiveInference["Passive Foundation Model"]
-        P[User Prompt] --> LLM[Neural Weight Matrix]
-        LLM --> Out[Isolated Text Output]
-    end
+The replacement is narrower: I compare what three pinned research sources actually measure. **The key finding is that their results answer different questions, so they cannot be combined into one general “agent success rate.”** ReAct reports task-specific success-rate gains; Generative Agents studies believable behavior in a simulated town; and a later survey organizes the field and its evaluation strategies. None supplies a shared score scale for the other two.
 
-    subgraph AutonomousAgentSystem["Autonomous Cognitive Agent Architecture"]
-        U[User Objective] --> Core[Agent Core: Decision & Reasoning Engine]
-        Core <--> Mem[Memory Subsystem: Short-Term Context & Long-Term Vector Store]
-        Core <--> Plan[Planning Subsystem: Sub-Goal Decomposition & Self-Reflection]
-        Core <--> Tool[Tool & Action Sandbox: APIs, Bash, Python Interpreters]
-        Tool --> Env[(External Environment: Databases, Web, File Systems)]
-        Env --> Tool
-    end
-```
+*Originally published 2024-04-24. Re-audited on 2026-10-19 against arXiv:2210.03629v3, arXiv:2304.03442v2, and arXiv:2308.11432v7.*
 
-The conceptual emergence of the **LLM-Powered Autonomous Agent**—formalized by early prototypes like AutoGPT and BabyAGI, and grounded theoretically in cognitive architectures (Weng, 2023; Wang et al., 2024)—redefines the foundation model as the central processing unit (CPU) of an active agentic state machine. Rather than terminating after a single response, an agent formulates high-level plans, invokes external software tools, observes environmental consequences, updates persistent memory registers, and iterates dynamically until an objective is satisfied. This source audit conducts an architectural dissection of the four core subsystems of autonomous agents, analyzes empirical benchmarks across tool use and multi-agent coordination, and traces how agent harnesses evolved through 2026.
+> **Correction (2026-10-19).** The earlier chart's five percentages and the conclusion that each added architecture layer caused a predictable increase were not backed by the cited references. I removed them. I also replaced the reused figure credited to arXiv:2309.07864v3: its record showed only a non-exclusive license to distribute to arXiv, and no separate reuse permission was documented for this site.
+{: .prompt-warning }
 
----
+## What the cited sources actually evaluate
 
-## Architectural Decomposition: The Four Cognitive Pillars
-
-A robust autonomous agent decomposes into four interacting cognitive modules: the **Agent Core**, the **Memory Subsystem**, the **Planning Module**, and the **Tool Execution Surface**.
-
-```mermaid
-classDiagram
-    class AgentCore {
-        +LLM_backbone: TransformerModel
-        +system_instructions: PromptTemplate
-        +state_machine: ExecutionLoop
-        +decide_next_step(observation) Action
-    }
-    class MemoryModule {
-        +short_term_context: ConversationBuffer
-        +long_term_store: VectorDatabase
-        +episodic_cache: ExecutionTraces[]
-        +retrieve_relevant(query) Context
-        +consolidate_experience(trace)
-    }
-    class PlanningModule {
-        +decompose_goal(objective) SubGoalDAG
-        +reflect_on_failure(stderr) Critique
-        +replan(current_state, feedback)
-    }
-    class ToolRegistry {
-        +tools: Map~String, ToolDefinition~
-        +sandbox: IsolatedExecutionRuntime
-        +dispatch(call_spec) ToolResult
-    }
-    AgentCore *-- MemoryModule
-    AgentCore *-- PlanningModule
-    AgentCore *-- ToolRegistry
-```
-
-### 1. The Agent Core: The Central Reasoning Engine
-
-The core represents the central orchestrator, executing a continuous loop of perception, deliberation, and action dispatch. The core maintains the active working state, manages token budget limits, enforces system instructions, and maps incoming perceptual observations into candidate action tokens.
-
-### 2. Memory Subsystem: Bridging Ephemeral Attention and Longitudinal Recall
-
-Human cognition relies on distinct memory stores: working memory for current problem solving, short-term memory for active conversation turns, and long-term episodic/semantic memory for historical knowledge. Autonomous agents emulate this hierarchy:
-
-- **Short-Term Memory (Context Window Buffer)**: Retains recent turn observations, system prompts, and tool return payloads within the attention span.
-- **Long-Term Memory (External Datastores)**: Leverages dense vector indices, relational state tables, or agent-maintained Markdown wikis to persist past experiences across multiple sessions.
-- **Memory Consolidation**: Periodically distills verbose trajectory histories into summarized episodic reflection records, preventing context window saturation.
-
-### 3. Planning Subsystem: Goal Decomposition and Iterative Reflection
-
-Complex, long-horizon objectives cannot be resolved reliably via immediate intuition. The planning module decomposes abstract tasks into directed acyclic graphs (DAGs) of executable sub-goals:
-
-```mermaid
-sequenceDiagram
-    autonumber
-    participant Core as Agent Reasoning Core
-    participant Plan as Planning Engine
-    participant Tool as Tool Dispatcher
-    participant Env as Environment
-
-    Core->>Plan: Formulate Task Decomposition(Objective)
-    Plan-->>Core: DAG of Sub-goals [Step 1, Step 2, Step 3]
-    loop Each Sub-goal Execution
-        Core->>Tool: Execute Action(Step K Parameters)
-        Tool->>Env: Issue Command (Shell / API / DB)
-        Env-->>Tool: Return Result (Stdout / Error Code)
-        Tool-->>Core: Observation Payload
-        alt Assertion Failed / Error Detected
-            Core->>Plan: Trigger Reflection & Dynamic Re-planning
-            Plan-->>Core: Adjusted Execution Branch
-        end
-    end
-    Core-->>Core: Synthesize Final Delivery Artifact
-```
-
-Planning relies on structured methodologies such as ReAct (interleaving reasoning thoughts with environmental actions), Tree of Thoughts (exploring multiple heuristic branches via search rollouts), and Reflexion (converting execution failures into verbal memory cues).
-
-### 4. Tool Execution Surface: Interfacing Neural State with Deterministic Sandboxes
-
-Language models cannot natively perform exact mathematical calculus, check system network status, or compile software code. The tool interface provides structured schemas (OpenAPI specifications or typed JSON interfaces) that allow the agent to invoke external binaries, relational databases, web search endpoints, and containerized shells.
-
----
-
-## Multi-Agent Systems (MAS): Specialization and Organizational Topologies
-
-While a single monolithic agent can handle self-contained tasks, allocating complex domain projects across a team of specialized agents improves system reliability and reduces individual token complexity.
-
-| Multi-Agent Collaboration Topology | Communication Protocol | Core Advantage | Primary Vulnerability |
+| Source and pinned version | Evaluation question | What the source reports | Boundary that matters |
 | :--- | :--- | :--- | :--- |
-| **Hierarchical Delegation** | Supervisor emits subtasks to workers; workers report back | Clear authority and deterministic token bounding | Supervisor context bottleneck on complex tasks |
-| **Peer Debate Protocol** | Agents critique candidate outputs across conversational rounds | Reduces individual hallucinations and cognitive bias | Consensus deadlock or spiraling inference cost |
-| **Producer-Reviewer Ensemble** | Linear handoff: Creator produces code $\rightarrow$ Auditor inspects diff | High defect detection rate before runtime execution | Infinite ping-pong argument loops |
-| **Shared Blackboard Architecture** | Agents read and write asynchronously to a centralized state store | Asynchronous scalability without rigid synchronization | Race conditions and state synchronization conflicts |
+| [ReAct, arXiv:2210.03629v3](https://arxiv.org/abs/2210.03629v3) | Can reasoning traces be interleaved with actions on language and interactive tasks? | The abstract reports that ReAct outperforms imitation and reinforcement-learning methods by an absolute success rate of 34% on ALFWorld and 10% on WebShop, respectively. | These are results for named tasks and comparisons, not a score for every agent or architecture. |
+| [Generative Agents, arXiv:2304.03442v2](https://arxiv.org/abs/2304.03442v2) | Can language-model agents produce believable individual and social behavior in an interactive simulation? | The paper describes 25 agents in a small-town setting, with natural-language experience records, reflection, and retrieval for planning; its ablations find observation, planning, and reflection each contribute to believability. | Believability in this simulation is not general task-completion accuracy, and the paper's “sandbox” is a simulated town, not a security sandbox. |
+| [A Survey on LLM-based Autonomous Agents, arXiv:2308.11432v7](https://arxiv.org/abs/2308.11432v7) | How can the field's construction approaches, applications, evaluation strategies, and open problems be organized? | The survey proposes a unified framework and reviews evaluation strategies across several application areas. The current arXiv record is version 7, revised 2025-03-02. | A synthesis of prior work is not a new controlled benchmark result or a single cross-paper success rate. |
 
----
+This table is an evidence map, not a leaderboard. The measures differ in task, environment, comparison, and outcome. A number is interpretable only with the setup that produced it.
 
-## Empirical Benchmark: Autonomous Agent Tool Success and Task Completion Rates
+## ReAct's gains stay attached to its tasks and baselines
 
-To evaluate the tangible benefits of modular agent architectures over raw baseline foundation models, we examine benchmark data measuring task completion rates, planning accuracy, and tool invocation fidelity across standard agent benchmarks (such as AgentBench and ToolBench).
+ReAct combines reasoning traces with actions, allowing an agent to use observations from the environment while solving a task. Its abstract states that on ALFWorld and WebShop, ReAct outperforms imitation and reinforcement-learning methods by an absolute success rate of 34% and 10%, respectively. That is useful evidence for those comparisons. It does not mean that adding a tool loop raises an arbitrary agent's success rate by the same amount, or that the reported gains transfer unchanged to a different model, prompt, tool set, or task.
 
-```mermaid
-xychart-beta
-    title "Benchmark Task Success Rate (%) Across System Configurations"
-    x-axis ["Direct Prompting", "RAG Retrieval Only", "ReAct Tool Use", "ReAct + Memory Consolidation", "Multi-Agent System"]
-    y-axis "Success Rate (%)" 0 --> 100
-    bar [32, 54, 71, 79, 88]
-```
+The old chart erased those boundaries. Its bars implied a controlled sequence in which direct prompting became retrieval, then ReAct, then ReAct plus memory, then a multi-agent system. But the references did not show a single experiment that changed one component at a time across that sequence. Without a shared protocol, the apparent upward curve was not a measured effect.
 
-The data demonstrates a clear progression: direct zero-shot prompting solves only 32% of multi-step real-world problems. Introducing RAG retrieval improves grounding to 54%, but equipping the agent with interactive tool loops (ReAct) elevates success to 71%. Combining tool execution with persistent episodic memory and multi-agent peer auditing pushes task completion to 88%, proving that architecture and execution feedback loops outweigh raw model parameter size.
+## “Sandbox” in Generative Agents means a simulated world
 
----
+Generative Agents describes an interactive environment inspired by The Sims, populated by 25 agents. The authors evaluate whether agents produce believable individual behaviors and emergent social interactions, and use ablations to examine the contribution of observation, planning, and reflection.
 
-## How Autonomous Agent Architectures and Tool Runtimes Evolved Across 2026
+Here, **sandbox** names the simulation world in which the agents act. The abstract describes a simulated town and does not report an operating-system isolation mechanism or a security test. Calling this result evidence for secure code execution would exceed what the abstract supports. Runtime security claims need their own implementation-specific evidence.
 
-Between 2024 and 2026, autonomous agent engineering transitioned from experimental scripting into resilient, enterprise-grade software infrastructure:
+## What changed since the original 2024 note
 
-```mermaid
-graph LR
-    subgraph 2024 Early Agents
-        E1[Raw OS Shell Access] --> E2[Shared Ambient Credentials]
-        E2 --> E3[Unbounded Prompt Loops & Drift]
-    end
-    subgraph 2026 Hardened Architectures
-        H1[Wasm / Micro-VM Sandboxes] --> H2[Scoped Short-Lived Tokens]
-        H2 --> H3[Strict SLA Circuit Breakers & PRMs]
-    end
-```
+The current version of the LLM-agent survey is v7, revised on 2025-03-02. It remains a survey: it maps agent construction, applications, evaluation strategies, and open challenges. That update is useful context, but it does not turn the separate ReAct and Generative Agents evaluations into comparable measurements.
 
-- **Micro-Virtualization over Ambient Shells**: Early agent prototypes executed dangerous bash commands directly on developer workstations. In 2026, agent runtimes mandate isolated micro-VM sandboxes (as detailed in our [NanoClaw sandboxing guide](/posts/nanoclaw-docker-sandboxes-guide/)), completely neutralizing container escape zero-days and malicious prompt injection side-effects.
-- **Process Reward Models (PRMs) for Planning**: Modern planners evaluate each intermediate sub-step using learned process verifiers rather than waiting for an entire multi-turn script to complete, enabling early backtracking before accumulating runaway inference costs.
-- **Persistent Agent-Maintained Knowledge Graphs**: Rather than storing raw episodic logs in opaque vector collections, 2026 agents maintain explicit, human-auditable knowledge bases using the [LLM Wiki compilation pattern](/posts/llm-wiki-persistent-knowledge-base/), allowing developers to inspect and refactor an agent's memory via standard Git pull requests.
+I also removed the previous draft's broad claims that modern runtimes universally use micro-VMs, that sandboxing completely neutralizes escape or prompt-injection risks, and that modern planners use process-reward models to verify every sub-step. Those claims require current, system-specific sources; the papers cited here do not establish them. This post now covers only what the pinned papers support, rather than presenting itself as a comprehensive 2026 survey.
 
-To explore related architectural paradigms, review our deep dive on [agentic design patterns](/posts/agentic-application-design-patterns/), study [Hugging Face Agents 2.0 and AgentGen planning](/posts/transformer-agent/), and examine our foundational [survey on LLM-based autonomous agents](/posts/survey-on-llm-based-autonomous-agents/).
+## A practical checklist for reporting an agent result
 
----
+The source comparison suggests a simple reporting rule: keep the conditions beside the number. For a benchmark result to be useful to another team, report at least:
+
+1. **Task and environment:** the exact benchmark, version, and allowed state transitions.
+2. **Model and agent configuration:** model snapshot, prompt, tools, memory, and orchestration components.
+3. **Baseline:** which methods were compared and whether the comparison changes one component or the whole system.
+4. **Metric:** success, believability, groundedness, or another outcome, with its unit and denominator.
+5. **Protocol:** trial count, random seeds, stopping rules, retries, and uncertainty where available.
+6. **Operational outcomes:** cost, latency, tool errors, recoveries, and safety failures, kept distinct from task success.
+
+This checklist is a recommendation drawn from the differences among the sources, not a formal benchmark standard. It prevents a task-specific gain from being presented as a universal property of an architecture.
+
+For implementation patterns, see the site's separate [agentic application design-patterns analysis](/posts/agentic-application-design-patterns/). For a broader field map, compare it with the separate [LLM-agent survey note](/posts/survey-on-llm-based-autonomous-agents/). They answer different questions from this benchmark-scope audit.
 
 ## Key Takeaways
 
-- **Agents as Cognitive Systems**: Autonomous agents transcend conversational chatbots by coupling an LLM reasoning core with structured memory, hierarchical planning, and deterministic tool execution sandboxes.
-- **Architecture Trumps Model Scale**: Empirical benchmarks demonstrate that structuring workflows around ReAct loops, episodic reflection, and multi-agent auditing yields higher task completion than upgrading to larger monolithic base models.
-- **Safety Requires Sandbox Isolation**: Deploying autonomous agents with code execution capabilities demands strict micro-VM sandboxing, capability dropping, and short-lived credentials to prevent destructive prompt injection attacks.
-
----
+- Do not compare agent percentages unless the task, model, baseline, metric, and protocol are aligned.
+- ReAct's reported gains belong to ALFWorld and WebShop comparisons; Generative Agents evaluates believability in a particular simulation.
+- The Generative Agents paper's “sandbox” is a simulated environment, not evidence of runtime isolation or security.
 
 ## New Questions
 
-1. **State Space Pruning in Deep Horizon Trees**: As agents execute hundreds of sequential tool calls, what algorithmic pruning strategies best retain critical dependency context while discarding ephemeral intermediate scratchpads?
-2. **Deterministic Agent-to-Agent Consensus**: In adversarial multi-agent debate protocols, what formal mathematical voting mechanisms prevent ensembles from converging on shared, persuasive hallucinations?
-
----
+1. What minimum shared protocol would make results from interactive task benchmarks comparable across agent designs?
+2. How should agent evaluations report retries, cost, latency, and safety failures without hiding them inside a single success rate?
+3. Which parts of an agent system should be held constant when testing whether memory, planning, or tool use caused an improvement?
 
 ## References
 
-- Weng, L. (2023). *LLM-powered Autonomous Agents*. Lil'Log. https://lilianweng.github.io/posts/2023-06-23-agent/ (accessed 2026-10-18).
-- Wang, L., Ma, C., Feng, X., Zhang, Z., Yang, H., Chen, J., ... & Ji, H. (2024). *A Survey on Large Language Model based Autonomous Agents*. Frontiers of Computer Science, 18(6), 186345. https://arxiv.org/abs/2308.11432 (accessed 2026-10-18).
-- Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y. (2022). *ReAct: Synergizing Reasoning and Acting in Language Models*. International Conference on Learning Representations (ICLR 2023). arXiv preprint arXiv:2210.03629. https://arxiv.org/abs/2210.03629 (accessed 2026-10-18).
-- Park, J. S., O'Brien, J. C., Cai, C. J., Morris, M. R., Liang, P., & Bernstein, M. S. (2023). *Generative Agents: Interactive Simulacra of Human Behavior*. In Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology (UIST '23). arXiv preprint arXiv:2304.03442. https://arxiv.org/abs/2304.03442 (accessed 2026-10-18).
+- Yao, S. et al. (2023). *ReAct: Synergizing Reasoning and Acting in Language Models*. arXiv:2210.03629v3. https://arxiv.org/abs/2210.03629v3 (read 2026-10-19).
+- Park, J. S. et al. (2023). *Generative Agents: Interactive Simulacra of Human Behavior*. arXiv:2304.03442v2. https://arxiv.org/abs/2304.03442v2 (read 2026-10-19).
+- Wang, L. et al. (2025). *A Survey on Large Language Model based Autonomous Agents*. arXiv:2308.11432v7. https://arxiv.org/abs/2308.11432v7 (read 2026-10-19).
+- Xi, Z. et al. (2023). *The Rise and Potential of Large Language Model Based Agents: A Survey*. arXiv:2309.07864v3. https://arxiv.org/abs/2309.07864v3 (the source of the removed figure; read 2026-10-19).
+- arXiv.org. *Non-exclusive license to distribute*. https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html (read 2026-10-19). The page records a distribution license granted to arXiv; it was not treated as third-party figure-reuse permission.

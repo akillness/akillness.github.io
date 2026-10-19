@@ -21,7 +21,7 @@ Email is the reliable channel. Expect a reply within a few days; I write this bl
 
 ## Who you are reaching
 
-**Jang Young Jeong** — AI Product Engineer at Supercent, Ph.D. candidate in Game Engineering at Hongik University, previously AI/game programmer at NCSOFT and Com2uS. Based in Hwaseong, Gyeonggi-do, South Korea (KST, UTC+9).
+**Jang Young Jeong** is an AI Product Engineer and Ph.D. candidate in Game Engineering at Hongik University. He was an AI Product Developer at Supercent from Dec 2025 to Sep 2026, and previously worked as an AI/game programmer at NCSOFT and Com2uS. Based in Hwaseong, Gyeonggi-do, South Korea (KST, UTC+9).
 
 Full background is on [About](/about/); selected work and its public evidence are mapped on [Portfolio](/projects/).
 
