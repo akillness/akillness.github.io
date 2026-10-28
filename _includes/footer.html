@@ -30,6 +30,10 @@
     <a href="{{ '/contact/' | relative_url }}">Contact</a>
     <span aria-hidden="true">·</span>
     <a href="{{ '/privacy/' | relative_url }}">Privacy</a>
+    {% if jekyll.environment == 'production' and site.google_analytics.id != empty and site.google_analytics.id %}
+      <span aria-hidden="true">·</span>
+      <button type="button" id="analytics-settings" aria-controls="analytics-consent" aria-expanded="false">Analytics settings</button>
+    {% endif %}
     {% if jekyll.environment == 'production' and site.google_ad_client != empty and site.google_ad_client %}
       <!-- Google automatically adds a revocation link to approved sites displaying these messages; keep this manual control until that is verified. -->
       <span id="google-consent-revocation-control" hidden>
@@ -73,6 +77,16 @@
     <span aria-hidden="true">·</span>
     <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
   </p>
+  {% if jekyll.environment == 'production' and site.google_analytics.id != empty and site.google_analytics.id %}
+    <section id="analytics-consent" aria-labelledby="analytics-consent-title" hidden>
+      <h2 id="analytics-consent-title">Analytics settings</h2>
+      <p>Allow Google Analytics to help us understand site usage? This choice is separate from advertising settings.</p>
+      <p>Declining stops analytics and attempts to remove existing analytics cookies. You can also clear cookies in your browser.</p>
+      <button type="button" id="analytics-accept">Accept analytics</button>
+      <button type="button" id="analytics-decline">Decline analytics</button>
+      <p id="analytics-consent-status" role="status" aria-live="polite"></p>
+    </section>
+  {% endif %}
 <!--
   <p>
     {%- capture _platform -%}

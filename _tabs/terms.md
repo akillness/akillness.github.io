@@ -7,7 +7,7 @@ description: Licensing of the writing and code on this site, accuracy limits, an
 mermaid: false
 ---
 
-**Last updated:** 2026-10-12
+**Last updated:** 2026-10-28
 
 Plain terms for a personal technical blog. If something here is unclear, [email me](mailto:akillness38@gmail.com) rather than guessing.
 
@@ -45,7 +45,7 @@ Material is provided "as is", without warranty of any kind. I am not liable for 
 
 ## Advertising
 
-Eligible long-form post pages carry Google AdSense units. The restored historical archive, short reference notes, `noindex` pages, generated tag and category detail pages, and the 404 page load no AdSense code. Ads are separated from the article body. I do not control which specific advertisers appear, and their presence is not an endorsement. See the [Privacy Policy](/privacy/) for what ad-serving means for your data.
+Eligible long-form post pages may load Google AdSense and display ads, including an in-article unit between paragraphs and a unit after the post. The restored historical archive, short reference notes, `noindex` pages, generated tag and category detail pages, and the 404 page load no AdSense code. I do not control which specific advertisers appear, and their presence is not an endorsement. See the [Privacy Policy](/privacy/) for data practices and the separate analytics and advertising choices.
 
 Posts are not sponsored. Where a source I analyse is itself sponsored — a vendor-funded article, for example — I say so in the post and verify its claims against primary documentation.
 

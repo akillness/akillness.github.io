@@ -1,14 +1,111 @@
-<!--
-  The GA snippet
--->
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script defer src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics.id }}"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function(event) {
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+  (function () {
+    const key = 'analytics-consent';
+    const measurementId = {{ site.google_analytics.id | jsonify }};
+    const settings = document.getElementById('analytics-settings');
+    const panel = document.getElementById('analytics-consent');
+    const accept = document.getElementById('analytics-accept');
+    const decline = document.getElementById('analytics-decline');
+    const status = document.getElementById('analytics-consent-status');
+    if (!settings || !panel || !accept || !decline || !status) return;
 
-    gtag('js', new Date());
-    gtag('config', '{{ site.google_analytics.id }}');
-  });
+    let choice;
+    try { choice = localStorage.getItem(key); } catch (error) { choice = null; }
+    let loaded = false;
+
+    function open() {
+      panel.hidden = false;
+      settings.setAttribute('aria-expanded', 'true');
+    }
+
+    function close() {
+      panel.hidden = true;
+      settings.setAttribute('aria-expanded', 'false');
+      settings.focus();
+    }
+
+    function save(value) {
+      try {
+        localStorage.setItem(key, value);
+        return localStorage.getItem(key) === value;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function loadAnalytics() {
+      if (loaded) return;
+      loaded = true;
+      window['ga-disable-' + measurementId] = false;
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+      });
+      gtag('js', new Date());
+      gtag('config', measurementId);
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+      document.head.appendChild(script);
+    }
+
+    function clearAnalyticsCookies() {
+      const domains = location.hostname.split('.');
+      const paths = location.pathname.split('/');
+      const cookieNames = document.cookie.split(';').map(function (cookie) { return cookie.trim().split('=')[0]; });
+      cookieNames.filter(function (name) { return name === '_ga' || name.indexOf('_ga_') === 0; }).forEach(function (name) {
+        for (let i = 0; i < domains.length; i++) {
+          for (let j = paths.length; j > 0; j--) {
+            const path = paths.slice(0, j).join('/') || '/';
+            document.cookie = name + '=; Max-Age=0; path=' + path + '; domain=' + domains.slice(i).join('.');
+            document.cookie = name + '=; Max-Age=0; path=' + path;
+          }
+        }
+      });
+    }
+
+    settings.addEventListener('click', function () {
+      if (panel.hidden) { open(); accept.focus(); } else { close(); }
+    });
+    accept.addEventListener('click', function () {
+      if (!save('granted')) {
+        status.textContent = loaded ? 'Your choice could not be saved. Check your browser storage settings.' : 'Your choice could not be saved. Analytics remains off; check your browser storage settings.';
+        return;
+      }
+      choice = 'granted';
+      status.textContent = '';
+      loadAnalytics();
+      close();
+    });
+    decline.addEventListener('click', function () {
+      window['ga-disable-' + measurementId] = true;
+      try { clearAnalyticsCookies(); } catch (error) { /* Browser cookie access can be blocked. */ }
+      if (!save('denied')) {
+        status.textContent = 'Your choice could not be saved. Analytics is disabled on this page; clear site data in your browser before returning.';
+        return;
+      }
+      if (loaded || choice === 'granted') {
+        location.reload();
+        return;
+      }
+      choice = 'denied';
+      status.textContent = '';
+      close();
+    });
+
+    window.addEventListener('storage', function (event) {
+      try { if (event.storageArea && event.storageArea !== localStorage) return; } catch (error) { /* Fail closed. */ }
+      if (loaded && (event.key === null || (event.key === key && event.newValue !== 'granted'))) {
+        window['ga-disable-' + measurementId] = true;
+        location.reload();
+      }
+    });
+
+    if (choice === 'granted') loadAnalytics();
+    else if (choice !== 'denied') open();
+  })();
 </script>

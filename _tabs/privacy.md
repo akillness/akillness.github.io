@@ -6,36 +6,40 @@ title: Privacy Policy
 description: What data this site collects, which third parties process it, and how to opt out.
 mermaid: false
 ---
-**Last updated:** 2026-10-05
+**Last updated:** 2026-10-28
 
-This page explains exactly what happens to data when you visit `akillness.github.io`. It lists only the services this site actually loads — nothing is included for the sake of looking thorough.
+This page describes the site's data practices and the third-party services it uses.
 
 ## Who runs this site
 
-This is a personal technical blog written by **Jang Young Jeong** (Fodev JEO), an AI product engineer based in South Korea. It is not a company. There is no sales funnel, no mailing list, and no user account system.
+This is a personal technical blog written by **Jang Young Jeong** (Fodev JEO), an AI product engineer based in South Korea. It is not a company. The site also offers paid reviews; inquiries can be sent by email.
 
 - Contact: [akillness38@gmail.com](mailto:akillness38@gmail.com)
 - More detail: [About](/about/)
 
 ## What this site does not do
 
-- **No accounts.** There is nothing to sign up for, so no credentials are stored.
-- **No forms.** The site collects no names, addresses, or payment details.
-- **No newsletter.** No email addresses are harvested from visitors.
-- **No selling of data.** Nothing collected here is sold or traded.
+- **No site accounts.** The blog does not have its own account system; commenting uses a GitHub account.
+- **No newsletter or payment forms.** The site does not collect newsletter signups or payments.
 - **No server-side logs owned by me.** The site is static and hosted on GitHub Pages; I do not operate a backend that records your requests.
 
 ## What is collected, and by whom
 
-The site is static HTML, but three third-party services run in your browser. Each is a separate data controller with its own policy.
+The site is static HTML and uses third-party services. Their own privacy policies describe how they handle data.
 
 | Service | Purpose | Data involved | Policy |
 | :--- | :--- | :--- | :--- |
-| **Google Analytics 4** | Aggregate traffic measurement — which posts get read, roughly where readers are | Cookies, IP address (truncated by Google), page URLs, device and browser type | [Google Privacy Policy](https://policies.google.com/privacy) |
-| **Google AdSense** | Displays ads on eligible long-form post pages only; it is not loaded on the homepage, short reference notes, `noindex` archives, support pages, or error pages | Cookies and device identifiers used for ad selection and frequency capping; may include personalised advertising where permitted | [How Google uses data](https://policies.google.com/technologies/partner-sites) |
-| **Giscus** (comments) | Comment threads, backed by GitHub Discussions | Only if you choose to comment: your GitHub account identity and comment text, stored by GitHub | [GitHub Privacy Statement](https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement) |
+| **Google Analytics 4** | Traffic measurement, such as which posts are read | When enabled, Google may receive page URLs, device and browser information, IP address and analytics identifiers or cookies | [Google Privacy Policy](https://policies.google.com/privacy) |
+| **Google AdSense** | Displays ads on eligible long-form post pages | Google and its partners may receive IP address, device information, cookies and other identifiers for ad delivery, measurement and, where applicable, personalisation | [How Google uses data](https://policies.google.com/technologies/partner-sites) |
+| **Giscus** (comments) | Displays comment threads backed by GitHub Discussions | On pages with comments, the browser loads Giscus even if you do not comment; Giscus and GitHub may receive technical request data such as your IP address and browser information. If you comment, your GitHub identity and comment are public on GitHub | [Giscus privacy policy](https://github.com/giscus/giscus/blob/main/PRIVACY-POLICY.md), [GitHub Privacy Statement](https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement) |
 
-Static assets (fonts, JavaScript libraries) are served from **jsDelivr** and **Google Fonts**, which receive your IP address as a technical necessity of delivering the file. Site hosting is **GitHub Pages**, which may log requests per [GitHub's policy](https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement).
+Static assets such as fonts and JavaScript libraries may be served from **jsDelivr**, which receives request information including your IP address. Site hosting is **GitHub Pages**, which may log requests per [GitHub's policy](https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement).
+
+## Analytics choice
+
+Google Analytics is off unless you choose **Accept analytics**. Before you accept, the site does not load its analytics tag. Open **Analytics settings** in the footer to accept or decline analytics or change your choice later. The choice is stored in this browser's local storage; if storage is unavailable, it cannot be saved and analytics is not enabled.
+
+If you decline after accepting, the site disables analytics and reloads the page. It also attempts to remove accessible Google Analytics cookies, but may not remove every cookie. You can clear remaining cookies in your browser settings. Changing this choice does not delete data previously sent to Google.
 
 ## Cookies and advertising
 
@@ -43,9 +47,9 @@ Third-party vendors, including Google, use cookies to serve ads based on your pr
 
 - You can opt out of personalised advertising at [Google Ads Settings](https://adssettings.google.com/).
 - For opt-outs from third-party vendors' use of cookies for personalised advertising across many networks at once, see [www.aboutads.info](https://www.aboutads.info/choices/) or [Your Online Choices](https://www.youronlinechoices.com/) (EU).
-- Blocking cookies in your browser also works. Nothing on this site breaks if you do — there is no functionality gated behind a cookie.
+- You can also manage or block cookies in your browser; doing so may affect third-party features.
 
-Where required by law, ad personalisation is limited and a consent mechanism is presented by Google's own consent management before personalised ads are served.
+AdSense may load on eligible posts. The site's analytics choice is separate from advertising controls; it does not set your advertising preferences. An advertising consent message may be provided by Google depending on account configuration and location, but this site does not guarantee that one is active or shown.
 
 ## Comments
 
@@ -61,13 +65,11 @@ This site is aimed at professional software engineers and researchers. It is not
 
 ## Your rights
 
-Because I hold no database of my own, most requests are best directed at the service that actually holds the data:
+For data held by third-party services, their privacy policies explain how to make requests:
 
-- **Analytics and ad data** → exercise your rights through [Google](https://policies.google.com/privacy) or use the opt-out links above.
+- **Analytics and ad data** → see [Google's privacy information](https://policies.google.com/privacy) and the advertising controls above.
 - **Comments** → manage them in GitHub Discussions, or email me.
-- **Anything else** → email [akillness38@gmail.com](mailto:akillness38@gmail.com) and I will respond.
-
-If you are in the EEA, UK, or a jurisdiction with comparable law (GDPR, CCPA/CPRA), the legal bases relied on are legitimate interest for aggregate analytics and consent for personalised advertising.
+- **Anything else** → email [akillness38@gmail.com](mailto:akillness38@gmail.com).
 
 ## Changes
 

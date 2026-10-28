@@ -5,6 +5,8 @@ categories: [AI, Research]
 tags: [natural-language-processing, summarization, speech-recognition, hallucinations]
 date: 2024-05-12 18:57:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
+correction_date: 2026-10-28
+correction_note: "Corrected claims about extractive factuality, NLI and FactCC verification, and long-context research and hierarchical summarization."
 mermaid: true
 archive_developed: "2026-10-18"
 archive_development_note: "Source audit examining neural summarization pipelines, contrasting extractive algorithms with abstractive transformers and hallucination mitigation."
@@ -14,7 +16,7 @@ archive_development_note: "Source audit examining neural summarization pipelines
 
 Automated video summarization tools—which convert long-form audio-visual streams into structured markdown briefs—frequently encounter a fundamental tension between factual fidelity and synthesis coherence. While user-facing applications like Lilys AI present a streamlined single-click interface, the underlying technical pipeline spans multiple brittle layers: acoustic speech recognition (ASR), speaker diarization, hierarchical context chunking, and neural text generation.
 
-A primary failure mode in end-to-end abstractive summarization of hours-long transcripts is neural hallucination. Language models hallucinate factual details or attribute statements to the incorrect speaker when context lengths exceed optimal attention bounds. Addressing this challenge requires analyzing the mathematical divergence between extractive graph formulations and abstractive neural sequence models, alongside formal factual consistency verification frameworks.
+A primary failure mode in end-to-end abstractive summarization of hours-long transcripts is neural hallucination. Language models hallucinate factual details or attribute statements to the incorrect speaker when context lengths exceed optimal attention bounds. Addressing this challenge requires analyzing the mathematical divergence between extractive graph formulations and abstractive neural sequence models, alongside model-based factual consistency checks.
 
 ```mermaid
 flowchart TD
@@ -28,11 +30,11 @@ flowchart TD
     MapReduce --> CandidateSummary[Draft Abstractive Summary]
     TextRank --> ExtractiveAnchors[Salient Sentence Embeddings]
     
-    CandidateSummary --> HallucinationGuard[FactCC / NLI Verification Gate]
+    CandidateSummary --> HallucinationGuard[FactCC / NLI Consistency Check]
     ExtractiveAnchors --> HallucinationGuard
     
-    HallucinationGuard -->|Entailment Verified| FinalBrief[Structured Executive Brief & Timelines]
-    HallucinationGuard -->|Contradiction Detected| Refiner[Constrained Logit Decoding / DLa Correction]
+    HallucinationGuard -->|Predicted consistent| FinalBrief[Candidate Brief for Review]
+    HallucinationGuard -->|Predicted inconsistent| Refiner[Review and Revise]
     Refiner --> FinalBrief
 ```
 
@@ -52,7 +54,7 @@ where $\mathbf{e}_i$ denotes the dense embedding of sentence $s_i$. Vertex impor
 
 $$R(s_i) = (1 - d) + d \sum_{j \in \text{In}(s_i)} \frac{W_{ji}}{\sum_{k \in \text{Out}(s_j)} W_{jk}} R(s_j)$$
 
-where $d \in (0, 1)$ is the damping factor (conventionally $0.85$). Extractive models guarantee $100\%$ factual faithfulness because no new tokens are generated. However, they suffer from discourse incoherence, anaphoric ambiguities (unresolved pronouns like "this" or "he"), and poor compression density.
+where $d \in (0, 1)$ is the damping factor (conventionally $0.85$). Extracting sentences preserves their wording, not a guarantee of factual faithfulness: source statements may themselves be wrong, and omitted context or unresolved references can make a verbatim selection misleading. Human review against the full source and, where needed, independent evidence remains necessary.
 
 ### 2. Abstractive Summarization via Conditional Autoregression
 
@@ -65,7 +67,7 @@ By generating novel phrasing and synthesizing across non-contiguous sections, ab
 | Dimension | Extractive Formulation | Abstractive Formulation |
 | :--- | :--- | :--- |
 | **Source Material** | Verbatim sentence extraction | Novel paraphrase generation |
-| **Factuality Guarantee** | High ($100\%$ ground truth token fidelity) | Moderate to Low (Prone to hallucinations) |
+| **Factuality** | Verbatim wording, but context or source claims can still mislead | Generated claims require checking against the source and, where needed, independent evidence |
 | **Compression Ratio** | Low (bounded by source sentence length) | High (dense thematic abstraction) |
 | **Discourse Fluency** | Choppy, pronoun-unresolved | Cohesive, structured discourse |
 | **Computational Overhead** | $O(N^2)$ graph distance or linear scoring | $O(N \cdot M)$ autoregressive attention passes |
@@ -91,19 +93,17 @@ graph LR
 1. **Intrinsic Hallucinations**: Generated summaries directly contradict facts stated in the transcript. For example, if the speaker discusses corporate layoffs occurring at an external competitor, an intrinsic hallucination might summarize: *"The speaker announced layoffs within their own engineering team."*
 2. **Extrinsic Hallucinations**: The summary introduces claims that cannot be grounded in or verified by the source transcript. While the factual assertion might be objectively true in the broader real world (leakage from pretraining weights), it constitutes an ungrounded hallucination relative to the source video.
 
-To quantify factual fidelity programmatically, modern evaluation pipelines eschew lexical overlap metrics like ROUGE-1/ROUGE-L in favor of natural language inference (NLI) classifiers:
+Natural language inference (NLI) classifiers can estimate whether a source supports a summary, but their entailment labels are model predictions, not proofs. [Falke et al.](https://aclanthology.org/P19-1213/) found that out-of-the-box NLI models did not achieve the desired performance on their summary-ranking task. [FactCC](https://aclanthology.org/2020.emnlp-main.750/) predicts sentence-level consistency and extracts supporting or conflicting spans to assist review; it does not establish external truth. A source-consistent claim can still be false if the source is wrong, so reviewers must inspect context and independently check consequential claims.
 
-$$\text{FaithfulnessScore}(\mathbf{X}, \mathbf{Y}) = \prod_{s \in \text{Sentences}(\mathbf{Y})} \sigma \left( \text{NLI}_{\text{entailment}}(\mathbf{X}, s) - \text{NLI}_{\text{contradiction}}(\mathbf{X}, s) \right)$$
-
-Techniques such as FactCC and DAE (Dependency Arc Entailment) decompose generated summaries into atomic semantic units, verifying each clause against the source text before publication. When coupled with [decoding by contrasting layers (DoLa)](/posts/new-decoding-to-reduce-hallucinations/), factual veracity increases substantially.
+For a different approach to reducing hallucinations during generation rather than checking summaries afterward, see the discussion of [DoLa decoding](/posts/new-decoding-to-reduce-hallucinations/).
 
 ---
 
 ## Architectural Scaling: Hierarchical Map-Reduce vs. Infinite Context Windows
 
-A 2.5-hour technical discourse generates between $25,000$ and $40,000$ spoken words—exceeding the reliable attention concentration boundaries of standard transformer architectures. As established in research on the *lost-in-the-middle* phenomenon, transformer attention weights concentrate heavily on initial and terminal tokens, failing to retrieve critical nuances buried in the interior $40\text{–}60\%$ of the context.
+Long recordings can produce transcripts that challenge a model's context handling. In [Lost in the Middle](https://arxiv.org/html/2307.03172), Liu et al. found that some tested models performed worse when relevant information appeared in the middle of a long input on multi-document question answering and key-value retrieval tasks. The result concerns task performance, not a demonstrated universal attention-weight mechanism or a fixed problematic interval.
 
-To summarize extended multimedia recordings reliably, production services deploy hierarchical chunking pipelines:
+Hierarchical chunking is one approach to processing long transcripts, but it can lose context during intermediate summarization and does not guarantee reliable retrieval or factuality:
 
 ```mermaid
 sequenceDiagram
@@ -142,9 +142,9 @@ In contemporary 2026 production environments, separate two-stage pipelines—ASR
 
 ## Key Takeaways
 
-- **Extractive Models Anchor Truth**: While abstractive summarization produces superior narrative structure, extractive algorithms remain essential as factual anchors to prevent hallucination.
-- **Long Context Demands Hierarchical Architectures**: Despite expanded context windows, hierarchical Map-Reduce decomposition prevents attention decay across multi-hour audio recordings.
-- **NLI Gates Exceed ROUGE Utility**: Evaluation of summarization quality must rely on natural language inference entailment scoring rather than lexical surface matching.
+- **Extractive Models Preserve Wording, Not Truth**: Verbatim selections can still omit necessary context or reproduce errors in the source.
+- **Long Context Needs Evaluation**: Hierarchical Map-Reduce can divide a long transcript into smaller inputs, but it does not guarantee that important context survives or that positional failures disappear.
+- **NLI Is a Fallible Check**: Entailment predictions can help flag potential inconsistencies, but cannot replace source review or independent fact-checking.
 - **Timestamps Provide Verification Utility**: Pairing generated narrative points with verifiable audio-visual timestamps transforms opaque AI generation into an auditable research tool.
 
 ---
@@ -161,4 +161,5 @@ In contemporary 2026 production environments, separate two-stage pipelines—ASR
 - Lewis, M., Liu, Y., Goyal, N., Ghazvininejad, M., Mohamed, A., Levy, O., Stoyanov, V., & Zettlemoyer, L. (2020). BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension. *Association for Computational Linguistics (ACL 2020)*. [https://arxiv.org/abs/1910.13461](https://arxiv.org/abs/1910.13461) (accessed 2026-10-18)
 - Radford, A., Kim, J. W., Xu, T., Brockman, G., McLeavey, C., & Sutskever, I. (2023). Robust Speech Recognition via Large-Scale Weak Supervision. *International Conference on Machine Learning (ICML 2023)*. [https://arxiv.org/abs/2212.04356](https://arxiv.org/abs/2212.04356) (accessed 2026-10-18)
 - Kryscinski, W., McCann, B., Xiong, C., & Socher, R. (2020). Evaluating the Factual Consistency of Abstractive Text Summarization. *Empirical Methods in Natural Language Processing (EMNLP 2020)*. [https://arxiv.org/abs/1910.12840](https://arxiv.org/abs/1910.12840) (accessed 2026-10-18)
+- Falke, T., Ribeiro, L. F. R., Utama, P. A., Dagan, I., & Gurevych, I. (2019). Ranking Generated Summaries by Correctness: An Interesting but Challenging Application for Natural Language Inference. *ACL 2019*. [https://aclanthology.org/P19-1213/](https://aclanthology.org/P19-1213/) (accessed 2026-10-28)
 - Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., & Liang, P. (2024). Lost in the Middle: How Language Models Use Long Contexts. *Transactions of the Association for Computational Linguistics (TACL)*, 12, 157-173. [https://arxiv.org/abs/2307.03172](https://arxiv.org/abs/2307.03172) (accessed 2026-10-18)
