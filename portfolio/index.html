@@ -1133,7 +1133,7 @@
             kicker: 'Selected work',
             title: 'Projects I shipped, and what I contributed',
             description:
-              'A visual tour of the systems I built — from production RAG platforms and open-source agent harnesses to multimodal QA tooling and game AI research. Each card pairs the work with my specific contribution.',
+              'A visual tour of the systems I built — from production RAG platforms and open-source agent harnesses to multimodal QA tooling and game AI research. I keep the surrounding development system explicit: jeo and jeopi explore spec-first planning and verification harnesses, while jeo-skills packages reusable skill contracts. The five side projects below are separate repositories; this does not imply every runtime or provider is connected or every project is production-verified.',
             roleLabel: 'My contribution:',
             projects: [
               {
@@ -1206,6 +1206,65 @@
                   'Designed the data-grounding pipeline (text / file / URL / Drive / Notion), Slackbot credential and runtime-config recovery controls, per-channel agent routing, and LLM-usage monitoring — a 4-week build.',
                 tags: ['Knowledge Ops', 'Slackbot', 'Agents', 'Control Tower', 'Firebase']
               },
+              {
+                codeLabel: 'FRAMEFORGE',
+                alt: 'FrameForge Studio local video-production workflow',
+                meta: 'Side project · 2026',
+                title: 'FrameForge Studio — Source-backed video workflow',
+                summary:
+                  'A local/admin video-production hub that carries source-backed research through versioned storyboards, layout, optional generation, rendering, and human review.',
+                role:
+                  'Implemented typed bounded workflows with expected-version and paid-generation guards, exact-output hashing, and publish only after a matching approved review. No public deployment link is claimed.',
+                tags: ['Video Production', 'Typed Workflow', 'Human Review', 'Provenance']
+              },
+              {
+                codeLabel: 'ECHO TURN',
+                alt: 'Echo Turn portrait Unity puzzle prototype',
+                meta: 'Side project · 2026',
+                title: 'Echo Turn — Prior-command puzzle',
+                summary:
+                  'A standalone portrait Unity puzzle prototype where an echo repeats the previous command; six hand-authored levels synchronize A/B switches before the open exit.',
+                role:
+                  'Implemented the core turn rules, BFS shortest-solution checks, undo/reset, versioned local save/restore, and Korean/English fallback UI. Unity import, APK, and device play remain unverified.',
+                tags: ['Unity', 'Puzzle', 'BFS Verification', 'Save/Restore']
+              },
+              {
+                codeLabel: 'WONDER SCANNER',
+                alt: 'Wonder Scanner browser camera collection game',
+                meta: 'Side project · 2026',
+                title: 'Wonder Scanner — Camera collection game',
+                summary:
+                  'A browser camera collection game that runs object recognition locally, turning everyday objects into 80 collectible Wonders.',
+                role:
+                  'Built the scan, resonance, and capture loop with codex, album, quests, and mobile-friendly fallback; the public build documents TensorFlow.js COCO-SSD and a Vercel deployment.',
+                tags: ['Vite', 'TensorFlow.js', 'Camera', 'Collection Game'],
+                links: [{ href: 'https://wonderscanner.vercel.app/', label: 'Play now' }]
+              },
+              {
+                codeLabel: 'TRACE-RPG',
+                alt: 'TRACE-RPG Sealed Lighthouse investigation game',
+                meta: 'Side project · 2026',
+                title: 'TRACE-RPG — The Sealed Lighthouse',
+                summary:
+                  'A Godot 4.7.1 turn-based investigation micro-RPG where generated events are proposals and deterministic symbolic commit gates decide canonical state.',
+                role:
+                  'Built the parser, policy and validation path, bounded repair, hash-linked receipts, and playable Godot/browser slice. Public evidence reports engineering checks, not player efficacy or usability results.',
+                tags: ['Godot', 'Neuro-symbolic', 'Commit Gates', 'Evidence'],
+                links: [{ href: 'https://sealed-lighthouse-trace-rpg.vercel.app/dashboard/', label: 'Live dashboard' }, { href: 'https://github.com/akillness/neural_symbolic_in_game', label: 'GitHub' }]
+              },
+              {
+                codeLabel: 'NOTCHIMA',
+                alt: 'Notchima family-event discovery map',
+                meta: 'Side project · 2026',
+                title: 'Notchima (놓치마) — Family-event discovery',
+                summary:
+                  'A Korea-wide family-event discovery service with map search, five-axis filters, and source-backed event listings.',
+                role:
+                  'Built a file-first pipeline that ingests public APIs and web search, normalizes events to schema.org/Event + OKF, builds JSON/SQLite indexes, and serves a static Vercel UI; application macros, alerts, and AI planning are optional paths.',
+                tags: ['Events', 'Maps', 'OKF', 'Vercel', 'File-first'],
+                links: [{ href: 'https://happy-our-planning.vercel.app/', label: 'Open app' }, { href: 'https://github.com/akillness/happy-our-planning', label: 'GitHub' }]
+              },
+
               {
                 image: 'assets/projects/oh-my-jeo.png',
                 alt: 'Illustration of Hermes agent hero from oh-my-jeo',
@@ -1637,7 +1696,7 @@
             kicker: '주요 작업물',
             title: '직접 만든 프로젝트와 제가 기여한 부분',
             description:
-              '제가 만든 시스템을 시각적으로 둘러봅니다 — 운영 중인 RAG 플랫폼과 오픈소스 에이전트 하네스부터 멀티모달 QA 도구, 게임 AI 연구까지. 각 카드는 작업물과 제가 실제로 기여한 부분을 함께 보여줍니다.',
+              '제가 만든 시스템을 시각적으로 둘러봅니다 — 운영 중인 RAG 플랫폼과 오픈소스 에이전트 하네스부터 멀티모달 QA 도구, 게임 AI 연구까지. 주변 개발 시스템도 분리해서 설명합니다. jeo와 jeopi는 스펙 우선 계획·검증 하네스를 실험하고, jeo-skills는 재사용 가능한 스킬 계약을 패키징합니다. 아래 다섯 사이드 프로젝트는 서로 별도 저장소이며, 모든 런타임·프로바이더가 연결되었거나 모든 프로젝트가 프로덕션 검증을 마쳤다는 뜻은 아닙니다.',
             roleLabel: '기여:',
             projects: [
               {
@@ -1710,6 +1769,65 @@
                   '텍스트/파일/URL/Drive/Notion Data Grounding 파이프라인, Slackbot credential·런타임 설정 복구 제어, 채널별 에이전트 라우팅, LLM 사용량 모니터링을 4주 만에 설계·구현했습니다.',
                 tags: ['Knowledge Ops', 'Slackbot', 'Agents', 'Control Tower', 'Firebase']
               },
+              {
+                codeLabel: 'FRAMEFORGE',
+                alt: 'FrameForge Studio 로컬 영상 제작 워크플로우',
+                meta: '사이드 프로젝트 · 2026',
+                title: 'FrameForge Studio — 근거 기반 영상 워크플로우',
+                summary:
+                  '소스 기반 리서치를 버전 관리되는 스토리보드, 레이아웃, 선택적 생성, 렌더링, 사람 검토까지 연결하는 로컬·관리자용 영상 제작 허브입니다.',
+                role:
+                  '예상 버전·유료 생성 가드, 출력 해시, 일치하는 승인 검토 이후에만 게시하는 typed bounded workflow를 구현했습니다. 공개 배포 링크는 확인하지 못했습니다.',
+                tags: ['영상 제작', 'Typed Workflow', '사람 검토', 'Provenance']
+              },
+              {
+                codeLabel: 'ECHO TURN',
+                alt: 'Echo Turn 세로형 Unity 퍼즐 프로토타입',
+                meta: '사이드 프로젝트 · 2026',
+                title: 'Echo Turn — 직전 명령 퍼즐',
+                summary:
+                  '에코가 직전 명령을 반복하는 독립형 세로형 Unity 퍼즐 프로토타입으로, 6개 수제 레벨에서 A/B 스위치를 맞춘 뒤 열린 출구에 도달합니다.',
+                role:
+                  '턴 규칙, BFS 최단해 검사, 실행 취소·초기화, 버전이 있는 로컬 저장·복원, 한·영 폴백 UI를 구현했습니다. Unity 임포트·APK·기기 플레이는 검증되지 않았습니다.',
+                tags: ['Unity', '퍼즐', 'BFS 검증', '저장/복원']
+              },
+              {
+                codeLabel: 'WONDER SCANNER',
+                alt: 'Wonder Scanner 브라우저 카메라 수집 게임',
+                meta: '사이드 프로젝트 · 2026',
+                title: 'Wonder Scanner — 카메라 수집 게임',
+                summary:
+                  '브라우저 안에서 객체 인식을 실행해 일상 사물을 80종의 수집 가능한 Wonder로 바꾸는 카메라 수집 게임입니다.',
+                role:
+                  '스캔·공명·캡처 루프와 도감·앨범·퀘스트·모바일 폴백을 구현했으며, 공개 빌드는 TensorFlow.js COCO-SSD와 Vercel 배포를 문서화합니다.',
+                tags: ['Vite', 'TensorFlow.js', '카메라', '수집 게임'],
+                links: [{ href: 'https://wonderscanner.vercel.app/', label: '게임 열기' }]
+              },
+              {
+                codeLabel: 'TRACE-RPG',
+                alt: 'TRACE-RPG 봉인된 등대 조사 게임',
+                meta: '사이드 프로젝트 · 2026',
+                title: 'TRACE-RPG — The Sealed Lighthouse',
+                summary:
+                  '생성 이벤트를 제안으로 취급하고 결정론적 심볼릭 커밋 게이트가 정본 상태를 결정하는 Godot 4.7.1 턴제 조사 마이크로 RPG입니다.',
+                role:
+                  '파서, 정책·검증 경로, 제한된 복구, 해시 연결 영수증, Godot·브라우저 플레이어블 슬라이스를 구현했습니다. 공개 근거는 플레이어 효능·사용성 결과가 아닌 엔지니어링 검사를 보고합니다.',
+                tags: ['Godot', '뉴로-심볼릭', '커밋 게이트', '근거'],
+                links: [{ href: 'https://sealed-lighthouse-trace-rpg.vercel.app/dashboard/', label: '라이브 대시보드' }, { href: 'https://github.com/akillness/neural_symbolic_in_game', label: 'GitHub' }]
+              },
+              {
+                codeLabel: 'NOTCHIMA',
+                alt: '놓치마 가족 행사 발견 지도',
+                meta: '사이드 프로젝트 · 2026',
+                title: '놓치마 (Notchima) — 가족 행사 발견',
+                summary:
+                  '지도 검색, 5축 필터, 출처 기반 행사 목록을 제공하는 전국 가족 행사 발견 서비스입니다.',
+                role:
+                  '공공 API·웹검색을 수집하고 schema.org/Event + OKF로 정규화한 뒤 JSON/SQLite 인덱스를 만들고 정적 Vercel UI로 제공하는 파일 기반 파이프라인을 구현했습니다. 신청 매크로·알림·AI 플래너는 선택 경로입니다.',
+                tags: ['행사', '지도', 'OKF', 'Vercel', '파일 기반'],
+                links: [{ href: 'https://happy-our-planning.vercel.app/', label: '서비스 열기' }, { href: 'https://github.com/akillness/happy-our-planning', label: 'GitHub' }]
+              },
+
               {
                 image: 'assets/projects/oh-my-jeo.png',
                 alt: 'oh-my-jeo의 Hermes 에이전트 히어로 일러스트',
@@ -2116,7 +2234,7 @@
             const projectLink = project.links && project.links[0] && project.links[0].href;
             const mediaInner = project.image
               ? `<img class="work-media" src="${project.image}" alt="${project.alt}" loading="lazy">`
-              : `<div class="work-media work-media--code" aria-hidden="true">${project.codeLabel || project.title}</div>`;
+              : `<div class="work-media work-media--code" role="img" aria-label="${project.alt || project.title}">${project.codeLabel || project.title}</div>`;
             const media = projectLink
               ? `<a class="work-media-link" href="${projectLink}" target="_blank" rel="noopener">${mediaInner}</a>`
               : mediaInner;
@@ -2129,6 +2247,7 @@
                 <div class="work-body">
                   <span class="work-meta">${project.meta}</span>
                   <h3>${project.title}</h3>
+                  ${project.summary ? `<p class="work-summary">${project.summary}</p>` : ''}
                   <p class="work-role"><strong>${roleLabel}</strong> ${project.role}</p>
                   <div class="work-spacer"></div>
                   <div class="tag-row">${renderTags(project.tags)}</div>
