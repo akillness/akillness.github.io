@@ -84,12 +84,14 @@ test('production footer provides a hidden consent-settings link only when AdSens
   assert.match(production, /Privacy and cookie settings/);
   const privacyToTerms = production.match(/<a href="\/privacy\/">Privacy<\/a>([\s\S]*?)<a href="\/terms\/">Terms<\/a>/)?.[1];
   assert.ok(privacyToTerms, 'rendered footer should place consent settings between Privacy and Terms');
+  const analyticsStart = privacyToTerms.indexOf('<button type="button" id="analytics-settings"');
   const controlStart = privacyToTerms.indexOf('<span id="google-consent-revocation-control" hidden>');
   const linkStart = privacyToTerms.indexOf('<a id="google-consent-revocation-link"');
   const separators = [...privacyToTerms.matchAll(/aria-hidden="true">·<\/span>/g)];
-  assert.equal(separators.length, 2, 'one separator belongs to the hidden control and one remains between Privacy and Terms');
-  assert.ok(controlStart >= 0 && separators[0].index > controlStart && separators[0].index < linkStart);
-  assert.ok(separators[1].index > linkStart, 'the always-visible Privacy/Terms separator follows the optional control');
+  assert.equal(separators.length, 3, 'analytics settings and Terms have visible separators, and the ad control has a hidden separator');
+  assert.ok(analyticsStart >= 0 && separators[0].index < analyticsStart, 'analytics settings follows its visible separator');
+  assert.ok(controlStart > analyticsStart && separators[1].index > controlStart && separators[1].index < linkStart, 'ad separator stays inside the hidden control');
+  assert.ok(separators[2].index > linkStart, 'the always-visible Terms separator follows the optional control');
 
   const development = await renderFooter('development');
   assert.doesNotMatch(development, /google-consent-revocation-link/);
