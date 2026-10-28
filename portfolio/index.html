@@ -692,6 +692,37 @@
         background: #efe7d8;
         border-bottom: 1px solid var(--line);
       }
+      .work-media[src="assets/side-projects/echo-turn.png"] {
+        object-fit: contain;
+        background: #24363d;
+      }
+      .work-media--video {
+        object-fit: contain;
+        background: #17211f;
+      }
+      .work-media-note {
+        margin: 8px 20px 0;
+        color: var(--muted);
+        font-size: 0.76rem;
+        line-height: 1.45;
+      }
+
+
+
+      .work-concept {
+        margin: 16px 20px 0;
+      }
+      .work-concept img {
+        display: block;
+        width: 100%;
+        border-radius: 8px;
+      }
+      .work-concept figcaption {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.76rem;
+        line-height: 1.45;
+      }
 
       .work-media-link {
         display: block;
@@ -1208,6 +1239,13 @@
               },
               {
                 codeLabel: 'FRAMEFORGE',
+                video: 'assets/projects/frameforge-studio-ui.mp4',
+                image: 'assets/side-projects/frameforge.png',
+                conceptImage: 'assets/side-projects/frameforge-concept.png',
+                conceptAlt: 'A hand arranging cinematic storyboards and film frames over a timeline',
+                videoLabel: 'FrameForge Studio captured UI states (isolated fixture data; screenshot sequence; no audio)',
+                videoNote: 'Captured UI states from an isolated fixture-data screenshot sequence; no audio or production data. The poster shows a production workspace with a scene list, vertical preview, and text and layout controls.',
+
                 alt: 'FrameForge Studio local video-production workflow',
                 meta: 'Side project · 2026',
                 title: 'FrameForge Studio — Source-backed video workflow',
@@ -1219,17 +1257,27 @@
               },
               {
                 codeLabel: 'ECHO TURN',
-                alt: 'Echo Turn portrait Unity puzzle prototype',
+                image: 'assets/side-projects/echo-turn.png',
+                conceptImage: 'assets/side-projects/echo-turn-concept.png',
+                conceptAlt: 'Two glowing figures following arrows across a floating puzzle board',
+                alt: 'Unity Editor capture of Ttoktak Brain puzzle instructions and board',
                 meta: 'Side project · 2026',
-                title: 'Echo Turn — Prior-command puzzle',
+                title: 'Ttoktak Brain (Echo Turn) — Prior-command puzzle',
                 summary:
-                  'A standalone portrait Unity puzzle prototype where an echo repeats the previous command; six hand-authored levels synchronize A/B switches before the open exit.',
+                  'A portrait Unity puzzle where P follows the current command and Q repeats the previous accepted command; A/B plates open the exit.',
                 role:
-                  'Implemented the core turn rules, BFS shortest-solution checks, undo/reset, versioned local save/restore, and Korean/English fallback UI. Unity import, APK, and device play remain unverified.',
-                tags: ['Unity', 'Puzzle', 'BFS Verification', 'Save/Restore']
+                  'Built the turn-based puzzle with undo, restart, and optional guidance. The image is a Unity Editor capture, not evidence of a device build.',
+                tags: ['Unity', 'Puzzle', 'Turn-based']
               },
               {
                 codeLabel: 'WONDER SCANNER',
+                video: 'assets/projects/wonder-scanner-public-demo.mp4',
+                image: 'assets/side-projects/wonder-scanner.png',
+                conceptImage: 'assets/side-projects/wonder-scanner-concept.png',
+                conceptAlt: 'A camera scans an apple, leaf and key into illustrated collection cards',
+                videoLabel: 'Wonder Scanner captured UI states (authentic screenshot sequence; no camera scan; no audio)',
+                videoNote: 'Captured UI states from a public-site screenshot sequence; no audio or live camera scan. The poster shows the home screen with quests, nearby spots, Open Camera, Codex, and Album controls.',
+
                 alt: 'Wonder Scanner browser camera collection game',
                 meta: 'Side project · 2026',
                 title: 'Wonder Scanner — Camera collection game',
@@ -1242,6 +1290,12 @@
               },
               {
                 codeLabel: 'TRACE-RPG',
+                video: 'assets/projects/trace-rpg-sealed-lighthouse.mp4',
+                image: 'assets/side-projects/trace-rpg-gameplay.png',
+                conceptImage: 'assets/side-projects/trace-rpg-concept.png',
+                conceptAlt: 'Investigation papers and connected clues on a rainy shore facing a lighthouse',
+                videoLabel: 'TRACE-RPG authentic gameplay footage (no audio; not a live interaction)',
+                videoNote: 'Recorded gameplay with no audio, not a live interaction. The poster shows a character in a rainy harbor, an objective to install a lens, and an open case ledger.',
                 alt: 'TRACE-RPG Sealed Lighthouse investigation game',
                 meta: 'Side project · 2026',
                 title: 'TRACE-RPG — The Sealed Lighthouse',
@@ -1254,6 +1308,13 @@
               },
               {
                 codeLabel: 'NOTCHIMA',
+                video: 'assets/projects/notchima-public-demo.mp4',
+                image: 'assets/side-projects/notchima.png',
+                conceptImage: 'assets/side-projects/notchima-concept.png',
+                conceptAlt: 'A family explores a neighborhood with outdoor music and an art gallery',
+                videoLabel: 'Notchima captured UI states (authentic screenshot sequence; read-only; no audio)',
+                videoNote: 'Captured read-only map, filter, timeline, and detail UI states from a public-site screenshot sequence; no audio. The poster shows map markers across Korea beside a list of family events.',
+
                 alt: 'Notchima family-event discovery map',
                 meta: 'Side project · 2026',
                 title: 'Notchima (놓치마) — Family-event discovery',
@@ -1771,6 +1832,12 @@
               },
               {
                 codeLabel: 'FRAMEFORGE',
+                video: 'assets/projects/frameforge-studio-ui.mp4',
+                image: 'assets/side-projects/frameforge.png',
+                conceptImage: 'assets/side-projects/frameforge-concept.png',
+                conceptAlt: '타임라인 위에서 영화 장면과 스토리보드를 배열하는 손',
+                videoLabel: 'FrameForge Studio 캡처 UI 상태(격리된 픽스처 데이터·스크린샷 시퀀스·무음)',
+                videoNote: '격리된 픽스처 데이터로 만든 UI 스크린샷 시퀀스이며 오디오와 운영 데이터는 없습니다. 미리보기 이미지에는 장면 목록, 세로형 영상 미리보기, 텍스트와 레이아웃 설정이 보입니다.',
                 alt: 'FrameForge Studio 로컬 영상 제작 워크플로우',
                 meta: '사이드 프로젝트 · 2026',
                 title: 'FrameForge Studio — 근거 기반 영상 워크플로우',
@@ -1782,17 +1849,27 @@
               },
               {
                 codeLabel: 'ECHO TURN',
-                alt: 'Echo Turn 세로형 Unity 퍼즐 프로토타입',
+                image: 'assets/side-projects/echo-turn.png',
+                conceptImage: 'assets/side-projects/echo-turn-concept.png',
+                conceptAlt: '떠 있는 퍼즐 보드에서 화살표를 따라가는 두 빛나는 캐릭터',
+                alt: '또각 브레인의 퍼즐 설명과 보드를 담은 Unity 에디터 캡처',
                 meta: '사이드 프로젝트 · 2026',
-                title: 'Echo Turn — 직전 명령 퍼즐',
+                title: '또각 브레인 (Echo Turn) — 직전 명령 퍼즐',
                 summary:
-                  '에코가 직전 명령을 반복하는 독립형 세로형 Unity 퍼즐 프로토타입으로, 6개 수제 레벨에서 A/B 스위치를 맞춘 뒤 열린 출구에 도달합니다.',
+                  'P는 현재 명령을, Q는 직전에 받아들인 명령을 따르며 A/B 발판을 맞춰 출구를 여는 세로형 Unity 퍼즐입니다.',
                 role:
-                  '턴 규칙, BFS 최단해 검사, 실행 취소·초기화, 버전이 있는 로컬 저장·복원, 한·영 폴백 UI를 구현했습니다. Unity 임포트·APK·기기 플레이는 검증되지 않았습니다.',
-                tags: ['Unity', '퍼즐', 'BFS 검증', '저장/복원']
+                  '실행 취소·재시작과 선택형 안내를 갖춘 턴제 퍼즐을 구현했습니다. 이미지는 Unity 에디터 캡처이며 기기 빌드의 증거는 아닙니다.',
+                tags: ['Unity', '퍼즐', '턴제']
               },
               {
                 codeLabel: 'WONDER SCANNER',
+                video: 'assets/projects/wonder-scanner-public-demo.mp4',
+                image: 'assets/side-projects/wonder-scanner.png',
+                conceptImage: 'assets/side-projects/wonder-scanner-concept.png',
+                conceptAlt: '사과와 잎, 열쇠를 촬영해 수집 카드로 만드는 카메라',
+                videoLabel: 'Wonder Scanner 캡처 UI 상태(실제 스크린샷 시퀀스·카메라 스캔 없음·무음)',
+                videoNote: '공개 사이트의 UI 스크린샷 시퀀스이며 오디오와 실시간 카메라 스캔은 없습니다. 미리보기 이미지에는 퀘스트, 주변 장소, 카메라 열기, 도감과 앨범이 있는 홈 화면이 보입니다.',
+
                 alt: 'Wonder Scanner 브라우저 카메라 수집 게임',
                 meta: '사이드 프로젝트 · 2026',
                 title: 'Wonder Scanner — 카메라 수집 게임',
@@ -1805,6 +1882,12 @@
               },
               {
                 codeLabel: 'TRACE-RPG',
+                video: 'assets/projects/trace-rpg-sealed-lighthouse.mp4',
+                image: 'assets/side-projects/trace-rpg-gameplay.png',
+                conceptImage: 'assets/side-projects/trace-rpg-concept.png',
+                conceptAlt: '비 오는 해안에서 등대를 바라보며 놓인 수사 자료와 연결된 단서들',
+                videoLabel: 'TRACE-RPG 실제 게임플레이 영상(무음·실시간 상호작용 아님)',
+                videoNote: '오디오가 없는 게임플레이 녹화이며 실시간 상호작용은 아닙니다. 미리보기 이미지에는 비 오는 항구의 캐릭터, 렌즈 설치 목표, 열린 사건 기록이 보입니다.',
                 alt: 'TRACE-RPG 봉인된 등대 조사 게임',
                 meta: '사이드 프로젝트 · 2026',
                 title: 'TRACE-RPG — The Sealed Lighthouse',
@@ -1817,6 +1900,12 @@
               },
               {
                 codeLabel: 'NOTCHIMA',
+                video: 'assets/projects/notchima-public-demo.mp4',
+                image: 'assets/side-projects/notchima.png',
+                conceptImage: 'assets/side-projects/notchima-concept.png',
+                conceptAlt: '야외 공연과 미술관이 있는 동네를 산책하는 가족',
+                videoLabel: '놓치마 캡처 UI 상태(실제 스크린샷 시퀀스·읽기 전용·무음)',
+                videoNote: '공개 사이트의 지도·필터·타임라인·상세 읽기 전용 UI 스크린샷 시퀀스이며 오디오는 없습니다. 미리보기 이미지에는 전국 지도 마커와 가족 행사 목록이 보입니다.',
                 alt: '놓치마 가족 행사 발견 지도',
                 meta: '사이드 프로젝트 · 2026',
                 title: '놓치마 (Notchima) — 가족 행사 발견',
@@ -2230,20 +2319,25 @@
       const renderWorkProjects = (projects, roleLabel) =>
 
         projects
-          .map(project => {
+          .map((project, index) => {
             const projectLink = project.links && project.links[0] && project.links[0].href;
-            const mediaInner = project.image
-              ? `<img class="work-media" src="${project.image}" alt="${project.alt}" loading="lazy">`
-              : `<div class="work-media work-media--code" role="img" aria-label="${project.alt || project.title}">${project.codeLabel || project.title}</div>`;
-            const media = projectLink
-              ? `<a class="work-media-link" href="${projectLink}" target="_blank" rel="noopener">${mediaInner}</a>`
-              : mediaInner;
+            const mediaInner = project.video
+              ? `<video class="work-media work-media--video" controls preload="metadata" playsinline${project.image ? ` poster="${project.image}"` : ''} aria-label="${project.videoLabel || project.alt || project.title}"${project.videoNote ? ` aria-describedby="work-media-note-${index}"` : ''}><source src="${project.video}" type="${project.videoType || (project.video.endsWith('.webm') ? 'video/webm' : 'video/mp4')}">${project.videoFallback || ''}</video>${project.videoNote ? `<p class="work-media-note" id="work-media-note-${index}">${project.videoNote}</p>` : ''}`
+              : project.image
+                ? `<img class="work-media" src="${project.image}" alt="${project.alt}" loading="lazy">`
+                : `<div class="work-media work-media--code" role="img" aria-label="${project.alt || project.title}">${project.codeLabel || project.title}</div>`;
+            const media = project.video
+              ? mediaInner
+              : projectLink
+                ? `<a class="work-media-link" href="${projectLink}" target="_blank" rel="noopener">${mediaInner}</a>`
+                : mediaInner;
             const links = (project.links || [])
               .map(link => `<a class="link-pill" href="${link.href}" target="_blank" rel="noopener">${link.label}</a>`)
               .join('');
             return `
               <article class="work-card">
                 ${media}
+                ${project.conceptImage ? `<figure class="work-concept"><img src="${project.conceptImage}" alt="${project.conceptAlt}" loading="lazy"><figcaption>Generated concept illustration · 생성형 콘셉트 일러스트</figcaption></figure>` : ''}
                 <div class="work-body">
                   <span class="work-meta">${project.meta}</span>
                   <h3>${project.title}</h3>
