@@ -136,7 +136,7 @@ test('blocked storage fails closed and reports inability to save', async () => {
   } finally { await s.context.close(); }
 });
 
-for (const change of ['decline', 'clear']) {
+for (const change of ['decline', 'remove', 'clear']) {
   test(`another tab ${change} disables active analytics and prevents reload requests`, { timeout: 20000 }, async () => {
     const active = await session();
     const other = await session({ context: active.context });
@@ -149,6 +149,7 @@ for (const change of ['decline', 'clear']) {
         get() { return value; },
         set(next) { value = next; if (next === true) console.log('analytics-disabled'); }
       });
+      window.addEventListener('beforeunload', () => console.log('cookies-before-reload:' + document.cookie));
     });
     try {
       await active.page.bringToFront();
@@ -157,17 +158,29 @@ for (const change of ['decline', 'clear']) {
       await active.page.waitForFunction(() => document.cookie.includes('_ga_TEST12345='));
       await other.page.bringToFront();
       await open(other, '/second/');
+      await active.page.evaluate(() => { document.cookie = 'unrelated=keep; path=/'; });
+      const initialCookies = await cookies(active.page);
+      assert.ok(initialCookies.includes('_ga') && initialCookies.includes('_ga_TEST12345'), 'loaded analytics has set both cookies');
+      assert.ok(initialCookies.includes('unrelated'));
       assert.equal(active.ga().length, 1);
       assert.equal(other.ga().length, 1);
       const reloaded = active.page.waitForNavigation({ waitUntil: 'networkidle0' });
       if (change === 'decline') {
         await other.page.click('#analytics-settings');
         await other.page.click('#analytics-decline');
+      } else if (change === 'remove') {
+        await other.page.evaluate(() => localStorage.removeItem('analytics-consent'));
       } else {
         await other.page.evaluate(() => localStorage.clear());
       }
       await reloaded;
       assert.ok(messages.includes('analytics-disabled'), 'active tab disables analytics before reloading');
+      const beforeReload = messages.find((message) => message.startsWith('cookies-before-reload:'));
+      assert.ok(beforeReload, 'active tab reported cookies before reloading');
+      assert.doesNotMatch(beforeReload, /(?:^|[;: ]+)_ga(?:_|=)/, 'analytics cookies must be removed before reload');
+      assert.match(beforeReload, /(?:^|[;: ]+)unrelated=keep(?:;|$)/, 'unrelated cookie must survive reset');
+      assert.deepEqual((await cookies(active.page)).filter((name) => name === '_ga' || name.startsWith('_ga_')), []);
+      assert.ok((await cookies(active.page)).includes('unrelated'));
       assert.equal(active.ga().length, 1, 'the active tab must not fetch analytics again');
       await open(active, '/first/');
       assert.equal(active.ga().length, 1);
