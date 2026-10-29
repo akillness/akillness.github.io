@@ -76,6 +76,24 @@ async function session({ storageError = false, context = null } = {}) {
 
 async function open(s, pathname = '/first/') { await s.page.goto(origin + pathname, { waitUntil: 'networkidle0' }); }
 async function cookies(page) { return (await page.cookies()).map((cookie) => cookie.name); }
+// Pass-through by default; the mode is set per document so reloads start from normal cookie behavior.
+function cookieControl() {
+  const descriptor = Object.getOwnPropertyDescriptor(Document.prototype, 'cookie');
+  window.__cookieMode = 'normal';
+  Object.defineProperty(Document.prototype, 'cookie', {
+    configurable: true,
+    get() {
+      if (window.__cookieMode === 'throw') throw new DOMException('Blocked', 'SecurityError');
+      return descriptor.get.call(this);
+    },
+    set(value) {
+      if (window.__cookieMode === 'throw') throw new DOMException('Blocked', 'SecurityError');
+      if (window.__cookieMode === 'ignore') return;
+      descriptor.set.call(this, value);
+    }
+  });
+}
+const cleanupWarning = "Some analytics cookies could not be removed in this browser. Clear this site's data in your browser settings.";
 
 test('no analytics before choice or after decline, including navigation; ads remain separate', async () => {
   const s = await session();
@@ -133,6 +151,104 @@ test('blocked storage fails closed and reports inability to save', async () => {
     assert.match(await s.page.$eval('#analytics-consent-status', (el) => el.textContent), /could not be saved/i);
     assert.equal(await s.page.$eval('#analytics-consent', (el) => el.hidden), false);
     assert.ok(!(await cookies(s.page)).some((name) => name === '_ga' || name.startsWith('_ga_')));
+  } finally { await s.context.close(); }
+});
+
+test('cookie access that throws during decline disables analytics and warns on the next load', { timeout: 20000 }, async () => {
+  const s = await session();
+  try {
+    await s.page.evaluateOnNewDocument(cookieControl);
+    await open(s);
+    await s.page.evaluate(() => { window.__cookieMode = 'throw'; });
+    await s.page.click('#analytics-decline');
+    const state = await s.page.evaluate(() => ({
+      disabled: window['ga-disable-G-TEST12345'],
+      flag: sessionStorage.getItem('analytics-cookie-cleanup-incomplete')
+    }));
+    assert.deepEqual(state, { disabled: true, flag: '1' });
+    assert.equal(s.ga().length, 0);
+    await open(s, '/second/');
+    assert.equal(await s.page.$eval('#analytics-consent', (el) => el.hidden), false);
+    assert.equal(await s.page.$eval('#analytics-settings', (el) => el.getAttribute('aria-expanded')), 'true');
+    assert.equal(await s.page.$eval('#analytics-consent-status', (el) => el.textContent), cleanupWarning);
+    assert.equal(await s.page.evaluate(() => sessionStorage.getItem('analytics-cookie-cleanup-incomplete')), null, 'warning flag is consumed on the next load');
+    assert.equal(s.ga().length, 0);
+  } finally { await s.context.close(); }
+});
+
+test('cookie removal silently ignored during decline reloads with the cleanup warning', { timeout: 20000 }, async () => {
+  const s = await session();
+  try {
+    await s.page.evaluateOnNewDocument(cookieControl);
+    await open(s);
+    await s.page.click('#analytics-accept');
+    await s.page.waitForFunction(() => document.cookie.includes('_ga_TEST12345='));
+    assert.equal(s.ga().length, 1);
+    await s.page.evaluate(() => { window.__cookieMode = 'ignore'; });
+    const reloaded = s.page.waitForNavigation({ waitUntil: 'networkidle0' });
+    await s.page.click('#analytics-settings');
+    await s.page.click('#analytics-decline');
+    await reloaded;
+    assert.equal(await s.page.$eval('#analytics-consent', (el) => el.hidden), false);
+    assert.equal(await s.page.$eval('#analytics-consent-status', (el) => el.textContent), cleanupWarning);
+    assert.equal(await s.page.evaluate(() => sessionStorage.getItem('analytics-cookie-cleanup-incomplete')), null, 'warning flag is consumed on the next load');
+    assert.ok(!(await cookies(s.page)).some((name) => name === '_ga' || name.startsWith('_ga_')), 'the reloaded load removes the cookie in normal cookie mode');
+    assert.equal(s.ga().length, 1, 'the reloaded page must not fetch analytics after decline');
+  } finally { await s.context.close(); }
+});
+
+test('successful decline leaves no cleanup warning on the next load', { timeout: 20000 }, async () => {
+  const s = await session();
+  try {
+    await s.page.evaluateOnNewDocument(cookieControl);
+    await open(s);
+    await s.page.click('#analytics-accept');
+    await s.page.waitForFunction(() => document.cookie.includes('_ga_TEST12345='));
+    const reloaded = s.page.waitForNavigation({ waitUntil: 'networkidle0' });
+    await s.page.click('#analytics-settings');
+    await s.page.click('#analytics-decline');
+    await reloaded;
+    assert.equal(await s.page.$eval('#analytics-consent-status', (el) => el.textContent), '');
+    assert.ok(!(await cookies(s.page)).some((name) => name === '_ga' || name.startsWith('_ga_')));
+    await open(s, '/second/');
+    assert.equal(await s.page.$eval('#analytics-consent', (el) => el.hidden), true);
+    assert.equal(await s.page.$eval('#analytics-consent-status', (el) => el.textContent), '');
+    assert.equal(await s.page.evaluate(() => sessionStorage.getItem('analytics-cookie-cleanup-incomplete')), null);
+    assert.equal(s.ga().length, 1);
+  } finally { await s.context.close(); }
+});
+
+test('denied consent removes a pre-existing analytics cookie on load without warning', { timeout: 20000 }, async () => {
+  const s = await session();
+  try {
+    await s.page.evaluateOnNewDocument(cookieControl);
+    await open(s);
+    await s.page.evaluate(() => localStorage.setItem('analytics-consent', 'denied'));
+    await s.page.setCookie({ name: '_ga', value: 'stale', url: origin });
+    assert.ok((await cookies(s.page)).includes('_ga'), 'fixture planted a visible analytics cookie');
+    await open(s);
+    assert.deepEqual((await cookies(s.page)).filter((name) => name === '_ga' || name.startsWith('_ga_')), []);
+    assert.equal(await s.page.$eval('#analytics-consent', (el) => el.hidden), true);
+    assert.equal(await s.page.$eval('#analytics-consent-status', (el) => el.textContent), '');
+    assert.equal(await s.page.evaluate(() => sessionStorage.getItem('analytics-cookie-cleanup-incomplete')), null);
+    assert.equal(s.ga().length, 0);
+  } finally { await s.context.close(); }
+});
+
+test('denied consent on load warns when a visible analytics cookie cannot be removed', { timeout: 20000 }, async () => {
+  const s = await session();
+  try {
+    await s.page.evaluateOnNewDocument(cookieControl);
+    await s.page.evaluateOnNewDocument(() => { window.__cookieMode = 'ignore'; });
+    await open(s);
+    await s.page.evaluate(() => localStorage.setItem('analytics-consent', 'denied'));
+    await s.page.setCookie({ name: '_ga', value: 'stale', url: origin });
+    await open(s);
+    assert.ok((await cookies(s.page)).includes('_ga'), 'the fixture kept the analytics cookie, so cleanup truly failed');
+    assert.equal(await s.page.$eval('#analytics-consent', (el) => el.hidden), false);
+    assert.equal(await s.page.$eval('#analytics-settings', (el) => el.getAttribute('aria-expanded')), 'true');
+    assert.equal(await s.page.$eval('#analytics-consent-status', (el) => el.textContent), cleanupWarning);
+    assert.equal(s.ga().length, 0);
   } finally { await s.context.close(); }
 });
 

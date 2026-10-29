@@ -1,6 +1,7 @@
 <script>
   (function () {
     const key = 'analytics-consent';
+    const cleanupKey = 'analytics-cookie-cleanup-incomplete';
     const measurementId = {{ site.google_analytics.id | jsonify }};
     const settings = document.getElementById('analytics-settings');
     const panel = document.getElementById('analytics-consent');
@@ -54,18 +55,30 @@
     }
 
     function clearAnalyticsCookies() {
-      const domains = location.hostname.split('.');
-      const paths = location.pathname.split('/');
-      const cookieNames = document.cookie.split(';').map(function (cookie) { return cookie.trim().split('=')[0]; });
-      cookieNames.filter(function (name) { return name === '_ga' || name.indexOf('_ga_') === 0; }).forEach(function (name) {
-        for (let i = 0; i < domains.length; i++) {
-          for (let j = paths.length; j > 0; j--) {
-            const path = paths.slice(0, j).join('/') || '/';
-            document.cookie = name + '=; Max-Age=0; path=' + path + '; domain=' + domains.slice(i).join('.');
-            document.cookie = name + '=; Max-Age=0; path=' + path;
+      try {
+        const domains = location.hostname.split('.');
+        const paths = location.pathname.split('/');
+        const cookieNames = document.cookie.split(';').map(function (cookie) { return cookie.trim().split('=')[0]; });
+        cookieNames.filter(function (name) { return name === '_ga' || name.indexOf('_ga_') === 0; }).forEach(function (name) {
+          for (let i = 0; i < domains.length; i++) {
+            for (let j = paths.length; j > 0; j--) {
+              const path = paths.slice(0, j).join('/') || '/';
+              document.cookie = name + '=; Max-Age=0; path=' + path + '; domain=' + domains.slice(i).join('.');
+              document.cookie = name + '=; Max-Age=0; path=' + path;
+            }
           }
-        }
-      });
+        });
+        return !document.cookie.split(';').some(function (cookie) {
+          const name = cookie.trim().split('=')[0];
+          return name === '_ga' || name.indexOf('_ga_') === 0;
+        });
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function markCleanupIncomplete() {
+      try { sessionStorage.setItem(cleanupKey, '1'); } catch (error) { /* Storage blocked; the warning cannot persist. */ }
     }
 
     settings.addEventListener('click', function () {
@@ -83,7 +96,7 @@
     });
     decline.addEventListener('click', function () {
       window['ga-disable-' + measurementId] = true;
-      try { clearAnalyticsCookies(); } catch (error) { /* Browser cookie access can be blocked. */ }
+      if (!clearAnalyticsCookies()) markCleanupIncomplete();
       if (!save('denied')) {
         status.textContent = 'Your choice could not be saved. Analytics is disabled on this page; clear site data in your browser before returning.';
         return;
@@ -101,11 +114,21 @@
       try { if (event.storageArea && event.storageArea !== localStorage) return; } catch (error) { /* Fail closed. */ }
       if (loaded && (event.key === null || (event.key === key && event.newValue !== 'granted'))) {
         window['ga-disable-' + measurementId] = true;
-        try { clearAnalyticsCookies(); } catch (error) { /* Browser cookie access can be blocked. */ }
+        if (!clearAnalyticsCookies()) markCleanupIncomplete();
         location.reload();
       }
     });
 
+    let cleanupIncomplete = false;
+    try {
+      cleanupIncomplete = sessionStorage.getItem(cleanupKey) === '1';
+      sessionStorage.removeItem(cleanupKey);
+    } catch (error) { cleanupIncomplete = false; }
+    if (choice !== 'granted' && !clearAnalyticsCookies()) cleanupIncomplete = true;
+    if (cleanupIncomplete) {
+      open();
+      status.textContent = 'Some analytics cookies could not be removed in this browser. Clear this site\'s data in your browser settings.';
+    }
     if (choice === 'granted') loadAnalytics();
     else if (choice !== 'denied') open();
   })();

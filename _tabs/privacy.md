@@ -39,7 +39,7 @@ Static assets such as fonts and JavaScript libraries may be served from **jsDeli
 
 Google Analytics is off unless you choose **Accept analytics**. Before you accept, the site does not load its analytics tag. Open **Analytics settings** in the footer to accept or decline analytics or change your choice later. The choice is stored in this browser's local storage; if storage is unavailable, it cannot be saved and analytics is not enabled.
 
-If you decline after accepting, the site disables analytics and reloads the page. It also attempts to remove accessible Google Analytics cookies, but may not remove every cookie. You can clear remaining cookies in your browser settings. Changing this choice does not delete data previously sent to Google.
+If you decline after accepting, the site disables analytics and reloads the page. It also attempts to remove Google Analytics cookies that scripts can read on the current path. It cannot remove cookies set on other paths of this site, cookies that browser settings block from scripts, or any other cookie. If removal fails, the Analytics settings panel shows a warning on your next visit. Clear remaining cookies in your browser settings. Changing this choice does not delete data previously sent to Google.
 
 ## Cookies and advertising
 
@@ -49,7 +49,7 @@ Third-party vendors, including Google, use cookies to serve ads based on your pr
 - For opt-outs from third-party vendors' use of cookies for personalised advertising across many networks at once, see [www.aboutads.info](https://www.aboutads.info/choices/) or [Your Online Choices](https://www.youronlinechoices.com/) (EU).
 - You can also manage or block cookies in your browser; doing so may affect third-party features.
 
-AdSense may load on eligible posts. The site's analytics choice is separate from advertising controls; it does not set your advertising preferences. An advertising consent message may be provided by Google depending on account configuration and location, but this site does not guarantee that one is active or shown.
+AdSense may load on eligible posts. The site's analytics choice is separate from advertising controls; it does not set your advertising preferences. Pages without ads do not load Google's advertising or consent code, so no Google advertising consent message appears on them. On eligible posts, a Google consent message may appear depending on Google's account configuration and your location. This site has not verified that a message is shown to every visitor, and it does not guarantee one.
 
 ## Comments
 
