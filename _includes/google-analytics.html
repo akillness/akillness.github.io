@@ -38,16 +38,8 @@
       if (loaded) return;
       loaded = true;
       window['ga-disable-' + measurementId] = false;
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { window.dataLayer.push(arguments); }
-      window.gtag = gtag;
-      gtag('consent', 'default', {
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied'
-      });
-      gtag('js', new Date());
-      gtag('config', measurementId);
+      window.gtag('js', new Date());
+      window.gtag('config', measurementId);
       const script = document.createElement('script');
       script.async = true;
       script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);

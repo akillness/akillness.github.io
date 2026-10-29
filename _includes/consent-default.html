@@ -1,0 +1,23 @@
+{% comment %}
+  Google Consent Mode default. Must run before any Google tag (AdSense loader or gtag.js)
+  so Google reads the default state before processing ads or measurement.
+  Emitted once per page from <head>; google-analytics.html reuses window.gtag.
+{% endcomment %}
+{% assign consent_needed = false %}
+{% if site.google_analytics.id != empty and site.google_analytics.id %}
+  {% assign consent_needed = true %}
+{% endif %}
+{% if site.google_ad_client != empty and site.google_ad_client %}
+  {% assign consent_needed = true %}
+{% endif %}
+{% if jekyll.environment == 'production' and consent_needed %}
+<script>
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
+  window.gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied'
+  });
+</script>
+{% endif %}

@@ -31,16 +31,23 @@ const liquid = new Liquid({ root: path.join(root, '_includes'), jekyllInclude: t
 liquid.registerFilter('relative_url', (value) => value);
 liquid.registerFilter('jsonify', JSON.stringify);
 liquid.registerFilter('number_of_words', (value) => String(value).trim().split(/\s+/).length);
+// Stubs for head-only tags with no effect on consent ordering; the head's real output is still rendered.
+liquid.registerTag('seo', { parse() {}, render() { return ''; } });
+liquid.registerTag('include_cached', { parse() {}, *render() { return ''; } });
+// Context for an eligible article: production, GA id and ad client configured, enough words for AdSense.
+function eligiblePost() {
+  return {
+    site, jekyll: { environment: 'production' }, type: 'test', paginator: null,
+    page: { layout: 'post', url: '/first/', title: 'First', content: 'word '.repeat(850) }
+  };
+}
 
 let browser, server, origin;
 before(async () => {
-  const context = {
-    site, jekyll: { environment: 'production' }, type: 'test',
-    page: { layout: 'post', url: '/first/', content: 'word '.repeat(850) }
-  };
-  // Execute the production ad, footer and JS selector includes, including the actual analytics include.
-  const [ads, footer, scripts] = await Promise.all(['adsense.html', 'footer.html', 'js-selector.html'].map((name) => liquid.renderFile(name, context)));
-  const html = `<!doctype html><html><head>${ads}</head><body><main><a href="/second/">Next page</a></main>${footer}${scripts}</body></html>`;
+  const context = eligiblePost();
+  // Execute the production head (consent default, then AdSense), footer, and JS selector includes, including the actual analytics include.
+  const [head, footer, scripts] = await Promise.all(['head.html', 'footer.html', 'js-selector.html'].map((name) => liquid.renderFile(name, context)));
+  const html = `<!doctype html><html>${head}<body><main><a href="/second/">Next page</a></main>${footer}${scripts}</body></html>`;
   server = http.createServer((req, res) => { res.writeHead(200, { 'Content-Type': 'text/html' }); res.end(html); });
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
   origin = `http://127.0.0.1:${server.address().port}`;
@@ -303,3 +310,31 @@ for (const change of ['decline', 'remove', 'clear']) {
     } finally { await active.context.close(); }
   });
 }
+
+test('consent default precedes the AdSense loader in head on an eligible production post', async () => {
+  const head = await liquid.renderFile('head.html', eligiblePost());
+  const defaults = head.indexOf("window.gtag('consent', 'default'");
+  const loader = head.indexOf('pagead/js/adsbygoogle.js');
+  assert.ok(defaults >= 0, 'head emits the advertising consent default on an eligible post');
+  assert.equal(head.split("window.gtag('consent', 'default'").length - 1, 1, 'advertising consent default is emitted exactly once');
+  assert.ok(loader >= 0, 'eligible post loads the AdSense loader');
+  assert.ok(defaults < loader, 'the consent default must run before the AdSense loader');
+});
+
+test('accepting analytics on an eligible post does not reissue advertising defaults', { timeout: 20000 }, async () => {
+  const s = await session();
+  try {
+    await open(s);
+    await s.page.click('#analytics-accept');
+    await s.page.waitForFunction(() => document.cookie.includes('_ga_TEST12345='));
+    const commands = await s.page.evaluate(() => window.dataLayer.map((entry) => Array.from(entry)));
+    const defaults = commands.filter((entry) => entry[0] === 'consent' && entry[1] === 'default');
+    assert.equal(defaults.length, 1, 'accepting analytics must not call gtag(consent, default) again');
+    assert.deepEqual(Object.keys(defaults[0][2]).sort(), ['ad_personalization', 'ad_storage', 'ad_user_data'], 'the default payload carries only advertising keys');
+    assert.ok(!('analytics_storage' in defaults[0][2]), 'the default payload must not set analytics_storage');
+    const configs = commands.filter((entry) => entry[0] === 'config');
+    assert.equal(configs.length, 1, 'analytics is still configured once');
+    assert.equal(configs[0][1], 'G-TEST12345');
+    assert.equal(s.ga().length, 1);
+  } finally { await s.context.close(); }
+});
