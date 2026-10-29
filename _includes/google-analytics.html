@@ -101,6 +101,7 @@
       try { if (event.storageArea && event.storageArea !== localStorage) return; } catch (error) { /* Fail closed. */ }
       if (loaded && (event.key === null || (event.key === key && event.newValue !== 'granted'))) {
         window['ga-disable-' + measurementId] = true;
+        try { clearAnalyticsCookies(); } catch (error) { /* Browser cookie access can be blocked. */ }
         location.reload();
       }
     });
