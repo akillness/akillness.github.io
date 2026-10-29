@@ -82,6 +82,8 @@ _SAGA connects retrieval quality to a product surface that a game studio can act
 
 At Supercent, I built AI products where retrieval was only the middle of the system. **SAGA** indexes 594 game-design documents and 1,563 vectors across 15 games, combining RAG-Fusion, CRAG, hybrid search, cross-encoder reranking, and a grounding-oriented generation pattern. **Millie** extends that direction into per-user knowledge operations and a Slack-driven local-agent system. **Brain** focuses on citation-first knowledge operations with incremental ingestion and connected editing workflows.
 
+I extended retrieval into operational workflows: cited answers, incremental knowledge updates, connected sources, and agent-assisted actions. I see this progression from RAG search to a system teams can operate as groundwork for productizing AI agents, rather than a claim that retrieval alone makes an autonomous product.
+
 The portfolio shows these as shipped products. The related writing explains the reusable engineering questions:
 
 - [LLM2Vec, Two Years On](/posts/llm2vec-embedding-models/) checks an embedding paper's SOTA claim against its own leaderboard placement and two years of download data.
