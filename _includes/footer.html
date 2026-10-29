@@ -58,7 +58,7 @@
           window.googlefc.callbackQueue.push({
             CONSENT_API_READY: function () {
               if (typeof window.__tcfapi !== 'function') return;
-              window.__tcfapi('addEventListener', 0, function (tcData, success) {
+              window.__tcfapi('addEventListener', 2, function (tcData, success) {
                 control.hidden =
                   !success ||
                   !tcData ||

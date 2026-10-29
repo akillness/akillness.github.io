@@ -53,12 +53,18 @@ function runConsentHook(script, {
   const callbackQueue = [];
   const showRevocationMessage = hasRevocationApi ? function showRevocationMessage() {} : undefined;
   const calls = [];
+  let tcfCallback;
   const googlefc = { callbackQueue };
   if (hasRevocationApi) googlefc.showRevocationMessage = showRevocationMessage;
   const window = { googlefc };
   if (hasTcfApi) {
     window.__tcfapi = (command, version, callback) => {
       calls.push({ command, version });
+      if (command !== 'addEventListener' || version !== 2) {
+        callback(null, false);
+        return;
+      }
+      tcfCallback = callback;
       callback({ gdprApplies }, success);
     };
   }
@@ -73,7 +79,7 @@ function runConsentHook(script, {
   const ready = callbackQueue.find((entry) => entry && typeof entry === 'object' && typeof entry.CONSENT_API_READY === 'function');
   assert.ok(ready, 'hook should wait for Google Consent API readiness');
   if (consentApiReady) ready.CONSENT_API_READY();
-  return { control, link, callbackQueue, showRevocationMessage, calls };
+  return { control, link, callbackQueue, showRevocationMessage, calls, googlefc, get tcfCallback() { return tcfCallback; } };
 }
 
 test('production footer provides a hidden consent-settings link only when AdSense is configured', async () => {
@@ -102,7 +108,7 @@ test('production footer provides a hidden consent-settings link only when AdSens
 test('consent-settings link appears only when TCF reports GDPR applies and opens the revocation flow', async () => {
   const script = consentScript(await renderFooter());
   const applicable = runConsentHook(script, { gdprApplies: true });
-  assert.deepEqual(applicable.calls, [{ command: 'addEventListener', version: 0 }]);
+  assert.deepEqual(applicable.calls, [{ command: 'addEventListener', version: 2 }]);
   assert.equal(applicable.control.hidden, false);
 
   let prevented = false;
@@ -115,4 +121,27 @@ test('consent-settings link appears only when TCF reports GDPR applies and opens
   assert.equal(runConsentHook(script, { hasTcfApi: false }).control.hidden, true);
   assert.equal(runConsentHook(script, { hasRevocationApi: false }).control.hidden, true);
   assert.equal(runConsentHook(script, { consentApiReady: false }).control.hidden, true);
+});
+
+test('later TCF events update visibility and failures hide the control', async () => {
+  const hook = runConsentHook(consentScript(await renderFooter()));
+  assert.equal(hook.control.hidden, false);
+  hook.tcfCallback({ gdprApplies: false }, true);
+  assert.equal(hook.control.hidden, true);
+  hook.tcfCallback({ gdprApplies: true }, true);
+  assert.equal(hook.control.hidden, false);
+  hook.tcfCallback({ gdprApplies: true }, false);
+  assert.equal(hook.control.hidden, true);
+  hook.tcfCallback(null, true);
+  assert.equal(hook.control.hidden, true);
+});
+
+test('click falls back to the privacy page if the revocation API becomes unavailable', async () => {
+  const hook = runConsentHook(consentScript(await renderFooter()));
+  assert.equal(hook.control.hidden, false);
+  delete hook.googlefc.showRevocationMessage;
+  let prevented = false;
+  hook.link.listeners.click({ preventDefault() { prevented = true; } });
+  assert.equal(prevented, false);
+  assert.equal(hook.callbackQueue.includes(hook.showRevocationMessage), false);
 });
