@@ -265,8 +265,29 @@ main article:has(.project-evidence-intro) .content > p.project-evidence-closing 
     padding: 0.55rem 0.5rem;
   }
 
-  main article:has(.project-evidence-intro) .content .project-evidence-table thead th:first-child,
-  main article:has(.project-evidence-intro) .content .project-evidence-table tbody th[scope='row'] {
-    width: 32%;
+  main article:has(.project-evidence-intro) .content table.project-evidence-table,
+  main article:has(.project-evidence-intro) .content .project-evidence-table tbody,
+  main article:has(.project-evidence-intro) .content .project-evidence-table tbody tr {
+    display: block;
+    width: 100%;
+  }
+
+  main article:has(.project-evidence-intro) .content .project-evidence-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  main article:has(.project-evidence-intro) .content .project-evidence-table tbody th[scope='row'],
+  main article:has(.project-evidence-intro) .content .project-evidence-table tbody td {
+    display: block;
+    width: 100%;
+  }
+
+  main article:has(.project-evidence-intro) .content .project-evidence-table tbody tr + tr > td {
+    border-top: 0;
   }
 }

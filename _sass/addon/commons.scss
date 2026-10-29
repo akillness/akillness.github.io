@@ -156,7 +156,7 @@ kbd {
 
 footer {
   background-color: var(--main-bg);
-  height: $footer-height;
+  min-height: $footer-height;
   @include pixel-border(var(--main-border-color), 3px);
   border-top: 3px solid var(--main-border-color);
   border-left: none;
@@ -166,6 +166,8 @@ footer {
   @extend %text-xs;
   font-family: $font-family-heading;
   font-size: 0.7rem;
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
 
   a {
     @extend %text-highlight;
@@ -182,6 +184,19 @@ footer {
   p {
     text-align: center;
     margin-bottom: 0;
+  }
+
+  button {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  > * {
+    min-width: 0;
+  }
+
+  #analytics-consent {
+    flex-basis: 100%;
   }
 }
 
@@ -926,6 +941,7 @@ $btn-mb: 0.5rem;
     padding-left: 2.5rem;
     padding-right: 1.25rem;
     width: 100%;
+    overflow-wrap: anywhere;
   }
 
   .site-title {
@@ -989,6 +1005,8 @@ $btn-mb: 0.5rem;
 
         span {
           font-size: 90%;
+          min-width: 0;
+          overflow-wrap: anywhere;
           letter-spacing: 0.2px;
         }
       }
@@ -1481,8 +1499,8 @@ search {
   footer {
     @include slide;
 
-    height: $footer-height-large;
-    padding: 1.5rem 0;
+    min-height: $footer-height-large;
+    padding: 1.5rem 1rem;
   }
 
   [#{$sidebar-display}] {

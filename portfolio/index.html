@@ -66,6 +66,7 @@
         line-height: 1.7;
         overflow-x: hidden;
         word-break: keep-all;
+        overflow-wrap: anywhere;
       }
 
       html[lang='ko'] body {
@@ -662,7 +663,7 @@
 
       .work-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
         gap: 18px;
       }
 
@@ -842,7 +843,7 @@
         .tool-grid,
         .principle-grid,
         .card-grid {
-          grid-template-columns: 1fr;
+          grid-template-columns: minmax(0, 1fr);
         }
 
         .page {
@@ -871,7 +872,7 @@
         }
 
         .metric-grid {
-          grid-template-columns: 1fr;
+          grid-template-columns: minmax(0, 1fr);
         }
 
         .link-row,
@@ -885,6 +886,16 @@
         .tag {
           width: 100%;
           justify-content: flex-start;
+        }
+      }
+
+      @media (max-width: 240px) {
+        .section-shell,
+        .hero-panel,
+        .stat-card,
+        .focus-note,
+        .callout {
+          padding: 12px;
         }
       }
 

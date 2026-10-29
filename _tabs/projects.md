@@ -26,6 +26,10 @@ The [visual portfolio](/portfolio/) is the gallery; this page is the evidence ma
 </thead>
 <tbody>
 <tr>
+<th scope="row"><a href="#project-side-projects">Recent side projects</a></th>
+<td><strong>Problem:</strong> Apply evidence-aware workflows to distinct creative, game, and discovery problems.<br><strong>Built:</strong> Five independent projects developed alongside a shared agent-harness and skills practice.<br><strong>Evidence:</strong> <a href="#project-side-projects">Project details</a> and the <a href="/portfolio/">visual portfolio</a>.</td>
+</tr>
+<tr>
 <th scope="row"><a href="#project-ai-products">AI products &amp; RAG</a></th>
 <td><strong>Problem:</strong> Make private studio knowledge searchable, grounded, and operable.<br><strong>Built:</strong> Retrieval pipelines, agent workflows, product surfaces, and operational controls.<br><strong>Evidence:</strong> <a href="#project-ai-products">Project details</a>, <a href="/start-here/#retrieval--agent-memory">retrieval writing</a>, and the <a href="/portfolio/">visual portfolio</a>.</td>
 </tr>
@@ -43,6 +47,31 @@ The [visual portfolio](/portfolio/) is the gallery; this page is the evidence ma
 </tr>
 </tbody>
 </table>
+
+## Recent side projects: one development practice, distinct products
+{: #project-side-projects }
+
+These five separate projects share a development-system context: **jeo** and **jeopi** explore spec-first planning and verification harnesses, while **jeo-skills** packages reusable skill contracts. That shared practice does not mean every runtime or provider is connected, or that every project is production-verified. The [visual portfolio](/portfolio/) includes their images and captured demonstrations.
+
+### FrameForge Studio
+
+A local/admin video-production hub carrying source-backed research through versioned storyboards, layout, optional generation, rendering, and human review. Its bounded workflows include version and paid-generation guards, output hashing, and approval tied to the reviewed output. The visual portfolio shows fixture-data UI captures; no public deployment is claimed.
+
+### Ttoktak Brain (Echo Turn)
+
+A portrait Unity puzzle where P follows the current command and Q repeats the previous accepted command; A/B plates open the exit. I built the turn-based puzzle with undo, restart, and optional guidance. Its visual portfolio image is a Unity Editor capture, not evidence of a device build.
+
+### Wonder Scanner
+
+A browser camera collection game that runs object recognition locally and turns everyday objects into 80 collectible Wonders. The scan, resonance, and capture loop includes a codex, album, quests, and a mobile-friendly fallback. [Open Wonder Scanner](https://wonderscanner.vercel.app/); the visual portfolio's UI sequence does not show a live camera scan.
+
+### TRACE-RPG — The Sealed Lighthouse
+
+A Godot turn-based investigation micro-RPG where generated events are proposals and deterministic symbolic commit gates decide canonical state. The work includes parsing, validation, bounded repair, and hash-linked receipts. The [dashboard](https://sealed-lighthouse-trace-rpg.vercel.app/dashboard/) and [repository](https://github.com/akillness/neural_symbolic_in_game) provide public engineering evidence, not player efficacy or usability results.
+
+### Notchima (놓치마)
+
+A Korea-wide family-event discovery service with map search, five-axis filters, and source-backed listings. Its file-first pipeline ingests public APIs and web search, normalizes events, and builds JSON and SQLite indexes for a static UI. Explore the [app](https://happy-our-planning.vercel.app/) and [repository](https://github.com/akillness/happy-our-planning).
 
 ## AI products: retrieval in real workflows
 {: #project-ai-products }
