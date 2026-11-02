@@ -4,8 +4,8 @@ description: "An affiliated overview of jeo-code's skill-driven workflow, approv
 categories: [AI, Agents]
 tags: [jeo-code, jeo-skills, HarnessEngineering, AIBuilder, AgentWorkflow, ClaudeCode, OpenAI, Remotion]
 date: 2026-06-22 10:00:00 +0900
-correction_date: "2026-09-07"
-correction_note: "Withdrew unmeasured productivity multipliers, setup-time rankings and delivery-time claims; identified the examples as illustrative and replaced the comparison with a measurement plan. Feature descriptions, skill counts and installation commands were not fully re-audited."
+correction_date: "2026-11-02"
+correction_note: "Updated the skill catalog snapshot and installer guidance on 2026-11-02; earlier productivity claims remain withdrawn. Other historical examples are illustrative, not verified runs."
 pin: true
 mermaid: false
 math: false
@@ -22,7 +22,7 @@ That question stuck with me: **What if the harness itself was the product?**
 
 Enter **[jeo-code](https://github.com/akillness/jeo-code)** — and its companion **[jeo-skills](https://github.com/akillness/jeo-skills)**.
 
-I maintain the linked jeo-code and jeo-skills projects. This is an affiliated overview, not an independent product review. The retained feature and catalog descriptions are historical context, not a verified current installation guide; check the linked repositories before following commands.
+I maintain the linked jeo-code and jeo-skills projects. This is an affiliated overview, not an independent product review. The catalog and core workflow notes below were updated on 2026-11-02; historical scenarios remain illustrations, not verified runs.
 
 > **Curiosity:** Can reusable skills and explicit approval gates make repeated engineering tasks easier to inspect and reproduce?
 {: .prompt-tip}
@@ -33,9 +33,9 @@ I maintain the linked jeo-code and jeo-skills projects. This is an affiliated ov
 
 ![jeo-code hero illustration](/assets/img/jeo-code/hero.png){: .w-100 .shadow .rounded-10 }
 
-**jeo-code** (`jeo` on the CLI) is a pure-TypeScript AI coding agent that runs on **Bun (≥ 1.3.14)** with zero native dependencies. It features a Spec-first workflow, deep-interview Socratic capabilities, robust TUI with TMA (tmux) integrations, and native Ouroboros compatibility. You run it inside any repository, and it reads files, edits them, executes commands, and drives tasks to completion.
+**jeo-code** (`jeo` on the CLI) is a Bun-based local-first coding agent. Its [README at commit `9f8d7b6`](https://github.com/akillness/jeo-code/blob/9f8d7b6dc00a9a5664229099a86326aad6d12f40/README.md) describes a spec-first workflow, reviewed plans, a multi-provider loop, an inline TUI and content-anchored edits. It can read and edit files and run commands; effective permissions and verification depend on the environment and configuration.
 
-Its standout feature is the **gjc-style flat inline stack TUI**: completed work flushes into scrollback as glyph-led ledger lines and bordered tool cards, avoiding scrollback flooding and allowing terminal mouse-wheel scrolling mid-turn. It also supports seamless **clipboard image paste (`Ctrl+V`)** across macOS and Linux, sending images as true multimodal input on every provider.
+The current implementation tracks mutation and verification ordering in its [agent engine](https://github.com/akillness/jeo-code/blob/9f8d7b6dc00a9a5664229099a86326aad6d12f40/src/agent/engine.ts). These signals are useful guards, not independent proof that a test covers the requirement or that the workspace cannot change later. The project README explicitly describes that boundary.
 
 But the design philosophy is what sets it apart.
 
@@ -55,7 +55,7 @@ But the design philosophy is what sets it apart.
 
 <img src="/assets/img/jeo-code/d2-multi-provider.svg" alt="jeo agent fans out to Anthropic Claude, OpenAI plus Codex, Antigravity, xAI Grok plus Kimi, and Ollama plus LM Studio through one uniform JSON tool loop" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;" />
 
-One agent loop, every major LLM. Switch providers with `/provider login <name>` from the input box — the choice persists as the new default.
+One agent loop supports multiple providers. Availability, authentication and input capabilities vary by provider; `/provider login <name>` is available in the interactive interface.
 
 ### The TUI That Doesn't Get in Your Way
 
@@ -101,37 +101,20 @@ The harness engine alone is powerful. With **[jeo-skills](https://github.com/aki
 
 > **[⭐ Star jeo-skills on GitHub →](https://github.com/akillness/jeo-skills)**
 
-jeo-skills is a curated collection of **146 installable skill folders** for LLM-based development workflows. Each skill is a `SKILL.md` that tells the agent exactly which tools to use, which patterns to apply, and which route-outs to respect — so the agent stops guessing and starts shipping.
+The catalog's [metadata at commit `f041a22`](https://github.com/akillness/jeo-skills/blob/f041a22a2486239b189a5425e6afc23b497a1914/.agent-skills/skills.json) lists 409 skills in ten categories. This is a snapshot, not a promise that the count remains fixed. Each skill has a `SKILL.md`; catalog metadata describes categories, bundles and relationships. The `jeo-skill` router searches the catalog and installs a selection; the host agent still decides when to load and execute instructions.
 
-### Install Any Skill in One Command
+### Preview before installing
+
+First inspect the [installer at commit `f041a22`](https://github.com/akillness/jeo-skills/blob/f041a22a2486239b189a5425e6afc23b497a1914/install.sh) and the [setup guide](https://github.com/akillness/jeo-skills/blob/f041a22a2486239b189a5425e6afc23b497a1914/README.md). The installer can fetch additional components, so review those dependencies and the current documentation before executing anything. Once the router is installed:
 
 ```bash
-# Install a specific skill
-npx skills add https://github.com/akillness/jeo-skills --skill scrapling
-
-# Install the whole library at once
-git clone https://github.com/akillness/jeo-skills.git && bash jeo-skills/install.sh
+jeo-skill doctor
+jeo-skill search "react performance"
+jeo-skill install react-best-practices --global --dry-run
+jeo-skill install react-best-practices --global --yes
 ```
 
-### The Skill Ecosystem Map
-
-<img src="/assets/img/jeo-code/d3-skills-map.svg" alt="jeo-skills ecosystem map — 146 installable skills grouped across 15 categories" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;" />
-
-### 146 Skills Across Every Domain
-
-| Category | Skills (sample) | Count |
-|:---------|:---------------|------:|
-| **🏗️ Orchestration** | `ooo`, `bmad`, `plannotator`, `team`, `ultrawork`, `autopilot` | 12 |
-| **🔬 Research** | `deep-dive`, `llm-wiki`, `autoresearch`, `graphify`, `scrapling` | 9 |
-| **⚙️ Dev Workflow** | `tdd`, `debugging`, `code-review`, `git-workflow`, `spec-kit` | 18 |
-| **🎬 Media & Visual** | `remotion-video-production`, `god-tibo-imagen`, `slides-grab` | 8 |
-| **🎮 Game Dev** | `unity-gamedev-skill-pack`, `game-performance-profiler`, `game-ci-cd-pipeline` | 6 |
-| **☁️ Platform** | `firebase-ai-logic`, `supabase-agent-skills`, `vercel-deploy`, `genkit` | 11 |
-| **🤖 AI Agents** | `crewai-multi-agent`, `openai-agents-python`, `pydantic-ai`, `clawteam` | 14 |
-| **📊 Data & Analytics** | `data-analysis`, `looker-studio-bigquery`, `langsmith`, `opik` | 9 |
-| **🔒 Quality & Security** | `ultraqa`, `security-best-practices`, `backend-testing`, `web-accessibility` | 12 |
-| **… and more** | `okf`, `obsidian`, `compresso`, `rtk`, `semble`, `graphify` | 47 |
-| **Total** | | **146** |
+The default installer installs the router, not the entire library. The setup guide also documents the guided full-catalog path, bundles and host-specific roots. Installing a skill does not install or run every external tool described by that skill.
 
 ---
 
@@ -166,9 +149,9 @@ jeo "design and implement a wave-function-collapse dungeon generator
 3. `jeo approve` gates until you read and confirm
 4. `team` spawns executor subagents: one for WFC algorithm, one for GameManager integration, one for unit tests
 5. Post-edit hook runs `tsc && jest --coverage`, errors fed back to the agent, fixed in-loop
-6. `ultragoal` verifies all acceptance criteria against real suite output
+6. `ultragoal` reviews the available evidence; a suite result is a global signal, not proof of every criterion.
 
-**With `unity-gamedev-skill-pack`:** The agent knows Unity's project structure, avoids serialization pitfalls, and cites the Unity docs it's working from.
+**With `unity-gamedev-skill-pack`:** The instructions may help route the task to relevant Unity guidance. Check the actual output and sources; installation alone does not guarantee correct behavior.
 
 </details>
 
@@ -233,9 +216,7 @@ These are evaluation questions, not a claim that other coding agents lack the sa
 
 ## Architecture Deep Dive
 
-The jeo-skills architecture diagram shows how skills, harnesses, and the jeo loop interconnect:
-
-<img src="/assets/img/jeo-code/architecture.svg" alt="jeo-skills architecture diagram" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;" />
+The catalog supplies instructions; the host agent decides how and when to load them and which tools it can run.
 
 ### How a Skill Execution Works
 
@@ -247,12 +228,11 @@ Every skill is **routing-first**: picks the *lightest workable path*, routes out
 
 ## Installation & Quick Start
 
-### Method 1 — Bun (recommended, fastest startup)
+### Install with Bun
+
+Install Bun 1.3.14 or later using the [official instructions](https://bun.sh/docs/installation), then:
 
 ```bash
-# Install Bun runtime
-curl -fsSL https://bun.sh/install | bash
-
 # Install jeo-code globally
 bun install -g jeo-code
 
@@ -260,75 +240,19 @@ bun install -g jeo-code
 jeo --version
 ```
 
-### Method 2 — npm (universal Node.js)
+### Other installation options
 
-```bash
-# Install globally (requires Node.js 18+)
-npm install -g jeo-code
-
-# Or run once without installing
-npx jeo-code
-```
+Check the [current install instructions](https://github.com/akillness/jeo-code/blob/9f8d7b6dc00a9a5664229099a86326aad6d12f40/README.md#install) for supported runtimes and distribution changes. The documented requirement is Bun 1.3.14 or later; do not assume a Node-only installation is supported.
 
 ### Connect Your LLM Provider (required)
 
-jeo-code supports every major LLM. Run `jeo doctor` first to see connection status, then log in to your preferred provider:
+Run `jeo doctor` to inspect configuration and connection status. Use `jeo setup` for provider setup; the interactive TUI also provides `/provider login <name>`. Provider support and authentication requirements vary; consult the current guide for the provider you intend to use.
 
-```bash
-# Diagnose connection status
-jeo doctor
+### Select skills instead of assuming a full install
 
-# Anthropic (Claude)
-jeo /provider login anthropic
-# → prompts for ANTHROPIC_API_KEY
+Use the router preview above to check the exact selection and destination. For a guided full-catalog installation, ask an agent to read the [setup prompt](https://github.com/akillness/jeo-skills/blob/f041a22a2486239b189a5425e6afc23b497a1914/setup-all-skills-prompt.md); the default router installer is not the same operation. jeo and jeopi can discover the shared `~/.agents/skills` root. Placement alone does not prove that a host loaded or followed a skill.
 
-# OpenAI (GPT / Codex)
-jeo /provider login openai
-# → prompts for OPENAI_API_KEY
-
-# Ollama (local, free — no API key needed)
-ollama serve          # in a separate terminal
-jeo /provider login ollama
-```
-
-> **Tip:** `/provider login <name>` also works from inside the jeo interactive TUI — no need to restart.
-{: .prompt-tip}
-
-### Install All 146 jeo-skills
-
-**The fastest way — let your LLM agent install them for you.** Hand this prompt file to any agent (jeo, Claude Code, Codex, Cursor…) — it reads the instructions and installs every skill automatically:
-
-<div style="background:linear-gradient(135deg,#1a3a2f 0%,#0a0a14 100%);border:2px solid #10b981;border-radius:16px;padding:1.25rem 1.5rem;margin:1.5rem 0;box-shadow:0 8px 32px rgba(16,185,129,0.25);">
-<div style="color:#34d399;font-family:monospace;font-size:0.8rem;font-weight:700;letter-spacing:0.05em;margin-bottom:0.6rem;">⭐ RECOMMENDED — ONE-LINE AGENT INSTALL</div>
-<pre style="margin:0;background:#05080f;border-radius:10px;padding:1rem;overflow-x:auto;"><code style="color:#e2e8f0;font-family:ui-monospace,Menlo,monospace;font-size:0.9rem;line-height:1.6;"><span style="color:#64748b;"># Send to your LLM agent — it will read and install automatically</span>
-curl -s https://raw.githubusercontent.com/akillness/jeo-skills/main/setup-all-skills-prompt.md</code></pre>
-</div>
-
-Prefer to do it by hand? The classic clone-and-run path still works:
-
-```bash
-# Manual full install
-git clone https://github.com/akillness/jeo-skills.git
-cd jeo-skills && bash install.sh
-# → creates 146 skill folders in ~/.agents/skills/
-
-# Verify
-ls ~/.agents/skills/ | wc -l   # → 146
-```
-
-
-### Run jeo
-
-```bash
-# Interactive mode
-jeo
-
-# One-shot with a skill prefix
-jeo "$deep-dive explain the architecture then refactor the auth module"
-
-# Check your skill library
-ls ~/.agents/skills/ | wc -l   # → 146
-```
+Run `jeo` for an interactive session and use `$<skill> [intent]` within it. Consult the current host documentation for available commands and permissions.
 
 
 ---
@@ -354,7 +278,7 @@ A workflow may help one task and hurt another. Until those measurements exist, a
 
 My experience in production game AI suggests three design priorities. These are engineering judgments, not measured outcomes from using jeo-code:
 
-**1. Gates beat guidelines.** Telling an agent "be careful" does nothing. A gate that blocks `done` until `ultragoal` passes — that's a mechanical constraint that actually works.
+**1. Gates make checks explicit.** A mechanical completion gate can catch some missing or stale verification signals. It cannot establish that a test is relevant, trustworthy, or sufficient for every acceptance criterion.
 
 **2. Skills encode institutional knowledge.** Each skill in jeo-skills is a distilled answer to "what does an expert do when they encounter this?" Agents with skills don't reinvent — they apply. The difference is the same as a junior developer Googling vs a senior who already knows the answer.
 
@@ -380,7 +304,7 @@ Both repos are open source and actively maintained:
   </a>
   <a href="https://github.com/akillness/jeo-skills" target="_blank" style="flex:1; min-width:280px; display:block; background:linear-gradient(135deg,#1a3a2f,#0a0a14); border:2px solid #10b981; border-radius:16px; padding:1.5rem; text-decoration:none;">
     <div style="font-family:monospace; font-size:1.3rem; font-weight:900; color:#34d399; margin-bottom:0.5rem;">🚀 akillness/jeo-skills</div>
-    <div style="color:#cbd5e1; font-size:0.95rem;">146 skills for LLM workflows · TOON format · Claude / Codex / Ollama</div>
+    <div style="color:#cbd5e1; font-size:0.95rem;">Categorized skill catalog · SKILL.md format · shared and host-specific roots</div>
     <div style="color:#f59e0b; font-size:0.85rem; margin-top:0.5rem; font-family:monospace;">npx skills add https://github.com/akillness/jeo-skills --skill &lt;name&gt;</div>
   </a>
 </div>

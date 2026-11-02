@@ -6,6 +6,8 @@ categories: [AI, Agents]
 tags: [jeo-code, oh-my-jeo, jeopi, jeo-claw, jeo-skills, ContextEngineering, AgentMemory, HarnessEngineering, ReasoningData, VerifierDesign]
 
 date: 2026-06-29 10:00:00 +0900
+correction_date: "2026-11-02"
+correction_note: "Updated the jeo-skills catalog snapshot and corrected jeo-code and jeopi gate limitations; other historical examples have not been fully re-audited."
 pin: true
 math: false
 image:
@@ -80,14 +82,14 @@ omj doctor
 
 <img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/jeo-code-hero.png" alt="jeo-code autonomous coding-agent hero illustration" style="display:block;width:100%;max-width:640px;height:auto;margin:1.25rem auto;border-radius:12px;" />
 
-**[jeo-code](https://github.com/akillness/jeo-code)** (`jeo` on the CLI) is the harness I use to write this very post. Its core insight is structural: a file `read` doesn't just return text, it returns text with content anchors (`42ab|`). An `edit` against those anchors is *rejected with fresh content* if the file changed underneath it — the agent is never allowed to silently corrupt a file because its mental model of "current state" drifted from reality.
+**[jeo-code](https://github.com/akillness/jeo-code)** (`jeo` on the CLI) uses content anchors such as `42ab|` for edits. Anchored edits can detect stale content and reject a change; they do not guarantee the semantic correctness of an accepted edit. See the [version-pinned README](https://github.com/akillness/jeo-code/blob/9f8d7b6dc00a9a5664229099a86326aad6d12f40/README.md) for the implementation's stated boundaries.
 
 | Principle | What it means | Why it matters for state-over-history |
 |:----------|:--------------|:---------------------------------------|
 | **Spec-First** | `deep-interview` Socratic gate before any code | Ambiguity gets resolved once, not re-litigated every turn |
 | **Reviewed Plans** | `ralplan` critic subagent's `[OKAY]` is persisted and *required* | The plan's reasoning survives as a durable artifact, not a chat message that scrolls away |
 | **Gated Execution** | `jeo approve` blocks until you explicitly confirm | Human judgment enters at the one point it changes the outcome |
-| **Honest Verification** | `ultragoal` runs real suites — never fabricates per-criterion passes | "Done" means evidence exists, not that the agent said so |
+| **Honest Verification** | Suite output provides a global signal | Individual requirements still need relevant evidence |
 | **Self-Correcting Loop** | Post-edit hooks (tsc/eslint/tests) feed diagnostics back to the agent | The lesson from a failed lint/test run becomes the very next action |
 
 It is built as a pure-TypeScript AI coding agent running on **Bun (≥ 1.3.14)** with zero native dependencies. It introduces a robust inline TUI rendered in the main terminal buffer, complete with full CJK width awareness, tmux integration, and seamless clipboard image paste (`Ctrl+V`) for true multimodal input.
@@ -109,36 +111,35 @@ All of this state — the frozen spec, the plan, the approval gate, the hook dia
 **[jeopi](https://github.com/akillness/jeopi)** is proof the discipline isn't tied to one runtime — and it's a sharper proof than the repo it replaces here. It's a fork of [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) (itself a fork of [badlogic/pi-mono](https://github.com/badlogic/pi-mono) by Mario Zechner), so jeopi inherits the whole capable engine — **40+** providers, **32** built-in tools, **14** LSP ops, **28** DAP ops, **~55k** lines of Rust — and welds jeo-code's spec-first philosophy onto it rather than rewriting the engine from scratch. One command, `/jeo <what you want built>`, drives the whole spine:
 
 ```
-interview        Socratic ambiguity gate — goal, constraints, out-of-scope,
-    │            checkable acceptance criteria. Vague criteria are refused.
+interview        prompts for goal, constraints, out-of-scope and checkable criteria.
     ▼
-frozen seed      local://jeo-seed.md — immutable; scope changes reopen the
-    │            interview, never drift silently.
+frozen seed      local://jeo-seed.md records the intended scope for later steps.
+    │            The workflow directs the agent to reopen scope changes.
     ▼
 plan             read-only `plan` agent; concrete files, sequencing,
     │            per-criterion verification.
     ▼
 critic gate      read-only `critic` agent; schema-enforced verdict
-    │            okay / iterate / reject. No okay → no execution. Ever.
+    │            okay / iterate / reject. A non-okay verdict engages the session gate.
     ▼
 execute          bounded `task` subagents; a failed task feeds the lesson
     │            into the next attempt instead of retrying unchanged.
     ▼
-verify           suite runs once as a global signal; each criterion cites
-                 its command + observed result, or is reported unresolved.
+verify           report command and observed result for each supported criterion;
+                 treat a suite as a global signal and name unresolved gaps.
 ```
 
 Its multi-package architecture separates concerns neatly: `packages/coding-agent` for the CLI, `packages/ai` for multi-provider streaming, `packages/tui` for rendering, and `crates/pi-natives` for high-performance operations, fully embracing the **Bun ecosystem**.
 
-| Stage | Standing agent | What it refuses to do |
+| Stage | Standing agent | Intended discipline |
 |---|---|---|
 | Plan → gate | `critic` | Soften a real, blocking gap into `iterate` just to avoid blocking — *"that softening is the signal the gap is real"* |
 | Review | `architect` | Return a verdict without the list of files it actually inspected — a clean verdict is not the absence of inspection |
-| Execute | `task` | Call a subgoal done without verification evidence, or leave debug leftovers behind |
+| Execute | `task` | Seek verification evidence and remove debug leftovers; runtime overrides remain possible |
 
 Two mechanisms here map almost exactly onto themes this post already covers. First, `critic`'s refusal to soften a blocking gap into `iterate` is the same discipline as jeo-code's failed-task marker: a signal that something is wrong doesn't get smoothed over on the way to "done," it gets carried forward as state. Second, jeopi's **Hashline** edit format — the model points at content-hash anchors instead of retyping lines, and a stale anchor gets the patch rejected before it can corrupt the file — is the same content-anchor discipline jeo-code's own `read`/`edit` tools use, described above; Grok 4 Fast spends 61% fewer output tokens once the retry loop on bad diffs disappears. Two independent forks of two different agent engines converged on "verify the model's claimed state against the file's actual state before accepting an edit" — which is exactly the state-over-history thesis this whole post is built around.
 
-`/review` spawns dedicated `reviewer` subagents that sweep branches, single commits, or uncommitted work in parallel, then rank every issue P0 through P3 with a confidence score, so nothing important hides in a wall of prose. And completion here is a hard gate too, not a suggestion: a criterion with no command and no observed result isn't marked done — it's reported `unresolved`, never implied met.
+In goal mode, the [evidence tracker](https://github.com/akillness/jeopi/blob/5b7690dc1c10f67923cbb1eccb9be8b9b7cf43f8/packages/coding-agent/src/goals/evidence-gate.ts) orders recorded mutations and verification signals. Its first blocked completion can be followed by an unchanged retry that passes; the separate verifier is conditional and also has a bounce-once override. These are bounded guards, not an unconditional proof of correctness. A new user message can clear the session critic gate.
 
 ### 4. jeo-claw — turning "learn from failure" into an actual state machine
 
@@ -189,30 +190,15 @@ That last row is a small but important detail: the verifier is deliberately test
 
 <img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/jeo-skills-og.png" alt="jeo-skills repository card" style="display:block;width:100%;max-width:480px;height:auto;margin:1.25rem auto;border-radius:8px;" />
 
-**[jeo-skills](https://github.com/akillness/jeo-skills)** is the substrate the other four repos draw from: **146 installable skills**, cross-platform (Claude Code, Codex, Gemini CLI, Cursor, OpenCode), each shipped as a `SKILL.md` (plus a `SKILL.toon` compact form) that spells out exactly *when* to route to it and *what conditions to hold to the end* — which is the missing piece when a task-solving agent has a good tool available but can't find its name, or forgets the constraint halfway through a long session.
+**[jeo-skills](https://github.com/akillness/jeo-skills)** is a catalog of reusable `SKILL.md` instructions. Its [metadata at commit `f041a22`](https://github.com/akillness/jeo-skills/blob/f041a22a2486239b189a5425e6afc23b497a1914/.agent-skills/skills.json) lists 409 skills across ten categories. The `jeo-skill` router supports search, selection and installation; the host still controls loading and execution. The count is a dated snapshot, not a guarantee about later versions.
 
-<img src="/assets/img/2026-06-29-jeo-ecosystem-context-engineering/jeo-skills-architecture.svg" alt="jeo-skills architecture diagram" style="display:block;width:100%;max-width:100%;height:auto;margin:1.25rem auto;" />
-
-```bash
-
-# Fetch the delegation guide and hand it to your agent — it detects OS,
-# installs the CLI, and wires every skill into the right per-agent paths.
-curl -s https://raw.githubusercontent.com/akillness/jeo-skills/main/setup-all-skills-prompt.md
-
-# Project-scoped install of two specific skills
-npx skills add https://github.com/akillness/jeo-skills --skill deepinit --skill deep-dive
-
-# Global install, targeted at specific agents
-npx skills add -g https://github.com/akillness/jeo-skills --skill deepinit --skill deep-dive -a claude-code -a codex -y
-```
-
-This is literally the repo I used to write this post — the `scrapling` skill entry here documents the exact "route to the lightest workable mode" logic (plain HTTP → JS render → stealth) I followed a few minutes before writing this sentence:
 
 ```bash
-
-claude mcp add semble -s user -- uvx --from "semble[mcp]" semble   # token-efficient code search
-npx skills add https://github.com/akillness/jeo-skills --skill ooo    # spec-first control loop
+jeo-skill search "react performance"
+jeo-skill install react-best-practices --global --dry-run
 ```
+
+The [setup guide](https://github.com/akillness/jeo-skills/blob/f041a22a2486239b189a5425e6afc23b497a1914/README.md) distinguishes installing the router from installing the full catalog. A preview does not install a skill; installing a skill does not automatically install or run the external project it documents.
 
 The `ooo` (Ouroboros) entry crystallizes the whole ecosystem's philosophy in one line: *"Socratic interview → immutable seed/spec → execute against the contract → verify before done → keep looping until completion is actually verified."* Every one of the other four repos is a different runtime's implementation of that exact sentence.
 
@@ -231,8 +217,8 @@ A worked example, using the actual commands each repo exposes:
 # 1. Interview — freeze the ambiguity before anything is written
 jeo   # inside your repo, or: pi + /clarify "add rate-limiting to the API"
 
-# 2. Plan — critic subagent must return [OKAY] before execution is allowed
-#    (jeo-code: ralplan · jeopi: plan + critic gate)
+# 2. Plan — review the plan with a critic before execution
+#    (jeo-code: ralplan · jeopi: plan + critic; session override noted above)
 
 #    contested calls (e.g. "token bucket vs. sliding window") are kept, not voted away
 
@@ -241,7 +227,7 @@ jeo "implement the rate limiter per the approved plan"
 #    jeo-claw: dispatches the same task to ZeroClaw AND NullClaw for comparison
 
 # 4. Verify — evidence-backed, not narrated
-#    jeo-code/jeopi: ultragoal / verify runs the real suite
+#    jeo-code/jeopi: check actual test output against the acceptance criteria
 
 #    jeo-claw: bun test && bun run check:compose && bun run smoke:glue
 
@@ -260,7 +246,7 @@ bun run ops/scripts/capture-knowledge.ts \
 The same discipline that makes an *agent* reliable is the discipline that makes **reasoning training data** trustworthy, and the parallel is worth spelling out because it's easy to miss:
 
 - A problem-answer pair with no record of *how* the answer was reached is exactly like a task marked "done" with no evidence attached — you can't tell whether the signal is real or fabricated after the fact.
-- `ultragoal`/jeopi's `verify` stage refusing to synthesize a passing result when the suite didn't actually pass is the operational form of "a verifier that's weak to superficial rewording or trigger words teaches the model to game the verifier, not to reason."
+- Verification output is evidence, not a substitute for checking whether a test addresses each requirement. In jeopi goal mode, the bounce-once override described above also matters when interpreting completion.
 
 - jeopi's `critic` refusing to soften a real, blocking gap into `iterate` just to avoid blocking is the same principle as: a verifier that smooths over an inconvenient failure to keep a pipeline green stops being a verifier and starts being a rubber stamp.
 
@@ -276,7 +262,7 @@ None of these five repos are training-data pipelines. But they were all built by
 | Failures must change the next action | jeo-claw `ops/` | `CAPTURE` step writes evidence + summary; next task reads `index.md` first |
 | Tool-call count ≠ success; correction quality does | jeo-code hooks | Post-edit tsc/eslint/test diagnostics fed back in-loop, blocking `done` until green |
 | Harness quality matters more than model size alone | oh-my-jeo | Deterministic contract layer wrapped around an unmodified chat agent |
-| Skill discoverability + held constraints matter | jeo-skills | 146 `SKILL.md` files with explicit routing conditions and route-outs |
+| Skill discoverability + held constraints matter | jeo-skills | A catalog of `SKILL.md` instructions; installation and actual host execution are separate |
 | A softened verdict is a signal, not a courtesy | jeopi `critic` gate | Schema-enforced `okay`/`iterate`/`reject`; softening a real gap into `iterate` is itself evidence the gap is real |
 
 | Verifiers must resist premature or fabricated "pass" | jeo-claw `smoke:glue` | Explicit test case: approving a merge before CI/review completes must be a no-op |
@@ -299,7 +285,7 @@ None of these five repos are training-data pipelines. But they were all built by
 - [akillness/jeopi](https://github.com/akillness/jeopi) — spec-first fork of oh-my-pi with a critic-gated plan/execute/verify spine
 
 - [akillness/jeo-claw](https://github.com/akillness/jeo-claw) — dual-runtime agentic PR orchestration with a self-evolving `ops/` doctrine
-- [akillness/jeo-skills](https://github.com/akillness/jeo-skills) — 146-skill library shared across all of the above
+- [akillness/jeo-skills](https://github.com/akillness/jeo-skills) — categorized skill catalog and selection router
 
 **Related reading on this blog:**
 - [jeo-code Puts Skills and Approval Gates Around Coding Agents](/posts/jeo-code-ai-builder-harness/)
