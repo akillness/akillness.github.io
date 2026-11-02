@@ -5,18 +5,36 @@ order: 5
 mermaid: false
 ---
 
-## AI Product Engineer Growing Out of Games, Research, and Real Systems
+<section class="about-hero" aria-labelledby="about-intro-title">
+  <div class="about-hero__copy">
+    <p class="about-eyebrow">AI PRODUCT ENGINEER · GAME ENGINEERING RESEARCH</p>
+    <h2 id="about-intro-title">From game systems to useful AI products.</h2>
+    <p class="about-hero__lead">I'm <strong>Jang Young Jeong</strong> (Fodev JEO). I build AI systems that connect research, interactive products, and practical evaluation.</p>
+    <p class="about-hero__location">Based in Hwaseong, Gyeonggi-do, South Korea</p>
+    <div class="about-actions">
+      <a class="about-button about-button--primary" href="/projects/">Explore my work <span aria-hidden="true">→</span></a>
+      <a class="about-button about-button--secondary" href="/contact/">Get in touch <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+  <figure class="about-hero__art">
+    <img src="/assets/img/about-ai-product-hero.png" alt="AI-generated illustration of a workspace connecting games, research, agent networks and evaluation dashboards" width="1672" height="941" fetchpriority="high">
+    <figcaption>Concept illustration generated with GTI; not an actual workspace.</figcaption>
+  </figure>
+</section>
 
-I am **Jang Young Jeong** (Fodev JEO), the author of this blog, based in Hwaseong, Gyeonggi-do, South Korea. Reach me through [Contact](/contact/).
+<div class="about-snapshot" aria-label="Background at a glance">
+  <div><span>RECENT ROLE</span><strong>Supercent</strong><small>AI Product Developer · 2025–2026</small></div>
+  <div><span>RESEARCH</span><strong>Hongik University</strong><small>Ph.D. candidate · Game Engineering</small></div>
+  <div><span>FOUNDATION</span><strong>8 years in games</strong><small>NCSOFT + Com2uS</small></div>
+</div>
 
-| At a glance | Background |
-|:--|:--|
-| Recent role | AI Product Developer, Supercent · Dec 2025–Sep 2026 |
-| Research | Ph.D. candidate in Game Engineering · Hongik University |
-| Industry foundation | Eight years across NCSOFT and Com2uS |
-
-![AI-generated illustration of a workspace connecting game development, research, agent networks and evaluation dashboards](/assets/img/about-ai-product-hero.png){: .w-100 .shadow .rounded-10 }
-_Concept illustration generated with GTI; not a photograph of an actual workspace._
+<nav class="about-jump" aria-label="On this page">
+  <span>EXPLORE</span>
+  <a href="#what-i-build-now">What I build</a>
+  <a href="#open-source">Open source</a>
+  <a href="#selected-work">Experience</a>
+  <a href="#editorial-method-and-ai-assistance">Editorial method</a>
+</nav>
 
 
 ---
@@ -81,13 +99,13 @@ I prefer starting with one capable agent and adding orchestration only when the 
 
 I build and maintain agent-tooling projects in public. Each project has a different role; installing a skill or using a gate is not a guarantee of a correct outcome.
 
-| Project | Role | Starting point |
-|:--|:--|:--|
-| [oh-my-jeo](https://github.com/akillness/oh-my-jeo) | Spec-first workflows and contracts for chat agents | Workflow pack |
-| [jeo-code](https://github.com/akillness/jeo-code) | Bun-based coding agent with multi-provider tools and anchored edits | Coding-agent CLI |
-| [jeopi](https://github.com/akillness/jeopi) | oh-my-pi fork with a spec-first, critic-gated workflow | Agent runtime |
-| [jeo-skills](https://github.com/akillness/jeo-skills) | Searchable catalog and installer for reusable agent skills | Skill catalog |
-| [jeo-claw](https://github.com/akillness/jeo-claw) | Discord-controlled agentic repository workflows | Remote orchestration |
+<div class="about-projects" aria-label="Open source projects">
+  <a class="about-project" href="https://github.com/akillness/jeo-code"><span>CODING AGENT</span><strong>jeo-code <span aria-hidden="true">↗</span></strong><p>Bun-based agent with multi-provider tools and anchored edits.</p></a>
+  <a class="about-project" href="https://github.com/akillness/jeopi"><span>AGENT RUNTIME</span><strong>jeopi <span aria-hidden="true">↗</span></strong><p>An oh-my-pi fork with a spec-first, critic-gated workflow.</p></a>
+  <a class="about-project" href="https://github.com/akillness/jeo-skills"><span>SKILL CATALOG</span><strong>jeo-skills <span aria-hidden="true">↗</span></strong><p>Discover and install reusable instructions for coding agents.</p></a>
+  <a class="about-project" href="https://github.com/akillness/oh-my-jeo"><span>WORKFLOW PACK</span><strong>oh-my-jeo <span aria-hidden="true">↗</span></strong><p>Spec-first workflows and contracts for chat agents.</p></a>
+  <a class="about-project" href="https://github.com/akillness/jeo-claw"><span>ORCHESTRATION</span><strong>jeo-claw <span aria-hidden="true">↗</span></strong><p>Discord-controlled agentic repository workflows.</p></a>
+</div>
 
 ---
 
