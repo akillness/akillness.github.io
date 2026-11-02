@@ -93,6 +93,60 @@
 .content .about-project:hover { border-color: #168276; box-shadow: 0 4px 0 #168276; }
 .content .about-button:focus-visible, .content .about-jump a:focus-visible, .content .about-project:focus-visible { outline: 3px solid #efad3c; outline-offset: 3px; }
 
+.content .about-roadmap {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+.about-roadmap::before {
+  position: absolute;
+  top: 1.4rem;
+  bottom: 1.4rem;
+  left: 1.3rem;
+  width: 2px;
+  background: #168276;
+  content: '';
+}
+.content .about-roadmap__stop {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.7rem minmax(0, 1fr);
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+.about-roadmap__marker {
+  z-index: 1;
+  display: grid;
+  width: 2.7rem;
+  height: 2.7rem;
+  place-items: center;
+  border: 2px solid #168276;
+  border-radius: 50%;
+  background: #0d202e;
+  color: #a9f2df;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.about-roadmap__card {
+  min-width: 0;
+  padding: 1.2rem 1.35rem;
+  border: 1px solid var(--main-border-color);
+  border-radius: 0.8rem;
+  background: var(--card-bg);
+}
+.about-roadmap__date { color: var(--text-muted-color); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.07em; }
+.content .about-roadmap__card h4 { margin: 0.35rem 0 0.45rem; color: var(--heading-color); font-size: 1.15rem; line-height: 1.3; }
+.content .about-roadmap__card p { margin: 0 0 0.75rem; color: var(--text-color); font-size: 0.95rem !important; line-height: 1.6; }
+.about-roadmap__tag { display: inline-block; color: var(--text-muted-color); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em; }
+.about-roadmap__stop--current .about-roadmap__card { border: 2px solid #168276; }
+.content .about-roadmap__card a { font-size: 0.9rem; font-weight: 700; }
+.content .about-roadmap__card a:focus-visible { outline: 3px solid #efad3c; outline-offset: 3px; }
+
 @media (max-width: 767px) {
   .about-hero { grid-template-columns: 1fr; }
   .about-hero__art { max-width: 100%; }

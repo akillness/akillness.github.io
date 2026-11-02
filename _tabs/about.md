@@ -7,12 +7,12 @@ mermaid: false
 
 <section class="about-hero" aria-labelledby="about-intro-title">
   <div class="about-hero__copy">
-    <p class="about-eyebrow">AI PRODUCT ENGINEER · GAME ENGINEERING RESEARCH</p>
-    <h2 id="about-intro-title">From game systems to useful AI products.</h2>
-    <p class="about-hero__lead">I'm <strong>Jang Young Jeong</strong> (Fodev JEO). I build AI systems that connect research, interactive products, and practical evaluation.</p>
+    <p class="about-eyebrow">A ROADMAP FROM GAMES TO AI PRODUCTS</p>
+    <h2 id="about-intro-title">Building useful AI, one milestone at a time.</h2>
+    <p class="about-hero__lead">I'm <strong>Jang Young Jeong</strong> (Fodev JEO). My path connects game systems, research, and practical AI products.</p>
     <p class="about-hero__location">Based in Hwaseong, Gyeonggi-do, South Korea</p>
     <div class="about-actions">
-      <a class="about-button about-button--primary" href="/projects/">Explore my work <span aria-hidden="true">→</span></a>
+      <a class="about-button about-button--primary" href="#selected-work">Explore the roadmap <span aria-hidden="true">→</span></a>
       <a class="about-button about-button--secondary" href="/contact/">Get in touch <span aria-hidden="true">↗</span></a>
     </div>
   </div>
@@ -30,9 +30,9 @@ mermaid: false
 
 <nav class="about-jump" aria-label="On this page">
   <span>EXPLORE</span>
+  <a href="#selected-work">Roadmap</a>
   <a href="#what-i-build-now">What I build</a>
   <a href="#open-source">Open source</a>
-  <a href="#selected-work">Experience</a>
   <a href="#editorial-method-and-ai-assistance">Editorial method</a>
 </nav>
 
@@ -111,13 +111,30 @@ I build and maintain agent-tooling projects in public. Each project has a differ
 
 ### Selected Work
 
-| Role | Period | Selected focus |
-|:--|:--|:--|
-| AI Product Developer, Supercent | Dec 2025–Sep 2026 | Internal AI products, multimodal RAG, agent workflows and operation |
-| AI Manager, SmartHome Tech, SK Intelix | Jul 2025–Dec 2025 | AI feature compliance, TTS/STT collaboration and device monitoring |
-| Ph.D. candidate, Hongik University | Sep 2024–present | Game engineering, AutoQA, VLM reporting and agentic workflows |
+From game development to research and AI products: these milestones summarize work already undertaken. Research and industry roles overlap; the final stop describes current interests, not a promised release schedule.
 
-At Supercent, I worked on SAGA and Millie, two Firebase/Genkit internal platforms. The examples above describe the projects, not a public benchmark or a claim that all internal details are independently reproducible.
+<ol class="about-roadmap" aria-label="Career roadmap and milestones">
+  <li class="about-roadmap__stop">
+    <div class="about-roadmap__marker" aria-hidden="true">01</div>
+    <div class="about-roadmap__card"><span class="about-roadmap__date">FOUNDATION · GAMES</span><h4>Interactive systems in production</h4><p>At Com2uS and NCSOFT, I worked on game programming, AI agents, procedural generation, and internal tools.</p><span class="about-roadmap__tag">GAME AI &amp; AUTOMATION</span></div>
+  </li>
+  <li class="about-roadmap__stop">
+    <div class="about-roadmap__marker" aria-hidden="true">02</div>
+    <div class="about-roadmap__card"><span class="about-roadmap__date">2024–PRESENT · RESEARCH</span><h4>Game engineering at Hongik University</h4><p>Ph.D. research explores game QA automation, visual understanding, and agentic workflows alongside industry work.</p><span class="about-roadmap__tag">MULTIMODAL QA</span></div>
+  </li>
+  <li class="about-roadmap__stop">
+    <div class="about-roadmap__marker" aria-hidden="true">03</div>
+    <div class="about-roadmap__card"><span class="about-roadmap__date">JUL–DEC 2025 · SK INTELIX</span><h4>AI for connected products</h4><p>At SmartHome Tech, I worked on AI feature compliance, TTS/STT collaboration, and a device-monitoring frontend.</p><span class="about-roadmap__tag">PRODUCT &amp; DEVICE UX</span></div>
+  </li>
+  <li class="about-roadmap__stop">
+    <div class="about-roadmap__marker" aria-hidden="true">04</div>
+    <div class="about-roadmap__card"><span class="about-roadmap__date">DEC 2025–SEP 2026 · SUPERCENT</span><h4>From retrieval to internal AI products</h4><p>I worked on SAGA and Millie, internal Firebase/Genkit platforms using RAG and agentic workflows.</p><span class="about-roadmap__tag">RAG &amp; AGENT WORKFLOWS</span></div>
+  </li>
+  <li class="about-roadmap__stop about-roadmap__stop--current">
+    <div class="about-roadmap__marker" aria-hidden="true">05</div>
+    <div class="about-roadmap__card"><span class="about-roadmap__date">CURRENT DIRECTION · EXPLORING</span><h4>More inspectable AI systems</h4><p>Current interests include evaluation, context engineering, MCP-connected tools, and human review for higher-risk actions.</p><a href="#open-source">Explore the open-source projects <span aria-hidden="true">→</span></a></div>
+  </li>
+</ol>
 
 **Recent research and publications**
 
