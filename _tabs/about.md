@@ -9,13 +9,14 @@ mermaid: false
 
 I am **Jang Young Jeong** (Fodev JEO), the author of this blog, based in Hwaseong, Gyeonggi-do, South Korea. Reach me through [Contact](/contact/).
 
-```text
-Former AI Product Developer, Supercent (Dec 2025 - Sep 2026)
-Ph.D. Candidate in Game Engineering @ Hongik University
-8 years across NCSOFT + Com2uS
-```
+| At a glance | Background |
+|:--|:--|
+| Recent role | AI Product Developer, Supercent · Dec 2025–Sep 2026 |
+| Research | Ph.D. candidate in Game Engineering · Hongik University |
+| Industry foundation | Eight years across NCSOFT and Com2uS |
 
-![Overview](/assets/img/cover.png){: .light .shadow .rounded-10 }
+![AI-generated illustration of a workspace connecting game development, research, agent networks and evaluation dashboards](/assets/img/about-ai-product-hero.png){: .w-100 .shadow .rounded-10 }
+_Concept illustration generated with GTI; not a photograph of an actual workspace._
 
 
 ---
@@ -26,11 +27,9 @@ I started in games because games force systems to be interactive, measurable, an
 
 My work began with game AI, procedural systems, digital humans, and computer-vision-based QA. Over time, that naturally expanded into a broader question: how do you turn research and experimentation into AI products people can actually use? That question is what now drives my work as an AI product engineer.
 
-I still like the same loop:
+![Workflow from framing a question through retrieving evidence, building a system, and evaluating results, with feedback informing the next question](/assets/img/about-workflow.svg){: .w-100 }
 
-- Start with a hard question.
-- Retrieve signal from papers, product constraints, user behavior, and experiments.
-- Turn that signal into a system that can survive production.
+The loop is **question → evidence → build → evaluate**. Evaluation feeds the next question; the diagram is a conceptual model, not a claim that every project followed the same sequence.
 
 ---
 
@@ -80,26 +79,27 @@ I prefer starting with one capable agent and adding orchestration only when the 
 
 ### Open Source
 
-I build and maintain a small family of agent-tooling projects in public:
+I build and maintain agent-tooling projects in public. Each project has a different role; installing a skill or using a gate is not a guarantee of a correct outcome.
 
-- **[oh-my-jeo](https://github.com/akillness/oh-my-jeo)** — a spec-first workflow pack and deterministic contract layer wrapped around chat agents (Hermes runtime).
-- **[jeo-code](https://github.com/akillness/jeo-code)** — a Bun-based coding-agent harness / CLI framework with a uniform multi-provider tool loop, anchored-edit integrity, and a verify-before-done loop.
-- **[jeopi](https://github.com/akillness/jeopi)** — a spec-first fork of oh-my-pi/pi-mono with a critic-gated plan/execute/verify spine.
-- **[jeo-skills](https://github.com/akillness/jeo-skills)** — a cross-platform agent-skills catalog for harness engineering, packaging reusable skills for coding agents.
-- **[jeo-claw](https://github.com/akillness/jeo-claw)** — a Discord-controlled, dual-runtime agentic agent that updates repositories from chat commands.
+| Project | Role | Starting point |
+|:--|:--|:--|
+| [oh-my-jeo](https://github.com/akillness/oh-my-jeo) | Spec-first workflows and contracts for chat agents | Workflow pack |
+| [jeo-code](https://github.com/akillness/jeo-code) | Bun-based coding agent with multi-provider tools and anchored edits | Coding-agent CLI |
+| [jeopi](https://github.com/akillness/jeopi) | oh-my-pi fork with a spec-first, critic-gated workflow | Agent runtime |
+| [jeo-skills](https://github.com/akillness/jeo-skills) | Searchable catalog and installer for reusable agent skills | Skill catalog |
+| [jeo-claw](https://github.com/akillness/jeo-claw) | Discord-controlled agentic repository workflows | Remote orchestration |
 
 ---
 
 ### Selected Work
 
-**Former AI Product Developer, Supercent (Dec 2025 - Sep 2026)**<br />
-Shipped SAGA and Millie — two Firebase/Genkit internal SaaS platforms — built on multimodal-embedding RAG and agentic AI workflows, plus on-premise AI product operation and team-wide AI-native collaboration standards.
+| Role | Period | Selected focus |
+|:--|:--|:--|
+| AI Product Developer, Supercent | Dec 2025–Sep 2026 | Internal AI products, multimodal RAG, agent workflows and operation |
+| AI Manager, SmartHome Tech, SK Intelix | Jul 2025–Dec 2025 | AI feature compliance, TTS/STT collaboration and device monitoring |
+| Ph.D. candidate, Hongik University | Sep 2024–present | Game engineering, AutoQA, VLM reporting and agentic workflows |
 
-**AI Manager, SmartHome Tech, SK Intelix (Jul 2025 - Dec 2025)**  
-Established AI feature compliance frameworks, tracked and shared Vision/LLM trends for NAMUHx Airsolution, owned TTS/STT collaboration, and delivered a real-time device-monitoring web frontend.
-
-**Ph.D. Candidate, Hongik University (Sep 2024 - Present)**  
-Researching game engineering with a focus on AutoQA tooling, VLM-based bug reporting, agentic workflows, RAG assistants, and lightweight on-device chatbots — the final twenty percent that turns a research concept into a working system.
+At Supercent, I worked on SAGA and Millie, two Firebase/Genkit internal platforms. The examples above describe the projects, not a public benchmark or a claim that all internal details are independently reproducible.
 
 **Recent research and publications**
 
@@ -154,17 +154,12 @@ This site is where those threads come together.
 
 ### Tech I Reach For
 
-**Languages & ML**
-Python | C | C++ | C# | Dart | PyTorch | TensorFlow | Transformers | OpenCV
-
-**AI Stack**
-LangGraph | LlamaIndex | RAG | Qdrant | ColBERT | PEFT/LoRA | ONNX | MCP
-
-**Product & Infra**
-Docker | Linux | GCP | AWS | Firebase | Genkit | WebSocket | PyQt | Flutter
-
-**Current AI/Product Themes**
-Agents | MCP | A2A | Evals | Tracing | Multimodal QA | Tool Use | Product Engineering
+| Area | Tools and themes |
+|:--|:--|
+| Languages and ML | Python, C, C++, C#, Dart, PyTorch, TensorFlow, Transformers, OpenCV |
+| AI stack | LangGraph, LlamaIndex, RAG, Qdrant, ColBERT, PEFT/LoRA, ONNX, MCP |
+| Product and infrastructure | Docker, Linux, GCP, AWS, Firebase, Genkit, WebSocket, PyQt, Flutter |
+| Current themes | Agents, MCP, A2A, evals, tracing, multimodal QA, tool use, product engineering |
 
 ---
 
