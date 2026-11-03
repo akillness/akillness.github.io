@@ -2,7 +2,9 @@
 title: "GPT-4o Architecture: Omni-Modal Foundation Models and Low-Latency Native Audio"
 description: "A source audit analyzing OpenAI's GPT-4o, evaluating native omni-modal tokenization, end-to-end audio reasoning, vision latency, and 2026 multimodal systems."
 date: 2024-05-14 10:00:00 +0800
-last_modified_at: 2026-10-18 14:00:00 +0900
+last_modified_at: 2026-11-03 16:22:00 +0900
+correction_date: "2026-11-03"
+correction_note: "Corrected the tokenizer chart and related prose to OpenAI's published language examples; removed the unsupported Python-code ratio and proportional latency claim. This correction is limited to tokenization."
 categories: [AI, Research]
 tags: [gpt-4o, multimodal, omni-modal, speech-to-speech, vision-language-model, real-time-ai]
 mermaid: true
@@ -78,16 +80,16 @@ A critical technical foundation of GPT-4o is its upgraded Byte-Pair Encoding (BP
 
 ```mermaid
 xychart-beta
-    title "Token Compression: Relative Tokens Needed vs English Baseline"
-    x-axis ["English", "Korean", "Japanese", "Arabic", "Hindi", "Python Code"]
-    y-axis "Token Count Reduction Factor" 1.0 --> 4.5
-    bar [1.1, 2.8, 3.1, 4.4, 3.8, 1.4]
+    title "OpenAI Language Examples: Previous Token Count / GPT-4o Token Count"
+    x-axis ["English", "Korean", "Japanese", "Arabic", "Hindi"]
+    y-axis "Token Count Ratio (rounded)" 0 --> 3.0
+    bar [1.1, 1.7, 1.4, 2.0, 2.9]
 ```
 
-Expanding the vocabulary significantly increases token compression across non-English scripts:
+The chart reproduces the rounded ratios in OpenAI's [May 2024 language-tokenization examples](https://openai.com/index/hello-gpt-4o/), not a comparison against an English baseline or a language-wide benchmark. The published before/after counts are English **27 → 24**, Korean **45 → 27**, Japanese **37 → 26**, Arabic **53 → 26**, and Hindi **90 → 31**. OpenAI does not include a Python-code example in that table.
 
-- **Non-Latin Scripts**: Languages such as Korean, Japanese, Hindi, and Arabic require **$2.5\times$ to $4.4\times$ fewer tokens** to represent identical sentences compared to `cl100k_base`.
-- **Latency and Cost Acceleration**: Because transformer inference complexity is strictly bounded by sequence length, higher token density directly translates into proportional generation speedups and dramatic API billing reductions for international developers.
+- **Non-Latin Scripts**: The selected Korean, Japanese, Arabic, and Hindi examples have ratios of **1.7, 1.4, 2.0, and 2.9**, respectively. The table's largest reported ratio, **4.4**, belongs to Gujarati (**145 → 33**), not Arabic.
+- **Cost and Latency Limits**: Fewer tokens for the same text can reduce token-based charges at a fixed price per token. These short examples do not establish a production workload's savings or proportional latency improvements; measure the actual text and deployment.
 
 ---
 
@@ -172,7 +174,7 @@ For deeper investigations into multimodal perception and real-time execution arc
 
 - **End-to-End Beats Cascades**: Training a unified neural network natively across audio, visual, and text tokens eliminates the latency penalties and emotional information loss inherent to multi-stage ASR-LLM-TTS pipelines.
 - **Sub-Second Conversational Parity**: Achieving ~320 ms end-to-end response times combined with automated Voice Activity Detection (VAD) unlocks natural, interruptible voice interactions.
-- **Vocabulary Scaling Drives Global Efficiency**: The 200,000-token `o200k_base` vocabulary compresses non-English and code representations by up to $4.4\times$, drastically reducing latency and operational API expenses.
+- **Tokenization Gains Are Example-Specific**: OpenAI's published examples report Korean 45 → 27 tokens and Gujarati 145 → 33 tokens (rounded ratios of 1.7 and 4.4). They do not establish a Python-code ratio, universal language compression, or proportional latency savings.
 
 ---
 
@@ -185,7 +187,7 @@ For deeper investigations into multimodal perception and real-time execution arc
 
 ## References
 
-- OpenAI. (2024). *Hello GPT-4o: OpenAI's New Flagship Omni-Modal Model*. OpenAI Research & Product Announcements. https://openai.com/index/hello-gpt-4o/ (accessed 2026-10-18).
+- OpenAI. (2024). *Hello GPT-4o: OpenAI's New Flagship Omni-Modal Model*. OpenAI Research & Product Announcements. https://openai.com/index/hello-gpt-4o/ (tokenization examples rechecked 2026-11-03; other sections last reviewed 2026-10-18).
 - OpenAI. (2024). *GPT-4o System Card*. OpenAI Technical Documentation. https://openai.com/index/gpt-4o-system-card/ (accessed 2026-10-18).
 - Achiam, J., Adler, S., Agarwal, S., Ahmad, L., Akkaya, I., Aleman, F. L., ... & McGrew, B. (2023). *GPT-4 Technical Report*. arXiv preprint arXiv:2303.08774. https://arxiv.org/abs/2303.08774 (accessed 2026-10-18).
 - Radford, A., Kim, J. W., Xu, T., Brockman, G., McLeavey, C., & Sutskever, I. (2023). *Robust Speech Recognition via Large-Scale Weak Supervision (Whisper)*. International Conference on Machine Learning (ICML 2023). arXiv preprint arXiv:2212.04356. https://arxiv.org/abs/2212.04356 (accessed 2026-10-18).
