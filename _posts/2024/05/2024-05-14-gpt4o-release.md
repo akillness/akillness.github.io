@@ -2,9 +2,9 @@
 title: "GPT-4o Architecture: Omni-Modal Foundation Models and Low-Latency Native Audio"
 description: "A source audit analyzing OpenAI's GPT-4o, evaluating native omni-modal tokenization, end-to-end audio reasoning, vision latency, and 2026 multimodal systems."
 date: 2024-05-14 10:00:00 +0800
-last_modified_at: 2026-11-03 16:22:00 +0900
+last_modified_at: 2026-11-03 16:24:23 +0900
 correction_date: "2026-11-03"
-correction_note: "Corrected the tokenizer chart and related prose to OpenAI's published language examples; removed the unsupported Python-code ratio and proportional latency claim. This correction is limited to tokenization."
+correction_note: "Corrected the tokenizer examples and voice-response latency figures against OpenAI's sources; removed unsupported code-compression and latency claims, separated the older GPT-3.5/GPT-4 Voice Mode figures from GPT-4 Turbo, and distinguished reported GPT-4o audio response time from application-level latency. This correction is limited to tokenization and voice-latency claims, not a full review of the article."
 categories: [AI, Research]
 tags: [gpt-4o, multimodal, omni-modal, speech-to-speech, vision-language-model, real-time-ai]
 mermaid: true
@@ -21,26 +21,26 @@ Prior to May 2024, conversational artificial intelligence systems that supported
 
 ```mermaid
 graph TD
-    subgraph CascadedLegacyPipeline["Legacy Cascaded Voice/Vision Pipeline"]
+    subgraph CascadedLegacyPipeline["Previous ChatGPT Voice Mode: Three-Model Pipeline"]
         AIn[User Voice Audio] --> ASR[Whisper ASR: Audio to Text]
         ASR -->|Loss of Tone, Pitch, Emotion & Cadence| TextQ[Raw Text String]
-        TextQ --> LLM[GPT-4 Turbo: Text Generation]
-        LLM -->|Buffering Complete Sentences| TextAns[Response Text]
+        TextQ --> LLM[GPT-3.5 or GPT-4: Text Generation]
+        LLM --> TextAns[Response Text]
         TextAns --> TTS[TTS Engine: Text to Speech Waveform]
         TTS --> AudioOut[Synthesized Speech Output]
-        Note1["Total End-to-End Latency: 1,400ms - 3,200ms<br/>Incapable of handling interruptions"]
+        Note1["OpenAI-reported average Voice Mode latency<br/>GPT-3.5: 2.8 s; GPT-4: 5.4 s"]
     end
 
     subgraph NativeOmniModal["GPT-4o Native Omni-Modal Architecture"]
         OmniIn[Audio Waveform + Video Stream + Text] --> SingleNet[Unified GPT-4o Transformer Backbone]
         SingleNet --> OmniOut[Real-Time Direct Audio Tokens + Text + Visuals]
-        Note2["Total End-to-End Latency: ~320ms (Human Conversational Parity)<br/>Preserves emotional inflection, laughter & real-time interruption"]
+        Note2["OpenAI-reported response to audio inputs<br/>As little as 232 ms; average 320 ms<br/>Not an application latency guarantee"]
     end
 ```
 
-While cascaded pipelines produced grammatically coherent answers, they suffered from two fatal flaws: excessive latency and severe information loss. Total roundtrip latency averaged between 1,400 ms and 3,200 ms, completely destroying natural conversational cadence. More fundamentally, converting sound into plain text stripped away emotional nuance, pitch, vocal timbre, sarcasm, laughter, and background audio clues. Concurrently, vision inputs were processed through disparate projection layers that could not synchronize with real-time audio frames.
+OpenAI's [May 13, 2024 announcement](https://openai.com/index/hello-gpt-4o/) describes latency and information loss in the previous three-model ChatGPT Voice Mode. It reports average latency of **2.8 seconds with GPT-3.5** and **5.4 seconds with GPT-4**. These are figures for that Voice Mode pipeline, not a measured range for all cascaded systems or a GPT-4 Turbo API benchmark. More fundamentally, converting sound into plain text stripped away emotional nuance, pitch, vocal timbre, sarcasm, laughter, and background audio clues. Concurrently, vision inputs were processed through disparate projection layers that could not synchronize with real-time audio frames.
 
-OpenAI’s **GPT-4o** ("omni") fundamentally transformed this paradigm by training a single neural network end-to-end across text, audio, and vision modalities. With an average response latency of 320 ms—closely matching human conversational reaction times—GPT-4o natively perceives and synthesizes emotional inflections, accommodates mid-sentence interruptions, and processes video streams in real time. This source audit conducts an architectural dissection of GPT-4o's omni-modal design, evaluates tokenization and benchmark metrics, examines developer API cost-throughput dynamics, and analyzes how omni-modal architectures evolved across 2026.
+OpenAI’s **GPT-4o** ("omni") fundamentally transformed this paradigm by training a single neural network end-to-end across text, audio, and vision modalities. OpenAI reports that GPT-4o can respond to audio inputs in **as little as 232 ms, with an average of 320 ms**, which it describes as similar to human response time in conversation. The [August 2024 system card](https://openai.com/index/gpt-4o-system-card/) repeats those figures. They are OpenAI-reported audio-response times, not measurements performed for this article or a guarantee for a deployed application's full capture-to-playback path. This source audit conducts an architectural dissection of GPT-4o's omni-modal design, evaluates tokenization and benchmark metrics, examines developer API cost-throughput dynamics, and analyzes how omni-modal architectures evolved across 2026.
 
 ---
 
@@ -103,7 +103,6 @@ To quantify GPT-4o's performance leap over predecessor architectures (GPT-4 Turb
 | **HumanEval (0-shot)** | Python Code Generation | 87.1% | 84.1% | **90.2%** |
 | **MMMU (Val)** | Multimodal College Reasoning | 63.1% | 62.2% | **69.1%** |
 | **DocVQA** | Document & Chart Parsing | 90.4% | 89.8% | **92.8%** |
-| **Speech-to-Speech End-to-End Latency** | Full Turnaround Time | ~1,800 ms (Cascaded) | N/A | **320 ms (Real-time)** |
 | **API Cost per Million Input Tokens** | Commercial Developer Pricing | $10.00 / 1M | $3.50 / 1M | **$5.00 / 1M (50% cheaper)** |
 | **Inference Throughput** | Output Tokens per Second | ~38 tok/s | ~42 tok/s | **~105 tok/s (2.8x faster)** |
 
@@ -111,9 +110,21 @@ The empirical results demonstrate that end-to-end omni-modal training did not di
 
 ---
 
+## Voice Latency Is a Separate, Source-Reported Comparison
+
+The May 2024 announcement reports the following figures. They are separated from the GPT-4 Turbo benchmark columns above to preserve the actual model and product attribution.
+
+| System named by OpenAI | Reported audio/voice response latency |
+| :--- | :--- |
+| Previous ChatGPT Voice Mode with GPT-3.5 | 2.8 seconds on average |
+| Previous ChatGPT Voice Mode with GPT-4 | 5.4 seconds on average |
+| GPT-4o responding to audio inputs | As little as 232 ms; 320 ms on average |
+
+These published figures are not an independently reproduced, common-harness API benchmark in this article. The 320 ms figure should not be read as the time to finish speaking an entire answer or as a fixed WebRTC playback delay.
+
 ## Developer Ecosystem Impact: Real-Time Audio APIs and WebRTC Integration
 
-Beyond browser and desktop chat applications, the primary technical disruption of GPT-4o was the release of the **Realtime API**, operating over bidirectional **WebSockets** and **WebRTC** transport layers.
+OpenAI introduced the **Realtime API public beta on October 1, 2024**, after the May GPT-4o announcement. Its [launch post](https://openai.com/index/introducing-the-realtime-api/) describes direct streaming of audio inputs and outputs over a persistent WebSocket connection and automatic interruption handling. It does not turn the May announcement's 320 ms average into a latency guarantee for this illustrative WebRTC application flow:
 
 ```mermaid
 sequenceDiagram
@@ -127,18 +138,18 @@ sequenceDiagram
     Client->>RTServer: Stream Live Microphone Audio Chunks
     RTServer->>AudioEngine: Continuous Acoustic Token Ingestion
     AudioEngine-->>RTServer: Stream Low-Latency Audio Delta Tokens
-    RTServer-->>Client: Play Native Synthesized Audio (320ms Latency)
+    RTServer-->>Client: Stream Audio for Playback (Application Latency Not Measured)
     Note over Client,AudioEngine: User Speaks Mid-Generation (Interrupt Event)
     Client->>RTServer: Send Voice Activity Detection (VAD) Interrupt Packet
-    RTServer->>AudioEngine: Truncate Active Audio Generation Immediately
+    RTServer->>AudioEngine: Cancel Active Audio Generation
     AudioEngine->>AudioEngine: Pivot Context to Handle Interruption
 ```
 
 ### Key Realtime API Primitives
 
 1. **Server-Side Voice Activity Detection (VAD)**: The gateway continuously monitors incoming audio streams, automatically halting generation when human vocal frequencies are detected.
-2. **Interruptibility**: Eliminates the jarring, unnatural turn-taking of legacy bots where users had to wait for a 20-second synthesized response to finish before speaking.
-3. **Function Calling in Mid-Conversation**: The model can pause active speech, trigger a background client tool (e.g., querying a flight status database), absorb the JSON response, and verbally explain the findings without audible context disruption.
+2. **Interruptibility**: The Realtime API launch post describes automatic interruption handling. This is a capability claim, not a measured interruption delay for the application shown here.
+3. **Function Calling**: The launch post describes triggering actions or retrieving context through function calling. This article has not measured tool-call round-trip latency or demonstrated pause-free speech around a tool call.
 
 ---
 
@@ -172,8 +183,8 @@ For deeper investigations into multimodal perception and real-time execution arc
 
 ## Key Takeaways
 
-- **End-to-End Beats Cascades**: Training a unified neural network natively across audio, visual, and text tokens eliminates the latency penalties and emotional information loss inherent to multi-stage ASR-LLM-TTS pipelines.
-- **Sub-Second Conversational Parity**: Achieving ~320 ms end-to-end response times combined with automated Voice Activity Detection (VAD) unlocks natural, interruptible voice interactions.
+- **Keep the Comparison Attributed**: OpenAI reports average latency of 2.8 seconds for the previous GPT-3.5 Voice Mode and 5.4 seconds for GPT-4 Voice Mode. Neither number is a GPT-4 Turbo API measurement.
+- **Audio Response Is Not an Application SLA**: OpenAI reports GPT-4o responding to audio in as little as 232 ms and averaging 320 ms. Measure a deployed application's latency separately; the figures do not guarantee WebRTC playback timing or the time to complete a spoken answer.
 - **Tokenization Gains Are Example-Specific**: OpenAI's published examples report Korean 45 → 27 tokens and Gujarati 145 → 33 tokens (rounded ratios of 1.7 and 4.4). They do not establish a Python-code ratio, universal language compression, or proportional latency savings.
 
 ---
@@ -187,7 +198,8 @@ For deeper investigations into multimodal perception and real-time execution arc
 
 ## References
 
-- OpenAI. (2024). *Hello GPT-4o: OpenAI's New Flagship Omni-Modal Model*. OpenAI Research & Product Announcements. https://openai.com/index/hello-gpt-4o/ (tokenization examples rechecked 2026-11-03; other sections last reviewed 2026-10-18).
-- OpenAI. (2024). *GPT-4o System Card*. OpenAI Technical Documentation. https://openai.com/index/gpt-4o-system-card/ (accessed 2026-10-18).
+- OpenAI. (2024). *Hello GPT-4o: OpenAI's New Flagship Omni-Modal Model*. OpenAI Research & Product Announcements. https://openai.com/index/hello-gpt-4o/ (tokenization and voice-response latency passages rechecked 2026-11-03; other sections not revalidated in this correction).
+- OpenAI. (2024). *GPT-4o System Card*. OpenAI Technical Documentation. https://openai.com/index/gpt-4o-system-card/ (introductory audio-response figures rechecked 2026-11-03).
+- OpenAI. (2024-10-01). *Introducing the Realtime API*. https://openai.com/index/introducing-the-realtime-api/ (launch date, streaming and interruption passages checked 2026-11-03).
 - Achiam, J., Adler, S., Agarwal, S., Ahmad, L., Akkaya, I., Aleman, F. L., ... & McGrew, B. (2023). *GPT-4 Technical Report*. arXiv preprint arXiv:2303.08774. https://arxiv.org/abs/2303.08774 (accessed 2026-10-18).
 - Radford, A., Kim, J. W., Xu, T., Brockman, G., McLeavey, C., & Sutskever, I. (2023). *Robust Speech Recognition via Large-Scale Weak Supervision (Whisper)*. International Conference on Machine Learning (ICML 2023). arXiv preprint arXiv:2212.04356. https://arxiv.org/abs/2212.04356 (accessed 2026-10-18).
