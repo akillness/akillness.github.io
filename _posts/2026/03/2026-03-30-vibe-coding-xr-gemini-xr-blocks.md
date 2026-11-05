@@ -5,10 +5,11 @@ categories: [AI, Tooling]
 tags: [vibe-coding, xr, gemini, google-research, webxr, spatial-computing, threejs]
 date: 2026-03-30 10:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt into authoritative source audit on Google Research's Vibe Coding XR, Gemini intent-to-spatial-code compilation, XR Blocks WebXR architecture, and prototyping speed"
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Spatial Computing Demand Intent-to-Spatial Compilation Over Manual 3D Setup?

@@ -8,8 +8,9 @@ image:
   path: /assets/img/llm/RAG-Data-Visualization.gif
   alt: Interactive RAG embedding visualization and vector space diagnostics
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from brief tutorial note into authoritative source audit on RAG exploratory data analysis, UMAP dimensionality reduction, and vector space diagnostics"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 In traditional tabular machine learning, no competent data scientist would train a model without first conducting thorough Exploratory Data Analysis (EDA)—inspecting feature distributions, correlation matrices, class imbalance ratios, and missing value patterns. Yet, in Retrieval-Augmented Generation (RAG) engineering, teams frequently operate in total visual blindness. Developers chunk documents, feed them into an embedding API, dump millions of vectors into a database, and treat cosine similarity as an unassailable mathematical truth.

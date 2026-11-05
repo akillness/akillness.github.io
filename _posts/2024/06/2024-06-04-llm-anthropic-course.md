@@ -8,8 +8,9 @@ image:
   path: /assets/img/llm/LLM_Anthropic_course.png
   alt: Anthropic tool use course and autonomous agent execution architecture
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from brief course syllabus note into authoritative source audit on Anthropic tool use, JSON schema contracts, agentic loop design, and error recovery"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 Large language models trained purely on static pre-training corpora suffer from insurmountable boundaries: their knowledge is fixed at training cutoffs, they cannot perform verified arithmetic without token drift, and they lack agency to interact with external digital environments. Early attempts to grant models external reach relied on loose text prompting—instructing models to wrap commands in Markdown code blocks or pseudocode snippets. This approach failed in production due to syntax hallucinations, unparseable JSON, and fragile downstream execution layers.

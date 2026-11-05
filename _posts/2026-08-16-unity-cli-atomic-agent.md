@@ -6,14 +6,15 @@ categories: [AI, Tooling]
 tags: [atomic-agent, unity, devops, automation, ci-cd, harness]
 date: 2026-08-16 09:00:00 +0900
 last_modified_at: 2026-10-17 11:45:00 +0900
-archive_developed: 2026-10-17
-archive_development_note: "Rebuilt from the August 2026 note into an original Source Audit on local-first AI operators, headless Unity build pipelines, artifact verification, and store delivery."
 pin: false
 mermaid: true
 image:
   path: /assets/img/posts/2026-08-16-unity-cli-atomic-agent/atomic-agent-hero.png
   lqip: data:image/webp;base64,UklGRiYAAABXRUJQVlA4IBIAAAAwAQCdASoBAAEAAQAcJZACdLoAA3AA
   alt: "Atomic Agent - Local-First AI Operator for Automation"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Game Build Pipelines Resist Traditional Headless Automation

@@ -5,14 +5,15 @@ categories: [AI, Agents]
 tags: [multi-agent, claude-opus, harness-engineering, compilers, orchestration]
 date: 2026-02-06 13:00:00 +0900
 last_modified_at: 2026-10-18 07:55:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit of Anthropic's Claude Opus 4.6 and Claude Code Agent Teams, examining task locking, autonomous Git reconciliation, and the 16-agent C compiler architecture."
 mermaid: true
 math: false
 image:
   path: /assets/img/2026-02-06-claude-opus-46/opus46.png
   alt: "Claude Opus 4.6"
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## The Multi-Agent Software Engineering Reset: Model Depth Meets Parallel Harnesses

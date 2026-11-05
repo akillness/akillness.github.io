@@ -9,8 +9,9 @@ mermaid: true
 image:
   path: /assets/img/ai/minimal-openclaw-1.jpg
   alt: "Minimal AI Agent Architecture"
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from informal project roundup into rigorous systems source audit on lightweight local agent runtimes, embedded execution, and sandboxed capability routing"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Are Developers Abandoning Heavy Monolithic Agent Frameworks?

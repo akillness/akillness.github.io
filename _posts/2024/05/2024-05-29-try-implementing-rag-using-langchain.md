@@ -8,8 +8,9 @@ image:
   path: /assets/img/llm/LLM_implementing_RAG_using_LangChain.png
   alt: Retrieval-Augmented Generation architecture with LangChain and vector databases
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from brief 93-word tutorial note into authoritative source audit on LangChain RAG architectures, hybrid vector-relational databases, and production retrieval pipelines"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 While frontier large language models demonstrate impressive conversational fluency, deploying them in enterprise environments immediately reveals their core limitation: parametric memory is static, cut off from real-time organizational records, and prone to confident hallucinations when answering domain-specific queries. Attempting to solve this through continual pre-training or fine-tuning is computationally prohibitive and fails to provide auditable source provenance or granular access controls.

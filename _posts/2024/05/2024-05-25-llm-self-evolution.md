@@ -8,8 +8,9 @@ image:
   path: /assets/img/news/Self-Evolution.jpeg
   alt: Autonomous self-evolution pipeline in large language models
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party rewrite into authoritative source audit on LLM self-evolution architectures, iterative DPO, self-rewarding mechanisms, and model collapse prevention"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 The rapid scaling of frontier foundation models has collided with a physical ceiling: the exhaustion of high-quality human text. As pre-training crawls the entirety of public internet repositories, foundational improvements can no longer depend solely on web-scale token ingestion. Furthermore, Reinforcement Learning from Human Feedback (RLHF) suffers from an expensive annotation bottleneck and inter-annotator disagreement on complex technical reasoning tasks.

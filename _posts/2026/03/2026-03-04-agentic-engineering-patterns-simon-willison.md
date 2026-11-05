@@ -5,10 +5,11 @@ categories: [AI, Agents]
 tags: [agentic-engineering, patterns, simon-willison, tdd, workflow, code-review]
 date: 2026-03-04 21:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt into authoritative source audit on Simon Willison's agentic engineering patterns, red-green TDD guardrails, linear walkthroughs, and prompt hoarding"
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Cheap Code Generation Demand Stricter Operational Engineering Patterns?

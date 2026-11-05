@@ -5,8 +5,9 @@ categories: [AI, Research]
 tags: [llm-evaluation, korean-nlp, benchmarks, kmmlu, click-benchmark]
 date: 2024-05-19 01:20:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from Korean repository summary into comprehensive technical source audit on Korean language model evaluation frameworks, tokenizer compression, and cultural grounding"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Global LLM Benchmarks Fail to Capture Korean Cultural Nuance?

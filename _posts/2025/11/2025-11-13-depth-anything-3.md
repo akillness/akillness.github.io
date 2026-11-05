@@ -9,8 +9,9 @@ mermaid: true
 image:
   path: /assets/img/posts/depth-anything-3-teaser.png
   alt: "Depth Anything 3 Performance Comparison"
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a third-party review note into an authoritative source audit of ByteDance Seed's Depth Anything 3 unified visual geometry foundation model."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Multi-Task 3D Reconstruction Yield to Singular Depth-Ray Formulations?

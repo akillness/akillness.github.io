@@ -7,8 +7,9 @@ date: 2024-05-11 14:30:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from Korean course syllabus note into rigorous computer science source audit on randomized algorithms, asymptotic complexity, and cache-conscious sorting"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Asymptotic Complexity Dictate Modern AI Hardware Scalability?

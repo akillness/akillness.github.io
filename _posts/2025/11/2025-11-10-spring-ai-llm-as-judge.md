@@ -9,8 +9,9 @@ mermaid: true
 image:
   path: /assets/img/posts/spring-ai-llm-as-judge.png
   alt: "Spring AI LLM as Judge Architecture"
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a third-party review note into an authoritative source audit of LLM-as-a-Judge evaluation mechanics and Spring AI recursive advisor architectures."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Deterministic NLP Metrics Break Down in Production LLM Evaluation?

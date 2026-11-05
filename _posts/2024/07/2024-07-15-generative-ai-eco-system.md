@@ -7,8 +7,9 @@ categories: [AI, Tooling]
 tags: [generative-ai, enterprise-ai, llm-stack, rag, agentic-systems]
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial 5-challenge note into exhaustive architectural audit on enterprise generative AI stacks: vLLM serving, gateway routing, hybrid RAG, and agent safety harnesses"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## How Did the Enterprise Generative AI Stack Decouple Across Five Tiers?

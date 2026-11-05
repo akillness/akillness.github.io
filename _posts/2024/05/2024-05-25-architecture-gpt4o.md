@@ -5,12 +5,13 @@ categories: [AI, Research]
 tags: [uni-moe, multimodal-llm, mixture-of-experts, gpt-4o, cross-modality, sparse-routing]
 date: 2024-05-25 11:05:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from speculative third-party summary into authoritative source audit analyzing Uni-MoE paper (HITsz-TMG), sparse cross-modality routing, and 3-stage training dynamics"
 mermaid: true
 image:
   path: /assets/img/news/GPT4o-Architecture.jpeg
   alt: "Uni-MoE sparse mixture of experts architecture and multimodal token projection"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Unified Multimodal Models Require Sparse Mixture-of-Experts Rather Than Dense Backbones?

@@ -6,13 +6,14 @@ categories: [AI, Research]
 tags: [llama, meta, foundation-models, distributed-training, alignment]
 date: 2024-07-29 12:00:00 +0800
 last_modified_at: 2026-10-18 10:40:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2024 note into an authoritative source audit of Meta's Llama 3.1 technical report, analyzing 405B dense scaling, 4D distributed training, and 128K context extensions."
 mermaid: true
 math: true
 image:
   path: /assets/img/llm/llama-3-1-technical-report.jpeg
   alt: "Meta Llama 3.1 Technical Report Architecture"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Meta Llama 3.1 Technical Report](/assets/img/llm/llama-3-1-technical-report.jpeg){: .light .w-75 .shadow .rounded-10 }

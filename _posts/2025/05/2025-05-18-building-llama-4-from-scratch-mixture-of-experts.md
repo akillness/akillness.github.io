@@ -10,8 +10,9 @@ math: true
 image:
   path: /assets/img/ai/llama4/llama4-moe-diagram.png
   alt: "Mixture-of-Experts Architecture Diagram"
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a third-party tutorial into an authoritative source audit of Mixture-of-Experts architectures, evaluating sparse routing, auxiliary losses, and distributed expert parallelism."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Dense Transformer Scaling Encounter Diminishing Returns?

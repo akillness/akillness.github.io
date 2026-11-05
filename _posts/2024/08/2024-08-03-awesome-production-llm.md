@@ -5,9 +5,10 @@ categories: [AI, Tooling]
 tags: [production-llm, llmops, model-serving, guardrails, evaluation, open-source]
 date: 2024-08-03 13:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from generic awesome-list roundup into authoritative systems engineering source audit detailing the 7-layer production LLM stack across serving engines (vLLM/SGLang), evaluation harnesses (Ragas/Opik), and layered NeMo guardrails"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Monolithic Frameworks Fail to Satisfy Enterprise Production LLM Requirements?

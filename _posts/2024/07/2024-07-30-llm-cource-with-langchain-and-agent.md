@@ -6,8 +6,9 @@ tags: [langchain, langgraph, agents, orchestration, lcel]
 date: 2024-07-30 20:00:00 +0800
 last_modified_at: 2026-10-18 10:45:00 +0900
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2024 note into an authoritative source audit of agent orchestration, evaluating LangChain LCEL pipelines and LangGraph cyclical state machines."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Static Linear Chains Break Under Complex Multi-Step Agent Workflows?

@@ -5,10 +5,11 @@ categories: ["AI, Agents"]
 tags: [software-engineering, multi-agent, harness, testing]
 date: 2025-11-20 15:00:00 +0800
 last_modified_at: 2026-10-17 14:25:00 +0900
-archive_developed: "2026-10-17"
-archive_development_note: "Rebuilt from the 2025-11 note into a rigorous Source Audit. Replaced speculative career advice listicles with a technical analysis of agent harness engineering, contract-driven interface design, and property-based verification pipelines."
 mermaid: true
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## What Technical Disciplines Replace Syntax Writing in Agent-Driven Software Development?

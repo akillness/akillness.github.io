@@ -9,8 +9,9 @@ mermaid: true
 image:
   path: /assets/img/semantic-router/signal-0.png
   alt: "Signal-Decision Architecture Overview"
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary announcement into an authoritative source audit of vLLM's Signal-Decision Architecture and multi-dimensional semantic routing."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Single-Dimensional Intent Classification Fail in Enterprise Model Serving?

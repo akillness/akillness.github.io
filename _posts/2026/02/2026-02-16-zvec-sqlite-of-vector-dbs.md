@@ -5,13 +5,14 @@ categories: [AI, Tooling]
 tags: [vector-database, zvec, alibaba, embedded-storage, information-retrieval]
 date: 2026-02-16 10:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2026 Zvec draft note into an authoritative source audit of Alibaba Zvec, in-process vector databases, Proxima search kernels, memory-mapped disk persistence, and edge RAG topologies."
 mermaid: true
 math: true
 image:
   path: /assets/img/2026-02-16-zvec/logo.svg
   alt: "Alibaba Zvec embedded in-process vector database"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Micro-RAG and Local Agent Workflows Demand In-Process Embedded Vector Engines?

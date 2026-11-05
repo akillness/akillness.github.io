@@ -7,8 +7,9 @@ categories: [AI, Research]
 tags: [llama-3, open-weights, transformer-scaling, fp8-quantization, post-training]
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial announcement note into exhaustive technical source audit on Meta Llama 3.1: dense 405B scaling, 128K context RoPE extension, FP8 single-node inference, and iterative DPO post-training"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## How Did Llama 3.1 Prove That Dense Scaling Rivals Mixture-of-Experts?

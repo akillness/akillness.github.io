@@ -5,13 +5,14 @@ categories: [AI, Tooling]
 tags: [generative-ai, architecture, mlops, vector-database, orchestration]
 date: 2025-12-08 10:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2025 production generative AI stack note into an authoritative source audit of multi-layer enterprise AI architectures, gateway routing, RAG topologies, and evaluation observability."
 mermaid: true
 math: true
 image:
   path: /assets/img/production-ai-stack/ai-stack-architecture.png
   alt: "Production Generative AI Stack Architecture Diagram"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Proof-of-Concept GenAI Architectures Fail Under Production Demands?

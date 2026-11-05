@@ -5,11 +5,12 @@ categories: [AI, Agents]
 tags: [agents, orchestration, langgraph, architecture]
 date: 2025-12-10 10:00:00 +0800
 last_modified_at: 2026-10-18 07:55:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit of Fareed Khan's all-agentic-architectures catalog, surveying 17 LangGraph patterns against 2026 production tradeoffs and harness engineering."
 mermaid: true
 math: false
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## The Taxonomy Problem in Modern AI Agent Architecture

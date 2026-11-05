@@ -6,13 +6,14 @@ categories: [AI, Research]
 tags: [peft, lora, fine-tuning, quantization, llm]
 date: 2024-06-10 10:10:00 +0800
 last_modified_at: 2026-10-18 10:20:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2024 note into an authoritative source audit of Parameter-Efficient Fine-Tuning, evaluating low-rank factorization, LoRA variants, and QLoRA memory mechanics."
 mermaid: true
 math: true
 image:
   path: /assets/img/llm/LLM_Finetune_visualization.gif
   alt: "Parameter-Efficient Fine-Tuning Architectural Mechanisms"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![PEFT Architectural Mechanisms](/assets/img/llm/LLM_Finetune_visualization.gif){: .light .w-75 .shadow .rounded-10 }

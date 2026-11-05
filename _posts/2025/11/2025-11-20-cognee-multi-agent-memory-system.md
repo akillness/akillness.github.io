@@ -5,10 +5,11 @@ categories: ["AI, Tooling"]
 tags: [graphrag, memory, multi-agent, knowledge-graph]
 date: 2025-11-20 15:00:00 +0800
 last_modified_at: 2026-10-17 14:30:00 +0900
-archive_developed: "2026-10-17"
-archive_development_note: "Rebuilt from the 2025-11 note into a rigorous Source Audit. Replaced first-person game development anecdotes with an architectural evaluation of Cognee ECL pipelines, GraphRAG multi-hop retrieval benchmarks, and hybrid property graph topologies."
 mermaid: true
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Pure Vector Similarity Fail in Multi-Agent Memory Systems?

@@ -8,8 +8,9 @@ image:
   path: /assets/img/blog/NLP_Overview.svg
   alt: Evolution of Natural Language Processing from early representations to Transformers
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from brief course syllabus note into authoritative source audit on NLP foundations, tokenization pipelines, self-attention mechanics, and Transformer scaling"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 Natural language processing (NLP) has undergone the most radical architectural transformation in computational history. For decades, computational linguistics relied on hand-engineered grammatical rules, statistical n-gram frequencies, and vector space models like TF-IDF. The arrival of deep learning introduced continuous distributed representations—pioneered by Word2Vec and GloVe—yet early deep models remained fundamentally constrained by sequential recurrence.

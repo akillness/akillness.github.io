@@ -5,8 +5,9 @@ categories: [AI, Research]
 tags: [reinforcement-learning, markov-decision-process, ppo, dpo, policy-gradients]
 date: 2024-06-30 20:10:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial library listicle into comprehensive technical source audit on Bellman optimality, policy gradients, PPO clipping, DPO derivation, and distributed RL systems"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Reinforcement Learning Foundations](/assets/img/blog/ReinforcementLearning_Library.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }

@@ -7,8 +7,9 @@ categories: [AI, Tooling]
 tags: [data-quality, machine-learning, data-contracts, mlops, feature-store]
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial 10-step list into exhaustive systems audit on ML data quality: data contracts, streaming Flink schema validation, PSI distribution drift, and train-serve feature store governance"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Silent Data Corruption Destabilize Production Machine Learning?

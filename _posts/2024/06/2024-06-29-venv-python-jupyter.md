@@ -5,9 +5,10 @@ categories: [AI, Tooling]
 tags: [jupyter, python-venv, ipykernel, development-environment, tooling, uv]
 date: 2024-06-29 00:10:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from basic CLI steps into authoritative source audit detailing the Jupyter messaging protocol, ZeroMQ IPC boundaries, kernelspec lifecycle, and modern uv toolchain workflows"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Global Python Environments Corrupt Interactive Notebook Workflows?

@@ -5,11 +5,12 @@ categories: [AI, Tooling]
 tags: [agent-skills, developer-tools, workflows, cli, quality-gates]
 date: 2026-02-07 18:00:00 +0900
 last_modified_at: 2026-10-18 07:55:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit examining open-source agent skill survival criteria, deconstructing Superpowers, Humanizer, UI-UX Pro Max, and Vercel Skills CLI against 2026 standards."
 mermaid: true
 math: false
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## The Proliferation and Attrition of Open-Source Agent Skills

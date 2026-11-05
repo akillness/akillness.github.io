@@ -5,8 +5,9 @@ categories: [AI, Research]
 tags: [llm-research, test-time-compute, state-space-models, mixture-of-experts, post-training]
 date: 2024-05-26 03:23:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial 2024 trend roundup into rigorous technical source audit on post-Chinchilla compute scaling, test-time search, state-space duality, and extreme quantization"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![LLM Research Trends](/assets/img/llm/LLM_research_trends.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }

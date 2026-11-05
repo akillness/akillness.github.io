@@ -3,8 +3,6 @@ title: "Source Audit: Memori and the Trade-Offs of SQL-Native Agent Memory"
 description: "Auditing MemoriLabs/Memori: analyzing relational schema interception, ACID durability, and why standard SQL databases challenge dedicated vector stores."
 date: 2025-11-26 09:00:00 +0800
 last_modified_at: 2026-10-18 07:40:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from the speculative 2025-11 note into a rigorous Source Audit pinning MemoriLabs/Memori, evaluating SQL interception, relational entity schemas, and hybrid vector trade-offs."
 categories: [AI, Tooling]
 tags: [memory, sql, postgresql, agents, databases]
 mermaid: true
@@ -12,6 +10,9 @@ image:
   path: /assets/img/research/memori/banner.png
   alt: "Memori architectural diagram comparing SQL-native relational memory with specialized vector databases"
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Can Standard Relational Databases Replace Dedicated Vector Stores for Agent Memory?

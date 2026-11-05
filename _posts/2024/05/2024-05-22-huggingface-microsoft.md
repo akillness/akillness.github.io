@@ -5,12 +5,13 @@ categories: [AI, Tooling]
 tags: [huggingface, microsoft-azure, amd-mi300x, onnx-runtime, webgpu, open-source-ai]
 date: 2024-05-22 15:22:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal partnership announcement into authoritative source audit on multi-hardware acceleration, AMD ROCm MI300X, and cross-platform ONNX runtime execution"
 mermaid: true
 image:
   path: /assets/img/news/Huggingface_Microsoft.jpeg
   alt: "Microsoft and Hugging Face cross-hardware open source AI ecosystem architecture"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did the Microsoft and Hugging Face Alliance Target Silicon Diversification Beyond Nvidia?

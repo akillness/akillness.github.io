@@ -6,13 +6,14 @@ categories: [AI, Research]
 tags: [ai-agents, open-source, machine-learning, agent-harness, systems-design]
 date: 2026-02-21 21:30:00 +0900
 last_modified_at: 2026-10-18 09:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2026-02 note into an authoritative architectural survey of 10 open-source repositories spanning foundational ML, agent workflows, and production systems design."
 mermaid: true
 math: false
 image:
   path: /assets/img/ai/agent-repos-1.jpg
   alt: "10 GitHub Repositories Defining the AI Agent Stack"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![10 GitHub Repositories Defining the AI Agent Stack](/assets/img/ai/agent-repos-1.jpg){: .light .w-75 .shadow .rounded-10 }

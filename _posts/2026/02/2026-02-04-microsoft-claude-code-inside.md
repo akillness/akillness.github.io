@@ -5,13 +5,14 @@ categories: [AI, Agents]
 tags: [claude-code, enterprise-ai, agent-governance, github-copilot, developer-productivity]
 date: 2026-02-04 09:30:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2026 Microsoft Claude Code note into an authoritative source audit of enterprise CLI agent adoption, dual-toolchain dynamics with GitHub Copilot, and security governance boundaries."
 mermaid: true
 math: true
 image:
   path: /assets/img/2026-02-03/ai-coding.jpg
   alt: "Enterprise adoption of Claude Code and agentic CLI workflows"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Are Enterprise Engineering Organizations Adopting Terminal Agents Alongside IDE Autocomplete?

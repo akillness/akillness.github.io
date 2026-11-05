@@ -6,13 +6,14 @@ categories: [AI, Tooling]
 tags: [opendev, compound-agents, multi-model, rust, coding-agents]
 date: 2026-03-16 10:00:00 +0900
 last_modified_at: 2026-10-18 09:20:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2026-03 note into an authoritative source audit of OpenDev, evaluating Matei Zaharia's Compound AI paradigm, specialized 5-slot workflow routing, and Rust runtime design."
 mermaid: true
 math: false
 image:
   path: /assets/img/posts/2026-03-16-opendev-llm/opendev-architecture.png
   alt: "OpenDev Multi-Model Compound Architecture"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![OpenDev architecture](/assets/img/posts/2026-03-16-opendev-llm/opendev-architecture.png)

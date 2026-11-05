@@ -8,8 +8,9 @@ image:
   path: /assets/img/blog/Hybrid_MLOps.jpeg
   alt: Hybrid MLOps architecture combining on-premises training with MLflow and SageMaker
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from brief Korean sample note into authoritative source audit on hybrid MLOps architecture, MLflow experiment tracking, and SageMaker production deployment"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 As enterprise machine learning workloads scale, infrastructure teams face a fundamental economic and operational tension between training and inference. Training frontier foundation models or fine-tuning domain-specific language models requires intensive, multi-node GPU clusters (such as NVIDIA H100 or A100 systems). When provisioned entirely on public cloud on-demand instances, sustained high-utilization training creates unsustainable operational expenditures. Consequently, organizations invest in on-premises bare-metal GPU clusters or colocation facilities to achieve maximum compute cost efficiency.

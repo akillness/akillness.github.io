@@ -6,13 +6,14 @@ categories: [AI, Agents]
 tags: [rag, workflows, architecture, evaluation, routing]
 date: 2024-05-18 14:20:00 +0800
 last_modified_at: 2026-10-18 09:55:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2024 note into an authoritative systems guide on engineering production RAG workflows, query routing, and automated evaluation harnesses."
 mermaid: true
 math: false
 image:
   path: /assets/img/llm/Systematic_RAG_workflow.jpeg
   alt: "Systematic Retrieval-Augmented Generation Workflow Diagram"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Systematic RAG Workflow](/assets/img/llm/Systematic_RAG_workflow.jpeg){: .light .w-75 .shadow .rounded-10 }

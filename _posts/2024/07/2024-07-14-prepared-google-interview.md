@@ -8,8 +8,9 @@ image:
   path: /assets/img/algorithm/Mindmap-to-Learn.gif
   alt: Google technical interview preparation and system design roadmap
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party preparation note into authoritative source audit on Google technical interviews, distributed systems design, and algorithmic rubrics"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 Preparing for technical evaluations at frontier technology firms—most notably Google—is frequently portrayed as a brute-force memorization exercise: grinding hundreds of LeetCode problems and memorizing textbook graph traversals. Candidates who approach the process as pure rote memorization often experience unexpected rejection, even after writing syntactically correct code.

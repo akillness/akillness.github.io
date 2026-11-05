@@ -6,13 +6,14 @@ categories: [AI, Agents]
 tags: [ai-coding, software-engineering, harness-engineering, code-review]
 date: 2026-02-10 13:00:00 +0900
 last_modified_at: 2026-10-18 08:25:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2026-02 note into an authoritative source audit of Sophie Koonin's essay and Mikayla Maki's agent principles, examining cognitive debt and harness verification."
 mermaid: true
 math: false
 image:
   path: /assets/img/2026-02-10-stop-generating/cover.png
   alt: "Stop generating, start thinking"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Stop generating, start thinking](/assets/img/2026-02-10-stop-generating/cover.png)

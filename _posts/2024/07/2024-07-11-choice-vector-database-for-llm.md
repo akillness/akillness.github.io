@@ -6,13 +6,14 @@ categories: [AI, Tooling]
 tags: [vector-databases, indexing, hnsw, ivf, benchmarks]
 date: 2024-07-11 22:00:00 +0800
 last_modified_at: 2026-10-18 10:30:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2024 note into an authoritative architectural evaluation of vector databases, comparing HNSW/IVF indexing topologies, memory constraints, and filtering mechanisms."
 mermaid: true
 math: true
 image:
   path: /assets/img/llm/Vector-Database.jpeg
   alt: "Vector Database Architectural Trade-Offs for LLM Systems"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Vector Database Architecture](/assets/img/llm/Vector-Database.jpeg){: .light .w-75 .shadow .rounded-10 }

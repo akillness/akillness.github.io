@@ -7,8 +7,9 @@ categories: [AI, Research]
 tags: [computer-vision, robotics, pose-estimation, 6d-pose, synthetic-data]
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial news summary into exhaustive technical source audit on FoundationPose: unified zero-shot 6D pose estimation, iterative SE(3) Lie-algebra refinement, synthetic data scaling, and robotics tracking loops"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did FoundationPose Transform Zero-Shot Robotic Perception?

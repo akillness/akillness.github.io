@@ -6,8 +6,9 @@ tags: [machine-learning, algorithms, statistical-learning, optimization]
 date: 2024-06-27 20:10:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit synthesizing the mathematical taxonomy of classical machine learning algorithms, bias-variance tradeoffs, and modern tabular foundation models."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## How Does the Bias-Variance Decomposition Dictate Algorithmic Selection?

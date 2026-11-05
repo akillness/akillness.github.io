@@ -6,11 +6,12 @@ last_modified_at: 2026-10-18 14:00:00 +0900
 categories: [AI, Research]
 tags: [boids, flocking-algorithm, swarm-intelligence, multi-agent-simulation, emergent-behavior, game-ai]
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party overview into authoritative source audit on Boids flocking algorithms, multi-species emergent behavior, and spatial partitioning"
 image:
   path: /assets/img/algorithm/BOiDS-Thumbnail.gif
   alt: Boids flocking algorithm multi-species emergent simulation
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## How Do Three Simple Local Rules Synthesize Complex Global Swarm Dynamics?

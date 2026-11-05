@@ -8,8 +8,9 @@ image:
   path: /assets/img/blog/Git_in_a_Nutshell.gif
   alt: Git internal architecture and object database mechanics
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party cheat sheet note into authoritative source audit on Git internal architecture, content-addressable storage, and DAG mechanics"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 Most developers interact with Git as a collection of incantations: `git add`, `git commit`, `git push`, and the occasional frantic invocation of `git checkout -- .` when a merge conflict goes awry. When teams treat version control as a magical black box that merely records file diffs, edge-case operations—such as detached HEAD states, interactive rebasing, or submodule de-synchronization—frequently lead to developer panic and accidental code loss.

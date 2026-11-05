@@ -5,11 +5,12 @@ categories: [AI, Tooling]
 tags: [claude-code, developer-tools, telemetry, observability, workflows]
 date: 2026-02-06 22:45:00 +0900
 last_modified_at: 2026-10-18 07:55:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit of Claude Code's /insights command, analyzing session trace aggregation, the telemetry vs. intent gap, and 2026 self-tuning harness loops."
 mermaid: true
 math: false
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## The Inversion of Developer Telemetry: From Tool Metrics to Workflow Critique

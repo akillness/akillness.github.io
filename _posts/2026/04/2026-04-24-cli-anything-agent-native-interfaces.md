@@ -5,10 +5,11 @@ categories: [AI, Tooling]
 tags: [cli-anything, agent-native, harness-engineering, cli-hub, mcp, tooling]
 date: 2026-04-24 10:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt into authoritative source audit on HKUDS CLI-Anything, agent-native interface design, CLI-Hub distribution, and deterministic execution harnesses"
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Agent Reliability Depend on Interface Design Rather Than Model Parameter Scale?

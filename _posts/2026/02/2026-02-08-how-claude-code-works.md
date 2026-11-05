@@ -6,13 +6,14 @@ categories: [AI, Agents]
 tags: [claude-code, agentic-loop, terminal-agents, harness-engineering]
 date: 2026-02-08 21:10:00 +0900
 last_modified_at: 2026-10-18 08:20:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2026-02 note into an authoritative source audit of Claude Code runtime mechanics, analyzing ReAct scheduling, tool dispatch, and checkpoint security."
 mermaid: true
 math: false
 image:
   path: /assets/img/2026-02-08-claude-code-works/agentic-loop.svg
   alt: "Claude Code agentic loop architecture"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Claude Code agentic loop architecture](/assets/img/2026-02-08-claude-code-works/agentic-loop.svg)

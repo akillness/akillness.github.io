@@ -5,13 +5,14 @@ categories: [AI, Agents]
 tags: [agent-harness, multi-agent, ralph-loop, skills-ecosystem, git-worktree]
 date: 2026-02-03 02:20:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2026 AI coding overview note into an authoritative source audit of multi-agent software engineering, Ralph closed loops, Git-worktree task isolation, and harness engineering."
 mermaid: true
 math: true
 image:
   path: /assets/img/2026-02-03/ai-coding.jpg
   alt: "AI coding teams, harness engineering, and multi-agent coordination"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Autonomous AI Coding Evolve from Chat Assistants to Multi-Agent Engineering Teams?

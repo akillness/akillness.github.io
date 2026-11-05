@@ -8,8 +8,9 @@ image:
   path: /assets/img/news/LLM%20Frameworks.gif
   alt: LangChain vs LlamaIndex architecture comparison
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt into authoritative source audit on LangChain LCEL/LangGraph versus LlamaIndex data framework architecture, RAG pipelines, and cyclical agent workflows"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 When the generative AI revolution accelerated following the public release of modern large language models, application developers immediately confronted the context window and knowledge boundary limitations of foundational checkpoints. Foundation models, trained on broad web-scale corpora, lacked access to private enterprise documents, proprietary source code repositories, and real-time operational databases.

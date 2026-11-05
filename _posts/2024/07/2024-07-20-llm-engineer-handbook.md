@@ -5,9 +5,10 @@ categories: [AI, Tooling]
 tags: [llm-engineering, llmops, data-pipeline, model-serving, qdrant, fine-tuning]
 date: 2024-07-20 13:30:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from promotional book announcement and interview link spam into authoritative systems engineering source audit deconstructing the 4-pipeline LLM Twin architecture across streaming ETL, Qdrant vector indexing, QLoRA fine-tuning, and 2026 LLMOps observability standards"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Ad-Hoc LLM Prototypes Fail to Transition into Reliable Production Systems?

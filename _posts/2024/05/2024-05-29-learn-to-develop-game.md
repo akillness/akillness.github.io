@@ -6,13 +6,14 @@ categories: [AI, Tooling]
 tags: [unity, csharp, game-development, game-engine, architecture]
 date: 2024-05-29 20:13:00 +0800
 last_modified_at: 2026-10-18 10:05:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a thin 2024 note into an authoritative architectural guide on Unity C# game systems, component decoupling, physics lifecycles, and agentic game mechanics."
 mermaid: true
 math: false
 image:
   path: /assets/img/blog/Create_with_Code.png
   alt: "Overview of Unity Create with Code Architectural Pipeline"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Unity Create with Code Architecture](/assets/img/blog/Create_with_Code.png){: .light .w-75 .shadow .rounded-10 }

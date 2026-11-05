@@ -8,8 +8,9 @@ image:
   path: /assets/img/blog/Graph_Analytics.jpeg
   alt: Graph Analytics and GNN architecture overview
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal library list into authoritative source audit on graph analytics, message-passing neural networks, community detection, and GraphRAG"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 Most machine learning algorithms are designed to operate on Euclidean data structures: structured tabular rows, uniform image pixel grids, or sequential token arrays. However, the most critical phenomena in enterprise systems—financial transaction fraud, corporate ownership hierarchies, supply chain interdependencies, social communication networks, and complex codebases—are fundamentally non-Euclidean. They exist as **relational graphs**.

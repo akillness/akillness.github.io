@@ -6,8 +6,9 @@ tags: [mlops, vllm, model-serving, triton, inference]
 date: 2024-08-05 17:00:00 +0800
 last_modified_at: 2026-10-18 11:00:00 +0900
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2024 deployment overview into an authoritative source audit of production ML model serving, evaluating batch pipelines, Triton, and distributed vLLM inference."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Synchronous REST Microservices Fail Under Modern Generative AI Workloads?

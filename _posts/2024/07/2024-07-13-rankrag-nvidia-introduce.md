@@ -5,9 +5,10 @@ categories: [AI, Research]
 tags: [rankrag, nvidia, rag, reranking, information-retrieval, dragon-retriever]
 date: 2024-07-13 15:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from Korean translation summary into authoritative source audit evaluating NVIDIA RankRAG's dual-purpose instruction tuning, ranking logits, Dragon retriever integration, and 2026 agentic retrieval paradigms"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Two-Stage Decoupled RAG Pipelines Create Retrieval-Generation Bottlenecks?

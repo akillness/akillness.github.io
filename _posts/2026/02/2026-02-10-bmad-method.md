@@ -5,13 +5,14 @@ categories: [AI, Agents]
 tags: [bmad, agent-workflows, agile-development, software-architecture, tea-cycle]
 date: 2026-02-10 13:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2026 BMAD draft note into an authoritative source audit of BMAD Method, phase-gated agile software lifecycles, TEA execution cycles, and role-based agent verification."
 mermaid: true
 math: true
 image:
   path: /assets/img/2026-02-10-bmad-method/banner.png
   alt: "BMAD Method structured agent-driven agile development architecture"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did "Vibe Coding" Create an Urgent Demand for Phase-Gated Agentic Lifecycles?

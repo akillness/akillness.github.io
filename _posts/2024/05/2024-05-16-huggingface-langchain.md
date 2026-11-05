@@ -6,11 +6,12 @@ last_modified_at: 2026-10-18 14:00:00 +0900
 categories: [AI, Tooling]
 tags: [langchain, huggingface, lcel, chat-huggingface, tgi, embeddings]
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party overview into authoritative source audit on langchain-huggingface partner package, ChatHuggingFace, and LCEL runtimes"
 image:
   path: /assets/img/llm/Huggingface_Langchain.jpeg
   alt: Hugging Face and LangChain partner package integration
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Monolithic LangChain Community Providers Fracture into Dedicated Partner Packages?

@@ -5,13 +5,14 @@ categories: [AI, Tooling]
 tags: [openvscode-server, remote-ide, cloud-workstations, docker, developer-infrastructure]
 date: 2026-02-17 21:30:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2026 OpenVSCode draft note into an authoritative source audit of OpenVSCode Server architecture, remote extension host RPC, token authentication, and cloud development environment scaling."
 mermaid: true
 math: true
 image:
   path: /assets/img/ai/openvscode-1.jpg
   alt: "OpenVSCode Server running remote cloud development environments"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Enterprise Developer Infrastructure Migrate from Local Machines to Cloud Workstations?

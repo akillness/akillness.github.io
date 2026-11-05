@@ -5,12 +5,13 @@ categories: [AI, Agents]
 tags: [agenteval, llm-evaluation, multi-agent-systems, critic-agent, verifier-agent, microsoft-research]
 date: 2024-06-09 12:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal brief note into authoritative source audit on Microsoft AgentEval framework, multi-agent evaluation dynamics, and rubrics verification"
 mermaid: true
 image:
   path: /assets/img/llm/LLM_AgentEval.jpeg
   alt: "Microsoft AgentEval multi-agent evaluation architecture featuring CriticAgent, QuantifierAgent, and VerifierAgent"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Traditional Benchmark Metrics Fail to Capture Multi-Step Autonomous Agent Utility?

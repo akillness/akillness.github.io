@@ -5,11 +5,12 @@ categories: [AI, Agents]
 tags: [ai-agents, agent-architecture, nanobot, local-llm, minimalism]
 date: 2026-02-02 22:57:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from informal project thoughts into comprehensive technical source audit on HKUDS/nanobot's 4,000-line codebase, single-loop execution, and local-first vLLM integration"
 image:
   path: /assets/img/2026-02-02/nanobot_arch.png
   alt: "nanobot architecture overview"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 <div style="display:flex; gap:12px; flex-wrap:wrap;">

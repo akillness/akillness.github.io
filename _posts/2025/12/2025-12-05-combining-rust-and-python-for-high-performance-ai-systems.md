@@ -5,13 +5,14 @@ categories: [AI, Tooling]
 tags: [rust, python, pyo3, machine-learning, performance]
 date: 2025-12-05 10:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2025 Rust-Python note into an authoritative source audit of PyO3 FFI boundaries, zero-copy buffer sharing, GIL release patterns, and production serving architectures."
 mermaid: true
 math: true
 image:
   path: /assets/img/posts/rust-python-ai-hero.svg
   alt: "Conceptual flow from Python orchestration through PyO3 and Maturin to Rust-native compute kernels"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did the Hybrid Rust-Python Architecture Become the Standard for Production AI Systems?

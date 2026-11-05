@@ -6,13 +6,14 @@ categories: [AI, Agents]
 tags: [solo-founder, agentic-workflows, multi-agent, gastown, symphony]
 date: 2026-03-06 21:30:00 +0900
 last_modified_at: 2026-10-18 09:10:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2026-03 note into an authoritative source audit of Automaton, Steve Yegge's Gas Town/Wasteland, and OpenAI Symphony, examining agent economics and operational federations."
 mermaid: true
 math: false
 image:
   path: /assets/img/ai/harness-techtarget.jpg
   alt: "The Solo Founder Agent Orchestration Stack"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![The Solo Founder Agent Orchestration Stack](/assets/img/ai/harness-techtarget.jpg){: .light .w-75 .shadow .rounded-10 }

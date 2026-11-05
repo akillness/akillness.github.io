@@ -6,13 +6,14 @@ categories: [AI, Agents]
 tags: [agent-sdk, multi-agent, harness-engineering, orchestration]
 date: 2026-02-12 14:00:00 +0900
 last_modified_at: 2026-10-18 08:35:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2026-02 note into an authoritative comparative audit of major Agent SDKs (OpenAI, Google ADK, Claude, Copilot, Strands), examining runtime primitives and coordination models."
 mermaid: true
 math: false
 image:
   path: /assets/img/2026-02-12-agent-sdk/cover.png
   alt: "The 2026 Agent SDK Landscape"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![The 2026 Agent SDK Landscape](/assets/img/2026-02-12-agent-sdk/cover.png)

@@ -5,10 +5,11 @@ categories: [AI, Tooling]
 tags: [gogcli, google-workspace, automation, agents, cli, tooling, productivity]
 date: 2026-03-03 21:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt into authoritative source audit on gogcli Google Workspace CLI automation, JSON-first schemas, headless OAuth2 authentication, and agent tool calling"
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Enterprise Agent Workflows Demand JSON-First CLIs Over Brittle Web Scraping?

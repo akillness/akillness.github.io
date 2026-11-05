@@ -6,8 +6,9 @@ tags: [agent-memory, rag, tokenization, semantic-cache, llm-systems]
 date: 2025-11-13 03:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial paper roundup into deep systems source audit analyzing agent memory error propagation, embedding-space semantic caching, and multilingual token fertility"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Production Agent Loops Accumulate Memory Hallucinations?

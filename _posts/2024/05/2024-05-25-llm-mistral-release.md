@@ -5,9 +5,10 @@ categories: [AI, Tooling]
 tags: [mistral-ai, fine-tuning, lora, mixtral, fsdp, open-source-models]
 date: 2024-05-25 07:23:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal promotional summary into authoritative source audit on Mistral-finetune architecture, FSDP memory distribution, and LoRA on Mixtral MoE"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Mistral AI Release an Opinionated, Hardware-Specialized Fine-Tuning Codebase?

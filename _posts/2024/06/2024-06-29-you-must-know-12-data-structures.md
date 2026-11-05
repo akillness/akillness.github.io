@@ -6,8 +6,9 @@ tags: [data-structures, computer-science, memory-hierarchy, algorithms]
 date: 2024-06-29 02:10:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit examining twelve fundamental data structures across contiguous memory buffers, hash tables, B+ trees, and CPU cache line locality."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Hardware Cache Locality Overrule Pure Asymptotic $O(1)$ Complexity?

@@ -6,8 +6,9 @@ tags: [generative-ai, diffusion-models, flow-matching, transformers]
 date: 2024-05-11 23:43:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit examining foundational generative AI architectures across autoregressive, diffusion, and flow matching paradigms."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## How Do Latent Generative Paradigms Unify Modern AI Architectures?

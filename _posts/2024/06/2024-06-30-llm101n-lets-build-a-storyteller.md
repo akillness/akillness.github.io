@@ -5,9 +5,10 @@ categories: [AI, Research]
 tags: [llm101n, andrej-karpathy, deep-learning, cuda, transformer, model-training]
 date: 2024-06-30 19:10:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from Korean syllabus outline into comprehensive pedagogical and architectural source audit evaluating first-principles LLM implementation across C/CUDA kernels, tokenization, distributed scaling, and 2026 synthetic-data pipelines"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does First-Principles LLM Implementation Outperform High-Level Framework Abstractions?

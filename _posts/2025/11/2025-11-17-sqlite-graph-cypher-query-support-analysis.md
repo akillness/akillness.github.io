@@ -9,8 +9,9 @@ mermaid: true
 image:
   path: /assets/img/posts/sqlite-graph-1.png
   alt: "SQLite-Graph Architecture"
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a third-party review note into an authoritative source audit of SQLite-Graph, Cypher query translation, and embedded knowledge graph architectures."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Relational SQL Engines Struggle with Multi-Hop Graph Traversals?

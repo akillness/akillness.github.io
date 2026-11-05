@@ -9,8 +9,9 @@ image:
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
   alt: LLM Systems Architecture Hierarchy
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from Korean machine summary into authoritative source audit on the 7-tier LLM systems hierarchy, prompt engineering, RAG, tool calling, and fine-tuning"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 When enterprise software engineers first transition into applied generative AI, they frequently suffer from abstraction confusion. A team might attempt to solve a simple document querying problem by launching an expensive parameter-efficient fine-tuning (PEFT) cluster, or conversely, attempt to build an autonomous coding system using a single, brittle 5,000-token prompt string.

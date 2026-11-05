@@ -5,11 +5,12 @@ categories: [AI, Agents]
 tags: [openclaw, model-routing, local-first, agent-architecture, llm-orchestration]
 date: 2026-02-19 21:30:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from informal ecosystem post into comprehensive technical source audit on ClawRouter's local-first policy evaluation, multi-objective scoring, and decentralized agent routing"
 image:
   path: /assets/img/ai/clawrouter-ecosystem-1.jpg
   alt: "Minimal OpenClaw ecosystem snapshot"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![ClawRouter Ecosystem Snapshot](/assets/img/ai/clawrouter-ecosystem-1.jpg){: .light .w-75 .shadow .rounded-10 }

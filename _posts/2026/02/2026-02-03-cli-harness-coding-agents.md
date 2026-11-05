@@ -5,14 +5,15 @@ categories: [AI, Tooling]
 tags: [cli, coding-agents, devops, unix, benchmarks]
 date: 2026-02-03 11:40:00 +0900
 last_modified_at: 2026-10-18 07:55:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit comparing 8 terminal agent harnesses against IDE extensions, surveying 2026 MCP/ACP standardization, diff safety, and Unix composability."
 mermaid: true
 math: false
 image:
   path: /assets/img/2026-02-03-cli-agents/gemini-cli.png
   alt: "Gemini CLI terminal interface"
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## The Substrate Advantage: Why the Terminal Beats the IDE Extension

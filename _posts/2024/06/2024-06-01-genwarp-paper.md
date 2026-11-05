@@ -5,8 +5,9 @@ categories: [AI, Research]
 tags: [novel-view-synthesis, diffusion-models, computer-vision, 3d-reconstruction, genwarp]
 date: 2024-06-01 11:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial 2024 paper summary into comprehensive technical source audit on GenWarp's cross-view attention, geometric warping, and diffusion inpainting mechanics"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![GenWarp Novel Views](/assets/img/paper/GenWarp_novel_veiws.png){: .light .shadow .rounded-10 w='1212' h='668' }

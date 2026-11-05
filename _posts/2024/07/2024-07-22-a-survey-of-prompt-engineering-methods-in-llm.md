@@ -5,9 +5,10 @@ categories: [AI, Research]
 tags: [prompt-engineering, chain-of-thought, tree-of-thoughts, llm-reasoning, in-context-learning, survey]
 date: 2024-07-22 13:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial paper flyer into comprehensive academic source audit deconstructing Sahoo et al.'s prompt engineering taxonomy, mathematical formulations of CoT/ToT/Self-Consistency, and 2026 automated prompt compilation via DSPy"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Prompt Engineering Transition from Heuristic "Hacks" to Formal Algorithmic Science?

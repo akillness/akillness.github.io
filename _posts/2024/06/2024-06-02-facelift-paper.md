@@ -7,8 +7,9 @@ categories: [AI, Research]
 tags: [computer-vision, facial-landmarks, 3d-reconstruction, generative-priors, vfx]
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial promotional summary into exhaustive technical source audit on FaceLift: semi-supervised 3D landmark lifting, 3D-aware GAN priors, silhouette ambiguity, and volumetric ViTs"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## How Can 3D Facial Landmarks Be Learned Without 3D Ground Truth?

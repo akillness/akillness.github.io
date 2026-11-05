@@ -5,12 +5,13 @@ categories: [AI, Research]
 tags: [chameleon-model, meta-ai, mixed-modal, discrete-tokenization, qk-norm, foundation-models]
 date: 2024-05-25 22:40:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal speculative summary into authoritative source audit on Meta Chameleon architecture, discrete image tokenization, and QK-norm stabilization"
 mermaid: true
 image:
   path: /assets/img/llm/LLM_chameleon.jpeg
   alt: "Meta Chameleon mixed-modal early fusion foundation model architecture"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Early-Fusion Tokenization in Chameleon Break the Dominance of Separate Encoders?

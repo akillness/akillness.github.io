@@ -6,13 +6,14 @@ categories: [AI, Agents]
 tags: [openai-codex, subagents, multi-agent, harness-engineering, orchestration]
 date: 2026-03-17 09:00:00 +0900
 last_modified_at: 2026-10-18 09:25:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2026-03 note into an authoritative source audit of OpenAI Codex Subagents, evaluating TOML-configured agent teams, sandbox constraints, and concurrency bounds."
 mermaid: true
 math: false
 image:
   path: /assets/img/posts/2026-03-17-codex-subagents-guide/openai-codex-og.png
   alt: "OpenAI Codex Subagents Documentation Architecture"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![OpenAI Codex subagents overview](/assets/img/posts/2026-03-17-codex-subagents-guide/openai-codex-og.png)

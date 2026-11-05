@@ -6,8 +6,9 @@ tags: [data-engineering, apache-iceberg, vector-etl, data-pipelines]
 date: 2024-08-12 10:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial category listicle into deep source audit on modern open-source AI data engineering (Iceberg, Arrow DataFusion, Vector ETL, and Dagster asset-based orchestration)"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Traditional Big Data Architectures Collapse Under Generative AI Demands?

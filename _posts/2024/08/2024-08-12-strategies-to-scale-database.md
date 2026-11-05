@@ -7,8 +7,9 @@ categories: [AI, Tooling]
 tags: [databases, distributed-systems, sharding, replication, system-design]
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial 7-bullet list into exhaustive systems audit on database scaling: indexing mechanics, WAL streaming replication, consistent hashing sharding, and Universal Scalability Law"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Premature Sharding Cripple Database Maintainability?

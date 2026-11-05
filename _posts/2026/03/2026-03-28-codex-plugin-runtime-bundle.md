@@ -5,10 +5,11 @@ categories: [AI, Tooling]
 tags: [codex, plugins, mcp, skills, architecture, tooling, ai-agents]
 date: 2026-03-28 10:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt into authoritative source audit on OpenAI Codex plugin architecture, runtime capability bundling, manifest contracts, and MCP tool execution"
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Are Codex Plugins Runtime Execution Bundles Rather Than Mere App Connectors?

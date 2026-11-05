@@ -6,8 +6,9 @@ tags: [developer-tools, language-server-protocol, ast-parsing, agentic-workflows
 date: 2024-06-04 11:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit examining developer productivity architecture across the Language Server Protocol, tree-sitter AST parsing, and agentic MCP tool execution."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## How Did the Language Server Protocol Solve the $M \times N$ Tooling Complexity Problem?

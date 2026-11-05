@@ -5,10 +5,11 @@ categories: [AI, Agents]
 tags: [rowboat, knowledge-graph, local-first, mcp, agents, memory]
 date: 2026-02-18 22:05:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt into authoritative source audit on Rowboat local-first knowledge graph architecture, Markdown memory persistence, and background coworker workflows"
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Daily Knowledge Work Demand Local-First Compounding Memory Over Ephemeral Chatbots?

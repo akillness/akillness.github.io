@@ -7,8 +7,9 @@ date: 2024-05-14 13:13:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from third-party Lilys AI summary into authoritative engineering source audit calculating exact tensor dimensions, GQA memory reduction, and SwiGLU projections in LLaMA 3"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did LLaMA 3 Universalize Grouped-Query Attention Across All Model Scales?

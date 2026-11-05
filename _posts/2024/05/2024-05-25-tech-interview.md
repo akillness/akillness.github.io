@@ -8,8 +8,9 @@ image:
   path: /assets/img/blog/Tech_Interview.gif
   alt: Technical interview preparation and system design architecture
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party rewrite into authoritative source audit on technical interview evolution, SWE-bench style practical evaluation, system design, and AI-assisted workflows"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 For over two decades, software engineering technical interviews were dominated by isolated puzzle solving: whiteboard algorithmic drills, reversing linked lists, and grinding hundreds of dynamic programming problems on LeetCode. While this filter tested basic algorithmic fluency and memorization, it bore virtually zero resemblance to day-to-day production engineering—where engineers navigate legacy monolithic codebases, debug distributed concurrency races, and weigh complex architectural trade-offs.

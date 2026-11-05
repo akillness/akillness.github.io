@@ -6,8 +6,9 @@ last_modified_at: 2026-10-18 14:00:00 +0900
 categories: [AI, Tooling]
 tags: [vector-databases, embeddings, hnsw, approximate-nearest-neighbor, similarity-search, rag-indexing]
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from machine translation into authoritative source audit on vector database mathematics, dense embeddings, HNSW graphs, and vector indexing"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## How Do Vector Databases Index Continuous Latent Spaces for Sub-Millisecond Retrieval?

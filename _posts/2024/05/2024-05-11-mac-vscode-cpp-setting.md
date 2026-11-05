@@ -6,8 +6,9 @@ last_modified_at: 2026-10-18 14:00:00 +0900
 categories: [AI, Tooling]
 tags: [vscode, cpp, apple-silicon, clang, lldb, toolchains]
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party overview into authoritative technical guide on Apple Silicon C++ toolchains, VS Code configuration, and arm64 debugging"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Default C++ Configurations Fail Silently on Apple Silicon Workstations?

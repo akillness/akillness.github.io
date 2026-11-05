@@ -6,11 +6,12 @@ last_modified_at: 2026-10-18 14:00:00 +0900
 categories: [AI, Agents]
 tags: [lazyllm, multi-agent, low-code, dataflow-pipelines, orchestration, agent-harness]
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party overview into authoritative source audit on LazyLLM architecture, low-code multi-agent orchestration, and dataflow pipelines"
 image:
   path: /assets/img/llm/lazyllm-for-multi-agent.jpeg
   alt: LazyLLM low-code multi-agent framework architecture
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Low-Code Orchestration Bridge the Chasm Between Agent Prototyping and Production?

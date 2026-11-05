@@ -7,8 +7,9 @@ categories: [AI, Research]
 tags: [apple-intelligence, on-device-ai, rlhf, mdloo, lora-adapters]
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial 46-line note into exhaustive technical source audit on Apple Intelligence: AFM on-device Palettization, dynamic LoRA adapters, MDLOO leave-one-out RLHF, and Private Cloud Compute"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## How Did Apple Balance On-Device Hardware Constraints with Frontier Alignment?

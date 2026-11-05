@@ -5,8 +5,9 @@ categories: [AI, Agents]
 tags: [agentic-rag, retrieval-augmented-generation, corrective-rag, self-rag, query-reformulation]
 date: 2024-07-13 14:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial cookbook note into comprehensive technical source audit on Agentic RAG, Corrective RAG (CRAG), Self-RAG reflection tokens, and multi-hop graph retrieval"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Vanilla RAG Fail on Ambiguous and Complex Multi-Hop Queries?

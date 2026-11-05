@@ -6,13 +6,14 @@ categories: [AI, Agents]
 tags: [harness-engineering, coding-agents, software-architecture, codex]
 date: 2026-02-11 13:00:00 +0900
 last_modified_at: 2026-10-18 08:30:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2026-02 note into an authoritative source audit of OpenAI's harness engineering study, deconstructing environmental constraints, affordance design, and observability."
 mermaid: true
 math: false
 image:
   path: /assets/img/2026-02-11-harness-engineering/cover.jpg
   alt: "Harness engineering architectural overview"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Harness engineering architectural overview](/assets/img/2026-02-11-harness-engineering/cover.jpg)

@@ -6,11 +6,12 @@ last_modified_at: 2026-10-18 14:00:00 +0900
 categories: [AI, Tooling]
 tags: [huggingface, open-source-ai, llm-as-a-judge, semantic-cache, peft, inference-endpoints]
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party overview into authoritative source audit on Hugging Face Cookbook recipes, evaluation harnesses, and inference architectures"
 image:
   path: /assets/img/ai/2026-04-30-llm-repos/huggingface-transformers.png
   alt: Hugging Face open-source artificial intelligence ecosystem
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Hands-On Engineering Cookbooks Bridge the Gap Between Research Papers and Production Systems?

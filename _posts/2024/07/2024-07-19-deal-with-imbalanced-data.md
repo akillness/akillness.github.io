@@ -8,8 +8,9 @@ image:
   path: /assets/img/blog/optimally-sample-imbalanced-data.jpeg
   alt: Optimal negative subsampling workflow and probability calibration pipeline
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from brief LinkedIn note into authoritative source audit on non-uniform negative subsampling, rare-event logistic regression, and probability calibration"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 Extreme class imbalance is one of the most pervasive challenges in commercial machine learning. In web-scale recommendation engines, credit card fraud detection, and online click-through rate (CTR) prediction, positive events (such as a user purchasing an item or committing financial fraud) occur at rates often below $0.1\%$ or even $0.01\%$. A production dataset may easily contain billions of unclicked negative impressions against a tiny fraction of positive interactions.

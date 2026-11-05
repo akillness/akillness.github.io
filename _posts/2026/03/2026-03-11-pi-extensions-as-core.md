@@ -6,13 +6,14 @@ categories: [AI, Tooling]
 tags: [pi-agent, coding-agents, harness-engineering, extensions, terminal-agents]
 date: 2026-03-11 09:00:00 +0900
 last_modified_at: 2026-10-18 09:15:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2026-03 note into an authoritative source audit of Mario Zechner's pi and Armin Ronacher's architectural analysis, examining minimal micro-kernel harnesses and hot-reloadable extensions."
 mermaid: true
 math: false
 image:
   path: /assets/img/posts/2026-03-11-pi-extension-ecosystem/pi-dev.png
   alt: "pi coding agent architecture and extension core"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![pi social card](/assets/img/posts/2026-03-11-pi-extension-ecosystem/pi-dev.png)

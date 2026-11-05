@@ -5,9 +5,10 @@ categories: [AI, Tooling]
 tags: [aws-inferentia2, neuroncore-v2, optimum-neuron, llama-3, tgi, model-serving]
 date: 2024-05-25 00:20:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal promotional tutorial into authoritative source audit on AWS Inferentia2 architecture, NeuronCore-v2 compilation graphs, and TGI serving"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did AWS Inferentia2 Emerge as a High-Throughput Alternative for 70B Parameter Serving?

@@ -9,8 +9,9 @@ image:
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
   alt: LLaMA-Factory post-training and alignment architecture
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party rewrite into authoritative source audit on LLaMA-Factory unified post-training architecture, PEFT engines, and alignment methods"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 The open-source generative AI ecosystem has experienced unprecedented proliferation in model architectures. Between 2023 and 2026, researchers and enterprise engineering teams saw releases of foundational checkpoints spanning LLaMA, Mistral, Mixtral, Qwen, DeepSeek, Gemma, and Command-R. However, this architectural diversity produced severe operational friction in post-training workflows.

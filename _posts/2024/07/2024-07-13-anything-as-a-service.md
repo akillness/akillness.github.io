@@ -5,8 +5,9 @@ categories: [AI, Tooling]
 tags: [cloud-computing, xaas, serverless, model-as-a-service, distributed-systems]
 date: 2024-07-13 13:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial cloud listicle into comprehensive technical source audit on the XaaS abstraction gradient, shared responsibility boundaries, serverless micro-VMs, and GPUaaS"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![XaaS Architectural Gradient](/assets/img/blog/Top-6-Xaas.gif){: .light .shadow .rounded-10 w='1212' h='668' }

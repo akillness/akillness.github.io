@@ -3,13 +3,14 @@ title: "Source Audit: Hugging Face TEI and Sub-Millisecond Embedding Serving"
 description: "Auditing huggingface/text-embeddings-inference: evaluating Rust tokenization, token-based dynamic batching, and FlashAttention kernel acceleration."
 date: 2025-12-05 10:00:00 +0800
 last_modified_at: 2026-10-18 07:50:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from the speculative 2025-12 note into a rigorous Source Audit pinning huggingface/text-embeddings-inference, analyzing Rust tokenization, dynamic batching, and FlashAttention serving."
 categories: [AI, Tooling]
 tags: [embeddings, rust, inference, rag, performance]
 mermaid: true
 math: true
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Python Inference Stall at Scale, and How Does TEI Achieve Sub-10ms Latency?

@@ -10,8 +10,9 @@ math: true
 image:
   path: /assets/img/ai/flexattention/flexattention-2.png
   alt: "FlexAttention Causal Mask and Block Sparsity"
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a third-party review note into an authoritative source audit of FlexAttention, FlashAttention-3, and CUTLASS CuTe DSL kernel compilation."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Kernel Specialization Fragment Modern Transformer Attention Research?

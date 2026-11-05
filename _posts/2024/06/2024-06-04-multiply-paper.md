@@ -7,8 +7,9 @@ categories: [AI, Research]
 tags: [computer-vision, human-pose-estimation, 3d-reconstruction, smpl, neural-rendering]
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial news summary into exhaustive technical source audit on MultiPly: monocular multi-human 3D reconstruction, SMPL parameterization, collision SDF penalties, and camera-ground registration"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## How Can Multiple Interacting Humans Be Reconstructed from Monocular Video?

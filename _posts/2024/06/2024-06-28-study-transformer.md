@@ -5,9 +5,10 @@ categories: [AI, Research]
 tags: [transformer, self-attention, rnn, lstm, neural-networks, deep-learning]
 date: 2024-06-28 00:10:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from sparse practice notes into comprehensive mathematical and architectural source audit comparing recurrent bottlenecked networks with multi-head self-attention and 2026 hybrid architectures"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Recurrent Architectures Fail to Scale for Long-Range Sequence Modeling?

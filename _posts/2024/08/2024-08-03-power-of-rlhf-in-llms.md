@@ -8,8 +8,9 @@ image:
   path: /assets/img/blog/ReinforcementLearning_Library.jpeg
   alt: Reinforcement Learning from Human Feedback and reward modeling architecture
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party overview into authoritative source audit on RLHF foundations, Bradley-Terry reward modeling, PPO, and Direct Preference Optimization"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 Pre-training foundational language models on hundreds of billions of web tokens produces exceptional statistical next-token predictors. However, raw pre-trained models are unaligned with human intent: they uncritically mirror internet biases, generate unhelpful sycophantic text, hallucinate plausible falsehoods, and struggle to decline dangerous requests.

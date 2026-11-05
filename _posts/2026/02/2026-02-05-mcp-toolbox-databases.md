@@ -5,13 +5,14 @@ categories: [AI, Tooling]
 tags: [mcp, databases, sql-agents, google-cloud, opentelemetry]
 date: 2026-02-04 20:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2026 MCP Toolbox draft note into an authoritative source audit of Google MCP Toolbox for Databases, declarative database toolsets, IAM security boundaries, and OpenTelemetry governance."
 mermaid: true
 math: true
 image:
   path: /assets/img/2026-02-05-mcp-toolbox/architecture.png
   alt: "MCP Toolbox for Databases architecture and governance"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Unfettered Agentic SQL Demand a Dedicated Database Tooling Middleware?

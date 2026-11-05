@@ -5,10 +5,11 @@ categories: [AI, Tooling]
 tags: [code-intelligence, gitnexus, knowledge-graph, mcp, refactoring, agents]
 date: 2026-02-25 21:30:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt into authoritative source audit on GitNexus zero-server code intelligence, in-browser knowledge graph engine, Cypher querying, and MCP blast radius tools"
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Autonomous Code Refactoring Demand In-Process Architectural Graphs Over Blind Grep?

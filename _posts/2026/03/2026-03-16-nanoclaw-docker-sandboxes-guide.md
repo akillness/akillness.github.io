@@ -6,11 +6,12 @@ last_modified_at: 2026-10-18 14:00:00 +0900
 categories: [AI, Tooling]
 tags: [nanoclaw, docker-sandboxes, agent-security, micro-vm, isolation-boundary, containerization]
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party overview into authoritative source audit on NanoClaw Docker Sandboxes, micro-VM boundaries, and agent runtime isolation"
 image:
   path: /assets/img/posts/2026-03-16-nanoclaw-sandboxes-guide/nanoclaw-social-preview.jpg
   alt: NanoClaw Docker Sandboxes dual isolation architecture
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Default Sandboxing Form the Critical Security Perimeter for Autonomous Coding Agents?

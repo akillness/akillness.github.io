@@ -6,8 +6,9 @@ tags: [statistics, llm-evaluation, hypothesis-testing, data-science]
 date: 2024-08-12 15:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from generic statistical listicle into technical source audit on statistical inference, bootstrap validation, and Simpson's paradox in LLM evaluation"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Naive Benchmark Averages Mislead Frontier Model Evaluation?

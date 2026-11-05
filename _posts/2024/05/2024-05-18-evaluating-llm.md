@@ -5,12 +5,13 @@ categories: [AI, Research]
 tags: [mmlu-pro, llm-benchmarks, chain-of-thought, reasoning, model-evaluation, ai-research]
 date: 2024-05-18 10:20:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party overview into authoritative source audit on MMLU-Pro benchmark architecture, chain-of-thought validation, and reasoning degradation"
 mermaid: true
 image:
   path: /assets/img/news/Evaluate_llm_guid.png
   alt: "LLM evaluation framework and MMLU-Pro multi-task benchmark architecture"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did MMLU-Pro Expose Reasoning Fragilities That Classical Benchmarks Concealed?

@@ -5,10 +5,11 @@ categories: [AI, Tooling]
 tags: [claude-code, github, ai-agents, tooling, mcp, rag, orchestration]
 date: 2026-03-26 10:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt into authoritative source audit on nine essential GitHub repositories for Claude Code in 2026, memory layers, n8n automation, LightRAG, and orchestration"
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Production Claude Code Development Require a Multi-Layered Harness Stack?

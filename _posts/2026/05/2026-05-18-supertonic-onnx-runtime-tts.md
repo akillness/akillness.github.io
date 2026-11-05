@@ -6,13 +6,14 @@ categories: [AI, Tooling]
 tags: [supertonic, onnx, tts, edge-ai, speech]
 date: 2026-05-18 10:00:00 +0900
 last_modified_at: 2026-10-18 09:45:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2026-05 note into an authoritative source audit of Supertone AI's Supertonic 3, evaluating 99M-parameter ONNX Runtime architecture, multi-runtime parity, and edge audio synthesis."
 mermaid: true
 math: false
 image:
   path: /assets/img/posts/2026-05-18-supertonic/supertonic-3-banner.jpeg
   alt: "Supertonic 3 banner from the PyTorch Korea discussion page"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Supertonic 3 overview](/assets/img/posts/2026-05-18-supertonic/supertonic-3-banner.jpeg)

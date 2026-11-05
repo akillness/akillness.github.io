@@ -8,8 +8,9 @@ image:
   path: /assets/img/llm/llm-agent-survey-architecture-1.png
   alt: Architectural blueprint of LLM-based autonomous agents
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from brief 278-word note into authoritative source audit on autonomous agent architecture, profiling, memory hierarchies, planning algorithms, and action spaces"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 A foundational large language model, operating in isolation, is fundamentally passive: it samples tokens in response to a user prompt, terminates generation upon emitting an end-of-sequence token, and retains zero state across sessions. It cannot perceive changes in its environment, cannot formulate multi-step plans, and has no sovereignty to invoke external software tools.

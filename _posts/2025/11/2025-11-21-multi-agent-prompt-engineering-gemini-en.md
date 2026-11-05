@@ -5,10 +5,11 @@ categories: ["AI, Agents"]
 tags: [prompt-engineering, structured-outputs, gemini, multi-agent]
 date: 2025-11-21 15:00:00 +0800
 last_modified_at: 2026-10-17 14:40:00 +0900
-archive_developed: "2026-10-17"
-archive_development_note: "Rebuilt from the 2025-11 note into a rigorous Source Audit. Removed personal game dev framing, added formal analysis of schema-guided decoding, Pydantic type validation in multi-agent routing, and comparative reliability benchmarks."
 mermaid: true
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Unconstrained Prompts Break Multi-Agent Coordination?

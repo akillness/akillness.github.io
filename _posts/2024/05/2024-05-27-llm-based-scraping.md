@@ -5,9 +5,10 @@ categories: [AI, Tooling]
 tags: [scrapegraphai, web-scraping, llm-agents, schema-extraction, directed-graphs, dom-parsing]
 date: 2024-05-27 12:13:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal Python library summary into authoritative source audit on ScrapeGraphAI graph execution, DOM tree pruning, and deterministic schema extraction"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Declarative Graph Pipelines Replace Fragile XPath Selectors in Modern Web Extraction?

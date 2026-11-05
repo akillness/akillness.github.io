@@ -6,11 +6,12 @@ categories: [AI, Tooling]
 tags: [workspace, automation, agents, tooling, gemini]
 date: 2025-11-16 12:00:00 +0900
 last_modified_at: 2026-10-17 18:40:00 +0900
-archive_developed: "2026-10-17"
-archive_development_note: "Rebuilt from the 2025-11 marketing overview note into an engineering Source Audit. Audited Google Workspace REST APIs and Gemini function-calling boundaries, contrasting deterministic trigger scripts against autonomous agentic execution."
 pin: false
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 > This Source Audit inspects enterprise workflow automation inside Google Workspace environments. It evaluates the architectural differences between deterministic rule-based triggers and autonomous, LLM-orchestrated document and spreadsheet pipelines.

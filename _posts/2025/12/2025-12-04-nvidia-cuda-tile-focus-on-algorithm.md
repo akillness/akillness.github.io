@@ -5,13 +5,14 @@ categories: [AI, Tooling]
 tags: [cuda, gpu-programming, cutlass, compilers, deep-learning]
 date: 2025-12-04 10:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2025 CUDA Tile note into an authoritative source audit of tile-centric GPU programming models, CUTLASS CuTe integration, and hardware automation across modern architectures."
 mermaid: true
 math: true
 image:
   path: /assets/img/posts/cuda-tile-hero.png
   alt: "NVIDIA CUDA Tile architecture and tile-based GPU programming"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Thread-Centric SIMT CUDA Programming Become a Bottleneck for Tensor Acceleration?

@@ -5,12 +5,13 @@ categories: [AI, Research]
 tags: [llm-curriculum, pretraining, fine-tuning, quantization, model-serving, ml-engineering]
 date: 2024-05-24 10:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal milestone celebration into authoritative source audit analyzing the pedagogical taxonomy of LLM fundamentals, scientist research, and production engineering"
 mermaid: true
 image:
   path: /assets/img/llm/LLM_course.jpeg
   alt: "Large Language Model structured curriculum taxonomy and competency framework"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did the Open-Source LLM Ecosystem Require a Bifurcated Scientist vs Engineer Competency Taxonomy?

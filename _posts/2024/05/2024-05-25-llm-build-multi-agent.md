@@ -8,8 +8,9 @@ image:
   path: /assets/img/llm/LLM_Agentgym.jpeg
   alt: Multi-agent system architecture and AgentGym environment
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party rewrite into authoritative source audit on multi-agent system architectures, AgentGym environments, trajectory tuning, and SLA circuit breakers"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 As artificial intelligence systems graduated from isolated conversational chatbots toward complex workflow automation, single-agent architectures encountered fundamental scaling barriers. A single LLM prompt attempting to simultaneously manage deep research, web scraping, code synthesis, security validation, and editorial publication collapses under cognitive context bloat. The model suffers from instruction drift, loses track of intermediate goals, and burns inference tokens on redundant replanning.

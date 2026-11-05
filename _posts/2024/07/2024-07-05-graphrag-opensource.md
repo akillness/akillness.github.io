@@ -8,8 +8,9 @@ image:
   path: /assets/img/2026-06-16-ontology-graphrag-agent-memory/hygrag-graphrag.png
   alt: Microsoft GraphRAG hierarchical knowledge graph and community detection architecture
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from brief open-source announcement note into authoritative source audit on GraphRAG architecture, Leiden community detection, and global summarization mechanics"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 Retrieval-Augmented Generation (RAG) established itself as the dominant architecture for grounding foundation models in proprietary enterprise documentation. By indexing text chunks into vector databases and retrieving top-$k$ nearest neighbors via semantic vector similarity, standard RAG excels at localized, "needle-in-a-haystack" queries—such as retrieving a specific employee policy or citing a specific software API endpoint.

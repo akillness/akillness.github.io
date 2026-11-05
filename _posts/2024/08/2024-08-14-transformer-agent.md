@@ -6,11 +6,12 @@ last_modified_at: 2026-10-18 14:00:00 +0900
 categories: [AI, Agents]
 tags: [huggingface-agents, agentgen, code-agents, gaia-benchmark, planning-synthesis, open-models]
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party overview into authoritative source audit on Hugging Face Agents 2.0, CodeAgent abstractions, AgentGen planning synthesis, and GAIA benchmarks"
 image:
   path: /assets/img/llm/agent-gen.jpeg
   alt: AgentGen automated planning and bidirectional evolution framework
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Code-Based Action Spaces and Automated Planning Synthesis Transform Open-Model Agents?

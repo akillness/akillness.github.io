@@ -5,11 +5,12 @@ categories: [AI, Research]
 tags: [generative-ai, foundation-models, autoregression, diffusion-models, flow-matching]
 date: 2024-05-21 11:10:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial buzzword cheat sheet into rigorous technical source audit on the mathematical taxonomy of generative models: autoregression, diffusion SDEs, flow matching, and VAEs"
 image:
   path: /assets/img/news/Generative-AI-Terms.jpeg
   alt: "Generative AI Taxonomy"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Generative AI Taxonomy](/assets/img/news/Generative-AI-Terms.jpeg){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }

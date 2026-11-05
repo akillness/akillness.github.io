@@ -6,11 +6,12 @@ last_modified_at: 2026-10-18 14:00:00 +0900
 categories: [AI, Tooling]
 tags: [elasticsearch, full-text-search, lucene, inverted-index, hybrid-search, observability]
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party overview into authoritative source audit on Elasticsearch distributed architecture, Lucene inverted indices, and hybrid vector search"
 image:
   path: /assets/img/blog/ElasticSearch_use_cases.gif
   alt: Elasticsearch distributed search and analytics architecture
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Distributed Inverted Indices Dominate Enterprise Search and Log Observability?

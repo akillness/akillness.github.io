@@ -5,13 +5,14 @@ categories: [AI, Agents]
 tags: [gui-agents, computer-use, vision-language-models, mcp, bytedance]
 date: 2026-02-01 12:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2026 UI-TARS draft into an authoritative source audit of ByteDance UI-TARS, vision-language coordinate grounding, MCP tool integration, and desktop OS safety boundaries."
 mermaid: true
 math: true
 image:
   path: /assets/img/2026-02-01-ui-tars/ui-tars-icon.png
   alt: "UI-TARS Desktop native GUI agent stack"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Native GUI Automation Shift from Brittle DOM Trees to Vision-Language Action Models?

@@ -5,12 +5,13 @@ categories: [AI, Research]
 tags: [mamba-2, state-space-models, state-space-duality, transformers, linear-attention, tri-dao]
 date: 2024-06-03 15:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from brief preliminary overview into authoritative source audit analyzing State Space Duality (SSD), semiseparable matrix transformations, and Mamba-2 kernel throughput"
 mermaid: true
 image:
   path: /assets/img/paper/State_Space_Model_Matrices.png
   alt: "State Space Duality connecting Structured Semiseparable Matrices, Linear Attention, and Mamba-2"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did State Space Duality Prove That Transformers and SSMs Are Two Faces of the Same Matrix Class?

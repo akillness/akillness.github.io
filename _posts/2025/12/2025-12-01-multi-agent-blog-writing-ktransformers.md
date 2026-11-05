@@ -3,8 +3,6 @@ title: "Source Audit: KTransformers and Heterogeneous CPU-GPU MoE Inference"
 description: "Auditing kvcache-ai/ktransformers: dissecting CPU-GPU offloading, AMX/AVX-512 kernels, and how heterogeneous memory architectures run 671B MoE models."
 date: 2025-12-01 10:00:00 +0800
 last_modified_at: 2026-10-18 07:45:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from the hallucinated 2025-12 note into a rigorous Source Audit pinning kvcache-ai/ktransformers, analyzing CPU-GPU heterogeneous MoE memory pipelines and kernel offloading."
 categories: [AI, Tooling]
 tags: [ktransformers, moe, inference, deepseek, hardware]
 mermaid: true
@@ -12,6 +10,9 @@ image:
   path: /assets/img/llm/ktransformers.png
   alt: "KTransformers heterogeneous CPU-GPU inference architecture and MoE expert offloading pipeline"
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Can Heterogeneous CPU-GPU Offloading Make 671B MoE Inference Practical on a Single Workstation?

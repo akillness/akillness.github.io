@@ -6,14 +6,15 @@ categories: [AI, Research]
 tags: [qwen, open-source, moe, quantization, inference]
 date: 2026-03-01 21:00:00 +0900
 last_modified_at: 2026-10-18 09:05:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2026-03 note into an authoritative source audit of Alibaba's Qwen3.5 Medium family, evaluating sparse MoE routing, YaRN 1M context, and local inference VRAM bounds."
 mermaid: true
 math: false
 image:
   path: /assets/img/ai/qwen35-venturebeat-1.png
   lqip: data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAADQBQCdASogABIAPxFysFAsJqSisAgBgCIJYgC1Gt184TGAn9CjOBhWduA3GogQcvQPBuRjqM7AAP7FgsYJ3KJyDbvIsuAcV6+o8xeCJp2IraTUY/TWOJMTwYzTRRJuVF5QvdjKVlyy2qR96GE0RVHhlmsFt/iwtSjyVb9l3FJ17FAA
   alt: "Qwen3.5 Medium Series Architectural Release by Alibaba"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Qwen3.5 Medium Series Architectural Release by Alibaba](/assets/img/ai/qwen35-venturebeat-1.png){: .light .w-75 .shadow .rounded-10 }

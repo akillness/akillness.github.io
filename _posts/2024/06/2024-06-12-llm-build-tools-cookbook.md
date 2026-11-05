@@ -5,9 +5,10 @@ categories: [AI, Tooling]
 tags: [llm-stack, vector-databases, model-serving, observability, rag, mlops]
 date: 2024-06-12 15:10:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party checklist into authoritative source audit analyzing the 5-layer enterprise LLM production architecture, latency budgets, and telemetry contracts"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Enterprise LLM Applications Require a Five-Layer Decoupled Infrastructure Stack?

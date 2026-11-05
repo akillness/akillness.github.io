@@ -8,8 +8,9 @@ image:
   path: /assets/img/llm/ragbuilder-optimizing-rag.jpeg
   alt: Automated RAG hyperparameter tuning and optimization pipeline
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from brief 296-word note into authoritative source audit on automated RAG hyperparameter tuning, RAGBuilder optimization, and Ragas evaluation metrics"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 Deploying a Retrieval-Augmented Generation (RAG) prototype takes less than an hour: an engineer connects a document loader to a vector database, sets an arbitrary chunk size of 512 tokens, selects a default embedding model, and issues similarity queries to an LLM. However, transitioning from an initial prototype to production reliability consistently exposes a frustrating reality: retrieval accuracy is fragile, latency varies widely, and answers frequently degrade into hallucinations or omissions.

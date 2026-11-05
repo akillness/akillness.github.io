@@ -5,12 +5,13 @@ categories: [AI, Research]
 tags: [vector-embeddings, contrastive-learning, mteb, matryoshka-embeddings, rag, retrieval]
 date: 2024-05-18 16:15:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal introductory overview into authoritative source audit on dense vector embedding architectures, contrastive losses, and MTEB standards"
 mermaid: true
 image:
   path: /assets/img/blog/Vectorembedding_backbone.jpeg
   alt: "Dense vector embeddings architecture and multi-modal semantic latent space"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Dense Vector Embeddings Serve as the Indispensable Foundation of Semantic Search?

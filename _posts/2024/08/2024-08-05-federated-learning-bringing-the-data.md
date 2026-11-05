@@ -7,8 +7,9 @@ categories: [AI, Research]
 tags: [federated-learning, privacy-preserving-ai, distributed-optimization, differential-privacy, edge-ai]
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial news summary into exhaustive technical source audit on Federated Learning: FedAvg mathematical mechanics, non-IID FedProx regularization, SecAgg cryptography, and Federated LoRA (FLoRA)"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Is Centralized Data Pooling Structurally Incompatible with Regulated AI?

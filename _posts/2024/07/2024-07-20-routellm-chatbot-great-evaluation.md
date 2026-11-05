@@ -7,8 +7,9 @@ categories: [AI, Tooling]
 tags: [llm-routing, routellm, cost-optimization, chatbot-arena, model-gateways]
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial news snippet into exhaustive systems audit on LMSYS RouteLLM: preference-driven routing, embedding classifiers, matrix factorization, and cost-quality Pareto frontiers"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Uniform Model Dispatch Create an Economic Deadweight Loss?

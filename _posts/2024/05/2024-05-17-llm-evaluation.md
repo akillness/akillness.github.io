@@ -6,11 +6,12 @@ last_modified_at: 2026-10-18 14:00:00 +0900
 categories: [AI, Research]
 tags: [llm-evaluation, mmlu-pro, alpacaeval, chatbot-arena, benchmarks, human-preference]
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party overview into authoritative source audit on LLM evaluation methodologies, MMLU-Pro, LC-AlpacaEval, and Arena Elo"
 image:
   path: /assets/img/news/Evalverse_2.jpeg
   alt: Evalverse unified LLM evaluation platform and leaderboard metrics
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did First-Generation Static Benchmarks Fail to Reflect Real-World LLM Capability?

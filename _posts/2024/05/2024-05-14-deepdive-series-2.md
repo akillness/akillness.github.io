@@ -8,8 +8,9 @@ image:
   path: /assets/img/2026-06-22-diffusion-model-visual-breakdown/14-diffusion-transformer.png
   alt: Diffusion Transformer architecture diagram
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from Korean machine summary into authoritative source audit on Diffusion Transformers (DiT), spacetime latent patchification, and generative video scaling laws"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 When OpenAI revealed its text-to-video foundation model Sora in early 2024, the computer vision research community observed a decisive departure from the dominant visual generative paradigm. For nearly a decade—from Denoising Diffusion Probabilistic Models (DDPM) to Latent Diffusion Models (LDM / Stable Diffusion)—the foundational inductive bias of visual generation resided in the **Convolutional U-Net**.

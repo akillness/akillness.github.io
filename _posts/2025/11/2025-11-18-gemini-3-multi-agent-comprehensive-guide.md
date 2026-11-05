@@ -5,10 +5,11 @@ categories: ["AI, Agents"]
 tags: [multi-agent, gemini, orchestration, context-window]
 date: 2025-11-18 15:00:00 +0800
 last_modified_at: 2026-10-17 14:15:00 +0900
-archive_developed: "2026-10-17"
-archive_development_note: "Rebuilt from the 2025-11 note into an empirical Source Audit. Replaced speculative marketing claims and ungrounded benchmarks with an architectural analysis of large context windows, structured tool calling schemas, and bounded supervisor-worker coordination."
 mermaid: true
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Can Frontier Multi-Modal LLMs Function as Multi-Agent Central Supervisors?

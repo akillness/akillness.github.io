@@ -5,11 +5,12 @@ categories: [AI, Tooling]
 tags: [agent-skills, gemini-api, automated-learning, web-scraping, workflows]
 date: 2026-02-07 02:10:00 +0900
 last_modified_at: 2026-10-18 07:55:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit of Philipp Schmid's self-learning-skill architecture and Gemini 3 SDK integration, analyzing autonomous web-grounded skill synthesis and verification."
 mermaid: true
 math: false
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## The Knowledge Ingestion Bottleneck in Autonomous Engineering

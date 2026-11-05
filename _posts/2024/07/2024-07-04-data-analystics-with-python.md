@@ -5,8 +5,9 @@ categories: [AI, Tooling]
 tags: [data-analytics, python, polars, duckdb, apache-arrow]
 date: 2024-07-04 20:10:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial Python library listicle into comprehensive technical source audit on columnar memory layouts, Apache Arrow zero-copy IPC, Polars lazy execution, and DuckDB"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Python Data Analytics Architecture](/assets/img/blog/Data_Analystic_With_Python.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }

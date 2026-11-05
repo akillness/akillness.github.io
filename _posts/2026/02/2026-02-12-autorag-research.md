@@ -5,13 +5,14 @@ categories: [AI, Research]
 tags: [rag, evaluation, autorag, benchmarks, information-retrieval]
 date: 2026-02-12 11:30:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2026 AutoRAG draft into an authoritative source audit of AutoRAG-Research, standardized benchmark datasets (BEIR, BRIGHT, ViDoRe), modular retrieval pipelines, and empirical RAG evaluation."
 mermaid: true
 math: true
 image:
   path: /assets/img/2026-02-12-autorag-research/cover.png
   alt: "AutoRAG-Research standardized RAG evaluation lab and benchmarking"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did RAG Pipeline Optimization Require a Standardized Empirical Benchmark Harness?

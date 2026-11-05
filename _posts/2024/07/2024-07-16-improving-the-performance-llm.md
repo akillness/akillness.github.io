@@ -5,9 +5,10 @@ categories: [AI, Research]
 tags: [llm-optimization, prompt-engineering, rag, peft, lora, model-adaptation]
 date: 2024-07-16 12:30:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial 3-item overview into rigorous architectural decision matrix evaluating prompt engineering, RAG, and PEFT (LoRA/QLoRA) across cost, latency, data freshness, and 2026 test-time compute scaling"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does No Single LLM Adaptation Technique Satisfy Every Production Constraint?

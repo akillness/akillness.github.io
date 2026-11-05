@@ -5,9 +5,10 @@ categories: [AI, Tooling]
 tags: [microservices, distributed-systems, domain-driven-design, saga-pattern, event-sourcing, architecture]
 date: 2024-07-21 11:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from generic component checklist into authoritative distributed systems source audit deconstructing Domain-Driven Design bounded contexts, distributed Saga patterns, event sourcing, and 2026 AI-agent microservice meshes"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Premature Microservice Splits Incur Crippling Distributed System Overhead?

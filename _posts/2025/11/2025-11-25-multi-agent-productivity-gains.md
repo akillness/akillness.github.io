@@ -3,8 +3,6 @@ title: "Source Audit: Anthropic 100k Study and Multi-Agent Productivity Boundari
 description: "Auditing Anthropic's 100,000-conversation productivity report against METR randomized developer trials and 2026 multi-agent benchmarks under equal token budgets."
 date: 2025-11-25 15:00:00 +0800
 last_modified_at: 2026-10-18 07:30:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from the speculative 2025-11 note into a rigorous Source Audit comparing Anthropic's self-estimated 100k conversation dataset with METR's randomized trials and 2026 multi-agent compute benchmarks."
 categories: [AI, Research]
 tags: [productivity, evaluation, benchmarks, multi-agent, agents]
 mermaid: true
@@ -12,6 +10,9 @@ image:
   path: /assets/img/research/anthropic-productivity/productivity-hero.png
   alt: "Visual summary of AI productivity estimation and multi-agent evaluation frameworks"
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Does Orchestrating Multiple AI Agents Multiply the 80% Time Savings from Chat LLMs?

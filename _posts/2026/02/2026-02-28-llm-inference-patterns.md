@@ -5,10 +5,11 @@ categories: [AI, Research]
 tags: [llm, inference, kv-cache, vllm, serving, latency, performance]
 date: 2026-02-28 21:30:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt into authoritative source audit on the four LLM inference patterns (SISO, LISO, SILO, LILO), prefill-decode disaggregation, and KV cache serving economics"
 mermaid: true
 math: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Autoregressive Token Generation Break Traditional ML Serving Paradigms?

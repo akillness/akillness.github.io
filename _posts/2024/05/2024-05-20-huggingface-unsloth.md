@@ -5,12 +5,13 @@ categories: [AI, Tooling]
 tags: [unsloth, triton-kernels, qlora, fine-tuning, backpropagation, huggingface]
 date: 2024-05-20 14:10:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal promotional milestone note into authoritative source audit on Unsloth manual backpropagation, Triton kernel fusion, and QLoRA memory mechanics"
 mermaid: true
 image:
   path: /assets/img/llm/Huggingface_Unsloth.jpeg
   alt: "Unsloth AI custom Triton kernel fusion and fine-tuning optimization pipeline"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Manual Backpropagation Derivation Outperform PyTorch Autograd in Low-Rank Adaptation?

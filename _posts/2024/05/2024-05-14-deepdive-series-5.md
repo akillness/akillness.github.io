@@ -7,8 +7,9 @@ date: 2024-05-14 13:15:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from third-party machine summary into technical source audit on the duality of Transformer blocks: cross-token attention routing vs associative FFN memory"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Is a Transformer Block Divided into Two Distinct Computational Engines?

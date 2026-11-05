@@ -7,8 +7,9 @@ date: 2025-11-03 03:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from third-party repo rewrite into an authoritative engineering source audit evaluating PPO, DPO, and GRPO on single-node DGX hardware"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Can a Full RLHF Alignment Pipeline Run Reliably on Single-Node Hardware?

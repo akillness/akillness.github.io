@@ -5,14 +5,15 @@ categories: [AI, Agents]
 tags: [agents, benchmarks, evaluation]
 date: 2025-12-07 10:00:00 +0800
 last_modified_at: 2026-10-18 07:55:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit on LangChain Deep Agents CLI evaluation on Terminal Bench 2.0 via Harbor, replacing uncredited paraphrase with architectural analysis of harness engineering and 2026 benchmarks."
 mermaid: true
 math: false
 image:
   path: /assets/img/blog/deepagents-terminal-bench-2-0-header.png
   alt: "Evaluating Deep Agents CLI on Terminal Bench 2.0 with Harbor"
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Sandboxed Terminal Benchmarking Matters for Coding Agents

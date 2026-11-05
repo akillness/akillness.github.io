@@ -5,10 +5,11 @@ categories: [AI, Tooling]
 tags: [openclaw, skills, frontend, package-management, security, tooling]
 date: 2026-03-15 09:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt into authoritative source audit on OpenClaw skill ecosystem architecture, catalog scaling over 5000 items, ClawHub package distribution, and frontend security"
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## How Can Engineering Teams Navigate Five Thousand Agent Skills Without Paralysis?

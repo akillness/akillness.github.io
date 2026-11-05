@@ -5,11 +5,12 @@ categories: [AI, Tooling]
 tags: [claude-skills, agent-workflows, mcp, composio, orchestration]
 date: 2026-02-04 18:00:00 +0900
 last_modified_at: 2026-10-18 07:55:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit of ComposioHQ's awesome-claude-skills repository, examining the evolution from prompt collections to the AgentSkills specification and MCP tool standards."
 mermaid: true
 math: false
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Skills Are the Scalable Execution Primitive for AI Agents

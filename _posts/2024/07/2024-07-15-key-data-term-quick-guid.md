@@ -5,9 +5,10 @@ categories: [AI, Tooling]
 tags: [data-engineering, lakehouse, delta-lake, data-mesh, apache-iceberg, data-contracts]
 date: 2024-07-15 11:30:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial 16-bullet glossary into authoritative architectural source audit deconstructing the four paradigms of data platforms: Warehouses, Lakes, Lakehouses (Iceberg/Delta), and decentralized Data Meshes"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Traditional Data Warehouses and Raw Lakes Diverge into Architectural Silos?

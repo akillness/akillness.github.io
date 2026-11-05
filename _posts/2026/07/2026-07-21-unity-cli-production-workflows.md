@@ -6,14 +6,15 @@ categories: [AI, Tooling]
 tags: [unity, devops, automation, ci-cd, game-dev, harness]
 date: 2026-07-21 10:00:00 +0900
 last_modified_at: 2026-10-17 11:30:00 +0900
-archive_developed: 2026-10-17
-archive_development_note: "Rebuilt from the 2026-07 note into an original Source Audit evaluating the Unity CLI binary, Unity Pipeline package contracts, headless CI runners, and agent-driven game verification."
 pin: false
 mermaid: true
 math: false
 image:
   path: /assets/img/2026-07-21-unity-cli-production-workflows/unity-cli.png
   alt: "Unity CLI command-line interface"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## What Makes the Unity Editor a Dependable CI and Agent Surface?

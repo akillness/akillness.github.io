@@ -6,8 +6,9 @@ tags: [search-indexing, sqlite, pagefind, static-site, documentation]
 date: 2026-04-01 10:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from Korean ad/search note into authoritative systems engineering source audit on client-side documentation indexing, SQLite-WASM, and Pagefind chunked inverted indexes"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Monolithic Client Search Bundles Cripple Technical Sites?

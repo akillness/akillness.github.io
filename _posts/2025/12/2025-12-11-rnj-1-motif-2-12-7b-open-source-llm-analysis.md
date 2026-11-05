@@ -10,8 +10,9 @@ math: true
 image:
   path: /assets/img/llm/rnj-1-model.png
   alt: "Rnj-1 and Motif-2 Open Source Architecture Comparison"
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from third-party PR summary into technical source audit evaluating full self-attention vs sliding-window attention, YaRN rotary scaling, and pre-training data density in open models"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Can Architectural Refinements Outperform Parameter Scale in Open Models?

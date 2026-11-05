@@ -5,9 +5,10 @@ categories: [AI, Research]
 tags: [speculative-decoding, model-inference, dag, llm-acceleration, tree-attention, vllm]
 date: 2024-08-03 12:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial newsletter snippet into comprehensive systems and mathematical source audit analyzing Graph-Structured Speculative Decoding, tree attention masks, speculative acceptance criteria, and 2026 EAGLE-2/Medusa inference architectures"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Is Autoregressive Decoding Fundamentally Memory-Bandwidth Bound on Modern Accelerators?

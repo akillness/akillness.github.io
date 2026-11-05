@@ -6,8 +6,9 @@ tags: [cloud-native, kubernetes, ebpf, observability, devops]
 date: 2024-07-01 21:10:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit examining cloud-native systems architecture across declarative Kubernetes control loops, Linux kernel cgroups, and eBPF observability."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## How Does the Declarative Reconciliation Loop Enforce Distributed System Convergence?

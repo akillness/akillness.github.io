@@ -5,9 +5,10 @@ categories: [AI, Tooling]
 tags: [kubernetes, mlops, gpu-scheduling, nvidia-nim, keda, model-serving]
 date: 2024-08-04 15:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial social infographic into authoritative systems engineering source audit deconstructing Kubernetes GPU scheduling (NVIDIA GPU Operator, MIG), NIM microservice architecture, and KEDA queue-based autoscaling"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Has Kubernetes Become the De-Facto Control Plane for Production AI Workloads?

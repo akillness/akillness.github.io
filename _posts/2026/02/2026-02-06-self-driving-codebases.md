@@ -5,14 +5,15 @@ categories: [AI, Agents]
 tags: [autonomous-agents, cursor, software-architecture, multi-agent, harness-engineering]
 date: 2026-02-06 13:30:00 +0900
 last_modified_at: 2026-10-18 07:55:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit of Cursor's self-driving codebase research, analyzing recursive planner-worker topologies, lock contention collapse, and controlled error-rate throughput."
 mermaid: true
 math: false
 image:
   path: /assets/img/2026-02-06-self-driving-codebases/cover.png
   alt: "Self‑driving codebases"
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## The Long-Horizon Autonomy Frontier: Why Single Agents Stall

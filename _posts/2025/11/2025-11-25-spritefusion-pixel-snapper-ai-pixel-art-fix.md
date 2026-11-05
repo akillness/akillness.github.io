@@ -3,8 +3,6 @@ title: "Source Audit: Sprite Fusion Pixel Snapper and Deterministic AI Pixel Cle
 description: "Auditing Hugo Duprez's Rust/Wasm Pixel Snapper: why deterministic grid snapping and color quantization solve diffusion pixel art flaws where LLMs fail."
 date: 2025-11-25 15:00:00 +0800
 last_modified_at: 2026-10-18 07:35:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from the speculative 2025-11 note into a rigorous Source Audit pinning Hugo-Dz/spritefusion-pixel-snapper, dismantling fictional multi-agent claims and analyzing Rust Wasm grid quantization."
 categories: [AI, Tooling]
 tags: [pixel-art, rust, wasm, gamedev, image-processing]
 mermaid: true
@@ -12,6 +10,9 @@ image:
   path: /assets/img/blog/spritefusion-pixel-snapper/hero.png
   alt: "Sprite Fusion Pixel Snapper architectural breakdown and deterministic grid snapping pipeline"
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Diffusion Models Fail at Pixel Art, and How Does Pixel Snapper Fix Them?

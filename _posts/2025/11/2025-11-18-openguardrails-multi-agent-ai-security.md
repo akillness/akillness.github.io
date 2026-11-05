@@ -5,10 +5,11 @@ categories: ["AI, Agents"]
 tags: [security, guardrails, multi-agent, safety]
 date: 2025-11-18 12:00:00 +0800
 last_modified_at: 2026-10-17 14:20:00 +0900
-archive_developed: "2026-10-17"
-archive_development_note: "Rebuilt from the 2025-11 note into a rigorous Source Audit. Replaced first-person game development anecdotes with an empirical evaluation of multi-layered guardrail architectures, NeMo Guardrails programmable rails, and tool-sandbox isolation contracts."
 mermaid: true
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Monolithic Security Filters Fail in Autonomous Multi-Agent Pipelines?

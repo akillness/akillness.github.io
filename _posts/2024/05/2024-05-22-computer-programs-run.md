@@ -8,8 +8,9 @@ image:
   path: /assets/img/blog/How_computer_programs_run.gif
   alt: Operating system process execution lifecycle
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party rewrite into authoritative source audit on OS process execution, ELF loaders, virtual memory, and CPU instruction pipelines"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 To a software engineer working in a high-level interpreted or managed language, executing a program appears deceptively simple: one invokes a binary in a terminal (`./app`) or double-clicks an icon in a desktop shell, and the software begins executing instructions.

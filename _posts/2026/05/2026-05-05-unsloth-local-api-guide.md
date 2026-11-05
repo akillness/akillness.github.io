@@ -7,8 +7,9 @@ tags: [unsloth, local-llm, api, gguf, anthropic, openai, tool-calling, inference
 image:
   path: /assets/img/posts/2026-05-05-unsloth-api/unsloth-api-overview.png
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt into authoritative source audit on Unsloth Studio local API server, GGUF dual-protocol proxying (Anthropic Messages and OpenAI Chat), and agent tool calling harnesses"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 If you have ever attempted to migrate production AI agent workflows from commercial hosted endpoints to on-premise hardware, you know that the fundamental friction point rarely stems from raw model weights or token generation speed. The primary failure mode in local deployment is interface impedance. Modern agent harnesses, evaluation runners, and interactive development environments are written against strict SDK contracts—principally the Anthropic Messages API (`/v1/messages`) and the OpenAI Chat Completions API (`/v1/chat/completions`).

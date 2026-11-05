@@ -6,11 +6,12 @@ last_modified_at: 2026-10-18 14:00:00 +0900
 categories: [AI, Agents]
 tags: [agentic-ai, design-patterns, reflection, tool-use, planning, multi-agent]
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party overview into authoritative source audit on agentic design patterns, reflection loops, planning primitives, and 2026 systems"
 image:
   path: /assets/img/llm/the-4-key-agentic-design-patterns.jpeg
   alt: The four foundational agentic design patterns
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Agentic Design Patterns Outperform Pure Parameter Scaling in Complex Problem Solving?

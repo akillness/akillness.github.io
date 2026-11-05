@@ -5,13 +5,14 @@ categories: [AI, Tooling]
 tags: [mcp, documentation, developer-knowledge-api, google-cloud, rag]
 date: 2026-02-11 10:30:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2026 Google Developer Knowledge API draft into an authoritative source audit of live documentation infrastructure, MCP retrieval mechanics, API deprecation defense, and token-budgeted markdown serving."
 mermaid: true
 math: true
 image:
   path: /assets/img/2026-02-11-developer-knowledge/cover.png
   alt: "Google Developer Knowledge API and MCP documentation infrastructure"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Static Training Cutoffs Make Documentation Infrastructure Essential for Coding Agents?

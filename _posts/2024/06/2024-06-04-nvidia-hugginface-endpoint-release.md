@@ -8,8 +8,9 @@ image:
   path: /assets/img/ai/2026-04-30-llm-repos/NVIDIA-TensorRT-LLM.png
   alt: NVIDIA NIM and TensorRT-LLM inference optimization architecture
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from brief COMPUTEX announcement note into authoritative source audit on NVIDIA NIM, TensorRT-LLM compilation, Hugging Face Inference Endpoints, and continuous batching"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 Deploying generative large language models to enterprise production environments reveals an immediate architectural chasm between training and serving. While PyTorch and Hugging Face Transformers provide intuitive abstractions for experimentation and fine-tuning, running raw Python inference loops (`model.generate()`) under multi-tenant production traffic results in operational catastrophe: severe GPU High-Bandwidth Memory (HBM) fragmentation, high latency variance, and low GPU compute utilization.

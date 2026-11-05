@@ -6,10 +6,11 @@ categories: [AI, Agents]
 tags: [agents, recursion, verification, harness, architecture]
 date: 2026-05-01 10:00:00 +0900
 last_modified_at: 2026-10-18 09:40:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2026-05 note into an authoritative source audit of Q00/rlm-forge, deconstructing Ouroboros recursion orchestration and TraceGuard deterministic evidence contracts."
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Does Recursion Compound Agent Intelligence or Call Stack Hallucinations?

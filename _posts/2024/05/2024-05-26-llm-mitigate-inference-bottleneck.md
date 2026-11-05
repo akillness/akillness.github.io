@@ -5,12 +5,13 @@ categories: [AI, Tooling]
 tags: [inference-optimization, memory-bandwidth, continuous-batching, speculative-decoding, paged-attention, vllm]
 date: 2024-05-26 12:10:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal high-level checklist into authoritative source audit analyzing roofline models, prefill vs decode dynamics, continuous batching, and speculative decoding"
 mermaid: true
 image:
   path: /assets/img/llm/LLM_mitigate_inference_bottleneck.jpeg
   alt: "Roofline analysis of compute-bound prefill versus memory-bandwidth-bound decode in autoregressive transformers"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Prefill and Decode Phases Exhibit Radically Opposing Hardware Bottlenecks?

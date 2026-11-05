@@ -5,13 +5,14 @@ categories: [AI, Agents]
 tags: [agent-architecture, minimal-agent, pi-agent, openclaw, execution-harness]
 date: 2026-02-13 10:30:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2026 Pi minimal agent draft note into an authoritative source audit of Pi agent kernel architecture, primitive tool surfaces, tree-shaped session branching, and self-extending runtimes."
 mermaid: true
 math: true
 image:
   path: /assets/img/2026-02-13-pi-agent/cover.png
   alt: "Pi minimal agent runtime and tree-branching execution loops"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Agentic Architecture Rebound from Tool Bloat to Minimal Primitive Kernels?

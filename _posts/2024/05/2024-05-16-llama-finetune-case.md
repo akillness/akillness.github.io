@@ -5,11 +5,12 @@ categories: [AI, Research]
 tags: [direct-preference-optimization, rlhf, fine-tuning, llama-3, model-alignment]
 date: 2024-05-16 18:22:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial news summary into comprehensive technical source audit on Salesforce's Online Iterative DPO framework, proxy reward modeling, and distribution shift mitigation"
 image:
   path: /assets/img/llm/Llamma-finetune.jpeg
   alt: "Online Iterative DPO Workflow"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Online Iterative DPO Workflow](/assets/img/llm/Llamma-finetune.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }

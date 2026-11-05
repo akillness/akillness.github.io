@@ -7,8 +7,9 @@ categories: [AI, Research]
 tags: [transformer, attention-mechanism, positional-encoding, rope, llm-architecture]
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial news summary into exhaustive technical source audit on Meta CoPE: contextual position gating, fractional interpolation, subword invariant addressing, and long-context scaling"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Token-Monotonic Positional Encoding Fail Higher-Level Abstractions?

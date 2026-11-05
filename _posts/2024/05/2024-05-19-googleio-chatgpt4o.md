@@ -5,12 +5,13 @@ categories: [AI, Research]
 tags: [google-gemini, gpt-4o, multimodality, project-astra, real-time-audio, context-window]
 date: 2024-05-19 13:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal promotional comparison into authoritative source audit on native multimodal architectures, end-to-end speech, and large context windows"
 mermaid: true
 image:
   path: /assets/img/news/Google_vs_OpenAI.jpeg
   alt: "Architectural comparison of Google Gemini 1.5 Pro and OpenAI GPT-4o native multimodal systems"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Spring 2024 Mark the Structural Shift from Cascaded Pipelines to Native Multimodality?

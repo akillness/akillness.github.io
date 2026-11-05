@@ -6,8 +6,9 @@ tags: [llamaindex, rag, qdrant, workflows, agentic-rag]
 date: 2024-08-05 11:00:00 +0800
 last_modified_at: 2026-10-18 11:15:00 +0900
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2024 note into an authoritative source audit of LlamaIndex event-driven Workflows and Qdrant vector retrieval pipelines."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Event-Driven Architecture Replace Static RAG Pipelines?

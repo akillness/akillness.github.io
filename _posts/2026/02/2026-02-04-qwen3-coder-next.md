@@ -5,13 +5,14 @@ categories: [AI, Research]
 tags: [qwen3-coder, mixture-of-experts, rl-training, swe-bench, open-weights]
 date: 2026-02-04 13:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2026 Qwen3-Coder draft note into an authoritative source audit of Alibaba Qwen3-Coder-Next, hybrid-attention MoE architectures, verifiable environment RL, and SWE-bench efficiency."
 mermaid: true
 math: true
 image:
   path: /assets/img/2026-02-04-qwen3-coder-next/benchmarks.png
   alt: "Qwen3-Coder-Next benchmark performance and architecture"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Agentic Training Signals Outperform Parameter Scaling in Open-Weight Code Models?

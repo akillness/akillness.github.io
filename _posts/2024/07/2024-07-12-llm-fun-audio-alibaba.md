@@ -5,8 +5,9 @@ categories: [AI, Research]
 tags: [funaudiollm, speech-recognition, text-to-speech, flow-matching, speech-to-speech]
 date: 2024-07-12 13:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial promotional announcement into comprehensive technical source audit on SenseVoice non-autoregressive ASR, CosyVoice flow matching, and real-time duplex voice interaction"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![FunAudioLLM Architecture](/assets/img/llm/FunAudioLLM.jpeg){: .light .shadow .rounded-10 w='1212' h='668' }

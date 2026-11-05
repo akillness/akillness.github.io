@@ -5,10 +5,11 @@ categories: ["AI, Tooling"]
 tags: [rag, vlm, parsing, retrieval]
 date: 2025-11-16 03:00:00 +0800
 last_modified_at: 2026-10-17 14:10:00 +0900
-archive_developed: "2026-10-17"
-archive_development_note: "Rebuilt from the 2025-11 note into a rigorous Source Audit. Replaced first-person marketing claims with an empirical architectural evaluation of VLM document ingestion versus managed retrieval APIs, with verified 2026 research benchmarks and schema contracts."
 mermaid: true
 published: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Does Vision-Language Document Parsing Beat Managed File Search APIs?

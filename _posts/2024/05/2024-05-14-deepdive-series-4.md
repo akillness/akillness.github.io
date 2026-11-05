@@ -6,8 +6,9 @@ tags: [transformers, self-attention, deep-learning, linear-algebra]
 date: 2024-05-14 13:14:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Source audit providing an end-to-end mathematical hand calculation of scaled dot-product attention, variance preservation proofs, and FlashAttention-3 evolution."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Is the $\sqrt{d_k}$ Scaling Factor Mathematically Indispensable in Self-Attention?

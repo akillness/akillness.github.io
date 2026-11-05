@@ -5,10 +5,11 @@ categories: [AI, Tooling]
 tags: [agentation, readout, frontend, claude-code, codex, mcp, observability, tooling]
 date: 2026-03-02 21:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt into authoritative source audit on Agentation visual DOM selector feedback, Readout native session replay, and frontend agent observability"
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Frontend AI Coding Require Exact DOM Anchors and Timeline Replays?

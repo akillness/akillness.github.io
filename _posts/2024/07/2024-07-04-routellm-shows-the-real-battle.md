@@ -5,9 +5,10 @@ categories: [AI, Research]
 tags: [routellm, model-routing, cost-optimization, lmsys, llm-inference, pareto-frontier]
 date: 2024-07-04 20:10:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from brief announcement note and translation block into rigorous empirical source audit analyzing RouteLLM's routing architectures (Matrix Factorization, BERT, Causal LLMs), preference calibration, and 2026 multi-tier gateway evolution"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Uniform Frontier Model Dispatch Incur Severe Economic and Latency Inefficiencies?

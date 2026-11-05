@@ -5,13 +5,14 @@ categories: [AI, Tooling]
 tags: [plano, agent-infrastructure, ai-gateway, observability, model-routing]
 date: 2026-02-13 10:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2026 Plano draft note into an authoritative source audit of Plano proxy architecture, inner-loop reasoning separation, outer-loop gateway routing, filter chains, and OpenTelemetry instrumentation."
 mermaid: true
 math: true
 image:
   path: /assets/img/2026-02-13-plano/logo.svg
   alt: "Plano architecture and AI agent control plane"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Enterprise Agent Deployment Demand an "ONNX Moment" for Infrastructure?

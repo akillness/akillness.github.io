@@ -6,13 +6,14 @@ categories: [AI, Agents]
 tags: [google-adk, agent-evaluation, multi-agent, python, orchestration]
 date: 2026-02-15 10:00:00 +0900
 last_modified_at: 2026-10-18 08:55:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2026-02 note into an authoritative source audit of Google ADK Python, analyzing hierarchical coordination, CodeExecutor sandboxes, and first-class trajectory evaluations."
 mermaid: true
 math: false
 image:
   path: /assets/img/2026-02-15-adk/cover.png
   alt: "Agent Development Kit Architecture and Evaluation Overview"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Agent Development Kit overview](/assets/img/2026-02-15-adk/cover.png){: .light .w-75 .shadow .rounded-10 }

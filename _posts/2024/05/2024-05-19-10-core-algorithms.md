@@ -5,8 +5,9 @@ categories: [AI, Research]
 tags: [algorithms, computer-science, distributed-systems, optimization, transformer-attention]
 date: 2024-05-19 23:46:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial 2024 listicle into technical source audit examining the computational, numerical, and architectural evolution of foundational algorithms in distributed computing and AI"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![10 Algorithms Shaping Modern Computing](/assets/img/blog/Algorithms_top_10.gif){: .light .w-75 .shadow .rounded-10 w='1212' h='668' }

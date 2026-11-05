@@ -8,8 +8,9 @@ image:
   path: /assets/img/news/AI_Papers_link.gif
   alt: Canonical deep learning architectures mapping
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal third-party paper list into authoritative source audit mapping canonical AI architectures, foundational mathematical papers, and 2026 systems convergence"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 The explosive acceleration of artificial intelligence research over the past decade can appear chaotic and fragmented. Every week brings hundreds of preprints to arXiv, accompanied by social media hype announcing incremental benchmarks and ephemeral fine-tunes.

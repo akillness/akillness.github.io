@@ -5,13 +5,14 @@ categories: [AI, Agents]
 tags: [agent-ops, clawd-control, fleet-management, observability, sse-streaming]
 date: 2026-02-18 22:20:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2026 Clawd Control draft note into an authoritative source audit of agent fleet observability, Server-Sent Events real-time event streaming, host vs agent resource contention, and operational health gates."
 mermaid: true
 math: true
 image:
   path: /assets/img/ai/clawd-control-1.jpg
   alt: "Clawd Control real-time agent fleet operations dashboard"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Autonomous Agent Fleets Require Real-Time Operational Mission Control?

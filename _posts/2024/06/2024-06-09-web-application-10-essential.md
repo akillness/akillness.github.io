@@ -7,8 +7,9 @@ categories: [AI, Tooling]
 tags: [web-architecture, distributed-systems, reliability-engineering, devops, system-design]
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial 10-point list into exhaustive systems audit on production web application architecture: L4/L7 ingress, caching topologies, event streaming, and SRE observability"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## What Distinguishes Toy Web Prototypes from Scalable Production Systems?

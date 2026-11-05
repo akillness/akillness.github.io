@@ -6,13 +6,14 @@ categories: [AI, Agents]
 tags: [entire, agentic-sdlc, git-checkpoints, provenance, developer-tools]
 date: 2026-02-12 10:30:00 +0900
 last_modified_at: 2026-10-18 08:50:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2026-02 note into an authoritative source audit of Thomas Dohmke's Entire platform, analyzing Git-compatible checkpoints, intent provenance, and agent-native SDLC."
 mermaid: true
 math: false
 image:
   path: /assets/img/2026-02-12-entire-world/cover.png
   alt: "Entire Platform Funding and Architecture Overview"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Entire Platform Funding and Architecture Overview](/assets/img/2026-02-12-entire-world/cover.png)

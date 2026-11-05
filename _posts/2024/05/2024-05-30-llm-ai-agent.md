@@ -5,12 +5,13 @@ categories: [AI, Agents]
 tags: [ai-agents, agent-orchestration, langgraph, llamaindex, agentic-workflows, tool-calling]
 date: 2024-05-30 03:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from unoriginal high-level framework list into authoritative source audit on agentic runtime architecture, cyclic state machines, tiered memory, and deterministic tool dispatch"
 mermaid: true
 image:
   path: /assets/img/llm/llm-ai-agents.jpeg
   alt: "Autonomous AI agent runtime architecture featuring cyclic state machine, memory, and tool integration"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Foundation Models Alone Fail to Form Autonomous Agents Without Runtime Harnesses?

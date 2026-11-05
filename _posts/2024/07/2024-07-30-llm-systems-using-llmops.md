@@ -5,8 +5,9 @@ categories: [AI, Tooling]
 tags: [llmops, qlora, model-serving, streaming-data, vector-database]
 date: 2024-07-30 11:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial promotional course announcement into comprehensive technical source audit on end-to-end LLMOps pipelines, QLoRA mechanics, streaming vector ETL, and multi-LoRA serving"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Architecture of Production LLM System](/assets/img/llm/architecture-of-llm-system.gif){: .light .shadow .rounded-10 w='1212' h='668' }

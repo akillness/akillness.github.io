@@ -7,8 +7,9 @@ categories: [AI, Research]
 tags: [transformer, decoding-algorithms, contrastive-decoding, hallucination, factuality]
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial news snippet into exhaustive technical source audit on DoLa: layer-contrastive decoding, Jensen-Shannon premature layer selection, logit lens mechanics, and truthfulness benchmarks"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## How Can Internal Layer Discrepancies Suppress LLM Hallucinations?

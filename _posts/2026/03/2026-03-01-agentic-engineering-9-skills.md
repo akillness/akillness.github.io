@@ -5,10 +5,11 @@ categories: [AI, Agents]
 tags: [agentic-engineering, multi-agent, workflow, orchestration, productivity, verification]
 date: 2026-03-01 21:30:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt into authoritative source audit on the 9 agentic engineering disciplines, task decomposition, context architecture, verification gates, and production loops"
 mermaid: true
 math: false
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Autonomous Agent Productivity Stall at the Last Twenty Percent?

@@ -5,13 +5,14 @@ categories: [AI, Tooling]
 tags: [edge-ai, sandboxing, mobile-agents, openclaw, security-guardrails]
 date: 2026-02-09 13:00:00 +0900
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Upgraded from 2026 OpenClaw mobile note into an authoritative source audit of edge agent sandboxing, Linux userlands on ARM/Android, air-gapped network policies, and hardware-isolated execution."
 mermaid: true
 math: true
 image:
   path: /assets/img/2026-02-09-openclaw-phone/cover.jpg
   alt: "Autonomous agent execution on isolated mobile hardware"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Does Physical Hardware Isolation Solve the Autonomous Agent Security Dilemma?

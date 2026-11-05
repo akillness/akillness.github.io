@@ -5,9 +5,10 @@ categories: [AI, Research]
 tags: [needlebench, long-context, llm-evaluation, needle-in-a-haystack, bilingual-reasoning, benchmarks]
 date: 2024-08-03 11:00:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from sensationalized headline and superficial summary into authoritative empirical source audit deconstructing Shanghai AI Lab's NeedleBench evaluation harness, multi-needle retrieval limits, Ancestral Trace Challenge (ATC), and 2026 long-context attention mechanisms"
 mermaid: true
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Do Synthetic Needle-in-a-Haystack Benchmarks Mask Long-Context Failure Modes?

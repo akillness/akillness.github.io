@@ -6,13 +6,14 @@ categories: [AI, Tooling]
 tags: [rag, retrieval, vector-databases, evaluation, architecture]
 date: 2024-06-22 20:10:00 +0800
 last_modified_at: 2026-10-18 10:25:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a preliminary 2024 note into an authoritative engineering delivery roadmap for production RAG systems, evaluating ingestion topologies, hybrid retrieval, and automated evaluation harnesses."
 mermaid: true
 math: false
 image:
   path: /assets/img/llm/RAG_Roadmap_3_days.jpeg
   alt: "Engineering Production RAG Architectural Roadmap"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![Production RAG Architectural Roadmap](/assets/img/llm/RAG_Roadmap_3_days.jpeg){: .light .w-75 .shadow .rounded-10 }

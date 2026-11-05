@@ -9,8 +9,9 @@ mermaid: true
 image:
   path: /assets/img/posts/vggt-fig1.webp
   alt: "VGGT Visual Geometry Grounded Transformer Architecture"
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a third-party review note into an authoritative source audit of Meta AI and Oxford's VGGT feed-forward 3D reconstruction transformer."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Pairwise 3D Reconstruction Fail to Scale Beyond Isolated Stereo Pairs?

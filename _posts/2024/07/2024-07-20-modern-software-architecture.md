@@ -5,8 +5,9 @@ categories: [AI, Tooling]
 tags: [software-architecture, system-design, clean-architecture, microservices, distributed-systems]
 date: 2024-07-20 15:30:00 +0800
 last_modified_at: 2026-10-18 14:00:00 +0900
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial 5-layer listicle into comprehensive technical source audit on architectural boundaries, hexagonal ports and adapters, event-driven CQRS, and service mesh fault isolation"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ![5 Layers of Modern Software Architecture](/assets/img/blog/5-layer-of-software.gif){: .light .shadow .rounded-10 w='1212' h='668' }

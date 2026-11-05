@@ -6,8 +6,9 @@ tags: [kubernetes, gateway-api, helm, networking, cloud-native]
 date: 2025-11-15 03:00:00 +0800
 last_modified_at: 2026-10-18 12:30:00 +0900
 mermaid: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from a third-party review note into an authoritative source audit of the Kubernetes Gateway API transition and Helm 4 architectural modernization."
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did the Kubernetes Ingress Specification Fail Enterprise Multi-Tenant Production?

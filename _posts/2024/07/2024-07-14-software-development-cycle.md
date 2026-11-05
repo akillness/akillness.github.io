@@ -7,8 +7,9 @@ categories: [AI, Tooling]
 tags: [software-engineering, sdlc, devops, continuous-delivery, dora-metrics]
 mermaid: true
 math: true
-archive_developed: "2026-10-18"
-archive_development_note: "Rebuilt from superficial 5-bullet note into exhaustive systems audit on the modern SDLC: trunk-based development, shift-left testing, DORA telemetry, and agentic engineering harnesses"
+robots: noindex, follow
+sitemap: false
+ads: false
 ---
 
 ## Why Did Classical Linear SDLC Models Collapse in Modern Engineering?
