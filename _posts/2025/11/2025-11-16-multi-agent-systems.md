@@ -47,7 +47,7 @@ flowchart TD
     end
 ```
 
-As established in our audits of [/posts/context-engineering-agent-memory-design/](/posts/context-engineering-agent-memory-design/) and [/posts/unity-cli-atomic-agent/](/posts/unity-cli-atomic-agent/), scalable agent reliability requires decoupling high-level strategic planning from narrow, verifiable worker executions.
+As discussed in our audits of [/posts/context-engineering-agent-memory-design/](/posts/context-engineering-agent-memory-design/) and [/posts/ouroboros-agent-os-spec-first-loop/](/posts/ouroboros-agent-os-spec-first-loop/), scalable agent reliability requires decoupling high-level strategic planning from narrow, verifiable worker executions.
 
 ## Architectural Blueprint: The Supervisor-Worker Pattern
 

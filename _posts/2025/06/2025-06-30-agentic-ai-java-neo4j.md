@@ -42,7 +42,7 @@ flowchart TD
     end
 ```
 
-**Agentic Graph-Native Systems** replace rigid pipelines with autonomous reasoning loops. Rather than executing a static lookup, the agent treats the graph database as an exploratory tool surface. It inspects schema labels, constructs bounded Cypher queries, evaluates intermediate entity relationships, and decides whether further traversals are required. As discussed in our analysis of [/posts/context-engineering-agent-memory-design/](/posts/context-engineering-agent-memory-design/) and [/posts/unity-cli-atomic-agent/](/posts/unity-cli-atomic-agent/), giving agents structured, machine-readable tool interfaces is far more reliable than dumping unstructured context into the prompt.
+**Agentic Graph-Native Systems** replace rigid pipelines with autonomous reasoning loops. Rather than executing a static lookup, the agent treats the graph database as an exploratory tool surface. It inspects schema labels, constructs bounded Cypher queries, evaluates intermediate entity relationships, and decides whether further traversals are required. As discussed in our analysis of [/posts/context-engineering-agent-memory-design/](/posts/context-engineering-agent-memory-design/) and [/posts/mcp-security-depends-on-transport-construction/](/posts/mcp-security-depends-on-transport-construction/), giving agents structured, machine-readable tool interfaces is far more reliable than dumping unstructured context into the prompt.
 
 ## Designing Enterprise Graph Tool Surfaces in Java
 

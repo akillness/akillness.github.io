@@ -39,7 +39,7 @@ flowchart TD
 
 The agent was not hallucinating syntax or misunderstanding the prompt; its internal reasoning remained completely coherent. The critical operational fact—the prior revert and its causal telemetry signature—never entered the agent's inference context window.
 
-This gap exposes why prompt engineering alone fails at scale. Prompt engineering governs how a model processes tokens, while **context engineering** governs the deterministic pipeline that decides which tokens enter the context window in the first place. For multi-step autonomous workflows such as those analyzed in our audits of [/posts/superlog-agentic-telemetry/](/posts/superlog-agentic-telemetry/) and [/posts/unity-cli-atomic-agent/](/posts/unity-cli-atomic-agent/), durable state requires deliberate retrieval and memory architectures.
+This gap exposes why prompt engineering alone fails at scale. Prompt engineering governs how a model processes tokens, while **context engineering** governs the deterministic pipeline that decides which tokens enter the context window in the first place. For multi-step autonomous workflows such as those analyzed in our audits of [/posts/superlog-agentic-telemetry/](/posts/superlog-agentic-telemetry/) and [/posts/langgraph-approval-freshness/](/posts/langgraph-approval-freshness/), durable state requires deliberate retrieval and memory architectures.
 
 ## Structuring the Four Layers of Agent Context Engineering
 
