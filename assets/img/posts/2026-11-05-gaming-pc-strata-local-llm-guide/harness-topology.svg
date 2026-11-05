@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" width="960" height="460" role="img" aria-labelledby="t d">
+  <title id="t">Author's hybrid coding harness: Tailscale, Orca, Claude Code, CPA, frontier orchestrator and local sub-agents</title>
+  <desc id="d">Devices joined by Tailscale run Orca sessions. Claude Code talks to CPA, which routes the orchestrator role to frontier subscriptions and sub-agent roles to the home gaming PC running Strata or to the DeepSeek API.</desc>
+  <style>
+    text{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#1f2933}
+    .h{font-size:15px;font-weight:700}
+    .s{font-size:12.5px}
+    .m{font-size:11.5px;fill:#52606d}
+    .box{fill:#fff;stroke:#9aa5b1;stroke-width:1.5;rx:10}
+    .a{fill:#eaf2ff;stroke:#3b82f6;stroke-width:1.5;rx:10}
+    .b{fill:#e9f8ee;stroke:#22a55b;stroke-width:1.5;rx:10}
+    .c{fill:#fff4e5;stroke:#f59e0b;stroke-width:1.5;rx:10}
+    .ln{stroke:#52606d;stroke-width:1.6;fill:none;marker-end:url(#ar)}
+  </style>
+  <defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#52606d"/></marker></defs>
+  <rect x="0" y="0" width="960" height="460" fill="#f8fafc"/>
+  <text x="24" y="30" class="h" font-size="17">Frontier plans plan; the home gaming PC does the bulk work</text>
+  <text x="24" y="50" class="m">Topology as described in the author's post. The roles are the author's design, not a Strata feature.</text>
+
+  <rect x="24" y="72" width="912" height="92" class="box"/>
+  <text x="40" y="96" class="h">Layer 1 - Tailscale mesh (WireGuard)</text>
+  <rect x="40" y="108" width="200" height="44" class="a"/><text x="52" y="127" class="s">Office laptop</text><text x="52" y="143" class="m">Orca session</text>
+  <rect x="260" y="108" width="200" height="44" class="a"/><text x="272" y="127" class="s">Phone / remote shell</text><text x="272" y="143" class="m">Orca session</text>
+  <rect x="480" y="108" width="440" height="44" class="b"/><text x="492" y="127" class="s">Home gaming PC (NVIDIA GPU + 64-128 GB RAM)</text><text x="492" y="143" class="m">Strata server on :8080, reached over the Tailscale address</text>
+
+  <rect x="24" y="190" width="440" height="110" class="box"/>
+  <text x="40" y="214" class="h">Layer 2 - one harness</text>
+  <rect x="40" y="226" width="190" height="60" class="a"/><text x="52" y="248" class="s">Claude Code</text><text x="52" y="265" class="m">single terminal UI,</text><text x="52" y="279" class="m">/model switches backend</text>
+  <rect x="250" y="226" width="200" height="60" class="c"/><text x="262" y="248" class="s">CPA (CLIProxyAPI)</text><text x="262" y="265" class="m">one proxy in front of</text><text x="262" y="279" class="m">subscriptions and APIs</text>
+  <path d="M230,256 L250,256" class="ln"/>
+
+  <rect x="500" y="190" width="436" height="244" class="box"/>
+  <text x="516" y="214" class="h">Layer 3 - roles in one session</text>
+  <rect x="516" y="228" width="404" height="80" class="a"/>
+  <text x="528" y="250" class="s">Orchestrator: frontier model (Claude / Codex subscription)</text>
+  <text x="528" y="270" class="m">design, task decomposition, review of sub-agent output</text>
+  <text x="528" y="287" class="m">spends scarce subscription tokens only on decisions</text>
+  <rect x="516" y="324" width="404" height="92" class="b"/>
+  <text x="528" y="346" class="s">Sub-agents: local Strata endpoint or DeepSeek API</text>
+  <text x="528" y="366" class="m">repo exploration, edits, test-fix loops, bulk context reading</text>
+  <text x="528" y="383" class="m">author reports 170 tok/s decode and 3,000 tok/s prefill locally</text>
+  <text x="528" y="400" class="m">(author-reported, not independently measured)</text>
+
+  <path d="M464,245 L500,262" class="ln"/>
+  <path d="M464,275 L500,366" class="ln"/>
+  <text x="24" y="330" class="m">Strata exposes OpenAI-style /v1/chat/completions</text>
+  <text x="24" y="346" class="m">and Anthropic-style /v1/messages (Strata DETAILS.md),</text>
+  <text x="24" y="362" class="m">which is what lets a proxy treat it like any other backend.</text>
+</svg>
