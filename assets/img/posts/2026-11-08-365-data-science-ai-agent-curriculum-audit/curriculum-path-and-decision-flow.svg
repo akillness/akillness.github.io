@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 960" width="1600" height="960" role="img" aria-labelledby="title desc">
   <title id="title">365 Data Science AI Agent Engineer Track: 15-Day Free Access Triage and Decision Flow</title>
-  <desc id="desc">Technical flowchart outlining the curriculum path and decision triage for the 365 Data Science November 2026 Free Weeks campaign. Compares 10 courses across 422 lessons (37 hours) into Tier 1 High-Leverage Priority (Courses 4, 6, 7, 8: MCP, LangGraph, ReAct/ReWOO, Evaluation), Tier 2 Fast-Track (Courses 3, 5, 10: Architecture, LangChain, Streamlit), and Tier 3 Skip (Courses 1, 2, 9 and classical ML projects: Intro theory, Ethics, Conway's Game of Life). Outlines pre-paywall completion versus open-source evergreen alternatives (Anthropic MCP specification, LangGraph documentation, Ragas evaluation framework) after the November 20, 2026 deadline.</desc>
+  <desc id="desc">Editorial study-triage schematic based on public 365 Data Science course outlines. Videos were not viewed. Project 01, 02, and 03 labels report the promotional infographic, not verified video demonstrations or learning outcomes. Study priorities and practice goals are recommendations, not measured results.</desc>
   <defs>
     <marker id="arrow-slate" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
       <path d="M0,1 L8,5 L0,9 z" fill="#64748b" />
@@ -56,7 +56,7 @@
     <text x="668" y="53" class="badge-text" fill="#14532d">SCOPE: 10 COURSES · 422 LESSONS · 37 HOURS</text>
     <!-- Title and Subtitle -->
     <text x="64" y="84" class="diagram-title">Curriculum Path &amp; Decision Triage: 15-Day Free Access vs. Production Reality</text>
-    <text x="64" y="103" class="diagram-subtitle">Evidence-based triage for working engineers: isolating high-leverage agentic courses before paywall reinstatement</text>
+    <text x="64" y="103" class="diagram-subtitle">Public outlines only; videos not viewed. Infographic project labels do not verify course delivery. Triage is editorial advice.</text>
   </g>
 
   <!-- Connectors (rendered below cards for clean visual overlap) -->
@@ -91,7 +91,7 @@
       <text x="56" y="266" class="card-desc">• Cost: $0 during window (No credit card)</text>
       <text x="56" y="286" class="card-desc">• Volume: 10 Courses · 422 Lessons</text>
       <text x="56" y="306" class="card-desc">• Duration: 25h Video + 12h Practice Exams</text>
-      <text x="56" y="326" class="card-desc">• Projects: 4 Optional standalone practice tracks</text>
+      <text x="56" y="326" class="card-desc">• Track page: 4 separate practice-project cards</text>
       <rect x="56" y="342" width="298" height="24" rx="4" fill="#fef3c7" />
       <text x="64" y="358" class="badge-text" fill="#b45309">AUDIT: NOT EVERGREEN FREE ACCESS</text>
     </g>
@@ -114,7 +114,7 @@
       <text x="66" y="658" class="card-desc">or reviewing general introductory data science?</text>
 
       <text x="56" y="692" class="card-desc" font-weight="700">Triage Routing Policy:</text>
-      <text x="56" y="712" class="card-desc" fill="#b91c1c">▶ Path A: Skip Tier 3 theory (Save 36+ hrs)</text>
+      <text x="56" y="712" class="card-desc" fill="#b91c1c">▶ Path A: De-prioritize introductory topics</text>
       <text x="56" y="732" class="card-desc" fill="#1d4ed8">▶ Path B: Fast-track Tier 2 apps (2x speed)</text>
       <text x="56" y="752" class="card-desc" fill="#15803d">▶ Path C: Prioritize Tier 1 MCP &amp; LangGraph</text>
 
@@ -133,7 +133,7 @@
       <!-- Header Badge -->
       <rect x="426" y="148" width="370" height="20" rx="5" fill="#fee2e2" stroke="#f87171" stroke-width="1" />
       <text x="434" y="162" class="badge-text" fill="#7f1d1d">TIER 3 · LOW LEVERAGE FOR WORKING ENGINEERS (SKIP)</text>
-      <text x="810" y="163" class="card-stat" fill="#b91c1c">TIME SAVED: 146 LESSONS · 8h VIDEO + 28h PROJECTS</text>
+      <text x="810" y="163" class="card-stat" fill="#b91c1c">146 LESSONS · 8h VIDEO; SEPARATE PRACTICE: 28h</text>
       
       <!-- Sub-cards 2x2 grid -->
       <!-- Course 1 -->
@@ -148,7 +148,7 @@
       <text x="818" y="194" class="card-title">Course 2: Intro to AI Agents &amp; Agentic AI</text>
       <text x="818" y="210" class="card-meta">Ned Krastev · 52 lessons · 2h video / 2h total (CPE: 3)</text>
       <text x="818" y="228" class="card-desc">Sensors, actuators, reflex vs goal-based agents. Conceptual taxonomy.</text>
-      <text x="818" y="242" class="badge-text" fill="#b91c1c">TRIAGE: SKIP (NO HANDS-ON CODING)</text>
+      <text x="818" y="242" class="badge-text" fill="#b91c1c">TRIAGE: REVIEW IF ALREADY FAMILIAR</text>
 
       <!-- Course 9 -->
       <rect x="426" y="258" width="360" height="78" rx="6" fill="#ffffff" stroke="#fca5a5" stroke-width="1" />
@@ -159,10 +159,10 @@
 
       <!-- Standalone Classical Projects -->
       <rect x="806" y="258" width="360" height="78" rx="6" fill="#ffffff" stroke="#fca5a5" stroke-width="1" />
-      <text x="818" y="276" class="card-title">Optional Classical Practice Projects</text>
+      <text x="818" y="276" class="card-title">Separate Classical Practice Cards</text>
       <text x="818" y="292" class="card-meta">3 Projects · 28 Hours Total Estimated Practice</text>
       <text x="818" y="310" class="card-desc">Conway's Game of Life (15h), User Classif. (10h), PCA Music (3h).</text>
-      <text x="818" y="324" class="badge-text" fill="#b91c1c">TRIAGE: SKIP (NOT REQUIRED FOR CERTIFICATE)</text>
+      <text x="818" y="324" class="badge-text" fill="#b91c1c">TRIAGE: DEFER FOR THIS STUDY GOAL</text>
     </g>
 
     <!-- Tier 2: Fast-Track (Y: 370 to 584) -->
@@ -184,7 +184,7 @@
       <!-- Course 5 -->
       <rect x="806" y="410" width="360" height="74" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1" />
       <text x="818" y="428" class="card-title">Course 5: Build Chat Apps (LangChain)</text>
-      <text x="818" y="462" class="card-desc">• Milestone: Project 01 (Q&amp;A Chatbot with LangChain)</text>
+      <text x="818" y="462" class="card-desc">• Public topics: chains, prompts, and RAG</text>
       <text x="818" y="476" class="badge-text" fill="#1d4ed8">TRIAGE: RAG RETRIEVAL &amp; PROMPT TEMPLATES</text>
 
       <!-- Course 10 -->
@@ -197,7 +197,7 @@
       <!-- Standalone Practice Project: LangChain Chatbot -->
       <rect x="806" y="492" width="360" height="78" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1" />
       <text x="818" y="510" class="card-title">Practice Project: Q&amp;A Chatbot (LangChain)</text>
-      <text x="818" y="526" class="card-meta">Standalone Recommended Project · 8 Hours Estimated</text>
+      <text x="818" y="526" class="card-meta">Separately Listed Practice Card · 8 Hours Estimated</text>
       <text x="818" y="544" class="card-desc">Vector store indexing, document retrieval, and conversational chain.</text>
       <text x="818" y="558" class="badge-text" fill="#1d4ed8">TRIAGE: HIGH-VALUE PRACTICE IF TIME ALLOWS</text>
     </g>
@@ -215,16 +215,16 @@
       <rect x="426" y="646" width="360" height="96" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.2" />
       <text x="438" y="664" class="card-title" fill="#0f172a">Course 4: MCPs for Everyone</text>
       <text x="438" y="680" class="card-meta">Shoumik Goswami · 30 lessons · 3h video / 9h total (CPE: 4)</text>
-      <text x="438" y="698" class="card-desc">• Practical Model Context Protocol configuration</text>
-      <text x="438" y="714" class="card-desc">• Claude Desktop &amp; Cursor tool calling integration</text>
+      <text x="438" y="698" class="card-desc">• Public topics: MCP concepts and outline design</text>
+      <text x="438" y="714" class="card-desc">• Claude Desktop scenarios; Cursor assistance</text>
       <text x="438" y="730" class="badge-text" fill="#15803d">KEY VALUE: TOOL TRANSPORT &amp; AGENT CAPABILITY</text>
 
       <!-- Course 6: LangGraph -->
       <rect x="806" y="646" width="360" height="96" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.2" />
       <text x="818" y="664" class="card-title" fill="#0f172a">Course 6: Conversational Memory (LangGraph)</text>
       <text x="818" y="680" class="card-meta">Hristina Hristova · 21 lessons · 1h video / 2h total (CPE: 2)</text>
-      <text x="818" y="698" class="card-desc">• LangGraph StateGraph design &amp; cyclic execution</text>
-      <text x="818" y="714" class="card-desc">• Milestone: Project 02 (Prompt Chaining &amp; Task Routing)</text>
+      <text x="818" y="698" class="card-desc">• States, reducers, checkpointers, SQLite persistence</text>
+      <text x="818" y="714" class="card-desc">• Syllabus project: AI Prompt Chaining &amp; Task Routing</text>
       <text x="818" y="730" class="badge-text" fill="#15803d">KEY VALUE: PERSISTENT STATEGRAPH MEMORY</text>
 
       <!-- Course 7: Agents in Practice -->
@@ -232,15 +232,15 @@
       <text x="438" y="768" class="card-title" fill="#0f172a">Course 7: AI Agents in Practice</text>
       <text x="438" y="784" class="card-meta">Petar Petrov · 37 lessons · 2h video / 2h total (CPE: 4)</text>
       <text x="438" y="802" class="card-desc">• ReAct (interleaved reasoning) vs ReWOO (decoupled plan)</text>
-      <text x="438" y="818" class="card-desc">• Milestone: Project 03 (Crypto Analysis Agent)</text>
+      <text x="438" y="818" class="card-desc">• Public topics: agent tools and workflow patterns</text>
       <text x="438" y="834" class="badge-text" fill="#15803d">KEY VALUE: REWOO DECOUPLED AGENT PIPELINES</text>
 
       <!-- Course 8: Evaluation -->
       <rect x="806" y="750" width="360" height="96" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.2" />
       <text x="818" y="768" class="card-title" fill="#0f172a">Course 8: Evaluating AI Agents</text>
       <text x="818" y="784" class="card-meta">Burcin Sarac · 36 lessons · 2h video / 2h total (CPE: 2)</text>
-      <text x="818" y="802" class="card-desc">• RAG retrieval metrics: context precision &amp; faithfulness</text>
-      <text x="818" y="818" class="card-desc">• Answer relevance, latency, cost budgets &amp; automated evals</text>
+      <text x="818" y="802" class="card-desc">• Public topics: retriever and generator evaluation</text>
+      <text x="818" y="818" class="card-desc">• Faithfulness, human feedback, bias and safety</text>
       <text x="818" y="834" class="badge-text" fill="#15803d">KEY VALUE: RELIABILITY GATES &amp; BENCHMARKING</text>
     </g>
   </g>
@@ -283,23 +283,23 @@
     <g id="outcome-production-ready">
       <rect x="1230" y="604" width="330" height="256" rx="10" fill="#f0fdf4" stroke="#15803d" stroke-width="2.2" filter="url(#card-shadow)" />
       <rect x="1246" y="620" width="190" height="22" rx="5" fill="#dcfce7" stroke="#86efac" stroke-width="1" />
-      <text x="1254" y="635" class="badge-text" fill="#14532d">STRATEGIC GOAL ATTAINED</text>
-      <text x="1246" y="664" class="col-header" fill="#0f172a">Production Competency</text>
-      <text x="1246" y="684" class="card-meta" fill="#15803d">Achieved Before Paywall ($0 Spent)</text>
+      <text x="1254" y="635" class="badge-text" fill="#14532d">PROPOSED PRACTICE GOALS</text>
+      <text x="1246" y="664" class="col-header" fill="#0f172a">Apply and Test Independently</text>
+      <text x="1246" y="684" class="card-meta" fill="#15803d">Not verified course outcomes</text>
       <line x1="1246" y1="696" x2="1534" y2="696" stroke="#86efac" stroke-width="1" />
-      <text x="1246" y="718" class="card-desc" font-weight="600">Verified Technical Deliverables:</text>
-      <text x="1246" y="738" class="card-desc">✔ Custom MCP Tool Connectors in Claude/Cursor</text>
-      <text x="1246" y="758" class="card-desc">✔ Persistent Multi-Turn Memory with SQLite</text>
-      <text x="1246" y="778" class="card-desc">✔ Decoupled ReWOO &amp; ReAct Agent Pipelines</text>
-      <text x="1246" y="798" class="card-desc">✔ Automated RAG Relevance &amp; Fidelity Scoring</text>
+      <text x="1246" y="718" class="card-desc" font-weight="600">Suggested follow-on exercises:</text>
+      <text x="1246" y="738" class="card-desc">• Verify MCP tool permissions and isolation</text>
+      <text x="1246" y="758" class="card-desc">• Test SQLite state recovery across restarts</text>
+      <text x="1246" y="778" class="card-desc">• Compare ReAct and ReWOO behavior</text>
+      <text x="1246" y="798" class="card-desc">• Measure RAG quality and judge variance</text>
       <rect x="1246" y="816" width="298" height="30" rx="5" fill="#dcfce7" stroke="#15803d" stroke-width="1" />
-      <text x="1254" y="836" class="card-stat" fill="#14532d">MAXIMUM LEVERAGE: ZERO DOLLARS SPENT</text>
+      <text x="1254" y="836" class="card-stat" fill="#14532d">API COSTS AND RESULTS NOT MEASURED</text>
     </g>
   </g>
 
   <!-- Group 4: Footer Legend & Technical Disclosures (Y: 884 to 944) -->
   <g id="footer-group">
-    <rect x="40" y="884" width="1520" height="56" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" class="footer-card" filter="url(#card-shadow)" />
+    <rect x="40" y="884" width="1520" height="68" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" class="footer-card" filter="url(#card-shadow)" />
     <!-- Legend Markers -->
     <rect x="64" y="902" width="16" height="16" rx="3" fill="#15803d" />
     <text x="88" y="915" class="badge-text" fill="#0f172a">Tier 1: High-Leverage Core (Must-Complete)</text>
@@ -313,6 +313,7 @@
     <rect x="912" y="902" width="16" height="16" rx="3" fill="#b45309" />
     <text x="936" y="915" class="badge-text" fill="#0f172a">Campaign Paywall Boundary</text>
 
-    <text x="1170" y="915" class="card-desc footer-text" font-style="italic">Source Audit · 365 Data Science AI Agent Engineer Track (Nov 2026) · WCAG 2.2 AA Compliant</text>
+    <text x="1170" y="915" class="card-desc footer-text" font-style="italic">Outline audit · Nov 2026 · Not video verification</text>
+    <text x="64" y="938" class="card-desc footer-text">Promotional labels only: Project 01: Q&amp;A Chatbot with LangChain · Project 02: Prompt Chaining &amp; Task Routing · Project 03: Crypto Analysis Agent. Not a verified module inventory.</text>
   </g>
 </svg>
