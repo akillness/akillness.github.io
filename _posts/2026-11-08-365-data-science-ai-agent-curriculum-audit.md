@@ -4,11 +4,20 @@ description: "A Source Audit of 365 Data Science's AI Agent Engineer track: veri
 categories: [AI, Agents]
 tags: [ai-agents, mcp, langgraph, langchain, 365datascience, source-audit, learning-path]
 date: 2026-11-08 20:20:29 +0900
+last_modified_at: 2026-11-08 22:50:00 +0900
+correction_date: "2026-11-08"
+correction_note: "Corrected project requirements (clarified that the 4 track projects are recommended portfolio practice rather than mandatory track completion gates), retracted unverified assertions regarding creator compensation from UTM parameters, corrected Free Plan features, removed unsupported assumptions about video presentation formats (e.g. 'slide-heavy') based solely on syllabus inspection, and explicitly disclosed audit access boundaries."
 image_policy: source-first-fallback
 image:
   path: /assets/img/posts/2026-11-08-365-data-science-ai-agent-curriculum-audit/hero.png
   alt: "An AI agent engineer studying architecture diagrams, MCP interfaces, and evaluation benchmarks on a workstation"
 ---
+
+> **Correction (2026-11-08):** Following an evidence-based audit review:
+> 1. **Project Requirements vs. Recommendations:** The 4 projects showcased on the career track landing page are recommended practice projects in a standalone carousel, not mandatory requirements to earn the accredited Career Track Certificate (which requires completing the 10 curriculum courses and passing the final exam). The viral post's claim of "3 projects" likely refers to in-course practical project applications.
+> 2. **Marketing Taxonomy vs. Creator Compensation:** The URL parameter `utm_medium=paid&utm_source=influencer%20` reflects internal marketing campaign attribution tags assigned by the platform, but does not constitute proof of direct financial payment or monetary sponsorship to the creator. The earlier claim of "confirmed commercial sponsorship" has been corrected.
+> 3. **Audit Access Scope & Retraction of Format Assertions:** The audit inspected public DOM elements, syllabus outlines, lesson titles, and pricing structures without streaming proprietary video lectures. Characterizations of video presentation styles (such as "slide presentations" or "slide-heavy overviews") were unverified assumptions and have been removed.
+> 4. **Pricing & Google Authentication:** Standard Free Plan features (which include course previews, 6 projects, practice exams, and 1 AI mock interview at $0/month) have been clarified. "Google" on the signup interface refers strictly to third-party OAuth sign-in and does not indicate Google sponsorship or provision of the courseware.
 
 ## Is 365 Data Science really teaching AI engineering for free?
 
@@ -34,11 +43,11 @@ flowchart TD
     subgraph TechnicalReality ["Verified Platform Truth (Nov 2026)"]
         B["Annual 15-Day Free Weeks Campaign<br/>Nov 5 – Nov 20, 2026 (Ends 15:00 UTC)"]
         C["Total Content: 422 Lessons<br/>25 Video Hours + 12 Exam Hours = 37h Total"]
-        D["Portfolio Projects Discrepancy<br/>4 Track Projects (3 Legacy ML/Python + 1 LangChain)"]
+        D["Portfolio Projects Scope<br/>4 Optional Practice Projects (3 Classical ML/Python + 1 LangChain)"]
     end
 
     subgraph PostWindow ["Post-Campaign Access Boundary"]
-        E["Paywall Reinstated: $29/mo (Annual) or $36/mo (Monthly)<br/>Free tier restricted to video previews"]
+        E["Paywall Reinstated: $29/mo (Annual) or $36/mo (Monthly)<br/>Free tier includes course previews & 6 projects"]
     end
 
     A -->|Audited Against HTTP Headers| B
@@ -61,15 +70,15 @@ The primary claim in the viral post is that the platform is providing open, free
 utm_medium=paid&utm_source=influencer%20&utm_campaign=2026-ds-nov-free-weeks-ved-prakash-course-...
 ```
 
-These parameters verify that the post is part of 365 Data Science's annual **November Free Weeks** promotion. Navigating to the registration portal at `https://365datascience.com/signup/` reveals an active countdown timer reading:
+These query parameters reflect internal campaign attribution tags configured by 365 Data Science's marketing team for its annual **November Free Weeks** promotion. While the parameters categorize the inbound channel under a `paid/influencer` taxonomy, tracking tags alone do not verify direct monetary compensation, speaker fees, or a paid sponsorship contract with the creator, as platforms routinely assign standardized tracking tags to partner, affiliate, or community distribution links.
 
 > **"AI & DATA Courses FREE for 15 days"**  
 > `12 Days 02 Hours 41 Minutes Remaining` *(captured 2026-11-08)*  
 > *No credit card required. Create your free account.*
 
-The promotional window opened on **November 5, 2026**, and closes on **November 20, 2026, at 15:00 UTC**. During these 15 days, any user who registers with an email address or OAuth provider (Google, LinkedIn, or Facebook) receives unrestricted access to all 422 lessons, exercises, exams, and certificates across the 10 courses without entering payment information.
+The promotional window opened on **November 5, 2026**, and closes on **November 20, 2026, at 15:00 UTC**. During these 15 days, any user who registers with an email address or third-party OAuth identity provider (Google, LinkedIn, or Facebook) receives unrestricted access to all 422 lessons, exercises, exams, and certificates across the 10 courses without entering payment information. (Note that Google serves solely as an authentication identity provider here, not as a course provider or sponsor; the courses are produced and hosted by 365 Data Science).
 
-However, once the timer reaches zero on November 20, full access terminates. Under the platform's standard policy, accounts on the $0/month Free Plan are downgraded to "course previews" and limited exercises. Unlocking the courses thereafter requires enrolling in the Self-Study tier at **$29 per month billed annually ($348 upfront)** or **$36 per month billed monthly**. By omitting the November 20 deadline, the viral social post creates an inaccurate expectation of an evergreen free repository.
+However, once the timer reaches zero on November 20, full access terminates. Under the platform's standard policy outside promotional windows, accounts on the $0/month Free Plan receive access to all course previews, 6 projects, interactive exercises, practice exams, and 1 AI mock interview. Unlocking the full catalog of 136 courses, 51 projects, 12 career tracks, and accredited certificates thereafter requires enrolling in the Self-Study tier at **$29 per month billed annually ($348 upfront)** or **$36 per month billed monthly**. By omitting the November 20 deadline, the viral social post creates an inaccurate expectation of an evergreen free repository.
 
 ---
 
@@ -95,30 +104,32 @@ The full breakdown of all 11 audited links is detailed below:
 
 *Table notes: Link targets verify destination URLs. Video hours reflect recorded lectures; total duration includes estimated time for practice exams and coding exercises.*
 
+*(Audit scope disclosure: This technical evaluation is grounded in public syllabus outlines, lesson titles, instructor credentials, and catalog metadata. Proprietary video streams were not viewed or streamed; accordingly, this analysis evaluates topic coverage and structural progression rather than video presentation formats or delivery styles.)*
+
 Analyzing the curriculum reveals a clear divide in technical depth:
 
-1. **Foundational Overviews (Courses 1, 2, and 9):** Comprise 146 lessons (over 34% of the track). These are high-level conceptual slide presentations on AI definitions and European AI regulations. For practicing software developers, they offer limited hands-on value.
+1. **Foundational Overviews (Courses 1, 2, and 9):** Comprise 146 lessons (over 34% of the track). Based on published syllabus outlines, these modules focus on introductory concepts, taxonomy (symbolic AI, machine learning vs. deep learning), agent definitions, and European AI governance. For experienced software developers already familiar with ML basics, these introductory overviews cover conceptual ground that may be secondary to hands-on implementation.
 2. **Intermediate Architecture (Courses 3, 4, and 8):** Cover essential concepts like prompt formatting, tool calling, and evaluation metrics. In particular, Course 4 by Shoumik Goswami addresses practical setup of the Model Context Protocol using Claude Desktop and Cursor. To understand how tool transport layers function under real production constraints, compare this with our technical analysis in [MCP security depends on transport construction](/posts/mcp-security-depends-on-transport-construction/).
 3. **Advanced Implementation (Courses 5, 6, 7, and 10):** Contain the core coding content, focusing on LangChain, LangGraph, and Streamlit. Course 6 specifically covers state graphs and SQLite-backed persistence. Understanding how LangGraph manages checkpoints and state graphs is critical for production reliability, a concept explored in depth in [LangGraph history is not pending approval](/posts/langgraph-history-is-not-pending-approval/).
 
 ---
 
-## The portfolio project disconnect: three classical exercises and one chatbot
+## The portfolio project scope: optional practice tracks and in-course applications
 
-The viral post claims that the track includes "3 projects". However, auditing the official career track portal at `https://365datascience.com/career-tracks/ai-agent-engineer/` reveals four linked portfolio projects:
+The viral post claims that the track includes "3 projects". Auditing the official career track portal at `https://365datascience.com/career-tracks/ai-agent-engineer/` provides important structural clarification on how projects are organized:
+
+Under the landing page section titled *"An AI agent engineer career track with REAL AI projects"*, the platform showcases four standalone portfolio projects:
 
 1. **Machine Learning for User Classification Project** (10 hours estimated)
 2. **Music Genre Classification Project with PCA and Logistic Regression** (3 hours estimated)
 3. **Building Conway's Game of Life in Python Project** (15 hours estimated)
 4. **Create a Q&A Chatbot with LangChain Project** (8 hours estimated)
 
-Here lies the most glaring technical contradiction of the curriculum: **three out of the four portfolio projects have virtually nothing to do with agentic AI or LLM engineering**.
+Crucially, these four projects are **recommended portfolio practice projects**, each individually marked as "free" in the 365 Data Science project catalog. They are **not mandatory prerequisites** to complete the AI Agent Engineer career track or earn the accredited Career Track Certificate (which requires completing the 10 curriculum courses and passing the final track exam).
 
-- Building Conway's Game of Life is a classic Python object-oriented programming and grid-simulation exercise. While instructive for fundamental programming logic, it teaches zero agent orchestration, zero tool calling, and zero model integration.
-- Music Genre Classification with Principal Component Analysis (PCA) and Logistic Regression is a traditional tabular and audio signal feature-classification task originating from the mid-2010s machine learning canon.
-- User Classification is a standard scikit-learn classification pipeline.
+Regarding the social post's claim of "3 projects": The curriculum incorporates practical coding projects directly within the courses themselves—most notably Course 5's LangChain chatbot, Course 7's ReAct/ReWOO agent scripts, and Course 10's Streamlit mock interview app. The viral post likely counted these embedded practical applications, or alternatively omitted one of the four standalone projects highlighted on the track landing page.
 
-Only the fourth project—**Create a Q&A Chatbot with LangChain**—engages with modern generative AI by wiring vector embeddings, document chunking, and LLM prompt templates. The discrepancy between the social post's "3 projects" claim and the platform's actual portfolio suggests that the post author either counted in-course practical modules (such as Course 7's ReAct script or Course 10's Streamlit mock interview app) or failed to scrutinize the legacy nature of the portfolio projects attached to the career track.
+Of the four standalone projects showcased on the landing page, three (User Classification, Music Genre with PCA, and Conway's Game of Life) are traditional Python programming and classical machine learning exercises, while the fourth (Create a Q&A Chatbot with LangChain) directly exercises generative AI and vector retrieval.
 
 ---
 
@@ -134,7 +145,7 @@ flowchart LR
         S1["Course 1: Intro to AI (44 lessons)"]
         S2["Course 2: Intro to Agents (52 lessons)"]
         S9["Course 9: AI Ethics (50 lessons)"]
-        SP["Legacy Projects: PCA & Game of Life"]
+        SP["Optional Classical Projects: PCA & Game of Life"]
     end
 
     subgraph FastTrack ["Tier 2: Fast-Track (2x Speed)"]
@@ -165,8 +176,8 @@ flowchart LR
 - **Course 8 (Evaluating AI Agents):** Study RAG retrieval metrics and automated evaluation patterns.
 
 ### 2. Low-Leverage Modules (Skip or Fast-Forward)
-- **Courses 1, 2, and 9:** These slide-heavy overviews can be replaced by 30 minutes of reading official documentation or regulatory summaries.
-- **Legacy Portfolio Projects:** Do not spend 15 hours coding Conway's Game of Life if your goal is mastering agentic engineering.
+- **Courses 1, 2, and 9:** As introductory conceptual modules, their syllabus topics (history, high-level taxonomy, and regulatory overviews) can be reviewed quickly or bypassed if you already have practical software and ML experience.
+- **Optional Classical Portfolio Projects:** Do not spend 15 hours coding Conway's Game of Life if your immediate goal is mastering agentic engineering before the Free Weeks window closes.
 
 ### 3. Open-Source Primary Alternatives
 If you miss the November 20 cutoff or choose not to register an account, the entire agentic stack taught in this track is accessible via open-source documentation and free resources:
@@ -181,11 +192,11 @@ If you miss the November 20 cutoff or choose not to register an account, the ent
 
 | Investigation Dimension | Viral Influencer Claim | Verified Primary Truth | Engineering Takeaway |
 |---|---|---|---|
-| **Pricing & Access** | "Teaching AI engineering for free" | 15-day promotional window (Nov 5–20, 2026); reverts to $29/mo | Free access is time-limited; prioritize high-value modules immediately |
+| **Pricing & Access** | "Teaching AI engineering for free" | 15-day promotional window (Nov 5–20, 2026); standard Free Plan includes previews & 6 projects; full access reverts to $29/mo (annual) or $36/mo (monthly) | Free access is time-limited; prioritize high-value modules immediately |
 | **Registration Gates** | No qualification given | Free account required; no credit card required during window | Safe to test with disposable or OAuth logins without billing risk |
 | **Curriculum Volume** | "420+ lessons" | Verified 422 lessons across 10 courses; 37 content hours | Substantial volume, but 34% consists of high-level introductory theory |
-| **Portfolio Projects** | "3 projects" | 4 portfolio tracks listed; 3 are legacy classical ML/Python | Skip Game of Life and PCA; focus on LangChain/LangGraph applications |
-| **Sponsorship Status** | Educational resource share | Paid influencer marketing (`utm_medium=paid&utm_source=influencer`) | Treat viral social curation as commercial campaign distribution |
+| **Portfolio Projects** | "3 projects" | 4 recommended standalone practice projects (optional, not required for certificate); 3 practical coding projects embedded directly in courseware | Standalone projects are optional practice; prioritize in-course LangChain, LangGraph, and Streamlit agent builds |
+| **Sponsorship Status** | Educational resource share | Tracking parameters reflect internal campaign taxonomy (`utm_medium=paid&utm_source=influencer`); does not establish direct creator remuneration | Verify promotional campaign boundaries and expiration dates independently of social curation |
 
 ---
 
