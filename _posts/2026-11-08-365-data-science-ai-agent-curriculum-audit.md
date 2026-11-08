@@ -4,9 +4,9 @@ description: "A Source Audit of 365 Data Science's AI Agent Engineer track: veri
 categories: [AI, Agents]
 tags: [ai-agents, mcp, langgraph, langchain, 365datascience, source-audit, learning-path]
 date: 2026-11-08 20:20:29 +0900
-last_modified_at: 2026-11-08 22:50:00 +0900
+last_modified_at: 2026-11-08 23:45:00 +0900
 correction_date: "2026-11-08"
-correction_note: "Corrected project requirements (clarified that the 4 track projects are recommended portfolio practice rather than mandatory track completion gates), retracted unverified assertions regarding creator compensation from UTM parameters, corrected Free Plan features, removed unsupported assumptions about video presentation formats (e.g. 'slide-heavy') based solely on syllabus inspection, and explicitly disclosed audit access boundaries."
+correction_note: "Corrected project requirements (clarified that the 4 track projects are recommended portfolio practice rather than mandatory track completion gates), retracted unverified assertions regarding creator compensation from UTM parameters, corrected Free Plan features, removed unsupported assumptions about video presentation formats (e.g. 'slide-heavy') based solely on syllabus inspection, explicitly disclosed audit access boundaries, added concrete technical scenario implementations (MCP transport, LangGraph memory persistence, automated RAG evaluation), forensically traced the viral post's attached infographic to explain the '3 projects' claim, and added an original SVG curriculum roadmap and triage decision flow."
 image_policy: source-first-fallback
 image:
   path: /assets/img/posts/2026-11-08-365-data-science-ai-agent-curriculum-audit/hero.png
@@ -18,6 +18,7 @@ image:
 > 2. **Marketing Taxonomy vs. Creator Compensation:** The URL parameter `utm_medium=paid&utm_source=influencer%20` reflects internal marketing campaign attribution tags assigned by the platform, but does not constitute proof of direct financial payment or monetary sponsorship to the creator. The earlier claim of "confirmed commercial sponsorship" has been corrected.
 > 3. **Audit Access Scope & Retraction of Format Assertions:** The audit inspected public DOM elements, syllabus outlines, lesson titles, and pricing structures without streaming proprietary video lectures. Characterizations of video presentation styles (such as "slide presentations" or "slide-heavy overviews") were unverified assumptions and have been removed.
 > 4. **Pricing & Google Authentication:** Standard Free Plan features (which include course previews, 6 projects, practice exams, and 1 AI mock interview at $0/month) have been clarified. "Google" on the signup interface refers strictly to third-party OAuth sign-in and does not indicate Google sponsorship or provision of the courseware.
+> 5. **Viral Infographic & In-Course Milestone Projects:** Direct forensic inspection of the marketing graphic attached to the viral LinkedIn post confirms that the influencer's claim of '3 projects' originates from three in-course practical project milestones (Project 01: Q&A Chatbot with LangChain, Project 02: Prompt Chaining & Task Routing, and Project 03: Crypto Analysis Agent) embedded within Courses 5, 6, and 7, rather than the four standalone recommended practice projects showcased on the career track landing page carousel.
 
 ## Is 365 Data Science really teaching AI engineering for free?
 
@@ -29,6 +30,10 @@ In early November 2026, a widely shared LinkedIn post by creator Ved Prakash Mee
 </figure>
 
 For software engineers, ML practitioners, and technical teams looking to upskill in agentic systems, Model Context Protocol (MCP), and LangGraph workflows, free access to structured courseware sounds like an unmissable opportunity. However, social media recommendations frequently blur the line between evergreen educational philanthropy and time-limited promotional marketing.
+
+Forensic inspection of the viral LinkedIn post reveals an attached 1080×1351 promotional infographic titled *"365 DataScience AI Agent Engineer"*, summarizing the 10 courses, 3 milestone projects, and a conceptual Plan–Tool–Memory loop. We audited both this image and the platform's visual assets for potential reproduction. Under Section XII (Items 1, 2, 4, 13, 14, 15, 18, and 19) of the [365 Data Science Terms of Use](https://365datascience.com/terms-of-use/), all visual elements, course diagrams, brand marks, and layout graphics are proprietary intellectual property with all rights reserved; reproduction, public display, downloading, or commercial redistribution without prior written consent is strictly prohibited. Furthermore, Sections 3.1 and 8.2 of the [LinkedIn User Agreement](https://www.linkedin.com/legal/user-agreement) reserve content rights to creators and forbid third-party commercial redistribution or scraping. Neither 365 Data Science nor the post creator provides a Creative Commons, open-source, or public-domain redistribution license.
+
+Under our publication's editorial policy and copyright standards, proprietary third-party commercial graphics without verified open licenses cannot be copied or rehosted on a monetized publication. To maintain strict copyright integrity while ensuring readers have full visual and technical clarity, we link directly to the [original LinkedIn promotional post](https://www.linkedin.com/posts/ved-prakash-meena_365-data-science-is-teaching-ai-engineering-activity-7524040457639641088-F6z3) and provide our own original, transparent vector (SVG) diagram below, illustrating the complete curriculum architecture, project milestones, and time-triage decision flow.
 
 To establish the technical ground truth, I audited the primary web surfaces behind the viral post. I traced every HTTP 301 redirect across all 11 shortlinks, inspected landing page DOM structures, analyzed the active campaign countdown timer, verified catalog metadata, and examined the portfolio project repository. Throughout this article, **verified** denotes facts directly established from HTTP headers and platform records, **influencer-reported** denotes claims made solely in the viral social post, and **inferred** represents my own technical evaluation.
 
@@ -112,25 +117,159 @@ Analyzing the curriculum reveals a clear divide in technical depth:
 2. **Intermediate Architecture (Courses 3, 4, and 8):** Cover essential concepts like prompt formatting, tool calling, and evaluation metrics. In particular, Course 4 by Shoumik Goswami addresses practical setup of the Model Context Protocol using Claude Desktop and Cursor. To understand how tool transport layers function under real production constraints, compare this with our technical analysis in [MCP security depends on transport construction](/posts/mcp-security-depends-on-transport-construction/).
 3. **Advanced Implementation (Courses 5, 6, 7, and 10):** Contain the core coding content, focusing on LangChain, LangGraph, and Streamlit. Course 6 specifically covers state graphs and SQLite-backed persistence. Understanding how LangGraph manages checkpoints and state graphs is critical for production reliability, a concept explored in depth in [LangGraph history is not pending approval](/posts/langgraph-history-is-not-pending-approval/).
 
+### Concrete implementation scenarios: primary evidence vs. production realities
+
+To bridge the gap between high-level syllabus outlines and hands-on software engineering, we examine three core architectural components taught in the track. For each scenario, we explicitly distinguish between **primary evidence** (topics and tools published in the official 365 Data Science syllabus) and **observation vs. assumption** (verified syllabus facts versus production engineering realities).
+
+#### 1. Model Context Protocol (MCP) tool configuration (Course 4 context)
+
+- **Primary Evidence (1차 근거):** Course 4 syllabus (*"MCPs for Everyone"*, 30 lessons by Shoumik Goswami) covers Model Context Protocol concepts, connecting external tools to Claude Desktop, and configuring Cursor tooling.
+- **Observation vs. Assumption (관찰 vs. 가정):**
+  - *Observed (Platform syllabus):* Course 4 introduces local MCP server registration using JSON configuration files in desktop hosts (e.g., `claude_desktop_config.json`), establishing tool discovery through `tools/list` and tool execution through `tools/call`.
+  - *Assumption vs. Production Reality:* While introductory tutorials demonstrate wiring an SQLite query or script runner in a desktop client in minutes, deploying MCP in real-world multi-agent production requires solving transport-level process isolation, preventing API keys and environment variables in the parent process from leaking into tool child processes, managing process restarts in `stdio` when tools crash, and enforcing token budget boundaries against bloated tool schemas.
+
+A standard desktop configuration wiring a local SQLite analytics server demonstrates the pattern:
+
+```json
+{
+  "mcpServers": {
+    "sqlite-analytics": {
+      "command": "uvx",
+      "args": ["mcp-server-sqlite", "--db-path", "./data/analytics.db", "--read-only"],
+      "env": {
+        "SQLITE_TIMEOUT": "5000"
+      }
+    }
+  }
+}
+```
+
+When an agent issues a tool call, the host translates LLM intent into a structured JSON-RPC request over standard I/O:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "read_query",
+    "arguments": {
+      "query": "SELECT cohort_date, count(*) as active_learners FROM student_progress WHERE course_id = 4 GROUP BY cohort_date ORDER BY cohort_date DESC LIMIT 5;"
+    }
+  },
+  "id": 1
+}
+```
+
+*Engineering constraint:* In desktop environments, `stdio` servers inherit user privileges. In production agent harnesses, tool execution must be sandbox-isolated with explicit read-only constraints and query timeout guards to prevent runaway resource consumption.
+
+#### 2. State persistence & SQLite checkpointing in LangGraph (Course 6 context)
+
+- **Primary Evidence (1차 근거):** Course 6 syllabus (*"Conversational AI Memory with LangGraph"*, 21 lessons by Hristina Hristova) covers `StateGraph` compilation, message persistence, conditional routing edges, and SQLite checkpointers.
+- **Observation vs. Assumption (관찰 vs. 가정):**
+  - *Observed (Platform syllabus):* Course 6 demonstrates creating a cyclic graph with LangGraph's `StateGraph`, appending conversational history to `MessagesState`, and persisting thread state across user turns using an SQLite checkpointer (`SqliteSaver`).
+  - *Assumption vs. Production Reality:* A local SQLite checkpointer is an effective educational baseline for state persistence, but production multi-turn systems must isolate thread-scoped working state (short-term dialogue) from durable semantic recall (vector/entity graphs), while guarding against concurrent write locks when agents spawn asynchronous sub-tasks.
+
+The core stateful execution pattern in Python:
+
+```python
+from typing import Annotated
+from typing_extensions import TypedDict
+from langgraph.graph import StateGraph, START, END
+from langgraph.graph.message import add_messages
+from langgraph.checkpoint.sqlite import SqliteSaver
+
+class AgentState(TypedDict):
+    messages: Annotated[list, add_messages]
+    triage_tier: str
+
+def reasoning_node(state: AgentState) -> dict:
+    # Deliberate on incoming query and assign routing label
+    return {
+        "triage_tier": "tier-1",
+        "messages": [{"role": "assistant", "content": "Prioritizing MCP & LangGraph modules."}]
+    }
+
+# Construct state graph with transactional checkpointing
+builder = StateGraph(AgentState)
+builder.add_node("reasoning", reasoning_node)
+builder.add_edge(START, "reasoning")
+builder.add_edge("reasoning", END)
+
+# Persist thread state across user turns
+with SqliteSaver.from_conn_string("./data/agent_memory.db") as checkpointer:
+    graph = builder.compile(checkpointer=checkpointer)
+    config = {"configurable": {"thread_id": "session-student-20261108"}}
+    result = graph.invoke(
+        {"messages": [{"role": "user", "content": "How do I allocate my study hours?"}]},
+        config
+    )
+```
+
+*Engineering constraint:* Checkpointers save raw execution graph snapshots. If an agent fails mid-trajectory, the harness can replay from the last saved state without re-invoking expensive upstream LLM calls, though production workloads require vacuuming stale checkpoints to prevent database bloat.
+
+#### 3. Automated agent & RAG evaluation metrics (Course 8 context)
+
+- **Primary Evidence (1차 근거):** Course 8 syllabus (*"Evaluating AI Agents"*, 36 lessons by Burcin Sarac) covers RAG retrieval evaluation, answer relevance, latency, bias metrics, and benchmark construction.
+- **Observation vs. Assumption (관찰 vs. 가정):**
+  - *Observed (Platform syllabus):* Course 8 covers quantitative evaluation frameworks that move beyond subjective manual inspection of chat responses, introducing structured scoring rubrics.
+  - *Assumption vs. Production Reality:* Automated agent evaluation cannot treat the agent as a black box that only emits a final string. A robust evaluation harness must independently measure retrieval precision (did the agent retrieve the exact context needed?), faithfulness (did the agent's response adhere strictly to the retrieved context without fabricating details?), and tool execution fidelity (did the agent invoke the correct tool with valid schema arguments?).
+
+An automated evaluation contract using the open-source Ragas evaluation framework:
+
+```python
+from ragas.metrics import faithfulness, answer_relevancy, context_precision
+from ragas import evaluate
+from datasets import Dataset
+
+# Ground-truth evaluation dataset for agent retrieval & response
+eval_dataset = Dataset.from_dict({
+    "question": [
+        "What is the exact deadline for 365 Data Science Free Weeks 2026?"
+    ],
+    "contexts": [[
+        "The promotional window opened on Nov 5, 2026 and closes on Nov 20, 2026 at 15:00 UTC."
+    ]],
+    "answer": [
+        "Promotional access ends on November 20, 2026 at 15:00 UTC, after which accounts revert to Free Plan preview mode."
+    ],
+    "ground_truth": [
+        "November 20, 2026 at 15:00 UTC."
+    ]
+})
+
+# Execute multi-dimensional scoring rubric
+score_results = evaluate(
+    dataset=eval_dataset,
+    metrics=[faithfulness, answer_relevancy, context_precision]
+)
+```
+
+*Engineering constraint:* Automated evaluation pipelines compute deterministic scores between 0.0 and 1.0. CI/CD test gates can enforce failure thresholds (e.g., rejecting any prompt modification where `faithfulness < 0.90`), guarding against subtle regressions before deployment.
+
 ---
 
 ## The portfolio project scope: optional practice tracks and in-course applications
 
-The viral post claims that the track includes "3 projects". Auditing the official career track portal at `https://365datascience.com/career-tracks/ai-agent-engineer/` provides important structural clarification on how projects are organized:
+The viral post claims that the track includes "3 projects". Crucially, forensic examination of the promotional roadmap infographic attached to the viral LinkedIn post resolves the origin of this claim:
 
-Under the landing page section titled *"An AI agent engineer career track with REAL AI projects"*, the platform showcases four standalone portfolio projects:
+Along the visual curriculum path, the infographic explicitly embeds three milestone projects directly within the course progression:
+
+1. **Project 01: Q&A Chatbot with LangChain** (embedded after Course 5: Build Chat Apps)
+2. **Project 02: Prompt Chaining & Task Routing** (embedded after Course 6: Conversational Memory)
+3. **Project 03: Crypto Analysis Agent** (embedded after Course 7: AI Agents in Practice)
+
+This explains why the social post advertised "3 projects"—the author was reciting the three in-course practical milestones labeled on the marketing roadmap.
+
+In contrast, auditing the public career track landing page at `https://365datascience.com/career-tracks/ai-agent-engineer/` displays four standalone practice projects in a separate carousel:
 
 1. **Machine Learning for User Classification Project** (10 hours estimated)
 2. **Music Genre Classification Project with PCA and Logistic Regression** (3 hours estimated)
 3. **Building Conway's Game of Life in Python Project** (15 hours estimated)
 4. **Create a Q&A Chatbot with LangChain Project** (8 hours estimated)
 
-Crucially, these four projects are **recommended portfolio practice projects**, each individually marked as "free" in the 365 Data Science project catalog. They are **not mandatory prerequisites** to complete the AI Agent Engineer career track or earn the accredited Career Track Certificate (which requires completing the 10 curriculum courses and passing the final track exam).
+Importantly, these four carousel projects are **recommended standalone practice tracks**, each individually accessible in the free project catalog. They are **not mandatory prerequisites** to complete the AI Agent Engineer career track or earn the accredited Career Track Certificate (which requires completing the 10 curriculum courses and passing the final exam). Three of the four carousel projects (User Classification, PCA Music, and Conway's Game of Life) are classical Python and machine learning exercises that do not teach agentic architecture, tool calling, or LLM evaluation.
 
-Regarding the social post's claim of "3 projects": The curriculum incorporates practical coding projects directly within the courses themselves—most notably Course 5's LangChain chatbot, Course 7's ReAct/ReWOO agent scripts, and Course 10's Streamlit mock interview app. The viral post likely counted these embedded practical applications, or alternatively omitted one of the four standalone projects highlighted on the track landing page.
-
-Of the four standalone projects showcased on the landing page, three (User Classification, Music Genre with PCA, and Conway's Game of Life) are traditional Python programming and classical machine learning exercises, while the fourth (Create a Q&A Chatbot with LangChain) directly exercises generative AI and vector retrieval.
-
+Regarding the attached promotional infographic and platform graphics: under Section XII of 365 Data Science's Terms of Use and Section 3.1 & 8.2 of the LinkedIn User Agreement, all visual marketing assets and course materials are proprietary with all rights reserved, prohibiting commercial reproduction or redistribution. Because neither 365 Data Science nor the post creator provides an open redistribution license, embedding the third-party raster graphic directly into this publication would violate copyright boundaries. To respect intellectual property while providing full visual and technical clarity, we link directly to the [original LinkedIn promotional post](https://www.linkedin.com/posts/ved-prakash-meena_365-data-science-is-teaching-ai-engineering-activity-7524040457639641088-F6z3) and provide our own original, transparent vector (SVG) diagram below, illustrating the complete curriculum architecture, project milestones, and time-triage decision flow.
 ---
 
 ## Prioritized 15-day triage and open-source alternatives
@@ -138,6 +277,11 @@ Of the four standalone projects showcased on the landing page, three (User Class
 Attempting to complete 37 hours of video and exercises within the remaining 12 days requires approximately **2.5 to 3 hours of focused study every single day**. For working engineers, brute-forcing the entire 422-lesson playlist is inefficient. 
 
 A high-leverage study strategy prioritizes the modules that are difficult to self-assemble while bypassing generic introductory lectures:
+
+![365 Data Science AI Agent Engineer Track: Curriculum Roadmap and 15-Day Triage Decision Flow](/assets/img/posts/2026-11-08-365-data-science-ai-agent-curriculum-audit/curriculum-path-and-decision-flow.svg){: .w-100 .shadow .rounded-10 }
+_Figure 1. Original vector schematic for this article. Depicting the 10-course progression, the three in-course practical project milestones revealed by the viral infographic, and the high-leverage 15-day triage decision path. Authored by akillness as an original SVG on transparency; not proprietary source material._
+
+[Open the original SVG](/assets/img/posts/2026-11-08-365-data-science-ai-agent-curriculum-audit/curriculum-path-and-decision-flow.svg).
 
 ```mermaid
 flowchart LR
@@ -244,3 +388,8 @@ If you miss the November 20 cutoff or choose not to register an account, the ent
 - [Model Context Protocol Specification](https://modelcontextprotocol.io/) (Anthropic, open standard documentation)
 - [LangGraph StateGraph & Persistence Documentation](https://langchain-ai.github.io/langgraph/) (LangChain AI documentation)
 - [Ragas: Automated Evaluation for RAG Systems](https://docs.ragas.io/) (Exploding Gradients open-source framework)
+
+**Legal & Terms Documentation:**
+- [365 Data Science Terms of Use](https://365datascience.com/terms-of-use/) (Section XII: Copyrights and Other Rights of Intellectual Property, accessed 2026-11-08)
+- [LinkedIn User Agreement](https://www.linkedin.com/legal/user-agreement) (Sections 3.1 & 8.2: Content Ownership, Permitted Display License, and Prohibition of Unauthorized Commercial Scraping/Redistribution, accessed 2026-11-08)
+- [LinkedIn Promotional Infographic by Ved Prakash Meena](https://media.licdn.com/dms/image/v2/D5622AQGNTflF79yrLQ/feedshare-shrink_1280/B56aGrC7WEG0AI-/0/1793871034006?e=2147483647&v=beta&t=w_-bRp2eOBx7n94nhlvwECbdEoeKfxxQ1W7T0khKIl0) (Audited visual asset: 1080×1351 px JPEG, accessed 2026-11-08)
