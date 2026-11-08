@@ -4,7 +4,8 @@ description: "A Source Audit of 365 Data Science's AI Agent Engineer track: veri
 categories: [AI, Agents]
 tags: [ai-agents, mcp, langgraph, langchain, 365datascience, source-audit, learning-path]
 date: 2026-11-08 20:20:29 +0900
-last_modified_at: 2026-11-08 23:04:00 +0900
+last_modified_at: 2026-11-08 23:27:00 +0900
+mermaid: true
 correction_date: "2026-11-08"
 correction_note: "Preserved earlier corrections on optional practice projects, campaign attribution, Free Plan access, and Google sign-in. Removed unverified SQLite server configuration flags; labeled the JSON-RPC request conceptual. Retracted deterministic Ragas LLM-judge scores and the unsubstantiated Python 3.12 SqliteSaver execution claim; replaced unverified library examples with pseudocode. Clarified checkpoint replay can repeat LLM calls, public syllabi do not establish video demonstrations, and infographic project labels establish neither course inclusion nor creator intent. Retained all 11 shortlinks and the original SVG with corrected evidence labels."
 image_policy: source-first-fallback
@@ -42,7 +43,10 @@ To establish the technical ground truth, I audited the primary web surfaces behi
 
 The short verdict: the public catalog supports the lesson count claim (422 lessons across 10 courses), while free full access is a **15-day promotional window ending on November 20, 2026**. Three of the four separately displayed practice cards concern classical Python or machine learning; that observation does not classify all in-course assignments. Navigating this offering effectively requires focused study triage.
 
+On narrow screens, scroll each diagram horizontally to read its labels at full size.
+
 ```mermaid
+%%{init: {"flowchart": {"useMaxWidth": false}}}%%
 flowchart TD
     subgraph LinkedInClaim ["Influencer Marketing Claim"]
         A["'365 Data Science is teaching AI engineering for free'<br/>420+ lessons | 3 projects | Evergreen track"]
@@ -63,9 +67,9 @@ flowchart TD
     B --> D
     B -->|Countdown Elapses| E
 
-    style LinkedInClaim fill:#f9f9f9,stroke:#e02424,stroke-width:2px
-    style TechnicalReality fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
-    style PostWindow fill:#eff6ff,stroke:#2563eb,stroke-width:2px
+    style LinkedInClaim fill:#f9f9f9,stroke:#e02424,stroke-width:2px,color:#111827
+    style TechnicalReality fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#111827
+    style PostWindow fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#111827
 ```
 
 ---
@@ -234,33 +238,40 @@ _Figure 1. Original vector schematic retained for this article. Course topics co
 [Open the original SVG](/assets/img/posts/2026-11-08-365-data-science-ai-agent-curriculum-audit/curriculum-path-and-decision-flow.svg).
 
 ```mermaid
-flowchart LR
+%%{init: {"flowchart": {"useMaxWidth": false}}}%%
+flowchart TB
     subgraph Skip ["Tier 3: Skip / De-prioritize"]
+        direction TB
         S1["Course 1: Intro to AI (44 lessons)"]
         S2["Course 2: Intro to Agents (52 lessons)"]
         S9["Course 9: AI Ethics (50 lessons)"]
-        SP["Optional Classical Projects: PCA & Game of Life"]
+        SP["Optional Classical Projects:<br/>PCA & Game of Life"]
+        S1 ~~~ S2 ~~~ S9 ~~~ SP
     end
 
     subgraph FastTrack ["Tier 2: Fast-Track (2x Speed)"]
+        direction TB
         F3["Course 3: Architecture & Prompting"]
         F5["Course 5: LangChain & Chat Apps"]
         F10["Course 10: Streamlit Deployment"]
+        F3 ~~~ F5 ~~~ F10
     end
 
     subgraph MustComplete ["Tier 1: High-Leverage Priority"]
+        direction TB
         M4["Course 4: MCP Tooling (Cursor/Claude)"]
         M6["Course 6: LangGraph State & Memory"]
         M7["Course 7: ReAct / ReWOO in Practice"]
         M8["Course 8: Agent & RAG Evaluation"]
+        M4 ~~~ M6 ~~~ M7 ~~~ M8
     end
 
     Skip -.->|Save 12+ Hours| MustComplete
     FastTrack --> MustComplete
 
-    style MustComplete fill:#dcfce7,stroke:#15803d,stroke-width:2px
-    style FastTrack fill:#fef9c3,stroke:#a16207,stroke-width:2px
-    style Skip fill:#fee2e2,stroke:#b91c1c,stroke-width:2px
+    style MustComplete fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#111827
+    style FastTrack fill:#fef9c3,stroke:#a16207,stroke-width:2px,color:#111827
+    style Skip fill:#fee2e2,stroke:#b91c1c,stroke-width:2px,color:#111827
 ```
 
 ### 1. High-Leverage Priority (Complete Before November 20)
