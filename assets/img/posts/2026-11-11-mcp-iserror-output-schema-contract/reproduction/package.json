@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "mcp-v1": "npm:@modelcontextprotocol/sdk@^1.32.2",
+    "mcp-v2": "npm:@modelcontextprotocol/client@^2.4.0"
+  }
+}

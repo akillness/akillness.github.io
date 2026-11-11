@@ -1,0 +1,127 @@
+{
+  "status": "pass",
+  "node": "v25.6.1",
+  "platform": "darwin",
+  "arch": "arm64",
+  "network_used_for_scenarios": false,
+  "fixture": "v1 low-level Server over linked in-memory transport; v2 prior.kind=legacy; synthetic payloads, not a live production server",
+  "assertions": "all 13 outcome rows plus returned payload/error-code assertions matched",
+  "rows": [
+    {
+      "client": "@modelcontextprotocol/sdk@1.32.2",
+      "discovery_performed": true,
+      "scenario": "success-valid",
+      "outcome": "returned",
+      "isError": false,
+      "structuredContent": {
+        "value": 7
+      }
+    },
+    {
+      "client": "@modelcontextprotocol/sdk@1.32.2",
+      "discovery_performed": true,
+      "scenario": "success-invalid",
+      "outcome": "threw",
+      "error_code": -32602,
+      "error_message": "MCP error -32602: Structured content does not match the tool's output schema: data must have required property 'value', data must NOT have additional properties"
+    },
+    {
+      "client": "@modelcontextprotocol/sdk@1.32.2",
+      "discovery_performed": true,
+      "scenario": "success-missing-structured",
+      "outcome": "threw",
+      "error_code": -32600,
+      "error_message": "MCP error -32600: Tool controlled_output has an output schema but did not return structured content"
+    },
+    {
+      "client": "@modelcontextprotocol/sdk@1.32.2",
+      "discovery_performed": true,
+      "scenario": "error-text-only",
+      "outcome": "returned",
+      "isError": true,
+      "structuredContent": null
+    },
+    {
+      "client": "@modelcontextprotocol/sdk@1.32.2",
+      "discovery_performed": true,
+      "scenario": "error-structured-off-schema",
+      "outcome": "threw",
+      "error_code": -32602,
+      "error_message": "MCP error -32602: Structured content does not match the tool's output schema: data must have required property 'value', data must NOT have additional properties"
+    },
+    {
+      "client": "@modelcontextprotocol/sdk@1.32.2",
+      "discovery_performed": true,
+      "scenario": "error-structured-conforming",
+      "outcome": "returned",
+      "isError": true,
+      "structuredContent": {
+        "value": 0
+      }
+    },
+    {
+      "client": "@modelcontextprotocol/client@2.4.0",
+      "discovery_performed": true,
+      "scenario": "success-valid",
+      "outcome": "returned",
+      "isError": false,
+      "structuredContent": {
+        "value": 7
+      }
+    },
+    {
+      "client": "@modelcontextprotocol/client@2.4.0",
+      "discovery_performed": true,
+      "scenario": "success-invalid",
+      "outcome": "threw",
+      "error_code": -32602,
+      "error_message": "Structured content does not match the tool's output schema: data must have required property 'value', data must NOT have additional properties"
+    },
+    {
+      "client": "@modelcontextprotocol/client@2.4.0",
+      "discovery_performed": true,
+      "scenario": "success-missing-structured",
+      "outcome": "threw",
+      "error_code": -32600,
+      "error_message": "Tool controlled_output has an output schema but did not return structured content"
+    },
+    {
+      "client": "@modelcontextprotocol/client@2.4.0",
+      "discovery_performed": true,
+      "scenario": "error-text-only",
+      "outcome": "returned",
+      "isError": true,
+      "structuredContent": null
+    },
+    {
+      "client": "@modelcontextprotocol/client@2.4.0",
+      "discovery_performed": true,
+      "scenario": "error-structured-off-schema",
+      "outcome": "returned",
+      "isError": true,
+      "structuredContent": {
+        "error": "unavailable"
+      }
+    },
+    {
+      "client": "@modelcontextprotocol/client@2.4.0",
+      "discovery_performed": true,
+      "scenario": "error-structured-conforming",
+      "outcome": "returned",
+      "isError": true,
+      "structuredContent": {
+        "value": 0
+      }
+    },
+    {
+      "client": "@modelcontextprotocol/sdk@1.32.2",
+      "discovery_performed": false,
+      "scenario": "error-structured-off-schema",
+      "outcome": "returned",
+      "isError": true,
+      "structuredContent": {
+        "error": "unavailable"
+      }
+    }
+  ]
+}
