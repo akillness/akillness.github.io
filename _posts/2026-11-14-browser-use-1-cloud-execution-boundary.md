@@ -32,17 +32,18 @@ flowchart LR
         AgentCode["Agent Script / CLI"]
         LocalBrowser["Local Chromium Daemon (default-chromium)"]
     end
+
     subgraph CloudBoundary ["External Boundaries"]
         CloudGateway["Browser Use Cloud Gateway"]
         LLMProvider["Model Provider API (OpenAI / Anthropic)"]
     end
 
-    AgentCode -->|"Default run_sync()"| CloudGateway
-    AgentCode -.->"Explicit Browser('chromium')"| LocalBrowser
-    LocalBrowser -->|"DOM & Screenshots"| LLMProvider
+    AgentCode -->|Default run_sync| CloudGateway
+    AgentCode -.->|Explicit Browser config| LocalBrowser
+    LocalBrowser -->|DOM and Screenshots| LLMProvider
 
-    style Client fill:#f8fafc,stroke:#38bdf8,stroke-width:2px,color:#0f172a
-    style CloudBoundary fill:#fffbeb,stroke:#f59e0b,stroke-width:2px,color:#0f172a
+    style Client fill:#f8fafc,stroke:#38bdf8,stroke-width:2px,color:#111827
+    style CloudBoundary fill:#fffbeb,stroke:#f59e0b,stroke-width:2px,color:#111827
 ```
 
 <svg viewBox="0 0 860 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Browser Use 1.0 architecture diagram showing local vs cloud execution boundaries" style="width:100%;max-width:860px;height:auto;display:block;margin:1.5rem auto;">
