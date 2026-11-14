@@ -26,20 +26,50 @@ The minimal `Agent(...).run_sync()` constructor in Browser Use 1.0 routes tasks 
 Even when an engineer overrides this configuration, nuanced boundaries remain. Specifying `Browser('chromium')` provisions a local browser process on the host, but page screenshots and accessibility trees are still dispatched to external model provider APIs. Understanding where browser automation state lives—and where remote telemetry and network traffic flow—is essential for building reliable, secure agent infrastructure.
 
 ```mermaid
+%%{init: {"flowchart": {"useMaxWidth": false}}}%%
 flowchart LR
-    subgraph Client["Developer Host"]
+    subgraph Client ["Developer Host Environment"]
         AgentCode["Agent Script / CLI"]
-        LocalBrowser["Local Chromium Daemon"]
+        LocalBrowser["Local Chromium Daemon (default-chromium)"]
     end
-    subgraph CloudBoundary["External Boundaries"]
+    subgraph CloudBoundary ["External Boundaries"]
         CloudGateway["Browser Use Cloud Gateway"]
-        LLMProvider["Model Provider API (OpenAI/Anthropic)"]
+        LLMProvider["Model Provider API (OpenAI / Anthropic)"]
     end
 
     AgentCode -->|"Default run_sync()"| CloudGateway
     AgentCode -.->"Explicit Browser('chromium')"| LocalBrowser
     LocalBrowser -->|"DOM & Screenshots"| LLMProvider
+
+    style Client fill:#f8fafc,stroke:#38bdf8,stroke-width:2px,color:#0f172a
+    style CloudBoundary fill:#fffbeb,stroke:#f59e0b,stroke-width:2px,color:#0f172a
 ```
+
+<svg viewBox="0 0 860 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Browser Use 1.0 architecture diagram showing local vs cloud execution boundaries" style="width:100%;max-width:860px;height:auto;display:block;margin:1.5rem auto;">
+  <rect x="10" y="20" width="380" height="280" rx="12" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 2"/>
+  <text x="30" y="50" fill="#38bdf8" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700">LOCAL HOST RUNTIME</text>
+  <rect x="30" y="70" width="340" height="55" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+  <text x="45" y="98" fill="#f8fafc" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600">CLI Stdio Transport (--cli-mcp)</text>
+  <text x="45" y="114" fill="#94a3b8" font-family="system-ui,-apple-system,sans-serif" font-size="11">intercepts BrokenPipe via except* OSError</text>
+  <rect x="30" y="140" width="340" height="55" rx="8" fill="#1e293b" stroke="#34d399" stroke-width="1"/>
+  <text x="45" y="168" fill="#f8fafc" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600">Background Daemon (default-chromium)</text>
+  <text x="45" y="184" fill="#94a3b8" font-family="system-ui,-apple-system,sans-serif" font-size="11">isolated PID lifecycle; closed via --reload</text>
+  <rect x="30" y="210" width="340" height="55" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1"/>
+  <text x="45" y="238" fill="#f8fafc" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600">CDP Endpoint (BU_CDP_URL)</text>
+  <text x="45" y="254" fill="#94a3b8" font-family="system-ui,-apple-system,sans-serif" font-size="11">3s fail-fast refusal timeout</text>
+
+  <rect x="470" y="20" width="380" height="280" rx="12" fill="none" stroke="#f59e0b" stroke-width="2"/>
+  <text x="490" y="50" fill="#f59e0b" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700">BROWSER USE CLOUD</text>
+  <rect x="490" y="70" width="340" height="55" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1"/>
+  <text x="505" y="98" fill="#f8fafc" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600">Cloud Gateway (run_sync default)</text>
+  <text x="505" y="114" fill="#94a3b8" font-family="system-ui,-apple-system,sans-serif" font-size="11">remote browser allocation via API key</text>
+  <rect x="490" y="140" width="340" height="55" rx="8" fill="#1e293b" stroke="#fbbf24" stroke-width="1"/>
+  <text x="505" y="168" fill="#f8fafc" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600">Hosted bu-fast Reasoning Model</text>
+  <text x="505" y="184" fill="#94a3b8" font-family="system-ui,-apple-system,sans-serif" font-size="11">automated plan and action generation</text>
+  <rect x="490" y="210" width="340" height="55" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="1"/>
+  <text x="505" y="238" fill="#f8fafc" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600">Cancellation Budget Guard</text>
+  <text x="505" y="254" fill="#94a3b8" font-family="system-ui,-apple-system,sans-serif" font-size="11">10s shared deadline caps billing retention</text>
+</svg>
 
 The release of Browser Use commit `dfb6a73d520809341c975c6a01c228327991e88b` (tagged for version 1.0.3) provides detailed telemetry-derived error data from real-world deployments. By analyzing the fixes merged in this update, systems engineers can trace how headless environments, Model Context Protocol (MCP) clients, and process teardowns behave under stress.
 
