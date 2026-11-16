@@ -33,7 +33,7 @@ flowchart TD
         Plan["2. Plan Game (Decompose GDD, Beats, Required Assets)"]
         Whitebox["3. Build Playable Whitebox (Greybox Geometry, Colliders)"]
         Refine["4. Refine Assets (Tri-Tier Resolution Substitution)"]
-        QA["5. Validate & Play (7-Point Video Recording Inspection)"]
+        QA["5. Validate and Play (7-Point Video Recording Inspection)"]
     end
 
     subgraph AssetHierarchy ["Tri-Tier Asset Resolution Hierarchy"]
@@ -50,13 +50,16 @@ flowchart TD
         ThreeJS["Three.js (WebGL Browser Canvas)"]
     end
 
-    Brief --> Plan --> Whitebox --> Refine --> QA
+    Brief --> Plan
+    Plan --> Whitebox
+    Whitebox --> Refine
+    Refine --> QA
     Refine -.-> Tier1
     Refine -.-> Tier2
     Refine -.-> Tier3
-    Whitebox ==> EngineAdapters
-    QA -->|Reject (Clipping / Jitter)| Whitebox
-    QA -->|Pass (All 7 Gates Green)| ShippedGame["Verified Game Slice"]
+    Whitebox --> EngineAdapters
+    QA -->|Reject on Clipping or Jitter| Whitebox
+    QA -->|Pass on All 7 Gates Green| ShippedGame["Verified Game Slice"]
 
     style Lifecycle fill:#f8fafc,stroke:#ec4899,stroke-width:2px,color:#111827
     style AssetHierarchy fill:#f0fdf4,stroke:#0369a1,stroke-width:2px,color:#111827

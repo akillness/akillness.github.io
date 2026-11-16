@@ -28,21 +28,21 @@ The release of TruLens version 2.16.0 by Truera (pinned to commit `32f57106c7f89
 ```mermaid
 %%{init: {"flowchart": {"useMaxWidth": false}}}%%
 flowchart LR
-    subgraph Inputs ["User Query & Context Retrieval"]
+    subgraph Inputs ["User Query and Context Retrieval"]
         Query["User Query"]
         Retriever["Vector / Hybrid Retriever"]
         Context["Retrieved Context Chunks"]
     end
 
     subgraph Evaluation ["RAG Triad Verification (TruLens Core)"]
-        CR["Context Relevance (Query -> Context)"]
-        Groundedness["Groundedness (Context -> Answer)"]
-        AR["Answer Relevance (Query -> Answer)"]
+        CR["Context Relevance (Query to Context)"]
+        Groundedness["Groundedness (Context to Answer)"]
+        AR["Answer Relevance (Query to Answer)"]
     end
 
-    subgraph Output ["Agent Response & Guardrails"]
+    subgraph Output ["Agent Response and Guardrails"]
         LLM["Generative Model"]
-        Guardrail["Runtime Guardrail (Threshold >= 0.7)"]
+        Guardrail["Runtime Guardrail (Threshold 0.7 or higher)"]
         FinalAnswer["Verified Production Output"]
     end
 

@@ -30,7 +30,7 @@ By operating within a single Python memory space, tool invocations bypass serial
 flowchart TD
     subgraph ServerLayer ["FastMCP Server Core (v4.2.0)"]
         FastMCPServer["FastMCP Container"]
-        Decorators["@mcp.tool / @mcp.resource / @mcp.prompt"]
+        Decorators["mcp.tool / mcp.resource / mcp.prompt decorators"]
         DI["Depends Injection and Context Resolution"]
     end
 

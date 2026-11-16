@@ -31,7 +31,7 @@ flowchart TD
     subgraph ClientLayer ["Client Browser (MapLibre / Leaflet)"]
         MapEngine["Map Engine Viewport"]
         PMTilesAdapter["@protomaps/pmtiles Protocol Adapter"]
-        RangeCache["In-Memory Directory Cache (< 16 KB)"]
+        RangeCache["In-Memory Directory Cache (under 16 KB)"]
     end
 
     subgraph NetworkLayer ["Static Edge / CDN (RFC 9110)"]
