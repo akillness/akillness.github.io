@@ -47,8 +47,10 @@ G9b ensures the final article is comfortable to read and rich in explanatory vis
 ## Platform editor invariants (Naver SmartEditor ONE and Tistory)
 
 - **Naver SmartEditor ONE Paragraph Invariant:** Never inject multiline strings as a single monolithic block via `insertText()`, as SmartEditor ONE strips newline delimiters and collapses all lines into a single unbroken `<p class="se-text-paragraph">` lump. Every paragraph must be dispatched sequentially with explicit `Enter` keypresses (`insertText(para)` then `press("Enter")`) to create distinct paragraph elements with native line-height.
+- **Naver SmartEditor ONE Section-by-Section Image Upload Invariant:** Multi-image uploads via a single file input invocation can cause SmartEditor ONE to prompt for collage mode or drop secondary items. Each section diagram must be uploaded individually immediately beneath its section heading by focusing that heading before triggering the photo upload (`single-photo-per-section-upload`).
 - **Proportional font ASCII art ban:** Monospace ASCII box-drawing characters (`┌─┐`, `│`) must never be used in proportional-font blog editors (Naver NanumGothic, Tistory skins). Such art collapses and wraps unevenly. All architecture diagrams and flowcharts must be authored as vector SVGs and converted to high-resolution PNGs before insertion.
-- **Tistory TinyMCE sanitizer invariant:** Tistory server-side filters strip raw `<svg>` tags, `<object data="...">` elements, and `data:image/...` base64 data URIs from the post body. All images and diagrams must be referenced via verified public HTTPS endpoints (such as `raw.githubusercontent.com` or `github.io`) or uploaded via the official file input.
+- **Tistory TinyMCE sanitizer invariant:** Tistory server-side filters strip raw `<svg>` tags, `<object data="...">` elements, and `data:image/...` base64 data URIs from the post body. All images and diagrams must be referenced via verified public HTTPS endpoints (such as `raw.githubusercontent.com` or `github.io`) wrapped in semantic `<figure class="explanatory-image"><img ...><figcaption>...</figcaption></figure>` containers.
+- **Live Rendered Image Count Invariant:** Every published post must verify `imageCount >= 3` on the live rendered page prior to sign-off.
 
 ## Revision policy
 
