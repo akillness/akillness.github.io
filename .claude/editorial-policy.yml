@@ -20,6 +20,18 @@ image_selection_policy: source-first-fallback
 image_selection_scope: akillness-git-blog-only
 maximum_reference_images: 12
 source_image_contract_effective_date: "2026-09-01"
+typography_policy: generous-line-height-and-pacing
+paragraph_pacing:
+  max_sentences_per_paragraph: 4
+  line_height_minimum: 1.85
+  require_section_breathers: true
+visual_density_policy:
+  minimum_visual_artifacts_per_article: 3
+  preferred_visual_mix:
+    - architecture-diagram-or-flowchart
+    - structured-comparison-table
+    - annotated-evidence-figure
+    - highlighted-code-or-callout-box
 reference_image_max_bytes: 5242880
 reference_image_max_total_bytes: 20971520
 reference_image_require_raster_signature: true

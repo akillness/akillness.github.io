@@ -15,6 +15,7 @@ A run may advance only with evidence recorded in `run-summary.md`.
 | G7 Date safety | Automated `+0900` timestamp is strictly past at build time | BLOCK |
 | G8 Taxonomy | One policy category axis (`AI, Agents` / `AI, Research` / `AI, Tooling`); lowercase reusable tags | FIX |
 | G9 Package/render | Front matter, fences, Mermaid, tables, internal links, secrets pass | FIX/BLOCK |
+| G9b Typography & Visual Density | Max 3–4 sentences per paragraph, generous line spacing (>=1.85 line-height), section breathers, at least 3 distinct visual artifacts (diagrams, tables, callout blocks, figures) | FIX |
 | G10 Independent review | Evidence editor and publication validator both PASS | FIX/REJECT |
 | G11 Diff scope | Only one post plus matching assets | BLOCK |
 | G12 Deployment | Remote SHA, Pages success, anonymous permalink 200, assets 200 | not published |
@@ -34,6 +35,13 @@ G6b fails closed. Only director-downloaded raster images from inspected referenc
 ## Visualization and generated imagery
 
 Explanatory visuals are table-first and SVG-first; Mermaid is used only when a generated graph beats an authored SVG. New original SVG diagrams omit an opaque full-canvas background fill so they stay readable on the theme's neutral `.svg` surface in both colour modes; a baked background is an exception that must be justified in `run-summary.md`, and published diagrams are never retrofitted. Cover/hero art and editorial illustrations are generated with `god-tibo-imagen` (`gti`, or `npx god-tibo-imagen`) using local Codex auth, stored outside `references/`, and described honestly in `image.alt`. Generated imagery is uncounted by G6b and never substitutes for downloaded evidence.
+
+## Typography, paragraph pacing, and visual density
+
+G9b ensures the final article is comfortable to read and rich in explanatory visuals:
+- **Paragraph pacing:** Paragraphs should not exceed 3–4 sentences. Long continuous blocks of text must be broken up with section breathers, visual callouts, or bulleted analysis.
+- **Line height & whitespace:** Headings (`h2`, `h3`) must have generous top margins; body text rendering must maintain at least 1.85 line-height with clean padding around code fences and blockquotes.
+- **Visual artifact density:** Every technical post must incorporate at least three distinct visual materials (for example: an architecture diagram/flowchart, a structured comparison table, an annotated evidence figure, or an indented callout summary block). Visual elements must carry descriptive captions explaining what the reader is seeing.
 
 ## Revision policy
 
