@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="840" height="400" rx="12" fill="url(#bgGrad)" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Title & Badge -->
+  <rect x="36" y="24" width="160" height="26" rx="6" fill="#1e1b4b" stroke="#6366f1" stroke-width="1"/>
+  <text x="46" y="42" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="700" fill="#a5b4fc" letter-spacing="0.05em">SPEC COMPARISON</text>
+  <text x="36" y="76" font-family="-apple-system, system-ui, sans-serif" font-size="20" font-weight="700" fill="#f8fafc">MiniMind 모델 규격 및 하드웨어 요구사양 비교표</text>
+  <text x="36" y="96" font-family="-apple-system, system-ui, sans-serif" font-size="13" fill="#94a3b8">소비자용 단일 GPU 기준 학습 소요 시간 및 권장 활용 시나리오</text>
+
+  <!-- Table Header -->
+  <g transform="translate(36, 120)">
+    <rect width="768" height="38" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="16" y="24" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">모델 프리셋</text>
+    <text x="170" y="24" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">파라미터 수</text>
+    <text x="270" y="24" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">구조 (Dim/Layer)</text>
+    <text x="420" y="24" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">권장 VRAM</text>
+    <text x="530" y="24" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">RTX 4090 훈련 시간</text>
+    <text x="690" y="24" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#38bdf8">주요 활용</text>
+  </g>
+
+  <!-- Row 1: MiniMind-Small -->
+  <g transform="translate(36, 166)">
+    <rect width="768" height="48" rx="4" fill="#0f172a" stroke="#334155" stroke-width="0.8"/>
+    <text x="16" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#f8fafc">MiniMind-Small</text>
+    <text x="170" y="29" font-family="ui-monospace, monospace" font-size="12" font-weight="700" fill="#38bdf8">~26M</text>
+    <text x="270" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#94a3b8">Dim 512 / 8 L</text>
+    <text x="420" y="29" font-family="ui-monospace, monospace" font-size="11" font-weight="600" fill="#4ade80">4 GB</text>
+    <text x="530" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">약 40분 ~ 1시간</text>
+    <text x="690" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#cbd5e1">라우터·임베디드</text>
+  </g>
+
+  <!-- Row 2: MiniMind -->
+  <g transform="translate(36, 220)">
+    <rect width="768" height="48" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.8"/>
+    <text x="16" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#f8fafc">MiniMind (Standard)</text>
+    <text x="170" y="29" font-family="ui-monospace, monospace" font-size="12" font-weight="700" fill="#38bdf8">~104M</text>
+    <text x="270" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#94a3b8">Dim 768 / 16 L</text>
+    <text x="420" y="29" font-family="ui-monospace, monospace" font-size="11" font-weight="600" fill="#facc15">8 GB</text>
+    <text x="530" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">약 2.5 ~ 3시간</text>
+    <text x="690" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#cbd5e1">일상 대화 에이전트</text>
+  </g>
+
+  <!-- Row 3: MiniMind-MoE 4x26M -->
+  <g transform="translate(36, 274)">
+    <rect width="768" height="48" rx="4" fill="#0f172a" stroke="#334155" stroke-width="0.8"/>
+    <text x="16" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#f8fafc">MiniMind-MoE (4x26M)</text>
+    <text x="170" y="29" font-family="ui-monospace, monospace" font-size="12" font-weight="700" fill="#2dd4bf">~45M (26M 활성)</text>
+    <text x="270" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#94a3b8">4 Experts + 1 Shared</text>
+    <text x="420" y="29" font-family="ui-monospace, monospace" font-size="11" font-weight="600" fill="#4ade80">6 GB</text>
+    <text x="530" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">약 1.5시간</text>
+    <text x="690" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#cbd5e1">도메인 특화 분기</text>
+  </g>
+
+  <!-- Row 4: MiniMind-MoE 8x26M -->
+  <g transform="translate(36, 328)">
+    <rect width="768" height="48" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.8"/>
+    <text x="16" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#f8fafc">MiniMind-MoE (8x26M)</text>
+    <text x="170" y="29" font-family="ui-monospace, monospace" font-size="12" font-weight="700" fill="#2dd4bf">~85M (26M 활성)</text>
+    <text x="270" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#94a3b8">8 Experts + 1 Shared</text>
+    <text x="420" y="29" font-family="ui-monospace, monospace" font-size="11" font-weight="600" fill="#facc15">8 GB</text>
+    <text x="530" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">약 2.5시간</text>
+    <text x="690" y="29" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#cbd5e1">복합 추론 에이전트</text>
+  </g>
+</svg>

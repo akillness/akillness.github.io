@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="gateGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="expActive" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="sharedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#0f766e"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrowShared" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2dd4bf"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="840" height="440" rx="12" fill="url(#bgGrad)" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Title & Badge -->
+  <rect x="36" y="24" width="150" height="26" rx="6" fill="#1e1b4b" stroke="#6366f1" stroke-width="1"/>
+  <text x="46" y="42" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="700" fill="#a5b4fc" letter-spacing="0.05em">ROUTING ARCHITECTURE</text>
+  <text x="36" y="76" font-family="-apple-system, system-ui, sans-serif" font-size="20" font-weight="700" fill="#f8fafc">MiniMind-MoE 동적 전문가 라우팅 구조</text>
+  <text x="36" y="96" font-family="-apple-system, system-ui, sans-serif" font-size="13" fill="#94a3b8">Softmax Top-2 전문가 가중 결합 및 기본 문법 보존을 위한 공유 전문가 결합</text>
+
+  <!-- Top: Input Vector -->
+  <g transform="translate(290, 115)">
+    <rect width="260" height="34" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+    <text x="130" y="22" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="600" fill="#f1f5f9" text-anchor="middle">Input Hidden State x</text>
+  </g>
+
+  <!-- Branch left to Gating, Branch right to Shared Expert -->
+  <path d="M 370 149 L 370 180 L 270 180 L 270 195" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 470 149 L 470 180 L 590 180 L 590 195" fill="none" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrowShared)"/>
+
+  <!-- Gating Router -->
+  <g transform="translate(170, 195)">
+    <rect width="200" height="48" rx="8" fill="url(#gateGrad)" stroke="#818cf8" stroke-width="1.5"/>
+    <text x="100" y="22" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">Gating Router</text>
+    <text x="100" y="38" font-family="ui-monospace, monospace" font-size="10" fill="#c7d2fe" text-anchor="middle">Softmax Top-2 Selection</text>
+  </g>
+
+  <!-- Shared Expert (Right) -->
+  <g transform="translate(500, 195)">
+    <rect width="180" height="48" rx="8" fill="url(#sharedGrad)" stroke="#14b8a6" stroke-width="1.5"/>
+    <text x="90" y="22" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">Shared Expert</text>
+    <text x="90" y="38" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#ccfbf1" text-anchor="middle">상시 활성화 (기초 지식)</text>
+  </g>
+
+  <!-- 4 Routed Experts Grid -->
+  <!-- Line from Gating to Active Experts (1 & 3) -->
+  <path d="M 230 243 L 230 265 L 85 265 L 85 285" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 310 243 L 310 265 L 325 265 L 325 285" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Expert 1 (Active, weight 0.65) -->
+  <g transform="translate(36, 285)">
+    <rect width="100" height="54" rx="6" fill="url(#expActive)" stroke="#38bdf8" stroke-width="2"/>
+    <text x="50" y="22" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">Expert 1</text>
+    <rect x="15" y="30" width="70" height="16" rx="3" fill="#0c4a6e"/>
+    <text x="50" y="42" font-family="ui-monospace, monospace" font-size="10" font-weight="700" fill="#38bdf8" text-anchor="middle">W: 0.65</text>
+  </g>
+
+  <!-- Expert 2 (Inactive) -->
+  <g transform="translate(156, 285)">
+    <rect width="100" height="54" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="50" y="22" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="600" fill="#64748b" text-anchor="middle">Expert 2</text>
+    <text x="50" y="42" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">비활성 (0.0)</text>
+  </g>
+
+  <!-- Expert 3 (Active, weight 0.35) -->
+  <g transform="translate(276, 285)">
+    <rect width="100" height="54" rx="6" fill="url(#expActive)" stroke="#38bdf8" stroke-width="2"/>
+    <text x="50" y="22" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">Expert 3</text>
+    <rect x="15" y="30" width="70" height="16" rx="3" fill="#0c4a6e"/>
+    <text x="50" y="42" font-family="ui-monospace, monospace" font-size="10" font-weight="700" fill="#38bdf8" text-anchor="middle">W: 0.35</text>
+  </g>
+
+  <!-- Expert 4 (Inactive) -->
+  <g transform="translate(396, 285)">
+    <rect width="100" height="54" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="50" y="22" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="600" fill="#64748b" text-anchor="middle">Expert 4</text>
+    <text x="50" y="42" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">비활성 (0.0)</text>
+  </g>
+
+  <!-- Weighted Sum Output -->
+  <path d="M 85 339 L 85 365 L 240 365 L 240 380" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+  <path d="M 325 339 L 325 365 L 240 365 L 240 380" fill="none" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  
+  <g transform="translate(160, 380)">
+    <rect width="160" height="34" rx="6" fill="#1e1b4b" stroke="#6366f1" stroke-width="1.5"/>
+    <text x="80" y="21" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="600" fill="#e0e7ff" text-anchor="middle">Weighted Experts Sum</text>
+  </g>
+
+  <!-- Sum + Shared to Final State -->
+  <path d="M 320 397 L 430 397" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 590 243 L 590 397 L 455 397" fill="none" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrowShared)"/>
+
+  <!-- Final Sum Circle -->
+  <circle cx="442" cy="397" r="14" fill="#0f172a" stroke="#fbbf24" stroke-width="2"/>
+  <text x="442" y="402" font-family="sans-serif" font-size="16" font-weight="700" fill="#fbbf24" text-anchor="middle">+</text>
+
+  <!-- Final Output Box -->
+  <g transform="translate(500, 380)">
+    <rect width="180" height="34" rx="6" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="90" y="22" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">Final FFN State Out</text>
+  </g>
+  <line x1="456" y1="397" x2="495" y2="397" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>
