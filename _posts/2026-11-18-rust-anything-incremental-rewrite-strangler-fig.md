@@ -7,15 +7,16 @@ tags: [rust, refactoring, ffi, code-migration, differential-testing]
 image:
   path: /assets/img/posts/2026-11-18-rust-anything-incremental-rewrite-strangler-fig/cover.png
   alt: Architecture diagram illustrating the Strangler Fig pattern for incremental Rust code migration
+image_policy: source-first-fallback
+published: false
 ---
 
 Attempting to rewrite an entire production codebase in Rust in a single massive pull request is one of the most reliable ways to derail an engineering team. Scope bloat, long release freezes, and subtle behavioral mismatches almost inevitably doom "big-bang" migration initiatives.
 
 The open-source [rust-anything](https://github.com/erkamyaman/rust-anything) project proposes a structured alternative: applying the Strangler Fig pattern to codebase migration, combined with bit-for-bit differential testing against recorded production behavior.
-
 <figure class="explanatory-image">
   <img src="/assets/img/posts/2026-11-18-rust-anything-incremental-rewrite-strangler-fig/cover.png" alt="Architecture diagram of the Strangler Fig pattern for incremental Rust code migration" width="800" height="420" loading="lazy">
-  <figcaption>Figure 1. The four-stage Strangler Fig migration pipeline: leaf module isolation, golden recording, FFI bridging, and zero-overhead cutover.</figcaption>
+  <figcaption>AI-generated illustration by Gemini; interpretation of rust-anything architecture, not source evidence</figcaption>
 </figure>
 
 ## The Leaf-First Inversion Principle
