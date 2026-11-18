@@ -40,7 +40,8 @@ Explanatory visuals are table-first and SVG-first; Mermaid is used only when a g
 
 G9b ensures the final article is comfortable to read and rich in explanatory visuals:
 - **Paragraph pacing:** Paragraphs should not exceed 3–4 sentences. Long continuous blocks of text must be broken up with section breathers, visual callouts, or bulleted analysis.
-- **Line height & whitespace:** Headings (`h2`, `h3`) must have generous top margins; body text rendering must maintain at least 1.85 line-height with clean padding around code fences and blockquotes.
+- **Line height & vertical spacing (행간):** Body paragraphs must maintain at least `1.88` line-height; headings (`h1`, `h2`, `h3`) must use `1.40–1.45` line-height with generous top margins (`2.2em`) and bottom margins (`0.8em`). Clean padding must surround code fences and blockquotes.
+- **Letter-spacing & word-break (자간):** Headings must use tight letter-spacing (`-0.025em`); Korean body text must use `-0.015em` to `-0.02em` with `word-break: keep-all; overflow-wrap: break-word;` to avoid jagged line breaks; English body text must use `-0.005em`.
 - **Visual artifact density:** Every technical post must incorporate at least three distinct visual materials (for example: an architecture diagram/flowchart, a structured comparison table, an annotated evidence figure, or an indented callout summary block). Visual elements must carry descriptive captions explaining what the reader is seeing.
 
 ## Revision policy

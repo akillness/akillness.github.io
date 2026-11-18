@@ -20,11 +20,24 @@ image_selection_policy: source-first-fallback
 image_selection_scope: akillness-git-blog-only
 maximum_reference_images: 12
 source_image_contract_effective_date: "2026-09-01"
-typography_policy: generous-line-height-and-pacing
-paragraph_pacing:
-  max_sentences_per_paragraph: 4
-  line_height_minimum: 1.85
-  require_section_breathers: true
+typography_policy:
+  readability_first: true
+  letter_spacing:
+    korean_body: "-0.015em"
+    english_body: "-0.005em"
+    headings: "-0.025em"
+    code_blocks: "0.0em"
+  line_height:
+    body_minimum: 1.88
+    headings: 1.42
+    code_blocks: 1.55
+  word_break:
+    korean: "keep-all"
+    general: "break-word"
+  paragraph_pacing:
+    max_sentences_per_paragraph: 4
+    require_section_breathers: true
+    vertical_margin: "18px"
 visual_density_policy:
   minimum_visual_artifacts_per_article: 3
   preferred_visual_mix:
