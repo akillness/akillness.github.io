@@ -38,6 +38,15 @@ typography_policy:
     max_sentences_per_paragraph: 4
     require_section_breathers: true
     vertical_margin: "18px"
+  platform_editor_invariants:
+    naver_smarteditor_one:
+      multiline_injection: forbidden-monolithic-string
+      paragraph_dispatch: sequential-insert-with-explicit-enter-keypress
+      proportional_font_ascii_art: forbidden-use-rendered-png-or-svg
+    tistory_tinymce:
+      raw_svg_body_injection: sanitized-by-server-use-https-img-tags
+      data_uri_base64_in_body: sanitized-by-server-use-https-img-tags
+      verified_endpoint_policy: raw-githubusercontent-or-cdn
 visual_density_policy:
   minimum_visual_artifacts_per_article: 3
   preferred_visual_mix:

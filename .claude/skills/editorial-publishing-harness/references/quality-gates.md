@@ -44,6 +44,12 @@ G9b ensures the final article is comfortable to read and rich in explanatory vis
 - **Letter-spacing & word-break (자간):** Headings must use tight letter-spacing (`-0.025em`); Korean body text must use `-0.015em` to `-0.02em` with `word-break: keep-all; overflow-wrap: break-word;` to avoid jagged line breaks; English body text must use `-0.005em`.
 - **Visual artifact density:** Every technical post must incorporate at least three distinct visual materials (for example: an architecture diagram/flowchart, a structured comparison table, an annotated evidence figure, or an indented callout summary block). Visual elements must carry descriptive captions explaining what the reader is seeing.
 
+## Platform editor invariants (Naver SmartEditor ONE and Tistory)
+
+- **Naver SmartEditor ONE Paragraph Invariant:** Never inject multiline strings as a single monolithic block via `insertText()`, as SmartEditor ONE strips newline delimiters and collapses all lines into a single unbroken `<p class="se-text-paragraph">` lump. Every paragraph must be dispatched sequentially with explicit `Enter` keypresses (`insertText(para)` then `press("Enter")`) to create distinct paragraph elements with native line-height.
+- **Proportional font ASCII art ban:** Monospace ASCII box-drawing characters (`┌─┐`, `│`) must never be used in proportional-font blog editors (Naver NanumGothic, Tistory skins). Such art collapses and wraps unevenly. All architecture diagrams and flowcharts must be authored as vector SVGs and converted to high-resolution PNGs before insertion.
+- **Tistory TinyMCE sanitizer invariant:** Tistory server-side filters strip raw `<svg>` tags, `<object data="...">` elements, and `data:image/...` base64 data URIs from the post body. All images and diagrams must be referenced via verified public HTTPS endpoints (such as `raw.githubusercontent.com` or `github.io`) or uploaded via the official file input.
+
 ## Revision policy
 
 - Maximum two writer revision loops.
