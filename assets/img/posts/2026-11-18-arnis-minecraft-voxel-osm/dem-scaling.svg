@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+    <linearGradient id="mountainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+
+  <rect width="840" height="400" rx="12" fill="url(#bgGrad)" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Title & Badge -->
+  <rect x="36" y="24" width="165" height="26" rx="6" fill="#1e1b4b" stroke="#6366f1" stroke-width="1"/>
+  <text x="46" y="42" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="700" fill="#a5b4fc" letter-spacing="0.05em">ELEVATION SCALING</text>
+  <text x="36" y="76" font-family="-apple-system, system-ui, sans-serif" font-size="20" font-weight="700" fill="#f8fafc">DEM 고도 데이터와 마인크래프트 Y축 좌표 매핑</text>
+  <text x="36" y="96" font-family="-apple-system, system-ui, sans-serif" font-size="13" fill="#94a3b8">실측 해발 고도(미터)를 마인크래프트 1.18+ 확장 높이(-64 ~ 319)에 투영하는 수식</text>
+
+  <!-- Left: Real World Heights -->
+  <g transform="translate(60, 130)">
+    <rect width="260" height="230" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="20" y="30" font-family="-apple-system, system-ui, sans-serif" font-size="14" font-weight="700" fill="#38bdf8">현실 실측 해발 고도 (DEM)</text>
+    <line x1="20" y1="42" x2="240" y2="42" stroke="#334155" stroke-width="1"/>
+    
+    <text x="20" y="75" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">고산 지형 / 산악 봉우리</text>
+    <text x="20" y="93" font-family="ui-monospace, monospace" font-size="11" fill="#94a3b8">+500m ~ +2000m</text>
+
+    <text x="20" y="130" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">일반 도시 및 평야 지반</text>
+    <text x="20" y="148" font-family="ui-monospace, monospace" font-size="11" fill="#94a3b8">+20m ~ +100m</text>
+
+    <text x="20" y="185" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">기준 해수면 (Sea Level)</text>
+    <text x="20" y="203" font-family="ui-monospace, monospace" font-size="11" fill="#38bdf8">0m (Mean Sea Level)</text>
+  </g>
+
+  <!-- Middle: Scaling Formula Box -->
+  <path d="M 320 245 L 390 245" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <g transform="translate(390, 150)">
+    <rect width="180" height="190" rx="8" fill="#1e1b4b" stroke="#6366f1" stroke-width="1.5"/>
+    <text x="90" y="30" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#a5b4fc" text-anchor="middle">수직 스케일링 공식</text>
+    <line x1="16" y1="42" x2="164" y2="42" stroke="#4338ca" stroke-width="1"/>
+    
+    <text x="90" y="75" font-family="ui-monospace, monospace" font-size="13" font-weight="700" fill="#fef08a" text-anchor="middle">Y = Base + (Alt * S)</text>
+    <text x="90" y="105" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">Base = 62 (해수면 블록)</text>
+    <text x="90" y="125" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">S = 1.0 (1:1 표준 스케일)</text>
+    <text x="90" y="145" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#cbd5e1" text-anchor="middle">S &lt; 1.0 (고산 압축 스케일)</text>
+    
+    <rect x="20" y="158" width="140" height="20" rx="4" fill="#312e81"/>
+    <text x="90" y="172" font-family="-apple-system, system-ui, sans-serif" font-size="9" fill="#a5b4fc" text-anchor="middle">Bilinear 지형 보간 적용</text>
+  </g>
+
+  <!-- Right: Minecraft Y Coordinates -->
+  <path d="M 570 245 L 635 245" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g transform="translate(640, 130)">
+    <rect width="160" height="230" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="20" y="30" font-family="-apple-system, system-ui, sans-serif" font-size="14" font-weight="700" fill="#4ade80">마인크래프트 Y축</text>
+    <line x1="20" y1="42" x2="140" y2="42" stroke="#334155" stroke-width="1"/>
+
+    <text x="20" y="75" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">최대 건축 고도</text>
+    <text x="20" y="93" font-family="ui-monospace, monospace" font-size="11" fill="#4ade80">Y = 319 (상한)</text>
+
+    <text x="20" y="130" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">도시 지표면</text>
+    <text x="20" y="148" font-family="ui-monospace, monospace" font-size="11" fill="#e2e8f0">Y = 70 ~ 120</text>
+
+    <text x="20" y="185" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">마인크래프트 해수면</text>
+    <text x="20" y="203" font-family="ui-monospace, monospace" font-size="11" fill="#38bdf8">Y = 62</text>
+  </g>
+</svg>

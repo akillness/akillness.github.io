@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="origCard" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+    <linearGradient id="rustCard" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7c2d12"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+    <linearGradient id="diffCard" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+
+  <rect width="840" height="420" rx="12" fill="url(#bgGrad)" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Title & Badge -->
+  <rect x="36" y="24" width="180" height="26" rx="6" fill="#1e1b4b" stroke="#6366f1" stroke-width="1"/>
+  <text x="46" y="42" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="700" fill="#a5b4fc" letter-spacing="0.05em">DIFFERENTIAL VERIFICATION</text>
+  <text x="36" y="76" font-family="-apple-system, system-ui, sans-serif" font-size="20" font-weight="700" fill="#f8fafc">골든 레코드-앤-리플레이 차분 검증 구조</text>
+  <text x="36" y="96" font-family="-apple-system, system-ui, sans-serif" font-size="13" fill="#94a3b8">실운영 입력 집합을 복제 실행하여 비트 단위 및 의미론적 100% 동등성 증명</text>
+
+  <!-- Input Feeder -->
+  <g transform="translate(36, 175)">
+    <rect width="140" height="90" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="70" y="32" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#38bdf8" text-anchor="middle">입력 테스트 집합</text>
+    <text x="70" y="52" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">• CLI argv / stdin</text>
+    <text x="70" y="68" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">• HTTP 요청 페이로드</text>
+  </g>
+
+  <!-- Branch lines -->
+  <path d="M 176 200 L 230 200 L 230 155 L 255 155" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 176 240 L 230 240 L 230 285 L 255 285" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Path A: Original System -->
+  <g transform="translate(260, 120)">
+    <rect width="210" height="70" rx="8" fill="url(#origCard)" stroke="#64748b" stroke-width="1.5"/>
+    <text x="16" y="28" font-family="-apple-system, system-ui, sans-serif" font-size="13" font-weight="700" fill="#f8fafc">원작 레거시 시스템</text>
+    <text x="16" y="48" font-family="ui-monospace, monospace" font-size="11" fill="#94a3b8">Python / TypeScript / Go</text>
+  </g>
+
+  <!-- Output A -->
+  <path d="M 470 155 L 515 155" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+  <g transform="translate(520, 125)">
+    <rect width="130" height="60" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="65" y="26" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="600" fill="#cbd5e1" text-anchor="middle">Recorded Output A</text>
+    <text x="65" y="44" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8" text-anchor="middle">exit / stdout / json</text>
+  </g>
+
+  <!-- Path B: Rust Implementation -->
+  <g transform="translate(260, 250)">
+    <rect width="210" height="70" rx="8" fill="url(#rustCard)" stroke="#ea580c" stroke-width="1.5"/>
+    <text x="16" y="28" font-family="-apple-system, system-ui, sans-serif" font-size="13" font-weight="700" fill="#ffffff">Rust 포팅 구현체</text>
+    <text x="16" y="48" font-family="ui-monospace, monospace" font-size="11" fill="#fed7aa">Clap / Axum / Native FFI</text>
+  </g>
+
+  <!-- Output B -->
+  <path d="M 470 285 L 515 285" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+  <g transform="translate(520, 255)">
+    <rect width="130" height="60" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="65" y="26" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="600" fill="#fed7aa" text-anchor="middle">Observed Output B</text>
+    <text x="65" y="44" font-family="ui-monospace, monospace" font-size="10" fill="#94a3b8" text-anchor="middle">exit / stdout / json</text>
+  </g>
+
+  <!-- Diff Engine -->
+  <path d="M 650 155 L 685 155 L 685 200 L 705 200" fill="none" stroke="#38bdf8" stroke-width="2"/>
+  <path d="M 650 285 L 685 285 L 685 240 L 705 240" fill="none" stroke="#38bdf8" stroke-width="2"/>
+
+  <g transform="translate(695, 175)">
+    <rect width="115" height="90" rx="8" fill="url(#diffCard)" stroke="#10b981" stroke-width="2"/>
+    <text x="57" y="32" font-family="-apple-system, system-ui, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">차분 검증기</text>
+    <circle cx="57" cy="55" r="14" fill="#065f46" stroke="#34d399" stroke-width="1.5"/>
+    <text x="57" y="60" font-family="-apple-system, system-ui, sans-serif" font-size="14" font-weight="700" fill="#34d399" text-anchor="middle">✓</text>
+    <text x="57" y="80" font-family="-apple-system, system-ui, sans-serif" font-size="10" font-weight="700" fill="#a7f3d0" text-anchor="middle">PASS / FAIL</text>
+  </g>
+</svg>

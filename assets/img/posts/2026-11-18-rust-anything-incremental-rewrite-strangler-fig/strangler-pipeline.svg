@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="stepGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="840" height="440" rx="12" fill="url(#bgGrad)" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Title & Badge -->
+  <rect x="36" y="24" width="165" height="26" rx="6" fill="#1e1b4b" stroke="#6366f1" stroke-width="1"/>
+  <text x="46" y="42" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="700" fill="#a5b4fc" letter-spacing="0.05em">STRANGLER FIG PATTERN</text>
+  <text x="36" y="76" font-family="-apple-system, system-ui, sans-serif" font-size="20" font-weight="700" fill="#f8fafc">rust-anything 점진적 모듈 이전 파이프라인</text>
+  <text x="36" y="96" font-family="-apple-system, system-ui, sans-serif" font-size="13" fill="#94a3b8">빅뱅 리라이트 위험 없이 의존성 말단부터 FFI 브리지로 무중단 치환</text>
+
+  <!-- 4 Step Boxes -->
+  <!-- Step 1 -->
+  <g transform="translate(36, 124)">
+    <rect width="170" height="260" rx="10" fill="url(#stepGrad)" stroke="#38bdf8" stroke-width="2"/>
+    <rect x="14" y="16" width="30" height="20" rx="4" fill="#0284c7"/>
+    <text x="24" y="31" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff">01</text>
+    <text x="52" y="31" font-family="-apple-system, system-ui, sans-serif" font-size="13" font-weight="700" fill="#38bdf8">의존성 분해</text>
+    <text x="14" y="60" font-family="ui-monospace, monospace" font-size="11" fill="#7dd3fc">Leaf Module Map</text>
+    <line x1="14" y1="72" x2="156" y2="72" stroke="#334155" stroke-width="1"/>
+    <text x="14" y="96" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">• 말단 모듈 식별</text>
+    <text x="14" y="116" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8">  유틸·파서·핵심 연산</text>
+    <text x="14" y="146" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">• 내부 의존성 0 순위</text>
+    <text x="14" y="166" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8">  독립적 컴파일 보장</text>
+    <text x="14" y="196" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">• Rust 크레이트 구성</text>
+    <text x="14" y="216" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8">  동반 Cargo.toml 생성</text>
+  </g>
+  <line x1="212" y1="254" x2="230" y2="254" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 2 -->
+  <g transform="translate(236, 124)">
+    <rect width="170" height="260" rx="10" fill="url(#stepGrad)" stroke="#0d9488" stroke-width="2"/>
+    <rect x="14" y="16" width="30" height="20" rx="4" fill="#0d9488"/>
+    <text x="24" y="31" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff">02</text>
+    <text x="52" y="31" font-family="-apple-system, system-ui, sans-serif" font-size="13" font-weight="700" fill="#2dd4bf">골든 레코드</text>
+    <text x="14" y="60" font-family="ui-monospace, monospace" font-size="11" fill="#5eead4">rust-anything record</text>
+    <line x1="14" y1="72" x2="156" y2="72" stroke="#334155" stroke-width="1"/>
+    <text x="14" y="96" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">• 실운영 트래픽 녹음</text>
+    <text x="14" y="116" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8">  CLI argv / HTTP 트랜잭션</text>
+    <text x="14" y="146" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">• 입출력 완전 캡처</text>
+    <text x="14" y="166" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8">  exit code / stdout / body</text>
+    <text x="14" y="196" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">• 픽스처 저장</text>
+    <text x="14" y="216" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8">  golden_fixtures/*.json</text>
+  </g>
+  <line x1="412" y1="254" x2="430" y2="254" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 3 -->
+  <g transform="translate(436, 124)">
+    <rect width="170" height="260" rx="10" fill="url(#stepGrad)" stroke="#f59e0b" stroke-width="2"/>
+    <rect x="14" y="16" width="30" height="20" rx="4" fill="#f59e0b"/>
+    <text x="24" y="31" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff">03</text>
+    <text x="52" y="31" font-family="-apple-system, system-ui, sans-serif" font-size="13" font-weight="700" fill="#fbbf24">FFI 브리지 위임</text>
+    <text x="14" y="60" font-family="ui-monospace, monospace" font-size="11" fill="#fde68a">PyO3 / napi-rs / C-ABI</text>
+    <line x1="14" y1="72" x2="156" y2="72" stroke="#334155" stroke-width="1"/>
+    <text x="14" y="96" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">• 언어별 네이티브 바인딩</text>
+    <text x="14" y="116" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8">  Python #[pyfunction]</text>
+    <text x="14" y="130" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8">  TypeScript #[napi]</text>
+    <text x="14" y="156" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">• 하이브리드 동시 실행</text>
+    <text x="14" y="176" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8">  기존 앱에서 Rust 호출</text>
+    <text x="14" y="206" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">• 점진적 상향 치환</text>
+    <text x="14" y="226" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8">  엔트리포인트까지 확장</text>
+  </g>
+  <line x1="612" y1="254" x2="630" y2="254" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 4 -->
+  <g transform="translate(636, 124)">
+    <rect width="170" height="260" rx="10" fill="url(#stepGrad)" stroke="#a855f7" stroke-width="2"/>
+    <rect x="14" y="16" width="30" height="20" rx="4" fill="#a855f7"/>
+    <text x="24" y="31" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff">04</text>
+    <text x="52" y="31" font-family="-apple-system, system-ui, sans-serif" font-size="13" font-weight="700" fill="#c084fc">완전 컷오프</text>
+    <text x="14" y="60" font-family="ui-monospace, monospace" font-size="11" fill="#e9d5ff">100% Native Rust</text>
+    <line x1="14" y1="72" x2="156" y2="72" stroke="#334155" stroke-width="1"/>
+    <text x="14" y="96" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">• 100% 차분 검증 통과</text>
+    <text x="14" y="116" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8">  골든 픽스처 전수 일치</text>
+    <text x="14" y="146" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">• FFI 브리지 심 제거</text>
+    <text x="14" y="166" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8">  단독 바이너리 컴파일</text>
+    <text x="14" y="196" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#e2e8f0">• 제로 오버헤드 런타임</text>
+    <text x="14" y="216" font-family="-apple-system, system-ui, sans-serif" font-size="10" fill="#94a3b8">  메모리 1/5 &amp; 지연 1/10</text>
+  </g>
+</svg>
