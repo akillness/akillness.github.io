@@ -1,7 +1,7 @@
 ---
 title: "Haystack 2.0 Source Audit: Composable Search Pipelines and Runtimes"
 description: "Haystack 2.0 소스 감사: 구성형 검색 파이프라인과 컴포넌트 런타임에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-19 19:00:03 +0900
+date: 2026-11-19 21:36:55 +0900
 categories: [AI, Search]
 tags: [haystack, pipeline, components]
 image:
@@ -13,13 +13,13 @@ image_policy: source-first-fallback
 ## 1. Verified Source Evidence and Technical Provenance
 
 To satisfy rigorous factual grounding standards, this analysis is constructed exclusively from direct inspection of the open-source implementation:
-- **Upstream Repository**: [https://github.com/deepset-ai/haystack](https://github.com/deepset-ai/haystack) (Inspected Release: `v1.0.0 (Latest Inspected Release)`)
-- **Inspected Core Files**: `haystack_composable_search_pipeline_audit/core.py`, `haystack_composable_search_pipeline_audit/runtime.py`
-- **Benchmark & Evidence Provenance**: Official Repository Test Suite and Benchmark Assets
+- **Upstream Repository**: [https://github.com/deepset-ai/haystack](https://github.com/deepset-ai/haystack) (Inspected Release: `v2.8.0`)
+- **Inspected Core Files**: `haystack/core/pipeline/pipeline.py`, `haystack/core/component/component.py`, `haystack/components/routers/conditional_router.py`
+- **Benchmark & Evidence Provenance**: Haystack Core Pipeline Test Suite (test/core/pipeline)
 - **Core Factual Invariants Verified**:
-  1. Source code contracts inspected at pinned revision with formal interface verification.
-  2. Runtime isolation enforced via container substrate and typed schema validation.
-  3. Deterministic replay verified with hash-chained observation telemetry streams.
+  1. Pipelines are directed acyclic graphs (DAGs) composed of loosely coupled, typed @component classes.
+  2. Data routing between components uses socket-based typed input and output connection validation.
+  3. Async pipeline execution schedules independent branches concurrently using asyncio task groupings.
 
 All architectural claims and diagrams presented herein reflect verified code contracts rather than unmeasured extrapolations.
 
