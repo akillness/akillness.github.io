@@ -3,7 +3,6 @@ title: "RAGAS Source Audit: Synthetic Testset Generation and Faithfulness Evalua
 description: "RAGAS 소스 감사: 합성 테스트셋 생성과 근거성(Faithfulness) 평가 메트릭에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
 date: 2026-11-19 23:00:03 +0900
 lastmod: 2026-11-19 23:00:03 +0900
-author: akillness
 categories: [AI, Evaluation]
 tags: [ragas, evaluation, metrics]
 image:

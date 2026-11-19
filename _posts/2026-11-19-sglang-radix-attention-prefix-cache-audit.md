@@ -3,7 +3,6 @@ title: "SGLang Source Audit: RadixAttention Prefix Caching and Multi-Turn Latenc
 description: "SGLang 소스 감사: RadixAttention 프리픽스 캐싱과 다중 턴 레이턴시 단축에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
 date: 2026-11-19 22:04:00 +0900
 lastmod: 2026-11-19 22:04:00 +0900
-author: akillness
 categories: [AI, Optimization]
 tags: [sglang, radix, caching]
 image:

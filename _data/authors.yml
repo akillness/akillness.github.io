@@ -1,10 +1,4 @@
 ## Template › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/advanced-usage.md#setting-author-url
-# -------------------------------------
-# {author_id}:
-#   name: {full name}
-#   twitter: {twitter_of_author}
-#   url: {homepage_of_author}
-# -------------------------------------
 
 cotes:
   name: Cotes Chung
@@ -19,4 +13,4 @@ sille_bille:
 akillness:
   name: Jang Young Jeong
   twitter: akillness0308
-  url: https://akillness.github.io/about/
+  url: /about/
