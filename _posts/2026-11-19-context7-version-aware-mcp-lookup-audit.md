@@ -1,7 +1,7 @@
 ---
 title: "Context7 Source Audit: Version-Aware Real-Time Documentation Protocol"
 description: "Context7 소스 감사: 라이브러리 버전 인식형 실시간 문서 검색 프로토콜에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-19 16:15:04 +0900
+date: 2026-11-19 16:40:19 +0900
 categories: [AI, MCP]
 tags: [context7, mcp, documentation]
 image:
