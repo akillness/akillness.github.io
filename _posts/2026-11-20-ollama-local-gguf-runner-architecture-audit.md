@@ -1,8 +1,8 @@
 ---
 title: "Ollama Source Audit: Local Model Runner Architecture and GGUF Boundaries"
 description: "Ollama 소스 감사: 로컬 모델 러너 아키텍처와 양자화 GGUF 서빙 경계에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-20 02:01:52 +0900
-lastmod: 2026-11-20 02:01:52 +0900
+date: 2026-11-20 02:05:07 +0900
+lastmod: 2026-11-20 02:05:07 +0900
 author: akillness
 categories: [AI, LocalLLM]
 tags: [ollama, gguf, runner]
