@@ -1,7 +1,7 @@
 ---
 title: "Browser-Use Source Audit: Vision-Guided Browser Automation and CDP Trees"
 description: "Browser-Use 소스 감사: 비전 기반 브라우저 조작과 CDP 액션 트리에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-19 18:00:45 +0900
+date: 2026-11-19 18:38:16 +0900
 categories: [AI, Browser]
 tags: [browser-use, cdp, automation]
 image:
