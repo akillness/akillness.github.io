@@ -1,7 +1,7 @@
 ---
 title: "OpenHands Source Audit: Event Stream Architecture and Docker Sandbox Isolation"
 description: "A comprehensive source audit of OpenHands event stream runtime pipeline, Action-Observation execution loops, and kernel-level Docker sandbox isolation boundaries."
-date: 2026-11-19 16:30:00 +0900
+date: 2026-11-19 11:30:00 +0900
 categories: [AI, Security]
 tags: [openhands, docker, eventstream, security, sandbox]
 image:
