@@ -1,7 +1,7 @@
 ---
 title: "Instructor Source Audit: Multi-Provider Schema Validation and Retries"
 description: "Instructor 소스 감사: 제미니·클로드 스키마 유효성 검증과 자동 재시도에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-19 17:11:11 +0900
+date: 2026-11-19 17:26:20 +0900
 categories: [AI, Schema]
 tags: [instructor, schema, retry]
 image:
