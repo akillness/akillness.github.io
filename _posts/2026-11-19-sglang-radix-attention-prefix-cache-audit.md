@@ -1,13 +1,18 @@
 ---
 title: "SGLang Source Audit: RadixAttention Prefix Caching and Multi-Turn Latency"
 description: "SGLang 소스 감사: RadixAttention 프리픽스 캐싱과 다중 턴 레이턴시 단축에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-19 21:00:02 +0900
+date: 2026-11-19 22:04:00 +0900
+lastmod: 2026-11-19 22:04:00 +0900
+author: akillness
 categories: [AI, Optimization]
 tags: [sglang, radix, caching]
 image:
   path: /assets/img/posts/2026-11-19-sglang-radix-attention-prefix-cache-audit/cover.png
   alt: "SGLang Source Audit: RadixAttention Prefix Caching and Multi-Turn Latency Architecture Diagram"
 image_policy: source-first-fallback
+ai_assisted: true
+ads: true
+content_type: audit
 ---
 
 ## 1. Verified Source Evidence and Technical Provenance
@@ -100,3 +105,9 @@ Filesystem access is similarly restricted to an ephemeral overlay mount with str
 Deploying multi-agent systems in shared enterprise infrastructure introduces complex noisy-neighbor and resource exhaustion challenges. Production architectures must enforce strict per-tenant resource quotas across CPU, memory, and concurrent process handles to prevent runaway execution loops from starving adjacent tenant workloads.
 
 By combining deterministic state container auditing with containerized execution harnesses, engineering teams achieve high throughput without sacrificing security. Real-time telemetry collectors stream structured OpenTelemetry spans capturing memory high-water marks, execution latency, and exit code signatures, providing comprehensive visibility across every task dispatch boundary.
+
+## Publisher Policy and Editorial Disclosures
+
+- **Monetization and Ad Placement**: This independent technical audit adheres to Google Publisher Policies. Advertising units (if displayed) are integrated non-intrusively without deceptive placement, ensuring clear visual separation from substantive technical analysis.
+- **AI and Editorial Transparency**: In accordance with Google Search and Ads transparency standards, this article incorporates AI-assisted research and Gemini-generated conceptual illustrations (`header_ai: true`), verified against upstream source code.
+- **Factual Integrity**: All architectural statements, module paths, and code invariants derive directly from public open-source repositories without unverified claims or sponsored endorsements.
