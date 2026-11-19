@@ -1,7 +1,7 @@
 ---
 title: "vLLM Source Audit: PagedAttention Memory Virtualization and High-Throughput Serving"
 description: "vLLM 소스 감사: PagedAttention 메모리 관리와 고처리량 서빙 엔진에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-19 20:00:13 +0900
+date: 2026-11-19 21:51:34 +0900
 categories: [AI, Inference]
 tags: [vllm, pagedattention, cuda]
 image:
