@@ -1,8 +1,8 @@
 ---
 title: "CrewAI Enterprise Flows Source Audit: Hierarchical Orchestration and State Isolation"
 description: "CrewAI Enterprise Flows 소스 감사: 계층형 오케스트레이션과 상태 격리에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-20 11:10:26 +0900
-lastmod: 2026-11-20 11:10:26 +0900
+date: 2026-11-21 04:04:05 +0900
+lastmod: 2026-11-21 04:04:05 +0900
 categories: [AI, Agents]
 tags: [crewai, python, orchestration]
 image:
