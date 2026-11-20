@@ -1,8 +1,8 @@
 ---
 title: "Weaviate Source Audit: Distributed Sharded Clusters and Hybrid Search"
 description: "Weaviate 소스 감사: 분산 샤딩 클러스터와 HNSW-BM25 하이브리드 인덱싱에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-20 09:34:04 +0900
-lastmod: 2026-11-20 09:34:04 +0900
+date: 2026-11-20 09:38:17 +0900
+lastmod: 2026-11-20 09:38:17 +0900
 categories: [AI, VectorSearch]
 tags: [weaviate, sharding, bm25]
 image:
