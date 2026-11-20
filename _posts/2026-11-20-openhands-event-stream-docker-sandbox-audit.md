@@ -1,8 +1,8 @@
 ---
 title: "OpenHands Source Audit: Event Stream Architecture and Docker Sandbox Isolation"
 description: "OpenHands 소스 감사: 이벤트 스트림 아키텍처와 도커 샌드박스 보안 격리에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-20 11:31:53 +0900
-lastmod: 2026-11-20 11:31:53 +0900
+date: 2026-11-21 05:04:18 +0900
+lastmod: 2026-11-21 05:04:18 +0900
 categories: [AI, Security]
 tags: [openhands, docker, sandbox]
 image:
