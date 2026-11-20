@@ -1,8 +1,8 @@
 ---
 title: "kagent Source Audit: Kubernetes CRD Workflow and Substrate Sandboxes"
 description: "kagent 소스 감사: 쿠버네티스 CRD 기반 Agentic 워크플로우와 A2A 프로토콜에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-21 06:04:32 +0900
-lastmod: 2026-11-21 06:04:32 +0900
+date: 2026-11-21 06:34:40 +0900
+lastmod: 2026-11-21 06:34:40 +0900
 categories: [AI, Kubernetes]
 tags: [kagent, kubernetes, crd]
 image:
