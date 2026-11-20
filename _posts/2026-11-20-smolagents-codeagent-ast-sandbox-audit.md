@@ -1,8 +1,8 @@
 ---
 title: "Smolagents Source Audit: CodeAgent Reasoning Loops and Dynamic AST Security"
 description: "Smolagents 소스 감사: CodeAgent 추론 루프와 동적 AST 샌드박스 보안에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-20 11:00:02 +0900
-lastmod: 2026-11-20 11:00:02 +0900
+date: 2026-11-20 13:10:05 +0900
+lastmod: 2026-11-20 13:10:05 +0900
 categories: [AI, Security]
 tags: [smolagents, ast, sandbox]
 image:
