@@ -1,8 +1,8 @@
 ---
 title: "LightRAG Source Audit: Dual-Level Knowledge Graphs and Incremental Indexing"
 description: "LightRAG 소스 감사: 이중 레벨 지식 그래프와 점증적 엔티티 인덱싱에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-20 23:18:55 +0900
-lastmod: 2026-11-20 23:18:55 +0900
+date: 2026-11-21 00:00:09 +0900
+lastmod: 2026-11-21 00:00:09 +0900
 categories: [AI, GraphRAG]
 tags: [lightrag, graphrag, indexing]
 image:
