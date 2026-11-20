@@ -1,8 +1,8 @@
 ---
 title: "AutoGen v0.4 Source Audit: Distributed Actor Runtime and Event Protocol"
 description: "AutoGen v0.4 소스 감사: gRPC 이벤트 기반 분산 멀티에이전트 런타임에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-20 10:00:03 +0900
-lastmod: 2026-11-20 10:00:03 +0900
+date: 2026-11-20 13:00:01 +0900
+lastmod: 2026-11-20 13:00:01 +0900
 categories: [AI, Distributed]
 tags: [autogen, grpc, actors]
 image:
