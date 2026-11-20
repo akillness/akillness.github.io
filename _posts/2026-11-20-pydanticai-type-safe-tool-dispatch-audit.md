@@ -1,8 +1,8 @@
 ---
 title: "PydanticAI Source Audit: Type-Safe Tool Dispatch and Structured Outputs"
 description: "PydanticAI 소스 감사: 타입 안전 도구 디스패치와 종단간 구조화 출력에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-20 08:00:07 +0900
-lastmod: 2026-11-20 08:00:07 +0900
+date: 2026-11-20 12:04:24 +0900
+lastmod: 2026-11-20 12:04:24 +0900
 categories: [AI, Pydantic]
 tags: [pydantic, typesafe, dispatch]
 image:
