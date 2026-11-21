@@ -171,7 +171,8 @@ The machine-readable mode is in `.claude/editorial-policy.yml`.
 - Never infer publication approval from a topic, URL, schedule, a prior approval for another article, or the policy capability flag.
 - Stage only the exact post and its referenced assets. Never use `git add -A`.
 - One run means one commit and one push. Consecutive pushes can cancel the previous Pages build.
-- A push is not publication. Completion requires remote SHA, successful Pages workflow, anonymous permalink HTTP 200, correct title/body, and every local image HTTP 200.
+- Before committing an applied publication, run `npm run editorial:prepush`, `JEKYLL_ENV=production bundle exec jekyll b -d _site`, and `node tools/verify-site-quality.mjs _site` from the same worktree. Jekyll rejects colliding post destinations even when filenames differ by date. Block on any failure.
+- A push is not publication. Completion requires remote SHA, a successful `Build and Deploy` run for the pushed SHA (both build and deploy), anonymous permalink HTTP 200, correct title/body, and every local image HTTP 200.
 - If the post is future-dated, missing an asset, conflicts with concurrent origin changes, or fails any gate, leave it as a draft and report `[blocked]`.
 
 ## Existing work and git safety

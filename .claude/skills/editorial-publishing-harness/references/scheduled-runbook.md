@@ -49,4 +49,4 @@ Remember:
 
 ## Publication
 
-`draft-only` stops before repository publication. `publish-on-green` is valid only when policy also has `standing_publish_approval: true` after explicit approval, and it still requires every gate. A dirty target path, changed origin, missing asset, future date, CI failure, or 404 forces draft-only fallback.
+`draft-only` stops before repository publication. `publish-on-green` is valid only when policy also has `standing_publish_approval: true` after explicit approval, and it still requires every gate. Before committing, run the production-build preflight in `CLAUDE.md` on the applied worktree. Different filename dates can resolve to the same public URL; a route collision must block the push. After pushing, require `Build and Deploy` success for that SHA. A dirty target path, changed origin, missing asset, future date, CI failure, or 404 forces draft-only fallback.

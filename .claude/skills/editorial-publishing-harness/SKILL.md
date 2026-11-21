@@ -191,8 +191,8 @@ The standing route requires both `publication_mode: publish-on-green` and `stand
 2. Run `node tools/verify-publication-scope.mjs`; use its exact `validation/path-scope.txt` as the only copy/stage allowlist.
 3. Confirm the target paths do not conflict with dirty or concurrent work.
 4. Fetch origin and require a fast-forward-safe base.
-5. Copy exact package files, stage only those paths, then run `node tools/verify-publication-scope.mjs --staged` before committing once and pushing once.
-6. Verify remote SHA, GitHub Pages workflow, anonymous permalink 200, title/body, and every image 200.
+5. Copy exact package files, stage only those paths, then run `node tools/verify-publication-scope.mjs --staged` and the production-build preflight in `CLAUDE.md`. Fix any collision before committing once and pushing once; different filename dates do not make distinct URLs.
+6. Verify that `Build and Deploy` for the pushed SHA completed successfully (build and deploy), then confirm the anonymous permalink 200, title/body, and every image 200.
 7. Mark `published` only after all proof is recorded.
 
 Any failure falls back to draft-only and reports `[blocked]`.
