@@ -1,8 +1,8 @@
 ---
 title: "Guardrails AI Source Audit: Output Validation Rails and PII Redaction"
 description: "Guardrails AI 소스 감사: 출력 유효성 검증과 개인정보(PII) 마스킹 레일에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-22 07:30:04 +0900
-lastmod: 2026-11-22 07:30:04 +0900
+date: 2026-11-22 07:47:39 +0900
+lastmod: 2026-11-22 07:47:39 +0900
 categories: [AI, BUILD]
 tags: [guardrails, pii, validation]
 image:
