@@ -1,8 +1,8 @@
 ---
 title: "Qwen 2.5 Coder Source Audit: Multi-Turn Tool Calling and Agentic Inference"
 description: "Qwen 2.5 Coder 소스 감사: 멀티턴 도구 호출과 코드 에이전트 인퍼런스에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-22 08:00:03 +0900
-lastmod: 2026-11-22 08:00:03 +0900
+date: 2026-11-22 08:19:39 +0900
+lastmod: 2026-11-22 08:19:39 +0900
 categories: [AI, CodingAgent]
 tags: [qwen, coder, tooluse]
 image:
