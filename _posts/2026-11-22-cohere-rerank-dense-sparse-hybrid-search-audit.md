@@ -1,8 +1,8 @@
 ---
 title: "Cohere Rerank Source Audit: Dense-Sparse Hybrid Retrieval and Cross-Encoders"
 description: "Cohere Rerank 소스 감사: 밀집-희소 하이브리드 검색과 크로스 인코더 랭킹에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-22 03:30:04 +0900
-lastmod: 2026-11-22 03:30:04 +0900
+date: 2026-11-22 03:30:18 +0900
+lastmod: 2026-11-22 03:30:18 +0900
 categories: [AI, BUILD]
 tags: [cohere, rerank, hybrid]
 image:
