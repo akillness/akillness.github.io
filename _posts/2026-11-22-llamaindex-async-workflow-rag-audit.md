@@ -1,8 +1,8 @@
 ---
 title: "LlamaIndex Workflows Source Audit: Event-Driven Asynchronous RAG Pipelines"
 description: "LlamaIndex Workflows 소스 감사: 이벤트 기반 비동기 RAG 파이프라인에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-22 21:32:21 +0900
-lastmod: 2026-11-22 21:32:21 +0900
+date: 2026-11-22 22:00:06 +0900
+lastmod: 2026-11-22 22:00:06 +0900
 categories: [AI, RESEARCH]
 tags: [llamaindex, rag, workflow]
 image:
