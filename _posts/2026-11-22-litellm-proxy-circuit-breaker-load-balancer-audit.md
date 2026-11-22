@@ -1,8 +1,8 @@
 ---
 title: "LiteLLM Source Audit: Unified Proxy Circuit Breakers and LLM Load Balancing"
 description: "LiteLLM 소스 감사: 통합 프록시 서킷 브레이커와 다중 LLM 로드밸런싱에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-22 15:32:39 +0900
-lastmod: 2026-11-22 15:32:39 +0900
+date: 2026-11-22 16:00:06 +0900
+lastmod: 2026-11-22 16:00:06 +0900
 categories: [AI, RESEARCH]
 tags: [litellm, proxy, circuitbreaker]
 image:
