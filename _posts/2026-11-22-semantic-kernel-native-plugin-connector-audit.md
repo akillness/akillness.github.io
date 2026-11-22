@@ -1,8 +1,8 @@
 ---
 title: "Semantic Kernel Source Audit: Native Function Plugins and Memory Connectors"
 description: "Semantic Kernel 소스 감사: 네이티브 함수 플러그인과 메모리 커넥터에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-22 20:32:15 +0900
-lastmod: 2026-11-22 20:32:15 +0900
+date: 2026-11-22 21:00:12 +0900
+lastmod: 2026-11-22 21:00:12 +0900
 categories: [AI, ENGINE]
 tags: [semantic-kernel, plugins, connectors]
 image:
