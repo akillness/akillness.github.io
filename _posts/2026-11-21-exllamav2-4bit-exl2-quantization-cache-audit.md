@@ -1,8 +1,8 @@
 ---
 title: "ExLlamaV2 Source Audit: 4-Bit EXL2 Quantization and Memory Paging"
 description: "ExLlamaV2 소스 감사: 4비트 EXL2 양자화 행렬과 VRAM 절감 아키텍처에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-22 10:27:47 +0900
-lastmod: 2026-11-22 10:27:47 +0900
+date: 2026-11-22 10:30:03 +0900
+lastmod: 2026-11-22 10:30:03 +0900
 categories: [AI, BUILD]
 tags: [exllamav2, exl2, cuda]
 image:
