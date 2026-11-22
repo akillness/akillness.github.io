@@ -1,8 +1,8 @@
 ---
 title: "ChromaDB Source Audit: HNSW Vector Indexes and SQLite Metadata Persistence"
 description: "ChromaDB 소스 감사: HNSW 벡터 인덱스와 SQLite 메타데이터 영속성 계층에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-22 05:39:31 +0900
-lastmod: 2026-11-22 05:39:31 +0900
+date: 2026-11-23 06:00:05 +0900
+lastmod: 2026-11-23 06:00:05 +0900
 categories: [AI, ENGINE]
 tags: [chroma, hnsw, sqlite]
 image:
