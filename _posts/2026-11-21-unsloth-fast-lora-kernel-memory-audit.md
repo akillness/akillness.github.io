@@ -1,8 +1,8 @@
 ---
 title: "Unsloth Source Audit: Manual Backpropagation Triton Kernels and VRAM Efficiency"
 description: "Unsloth 소스 감사: 수동 역전파 Triton 커널과 80% VRAM 절감 기법에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-22 11:30:03 +0900
-lastmod: 2026-11-22 11:30:03 +0900
+date: 2026-11-22 12:00:05 +0900
+lastmod: 2026-11-22 12:00:05 +0900
 categories: [AI, ENGINE]
 tags: [unsloth, lora, triton]
 image:
