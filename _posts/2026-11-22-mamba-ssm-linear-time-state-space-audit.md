@@ -1,8 +1,8 @@
 ---
 title: "Mamba-SSM Source Audit: Linear-Time State Space Models and Long Contexts"
 description: "Mamba-SSM 소스 감사: 선형 시간 상태공간 모델과 긴 문맥 어텐션 대체에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-22 17:32:04 +0900
-lastmod: 2026-11-22 17:32:04 +0900
+date: 2026-11-22 18:00:06 +0900
+lastmod: 2026-11-22 18:00:06 +0900
 categories: [AI, ENGINE]
 tags: [mamba, ssm, lineartime]
 image:
