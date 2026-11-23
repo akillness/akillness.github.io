@@ -1,8 +1,8 @@
 ---
 title: "Guidance Source Audit: Context-Free Grammar Masking and Structured Decoding"
 description: "Guidance 소스 감사: 문맥 자유 문법(CFG) 기반 토큰 마스킹과 구조화 보장에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-22 14:00:04 +0900
-lastmod: 2026-11-22 14:00:04 +0900
+date: 2026-11-23 14:00:06 +0900
+lastmod: 2026-11-23 14:00:06 +0900
 categories: [AI, BUILD]
 tags: [guidance, cfg, tokenmask]
 image:
