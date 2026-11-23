@@ -1,8 +1,8 @@
 ---
 title: "TensorRT-LLM Source Audit: In-Flight Batching and Paged KV Kernel Acceleration"
 description: "TensorRT-LLM 소스 감사: 인플라이트 배치와 Paged KV 커널 가속에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-22 17:00:07 +0900
-lastmod: 2026-11-22 17:00:07 +0900
+date: 2026-11-23 17:00:05 +0900
+lastmod: 2026-11-23 17:00:05 +0900
 categories: [AI, BUILD]
 tags: [tensorrt, inflight, kvpaging]
 image:
