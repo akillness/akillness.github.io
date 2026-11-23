@@ -1,8 +1,8 @@
 ---
 title: "DSPy Source Audit: Automatic Pipeline Optimization and Prompt Compilers"
 description: "DSPy 소스 감사: 파이프라인 자동 최적화와 컴파일 기반 프롬프트 튜닝에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-22 23:00:05 +0900
-lastmod: 2026-11-22 23:00:05 +0900
+date: 2026-11-23 23:00:06 +0900
+lastmod: 2026-11-23 23:00:06 +0900
 categories: [AI, BUILD]
 tags: [dspy, compiler, optimization]
 image:
