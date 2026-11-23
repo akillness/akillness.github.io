@@ -1,8 +1,8 @@
 ---
 title: "Arize Phoenix Source Audit: UMAP-Driven Embedding Drift and Eval Frameworks"
 description: "Arize Phoenix 소스 감사: UMAP 기반 임베딩 드리프트 탐지와 평가 함수에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-22 19:00:05 +0900
-lastmod: 2026-11-22 19:00:05 +0900
+date: 2026-11-23 19:00:05 +0900
+lastmod: 2026-11-23 19:00:05 +0900
 categories: [AI, RESEARCH]
 tags: [phoenix, umap, drift]
 image:
