@@ -1,9 +1,9 @@
 ---
 title: "OpenAI Triton Source Audit: Block-Level GPU Programming and HBM Bandwidth"
 description: "OpenAI Triton 소스 감사: 블록 레벨 GPU 프로그래밍과 고대역폭 메모리 최적화에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-24 22:41:52 +0900
-lastmod: 2026-11-24 22:41:52 +0900
-categories: [AI, FRONTIER]
+date: 2026-11-24 23:30:04 +0900
+lastmod: 2026-11-24 23:30:04 +0900
+categories: [AI, ENGINE]
 tags: [triton, kernel, hbm]
 image:
   path: /assets/img/posts/2026-11-24-openai-triton-gpu-kernel-memory-bandwidth-audit/cover.png
