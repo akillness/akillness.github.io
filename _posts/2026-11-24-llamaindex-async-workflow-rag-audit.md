@@ -1,12 +1,12 @@
 ---
 title: "LlamaIndex Workflows Source Audit: Event-Driven Asynchronous RAG Pipelines"
 description: "LlamaIndex Workflows 소스 감사: 이벤트 기반 비동기 RAG 파이프라인에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-20 14:00:02 +0900
-lastmod: 2026-11-20 14:00:02 +0900
-categories: [AI, RAG]
+date: 2026-11-24 22:00:06 +0900
+lastmod: 2026-11-24 22:00:06 +0900
+categories: [AI, RESEARCH]
 tags: [llamaindex, rag, workflow]
 image:
-  path: /assets/img/posts/2026-11-20-llamaindex-async-workflow-rag-audit/cover.png
+  path: /assets/img/posts/2026-11-24-llamaindex-async-workflow-rag-audit/cover.png
   alt: "LlamaIndex Workflows Source Audit: Event-Driven Asynchronous RAG Pipelines Architecture Diagram"
 image_policy: source-first-fallback
 ai_assisted: true
@@ -31,7 +31,7 @@ All architectural claims and diagrams presented herein reflect verified code con
 
 Modern multi-agent architectures demand rigorous structural invariants to prevent cascading failure states, data contamination, and unbounded execution latency. In this field audit, we examine the formal execution boundaries, state container models, and telemetry interfaces within contemporary agentic runtimes.
 <figure class="explanatory-image">
-  <img src="/assets/img/posts/2026-11-20-llamaindex-async-workflow-rag-audit/ref_architecture.png" alt="LlamaIndex Workflows Source Audit: Event-Driven Asynchronous RAG Pipelines Upstream Architecture Reference">
+  <img src="/assets/img/posts/2026-11-24-llamaindex-async-workflow-rag-audit/ref_architecture.png" alt="LlamaIndex Workflows Source Audit: Event-Driven Asynchronous RAG Pipelines Upstream Architecture Reference">
   <figcaption>Original illustration by Fodev JEO editorial harness (SVG diagram, local rsvg-convert export); not source evidence.</figcaption>
 </figure>
 
@@ -57,7 +57,7 @@ class IsolatedAgentScope:
 ```
 
 <figure class="explanatory-image">
-  <img src="/assets/img/posts/2026-11-20-llamaindex-async-workflow-rag-audit/cover.png" alt="LlamaIndex Workflows Source Audit: Event-Driven Asynchronous RAG Pipelines Architecture Diagram">
+  <img src="/assets/img/posts/2026-11-24-llamaindex-async-workflow-rag-audit/cover.png" alt="LlamaIndex Workflows Source Audit: Event-Driven Asynchronous RAG Pipelines Architecture Diagram">
   <figcaption>AI-generated illustration by Gemini; not source evidence.</figcaption>
 </figure>
 
@@ -66,7 +66,7 @@ class IsolatedAgentScope:
 Serializing intermediate function arguments into JSON Schema representations across recursive agent loops inflates prompt payloads by 30% to 50%. In enterprise workflows involving multi-turn conversations and large document trees, this token inflation rapidly degrades language model attention mechanisms and increases operational API expenditures.
 
 <figure class="explanatory-image">
-  <img src="/assets/img/posts/2026-11-20-llamaindex-async-workflow-rag-audit/card1.png" alt="LlamaIndex Workflows Source Audit: Event-Driven Asynchronous RAG Pipelines Runtime Interaction Flow">
+  <img src="/assets/img/posts/2026-11-24-llamaindex-async-workflow-rag-audit/card1.png" alt="LlamaIndex Workflows Source Audit: Event-Driven Asynchronous RAG Pipelines Runtime Interaction Flow">
   <figcaption>Original illustration by Fodev JEO editorial harness (SVG diagram, local rsvg-convert export); not source evidence.</figcaption>
 </figure>
 
@@ -79,7 +79,7 @@ Evaluating dynamic code generation within autonomous multi-agent environments in
 However, static AST inspection alone cannot guarantee complete isolation against sophisticated runtime introspection exploits, memory exhaustion attacks, or infinite recursion loops. Enterprise deployments must combine AST parsing with hardware-isolated process boundaries, enforcing strict CPU quotas, execution timeouts, and ephemeral container lifetimes. This defense-in-depth approach ensures that malicious or malformed outputs generated during autonomous agent loops cannot compromise persistent infrastructure components.
 
 <figure class="explanatory-image">
-  <img src="/assets/img/posts/2026-11-20-llamaindex-async-workflow-rag-audit/card2.png" alt="LlamaIndex Workflows Source Audit: Event-Driven Asynchronous RAG Pipelines Security Isolation Matrix">
+  <img src="/assets/img/posts/2026-11-24-llamaindex-async-workflow-rag-audit/card2.png" alt="LlamaIndex Workflows Source Audit: Event-Driven Asynchronous RAG Pipelines Security Isolation Matrix">
   <figcaption>Original illustration by Fodev JEO editorial harness (SVG diagram, local rsvg-convert export); not source evidence.</figcaption>
 </figure>
 
