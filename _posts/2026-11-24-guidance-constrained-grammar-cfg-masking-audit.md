@@ -1,12 +1,12 @@
 ---
 title: "Guidance Source Audit: Context-Free Grammar Masking and Structured Decoding"
 description: "Guidance 소스 감사: 문맥 자유 문법(CFG) 기반 토큰 마스킹과 구조화 보장에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-24 14:00:06 +0900
-lastmod: 2026-11-24 14:00:06 +0900
+date: 2026-11-25 23:00:04 +0900
+lastmod: 2026-11-25 23:00:04 +0900
 categories: [AI, BUILD]
 tags: [guidance, cfg, tokenmask]
 image:
-  path: /assets/img/posts/2026-11-22-guidance-constrained-grammar-cfg-masking-audit/cover.png
+  path: /assets/img/posts/2026-11-24-guidance-constrained-grammar-cfg-masking-audit/cover.png
   alt: "Guidance Source Audit: Context-Free Grammar Masking and Structured Decoding Architecture Diagram"
 image_policy: source-first-fallback
 ai_assisted: true
@@ -31,7 +31,7 @@ All architectural claims and diagrams presented herein reflect verified code con
 
 Modern multi-agent architectures demand rigorous structural invariants to prevent cascading failure states, data contamination, and unbounded execution latency. In this field audit, we examine the formal execution boundaries, state container models, and telemetry interfaces within contemporary agentic runtimes.
 <figure class="explanatory-image">
-  <img src="/assets/img/posts/2026-11-22-guidance-constrained-grammar-cfg-masking-audit/ref_architecture.png" alt="Guidance Source Audit: Context-Free Grammar Masking and Structured Decoding Upstream Architecture Reference">
+  <img src="/assets/img/posts/2026-11-24-guidance-constrained-grammar-cfg-masking-audit/ref_architecture.png" alt="Guidance Source Audit: Context-Free Grammar Masking and Structured Decoding Upstream Architecture Reference">
   <figcaption>Original illustration by Fodev JEO editorial harness (SVG diagram, local rsvg-convert export); not source evidence.</figcaption>
 </figure>
 
@@ -57,7 +57,7 @@ class IsolatedAgentScope:
 ```
 
 <figure class="explanatory-image">
-  <img src="/assets/img/posts/2026-11-22-guidance-constrained-grammar-cfg-masking-audit/cover.png" alt="Guidance Source Audit: Context-Free Grammar Masking and Structured Decoding Architecture Diagram">
+  <img src="/assets/img/posts/2026-11-24-guidance-constrained-grammar-cfg-masking-audit/cover.png" alt="Guidance Source Audit: Context-Free Grammar Masking and Structured Decoding Architecture Diagram">
   <figcaption>AI-generated illustration by Gemini; not source evidence.</figcaption>
 </figure>
 
@@ -66,7 +66,7 @@ class IsolatedAgentScope:
 Serializing intermediate function arguments into JSON Schema representations across recursive agent loops inflates prompt payloads by 30% to 50%. In enterprise workflows involving multi-turn conversations and large document trees, this token inflation rapidly degrades language model attention mechanisms and increases operational API expenditures.
 
 <figure class="explanatory-image">
-  <img src="/assets/img/posts/2026-11-22-guidance-constrained-grammar-cfg-masking-audit/card1.png" alt="Guidance Source Audit: Context-Free Grammar Masking and Structured Decoding Runtime Interaction Flow">
+  <img src="/assets/img/posts/2026-11-24-guidance-constrained-grammar-cfg-masking-audit/card1.png" alt="Guidance Source Audit: Context-Free Grammar Masking and Structured Decoding Runtime Interaction Flow">
   <figcaption>Original illustration by Fodev JEO editorial harness (SVG diagram, local rsvg-convert export); not source evidence.</figcaption>
 </figure>
 
@@ -79,7 +79,7 @@ Evaluating dynamic code generation within autonomous multi-agent environments in
 However, static AST inspection alone cannot guarantee complete isolation against sophisticated runtime introspection exploits, memory exhaustion attacks, or infinite recursion loops. Enterprise deployments must combine AST parsing with hardware-isolated process boundaries, enforcing strict CPU quotas, execution timeouts, and ephemeral container lifetimes. This defense-in-depth approach ensures that malicious or malformed outputs generated during autonomous agent loops cannot compromise persistent infrastructure components.
 
 <figure class="explanatory-image">
-  <img src="/assets/img/posts/2026-11-22-guidance-constrained-grammar-cfg-masking-audit/card2.png" alt="Guidance Source Audit: Context-Free Grammar Masking and Structured Decoding Security Isolation Matrix">
+  <img src="/assets/img/posts/2026-11-24-guidance-constrained-grammar-cfg-masking-audit/card2.png" alt="Guidance Source Audit: Context-Free Grammar Masking and Structured Decoding Security Isolation Matrix">
   <figcaption>Original illustration by Fodev JEO editorial harness (SVG diagram, local rsvg-convert export); not source evidence.</figcaption>
 </figure>
 
