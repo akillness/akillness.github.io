@@ -1,8 +1,8 @@
 ---
 title: "OpenTelemetry GenAI Source Audit: Standard Semantic Conventions and Spans"
 description: "OpenTelemetry GenAI 소스 감사: 표준 시맨틱 컨벤션과 LLM 스팬 계측에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-24 11:11:17 +0900
-lastmod: 2026-11-24 11:11:17 +0900
+date: 2026-11-25 19:00:03 +0900
+lastmod: 2026-11-25 19:00:03 +0900
 categories: [AI, ENGINE]
 tags: [opentelemetry, genai, spans]
 image:
