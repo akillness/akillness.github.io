@@ -1,8 +1,8 @@
 ---
 title: "TruLens Source Audit: Feedback Functions and Groundedness Triad Metrics"
 description: "TruLens 소스 감사: 피드백 함수 파이프라인과 RAG 근거성 평가 삼각측량에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-25 17:00:04 +0900
-lastmod: 2026-11-25 17:00:04 +0900
+date: 2026-11-26 17:00:04 +0900
+lastmod: 2026-11-26 17:00:04 +0900
 categories: [AI, RESEARCH]
 tags: [trulens, groundedness, evaluation]
 image:
