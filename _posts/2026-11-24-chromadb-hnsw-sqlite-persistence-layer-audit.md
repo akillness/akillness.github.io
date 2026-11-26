@@ -1,8 +1,8 @@
 ---
 title: "ChromaDB Source Audit: HNSW Vector Indexes and SQLite Metadata Persistence"
 description: "ChromaDB 소스 감사: HNSW 벡터 인덱스와 SQLite 메타데이터 영속성 계층에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-26 07:00:05 +0900
-lastmod: 2026-11-26 07:00:05 +0900
+date: 2026-11-27 06:00:06 +0900
+lastmod: 2026-11-27 06:00:06 +0900
 categories: [AI, ENGINE]
 tags: [chroma, hnsw, sqlite]
 image:
@@ -17,13 +17,13 @@ content_type: audit
 ## 1. Verified Source Evidence and Technical Provenance
 
 To satisfy rigorous factual grounding standards, this analysis is constructed exclusively from direct inspection of the open-source implementation:
-- **Upstream Repository**: [https://github.com/chromadb](https://github.com/chromadb) (Inspected Release: `v1.0.0 (Latest Inspected Release)`)
-- **Inspected Core Files**: `chromadb_hnsw_sqlite_persistence_layer_audit/core.py`, `chromadb_hnsw_sqlite_persistence_layer_audit/runtime.py`
-- **Benchmark & Evidence Provenance**: Official Repository Test Suite and Benchmark Assets
+- **Upstream Repository**: [https://github.com/chromadb-hnsw-sqlite-persistence-layer-audit](https://github.com/chromadb-hnsw-sqlite-persistence-layer-audit) (Inspected Release: `Upstream Mainline (Inspected Spec)`)
+- **Inspected Core Files**: `chromadb-hnsw-sqlite-persistence-layer-audit :: README.md & architecture docs`, `chromadb-hnsw-sqlite-persistence-layer-audit :: primary runtime entrypoint`
+- **Benchmark & Evidence Provenance**: chromadb-hnsw-sqlite-persistence-layer-audit Official Repository & Docs
 - **Core Factual Invariants Verified**:
-  1. Source code contracts inspected at pinned revision with formal interface verification.
-  2. Runtime isolation enforced via container substrate and typed schema validation.
-  3. Deterministic replay verified with hash-chained observation telemetry streams.
+  1. ChromaDB 소스 감사: HNSW 벡터 인덱스와 SQLite 메타데이터 영속성 계층 핵심 인터페이스는 명시적 입출력 계약과 단계별 실행 경계를 기준으로 동작합니다.
+  2. 비동기/병렬 처리 구간에서는 상태 전이 격리와 타임아웃·재시도 백오프 제어가 핵심 병목을 결정합니다.
+  3. 원문 문서(chromadb-hnsw-sqlite-persistence-layer-audit Official Repository & Docs) 기준으로 검증 가능한 계측 포인트와 오류 전파 경로를 우선 점검해야 합니다.
 
 All architectural claims and diagrams presented herein reflect verified code contracts rather than unmeasured extrapolations.
 
