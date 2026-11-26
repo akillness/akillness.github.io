@@ -1,9 +1,9 @@
 ---
 title: "Langfuse Source Audit: Distributed Trace Trees and Session-Level Observability"
 description: "Langfuse 소스 감사: 분산 트레이스 트리와 세션 레벨 비용-지연시간 분석에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-25 15:00:04 +0900
-lastmod: 2026-11-25 15:00:04 +0900
-categories: [AI, RESEARCH]
+date: 2026-11-26 13:00:04 +0900
+lastmod: 2026-11-26 13:00:04 +0900
+categories: [AI, ENGINE]
 tags: [langfuse, tracing, telemetry]
 image:
   path: /assets/img/posts/2026-11-24-langfuse-open-source-llm-observability-trace-audit/cover.png
