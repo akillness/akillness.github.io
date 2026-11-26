@@ -1,8 +1,8 @@
 ---
 title: "Qdrant Source Audit: Rust Segment Storage and Payload Indexing Filters"
 description: "Qdrant 소스 감사: Rust 기반 세그먼트 스토리지와 페이로드 인덱싱 필터에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-25 09:00:06 +0900
-lastmod: 2026-11-25 09:00:06 +0900
+date: 2026-11-26 09:00:17 +0900
+lastmod: 2026-11-26 09:00:17 +0900
 categories: [AI, RESEARCH]
 tags: [qdrant, rust, hnsw]
 image:
