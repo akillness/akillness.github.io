@@ -1,8 +1,8 @@
 ---
 title: "Outlines Source Audit: Finite State Machines and Regex-Guided JSON Generation"
 description: "Outlines 소스 감사: 유한상태기계(FSM)와 정규표현식 기반 고속 JSON 생성에 대한 소스 레벨 심층 아키텍처 감사 및 실무 운영 가이드입니다."
-date: 2026-11-26 20:30:04 +0900
-lastmod: 2026-11-26 20:30:04 +0900
+date: 2026-11-26 21:00:06 +0900
+lastmod: 2026-11-26 21:00:06 +0900
 categories: [AI, ENGINE]
 tags: [outlines, fsm, regex]
 image:
