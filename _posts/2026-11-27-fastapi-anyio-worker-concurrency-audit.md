@@ -1,8 +1,8 @@
 ---
 title: "FastAPI 0.115 Concurrency Internals: AnyIO Worker Pools and High-Throughput I/O"
 description: "FastAPI 0.115 동시성 아키텍처: AnyIO 작업자 풀과 고성능 비동기 백엔드 설계에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-27 21:00:50 +0900
-lastmod: 2026-11-27 21:00:50 +0900
+date: 2026-11-27 21:01:04 +0900
+lastmod: 2026-11-27 21:01:04 +0900
 categories: [AI, FRONTIER]
 tags: [fastapi, anyio, concurrency]
 image:
