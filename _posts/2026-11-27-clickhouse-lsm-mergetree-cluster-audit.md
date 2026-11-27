@@ -1,8 +1,8 @@
 ---
 title: "ClickHouse Architecture: LSM MergeTree Engine and Distributed Sharded Processing"
 description: "ClickHouse 실시간 집계 파이프라인: LSM 머지트리 엔진과 분산 샤딩 클러스터에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-27 23:30:42 +0900
-lastmod: 2026-11-27 23:30:42 +0900
+date: 2026-11-27 23:30:53 +0900
+lastmod: 2026-11-27 23:30:53 +0900
 categories: [AI, RESEARCH]
 tags: [clickhouse, mergetree, sharding]
 image:
