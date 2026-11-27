@@ -1,8 +1,8 @@
 ---
 title: "KubeRay Operator Internals: Ray Cluster CRDs and Elastic GPU Scaling"
 description: "KubeRay 분산 학습 오케스트레이션: Ray 클러스터 CRD와 GPU 자동 스케일링 설계에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 08:00:03 +0900
-lastmod: 2026-11-28 08:00:03 +0900
+date: 2026-11-28 08:14:29 +0900
+lastmod: 2026-11-28 08:14:29 +0900
 categories: [AI, FRONTIER]
 tags: [kuberay, ray, kubernetes]
 image:
