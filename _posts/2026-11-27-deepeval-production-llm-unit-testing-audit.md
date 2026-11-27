@@ -1,8 +1,8 @@
 ---
 title: "DeepEval Architecture: G-Eval Production Unit Testing and CI/CD Quality Gates"
 description: "DeepEval 단위 테스트 프레임워크: G-Eval 기반 실시간 프로덕션 회귀 테스트 자동화에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-27 20:00:46 +0900
-lastmod: 2026-11-27 20:00:46 +0900
+date: 2026-11-27 20:00:56 +0900
+lastmod: 2026-11-27 20:00:56 +0900
 categories: [AI, FRONTIER]
 tags: [deepeval, testing, geval]
 image:
