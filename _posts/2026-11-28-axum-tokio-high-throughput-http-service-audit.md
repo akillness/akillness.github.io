@@ -1,8 +1,8 @@
 ---
 title: "Axum Rust Web Service: Zero-Cost HTTP Abstractions and Tokio I/O Pipelining"
 description: "Axum Rust 웹 프레임워크: Tokio 기반 제로코스트 추상화와 초고속 API 백엔드에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 07:00:41 +0900
-lastmod: 2026-11-28 07:00:41 +0900
+date: 2026-11-28 07:00:58 +0900
+lastmod: 2026-11-28 07:00:58 +0900
 categories: [AI, BUILD]
 tags: [axum, rust, http]
 image:
