@@ -1,8 +1,8 @@
 ---
 title: "Dragonfly Architecture: Shared-Nothing Multi-Threaded Cache and Memory Paging"
 description: "Dragonfly 인메모리 스토리지: 비공유(Shared-Nothing) 멀티스레드 Redis 대안 구조에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 07:26:35 +0900
-lastmod: 2026-11-28 07:26:35 +0900
+date: 2026-11-28 07:30:02 +0900
+lastmod: 2026-11-28 07:30:02 +0900
 categories: [AI, BUILD]
 tags: [dragonfly, cache, sharednothing]
 image:
