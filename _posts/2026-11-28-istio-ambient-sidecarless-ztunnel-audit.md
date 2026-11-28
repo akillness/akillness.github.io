@@ -1,8 +1,8 @@
 ---
 title: "Istio Ambient Mesh: Sidecarless ztunnel and L4/L7 Layered Traffic Isolation"
 description: "Istio Ambient 메시 아키텍처: 사이드카리스 ztunnel과 L4/L7 계층형 트래픽 분리에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 10:00:41 +0900
-lastmod: 2026-11-28 10:00:41 +0900
+date: 2026-11-28 10:17:47 +0900
+lastmod: 2026-11-28 10:17:47 +0900
 categories: [AI, ENGINE]
 tags: [istio, ambient, ztunnel]
 image:
