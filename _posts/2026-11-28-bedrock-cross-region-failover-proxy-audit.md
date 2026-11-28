@@ -1,8 +1,8 @@
 ---
 title: "Amazon Bedrock Multi-Region Failover: Intelligent Routing and Model Fallbacks"
 description: "Amazon Bedrock 멀티 리전 장애 복구: 지능형 라우팅 프록시와 모델 폴백 가드레일에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 22:00:03 +0900
-lastmod: 2026-11-28 22:00:03 +0900
+date: 2026-11-28 22:17:11 +0900
+lastmod: 2026-11-28 22:17:11 +0900
 categories: [AI, RESEARCH]
 tags: [bedrock, failover, proxy]
 image:
