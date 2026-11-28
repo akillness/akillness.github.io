@@ -1,8 +1,8 @@
 ---
 title: "Apache Arrow Internals: Practical Production Engineering Guide"
 description: "[엔지니어링 딥다이브] Apache Arrow 제로카피 데이터 파이프라인: 실무 엔지니어링 가이드 및 프로덕션 도입에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 23:30:04 +0900
-lastmod: 2026-11-28 23:30:04 +0900
+date: 2026-11-28 23:53:51 +0900
+lastmod: 2026-11-28 23:53:51 +0900
 categories: [AI, FRONTIER]
 tags: [arrow, zerocopy, ipc]
 image:
