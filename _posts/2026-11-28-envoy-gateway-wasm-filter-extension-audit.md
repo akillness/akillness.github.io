@@ -1,8 +1,8 @@
 ---
 title: "Envoy Gateway: Wasm Extensibility and Edge L7 Security Enforcement"
 description: "Envoy Gateway Wasm 필터 확장: 엣지 프록시 인증과 L7 트래픽 보안 제어에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 13:00:43 +0900
-lastmod: 2026-11-28 13:00:43 +0900
+date: 2026-11-28 13:25:00 +0900
+lastmod: 2026-11-28 13:25:00 +0900
 categories: [AI, ENGINE]
 tags: [envoy, wasm, gateway]
 image:
