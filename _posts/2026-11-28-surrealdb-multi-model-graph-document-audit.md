@@ -1,8 +1,8 @@
 ---
 title: "SurrealDB Internals: Multi-Model Document-Graph Engine and Live Queries"
 description: "SurrealDB 멀티모델 데이터베이스: 문서-테이블-그래프 통합 쿼리와 실시간 라이브 쿼리에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 17:00:07 +0900
-lastmod: 2026-11-28 17:00:07 +0900
+date: 2026-11-28 17:04:23 +0900
+lastmod: 2026-11-28 17:04:23 +0900
 categories: [AI, ENGINE]
 tags: [surrealdb, multimodel, graph]
 image:
