@@ -1,8 +1,8 @@
 ---
 title: "MetaGPT Multi-Agent Architecture: SOP-Driven Collaboration and Code Synthesis"
 description: "MetaGPT 소프트웨어 개발 멀티에이전트: SOP 표준 절차 기반 역할 분담 아키텍처에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 19:00:33 +0900
-lastmod: 2026-11-28 19:00:33 +0900
+date: 2026-11-28 19:00:55 +0900
+lastmod: 2026-11-28 19:00:55 +0900
 categories: [AI, FRONTIER]
 tags: [metagpt, sop, multiagent]
 image:
