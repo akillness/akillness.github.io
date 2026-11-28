@@ -1,8 +1,8 @@
 ---
 title: "NeMo Guardrails Architecture: Colang Execution Rails and Hallucination Defenses"
 description: "NeMo Guardrails 대화 안전 제어: Colang 기반 대화 흐름 레일과 취약점 방어에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 21:00:03 +0900
-lastmod: 2026-11-28 21:00:03 +0900
+date: 2026-11-28 21:14:05 +0900
+lastmod: 2026-11-28 21:14:05 +0900
 categories: [AI, BUILD]
 tags: [nemoguardrails, colang, safety]
 image:
