@@ -1,8 +1,8 @@
 ---
 title: "Cilium eBPF Networking: Kernel-Level Packet Forwarding and Sidecarless Mesh"
 description: "Cilium eBPF 네트워크 가속: 커널 레벨 패킷 라우팅과 사이드카리스 서비스 메시에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 09:00:35 +0900
-lastmod: 2026-11-28 09:00:35 +0900
+date: 2026-11-28 09:00:43 +0900
+lastmod: 2026-11-28 09:00:43 +0900
 categories: [AI, BUILD]
 tags: [cilium, ebpf, servicemesh]
 image:
