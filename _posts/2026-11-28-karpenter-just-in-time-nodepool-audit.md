@@ -1,8 +1,8 @@
 ---
 title: "Karpenter Node Autoscaler: Just-In-Time Instance Provisioning and Resource Bin-Packing"
 description: "Karpenter 쿠버네티스 노드 오토스케일러: Just-In-Time 인스턴스 프로비저닝과 비용 최적화에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 11:00:53 +0900
-lastmod: 2026-11-28 11:00:53 +0900
+date: 2026-11-28 11:21:41 +0900
+lastmod: 2026-11-28 11:21:41 +0900
 categories: [AI, RESEARCH]
 tags: [karpenter, kubernetes, autoscaler]
 image:
