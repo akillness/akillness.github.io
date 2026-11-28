@@ -1,8 +1,8 @@
 ---
 title: "Redpanda Architecture: Raft Quorum and Zero-JVM C++ Streaming Runtime"
 description: "Redpanda Raft 메타데이터 아키텍처: C++ 기반 제로 JVM 오버헤드 스트리밍에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 14:00:44 +0900
-lastmod: 2026-11-28 14:00:44 +0900
+date: 2026-11-28 14:28:07 +0900
+lastmod: 2026-11-28 14:28:07 +0900
 categories: [AI, RESEARCH]
 tags: [redpanda, raft, streaming]
 image:
