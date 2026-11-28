@@ -1,8 +1,8 @@
 ---
 title: "Apache Arrow Internals: Columnar In-Memory Format and Zero-Copy IPC Transport"
 description: "Apache Arrow 제로카피 데이터 파이프라인: 열 지향 메모리 포맷과 초고속 IPC 스트리밍에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 18:00:07 +0900
-lastmod: 2026-11-28 18:00:07 +0900
+date: 2026-11-28 18:07:33 +0900
+lastmod: 2026-11-28 18:07:33 +0900
 categories: [AI, RESEARCH]
 tags: [arrow, zerocopy, ipc]
 image:
