@@ -1,8 +1,8 @@
 ---
 title: "TimescaleDB: Hypertable Chunk Partitioning and Columnar Compression"
 description: "TimescaleDB 하이퍼테이블 압축: 시계열 데이터 청크 분할과 컬럼 압축 최적화에 대한 2026 최신 기술 트렌드 분석, 핵심 엔지니어링 쟁점 진단 및 실무 도입 가이드입니다."
-date: 2026-11-28 16:00:40 +0900
-lastmod: 2026-11-28 16:00:40 +0900
+date: 2026-11-28 16:01:17 +0900
+lastmod: 2026-11-28 16:01:17 +0900
 categories: [AI, ENGINE]
 tags: [timescale, hypertables, compression]
 image:
